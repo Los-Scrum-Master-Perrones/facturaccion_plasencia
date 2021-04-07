@@ -12,13 +12,18 @@ class CapaImport implements ToModel
     public function model(array $row)
     {
 
-        if($row[11] == null){
+        if($row[11] == null || $row[11] == "CAPA" ){
             $capa = null;
         }else{
-           
-         $capa =  new capa_producto([
-            'CAPA' => $row[11],
-        ]);
+            $capa_existe = capa_producto::where('capa',$row[11])->count();
+          if($capa_existe>0){
+            $capa = null;
+          }else{
+            
+            $capa =  new capa_producto([
+                'CAPA' => $row[11],
+            ]);
+          }
 
         }
         return $capa;

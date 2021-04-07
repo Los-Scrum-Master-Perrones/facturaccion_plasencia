@@ -9,10 +9,40 @@ use Maatwebsite\Excel\Concerns\Importable;
 class VitolaImport implements ToModel
 {
     use Importable; 
+
+    
+    
     public function model(array $row)
     {
-        return new vitola_producto([
+    if($row[9] == null ||  $row[9] == "VITOLA" ){
+        $vitola = null;
+    }else{
+        $vitola_existe = vitola_producto::where('vitola',$row[9])->count();
+      if($vitola_existe>0){
+        $vitola = null;
+      }else{
+        
+        $vitola =  new vitola_producto([
             'VITOLA' => $row[9],
         ]);
+     }
+      }
+
+      return $vitola;
     }
+
+
 }
+
+
+
+
+
+
+
+
+
+
+
+
+

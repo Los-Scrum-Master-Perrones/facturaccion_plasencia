@@ -11,8 +11,22 @@ class MarcaImport implements ToModel
     use Importable;
     public function model(array $row)
     {
-        return new marca_producto([
+    if($row[8] == null || $row[8] == "PENDIENTE" || $row[8] == "MARCA" ){
+        $marca = null;
+    }else{
+        $marca_existe = marca_producto::where('marca',$row[8])->count();
+      if($marca_existe>0){
+        $marca = null;
+      }else{
+        
+        $marca =  new marca_producto([
             'MARCA' => $row[8],
         ]);
+     }
+      }
+
+      return $marca;
     }
+
+
 }

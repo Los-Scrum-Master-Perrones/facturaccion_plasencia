@@ -16,15 +16,31 @@ use Maatwebsite\Excel\Facades\Excel;
 class CapaProductoController extends Controller
 {
     public function import(Request $request){
+        try{
+
+       
         $file = $request->select_file;
         
-        (new capaImport)->import($file);
-        (new vitolaImport)->import($file);
-        (new marcaImport)->import($file);
-        (new ordenImport)->import($file);
-        (new nombreImport)->import($file);
+        // (new capaImport)->import($file);
+        // (new vitolaImport)->import($file);
+        // (new marcaImport)->import($file);
+        // (new ordenImport)->import($file);
+        // (new nombreImport)->import($file);
 
 
+         
+        Excel::import(new capaImport, storage_path($file));
+        Excel::import(new vitolaImport, storage_path($file));
+        Excel::import(new marcaImport, storage_path($file));
+        Excel::import(new ordenImport, storage_path($file));
+        Excel::import(new nombreImport, storage_path($file));
+        }catch(Exception $e){
+
+        }
         return redirect('/importar_pedido')->with('success', 'File imported successfully!');
+
     }
 }
+
+
+
