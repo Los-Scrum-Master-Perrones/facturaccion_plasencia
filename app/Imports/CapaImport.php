@@ -1,0 +1,26 @@
+<?php
+
+namespace App\Imports;
+
+use App\Models\capa_producto;
+use Maatwebsite\Excel\Concerns\ToModel;
+
+use Maatwebsite\Excel\Concerns\Importable;
+class CapaImport implements ToModel
+{
+    use Importable;
+    public function model(array $row)
+    {
+
+        if($row[11] == null){
+            $capa = null;
+        }else{
+           
+         $capa =  new capa_producto([
+            'CAPA' => $row[11],
+        ]);
+
+        }
+        return $capa;
+    }
+}

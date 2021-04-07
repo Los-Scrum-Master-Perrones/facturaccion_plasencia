@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ImportExcelController;
 use App\Http\Controllers\VehicleController;
 use App\Http\Controllers\PedidoController;
+use App\Http\Controllers\CapaProductoController;
 
 /*
 |--------------------------------------------------------------------------
@@ -24,9 +25,12 @@ Route::post('/import', [VehicleController::class, 'import']);
 
 
 Route::post('/importar_pedido', [PedidoController::class, 'import']);
-
-
 Route::get('/importar_pedido', [PedidoController::class, 'import']);
+
+
+
+Route::post('/importar_clase', [CapaProductoController::class, 'import']);
+Route::get('/importar_clase', [CapaProductoController::class, 'import']);
 
 
 Route::get('/', function () {

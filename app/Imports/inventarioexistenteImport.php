@@ -21,7 +21,7 @@ class inventarioexistenteImport implements ToModel
                         'cant_paquetes' => $row[1],
                         'unidades' => $row[4],
                         'numero_orden' => $row[5],
-                        'categoria' => "INVENTARIO EXISTENTE",
+                        'categoria' => "3",
 
 
                         
