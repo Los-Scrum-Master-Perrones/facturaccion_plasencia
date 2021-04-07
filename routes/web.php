@@ -33,10 +33,15 @@ Route::post('/importar_clase', [CapaProductoController::class, 'import']);
 Route::get('/importar_clase', [CapaProductoController::class, 'import']);
 
 
-Route::get('/', function () {
+Route::get('/welcome', function () {
     return view('welcome');
 });
 
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+
+//rutas melvin
+Route::get('/tabledit', [App\Http\Controllers\TableditController::class, 'index']);
+Route::post('tabledit/action', [App\Http\Controllers\TableditController::class, 'action'])->name('tabledit.action');

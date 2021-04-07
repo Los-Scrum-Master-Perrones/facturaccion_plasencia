@@ -10,7 +10,7 @@ class ImportExcelController extends Controller
 {
     function index()
     {
-     $data = DB::table('tbl_customer')->orderBy('CustomerID', 'DESC')->get();
+     $data = DB::table('vitola_productos')->get();
      return view('import_excel', compact('data'));
     }
 
