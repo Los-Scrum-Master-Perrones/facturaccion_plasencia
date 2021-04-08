@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreatePendientesTable extends Migration
+class CreateTipoEmpaquesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,10 +13,11 @@ class CreatePendientesTable extends Migration
      */
     public function up()
     {
-        // Schema::create('pendientes', function (Blueprint $table) {
-        //     $table->id();
-        //    
-        // });
+        Schema::create('tipo_empaques', function (Blueprint $table) {
+            $table->bigIncrements('id_tipo_empaque');
+            $table->string('tipo_empaque')->nullable();
+             $table->timestamps();
+        });
     }
 
     /**
@@ -26,6 +27,6 @@ class CreatePendientesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('pendientes');
+        Schema::dropIfExists('tipo_empaques');
     }
 }
