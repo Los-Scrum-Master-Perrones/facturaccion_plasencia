@@ -10,37 +10,29 @@ use App\Imports\nombreImport;
 use App\Imports\vitolaImport;
 use App\Imports\marcaImport;
 use App\Imports\ordenImport;
-
+use App\Imports\celloImport;
+use App\Imports\tipo_empaqueImport;
+use App\Imports\clase_productoImport;
 use Maatwebsite\Excel\Facades\Excel;
 
 class CapaProductoController extends Controller
 {
     public function import(Request $request){
-        try{
-
        
-        $file = $request->select_file;
-        
-        // (new capaImport)->import($file);
-        // (new vitolaImport)->import($file);
-        // (new marcaImport)->import($file);
-        // (new ordenImport)->import($file);
-        // (new nombreImport)->import($file);
+            Excel::import(new capaImport,  $request->file('select_file'));
+            Excel::import(new vitolaImport,  $request->file('select_file') );
+            Excel::import(new marcaImport,  $request->file('select_file'));
+            Excel::import(new ordenImport,  $request->file('select_file'));
+            Excel::import(new nombreImport,  $request->file('select_file'));
+            Excel::import(new CelloImport,  $request->file('select_file'));
+            Excel::import(new tipo_empaqueImport,  $request->file('select_file'));
+            Excel::import(new clase_productoImport,  $request->file('select_file'));
 
-
-         
-        Excel::import(new capaImport, storage_path($file));
-        Excel::import(new vitolaImport, storage_path($file));
-        Excel::import(new marcaImport, storage_path($file));
-        Excel::import(new ordenImport, storage_path($file));
-        Excel::import(new nombreImport, storage_path($file));
-        }catch(Exception $e){
-
-        }
-        return redirect('/importar_pedido')->with('success', 'File imported successfully!');
-
+        return view('import_excel')->with('success', 'File imported successfully!');
     }
 }
+
+
 
 
 

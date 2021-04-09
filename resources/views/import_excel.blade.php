@@ -10,7 +10,7 @@
   <br />
   
   <div class="container">
-   <h3 align="center">Import Excel File in Laravel </h3>
+   <h3 >Import Excel File in Laravel </h3>
     <br />
    @if(count($errors) > 0)
     <div class="alert alert-danger">
@@ -23,32 +23,36 @@
     </div>
    @endif
 
-   @if($message = Session::get('success'))
+   @if(isset($success))
    <div class="alert alert-success alert-block">
     <button type="button" class="close" data-dismiss="alert">×</button>
-           <strong>{{ $message }}</strong>
+           <strong>{{ $success }}</strong>
    </div>
    @endif
    <form method="post" enctype="multipart/form-data" action="{{ url('/importar_clase') }}">
-    {{ csrf_field() }}
+   @csrf
+<h4>Fecha de pedido</h4>
+   <input type="date" value="" onKeyDown="copiar('fecha_fin','fechafin');" name="fecha_fin"
+                        id="fecha_fin" style="width:150px;" class="form-control mr-sm-2" placeholder="Fecha final"
+                        onchange="obtenerFechaFin(this)" required>
     <div class="form-group">
      <table class="table">
       <tr>
-       <td width="40%" align="right"><label>Select File for Upload</label></td>
+       <td width="40%"><label>Select File for Upload</label></td>
        <td width="30">
-        <input type="file" name="select_file" />
+        <input type="file" name="select_file" id="select_file" />
        </td>
-       <td width="30%" align="left">
+       <td width="30%" >
         <input type="submit" name="upload" class="btn btn-primary" value="Upload">
        </td>
       </tr>
       <tr>
-       <td width="40%" align="right"></td>
+       <td width="40%" ></td>
        <td width="30"><span class="text-muted">.xls, .xslx</span></td>
-       <td width="30%" align="left"></td>
+       <td width="30%"></td>
       </tr>
      </table>
-     @csrf
+     
     </div>
    </form>
 
@@ -74,16 +78,6 @@
         <th>Postal Code</th>
         <th>Country</th>
        </tr>
-       @foreach($data as $row)
-       <tr>
-        <td>{{ $row->CustomerName }}</td>
-        <td>{{ $row->Gender }}</td>
-        <td>{{ $row->Address }}</td>
-        <td>{{ $row->City }}</td>
-        <td>{{ $row->PostalCode }}</td>
-        <td>{{ $row->Country }}</td>
-       </tr>
-       @endforeach
       </table>
      </div>
     </div>
