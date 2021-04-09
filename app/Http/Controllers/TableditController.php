@@ -13,6 +13,12 @@ class TableditController extends Controller
     	return view('table_edit', compact('data'));
     }
 
+	function buscar()
+    {
+    	$data = DB::table('sample_datas')->get();
+    	return view('table_edit', compact('data'));
+    }
+
     function action(Request $request)
     {
     	if($request->ajax())
@@ -24,17 +30,24 @@ class TableditController extends Controller
     				'last_name'		=>	$request->last_name,
     				'gender'		=>	$request->gender
     			);
-                console.log(	$data);
     			DB::table('sample_datas')
     				->where('id', $request->id)
     				->update($data);
     		}
+
+
+
+
+
     		if($request->action == 'delete')
     		{
     			DB::table('sample_datas')
     				->where('id', $request->id)
     				->delete();
     		}
+
+
+			
     		return response()->json($request);
     	}
     }

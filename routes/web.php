@@ -43,5 +43,7 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 
 
 //rutas melvin
-Route::get('/tabledit', [App\Http\Controllers\TableditController::class, 'index']);
+Route::get('/', [App\Http\Controllers\TableditController::class, 'index']);
+
+Route::get('/', [App\Http\Controllers\TableditController::class, 'buscar'])->name('buscar');
 Route::post('tabledit/action', [App\Http\Controllers\TableditController::class, 'action'])->name('tabledit.action');

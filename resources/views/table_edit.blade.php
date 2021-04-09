@@ -14,7 +14,18 @@
       <br />
       <div class="panel panel-default">
         <div class="panel-heading">
-          <h3 class="panel-title">Sample Data</h3>
+
+          <form action=  "{{Route('buscar')}}" method= "POST" class="form-inline">
+          @csrf
+          <input name="vitolabuscar" id="vitolabuscar" class="form-control mr-sm-2"  placeholder="Vitola" style="width:150px;">
+          <button class="btn-dark" type="submit">
+          <span>
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
+          <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/>
+          </svg>
+          </span>
+          </button>
+          </form>
         </div>
         <div class="panel-body">
           <div class="table-responsive">
@@ -57,19 +68,19 @@ $(document).ready(function(){
 
   $('#editable').Tabledit({
     url:'{{ route("tabledit.action") }}',
+    method : 'POST',
     dataType:"json",
     columns:{
       identifier:[0, 'id'],
-      editable:[[1, 'first_name'], [2, 'last_name'], [3, 'gender', '{"1":"Male", "2":"Female"}']]
+      editable:[[1, 'first_name'], [2, 'last_name'], [3, 'gender']]
     },
     restoreButton:false,
-    onSuccess:function(data, textStatus, jqXHR)
-    {
-      if(data.action == 'delete')
-      {
-        $('#'+data.id).remove();
-      }
+
+    onSuccess:function(data, textStatus, jqXHR){
+      if(data.action == 'delete'){
+        $('#'+data.id).remove();}
     }
+
   });
 
 });  
