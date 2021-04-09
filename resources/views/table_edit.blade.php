@@ -9,9 +9,9 @@
 
 
 
-
+    
   </head>
-  <body>
+  <body style="background: url('fondoplasencia.png') center center no-repeat; background-size:100% 100%;">
     <div class="container">
       <br />
       <div class="panel panel-default">
