@@ -1,3 +1,8 @@
+@extends('principal')
+
+
+@section('content')
+
 <html>
   <head>
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -90,3 +95,5 @@ $(document).ready(function(){
 
 });  
 </script>
+
+@endsection

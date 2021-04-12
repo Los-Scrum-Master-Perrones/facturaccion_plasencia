@@ -6,6 +6,9 @@
   <body style="background: #888; background-size:100% 100%;">
 
 
+  <div  style="width:100%; height:90%;"> 
+  @yield('content')
+  </div>
 
 
 
