@@ -5,6 +5,7 @@ use App\Http\Controllers\ImportExcelController;
 use App\Http\Controllers\VehicleController;
 use App\Http\Controllers\PedidoController;
 use App\Http\Controllers\CapaProductoController;
+use App\Http\Controllers\clase_producto;
 
 /*
 |--------------------------------------------------------------------------
@@ -28,6 +29,12 @@ Route::post('/importar_pedido', [PedidoController::class, 'import']);
 Route::get('/importar_pedido', [PedidoController::class, 'import']);
 
 
+Route::get('/productos', [PedidoController::class, 'productos_index'])->name('productos');
+Route::post('/productos', [PedidoController::class, 'productos_index'])->name('productos');
+
+
+Route::get('/insertar_productos', [clase_producto::class, 'insertar_clase'])->name('nuevo_producto');
+Route::post('/insertar_productos', [clase_producto::class, 'insertar_clase'])->name('nuevo_producto');
 
 Route::post('/importar_clase', [CapaProductoController::class, 'import']);
 Route::get('/importar_clase', [CapaProductoController::class, 'import']);

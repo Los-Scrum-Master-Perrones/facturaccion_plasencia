@@ -14,4 +14,17 @@ class PedidoController extends Controller
 
         return redirect('/importar_pedido')->with('success', 'File imported successfully!');
     }
+
+
+
+    public function productos_index(Request $request){
+        
+       $productos = \DB::select('call mostrar_productos');
+        return view('/productos')->with('productos', $productos);
+    }
+
+
+
 }
+
+

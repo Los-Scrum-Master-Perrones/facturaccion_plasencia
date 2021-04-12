@@ -8,6 +8,11 @@
  </head>
  <body>
   <br />
+
+  <form action="{{Route('productos')}}" method="POST">
+                @csrf
+    <button type="submit"  class="btn-info" style="width:100%;" >Productos</button> 
+       </form>
   
   <div class="container">
    <h3 >Import Excel File in Laravel </h3>
