@@ -13,9 +13,15 @@ class TableditController extends Controller
     	return view('table_edit', compact('data'));
     }
 
-	function buscar()
+	function buscar(Request $request)
     {
-    	$data = DB::table('sample_datas')->get();
+		if($request->txt_name == null){
+			$request->txt_name = "";
+		}
+
+    	$data = \DB::select('call buscar(:name)',
+		[ 'name' => $request->txt_name]);
+
     	return view('table_edit', compact('data'));
     }
 
