@@ -17,6 +17,7 @@ class PedidoController extends Controller
 
 
 
+<<<<<<< Updated upstream
     public function productos_index(Request $request){
         
        $productos = \DB::select('call mostrar_productos');
@@ -25,6 +26,14 @@ class PedidoController extends Controller
 
 
 
+=======
+
+    public function productos_index(){
+
+        return view('productos');
+        
+    }
+>>>>>>> Stashed changes
 }
 
 

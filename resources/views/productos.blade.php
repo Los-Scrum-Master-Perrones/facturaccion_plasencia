@@ -1,8 +1,11 @@
+<<<<<<< Updated upstream
 
 
 
 
 
+=======
+>>>>>>> Stashed changes
 <html>
   <head>
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -10,6 +13,7 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" />
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>            
+<<<<<<< Updated upstream
    
    
     <script src="https://markcell.github.io/jquery-tabledit/assets/js/tabledit.min.js"></script>
@@ -24,10 +28,14 @@
 <script src="https://code.jquery.com/jquery-3.2.1.js"></script>
 
   
+=======
+    <script src="https://markcell.github.io/jquery-tabledit/assets/js/tabledit.min.js"></script>
+>>>>>>> Stashed changes
   </head>
   <body>
     <div class="container">
       <br />
+<<<<<<< Updated upstream
       <h3 style="	text-align:center; font-size:35px; font:bold; width:1160px;" >Inventario de productos Plasencia</h3>
       <br />
       
@@ -78,6 +86,13 @@ $(document).ready(function(){
 
            <button style="text-align: right;"   data-toggle="modal" data-target="#modal_nuevoproducto">Nuevo producto</button>
         
+=======
+      <h3 >Live Table Edit Delete with jQuery Tabledit in Laravel</h3>
+      <br />
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          <h3 class="panel-title">Sample Data</h3>
+>>>>>>> Stashed changes
         </div>
         <div class="panel-body">
           <div class="table-responsive">
@@ -85,6 +100,7 @@ $(document).ready(function(){
             <table id="editable" class="table table-bordered table-striped">
               <thead>
                 <tr>
+<<<<<<< Updated upstream
                   <th>Item</th>
                   <th>Marca</th>
                   <th>Nombre</th>
@@ -105,12 +121,23 @@ $(document).ready(function(){
                   <td><button>Agregar detalle</td></button>
                 </tr>
                 @endforeach
+=======
+                  <th>ID</th>
+                  <th>First Name</th>
+                  <th>Last Name</th>
+                  <th>Gender</th>
+                </tr>
+              </thead>
+              <tbody>
+              
+>>>>>>> Stashed changes
               </tbody>
             </table>
           </div>
         </div>
       </div>
     </div>
+<<<<<<< Updated upstream
     <!-- <script src="{{ asset('js/app.js') }}" ></script> -->
   </body>
   
@@ -220,3 +247,36 @@ $(document).ready(function(){
 
 </form>
 <!-- FIN DEL MODAL NUEVO MOLDE -->
+=======
+  </body>
+</html>
+
+<script type="text/javascript">
+$(document).ready(function(){
+   
+  $.ajaxSetup({
+    headers:{
+      'X-CSRF-Token' : $("input[name=_token]").val()
+    }
+  });
+
+  $('#editable').Tabledit({
+    url:'{{ route("tabledit.action") }}',
+    dataType:"json",
+    columns:{
+      identifier:[0, 'id'],
+      editable:[[1, 'first_name'], [2, 'last_name'], [3, 'gender', '{"1":"Male", "2":"Female"}']]
+    },
+    restoreButton:false,
+    onSuccess:function(data, textStatus, jqXHR)
+    {
+      if(data.action == 'delete')
+      {
+        $('#'+data.id).remove();
+      }
+    }
+  });
+
+});  
+</script>
+>>>>>>> Stashed changes

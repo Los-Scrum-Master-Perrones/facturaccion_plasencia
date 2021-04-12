@@ -47,7 +47,8 @@ Route::get('/welcome', function () {
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-
+Route::get('/productos', [App\Http\Controllers\PedidoController::class, 'productos_index'])->name('productos');
+Route::post('/productos', [App\Http\Controllers\PedidoController::class, 'productos_index'])->name('productos');;
 
 //rutas melvin
 Route::get('/', [App\Http\Controllers\TableditController::class, 'index']);

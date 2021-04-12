@@ -9,11 +9,24 @@
  <body>
   <br />
 
+<<<<<<< Updated upstream
   <form action="{{Route('productos')}}" method="POST">
                 @csrf
     <button type="submit"  class="btn-info" style="width:100%;" >Productos</button> 
        </form>
+=======
+
+>>>>>>> Stashed changes
   
+  <form action="{{Route('productos')}}" method="POST">
+               @csrf
+               <button type="submit"   >Productos</button>
+  </form>  
+
+
+
+
+
   <div class="container">
    <h3 >Import Excel File in Laravel </h3>
     <br />
@@ -34,6 +47,7 @@
            <strong>{{ $success }}</strong>
    </div>
    @endif
+
    <form method="post" enctype="multipart/form-data" action="{{ url('/importar_clase') }}">
    @csrf
 <h4>Fecha de pedido</h4>

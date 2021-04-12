@@ -10,7 +10,7 @@
   <body>
     <div class="container">
       <br />
-      <h3 align="center">Live Table Edit Delete with jQuery Tabledit in Laravel</h3>
+      <h3 >Live Table Edit Delete with jQuery Tabledit in Laravel</h3>
       <br />
       <div class="panel panel-default">
         <div class="panel-heading">
