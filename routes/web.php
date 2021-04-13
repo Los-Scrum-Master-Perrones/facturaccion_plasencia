@@ -55,4 +55,11 @@ Route::get('/', [App\Http\Controllers\TableditController::class, 'index'])->name
 
 Route::post('/', [App\Http\Controllers\TableditController::class, 'buscar'])->name('buscar');
 Route::post('tabledit/action', [App\Http\Controllers\TableditController::class, 'action'])->name('tabledit.action');
-Route::get('/principal', [App\Http\Controllers\Principal::class, 'index'])->name('principal');;
+Route::get('/principal', [App\Http\Controllers\Principal::class, 'index'])->name('principal');
+
+
+//USERS
+Route::post('/usuarios/d',[App\Http\Controllers\Users::class, 'update' ])->name('actualizar_usuario');
+Route::post('/usuarios/a',[App\Http\Controllers\Users::class, 'destroy' ])->name('eliminar_usuario');
+Route::post('usuarios/contra', [App\Http\Controllers\Users::class,'update_contrasenia'])->name('actualizar_usuario_contrasenia');
+Route::get('/usuarios',[App\Http\Controllers\Users::class, 'index' ])->name('usuarios');
