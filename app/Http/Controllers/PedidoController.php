@@ -17,23 +17,24 @@ class PedidoController extends Controller
 
 
 
-<<<<<<< Updated upstream
     public function productos_index(Request $request){
+
         
        $productos = \DB::select('call mostrar_productos');
-        return view('/productos')->with('productos', $productos);
+
+       $producto_unico =  \DB::select('call mostrar_clase_paradetalle(:item)',
+       ['item'=> $request->item_detalle]);
+
+       $detalle_productos = \DB::select('call mostrar_detalles_productos');
+
+       $producto = json_encode($productos);       
+
+
+        return view('/productos')->with('productos', $productos)->with('detalle_productos', $detalle_productos)->with('producto_unico', $producto_unico);
     }
 
 
 
-=======
-
-    public function productos_index(){
-
-        return view('productos');
-        
-    }
->>>>>>> Stashed changes
 }
 
 
