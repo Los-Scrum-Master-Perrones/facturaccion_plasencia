@@ -36,6 +36,14 @@ Route::post('/productos', [PedidoController::class, 'productos_index'])->name('p
 Route::get('/insertar_productos', [clase_producto::class, 'insertar_clase'])->name('nuevo_producto');
 Route::post('/insertar_productos', [clase_producto::class, 'insertar_clase'])->name('nuevo_producto');
 
+
+Route::get('/insertar_detalle_productos', [clase_producto::class, 'insertar_detalle_clase'])->name('detalle');
+Route::post('/insertar_detalle_productos', [clase_producto::class, 'insertar_detalle_clase'])->name('detalle');
+
+
+Route::get('/mostrar_detalle_productos', [clase_producto::class, 'insertar_detalle_clase'])->name('detalle_producto');
+Route::post('/mostrar_detalle_productos', [clase_producto::class, 'insertar_detalle_clase'])->name('detalle_producto');
+
 Route::post('/importar_clase', [CapaProductoController::class, 'import']);
 Route::get('/importar_clase', [CapaProductoController::class, 'import']);
 

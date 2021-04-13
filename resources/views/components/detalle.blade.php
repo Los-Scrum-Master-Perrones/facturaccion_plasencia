@@ -85,7 +85,7 @@ $(document).ready(function(){
             <table id="editable" class="table table-bordered table-striped">
               <thead>
                 <tr>
-                  <th>Item</th>
+                  <th>{{$hol}}</th>
                   <th>Marca</th>
                   <th>Nombre</th>
                   <th>Vitola</th>
@@ -103,7 +103,7 @@ $(document).ready(function(){
                   <td>{{$producto->vitola}}</td>
                   <td>{{$producto->tipo_empaque}}</td>
                   <td><button style="font-size:12px;"  data-toggle="modal" data-target="#modal_agregarproducto" onclick="agregar_item({{$producto->item}},{{ strlen($producto->item)}})">Agregar detalle</button> 
-                  <button style="font-size:12px;"   data-toggle="modal" data-target="#modal_ver_detalle_producto" onclick="item_detalle({{$producto->item}},{{ strlen($producto->item)}})">Ver detalle</button></td>
+                  <button style="font-size:12px;"   data-toggle="modal"  onclick="item_detalle({{$producto->item}},{{ strlen($producto->item)}})">Ver detalle</button></td>
                 </tr>
                 @endforeach
               </tbody>
@@ -124,17 +124,17 @@ $(document).ready(function(){
 
 <script type="text/javascript">
 function agregar_item(item, tamano){
+
 var ta_item = (item.toString()).length;
 var diferencia = tamano-ta_item;
-var cero = "0";
+var cero = "0"
 
 var nombre_item = item.toString();
 
   for(var i=0;i < diferencia ; i++){
     nombre_item = cero+nombre_item; 
   }
-
-  document.form_detalle.item_de.value = nombre_item;
+  document.form_detalle.item_detalle.value = nombre_item;
 
 }
 
@@ -143,29 +143,11 @@ var nombre_item = item.toString();
 
 <script type="text/javascript">
 function item_detalle(item, tamano){
-var table = document.getElementById("detallestabla");
-var rowCount = table.rows.length;
-var tableRows = table.getElementsByTagName('tr');
-//console.log(rowCount)
 
-if(rowCount <= 1){
-}
-else{
- 
-for (var x=rowCount-1; x>0; x--) {
-  
-  document.getElementById("body").innerHTML = "";
-  
-}
-
-}
-
-
-  tabla_nueva = "";
 
 var ta_item = (item.toString()).length;
 var diferencia = tamano-ta_item;
-var cero = "0";
+var cero = "0"
 
 var nombre_item = item.toString();
 
@@ -173,38 +155,8 @@ var nombre_item = item.toString();
     nombre_item = cero+nombre_item; 
   }
 
-
-  var detalles = '<?php echo json_encode($detalle_productos);?>';
-    var detalle = JSON.parse(detalles);
-        
-
-
-        for (var i = 0; i < detalle.length; i++) {
-
-
-            if (detalle[i].item === nombre_item) {
-
-
-            var tabla_nueva = `
-
-<tr>
-  <td>`+detalle[i].item+`</td>
-  <td>`+detalle[i].marca+`</td>
-  <td>`+detalle[i].nombre+`</td>
-  <td>`+detalle[i].vitola+`</td>
-  <td>`+detalle[i].tipo_empaque+`</td>
-
-</tr>
-
-`;
-            
-             document.getElementById("body").innerHTML += tabla_nueva.toString();
-            }
-
-        }
-
-
-
+  alert(nombre_item);
+  document.formde.item_detalle.value = nombre_item;
 
 }
 
@@ -440,57 +392,5 @@ var nombre_item = item.toString();
 <!-- FIN DEL MODAL AGREGAR DETALLE PRODUCTO -->
 
 
-
-
-<!-- INICIO DEL MODAL VER DETALLE PRODUCTO -->
-
-<form action="{{Route('detalle_producto')}} "   method="POST" name="formde"id=" formde" >
-    <div class="modal fade" role="dialog" id="modal_ver_detalle_producto" data-backdrop="static" data-keyboard="false"
-        tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true"
-        style="opacity:.9;background:#212529;width=800px;">
-        <div class="modal-dialog modal-dialog-centered modal-lg" style="opacity:.9;background:#212529;width=80%">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 style="font-size:20px; width:3000px; text-align:center; font:bold" class="" id="staticBackdropLabel">Detalles del producto</h5>
-                    <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close"></button>
-                </div>
-
-                <div class="modal-body">
-                
-                    <div class="card-body">
-
-                    <div class="row">
-              <table id="detallestabla" name="detallestabla" class="table table-bordered table-striped">
-              <thead>
-                <tr>
-                  <th>Item</th>
-                  <th>Marca</th>
-                  <th>Nombre</th>
-                  <th>Vitola</th>
-                  <th>Tipo de empaque</th>
-
-                </tr>
-              </thead>
-              <tbody name="body" id="body">
-                
-              </tbody>
-            </table>
-
-            </div>
-                      
-
-                <div class="modal-footer">
-                   
-
-
-                </div>
-            </div>
-
-            <input name="item_detalle" id="item_detalle"  value+="" hidden > </input>
-        </div>
-    </div>
-
-</form>
-<!-- FIN DEL MODAL VER DETALLE PRODUCTO -->
 
 </html>
