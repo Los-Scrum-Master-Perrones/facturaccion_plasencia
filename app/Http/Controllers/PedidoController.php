@@ -11,8 +11,9 @@ class PedidoController extends Controller
         
         (new pedidoImport)->import($request->select_file);
         
+        $pedido_completo =  \DB::select('call mostrar_pedido');  
 
-        return redirect('/importar_pedido')->with('success', 'File imported successfully!');
+        return view('import_excel')->with('success', 'Importación realizada con éxito!')->with('pedido_completo', $pedido_completo);
     }
 
 

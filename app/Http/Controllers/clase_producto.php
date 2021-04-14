@@ -96,10 +96,10 @@ class clase_producto extends Controller
     $producto_unico =  \DB::select('call mostrar_clase_paradetalle(:item)',
     ['item'=> $request->item_detalle]);
 
-
+    $productos = \DB::select('call mostrar_productos');
        $detalle_productos = \DB::select('call mostrar_detalles_productos');
 
-        return view('productos')->with('detalle_productos', $detalle_productos)->with('producto_unico', $producto_unico);
+        return view('productos')->with('detalle_productos', $detalle_productos)->with('producto_unico', $producto_unico)->with('productos', $productos);
     }
 
 
