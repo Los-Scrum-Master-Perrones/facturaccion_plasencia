@@ -1,24 +1,25 @@
-<title>Placensia inventario móvil</title>
-<link rel="shortcat icon" href="{{ URL::asset('favicon.ico') }}"> 
-
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta http-equiv="X-UA-Compatible" content="IE=edge">
-
-
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Live Table Edit Delete Mysql Data using Tabledit Plugin in Laravel</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" />
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>            
+   
+   
+    <script src="https://markcell.github.io/jquery-tabledit/assets/js/tabledit.min.js"></script>
+  
 <!-- Bootstrap CSS CDN -->
-<link rel="stylesheet" href="{{ URL::asset('https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css') }}" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
+<link rel="stylesheet"
+    href="{{ URL::asset('https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css') }}"
+    integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
 <!-- Our Custom CSS -->
 <link rel="stylesheet" href="{{ URL::asset('css/app.css') }}">
 <link rel="stylesheet" href="{{ URL::asset('css/bootstrap.min.css') }}">
 <script src="https://code.jquery.com/jquery-3.2.1.js"></script>
-
-    <link rel="stylesheet" href="{{ asset('css/principal.css') }}" />
-<html>
-  <head>
+<link rel="stylesheet" href="{{ asset('css/principal.css') }}" />
+  
   </head>
-
-<!-- CSS only -->
 
 
 
