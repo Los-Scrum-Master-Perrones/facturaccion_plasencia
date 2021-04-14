@@ -41,7 +41,7 @@ style="background: url('fondologin.jpg') center center no-repeat;    background-
 
                     <div >
                            <input id="email" type="email" class="@error('email') is-invalid @enderror" name="email" 
-                           style="color:white;"required >
+                           style="color:black;"required >
                            <label for="email"><span style="margin-top:5px;color:white;"> CORREO</span></label>
                          
                             @error('email')

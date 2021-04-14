@@ -10,4 +10,6 @@ class Principal extends Controller
     {
      return view('principal');
     }
+    
+ 
 }
