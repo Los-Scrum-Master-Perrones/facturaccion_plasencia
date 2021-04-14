@@ -11,7 +11,13 @@ class ImportExcelController extends Controller
     function index()
     {
      $data = DB::table('vitola_productos')->get();
-     return view('import_excel', compact('data'));
+
+     $pedido_completo =  \DB::select('call mostrar_pedido');  
+
+    
+     return view('import_excel', compact('data'))->with('pedido_completo', $pedido_completo);
+
+
     }
 
     function import(Request $request)
@@ -46,6 +52,8 @@ class ImportExcelController extends Controller
        DB::table('tbl_customer')->insert($insert_data);
       }
      }
+
+   
      return back()->with('success', 'Excel Data Imported successfully.');
     }
 

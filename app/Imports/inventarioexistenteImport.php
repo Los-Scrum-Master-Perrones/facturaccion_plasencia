@@ -13,7 +13,7 @@ class inventarioexistenteImport implements ToModel
     use Importable;
     public function model(array $row)
     {
-        if($row[4] == null && $row[5] ==null){
+        if($row[4] == null && $row[5] ==null ||$row[0] == "RP Item#" || $row[0] == null){
                     $pedio = null;
                 }else{
                     $pedio =  new pedido([
