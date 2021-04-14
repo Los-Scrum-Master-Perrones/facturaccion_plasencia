@@ -2,7 +2,27 @@
 
 
 @section('content')
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Live Table Edit Delete Mysql Data using Tabledit Plugin in Laravel</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" />
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>            
+   
+   
+    <script src="https://markcell.github.io/jquery-tabledit/assets/js/tabledit.min.js"></script>
+  
+<!-- Bootstrap CSS CDN -->
+<link rel="stylesheet"
+    href="{{ URL::asset('https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css') }}"
+    integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
+<!-- Our Custom CSS -->
+<link rel="stylesheet" href="{{ URL::asset('css/app.css') }}">
+<link rel="stylesheet" href="{{ URL::asset('css/bootstrap.min.css') }}">
+<script src="https://code.jquery.com/jquery-3.2.1.js"></script>
 
+  
+  </head>
 
 <button type="button" class=" btn-info float-right"   data-toggle="modal" data-target="#modal_agregar_usuarios"  style="margin-right: 10px; margin-bottom: 10px;">
       <span> Agregar Usuarios</span>

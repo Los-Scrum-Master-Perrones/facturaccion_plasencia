@@ -10,7 +10,7 @@ class Users extends Controller
     function index()
     {
         $users = DB::table('users')->get();
-    	return view('users')->with('users',$users);
+    	return view('usuarios')->with('users',$users);
     }
 
 
