@@ -5,8 +5,6 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" />
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>            
-   
-   
     <script src="https://markcell.github.io/jquery-tabledit/assets/js/tabledit.min.js"></script>
   
 <!-- Bootstrap CSS CDN -->
@@ -18,6 +16,12 @@
 <link rel="stylesheet" href="{{ URL::asset('css/bootstrap.min.css') }}">
 <script src="https://code.jquery.com/jquery-3.2.1.js"></script>
 <link rel="stylesheet" href="{{ asset('css/principal.css') }}" />
+
+<!-- Libreria de las alertas -->
+<script src= "{{ URL::asset('https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js') }}"></script>
+<link rel="stylesheet" href="{{ URL::asset('https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css') }}">
+
+  
   
   </head>
 
@@ -123,15 +127,14 @@
 
 
 <div class="righter2">
-<form action=  "{{Route('tabla')}}" method= "GET">
-     @csrf
-     <button type="submit"  class="buttonsubmit" >
-     <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="white" class="bi bi-card-checklist" viewBox="0 0 16 16">
-  <path d="M14.5 3a.5.5 0 0 1 .5.5v9a.5.5 0 0 1-.5.5h-13a.5.5 0 0 1-.5-.5v-9a.5.5 0 0 1 .5-.5h13zm-13-1A1.5 1.5 0 0 0 0 3.5v9A1.5 1.5 0 0 0 1.5 14h13a1.5 1.5 0 0 0 1.5-1.5v-9A1.5 1.5 0 0 0 14.5 2h-13z"/>
-  <path d="M7 5.5a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5zm-1.496-.854a.5.5 0 0 1 0 .708l-1.5 1.5a.5.5 0 0 1-.708 0l-.5-.5a.5.5 0 1 1 .708-.708l.146.147 1.146-1.147a.5.5 0 0 1 .708 0zM7 9.5a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5zm-1.496-.854a.5.5 0 0 1 0 .708l-1.5 1.5a.5.5 0 0 1-.708 0l-.5-.5a.5.5 0 0 1 .708-.708l.146.147 1.146-1.147a.5.5 0 0 1 .708 0z"/>
+
+     <button type="submit"  class="buttonsubmit"  data-toggle="modal" data-target="#modal_cerrarsesion" >
+     <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="white" class="bi bi-power" viewBox="0 0 16 16">
+  <path d="M7.5 1v7h1V1h-1z"/>
+  <path d="M3 8.812a4.999 4.999 0 0 1 2.578-4.375l-.485-.874A6 6 0 1 0 11 3.616l-.501.865A5 5 0 1 1 3 8.812z"/>
 </svg>
      </button> 
-        </form>
+        
   <div class="text">CERRAR</div>
 </div>
 
@@ -145,6 +148,32 @@
 
 
 
+<div class="modal fade" id="modal_cerrarsesion" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true" style="opacity:.9;background:#212529;">
+  <div class="modal-dialog modal-dialog-centered" >
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="staticBackdropLabel">Cerrar Sesión <strong><input value ="" id="txt_ayuda" name= "cerrarse" style="border:none;"></strong> </h5>
+        <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+      ¿Esta seguro(a) de que quiere cerrar sesión?
+      </div>
+      <div class="modal-footer" >
+        <button  type="button" class=" btn btn-secondary "data-dismiss="modal" >
+            <span>Cancelar</span>
+        </button>
+        <button  onclick="event.preventDefault();
+           document.getElementById('logout-form').submit();" class=" btn btn-dark  "   >
+            <span>Cerrar Sesión</span>
+        </button>
+
+        <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                                        @csrf
+                                    </form>
+      </div>
+    </div>
+  </div>
+</div>
 
 
 

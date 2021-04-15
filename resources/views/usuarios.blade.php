@@ -21,6 +21,10 @@
 <link rel="stylesheet" href="{{ URL::asset('css/bootstrap.min.css') }}">
 <script src="https://code.jquery.com/jquery-3.2.1.js"></script>
 
+<!-- Libreria de las alertas -->
+<script src= "{{ URL::asset('https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js') }}"></script>
+<link rel="stylesheet" href="{{ URL::asset('https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css') }}">
+
   
   </head>
 
@@ -35,6 +39,7 @@
             <th scope="col">Código</th>
             <th scope="col">Nombre</th>
             <th scope="col">Correo</th>  
+            <th scope="col">Rol</th>  
             <th scope="col">Editar</th>            
          </thead>
          <tbody>
@@ -44,6 +49,13 @@
                   <td>{{$usuario->codigo}}</td>
                   <td>{{$usuario->name}}</td>
                   <td>{{$usuario->email}}</td>
+                  <?php if($usuario->rol == 0): ?>
+                  <td>Administrador</td>
+                  <?php endif; ?>
+
+                  <?php if($usuario->rol == 1): ?>
+                  <td>Usuario</td>
+                  <?php endif; ?>
                  
 
                   <td style="padding:0px; text-align:center;    vertical-align: inherit;" >
@@ -136,6 +148,17 @@
 
 
 
+
+
+
+
+
+
+
+
+
+
+
 <!-- INICIO DEL MODAL AGREGAR USUARIO -->
 <form   method="POST" action="{{ route('register') }}" id ="FormRegistroUsuario" name="FormRegistroUsuario">
 @csrf
@@ -185,15 +208,12 @@
        </div>
 
         <div class="mb-3 col">
-        <label for="id_planta" class="form-label">Sucursal</label>
-        <select id="id_planta" type="id_planta" class="form-control @error('id_planta') is-invalid @enderror" name="id_planta" value="{{ old('id_planta') }}" required autocomplete="id_planta">
-        <option value =  "1" >El Paraiso</option>
-        <option value =  "3" >San Marcos</option>
-        <option value =  "4" >Gualiqueme</option>
-        <option value =  "2" >Moroceli</option>
-        <option value =  "0" >Todas las Sucursales</option>
+        <label for="rol" class="form-label">Rol</label>
+        <select id="rol" type="rol" class="form-control @error('rol') is-invalid @enderror" name="rol" value="{{ old('rol') }}" required autocomplete="rol">
+        <option value =  "0" >Administrador</option>
+        <option value =  "1" >Usuario</option>
         </select> 
-        @error('id_planta')
+        @error('rol')
             <span class="invalid-feedback" role="alert">
                 <strong>{{ $message }}</strong>
             </span>
@@ -368,9 +388,9 @@
     function v_agregarusuario(){ 
         var v_contrasenia = document.getElementById('password').value;
         var v_confirmacion_contrasenia = document.getElementById('password-confirm').value;
-        var v_codigo = document.getElementById('txt_codigo').value;
-        var v_nombre = document.getElementById('txt_nombre_completo').value;
-        var v_correo = document.getElementById('txt_correo_electronico').value;
+        var v_codigo = document.getElementById('codigo').value;
+        var v_nombre = document.getElementById('name').value;
+        var v_correo = document.getElementById('email').value;
   
   
   var usuario = '<?php echo json_encode($users);?>';
@@ -383,10 +403,10 @@
     if(usuarios[i].codigo.toLowerCase() === v_codigo.toLowerCase()){ 
       unico_codigo++;
       } 
-    if(usuarios[i].nombre_usuario.toLowerCase() === v_nombre.toLowerCase()){ 
+    if(usuarios[i].name.toLowerCase() === v_nombre.toLowerCase()){ 
       unico_nombre++;
       } 
-    if(usuarios[i].correo.toLowerCase() === v_correo.toLowerCase()){ 
+    if(usuarios[i].email.toLowerCase() === v_correo.toLowerCase()){ 
       unico_correo++;
       } 
   }
@@ -413,18 +433,14 @@ if(v_confirmacion_contrasenia != v_contrasenia){
   toastr.success( 'El usuario se registró correctamente','BIEN',{"progressBar": true,"closeButton": false} );
     theForm.addEventListener('submit', function (event) {
     });
-       document.getElementById('contrasenia').value =" ";
-       document.getElementById('confirmacion_contrasenia').value = " ";
-       document.getElementById('contrasenia').value= " ";
-      document.getElementById('txt_codigo').value= " ";
-       document.getElementById('txt_nombre_completo').value = " ";
-        document.getElementById('txt_correo_electronico').value= " ";
-
+       document.getElementById('password').value =" ";
+       document.getElementById('password-confirm').value = " ";
+       document.getElementById('codigo').value= " ";
+      document.getElementById('name').value= " ";
+       document.getElementById('email').value = " ";
 }
-
  }
-
-  </script>
+   </script>
 
 
 <!-- INICIO MODAL CAMBIAR CONTRASENIA -->
@@ -588,9 +604,20 @@ if(contraseniaA != confirmacion_contraseniaA ){
         </div>
 
         <div class="mb-3 col">
-        <label for="txt_sucursales" class="form-label">Sucursal</label>
+        <label for="txt_sucursales" class="form-label">Rol</label>
   
-        
+  <select id="txt_rol" type="rol" class="form-control" name="txt_rol" required autocomplete="rol">
+        <?php if($usuario->rol == 0): ?>
+        <option value =  "0" >Administrador</option>
+        <option value =  "1" >Usuario</option>
+        <?php endif; ?>
+
+        <?php if($usuario->rol == 1): ?>
+        <option value =  "1" >Usuario</option>
+        <option value =  "0" >Administrador</option>
+        <?php endif; ?>
+       
+        </select> 
         </div>
       </div>       
 </div>
@@ -666,6 +693,7 @@ for (var i = 0; i < data.length; i++) {
      document.formulario_mostrar.txt_nombre_completo.value = data[i].name;
      document.formulario_mostrar.txt_codigo.value = data[i].codigo;
      document.formulario_mostrar.id_usuario.value = data[i].id;     
+     document.formulario_mostrar.txt_rol.value = data[i].rol;     
     }
 }
 }   

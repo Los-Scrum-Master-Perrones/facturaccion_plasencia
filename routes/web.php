@@ -57,6 +57,7 @@ Route::get('/welcome', function () {
 });
 
 Auth::routes();
+Route::get('/logout', [App\Http\Controllers\LoginController::class, 'logout'])->name('logout');
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 Route::get('/productos', [App\Http\Controllers\PedidoController::class, 'productos_index'])->name('productos');
