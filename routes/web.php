@@ -6,6 +6,7 @@ use App\Http\Controllers\VehicleController;
 use App\Http\Controllers\PedidoController;
 use App\Http\Controllers\CapaProductoController;
 use App\Http\Controllers\clase_producto;
+use App\Http\Controllers\PendienteController;
 
 /*
 |--------------------------------------------------------------------------
@@ -47,6 +48,9 @@ Route::post('/mostrar_detalle_productos', [clase_producto::class, 'insertar_deta
 Route::post('/importar_clase', [CapaProductoController::class, 'import']);
 Route::get('/importar_clase', [CapaProductoController::class, 'import']);
 
+
+Route::get('/pendiente', [PendienteController::class, 'pendiente_index'])->name('pendiente');
+Route::post('/pendiente', [PendienteController::class, 'pendiente_index'])->name('pendiente');
 
 Route::get('/welcome', function () {
     return view('welcome');

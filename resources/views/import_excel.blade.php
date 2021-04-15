@@ -17,7 +17,7 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" />
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
-    <script src="https://markcell.github.io/jquery-tabledit/assets/js/tabledit.min.js"></script>
+    
 
 
 
@@ -54,12 +54,12 @@
             
         </div>
         
-        <!-- 
-  <form action="{{Route('productos')}}" method="POST"> -->
+        
+  <form action="{{Route('pendiente')}}" method="POST">
         @csrf
         <button type="submit" style="width:15%;   padding-left: 90em;	top: 10%;  padding: .4em 1em; ">Agregar a
             pendiente</button>
-        <!-- </form>   -->
+         </form>   
 
 
 
