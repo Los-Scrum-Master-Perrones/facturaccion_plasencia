@@ -33,9 +33,4 @@ class PedidoController extends Controller
 
         return view('/productos')->with('productos', $productos)->with('detalle_productos', $detalle_productos)->with('producto_unico', $producto_unico);
     }
-
-
-
 }
-
-

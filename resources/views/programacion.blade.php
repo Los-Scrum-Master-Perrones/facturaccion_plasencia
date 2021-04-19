@@ -28,10 +28,9 @@
 <body style=" background-size:100% 100%;">
 </br>
 </br>
-<form action="{{Route('programacion')}}" method="POST">
 <button style="width:20%;  padding-left:20px;" class="btn-dark form-control mr-sm-2" type="submit">Crear programación</button>
-@csrf
-</form>
+
+
     <br />
 <div class="" style="padding-left:20px; padding-right:20px;">
             <br />
@@ -82,30 +81,7 @@
                             </thead>
                             <tbody>
 
-                            @foreach($datos_pendiente as $datos)
-<tr>
-<td style="width:100px; max-width: 400px;overflow-x:auto;">{{$datos->categoria}}</td>
-<td>{{$datos->item}}</td>
-<td>{{$datos->orden_del_sitema}}</td>
-<td>{{$datos->observacion}}</td>
-<td>{{$datos->presentacion}}</td>
-<td>{{$datos->mes}}</td>
-<td>{{$datos->orden}}</td>
-<td>{{$datos->marca}}</td>
-<td>{{$datos->vitola}}</td>
-<td>{{$datos->nombre}}</td>
-<td>{{$datos->capa}}</td>
-<td>{{$datos->tipo_empaque}}</td>
-<td>{{$datos->anillo}}</td>
-<td>{{$datos->cello}}</td>
-<td>{{$datos->upc}}</td>
-<td>{{$datos->pendiente}}</td>
-<td>{{$datos->factura_del_mes}}</td>
-<td>{{$datos->cantidad_enviada_mes}}</td>
-<td>{{$datos->saldo}}</td>
-</tr>
-
-@endforeach
+     
                             </tbody>
                         </table>
                         </div>

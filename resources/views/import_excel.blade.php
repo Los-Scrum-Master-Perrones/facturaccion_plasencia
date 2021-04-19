@@ -38,26 +38,26 @@
                 <form action="{{Route('productos')}}" method="POST">
                     @csrf
                     <button type="submit"
-                        style="width:45%;   padding-left: 90em;	top: 10%;  padding: .4em 1em; ">Productos</button>
+                        style="width:30%;   padding-left: 90em;	top: 10%;  padding: .4em 1em; ">Productos</button>
                 </form>
 
             </div>
 
+        <form action="{{Route('pendiente')}}" method="POST">
             <div class="mb-3 col">
             <h4  style="width:100%;   padding-left: 200px;	">Fecha de pedido</h4>
-                
-
+            <input type="date" value=""  name="fecha" id="fecha"
+                style="width:30%;   padding-left: 90em;	top: 10%;  padding: .4em 1em; "class="form-control mr-sm-2" 
+                   required>
             </div>
-                <input type="date" value="" onKeyDown="copiar('fecha_fin','fechafin');" name="fecha_fin" id="fecha_fin"
-                style="width:30%;   padding-left: 90em;	top: 10%;  padding: .4em 1em; "class="form-control mr-sm-2" placeholder="Fecha final"
-                    onchange="obtenerFechaFin(this)">
+                
             
-        </div>
+            </div>
         
         
-  <form action="{{Route('pendiente')}}" method="POST">
+ 
         @csrf
-        <button type="submit" style="width:15%;   padding-left: 90em;	top: 10%;  padding: .4em 1em; ">Agregar a
+        <button type="submit" style="width:20%;   padding-left: 90em;	top: 10%;  padding: .4em 1em; ">Agregar a
             pendiente</button>
          </form>   
 

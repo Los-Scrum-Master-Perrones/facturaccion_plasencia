@@ -5,6 +5,7 @@ namespace App\Imports;
 use App\Models\capa_producto;
 use Maatwebsite\Excel\Concerns\ToModel;
 use Maatwebsite\Excel\Concerns\Importable;
+
 class CapaImport implements ToModel
 {
     use Importable;

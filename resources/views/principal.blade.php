@@ -53,7 +53,7 @@
  
     
       <div class="lefter" >
-      <form action=  "{{Route('tabla')}}" method= "GET">
+      <form action=  "{{Route('pendiente')}}" method= "GET">
      @csrf
      <button type="submit"  class="buttonsubmit" >
      <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="white" class="bi bi-card-checklist" viewBox="0 0 16 16">

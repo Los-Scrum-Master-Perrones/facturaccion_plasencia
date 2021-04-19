@@ -7,6 +7,7 @@ use App\Http\Controllers\PedidoController;
 use App\Http\Controllers\CapaProductoController;
 use App\Http\Controllers\clase_producto;
 use App\Http\Controllers\PendienteController;
+use App\Http\Controllers\programacion;
 
 /*
 |--------------------------------------------------------------------------
@@ -50,7 +51,10 @@ Route::get('/importar_clase', [CapaProductoController::class, 'import']);
 
 
 Route::get('/pendiente', [PendienteController::class, 'pendiente_index'])->name('pendiente');
-Route::post('/pendiente', [PendienteController::class, 'pendiente_index'])->name('pendiente');
+Route::post('/pendiente', [PendienteController::class, 'pendiente_indexi'])->name('pendiente');
+
+Route::get('/programacion', [programacion::class, 'index'])->name('programacion');
+Route::post('/programacion', [programacion::class, 'index'])->name('programacion');
 
 Route::get('/welcome', function () {
     return view('welcome');
