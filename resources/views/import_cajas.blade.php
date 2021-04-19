@@ -15,10 +15,6 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" />
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
-    
-
-
-
 </head>
 
 <body style=" background-size:100% 100%;">
@@ -27,37 +23,37 @@
 
 
     <div class="container">
-        <h3 style="width:100%;  text-align:center">Importación de pedidos para la producción </h3>
+        <h3 style="width:100%;  text-align:center">Importación Cajas </h3>
 
         <br />
-        <div class="row">
-            <div class="mb-3 col">
 
+
+        <!-- <div class="row">
+
+            <div class="mb-3 col">
                 <form action="{{Route('productos')}}" method="POST">
                     @csrf
                     <button type="submit"
-                        style="width:30%;   padding-left: 90em;	top: 10%;  padding: .4em 1em; ">Productos</button>
+                        style="width:45%;   padding-left: 90em;	top: 10%;  padding: .4em 1em; ">Productos</button>
                 </form>
-
             </div>
 
-        <form action="{{Route('pendiente')}}" method="POST">
             <div class="mb-3 col">
             <h4  style="width:100%;   padding-left: 200px;	">Fecha de pedido</h4>
-            <input type="date" value=""  name="fecha" id="fecha"
-                style="width:30%;   padding-left: 90em;	top: 10%;  padding: .4em 1em; "class="form-control mr-sm-2" 
-                   required>
             </div>
-                
+
+                <input type="date" value="" onKeyDown="copiar('fecha_fin','fechafin');" name="fecha_fin" id="fecha_fin"
+                style="width:30%;   padding-left: 90em;	top: 10%;  padding: .4em 1em; "class="form-control mr-sm-2" placeholder="Fecha final"
+                    onchange="obtenerFechaFin(this)">
             
-            </div>
+        </div> -->
         
         
- 
+  <!-- <form action="{{Route('pendiente')}}" method="POST">
         @csrf
-        <button type="submit" style="width:20%;   padding-left: 90em;	top: 10%;  padding: .4em 1em; ">Agregar a
+        <button type="submit" style="width:15%;   padding-left: 90em;	top: 10%;  padding: .4em 1em; ">Agregar a
             pendiente</button>
-         </form>   
+         </form>    -->
 
 
 
@@ -84,28 +80,28 @@
         <br />
         <div style="padding: center;padding-left: 100px;padding-righ: 100px;">
 
-            <form method="post" enctype="multipart/form-data" action="{{ url('/importar_pedido') }}"
+            <form method="post" enctype="multipart/form-data" action="{{ url('/importar_cajas') }}"
                 style="padding: center;">
                 @csrf
                
                 <div class="form-group">
                     <table class="table">
                         <tr>
-                            <td width="40%"><label style="font-size:18px;">Seleccionar el archivo a importar<span
+                            <td width="20%"><label style="font-size:18px;">Seleccionar el archivo a importar<span
                                         class="text-muted"> (.xls, .xslx)</span></label></td>
-                            <td width="30">
+                            <td width="40">
                                 <input type="file" name="select_file" id="select_file" class="btn btn-primary"
                                     style="width:100%;" />
                             </td>
-                            <td width="30%">
+                            <td width="40%">
                                 <input type="submit" name="upload" class="btn btn-primary" style="width:50%; "
                                     value="Importar">
                             </td>
                         </tr>
                         <tr>
+                            <td width="20%"></td>
+                            <td width="40"></td>
                             <td width="40%"></td>
-                            <td width="30"></td>
-                            <td width="30%"></td>
                         </tr>
                     </table>
 
@@ -114,10 +110,27 @@
         </form>
         </div>
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+
         <div class="container">
             <br />
             <div class="panel panel-default">
-                <div class="panel-heading">
+                <!-- <div class="panel-heading">
 
                     <form action="{{Route('buscar')}}" method="POST" class="form-inline" style="margin-bottom:0px;">
                         @csrf
@@ -132,32 +145,34 @@
                             </span>
                         </button>
                     </form>
-                </div>
+                </div> -->
                 <div class="panel-body">
                     <div class="table-responsive">
                         @csrf
                         <table id="editable" class="table table-striped table-secondary table-bordered border-primary ">
                             <thead>
                                 <tr>
-                                    <th>Item</th>
-                                    <th>Paquetes</th>
+                                    <th>Código</th>
                                     <th>Descripción</th>
-                                    <th>Total</th>
-                                    <th>Unidades</th>
-                                    <th>#Orden</th>
+                                    <th>Lote origen</th>
+                                    <th>Lote Destino</th>
+                                    <th>Cantidad</th>
+                                    <th>Costo Unitario</th>
+                                    <th>Subtotal</th>
                                 </tr>
                             </thead>
                             <tbody>
-@foreach($pedido_completo as $pedido)
-                              <tr>
-                                <td>{{$pedido->item}}</td>
-                                <td>{{$pedido->cant_paquetes}}</td>
-                                <td>{{$pedido->desccripcion}}</td>
-                                <td>{{$pedido->unidades*$pedido->cant_paquetes}}</td>
-                                <td>{{$pedido->unidades}}</td>
-                                <td>{{$pedido->numero_orden}}</td>
+@foreach($cajas as $caja)
 
-                              </tr>
+<tr>
+        <td>{{$caja->codigo}}</td>
+        <td>{{$caja->descripcion}}</td>
+        <td>{{$caja->lote_origen}}</td>
+        <td>{{$caja->lote_destino}}</td>
+        <td>{{$caja->cantidad}}</td>
+        <td>{{$caja->costo_u}}</td>
+        <td>{{$caja->subtotal}}</td>
+        </tr>
 @endforeach
                             </tbody>
                         </table>
