@@ -19,7 +19,7 @@ use App\Http\Controllers\PendienteController;
 |
 */
 
- Route::get('/import_excel', [ImportExcelController::class, 'index']);
+ Route::get('/import_excel', [ImportExcelController::class, 'index'])->name('import_excel');
 
 
 Route::post('/import', [VehicleController::class, 'import']);
@@ -76,3 +76,10 @@ Route::post('/usuarios/d',[App\Http\Controllers\Users::class, 'update' ])->name(
 Route::post('/usuarios/a',[App\Http\Controllers\Users::class, 'destroy' ])->name('eliminar_usuario');
 Route::post('usuarios/contra', [App\Http\Controllers\Users::class,'update_contrasenia'])->name('actualizar_usuario_contrasenia');
 Route::get('/usuarios',[App\Http\Controllers\Users::class, 'index' ])->name('usuarios');
+
+
+//cajas
+
+Route::get('/index_cajas', [App\Http\Controllers\CajasController::class, 'index'])->name('index_cajas');
+Route::post('/importar_cajas', [App\Http\Controllers\CajasController::class, 'import'])->name('importar_cajas');
+Route::get('/importar_cajas', [App\Http\Controllers\CajasController::class, 'import'])->name('importar_cajas');
