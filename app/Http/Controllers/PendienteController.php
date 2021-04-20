@@ -31,24 +31,20 @@ class PendienteController extends Controller
 
           
 
-            if($request->fechade === null){
+            if($request->fechade == null){
                 $fede = "0";
             }else{
                 $fede = $request->fechade;
             }
 
-
-           
-
-
-            if($request->fechahasta === null){
-                $feha = "0";
+            if($request->fechahasta === ""){
+                $feha = "hola";
             }else{
                 $feha = $request->fechahasta;
             }
 
 
-            if($request->nombre === null){
+            if($request->nombre == null){
                 $nom = "0";
             }else{
                 $nom = $request->nombre;
