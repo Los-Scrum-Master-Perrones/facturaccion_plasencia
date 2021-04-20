@@ -38,9 +38,13 @@
             <div class="panel panel-default">
                 <div class="panel-heading">
 
-                    <form action="{{Route('buscar')}}" method="POST" class="form-inline" style="margin-bottom:0px;">
+                    <form action="{{Route('buscar_pendiente')}}" method="POST" class="form-inline" style="margin-bottom:0px;">
                         @csrf
-                        <input name="txt_name" class="form-control mr-sm-2" placeholder="Nombre" style="width:150px;">
+                        <label>De</label>
+                        <input name="fecha_de" id="fecha_de" class="form-control mr-sm-2" placeholder="Nombre" style="width:150px;">
+                        <label>Hasta</label>
+                        <input name="fecha_hasta" id="fecha_hasta" class="form-control mr-sm-2" placeholder="Nombre" style="width:150px;">
+                        <input name="nombre" id="nombre" class="form-control mr-sm-2" placeholder="Nombre" style="width:150px;">
                         <button class="btn-dark form-control mr-sm-2" type="submit">
                             <span>
                                 <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor"
