@@ -17,7 +17,7 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" />
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
-    
+    <script src="{{ URL::asset('css/tabla.js') }}"></script>    
 <link rel="stylesheet" href="{{ asset('css/principal.css') }}" />
 </head>
 
@@ -28,10 +28,16 @@
     <a style="color:white;"  href="index_lista_cajas">Lista</a>
   </li>
   <li class="nav-item">
-    <a style="color:black;"  href="index_inventario_cajas">Inventario</a>
+    <a style="color:black;" href="index_importar_cajas">Importar</a>
   </li>
   <li class="nav-item">
-    <a style="color:black;" href="index_importar_cajas">Importar</a>
+    <a style="color:black;"  href="index_bodega">Bodega</a>
+  </li>
+  <li class="nav-item">
+    <a style="color:black;"  href="index_bodega_proceso">Bodega Proceso</a>
+  </li>  
+  <li class="nav-item">
+    <a style="color:black;"  href="index_inventario_cajas">Total Bodega</a>
   </li>
 </ul>
 
@@ -60,7 +66,7 @@
                 
                
                 <div class="col-md-3">
-                <button class="btn botonprincipal">Agregar</button>
+                <button class="btn botonprincipal" data-toggle="modal" data-target="#modal_agregar_lista" >Agregar</button>
                 </div>
           </div>
 
@@ -68,7 +74,7 @@
 
             <br />
                    
-                        <table class="table table-light"
+                        <table class="table table-light"  id="editable"
                         style="font-size:10px;">
                             <thead>
                                 <tr>
@@ -97,6 +103,105 @@
                 </div>
             </div>
         </div>
+
+
+        <script type="text/javascript">
+            $(document).ready(function () {
+
+                $.ajaxSetup({
+                    headers: {
+                        'X-CSRF-Token': $("input[name=_token]").val()
+                    }
+                });
+
+                $('#editable').Tabledit({
+                    url: '{{ route("editaryeliminarlista") }}',
+                    method: 'POST',
+                    dataType: "json",
+                    columns: {
+                        identifier: [0, 'id'],
+                        editable: [
+                            [1, 'codigo'],
+                            [2, 'productoServicio'],
+                            [3, 'marca']
+                        ]
+                    },
+                    restoreButton: false,
+
+                    onSuccess: function (data, textStatus, jqXHR) {
+                        if (data.action == 'delete') {
+                            $('#' + data.id).remove();
+                        }
+                    }
+
+                });
+
+            });
+
+        </script>
+
+
+
+
+
+
+
+
+<!-- INICIO MODAL AGREGAR LISTA CAJA -->
+<form id = "formulario_mostrarE" name = "formulario_mostrarE" action = "{{Route('agregar_lista_caja')}}"  method="POST">
+
+@csrf
+  
+
+<div class="modal fade " id="modal_agregar_lista" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true" style="opacity:.9;background:#212529;">
+  <div class="modal-dialog modal-dialog-centered modal-lg" >
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="staticBackdropLabel">Agregar caja <strong><input value ="" id="txt_usuarioE" name= "txt_usuarioE" style="border:none;"></strong> </h5>
+       
+      </div>
+      <div class="modal-body">
+    
+
+      <div class="row">
+        <div class="mb-3 col">
+        <input name="codigo"  class="form-control " style="width:100%;"   placeholder="Código" >
+        </div>
+        <div class="mb-3 col">
+        <input name="producto"  class="form-control " style="width:100%;"   placeholder="Producto/Servicio" >
+        </div>
+        <div class="mb-3 col">
+        <input name="marca"  class="form-control " style="width:100%;"   placeholder="Marca" >
+        </div>
+    </div>
+
+
+
+      </div>
+      <div class="modal-footer" >
+        <button  type="button" class=" btn botonprincipal " data-dismiss="modal" >
+            <span>Cancelar</span>
+        </button>
+        <button type="submit" class=" btn botonprincipal  "   >
+            <span>Agregar</span>
+        </button>   
+      
+      </div>
+    </div>
+  </div>
+</div>
+</form>
+
+
+
+
+
+
+
+
+
+
+        
         
       
 

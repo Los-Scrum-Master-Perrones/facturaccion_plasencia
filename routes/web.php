@@ -88,11 +88,13 @@ Route::get('/usuarios',[App\Http\Controllers\Users::class, 'index' ])->name('usu
 //cajas
 
 Route::get('/index_importar_cajas', [App\Http\Controllers\CajasController::class, 'index_importar'])->name('index_importar_cajas');
-Route::get('/index_inventario_cajas', [App\Http\Controllers\CajasController::class, 'index_inventario'])->name('index_inventario_cajas');
+Route::get('/index_bodega', [App\Http\Controllers\CajasController::class, 'index_bodega'])->name('index_bodega');
 Route::get('/index_lista_cajas', [App\Http\Controllers\CajasController::class, 'index_lista'])->name('index_lista_cajas');
+Route::post('/editaryeliminarlista', [App\Http\Controllers\CajasController::class, 'editaryeliminarlista'])->name('editaryeliminarlista');
 
 
 Route::post('/buscar_lista_cajas', [App\Http\Controllers\CajasController::class, 'buscar_lista_cajas'])->name('buscar_lista_cajas');
+Route::post('/agregar_lista_caja', [App\Http\Controllers\CajasController::class, 'agregar_lista_caja'])->name('agregar_lista_caja');
 
 Route::post('/importar_cajas', [App\Http\Controllers\CajasController::class, 'import'])->name('importar_cajas');
 Route::get('/importar_cajas', [App\Http\Controllers\CajasController::class, 'import'])->name('importar_cajas');

@@ -26,10 +26,16 @@
     <a style="color:black;"  href="index_lista_cajas">Lista</a>
   </li>
   <li class="nav-item">
-    <a style="color:black;"  href="index_inventario_cajas">Inventario</a>
+    <a style="color:white;" href="index_importar_cajas">Importar</a>
   </li>
   <li class="nav-item">
-    <a style="color:white;" href="index_importar_cajas">Importar</a>
+    <a style="color:black;"  href="index_bodega">Bodega</a>
+  </li>
+  <li class="nav-item">
+    <a style="color:black;"  href="index_bodega_proceso">Bodega Proceso</a>
+  </li>  
+  <li class="nav-item">
+    <a style="color:black;"  href="index_inventario_cajas">Total Bodega</a>
   </li>
 </ul>
 
@@ -40,7 +46,7 @@
             
        
 
-            <form method="post" enctype="multipart/form-data" action="{{ url('/importar_cajas') }}" >
+            <form method="post" enctype="multipart/form-data" action="{{ url('/importar_inv_cajas') }}" >
                 @csrf        
                 <div class="row" style="width:100%;">
                 <div class="col-md-8" >
