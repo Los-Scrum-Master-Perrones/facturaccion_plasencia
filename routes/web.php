@@ -90,3 +90,6 @@ Route::get('/usuarios',[App\Http\Controllers\Users::class, 'index' ])->name('usu
 Route::get('/index_cajas', [App\Http\Controllers\CajasController::class, 'index'])->name('index_cajas');
 Route::post('/importar_cajas', [App\Http\Controllers\CajasController::class, 'import'])->name('importar_cajas');
 Route::get('/importar_cajas', [App\Http\Controllers\CajasController::class, 'import'])->name('importar_cajas');
+
+Route::post('/importar_inv_cajas', [App\Http\Controllers\CajasController::class, 'importinvcajas'])->name('importar_inv_cajas');
+Route::get('/importar_inv_cajas', [App\Http\Controllers\CajasController::class, 'importinvcajas'])->name('importar_inv_cajas');

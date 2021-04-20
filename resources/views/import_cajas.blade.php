@@ -19,96 +19,41 @@
 
 <body style=" background-size:100% 100%;">
 
-    <br />
-
+<ul class="nav justify-content-center">
+  <li class="nav-item">
+    <a style="color:black;"  href="#">Lista</a>
+  </li>
+  <li class="nav-item">
+    <a style="color:black;"  href="#">Inventario</a>
+  </li>
+  <li class="nav-item">
+    <a href="index_cajas">Importar</a>
+  </li>
+</ul>
 
     <div class="container">
-        <h3 style="width:100%;  text-align:center">Importación Cajas </h3>
-
-        <br />
+      
 
 
-        <!-- <div class="row">
-
-            <div class="mb-3 col">
-                <form action="{{Route('productos')}}" method="POST">
-                    @csrf
-                    <button type="submit"
-                        style="width:45%;   padding-left: 90em;	top: 10%;  padding: .4em 1em; ">Productos</button>
-                </form>
-            </div>
-
-            <div class="mb-3 col">
-            <h4  style="width:100%;   padding-left: 200px;	">Fecha de pedido</h4>
-            </div>
-
-                <input type="date" value="" onKeyDown="copiar('fecha_fin','fechafin');" name="fecha_fin" id="fecha_fin"
-                style="width:30%;   padding-left: 90em;	top: 10%;  padding: .4em 1em; "class="form-control mr-sm-2" placeholder="Fecha final"
-                    onchange="obtenerFechaFin(this)">
             
-        </div> -->
-        
-        
-  <!-- <form action="{{Route('pendiente')}}" method="POST">
-        @csrf
-        <button type="submit" style="width:15%;   padding-left: 90em;	top: 10%;  padding: .4em 1em; ">Agregar a
-            pendiente</button>
-         </form>    -->
+       
 
-
-
-
-        <br />
-        @if(count($errors) > 0)
-        <div class="alert alert-danger">
-            Upload Validation Error<br><br>
-            <ul>
-                @foreach($errors->all() as $error)
-                <li>{{ $error }}</li>
-                @endforeach
-            </ul>
-        </div>
-        @endif
-
-        @if(isset($success))
-        <div class="alert alert-success alert-block">
-            <button type="button" class="close" data-dismiss="alert"></button>
-            <strong>{{ $success }}</strong>
-        </div>
-        @endif
-
-        <br />
-        <div style="padding: center;padding-left: 100px;padding-righ: 100px;">
-
-            <form method="post" enctype="multipart/form-data" action="{{ url('/importar_cajas') }}"
-                style="padding: center;">
-                @csrf
-               
-                <div class="form-group">
-                    <table class="table">
-                        <tr>
-                            <td width="20%"><label style="font-size:18px;">Seleccionar el archivo a importar<span
-                                        class="text-muted"> (.xls, .xslx)</span></label></td>
-                            <td width="40">
-                                <input type="file" name="select_file" id="select_file" class="btn btn-primary"
-                                    style="width:100%;" />
-                            </td>
-                            <td width="40%">
-                                <input type="submit" name="upload" class="btn btn-primary" style="width:50%; "
-                                    value="Importar">
-                            </td>
-                        </tr>
-                        <tr>
-                            <td width="20%"></td>
-                            <td width="40"></td>
-                            <td width="40%"></td>
-                        </tr>
-                    </table>
-
+            <form method="post" enctype="multipart/form-data" action="{{ url('/importar_cajas') }}" >
+                @csrf        
+                <div class="row" style="width:100%;">
+                <div class="col-md-8" >
+                <input type="file" name="select_file" id="select_file" class="btn btn-primary form-control" style="width:100%;" />        
+          
                 </div>
-            
-        </form>
-        </div>
+                <div class="col-md-2">
+                <input type="submit" name="upload" class="btn btn-primary form-control" style="width:100%;"  value="Importar">
+                </div>
+                <div class="col-md-2">
+                <input type="submit" name="upload" class="btn btn-primary form-control" style="width:100%;"  value="Añadir a inventario">
+                </div>
+          </div>
+          </form>
+  
 
 
 
@@ -127,29 +72,10 @@
 
         
 
-        <div class="container">
             <br />
-            <div class="panel panel-default">
-                <!-- <div class="panel-heading">
-
-                    <form action="{{Route('buscar')}}" method="POST" class="form-inline" style="margin-bottom:0px;">
-                        @csrf
-                        <input name="txt_name" class="form-control mr-sm-2" placeholder="Nombre" style="width:150px;">
-                        <button class="btn-dark form-control mr-sm-2" type="submit">
-                            <span>
-                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor"
-                                    class="bi bi-search" viewBox="0 0 16 16">
-                                    <path
-                                        d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z" />
-                                </svg>
-                            </span>
-                        </button>
-                    </form>
-                </div> -->
-                <div class="panel-body">
-                    <div class="table-responsive">
-                        @csrf
-                        <table id="editable" class="table table-striped table-secondary table-bordered border-primary ">
+                   
+                        <table class="table table-light"
+                        style="font-size:10px;">
                             <thead>
                                 <tr>
                                     <th>Código</th>
@@ -176,7 +102,7 @@
 @endforeach
                             </tbody>
                         </table>
-                    </div>
+              
                 </div>
             </div>
         </div>
