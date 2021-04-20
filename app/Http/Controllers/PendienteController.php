@@ -28,9 +28,6 @@ class PendienteController extends Controller
 
 
          public function buscar(Request $request){
-
-          
-
             if($request->fechade == null){
                 $fede = "0";
             }else{
