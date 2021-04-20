@@ -41,9 +41,9 @@
                     <form action="{{Route('buscar_pendiente')}}" method="POST" class="form-inline" style="margin-bottom:0px;">
                         @csrf
                         <label>De</label>
-                        <input name="fecha_de" id="fecha_de" class="form-control mr-sm-2" placeholder="Nombre" style="width:150px;">
+                        <input  type="date" name="fecha_de" id="fecha_de" class="form-control mr-sm-2" placeholder="Nombre" style="width:150px;">
                         <label>Hasta</label>
-                        <input name="fecha_hasta" id="fecha_hasta" class="form-control mr-sm-2" placeholder="Nombre" style="width:150px;">
+                        <input   type="date" name="fecha_hasta" id="fecha_hasta" class="form-control mr-sm-2" placeholder="Nombre" style="width:150px;">
                         <input name="nombre" id="nombre" class="form-control mr-sm-2" placeholder="Nombre" style="width:150px;">
                         <button class="btn-dark form-control mr-sm-2" type="submit">
                             <span>

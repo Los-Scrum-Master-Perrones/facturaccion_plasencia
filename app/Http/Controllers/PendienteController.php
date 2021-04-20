@@ -29,14 +29,42 @@ class PendienteController extends Controller
 
          public function buscar(Request $request){
 
-        
-            $datos_pendiente =  \DB::select('call mostrar_pendiente');  
+          
 
+            if($request->fechade === null){
+                $fede = "0";
+            }else{
+                $fede = $request->fechade;
+            }
+
+
+           
+
+
+            if($request->fechahasta === null){
+                $feha = "0";
+            }else{
+                $feha = $request->fechahasta;
+            }
+
+
+            if($request->nombre === null){
+                $nom = "0";
+            }else{
+                $nom = $request->nombre;
+            }
+
+            return $feha;
             $buscar = \DB::select('call buscar_pendiente(:nombre,:fechade,:fechahasta)',
-        ['nombre'=>$request->nombre,
-        'fechade'=>$request->fechade,
-        'fechahasta'=>$request->fechahasta
+        ['nombre'=>$nom,
+        'fechade'=>$fede,
+        'fechahasta'=>$feha
         ]);  
+
+      
+        
+        $datos_pendiente =  \DB::select('call mostrar_pendiente');  
+
     
             return REDIRECT('/pendiente')->with('datos_pendiente' ,$datos_pendiente)->with('buscar' ,$buscar);
          }

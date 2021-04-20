@@ -50,9 +50,8 @@ Route::post('/importar_clase', [CapaProductoController::class, 'import']);
 Route::get('/importar_clase', [CapaProductoController::class, 'import']);
 
 
-Route::get('/pendiente_', [PendienteController::class, 'pendiente_index'])->name('pendiente');
+Route::get('/pendiente', [PendienteController::class, 'pendiente_index'])->name('pendiente');
 Route::post('/pendiente', [PendienteController::class, 'pendiente_indexi'])->name('pendiente');
-
 
 Route::get('/pendiente_buscar', [PendienteController::class, 'buscar'])->name('buscar_pendiente');
 Route::post('/pendiente_buscar', [PendienteController::class, 'buscar'])->name('buscar_pendiente');
