@@ -53,6 +53,12 @@ Route::get('/importar_clase', [CapaProductoController::class, 'import']);
 Route::get('/pendiente', [PendienteController::class, 'pendiente_index'])->name('pendiente');
 Route::post('/pendiente', [PendienteController::class, 'pendiente_indexi'])->name('pendiente');
 
+
+Route::get('/pendiente_empaque', [PendienteController::class, 'index_pendiente_empaque'])->name('pendiente_empaque');
+Route::post('/pendiente_empaque', [PendienteController::class, 'index_pendiente_empaque'])->name('pendiente_empaque');
+
+
+
 Route::get('/pendiente_buscar', [PendienteController::class, 'buscar'])->name('buscar_pendiente');
 Route::post('/pendiente_buscar', [PendienteController::class, 'buscar'])->name('buscar_pendiente');
 

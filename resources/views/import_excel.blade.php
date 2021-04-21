@@ -1,8 +1,11 @@
-@extends('principal')
-@section('content')
 
 <!DOCTYPE html>
 <html>
+
+@extends('principal')
+@section('content')
+
+
 
 <head>
     <title></title>

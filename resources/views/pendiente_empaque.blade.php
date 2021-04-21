@@ -1,8 +1,7 @@
 <!DOCTYPE html>
 <html>
+
 @extends('principal')
-
-
 @section('content')
 
 
@@ -30,17 +29,21 @@
 </br>
 <form action="{{Route('programacion')}}" method="POST">
 <button style="width:20%;  padding-left:20px;" class="btn-dark form-control mr-sm-2" type="submit">Crear programación</button>
+@csrf
 </form>
-
     <br />
 <div class="" style="padding-left:20px; padding-right:20px;">
             <br />
             <div class="panel panel-default">
                 <div class="panel-heading">
 
-                    <form action="{{Route('buscar')}}" method="POST" class="form-inline" style="margin-bottom:0px;">
+                    <form action="{{Route('buscar_pendiente')}}" method="POST" class="form-inline" style="margin-bottom:0px;">
                         @csrf
-                        <input name="txt_name" class="form-control mr-sm-2" placeholder="Nombre" style="width:150px;">
+                        <label>De</label>
+                        <input  type="date" name="fecha_de" id="fecha_de" class="form-control mr-sm-2" placeholder="Nombre" style="width:150px;">
+                        <label>Hasta</label>
+                        <input   type="date" name="fecha_hasta" id="fecha_hasta" class="form-control mr-sm-2" placeholder="Nombre" style="width:150px;">
+                        <input name="nombre" id="nombre" class="form-control mr-sm-2" placeholder="Nombre" style="width:150px;">
                         <button class="btn-dark form-control mr-sm-2" type="submit">
                             <span>
                                 <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor"
@@ -59,28 +62,59 @@
 <table id="editable" class="table table-striped table-secondary table-bordered border-primary " style="overflow-x:auto;">
                             <thead>
                                 <tr>
+                                    <th style="width:100px;">CATEGORIA</th>
+                                    <th>ITEM</th>
                                     <th>ORDEN DEL SISTEMA</th>
+                                    <th>OBSERVACÓN</th>
+                                    <th>PRESENTACIÓN</th>
+                                    <th>MES</th>
                                     <th>ORDEN</th>
-                                    <th>MARCA</th>
-                                    <th>NOMBRE</th>
+                                    <th style="width:100px;">MARCA</th>
                                     <th>VITOLA</th>
+                                    <th>NOMBRE</th>
                                     <th>CAPA</th>
                                     <th>TIPO DE EMPAQUE</th>
                                     <th>ANILLO</th>
                                     <th>CELLO</th>
                                     <th>UPC</th>
+                                    <th>PENDIENTE</th>
+                                    <th>MARZO 2021 FACTURA #17976(Warehouse)</th>
+                                    <th>ENVIADO MES</th>
                                     <th>SALDO</th>
-                                </tr>
-                            </thead>
-                            <tbody>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                        @foreach($datos_pendiente_empaque as $datos)
+                                        <tr>
+                                            <td style="width:100px; max-width: 400px;overflow-x:auto;">
+                                                {{$datos->categoria}}</td>
+                                            <td>{{$datos->item}}</td>
+                                            <td>{{$datos->orden_del_sitema}}</td>
+                                            <td>{{$datos->observacion}}</td>
+                                            <td>{{$datos->presentacion}}</td>
+                                            <td>{{$datos->mes}}</td>
+                                            <td>{{$datos->orden}}</td>
+                                            <td>{{$datos->marca}}</td>
+                                            <td>{{$datos->vitola}}</td>
+                                            <td>{{$datos->nombre}}</td>
+                                            <td>{{$datos->capa}}</td>
+                                            <td>{{$datos->tipo_empaque}}</td>
+                                            <td>{{$datos->anillo}}</td>
+                                            <td>{{$datos->cello}}</td>
+                                            <td>{{$datos->upc}}</td>
+                                            <td>{{$datos->pendiente}}</td>
+                                            <td>{{$datos->factura_del_mes}}</td>
+                                            <td>{{$datos->cantidad_enviada_mes}}</td>
+                                            <td>{{$datos->saldo}}</td>
+                                        </tr>
 
-     
-                            </tbody>
-                        </table>
-                        </div>
-                </div>
-            </div>
-        </div>
+                                        @endforeach
+                                    </tbody>
+                                    </table>
+                                    </div>
+                                    </div>
+                                    </div>
+                                    </div>
 
                         
  
