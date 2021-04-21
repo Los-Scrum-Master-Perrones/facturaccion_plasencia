@@ -87,7 +87,7 @@
         <br />
         <div style="padding: center;padding-left: 100px;padding-righ: 100px;">
 
-            <form method="post" enctype="multipart/form-data" action="{{ url('/importar_pedido') }}"
+            <form method="post" enctype="multipart/form-data" action="{{ url('/producto') }}"
                 style="padding: center;">
                 @csrf
                

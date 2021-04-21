@@ -9,6 +9,8 @@ use App\Http\Controllers\clase_producto;
 use App\Http\Controllers\PendienteController;
 use App\Http\Controllers\programacion;
 
+use App\Http\Controllers\tabla_existencia;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -64,6 +66,12 @@ Route::post('/pendiente_buscar', [PendienteController::class, 'buscar'])->name('
 
 Route::get('/programacion', [programacion::class, 'index'])->name('programacion');
 Route::post('/programacion', [programacion::class, 'index'])->name('programacion');
+
+
+
+Route::get('/producto', [tabla_existencia::class, 'import'])->name('codigo');
+Route::post('/producto', [tabla_existencia::class, 'import'])->name('codigo');
+
 
 Route::get('/welcome', function () {
     return view('welcome');
