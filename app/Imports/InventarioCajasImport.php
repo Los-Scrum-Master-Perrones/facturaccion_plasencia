@@ -2,7 +2,7 @@
 
 namespace App\Imports;
 
-use App\Models\InventarioCajas;
+use App\Models\ListaCajas;
 use Maatwebsite\Excel\Concerns\ToModel;
 use Maatwebsite\Excel\Concerns\Importable;
 
@@ -22,7 +22,7 @@ use Importable;
         }
         else{
 
-        $inventariocajas = new InventarioCajas([
+        $inventariocajas = new ListaCajas([
             'codigo' => $row[0],
             'productoServicio' => $row[1],
             'marca' => $row[2]          

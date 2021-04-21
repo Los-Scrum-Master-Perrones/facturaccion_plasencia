@@ -15,19 +15,27 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" />
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+    
+<link rel="stylesheet" href="{{ asset('css/principal.css') }}" />
 </head>
 
 <body style=" background-size:100% 100%;">
 
 <ul class="nav justify-content-center">
   <li class="nav-item">
-    <a style="color:black;"  href="#">Lista</a>
+    <a style="color:black;"  href="index_lista_cajas">Lista</a>
   </li>
   <li class="nav-item">
-    <a style="color:black;"  href="#">Inventario</a>
+    <a style="color:white;" href="index_importar_cajas">Importar</a>
   </li>
   <li class="nav-item">
-    <a href="index_cajas">Importar</a>
+    <a style="color:black;"  href="index_bodega">Bodega</a>
+  </li>
+  <li class="nav-item">
+    <a style="color:black;"  href="index_bodega_proceso">Bodega Proceso</a>
+  </li>  
+  <li class="nav-item">
+    <a style="color:black;"  href="index_inventario_cajas">Total Bodega</a>
   </li>
 </ul>
 
@@ -38,18 +46,18 @@
             
        
 
-            <form method="post" enctype="multipart/form-data" action="{{ url('/importar_cajas') }}" >
+            <form method="post" enctype="multipart/form-data" action="{{ url('/importar_inv_cajas') }}" >
                 @csrf        
                 <div class="row" style="width:100%;">
                 <div class="col-md-8" >
-                <input type="file" name="select_file" id="select_file" class="btn btn-primary form-control" style="width:100%;" />        
-          
+                <input type="file" name="select_file" id="select_file" class="btn botonprincipal form-control" />        
+                </div>
+                
+                <div class="col-md-2">
+                <input type="submit" name="upload" class="btn botonprincipal form-control" value="Importar">
                 </div>
                 <div class="col-md-2">
-                <input type="submit" name="upload" class="btn btn-primary form-control" style="width:100%;"  value="Importar">
-                </div>
-                <div class="col-md-2">
-                <input type="submit" name="upload" class="btn btn-primary form-control" style="width:100%;"  value="Añadir a inventario">
+                <input type="submit" name="upload" class="btn botonprincipal form-control" value="Añadir a inventario">
                 </div>
           </div>
           </form>
@@ -107,40 +115,7 @@
             </div>
         </div>
         
-        <script type="text/javascript">
-            $(document).ready(function () {
-
-                $.ajaxSetup({
-                    headers: {
-                        'X-CSRF-Token': $("input[name=_token]").val()
-                    }
-                });
-
-                $('#editable').Tabledit({
-                    url: '{{ route("tabledit.action") }}',
-                    method: 'POST',
-                    dataType: "json",
-                    columns: {
-                        identifier: [0, 'id'],
-                        editable: [
-                            [1, 'first_name'],
-                            [2, 'last_name'],
-                            [3, 'gender']
-                        ]
-                    },
-                    restoreButton: false,
-
-                    onSuccess: function (data, textStatus, jqXHR) {
-                        if (data.action == 'delete') {
-                            $('#' + data.id).remove();
-                        }
-                    }
-
-                });
-
-            });
-
-        </script>
+      
 
         @endsection
 </body>

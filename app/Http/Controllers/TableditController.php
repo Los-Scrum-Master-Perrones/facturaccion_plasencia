@@ -36,6 +36,7 @@ class TableditController extends Controller
     				'last_name'		=>	$request->last_name,
     				'gender'		=>	$request->gender
     			);
+				
     			DB::table('sample_datas')
     				->where('id', $request->id)
     				->update($data);

@@ -11,6 +11,82 @@ use Maatwebsite\Excel\Facades\Excel;
 class CajasController extends Controller
 {
 
+    function index_importar()  {    
+    $cajas = DB::table('cajas')->get();         
+    return view('import_cajas')->with('cajas', $cajas);   
+    }
+
+    function index_bodega()  {     
+    return view('bodega');  
+    }
+
+    function index_lista()  {    
+        
+    $listacajas = DB::table('lista_cajas')->get();         
+    return view('lista_cajas')->with('listacajas', $listacajas);     
+    }
+
+        function buscar_lista_cajas(Request $request)  {  
+
+        if($request->nombre== null){
+        $nombre = "";
+        }else{
+        $nombre = $request->nombre;
+        }
+
+        $listacajas = \DB::select('call buscar_lista_cajas(:nombre)',
+        [ 'nombre' => $nombre]);        
+
+        return view('lista_cajas')->with('listacajas', $listacajas);     
+        }
+
+
+
+        function editaryeliminarlista(Request $request)  { 
+            if($request->ajax())
+    	{
+    		if($request->action == 'edit')
+    		{
+    			$data = array(
+    				'codigo'	=>	$request->codigo,
+    				'productoServicio'		=>	$request->productoServicio,
+    				'marca'		=>	$request->marca
+    			);
+    			DB::table('lista_cajas')
+    				->where('id', $request->id)
+    				->update($data);
+    		}
+
+    		if($request->action == 'delete')
+    		{
+    			DB::table('lista_cajas')
+    				->where('id', $request->id)
+    				->delete();
+    		}
+			
+    		return response()->json($request);
+    	}
+    }
+        
+        
+
+        function agregar_lista_caja(Request $request)  {      
+            $caja = \DB::select('call agregar_lista_caja(:a,:b,:c)',
+            [ 'a' => $request->codigo,
+            'b' =>$request->producto,
+            'c' => $request->marca]);
+            
+            $listacajas = DB::table('lista_cajas')->get();         
+    return view('lista_cajas')->with('listacajas', $listacajas);     
+        }  
+
+
+
+
+
+
+
+
       
     function import(Request $request)  {    
 
@@ -29,8 +105,5 @@ class CajasController extends Controller
 
 
 
-    function index()  {    
-        $cajas = DB::table('cajas')->get();         
-        return view('import_cajas')->with('cajas', $cajas);   
-       }
+   
 }

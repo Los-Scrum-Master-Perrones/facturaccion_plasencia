@@ -24,7 +24,12 @@
     
 }
 
-
+.botonprincipal{
+  width:100%;background: #000; color: #fff;border-radius: 20px;
+}
+.botonprincipal:hover {
+  width:100%;background: #000; color: rgb(255, 255, 255);border-radius: 20px;
+}
 
   
   .all:hover {
