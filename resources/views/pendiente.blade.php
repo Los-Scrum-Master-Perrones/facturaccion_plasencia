@@ -35,9 +35,6 @@
     <a style="color:black; font-size:16px;" href="import_excel"><strong>Importar pedido</strong></a>
   </li>
   <li class="nav-item">
-    <a style="color:black; font-size:16px;"  href="index_bodega"><strong>Exportar</strong></a>
-  </li>
-  <li class="nav-item">
     <a style="color:black; font-size:16px;"  href="index_bodega_proceso"><strong>Reporte</strong></a>
   </li>  
 </ul>
@@ -45,7 +42,7 @@
     
    
     
-    <div class="container" style="width:1400px; padding-left:100px">
+    <div class="container" style="width:1400px; padding-left:60px">
       
  <div class="row">
 
@@ -68,7 +65,7 @@
                          style="width:200px;" placeholder="Nombre">
                  </div>
                  <div class="col-sm">
-                     <input name="nombre" id="nombre" class="form-control mr-sm-2 botonprincipal" style="width:250px;"
+                     <input name="nombre" id="nombre" class="form-control mr-sm-2 botonprincipal" style="width:200px;"
                          placeholder="Nombre">
                  </div>
                  <div class="col-sm">
@@ -81,6 +78,10 @@
                              </svg>
                          </span>
                      </button>
+                 </div>
+                 <div class="col-sm">
+                 <button class="form-control mr-sm-2 botonprincipal" type="submit" style="width:120px;">Exportar
+                 </button>
                  </div>
              </div>
          </form>

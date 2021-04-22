@@ -40,14 +40,6 @@
 </ul>
 
     <div class="container">
-      
-
-
-
-     
-            
-       
-
             <form method="post" enctype="multipart/form-data" action="{{ url('/importar_inv_cajas') }}" >
                 @csrf        
                 <div class="row" style="width:100%;">
