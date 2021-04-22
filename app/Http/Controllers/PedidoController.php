@@ -18,9 +18,26 @@ class PedidoController extends Controller
 
 
 
+ function buscar(Request $request){
+
+if($request->busqueda ===null){
+$i = "0";
+}else{
+   $i= $request->busqueda;
+}
+
+
+
+        $pedido_completo =  \DB::select('call buscar_pedidos(:item)',
+        ['item'=> $i]);
+
+        return view('import_excel')->with('pedido_completo', $pedido_completo);
+    }
+
+
     public function productos_index(Request $request){
 
-        
+    
        $productos = \DB::select('call mostrar_productos');
 
        $producto_unico =  \DB::select('call mostrar_clase_paradetalle(:item)',

@@ -1,12 +1,9 @@
 
 @extends('principal')
 
-<!DOCTYPE html>
-<html>
 
 @section('content')
 
-<head>
     <title></title>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" />
@@ -21,10 +18,6 @@
     <link rel="stylesheet" href="{{ asset('css/principal.css') }}" />
 
 
-
-</head>
-
-<body style=" background-size:100% 100%;">
 
     </br>
     <ul class="nav justify-content-center">
@@ -111,13 +104,13 @@
                                 <div class="row">
 
                                     <div class="col-sm">
-                                        <form action="{{Route('buscar')}}" method="POST" class="form-inline"
+                                        <form action="{{Route('buscar_pedido')}}" method="POST" class="form-inline"
                                             style="margin-bottom:0px;">
                                             @csrf
                                             <div class="row">
 
                                                 <div class="col-sm">
-                                                    <input name="txt_name" class="btn botonprincipal form-control"
+                                                    <input name="busqueda" id="busqueda" class="btn botonprincipal form-control"
                                                         placeholder="Búsqueda por descripción u orden" style="width:350px;">
                                                 </div>
                                                 <div class="col-sm">
@@ -159,7 +152,7 @@
                             <tr>
                                 <td>{{$pedido->item}}</td>
                                 <td>{{$pedido->cant_paquetes}}</td>
-                                <td>{{$pedido->desccripcion}}</td>
+                                <td>{{$pedido->descripcion}}</td>
                                 <td>{{$pedido->unidades*$pedido->cant_paquetes}}</td>
                                 <td>{{$pedido->unidades}}</td>
                                 <td>{{$pedido->numero_orden}}</td>
@@ -209,6 +202,5 @@
     </script>
 
    
-</body>
 @endsection
-</html>
+

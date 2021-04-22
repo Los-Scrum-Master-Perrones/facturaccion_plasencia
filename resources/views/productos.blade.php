@@ -1,12 +1,9 @@
 
 @extends('principal')
-<!DOCTYPE html>
-<html>
-
 
 
 @section('content')
-<head>
+
     <title></title>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" />
@@ -20,18 +17,17 @@
     <script src="{{ URL::asset('css/tabla.js') }}"></script>
 
 
-</head>
 
-<body style="background-size:100% 100%;">
-    <div class="container">
+
+  
         <br />
         <h3 style="	text-align:center; font-size:35px; font:bold; width:1160px;">Inventario de productos Plasencia</h3>
         <br />
+        <div class="" style="width:1100px; padding-left:100px;">
 
-        <div class="panel panel-default">
-            <div class="panel-heading">
+<div class="row">
 
-
+    <div class="col-sm">
 
 
                 <form action="{{Route('buscar')}}" method="POST" class="form-inline" name="form_tabla" id="form_tabla">
@@ -56,7 +52,7 @@
             <div class="panel-body">
                 <div class="table-responsive">
                     @csrf
-                    <table id="editable" class="table table-bordered table-striped">
+                    <table class="table table-light" id="editable" style="font-size:10px;m">
                         <thead>
                             <tr>
                                 <th>Item</th>
@@ -513,9 +509,8 @@
 <!-- FIN DEL MODAL VER DETALLE PRODUCTO -->
 
 
-</body>
 @endsection
-</html>
+
 
 
 

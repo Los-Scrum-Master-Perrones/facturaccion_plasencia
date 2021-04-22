@@ -32,6 +32,7 @@ Route::post('/importar_pedido', [PedidoController::class, 'import']);
 Route::get('/importar_pedido', [PedidoController::class, 'import']);
 
 
+
 Route::get('/productos', [PedidoController::class, 'productos_index'])->name('productos');
 Route::post('/productos', [PedidoController::class, 'productos_index'])->name('productos');
 
@@ -62,6 +63,10 @@ Route::post('/pendiente_empaque', [PendienteController::class, 'index_pendiente_
 
 Route::get('/pendiente_buscar', [PendienteController::class, 'buscar'])->name('buscar_pendiente');
 Route::post('/pendiente_buscar', [PendienteController::class, 'buscar'])->name('buscar_pendiente');
+
+Route::get('/pedido_buscar', [PedidoController::class, 'buscar'])->name('buscar_pedido');
+Route::post('/pedido_buscar', [PedidoController::class, 'buscar'])->name('buscar_pedido');
+
 
 Route::get('/programacion', [programacion::class, 'index'])->name('programacion');
 Route::post('/programacion', [programacion::class, 'index'])->name('programacion');
