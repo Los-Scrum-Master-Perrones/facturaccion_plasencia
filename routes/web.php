@@ -8,7 +8,6 @@ use App\Http\Controllers\CapaProductoController;
 use App\Http\Controllers\clase_producto;
 use App\Http\Controllers\PendienteController;
 use App\Http\Controllers\programacion;
-
 use App\Http\Controllers\tabla_existencia;
 
 /*

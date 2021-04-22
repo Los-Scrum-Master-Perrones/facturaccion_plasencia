@@ -25,21 +25,23 @@
 
 <ul class="nav justify-content-center">
   <li class="nav-item">
-    <a style="color:white;"  href="index_lista_cajas">Lista</a>
+    <a style="color:white; font-size:16px;"  href="index_lista_cajas"><strong>Lista</strong></a>
   </li>
   <li class="nav-item">
-    <a style="color:black;" href="index_importar_cajas">Importar</a>
+    <a style="color:black; font-size:16px;" href="index_importar_cajas"><strong>Importar</strong></a>
   </li>
   <li class="nav-item">
-    <a style="color:black;"  href="index_bodega">Bodega</a>
+    <a style="color:black; font-size:16px;"  href="index_bodega"><strong>Bodega</strong></a>
   </li>
   <li class="nav-item">
-    <a style="color:black;"  href="index_bodega_proceso">Bodega Proceso</a>
+    <a style="color:black; font-size:16px;"  href="index_bodega_proceso"><strong>Bodega Proceso</strong></a>
   </li>  
   <li class="nav-item">
-    <a style="color:black;"  href="index_inventario_cajas">Total Bodega</a>
+    <a style="color:black; font-size:16px;"  href="index_inventario_cajas"><strong>Total Bodega</strong></a>
   </li>
 </ul>
+</br>
+
 
     <div class="container">
       

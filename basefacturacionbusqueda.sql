@@ -16,6 +16,40 @@
 CREATE DATABASE IF NOT EXISTS `facturacion_plasencia` /*!40100 DEFAULT CHARACTER SET latin1 */;
 USE `facturacion_plasencia`;
 
+-- Volcando estructura para tabla facturacion_plasencia.anadir_inventario_cajas
+CREATE TABLE IF NOT EXISTS `anadir_inventario_cajas` (
+  `id_cajas` int(11) NOT NULL AUTO_INCREMENT,
+  `codigo` varchar(50) DEFAULT NULL,
+  `descripcion` longtext,
+  `lote_origen` longtext,
+  `lote_destino` longtext,
+  `cantidad` longtext,
+  `costo_u` longtext,
+  `subtotal` longtext,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`id_cajas`) USING BTREE
+) ENGINE=MyISAM AUTO_INCREMENT=21 DEFAULT CHARSET=latin1 ROW_FORMAT=DYNAMIC;
+
+-- La exportación de datos fue deseleccionada.
+
+-- Volcando estructura para tabla facturacion_plasencia.cajas
+CREATE TABLE IF NOT EXISTS `cajas` (
+  `id_cajas` int(11) NOT NULL AUTO_INCREMENT,
+  `codigo` varchar(50) DEFAULT NULL,
+  `descripcion` longtext,
+  `lote_origen` longtext,
+  `lote_destino` longtext,
+  `cantidad` longtext,
+  `costo_u` longtext,
+  `subtotal` longtext,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`id_cajas`)
+) ENGINE=MyISAM AUTO_INCREMENT=21 DEFAULT CHARSET=latin1;
+
+-- La exportación de datos fue deseleccionada.
+
 -- Volcando estructura para tabla facturacion_plasencia.capa_productos
 CREATE TABLE IF NOT EXISTS `capa_productos` (
   `id_capa` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
@@ -55,12 +89,14 @@ CREATE TABLE IF NOT EXISTS `cellos` (
 CREATE TABLE IF NOT EXISTS `clase_productos` (
   `id_producto` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
   `item` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `codigo_producto` varchar(50) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `id_capa` int(11) NOT NULL,
   `id_vitola` int(11) NOT NULL,
   `id_nombre` int(11) NOT NULL,
   `id_marca` int(11) NOT NULL,
   `id_cello` int(11) NOT NULL,
   `id_tipo_empaque` int(11) NOT NULL,
+  `presentacion` varchar(50) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id_producto`)
@@ -83,6 +119,19 @@ CREATE TABLE IF NOT EXISTS `detalle_clase_productos` (
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id_producto`) USING BTREE
 ) ENGINE=MyISAM AUTO_INCREMENT=213 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- La exportación de datos fue deseleccionada.
+
+-- Volcando estructura para tabla facturacion_plasencia.lista_cajas
+CREATE TABLE IF NOT EXISTS `lista_cajas` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `codigo` varchar(50) DEFAULT NULL,
+  `productoServicio` varchar(255) DEFAULT NULL,
+  `marca` varchar(100) DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`id`) USING BTREE
+) ENGINE=MyISAM AUTO_INCREMENT=1046 DEFAULT CHARSET=latin1;
 
 -- La exportación de datos fue deseleccionada.
 
@@ -174,13 +223,26 @@ CREATE TABLE IF NOT EXISTS `pendiente` (
 
 -- La exportación de datos fue deseleccionada.
 
--- Volcando estructura para tabla facturacion_plasencia.pendiente_embarque
-CREATE TABLE IF NOT EXISTS `pendiente_embarque` (
-  `Columna 1` int(11) DEFAULT NULL,
-  `Columna 2` int(11) DEFAULT NULL,
-  `Columna 3` int(11) DEFAULT NULL,
-  `Columna 4` int(11) DEFAULT NULL
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+-- Volcando estructura para tabla facturacion_plasencia.pendiente_empaque
+CREATE TABLE IF NOT EXISTS `pendiente_empaque` (
+  `categoria` int(11) DEFAULT NULL,
+  `item` varchar(50) DEFAULT NULL,
+  `orden_del_sitema` varchar(50) DEFAULT NULL,
+  `observacion` varchar(50) DEFAULT NULL,
+  `presentacion` varchar(50) DEFAULT NULL,
+  `mes` date DEFAULT NULL,
+  `orden` int(11) DEFAULT NULL,
+  `marca` int(11) DEFAULT NULL,
+  `vitola` int(11) DEFAULT NULL,
+  `nombre` int(11) DEFAULT NULL,
+  `capa` int(11) DEFAULT NULL,
+  `tipo_empaque` int(11) DEFAULT NULL,
+  `cello` int(11) DEFAULT NULL,
+  `pendiente` int(11) DEFAULT NULL,
+  `factura_del_mes` int(11) DEFAULT NULL,
+  `cantidad_enviada_mes` int(11) DEFAULT NULL,
+  `saldo` int(11) DEFAULT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=latin1 COMMENT='CATEGORIA	ITEM	ORDEN DEL SISTEMA	OBSERVACÓN	PRESENTACIÓN	MES	ORDEN	MARCA	VITOLA	NOMBRE	CAPA	TIPO DE EMPAQUE	ANILLO	CELLO	UPC	PENDIENTE	MARZO 2021 FACTURA #17976(Warehouse)	ENVIADO MES	SALDO';
 
 -- La exportación de datos fue deseleccionada.
 
@@ -194,6 +256,20 @@ CREATE TABLE IF NOT EXISTS `sample_datas` (
   `update_at` datetime DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
 ) ENGINE=MyISAM AUTO_INCREMENT=15 DEFAULT CHARSET=latin1;
+
+-- La exportación de datos fue deseleccionada.
+
+-- Volcando estructura para tabla facturacion_plasencia.tabla_codigo_programacions
+CREATE TABLE IF NOT EXISTS `tabla_codigo_programacions` (
+  `codigo` varchar(50) DEFAULT NULL,
+  `presentacion` varchar(50) DEFAULT NULL,
+  `marca` int(11) DEFAULT NULL,
+  `nombre` int(11) DEFAULT NULL,
+  `vitola` int(11) DEFAULT NULL,
+  `capa` int(11) DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 -- La exportación de datos fue deseleccionada.
 
@@ -277,7 +353,7 @@ BEGIN
 if nombre="0" && fechade="0" && fechahasta="0" then
 
 SELECT categoria.categoria AS categoria, pendiente.item AS item,pendiente.orden_del_sitema ,pendiente.observacion 
-,pendiente.observacion ,pendiente.mes AS mes ,orden_productos.orden AS orden, marca_productos.marca AS marca,vitola_productos.vitola AS vitola, 
+,pendiente.presentacion ,pendiente.mes AS mes ,orden_productos.orden AS orden, marca_productos.marca AS marca,vitola_productos.vitola AS vitola, 
 nombre_productos.nombre AS nombre, capa_productos.capa AS capa,
 cellos.anillo AS anillo,cellos.cello AS cello, cellos.upc AS upc, pendiente.pendiente as pendiente,pendiente.factura_del_mes, pendiente.cantidad_enviada_mes, pendiente.saldo, tipo_empaques.tipo_empaque AS tipo_empaque
 FROM categoria, clase_productos, marca_productos, vitola_productos,nombre_productos, capa_productos, orden_productos,cellos,
@@ -292,7 +368,7 @@ ELSE
 if fechade = "0"   && fechahasta = "0"  && nombre != "0" then
 
 SELECT categoria.categoria AS categoria, pendiente.item AS item,pendiente.orden_del_sitema ,pendiente.observacion 
-,pendiente.observacion ,pendiente.mes AS mes ,orden_productos.orden AS orden, marca_productos.marca AS marca,vitola_productos.vitola AS vitola, 
+,pendiente.presentacion ,pendiente.mes AS mes ,orden_productos.orden AS orden, marca_productos.marca AS marca,vitola_productos.vitola AS vitola, 
 nombre_productos.nombre AS nombre, capa_productos.capa AS capa,
 cellos.anillo AS anillo,cellos.cello AS cello, cellos.upc AS upc, pendiente.pendiente as pendiente,pendiente.factura_del_mes, pendiente.cantidad_enviada_mes, pendiente.saldo, tipo_empaques.tipo_empaque AS tipo_empaque
 FROM categoria, clase_productos, marca_productos, vitola_productos,nombre_productos, capa_productos, orden_productos,cellos,
@@ -313,7 +389,7 @@ WHERE clase_productos.id_vitola = vitola_productos.id_vitola AND clase_productos
 	
 	
 	SELECT categoria.categoria AS categoria, pendiente.item AS item,pendiente.orden_del_sitema ,pendiente.observacion 
-,pendiente.observacion ,pendiente.mes AS mes ,orden_productos.orden AS orden, marca_productos.marca AS marca,vitola_productos.vitola AS vitola, 
+,pendiente.presentacion ,pendiente.mes AS mes ,orden_productos.orden AS orden, marca_productos.marca AS marca,vitola_productos.vitola AS vitola, 
 nombre_productos.nombre AS nombre, capa_productos.capa AS capa,
 cellos.anillo AS anillo,cellos.cello AS cello, cellos.upc AS upc, pendiente.pendiente as pendiente,pendiente.factura_del_mes, pendiente.cantidad_enviada_mes, pendiente.saldo, tipo_empaques.tipo_empaque AS tipo_empaque
 FROM categoria, clase_productos, marca_productos, vitola_productos,nombre_productos, capa_productos, orden_productos,cellos,
@@ -333,6 +409,23 @@ WHERE clase_productos.id_vitola = vitola_productos.id_vitola AND clase_productos
 	END if;
 END if;	
 END if;	
+END//
+DELIMITER ;
+
+-- Volcando estructura para procedimiento facturacion_plasencia.ingresar_presentacion
+DELIMITER //
+CREATE PROCEDURE `ingresar_presentacion`()
+BEGIN
+
+UPDATE clase_productos,(
+	SELECT tabla_codigo_programacions.codigo, tabla_codigo_programacions.presentacion, tabla_codigo_programacions.capa,
+	tabla_codigo_programacions.nombre ,tabla_codigo_programacions.marca
+	FROM clase_productos, tabla_codigo_programacions
+	WHERE clase_productos.id_capa = tabla_codigo_programacions.capa AND clase_productos.id_nombre =
+tabla_codigo_programacions.nombre AND clase_productos.id_marca = tabla_codigo_programacions.marca)x
+SET clase_productos.codigo_producto = x.codigo , clase_productos.presentacion = x.presentacion
+WHERE clase_productos.id_capa = x.capa AND clase_productos.id_nombre =
+x.nombre AND clase_productos.id_marca = x.marca;
 END//
 DELIMITER ;
 
@@ -411,6 +504,26 @@ VALUES(item, icapa,ivitola,inombre,imarca,icello,itipo,precio);
 END//
 DELIMITER ;
 
+-- Volcando estructura para procedimiento facturacion_plasencia.insertar_pendente_empaque
+DELIMITER //
+CREATE PROCEDURE `insertar_pendente_empaque`(
+	IN `fecha` VARCHAR(50)
+)
+BEGIN
+
+
+insert into pendiente_empaque(SELECT categoria.id_categoria AS categoria, pedidos.item AS item,"" AS orden_del_sitema,"" AS observacion,"" AS presentacion ,fecha AS mes ,orden_productos.id_orden AS orden, marca_productos.id_marca AS marca,vitola_productos.id_vitola AS vitola, 
+nombre_productos.id_nombre AS nombre, capa_productos.id_capa AS capa,tipo_empaques.id_tipo_empaque AS tipo_empaque,
+cellos.id_cello AS cello,(pedidos.cant_paquetes * pedidos.unidades)  as pendiente,0 as factura_del_mes, 0 AS cantidad_enviada_mes, 0 AS saldo
+FROM categoria, clase_productos, pedidos, marca_productos, vitola_productos,nombre_productos, capa_productos, orden_productos,cellos,
+tipo_empaques
+WHERE clase_productos.id_vitola = vitola_productos.id_vitola AND pedidos.numero_orden = orden_productos.orden AND clase_productos.id_capa = capa_productos.id_capa AND 
+ clase_productos.id_nombre = nombre_productos.id_nombre AND  clase_productos.id_marca = marca_productos.id_marca AND cellos.id_cello=clase_productos.id_cello and
+   clase_productos.id_tipo_empaque = tipo_empaques.id_tipo_empaque AND pedidos.item = clase_productos.item AND categoria.id_categoria=pedidos.categoria
+ GROUP BY pedidos.item, pedidos.numero_orden, pedidos.categoria);
+END//
+DELIMITER ;
+
 -- Volcando estructura para procedimiento facturacion_plasencia.insertar_pendiente
 DELIMITER //
 CREATE PROCEDURE `insertar_pendiente`(
@@ -419,7 +532,7 @@ CREATE PROCEDURE `insertar_pendiente`(
 BEGIN
 
 
-insert into pendiente(SELECT categoria.id_categoria AS categoria, pedidos.item AS item,0 AS orden_del_sitema,0 AS observacion,0 AS presentacion ,fecha AS mes ,orden_productos.id_orden AS orden, marca_productos.id_marca AS marca,vitola_productos.id_vitola AS vitola, 
+insert into pendiente(SELECT categoria.id_categoria AS categoria, pedidos.item AS item,"" AS orden_del_sitema,"" AS observacion,"" AS presentacion ,fecha AS mes ,orden_productos.id_orden AS orden, marca_productos.id_marca AS marca,vitola_productos.id_vitola AS vitola, 
 nombre_productos.id_nombre AS nombre, capa_productos.id_capa AS capa,tipo_empaques.id_tipo_empaque AS tipo_empaque,
 cellos.id_cello AS cello,(pedidos.cant_paquetes * pedidos.unidades)  as pendiente,0 as factura_del_mes, 0 AS cantidad_enviada_mes, 0 AS saldo
 FROM categoria, clase_productos, pedidos, marca_productos, vitola_productos,nombre_productos, capa_productos, orden_productos,cellos,
@@ -500,6 +613,24 @@ WHERE clase_productos.id_vitola = vitola_productos.id_vitola AND clase_productos
 	GROUP BY pendiente.item, pendiente.orden, pendiente.categoria
 	;
 
+END//
+DELIMITER ;
+
+-- Volcando estructura para procedimiento facturacion_plasencia.mostrar_pendiente_empaque
+DELIMITER //
+CREATE PROCEDURE `mostrar_pendiente_empaque`()
+BEGIN
+
+SELECT categoria.categoria AS categoria, pendiente.item AS item,0 AS orden_del_sitema,0 AS observacion,0 AS presentacion ,pendiente.mes AS mes ,orden_productos.orden AS orden, marca_productos.marca AS marca,vitola_productos.vitola AS vitola, 
+nombre_productos.nombre AS nombre, capa_productos.capa AS capa,
+cellos.anillo AS anillo,cellos.cello AS cello, cellos.upc AS upc, pendiente.pendiente as pendiente,0 as factura_del_mes, 0 AS cantidad_enviada_mes, 0 AS saldo, tipo_empaques.tipo_empaque AS tipo_empaque
+FROM categoria, clase_productos, marca_productos, vitola_productos,nombre_productos, capa_productos, orden_productos,cellos,
+tipo_empaques, pendiente
+WHERE clase_productos.id_vitola = vitola_productos.id_vitola AND clase_productos.id_capa = capa_productos.id_capa AND pendiente.capa = capa_productos.id_capa and
+ clase_productos.id_nombre = nombre_productos.id_nombre AND  clase_productos.id_marca = marca_productos.id_marca AND cellos.id_cello=clase_productos.id_cello and
+   clase_productos.id_tipo_empaque = tipo_empaques.id_tipo_empaque AND pendiente.categoria = categoria.id_categoria 
+	GROUP BY pendiente.item, pendiente.orden, pendiente.categoria
+	;
 END//
 DELIMITER ;
 
