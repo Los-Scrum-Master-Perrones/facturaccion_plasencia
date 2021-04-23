@@ -119,3 +119,6 @@ Route::get('/importar_cajas', [App\Http\Controllers\CajasController::class, 'imp
 
 Route::post('/importar_inv_cajas', [App\Http\Controllers\CajasController::class, 'importinvcajas'])->name('importar_inv_cajas');
 Route::get('/importar_inv_cajas', [App\Http\Controllers\CajasController::class, 'importinvcajas'])->name('importar_inv_cajas');
+
+
+Route::get('/exportar_pendiente', [App\Http\Controllers\PendienteController::class, 'exportPendiente'])->name('exportar_pendiente');
