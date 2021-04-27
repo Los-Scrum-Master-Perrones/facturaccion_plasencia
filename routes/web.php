@@ -9,6 +9,7 @@ use App\Http\Controllers\clase_producto;
 use App\Http\Controllers\PendienteController;
 use App\Http\Controllers\programacion;
 use App\Http\Controllers\tabla_existencia;
+use App\Http\Livewire\DatosProductos;
 
 /*
 |--------------------------------------------------------------------------
@@ -75,6 +76,33 @@ Route::post('/programacion', [programacion::class, 'index'])->name('programacion
 
 Route::get('/producto', [tabla_existencia::class, 'import'])->name('codigo');
 Route::post('/producto', [tabla_existencia::class, 'import'])->name('codigo');
+
+
+Route::get('/datos_producto', DatosProductos::class)->name('datos_producto');
+
+
+
+// INSERTAR DATOS ADICIONALES DE LOS PRODUCTOS
+
+Route::get('/insertar_marca', [DatosProductos::class, 'insertar_marca'])->name('insertar_marca');
+Route::post('/insertar_marca', [DatosProductos::class, 'insertar_marca'])->name('insertar_marca');
+
+
+Route::get('/insertar_nombre', [DatosProductos::class, 'insertar_nombre'])->name('insertar_nombre');
+Route::post('/insertar_nombre', [DatosProductos::class, 'insertar_nombre'])->name('insertar_nombre');
+
+Route::get('/insertar_vitola', [DatosProductos::class, 'insertar_vitola'])->name('insertar_vitola');
+Route::post('/insertar_vitola', [DatosProductos::class, 'insertar_vitola'])->name('insertar_vitola');
+
+Route::get('/insertar_tipo', [DatosProductos::class, 'insertar_tipo'])->name('insertar_tipo');
+Route::post('/insertar_tipo', [DatosProductos::class, 'insertar_tipo'])->name('insertar_tipo');
+
+Route::get('/insertar_capa', [DatosProductos::class, 'insertar_capa'])->name('insertar_capa');
+Route::post('/insertar_capa', [DatosProductos::class, 'insertar_capa'])->name('insertar_capa');
+
+
+
+
 
 
 Route::get('/welcome', function () {
