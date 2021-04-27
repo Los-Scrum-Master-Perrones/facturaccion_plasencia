@@ -10,6 +10,7 @@ use App\Http\Controllers\PendienteController;
 use App\Http\Controllers\programacion;
 use App\Http\Controllers\tabla_existencia;
 use App\Http\Livewire\DatosProductos;
+use App\Http\Livewire\Productos;
 
 /*
 |--------------------------------------------------------------------------
@@ -34,8 +35,8 @@ Route::get('/importar_pedido', [PedidoController::class, 'import']);
 
 
 
-Route::get('/productos', [PedidoController::class, 'productos_index'])->name('productos');
-Route::post('/productos', [PedidoController::class, 'productos_index'])->name('productos');
+Route::get('/productos', Productos::class)->name('productos');
+Route::post('/productos', Productos::class)->name('productos');
 
 
 Route::get('/insertar_productos', [clase_producto::class, 'insertar_clase'])->name('nuevo_producto');
@@ -113,8 +114,6 @@ Auth::routes();
 Route::get('/logout', [App\Http\Controllers\LoginController::class, 'logout'])->name('logout');
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-Route::get('/productos', [App\Http\Controllers\PedidoController::class, 'productos_index'])->name('productos');
-Route::post('/productos', [App\Http\Controllers\PedidoController::class, 'productos_index'])->name('productos');;
 
 //rutas melvin
 Route::get('/', [App\Http\Controllers\TableditController::class, 'index'])->name('tabla');

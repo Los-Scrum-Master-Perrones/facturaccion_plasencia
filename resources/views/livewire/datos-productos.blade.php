@@ -352,6 +352,7 @@
         var capas = '<?php echo json_encode($capas);?>';
 
         var capa = JSON.parse(capas);
+        
         var cap = 0;
         var theForm = document.forms['formcapa'];
 
@@ -446,7 +447,7 @@
     function validar_nombre() {
         var nombre_m = document.getElementById('nombrem').value;
 
-        var nombres = '<?php echo json_encode($capas);?>';
+        var nombres = '<?php echo json_encode($nombres);?>';
 
         var nombre = JSON.parse(nombres);
         var nom = 0;
@@ -491,8 +492,6 @@
 </script>
 
 <!-- FIN VALIDAR NOMBRE -->
-
-
 
 
 
@@ -689,8 +688,4 @@
 
 <!-- FIN VALIDAR VITOLA -->
 
-
-
-    <script src="{{ asset('js/app.js') }}"></script>
-    @livewireScripts
 </div>
