@@ -399,42 +399,42 @@
 
 
     <!-- INICIO MODAL NOMBRE -->
-    <form action="{{Route('insertar_nombre)}}" method='POST' id="formnombre" name="formnombre">
-    <div class="modal fade" id="modal_nombre" data-backdrop="static" data-keyboard="false" tabindex="-1"
-        aria-labelledby="staticBackdropLabel" aria-hidden="true" style="opacity:.9;background:#212529;">
-        <div class="modal-dialog modal-dialog-centered">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="staticBackdropLabel"
-                        style="width:450px; text-align:center; font-size:20px;"><strong>Agregar nombre</strong></h5>
-                    <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <div class="mb-3 col">
-                        <label for="txt_vitola" class="form-label"
-                            style="width:440px; text-align:center; font-size:20px;">Nueva nombre</label>
-                        <input class="form-control" id="nombrem" type="text" name="nombrem" placeholder="Agregar marca"
-                            style="width: 440px" maxLength="30" autocomplete="off">
+    <form action="{{Route('insertar_nombre')}}" method='POST' id="formnombre" name="formnombre">
+        <div class="modal fade" id="modal_nombre" data-backdrop="static" data-keyboard="false" tabindex="-1"
+            aria-labelledby="staticBackdropLabel" aria-hidden="true" style="opacity:.9;background:#212529;">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="staticBackdropLabel"
+                            style="width:450px; text-align:center; font-size:20px;"><strong>Agregar nombre</strong></h5>
+                        <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close"></button>
                     </div>
-                </div>
-                <div class="modal-footer">
-                    <button style=" background: #b39f64; color: #ecedf1;" type="button" class=" btn-info-claro "
-                        data-dismiss="modal">
-                        <span>Cancelar</span>
-                    </button>
-                    <button onclick="validar_nombre()"  type="submit"
-                        class=" btn-info float-right" value="Guardar" style="margin-right: 10px">
+                    <div class="modal-body">
+                        <div class="mb-3 col">
+                            <label for="txt_vitola" class="form-label"
+                                style="width:440px; text-align:center; font-size:20px;">Nueva nombre</label>
+                            <input class="form-control" id="nombrem" type="text" name="nombrem"
+                                placeholder="Agregar marca" style="width: 440px" maxLength="30" autocomplete="off">
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button style=" background: #b39f64; color: #ecedf1;" type="button" class=" btn-info-claro "
+                            data-dismiss="modal">
+                            <span>Cancelar</span>
+                        </button>
+                        <button onclick="validar_nombre()" type="submit" class=" btn-info float-right" value="Guardar"
+                            style="margin-right: 10px">
 
-                        <span>Guardar</span>
-                    </button>
-                    @csrf
-                    <input name="id_planta" value='1' hidden />
+                            <span>Guardar</span>
+                        </button>
+                        @csrf
+                        <input name="id_planta" value='1' hidden />
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
 
-</form>
+    </form>
     <!-- FIN MODAL NOMBRE -->
 
 
@@ -491,6 +491,203 @@
 </script>
 
 <!-- FIN VALIDAR NOMBRE -->
+
+
+
+
+
+
+    <!-- INICIO MODAL TIPO -->
+    <form action="{{Route('insertar_tipo')}}" method='POST' id="formtipo" name="formtipo">
+    <div class="modal fade" id="modal_tipo" data-backdrop="static" data-keyboard="false" tabindex="-1"
+        aria-labelledby="staticBackdropLabel" aria-hidden="true" style="opacity:.9;background:#212529;">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="staticBackdropLabel"
+                        style="width:450px; text-align:center; font-size:20px;"><strong>Agregar tipo de empaque</strong></h5>
+                    <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="mb-3 col">
+                        <label for="txt_vitola" class="form-label"
+                            style="width:440px; text-align:center; font-size:20px;">Nuevo tipo de empaque</label>
+                        <input class="form-control" id="tipom" type="text" name="tipom" placeholder="Agregar tipo de empaque"
+                            style="width: 440px" maxLength="30" autocomplete="off">
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button style=" background: #b39f64; color: #ecedf1;" type="button" class=" btn-info-claro "
+                        data-dismiss="modal">
+                        <span>Cancelar</span>
+                    </button>
+                    <button onclick="validar_tipo()"  type="submit"
+                        class=" btn-info float-right" value="Guardar" style="margin-right: 10px">
+
+                        <span>Guardar</span>
+                    </button>
+                    @csrf
+                    <input name="id_planta" value='1' hidden />
+                </div>
+            </div>
+        </div>
+    </div>
+
+</form>
+    <!-- FIN MODAL TIPO -->
+
+
+
+<!-- VALIDACION VENTANA TIPO -->
+
+
+<script type="text/javascript">
+    function validar_tipo() {
+        var tipo_m = document.getElementById('tipom').value;
+
+        var tipos = '<?php echo json_encode($tipos);?>';
+
+        var tipo = JSON.parse(tipos);
+        var tip = 0;
+        var theForm = document.forms['formtipo'];
+
+
+        for (var i = 0; i < tipo.length; i++) {
+
+
+            if (tipo[i].tipo_empaque.toLowerCase() === tipo_m.toLowerCase()) {
+                tip++;
+            }
+        }
+
+        if (tipo_m === "") {
+            toastr.error('Llene el nombre de la vitola', 'ERROR', {
+                "progressBar": true,
+                "closeButton": false,
+                "preventDuplicates": true,
+                "preventOpenDuplicates": true
+            });
+            event.preventDefault();
+
+        } else if (tip > 0) {
+            toastr.error('Esta vitola ya existe, favor ingrese una nueva', 'ERROR', {
+                "progressBar": true,
+                "closeButton": false,
+                "preventDuplicates": true,
+                "preventOpenDuplicates": true
+            });
+            event.preventDefault();
+
+        } else
+
+            toastr.success('Tus datos se guardaron correctamente', 'BIEN', {
+                "progressBar": true,
+                "closeButton": false
+            });
+        theForm.addEventListener('submit', function (event) {});
+
+    }
+</script>
+
+<!-- FIN VALIDAR TIPO -->
+
+
+
+
+
+    <!-- INICIO MODAL VITOLA -->
+    <form action="{{Route('insertar_vitola')}}" method='POST' id="formvitola" name="formvitola">
+    <div class="modal fade" id="modal_vitola" data-backdrop="static" data-keyboard="false" tabindex="-1"
+        aria-labelledby="staticBackdropLabel" aria-hidden="true" style="opacity:.9;background:#212529;">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="staticBackdropLabel"
+                        style="width:450px; text-align:center; font-size:20px;"><strong>Agregar tipo de empaque</strong></h5>
+                    <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="mb-3 col">
+                        <label for="txt_vitola" class="form-label"
+                            style="width:440px; text-align:center; font-size:20px;">Nuevo tipo de empaque</label>
+                        <input class="form-control" id="vitolam" type="text" name="vitolam" placeholder="Agregar tipo de empaque"
+                            style="width: 440px" maxLength="30" autocomplete="off">
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button style=" background: #b39f64; color: #ecedf1;" type="button" class=" btn-info-claro "
+                        data-dismiss="modal">
+                        <span>Cancelar</span>
+                    </button>
+                    <button onclick="validar_vitola()"  type="submit"
+                        class=" btn-info float-right" value="Guardar" style="margin-right: 10px">
+
+                        <span>Guardar</span>
+                    </button>
+                    @csrf
+                    <input name="id_planta" value='1' hidden />
+                </div>
+            </div>
+        </div>
+    </div>
+
+</form>
+    <!-- FIN MODAL VITOLA -->
+
+
+
+<!-- VALIDACION VENTANA VITOLA -->
+
+
+<script type="text/javascript">
+    function validar_vitola() {
+        var vitola_m = document.getElementById('vitolam').value;
+
+        var vitolas = '<?php echo json_encode($vitolas);?>';
+
+        var vitola = JSON.parse(vitolas);
+        var vit = 0;
+        var theForm = document.forms['formvitola'];
+
+
+        for (var i = 0; i < vitola.length; i++) {
+
+
+            if (vitola[i].vitola.toLowerCase() === vitola_m.toLowerCase()) {
+                vit++;
+            }
+        }
+
+        if (vitola_m === "") {
+            toastr.error('Llene el nombre de la vitola', 'ERROR', {
+                "progressBar": true,
+                "closeButton": false,
+                "preventDuplicates": true,
+                "preventOpenDuplicates": true
+            });
+            event.preventDefault();
+
+        } else if (vit > 0) {
+            toastr.error('Esta vitola ya existe, favor ingrese una nueva', 'ERROR', {
+                "progressBar": true,
+                "closeButton": false,
+                "preventDuplicates": true,
+                "preventOpenDuplicates": true
+            });
+            event.preventDefault();
+
+        } else
+
+            toastr.success('Tus datos se guardaron correctamente', 'BIEN', {
+                "progressBar": true,
+                "closeButton": false
+            });
+        theForm.addEventListener('submit', function (event) {});
+
+    }
+</script>
+
+<!-- FIN VALIDAR VITOLA -->
 
 
 
