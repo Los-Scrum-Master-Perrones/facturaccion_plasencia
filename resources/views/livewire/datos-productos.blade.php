@@ -257,7 +257,7 @@
 
             console.info(marca[i]);
 
-            if (marca[i].marca === marca_mo) {
+            if (marca[i].marca.toLowerCase() === marca_mo.toLowerCase()) {
                 mar++;
             }
 
@@ -295,6 +295,204 @@
 </script>
 
 <!-- FIN VALIDAR MARCA -->
+
+
+
+
+
+
+    <!-- INICIO MODAL CAPA -->
+    <form action="{{Route('insertar_capa')}}" method='POST' id="formcapa" name="formcapa">
+    <div class="modal fade" id="modal_capa" data-backdrop="static" data-keyboard="false" tabindex="-1"
+        aria-labelledby="staticBackdropLabel" aria-hidden="true" style="opacity:.9;background:#212529;">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="staticBackdropLabel"
+                        style="width:450px; text-align:center; font-size:20px;"><strong>Agregar capa</strong></h5>
+                    <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="mb-3 col">
+                        <label for="txt_vitola" class="form-label"
+                            style="width:440px; text-align:center; font-size:20px;">Nueva capa</label>
+                        <input class="form-control" id="capam" type="text" name="capam" placeholder="Agregar marca"
+                            style="width: 440px" maxLength="30" autocomplete="off">
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button style=" background: #b39f64; color: #ecedf1;" type="button" class=" btn-info-claro "
+                        data-dismiss="modal">
+                        <span>Cancelar</span>
+                    </button>
+                    <button onclick="validar_capa()"  type="submit"
+                        class=" btn-info float-right" value="Guardar" style="margin-right: 10px">
+
+                        <span>Guardar</span>
+                    </button>
+                    @csrf
+                    <input name="id_planta" value='1' hidden />
+                </div>
+            </div>
+        </div>
+    </div>
+
+</form>
+    <!-- FIN MODAL CAPA -->
+
+
+
+<!-- VALIDACION VENTANA CAPA -->
+
+
+<script type="text/javascript">
+    function validar_capa() {
+        var capa_m = document.getElementById('capam').value;
+
+        var capas = '<?php echo json_encode($capas);?>';
+
+        var capa = JSON.parse(capas);
+        var cap = 0;
+        var theForm = document.forms['formcapa'];
+
+
+        for (var i = 0; i < capa.length; i++) {
+
+
+            if (capa[i].capa.toLowerCase() === capa_m.toLowerCase()) {
+                cap++;
+            }
+        }
+
+        if (capa_m === "") {
+            toastr.error('Llene el nombre de la vitola', 'ERROR', {
+                "progressBar": true,
+                "closeButton": false,
+                "preventDuplicates": true,
+                "preventOpenDuplicates": true
+            });
+            event.preventDefault();
+
+        } else if (cap > 0) {
+            toastr.error('Esta vitola ya existe, favor ingrese una nueva', 'ERROR', {
+                "progressBar": true,
+                "closeButton": false,
+                "preventDuplicates": true,
+                "preventOpenDuplicates": true
+            });
+            event.preventDefault();
+
+        } else
+
+            toastr.success('Tus datos se guardaron correctamente', 'BIEN', {
+                "progressBar": true,
+                "closeButton": false
+            });
+        theForm.addEventListener('submit', function (event) {});
+
+    }
+</script>
+
+<!-- FIN VALIDAR CAPA -->
+
+
+
+
+    <!-- INICIO MODAL NOMBRE -->
+    <form action="{{Route('insertar_nombre)}}" method='POST' id="formnombre" name="formnombre">
+    <div class="modal fade" id="modal_nombre" data-backdrop="static" data-keyboard="false" tabindex="-1"
+        aria-labelledby="staticBackdropLabel" aria-hidden="true" style="opacity:.9;background:#212529;">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="staticBackdropLabel"
+                        style="width:450px; text-align:center; font-size:20px;"><strong>Agregar nombre</strong></h5>
+                    <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="mb-3 col">
+                        <label for="txt_vitola" class="form-label"
+                            style="width:440px; text-align:center; font-size:20px;">Nueva nombre</label>
+                        <input class="form-control" id="nombrem" type="text" name="nombrem" placeholder="Agregar marca"
+                            style="width: 440px" maxLength="30" autocomplete="off">
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button style=" background: #b39f64; color: #ecedf1;" type="button" class=" btn-info-claro "
+                        data-dismiss="modal">
+                        <span>Cancelar</span>
+                    </button>
+                    <button onclick="validar_nombre()"  type="submit"
+                        class=" btn-info float-right" value="Guardar" style="margin-right: 10px">
+
+                        <span>Guardar</span>
+                    </button>
+                    @csrf
+                    <input name="id_planta" value='1' hidden />
+                </div>
+            </div>
+        </div>
+    </div>
+
+</form>
+    <!-- FIN MODAL NOMBRE -->
+
+
+
+<!-- VALIDACION VENTANA NOMBRE -->
+
+
+<script type="text/javascript">
+    function validar_nombre() {
+        var nombre_m = document.getElementById('nombrem').value;
+
+        var nombres = '<?php echo json_encode($capas);?>';
+
+        var nombre = JSON.parse(nombres);
+        var nom = 0;
+        var theForm = document.forms['formnombre'];
+
+
+        for (var i = 0; i < nombre.length; i++) {
+
+
+            if (nombre[i].nombre.toLowerCase() === nombre_m.toLowerCase()) {
+                nom++;
+            }
+        }
+
+        if (nombre_m === "") {
+            toastr.error('Llene el nombre de la vitola', 'ERROR', {
+                "progressBar": true,
+                "closeButton": false,
+                "preventDuplicates": true,
+                "preventOpenDuplicates": true
+            });
+            event.preventDefault();
+
+        } else if (nom > 0) {
+            toastr.error('Esta vitola ya existe, favor ingrese una nueva', 'ERROR', {
+                "progressBar": true,
+                "closeButton": false,
+                "preventDuplicates": true,
+                "preventOpenDuplicates": true
+            });
+            event.preventDefault();
+
+        } else
+
+            toastr.success('Tus datos se guardaron correctamente', 'BIEN', {
+                "progressBar": true,
+                "closeButton": false
+            });
+        theForm.addEventListener('submit', function (event) {});
+
+    }
+</script>
+
+<!-- FIN VALIDAR NOMBRE -->
+
+
 
     <script src="{{ asset('js/app.js') }}"></script>
     @livewireScripts

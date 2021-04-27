@@ -57,7 +57,7 @@ CREATE TABLE IF NOT EXISTS `capa_productos` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id_capa`)
-) ENGINE=MyISAM AUTO_INCREMENT=19 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=MyISAM AUTO_INCREMENT=25 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- La exportación de datos fue deseleccionada.
 
@@ -142,7 +142,7 @@ CREATE TABLE IF NOT EXISTS `marca_productos` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id_marca`)
-) ENGINE=MyISAM AUTO_INCREMENT=237 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=MyISAM AUTO_INCREMENT=242 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- La exportación de datos fue deseleccionada.
 
@@ -342,6 +342,90 @@ CREATE TABLE IF NOT EXISTS `vitola_productos` (
 
 -- La exportación de datos fue deseleccionada.
 
+-- Volcando estructura para procedimiento facturacion_plasencia.buscar_capa
+DELIMITER //
+CREATE PROCEDURE `buscar_capa`(
+	IN `capa` VARCHAR(50)
+)
+BEGIN
+
+if capa = "" then 
+
+SELECT * FROM capa_productos ;
+ELSE
+
+SELECT * FROM capa_productos WHERE capa_productos.capa LIKE CONCAT("%",capa,"%");
+END if;
+END//
+DELIMITER ;
+
+-- Volcando estructura para procedimiento facturacion_plasencia.buscar_marca
+DELIMITER //
+CREATE PROCEDURE `buscar_marca`(
+	IN `marca` VARCHAR(50)
+)
+BEGIN
+  IF marca = ""  THEN 
+  SELECT * FROM marca_productos ;
+
+ELSE 
+SELECT * FROM marca_productos WHERE marca_productos.marca  like CONCAT("%",marca,"%");
+
+END if;
+END//
+DELIMITER ;
+
+-- Volcando estructura para procedimiento facturacion_plasencia.buscar_nombre
+DELIMITER //
+CREATE PROCEDURE `buscar_nombre`(
+	IN `nombre` VARCHAR(50)
+)
+BEGIN
+if nombre = "" then 
+SELECT * FROM nombre_productos;
+
+ELSE
+
+SELECT * FROM nombre_productos WHERE nombre_productos.nombre  like CONCAT("%",nombre,"%");
+END if;
+END//
+DELIMITER ;
+
+-- Volcando estructura para procedimiento facturacion_plasencia.buscar_pedidos
+DELIMITER //
+CREATE PROCEDURE `buscar_pedidos`(
+	IN `item` VARCHAR(50)
+)
+BEGIN
+
+
+
+
+if item="0"then
+
+
+SELECT  pedidos.item, pedidos.cant_paquetes, CONCAT( tipo_empaques.tipo_empaque," ", marca_productos.marca," ",nombre_productos.nombre," ",
+vitola_productos.vitola," ",capa_productos.capa) AS descripcion ,pedidos.unidades,pedidos.numero_orden
+ FROM pedidos, clase_productos, tipo_empaques,marca_productos,nombre_productos,vitola_productos,capa_productos
+ WHERE pedidos.item=clase_productos.item AND clase_productos.id_vitola = vitola_productos.id_vitola AND 
+ clase_productos.id_nombre = nombre_productos.id_nombre AND  clase_productos.id_marca = marca_productos.id_marca AND 
+   clase_productos.id_tipo_empaque = tipo_empaques.id_tipo_empaque  GROUP BY pedidos.item , pedidos.numero_orden;
+	 
+
+else	
+SELECT x.item,x.cant_paquetes, x.descripcion, (x.cant_paquetes*x.unidades) AS total, x.unidades,x.numero_orden FROM (SELECT  pedidos.item AS item, pedidos.cant_paquetes AS cant_paquetes, CONCAT( tipo_empaques.tipo_empaque," ", marca_productos.marca," ",nombre_productos.nombre," ",
+vitola_productos.vitola," ",capa_productos.capa) AS descripcion ,pedidos.unidades AS unidades,pedidos.numero_orden AS numero_orden
+ FROM pedidos, clase_productos, tipo_empaques,marca_productos,nombre_productos,vitola_productos,capa_productos
+ WHERE pedidos.item=clase_productos.item AND clase_productos.id_vitola = vitola_productos.id_vitola AND 
+ clase_productos.id_nombre = nombre_productos.id_nombre AND  clase_productos.id_marca = marca_productos.id_marca AND 
+   clase_productos.id_tipo_empaque = tipo_empaques.id_tipo_empaque  GROUP BY pedidos.item , pedidos.numero_orden
+)x
+WHERE x.descripcion  LIKE CONCAT("%",item,"%") ||  x.numero_orden  LIKE CONCAT("%",item,"%") || x.item  LIKE CONCAT("%",item,"%") ;
+END if;	 
+
+END//
+DELIMITER ;
+
 -- Volcando estructura para procedimiento facturacion_plasencia.buscar_pendiente
 DELIMITER //
 CREATE PROCEDURE `buscar_pendiente`(
@@ -402,13 +486,84 @@ WHERE clase_productos.id_vitola = vitola_productos.id_vitola AND clase_productos
   
 
 	GROUP BY pendiente.item, pendiente.orden, pendiente.categoria;
+		else
+	
+	if fechade != "0"   && fechahasta = "0"  && nombre = "0" then
+	
+	
+	SELECT categoria.categoria AS categoria, pendiente.item AS item,pendiente.orden_del_sitema ,pendiente.observacion 
+,pendiente.presentacion ,pendiente.mes AS mes ,orden_productos.orden AS orden, marca_productos.marca AS marca,vitola_productos.vitola AS vitola, 
+nombre_productos.nombre AS nombre, capa_productos.capa AS capa,
+cellos.anillo AS anillo,cellos.cello AS cello, cellos.upc AS upc, pendiente.pendiente as pendiente,pendiente.factura_del_mes, pendiente.cantidad_enviada_mes, pendiente.saldo, tipo_empaques.tipo_empaque AS tipo_empaque
+FROM categoria, clase_productos, marca_productos, vitola_productos,nombre_productos, capa_productos, orden_productos,cellos,
+tipo_empaques, pendiente
+WHERE clase_productos.id_vitola = vitola_productos.id_vitola AND clase_productos.id_capa = capa_productos.id_capa AND pendiente.capa = capa_productos.id_capa and
+ clase_productos.id_nombre = nombre_productos.id_nombre AND  clase_productos.id_marca = marca_productos.id_marca AND cellos.id_cello=clase_productos.id_cello and
+   clase_productos.id_tipo_empaque = tipo_empaques.id_tipo_empaque AND pendiente.categoria = categoria.id_categoria AND pendiente.nombre = nombre_productos.id_nombre and
+    pendiente.capa = capa_productos.id_capa AND pendiente.marca = marca_productos.id_marca AND  pendiente.mes = STR_TO_DATE( fechade,"%Y-%m-%d")
+                      
+  
+
+	GROUP BY pendiente.item, pendiente.orden, pendiente.categoria;
+	
+	
+		else
+	
+	if fechade = "0"   && fechahasta != "0"  && nombre = "0" then
+	
+	
+	SELECT categoria.categoria AS categoria, pendiente.item AS item,pendiente.orden_del_sitema ,pendiente.observacion 
+,pendiente.presentacion ,pendiente.mes AS mes ,orden_productos.orden AS orden, marca_productos.marca AS marca,vitola_productos.vitola AS vitola, 
+nombre_productos.nombre AS nombre, capa_productos.capa AS capa,
+cellos.anillo AS anillo,cellos.cello AS cello, cellos.upc AS upc, pendiente.pendiente as pendiente,pendiente.factura_del_mes, pendiente.cantidad_enviada_mes, pendiente.saldo, tipo_empaques.tipo_empaque AS tipo_empaque
+FROM categoria, clase_productos, marca_productos, vitola_productos,nombre_productos, capa_productos, orden_productos,cellos,
+tipo_empaques, pendiente
+WHERE clase_productos.id_vitola = vitola_productos.id_vitola AND clase_productos.id_capa = capa_productos.id_capa AND pendiente.capa = capa_productos.id_capa and
+ clase_productos.id_nombre = nombre_productos.id_nombre AND  clase_productos.id_marca = marca_productos.id_marca AND cellos.id_cello=clase_productos.id_cello and
+   clase_productos.id_tipo_empaque = tipo_empaques.id_tipo_empaque AND pendiente.categoria = categoria.id_categoria AND pendiente.nombre = nombre_productos.id_nombre and
+    pendiente.capa = capa_productos.id_capa AND pendiente.marca = marca_productos.id_marca AND  pendiente.mes = STR_TO_DATE(  fechahasta, "%Y-%m-%d") 
+                      
+  
+
+	GROUP BY pendiente.item, pendiente.orden, pendiente.categoria;
 	
 	else
 	SELECT "";
 	
 	END if;
+		END if;
+			END if;
 END if;	
 END if;	
+END//
+DELIMITER ;
+
+-- Volcando estructura para procedimiento facturacion_plasencia.buscar_tipo_empaque
+DELIMITER //
+CREATE PROCEDURE `buscar_tipo_empaque`(
+	IN `tipo` VARCHAR(50)
+)
+BEGIN
+if tipo =""then 
+SELECT * FROM tipo_empaques ;
+else
+SELECT * FROM tipo_empaques WHERE tipo_empaques.tipo_empaque  like CONCAT("%",tipo,"%");
+END if;
+END//
+DELIMITER ;
+
+-- Volcando estructura para procedimiento facturacion_plasencia.buscar_vitola
+DELIMITER //
+CREATE PROCEDURE `buscar_vitola`(
+	IN `vitola` VARCHAR(50)
+)
+BEGIN
+if vitola = "" then
+SELECT * FROM vitola_productos;
+
+ELSE 
+SELECT * FROM vitola_productos WHERE vitola_productos.vitola   like CONCAT("%",vitola,"%");
+END if;
 END//
 DELIMITER ;
 
@@ -426,6 +581,16 @@ tabla_codigo_programacions.nombre AND clase_productos.id_marca = tabla_codigo_pr
 SET clase_productos.codigo_producto = x.codigo , clase_productos.presentacion = x.presentacion
 WHERE clase_productos.id_capa = x.capa AND clase_productos.id_nombre =
 x.nombre AND clase_productos.id_marca = x.marca;
+END//
+DELIMITER ;
+
+-- Volcando estructura para procedimiento facturacion_plasencia.insertar_capa
+DELIMITER //
+CREATE PROCEDURE `insertar_capa`(
+	IN `capa` VARCHAR(50)
+)
+BEGIN
+ INSERT INTO capa_productos(capa_productos.capa)VALUES(capa);
 END//
 DELIMITER ;
 
@@ -501,6 +666,26 @@ detalle_clase_productos.id_nombre,detalle_clase_productos.id_marca, detalle_clas
 ,detalle_clase_productos.otra_descripcion)
 VALUES(item, icapa,ivitola,inombre,imarca,icello,itipo,precio);
 
+END//
+DELIMITER ;
+
+-- Volcando estructura para procedimiento facturacion_plasencia.insertar_marca
+DELIMITER //
+CREATE PROCEDURE `insertar_marca`(
+	IN `marca` VARCHAR(100)
+)
+BEGIN
+ INSERT INTO marca_productos(marca_productos.marca)VALUES(marca);
+ end//
+DELIMITER ;
+
+-- Volcando estructura para procedimiento facturacion_plasencia.insertar_nombre
+DELIMITER //
+CREATE PROCEDURE `insertar_nombre`(
+	IN `nombre` VARCHAR(50)
+)
+BEGIN
+  INSERT INTO nombre_productos(nombre_productos.nombre)VALUES(nombre); 
 END//
 DELIMITER ;
 
@@ -589,7 +774,7 @@ BEGIN
 
 
 SELECT  pedidos.item, pedidos.cant_paquetes, CONCAT( tipo_empaques.tipo_empaque," ", marca_productos.marca," ",nombre_productos.nombre," ",
-vitola_productos.vitola," ",capa_productos.capa) AS desccripcion ,pedidos.unidades,pedidos.numero_orden
+vitola_productos.vitola," ",capa_productos.capa) AS descripcion ,pedidos.unidades,pedidos.numero_orden
  FROM pedidos, clase_productos, tipo_empaques,marca_productos,nombre_productos,vitola_productos,capa_productos
  WHERE pedidos.item=clase_productos.item AND clase_productos.id_vitola = vitola_productos.id_vitola AND 
  clase_productos.id_nombre = nombre_productos.id_nombre AND  clase_productos.id_marca = marca_productos.id_marca AND 

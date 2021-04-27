@@ -75,4 +75,30 @@ class DatosProductos extends Component
    
        return redirect()->route('datos_producto');
     }
+
+    public function insertar_capa(Request $request){
+
+        $marcas_in=  \DB::SELECT('call insertar_capa(:capa)',['capa'=>$request->capam]);
+        
+        $this->capas= \DB::SELECT('call buscar_capa(:capa)',['capa'=>$this->busqueda]);
+        $this->marcas= \DB::SELECT('call buscar_marca(:marca)',['marca'=>$this->busqueda]);
+        $this->nombres= \DB::SELECT('call buscar_nombre(:nombre)',['nombre'=>$this->busqueda]);
+        $this->vitolas= \DB::SELECT('call buscar_vitola(:vitola)',['vitola'=>$this->busqueda]);
+        $this->tipos= \DB::SELECT('call buscar_tipo_empaque(:tipo)',['tipo'=>$this->busqueda]);
+    
+        return redirect()->route('datos_producto');
+     }
+
+     public function insertar_nombre(Request $request){
+
+        $marcas_in=  \DB::SELECT('call insertar_nombre(:nombre)',['nombre'=>$request->nombrem]);
+        
+        $this->capas= \DB::SELECT('call buscar_capa(:capa)',['capa'=>$this->busqueda]);
+        $this->marcas= \DB::SELECT('call buscar_marca(:marca)',['marca'=>$this->busqueda]);
+        $this->nombres= \DB::SELECT('call buscar_nombre(:nombre)',['nombre'=>$this->busqueda]);
+        $this->vitolas= \DB::SELECT('call buscar_vitola(:vitola)',['vitola'=>$this->busqueda]);
+        $this->tipos= \DB::SELECT('call buscar_tipo_empaque(:tipo)',['tipo'=>$this->busqueda]);
+    
+        return redirect()->route('datos_producto');
+     }
 }
