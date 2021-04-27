@@ -2,7 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Exports\PendienteExport;
 use Illuminate\Http\Request;
+
+use Maatwebsite\Excel\Facades\Excel;
 
 class PendienteController extends Controller
 {
@@ -54,25 +57,51 @@ class PendienteController extends Controller
             }
 
             $datos_pendiente = \DB::select('call buscar_pendiente(:nombre,:fechade,:fechahasta)',
-        ['nombre'=>(String)$nom,
-        'fechade'=>(String)$fede,
-        'fechahasta'=>(String)$feha
-        ]);
+                ['nombre'=>(String)$nom,
+                'fechade'=>(String)$fede,
+                'fechahasta'=>(String)$feha
+                ]);
     
         
-            return view('pendiente')->with('datos_pendiente' ,$datos_pendiente);
+            return view('pendiente')->with('datos_pendiente' ,$datos_pendiente)
+                                    ->with('nom' ,$nom)
+                                    ->with('fede' ,$fede)
+                                    ->with('feha' ,$feha);
          }
 
 
 
          function index_pendiente_empaque(){
 
-
-
-
             $datos_pendiente_empaque =  \DB::select('call mostrar_pendiente_empaque');  
             return view('pendiente_empaque')->with('datos_pendiente_empaque',$datos_pendiente_empaque);
  
          }
 
+         
+         function exportPendiente(Request $request){ 
+            if($request->fecha_de == null){
+                $fede = "0";
+            }else{
+                $fede = $request->fecha_de;
+            }
+
+            if($request->fecha_hasta === null){
+                $feha = "0";
+            }else{
+                $feha = $request->fecha_hasta;
+            }
+
+
+            if($request->nombre == null){
+                $nom = "0";
+            }else{
+                $nom = $request->nombre;
+            }
+
+             return Excel::download(new PendienteExport($nom,$fede,$feha), 'Pendiente.xlsx');
+         }
+
+
+         
 }
