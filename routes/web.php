@@ -39,7 +39,7 @@ Route::get('/productos', Productos::class)->name('productos');
 Route::post('/productos', Productos::class)->name('productos');
 
 
-Route::get('/insertar_productos', [clase_producto::class, 'insertar_clase'])->name('nuevo_producto');
+Route::get('/insertar_productos', [Productos::class, 'insertar_clase'])->name('nuevo_producto');
 Route::post('/insertar_productos', [clase_producto::class, 'insertar_clase'])->name('nuevo_producto');
 
 

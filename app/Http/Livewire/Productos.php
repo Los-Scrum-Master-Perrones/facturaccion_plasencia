@@ -6,11 +6,7 @@ namespace App\Http\Livewire;
 
 use Livewire\Component;
 use DB;
-use App\Models\capa_producto;
-use App\Models\marca_producto;
-use App\Models\nombre_producto;
-use App\Models\vitola_producto;
-use App\Models\tipo_empaque;
+
 use Illuminate\Http\Request;
 use Livewire\WithPagination;
 
@@ -22,9 +18,34 @@ class Productos extends Component
     public $productos;
     public $busqueda;
     public $detalle_productos;
+    public $marcas;
+    public $capas;
+    public $nombres;
+    public $vitolas;
+    public $tipo_empaques;
+
+    public $mars;
+    public $ites;
+    public $caps;
+    public $nombrs;
+    public $tips;
+    public $presentacions;
+    public $cod_sistemas;
+    public $cod_precios;
+    public $cod_cajas;
+    public $cellos;
+    public $anillos;
+    public $upc;
+    public $vitols;
+    
 
     public function render(){
 
+        $this->capas= \DB::select('call buscar_capa("")');
+        $this->marcas=\DB::select('call buscar_marca("")');
+        $this->nombres= \DB::select('call buscar_nombre("")');
+        $this->vitolas= \DB::select('call buscar_vitola("")');
+        $this->tipo_empaques= \DB::select('call buscar_tipo_empaque("")');
     
         $this->productos = \DB::select('call buscar_producto(:todo)',['todo'=>$this->busqueda]);
  
@@ -33,15 +54,39 @@ class Productos extends Component
  
          return view('livewire.productos')->extends('principal')->section('content');
      }
+
      public function mount(){
 
         $this->productos = [];
+        $this->marcas = [];
+        $this->cajas = [];
+        $this->nombres = [];
+        $this->vitolas = [];
+        $this->tipo_empaques = [];
         $this->detalle_productos = [];
         $this->busqueda = ""; 
 
+        $this->mars = "";
+        $this->ites = ""; 
+        $this->caps = ""; 
+        $this->nombrs = ""; 
+        $this->tips = ""; 
+        $this->presentacions = ""; 
+        $this->cod_sistemas = ""; 
+        $this->cod_precios = ""; 
+        $this->cod_cajas = ""; 
+        $this->cellos = ""; 
+        $this->vitols = "";
+        $this->cellos= "";
+        $this->anillos= "";
+        $this->upc= "";
+
+        $this->capas= \DB::select('call buscar_capa("")');
+        $this->marcas=\DB::select('call buscar_marca("")');
+        $this->nombres= \DB::select('call buscar_nombre("")');
+        $this->vitolas= \DB::select('call buscar_vitola("")');
+        $this->tipo_empaques= \DB::select('call buscar_tipo_empaque("")');
     }
-
-
 
 
     use WithPagination;
@@ -67,10 +112,14 @@ class Productos extends Component
         }else{
             $upc = "no";
         }
+    
        
 
-        $clase_producto = \DB::select('call insertar_clase_producto(:item,:capa,:vitola,:nombre,:marca,:cello,:anillo,:upc,:tipo)',
+        $clase_producto = \DB::select('call insertar_clase_producto(:item,:cod_producto,:cod_caja,:cod_precio,:capa,:vitola,:nombre,:marca,:cello,:anillo,:upc,:tipo,:presentacion)',
              [ 'item' => $request->item,
+             'cod_producto' => $request->cod_sistema,
+             'cod_caja' => $request->cod_caja,
+             'cod_precio' => $request->cod_precio,
             'capa' =>  $request->capa,
             'vitola' => $request->vitola,
             'nombre' => $request->nombre,
@@ -78,13 +127,13 @@ class Productos extends Component
             'cello' => $cello,
             'anillo'=> $anillo,
             'upc'=> $upc,
-            'tipo' => $request->tipo
+            'tipo' => $request->tipo,
+            'presentacion' => $request->presentacion
              ]);
 
              $productos = \DB::select('call mostrar_productos');
 
-            return view('livewire.productos')->extends('principal')->section('content')->with('clase_producto', $clase_producto)->with('productos', $productos);
-    }
+             return redirect()->route('productos'); }
 
     public function insertar_detalle_clase(Request $request)  {
        
@@ -123,11 +172,36 @@ class Productos extends Component
             'precio' => $request->precio_de
              ]);
 
+            
              $productos = \DB::select('call mostrar_productos');
 
             return view('livewire.productos')->extends('principal')->section('content')->with('detalle_clase_producto', $detalle_clase_producto)->with('productos', $productos);
     }
 
+
+    public function editar_productosssssss($numero_id){
+        
+        $datos_editar = \DB::select('call mostrar_datos_para_editar(:item)',
+        ['item'=> $numero_id]);
+
+        $this->mars = $datos_editar[0]->marca;
+        $this->ites = $datos_editar[0]->item;
+        $this->caps = $datos_editar[0]->capa;
+        $this->nombrs = $datos_editar[0]->nombre;
+        $this->tips = $datos_editar[0]->tipo_empaque;
+        $this->presentacions = $datos_editar[0]->presentacion;
+        $this->cod_sistemas = $datos_editar[0]->codigo_producto;
+        $this->cod_precios = $datos_editar[0]->codigo_precio;
+        $this->cod_cajas = $datos_editar[0]->codigo_caja;
+        $this->cellos = $datos_editar[0]->cello;
+        $this->vitols = $datos_editar[0]->vitola;
+        $this->anillos=$datos_editar[0]->anillo;
+        $this->upc=$datos_editar[0]->upc;
+
+        
+
+
+    }
 
 
  public function detalle_productos_index(Request $request){
