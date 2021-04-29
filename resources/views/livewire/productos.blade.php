@@ -100,9 +100,9 @@
                                         d="M15 2a1 1 0 0 0-1-1H2a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V2zM0 2a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V2zm5.854 8.803a.5.5 0 1 1-.708-.707L9.243 6H6.475a.5.5 0 1 1 0-1h3.975a.5.5 0 0 1 .5.5v3.975a.5.5 0 1 1-1 0V6.707l-4.096 4.096z" />
                                 </svg>
                             </a>
-                        <form wire:submit.prevent="editar_productosssssss('1')">
-                            <button style=" width:10px; height:10px;" data-toggle="modal"
-                                data-target="#modal_actualizarproducto" type="submit">
+                       
+                            <a style=" width:10px; height:10px;" data-toggle="modal" href=""
+                                data-target="#modal_actualizarproducto" type="submit" onclick="cargar_datos_editar({{$producto->id_producto}})">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor"
                                     class="bi bi-pencil-square" viewBox="0 0 16 16">
                                     <path
@@ -110,8 +110,8 @@
                                     <path fill-rule="evenodd"
                                         d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z" />
                                 </svg>
-                                </button>
-                            </form> 
+                                </a>
+                           
                         </td>
                     </tr>
                     @endforeach
@@ -123,6 +123,91 @@
 
 
 
+<!-- SCRIPT MODAL EDITAR MOLDE -->
+
+<script type="text/javascript">
+    function cargar_datos_editar(id) {
+
+        if(document.formulario_actualizar.cello_ac.checked){
+
+        document.formulario_actualizar.cello_ac.click();
+
+        }else{
+
+        }
+        if(document.formulario_actualizar.anillo_ac.checked){
+
+        document.formulario_actualizar.anillo_ac.click();
+
+        }else{
+
+        }
+        if(document.formulario_actualizar.upc_ac.checked){
+
+        document.formulario_actualizar.upc_ac.click();
+
+        }else{
+
+        }
+
+
+
+
+        var productos = '<?php echo json_encode($productos);?>';
+
+        var producto = JSON.parse(productos);
+
+
+        for (var i = 0; i < producto.length; i++) {
+
+            if (producto[i].id_producto === id) {
+             
+                document.formulario_actualizar.marca_ac.value = producto[i].marca;
+                document.formulario_actualizar.item_ac.value = producto[i].item;
+                document.formulario_actualizar.capa_ac.value = producto[i].capa;
+                document.formulario_actualizar.nombre_ac.value = producto[i].nombre;
+                document.formulario_actualizar.vitola_ac.value = producto[i].vitola;
+                document.formulario_actualizar.tipo_ac.value = producto[i].tipo_empaque;
+                document.formulario_actualizar.presentacion_ac.value = producto[i].presentacion;
+                document.formulario_actualizar.cod_sistema_ac.value = producto[i].codigo_producto;
+                document.formulario_actualizar.cod_precio_ac.value = producto[i].codigo_precio;
+                document.formulario_actualizar.cod_caja_ac.value = producto[i].codigo_caja;
+               
+                document.formulario_actualizar.id_producto.value = producto[i].id_producto;
+
+
+
+                if(producto[i].cello === "SI"){
+                    
+                     document.formulario_actualizar.cello_ac.click();
+                   
+                }else{
+                
+                     
+                }
+
+                if(producto[i].anillo === "SI"){  
+                    document.formulario_actualizar.anillo_ac.click();
+                }else{
+                    
+                }
+
+                if(producto[i].upc === "SI"){
+                    
+                    document.formulario_actualizar.upc_ac.click();
+                    }else{
+                    }
+
+                
+
+            }
+        }
+
+    }
+</script>
+
+<!-- FIN SCRIPT MODAL EDITAR MOLDE -->
+c
 
 
     <script type="text/javascript">
@@ -444,7 +529,8 @@
 
     <!-- INICIO MODAL ACTUALIZAR PRODUCTO-->
 
-    <form method="">
+  
+    <form action="{{Route('actualizar_producto')}}" method="POST" name="formulario_actualizar" id="formulario_actualizar">
         <div class="modal fade" role="dialog" id="modal_actualizarproducto" data-backdrop="static" data-keyboard="false"
             tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true"
             style="opacity:.9;background:#212529;width=800px;">
@@ -453,7 +539,7 @@
 
                     <div class="modal-header">
                         <h5 style="font-size:20px; width:3000px; text-align:center; font:bold" class=""
-                            id="staticBackdropLabel"><strong>Agregar producto</strong></h5>
+                            id="staticBackdropLabel"><strong>Editar producto</strong></h5>
                         <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close"></button>
                     </div>
 
@@ -463,7 +549,7 @@
                             <div class="row">
                                 <div class="mb-3 col">
                                     <label style="font-size:16px" for="txt_vitola" class="form-label">Marca</label>
-                                    <select class="form-control" name="marca_ac" id="marca_ac" wire:model="mars"
+                                    <select class="form-control" name="marca_ac" id="marca_ac" 
                                         placeholder="Ingresa figura y tipo" style="overflow-y: scroll; height:30px;"
                                         required>
                                         @foreach($marcas as $marca)
@@ -478,12 +564,12 @@
                                 <div class="mb-3 col">
                                     <label style="font-size:16px" for="txt_figuraytipo" class="form-label">Item</label>
                                     <input name="item_ac" id="item_ac" style="font-size:16px" class="form-control" required
-                                        type="text" autocomplete="off" wire:model="ites">
+                                        type="text" autocomplete="off" >
                                 </div>
 
                                 <div class="mb-3 col">
                                     <label style="font-size:16px" for="txt_figuraytipo" class="form-label">Capa</label>
-                                    <select class="form-control" name="capa_ac" id="capa_ac" wire:model="caps"
+                                    <select class="form-control" name="capa_ac" id="capa_ac" 
                                         placeholder="Ingresa figura y tipo" style="overflow-y: scroll; height:30px;"
                                         required>
                                         @foreach($capas as $capa)
@@ -495,7 +581,7 @@
                                 <div class="mb-3 col">
                                     <label for="txt_total" style="font-size:16px" class="form-label">Nombre</label>
 
-                                    <select class="form-control" name="nombre_ac" id="nombre_ac" wire:model="nombrs"
+                                    <select class="form-control" name="nombre_ac" id="nombre_ac" 
                                         placeholder="Ingresa figura y tipo" style="overflow-y: scroll; height:30px;"
                                         required>
                                         @foreach($nombres as $nombre)
@@ -511,7 +597,7 @@
                                 <div class="mb-3 col">
                                     <label style="font-size:16px" for="txt_buenos" class="form-label">Vitola</label>
 
-                                    <select class="form-control" name="vitola_ac" id="vitola_ac" wire:model="vitols"
+                                    <select class="form-control" name="vitola_ac" id="vitola_ac" 
                                         placeholder="Ingresa figura y tipo" style="overflow-y: scroll; height:30px;"
                                         required>
                                         @foreach($vitolas as $vitola)
@@ -523,7 +609,7 @@
                                 <div class="mb-3 col">
                                     <label style="font-size:16px" for="txt_malos" class="form-label">Tipo de
                                         empaque</label>
-                                    <select class="form-control" name="tipo_ac" id="tipo_ac" wire:model="tips"
+                                    <select class="form-control" name="tipo_ac" id="tipo_ac"
                                         placeholder="Ingresa figura y tipo" style="overflow-y: scroll; height:30px;"
                                         required>
                                         @foreach($tipo_empaques as $tipo_empaque)
@@ -537,7 +623,7 @@
                                         class="form-label">Presentación</label>
 
                                     <select class="form-control" name="presentacion_ac" id="presentacion_ac"
-                                        wire:model="presentacion" placeholder="Ingresa figura y tipo"
+                                        placeholder="Ingresa figura y tipo"
                                         style="overflow-y: scroll; height:30px;" required>
 
                                         <option value="Puros Tripa Larga" style="overflow-y: scroll;">Puros Tripa Larga
@@ -558,21 +644,21 @@
                                     <label for="txt_total" style="font-size:16px" class="form-label">Código del
                                         sistema</label>
                                     <input name="cod_sistema_ac" id="cod_sistema_ac" style="font-size:16px"
-                                        wire:model="cod_sistemas" class="form-control" required type="text"
+                                        class="form-control"  type="text"
                                         autocomplete="off">
                                 </div>
                                 <div class="mb-3 col">
                                     <label style="font-size:16px" for="txt_buenos" class="form-label">Código de
                                         precio</label>
                                     <input name="cod_precio_ac" id="cod_precio_ac" style="font-size:16px" class="form-control"
-                                        required type="text" autocomplete="off" wire:model="cod_precios">
+                                         type="text" autocomplete="off" >
                                 </div>
 
                                 <div class="mb-3 col">
                                     <label for="txt_total" style="font-size:16px" class="form-label">Código de la
                                         cajita</label>
                                     <input name="cod_caja_ac" id="cod_caja_ac" style="font-size:16px" class="form-control"
-                                        required type="text" autocomplete="off" wire:model="cod_cajas">
+                                         type="text" autocomplete="off" >
                                 </div>
 
                             </div>
@@ -580,20 +666,21 @@
 
                             <div class="row">
                                 <div class="mb-3 col">
-                                    <input type="checkbox" name="cello_ac" id="cello_ac" style="font-size:20px" value="si">
+                                    <input type="checkbox" name="cello_ac" id="cello_ac" style="font-size:20px"  value="si">
                                     <label style="font-size:16px" for="cello" class="form-label">Cello</label>
                                 </div>
                                 <div class="mb-3 col">
 
-                                    <input type="checkbox" name="anillo_ac" id="anillo_ac" style="font-size:20px" value="si">
+                                    <input type="checkbox" name="anillo_ac" id="anillo_ac" style="font-size:20px"  value="si">
                                     <label style="font-size:16px" for="anillo" class="form-label">Anillo</label>
                                 </div>
                                 <div class="mb-3 col">
 
-                                    <input type="checkbox" name="upc_ac" id="upc_ac" style="font-size:20px" value="si">
+                                    <input type="checkbox" name="upc_ac" id="upc_ac" style="font-size:20px"  value="si">
                                     <label style="font-size:16px" for="upc" class="form-label">UPC</label>
                                 </div>
 
+   <input name="id_producto" id="id_producto" value="" hidden>
 
                             </div>
                         </div>
@@ -605,9 +692,12 @@
                             <span style="font-size:16px">Cancelar</span>
                             @csrf
                         </button>
-                        <button class="submit">
+                       
+                        <button class="submit" >
                             <span style="font-size:16px">Guardar</span>
                         </button>
+                      
+
                     </div>
 
                 </div>

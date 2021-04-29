@@ -113,7 +113,6 @@ class Productos extends Component
             $upc = "no";
         }
     
-       
 
         $clase_producto = \DB::select('call insertar_clase_producto(:item,:cod_producto,:cod_caja,:cod_precio,:capa,:vitola,:nombre,:marca,:cello,:anillo,:upc,:tipo,:presentacion)',
              [ 'item' => $request->item,
@@ -131,9 +130,73 @@ class Productos extends Component
             'presentacion' => $request->presentacion
              ]);
 
-             $productos = \DB::select('call mostrar_productos');
+             $this->capas= \DB::select('call buscar_capa("")');
+             $this->marcas=\DB::select('call buscar_marca("")');
+             $this->nombres= \DB::select('call buscar_nombre("")');
+             $this->vitolas= \DB::select('call buscar_vitola("")');
+             $this->tipo_empaques= \DB::select('call buscar_tipo_empaque("")');
 
-             return redirect()->route('productos'); }
+             return redirect()->route('productos'); 
+            
+            }
+
+
+
+            public function actualizar_clase(Request $request)  {
+       
+
+                
+                if(isset($request->cello_ac)){
+                   
+                    $cello = $request->cello_ac;
+                }else{
+                    $cello = "no";
+                }
+        
+                if(isset($request->anillo_ac)){
+                    $anillo = $request->anillo_ac;
+                    
+                }else{
+                    $anillo = "no";
+                }
+        
+                if(isset($request->upc_ac)){
+                    $upc = $request->upc_ac;
+                   
+                }else{
+                    $upc = "no";
+                }
+            
+        
+
+
+                $clase_producto = \DB::select('call actualizar_productos(:id,:item,:cod_producto,:cod_caja,:cod_precio,
+                :capa,:vitola,:nombre,:marca,:cello,:anillo,:upc,:tipo,:presentacion)',
+                     ['id' =>$request->id_producto,
+                     'item' => $request->item_ac,
+                     'cod_producto' => $request->cod_sistema_ac,
+                     'cod_caja' => $request->cod_caja_ac,
+                     'cod_precio' => $request->cod_precio_ac,
+                    'capa' =>  $request->capa_ac,
+                    'vitola' => $request->vitola_ac,
+                    'nombre' => $request->nombre_ac,
+                    'marca' => $request->marca_ac,
+                    'cello' => $cello,
+                    'anillo'=> $anillo,
+                    'upc'=> $upc,
+                    'tipo' => $request->tipo_ac,
+                    'presentacion' => $request->presentacion_ac
+                     ]);
+                     $this->capas= \DB::select('call buscar_capa("")');
+                     $this->marcas=\DB::select('call buscar_marca("")');
+                     $this->nombres= \DB::select('call buscar_nombre("")');
+                     $this->vitolas= \DB::select('call buscar_vitola("")');
+                     $this->tipo_empaques= \DB::select('call buscar_tipo_empaque("")');
+                     $productos = \DB::select('call mostrar_productos');
+        
+                     return redirect()->route('productos'); 
+                    
+                    }
 
     public function insertar_detalle_clase(Request $request)  {
        

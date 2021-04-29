@@ -40,7 +40,12 @@ Route::post('/productos', Productos::class)->name('productos');
 
 
 Route::get('/insertar_productos', [Productos::class, 'insertar_clase'])->name('nuevo_producto');
-Route::post('/insertar_productos', [clase_producto::class, 'insertar_clase'])->name('nuevo_producto');
+Route::post('/insertar_productos', [Productos::class, 'insertar_clase'])->name('nuevo_producto');
+
+
+
+Route::get('/actualizar_productos', [Productos::class, 'actualizar_clase'])->name('actualizar_producto');
+Route::post('/actualizar_productos', [Productos::class, 'actualizar_clase'])->name('actualizar_producto');
 
 
 Route::get('/insertar_detalle_productos', [clase_producto::class, 'insertar_detalle_clase'])->name('detalle');
