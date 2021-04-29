@@ -12,7 +12,7 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
 
     @livewireStyles
-    <link rel="stylesheet" href="{{ asset('css/principal.css') }}" />
+    <link rel="stylesheet" href="{{ asset('css/principal.css') }}"/>
 
     <h3 style="	text-align:center;  width:auto;"><strong>Inventario de productos Plasencia</strong></h3>
     <br />

@@ -19,7 +19,7 @@
 <h3 style="	text-align:center;  width:1400px;"><strong>Inventario de productos Plasencia</strong></h3>
 <br />
 
-<div class="" style="width:1100px; padding-left:200px;">
+<div class="" style="width:1100px; padding-left:160px;">
 
     <div class="row">
 
@@ -30,7 +30,7 @@
                 <div class="row">
                     <div class="col-sm">
                         <input name="buscar" id="buscar" class="btn botonprincipal form-control"
-                            placeholder="Búsqueda por item, nombre y capa" style="width:350px;">
+                            placeholder="Búsqueda por item, nombre" style="width:350px;">
                     </div>
                     <div class="col-sm">
                         <button class="btn botonprincipal form-control" type="submit">
@@ -49,14 +49,23 @@
         <div class="row">
         <div class="col-sm">
             <button class="btn botonprincipal form-control"  data-toggle="modal"
-                data-target="#modal_nuevoproducto" style="width:200px;">Nuevo
+                data-target="#modal_nuevoproducto" style="width:150px;">Nuevo
                 producto</button>
                 </div>
 
                 <div class="col-sm">
 
-                <a class="btn botonprincipal form-control" href="{{Route('datos_producto')}}"  style="width:200px;">Datos adicionales</a>
+                <a class="btn botonprincipal form-control" href="{{Route('datos_producto')}}"  style="width:150px;">Datos adicionales</a>
                 </div>
+                <div class="col-sm">
+                <form action="{{Route('exportar_pendiente')}}">
+                    <input type="text" value= "{{isset($nom)?$nom:null}}" name="nombre" id="nombre" hidden >
+                    <input type="date" value= "{{isset($fede)?$fede:null}}" name="fecha_de" id="fecha_de" hidden>
+                    <input type="date" value= "{{isset($feha)?$feha:null}}" name="fecha_hasta" id="fecha_hasta" hidden>
+                    <button class="form-control mr-sm-2 botonprincipal" type="submit" style="width:100px;">Exportar
+                    </button>
+                </form>
+            </div>
         </div>
 
     </div>

@@ -17,7 +17,6 @@ class ImportExcelController extends Controller
     
      return view('import_excel', compact('data'))->with('pedido_completo', $pedido_completo);
 
-
     }
 
     function import(Request $request)
