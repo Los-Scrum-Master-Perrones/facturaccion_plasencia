@@ -3444,35 +3444,6 @@ END if;
 END//
 DELIMITER ;
 
--- Volcando estructura para procedimiento facturacion_plasencia.buscar_producto
-DELIMITER //
-CREATE PROCEDURE `buscar_producto`(
-	IN `todo` VARCHAR(50)
-)
-BEGIN
-if  todo = "" then 
-
-		 SELECT clase_productos.id_producto,clase_productos.item,marca_productos.marca, nombre_productos.nombre, vitola_productos.vitola,tipo_empaques.tipo_empaque
-		FROM clase_productos ,marca_productos,vitola_productos,tipo_empaques,nombre_productos
-		WHERE  clase_productos.id_vitola = vitola_productos.id_vitola AND 
-		 clase_productos.id_nombre = nombre_productos.id_nombre AND  clase_productos.id_marca = marca_productos.id_marca  AND
-		   clase_productos.id_tipo_empaque = tipo_empaques.id_tipo_empaque ;
-
-ELSE
-
-		SELECT x.id_producto, x.item,x.marca,x.nombre, x.vitola,x.tipo_empaque 
-		from(SELECT clase_productos.id_producto AS id_producto ,clase_productos.item AS item,marca_productos.marca AS marca, nombre_productos.nombre AS nombre, 
-		 vitola_productos.vitola AS vitola,tipo_empaques.tipo_empaque AS tipo_empaque
-		FROM clase_productos ,marca_productos,vitola_productos,tipo_empaques,nombre_productos
-		WHERE  clase_productos.id_vitola = vitola_productos.id_vitola AND 
-		clase_productos.id_nombre = nombre_productos.id_nombre AND  clase_productos.id_marca = marca_productos.id_marca  AND 
-		clase_productos.id_tipo_empaque = tipo_empaques.id_tipo_empaque )x
-		 where x.nombre LIKE  CONCAT("%",todo,"%") || x.marca LIKE  CONCAT("%",todo,"%")
-		|| x.item LIKE  CONCAT("%",todo,"%") || x.vitola LIKE  CONCAT("%",todo,"%");
-
-END if;
-END//
-DELIMITER ;
 
 -- Volcando estructura para procedimiento facturacion_plasencia.buscar_tipo_empaque
 DELIMITER //
@@ -3520,42 +3491,6 @@ x.nombre AND clase_productos.id_marca = x.marca;
 END//
 DELIMITER ;
 
--- Volcando estructura para procedimiento facturacion_plasencia.insertar_clase_producto
-DELIMITER //
-CREATE PROCEDURE `insertar_clase_producto`(
-	IN `item` VARCHAR(50),
-	IN `capa` VARCHAR(50),
-	IN `vitola` VARCHAR(50),
-	IN `nombre` VARCHAR(50),
-	IN `marca` VARCHAR(50),
-	IN `cello` VARCHAR(50),
-	IN `anillo` VARCHAR(50),
-	IN `upc` VARCHAR(50),
-	IN `tipo_empaque` VARCHAR(50)
-)
-BEGIN
-
-DECLARE icapa INT;
-DECLARE imarca INT;
-DECLARE inombre INT;
-DECLARE ivitola INT;
-DECLARE icello INT;
-DECLARE itipo INT;
-
-
-SET ivitola = (SELECT vitola_productos.id_vitola FROM  vitola_productos WHERE vitola_productos.vitola = vitola);
-SET icapa = (SELECT capa_productos.id_capa FROM  capa_productos WHERE capa_productos.capa = capa);
-SET imarca = (SELECT marca_productos.id_marca FROM marca_productos WHERE marca_productos.marca = marca);
-SET inombre = (SELECT nombre_productos.id_nombre FROM nombre_productos WHERE nombre_productos.nombre = nombre);
-SET icello = (SELECT cellos.id_cello FROM cellos WHERE cellos.cello = cello AND cellos.anillo = anillo AND cellos.upc= upc);
-SET itipo =  (SELECT tipo_empaques.id_tipo_empaque FROM tipo_empaques WHERE tipo_empaques.tipo_empaque = tipo_empaque);
-
-INSERT INTO clase_productos(clase_productos.item,clase_productos.id_capa, clase_productos.id_vitola,
-clase_productos.id_nombre,clase_productos.id_marca, clase_productos.id_cello, clase_productos.id_tipo_empaque)
-VALUES(item, icapa,ivitola,inombre,imarca,icello,itipo);
-
-END//
-DELIMITER ;
 
 -- Volcando estructura para procedimiento facturacion_plasencia.insertar_detalle_clase_producto
 DELIMITER //
