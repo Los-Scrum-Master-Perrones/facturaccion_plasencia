@@ -53,6 +53,7 @@
   .right,
   .lefter,
   .lefter2,
+  .lefter3,
   .righter,
   .righter2  {
     width: 66px;
@@ -77,6 +78,7 @@
   .right:hover,
   .lefter:hover,
   .lefter2:hover,
+  .lefter3:hover,
   .righter:hover ,
   .righter2:hover {
     box-shadow: 0 0 30px 10px #6e0772;
@@ -96,8 +98,13 @@
     text-shadow: 0 0 5px #6e0772;
   }
   
+  .lefter3 {
+    transform: translateX(-120px) translateZ(-100px) rotateY(-20deg);
+    text-align: center;
+  }
+
   .lefter2 {
-    transform: translateX(-90px) translateZ(-75px) rotateY(-10deg);
+    transform: translateX(-90px) translateZ(-75px) rotateY(-15deg);
     text-align: center;
   }
  

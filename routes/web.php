@@ -11,6 +11,7 @@ use App\Http\Controllers\programacion;
 use App\Http\Controllers\tabla_existencia;
 use App\Http\Livewire\DatosProductos;
 use App\Http\Livewire\Productos;
+use Illuminate\Support\Facades\Auth;
 
 /*
 |--------------------------------------------------------------------------
