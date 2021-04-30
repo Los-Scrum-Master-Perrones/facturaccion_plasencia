@@ -9,6 +9,9 @@ use App\Http\Controllers\clase_producto;
 use App\Http\Controllers\PendienteController;
 use App\Http\Controllers\programacion;
 use App\Http\Controllers\tabla_existencia;
+use App\Http\Livewire\DatosProductos;
+use App\Http\Livewire\Productos;
+use Illuminate\Support\Facades\Auth;
 
 /*
 |--------------------------------------------------------------------------
@@ -32,12 +35,18 @@ Route::post('/importar_pedido', [PedidoController::class, 'import']);
 Route::get('/importar_pedido', [PedidoController::class, 'import']);
 
 
-Route::get('/productos', [PedidoController::class, 'productos_index'])->name('productos');
-Route::post('/productos', [PedidoController::class, 'productos_index'])->name('productos');
+
+Route::get('/productos', Productos::class)->name('productos');
+Route::post('/productos', Productos::class)->name('productos');
 
 
-Route::get('/insertar_productos', [clase_producto::class, 'insertar_clase'])->name('nuevo_producto');
-Route::post('/insertar_productos', [clase_producto::class, 'insertar_clase'])->name('nuevo_producto');
+Route::get('/insertar_productos', [Productos::class, 'insertar_clase'])->name('nuevo_producto');
+Route::post('/insertar_productos', [Productos::class, 'insertar_clase'])->name('nuevo_producto');
+
+
+
+Route::get('/actualizar_productos', [Productos::class, 'actualizar_clase'])->name('actualizar_producto');
+Route::post('/actualizar_productos', [Productos::class, 'actualizar_clase'])->name('actualizar_producto');
 
 
 Route::get('/insertar_detalle_productos', [clase_producto::class, 'insertar_detalle_clase'])->name('detalle');
@@ -63,6 +72,10 @@ Route::post('/pendiente_empaque', [PendienteController::class, 'index_pendiente_
 Route::get('/pendiente_buscar', [PendienteController::class, 'buscar'])->name('buscar_pendiente');
 Route::post('/pendiente_buscar', [PendienteController::class, 'buscar'])->name('buscar_pendiente');
 
+Route::get('/pedido_buscar', [PedidoController::class, 'buscar'])->name('buscar_pedido');
+Route::post('/pedido_buscar', [PedidoController::class, 'buscar'])->name('buscar_pedido');
+
+
 Route::get('/programacion', [programacion::class, 'index'])->name('programacion');
 Route::post('/programacion', [programacion::class, 'index'])->name('programacion');
 
@@ -70,6 +83,33 @@ Route::post('/programacion', [programacion::class, 'index'])->name('programacion
 
 Route::get('/producto', [tabla_existencia::class, 'import'])->name('codigo');
 Route::post('/producto', [tabla_existencia::class, 'import'])->name('codigo');
+
+
+Route::get('/datos_producto', DatosProductos::class)->name('datos_producto');
+
+
+
+// INSERTAR DATOS ADICIONALES DE LOS PRODUCTOS
+
+Route::get('/insertar_marca', [DatosProductos::class, 'insertar_marca'])->name('insertar_marca');
+Route::post('/insertar_marca', [DatosProductos::class, 'insertar_marca'])->name('insertar_marca');
+
+
+Route::get('/insertar_nombre', [DatosProductos::class, 'insertar_nombre'])->name('insertar_nombre');
+Route::post('/insertar_nombre', [DatosProductos::class, 'insertar_nombre'])->name('insertar_nombre');
+
+Route::get('/insertar_vitola', [DatosProductos::class, 'insertar_vitola'])->name('insertar_vitola');
+Route::post('/insertar_vitola', [DatosProductos::class, 'insertar_vitola'])->name('insertar_vitola');
+
+Route::get('/insertar_tipo', [DatosProductos::class, 'insertar_tipo'])->name('insertar_tipo');
+Route::post('/insertar_tipo', [DatosProductos::class, 'insertar_tipo'])->name('insertar_tipo');
+
+Route::get('/insertar_capa', [DatosProductos::class, 'insertar_capa'])->name('insertar_capa');
+Route::post('/insertar_capa', [DatosProductos::class, 'insertar_capa'])->name('insertar_capa');
+
+
+
+
 
 
 Route::get('/welcome', function () {
@@ -80,8 +120,6 @@ Auth::routes();
 Route::get('/logout', [App\Http\Controllers\LoginController::class, 'logout'])->name('logout');
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-Route::get('/productos', [App\Http\Controllers\PedidoController::class, 'productos_index'])->name('productos');
-Route::post('/productos', [App\Http\Controllers\PedidoController::class, 'productos_index'])->name('productos');;
 
 //rutas melvin
 Route::get('/', [App\Http\Controllers\TableditController::class, 'index'])->name('tabla');
@@ -115,3 +153,6 @@ Route::get('/anadir_inventario', [App\Http\Controllers\CajasController::class, '
 
 Route::post('/importar_inv_cajas', [App\Http\Controllers\CajasController::class, 'importinvcajas'])->name('importar_inv_cajas');
 Route::get('/importar_inv_cajas', [App\Http\Controllers\CajasController::class, 'importinvcajas'])->name('importar_inv_cajas');
+
+
+Route::get('/exportar_pendiente', [App\Http\Controllers\PendienteController::class, 'exportPendiente'])->name('exportar_pendiente');

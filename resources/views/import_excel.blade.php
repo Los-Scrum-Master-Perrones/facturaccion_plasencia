@@ -1,14 +1,9 @@
 
-
-
-<!DOCTYPE html>
-<html>
 @extends('principal')
+
+
 @section('content')
 
-
-
-<head>
     <title></title>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" />
@@ -23,10 +18,6 @@
     <link rel="stylesheet" href="{{ asset('css/principal.css') }}" />
 
 
-
-</head>
-
-<body style=" background-size:100% 100%;">
 
     </br>
     <ul class="nav justify-content-center">
@@ -49,7 +40,7 @@
 
 
 
-    <div class="container" style="width:1100px; padding-left:30px;">
+    <div class="" style="width:1150px; padding-left:100px;">
         <div class="row">
 
             <div class="col-sm">
@@ -66,7 +57,7 @@
 
                             </div>
                             </div>
-                            </form>
+                </form>
                             </div>
 
                             <div class="col-sm">
@@ -78,11 +69,11 @@
                                                     pedido</strong></a>
                                         </div>
                                         <div class="col-sm">
-                                            <input type="date" value="" name="fecha" id="fecha" style="width: 170px;"
+                                            <input type="date" value="" name="fecha" id="fecha" style="width: 160px;"
                                                 class="btn botonprincipal form-control" required>
                                         </div>
                                         <div class="col-sm">
-                                            <button type="submit" style="width:150px;"
+                                            <button type="submit" style="width:160px;"
                                                 class="btn botonprincipal form-control">Agregar a
                                                 pendiente</button>
                                         </div>
@@ -108,18 +99,18 @@
 
 
 
-                            <div class="container" style="width:1100px; padding-left:30px;">
+                            <div class="" style="width:1100px; padding-left:100px;">
 
                                 <div class="row">
 
                                     <div class="col-sm">
-                                        <form action="{{Route('buscar')}}" method="POST" class="form-inline"
+                                        <form action="{{Route('buscar_pedido')}}" method="POST" class="form-inline"
                                             style="margin-bottom:0px;">
                                             @csrf
                                             <div class="row">
 
                                                 <div class="col-sm">
-                                                    <input name="txt_name" class="btn botonprincipal form-control"
+                                                    <input name="busqueda" id="busqueda" class="btn botonprincipal form-control"
                                                         placeholder="Búsqueda por descripción u orden" style="width:350px;">
                                                 </div>
                                                 <div class="col-sm">
@@ -142,10 +133,10 @@
                             </div>
 
                             </br>
-    <div class="panel-body">
-     <div class="table-responsive">
+                            <div style="width:1150px; padding-left:0px;">
+                                <div class="table-responsive">
                     @csrf
-                    <table class="table table-light" id="editable" style="font-size:10px; padding-left:0px; ">
+                    <table class="table table-light" id="editable" style="font-size:10px; ">
                         <thead>
                             <tr style="font-size:16px; text-align:center;">
                                 <th  style=" text-align:center;">Item</th>
@@ -161,7 +152,7 @@
                             <tr>
                                 <td>{{$pedido->item}}</td>
                                 <td>{{$pedido->cant_paquetes}}</td>
-                                <td>{{$pedido->desccripcion}}</td>
+                                <td>{{$pedido->descripcion}}</td>
                                 <td>{{$pedido->unidades*$pedido->cant_paquetes}}</td>
                                 <td>{{$pedido->unidades}}</td>
                                 <td>{{$pedido->numero_orden}}</td>
@@ -211,7 +202,5 @@
     </script>
 
    
-</body>
-
-</html>
 @endsection
+

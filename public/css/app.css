@@ -2086,17 +2086,13 @@ pre code {
 .container-md,
 .container-sm {
   width: 100%;
-  padding-right: 10px;
+
   padding-left: 10px;
   margin-right: auto;
   margin-left: auto;
 }
 
-@media (min-width: 576px) {
-  .container-sm, .container {
-    max-width: 1000px;
-  }
-}
+
 @media (min-width: 768px) {
   .container-md, .container-sm, .container {
     max-width: 1000px;

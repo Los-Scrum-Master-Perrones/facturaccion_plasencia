@@ -1,165 +1,193 @@
-  .buttonsubmit{
-    width:100%;
-    height:100%;
-    background: transparent;color:#000;outline: none;
-    border: none;
+  .buttonsubmit {
+      width: 100%;
+      height: 100%;
+      background: transparent;
+      color: #000;
+      outline: none;
+      border: none;
   }
-  
+
   .all {
-    display: flex;
-    perspective: 10px;
-    transform: perspective(300px) rotateX(20deg);
-    will-change: perspective;
-    perspective-origin: center center;
-    transition: all .5s ease-out;
-    justify-content: center;
-    transform-style: preserve-3d;
-    margin-left: 50px;
-    margin-right: 50px;
-    
-    position: fixed;
-    bottom: 0;
-    margin: 0 auto;
-    width: 100%;
-    
-}
+      display: flex;
+      perspective: 10px;
+      transform: perspective(300px) rotateX(20deg);
+      will-change: perspective;
+      perspective-origin: center center;
+      transition: all .5s ease-out;
+      justify-content: center;
+      transform-style: preserve-3d;
+      margin-left: 50px;
+      margin-right: 50px;
 
-.botonprincipal{
-  width:100%;background: #000; color: #fff;border-radius: 20px;
-}
-.botonprincipal:hover {
-  width:100%;background: #000; color: rgb(255, 255, 255);border-radius: 20px;
-}
+      position: fixed;
+      bottom: 0;
+      margin: 0 auto;
+      width: 100%;
 
-  
+  }
+
+  .botonprincipal {
+      width: 100%;
+      background: #000;
+      color: #fff;
+      border-radius: 20px;
+  }
+
+  .botonprincipal:hover {
+      width: 100%;
+      background: #000;
+      color: rgb(255, 255, 255);
+      border-radius: 20px;
+  }
+
+
   .all:hover {
-    perspective: 1000px;
-    transition: all .5s ease-in;
-    transform: perspective(10000px) rotateX(0deg);
+      perspective: 1000px;
+      transition: all .5s ease-in;
+      transform: perspective(10000px) rotateX(0deg);
   }
+
   .all:hover .text {
-    opacity: 1;
+      opacity: 1;
   }
-  .all:hover > div {
-    opacity: 1;
-    transition-delay: 0s;
+
+  .all:hover>div {
+      opacity: 1;
+      transition-delay: 0s;
   }
+
   .all:hover .explainer {
-    opacity: 0;
+      opacity: 0;
   }
-  
+
   .left,
   .center,
   .right,
   .lefter,
   .lefter2,
+  .lefter3,
   .righter,
-  .righter2  {
-    width: 66px;
-    height: 30px;
-    transform-style: preserve-3d;
-    border-radius: 10px;
-    border: 1px solid #fff;
-    box-shadow: 0 0 20px 5px #6e0772;
-    opacity: 0;
-    transition: all 0.3s ease;
-    transition-delay: 1s;
-    position: relative;
-    background-position: center center;
-    background-size: contain;
-    background-repeat: no-repeat;
-    background-color: #6e0772;
-    cursor: pointer;
-    background-blend-mode: color-burn;
+  .righter2,
+  .righter3 {
+      width: 66px;
+      height: 30px;
+      transform-style: preserve-3d;
+      border-radius: 10px;
+      border: 1px solid #fff;
+      box-shadow: 0 0 20px 5px #6e0772;
+      opacity: 0;
+      transition: all 0.3s ease;
+      transition-delay: 1s;
+      position: relative;
+      background-position: center center;
+      background-size: contain;
+      background-repeat: no-repeat;
+      background-color: #6e0772;
+      cursor: pointer;
+      background-blend-mode: color-burn;
   }
+
   .left:hover,
   .center:hover,
   .right:hover,
   .lefter:hover,
   .lefter2:hover,
-  .righter:hover ,
-  .righter2:hover {
-    box-shadow: 0 0 30px 10px #6e0772;
-    background-color: #ccf;
+  .lefter3:hover,
+  .righter:hover,
+  .righter2:hover,
+  .righter3:hover {
+      box-shadow: 0 0 30px 10px #6e0772;
+      background-color: #ccf;
   }
-  
+
   .text {
-    transform: translateY(-20px);
-    opacity: 0;
-    font-size:10px;
-    transition: all 0.3s ease;
-    top: 0;
-    left: 5px;
-    position: absolute;
-    will-change: transform;
-    color: #fff;
-    text-shadow: 0 0 5px #6e0772;
+      transform: translateY(-20px);
+      opacity: 0;
+      font-size: 10px;
+      transition: all 0.3s ease;
+      top: 0;
+      left: 5px;
+      position: absolute;
+      will-change: transform;
+      color: #fff;
+      text-shadow: 0 0 5px #6e0772;
   }
-  
+
+  .lefter3 {
+      transform: translateX(-80px) translateZ(-100px) rotateY(-20deg);
+      text-align: center;
+  }
+
   .lefter2 {
-    transform: translateX(-90px) translateZ(-75px) rotateY(-10deg);
-    text-align: center;
+      transform: translateX(-60px) translateZ(-75px) rotateY(-15deg);
+      text-align: center;
   }
- 
+
   .lefter {
-    transform: translateX(-60px) translateZ(-50px) rotateY(-10deg);
-    text-align: center;
+      transform: translateX(-40px) translateZ(-50px) rotateY(-10deg);
+      text-align: center;
   }
-  
+
   .left {
-    transform: translateX(-30px) translateZ(-25px) rotateY(-5deg);
-    text-align: center;
+      transform: translateX(-20px) translateZ(-25px) rotateY(-5deg);
+      text-align: center;
   }
-  
+
   .center {
-    opacity: 1;    
-    background-image: url(https://cdn4.iconfinder.com/data/icons/free-ui/64/v-36-512.png);
+      opacity: 1;
+      background-image: url(https://cdn4.iconfinder.com/data/icons/free-ui/64/v-36-512.png);
   }
-  
+
   .right {
-    text-align: center;
-    transform: translateX(30px) translateZ(-25px) rotateY(5deg);
-   }
-  
+      text-align: center;
+      transform: translateX(20px) translateZ(-25px) rotateY(5deg);
+  }
+
   .righter {
-    transform: translateX(60px) translateZ(-50px) rotateY(10deg);
-    text-align: center;
-      }
+      transform: translateX(40px) translateZ(-50px) rotateY(10deg);
+      text-align: center;
+  }
 
   .righter2 {
-  transform: translateX(90px) translateZ(-75px) rotateY(15deg);
-  text-align: center;
+      transform: translateX(60px) translateZ(-75px) rotateY(15deg);
+      text-align: center;
   }
-  
+
+  .righter3 {
+      transform: translateX(80px) translateZ(-75px) rotateY(15deg);
+      text-align: center;
+  }
+
   .explainer {
-    
-    font-size: 10px;
-    color: #fff;
-    transition: all 0.6s ease;
-    width: 100%;
-    height: 100%;
-    background-color: #6e0772;
-    background-image: radial-gradient(circle at center top, #cce, #6e0772);
-    border-radius: 10px;
-    text-shadow: 0 0 10px rgba(255, 255, 255, 0.8);
-    display: flex;
-    justify-content: center;
-    align-items: center;
+
+      font-size: 10px;
+      color: #fff;
+      transition: all 0.6s ease;
+      width: 100%;
+      height: 100%;
+      background-color: #6e0772;
+      background-image: radial-gradient(circle at center top, #cce, #6e0772);
+      border-radius: 10px;
+      text-shadow: 0 0 10px rgba(255, 255, 255, 0.8);
+      display: flex;
+      justify-content: center;
+      align-items: center;
   }
-  
+
   .ref {
-    background-color: #000;
-    background-image: linear-gradient(to bottom, #d80, #c00);
-    border-radius: 3px;
-    padding: 7px 10px;
-    position: absolute;
-    font-size: 16px;
-    bottom: 10px;
-    right: 10px;
-    color: #fff;
-    text-decoration: none;
-    text-shadow: 0 0 3px rgba(0, 0, 0, 0.4);
+      background-color: #000;
+      background-image: linear-gradient(to bottom, #d80, #c00);
+      border-radius: 3px;
+      padding: 7px 10px;
+      position: absolute;
+      font-size: 16px;
+      bottom: 10px;
+      right: 10px;
+      color: #fff;
+      text-decoration: none;
+      text-shadow: 0 0 3px rgba(0, 0, 0, 0.4);
   }
+
   .ref::first-letter {
-    font-size: 12px;
+      font-size: 12px;
   }
