@@ -734,117 +734,155 @@ c
 
 
     <!-- INICIO DEL MODAL AGREGAR DETALLE PRODUCTO -->
+<form action="{{Route('detalle')}}" method="POST" id="form_detalle" name="form_detalle">
+    <div class="modal fade" role="dialog" id="modal_agregarproducto" data-backdrop="static" data-keyboard="false"
+        tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true"
+        style="opacity:.9;background:#212529;width=800px;">
+        <div class="modal-dialog modal-dialog-centered modal-lg" style="opacity:.9;background:#212529;width=80%">
+            <div class="modal-content">
 
-    <form action="{{Route('detalle')}}" method="POST" id="form_detalle" name="form_detalle">
-        <div class="modal fade" role="dialog" id="modal_agregarproducto" data-backdrop="static" data-keyboard="false"
-            tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true"
-            style="opacity:.9;background:#212529;width=800px;">
-            <div class="modal-dialog modal-dialog-centered modal-lg" style="opacity:.9;background:#212529;width=80%">
-                <div class="modal-content">
+                <div class="modal-header">
+                    <h5 style="font-size:20px; width:3000px; text-align:center; font:bold" class=""
+                        id="staticBackdropLabel">Agregar detalle del producto</h5>
+                    <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close"></button>
+                </div>
 
-                    <div class="modal-header">
-                        <h5 style="font-size:20px; width:3000px; text-align:center; font:bold" class=""
-                            id="staticBackdropLabel">Agregar detalle del producto</h5>
-                        <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close"></button>
-                    </div>
+                <div class="modal-body">
 
-                    <div class="modal-body">
+                    <div class="card-body">
 
-                        <div class="card-body">
-
-                            <div class="row">
-                                <div class="mb-3 col">
-                                    <label style="font-size:16px" for="txt_figuraytipo" class="form-label">Item</label>
-                                    <input name="item_de" id="item_de" style="font-size:16px" class="form-control"
-                                        required type="text" autocomplete="off" readonly>
-                                </div>
-                                <div class="mb-3 col">
-                                    <label style="font-size:16px" for="txt_figuraytipo" class="form-label">Capa</label>
-                                    <input name="capa_de" id="capa_de" style="font-size:16px" class="form-control"
-                                        required type="text" autocomplete="off">
-                                </div>
-
-                                <div class="mb-3 col">
-                                    <label style="font-size:16px" for="txt_vitola" class="form-label">Marca</label>
-                                    <input name="marca_de" id="marca_de" style="font-size:16px" class="form-control"
-                                        required type="text" autocomplete="off">
-
-                                </div>
+                        <div class="row">
+                            <div class="mb-3 col">
+                                <label style="font-size:16px" for="txt_figuraytipo" class="form-label">Item</label>
+                                <input name="item_de" id="item_de" style="font-size:16px" class="form-control" required
+                                    type="text" autocomplete="off" readonly>
+                            </div>
+                            <div class="mb-3 col">
+                                <label style="font-size:16px" for="txt_figuraytipo" class="form-label">Capa</label>
+                                <select class="form-control" name="capa_de" id="capa_de"
+                                    placeholder="Ingresa figura y tipo" style="overflow-y: scroll; height:35px;"
+                                    required>
+                                    <option value="NINGUNA" style="overflow-y: scroll;">Ninguna</option>
+                                    @foreach($capas as $capa)
+                                    <option style="overflow-y: scroll;"> {{$capa->capa}}</option>
+                                    @endforeach
+                                </select>
                             </div>
 
-                            <div class="row">
-                                <div class="mb-3 col">
-                                    <label for="txt_total" style="font-size:16px" class="form-label">Nombre</label>
-                                    <input name="nombre_de" id="nombre_de" style="font-size:16px" class="form-control"
-                                        required type="text" autocomplete="off"> </div>
-                                <div class="mb-3 col">
-                                    <label style="font-size:16px" for="txt_buenos" class="form-label">Vitola</label>
-                                    <input name="vitola_de" id="vitola_de" style="font-size:16px" class="form-control"
-                                        required type="text" autocomplete="off"> </div>
-                                <div class="mb-3 col">
-                                    <label style="font-size:16px" for="txt_malos" class="form-label">Tipo de
-                                        empaque</label>
-                                    <input name="tipo_de" id="tipo_de" style="font-size:16px" class="form-control"
-                                        required type="text" autocomplete="off">
-                                </div>
+                            <div class="mb-3 col">
+                                <label style="font-size:16px" for="txt_vitola" class="form-label">Marca</label>
 
-                            </div>
-
-
-
-
-                            <div class="row">
-                                <div class="mb-3 col">
-                                    <input type="checkbox" name="cello_de" id="cello_de" style="font-size:20px"
-                                        value="si">
-                                    <label style="font-size:16px" for="cello" class="form-label">Cello</label>
-                                </div>
-                                <div class="mb-3 col">
-
-                                    <input type="checkbox" name="anillo_de" id="anillo_de" style="font-size:20px"
-                                        value="si">
-                                    <label style="font-size:16px" for="anillo" class="form-label">Anillo</label>
-                                </div>
-                                <div class="mb-3 col">
-
-                                    <input type="checkbox" name="upc_de" id="upc_de" style="font-size:20px" value="si">
-                                    <label style="font-size:16px" for="upc" class="form-label">UPC</label>
-                                </div>
-                            </div>
-
-                            <div class="row">
-                                <div class="mb-3 col">
-
-                                    <label style="font-size:16px" for="txt_malos" class="form-label">Código de
-                                        precio</label>
-                                    <input name="precio_de" id="precio_de" style="font-size:16px" class="form-control"
-                                        required type="text" autocomplete="off">
-                                </div>
+                                <select class="form-control" name="marca_de" id="marca_de"
+                                    placeholder="Ingresa figura y tipo" style="overflow-y: scroll; height:35px;"
+                                    required>
+                                    <option value="NINGUNA" style="overflow-y: scroll;">Ninguna</option>
+                                    @foreach($marcas as $marca)
+                                    <option style="overflow-y: scroll;"> {{$marca->marca}}</option>
+                                    @endforeach
+                                </select>
 
                             </div>
                         </div>
 
+                        <div class="row">
+                            <div class="mb-3 col">
+                                <label for="txt_total" style="font-size:16px" class="form-label">Nombre</label>
+
+                                <select class="form-control" name="nombre_de" id="nombre_de"
+                                    placeholder="Ingresa figura y tipo" style="overflow-y: scroll; height:35px;"
+                                    required>
+                                    <option value="NINGUNA" style="overflow-y: scroll;">Ninguna</option>
+                                    @foreach($nombres as $nombre)
+                                    <option style="overflow-y: scroll;"> {{$nombre->nombre}}</option>
+                                    @endforeach
+                                </select>
+
+                            </div>
+
+                            <div class="mb-3 col">
+                                <label style="font-size:16px" for="txt_buenos" class="form-label">Vitola</label>
+
+                                <select class="form-control" name="vitola_de" id="vitola_de"
+                                    placeholder="Ingresa figura y tipo" style="overflow-y: scroll; height:35px;"
+                                    required>
+                                    <option value="NINGUNA" style="overflow-y: scroll;">Ninguna</option>
+                                    @foreach($vitolas as $vitola)
+                                    <option style="overflow-y: scroll;"> {{$vitola->vitola}}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                            <div class="mb-3 col">
+                                <label style="font-size:16px" for="txt_malos" class="form-label">Tipo de
+                                    empaque</label>
+                                <select class="form-control" name="tipo_de" id="tipo_de"
+                                    placeholder="Ingresa figura y tipo" style="overflow-y: scroll; height:35px;"
+                                    required>
+                                    <option value="N/D" style="overflow-y: scroll;">Ninguna</option>
+                                    @foreach($tipo_empaques as $tipo_empaque)
+                                    <option style="overflow-y: scroll;"> {{$tipo_empaque->tipo_empaque}}
+                                    </option>
+                                    @endforeach
+                                </select>
+                            </div>
+
+
+
+                        </div>
+
+
+                                <div class="row">
+                                    <div class="mb-3 col">
+                                        <input type="checkbox" name="cello_de" id="cello_de" style="font-size:20px"
+                                            value="si">
+                                        <label style="font-size:16px" for="cello" class="form-label">Cello</label>
+                                    </div>
+                                    <div class="mb-3 col">
+
+                                        <input type="checkbox" name="anillo_de" id="anillo_de" style="font-size:20px"
+                                            value="si">
+                                        <label style="font-size:16px" for="anillo" class="form-label">Anillo</label>
+                                    </div>
+                                    <div class="mb-3 col">
+
+                                        <input type="checkbox" name="upc_de" id="upc_de" style="font-size:20px"
+                                            value="si">
+                                        <label style="font-size:16px" for="upc" class="form-label">UPC</label>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="mb-3 col">
+
+                                        <label style="font-size:16px" for="txt_malos" class="form-label">Código de
+                                            precio</label>
+                                        <input name="precio_de" id="precio_de" style="font-size:16px"
+                                            class="form-control" required type="text" autocomplete="off">
+                                    </div>
+
+                                </div>
+                            </div>
+
+                        </div>
+
+                        <div class="modal-footer">
+                            <button style=" background: #b39f64; color: #ecedf1;" type="button" class=" btn-info-claro "
+                                data-dismiss="modal">
+                                <span style="font-size:16px">Cancelar</span>
+                                @csrf
+                            </button>
+                            <button class="submit">
+                                <span style="font-size:16px">Guardar</span>
+                            </button>
+
+
+                        </div>
+
+
                     </div>
-
-                    <div class="modal-footer">
-                        <button style=" background: #b39f64; color: #ecedf1;" type="button" class=" btn-info-claro "
-                            data-dismiss="modal">
-                            <span style="font-size:16px">Cancelar</span>
-                            @csrf
-                        </button>
-                        <button class="submit">
-                            <span style="font-size:16px">Guardar</span>
-                        </button>
-
-
-                    </div>
-
-
                 </div>
             </div>
-        </div>
-    </form>
-    <!-- FIN DEL MODAL AGREGAR DETALLE PRODUCTO -->
+</form>
+<!-- FIN DEL MODAL AGREGAR DETALLE PRODUCTO -->
 
 
     <!-- INICIO DEL MODAL VER DETALLE PRODUCTO -->

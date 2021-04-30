@@ -235,11 +235,20 @@ class Productos extends Component
             'precio' => $request->precio_de
              ]);
 
+             $this->capas= \DB::select('call buscar_capa("")');
+             $this->marcas=\DB::select('call buscar_marca("")');
+             $this->nombres= \DB::select('call buscar_nombre("")');
+             $this->vitolas= \DB::select('call buscar_vitola("")');
+             $this->tipo_empaques= \DB::select('call buscar_tipo_empaque("")');
             
-             $productos = \DB::select('call mostrar_productos');
 
-            return view('livewire.productos')->extends('principal')->section('content')->with('detalle_clase_producto', $detalle_clase_producto)->with('productos', $productos);
-    }
+             $productos = \DB::select('call mostrar_productos');
+             $detalle_productos = \DB::select('call mostrar_detalles_productos');
+
+
+             return redirect()->route('productos'); 
+            
+            }
 
 
     public function editar_productosssssss($numero_id){
@@ -273,8 +282,14 @@ class Productos extends Component
     ['item'=> $request->item_detalle]);
 
     $productos = \DB::select('call mostrar_productos');
+    
        $detalle_productos = \DB::select('call mostrar_detalles_productos');
-
+       $this->capas= \DB::select('call buscar_capa("")');
+       $this->marcas=\DB::select('call buscar_marca("")');
+       $this->nombres= \DB::select('call buscar_nombre("")');
+       $this->vitolas= \DB::select('call buscar_vitola("")');
+       $this->tipo_empaques= \DB::select('call buscar_tipo_empaque("")');
+      
         return view('livewire.productos')->extends('principal')->section('content')->with('detalle_productos', $detalle_productos)->with('producto_unico', $producto_unico)->with('productos', $productos);
     }
 }

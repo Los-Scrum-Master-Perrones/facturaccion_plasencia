@@ -11,6 +11,7 @@ use App\Http\Controllers\programacion;
 use App\Http\Controllers\tabla_existencia;
 use App\Http\Livewire\DatosProductos;
 use App\Http\Livewire\Productos;
+use App\Http\Livewire\PendienteEmpaque;
 use Illuminate\Support\Facades\Auth;
 
 /*
@@ -40,6 +41,11 @@ Route::get('/productos', Productos::class)->name('productos');
 Route::post('/productos', Productos::class)->name('productos');
 
 
+
+Route::get('/pendiente_empaque', PendienteEmpaque::class)->name('pendiente_empaque');
+Route::post('/pendiente_empaque', PendienteEmpaque::class)->name('pendiente_empaque');
+
+
 Route::get('/insertar_productos', [Productos::class, 'insertar_clase'])->name('nuevo_producto');
 Route::post('/insertar_productos', [Productos::class, 'insertar_clase'])->name('nuevo_producto');
 
@@ -49,8 +55,8 @@ Route::get('/actualizar_productos', [Productos::class, 'actualizar_clase'])->nam
 Route::post('/actualizar_productos', [Productos::class, 'actualizar_clase'])->name('actualizar_producto');
 
 
-Route::get('/insertar_detalle_productos', [clase_producto::class, 'insertar_detalle_clase'])->name('detalle');
-Route::post('/insertar_detalle_productos', [clase_producto::class, 'insertar_detalle_clase'])->name('detalle');
+Route::get('/insertar_detalle_productos', [Productos::class, 'insertar_detalle_clase'])->name('detalle');
+Route::post('/insertar_detalle_productos', [Productos::class, 'insertar_detalle_clase'])->name('detalle');
 
 
 Route::get('/mostrar_detalle_productos', [clase_producto::class, 'insertar_detalle_clase'])->name('detalle_producto');
@@ -64,8 +70,6 @@ Route::get('/pendiente', [PendienteController::class, 'pendiente_index'])->name(
 Route::post('/pendiente', [PendienteController::class, 'pendiente_indexi'])->name('pendiente');
 
 
-Route::get('/pendiente_empaque', [PendienteController::class, 'index_pendiente_empaque'])->name('pendiente_empaque');
-Route::post('/pendiente_empaque', [PendienteController::class, 'index_pendiente_empaque'])->name('pendiente_empaque');
 
 
 

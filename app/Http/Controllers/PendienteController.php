@@ -78,12 +78,7 @@ class PendienteController extends Controller
             ->with('feha', $feha);
     }
 
-    function index_pendiente_empaque()
-    {
-
-        $datos_pendiente_empaque =  \DB::select('call mostrar_pendiente_empaque');
-        return view('pendiente_empaque')->with('datos_pendiente_empaque', $datos_pendiente_empaque);
-    }
+    
 
     function exportPendiente(Request $request)
     {
