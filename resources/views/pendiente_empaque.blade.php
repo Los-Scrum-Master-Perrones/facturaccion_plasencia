@@ -21,8 +21,10 @@
 
 
     </br>
-    <ul class="nav justify-content-center">
-
+       <ul class="nav justify-content-center">
+        <li class="nav-item">
+            <a style="color:black; font-size:16px;" href="pendiente-empaque"><strong>Pendiente</strong></a>
+        </li>
         <li class="nav-item">
             <a style="color:black; font-size:16px;" href="import_excel"><strong>Importar pedido</strong></a>
         </li>

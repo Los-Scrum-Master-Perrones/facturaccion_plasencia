@@ -23,7 +23,9 @@
 
     </br>
     <ul class="nav justify-content-center">
-
+    <li class="nav-item">
+            <a style="color:black; font-size:16px;" href="pendiente_empaque"><strong>Pendiente</strong></a>
+        </li>
         <li class="nav-item">
             <a style="color:black; font-size:16px;" href="import_excel"><strong>Existencia en bodega</strong></a>
         </li>

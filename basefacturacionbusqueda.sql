@@ -13,12 +13,10 @@
 
 
 -- Volcando estructura de base de datos para facturacion_plasencia
-DROP DATABASE IF EXISTS `facturacion_plasencia`;
 CREATE DATABASE IF NOT EXISTS `facturacion_plasencia` /*!40100 DEFAULT CHARACTER SET latin1 */;
 USE `facturacion_plasencia`;
 
 -- Volcando estructura para tabla facturacion_plasencia.anadir_inventario_cajas
-DROP TABLE IF EXISTS `anadir_inventario_cajas`;
 CREATE TABLE IF NOT EXISTS `anadir_inventario_cajas` (
   `id_cajas` int(11) NOT NULL AUTO_INCREMENT,
   `codigo` varchar(50) DEFAULT NULL,
@@ -39,7 +37,6 @@ DELETE FROM `anadir_inventario_cajas`;
 /*!40000 ALTER TABLE `anadir_inventario_cajas` ENABLE KEYS */;
 
 -- Volcando estructura para tabla facturacion_plasencia.cajas
-DROP TABLE IF EXISTS `cajas`;
 CREATE TABLE IF NOT EXISTS `cajas` (
   `id_cajas` int(11) NOT NULL AUTO_INCREMENT,
   `codigo` varchar(50) DEFAULT NULL,
@@ -60,7 +57,6 @@ DELETE FROM `cajas`;
 /*!40000 ALTER TABLE `cajas` ENABLE KEYS */;
 
 -- Volcando estructura para tabla facturacion_plasencia.capa_productos
-DROP TABLE IF EXISTS `capa_productos`;
 CREATE TABLE IF NOT EXISTS `capa_productos` (
   `id_capa` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
   `capa` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
@@ -176,7 +172,6 @@ INSERT INTO `capa_productos` (`id_capa`, `capa`, `created_at`, `updated_at`) VAL
 /*!40000 ALTER TABLE `capa_productos` ENABLE KEYS */;
 
 -- Volcando estructura para tabla facturacion_plasencia.categoria
-DROP TABLE IF EXISTS `categoria`;
 CREATE TABLE IF NOT EXISTS `categoria` (
   `id_categoria` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
   `categoria` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
@@ -196,7 +191,6 @@ INSERT INTO `categoria` (`id_categoria`, `categoria`, `created_at`, `updated_at`
 /*!40000 ALTER TABLE `categoria` ENABLE KEYS */;
 
 -- Volcando estructura para tabla facturacion_plasencia.cellos
-DROP TABLE IF EXISTS `cellos`;
 CREATE TABLE IF NOT EXISTS `cellos` (
   `id_cello` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
   `cello` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
@@ -218,7 +212,6 @@ INSERT INTO `cellos` (`id_cello`, `cello`, `anillo`, `upc`, `created_at`, `updat
 /*!40000 ALTER TABLE `cellos` ENABLE KEYS */;
 
 -- Volcando estructura para tabla facturacion_plasencia.clase_productos
-DROP TABLE IF EXISTS `clase_productos`;
 CREATE TABLE IF NOT EXISTS `clase_productos` (
   `id_producto` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
   `item` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
@@ -453,7 +446,6 @@ INSERT INTO `clase_productos` (`id_producto`, `item`, `codigo_producto`, `codigo
 /*!40000 ALTER TABLE `clase_productos` ENABLE KEYS */;
 
 -- Volcando estructura para tabla facturacion_plasencia.detalle_clase_productos
-DROP TABLE IF EXISTS `detalle_clase_productos`;
 CREATE TABLE IF NOT EXISTS `detalle_clase_productos` (
   `id_producto` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
   `item` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
@@ -467,19 +459,26 @@ CREATE TABLE IF NOT EXISTS `detalle_clase_productos` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id_producto`) USING BTREE
-) ENGINE=MyISAM AUTO_INCREMENT=213 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=MyISAM AUTO_INCREMENT=221 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- Volcando datos para la tabla facturacion_plasencia.detalle_clase_productos: 3 rows
+-- Volcando datos para la tabla facturacion_plasencia.detalle_clase_productos: 11 rows
 DELETE FROM `detalle_clase_productos`;
 /*!40000 ALTER TABLE `detalle_clase_productos` DISABLE KEYS */;
 INSERT INTO `detalle_clase_productos` (`id_producto`, `item`, `id_capa`, `id_vitola`, `id_nombre`, `id_marca`, `id_cello`, `id_tipo_empaque`, `otra_descripcion`, `created_at`, `updated_at`) VALUES
 	(210, '02008065', 5, 1, 2, 14, 4, 1, '8787', NULL, NULL),
 	(211, '02008065', 5, 1, 2, 14, 4, 1, 'HIH', NULL, NULL),
-	(212, '02008048', 5, 1, 2, 14, 4, 1, 'HIH', NULL, NULL);
+	(212, '02008048', 5, 1, 2, 14, 4, 1, 'HIH', NULL, NULL),
+	(213, '02008065', 19, 8, 2, 8, 1, 8, 'hola', NULL, NULL),
+	(214, '02008065', 19, 45, 153, 1450, 1, 27, ',ml', NULL, NULL),
+	(215, '02008065', 19, 45, 153, 1450, 1, 27, 'mdxlk', NULL, NULL),
+	(216, '02008065', 19, 45, 153, 1450, 1, 27, 'scas', NULL, NULL),
+	(217, '02008065', 19, 45, 153, 6, 1, 27, 'xcx', NULL, NULL),
+	(218, '02008065', 19, 45, 153, 6, 1, 27, 'mnm', NULL, NULL),
+	(219, '02008065', 19, 45, 153, 1450, 1, 27, 'das', NULL, NULL),
+	(220, '02008065', 19, 45, 153, 1450, 1, 27, 'df', NULL, NULL);
 /*!40000 ALTER TABLE `detalle_clase_productos` ENABLE KEYS */;
 
 -- Volcando estructura para tabla facturacion_plasencia.lista_cajas
-DROP TABLE IF EXISTS `lista_cajas`;
 CREATE TABLE IF NOT EXISTS `lista_cajas` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `codigo` varchar(50) DEFAULT NULL,
@@ -496,7 +495,6 @@ DELETE FROM `lista_cajas`;
 /*!40000 ALTER TABLE `lista_cajas` ENABLE KEYS */;
 
 -- Volcando estructura para tabla facturacion_plasencia.marca_productos
-DROP TABLE IF EXISTS `marca_productos`;
 CREATE TABLE IF NOT EXISTS `marca_productos` (
   `id_marca` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
   `marca` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
@@ -1962,7 +1960,6 @@ INSERT INTO `marca_productos` (`id_marca`, `marca`, `created_at`, `updated_at`) 
 /*!40000 ALTER TABLE `marca_productos` ENABLE KEYS */;
 
 -- Volcando estructura para tabla facturacion_plasencia.migrations
-DROP TABLE IF EXISTS `migrations`;
 CREATE TABLE IF NOT EXISTS `migrations` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `migration` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
@@ -1990,16 +1987,15 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 /*!40000 ALTER TABLE `migrations` ENABLE KEYS */;
 
 -- Volcando estructura para tabla facturacion_plasencia.nombre_productos
-DROP TABLE IF EXISTS `nombre_productos`;
 CREATE TABLE IF NOT EXISTS `nombre_productos` (
   `id_nombre` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
   `nombre` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id_nombre`)
-) ENGINE=MyISAM AUTO_INCREMENT=153 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=MyISAM AUTO_INCREMENT=154 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- Volcando datos para la tabla facturacion_plasencia.nombre_productos: 152 rows
+-- Volcando datos para la tabla facturacion_plasencia.nombre_productos: 153 rows
 DELETE FROM `nombre_productos`;
 /*!40000 ALTER TABLE `nombre_productos` DISABLE KEYS */;
 INSERT INTO `nombre_productos` (`id_nombre`, `nombre`, `created_at`, `updated_at`) VALUES
@@ -2154,11 +2150,11 @@ INSERT INTO `nombre_productos` (`id_nombre`, `nombre`, `created_at`, `updated_at
 	(149, 'Sweet Single', '2021-04-28 20:51:58', '2021-04-28 20:51:58'),
 	(150, 'Cream', '2021-04-28 20:51:58', '2021-04-28 20:51:58'),
 	(151, 'Natural Single', '2021-04-28 20:51:58', '2021-04-28 20:51:58'),
-	(152, 'Lancero Rabito', '2021-04-28 20:51:58', '2021-04-28 20:51:58');
+	(152, 'Lancero Rabito', '2021-04-28 20:51:58', '2021-04-28 20:51:58'),
+	(153, 'NINGUNA', NULL, NULL);
 /*!40000 ALTER TABLE `nombre_productos` ENABLE KEYS */;
 
 -- Volcando estructura para tabla facturacion_plasencia.orden_productos
-DROP TABLE IF EXISTS `orden_productos`;
 CREATE TABLE IF NOT EXISTS `orden_productos` (
   `id_orden` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
   `orden` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
@@ -2425,7 +2421,6 @@ INSERT INTO `orden_productos` (`id_orden`, `orden`, `created_at`, `updated_at`) 
 /*!40000 ALTER TABLE `orden_productos` ENABLE KEYS */;
 
 -- Volcando estructura para tabla facturacion_plasencia.password_resets
-DROP TABLE IF EXISTS `password_resets`;
 CREATE TABLE IF NOT EXISTS `password_resets` (
   `email` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `token` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
@@ -2438,7 +2433,6 @@ DELETE FROM `password_resets`;
 /*!40000 ALTER TABLE `password_resets` ENABLE KEYS */;
 
 -- Volcando estructura para tabla facturacion_plasencia.pedidos
-DROP TABLE IF EXISTS `pedidos`;
 CREATE TABLE IF NOT EXISTS `pedidos` (
   `item` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `cant_paquetes` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
@@ -2455,7 +2449,6 @@ DELETE FROM `pedidos`;
 /*!40000 ALTER TABLE `pedidos` ENABLE KEYS */;
 
 -- Volcando estructura para tabla facturacion_plasencia.pendiente
-DROP TABLE IF EXISTS `pendiente`;
 CREATE TABLE IF NOT EXISTS `pendiente` (
   `categoria` int(11) DEFAULT NULL,
   `item` varchar(50) DEFAULT NULL,
@@ -2562,7 +2555,6 @@ INSERT INTO `pendiente` (`categoria`, `item`, `orden_del_sitema`, `observacion`,
 /*!40000 ALTER TABLE `pendiente` ENABLE KEYS */;
 
 -- Volcando estructura para tabla facturacion_plasencia.pendiente_empaque
-DROP TABLE IF EXISTS `pendiente_empaque`;
 CREATE TABLE IF NOT EXISTS `pendiente_empaque` (
   `categoria` int(11) DEFAULT NULL,
   `item` varchar(50) DEFAULT NULL,
@@ -2583,13 +2575,92 @@ CREATE TABLE IF NOT EXISTS `pendiente_empaque` (
   `saldo` int(11) DEFAULT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1 COMMENT='CATEGORIA	ITEM	ORDEN DEL SISTEMA	OBSERVACÓN	PRESENTACIÓN	MES	ORDEN	MARCA	VITOLA	NOMBRE	CAPA	TIPO DE EMPAQUE	ANILLO	CELLO	UPC	PENDIENTE	MARZO 2021 FACTURA #17976(Warehouse)	ENVIADO MES	SALDO';
 
--- Volcando datos para la tabla facturacion_plasencia.pendiente_empaque: 0 rows
+-- Volcando datos para la tabla facturacion_plasencia.pendiente_empaque: 79 rows
 DELETE FROM `pendiente_empaque`;
 /*!40000 ALTER TABLE `pendiente_empaque` DISABLE KEYS */;
+INSERT INTO `pendiente_empaque` (`categoria`, `item`, `orden_del_sitema`, `observacion`, `presentacion`, `mes`, `orden`, `marca`, `vitola`, `nombre`, `capa`, `tipo_empaque`, `cello`, `pendiente`, `factura_del_mes`, `cantidad_enviada_mes`, `saldo`) VALUES
+	(1, '00231000', '0', '0', '0', '2021-04-27', 226, 62, 15, 18, 3, 15, 1, 10000, 0, 0, 0),
+	(1, '00303007', '0', '0', '0', '2021-04-23', 212, 67, 25, 2, 3, 4, 1, 1000, 0, 0, 0),
+	(4, '00303007', '0', '0', '0', '2021-04-13', 243, 67, 25, 2, 3, 4, 1, 200, 0, 0, 0),
+	(4, '00303007', '0', '0', '0', '2021-04-13', 222, 67, 25, 2, 3, 4, 1, 500, 0, 0, 0),
+	(4, '00303007', '0', '0', '0', '2021-04-13', 221, 67, 25, 2, 3, 4, 1, 160, 0, 0, 0),
+	(1, '00404000', '0', '0', '0', '2021-04-13', 212, 67, 3, 2, 3, 7, 3, 4400, 0, 0, 0),
+	(1, '00405000', '0', '0', '0', '2021-04-13', 212, 67, 16, 14, 3, 7, 3, 400, 0, 0, 0),
+	(1, '00408000', '0', '0', '0', '2021-04-13', 212, 67, 9, 40, 3, 7, 3, 400, 0, 0, 0),
+	(4, '00408000', '0', '0', '0', '2021-04-13', 222, 67, 9, 40, 3, 7, 3, 140, 0, 0, 0),
+	(4, '00503008', '0', '0', '0', '2021-04-13', 222, 51, 6, 43, 2, 7, 1, 400, 0, 0, 0),
+	(1, '00504007', '0', '0', '0', '2021-04-13', 212, 51, 4, 2, 2, 18, 3, 12000, 0, 0, 0),
+	(4, '00504007', '0', '0', '0', '2021-04-13', 213, 51, 4, 2, 2, 18, 3, 400, 0, 0, 0),
+	(1, '00504033', '0', '0', '0', '2021-04-13', 212, 51, 4, 14, 3, 7, 1, 400, 0, 0, 0),
+	(1, '00504042', '0', '0', '0', '2021-04-13', 214, 51, 9, 32, 2, 11, 1, 500, 0, 0, 0),
+	(1, '00504102', '0', '0', '0', '2021-04-13', 212, 51, 22, 34, 5, 7, 1, 400, 0, 0, 0),
+	(1, '00505002', '0', '0', '0', '2021-04-13', 212, 51, 4, 14, 5, 7, 3, 3600, 0, 0, 0),
+	(1, '00505003', '0', '0', '0', '2021-04-13', 212, 51, 4, 14, 2, 7, 3, 3200, 0, 0, 0),
+	(1, '00505006', '0', '0', '0', '2021-04-13', 212, 51, 4, 14, 5, 18, 3, 4000, 0, 0, 0),
+	(1, '00505007', '0', '0', '0', '2021-04-13', 212, 51, 4, 14, 2, 18, 3, 2000, 0, 0, 0),
+	(1, '00505019', '0', '0', '0', '2021-04-13', 212, 51, 4, 14, 3, 18, 1, 2000, 0, 0, 0),
+	(1, '00508001', '0', '0', '0', '2021-04-13', 212, 51, 9, 32, 2, 7, 3, 7200, 0, 0, 0),
+	(4, '00508001', '0', '0', '0', '2021-04-13', 221, 51, 9, 32, 2, 7, 3, 200, 0, 0, 0),
+	(1, '00508003', '0', '0', '0', '2021-04-13', 212, 61, 9, 11, 1, 7, 1, 1200, 0, 0, 0),
+	(1, '00508010', '0', '0', '0', '2021-04-13', 212, 51, 21, 33, 5, 19, 1, 1800, 0, 0, 0),
+	(1, '00508011', '0', '0', '0', '2021-04-13', 212, 51, 21, 33, 2, 19, 1, 1200, 0, 0, 0),
+	(4, '00508011', '0', '0', '0', '2021-04-13', 244, 51, 21, 33, 2, 19, 1, 300, 0, 0, 0),
+	(1, '00508015', '0', '0', '0', '2021-04-13', 212, 51, 11, 12, 5, 4, 1, 600, 0, 0, 0),
+	(1, '00508016', '0', '0', '0', '2021-04-13', 212, 51, 11, 12, 2, 4, 1, 1000, 0, 0, 0),
+	(1, '00508017', '0', '0', '0', '2021-04-13', 212, 73, 11, 12, 6, 4, 1, 200, 0, 0, 0),
+	(1, '00508022', '0', '0', '0', '2021-04-13', 212, 91, 9, 11, 10, 7, 1, 1200, 0, 0, 0),
+	(1, '00605003', '0', '0', '0', '2021-04-13', 212, 51, 14, 17, 2, 13, 3, 1500, 0, 0, 0),
+	(2, '00704004', '0', '0', '0', '2021-04-13', 215, 99, 4, 2, 6, 12, 1, 20000, 0, 0, 0),
+	(1, '00712001', '0', '0', '0', '2021-04-13', 212, 99, 22, 34, 6, 21, 3, 1000, 0, 0, 0),
+	(1, '00904038', '0', '0', '0', '2021-04-13', 212, 51, 4, 2, 2, 14, 1, NULL, 0, 0, 0),
+	(2, '01104000', '0', '0', '0', '2021-04-13', 220, 59, 4, 3, 2, 13, 3, 1750, 0, 0, 0),
+	(1, '01604010', '0', '0', '0', '2021-04-13', 212, 109, 24, 41, 1, 7, 1, 400, 0, 0, 0),
+	(1, '01604011', '0', '0', '0', '2021-04-13', 212, 109, 3, 2, 1, 7, 1, 400, 0, 0, 0),
+	(4, '01606677', '0', '0', '0', '2021-04-13', 213, 40, 9, 11, 5, 7, 1, 300, 0, 0, 0),
+	(4, '01606677', '0', '0', '0', '2021-04-13', 221, 40, 9, 11, 5, 7, 1, 200, 0, 0, 0),
+	(2, '01606872', '0', '0', '0', '2021-04-13', 217, 56, 4, 2, 6, 11, 1, 2500, 0, 0, 0),
+	(4, '01607602', '0', '0', '0', '2021-04-13', 213, 95, 3, 2, 11, 7, 1, 160, 0, 0, 0),
+	(4, '01607602', '0', '0', '0', '2021-04-13', 221, 95, 3, 2, 11, 7, 1, 200, 0, 0, 0),
+	(4, '01607603', '0', '0', '0', '2021-04-13', 221, 95, 9, 11, 11, 7, 1, 200, 0, 0, 0),
+	(1, '10104111', '0', '0', '0', '2021-04-13', 223, 90, 6, 44, 3, 7, 1, 500, 0, 0, 0),
+	(1, '10104751', '0', '0', '0', '2021-04-13', 212, 101, 3, 35, 4, 7, 1, 4000, 0, 0, 0),
+	(1, '10104752', '0', '0', '0', '2021-04-13', 212, 101, 16, 36, 4, 7, 1, 800, 0, 0, 0),
+	(1, '10104754', '0', '0', '0', '2021-04-13', 212, 101, 9, 37, 4, 7, 1, 800, 0, 0, 0),
+	(4, '10104754', '0', '0', '0', '2021-04-13', 244, 101, 9, 37, 4, 7, 1, 400, 0, 0, 0),
+	(2, '10104775', '0', '0', '0', '2021-04-13', 215, 101, 3, 35, 4, 12, 1, 2000, 0, 0, 0),
+	(3, '11707003', '0', '0', '0', '2021-04-13', 228, 138, 15, 48, 6, 17, 4, 32000, 0, 0, 0),
+	(3, '11812002', '0', '0', '0', '2021-04-13', 218, 132, 9, 11, 6, 7, 1, 2000, 0, 0, 0),
+	(3, '12003005', '0', '0', '0', '2021-04-13', 218, 133, 22, 34, 5, 7, 1, 1000, 0, 0, 0),
+	(3, '12003007', '0', '0', '0', '2021-04-13', 218, 133, 22, 34, 2, 7, 1, 1000, 0, 0, 0),
+	(3, '12003050', '0', '0', '0', '2021-04-13', 218, 105, 4, 2, 1, 7, 1, 4000, 0, 0, 0),
+	(3, '12003051', '0', '0', '0', '2021-04-13', 218, 105, 4, 14, 1, 7, 1, 2000, 0, 0, 0),
+	(3, '12005003', '0', '0', '0', '2021-04-13', 218, 133, 9, 11, 2, 7, 1, 2000, 0, 0, 0),
+	(4, '12506001', '0', '0', '0', '2021-04-13', 213, 61, 4, 2, 1, 16, 1, 200, 0, 0, 0),
+	(1, '12506010', '0', '0', '0', '2021-04-13', 214, 61, 4, 2, 1, 12, 1, 625, 0, 0, 0),
+	(2, '12506011', '0', '0', '0', '2021-04-13', 245, 61, 4, 14, 1, 12, 1, 1000, 0, 0, 0),
+	(1, '12506012', '0', '0', '0', '2021-04-13', 215, 61, 4, 2, 1, 11, 1, 10000, 0, 0, 0),
+	(1, '12506020', '0', '0', '0', '2021-04-13', 212, 61, 4, 2, 1, 7, 1, 3200, 0, 0, 0),
+	(1, '12506021', '0', '0', '0', '2021-04-13', 212, 61, 4, 14, 1, 7, 1, 3200, 0, 0, 0),
+	(4, '12506021', '0', '0', '0', '2021-04-13', 222, 61, 4, 14, 1, 7, 1, 80, 0, 0, 0),
+	(1, '20005001', '0', '0', '0', '2021-04-13', 212, 90, 3, 3, 3, 7, 3, 8000, 0, 0, 0),
+	(1, '20005002', '0', '0', '0', '2021-04-13', 212, 90, 3, 21, 3, 7, 3, 4800, 0, 0, 0),
+	(1, '20005007', '0', '0', '0', '2021-04-13', 212, 90, 9, 26, 3, 7, 1, 1200, 0, 0, 0),
+	(4, '20005007', '0', '0', '0', '2021-04-13', 222, 90, 9, 26, 3, 7, 1, 200, 0, 0, 0),
+	(2, '47801420', '0', '0', '0', '2021-04-13', 217, 60, 1, 1, 8, 10, 1, 60000, 0, 0, 0),
+	(2, '47801421', '0', '0', '0', '2021-04-13', 217, 60, 4, 2, 8, 10, 1, 60000, 0, 0, 0),
+	(2, '47801892', '0', '0', '0', '2021-04-13', 220, 57, 9, 16, 1, 9, 1, 1600, 0, 0, 0),
+	(1, '603004002', '0', '0', '0', '2021-04-13', 212, 88, 4, 3, 1, 7, 1, 1200, 0, 0, 0),
+	(4, '603004002', '0', '0', '0', '2021-04-13', 213, 88, 4, 3, 1, 7, 1, 240, 0, 0, 0),
+	(2, '603004023', '0', '0', '0', '2021-04-13', 214, 88, 4, 3, 1, 12, 1, 1250, 0, 0, 0),
+	(2, '603004023', '0', '0', '0', '2021-04-13', 215, 88, 4, 3, 1, 12, 1, 5000, 0, 0, 0),
+	(1, '603005750', '0', '0', '0', '2021-04-13', 212, 92, 2, 1, 1, 4, 1, 600, 0, 0, 0),
+	(1, '603005751', '0', '0', '0', '2021-04-13', 212, 92, 4, 2, 1, 4, 1, 1200, 0, 0, 0),
+	(1, '603005752', '0', '0', '0', '2021-04-13', 212, 92, 9, 11, 1, 4, 1, 400, 0, 0, 0),
+	(1, '9900004020', '0', '0', '0', '2021-04-13', 230, 53, 3, 2, 1, 7, 1, 4000, 0, 0, 0),
+	(1, '9900009111', '0', '0', '0', '2021-04-13', 230, 93, 3, 27, 2, 7, 1, 2000, 0, 0, 0);
 /*!40000 ALTER TABLE `pendiente_empaque` ENABLE KEYS */;
 
 -- Volcando estructura para tabla facturacion_plasencia.sample_datas
-DROP TABLE IF EXISTS `sample_datas`;
 CREATE TABLE IF NOT EXISTS `sample_datas` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `first_name` varchar(50) DEFAULT NULL,
@@ -2609,7 +2680,6 @@ INSERT INTO `sample_datas` (`id`, `first_name`, `last_name`, `gender`, `created_
 /*!40000 ALTER TABLE `sample_datas` ENABLE KEYS */;
 
 -- Volcando estructura para tabla facturacion_plasencia.tabla_codigo_programacions
-DROP TABLE IF EXISTS `tabla_codigo_programacions`;
 CREATE TABLE IF NOT EXISTS `tabla_codigo_programacions` (
   `codigo` varchar(50) DEFAULT NULL,
   `presentacion` varchar(50) DEFAULT NULL,
@@ -2627,7 +2697,6 @@ DELETE FROM `tabla_codigo_programacions`;
 /*!40000 ALTER TABLE `tabla_codigo_programacions` ENABLE KEYS */;
 
 -- Volcando estructura para tabla facturacion_plasencia.tbl_customer
-DROP TABLE IF EXISTS `tbl_customer`;
 CREATE TABLE IF NOT EXISTS `tbl_customer` (
   `CustomerID` int(11) NOT NULL AUTO_INCREMENT,
   `CustomerName` varchar(50) DEFAULT NULL,
@@ -2645,7 +2714,6 @@ DELETE FROM `tbl_customer`;
 /*!40000 ALTER TABLE `tbl_customer` ENABLE KEYS */;
 
 -- Volcando estructura para tabla facturacion_plasencia.tipo_empaques
-DROP TABLE IF EXISTS `tipo_empaques`;
 CREATE TABLE IF NOT EXISTS `tipo_empaques` (
   `id_tipo_empaque` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
   `tipo_empaque` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
@@ -2775,7 +2843,6 @@ INSERT INTO `tipo_empaques` (`id_tipo_empaque`, `tipo_empaque`, `created_at`, `u
 /*!40000 ALTER TABLE `tipo_empaques` ENABLE KEYS */;
 
 -- Volcando estructura para tabla facturacion_plasencia.users
-DROP TABLE IF EXISTS `users`;
 CREATE TABLE IF NOT EXISTS `users` (
   `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
   `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
@@ -2794,7 +2861,6 @@ DELETE FROM `users`;
 /*!40000 ALTER TABLE `users` ENABLE KEYS */;
 
 -- Volcando estructura para tabla facturacion_plasencia.vehicles
-DROP TABLE IF EXISTS `vehicles`;
 CREATE TABLE IF NOT EXISTS `vehicles` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `registration_number` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
@@ -2816,7 +2882,6 @@ DELETE FROM `vehicles`;
 /*!40000 ALTER TABLE `vehicles` ENABLE KEYS */;
 
 -- Volcando estructura para tabla facturacion_plasencia.vitola_productos
-DROP TABLE IF EXISTS `vitola_productos`;
 CREATE TABLE IF NOT EXISTS `vitola_productos` (
   `id_vitola` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
   `vitola` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
@@ -3339,8 +3404,25 @@ INSERT INTO `vitola_productos` (`id_vitola`, `vitola`, `created_at`, `updated_at
 	(508, '5-1/8X55', '2021-04-28 20:52:06', '2021-04-28 20:52:06');
 /*!40000 ALTER TABLE `vitola_productos` ENABLE KEYS */;
 
+-- Volcando estructura para procedimiento facturacion_plasencia.actualizar_contrasenia
+DELIMITER //
+CREATE PROCEDURE `actualizar_contrasenia`(
+	IN `pa_id` INT,
+	IN `pa_email` VARCHAR(50),
+	IN `pa_password` VARCHAR(200)
+)
+BEGIN
+             UPDATE users 
+                SET 
+                      users.email = pa_email, 
+                      users.password = pa_password
+               
+        
+                WHERE users.id = pa_id;
+END//
+DELIMITER ;
+
 -- Volcando estructura para procedimiento facturacion_plasencia.actualizar_productos
-DROP PROCEDURE IF EXISTS `actualizar_productos`;
 DELIMITER //
 CREATE PROCEDURE `actualizar_productos`(
 	IN `id` INT,
@@ -3388,8 +3470,39 @@ WHERE clase_productos.id_producto = id;
 END//
 DELIMITER ;
 
+-- Volcando estructura para procedimiento facturacion_plasencia.actualizar_usuarios
+DELIMITER //
+CREATE PROCEDURE `actualizar_usuarios`(
+	IN `pa_id` INT,
+	IN `pa_codigo` INT,
+	IN `pa_nombre` VARCHAR(50),
+	IN `pa_rol` INT
+)
+BEGIN
+             UPDATE users 
+                SET 
+                      users.name = pa_nombre, 
+                      users.codigo = pa_codigo,
+                      users.rol =pa_rol
+                      
+        
+                WHERE users.id = pa_id;
+END//
+DELIMITER ;
+
+-- Volcando estructura para procedimiento facturacion_plasencia.agregar_lista_caja
+DELIMITER //
+CREATE PROCEDURE `agregar_lista_caja`(
+	IN `pa_codigo` VARCHAR(50),
+	IN `pa_producto` VARCHAR(255),
+	IN `pa_marca` VARCHAR(50)
+)
+BEGIN
+INSERT INTO lista_cajas (lista_cajas.codigo,lista_cajas.productoServicio,lista_cajas.marca) VALUES (pa_codigo,pa_producto,pa_marca);
+END//
+DELIMITER ;
+
 -- Volcando estructura para procedimiento facturacion_plasencia.buscar_capa
-DROP PROCEDURE IF EXISTS `buscar_capa`;
 DELIMITER //
 CREATE PROCEDURE `buscar_capa`(
 	IN `capa` VARCHAR(50)
@@ -3406,8 +3519,21 @@ END if;
 END//
 DELIMITER ;
 
+-- Volcando estructura para procedimiento facturacion_plasencia.buscar_lista_cajas
+DELIMITER //
+CREATE PROCEDURE `buscar_lista_cajas`(
+	IN `pa_nombre` VARCHAR(50)
+)
+BEGIN
+SELECT lista_cajas.codigo,lista_cajas.productoServicio,lista_cajas.marca
+FROM lista_cajas
+WHERE lista_cajas.codigo LIKE CONCAT("%",pa_nombre,"%") OR
+lista_cajas.productoServicio LIKE CONCAT("%",pa_nombre,"%") OR
+lista_cajas.marca LIKE CONCAT("%",pa_nombre,"%") ;
+END//
+DELIMITER ;
+
 -- Volcando estructura para procedimiento facturacion_plasencia.buscar_marca
-DROP PROCEDURE IF EXISTS `buscar_marca`;
 DELIMITER //
 CREATE PROCEDURE `buscar_marca`(
 	IN `marca` VARCHAR(50)
@@ -3424,7 +3550,6 @@ END//
 DELIMITER ;
 
 -- Volcando estructura para procedimiento facturacion_plasencia.buscar_nombre
-DROP PROCEDURE IF EXISTS `buscar_nombre`;
 DELIMITER //
 CREATE PROCEDURE `buscar_nombre`(
 	IN `nombre` VARCHAR(50)
@@ -3441,7 +3566,6 @@ END//
 DELIMITER ;
 
 -- Volcando estructura para procedimiento facturacion_plasencia.buscar_pedidos
-DROP PROCEDURE IF EXISTS `buscar_pedidos`;
 DELIMITER //
 CREATE PROCEDURE `buscar_pedidos`(
 	IN `item` VARCHAR(50)
@@ -3477,7 +3601,6 @@ END//
 DELIMITER ;
 
 -- Volcando estructura para procedimiento facturacion_plasencia.buscar_pendiente
-DROP PROCEDURE IF EXISTS `buscar_pendiente`;
 DELIMITER //
 CREATE PROCEDURE `buscar_pendiente`(
 	IN `nombre` VARCHAR(50),
@@ -3589,8 +3712,142 @@ END if;
 END//
 DELIMITER ;
 
+-- Volcando estructura para procedimiento facturacion_plasencia.buscar_pendiente_empaque
+DELIMITER //
+CREATE PROCEDURE `buscar_pendiente_empaque`(
+	IN `nombre` VARCHAR(50),
+	IN `fechade` VARCHAR(50),
+	IN `fechahasta` VARCHAR(50)
+)
+BEGIN
+if nombre="" && fechade="" && fechahasta="" then
+
+
+SELECT categoria.categoria AS categoria, pendiente_empaque.item AS item,pendiente_empaque.orden_del_sitema AS orden_del_sitema,pendiente_empaque.observacion AS observacion,pendiente_empaque.presentacion AS presentacion ,pendiente_empaque.mes AS mes ,orden_productos.orden AS orden, marca_productos.marca AS marca,vitola_productos.vitola AS vitola, 
+nombre_productos.nombre AS nombre, capa_productos.capa AS capa,
+cellos.anillo AS anillo,cellos.cello AS cello, cellos.upc AS upc, pendiente_empaque.pendiente as pendiente_empaque,pendiente_empaque.factura_del_mes as factura_del_mes, pendiente_empaque.cantidad_enviada_mes AS cantidad_enviada_mes, pendiente_empaque.saldo AS saldo, tipo_empaques.tipo_empaque AS tipo_empaque
+FROM categoria, clase_productos, marca_productos, vitola_productos,nombre_productos, capa_productos, orden_productos,cellos,
+tipo_empaques, pendiente_empaque
+WHERE clase_productos.id_vitola = vitola_productos.id_vitola AND clase_productos.id_capa = capa_productos.id_capa AND pendiente_empaque.capa = capa_productos.id_capa and
+ clase_productos.id_nombre = nombre_productos.id_nombre AND  clase_productos.id_marca = marca_productos.id_marca AND cellos.id_cello=clase_productos.id_cello and
+   clase_productos.id_tipo_empaque = tipo_empaques.id_tipo_empaque AND pendiente_empaque.categoria = categoria.id_categoria 
+	GROUP BY pendiente_empaque.item, pendiente_empaque.orden, pendiente_empaque.categoria;
+	
+ELSE  
+
+if fechade = ""   && fechahasta = ""  && nombre != "" then
+
+SELECT categoria.categoria AS categoria, pendiente_empaque.item AS item,pendiente_empaque.orden_del_sitema AS orden_del_sitema,pendiente_empaque.observacion AS observacion,pendiente_empaque.presentacion AS presentacion ,pendiente_empaque.mes AS mes ,orden_productos.orden AS orden, marca_productos.marca AS marca,vitola_productos.vitola AS vitola, 
+nombre_productos.nombre AS nombre, capa_productos.capa AS capa,
+cellos.anillo AS anillo,cellos.cello AS cello, cellos.upc AS upc, pendiente_empaque.pendiente as pendiente_empaque,pendiente_empaque.factura_del_mes as factura_del_mes, pendiente_empaque.cantidad_enviada_mes AS cantidad_enviada_mes, pendiente_empaque.saldo AS saldo, tipo_empaques.tipo_empaque AS tipo_empaque
+FROM categoria, clase_productos, marca_productos, vitola_productos,nombre_productos, capa_productos, orden_productos,cellos,
+tipo_empaques, pendiente_empaque
+WHERE clase_productos.id_vitola = vitola_productos.id_vitola AND clase_productos.id_capa = capa_productos.id_capa AND pendiente_empaque.capa = capa_productos.id_capa and
+ clase_productos.id_nombre = nombre_productos.id_nombre AND  clase_productos.id_marca = marca_productos.id_marca AND cellos.id_cello=clase_productos.id_cello and
+   clase_productos.id_tipo_empaque = tipo_empaques.id_tipo_empaque AND pendiente_empaque.categoria = categoria.id_categoria  and
+  (nombre_productos.nombre LIKE  CONCAT("%",nombre, "%") or  capa_productos.capa LIKE  CONCAT("%",nombre, "%") or  marca_productos.marca LIKE  CONCAT("%",nombre, "%") )
+
+	GROUP BY pendiente_empaque.item, pendiente_empaque.orden, pendiente_empaque.categoria;
+	
+	
+	
+	else
+	if fechade != ""   && fechahasta != ""  && nombre = "" then
+	
+	
+	
+SELECT categoria.categoria AS categoria, pendiente_empaque.item AS item,pendiente_empaque.orden_del_sitema AS orden_del_sitema,
+pendiente_empaque.observacion AS observacion,pendiente_empaque.presentacion AS presentacion ,pendiente_empaque.mes AS mes ,
+orden_productos.orden AS orden, marca_productos.marca AS marca,vitola_productos.vitola AS vitola, nombre_productos.nombre AS nombre
+, capa_productos.capa AS capa,cellos.anillo AS anillo,cellos.cello AS cello, cellos.upc AS upc, pendiente_empaque.pendiente 
+as pendiente_empaque, pendiente_empaque.factura_del_mes as factura_del_mes, pendiente_empaque.cantidad_enviada_mes AS cantidad_enviada_mes,
+ pendiente_empaque.saldo AS saldo, tipo_empaques.tipo_empaque AS tipo_empaque
+FROM categoria, clase_productos, marca_productos, vitola_productos,nombre_productos, capa_productos, orden_productos,cellos,
+tipo_empaques, pendiente_empaque
+WHERE clase_productos.id_vitola = vitola_productos.id_vitola AND clase_productos.id_capa = capa_productos.id_capa 
+AND pendiente_empaque.capa = capa_productos.id_capa and clase_productos.id_nombre = nombre_productos.id_nombre AND 
+ clase_productos.id_marca = marca_productos.id_marca AND cellos.id_cello=clase_productos.id_cello and
+   clase_productos.id_tipo_empaque = tipo_empaques.id_tipo_empaque AND pendiente_empaque.categoria = categoria.id_categoria 
+	 AND  pendiente_empaque.mes between  STR_TO_DATE( fechade,"%Y-%m-%d") AND STR_TO_DATE(  fechahasta, "%Y-%m-%d") 
+                      
+  
+
+GROUP BY pendiente_empaque.item, pendiente_empaque.orden, pendiente_empaque.categoria;
+		else
+	
+	if fechade != ""   && fechahasta = ""  && nombre = "" then
+	
+	
+	SELECT categoria.categoria AS categoria, pendiente_empaque.item AS item,pendiente_empaque.orden_del_sitema ,
+	pendiente_empaque.observacion AS observacion,pendiente_empaque.presentacion  AS presentacion,pendiente_empaque.mes AS mes 
+	,orden_productos.orden AS orden, marca_productos.marca AS marca,vitola_productos.vitola AS vitola, 
+nombre_productos.nombre AS nombre, capa_productos.capa AS capa,
+cellos.anillo AS anillo,cellos.cello AS cello, cellos.upc AS upc, pendiente_empaque.pendiente AS pendiente_empaque,pendiente_empaque.factura_del_mes AS factura_del_mes,
+ pendiente_empaque.cantidad_enviada_mes AS cantidad_enviada_mes, pendiente_empaque.saldo AS saldo , tipo_empaques.tipo_empaque AS tipo_empaque
+FROM categoria, clase_productos, marca_productos, vitola_productos,nombre_productos, capa_productos, orden_productos,cellos,
+tipo_empaques, pendiente_empaque
+WHERE clase_productos.id_vitola = vitola_productos.id_vitola AND clase_productos.id_capa = capa_productos.id_capa AND pendiente_empaque.capa = capa_productos.id_capa and
+ clase_productos.id_nombre = nombre_productos.id_nombre AND  clase_productos.id_marca = marca_productos.id_marca AND cellos.id_cello=clase_productos.id_cello and
+   clase_productos.id_tipo_empaque = tipo_empaques.id_tipo_empaque AND pendiente_empaque.categoria = categoria.id_categoria AND pendiente_empaque.nombre = nombre_productos.id_nombre and
+    pendiente_empaque.capa = capa_productos.id_capa AND pendiente_empaque.marca = marca_productos.id_marca AND  pendiente_empaque.mes = STR_TO_DATE( fechade,"%Y-%m-%d")
+                  
+	GROUP BY pendiente_empaque.item, pendiente_empaque.orden, pendiente_empaque.categoria;
+	
+	
+		else
+	
+	if fechade = ""   && fechahasta != ""  && nombre = "" then
+	
+	
+SELECT categoria.categoria AS categoria, pendiente_empaque.item AS item,pendiente_empaque.orden_del_sitema AS orden_del_sitema,pendiente_empaque.observacion AS observacion,pendiente_empaque.presentacion AS presentacion ,pendiente_empaque.mes AS mes ,orden_productos.orden AS orden, marca_productos.marca AS marca,vitola_productos.vitola AS vitola, 
+nombre_productos.nombre AS nombre, capa_productos.capa AS capa,
+cellos.anillo AS anillo,cellos.cello AS cello, cellos.upc AS upc, pendiente_empaque.pendiente as pendiente_empaque,
+pendiente_empaque.factura_del_mes as factura_del_mes, pendiente_empaque.cantidad_enviada_mes AS cantidad_enviada_mes,
+ pendiente_empaque.saldo AS saldo, tipo_empaques.tipo_empaque AS tipo_empaque
+FROM categoria, clase_productos, marca_productos, vitola_productos,nombre_productos, capa_productos, orden_productos,cellos,
+tipo_empaques, pendiente_empaque
+WHERE clase_productos.id_vitola = vitola_productos.id_vitola AND clase_productos.id_capa = capa_productos.id_capa AND pendiente_empaque.capa = capa_productos.id_capa and
+ clase_productos.id_nombre = nombre_productos.id_nombre AND  clase_productos.id_marca = marca_productos.id_marca AND cellos.id_cello=clase_productos.id_cello and
+   clase_productos.id_tipo_empaque = tipo_empaques.id_tipo_empaque AND pendiente_empaque.categoria = categoria.id_categoria 
+	AND  pendiente_empaque.mes = STR_TO_DATE(  fechahasta, "%Y-%m-%d") 
+                      
+  
+
+GROUP BY pendiente_empaque.item, pendiente_empaque.orden, pendiente_empaque.categoria;
+	
+	else
+	if fechade != "" && fechahasta != ""  && nombre != "" then 
+	
+		
+	
+SELECT categoria.categoria AS categoria, pendiente_empaque.item AS item,pendiente_empaque.orden_del_sitema AS orden_del_sitema,
+pendiente_empaque.observacion AS observacion,pendiente_empaque.presentacion AS presentacion ,pendiente_empaque.mes AS mes ,
+orden_productos.orden AS orden, marca_productos.marca AS marca,vitola_productos.vitola AS vitola, 
+nombre_productos.nombre AS nombre, capa_productos.capa AS capa,
+cellos.anillo AS anillo,cellos.cello AS cello, cellos.upc AS upc, pendiente_empaque.pendiente as pendiente_empaque,pendiente_empaque.factura_del_mes as factura_del_mes, pendiente_empaque.cantidad_enviada_mes AS cantidad_enviada_mes, pendiente_empaque.saldo AS saldo, tipo_empaques.tipo_empaque AS tipo_empaque
+FROM categoria, clase_productos, marca_productos, vitola_productos,nombre_productos, capa_productos, orden_productos,cellos,
+tipo_empaques, pendiente_empaque
+WHERE clase_productos.id_vitola = vitola_productos.id_vitola AND clase_productos.id_capa = capa_productos.id_capa AND pendiente_empaque.capa = capa_productos.id_capa and
+ clase_productos.id_nombre = nombre_productos.id_nombre AND  clase_productos.id_marca = marca_productos.id_marca AND cellos.id_cello=clase_productos.id_cello and
+   clase_productos.id_tipo_empaque = tipo_empaques.id_tipo_empaque AND pendiente_empaque.categoria = categoria.id_categoria 
+   AND pendiente_empaque.mes between  STR_TO_DATE( fechade,"%Y-%m-%d") AND STR_TO_DATE(  fechahasta, "%Y-%m-%d") AND 
+   (nombre_productos.nombre LIKE CONCAT("%",nombre, "%") or  capa_productos.capa LIKE  CONCAT("%",nombre, "%") or  marca_productos.marca LIKE  CONCAT("%",nombre, "%") )   
+	GROUP BY pendiente_empaque.item, pendiente_empaque.orden, pendiente_empaque.categoria;
+	
+	else
+	
+	SELECT "";
+	
+	END if;
+	END if;
+		END if;
+			END if;
+END if;	
+END if;	
+END//
+DELIMITER ;
+
 -- Volcando estructura para procedimiento facturacion_plasencia.buscar_producto
-DROP PROCEDURE IF EXISTS `buscar_producto`;
 DELIMITER //
 CREATE PROCEDURE `buscar_producto`(
 	IN `todo` VARCHAR(50)
@@ -3627,7 +3884,6 @@ END//
 DELIMITER ;
 
 -- Volcando estructura para procedimiento facturacion_plasencia.buscar_tipo_empaque
-DROP PROCEDURE IF EXISTS `buscar_tipo_empaque`;
 DELIMITER //
 CREATE PROCEDURE `buscar_tipo_empaque`(
 	IN `tipo` VARCHAR(50)
@@ -3642,7 +3898,6 @@ END//
 DELIMITER ;
 
 -- Volcando estructura para procedimiento facturacion_plasencia.buscar_vitola
-DROP PROCEDURE IF EXISTS `buscar_vitola`;
 DELIMITER //
 CREATE PROCEDURE `buscar_vitola`(
 	IN `vitola` VARCHAR(50)
@@ -3657,8 +3912,20 @@ END if;
 END//
 DELIMITER ;
 
+-- Volcando estructura para procedimiento facturacion_plasencia.eliminar_usuario
+DELIMITER //
+CREATE PROCEDURE `eliminar_usuario`(
+	IN `pa_id_usuario` INT
+)
+BEGIN
+        
+        DELETE FROM users 
+        WHERE users.id = pa_id_usuario;
+                
+        END//
+DELIMITER ;
+
 -- Volcando estructura para procedimiento facturacion_plasencia.ingresar_presentacion
-DROP PROCEDURE IF EXISTS `ingresar_presentacion`;
 DELIMITER //
 CREATE PROCEDURE `ingresar_presentacion`()
 BEGIN
@@ -3676,7 +3943,6 @@ END//
 DELIMITER ;
 
 -- Volcando estructura para procedimiento facturacion_plasencia.insertar_capa
-DROP PROCEDURE IF EXISTS `insertar_capa`;
 DELIMITER //
 CREATE PROCEDURE `insertar_capa`(
 	IN `capa` VARCHAR(50)
@@ -3687,7 +3953,6 @@ END//
 DELIMITER ;
 
 -- Volcando estructura para procedimiento facturacion_plasencia.insertar_clase_producto
-DROP PROCEDURE IF EXISTS `insertar_clase_producto`;
 DELIMITER //
 CREATE PROCEDURE `insertar_clase_producto`(
 	IN `item` VARCHAR(50),
@@ -3736,7 +4001,6 @@ END//
 DELIMITER ;
 
 -- Volcando estructura para procedimiento facturacion_plasencia.insertar_detalle_clase_producto
-DROP PROCEDURE IF EXISTS `insertar_detalle_clase_producto`;
 DELIMITER //
 CREATE PROCEDURE `insertar_detalle_clase_producto`(
 	IN `item` VARCHAR(50),
@@ -3775,7 +4039,6 @@ END//
 DELIMITER ;
 
 -- Volcando estructura para procedimiento facturacion_plasencia.insertar_marca
-DROP PROCEDURE IF EXISTS `insertar_marca`;
 DELIMITER //
 CREATE PROCEDURE `insertar_marca`(
 	IN `marca` VARCHAR(100)
@@ -3786,7 +4049,6 @@ BEGIN
 DELIMITER ;
 
 -- Volcando estructura para procedimiento facturacion_plasencia.insertar_nombre
-DROP PROCEDURE IF EXISTS `insertar_nombre`;
 DELIMITER //
 CREATE PROCEDURE `insertar_nombre`(
 	IN `nombre` VARCHAR(50)
@@ -3797,7 +4059,6 @@ END//
 DELIMITER ;
 
 -- Volcando estructura para procedimiento facturacion_plasencia.insertar_pendente_empaque
-DROP PROCEDURE IF EXISTS `insertar_pendente_empaque`;
 DELIMITER //
 CREATE PROCEDURE `insertar_pendente_empaque`(
 	IN `fecha` VARCHAR(50)
@@ -3818,7 +4079,6 @@ END//
 DELIMITER ;
 
 -- Volcando estructura para procedimiento facturacion_plasencia.insertar_pendiente
-DROP PROCEDURE IF EXISTS `insertar_pendiente`;
 DELIMITER //
 CREATE PROCEDURE `insertar_pendiente`(
 	IN `fecha` DATE
@@ -3843,7 +4103,6 @@ END//
 DELIMITER ;
 
 -- Volcando estructura para procedimiento facturacion_plasencia.insertar_tipo
-DROP PROCEDURE IF EXISTS `insertar_tipo`;
 DELIMITER //
 CREATE PROCEDURE `insertar_tipo`(
 	IN `tipo` VARCHAR(50)
@@ -3854,7 +4113,6 @@ END//
 DELIMITER ;
 
 -- Volcando estructura para procedimiento facturacion_plasencia.insertar_vitola
-DROP PROCEDURE IF EXISTS `insertar_vitola`;
 DELIMITER //
 CREATE PROCEDURE `insertar_vitola`(
 	IN `vitola` VARCHAR(50)
@@ -3865,7 +4123,6 @@ END//
 DELIMITER ;
 
 -- Volcando estructura para procedimiento facturacion_plasencia.mostrar_clase_paradetalle
-DROP PROCEDURE IF EXISTS `mostrar_clase_paradetalle`;
 DELIMITER //
 CREATE PROCEDURE `mostrar_clase_paradetalle`(
 	IN `item` VARCHAR(50)
@@ -3884,7 +4141,6 @@ END//
 DELIMITER ;
 
 -- Volcando estructura para procedimiento facturacion_plasencia.mostrar_datos_para_editar
-DROP PROCEDURE IF EXISTS `mostrar_datos_para_editar`;
 DELIMITER //
 CREATE PROCEDURE `mostrar_datos_para_editar`(
 	IN `id` INT
@@ -3905,7 +4161,6 @@ END//
 DELIMITER ;
 
 -- Volcando estructura para procedimiento facturacion_plasencia.mostrar_detalles_productos
-DROP PROCEDURE IF EXISTS `mostrar_detalles_productos`;
 DELIMITER //
 CREATE PROCEDURE `mostrar_detalles_productos`()
 BEGIN
@@ -3922,7 +4177,6 @@ END//
 DELIMITER ;
 
 -- Volcando estructura para procedimiento facturacion_plasencia.mostrar_pedido
-DROP PROCEDURE IF EXISTS `mostrar_pedido`;
 DELIMITER //
 CREATE PROCEDURE `mostrar_pedido`()
 BEGIN
@@ -3938,7 +4192,6 @@ END//
 DELIMITER ;
 
 -- Volcando estructura para procedimiento facturacion_plasencia.mostrar_pendiente
-DROP PROCEDURE IF EXISTS `mostrar_pendiente`;
 DELIMITER //
 CREATE PROCEDURE `mostrar_pendiente`()
 BEGIN
@@ -3958,26 +4211,24 @@ END//
 DELIMITER ;
 
 -- Volcando estructura para procedimiento facturacion_plasencia.mostrar_pendiente_empaque
-DROP PROCEDURE IF EXISTS `mostrar_pendiente_empaque`;
 DELIMITER //
 CREATE PROCEDURE `mostrar_pendiente_empaque`()
 BEGIN
 
-SELECT categoria.categoria AS categoria, pendiente.item AS item,0 AS orden_del_sitema,0 AS observacion,0 AS presentacion ,pendiente.mes AS mes ,orden_productos.orden AS orden, marca_productos.marca AS marca,vitola_productos.vitola AS vitola, 
+SELECT categoria.categoria AS categoria, pendiente_empaque.item AS item,pendiente_empaque.orden_del_sitema AS orden_del_sitema,pendiente_empaque.observacion AS observacion,pendiente_empaque.presentacion AS presentacion ,pendiente_empaque.mes AS mes ,orden_productos.orden AS orden, marca_productos.marca AS marca,vitola_productos.vitola AS vitola, 
 nombre_productos.nombre AS nombre, capa_productos.capa AS capa,
-cellos.anillo AS anillo,cellos.cello AS cello, cellos.upc AS upc, pendiente.pendiente as pendiente,0 as factura_del_mes, 0 AS cantidad_enviada_mes, 0 AS saldo, tipo_empaques.tipo_empaque AS tipo_empaque
+cellos.anillo AS anillo,cellos.cello AS cello, cellos.upc AS upc, pendiente_empaque.pendiente as pendiente_empaque,pendiente_empaque.factura_del_mes as factura_del_mes, pendiente_empaque.cantidad_enviada_mes AS cantidad_enviada_mes, pendiente_empaque.saldo AS saldo, tipo_empaques.tipo_empaque AS tipo_empaque
 FROM categoria, clase_productos, marca_productos, vitola_productos,nombre_productos, capa_productos, orden_productos,cellos,
-tipo_empaques, pendiente
-WHERE clase_productos.id_vitola = vitola_productos.id_vitola AND clase_productos.id_capa = capa_productos.id_capa AND pendiente.capa = capa_productos.id_capa and
+tipo_empaques, pendiente_empaque
+WHERE clase_productos.id_vitola = vitola_productos.id_vitola AND clase_productos.id_capa = capa_productos.id_capa AND pendiente_empaque.capa = capa_productos.id_capa and
  clase_productos.id_nombre = nombre_productos.id_nombre AND  clase_productos.id_marca = marca_productos.id_marca AND cellos.id_cello=clase_productos.id_cello and
-   clase_productos.id_tipo_empaque = tipo_empaques.id_tipo_empaque AND pendiente.categoria = categoria.id_categoria 
-	GROUP BY pendiente.item, pendiente.orden, pendiente.categoria
+   clase_productos.id_tipo_empaque = tipo_empaques.id_tipo_empaque AND pendiente_empaque.categoria = categoria.id_categoria 
+	GROUP BY pendiente_empaque.item, pendiente_empaque.orden, pendiente_empaque.categoria
 	;
 END//
 DELIMITER ;
 
 -- Volcando estructura para procedimiento facturacion_plasencia.mostrar_productos
-DROP PROCEDURE IF EXISTS `mostrar_productos`;
 DELIMITER //
 CREATE PROCEDURE `mostrar_productos`()
 BEGIN
