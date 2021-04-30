@@ -42,18 +42,8 @@
 </ul>
 
     <div class="container">
-<<<<<<< Updated upstream
             <form method="post" enctype="multipart/form-data" action="{{ url('/importar_inv_cajas') }}" >
                 @csrf        
-=======
-      
-
-
-            
-       
-
-             
->>>>>>> Stashed changes
                 <div class="row" style="width:100%;">
 
                 <div class="col-md-8" >

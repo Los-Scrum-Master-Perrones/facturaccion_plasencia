@@ -22,11 +22,19 @@
     </br>
     <ul class="nav justify-content-center">
 
-        <li class="nav-item">
+    <li class="nav-item">
+            <a style="color:black; font-size:16px;" href="pendiente"><strong>Pendiente</strong></a>
+        </li>
+
+         <li class="nav-item">
             <a style="color:black; font-size:16px;" href="productos"><strong>Productos</strong></a>
         </li>
+        
         <li class="nav-item">
-            <a style="color:black; font-size:16px;" href="pendiente"><strong>Pendiente</strong></a>
+            <a style="color:black; font-size:16px;" href="import_excel"><strong>Importar pedido</strong></a>
+        </li>
+        <li class="nav-item">
+            <a style="color:black; font-size:16px;" href="index_bodega_proceso"><strong>Reporte</strong></a>
         </li>
 
     </ul>
