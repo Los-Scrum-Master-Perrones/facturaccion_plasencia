@@ -1,8 +1,10 @@
+<!DOCTYPE html>
+<html>
+  
 @extends('principal')
 @section('content')
 
-<!DOCTYPE html>
-<html>
+
 
 <head>
     <title></title>
@@ -40,21 +42,41 @@
 </ul>
 
     <div class="container">
+<<<<<<< Updated upstream
             <form method="post" enctype="multipart/form-data" action="{{ url('/importar_inv_cajas') }}" >
                 @csrf        
+=======
+      
+
+
+            
+       
+
+             
+>>>>>>> Stashed changes
                 <div class="row" style="width:100%;">
+
                 <div class="col-md-8" >
                 <input type="file" name="select_file" id="select_file" class="btn botonprincipal form-control" />        
                 </div>
-                
+                  
                 <div class="col-md-2">
+                <form method="post" enctype="multipart/form-data" action="{{ url('/importar_cajas') }}" >
+                @csrf  
                 <input type="submit" name="upload" class="btn botonprincipal form-control" value="Importar">
-                </div>
+               </form>
+                 </div>
+             
+
+               
                 <div class="col-md-2">
+                     <form method="get" enctype="multipart/form-data" action="{{ url('/anadir_inventario') }}" >
+                @csrf 
                 <input type="submit" name="upload" class="btn botonprincipal form-control" value="Añadir a inventario">
+               </form>
                 </div>
+              
           </div>
-          </form>
   
 
 

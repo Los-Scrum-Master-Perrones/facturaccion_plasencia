@@ -80,6 +80,39 @@ class CajasController extends Controller
     return view('lista_cajas')->with('listacajas', $listacajas);     
         }  
 
+        
+
+
+   
+
+
+        function anadir_inventario(Request $request)  {      
+             
+            $listacajas = DB::table('lista_cajas')->get(); 
+
+            $c = count($listacajas);
+
+            for( $i=0;$i<$c;$i++ )
+            {
+                $nuevoinventario[]= [
+                    'codigo'        => $codigo[$i],
+                    'descripcion'          => $descripcion[$i],
+                    'lote_origen'          => $lote_origen[$i],
+                    'lote_destino'          => $lote_destino[$i],
+                    'cantidad'          => $cantidad[$i],
+                    'costo_u'          => $costo_u[$i],
+                    'subtotal'          => $subtotal[$i],
+                ];
+            }
+
+            HorariosNew::create($nuevoinventario);
+
+                  
+    return view('lista_cajas')->with('listacajas', $listacajas);     
+        }  
+
+        
+
 
 
 
