@@ -30,12 +30,8 @@ use Importable;
 
         $cajas = new Cajas([
             'codigo' => $row[0],
-            'descripcion' => $row[4],
-            'lote_origen' => $row[12],
-            'lote_destino' => $row[14],
-            'cantidad' => $row[17],
-            'costo_u' => $row[19],
-            'subtotal' => $row[23]            
+            'descripcion' => $row[1],
+            'marca' => $row[2]           
         ]);
     }
         

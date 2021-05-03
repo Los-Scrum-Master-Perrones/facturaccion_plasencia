@@ -17,7 +17,8 @@ use Importable;
     */
     public function model(array $row)
     {
-      if($row[0] == 'Código' || $row[0] == null ){
+      if($row[0] == 'Código' || $row[0] == null ||$row[0] == ' - CAJAS DE MADERA'||$row[0] == 'Tabacos de Oriente, S. De R. L.  - El Paraiso'||
+      $row[0] == 'LISTADO DE PRODUCTOS POR DEPARTAMENTOS Y CATEGORIAS'){
             $inventariocajas = null;
         }
         else{

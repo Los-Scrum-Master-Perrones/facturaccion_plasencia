@@ -29,7 +29,7 @@
             <a style="color:black; font-size:16px;" href="import_excel"><strong>Importar pedido</strong></a>
         </li>
         <li class="nav-item">
-            <a style="color:black; font-size:16px;" href="index_bodega_proceso"><strong>Reporte</strong></a>
+            <a style="color:black; font-size:16px;" href="inventario_cajas"><strong>Reporte</strong></a>
         </li>
     </ul>
     </br>

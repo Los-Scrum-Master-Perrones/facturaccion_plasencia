@@ -13,6 +13,8 @@ use App\Http\Livewire\DatosProductos;
 use App\Http\Livewire\Productos;
 use App\Http\Livewire\PendienteEmpaque;
 use Illuminate\Support\Facades\Auth;
+use App\Http\Livewire\ImportarProductoBodega;
+use App\Http\Livewire\InventarioCajas;
 
 /*
 |--------------------------------------------------------------------------
@@ -70,6 +72,12 @@ Route::get('/pendiente', [PendienteController::class, 'pendiente_index'])->name(
 Route::post('/pendiente', [PendienteController::class, 'pendiente_indexi'])->name('pendiente');
 
 
+Route::get('/inventario_cajas', InventarioCajas::class)->name('inventario_cajas');
+Route::post('/inventario_cajas', InventarioCajas::class)->name('inventario_cajas');
+
+
+Route::get('/importar_c', ImportarProductoBodega::class)->name('importar_ca');
+Route::post('/importar_c', ImportarProductoBodega::class)->name('importar_ca');
 
 
 

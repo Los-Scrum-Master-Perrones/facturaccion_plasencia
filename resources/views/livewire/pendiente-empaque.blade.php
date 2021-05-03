@@ -27,10 +27,10 @@
             <a style="color:black; font-size:16px;" href="pendiente_empaque"><strong>Pendiente</strong></a>
         </li>
         <li class="nav-item">
-            <a style="color:black; font-size:16px;" href="import_excel"><strong>Existencia en bodega</strong></a>
+            <a style="color:black; font-size:16px;" href="importar_c"><strong>Existencia en bodega</strong></a>
         </li>
         <li class="nav-item">
-            <a style="color:black; font-size:16px;" href="index_bodega_proceso"><strong>Existencia de cajas</strong></a>
+            <a style="color:black; font-size:16px;" href="inventario_cajas"><strong>Existencia de cajas</strong></a>
         </li>
     </ul>
     </br>

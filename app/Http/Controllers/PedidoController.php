@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 use App\Imports\pedidoImport;
 use Maatwebsite\Excel\Facades\Excel;
@@ -13,7 +13,7 @@ class PedidoController extends Controller
 
         (new pedidoImport)->import($request->select_file);
 
-        $pedido_completo =  \DB::select('call mostrar_pedido');
+        $pedido_completo =  DB::select('call mostrar_pedido');
 
         return view('import_excel')->with('success', 'Importación realizada con éxito!')->with('pedido_completo', $pedido_completo);
     }
@@ -29,7 +29,7 @@ class PedidoController extends Controller
             $i = $request->busqueda;
         }
 
-        $pedido_completo =  \DB::select(
+        $pedido_completo =  DB::select(
             'call buscar_pedidos(:item)',
             ['item' => $i]
         );

@@ -5,11 +5,11 @@ namespace App\Http\Livewire;
 use Livewire\Component;
 
 
-use DB;
 
 use Illuminate\Http\Request;
 use Livewire\WithPagination;
 
+use Illuminate\Support\Facades\DB;
 class PendienteEmpaque extends Component
 {
 
@@ -22,7 +22,7 @@ class PendienteEmpaque extends Component
     {
         
 
-        $this->datos_pendiente_empaque = \DB::select('call buscar_pendiente_empaque(:nombre,:fechade,:fechahasta)'
+        $this->datos_pendiente_empaque = DB::select('call buscar_pendiente_empaque(:nombre,:fechade,:fechahasta)'
         ,['nombre'=>$this->nombre,
         'fechade'=>$this->fechade,
         'fechahasta'=>$this->fechahasta]);
