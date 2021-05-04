@@ -50,7 +50,7 @@
         </div>
     </div>
 
-    </br>
+    <br>
 
 
     <div style="width:1250px; padding-left:100px;">
@@ -101,108 +101,108 @@
             </table>
         </div>
     </div>
-</div>
-
-</div>
 
 
 
-<script type="text/javascript">
-    $(document).ready(function () {
 
-        $.ajaxSetup({
-            headers: {
-                'X-CSRF-Token': $("input[name=_token]").val()
-            }
-        });
 
-        $('#editable').Tabledit({
-            url: '{{ route("tabledit.action") }}',
-            method: 'POST',
-            dataType: "json",
-            columns: {
-                identifier: [0, 'id'],
-                editable: [
-                    [1, 'Marca'],
-                    [2, 'Nombre'],
-                    [3, 'Vitola'],
-                    [4, 'Orden'],
-                    [5, 'Tipo de empaque']
-                ]
-            },
-            restoreButton: false,
 
-            onSuccess: function (data, textStatus, jqXHR) {
-                if (data.action == 'delete') {
-                    $('#' + data.id).remove();
+    <script type="text/javascript">
+        $(document).ready(function () {
+
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-Token': $("input[name=_token]").val()
                 }
-            }
+            });
+
+            $('#editable').Tabledit({
+                url: '{{ route("tabledit.action") }}',
+                method: 'POST',
+                dataType: "json",
+                columns: {
+                    identifier: [0, 'id'],
+                    editable: [
+                        [1, 'Marca'],
+                        [2, 'Nombre'],
+                        [3, 'Vitola'],
+                        [4, 'Orden'],
+                        [5, 'Tipo de empaque']
+                    ]
+                },
+                restoreButton: false,
+
+                onSuccess: function (data, textStatus, jqXHR) {
+                    if (data.action == 'delete') {
+                        $('#' + data.id).remove();
+                    }
+                }
+
+            });
 
         });
-
-    });
-</script>
+    </script>
 
 
-<script type="text/javascript">
-    function agregar_item(id, tamano) {
+    <script type="text/javascript">
+        function agregar_item(id, tamano) {
 
-        var idproductos = '<?php echo json_encode($productos);?>';
-        var idproduct = JSON.parse(idproductos);
-        for (var i = 0; i < idproduct.length; i++) {
+            var idproductos = '<?php echo json_encode($productos);?>';
+            var idproduct = JSON.parse(idproductos);
+            for (var i = 0; i < idproduct.length; i++) {
 
-            if (idproduct[i].id_producto === id) {
+                if (idproduct[i].id_producto === id) {
 
-                var nombre_item = idproduct[i].item;
-                document.form_detalle.item_de.value = nombre_item;
+                    var nombre_item = idproduct[i].item;
+                    document.form_detalle.item_de.value = nombre_item;
+                }
+
+
+            }
+        }
+    </script>
+
+
+    <script type="text/javascript">
+        function item_detalle(item, tamano) {
+            var table = document.getElementById("detallestabla");
+            var rowCount = table.rows.length;
+            var tableRows = table.getElementsByTagName('tr');
+            //console.log(rowCount)
+
+            if (rowCount <= 1) {} else {
+
+                for (var x = rowCount - 1; x > 0; x--) {
+
+                    document.getElementById("body").innerHTML = "";
+                    document.getElementById("clase").innerHTML = "";
+
+                }
+
             }
 
 
-        }
-    }
-</script>
+            tabla_nueva = "";
 
+            var ta_item = (item.toString()).length;
+            var diferencia = tamano - ta_item;
+            var cero = "0";
 
-<script type="text/javascript">
-    function item_detalle(item, tamano) {
-        var table = document.getElementById("detallestabla");
-        var rowCount = table.rows.length;
-        var tableRows = table.getElementsByTagName('tr');
-        //console.log(rowCount)
+            var nombre_item = item.toString();
 
-        if (rowCount <= 1) {} else {
-
-            for (var x = rowCount - 1; x > 0; x--) {
-
-                document.getElementById("body").innerHTML = "";
-                document.getElementById("clase").innerHTML = "";
-
+            for (var i = 0; i < diferencia; i++) {
+                nombre_item = cero + nombre_item;
             }
 
-        }
 
 
-        tabla_nueva = "";
-
-        var ta_item = (item.toString()).length;
-        var diferencia = tamano - ta_item;
-        var cero = "0";
-
-        var nombre_item = item.toString();
-
-        for (var i = 0; i < diferencia; i++) {
-            nombre_item = cero + nombre_item;
-        }
+            var detalles = '<?php echo json_encode($detalle_productos);?>';
+            var detalle = JSON.parse(detalles);
+            for (var i = 0; i < detalle.length; i++) {
 
 
-
-        var detalles = '<?php echo json_encode($detalle_productos);?>';
-        var detalle = JSON.parse(detalles);
-        for (var i = 0; i < detalle.length; i++) {
-
-
-            if (detalle[i].item === nombre_item) {
-                var tabla_nueva = `
+                if (detalle[i].item === nombre_item) {
+                    var tabla_nueva = `
                   <tr>
                     <td>` + detalle[i].item + `</td>
                     <td>` + detalle[i].marca + `</td>
@@ -213,20 +213,20 @@
                   </tr>
 
                   `;
-                document.getElementById("body").innerHTML += tabla_nueva.toString();
+                    document.getElementById("body").innerHTML += tabla_nueva.toString();
+                }
+
             }
 
-        }
 
 
+            var productos = '<?php echo json_encode($productos);?>';
+            var producto = JSON.parse(productos);
+            for (var i = 0; i < producto.length; i++) {
 
-        var productos = '<?php echo json_encode($productos);?>';
-        var producto = JSON.parse(productos);
-        for (var i = 0; i < producto.length; i++) {
 
-
-            if (producto[i].item === nombre_item) {
-                var h3 = `
+                if (producto[i].item === nombre_item) {
+                    var h3 = `
                   <h3><strong>
                     ` + producto[i].item + `
                     ` + producto[i].tipo_empaque + `
@@ -238,276 +238,281 @@
                     </strong></h3>
 
                   `;
-                document.getElementById("clase").innerHTML += h3.toString();
+                    document.getElementById("clase").innerHTML += h3.toString();
+                }
+
             }
 
         }
-
-    }
-</script>
+    </script>
 
 
-<!-- INICIO DEL MODAL NUEVO PRODUCTO -->
+    <!-- INICIO DEL MODAL NUEVO PRODUCTO -->
 
-<form action="{{Route('nuevo_producto')}} " method="POST">
-    <div class="modal fade" role="dialog" id="modal_nuevoproducto" data-backdrop="static" data-keyboard="false"
-        tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true"
-        style="opacity:.9;background:#212529;width=800px;">
-        <div class="modal-dialog modal-dialog-centered modal-lg" style="opacity:.9;background:#212529;width=80%">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 style="font-size:20px; width:3000px; text-align:center; font:bold" class=""
-                        id="staticBackdropLabel">Agregar producto</h5>
-                    <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close"></button>
-                </div>
+    <form action="{{Route('nuevo_producto')}} " method="POST">
+        <div class="modal fade" role="dialog" id="modal_nuevoproducto" data-backdrop="static" data-keyboard="false"
+            tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true"
+            style="opacity:.9;background:#212529;width=800px;">
+            <div class="modal-dialog modal-dialog-centered modal-lg" style="opacity:.9;background:#212529;width=80%">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 style="font-size:20px; width:3000px; text-align:center; font:bold" class=""
+                            id="staticBackdropLabel">Agregar producto</h5>
+                        <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close"></button>
+                    </div>
 
-                <div class="modal-body">
+                    <div class="modal-body">
 
-                    <div class="card-body">
+                        <div class="card-body">
 
-                        <div class="row">
-                            <div class="mb-3 col">
-                                <label style="font-size:16px" for="txt_figuraytipo" class="form-label">Item</label>
-                                <input name="item" id="item" style="font-size:16px" class="form-control" required
-                                    type="text" autocomplete="off">
+                            <div class="row">
+                                <div class="mb-3 col">
+                                    <label style="font-size:16px" for="txt_figuraytipo" class="form-label">Item</label>
+                                    <input name="item" id="item" style="font-size:16px" class="form-control" required
+                                        type="text" autocomplete="off">
+                                </div>
+                                <div class="mb-3 col">
+                                    <label style="font-size:16px" for="txt_figuraytipo" class="form-label">Capa</label>
+                                    <input name="capa" id="capa" style="font-size:16px" class="form-control" required
+                                        type="text" autocomplete="off">
+                                </div>
+
+                                <div class="mb-3 col">
+                                    <label style="font-size:16px" for="txt_vitola" class="form-label">Marca</label>
+                                    <input name="marca" id="marca" style="font-size:16px" class="form-control" required
+                                        type="text" autocomplete="off"> </div>
+
+
                             </div>
-                            <div class="mb-3 col">
-                                <label style="font-size:16px" for="txt_figuraytipo" class="form-label">Capa</label>
-                                <input name="capa" id="capa" style="font-size:16px" class="form-control" required
-                                    type="text" autocomplete="off">
+
+                            <div class="row">
+                                <div class="mb-3 col">
+                                    <label for="txt_total" style="font-size:16px" class="form-label">Nombre</label>
+                                    <input name="nombre" id="nombre" style="font-size:16px" class="form-control"
+                                        required type="text" autocomplete="off"> </div>
+                                <div class="mb-3 col">
+                                    <label style="font-size:16px" for="txt_buenos" class="form-label">Vitola</label>
+                                    <input name="vitola" id="vitola" style="font-size:16px" class="form-control"
+                                        required type="text" autocomplete="off"> </div>
+                                <div class="mb-3 col">
+                                    <label style="font-size:16px" for="txt_malos" class="form-label">Tipo de
+                                        empaque</label>
+                                    <input name="tipo" id="tipo" style="font-size:16px" class="form-control" required
+                                        type="text" autocomplete="off"> </div>
+
                             </div>
-
-                            <div class="mb-3 col">
-                                <label style="font-size:16px" for="txt_vitola" class="form-label">Marca</label>
-                                <input name="marca" id="marca" style="font-size:16px" class="form-control" required
-                                    type="text" autocomplete="off"> </div>
-
-
                         </div>
 
                         <div class="row">
                             <div class="mb-3 col">
-                                <label for="txt_total" style="font-size:16px" class="form-label">Nombre</label>
-                                <input name="nombre" id="nombre" style="font-size:16px" class="form-control" required
-                                    type="text" autocomplete="off"> </div>
+                                <input type="checkbox" name="cello" id="cello" style="font-size:20px" value="si">
+                                <label style="font-size:16px" for="cello" class="form-label">Cello</label>
+                            </div>
                             <div class="mb-3 col">
-                                <label style="font-size:16px" for="txt_buenos" class="form-label">Vitola</label>
-                                <input name="vitola" id="vitola" style="font-size:16px" class="form-control" required
-                                    type="text" autocomplete="off"> </div>
+
+                                <input type="checkbox" name="anillo" id="anillo" style="font-size:20px" value="si">
+                                <label style="font-size:16px" for="anillo" class="form-label">Anillo</label>
+                            </div>
                             <div class="mb-3 col">
-                                <label style="font-size:16px" for="txt_malos" class="form-label">Tipo de empaque</label>
-                                <input name="tipo" id="tipo" style="font-size:16px" class="form-control" required
-                                    type="text" autocomplete="off"> </div>
+
+                                <input type="checkbox" name="upc" id="upc" style="font-size:20px" value="si">
+                                <label style="font-size:16px" for="upc" class="form-label">UPC</label>
+                            </div>
+
 
                         </div>
                     </div>
 
-                    <div class="row">
-                        <div class="mb-3 col">
-                            <input type="checkbox" name="cello" id="cello" style="font-size:20px" value="si">
-                            <label style="font-size:16px" for="cello" class="form-label">Cello</label>
-                        </div>
-                        <div class="mb-3 col">
-
-                            <input type="checkbox" name="anillo" id="anillo" style="font-size:20px" value="si">
-                            <label style="font-size:16px" for="anillo" class="form-label">Anillo</label>
-                        </div>
-                        <div class="mb-3 col">
-
-                            <input type="checkbox" name="upc" id="upc" style="font-size:20px" value="si">
-                            <label style="font-size:16px" for="upc" class="form-label">UPC</label>
-                        </div>
-
-
+                    <div class="modal-footer">
+                        <button style=" background: #b39f64; color: #ecedf1;" type="button" class=" btn-info-claro "
+                            data-dismiss="modal">
+                            <span style="font-size:16px">Cancelar</span>
+                            @csrf
+                        </button>
+                        <button class="submit">
+                            <span style="font-size:16px">Guardar</span>
+                        </button>
                     </div>
-                </div>
-
-                <div class="modal-footer">
-                    <button style=" background: #b39f64; color: #ecedf1;" type="button" class=" btn-info-claro "
-                        data-dismiss="modal">
-                        <span style="font-size:16px">Cancelar</span>
-                        @csrf
-                    </button>
-                    <button class="submit">
-                        <span style="font-size:16px">Guardar</span>
-                    </button>
                 </div>
             </div>
         </div>
-    </div>
 
-</form>
-<!-- FIN DEL MODAL NUEVO PRODUCTO -->
-
-
-<!-- INICIO DEL MODAL AGREGAR DETALLE PRODUCTO -->
-
-<form action="{{Route('detalle')}}" method="POST" id="form_detalle" name="form_detalle">
-    <div class="modal fade" role="dialog" id="modal_agregarproducto" data-backdrop="static" data-keyboard="false"
-        tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true"
-        style="opacity:.9;background:#212529;width=800px;">
-        <div class="modal-dialog modal-dialog-centered modal-lg" style="opacity:.9;background:#212529;width=80%">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 style="font-size:20px; width:3000px; text-align:center; font:bold" class=""
-                        id="staticBackdropLabel">Agregar detalle del producto</h5>
-                    <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close"></button>
-                </div>
-
-                <div class="modal-body">
-
-                    <div class="card-body">
+    </form>
+    <!-- FIN DEL MODAL NUEVO PRODUCTO -->
 
 
+    <!-- INICIO DEL MODAL AGREGAR DETALLE PRODUCTO -->
 
+    <form action="{{Route('detalle')}}" method="POST" id="form_detalle" name="form_detalle">
+        <div class="modal fade" role="dialog" id="modal_agregarproducto" data-backdrop="static" data-keyboard="false"
+            tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true"
+            style="opacity:.9;background:#212529;width=800px;">
+            <div class="modal-dialog modal-dialog-centered modal-lg" style="opacity:.9;background:#212529;width=80%">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 style="font-size:20px; width:3000px; text-align:center; font:bold" class=""
+                            id="staticBackdropLabel">Agregar detalle del producto</h5>
+                        <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close"></button>
+                    </div>
+
+                    <div class="modal-body">
+
+                        <div class="card-body">
+
+
+
+
+                            <div class="row">
+                                <div class="mb-3 col">
+                                    <label style="font-size:16px" for="txt_figuraytipo" class="form-label">Item</label>
+                                    <input name="item_de" id="item_de" style="font-size:16px" class="form-control"
+                                        required type="text" autocomplete="off" readonly>
+                                </div>
+                                <div class="mb-3 col">
+                                    <label style="font-size:16px" for="txt_figuraytipo" class="form-label">Capa</label>
+                                    <input name="capa_de" id="capa_de" style="font-size:16px" class="form-control"
+                                        required type="text" autocomplete="off">
+                                </div>
+
+                                <div class="mb-3 col">
+                                    <label style="font-size:16px" for="txt_vitola" class="form-label">Marca</label>
+                                    <input name="marca_de" id="marca_de" style="font-size:16px" class="form-control"
+                                        required type="text" autocomplete="off"> </div>
+
+
+                            </div>
+
+                            <div class="row">
+
+
+
+                                <div class="mb-3 col">
+                                    <label for="txt_total" style="font-size:16px" class="form-label">Nombre</label>
+                                    <input name="nombre_de" id="nombre_de" style="font-size:16px" class="form-control"
+                                        required type="text" autocomplete="off"> </div>
+                                <div class="mb-3 col">
+                                    <label style="font-size:16px" for="txt_buenos" class="form-label">Vitola</label>
+                                    <input name="vitola_de" id="vitola_de" style="font-size:16px" class="form-control"
+                                        required type="text" autocomplete="off"> </div>
+                                <div class="mb-3 col">
+                                    <label style="font-size:16px" for="txt_malos" class="form-label">Tipo de
+                                        empaque</label>
+                                    <input name="tipo_de" id="tipo_de" style="font-size:16px" class="form-control"
+                                        required type="text" autocomplete="off"> </div>
+
+                            </div>
+
+
+                        </div>
 
                         <div class="row">
                             <div class="mb-3 col">
-                                <label style="font-size:16px" for="txt_figuraytipo" class="form-label">Item</label>
-                                <input name="item_de" id="item_de" style="font-size:16px" class="form-control" required
-                                    type="text" autocomplete="off" readonly>
+                                <input type="checkbox" name="cello_de" id="cello_de" style="font-size:20px" value="si">
+                                <label style="font-size:16px" for="cello" class="form-label">Cello</label>
                             </div>
                             <div class="mb-3 col">
-                                <label style="font-size:16px" for="txt_figuraytipo" class="form-label">Capa</label>
-                                <input name="capa_de" id="capa_de" style="font-size:16px" class="form-control" required
-                                    type="text" autocomplete="off">
-                            </div>
 
+                                <input type="checkbox" name="anillo_de" id="anillo_de" style="font-size:20px"
+                                    value="si">
+                                <label style="font-size:16px" for="anillo" class="form-label">Anillo</label>
+                            </div>
                             <div class="mb-3 col">
-                                <label style="font-size:16px" for="txt_vitola" class="form-label">Marca</label>
-                                <input name="marca_de" id="marca_de" style="font-size:16px" class="form-control"
-                                    required type="text" autocomplete="off"> </div>
+
+                                <input type="checkbox" name="upc_de" id="upc_de" style="font-size:20px" value="si">
+                                <label style="font-size:16px" for="upc" class="form-label">UPC</label>
+                            </div>
 
 
                         </div>
 
                         <div class="row">
-
-
-
                             <div class="mb-3 col">
-                                <label for="txt_total" style="font-size:16px" class="form-label">Nombre</label>
-                                <input name="nombre_de" id="nombre_de" style="font-size:16px" class="form-control"
-                                    required type="text" autocomplete="off"> </div>
-                            <div class="mb-3 col">
-                                <label style="font-size:16px" for="txt_buenos" class="form-label">Vitola</label>
-                                <input name="vitola_de" id="vitola_de" style="font-size:16px" class="form-control"
-                                    required type="text" autocomplete="off"> </div>
-                            <div class="mb-3 col">
-                                <label style="font-size:16px" for="txt_malos" class="form-label">Tipo de empaque</label>
-                                <input name="tipo_de" id="tipo_de" style="font-size:16px" class="form-control" required
-                                    type="text" autocomplete="off"> </div>
+
+                                <label style="font-size:16px" for="txt_malos" class="form-label">Código de
+                                    precio</label>
+                                <input name="precio_de" id="precio_de" style="font-size:16px" class="form-control"
+                                    required type="text" autocomplete="off">
+                            </div>
 
                         </div>
+                    </div>
+
+
+
+                    <div class="modal-footer">
+                        <button style=" background: #b39f64; color: #ecedf1;" type="button" class=" btn-info-claro "
+                            data-dismiss="modal">
+                            <span style="font-size:16px">Cancelar</span>
+                            @csrf
+                        </button>
+                        <button class="submit">
+                            <span style="font-size:16px">Guardar</span>
+                        </button>
 
 
                     </div>
-
-                    <div class="row">
-                        <div class="mb-3 col">
-                            <input type="checkbox" name="cello_de" id="cello_de" style="font-size:20px" value="si">
-                            <label style="font-size:16px" for="cello" class="form-label">Cello</label>
-                        </div>
-                        <div class="mb-3 col">
-
-                            <input type="checkbox" name="anillo_de" id="anillo_de" style="font-size:20px" value="si">
-                            <label style="font-size:16px" for="anillo" class="form-label">Anillo</label>
-                        </div>
-                        <div class="mb-3 col">
-
-                            <input type="checkbox" name="upc_de" id="upc_de" style="font-size:20px" value="si">
-                            <label style="font-size:16px" for="upc" class="form-label">UPC</label>
-                        </div>
-
-
-                    </div>
-
-                    <div class="row">
-                        <div class="mb-3 col">
-
-                            <label style="font-size:16px" for="txt_malos" class="form-label">Código de precio</label>
-                            <input name="precio_de" id="precio_de" style="font-size:16px" class="form-control" required
-                                type="text" autocomplete="off">
-                        </div>
-
-                    </div>
-                </div>
-
-
-
-                <div class="modal-footer">
-                    <button style=" background: #b39f64; color: #ecedf1;" type="button" class=" btn-info-claro "
-                        data-dismiss="modal">
-                        <span style="font-size:16px">Cancelar</span>
-                        @csrf
-                    </button>
-                    <button class="submit">
-                        <span style="font-size:16px">Guardar</span>
-                    </button>
-
-
                 </div>
             </div>
         </div>
-    </div>
 
-</form>
-<!-- FIN DEL MODAL AGREGAR DETALLE PRODUCTO -->
-
-
-<!-- INICIO DEL MODAL VER DETALLE PRODUCTO -->
-
-<form action="{{Route('detalle_producto')}} " method="POST" name="formde" id=" formde">
-    <div class="modal fade" role="dialog" id="modal_ver_detalle_producto" data-backdrop="static" data-keyboard="false"
-        tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true"
-        style="opacity:.9;background:#212529;width=800px;">
-        <div class="modal-dialog modal-dialog-centered modal-lg" style="opacity:.9;background:#212529;width=80%">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 style="font-size:20px; width:3000px; text-align:center; font:bold" class=""
-                        id="staticBackdropLabel">Detalles del producto</h5>
-                    <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close"></button>
-                </div>
-
-                <div class="modal-body">
-
-                    <div class="card-body">
-
-                        <div class="row">
-                            <h3 name="clase" id="clase" style="font-weight: bold;"></h3>
-                        </div>
-                        <div class="row">
-                            <table id="detallestabla" name="detallestabla" class="table table-bordered table-striped">
-                                <thead>
-                                    <tr>
-                                        <th>Item</th>
-                                        <th>Marca</th>
-                                        <th>Nombre</th>
-                                        <th>Vitola</th>
-                                        <th>Tipo de empaque</th>
-
-                                    </tr>
-                                </thead>
-                                <tbody name="body" id="body">
-
-                                </tbody>
-                            </table>
-
-                        </div>
+    </form>
+    <!-- FIN DEL MODAL AGREGAR DETALLE PRODUCTO -->
 
 
-                        <div class="modal-footer">
+    <!-- INICIO DEL MODAL VER DETALLE PRODUCTO -->
 
-
-
-                        </div>
+    <form action="{{Route('detalle_producto')}} " method="POST" name="formde" id=" formde">
+        <div class="modal fade" role="dialog" id="modal_ver_detalle_producto" data-backdrop="static"
+            data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true"
+            style="opacity:.9;background:#212529;width=800px;">
+            <div class="modal-dialog modal-dialog-centered modal-lg" style="opacity:.9;background:#212529;width=80%">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 style="font-size:20px; width:3000px; text-align:center; font:bold" class=""
+                            id="staticBackdropLabel">Detalles del producto</h5>
+                        <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close"></button>
                     </div>
 
-                    <input name="item_detalle" id="item_detalle" value+="" hidden> </input>
-                </div>
-            </div>
+                    <div class="modal-body">
 
-</form>
-<!-- FIN DEL MODAL VER DETALLE PRODUCTO -->
+                        <div class="card-body">
+
+                            <div class="row">
+                                <h3 name="clase" id="clase" style="font-weight: bold;"></h3>
+                            </div>
+                            <div class="row">
+                                <table id="detallestabla" name="detallestabla"
+                                    class="table table-bordered table-striped">
+                                    <thead>
+                                        <tr>
+                                            <th>Item</th>
+                                            <th>Marca</th>
+                                            <th>Nombre</th>
+                                            <th>Vitola</th>
+                                            <th>Tipo de empaque</th>
+
+                                        </tr>
+                                    </thead>
+                                    <tbody name="body" id="body">
+
+                                    </tbody>
+                                </table>
+
+                            </div>
+
+
+                            <div class="modal-footer">
+
+
+
+                            </div>
+                        </div>
+
+                        <input name="item_detalle" id="item_detalle" value+="" hidden>
+                    </div>
+                </div>
+
+    </form>
+    <!-- FIN DEL MODAL VER DETALLE PRODUCTO -->
 
 </div>
