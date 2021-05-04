@@ -1,7 +1,5 @@
 <div xmlns:wire="http://www.w3.org/1999/xhtml">
-
-
-
+    
     <title></title>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" />
@@ -16,10 +14,8 @@
     @livewireStyles
     <link rel="stylesheet" href="{{ asset('css/principal.css') }}" />
 
-
-
-
-    </br>
+    
+    <br>
     <ul class="nav justify-content-center">
         <li class="nav-item">
             <a style="color:black; font-size:16px;" href="pendiente_empaque"><strong>Pendiente</strong></a>
