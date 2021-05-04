@@ -10,8 +10,10 @@ use App\Http\Controllers\PendienteController;
 use App\Http\Controllers\programacion;
 use App\Http\Controllers\tabla_existencia;
 use App\Http\Livewire\DatosProductos;
+use App\Http\Livewire\FacturaTerminado;
 use App\Http\Livewire\Productos;
 use App\Http\Livewire\PendienteEmpaque;
+use App\Http\Livewire\ProductosTerminados;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Livewire\ImportarProductoBodega;
 use App\Http\Livewire\InventarioCajas;
@@ -128,6 +130,7 @@ Route::get('/welcome', function () {
     return view('welcome');
 });
 
+
 Auth::routes();
 Route::get('/logout', [App\Http\Controllers\LoginController::class, 'logout'])->name('logout');
 
@@ -168,3 +171,9 @@ Route::get('/importar_inv_cajas', [App\Http\Controllers\CajasController::class, 
 
 
 Route::get('/exportar_pendiente', [App\Http\Controllers\PendienteController::class, 'exportPendiente'])->name('exportar_pendiente');
+
+
+//Produtco terminado y Facturacion
+Route::get('/productos_terminado', ProductosTerminados::class)->name('p_terminado');
+
+Route::get('/factura_terminados', FacturaTerminado::class)->name('f_terminado');

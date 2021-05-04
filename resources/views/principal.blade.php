@@ -155,7 +155,7 @@
         </div>
 
         <div class="righter2">
-            <form action="{{Route('tabla')}}" method="GET">
+            <form action="{{Route('f_terminado')}}" method="GET">
                 @csrf
                 <button type="submit" class="buttonsubmit">
                     <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="white" class="bi bi-truck" viewBox="0 0 16 16">
@@ -173,7 +173,7 @@
 
         <div class="righter3">
 
-            <form action="{{Route('tabla')}}" method="GET">
+            <form action="{{Route('f_terminado')}}" method="GET">
                 @csrf
                 <button type="submit" class="buttonsubmit">
                     <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="white"
