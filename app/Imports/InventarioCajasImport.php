@@ -23,11 +23,12 @@ use Importable;
         }
         else{
 
-        $inventariocajas = new ListaCajas([
-            'codigo' => $row[0],
-            'productoServicio' => $row[1],
-            'marca' => $row[2]          
-        ]);
+            $inventariocajas = \DB::select('call insertar_lista_cajas(:codigo,:productoServicio,:marca)',[
+                'codigo' => $row[0],
+                'productoServicio' => $row[1],
+                'marca' => $row[2]          
+            ]);     
+
     }
         
     return null;
