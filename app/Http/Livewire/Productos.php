@@ -57,7 +57,7 @@ class Productos extends Component
 
      public function mount(){
 
-        $this->productos = [];
+        $this->productos = [];  
         $this->marcas = [];
         $this->cajas = [];
         $this->nombres = [];
