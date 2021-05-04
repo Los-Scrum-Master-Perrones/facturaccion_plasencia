@@ -27,6 +27,9 @@
         <li class="nav-item">
             <a style="color:black; font-size:16px;" href="inventario_cajas"><strong>Existencia de cajas</strong></a>
         </li>
+        <li class="nav-item">
+            <a style="color:black; font-size:16px;" href="historial_programacion"><strong>Programaciones</strong></a>
+        </li>
     </ul>
     </br>
 <div class="container">

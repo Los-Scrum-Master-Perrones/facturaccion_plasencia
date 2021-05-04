@@ -15,6 +15,10 @@ use App\Http\Livewire\PendienteEmpaque;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Livewire\ImportarProductoBodega;
 use App\Http\Livewire\InventarioCajas;
+use App\Http\Livewire\HistorialProgramacion;
+use App\Http\Livewire\DetalleProgramacion;
+
+
 
 /*
 |--------------------------------------------------------------------------
@@ -48,6 +52,9 @@ Route::get('/pendiente_empaque', PendienteEmpaque::class)->name('pendiente_empaq
 Route::post('/pendiente_empaque', PendienteEmpaque::class)->name('pendiente_empaque');
 
 
+Route::get('/insertar_detalles', [PendienteEmpaque::class, 'insertar_detalle_provicional'])->name('insertar_detalles');
+Route::post('/insertar_detalles', [PendienteEmpaque::class, 'insertar_detalle_provicional'])->name('insertar_detalles');
+
 Route::get('/insertar_productos', [Productos::class, 'insertar_clase'])->name('nuevo_producto');
 Route::post('/insertar_productos', [Productos::class, 'insertar_clase'])->name('nuevo_producto');
 
@@ -79,6 +86,13 @@ Route::post('/inventario_cajas', InventarioCajas::class)->name('inventario_cajas
 Route::get('/importar_c', ImportarProductoBodega::class)->name('importar_ca');
 Route::post('/importar_c', ImportarProductoBodega::class)->name('importar_ca');
 
+
+Route::get('/historial_programacion', HistorialProgramacion::class)->name('historial_programacion');
+Route::post('/historial_programacion', HistorialProgramacion::class)->name('historial_programacion');
+
+
+Route::get('/detalles_programacion', DetalleProgramacion::class)->name('detalles_programacion');
+Route::post('/detalles_programacion', DetalleProgramacion::class)->name('detalles_programacion');
 
 
 Route::get('/pendiente_buscar', [PendienteController::class, 'buscar'])->name('buscar_pendiente');

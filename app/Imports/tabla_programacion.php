@@ -22,8 +22,6 @@ class tabla_programacion implements ToModel
     use Importable;
     public function model(array $row)
     {
-
-
         $capa = capa_producto::where('capa',$row[8])->get('id_capa');
         $vitola = vitola_producto::where('vitola',$row[7])->get('id_vitola');
         $nombre = nombre_producto::where('nombre',$row[6])->get('id_nombre');

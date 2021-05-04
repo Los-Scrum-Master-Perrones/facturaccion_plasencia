@@ -16,15 +16,18 @@ class ImportarProductoBodega extends Component
 
     public $existencias;
     public $select_file;
+    public $busqueda;
+    public $borrar;
 
     public function render()
     {
-        $this->existencias  =  DB::select('call mostrar_existencia_bodega');
+
+        $this->existencias  =  DB::select('call buscar_existencia(:buscar)',['buscar'=>$this->busqueda]);
 
         if(isset($this->select_file)){
             $this->select_file->store('select_file');
         }
-
+        
         return view('livewire.importar-producto-bodega')->extends('principal')->section('content');
     }
 
@@ -32,11 +35,15 @@ class ImportarProductoBodega extends Component
     public function mount(){
 
         $this->existencias = [];
+        $this->busqueda =""; 
         $this->existencias  =  DB::select('call mostrar_existencia_bodega');
 
+
     }
-     
-    function import()  {    
+      public  function import()  {  
+
+
+        $this->borrar =  DB::select('call borrar_datos_existencia');
         $this->validate([
             'select_file' => 'max:1024', // 1MB Max
         ]);

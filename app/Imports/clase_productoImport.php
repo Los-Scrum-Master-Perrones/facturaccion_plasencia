@@ -56,13 +56,13 @@ class clase_productoImport implements ToModel
              
       $clase_producto =  new  clase_producto([
             'item'=>$row[1],
-            'id_capa'=>$capa[0]->id_capa,
-            'id_vitola'=>$vitola[0]->id_vitola,
-            'id_nombre'=>$nombre[0]->id_nombre,
-            'id_marca'=>$marca[0]->id_marca,
-            'id_orden'=>$orden[0]->id_orden, 
-            'id_cello'=>$cello[0]->id_cello,
-            'id_tipo_empaque'=>$tipo_empaque[0]->id_tipo_empaque,
+            'id_capa'=>isset($capa[0]->id_capa)?$capa[0]->id_capa:null,
+            'id_vitola'=>isset($vitola[0]->id_vitola)?$vitola[0]->id_vitola:null,
+            'id_nombre'=>isset($nombre[0]->id_nombre)?$nombre[0]->id_nombre:null,
+            'id_marca'=>isset($marca[0]->id_marca)?$marca[0]->id_marca:null,
+            'id_orden'=>isset($orden[0]->id_orden)?$orden[0]->id_orden:null, 
+            'id_cello'=>isset($cello[0]->id_cello)?$cello[0]->id_cello:null,
+            'id_tipo_empaque'=>isset($tipo_empaque[0]->id_tipo_empaque)?$tipo_empaque[0]->id_tipo_empaque:null,
 
         ]);
     }}

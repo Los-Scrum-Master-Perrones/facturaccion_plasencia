@@ -27,6 +27,9 @@
         <li class="nav-item">
             <a style="color:black; font-size:16px;" href="inventario_cajas"><strong>Existencia de cajas</strong></a>
         </li>
+        <li class="nav-item">
+            <a style="color:black; font-size:16px;" href="historial_programacion"><strong>Programaciones</strong></a>
+        </li>
     </ul>
     </br>
 
@@ -47,7 +50,7 @@
                     <div class="row">
                         <div class="col-sm">
                             <input type="file" name="select_file" id="select_file" wire:model="select_file" 
-                                class="btn botonprincipal form-control" style="width:350px;" />
+                                class="btn botonprincipal form-control" style="width:450px;" />
                         </div>
                         <div class="col-sm">
                             <input type="submit" name="upload" style="width:130px;"
@@ -77,16 +80,15 @@
         <div class="row">
 
             <div class="col-sm">
-                <form action="{{Route('buscar_pedido')}}" method="POST" class="form-inline" style="margin-bottom:0px;">
-                    @csrf
+               
                     <div class="row">
 
                         <div class="col-sm">
-                            <input name="busqueda" id="busqueda" class="btn botonprincipal form-control"
-                                placeholder="Búsqueda por descripción u orden" style="width:350px;">
+                            <input name="busqueda" id="busqueda"  wire:model= "busqueda" class="btn botonprincipal form-control"
+                                placeholder="Búsqueda por Marca, Nombre y Capa" style="width:450px;">
                         </div>
                         
-                </form>
+               
             </div>
 
         </div>

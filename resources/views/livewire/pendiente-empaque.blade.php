@@ -1,5 +1,3 @@
-
-
 <div xmlns:wire="http://www.w3.org/1999/xhtml">
 
 
@@ -16,14 +14,14 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
     <script src="{{ URL::asset('css/tabla.js') }}"></script>
     @livewireStyles
-    <link rel="stylesheet" href="{{ asset('css/principal.css') }}"/>
+    <link rel="stylesheet" href="{{ asset('css/principal.css') }}" />
 
 
 
 
     </br>
     <ul class="nav justify-content-center">
-    <li class="nav-item">
+        <li class="nav-item">
             <a style="color:black; font-size:16px;" href="pendiente_empaque"><strong>Pendiente</strong></a>
         </li>
         <li class="nav-item">
@@ -31,6 +29,9 @@
         </li>
         <li class="nav-item">
             <a style="color:black; font-size:16px;" href="inventario_cajas"><strong>Existencia de cajas</strong></a>
+        </li>
+        <li class="nav-item">
+            <a style="color:black; font-size:16px;" href="historial_programacion"><strong>Programaciones</strong></a>
         </li>
     </ul>
     </br>
@@ -40,37 +41,46 @@
     <div class="container" style="width:1400px; padding-left:30px">
         <div class="row">
             <div class="col-16">
-            
-                    <div class="row">
-                        <div class="col-sm">
-                            <label>De</label>
-                        </div>
-                        <div class="col-sm">
-                            <input type="date" name="fecha_de" id="fecha_de" wire:model="fechade" class="form-control mr-sm-2 botonprincipal"
-                                style="width:200px;" placeholder="Nombre">
-                        </div>
-                        <div class="col-sm">
-                            <label>Hasta</label>
-                        </div>
-                        <div class="col-sm">
-                            <input type="date" name="fecha_hasta" id="fecha_hasta" wire:model="fechahasta" 
-                                class="form-control mr-sm-2 botonprincipal" style="width:200px;" placeholder="Nombre">
-                        </div>
-                        <div class="col-sm">
-                            <input name="nombre" id="nombre" class="form-control mr-sm-2 botonprincipal"
-                                style="width:200px;" placeholder="Nombre"  wire:model="nombre" >
-                        </div>
-                        
 
+                <div class="row">
+                    <div class="col-sm">
+                        <label>De</label>
                     </div>
+                    <div class="col-sm">
+                        <input type="date" name="fecha_de" id="fecha_de" wire:model="fechade"
+                            class="form-control mr-sm-2 botonprincipal" style="width:200px;" placeholder="Nombre">
+                    </div>
+                    <div class="col-sm">
+                        <label>Hasta</label>
+                    </div>
+                    <div class="col-sm">
+                        <input type="date" name="fecha_hasta" id="fecha_hasta" wire:model="fechahasta"
+                            class="form-control mr-sm-2 botonprincipal" style="width:200px;" placeholder="Nombre">
+                    </div>
+                    <div class="col-sm">
+                        <input name="nombre" id="nombre" class="form-control mr-sm-2 botonprincipal"
+                            style="width:200px;" placeholder="Nombre" wire:model="nombre">
+                    </div>
+
+
+                </div>
             </div>
             <div class="col">
                 <form action="{{Route('exportar_pendiente')}}">
-                    <input type="text" value= "{{isset($nom)?$nom:null}}" name="nombre" id="nombre" hidden >
-                    <input type="date" value= "{{isset($fede)?$fede:null}}" name="fecha_de" id="fecha_de" hidden>
-                    <input type="date" value= "{{isset($feha)?$feha:null}}" name="fecha_hasta" id="fecha_hasta" hidden>
-                    <button class="form-control mr-sm-2 botonprincipal" type="submit" style="width:200px;">Agregar Programación
+                    <input type="text" value="{{isset($nom)?$nom:null}}" name="nombre" id="nombre" hidden>
+                    <input type="date" value="{{isset($fede)?$fede:null}}" name="fecha_de" id="fecha_de" hidden>
+                    <input type="date" value="{{isset($feha)?$feha:null}}" name="fecha_hasta" id="fecha_hasta" hidden>
+
+                </form>
+            </div>
+            <div class="col">
+            
+                <form wire:submit.prevent="insertar_detalle_provicional()">
+
+                   
+                    <button class="form-control mr-sm-2 botonprincipal" style="width:200px;">Agregar Programación {{$tuplas}}
                     </button>
+                    @csrf
                 </form>
             </div>
         </div>
@@ -106,7 +116,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                @foreach($datos_pendiente_empaque as $datos)
+                    @foreach($datos_pendiente_empaque as $datos)
                     <tr>
                         <td style="width:100px; max-width: 400px;overflow-x:auto;">{{$datos->categoria}}</td>
                         <td>{{$datos->item}}</td>
@@ -133,43 +143,42 @@
             </table>
         </div>
     </div>
-    </div>
-    </div>
-
-
-
-    <script type="text/javascript">
-        $(document).ready(function () {
-
-            $.ajaxSetup({
-                headers: {
-                    'X-CSRF-Token': $("input[name=_token]").val()
-                }
-            });
-
-            $('#editable').Tabledit({
-                url: '{{ route("tabledit.action") }}',
-                method: 'POST',
-                dataType: "json",
-                columns: {
-                    identifier: [0, 'id'],
-                    editable: [
-                        [1, 'first_name'],
-                        [2, 'last_name'],
-                        [3, 'gender']
-                    ]
-                },
-                restoreButton: false,
-
-                onSuccess: function (data, textStatus, jqXHR) {
-                    if (data.action == 'delete') {
-                        $('#' + data.id).remove();
-                    }
-                }
-
-            });
-
-        });
-    </script>
+</div>
 </div>
 
+
+
+<script type="text/javascript">
+    $(document).ready(function () {
+
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-Token': $("input[name=_token]").val()
+            }
+        });
+
+        $('#editable').Tabledit({
+            url: '{{ route("tabledit.action") }}',
+            method: 'POST',
+            dataType: "json",
+            columns: {
+                identifier: [0, 'id'],
+                editable: [
+                    [1, 'first_name'],
+                    [2, 'last_name'],
+                    [3, 'gender']
+                ]
+            },
+            restoreButton: false,
+
+            onSuccess: function (data, textStatus, jqXHR) {
+                if (data.action == 'delete') {
+                    $('#' + data.id).remove();
+                }
+            }
+
+        });
+
+    });
+</script>
+</div>
