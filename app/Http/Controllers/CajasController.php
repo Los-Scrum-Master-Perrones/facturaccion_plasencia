@@ -53,9 +53,9 @@ class CajasController extends Controller
         if ($request->ajax()) {
             if ($request->action == 'edit') {
                 $data = array(
-                    'codigo'    =>    $request->codigo,
-                    'productoServicio'        =>    $request->productoServicio,
-                    'marca'        =>    $request->marca
+                    'codigo'  =>    $request->codigo,
+                    'productoServicio'    =>    $request->productoServicio,
+                    'marca'   =>    $request->marca
                 );
                 DB::table('lista_cajas')
                     ->where('id', $request->id)
