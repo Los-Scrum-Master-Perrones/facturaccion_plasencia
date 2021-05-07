@@ -98,8 +98,6 @@ Route::get('/detalles_programacion', DetalleProgramacion::class)->name('detalles
 Route::post('/detalles_programacion', DetalleProgramacion::class)->name('detalles_programacion');
 
 
-Route::get('/pendiente_buscar', [Pendiente::class, 'buscar'])->name('buscar_pendiente');
-Route::post('/pendiente_buscar', [Pendiente::class, 'buscar'])->name('buscar_pendiente');
 
 Route::get('/pedido_buscar', [PedidoController::class, 'buscar'])->name('buscar_pedido');
 Route::post('/pedido_buscar', [PedidoController::class, 'buscar'])->name('buscar_pedido');
@@ -185,7 +183,7 @@ Route::post('/importar_inv_cajas', [App\Http\Controllers\CajasController::class,
 Route::get('/importar_inv_cajas', [App\Http\Controllers\CajasController::class, 'importinvcajas'])->name('importar_inv_cajas');
 
 
-Route::get('/exportar_pendiente', [App\Http\Controllers\Pendiente::class, 'exportPendiente'])->name('exportar_pendiente');
+Route::get('/exportar_pendiente', [Pendiente::class, 'exportPendiente'])->name('exportar_pendiente');
 
 
 //Produtco terminado y Facturacion

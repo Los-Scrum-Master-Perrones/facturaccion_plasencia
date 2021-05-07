@@ -11,15 +11,19 @@ class Pendiente extends Component
 {
 
     public $datos_pendiente;
+    public $nom;
+    public $fede;
+    public $fecha;
+    public $busqueda;
 
     public function render()
     {
-        $this->datos_pendiente = \DB::select(
-            'call buscar_pendiente(:nombre,:fechade,:fechahasta)',
+
+        $this->datos_pendiente = DB::select('call buscar_pendiente(:nombre,:fechade,:fechahasta)',
             [
-                'nombre' => (string)$nom,
-                'fechade' => (string)$fede,
-                'fechahasta' => (string)$feha
+                'nombre' =>  $this->nom,
+                'fechade' =>  $this->fede,
+                'fechahasta' => $this->fecha
             ]
         );
         
@@ -31,6 +35,22 @@ class Pendiente extends Component
  
 
         $this->datos_pendiente = [];
+        $this->nom = "";
+        $this->fede = "";
+        $this->fecha = "";
+
+        $this->datos_pendiente = DB::select(
+            'call buscar_pendiente(:nombre,:fechade,:fechahasta)',
+            [
+                'nombre' =>  $this->nom,
+                'fechade' =>  $this->fede,
+                'fechahasta' => $this->fecha
+            ]
+        );
+
+      
+
+
     }
    
 
@@ -43,14 +63,20 @@ class Pendiente extends Component
             ['fecha' => (string)$request->fecha]
         );
 
-        $insertar_pendiente = \DB::select(
+        $insertar_pendiente = DB::select(
             'call insertar_pendiente(:fecha)',
             ['fecha' => (string)$request->fecha]
         );
 
-        $this->datos_pendiente=  \DB::select('call mostrar_pendiente');
-
-        return view('pendiente')->with('insertar_pendiente', $insertar_pendiente)->with('datos_pendiente', $datos_pendiente)->with('insertar_pendiente_empaque', $insertar_pendiente_empaque);
+        $this->datos_pendiente = DB::select(
+            'call buscar_pendiente(:nombre,:fechade,:fechahasta)',
+            [
+                'nombre' =>  $this->nom,
+                'fechade' =>  $this->fede,
+                'fechahasta' => $this->fecha,
+            ]
+        );
+        return redirect()->route('pendiente')->with('insertar_pendiente', $insertar_pendiente)->with('insertar_pendiente_empaque', $insertar_pendiente_empaque);
     }
 
 
@@ -59,7 +85,7 @@ class Pendiente extends Component
 
         $this->datos_pendiente=  \DB::select('call mostrar_pendiente');
 
-        return view('pendiente')->with('datos_pendiente', $datos_pendiente);
+        return redirect()->route('pendiente');
     }
 
 
@@ -87,43 +113,41 @@ class Pendiente extends Component
             $nom = $request->nombre;
         }
 
-        $datos_pendiente = \DB::select(
+        $this->datos_pendiente = DB::select(
             'call buscar_pendiente(:nombre,:fechade,:fechahasta)',
             [
-                'nombre' => (string)$nom,
-                'fechade' => (string)$fede,
-                'fechahasta' => (string)$feha
+                'nombre' =>  $this->nom,
+                'fechade' =>  $this->fede,
+                'fechahasta' => $this->fecha,
             ]
         );
 
 
-        return view('pendiente')->with('datos_pendiente', $datos_pendiente)
-            ->with('nom', $nom)
-            ->with('fede', $fede)
-            ->with('feha', $feha);
+        return redirect()->route('pendiente');
+            
     }
 
     
 
     function exportPendiente(Request $request)
     {
-        if ($request->fecha_de == null) {
+        if ($this->fede == null) {
             $fede = "0";
         } else {
-            $fede = $request->fecha_de;
+            $fede = $this->fede ;
         }
 
-        if ($request->fecha_hasta === null) {
+        if ($this->fecha === null) {
             $feha = "0";
         } else {
-            $feha = $request->fecha_hasta;
+            $feha = $this->fecha;
         }
 
 
-        if ($request->nombre == null) {
+        if ($this->nom == null) {
             $nom = "0";
         } else {
-            $nom = $request->nombre;
+            $nom =$this->nom;
         }
         return Excel::download(new PendienteExport($nom, $fede, $feha), 'Pendiente.xlsx');
     }
