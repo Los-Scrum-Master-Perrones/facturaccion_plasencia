@@ -131,24 +131,7 @@ class Pendiente extends Component
 
     function exportPendiente(Request $request)
     {
-        if ($this->fede == null) {
-            $fede = "0";
-        } else {
-            $fede = $this->fede ;
-        }
-
-        if ($this->fecha === null) {
-            $feha = "0";
-        } else {
-            $feha = $this->fecha;
-        }
-
-
-        if ($this->nom == null) {
-            $nom = "0";
-        } else {
-            $nom =$this->nom;
-        }
-        return Excel::download(new PendienteExport($nom, $fede, $feha), 'Pendiente.xlsx');
+       
+        return Excel::download(new PendienteExport($this->nom, $this->fede, $this->fecha), 'Pendiente.xlsx');
     }
 }
