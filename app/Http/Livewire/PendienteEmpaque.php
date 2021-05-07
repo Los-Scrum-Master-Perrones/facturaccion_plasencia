@@ -27,11 +27,9 @@ class PendienteEmpaque extends Component
         'fechade'=>$this->fechade,
         'fechahasta'=>$this->fechahasta]);
     
-        $this->tuplas = count(DB::select('call buscar_pendiente_empaque(:nombre,:fechade,:fechahasta)'
-        ,['nombre'=>$this->nombre,
-        'fechade'=>$this->fechade,
-        'fechahasta'=>$this->fechahasta]));
 
+        $this->tuplas=count($this->datos_pendiente_empaque);
+       
         return view('livewire.pendiente-empaque')->extends('principal')->section('content');
     }
 
@@ -42,11 +40,9 @@ class PendienteEmpaque extends Component
         'fechade'=>$this->fechade,
         'fechahasta'=>$this->fechahasta]);
         
-        $this->tuplas = count(DB::select('call buscar_pendiente_empaque(:nombre,:fechade,:fechahasta)'
-        ,['nombre'=>$this->nombre,
-        'fechade'=>$this->fechade,
-        'fechahasta'=>$this->fechahasta]));
+        $this->tuplas=count($this->datos_pendiente_empaque);
 
+ 
         $this->fechade= "";
         $this->fechahasta= "";
         $this->nombre= "";
@@ -59,7 +55,8 @@ class PendienteEmpaque extends Component
         'fechade'=>$this->fechade,
         'fechahasta'=>$this->fechahasta]);
         
-        
+        $this->tuplas=count($this->datos_pendiente_empaque);
+
         for($i = 0 ; $this->tuplas > $i ; $i++){
             $detalles = DB::select('call insertar_detalle_temporal(:numero_orden,:orden,:cod_producto,:saldo)'
             ,['numero_orden'=>isset($this->datos_pendiente_empaque[$i]->orden_del_sitema)?$this->datos_pendiente_empaque[$i]->orden_del_sitema:null,
@@ -67,7 +64,9 @@ class PendienteEmpaque extends Component
             'cod_producto'=>isset($this->datos_pendiente_empaque[$i]->item)?$this->datos_pendiente_empaque[$i]->item:null,
             'saldo'=>isset($this->datos_pendiente_empaque[$i]->saldo)?$this->datos_pendiente_empaque[$i]->saldo:null]);
         }
-        return view('livewire.detalle-programacion')->extends('principal')->section('content')->with('detalles',$detalles);
+
+        return redirect()->route('detalles_programacion'); 
+       
     }
 
 

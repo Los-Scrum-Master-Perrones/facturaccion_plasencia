@@ -13,6 +13,7 @@ use App\Http\Livewire\DatosProductos;
 use App\Http\Livewire\FacturaTerminado;
 use App\Http\Livewire\Productos;
 use App\Http\Livewire\PendienteEmpaque;
+use App\Http\Livewire\Pendiente;
 use App\Http\Livewire\ProductosTerminados;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Livewire\ImportarProductoBodega;
@@ -77,8 +78,8 @@ Route::post('/importar_clase', [CapaProductoController::class, 'import']);
 Route::get('/importar_clase', [CapaProductoController::class, 'import']);
 
 
-Route::get('/pendiente', [PendienteController::class, 'pendiente_index'])->name('pendiente');
-Route::post('/pendiente', [PendienteController::class, 'pendiente_indexi'])->name('pendiente');
+Route::get('/pendiente', Pendiente::class)->name('pendiente');
+Route::post('/pendiente', Pendiente::class)->name('pendiente');
 
 
 Route::get('/inventario_cajas', InventarioCajas::class)->name('inventario_cajas');
@@ -97,8 +98,8 @@ Route::get('/detalles_programacion', DetalleProgramacion::class)->name('detalles
 Route::post('/detalles_programacion', DetalleProgramacion::class)->name('detalles_programacion');
 
 
-Route::get('/pendiente_buscar', [PendienteController::class, 'buscar'])->name('buscar_pendiente');
-Route::post('/pendiente_buscar', [PendienteController::class, 'buscar'])->name('buscar_pendiente');
+Route::get('/pendiente_buscar', [Pendiente::class, 'buscar'])->name('buscar_pendiente');
+Route::post('/pendiente_buscar', [Pendiente::class, 'buscar'])->name('buscar_pendiente');
 
 Route::get('/pedido_buscar', [PedidoController::class, 'buscar'])->name('buscar_pedido');
 Route::post('/pedido_buscar', [PedidoController::class, 'buscar'])->name('buscar_pedido');
@@ -184,7 +185,7 @@ Route::post('/importar_inv_cajas', [App\Http\Controllers\CajasController::class,
 Route::get('/importar_inv_cajas', [App\Http\Controllers\CajasController::class, 'importinvcajas'])->name('importar_inv_cajas');
 
 
-Route::get('/exportar_pendiente', [App\Http\Controllers\PendienteController::class, 'exportPendiente'])->name('exportar_pendiente');
+Route::get('/exportar_pendiente', [App\Http\Controllers\Pendiente::class, 'exportPendiente'])->name('exportar_pendiente');
 
 
 //Produtco terminado y Facturacion

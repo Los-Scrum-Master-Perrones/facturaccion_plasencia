@@ -33,8 +33,7 @@
         </li>
 
     </ul>
-    <h3 style="	text-align:center;  width:auto;"><strong>Inventario de productos Plasencia</strong></h3>
-    <br />
+    <br>
 
     <div class="" style="width:1100px; padding-left:200px;">
 
@@ -72,11 +71,12 @@
     <br>
 
 
-    <div style="width:1250px; padding-left:100px;">
-        <div class="table-responsive">
+    <div style="width:1300px; padding-left:60px;   font-size:10px;   overflow-x: display; overflow-y: auto;
+     height:450px;">
+        <div>
             @csrf
-            <table class="table table-light" id="editable" style="font-size:10px;m">
-                <thead>
+            <table class="table table-light" id="editable" >
+                <thead style=" position: static;">
                     <tr style="font-size:16px; text-align:center;">
                         <th style=" text-align:center;">Item</th>
                         <th style=" text-align:center;">Marca</th>
@@ -87,7 +87,8 @@
 
                     </tr>
                 </thead>
-                <tbody>
+                <div >
+                <tbody >
                     @foreach($productos as $producto)
                     <tr>
                         <td>{{$producto->item}}</td>

@@ -73,11 +73,15 @@
             
                 <form wire:submit.prevent="insertar_detalle_provicional()">
 
-                   
-                    <button class="form-control mr-sm-2 botonprincipal" style="width:200px;">Agregar Programación {{$tuplas}}
+                    <button class="form-control mr-sm-2 botonprincipal" style="width:200px;">Agregar Programación 
                     </button>
                     @csrf
                 </form>
+            </div>
+            <div class="col">
+            <a  type="button" href="detalles_programacion"class="form-control mr-sm-2 botonprincipal" style="width:200px;">Ver 
+                    </a>
+
             </div>
         </div>
 
@@ -109,6 +113,7 @@
                         <th>MARZO 2021 FACTURA #17976(Warehouse)</th>
                         <th>ENVIADO MES</th>
                         <th>SALDO</th>
+                        <th>OPERACIONES</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -133,6 +138,10 @@
                         <td>{{$datos->factura_del_mes}}</td>
                         <td>{{$datos->cantidad_enviada_mes}}</td>
                         <td>{{$datos->saldo}}</td>
+                        <td>
+                        
+                        
+                        </td>
                     </tr>
 
                     @endforeach
