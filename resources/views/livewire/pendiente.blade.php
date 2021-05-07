@@ -1,8 +1,5 @@
-
-
-@extends('principal')
-@section('content')
-
+<div xmlns:wire="http://www.w3.org/1999/xhtml">
+    
 
 
 
@@ -17,7 +14,7 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" />
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
     <script src="{{ URL::asset('css/tabla.js') }}"></script>
-
+    @livewireStyles
     <link rel="stylesheet" href="{{ asset('css/principal.css') }}" />
 
 
@@ -47,48 +44,37 @@
     <div class="container" style="width:1400px; padding-left:30px">
         <div class="row">
             <div class="col-10">
-                <form action="{{Route('buscar_pendiente')}}" method="POST" class="form-inline"
-                    style="margin-bottom:0px;" style="width:1100px;">
-                    @csrf
+                
                     <div class="row">
                         <div class="col-sm">
                             <label>De</label>
                         </div>
                         <div class="col-sm">
                             <input type="date" name="fecha_de" id="fecha_de" class="form-control mr-sm-2 botonprincipal"
-                                style="width:200px;" placeholder="Nombre">
+                                style="width:200px;" placeholder="Nombre" wire:model= "fede">
                         </div>
                         <div class="col-sm">
                             <label>Hasta</label>
                         </div>
                         <div class="col-sm">
-                            <input type="date" name="fecha_hasta" id="fecha_hasta"
+                            <input type="date" name="fecha_hasta" id="fecha_hasta" wire:model= "fecha"
                                 class="form-control mr-sm-2 botonprincipal" style="width:200px;" placeholder="Nombre">
                         </div>
                         <div class="col-sm">
                             <input name="nombre" id="nombre" class="form-control mr-sm-2 botonprincipal"
-                                style="width:200px;" placeholder="Nombre">
+                                style="width:200px;" placeholder="Nombre" wire:model= "nom">
                         </div>
-                        <div class="col-sm">
-                            <button class="form-control mr-sm-2 botonprincipal" type="submit" style="width:60px;">
-                                <span>
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor"
-                                        class="bi bi-search" viewBox="0 0 16 16">
-                                        <path
-                                            d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z" />
-                                    </svg>
-                                </span>
-                            </button>
-                        </div>
+                        
 
                     </div>
-                </form>
+               
             </div>
+
             <div class="col">
                 <form action="{{Route('exportar_pendiente')}}">
-                    <input type="text" value= "{{isset($nom)?$nom:null}}" name="nombre" id="nombre" hidden >
-                    <input type="date" value= "{{isset($fede)?$fede:null}}" name="fecha_de" id="fecha_de" hidden>
-                    <input type="date" value= "{{isset($feha)?$feha:null}}" name="fecha_hasta" id="fecha_hasta" hidden>
+                    <input type="text" value= "{{isset($nom)?$nom:null}}" name="nombre" id="nombre" hidden wire:model= "nom" >
+                    <input type="date" value= "{{isset($fede)?$fede:null}}" name="fecha_de" id="fecha_de" hidden wire:model= "fede">
+                    <input type="date" value= "{{isset($feha)?$feha:null}}" name="fecha_hasta" id="fecha_hasta" hidden wire:model= "fecha">
                     <button class="form-control mr-sm-2 botonprincipal" type="submit" style="width:120px;">Exportar
                     </button>
                 </form>
@@ -197,5 +183,6 @@
         });
     </script>
      
-@endsection
 
+
+</div>

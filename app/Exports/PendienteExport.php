@@ -29,10 +29,10 @@ class PendienteExport implements FromCollection,
     public $fede;
     public $feha;
     
-    function __construct($nom,$fede,$feha) {
+    function __construct($nom,$fede,$fecha) {
         $this->nom = $nom;
         $this->fede = $fede;
-        $this->feha = $feha;
+        $this->feha = $fecha;
     }
 
     public function headings(): array
