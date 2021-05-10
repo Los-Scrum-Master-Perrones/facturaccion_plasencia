@@ -28,11 +28,11 @@ class DetalleProgramacion extends Component
 
     }
 
-    public function eliminar_detalles($id){
+    public function eliminar_detalles(Request $request){
 
         $this->detalles_provicionales=[];
     
-        $this->borrar=\DB::select('call eliminar_detalles(:buscar)',['buscar'=>$id]);
+        $this->borrar=\DB::select('call eliminar_detalles(:buscar)',['buscar'=>$request->id_usuarioE]);
         ;
 
 

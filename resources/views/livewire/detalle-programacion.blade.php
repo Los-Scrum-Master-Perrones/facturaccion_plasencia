@@ -98,9 +98,10 @@
                         <td>{{$detalle_provicional->upc}}</td>
                         <td>{{$detalle_provicional->saldo}}</td>
                         <td>
-                            <a data-toggle="modal" data-target="#modal_eliminar_detalle" onclick ="datos_modal_eliminar({{ $detalle_provicional->id }})"href=""> 
-                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
-                                    fill="currentColor" class="bi bi-trash-fill" viewBox="0 0 16 16">
+                            <a data-toggle="modal" data-target="#modal_eliminar_detalle"
+                                onclick="datos_modal_eliminar({{ $detalle_provicional->id }})" href="{{$ids = $detalle_provicional->id}}">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                                    class="bi bi-trash-fill" viewBox="0 0 16 16">
                                     <path
                                         d="M2.5 1a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1H3v9a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V4h.5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1H2.5zm3 4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5zM8 5a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7A.5.5 0 0 1 8 5zm3 .5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 1 0z" />
                                 </svg></a>
@@ -114,24 +115,24 @@
 
     </div>
 
-    
-<script type="text/javascript">
-    function datos_modal_eliminar(id){ 
-var datas = '<?php echo json_encode($detalles_provicionales);?>';
 
-var data = JSON.parse(datas);
- 
+    <script type="text/javascript">
+        function datos_modal_eliminar(id) {
+            var datas = '<?php echo json_encode($detalles_provicionales);?>';
 
-for (var i = 0; i < data.length; i++) {  
-  if(data[i].id === id){  
-     document.formulario_mostrarE.id_usuarioE.value = data[i].id;
-  
-     
-    }
-}
+            var data = JSON.parse(datas);
 
-    }   
-</script>
+
+            for (var i = 0; i < data.length; i++) {
+                if (data[i].id === id) {
+                    document.formulario_mostrarE.id_usuarioE.value = data[i].id;
+
+
+                }
+            }
+
+        }
+    </script>
 
     <script type="text/javascript">
         $(document).ready(function () {
@@ -172,39 +173,43 @@ for (var i = 0; i < data.length; i++) {
 
 
 
-<!-- INICIO MODAL ELMINAR DETALLE -->
-<form    wire:submit.prevent="eliminar_detalles({{$detalle_provicional->id}})" id = "formulario_mostrarE" name = "formulario_mostrarE" action = ""  method="POST">
+    <!-- INICIO MODAL ELMINAR DETALLE -->
+    <form action="{{Route('borrardetalles_programacion')}}"  method= "POST" id="formulario_mostrarE"
+        name="formulario_mostrarE" action="" method="POST">
 
-@csrf
-<?php use App\Http\Controllers\UserController; ?>
-<div hidden>{{$id_usuario_basicoE=0}}</div>
-  
-<input name = "id_usuarioE" id="id_usuarioE" value ="" hidden />
+        @csrf
+        <?php use App\Http\Controllers\UserController; ?>
+        <div hidden>{{$id_usuario_basicoE=0}}</div>
 
-<div class="modal fade" id="modal_eliminar_detalle" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true" style="opacity:.9;background:#212529;">
-  <div class="modal-dialog modal-dialog-centered" >
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="staticBackdropLabel">Eliminar a <strong><input value ="" id="txt_usuarioE" name= "txt_usuarioE" style="border:none;"></strong> </h5>
-        <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <div class="modal-body">
-      ¿Estás seguro que quieres eliminar este usuario?
-      </div>
-      <div class="modal-footer" >
-        <button style=" background: #b39f64; color: #ecedf1;" type="button" class=" btn-info-claro " data-dismiss="modal" >
-            <span>Cancelar</span>
-        </button>
-        <button type="submit" class=" btn-info "   >
-            <span>Eliminar</span>
-        </button>
-      </div>
-    </div>
-  </div>
-</div>
-</form>
+        <input name="id_usuarioE" id="id_usuarioE" value="" hidden />
+
+        <div class="modal fade" id="modal_eliminar_detalle" data-backdrop="static" data-keyboard="false" tabindex="-1"
+            aria-labelledby="staticBackdropLabel" aria-hidden="true" style="opacity:.9;background:#212529;">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="staticBackdropLabel">Eliminar a <strong><input value=""
+                                    id="txt_usuarioE" name="txt_usuarioE" style="border:none;"></strong> </h5>
+                        <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        ¿Estás seguro que quieres eliminar este usuario?
+                    </div>
+                    <div class="modal-footer">
+                        <button style=" background: #b39f64; color: #ecedf1;" type="button" class=" btn-info-claro "
+                            data-dismiss="modal">
+                            <span>Cancelar</span>
+                        </button>
+                        <button type="submit" class=" btn-info ">
+                            <span>Eliminar</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
 
 
-<!-- FIN MODAL ELMINAR DETALLE -->
+    <!-- FIN MODAL ELMINAR DETALLE -->
 
 </div>

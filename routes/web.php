@@ -81,6 +81,14 @@ Route::get('/importar_clase', [CapaProductoController::class, 'import']);
 Route::get('/pendiente', Pendiente::class)->name('pendiente');
 Route::post('/pendiente', Pendiente::class)->name('pendiente');
 
+Route::get('/borrarpendiente',[ Pendiente::class,'eliminar_pendiente'])->name('borrarpendiente');
+Route::post('/borrarpendiente',[ Pendiente::class,'eliminar_pendiente'])->name('borrarpendiente');
+
+
+Route::get('/actualizar_pendiente',[ Pendiente::class,'actualizar_pendiente'])->name('actualizar_pendiente');
+Route::post('/actualizar_pendiente',[ Pendiente::class,'actualizar_pendiente'])->name('actualizar_pendiente');
+
+
 
 Route::get('/inventario_cajas', InventarioCajas::class)->name('inventario_cajas');
 Route::post('/inventario_cajas', InventarioCajas::class)->name('inventario_cajas');
@@ -96,6 +104,11 @@ Route::post('/historial_programacion', HistorialProgramacion::class)->name('hist
 
 Route::get('/detalles_programacion', DetalleProgramacion::class)->name('detalles_programacion');
 Route::post('/detalles_programacion', DetalleProgramacion::class)->name('detalles_programacion');
+
+
+
+Route::get('/borrardetalles_programacion', [DetalleProgramacion::class,'eliminar_detalles'])->name('borrardetalles_programacion');
+Route::post('/borrardetalles_programacion', [DetalleProgramacion::class,'eliminar_detalles'])->name('borrardetalles_programacion');
 
 
 
@@ -133,6 +146,7 @@ Route::post('/insertar_tipo', [DatosProductos::class, 'insertar_tipo'])->name('i
 
 Route::get('/insertar_capa', [DatosProductos::class, 'insertar_capa'])->name('insertar_capa');
 Route::post('/insertar_capa', [DatosProductos::class, 'insertar_capa'])->name('insertar_capa');
+
 
 
 
