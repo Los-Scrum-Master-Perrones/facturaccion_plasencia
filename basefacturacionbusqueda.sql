@@ -31,11 +31,43 @@ CREATE TABLE IF NOT EXISTS `anadir_inventario_cajas` (
   PRIMARY KEY (`id_cajas`) USING BTREE
 ) ENGINE=MyISAM AUTO_INCREMENT=21 DEFAULT CHARSET=latin1 ROW_FORMAT=DYNAMIC;
 
+CREATE TABLE `factura_terminados` (
+	`id` INT(11) NOT NULL AUTO_INCREMENT,
+	`cliente` VARCHAR(100) NOT NULL DEFAULT '0' COLLATE 'utf8_general_ci',
+	`numero_factura` VARCHAR(30) NULL DEFAULT '0' COLLATE 'utf8_general_ci',
+	`contenedor` TINYINT(4) NOT NULL DEFAULT '0',
+	`cantidad_bultos` SMALLINT(6) NOT NULL DEFAULT '0',
+	`total_puros` MEDIUMINT(9) NOT NULL DEFAULT '0',
+	`total_peso_bruto` MEDIUMINT(9) NOT NULL DEFAULT '0',
+	`total_peso_neto` MEDIUMINT(9) NOT NULL DEFAULT '0',
+	`fecha_factura` DATE NOT NULL,
+	PRIMARY KEY (`id`) USING BTREE
+
+) COLLATE='utf8_general_ci' ENGINE=InnoDB;
+
+DELETE FROM `factura_terminados`;
 -- Volcando datos para la tabla facturacion_plasencia.anadir_inventario_cajas: 0 rows
 DELETE FROM `anadir_inventario_cajas`;
 /*!40000 ALTER TABLE `anadir_inventario_cajas` DISABLE KEYS */;
 /*!40000 ALTER TABLE `anadir_inventario_cajas` ENABLE KEYS */;
 
+CREATE TABLE `detalle_factura` (
+	`id_detalle` BIGINT(20) NOT NULL AUTO_INCREMENT,
+	`id_pendiente` BIGINT(20) NOT NULL DEFAULT '0',
+	`id_venta` INT(11) NOT NULL,
+	`peso_bruto` DECIMAL(5,2) NOT NULL,
+	`peso_neto` DECIMAL(5,2) NOT NULL,
+	`back_order` DECIMAL(5,2) NOT NULL,
+	`cantidad_puros` SMALLINT(6) NOT NULL,
+	`unidad` SMALLINT(6) NOT NULL,
+	`upc_bundle` BIT(1) NOT NULL,
+	`observaciones` TINYTEXT NULL COLLATE 'utf8_general_ci',
+	PRIMARY KEY (`id_detalle`) USING BTREE
+)
+COLLATE='utf8_general_ci'
+ENGINE=InnoDB
+;
+DELETE FROM `detalle_factura`;
 -- Volcando estructura para tabla facturacion_plasencia.cajas
 CREATE TABLE IF NOT EXISTS `cajas` (
   `id_cajas` int(11) NOT NULL AUTO_INCREMENT,
