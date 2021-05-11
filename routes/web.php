@@ -111,6 +111,10 @@ Route::get('/borrardetalles_programacion', [DetalleProgramacion::class,'eliminar
 Route::post('/borrardetalles_programacion', [DetalleProgramacion::class,'eliminar_detalles'])->name('borrardetalles_programacion');
 
 
+Route::get('/actualizar_rdetalles_programacion', [DetalleProgramacion::class,'actualizar_saldo'])->name('actualizar_rdetalles_programacion');
+Route::post('/actualizar_rdetalles_programacion', [DetalleProgramacion::class,'actualizar_saldo'])->name('actualizar_rdetalles_programacion');
+
+
 
 Route::get('/pedido_buscar', [PedidoController::class, 'buscar'])->name('buscar_pedido');
 Route::post('/pedido_buscar', [PedidoController::class, 'buscar'])->name('buscar_pedido');
