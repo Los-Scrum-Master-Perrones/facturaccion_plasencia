@@ -87,7 +87,7 @@
 
                     </tr>
                 </thead>
-                <div >
+               
                 <tbody >
                     @foreach($productos as $producto)
                     <tr>

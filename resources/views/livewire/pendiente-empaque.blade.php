@@ -110,10 +110,7 @@
                         <th>CELLO</th>
                         <th>UPC</th>
                         <th>PENDIENTE</th>
-                        <th>MARZO 2021 FACTURA #17976(Warehouse)</th>
-                        <th>ENVIADO MES</th>
                         <th>SALDO</th>
-                        <th>OPERACIONES</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -135,13 +132,7 @@
                         <td>{{$datos->cello}}</td>
                         <td>{{$datos->upc}}</td>
                         <td>{{$datos->pendiente_empaque}}</td>
-                        <td>{{$datos->factura_del_mes}}</td>
-                        <td>{{$datos->cantidad_enviada_mes}}</td>
                         <td>{{$datos->saldo}}</td>
-                        <td>
-                        
-                        
-                        </td>
                     </tr>
 
                     @endforeach

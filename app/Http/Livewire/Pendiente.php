@@ -7,6 +7,8 @@ use App\Exports\PendienteExport;
 use Illuminate\Http\Request;
 use DB;
 use Maatwebsite\Excel\Facades\Excel;
+
+
 class Pendiente extends Component
 {
 
@@ -15,6 +17,8 @@ class Pendiente extends Component
     public $fede;
     public $fecha;
     public $busqueda;
+    public $borrar;
+    public $actualizar;
 
     public function render()
     {
@@ -38,6 +42,8 @@ class Pendiente extends Component
         $this->nom = "";
         $this->fede = "";
         $this->fecha = "";
+        $this->borrar = [];
+        $this->actualizar= [];
 
         $this->datos_pendiente = DB::select(
             'call buscar_pendiente(:nombre,:fechade,:fechahasta)',
@@ -129,9 +135,56 @@ class Pendiente extends Component
 
     
 
+
+    public function eliminar_pendiente(Request $request){
+
+        $this->datos_pendiente =[];
+
+    
+        $this->borrar=\DB::select('call borrar_pendientes(:eliminar)',['eliminar'=>$request->id_pendiente]);
+
+     
+        return redirect()->route('pendiente'); 
+    
+        }
+
+        public function actualizar_pendiente(Request $request){
+
+          
+    
+        
+            $this->actualizar=\DB::select('call actualizar_pendientes(:id,:item,:orden,:observacion,:presentacion)',
+            ['id'=>$request->id_pendientea,
+            'item'=>$request->itema,
+            'orden'=>$request->orden_sistema,
+            'observacion'=>$request->observacion,
+            'presentacion'=>$request->presentacion,
+            ]);
+    
+            
+        $this->datos_pendiente = DB::select(
+            'call buscar_pendiente(:nombre,:fechade,:fechahasta)',
+            [
+                'nombre' =>  $this->nom,
+                'fechade' =>  $this->fede,
+                'fechahasta' => $this->fecha,
+            ]
+        );
+         
+            return redirect()->route('pendiente'); 
+        
+            }
+
+
+
     function exportPendiente(Request $request)
     {
        
         return Excel::download(new PendienteExport($this->nom, $this->fede, $this->fecha), 'Pendiente.xlsx');
     }
+
+
+
+
+
 }

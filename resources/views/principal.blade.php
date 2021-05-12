@@ -41,7 +41,7 @@
 
     <div class="all" style="padding-bottom: 10px">
 
-        
+
         <div class="lefter3">
 
             <button type="submit" class="buttonsubmit" data-toggle="modal" data-target="#modal_cerrarsesion">
@@ -79,16 +79,16 @@
             <form action="{{Route('productos')}}" method="GET">
                 @csrf
                 <button type="submit" class="buttonsubmit" aria-placeholder="Hola">
-                    <abbr title="Catálogo de Productos Existente"><svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="white" class="bi bi-box"
-                        viewBox="0 0 16 16">
-                        <path
-                            d="M8.186 1.113a.5.5 0 0 0-.372 0L1.846 3.5 8 5.961 14.154 3.5 8.186 1.113zM15 4.239l-6.5 2.6v7.922l6.5-2.6V4.24zM7.5 14.762V6.838L1 4.239v7.923l6.5 2.6zM7.443.184a1.5 1.5 0 0 1 1.114 0l7.129 2.852A.5.5 0 0 1 16 3.5v8.662a1 1 0 0 1-.629.928l-7.185 2.874a.5.5 0 0 1-.372 0L.63 13.09a1 1 0 0 1-.63-.928V3.5a.5.5 0 0 1 .314-.464L7.443.184z" />
-                    </svg></abbr>
+                    <abbr title="Catálogo de Productos Existente"><svg xmlns="http://www.w3.org/2000/svg" width="30"
+                            height="30" fill="white" class="bi bi-box" viewBox="0 0 16 16">
+                            <path
+                                d="M8.186 1.113a.5.5 0 0 0-.372 0L1.846 3.5 8 5.961 14.154 3.5 8.186 1.113zM15 4.239l-6.5 2.6v7.922l6.5-2.6V4.24zM7.5 14.762V6.838L1 4.239v7.923l6.5 2.6zM7.443.184a1.5 1.5 0 0 1 1.114 0l7.129 2.852A.5.5 0 0 1 16 3.5v8.662a1 1 0 0 1-.629.928l-7.185 2.874a.5.5 0 0 1-.372 0L.63 13.09a1 1 0 0 1-.63-.928V3.5a.5.5 0 0 1 .314-.464L7.443.184z" />
+                        </svg></abbr>
                 </button>
             </form>
-            
+
             <div class="text">CATÁLOGO</div>
-        
+
 
         </div>
 
@@ -123,7 +123,7 @@
             <div class="text">INICIO</div>
         </div>
 
-        
+
         <div class="right">
             <form action="{{Route('pendiente_empaque')}}" method="GET">
                 @csrf
@@ -155,17 +155,19 @@
         </div>
 
         <div class="righter2">
-            <form action="{{Route('f_terminado')}}" method="GET">
+            <form action="{{Route('p_terminado')}}" method="GET">
                 @csrf
                 <button type="submit" class="buttonsubmit">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="white" class="bi bi-truck" viewBox="0 0 16 16">
-                        <path d="M0 3.5A1.5 1.5 0 0 1 1.5 2h9A1.5 1.5 0 0 1 12 3.5V5h1.02a1.5 1.5 0 0 1 1.17.563l1.481 1.85a1.5 1.5 0 0 1 .329.938V10.5a1.5 1.5 0 0 1-1.5 1.5H14a2 2 0 1 1-4 0H5a2 2 0 1 1-3.998-.085A1.5 1.5 0 0 1 0 10.5v-7zm1.294 7.456A1.999 1.999 0 0 1 4.732 11h5.536a2.01 2.01 0 0 1 .732-.732V3.5a.5.5 0 0 0-.5-.5h-9a.5.5 0 0 0-.5.5v7a.5.5 0 0 0 .294.456zM12 10a2 2 0 0 1 1.732 1h.768a.5.5 0 0 0 .5-.5V8.35a.5.5 0 0 0-.11-.312l-1.48-1.85A.5.5 0 0 0 13.02 6H12v4zm-9 1a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm9 0a1 1 0 1 0 0 2 1 1 0 0 0 0-2z"/>
-                      </svg>
-                    
-                    
+                    <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="white" class="bi bi-truck"
+                        viewBox="0 0 16 16">
+                        <path
+                            d="M0 3.5A1.5 1.5 0 0 1 1.5 2h9A1.5 1.5 0 0 1 12 3.5V5h1.02a1.5 1.5 0 0 1 1.17.563l1.481 1.85a1.5 1.5 0 0 1 .329.938V10.5a1.5 1.5 0 0 1-1.5 1.5H14a2 2 0 1 1-4 0H5a2 2 0 1 1-3.998-.085A1.5 1.5 0 0 1 0 10.5v-7zm1.294 7.456A1.999 1.999 0 0 1 4.732 11h5.536a2.01 2.01 0 0 1 .732-.732V3.5a.5.5 0 0 0-.5-.5h-9a.5.5 0 0 0-.5.5v7a.5.5 0 0 0 .294.456zM12 10a2 2 0 0 1 1.732 1h.768a.5.5 0 0 0 .5-.5V8.35a.5.5 0 0 0-.11-.312l-1.48-1.85A.5.5 0 0 0 13.02 6H12v4zm-9 1a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm9 0a1 1 0 1 0 0 2 1 1 0 0 0 0-2z" />
+                    </svg>
+
+
                 </button>
             </form>
-            
+
             <div class="text">TERMINADO</div>
         </div>
 
@@ -188,22 +190,7 @@
             <div class="text">FACTURACION</div>
         </div>
 
-      
-       
-
-
-
-
-
     </div>
-
-
-
-
-
-
-
-
 
     <div class="modal fade" id="modal_cerrarsesion" data-backdrop="static" data-keyboard="false" tabindex="-1"
         aria-labelledby="staticBackdropLabel" aria-hidden="true" style="opacity:.9;background:#212529;">

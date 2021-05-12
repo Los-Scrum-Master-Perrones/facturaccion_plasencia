@@ -1,6 +1,6 @@
 -- --------------------------------------------------------
 -- Host:                         127.0.0.1
--- Versión del servidor:         10.5.8-MariaDB - mariadb.org binary distribution
+-- Versión del servidor:         5.7.24 - MySQL Community Server (GPL)
 -- SO del servidor:              Win64
 -- HeidiSQL Versión:             11.0.0.5919
 -- --------------------------------------------------------
@@ -20,32 +20,64 @@ USE `facturacion_plasencia`;
 CREATE TABLE IF NOT EXISTS `anadir_inventario_cajas` (
   `id_cajas` int(11) NOT NULL AUTO_INCREMENT,
   `codigo` varchar(50) DEFAULT NULL,
-  `descripcion` longtext DEFAULT NULL,
-  `lote_origen` longtext DEFAULT NULL,
-  `lote_destino` longtext DEFAULT NULL,
-  `cantidad` longtext DEFAULT NULL,
-  `costo_u` longtext DEFAULT NULL,
-  `subtotal` longtext DEFAULT NULL,
+  `descripcion` longtext,
+  `lote_origen` longtext,
+  `lote_destino` longtext,
+  `cantidad` longtext,
+  `costo_u` longtext,
+  `subtotal` longtext,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id_cajas`) USING BTREE
 ) ENGINE=MyISAM AUTO_INCREMENT=21 DEFAULT CHARSET=latin1 ROW_FORMAT=DYNAMIC;
 
+CREATE TABLE `factura_terminados` (
+	`id` INT(11) NOT NULL AUTO_INCREMENT,
+	`cliente` VARCHAR(100) NOT NULL DEFAULT '0' COLLATE 'utf8_general_ci',
+	`numero_factura` VARCHAR(30) NULL DEFAULT '0' COLLATE 'utf8_general_ci',
+	`contenedor` TINYINT(4) NOT NULL DEFAULT '0',
+	`cantidad_bultos` SMALLINT(6) NOT NULL DEFAULT '0',
+	`total_puros` MEDIUMINT(9) NOT NULL DEFAULT '0',
+	`total_peso_bruto` MEDIUMINT(9) NOT NULL DEFAULT '0',
+	`total_peso_neto` MEDIUMINT(9) NOT NULL DEFAULT '0',
+	`fecha_factura` DATE NOT NULL,
+	PRIMARY KEY (`id`) USING BTREE
+
+) COLLATE='utf8_general_ci' ENGINE=InnoDB;
+
+DELETE FROM `factura_terminados`;
 -- Volcando datos para la tabla facturacion_plasencia.anadir_inventario_cajas: 0 rows
 DELETE FROM `anadir_inventario_cajas`;
 /*!40000 ALTER TABLE `anadir_inventario_cajas` DISABLE KEYS */;
 /*!40000 ALTER TABLE `anadir_inventario_cajas` ENABLE KEYS */;
 
+CREATE TABLE `detalle_factura` (
+	`id_detalle` BIGINT(20) NOT NULL AUTO_INCREMENT,
+	`id_pendiente` BIGINT(20) NOT NULL DEFAULT '0',
+	`id_venta` INT(11) NOT NULL,
+	`peso_bruto` DECIMAL(5,2) NOT NULL,
+	`peso_neto` DECIMAL(5,2) NOT NULL,
+	`back_order` DECIMAL(5,2) NOT NULL,
+	`cantidad_puros` SMALLINT(6) NOT NULL,
+	`unidad` SMALLINT(6) NOT NULL,
+	`upc_bundle` BIT(1) NOT NULL,
+	`observaciones` TINYTEXT NULL COLLATE 'utf8_general_ci',
+	PRIMARY KEY (`id_detalle`) USING BTREE
+)
+COLLATE='utf8_general_ci'
+ENGINE=InnoDB
+;
+DELETE FROM `detalle_factura`;
 -- Volcando estructura para tabla facturacion_plasencia.cajas
 CREATE TABLE IF NOT EXISTS `cajas` (
   `id_cajas` int(11) NOT NULL AUTO_INCREMENT,
   `codigo` varchar(50) DEFAULT NULL,
-  `descripcion` longtext DEFAULT NULL,
-  `lote_origen` longtext DEFAULT NULL,
-  `lote_destino` longtext DEFAULT NULL,
-  `cantidad` longtext DEFAULT NULL,
-  `costo_u` longtext DEFAULT NULL,
-  `subtotal` longtext DEFAULT NULL,
+  `descripcion` longtext,
+  `lote_origen` longtext,
+  `lote_destino` longtext,
+  `cantidad` longtext,
+  `costo_u` longtext,
+  `subtotal` longtext,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id_cajas`)
@@ -834,7 +866,7 @@ CREATE TABLE IF NOT EXISTS `detalle_clase_productos` (
   `id_marca` int(11) NOT NULL,
   `id_cello` int(11) NOT NULL,
   `id_tipo_empaque` int(11) NOT NULL,
-  `otra_descripcion` text COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `otra_descripcion` text COLLATE utf8mb4_unicode_ci,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id_producto`) USING BTREE
@@ -879,279 +911,18 @@ CREATE TABLE IF NOT EXISTS `detalle_programacion_temporal` (
   `numero_orden` varchar(50) DEFAULT NULL,
   `orden` varchar(50) DEFAULT NULL,
   `cod_producto` varchar(50) DEFAULT NULL,
-  `saldo` bigint(20) DEFAULT NULL,
+  `saldo` decimal(8,2) DEFAULT NULL,
+  `id_pendiente` int(11) DEFAULT NULL,
   PRIMARY KEY (`id_detalle_programacion`) USING BTREE
-) ENGINE=MyISAM AUTO_INCREMENT=266 DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
 
--- Volcando datos para la tabla facturacion_plasencia.detalle_programacion_temporal: 265 rows
+-- Volcando datos para la tabla facturacion_plasencia.detalle_programacion_temporal: 3 rows
 DELETE FROM `detalle_programacion_temporal`;
 /*!40000 ALTER TABLE `detalle_programacion_temporal` DISABLE KEYS */;
-INSERT INTO `detalle_programacion_temporal` (`id_detalle_programacion`, `numero_orden`, `orden`, `cod_producto`, `saldo`) VALUES
-	(1, '78', '7', NULL, 89),
-	(2, '', 'FTT-1479', 'P-01314', 9000),
-	(3, '', 'INT-H-1234', 'P-01314', 500),
-	(4, '', 'HON-3144', 'P-22640', 200),
-	(5, '', 'HON-3144', NULL, 200),
-	(6, '', 'HON-3144', 'P-22642', 200),
-	(7, '', 'HON-3144', NULL, 200),
-	(8, '', 'INT-H-1233', NULL, 600),
-	(9, '', 'INT-H-1233', NULL, 400),
-	(10, '', 'FTT-1479', 'P-02161', 10000),
-	(11, '', 'INT-H-1212', NULL, 20),
-	(12, '', 'INT-H-1239', 'P-02507', 100),
-	(13, '', 'INT-H-1237', 'P-02507', 1000),
-	(14, '', 'INT-H-1235', 'P-02509', 40),
-	(15, '', 'HON-3142', 'P-02433', 1000),
-	(16, '', 'INT-H-1239', 'P-02433', 160),
-	(17, '', 'INT-H-1238', 'P-02433', 500),
-	(18, '', 'INT-H-1236', 'P-02433', 200),
-	(19, '', 'INT-H-1239', NULL, 40),
-	(20, '', 'INT-H-1240', NULL, 100),
-	(21, '', 'INT-H-1212', 'P-02501', 200),
-	(22, '', 'HON-3142', 'P-02032', 1200),
-	(23, '', 'HON-3142', 'P-02033', 2800),
-	(24, '', 'HON-3142', 'P-02034', 4400),
-	(25, '', 'HON-3138', 'P-02034', 5000),
-	(26, '', 'HON-3142', 'P-02924', 400),
-	(27, '', 'INT-H-1212', 'P-02162', 1400),
-	(28, '', 'FTT-1479', 'P-02162', 3000),
-	(29, '', 'HON-3142', 'P-02040', 400),
-	(30, '', 'INT-H-1238', 'P-02040', 140),
-	(31, '', 'HON-3138', 'P-02040', 7500),
-	(32, '', 'INT-H-1238', 'P-02980', 400),
-	(33, '', 'INT-H-1238', 'P-02977', 1000),
-	(34, '', 'HON-3142', 'P-02000', 9600),
-	(35, '', 'HON-3142', 'P-02001', 11600),
-	(36, '', 'INT-H-1235', 'P-02001', 400),
-	(37, '', 'HON-3142', 'P-02000', 10000),
-	(38, '', 'HON-3142', 'P-02001', 12000),
-	(39, '', 'INT-H-1235', 'P-02001', 400),
-	(40, '', 'HON-3132', 'P-02000', 1000),
-	(41, '', 'HON-3139', 'P-02000', 3000),
-	(42, '', 'HON-3142', 'P-02020', 1600),
-	(43, '', 'INT-H-1239', 'P-02020', 100),
-	(44, '', 'HON-3142', 'P-02021', 400),
-	(45, '', 'HON-3135', 'P-02016', 500),
-	(46, '', 'HON-3135', 'p-02017', 500),
-	(47, '', 'HON-3135', 'P-02031', 500),
-	(48, '', 'HON-3138', 'P-02020', 5000),
-	(49, '', 'HON-3139', 'P-02020', 500),
-	(50, '', 'HON-3142', 'P-02004', 4000),
-	(51, '', 'INT-H-1235', 'P-02004', 100),
-	(52, '', 'HON-3142', 'P-02005', 3600),
-	(53, '', 'INT-H-1235', 'P-02005', 400),
-	(54, '', 'INT-H-1239', 'P-02005', 200),
-	(55, '', 'HON-3142', 'P-02018', 400),
-	(56, '', 'HON-3142', 'P-02019', 800),
-	(57, '', 'HON-3142', 'P-22078', 800),
-	(58, '', 'INT-H-1235', 'P-22078', 80),
-	(59, '', 'INT-H-1239', 'P-22078', 40),
-	(60, '', 'HON-3133', 'P-23234', 2000),
-	(61, '', 'HON-3142', 'p-02002', 3600),
-	(62, '', 'HON-3142', 'P-02003', 3200),
-	(63, '', 'HON-3142', 'p-02002', 4000),
-	(64, '', 'HON-3142', 'P-02003', 2000),
-	(65, '', 'HON-3142', 'P-02021', 2000),
-	(66, '', 'INT-H-1235', 'P-02397', 1700),
-	(67, '', 'HON-3142', 'P-02016', 4000),
-	(68, '', 'HON-3142', 'p-02017', 7200),
-	(69, '', 'INT-H-1239', 'p-02017', 200),
-	(70, '', 'HON-3142', 'P-02031', 3600),
-	(71, '', 'HON-3142', 'P-22263', 1200),
-	(72, '', 'HON-3142', 'P-22247', 1800),
-	(73, '', 'HON-3142', 'P-22248', 1200),
-	(74, '', 'INT-H-1237', 'P-22248', 300),
-	(75, '', 'HON-3142', 'P-22288', 600),
-	(76, '', 'HON-3142', 'P-22289', 1000),
-	(77, '', 'HON-3142', NULL, 200),
-	(78, '', 'HON-3142', 'P-22368', 62800),
-	(79, '', 'HON-3142', 'P-22620', 1200),
-	(80, '', 'HON-3142', 'p-02010', 5500),
-	(81, '', 'HON-3142', 'P-02011', 1500),
-	(82, '', 'HON-3142', 'P-02024', 2000),
-	(83, '', 'INT-H-1212', 'P-02024', 460),
-	(84, '', 'HON-3142', 'P-02024', 1600),
-	(85, '', 'HON-3142', 'P-02028', 2000),
-	(86, '', 'HON-3142', 'P-02028', 2000),
-	(87, '', 'INT-H-1239', 'P-02028', 100),
-	(88, '', 'HON-3138', 'P-02028', 20000),
-	(89, '', 'HON-3142', 'P-01308', 1000),
-	(90, '', 'HON-3142', 'P-01308', 1200),
-	(91, '', 'HON-3142', 'P-02025', 1000),
-	(92, '', 'HON-3142', 'P-02025', 400),
-	(93, '', 'HON-3135', 'P-02025', 1250),
-	(94, '', 'HON-3139', NULL, 400),
-	(95, '', 'HON-3142', 'P-02001', NULL),
-	(96, '', 'HON-3135', 'P-02147', 500),
-	(97, '', 'HON-3141', 'P-02041', 325),
-	(98, '', 'HON-3141', 'P-02045', 2500),
-	(99, '', 'HON-3141', 'P-02047', 1000),
-	(100, '', 'HON-3141', 'P-02045', 1750),
-	(101, '', 'HON-3142', 'P-02179', 400),
-	(102, '', 'HON-3142', NULL, 400),
-	(103, '', 'HON-3142', 'P-02181', 400),
-	(104, '', 'HON-3142', 'P-23691', 6400),
-	(105, '', 'INT-H-1235', 'P-23693', 300),
-	(106, '', 'INT-H-1239', 'P-23693', 200),
-	(107, '', 'HON-3142', 'P-23694', 5200),
-	(108, '', 'INT-H-1235', 'P-23694', 380),
-	(109, '', 'INT-H-1239', 'P-23694', 100),
-	(110, '', 'FTT-1472', 'P-22797', 2500),
-	(111, '', 'INT-H-1235', 'P-23628', 160),
-	(112, '', 'INT-H-1239', 'P-23628', 200),
-	(113, '', 'INT-H-1239', 'P-23629', 200),
-	(114, '', 'HON-3140', 'P-02617', 360),
-	(115, '', 'HON-3140', NULL, 1920),
-	(116, '', 'HON-3140', 'P-02615', 480),
-	(117, '', 'HON-3140', 'P-22628', 320),
-	(118, '', 'HON-3140', NULL, 750),
-	(119, '', 'HON-3140', 'P-22648', 1200),
-	(120, '', 'HON-3136', 'P-02494', 500),
-	(121, '', 'HON-3136', NULL, 500),
-	(122, '', 'INT-H-1235', NULL, 140),
-	(123, '', 'HON-3142', 'P-03201', 2400),
-	(124, '', 'INT-H-1235', 'P-03201', 600),
-	(125, '', 'HON-3142', 'P-03202', 4000),
-	(126, '', 'HON-3142', 'P-03203', 800),
-	(127, '', 'HON-3142', 'P-03204', 800),
-	(128, '', 'INT-H-1237', 'P-03204', 400),
-	(129, '', 'HON-3135', 'P-03205', 1250),
-	(130, '', 'HON-3138', 'P-03202', 2000),
-	(131, '', 'HON-3139', 'P-03201', 700),
-	(132, '', 'HON-3138', 'P-02001', 10000),
-	(133, '', 'HON-3138', NULL, 10000),
-	(134, '', 'HON-3142', 'P-02004', 14300),
-	(135, '', 'HON-3126', 'P-02360', 400),
-	(136, '', 'FTT-1475', 'P-23708', 6000),
-	(137, '', 'FTT-1475', 'P-23709', 6000),
-	(138, '', 'FTT-1475', 'P-23715', 2000),
-	(139, '', 'FTT-1475', 'P-23716', 2000),
-	(140, '', 'FTT-1475', 'P-23713', 2000),
-	(141, '', 'FTT-1475', 'P-23714', 2000),
-	(142, '', 'FTT-1475', 'P-23706', 2000),
-	(143, '', 'FTT-1475', 'P-23707', 2000),
-	(144, '', 'HON-3141', NULL, NULL),
-	(145, '', 'HON-3141', NULL, NULL),
-	(146, '', 'HON-3137', NULL, 1000),
-	(147, '', 'HON-3136', 'P-22193', 750),
-	(148, '', 'HON-3136', 'P-22194', 750),
-	(149, '', 'HON-3136', NULL, 750),
-	(150, '', 'HON-3136', NULL, 1500),
-	(151, '', 'FTT-1474', 'P-22503', 32000),
-	(152, '', 'HON-3130', NULL, 1000),
-	(153, '', 'HON-3130', 'P-22993', 2000),
-	(154, '', 'HON-3131', NULL, 2000),
-	(155, '', 'HON-3130', 'P-02207', 4000),
-	(156, '', 'HON-3131', 'P-02207', 3000),
-	(157, '', 'HON-3130', NULL, 2000),
-	(158, '', 'HON-3131', 'P-02445', 2000),
-	(159, '', 'HON-3131', 'P-02209', 5000),
-	(160, '', 'HON-3131', 'P-02277', 4000),
-	(161, '', 'HON-3131', NULL, 6000),
-	(162, '', 'HON-3131', 'P-02274', 2000),
-	(163, '', 'HON-3130', 'P-02273', 1000),
-	(164, '', 'HON-3130', 'P-02274', 1000),
-	(165, '', 'HON-3130', NULL, 1000),
-	(166, '', 'HON-3130', 'P-02847', 1000),
-	(167, '', 'HON-3130', 'P-22359', 4000),
-	(168, '', 'HON-3130', 'P-22360', 2000),
-	(169, '', 'HON-3131', 'P-22359', 6000),
-	(170, '', 'HON-3131', 'P-22361', 2000),
-	(171, '', 'HON-3131', 'P-22360', 1000),
-	(172, '', 'HON-3130', 'P-02277', 2000),
-	(173, '', 'HON-3130', NULL, 2000),
-	(174, '', 'HON-3130', 'P-02481', 2000),
-	(175, '', 'HON-3130', NULL, 2400),
-	(176, '', 'HON-3130', NULL, 2000),
-	(177, '', 'HON-3130', 'P-02219', 2000),
-	(178, '', 'HON-3128', NULL, 800),
-	(179, '', 'HON-3128', NULL, 800),
-	(180, '', 'HON-3128', 'P-02913', 800),
-	(181, '', 'INT-H-1235', 'P-22251', 200),
-	(182, '', 'HON-3135', 'P-22251', 625),
-	(183, '', 'HON-3132', 'P-22300', 1000),
-	(184, '', 'HON-3138', 'P-22251', 10000),
-	(185, '', 'HON-3142', 'P-22251', 3200),
-	(186, '', 'HON-3142', 'P-22300', 3200),
-	(187, '', 'INT-H-1238', 'P-22300', 80),
-	(188, '', 'HON-3131', 'P-02220', 6000),
-	(189, '', 'HON-3141', NULL, 400),
-	(190, '', 'HON-3141', 'P-02560', 4000),
-	(191, '', 'HON-3141', 'P-03193', 1500),
-	(192, '', 'HON-3127', 'P-02260', 2000),
-	(193, '', 'HON-3127', 'P-02475', 2000),
-	(194, '', 'HON-3142', 'P-02337', 4000),
-	(195, '', 'INT-H-1235', 'P-02337', 380),
-	(196, '', 'INT-H-1238', 'P-02337', 200),
-	(197, '', 'HON-3142', 'P-02339', 8000),
-	(198, '', 'HON-3142', 'P-02338', 4800),
-	(199, '', 'HON-3142', 'P-02341', 400),
-	(200, '', 'HON-3138', 'P-02339', 25000),
-	(201, '', 'HON-3142', 'P-02342', 1200),
-	(202, '', 'INT-H-1238', 'P-02342', 200),
-	(203, '', 'HON-3141', 'P-02337', 40000),
-	(204, '', 'INT-H-1237', 'P-22372', 600),
-	(205, '', 'HON-3135', 'P-22371', 1250),
-	(206, '', 'HON-3135', 'P-22372', 1250),
-	(207, '', 'HON-3127', 'P-23833', 10000),
-	(208, '', 'HON-3127', NULL, 10000),
-	(209, '', 'HON-3127', 'P-23831', 10000),
-	(210, '', 'HON-3127', 'P-23833', 2500),
-	(211, '', 'HON-3127', NULL, 2500),
-	(212, '', 'HON-3127', 'P-23831', 2500),
-	(213, '', 'HON-3127', 'P-23833', 3000),
-	(214, '', 'HON-3127', NULL, 3000),
-	(215, '', 'HON-3127', 'P-23831', 3000),
-	(216, '', 'HON-3141', NULL, 200),
-	(217, '', 'HON-3141', 'P-02097', 7500),
-	(218, '', 'HON-3141', 'P-02097', 1200),
-	(219, '', 'HON-3141', 'P-02098', 2000),
-	(220, '', 'FTT-1473', NULL, 3000),
-	(221, '', 'FTT-1473', NULL, 3000),
-	(222, '', 'FTT-1473', NULL, 3000),
-	(223, '', 'FTT-1473', NULL, 3000),
-	(224, '', 'FTT-1472', 'P-23566', 60000),
-	(225, '', 'FTT-1472', 'P-23567', 60000),
-	(226, '', 'FTT-1477', 'P-22685', 600),
-	(227, '', 'FTT-1472', 'P-23395', 60000),
-	(228, '', 'FTT-1472', 'P-23393', 60000),
-	(229, '', 'HON-3141', 'P-23429', 1400),
-	(230, '', 'HON-3141', 'P-23431', 1600),
-	(231, '', 'HON-3142', 'P-22518', 1200),
-	(232, '', 'INT-H-1235', 'P-22518', 240),
-	(233, '', 'HON-3142', 'P-22536', 400),
-	(234, '', 'HON-3135', 'P-22518', 1250),
-	(235, '', 'HON-3138', 'P-22518', 5000),
-	(236, '', 'HON-3139', 'P-22518', 750),
-	(237, '', 'HON-3139', 'P-23193', 3000),
-	(238, '', 'HON-3142', 'P-23377', 600),
-	(239, '', 'HON-3142', 'P-23376', 1200),
-	(240, '', 'HON-3142', 'P-23432', 400),
-	(241, '', 'FTT-1472', 'P-23396', 5000),
-	(242, '', 'HON-3124', 'P-23248', 2000),
-	(243, '', 'HON-3124', 'P-23249', 2000),
-	(244, '', 'HON-3124', 'P-23250', 2000),
-	(245, '', 'HON-3146', 'P-23250', 1000),
-	(246, '', 'HON-3124', 'P-22831', 2000),
-	(247, '', 'HON-3124', 'P-22832', 3000),
-	(248, '', 'HON-3146', 'P-22831', 1000),
-	(249, '', 'HON-3124', 'P-23066', 3000),
-	(250, '', 'HON-3124', 'P-23215', 4000),
-	(251, '', 'HON-3146', 'P-23215', 1000),
-	(252, '', 'HON-3124', NULL, 2000),
-	(253, '', 'HON-3124', 'P-23763', 2000),
-	(254, '', 'HON-3124', 'P-23606', 4000),
-	(255, '', 'HON-3123', 'P-23763', 2000),
-	(256, '', 'HON-3146', 'P-23606', 1000),
-	(257, '', 'HON-3124', 'P-22868', 2000),
-	(258, '', 'HON-3124', 'P-22870', 3000),
-	(259, '', 'HON-3124', 'P-22871', 5000),
-	(260, '', 'HON-3143', 'P-22870', 4000),
-	(261, '', 'HON-3146', 'P-22871', 1000),
-	(262, '', 'HON-3124', 'P-23262', 2000),
-	(263, '', 'HON-3124', 'P-23263', 2000),
-	(264, '', 'HON-3123', 'P-23262', 2500),
-	(265, '', 'HON-3146', 'P-23263', 1000);
+INSERT INTO `detalle_programacion_temporal` (`id_detalle_programacion`, `numero_orden`, `orden`, `cod_producto`, `saldo`, `id_pendiente`) VALUES
+	(1, '', 'HON-3135', 'P-03205', 1250.00, 128),
+	(2, '', 'HON-3141', 'P-02098', 2000.00, 218),
+	(3, '', 'HON-3141', 'P-02047', 1000.00, 98);
 /*!40000 ALTER TABLE `detalle_programacion_temporal` ENABLE KEYS */;
 
 -- Volcando estructura para tabla facturacion_plasencia.importar_existencias
@@ -5372,14 +5143,12 @@ CREATE TABLE IF NOT EXISTS `pendiente` (
   PRIMARY KEY (`id_pendiente`)
 ) ENGINE=MyISAM AUTO_INCREMENT=265 DEFAULT CHARSET=latin1 COMMENT='CATEGORIA	ITEM	ORDEN DEL SISTEMA	OBSERVACÓN	PRESENTACIÓN	MES	ORDEN	MARCA	VITOLA	NOMBRE	CAPA	TIPO DE EMPAQUE	ANILLO	CELLO	UPC	PENDIENTE	MARZO 2021 FACTURA #17976(Warehouse)	ENVIADO MES	SALDO';
 
--- Volcando datos para la tabla facturacion_plasencia.pendiente: 264 rows
+-- Volcando datos para la tabla facturacion_plasencia.pendiente: 262 rows
 DELETE FROM `pendiente`;
 /*!40000 ALTER TABLE `pendiente` DISABLE KEYS */;
 INSERT INTO `pendiente` (`id_pendiente`, `categoria`, `item`, `orden_del_sitema`, `observacion`, `presentacion`, `mes`, `orden`, `marca`, `vitola`, `nombre`, `capa`, `tipo_empaque`, `cello`, `pendiente`, `factura_del_mes`, `cantidad_enviada_mes`, `saldo`) VALUES
-	(1, 1, '00107000', '', '', 'Puros Tripa Larga', '2021-05-05', 226, 141, 15, 53, 9, 15, 1, 9000, 0, 0, 9000),
-	(2, 4, '00107000', '', '', 'Puros Tripa Larga', '2021-05-05', 227, 141, 15, 53, 9, 15, 1, 500, 0, 0, 500),
-	(3, 1, '00110060', '', '', 'Puros Tripa Larga', '2021-05-05', 234, 231, 2, 1, 6, 7, 1, 200, 0, 0, 200),
-	(4, 1, '00110061', '', '', NULL, '2021-05-05', 234, 231, 4, 2, 6, 7, 1, 200, 0, 0, 200),
+	(3, 1, '00110060', 'Hola', 'Hola', 'Puros Tripa Larga', '2021-05-05', 234, 231, 2, 1, 6, 7, 1, 200, 0, 0, 200),
+	(4, 1, '00110061', NULL, NULL, NULL, '2021-05-05', 234, 231, 4, 2, 6, 7, 1, 200, 0, 0, 200),
 	(5, 1, '00110062', '', '', 'Puros Tripa Larga', '2021-05-05', 234, 231, 9, 11, 6, 7, 1, 200, 0, 0, 200),
 	(6, 1, '00110063', '', '', NULL, '2021-05-05', 234, 231, 22, 34, 6, 7, 1, 200, 0, 0, 200),
 	(7, 4, '00110346', '', '', NULL, '2021-05-05', 224, 226, 4, 2, 9, 7, 1, 600, 0, 0, 600),
@@ -5665,14 +5434,12 @@ CREATE TABLE IF NOT EXISTS `pendiente_empaque` (
   PRIMARY KEY (`id_pendiente`)
 ) ENGINE=MyISAM AUTO_INCREMENT=265 DEFAULT CHARSET=latin1 COMMENT='CATEGORIA	ITEM	ORDEN DEL SISTEMA	OBSERVACÓN	PRESENTACIÓN	MES	ORDEN	MARCA	VITOLA	NOMBRE	CAPA	TIPO DE EMPAQUE	ANILLO	CELLO	UPC	PENDIENTE	MARZO 2021 FACTURA #17976(Warehouse)	ENVIADO MES	SALDO';
 
--- Volcando datos para la tabla facturacion_plasencia.pendiente_empaque: 264 rows
+-- Volcando datos para la tabla facturacion_plasencia.pendiente_empaque: 262 rows
 DELETE FROM `pendiente_empaque`;
 /*!40000 ALTER TABLE `pendiente_empaque` DISABLE KEYS */;
 INSERT INTO `pendiente_empaque` (`id_pendiente`, `categoria`, `item`, `orden_del_sitema`, `observacion`, `presentacion`, `mes`, `orden`, `marca`, `vitola`, `nombre`, `capa`, `tipo_empaque`, `cello`, `pendiente`, `factura_del_mes`, `cantidad_enviada_mes`, `saldo`) VALUES
-	(1, 1, '00107000', '', '', 'Puros Tripa Larga', '2021-05-05', 226, 141, 15, 53, 9, 15, 1, 9000, 0, 0, 9000),
-	(2, 4, '00107000', '', '', 'Puros Tripa Larga', '2021-05-05', 227, 141, 15, 53, 9, 15, 1, 500, 0, 0, 500),
-	(3, 1, '00110060', '', '', 'Puros Tripa Larga', '2021-05-05', 234, 231, 2, 1, 6, 7, 1, 200, 0, 0, 200),
-	(4, 1, '00110061', '', '', NULL, '2021-05-05', 234, 231, 4, 2, 6, 7, 1, 200, 0, 0, 200),
+	(3, 1, '00110060', 'Hola', 'Hola', 'Puros Tripa Larga', '2021-05-05', 234, 231, 2, 1, 6, 7, 1, 200, 0, 0, 200),
+	(4, 1, '00110061', NULL, NULL, NULL, '2021-05-05', 234, 231, 4, 2, 6, 7, 1, 200, 0, 0, 200),
 	(5, 1, '00110062', '', '', 'Puros Tripa Larga', '2021-05-05', 234, 231, 9, 11, 6, 7, 1, 200, 0, 0, 200),
 	(6, 1, '00110063', '', '', NULL, '2021-05-05', 234, 231, 22, 34, 6, 7, 1, 200, 0, 0, 200),
 	(7, 4, '00110346', '', '', NULL, '2021-05-05', 224, 226, 4, 2, 9, 7, 1, 600, 0, 0, 600),
@@ -5939,8 +5706,7 @@ INSERT INTO `pendiente_empaque` (`id_pendiente`, `categoria`, `item`, `orden_del
 CREATE TABLE IF NOT EXISTS `prograamacion` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `fecha` date DEFAULT NULL,
-  `mes_contenedor` varchar(50) DEFAULT NULL,
-  `numero_contenedor_mes` varchar(50) DEFAULT NULL,
+  `mes_contenedor` varchar(100) DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
@@ -7332,6 +7098,30 @@ BEGIN
 END//
 DELIMITER ;
 
+-- Volcando estructura para procedimiento facturacion_plasencia.actualizar_pendientes
+DELIMITER //
+CREATE PROCEDURE `actualizar_pendientes`(
+	IN `id` INT,
+	IN `item` VARCHAR(50),
+	IN `orden_sistema` VARCHAR(50),
+	IN `observeacion` VARCHAR(50),
+	IN `presentacion` VARCHAR(50)
+)
+BEGIN
+
+UPDATE pendiente, pendiente_empaque set pendiente.orden_del_sitema = orden_sistema,
+pendiente.observacion = observeacion, pendiente.presentacion = presentacion,
+pendiente_empaque.orden_del_sitema = orden_sistema,
+pendiente_empaque.observacion = observeacion,
+ pendiente_empaque.presentacion = presentacion
+ WHERE pendiente.id_pendiente = id and pendiente_empaque.id_pendiente = id ;
+ 
+ 
+ UPDATE clase_productos SET clase_productos.presentacion = presentacion
+ WHERE clase_productos.item = item;
+ end//
+DELIMITER ;
+
 -- Volcando estructura para procedimiento facturacion_plasencia.actualizar_productos
 DELIMITER //
 CREATE PROCEDURE `actualizar_productos`(
@@ -7380,6 +7170,20 @@ WHERE clase_productos.id_producto = id;
 END//
 DELIMITER ;
 
+-- Volcando estructura para procedimiento facturacion_plasencia.actualizar_saldo_programacion
+DELIMITER //
+CREATE PROCEDURE `actualizar_saldo_programacion`(
+	IN `id_detalle` INT,
+	IN `saldo` DECIMAL(8,2)
+)
+BEGIN
+
+UPDATE detalle_programacion_temporal SET detalle_programacion_temporal.saldo = saldo
+WHERE detalle_programacion_temporal.id_detalle_programacion = id_detalle;
+
+END//
+DELIMITER ;
+
 -- Volcando estructura para procedimiento facturacion_plasencia.actualizar_usuarios
 DELIMITER //
 CREATE PROCEDURE `actualizar_usuarios`(
@@ -7417,6 +7221,19 @@ DELIMITER //
 CREATE PROCEDURE `borrar_datos_existencia`()
 BEGIN
  DELETE FROM importar_existencias;
+END//
+DELIMITER ;
+
+-- Volcando estructura para procedimiento facturacion_plasencia.borrar_pendientes
+DELIMITER //
+CREATE PROCEDURE `borrar_pendientes`(
+	IN `id` INT
+)
+BEGIN
+
+DELETE FROM pendiente WHERE pendiente.id_pendiente = id;
+DELETE FROM pendiente_empaque WHERE pendiente_empaque.id_pendiente = id;
+
 END//
 DELIMITER ;
 
@@ -7574,7 +7391,7 @@ CREATE PROCEDURE `buscar_pendiente`(
 BEGIN
 if nombre="" && fechade="" && fechahasta="" then
 
-SELECT categoria.categoria AS categoria, pendiente.item AS item,pendiente.orden_del_sitema ,pendiente.observacion 
+SELECT pendiente.id_pendiente ,categoria.categoria AS categoria, pendiente.item AS item,pendiente.orden_del_sitema ,pendiente.observacion 
 ,pendiente.presentacion ,pendiente.mes AS mes ,orden_productos.orden AS orden, marca_productos.marca AS marca,vitola_productos.vitola AS vitola, 
 nombre_productos.nombre AS nombre, capa_productos.capa AS capa,
 cellos.anillo AS anillo,cellos.cello AS cello, cellos.upc AS upc, pendiente.pendiente as pendiente,pendiente.factura_del_mes, pendiente.cantidad_enviada_mes, pendiente.saldo, tipo_empaques.tipo_empaque AS tipo_empaque
@@ -7582,7 +7399,7 @@ FROM categoria, clase_productos, marca_productos, vitola_productos,nombre_produc
 tipo_empaques, pendiente
 WHERE pendiente.vitola = vitola_productos.id_vitola AND pendiente.capa = capa_productos.id_capa AND pendiente.orden = orden_productos.id_orden and
  pendiente.nombre = nombre_productos.id_nombre AND  pendiente.marca = marca_productos.id_marca AND cellos.id_cello=pendiente.cello and
-   clase_productos.id_tipo_empaque = tipo_empaques.id_tipo_empaque AND pendiente.categoria = categoria.id_categoria 
+   pendiente.tipo_empaque = tipo_empaques.id_tipo_empaque AND pendiente.categoria = categoria.id_categoria 
 	GROUP BY pendiente.item, pendiente.orden, pendiente.categoria;
 	
 ELSE  
@@ -7597,7 +7414,7 @@ FROM categoria, clase_productos, marca_productos, vitola_productos,nombre_produc
 tipo_empaques, pendiente
 WHERE pendiente.vitola = vitola_productos.id_vitola AND pendiente.capa = capa_productos.id_capa AND pendiente.orden = orden_productos.id_orden and
  pendiente.nombre = nombre_productos.id_nombre AND  pendiente.marca = marca_productos.id_marca AND cellos.id_cello=pendiente.cello and
-   clase_productos.id_tipo_empaque = tipo_empaques.id_tipo_empaque AND pendiente.categoria = categoria.id_categoria  and
+   pendiente.tipo_empaque = tipo_empaques.id_tipo_empaque AND pendiente.categoria = categoria.id_categoria  and
   (nombre_productos.nombre LIKE  CONCAT("%",nombre, "%") or  capa_productos.capa LIKE  CONCAT("%",nombre, "%") or  marca_productos.marca LIKE  CONCAT("%",nombre, "%") or
   categoria.categoria LIKE  CONCAT("%",nombre, "%") or  tipo_empaques.tipo_empaque LIKE  CONCAT("%",nombre, "%") or
   vitola_productos.vitola LIKE  CONCAT("%",nombre, "%") or  pendiente.orden_del_sitema LIKE  CONCAT("%",nombre, "%"))
@@ -7619,7 +7436,7 @@ FROM categoria, clase_productos, marca_productos, vitola_productos,nombre_produc
 tipo_empaques, pendiente
 WHERE pendiente.vitola = vitola_productos.id_vitola AND pendiente.capa = capa_productos.id_capa AND pendiente.orden = orden_productos.id_orden and
  pendiente.nombre = nombre_productos.id_nombre AND  pendiente.marca = marca_productos.id_marca AND cellos.id_cello=pendiente.cello and
-   clase_productos.id_tipo_empaque = tipo_empaques.id_tipo_empaque AND pendiente.categoria = categoria.id_categoria  AND  pendiente.mes between  STR_TO_DATE( fechade,"%Y-%m-%d") AND STR_TO_DATE(  fechahasta, "%Y-%m-%d") 
+   pendiente.tipo_empaque = tipo_empaques.id_tipo_empaque AND pendiente.categoria = categoria.id_categoria  AND  pendiente.mes between  STR_TO_DATE( fechade,"%Y-%m-%d") AND STR_TO_DATE(  fechahasta, "%Y-%m-%d") 
                       
   
 
@@ -7637,7 +7454,7 @@ FROM categoria, clase_productos, marca_productos, vitola_productos,nombre_produc
 tipo_empaques, pendiente
 WHERE pendiente.vitola = vitola_productos.id_vitola AND pendiente.capa = capa_productos.id_capa AND pendiente.orden = orden_productos.id_orden and
  pendiente.nombre = nombre_productos.id_nombre AND  pendiente.marca = marca_productos.id_marca AND cellos.id_cello=pendiente.cello and
-   clase_productos.id_tipo_empaque = tipo_empaques.id_tipo_empaque AND pendiente.categoria = categoria.id_categoria  AND  pendiente.mes = STR_TO_DATE( fechade,"%Y-%m-%d")
+   pendiente.tipo_empaque  = tipo_empaques.id_tipo_empaque AND pendiente.categoria = categoria.id_categoria  AND  pendiente.mes = STR_TO_DATE( fechade,"%Y-%m-%d")
                       
   
 
@@ -7657,7 +7474,7 @@ FROM categoria, clase_productos, marca_productos, vitola_productos,nombre_produc
 tipo_empaques, pendiente
 WHERE pendiente.vitola = vitola_productos.id_vitola AND pendiente.capa = capa_productos.id_capa AND pendiente.orden = orden_productos.id_orden and
  pendiente.nombre = nombre_productos.id_nombre AND  pendiente.marca = marca_productos.id_marca AND cellos.id_cello=pendiente.cello and
-   clase_productos.id_tipo_empaque = tipo_empaques.id_tipo_empaque AND pendiente.categoria = categoria.id_categoria  AND  pendiente.mes = STR_TO_DATE(  fechahasta, "%Y-%m-%d") 
+   pendiente.tipo_empaque = tipo_empaques.id_tipo_empaque AND pendiente.categoria = categoria.id_categoria  AND  pendiente.mes = STR_TO_DATE(  fechahasta, "%Y-%m-%d") 
                       
   
 
@@ -7685,7 +7502,7 @@ BEGIN
 if nombre="" && fechade="" && fechahasta="" then
 
 
-SELECT categoria.categoria AS categoria, pendiente_empaque.item AS item,pendiente_empaque.orden_del_sitema AS orden_del_sitema,pendiente_empaque.observacion AS observacion,pendiente_empaque.presentacion AS presentacion ,pendiente_empaque.mes AS mes ,orden_productos.orden AS orden, marca_productos.marca AS marca,vitola_productos.vitola AS vitola, 
+SELECT pendiente_empaque.id_pendiente, categoria.categoria AS categoria, pendiente_empaque.item AS item,pendiente_empaque.orden_del_sitema AS orden_del_sitema,pendiente_empaque.observacion AS observacion,pendiente_empaque.presentacion AS presentacion ,pendiente_empaque.mes AS mes ,orden_productos.orden AS orden, marca_productos.marca AS marca,vitola_productos.vitola AS vitola, 
 nombre_productos.nombre AS nombre, capa_productos.capa AS capa,
 cellos.anillo AS anillo,cellos.cello AS cello, cellos.upc AS upc, pendiente_empaque.pendiente as pendiente_empaque,pendiente_empaque.factura_del_mes as factura_del_mes, pendiente_empaque.cantidad_enviada_mes AS cantidad_enviada_mes, pendiente_empaque.saldo AS saldo, tipo_empaques.tipo_empaque AS tipo_empaque
 FROM categoria, clase_productos, marca_productos, vitola_productos,nombre_productos, capa_productos, orden_productos,cellos,
@@ -7699,7 +7516,7 @@ ELSE
 
 if fechade = ""   && fechahasta = ""  && nombre != "" then
 
-SELECT categoria.categoria AS categoria, pendiente_empaque.item AS item,pendiente_empaque.orden_del_sitema AS orden_del_sitema,pendiente_empaque.observacion AS observacion,pendiente_empaque.presentacion AS presentacion ,pendiente_empaque.mes AS mes ,orden_productos.orden AS orden, marca_productos.marca AS marca,vitola_productos.vitola AS vitola, 
+SELECT pendiente_empaque.id_pendiente,  categoria.categoria AS categoria, pendiente_empaque.item AS item,pendiente_empaque.orden_del_sitema AS orden_del_sitema,pendiente_empaque.observacion AS observacion,pendiente_empaque.presentacion AS presentacion ,pendiente_empaque.mes AS mes ,orden_productos.orden AS orden, marca_productos.marca AS marca,vitola_productos.vitola AS vitola, 
 nombre_productos.nombre AS nombre, capa_productos.capa AS capa,
 cellos.anillo AS anillo,cellos.cello AS cello, cellos.upc AS upc, pendiente_empaque.pendiente as pendiente_empaque,pendiente_empaque.factura_del_mes as factura_del_mes, pendiente_empaque.cantidad_enviada_mes AS cantidad_enviada_mes, pendiente_empaque.saldo AS saldo, tipo_empaques.tipo_empaque AS tipo_empaque
 FROM categoria, clase_productos, marca_productos, vitola_productos,nombre_productos, capa_productos, orden_productos,cellos,
@@ -7718,7 +7535,7 @@ WHERE pendiente_empaque.vitola = vitola_productos.id_vitola AND pendiente_empaqu
 	
 	
 	
-SELECT categoria.categoria AS categoria, pendiente_empaque.item AS item,pendiente_empaque.orden_del_sitema AS orden_del_sitema,
+SELECT pendiente_empaque.id_pendiente, categoria.categoria AS categoria, pendiente_empaque.item AS item,pendiente_empaque.orden_del_sitema AS orden_del_sitema,
 pendiente_empaque.observacion AS observacion,pendiente_empaque.presentacion AS presentacion ,pendiente_empaque.mes AS mes ,
 orden_productos.orden AS orden, marca_productos.marca AS marca,vitola_productos.vitola AS vitola, nombre_productos.nombre AS nombre
 , capa_productos.capa AS capa,cellos.anillo AS anillo,cellos.cello AS cello, cellos.upc AS upc, pendiente_empaque.pendiente 
@@ -7739,7 +7556,7 @@ GROUP BY pendiente_empaque.item, pendiente_empaque.orden, pendiente_empaque.cate
 	if fechade != ""   && fechahasta = ""  && nombre = "" then
 	
 	
-	SELECT categoria.categoria AS categoria, pendiente_empaque.item AS item,pendiente_empaque.orden_del_sitema ,
+	SELECT pendiente_empaque.id_pendiente, categoria.categoria AS categoria, pendiente_empaque.item AS item,pendiente_empaque.orden_del_sitema ,
 	pendiente_empaque.observacion AS observacion,pendiente_empaque.presentacion  AS presentacion,pendiente_empaque.mes AS mes 
 	,orden_productos.orden AS orden, marca_productos.marca AS marca,vitola_productos.vitola AS vitola, 
 nombre_productos.nombre AS nombre, capa_productos.capa AS capa,
@@ -7759,7 +7576,7 @@ WHERE pendiente_empaque.vitola = vitola_productos.id_vitola AND pendiente_empaqu
 	if fechade = ""   && fechahasta != ""  && nombre = "" then
 	
 	
-SELECT categoria.categoria AS categoria, pendiente_empaque.item AS item,pendiente_empaque.orden_del_sitema AS orden_del_sitema,pendiente_empaque.observacion AS observacion,pendiente_empaque.presentacion AS presentacion ,pendiente_empaque.mes AS mes ,orden_productos.orden AS orden, marca_productos.marca AS marca,vitola_productos.vitola AS vitola, 
+SELECT pendiente_empaque.id_pendiente,categoria.categoria AS categoria, pendiente_empaque.item AS item,pendiente_empaque.orden_del_sitema AS orden_del_sitema,pendiente_empaque.observacion AS observacion,pendiente_empaque.presentacion AS presentacion ,pendiente_empaque.mes AS mes ,orden_productos.orden AS orden, marca_productos.marca AS marca,vitola_productos.vitola AS vitola, 
 nombre_productos.nombre AS nombre, capa_productos.capa AS capa,
 cellos.anillo AS anillo,cellos.cello AS cello, cellos.upc AS upc, pendiente_empaque.pendiente as pendiente_empaque,
 pendiente_empaque.factura_del_mes as factura_del_mes, pendiente_empaque.cantidad_enviada_mes AS cantidad_enviada_mes,
@@ -7780,7 +7597,7 @@ GROUP BY pendiente_empaque.item, pendiente_empaque.orden, pendiente_empaque.cate
 	
 		
 	
-SELECT categoria.categoria AS categoria, pendiente_empaque.item AS item,pendiente_empaque.orden_del_sitema AS orden_del_sitema,
+SELECT pendiente_empaque.id_pendiente, categoria.categoria AS categoria, pendiente_empaque.item AS item,pendiente_empaque.orden_del_sitema AS orden_del_sitema,
 pendiente_empaque.observacion AS observacion,pendiente_empaque.presentacion AS presentacion ,pendiente_empaque.mes AS mes ,
 orden_productos.orden AS orden, marca_productos.marca AS marca,vitola_productos.vitola AS vitola, 
 nombre_productos.nombre AS nombre, capa_productos.capa AS capa,
@@ -8095,7 +7912,8 @@ CREATE PROCEDURE `insertar_detalle_temporal`(
 	IN `numero_orden` VARCHAR(50),
 	IN `orden` VARCHAR(50),
 	IN `cod_producto` VARCHAR(50),
-	IN `saldo` DECIMAL(10,2)
+	IN `saldo` DECIMAL(10,2),
+	IN `id_pendiente` INT
 )
 BEGIN
 
@@ -8110,12 +7928,16 @@ SET total_Existencia= (SELECT sum(importar_existencias.total) FROM importar_exis
 importar_existencias.codigo_producto = cod_producto);
 
 
-
+if EXISTS(SELECT importar_existencias.codigo_producto FROM importar_existencias WHERE
+importar_existencias.codigo_producto = c)then
 INSERT INTO detalle_programacion_temporal(detalle_programacion_temporal.numero_orden,detalle_programacion_temporal.orden,
-detalle_programacion_temporal.cod_producto,detalle_programacion_temporal.saldo)
-VALUES(numero_orden,orden,c,saldo);
+detalle_programacion_temporal.cod_producto,detalle_programacion_temporal.saldo, detalle_programacion_temporal.id_pendiente)
+VALUES(numero_orden,orden,c,saldo,id_pendiente);
 
+ELSE 
 
+SELECT "nada";
+END if;
 
 END//
 DELIMITER ;
@@ -8358,20 +8180,31 @@ CREATE PROCEDURE `mostrar_detalles_provicional`(
 )
 BEGIN
 
+
+DECLARE fecha VARCHAR(50);
+
+
+		
+		
 if busqueda = "" then 
+
+
 SELECT  detalle_programacion_temporal.id_detalle_programacion AS id,
 detalle_programacion_temporal.numero_orden, 
 			detalle_programacion_temporal.cod_producto , 
-			detalle_programacion_temporal.orden,
+			(SELECT concat(detalle_programacion_temporal.orden ,"-", MONTH(pendiente_empaque.mes) , "-" , date_format(pendiente_empaque.mes,'%y')) 
+		   FROM pendiente_empaque WHERE pendiente_empaque.id_pendiente = detalle_programacion_temporal.id_pendiente) AS orden,
 			marca_productos.marca,
 			vitola_productos.vitola,
-			nombre_productos.nombre,
+			nombre_productos.nombre,             
 			capa_productos.capa,
  			tipo_empaques.tipo_empaque, 
  			cellos.anillo,
  			cellos.cello,
 			cellos.upc,
-			detalle_programacion_temporal.saldo
+			detalle_programacion_temporal.saldo,
+			(SELECT SUM(importar_existencias.total) FROM importar_existencias WHERE importar_existencias.codigo_producto = detalle_programacion_temporal.cod_producto)  AS total_existencia,
+			((SELECT SUM(importar_existencias.total) FROM importar_existencias WHERE importar_existencias.codigo_producto = detalle_programacion_temporal.cod_producto) - detalle_programacion_temporal.saldo) AS diferencia
  FROM  detalle_programacion_temporal, 
  		 clase_productos,
 	    marca_productos, 
@@ -8379,40 +8212,8 @@ detalle_programacion_temporal.numero_orden,
 		 nombre_productos,
  		 capa_productos, 
 		 tipo_empaques,
-		 cellos
- WHERE  clase_productos.codigo_producto =  detalle_programacion_temporal.cod_producto AND 
-        clase_productos.id_capa = capa_productos.id_capa AND 
- 		  clase_productos.id_marca = marca_productos.id_marca AND 
-        clase_productos.id_vitola = vitola_productos.id_vitola AND 
-		  clase_productos.id_nombre =  nombre_productos.id_nombre and 
- 		  clase_productos.id_tipo_empaque = tipo_empaques.id_tipo_empaque AND 
- 		  clase_productos.id_cello = cellos.id_cello
-			
-GROUP BY 1;
-
-ELSE
-
-SELECT  detalle_programacion_temporal.id_detalle_programacion AS id,
-detalle_programacion_temporal.numero_orden, 
-			detalle_programacion_temporal.cod_producto , 
-			detalle_programacion_temporal.orden,
-			marca_productos.marca,
-			vitola_productos.vitola,
-			nombre_productos.nombre,
-			capa_productos.capa,
- 			tipo_empaques.tipo_empaque, 
- 			cellos.anillo,
- 			cellos.cello,
-			cellos.upc,
-			detalle_programacion_temporal.saldo
- FROM  detalle_programacion_temporal, 
- 		 clase_productos,
-	    marca_productos, 
-		 vitola_productos, 
-		 nombre_productos,
- 		 capa_productos, 
-		 tipo_empaques,
-		 cellos
+		 cellos, 
+		 importar_existencias
  WHERE  clase_productos.codigo_producto =  detalle_programacion_temporal.cod_producto AND 
         clase_productos.id_capa = capa_productos.id_capa AND 
  		  clase_productos.id_marca = marca_productos.id_marca AND 
@@ -8420,6 +8221,46 @@ detalle_programacion_temporal.numero_orden,
 		  clase_productos.id_nombre =  nombre_productos.id_nombre and 
  		  clase_productos.id_tipo_empaque = tipo_empaques.id_tipo_empaque AND 
  		  clase_productos.id_cello = cellos.id_cello and
+ 		  detalle_programacion_temporal.cod_producto = importar_existencias.codigo_producto and
+ 		  importar_existencias.codigo_producto = clase_productos.codigo_producto
+			
+GROUP BY 1;
+ELSE
+
+SELECT  detalle_programacion_temporal.id_detalle_programacion AS id,
+detalle_programacion_temporal.numero_orden, 
+			detalle_programacion_temporal.cod_producto , 
+			(SELECT concat(detalle_programacion_temporal.orden ,"-", MONTH(pendiente_empaque.mes) , "-" , date_format(pendiente_empaque.mes,'%y')) 
+		   FROM pendiente_empaque WHERE pendiente_empaque.id_pendiente = detalle_programacion_temporal.id_pendiente) AS orden,
+		marca_productos.marca,
+			vitola_productos.vitola,
+			nombre_productos.nombre,
+			capa_productos.capa,
+ 			tipo_empaques.tipo_empaque, 
+ 			cellos.anillo,
+ 			cellos.cello,
+			cellos.upc,
+			detalle_programacion_temporal.saldo,
+			(SELECT SUM(importar_existencias.total) FROM importar_existencias WHERE importar_existencias.codigo_producto = detalle_programacion_temporal.cod_producto)  AS total_existencia,
+			((SELECT SUM(importar_existencias.total) FROM importar_existencias WHERE importar_existencias.codigo_producto = detalle_programacion_temporal.cod_producto)- detalle_programacion_temporal.saldo) AS diferencia
+ FROM  detalle_programacion_temporal, 
+ 		 clase_productos,
+	    marca_productos, 
+		 vitola_productos, 
+		 nombre_productos,
+ 		 capa_productos, 
+		 tipo_empaques,
+		 cellos,
+		 importar_existencias
+ WHERE  clase_productos.codigo_producto =  detalle_programacion_temporal.cod_producto AND 
+        clase_productos.id_capa = capa_productos.id_capa AND 
+ 		  clase_productos.id_marca = marca_productos.id_marca AND 
+        clase_productos.id_vitola = vitola_productos.id_vitola AND 
+		  clase_productos.id_nombre =  nombre_productos.id_nombre and 
+ 		  clase_productos.id_tipo_empaque = tipo_empaques.id_tipo_empaque AND 
+ 		  clase_productos.id_cello = cellos.id_cello and
+ 		  detalle_programacion_temporal.cod_producto = importar_existencias.codigo_producto and
+ 		  importar_existencias.codigo_producto = clase_productos.codigo_producto and
  		  (detalle_programacion_temporal.numero_orden LIKE CONCAT("%",busqueda,"%")||
 			detalle_programacion_temporal.orden LIKE CONCAT("%",busqueda,"%")||
 			marca_productos.marca LIKE CONCAT("%",busqueda,"%")||
