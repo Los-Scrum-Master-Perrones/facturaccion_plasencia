@@ -23,26 +23,19 @@
 
 <body style=" background-size:100% 100%;">
 
-<ul class="nav justify-content-center">
+
+
+<ul class="nav justify-content-center"  >
   <li class="nav-item">
-    <a style="color:black;"  href="index_lista_cajas">Lista</a>
+    <a style="color:black;"  href="index_lista_cajas">Catálogo Cajas</a>
   </li>
   <li class="nav-item">
-    <a style="color:white;" href="index_importar_cajas">Importar</a>
+    <a style="color:white;" href="index_importar_cajas">Importar Cajas</a>
   </li>
-  <li class="nav-item">
-    <a style="color:black;"  href="index_bodega">Bodega</a>
-  </li>
-  <li class="nav-item">
-    <a style="color:black;"  href="index_bodega_proceso">Bodega Proceso</a>
-  </li>  
-  <li class="nav-item">
-    <a style="color:black;"  href="index_inventario_cajas">Total Bodega</a>
-  </li>
-</ul>
+  </ul>
 
     <div class="container">
-            <form method="post" enctype="multipart/form-data" action="{{ url('/importar_inv_cajas') }}" >
+            <form method="post" enctype="multipart/form-data" action="{{ url('/importar_cajas') }}" >
                 @csrf        
                 <div class="row" style="width:100%;">
 
@@ -50,12 +43,12 @@
                 <input type="file" name="select_file" id="select_file" class="btn botonprincipal form-control" />        
                 </div>
                   
-                <div class="col-md-2">
-                <form method="post" enctype="multipart/form-data" action="{{ url('/importar_cajas') }}" >
-                @csrf  
+                <div class="col-md-2">              
                 <input type="submit" name="upload" class="btn botonprincipal form-control" value="Importar">
+                </div>
+                
                </form>
-                 </div>
+               
              
 
                

@@ -1,12 +1,10 @@
 <?php
 
 namespace App\Http\Controllers;
-
 namespace App\Http\Livewire;
 
 use Livewire\Component;
 use DB;
-
 use Illuminate\Http\Request;
 use Livewire\WithPagination;
 

@@ -7,30 +7,28 @@ use App\Imports\CajasImport;
 use App\Imports\InventarioCajasImport;
 use DB;
 use Maatwebsite\Excel\Facades\Excel;
+use Illuminate\Pagination\LengthAwarePaginator;
 
 class CajasController extends Controller
 {
 
-    function index_importar()
-    {
+    function index_importar(){
         $cajas = DB::table('cajas')->get();
         return view('import_cajas')->with('cajas', $cajas);
     }
+    
 
-    function index_bodega()
-    {
-        return view('bodega');
+
+    function index_lista(){
+        $listacajas = DB::table('lista_cajas')->orderBy('existencia', 'desc')->paginate('50');
+        $mostrar_lista_cajas = \DB::select('call mostrar_lista_cajas');
+        return view('lista_cajas')->with('listacajas', $listacajas)->with('mostrar_lista_cajas', $mostrar_lista_cajas);
     }
 
-    function index_lista()
-    {
 
-        $listacajas = DB::table('lista_cajas')->get();
-        return view('lista_cajas')->with('listacajas', $listacajas);
-    }
+    
 
-    function buscar_lista_cajas(Request $request)
-    {
+    function buscar_lista_cajas(Request $request){
 
         if ($request->nombre == null) {
             $nombre = "";
@@ -48,97 +46,83 @@ class CajasController extends Controller
 
 
 
-    function editaryeliminarlista(Request $request)
-    {
-        if ($request->ajax()) {
-            if ($request->action == 'edit') {
-                $data = array(
-                    'codigo'  =>    $request->codigo,
-                    'productoServicio'    =>    $request->productoServicio,
-                    'marca'   =>    $request->marca
-                );
-                DB::table('lista_cajas')
-                    ->where('id', $request->id)
-                    ->update($data);
-            }
-
-            if ($request->action == 'delete') {
-                DB::table('lista_cajas')
-                    ->where('id', $request->id)
-                    ->delete();
-            }
-
-            return response()->json($request);
-        }
-    }
-
-
 
     function agregar_lista_caja(Request $request)
     {
         $caja = \DB::select(
-            'call agregar_lista_caja(:a,:b,:c)',
+            'call agregar_lista_caja(:a,:b,:c,:d)',
             [
                 'a' => $request->codigo,
                 'b' => $request->producto,
-                'c' => $request->marca
+                'c' => $request->marca,
+                'd' => $request->existencia
             ]
         );
 
-        $listacajas = DB::table('lista_cajas')->get();
-        return view('lista_cajas')->with('listacajas', $listacajas);
+        $listacajas = DB::table('lista_cajas')->orderBy('existencia', 'desc')->paginate('50');
+        $mostrar_lista_cajas = \DB::select('call mostrar_lista_cajas');
+        return view('lista_cajas')->with('listacajas', $listacajas)->with('mostrar_lista_cajas', $mostrar_lista_cajas);
+    }
+
+    
+
+    function editar_existencia(Request $request){
+        $editar_existenciaP = \DB::select(
+            'call editar_existencia(:a,:b)',
+            [
+                'a' => $request->id_cajaE,
+                'b' => $request->existencia_cajaE
+            ]
+        );
+
+        $listacajas = DB::table('lista_cajas')->orderBy('existencia', 'desc')->paginate('50');
+        $mostrar_lista_cajas = \DB::select('call mostrar_lista_cajas');
+        return view('lista_cajas')->with('listacajas', $listacajas)->with('mostrar_lista_cajas', $mostrar_lista_cajas);
     }
 
 
-
-
-
-
-
-    function anadir_inventario(Request $request)
-    {
-
-        $listacajas = DB::table('lista_cajas')->get();
-
-        $c = count($listacajas);
-
-        for ($i = 0; $i < $c; $i++) {
-            $nuevoinventario[] = [
-                'codigo'        => $codigo[$i],
-                'descripcion'          => $descripcion[$i],
-                'lote_origen'          => $lote_origen[$i],
-                'lote_destino'          => $lote_destino[$i],
-                'cantidad'          => $cantidad[$i],
-                'costo_u'          => $costo_u[$i],
-                'subtotal'          => $subtotal[$i],
-            ];
-        }
-
-        HorariosNew::create($nuevoinventario);
-
-
-        return view('lista_cajas')->with('listacajas', $listacajas);
-    }
-
-
-
-
-
-
-
-
-
-
-
-    function import(Request $request)
-    {
-
+    function import(Request $request){
         (new CajasImport)->import($request->select_file);
-
         $cajas = DB::table('cajas')->get();
         return view('import_cajas')->with('cajas', $cajas);
     }
 
+
+
+
+
+
+    function anadir_inventario(Request $request){   
+
+        $cajasinsertar = DB::table('cajas')->get();
+        foreach($cajasinsertar as $caja){
+            $pa_codigo = $caja->codigo;
+            $pa_cantidad = $caja->cantidad;   
+            
+            $procedimiento = \DB::select('call anadir_cajas_a_inventario(:pa_codigo, :pa_cantidad)', [
+                'pa_codigo' => $pa_codigo,
+                'pa_cantidad' => $pa_cantidad
+                ]);
+        }     
+
+        $cajasborrar = DB::table('cajas')->delete();
+
+        $listacajas = DB::table('lista_cajas')->orderBy('existencia', 'desc')->paginate('50');
+        $mostrar_lista_cajas = \DB::select('call mostrar_lista_cajas');
+        return view('lista_cajas')->with('listacajas', $listacajas)->with('mostrar_lista_cajas', $mostrar_lista_cajas);
+    }
+
+
+
+
+
+
+
+
+
+
+
+//solo se hizo una vez, para ingresar el inventario general
     function importinvcajas(Request $request)
     {
         (new InventarioCajasImport)->import($request->select_file);

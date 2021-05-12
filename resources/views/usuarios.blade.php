@@ -2,45 +2,46 @@
 
 
 @section('content')
-<head>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" />
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Live Table Edit Delete Mysql Data using Tabledit Plugin in Laravel</title>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" />
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>            
-   
-   
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
     <script src="https://markcell.github.io/jquery-tabledit/assets/js/tabledit.min.js"></script>
-  
-<!-- Bootstrap CSS CDN -->
-<link rel="stylesheet"
-    href="{{ URL::asset('https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css') }}"
-    integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
-<!-- Our Custom CSS -->
-<link rel="stylesheet" href="{{ URL::asset('css/app.css') }}">
-<link rel="stylesheet" href="{{ URL::asset('css/bootstrap.min.css') }}">
-<script src="https://code.jquery.com/jquery-3.2.1.js"></script>
+    <script src="{{ URL::asset('css/tabla.js') }}"></script>    
+<link rel="stylesheet" href="{{ asset('css/principal.css') }}" />
 
-<!-- Libreria de las alertas -->
-<script src= "{{ URL::asset('https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js') }}"></script>
-<link rel="stylesheet" href="{{ URL::asset('https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css') }}">
 
-  
-  </head>
 
-<button type="button" class=" btn-info float-right"   data-toggle="modal" data-target="#modal_agregar_usuarios"  style="margin-right: 10px; margin-bottom: 10px;">
+
+
+  <div class="container" style="width:100%;max-width:100%;margin-left:0px;">
+
+  </br>
+    <div class="row" style="width:100%;">
+      <div class="col-md-3">
+    <button class="btn botonprincipal"    data-toggle="modal" data-target="#modal_agregar_usuarios">
       <span> Agregar Usuarios</span>
   </button>
+    </div>
+    </div>    
+</br>
+
 
 <!-- INICIO DEL TABLA USUARIOS -->
-<table class="table table-striped table-secondary table-bordered border-primary ">
-        <thead class= "table-dark">
-        <tr>
-            <th scope="col">Código</th>
-            <th scope="col">Nombre</th>
-            <th scope="col">Correo</th>  
-            <th scope="col">Rol</th>  
-            <th scope="col">Editar</th>            
+<div style="width:100%; padding-left:0px;   font-size:10px;   overflow-x: display; overflow-y: auto;
+     height:450px;">
+<table class="table table-light"  style="font-size:10px; text-align:center">
+        <thead >
+        <tr >
+            <th>Código</th>
+            <th>Nombre</th>
+            <th >Correo</th>  
+            <th >Rol</th>  
+            <th >Editar</th>            
          </thead>
          <tbody>
         
@@ -73,8 +74,6 @@
                   </svg>
                   </a>
 
-
-
                   <a data-toggle="modal" data-target="#modal_cambiar_contrasenia" onclick ="datos_modal_contra({{ $id_usuario_contrasenia = $usuario->id }})">
                   <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="black" class="bi bi-key" viewBox="0 0 16 16">
                   <path d="M0 8a4 4 0 0 1 7.465-2H14a.5.5 0 0 1 .354.146l1.5 1.5a.5.5 0 0 1 0 .708l-1.5 1.5a.5.5 0 0 1-.708 0L13 9.207l-.646.647a.5.5 0 0 1-.708 0L11 9.207l-.646.647a.5.5 0 0 1-.708 0L9 9.207l-.646.647A.5.5 0 0 1 8 10h-.535A4 4 0 0 1 0 8zm4-3a3 3 0 1 0 2.712 4.285A.5.5 0 0 1 7.163 9h.63l.853-.854a.5.5 0 0 1 .708 0l.646.647.646-.647a.5.5 0 0 1 .708 0l.646.647.646-.647a.5.5 0 0 1 .708 0l.646.647.793-.793-1-1h-6.63a.5.5 0 0 1-.451-.285A3 3 0 0 0 4 5z"/>
@@ -83,46 +82,56 @@
                 </a>
                   
             </td>
-
-            
-             </tr>
+           </tr>
              
             @endforeach
            
           <tbody>
     </table>
+  </div>
+  </div>
+
 <!-- FIN DEL TABLA USUARIOS -->
+
+
+
+
 
 
 
 
 <!-- INICIO MODAL ELMINAR USUARIO -->
 <form id = "formulario_mostrarE" name = "formulario_mostrarE" action = "{{Route('eliminar_usuario')}}"  method="POST">
-
 @csrf
 <?php use App\Http\Controllers\UserController; ?>
 <div hidden>{{$id_usuario_basicoE=0}}</div>
   
-<input name = "id_usuarioE" id="id_usuarioE" value ="" hidden />
 
 <div class="modal fade" id="modal_eliminar_usuario" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true" style="opacity:.9;background:#212529;">
   <div class="modal-dialog modal-dialog-centered" >
     <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="staticBackdropLabel">Eliminar a <strong><input value ="" id="txt_usuarioE" name= "txt_usuarioE" style="border:none;"></strong> </h5>
-        <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close"></button>
-      </div>
+
+      <div class="modal-header">       
+   
+          <h5 class="modal-title" id="staticBackdropLabel">Eliminar Usuario  </h5>  
+                  
+         
+          </div>
+
       <div class="modal-body">
-      ¿Estás seguro que quieres eliminar este usuario?
+      ¿Estás seguro que quieres eliminar a  <strong><input value ="" id="txt_usuarioE" name= "txt_usuarioE" style="border:none;text-align:center;" readonly></strong>?
+      <input name = "id_usuarioE" id="id_usuarioE" value ="" hidden />
       </div>
+
       <div class="modal-footer" >
-        <button style=" background: #b39f64; color: #ecedf1;" type="button" class=" btn-info-claro " data-dismiss="modal" >
+        <button class="bmodal_no" data-dismiss="modal" >
             <span>Cancelar</span>
         </button>
-        <button type="submit" class=" btn-info "   >
+        <button type="submit" class="bmodal_yes">
             <span>Eliminar</span>
         </button>
       </div>
+
     </div>
   </div>
 </div>
@@ -131,16 +140,12 @@
 
 <!-- FIN MODAL ELMINAR USUARIO -->
 <script type="text/javascript">
-
-    function eliminar_usuario(){ 
-      
+    function eliminar_usuario(){       
       var theFormE = document.forms['formulario_mostrarE'];
-
       toastr.success( 'El usuario se eliminó correctamente','BIEN',{"progressBar": true,"closeButton": false} );
       theFormE.addEventListener('submit', function (event) {
     });
  }
-
   </script>
 
 
@@ -167,7 +172,6 @@
     <div class="modal-content">
       <div class="modal-header">
         <h5 class="modal-title" id="staticBackdropLabel">Agregar Usuarios</h5>
-        <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close" ></button>
       </div>
      
       <div class="modal-body">
@@ -209,7 +213,7 @@
 
         <div class="mb-3 col">
         <label for="rol" class="form-label">Rol</label>
-        <select id="rol" type="rol" class="form-control @error('rol') is-invalid @enderror" name="rol" value="{{ old('rol') }}" required autocomplete="rol">
+        <select id="rol" type="rol" class="form-control @error('rol') is-invalid @enderror" name="rol" value="{{ old('rol') }}" required autocomplete="off">
         <option value =  "0" >Administrador</option>
         <option value =  "1" >Usuario</option>
         </select> 
@@ -223,57 +227,49 @@
 
 
       <div class="row" >
-        <div class="mb-3 col">
-        <label for="password" class="form-label">Contraseña</label>
 
-        <div class="row"style="margin-left:0px;    margin-right: 0px;">
-        <div class="input-group ">
-        <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="new-password">
-        @error('password')
+        <div class="mb-3 col">
+          <label for="password" class="form-label">Contraseña</label>
+          <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="new-password">
+
+            @error('password')
             <span class="invalid-feedback" role="alert">
-                <strong>{{ $message }}</strong>
+            <strong>{{ $message }}</strong>
             </span>
-        @enderror
- <a type="button"  class="input-group-text" onclick="mostrarContrasena()" >
-      
-        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-eye-slash-fill" viewBox="0 0 16 16" id="iconovisible" style="position:absolute;">
-  <path d="M10.5 8a2.5 2.5 0 1 1-5 0 2.5 2.5 0 0 1 5 0z"/>
-  <path d="M0 8s3-5.5 8-5.5S16 8 16 8s-3 5.5-8 5.5S0 8 0 8zm8 3.5a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7z"/>
-</svg>
-<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-eye-slash-fill" viewBox="0 0 16 16" id="icononovisible"> 
-  <path d="M10.79 12.912l-1.614-1.615a3.5 3.5 0 0 1-4.474-4.474l-2.06-2.06C.938 6.278 0 8 0 8s3 5.5 8 5.5a7.027 7.027 0 0 0 2.79-.588zM5.21 3.088A7.028 7.028 0 0 1 8 2.5c5 0 8 5.5 8 5.5s-.939 1.721-2.641 3.238l-2.062-2.062a3.5 3.5 0 0 0-4.474-4.474L5.21 3.088z"/>
-  <path d="M5.525 7.646a2.5 2.5 0 0 0 2.829 2.829l-2.83-2.829zm4.95.708l-2.829-2.83a2.5 2.5 0 0 1 2.829 2.829zm3.171 6l-12-12 .708-.708 12 12-.708.707z"/>
-</svg>
-</a>
-        </div>
-        </div>
+            @enderror
+
+            <a type="button"  onclick="mostrarContrasena()" style="margin-top: -30px;position: absolute;right: 20px;">      
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-eye-slash-fill" viewBox="0 0 16 16" id="iconovisible" style="position:absolute;">
+            <path d="M10.5 8a2.5 2.5 0 1 1-5 0 2.5 2.5 0 0 1 5 0z"/>
+            <path d="M0 8s3-5.5 8-5.5S16 8 16 8s-3 5.5-8 5.5S0 8 0 8zm8 3.5a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7z"/>
+            </svg>
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-eye-slash-fill" viewBox="0 0 16 16" id="icononovisible"> 
+            <path d="M10.79 12.912l-1.614-1.615a3.5 3.5 0 0 1-4.474-4.474l-2.06-2.06C.938 6.278 0 8 0 8s3 5.5 8 5.5a7.027 7.027 0 0 0 2.79-.588zM5.21 3.088A7.028 7.028 0 0 1 8 2.5c5 0 8 5.5 8 5.5s-.939 1.721-2.641 3.238l-2.062-2.062a3.5 3.5 0 0 0-4.474-4.474L5.21 3.088z"/>
+            <path d="M5.525 7.646a2.5 2.5 0 0 0 2.829 2.829l-2.83-2.829zm4.95.708l-2.829-2.83a2.5 2.5 0 0 1 2.829 2.829zm3.171 6l-12-12 .708-.708 12 12-.708.707z"/>
+            </svg>
+            </a>
+          </div>
+          
      
-      </div>
 
         
 
         <div class="mb-3 col">
-        <label for="password-confirm" class="form-label">Confirmación contraseña</label>
-        <div class="row"style="margin-left:0px;    margin-right: 0px;">
-        
-        <div class="input-group ">
+        <label for="password-confirm" class="form-label">Confirmación contraseña</label>       
         <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required autocomplete="new-password">
-         <a type="button" onclick="mostrarConfirmacion()"  class="input-group-text">
-      
-      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-eye-slash-fill" viewBox="0 0 16 16" id="iconovisibleC" style="position:absolute;">
-<path d="M10.5 8a2.5 2.5 0 1 1-5 0 2.5 2.5 0 0 1 5 0z"/>
-<path d="M0 8s3-5.5 8-5.5S16 8 16 8s-3 5.5-8 5.5S0 8 0 8zm8 3.5a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7z"/>
-</svg>
-<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-eye-slash-fill" viewBox="0 0 16 16" id="icononovisibleC"> 
-<path d="M10.79 12.912l-1.614-1.615a3.5 3.5 0 0 1-4.474-4.474l-2.06-2.06C.938 6.278 0 8 0 8s3 5.5 8 5.5a7.027 7.027 0 0 0 2.79-.588zM5.21 3.088A7.028 7.028 0 0 1 8 2.5c5 0 8 5.5 8 5.5s-.939 1.721-2.641 3.238l-2.062-2.062a3.5 3.5 0 0 0-4.474-4.474L5.21 3.088z"/>
-<path d="M5.525 7.646a2.5 2.5 0 0 0 2.829 2.829l-2.83-2.829zm4.95.708l-2.829-2.83a2.5 2.5 0 0 1 2.829 2.829zm3.171 6l-12-12 .708-.708 12 12-.708.707z"/>
-</svg>
-</a>
-       
-       
-        </div>
-        </div>
-        </div>
+
+        <a type="button" onclick="mostrarConfirmacion()"  style="margin-top: -30px;position: absolute;right: 20px;">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-eye-slash-fill" viewBox="0 0 16 16" id="iconovisibleC" style="position:absolute;">
+        <path d="M10.5 8a2.5 2.5 0 1 1-5 0 2.5 2.5 0 0 1 5 0z"/>
+        <path d="M0 8s3-5.5 8-5.5S16 8 16 8s-3 5.5-8 5.5S0 8 0 8zm8 3.5a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7z"/>
+        </svg>
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-eye-slash-fill" viewBox="0 0 16 16" id="icononovisibleC"> 
+        <path d="M10.79 12.912l-1.614-1.615a3.5 3.5 0 0 1-4.474-4.474l-2.06-2.06C.938 6.278 0 8 0 8s3 5.5 8 5.5a7.027 7.027 0 0 0 2.79-.588zM5.21 3.088A7.028 7.028 0 0 1 8 2.5c5 0 8 5.5 8 5.5s-.939 1.721-2.641 3.238l-2.062-2.062a3.5 3.5 0 0 0-4.474-4.474L5.21 3.088z"/>
+        <path d="M5.525 7.646a2.5 2.5 0 0 0 2.829 2.829l-2.83-2.829zm4.95.708l-2.829-2.83a2.5 2.5 0 0 1 2.829 2.829zm3.171 6l-12-12 .708-.708 12 12-.708.707z"/>
+        </svg>
+        </a>
+      </div>
+     
       </div>   
 
 
@@ -283,13 +279,12 @@
 </div>
 
 <div class="modal-footer" >
-        <button style=" background: #b39f64; color: #ecedf1;" type="button" class=" btn-info-claro " data-dismiss="modal" >
+        <button class="bmodal_no " data-dismiss="modal" >
             <span>Cancelar</span>
         </button>
-        <button  class=" btn-info " onclick="v_agregarusuario()" >
+        <button  class="bmodal_yes " onclick="v_agregarusuario()" >
             <span>Guardar</span>
         </button>
-
         
       </div>
     </div>
@@ -453,8 +448,7 @@ if(v_confirmacion_contrasenia != v_contrasenia){
   <div class="modal-dialog modal-dialog-centered modal-lg" >
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="staticBackdropLabel">Cambio de contraseña de <strong><input value ="" id="txt_empleado" name= "txt_empleado" style="border:none;"></strong></h5>
-        <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close"></button>
+        <h5 class="modal-title" id="staticBackdropLabel">Cambio de contraseña de <strong><input value ="" id="txt_empleado" name= "txt_empleado" style="border:none;" readonly></strong></h5>
       </div>
       <div class="modal-body">
      
@@ -467,64 +461,59 @@ if(v_confirmacion_contrasenia != v_contrasenia){
       
      
       <div class="row">
-        <div class="mb-3 col">
-        <label for="contraseniaA" class="form-label">Nueva Contraseña</label>
-        
-       
-        <div class="row"style="margin-left:0px;    margin-right: 0px;">
-        <div class="input-group ">
-        <input class="form-control @error('password') is-invalid @enderror" id="contraseniaA" name="contraseniaA" type="password" placeholder="Ingresa contraseña"  minLength="5" maxLength="50" autocomplete= "off" required>        
-         @error('password')
-            <span class="invalid-feedback" role="alert">
-                <strong>{{ $message }}</strong>
-            </span>
-        @enderror
- <a type="button"  class= "input-group-text" onclick="nueva_contrasena()" >
-      
-        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-eye-slash-fill" viewBox="0 0 16 16" id="iconovisiblen" style="position:absolute;">
-  <path d="M10.5 8a2.5 2.5 0 1 1-5 0 2.5 2.5 0 0 1 5 0z"/>
-  <path d="M0 8s3-5.5 8-5.5S16 8 16 8s-3 5.5-8 5.5S0 8 0 8zm8 3.5a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7z"/>
-</svg>
-<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-eye-slash-fill" viewBox="0 0 16 16" id="icononovisiblen"> 
-  <path d="M10.79 12.912l-1.614-1.615a3.5 3.5 0 0 1-4.474-4.474l-2.06-2.06C.938 6.278 0 8 0 8s3 5.5 8 5.5a7.027 7.027 0 0 0 2.79-.588zM5.21 3.088A7.028 7.028 0 0 1 8 2.5c5 0 8 5.5 8 5.5s-.939 1.721-2.641 3.238l-2.062-2.062a3.5 3.5 0 0 0-4.474-4.474L5.21 3.088z"/>
-  <path d="M5.525 7.646a2.5 2.5 0 0 0 2.829 2.829l-2.83-2.829zm4.95.708l-2.829-2.83a2.5 2.5 0 0 1 2.829 2.829zm3.171 6l-12-12 .708-.708 12 12-.708.707z"/>
-</svg>
-</a>
-        </div>
-        </div>
-        </div>
+          <div class="mb-3 col">
+            <label for="contraseniaA" class="form-label">Nueva Contraseña</label>
 
-        <div class="mb-3 col">
-        <label for="confirmacion_contraseniaA" class="form-label">Confirmación contraseña</label>
-         <div class="row"style="margin-left:0px;    margin-right: 0px;">
-        <div class="input-group ">
-        <input class="form-control" id="confirmacion_contraseniaA" type="password" name="confirmacion_contraseniaA" placeholder="Confirma tu contraseña" autocomplete= "off"  minLength="5" maxLength="50" required>        
-         @error('password')
+            <input class="form-control @error('password') is-invalid @enderror" id="contraseniaA" name="contraseniaA" type="password" placeholder="Ingresa contraseña"  minLength="5" maxLength="50" autocomplete= "off" required>        
+            @error('password')
             <span class="invalid-feedback" role="alert">
-                <strong>{{ $message }}</strong>
+            <strong>{{ $message }}</strong>
             </span>
-        @enderror
- <a type="button"  class="input-group-text" onclick="c_nueva_contrasena()" >
+            @enderror
+
+            <a type="button" onclick="nueva_contrasena()" style="margin-top: -30px;position: absolute;right: 20px;" >
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-eye-slash-fill" viewBox="0 0 16 16" id="iconovisiblen" style="position:absolute;">
+            <path d="M10.5 8a2.5 2.5 0 1 1-5 0 2.5 2.5 0 0 1 5 0z"/>
+            <path d="M0 8s3-5.5 8-5.5S16 8 16 8s-3 5.5-8 5.5S0 8 0 8zm8 3.5a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7z"/>
+            </svg>
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-eye-slash-fill" viewBox="0 0 16 16" id="icononovisiblen"> 
+            <path d="M10.79 12.912l-1.614-1.615a3.5 3.5 0 0 1-4.474-4.474l-2.06-2.06C.938 6.278 0 8 0 8s3 5.5 8 5.5a7.027 7.027 0 0 0 2.79-.588zM5.21 3.088A7.028 7.028 0 0 1 8 2.5c5 0 8 5.5 8 5.5s-.939 1.721-2.641 3.238l-2.062-2.062a3.5 3.5 0 0 0-4.474-4.474L5.21 3.088z"/>
+            <path d="M5.525 7.646a2.5 2.5 0 0 0 2.829 2.829l-2.83-2.829zm4.95.708l-2.829-2.83a2.5 2.5 0 0 1 2.829 2.829zm3.171 6l-12-12 .708-.708 12 12-.708.707z"/>
+            </svg>
+            </a>
+          </div>
       
-        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-eye-slash-fill" viewBox="0 0 16 16" id="iconovisiblecn" style="position:absolute;">
-  <path d="M10.5 8a2.5 2.5 0 1 1-5 0 2.5 2.5 0 0 1 5 0z"/>
-  <path d="M0 8s3-5.5 8-5.5S16 8 16 8s-3 5.5-8 5.5S0 8 0 8zm8 3.5a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7z"/>
-</svg>
-<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-eye-slash-fill" viewBox="0 0 16 16" id="icononovisiblecn"> 
-  <path d="M10.79 12.912l-1.614-1.615a3.5 3.5 0 0 1-4.474-4.474l-2.06-2.06C.938 6.278 0 8 0 8s3 5.5 8 5.5a7.027 7.027 0 0 0 2.79-.588zM5.21 3.088A7.028 7.028 0 0 1 8 2.5c5 0 8 5.5 8 5.5s-.939 1.721-2.641 3.238l-2.062-2.062a3.5 3.5 0 0 0-4.474-4.474L5.21 3.088z"/>
-  <path d="M5.525 7.646a2.5 2.5 0 0 0 2.829 2.829l-2.83-2.829zm4.95.708l-2.829-2.83a2.5 2.5 0 0 1 2.829 2.829zm3.171 6l-12-12 .708-.708 12 12-.708.707z"/>
-</svg>
-</a>
-        </div>
-        </div>
-        </div>
+
+          <div class="mb-3 col">
+            <label for="confirmacion_contraseniaA" class="form-label">Confirmación contraseña</label>
+
+            <input class="form-control" id="confirmacion_contraseniaA" type="password" name="confirmacion_contraseniaA" placeholder="Confirma tu contraseña" autocomplete= "off"  minLength="5" maxLength="50" required>        
+            @error('password')
+            <span class="invalid-feedback" role="alert">
+            <strong>{{ $message }}</strong>
+            </span>
+            @enderror
+
+            <a type="button" onclick="c_nueva_contrasena()" style="margin-top: -30px;position: absolute;right: 20px;" >
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-eye-slash-fill" viewBox="0 0 16 16" id="iconovisiblecn" style="position:absolute;">
+            <path d="M10.5 8a2.5 2.5 0 1 1-5 0 2.5 2.5 0 0 1 5 0z"/>
+            <path d="M0 8s3-5.5 8-5.5S16 8 16 8s-3 5.5-8 5.5S0 8 0 8zm8 3.5a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7z"/>
+            </svg>
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-eye-slash-fill" viewBox="0 0 16 16" id="icononovisiblecn"> 
+            <path d="M10.79 12.912l-1.614-1.615a3.5 3.5 0 0 1-4.474-4.474l-2.06-2.06C.938 6.278 0 8 0 8s3 5.5 8 5.5a7.027 7.027 0 0 0 2.79-.588zM5.21 3.088A7.028 7.028 0 0 1 8 2.5c5 0 8 5.5 8 5.5s-.939 1.721-2.641 3.238l-2.062-2.062a3.5 3.5 0 0 0-4.474-4.474L5.21 3.088z"/>
+            <path d="M5.525 7.646a2.5 2.5 0 0 0 2.829 2.829l-2.83-2.829zm4.95.708l-2.829-2.83a2.5 2.5 0 0 1 2.829 2.829zm3.171 6l-12-12 .708-.708 12 12-.708.707z"/>
+            </svg>
+            </a>
+          </div>
+      
       </div>
       </div>
+
       <div class="modal-footer" >
-        <button style=" background: #b39f64; color: #ecedf1;" type="button" class=" btn-info-claro " data-dismiss="modal" >
+        <button class="bmodal_no" data-dismiss="modal" >
             <span>Cancelar</span>
         </button>
-        <button  class=" btn-info " onclick="validar_actualizar_contrasenia()">
+        <button  class="bmodal_yes " onclick="validar_actualizar_contrasenia()">
             <span>Cambiar</span>
         </button>
       </div>
@@ -583,7 +572,6 @@ if(contraseniaA != confirmacion_contraseniaA ){
     <div class="modal-content">
       <div class="modal-header">
         <h5 class="modal-title" id="staticBackdropLabel">Editar Usuario</h5>
-        <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close" ></button>
       </div>
      
       <div class="modal-body">
@@ -623,11 +611,11 @@ if(contraseniaA != confirmacion_contraseniaA ){
 </div>
 </div>
       <div class="modal-footer" >
-        <button style=" background: #b39f64; color: #ecedf1;" type="button" class=" btn-info-claro " data-dismiss="modal" >
+        <button  class=" bmodal_no " data-dismiss="modal" >
             <span>Cancelar</span>
             @csrf
         </button>
-        <button  class=" btn-info " onclick="validar_actualizar_usuario()" >
+        <button  class="bmodal_yes " onclick="validar_actualizar_usuario()" >
             <span>Guardar</span>
         </button>
       </div>
