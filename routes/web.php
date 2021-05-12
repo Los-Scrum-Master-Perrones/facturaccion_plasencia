@@ -114,6 +114,10 @@ Route::post('/borrardetalles_programacion', [DetalleProgramacion::class,'elimina
 Route::get('/actualizar_rdetalles_programacion', [DetalleProgramacion::class,'actualizar_saldo'])->name('actualizar_rdetalles_programacion');
 Route::post('/actualizar_rdetalles_programacion', [DetalleProgramacion::class,'actualizar_saldo'])->name('actualizar_rdetalles_programacion');
 
+Route::get('/historial_programa', [DetalleProgramacion::class,'insertarDetalle_y_actualizarPendiente'])->name('historial_programa');
+Route::post('/historial_programa', [DetalleProgramacion::class,'insertarDetalle_y_actualizarPendiente'])->name('historial_programa');
+
+
 
 
 Route::get('/pedido_buscar', [PedidoController::class, 'buscar'])->name('buscar_pedido');

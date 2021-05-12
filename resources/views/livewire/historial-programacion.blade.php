@@ -58,9 +58,9 @@
     <div style="width:1350px; padding-left:20px; padding-right:20px;">
 
         <div class="row">
-        <div class="col-sm" style="width:100px;">
+            <div class="col-sm" style="width:100px;">
 
-        <table class="table table-light" id="editable" style="font-size:10px;m">
+                <table class="table table-light" id="editable" style="font-size:10px;m">
                     <thead>
                         <tr style="font-size:16px; text-align:center;">
                             <th style=" text-align:center;">ID</th>
@@ -72,10 +72,17 @@
                     </thead>
                     <tbody>
 
+                        @foreach($programaciones as $programacion)
+                        <tr>
+                            <td> {{$programacion ->id}}</td>
+                            <td> {{$programacion ->fecha}}</td>
+                            <td> {{$programacion ->mes_contenedor}}</td>
+                        </tr>
+                        @endforeach
                     </tbody>
                 </table>
             </div>
-            <div class="col-sm" >
+            <div class="col-sm">
                 <table class="table table-light" id="editable" style="font-size:10px;m">
                     <thead>
                         <tr style="font-size:16px; text-align:center;">
@@ -96,10 +103,29 @@
                     </thead>
                     <tbody>
 
+                        @foreach($detalles_programaciones as $detalles_programacione)
+                        <tr>
+                            <td> {{$detalles_programacione->numero_orden}}</td>
+                            <td> {{$detalles_programacione->orden}}</td>
+                            <td> {{$detalles_programacione->marca}}</td>
+                            <td> {{$detalles_programacione->vitola}}</td>
+                            <td> {{$detalles_programacione->nombre}}</td>
+                            <td> {{$detalles_programacione->capa}}</td>
+                            <td> {{$detalles_programacione->tipo_empaque}}</td>
+                            <td> {{$detalles_programacione->anillo}}</td>
+                            <td> {{$detalles_programacione->cello}}</td>
+                            <td> {{$detalles_programacione->upc}}</td>
+                            <td> {{$detalles_programacione->saldo}}</td>
+
+
+                        </tr>
+                        @endforeach
+
+
                     </tbody>
                 </table>
             </div>
-            
+
         </div>
 
     </div>
@@ -143,6 +169,7 @@
             });
 
         });
+
     </script>
 
 
