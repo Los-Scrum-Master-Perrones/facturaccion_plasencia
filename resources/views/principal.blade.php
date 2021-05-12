@@ -197,19 +197,17 @@
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="staticBackdropLabel">Cerrar Sesión <strong><input value=""
-                                id="txt_ayuda" name="cerrarse" style="border:none;"></strong> </h5>
-                    <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close"></button>
+                    <h5 class="modal-title" id="staticBackdropLabel">Cerrar Sesión </h5>
                 </div>
-                <div class="modal-body">
+                <div class="modal-body" >
                     ¿Esta seguro(a) de que quiere cerrar sesión?
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class=" btn btn-secondary " data-dismiss="modal">
+                    <button type="button" class="bmodal_no" data-dismiss="modal">
                         <span>Cancelar</span>
                     </button>
                     <button onclick="event.preventDefault();
-           document.getElementById('logout-form').submit();" class=" btn btn-dark  ">
+           document.getElementById('logout-form').submit();" class="bmodal_yes">
                         <span>Cerrar Sesión</span>
                     </button>
 
