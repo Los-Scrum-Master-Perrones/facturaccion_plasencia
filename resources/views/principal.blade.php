@@ -28,10 +28,8 @@
 </head>
 
 
-
-<body
-    style="background: linear-gradient(0deg, rgba(9,14,7,1) 6%, rgba(25,31,21,1) 28%, rgba(85,64,59,1) 51%, rgba(139,87,101,1) 75%,rgba(231,139,188,1) 100%);">
-
+<!-- <body    style="background: linear-gradient(0deg, rgba(9,14,7,1) 6%, rgba(25,31,21,1) 28%, rgba(85,64,59,1) 51%, rgba(139,87,101,1) 75%,rgba(231,139,188,1) 100%);"> -->
+<body style="background: url('fondologin.jpg') center center no-repeat;    background-size:100% 100%;">
 
 
     @yield('content')

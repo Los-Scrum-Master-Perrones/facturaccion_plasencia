@@ -1,81 +1,62 @@
 <div xmlns:wire="http://www.w3.org/1999/xhtml">
+<title></title>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" />
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
-    <title></title>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" />
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Hola</title>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" />
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+<script src="{{ URL::asset('css/tabla.js') }}"></script>
+@livewireStyles
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-wEmeIV1mKuiNpC+IOBjI7aAzPcEZeedi5yW5f2yOq55WWLwNGmvvx4Um1vskeMj0" crossorigin="anonymous">
 
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Hola</title>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" />
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
 
-    @livewireStyles
-    <link rel="stylesheet" href="{{ asset('css/principal.css') }}" />
-
-    <br>
+    
     <ul class="nav justify-content-center">
-
-        <li class="nav-item">
-            <a style="color:black; font-size:16px;" href="pendiente"><strong>Pendiente</strong></a>
+    <li class="nav-item">
+            <a style="color:black;" href="pendiente"><strong>Pendiente</strong></a>
         </li>
 
-        <li class="nav-item">
-            <a style="color:black; font-size:16px;" href="productos"><strong>Productos</strong></a>
+         <li class="nav-item">
+            <a style="color:white; " href="productos"><strong>Productos</strong></a>
         </li>
-
+        
         <li class="nav-item">
-            <a style="color:black; font-size:16px;" href="import_excel"><strong>Importar pedido</strong></a>
+            <a style="color:black;" href="import_excel"><strong>Importar pedido</strong></a>
         </li>
         <li class="nav-item">
-            <a style="color:black; font-size:16px;" href="index_bodega_proceso"><strong>Reporte</strong></a>
+            <a style="color:black;" href="index_bodega_proceso"><strong>Reporte</strong></a>
         </li>
-
     </ul>
-    <br>
-
-    <div class="" style="width:1100px; padding-left:200px;">
-
-        <div class="row">
-
-            <div class="col-sm">
 
 
-                <div class="row">
-                    <div class="col-sm">
-                        <input name="buscar" id="buscar" class="btn botonprincipal form-control" wire:model="busqueda"
-                            placeholder="Búsqueda por Marca, Nombre y Vitola" style="width:350px;">
-                    </div>
 
-                </div>
 
+    <div class="container" style="max-width:100%; ">
+    
+
+
+
+    <div class="row" >
+            <div class="col">
+                   <div class="input-group mb-3">
+                     <input name="buscar" id="buscar"  style="width:350px;" class=" form-control botonprincipal mr-sm-2 " wire:model="busqueda" placeholder="Búsqueda por Marca, Nombre y Vitola">
+                     <button class=" botonprincipal mr-sm-2 " style="width:200px;" >        <a  href="{{Route('datos_producto')}}"   >Datos adicionales</a></button>
+                         <button class=" botonprincipal mr-sm-2 " data-toggle="modal" data-target="#modal_nuevoproducto" style="width:200px;">Nuevo producto</button>
+   </div>
             </div>
-            <div class="row">
-                <div class="col-sm">
-                    <button class="btn botonprincipal form-control" data-toggle="modal"
-                        data-target="#modal_nuevoproducto" style="width:200px;">Nuevo
-                        producto</button>
-                </div>
-
-                <div class="col-sm">
-
-                    <a class="btn botonprincipal form-control" href="{{Route('datos_producto')}}"
-                        style="width:200px;">Datos adicionales</a>
-                </div>
-            </div>
-
-        </div>
     </div>
 
-    <br>
+    
 
-
-    <div style="width:1300px; padding-left:60px;   font-size:10px;   overflow-x: display; overflow-y: auto;
+    <div class="panel-body" style="padding:0px;">
+    <div style="width:100%; padding-left:0px;   font-size:10px;   overflow-x: display; overflow-y: auto;
      height:450px;">
-        <div>
             @csrf
-            <table class="table table-light" id="editable" >
+            <table class="table table-light"  style="font-size:10px;">
                 <thead style=" position: static;">
                     <tr style="font-size:16px; text-align:center;">
                         <th style=" text-align:center;">Item</th>
@@ -139,6 +120,7 @@
                 </tbody>
             </table>
         </div>
+    </div>
     </div>
 
 
@@ -541,26 +523,20 @@
     <!-- FIN DEL MODAL NUEVO PRODUCTO -->
 
     <!-- INICIO MODAL ACTUALIZAR PRODUCTO-->
-    <form action="{{Route('actualizar_producto')}}" method="POST" name="formulario_actualizar"
-        id="formulario_actualizar">
-        <div class="modal fade" role="dialog" id="modal_actualizarproducto" data-backdrop="static" data-keyboard="false"
-            tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true"
-            style="opacity:.9;background:#212529;width=800px;">
-            <div class="modal-dialog modal-dialog-centered modal-lg" style="opacity:.9;background:#212529;width=80%">
+    <form action="{{Route('actualizar_producto')}}" method="POST" name="formulario_actualizar" id="formulario_actualizar">
+        <div class="modal fade"  id="modal_actualizarproducto" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true" style="opacity:.9;background:#212529;width=800px;">
+            <div class="modal-dialog modal-dialog-centered modal-lg" >
                 <div class="modal-content">
 
                     <div class="modal-header">
-                        <h5 style="font-size:20px; width:3000px; text-align:center; font:bold" class=""
-                            id="staticBackdropLabel"><strong>Editar producto</strong></h5>
-                        <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close"></button>
+                        <h5 class="modal-title" id="staticBackdropLabel">Editar producto</h5>
                     </div>
 
                     <div class="modal-body">
 
-                        <div class="card-body">
                             <div class="row">
                                 <div class="mb-3 col">
-                                    <label style="font-size:16px" for="txt_vitola" class="form-label">Marca</label>
+                                    <label for="txt_vitola" class="form-label">Marca</label>
                                     <select class="form-control" name="marca_ac" id="marca_ac"
                                         placeholder="Ingresa figura y tipo" style="overflow-y: scroll; height:30px;"
                                         required>
@@ -568,22 +544,19 @@
                                         <option style="overflow-y: scroll;"> {{$marca->marca}}</option>
                                         @endforeach
                                     </select>
-
-                                </div>
+                                </div>                             
                             </div>
+
 
                             <div class="row">
                                 <div class="mb-3 col">
-                                    <label style="font-size:16px" for="txt_figuraytipo" class="form-label">Item</label>
-                                    <input name="item_ac" id="item_ac" style="font-size:16px" class="form-control"
-                                        required type="text" autocomplete="off">
+                                    <label for="txt_figuraytipo" class="form-label">Item</label>
+                                    <input name="item_ac" id="item_ac" class="form-control" required type="text" autocomplete="off">
                                 </div>
 
                                 <div class="mb-3 col">
-                                    <label style="font-size:16px" for="txt_figuraytipo" class="form-label">Capa</label>
-                                    <select class="form-control" name="capa_ac" id="capa_ac"
-                                        placeholder="Ingresa figura y tipo" style="overflow-y: scroll; height:30px;"
-                                        required>
+                                    <label  for="txt_figuraytipo" class="form-label">Capa</label>
+                                    <select class="form-control" name="capa_ac" id="capa_ac" placeholder="Ingresa figura y tipo" style="overflow-y: scroll; height:30px;"  required>
                                         @foreach($capas as $capa)
                                         <option style="overflow-y: scroll;"> {{$capa->capa}}</option>
                                         @endforeach
@@ -591,11 +564,8 @@
                                 </div>
 
                                 <div class="mb-3 col">
-                                    <label for="txt_total" style="font-size:16px" class="form-label">Nombre</label>
-
-                                    <select class="form-control" name="nombre_ac" id="nombre_ac"
-                                        placeholder="Ingresa figura y tipo" style="overflow-y: scroll; height:30px;"
-                                        required>
+                                    <label for="txt_total" class="form-label">Nombre</label>
+                                    <select class="form-control" name="nombre_ac" id="nombre_ac" placeholder="Ingresa figura y tipo" style="overflow-y: scroll; height:30px;"  required>
                                         @foreach($nombres as $nombre)
                                         <option style="overflow-y: scroll;"> {{$nombre->nombre}}</option>
                                         @endforeach
@@ -606,23 +576,17 @@
 
                             <div class="row">
                                 <div class="mb-3 col">
-                                    <label style="font-size:16px" for="txt_buenos" class="form-label">Vitola</label>
-
-                                    <select class="form-control" name="vitola_ac" id="vitola_ac"
-                                        placeholder="Ingresa figura y tipo" style="overflow-y: scroll; height:30px;"
-                                        required>
+                                    <label  for="txt_buenos" class="form-label">Vitola</label>
+                                    <select class="form-control" name="vitola_ac" id="vitola_ac" placeholder="Ingresa figura y tipo" style="overflow-y: scroll; height:30px;" required>
                                         @foreach($vitolas as $vitola)
                                         <option style="overflow-y: scroll;"> {{$vitola->vitola}}</option>
                                         @endforeach
                                     </select>
-
                                 </div>
+
                                 <div class="mb-3 col">
-                                    <label style="font-size:16px" for="txt_malos" class="form-label">Tipo de
-                                        empaque</label>
-                                    <select class="form-control" name="tipo_ac" id="tipo_ac"
-                                        placeholder="Ingresa figura y tipo" style="overflow-y: scroll; height:30px;"
-                                        required>
+                                    <label  for="txt_malos" class="form-label">Tipo de empaque</label>
+                                    <select class="form-control" name="tipo_ac" id="tipo_ac" placeholder="Ingresa figura y tipo" style="overflow-y: scroll; height:30px;"   required>
                                         @foreach($tipo_empaques as $tipo_empaque)
                                         <option style="overflow-y: scroll;"> {{$tipo_empaque->tipo_empaque}}</option>
                                         @endforeach
@@ -630,45 +594,34 @@
                                 </div>
 
                                 <div class="mb-3 col">
-                                    <label style="font-size:16px" for="txt_malos"
-                                        class="form-label">Presentación</label>
-
-                                    <select class="form-control" name="presentacion_ac" id="presentacion_ac"
-                                        placeholder="Ingresa figura y tipo" style="overflow-y: scroll; height:30px;"
-                                        required>
-
+                                    <label for="txt_malos" class="form-label">Presentación</label>
+                                    <select class="form-control" name="presentacion_ac" id="presentacion_ac" placeholder="Ingresa figura y tipo" style="overflow-y: scroll; height:30px;" required>
                                         <option value="Puros Tripa Larga" style="overflow-y: scroll;">Puros Tripa Larga
                                         </option>
                                         <option value="Puros Tripa Corta" style="overflow-y: scroll;">Puros Tripa Corta
                                         </option>
-
                                     </select>
                                 </div>
+
                             </div>
 
 
 
                             <div class="row">
 
-
                                 <div class="mb-3 col">
-                                    <label for="txt_total" style="font-size:16px" class="form-label">Código del
-                                        sistema</label>
-                                    <input name="cod_sistema_ac" id="cod_sistema_ac" style="font-size:16px"
+                                    <label for="txt_total"class="form-label">Código del sistema</label>
+                                    <input name="cod_sistema_ac" id="cod_sistema_ac" 
                                         class="form-control" type="text" autocomplete="off">
                                 </div>
                                 <div class="mb-3 col">
-                                    <label style="font-size:16px" for="txt_buenos" class="form-label">Código de
-                                        precio</label>
-                                    <input name="cod_precio_ac" id="cod_precio_ac" style="font-size:16px"
-                                        class="form-control" type="text" autocomplete="off">
+                                    <label  for="txt_buenos" class="form-label">Código de precio</label>
+                                    <input name="cod_precio_ac" id="cod_precio_ac"  class="form-control" type="text" autocomplete="off">
                                 </div>
 
                                 <div class="mb-3 col">
-                                    <label for="txt_total" style="font-size:16px" class="form-label">Código de la
-                                        cajita</label>
-                                    <input name="cod_caja_ac" id="cod_caja_ac" style="font-size:16px"
-                                        class="form-control" type="text" autocomplete="off">
+                                    <label for="txt_total"class="form-label">Código de la cajita</label>
+                                    <input name="cod_caja_ac" id="cod_caja_ac" class="form-control" type="text" autocomplete="off">
                                 </div>
 
                             </div>
@@ -676,68 +629,70 @@
 
                             <div class="row">
                                 <div class="mb-3 col">
-                                    <input type="checkbox" name="cello_ac" id="cello_ac" style="font-size:20px"
-                                        value="si">
-                                    <label style="font-size:16px" for="cello" class="form-label">Cello</label>
+                                    <input type="checkbox" name="cello_ac" id="cello_ac"  value="si">
+                                    <label  for="cello" class="form-label">Sello</label>
                                 </div>
-                                <div class="mb-3 col">
 
-                                    <input type="checkbox" name="anillo_ac" id="anillo_ac" style="font-size:20px"
-                                        value="si">
-                                    <label style="font-size:16px" for="anillo" class="form-label">Anillo</label>
+                                <div class="mb-3 col">
+                                    <input type="checkbox" name="anillo_ac" id="anillo_ac" style="font-size:20px" value="si">
+                                    <label for="anillo" class="form-label">Anillo</label>
                                 </div>
                                 <div class="mb-3 col">
-                                    <input type="checkbox" name="upc_ac" id="upc_ac" style="font-size:20px" value="si">
-                                    <label style="font-size:16px" for="upc" class="form-label">UPC</label>
+                                    <input type="checkbox" name="upc_ac" id="upc_ac" value="si">
+                                    <label for="upc" class="form-label">UPC</label>
                                 </div>
                                 <input name="id_producto" id="id_producto" value="" hidden>
                             </div>
-                        </div>
+                       
                     </div>
 
-                    <div class="modal-footer">
-                        <button style=" background: #b39f64; color: #ecedf1;" type="button" class=" btn-info-claro "
-                            data-dismiss="modal">
-                            <span style="font-size:16px">Cancelar</span>
-                            @csrf
-                        </button>
-
-                        <button class="submit">
-                            <span style="font-size:16px">Guardar</span>
-                        </button>
+                    <div class="modal-footer" >
+                    <button class="bmodal_no" data-dismiss="modal" >
+                    <span>Cancelar</span>
+                    </button>
+                    <button type="submit" class="bmodal_yes">
+                    <span>Guardar</span>
+                    </button>
                     </div>
+
                 </div>
             </div>
         </div>
     </form>
     <!-- FIN  MODAL ACTUALIZAR PRODUCTO -->
 
+
+
+
+
     <!-- INICIO DEL MODAL AGREGAR DETALLE PRODUCTO -->
     <form action="{{Route('detalle')}}" method="POST" id="form_detalle" name="form_detalle">
-        <div class="modal fade" role="dialog" id="modal_agregarproducto" data-backdrop="static" data-keyboard="false"
-            tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true"
-            style="opacity:.9;background:#212529;width=800px;">
-            <div class="modal-dialog modal-dialog-centered modal-lg" style="opacity:.9;background:#212529;width=80%">
+        <div class="modal fade" id="modal_agregarproducto" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true"  style="opacity:.9;background:#212529;width=800px;">
+            <div class="modal-dialog modal-dialog-centered 	modal-xl">
                 <div class="modal-content">
 
                     <div class="modal-header">
-                        <h5 style="font-size:20px; width:3000px; text-align:center; font:bold" class=""
-                            id="staticBackdropLabel">Agregar detalle del producto</h5>
-                        <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close"></button>
+                        <h5 class="modal-title" id="staticBackdropLabel">Agregar detalle del producto</h5>
                     </div>
 
                     <div class="modal-body">
 
-                        <div class="card-body">
 
                             <div class="row">
+
+                   
+
+
+
+
                                 <div class="mb-3 col">
-                                    <label style="font-size:16px" for="txt_figuraytipo" class="form-label">Item</label>
-                                    <input name="item_de" id="item_de" style="font-size:16px" class="form-control"
-                                        required type="text" autocomplete="off" readonly>
+                                    <label for="txt_figuraytipo" class="form-label">Item</label>
+                                    <input name="item_de" id="item_de"  class="form-control" required type="text" autocomplete="off" readonly>
                                 </div>
+
+
                                 <div class="mb-3 col">
-                                    <label style="font-size:16px" for="txt_figuraytipo" class="form-label">Capa</label>
+                                    <label for="txt_figuraytipo" class="form-label">Capa</label>
                                     <select class="form-control" name="capa_de" id="capa_de"
                                         placeholder="Ingresa figura y tipo" style="overflow-y: scroll; height:35px;"
                                         required>
@@ -749,8 +704,7 @@
                                 </div>
 
                                 <div class="mb-3 col">
-                                    <label style="font-size:16px" for="txt_vitola" class="form-label">Marca</label>
-
+                                    <label  for="txt_vitola" class="form-label">Marca</label>
                                     <select class="form-control" name="marca_de" id="marca_de"
                                         placeholder="Ingresa figura y tipo" style="overflow-y: scroll; height:35px;"
                                         required>
@@ -765,7 +719,7 @@
 
                             <div class="row">
                                 <div class="mb-3 col">
-                                    <label for="txt_total" style="font-size:16px" class="form-label">Nombre</label>
+                                    <label for="txt_total" class="form-label">Nombre</label>
 
                                     <select class="form-control" name="nombre_de" id="nombre_de"
                                         placeholder="Ingresa figura y tipo" style="overflow-y: scroll; height:35px;"
@@ -778,7 +732,7 @@
                                 </div>
 
                                 <div class="mb-3 col">
-                                    <label style="font-size:16px" for="txt_buenos" class="form-label">Vitola</label>
+                                    <label for="txt_buenos" class="form-label">Vitola</label>
 
                                     <select class="form-control" name="vitola_de" id="vitola_de"
                                         placeholder="Ingresa figura y tipo" style="overflow-y: scroll; height:35px;"
@@ -790,7 +744,7 @@
                                     </select>
                                 </div>
                                 <div class="mb-3 col">
-                                    <label style="font-size:16px" for="txt_malos" class="form-label">Tipo de
+                                    <label  for="txt_malos" class="form-label">Tipo de
                                         empaque</label>
                                     <select class="form-control" name="tipo_de" id="tipo_de"
                                         placeholder="Ingresa figura y tipo" style="overflow-y: scroll; height:35px;"
@@ -807,47 +761,53 @@
 
                             <div class="row">
                                 <div class="mb-3 col">
-                                    <input type="checkbox" name="cello_de" id="cello_de" style="font-size:20px"
+                                    <input type="checkbox" name="cello_de" id="cello_de"
                                         value="si">
-                                    <label style="font-size:16px" for="cello" class="form-label">Cello</label>
+                                    <label for="cello" class="form-label">Sello</label>
                                 </div>
                                 <div class="mb-3 col">
 
-                                    <input type="checkbox" name="anillo_de" id="anillo_de" style="font-size:20px"
+                                    <input type="checkbox" name="anillo_de" id="anillo_de" 
                                         value="si">
-                                    <label style="font-size:16px" for="anillo" class="form-label">Anillo</label>
+                                    <label  for="anillo" class="form-label">Anillo</label>
                                 </div>
                                 <div class="mb-3 col">
 
-                                    <input type="checkbox" name="upc_de" id="upc_de" style="font-size:20px" value="si">
-                                    <label style="font-size:16px" for="upc" class="form-label">UPC</label>
+                                    <input type="checkbox" name="upc_de" id="upc_de"  value="si">
+                                    <label  for="upc" class="form-label">UPC</label>
                                 </div>
                             </div>
 
                             <div class="row">
+                           
                                 <div class="mb-3 col">
 
-                                    <label style="font-size:16px" for="txt_malos" class="form-label">Código de
+                                    <label  for="txt_malos" class="form-label">Código de
                                         precio</label>
                                     <input name="precio_de" id="precio_de" style="font-size:16px" class="form-control"
                                         required type="text" autocomplete="off">
                                 </div>
-
+                                <div class="mb-3 col">
                             </div>
+                            <div class="mb-3 col">
+                            </div>
+
                         </div>
 
                     </div>
 
-                    <div class="modal-footer">
-                        <button style=" background: #b39f64; color: #ecedf1;" type="button" class=" btn-info-claro "
-                            data-dismiss="modal">
-                            <span style="font-size:16px">Cancelar</span>
-                            @csrf
-                        </button>
-                        <button class="submit">
-                            <span style="font-size:16px">Guardar</span>
-                        </button>
-                    </div>
+
+
+                    <div class="modal-footer" >
+                    <button class="bmodal_no" data-dismiss="modal" >
+                        <span>Cancelar</span>
+                    </button>
+                    <button type="submit" class="bmodal_yes">
+                        <span>Guardar</span>
+                    </button>
+                </div>
+
+
                 </div>
             </div>
         </div>
@@ -857,27 +817,17 @@
 
     <!-- INICIO DEL MODAL VER DETALLE PRODUCTO -->
     <form action="{{Route('detalle_producto')}} " method="POST" name="formde" id=" formde">
-        <div class="modal fade" role="dialog" id="modal_ver_detalle_producto" data-backdrop="static"
-            data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true"
-            style="opacity:.9;background:#212529;width=800px;">
-            <div class="modal-dialog modal-dialog-centered modal-lg" style="opacity:.9;background:#212529;width=80%">
-                <div class="modal-content">
+        <div class="modal fade" id="modal_ver_detalle_producto" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true" style="opacity:.9;background:#212529;width=800px;">
+            <div class="modal-dialog modal-dialog-centered modal-lg">
+                <div class="modal-content"  style="font-size:10px;">
+
                     <div class="modal-header">
-                        <h5 style="font-size:20px; width:3000px; text-align:center; font:bold" class=""
-                            id="staticBackdropLabel">Detalles del producto</h5>
+                        <h5 id="staticBackdropLabel">Detalles del producto <span  style="font-size:10px;" name="clase" id="clase"></span></h5> 
                         <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close"></button>
                     </div>
 
-                    <div class="modal-body">
-
-                        <div class="card-body">
-
-                            <div class="row">
-                                <h3 name="clase" id="clase" style="font-weight: bold;"></h3>
-                            </div>
-                            <div class="row">
-                                <table id="detallestabla" name="detallestabla"
-                                    class="table table-bordered table-striped">
+                    <div class="modal-body">                           
+                                <table id="detallestabla" name="detallestabla"  class="table table-bordered table-striped" style="font-size:10px;">
                                     <thead>
                                         <tr>
                                             <th>Item</th>
@@ -893,17 +843,11 @@
                                     </tbody>
                                 </table>
 
-                            </div>
-                        </div>
+                            </div>                   
 
-                        <div class="modal-footer">
+                    <input name="item_detalle" id="item_detalle" value+="" hidden>
 
-
-
-                        </div>
-
-                        <input name="item_detalle" id="item_detalle" value+="" hidden>
-                    </div>
+                  
                 </div>
             </div>
         </div>

@@ -1,97 +1,85 @@
 <div xmlns:wire="http://www.w3.org/1999/xhtml">
-    
-    <title></title>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" />
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<title></title>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" />
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Hola</title>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" />
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
-    <script src="{{ URL::asset('css/tabla.js') }}"></script>
-    @livewireStyles
-    <link rel="stylesheet" href="{{ asset('css/principal.css') }}" />
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Hola</title>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" />
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+<script src="{{ URL::asset('css/tabla.js') }}"></script>
+@livewireStyles
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-wEmeIV1mKuiNpC+IOBjI7aAzPcEZeedi5yW5f2yOq55WWLwNGmvvx4Um1vskeMj0" crossorigin="anonymous">
+
 
     
-    <br>
+
     <ul class="nav justify-content-center">
         <li class="nav-item">
-            <a style="color:black; font-size:16px;" href="pendiente_empaque"><strong>Pendiente</strong></a>
+            <a style="color:white;" href="pendiente_empaque"><strong>Pendiente</strong></a>
         </li>
         <li class="nav-item">
-            <a style="color:black; font-size:16px;" href="importar_c"><strong>Existencia en bodega</strong></a>
+            <a style="color:black;" href="importar_c"><strong>Existencia en bodega</strong></a>
         </li>
         <li class="nav-item">
-            <a style="color:black; font-size:16px;" href="inventario_cajas"><strong>Existencia de cajas</strong></a>
+            <a style="color:black;" href="inventario_cajas"><strong>Existencia de cajas</strong></a>
         </li>
         <li class="nav-item">
-            <a style="color:black; font-size:16px;" href="historial_programacion"><strong>Programaciones</strong></a>
+            <a style="color:black; " href="historial_programacion"><strong>Programaciones</strong></a>
         </li>
     </ul>
-    </br>
 
 
 
-    <div class="container" style="width:1400px; padding-left:30px">
-        <div class="row">
-            <div class="col-16">
+    <div class="container" style="max-width:100%; ">
+    
+    <div class="row" style="text-align:center;">
 
-                <div class="row">
-                    <div class="col-sm">
-                        <label>De</label>
-                    </div>
-                    <div class="col-sm">
-                        <input type="date" name="fecha_de" id="fecha_de" wire:model="fechade"
-                            class="form-control mr-sm-2 botonprincipal" style="width:200px;" placeholder="Nombre">
-                    </div>
-                    <div class="col-sm">
-                        <label>Hasta</label>
-                    </div>
-                    <div class="col-sm">
-                        <input type="date" name="fecha_hasta" id="fecha_hasta" wire:model="fechahasta"
-                            class="form-control mr-sm-2 botonprincipal" style="width:200px;" placeholder="Nombre">
-                    </div>
-                    <div class="col-sm">
-                        <input name="nombre" id="nombre" class="form-control mr-sm-2 botonprincipal"
-                            style="width:200px;" placeholder="Nombre" wire:model="nombre">
-                    </div>
-
-
-                </div>
-            </div>
             <div class="col">
+                   <div class="input-group mb-3">
+
+
+            <span class="input-group-text form-control ">De</span>
+            <input type="date" name="fecha_de" id="fecha_de" wire:model="fechade" class="form-control botonprincipal" style="width:200px;" placeholder="Nombre">
+            <span class="input-group-text form-control ">Hasta</span>
+            <input type="date" name="fecha_hasta" id="fecha_hasta" wire:model="fechahasta" class="form-control mr-sm-2 botonprincipal" style="width:200px;" placeholder="Nombre">
+
+                        <input name="nombre" id="nombre" class="form-control mr-sm-2 botonprincipal" style="width:200px;" placeholder="Nombre" wire:model="nombre">
+                  
                 <form action="{{Route('exportar_pendiente')}}">
                     <input type="text" value="{{isset($nom)?$nom:null}}" name="nombre" id="nombre" hidden>
                     <input type="date" value="{{isset($fede)?$fede:null}}" name="fecha_de" id="fecha_de" hidden>
                     <input type="date" value="{{isset($feha)?$feha:null}}" name="fecha_hasta" id="fecha_hasta" hidden>
-
                 </form>
-            </div>
-            <div class="col">
             
                 <form wire:submit.prevent="insertar_detalle_provicional()">
-
-                    <button class="form-control mr-sm-2 botonprincipal" style="width:200px;">Agregar Programación 
-                    </button>
-                    @csrf
-                </form>
-            </div>
-            <div class="col">
-            <a  type="button" href="detalles_programacion"class="form-control mr-sm-2 botonprincipal" style="width:200px;">Ver 
-                    </a>
-
-            </div>
-        </div>
+                      @csrf
+                      <button class="mr-sm-2 botonprincipal" style="width:200px;">Agregar Programación </button>
+                   </form>
+         
+                   <button class="mr-sm-2 botonprincipal" style="width:200px;"> <a  href="/detalles_programacion">Ver</a> </button>
+           
+   </div>
+</div>
+</div>
 
 
-    </div>
 
-    <div class="panel-body">
-        <div class="table-responsive">
+
+
+
+
+
+
+
+
+    <div class="panel-body" style="padding:0px;">
+            <div style="width:100%; padding-left:0px;   font-size:10px;   overflow-x: display; overflow-y: auto;
+     height:450px;">
             @csrf
-            <table class="table table-light" id="editable" style="font-size:10px;">
+            <table class="table table-light" style="font-size:10px;">
                 <thead>
                     <tr>
                         <th style="width:100px;">CATEGORIA</th>

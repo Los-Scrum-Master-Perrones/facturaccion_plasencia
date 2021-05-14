@@ -1,66 +1,57 @@
-
-    
 @extends('principal')
 @section('content')
 
+<div xmlns:wire="http://www.w3.org/1999/xhtml">
+<title></title>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" />
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Hola</title>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" />
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
-    <script src="https://markcell.github.io/jquery-tabledit/assets/js/tabledit.min.js"></script>
-    <script src="{{ URL::asset('css/tabla.js') }}"></script>    
-<link rel="stylesheet" href="{{ asset('css/principal.css') }}" />
+    <script src="{{ URL::asset('css/tabla.js') }}"></script>
+    @livewireStyles
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-wEmeIV1mKuiNpC+IOBjI7aAzPcEZeedi5yW5f2yOq55WWLwNGmvvx4Um1vskeMj0" crossorigin="anonymous">
+
 
 
 
 <ul class="nav justify-content-center">
 <li class="nav-item">
-    <a style="color:white;"  href="index_lista_cajas">Catálogo Cajas</a>
+    <a style="color:white;"  href="index_lista_cajas"><strong>Catálogo Cajas</strong></a>
   </li>
   <li class="nav-item">
-    <a style="color:black;" href="index_importar_cajas">Importar Cajas</a>
+    <a style="color:black;" href="index_importar_cajas"><strong>Importar Cajas</strong></a>
   </li>
 </ul>
-</br>
 
 
-    <div class="container" style="width:100%;max-width:100%;margin-left:0px;">
-      
+
+<div class="container" style="max-width:100%; "> 
+               
+    <div class="row">
+          <form action=  "{{Route('buscar_lista_cajas')}}" method= "POST" >
+            
+     
+          @csrf
+          <input  name="nombre"  class=" botonprincipal" style="width:300px;"   placeholder="buscar tipo de caja (Código,Producto/Servicio,Marca)" >
+
+          <button  type="submit" class=" mr-sm-2 botonprincipal "  style="width:40px;" >
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
+          <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/>
+          </svg>
+          </button>
+          <button class="botonprincipal  mr-sm-2 " style="width:120px;" data-toggle="modal" data-target="#modal_agregar_lista" >Agregar</button>
  
-               
-                <div class="row" style="width:100%;">
-                <div class="col-md-8" >
+          </form>  
 
-             <form action=  "{{Route('buscar_lista_cajas')}}" method= "POST" class="form-inline" style="margin-bottom:0px;">
-                    @csrf
-                    <input name="nombre"  class="form-control mr-sm-2 botonprincipal" style="width:100%;"   placeholder="buscar tipo de caja (Código,Producto/Servicio,Marca)" >
-                 
-                </div>
-                <div class="col-md-1">
-                       <button class="btn botonprincipal form-control mr-sm-2" type="submit">
-                    <span>
-                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
-                    <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/>
-                    </svg>
-                    </span>
-                    </button>
-                </div>
-             </form>  
-                
-               
-                <div class="col-md-3">
-                <button class="btn botonprincipal" data-toggle="modal" data-target="#modal_agregar_lista" >Agregar</button>
-                </div>
-          </div>
+    </div>
 
         
-
-            <br />
-                   
+          <div class="panel-body" style="padding:0px;">   
             <div style="width:100%; padding-left:0px;   font-size:10px;   overflow-x: display; overflow-y: auto;
      height:450px;">
                         <table class="table table-light"
@@ -96,7 +87,7 @@
                   </svg>
                   </a>
 
-</td>
+                    </td>
                             </tr>
                             @endforeach
                             </tbody>
@@ -106,8 +97,19 @@
               
                 </div>
                 </div>
-            </div>
-        </div>
+
+
+
+
+
+
+                </div>
+
+
+
+
+
+       
 
 
 
@@ -215,7 +217,7 @@ for (var i = 0; i < data.length; i++) {
   </div>
 </div>
 </form>
-
+<!-- FIN MODAL AGREGAR LISTA CAJA -->
 
         @endsection
 

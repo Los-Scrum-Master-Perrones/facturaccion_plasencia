@@ -24,19 +24,18 @@
   <link rel="stylesheet" href="{{ asset('css/login.css') }}" />
 </head>
 
-  <body 
-style="background: url('fondologin.jpg') center center no-repeat;    background-size:100% 100%;">
+  <body style="background: url('fondologin.jpg') center center no-repeat;    background-size:100% 100%;">
 <div style="  display: flex;justify-content: center;align-items: center;height: 100%;"  >
 <div style=" -webkit-background-size: cover;  -moz-background-size: cover;  background-repeat:no-repeat;  -o-background-size: cover;  background-size: cover;  width: 350px;height:350px; background-size: 100% 100%;" >
 
 
 
 <div style="text-align:center;">
-    <img  src="pblanca.png" />
+    <img  src="pblanca.png"   style="color:yellow;"/>
 </div>
 <br>
 
-                    <form method="POST" action="{{ route('login') }}" class="go-right" > 
+                     <form method="POST" action="{{ route('login') }}" class="go-right" > 
                         @csrf
 
                     <div >

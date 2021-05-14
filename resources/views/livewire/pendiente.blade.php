@@ -1,93 +1,76 @@
 <div xmlns:wire="http://www.w3.org/1999/xhtml">
-    
+<title></title>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" />
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
-
-
-    <title></title>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" />
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Hola</title>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" />
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
-    <script src="{{ URL::asset('css/tabla.js') }}"></script>
-    @livewireStyles
-    <link rel="stylesheet" href="{{ asset('css/principal.css') }}" />
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Hola</title>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" />
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+<script src="{{ URL::asset('css/tabla.js') }}"></script>
+@livewireStyles
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-wEmeIV1mKuiNpC+IOBjI7aAzPcEZeedi5yW5f2yOq55WWLwNGmvvx4Um1vskeMj0" crossorigin="anonymous">
 
 
 
 
-    </br>
+   
     <ul class="nav justify-content-center">
     <li class="nav-item">
-            <a style="color:black; font-size:16px;" href="pendiente"><strong>Pendiente</strong></a>
+            <a style="color:white;" href="pendiente"><strong>Pendiente</strong></a>
         </li>
 
          <li class="nav-item">
-            <a style="color:black; font-size:16px;" href="productos"><strong>Productos</strong></a>
+            <a style="color:black; " href="productos"><strong>Productos</strong></a>
         </li>
         
         <li class="nav-item">
-            <a style="color:black; font-size:16px;" href="import_excel"><strong>Importar pedido</strong></a>
+            <a style="color:black;" href="import_excel"><strong>Importar pedido</strong></a>
         </li>
         <li class="nav-item">
-            <a style="color:black; font-size:16px;" href="index_bodega_proceso"><strong>Reporte</strong></a>
+            <a style="color:black;" href="index_bodega_proceso"><strong>Reporte</strong></a>
         </li>
     </ul>
-    </br>
 
 
-
-    <div class="container" style="width:1400px; padding-left:30px">
-        <div class="row">
-            <div class="col-10">
-                
-                    <div class="row">
-                        <div class="col-sm">
-                            <label>De</label>
-                        </div>
-                        <div class="col-sm">
-                            <input type="date" name="fecha_de" id="fecha_de" class="form-control mr-sm-2 botonprincipal"
-                                style="width:200px;" placeholder="Nombre" wire:model= "fede">
-                        </div>
-                        <div class="col-sm">
-                            <label>Hasta</label>
-                        </div>
-                        <div class="col-sm">
-                            <input type="date" name="fecha_hasta" id="fecha_hasta" wire:model= "fecha"
-                                class="form-control mr-sm-2 botonprincipal" style="width:200px;" placeholder="Nombre">
-                        </div>
-                        <div class="col-sm">
-                            <input name="nombre" id="nombre" class="form-control mr-sm-2 botonprincipal"
-                                style="width:200px;" placeholder="Nombre" wire:model= "nom">
-                        </div>
-                        
-
-                    </div>
-               
-            </div>
+ 
+    <div class="container" style="max-width:100%; ">
+    
+    <div class="row" style="text-align:center;">
 
             <div class="col">
-                <form action="{{Route('exportar_pendiente')}}">
-                    <input type="text" value= "{{isset($nom)?$nom:null}}" name="nombre" id="nombre" hidden wire:model= "nom" >
-                    <input type="date" value= "{{isset($fede)?$fede:null}}" name="fecha_de" id="fecha_de" hidden wire:model= "fede">
-                    <input type="date" value= "{{isset($feha)?$feha:null}}" name="fecha_hasta" id="fecha_hasta" hidden wire:model= "fecha">
-                    <button class="form-control mr-sm-2 botonprincipal" type="submit" style="width:120px;">Exportar
-                    </button>
-                </form>
-            </div>
-        </div>
+                   <div class="input-group mb-3">
+                        <span class="input-group-text form-control ">De</span>
+                        <input type="date" name="fecha_de" id="fecha_de" class="form-control botonprincipal"
+                                style="width:200px;" placeholder="Nombre" wire:model= "fede">
+                        <span class="input-group-text form-control">Hasta</span>
+                        <input type="date" name="fecha_hasta" id="fecha_hasta" wire:model= "fecha"
+                                class="form-control mr-sm-2 botonprincipal" style="width:200px;" placeholder="Nombre">
+                        
+                       
+                        <input name="nombre" id="nombre" class="form-control mr-sm-2 botonprincipal" style="width:200px;" placeholder="Nombre" wire:model= "nom">
+           
+                        <form action="{{Route('exportar_pendiente')}}">
+                        <input type="text" value= "{{isset($nom)?$nom:null}}" name="nombre" id="nombre" hidden wire:model= "nom" >
+                        <input type="date" value= "{{isset($fede)?$fede:null}}" name="fecha_de" id="fecha_de" hidden wire:model= "fede">
+                        <input type="date" value= "{{isset($feha)?$feha:null}}" name="fecha_hasta" id="fecha_hasta" hidden wire:model= "fecha">
+                        <button class="botonprincipal" type="submit" style="width:120px;">Exportar
+                        </button>
 
-
+                       </form>
+               </div>                
+          </div>
     </div>
 
-    <div class="panel-body">
-        <div class="table-responsive">
+    
+
+    <div class="panel-body" style="padding:0px;">
+            <div style="width:100%; padding-left:0px;   font-size:10px;   overflow-x: display; overflow-y: auto;
+     height:450px;">
             @csrf
-            <table class="table table-light" id="editable" style="font-size:10px;">
+            <table class="table table-light" style="font-size:10px;">
                 <thead>
                     <tr>
                         <th style="width:100px;">CATEGORIA</th>
@@ -160,6 +143,7 @@
                 </tbody>
             </table>
         </div>
+        </div>
     </div>
     </div>
     </div>
@@ -177,17 +161,17 @@
   <div class="modal-dialog modal-dialog-centered" >
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="staticBackdropLabel">Eliminar a <strong><input value ="" id="txt_usuarioE" name= "txt_usuarioE" style="border:none;"></strong> </h5>
+        <h5 class="modal-title" id="staticBackdropLabel">Eliminar  <strong><input value ="" id="txt_usuarioE" name= "txt_usuarioE" style="border:none;"></strong> </h5>
         <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
-      ¿Estás seguro que quieres eliminar este usuario?
+      ¿Estás seguro que quieres eliminar este registro del pendiente?
       </div>
       <div class="modal-footer" >
-        <button style=" background: #b39f64; color: #ecedf1;" type="button" class=" btn-info-claro " data-dismiss="modal" >
+        <button  type="button" class="bmodal_no " data-dismiss="modal" >
             <span>Cancelar</span>
         </button>
-        <button type="submit" class=" btn-info "   >
+        <button type="submit" class=" bmodal_yes "   >
             <span>Eliminar</span>
         </button>
       </div>
@@ -212,72 +196,45 @@
             <div class="modal-content">
 
                 <div class="modal-header">
-
-                   
-                       
-                            <h5 style="font-size:20px; width:3000px; text-align:center; font:bold" class=""
-                                id="staticBackdropLabel"><strong>Descripción del producto</strong></h5>
-                       
-                        
-                   
-
-                        <h5 style="font-size:20px; width:3000px; text-align:center; font:bold" class="" id="titulo"
-                            name="titulo"><strong>hola</strong></h5>
-
-                    
-                            <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close"></button>
-                        
-                    
+                <h5  id="staticBackdropLabel"><strong>Descripción del producto: </strong><span id="titulo"   name="titulo"></span></h5>  
+             </div>
 
 
-                </div>
 
                 <div class="modal-body">
-
-                    <div class="card-body">
-
                         <div class="row">
 
-                        <input name = "id_pendientea" id="id_pendientea" value ="" hidden />
-                        
-                        <input name = "itema" id="itema" value ="" hidden />
-                            <div class="mb-3 col">
-                                <label style="font-size:16px" for="txt_figuraytipo" class="form-label">Orden del
-                                    sistema</label>
-                                <input name="orden_sistema" id="orden_sistema" style="font-size:16px"
-                                    class="form-control" \ type="text" autocomplete="off">
-                            </div>
-                            <div class="mb-3 col">
-                                <label style="font-size:16px" for="txt_figuraytipo"
-                                    class="form-label">Observación</label>
-                                <input name="observacion" id="observacion" style="font-size:16px" class="form-control"
-                                     type="text" autocomplete="off">
-                            </div>
+                            <input name = "id_pendientea" id="id_pendientea" value ="" hidden />
+                            
+                            <input name = "itema" id="itema" value ="" hidden />
+                                <div class="mb-3 col">
+                                    <label  for="txt_figuraytipo" class="form-label">Orden del sistema</label>
+                                    <input name="orden_sistema" id="orden_sistema" 
+                                        class="form-control" \ type="text" autocomplete="off">
+                                </div>
+                                <div class="mb-3 col">
+                                    <label for="txt_figuraytipo"  class="form-label">Observación</label>
+                                    <input name="observacion" id="observacion" class="form-control"
+                                        type="text" autocomplete="off">
+                                </div>
 
-                            <div class="mb-3 col">
-                                <label style="font-size:16px" for="txt_figuraytipo"
-                                    class="form-label">Presentación</label>
-                                <input name="presentacion" id="presentacion" style="font-size:16px" class="form-control"
-                                   type="text" autocomplete="off">
-                            </div>
+                                <div class="mb-3 col">
+                                    <label for="txt_figuraytipo"  class="form-label">Presentación</label>
+                                    <input name="presentacion" id="presentacion"  class="form-control"
+                                    type="text" autocomplete="off">
+                                </div>
 
                         </div>
-
-
-
-                    </div>
                 </div>
 
-                <div class="modal-footer">
-                    <button style=" background: #b39f64; color: #ecedf1;" type="button" class=" btn-info-claro "
-                        data-dismiss="modal">
-                        <span style="font-size:16px">Cancelar</span>
-                        @csrf
-                    </button>
-                    <button class="submit">
-                        <span style="font-size:16px">Actualizar</span>
-                    </button>
-                </div>
+                <div class="modal-footer" >
+        <button class="bmodal_no" data-dismiss="modal" >
+            <span>Cancelar</span>
+        </button>
+        <button type="submit" class="bmodal_yes">
+            <span>Actualizar</span>
+        </button>
+      </div>
 
             </div>
         </div>
