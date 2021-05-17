@@ -5,6 +5,7 @@ use DB;
 use Livewire\Component;
 
 use Illuminate\Http\Request;
+use Carbon\Carbon;
 
 class DetalleProgramacion extends Component
 {
@@ -18,6 +19,7 @@ class DetalleProgramacion extends Component
     public $fecha;
     public $contenedor;
     public $insertar_programacion;
+    public $fecha_actual;
 
     public function render()
     {
@@ -34,8 +36,10 @@ class DetalleProgramacion extends Component
     $this->actualizar = [];
     $this->actualizar_insertar = [];
     $this->contenedor="";
-    $this->fecha="";
+   
     $this->insertar_programacion=[];
+
+    $this->fecha = Carbon::now()->format("Y-m-d");   
     }
 
     public function eliminar_detalles(Request $request){

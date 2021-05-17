@@ -26,7 +26,7 @@
             <a style="color:black; font-size:16px;" href="inventario_cajas"><strong>Existencia de cajas</strong></a>
         </li>
         <li class="nav-item">
-            <a style="color:black; font-size:16px;" href=""><strong>Programaciones</strong></a>
+            <a style="color:black; font-size:16px;" href="historial_programacion"><strong>Programaciones</strong></a>
         </li>
     </ul>
     <br>
@@ -87,7 +87,7 @@
     </div>
 
 
-    <script type="text/javascript">
+    <!-- <script type="text/javascript">
         window.onload = function () {
             var fecha = new Date(); //Fecha actual
             var mes = fecha.getMonth() + 1; //obteniendo mes
@@ -100,7 +100,7 @@
             document.getElementById('fecha_creacion').value = ano + "-" + mes + "-" + dia;
         }
 
-    </script>
+    </script> -->
 
     </br>
 
@@ -266,42 +266,6 @@
 
     </script>
 
-    <script type="text/javascript">
-        $(document).ready(function () {
-
-            $.ajaxSetup({
-                headers: {
-                    'X-CSRF-Token': $("input[name=_token]").val()
-                }
-            });
-
-            $('#editable').Tabledit({
-                url: '{{ route("tabledit.action") }}',
-                method: 'POST',
-                dataType: "json",
-                columns: {
-                    identifier: [0, 'id'],
-                    editable: [
-                        [1, 'Marca'],
-                        [2, 'Nombre'],
-                        [3, 'Vitola'],
-                        [4, 'Orden'],
-                        [5, 'Tipo de empaque']
-                    ]
-                },
-                restoreButton: false,
-
-                onSuccess: function (data, textStatus, jqXHR) {
-                    if (data.action == 'delete') {
-                        $('#' + data.id).remove();
-                    }
-                }
-
-            });
-
-        });
-
-    </script>
 
 
 
