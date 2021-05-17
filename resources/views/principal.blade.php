@@ -6,7 +6,7 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" />
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
-    <!-- <script src="https://markcell.github.io/jquery-tabledit/assets/js/tabledit.min.js"></script> -->
+    <script src="https://markcell.github.io/jquery-tabledit/assets/js/tabledit.min.js"></script>
 
     <!-- Bootstrap CSS CDN -->
     <link rel="stylesheet"
@@ -28,10 +28,8 @@
 </head>
 
 
-
-<body
-    style="background: linear-gradient(0deg, rgba(9,14,7,1) 6%, rgba(25,31,21,1) 28%, rgba(85,64,59,1) 51%, rgba(139,87,101,1) 75%,rgba(231,139,188,1) 100%);">
-
+<!-- <body    style="background: linear-gradient(0deg, rgba(9,14,7,1) 6%, rgba(25,31,21,1) 28%, rgba(85,64,59,1) 51%, rgba(139,87,101,1) 75%,rgba(231,139,188,1) 100%);"> -->
+<body style="background: url('fondologin.jpg') center center no-repeat;    background-size:100% 100%;">
 
 
     @yield('content')
@@ -197,19 +195,17 @@
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="staticBackdropLabel">Cerrar Sesión <strong><input value=""
-                                id="txt_ayuda" name="cerrarse" style="border:none;"></strong> </h5>
-                    <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close"></button>
+                    <h5 class="modal-title" id="staticBackdropLabel">Cerrar Sesión </h5>
                 </div>
-                <div class="modal-body">
+                <div class="modal-body" >
                     ¿Esta seguro(a) de que quiere cerrar sesión?
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class=" btn btn-secondary " data-dismiss="modal">
+                    <button type="button" class="bmodal_no" data-dismiss="modal">
                         <span>Cancelar</span>
                     </button>
                     <button onclick="event.preventDefault();
-           document.getElementById('logout-form').submit();" class=" btn btn-dark  ">
+           document.getElementById('logout-form').submit();" class="bmodal_yes">
                         <span>Cerrar Sesión</span>
                     </button>
 

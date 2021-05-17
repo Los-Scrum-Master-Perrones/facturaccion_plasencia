@@ -20,6 +20,7 @@ use App\Http\Livewire\ImportarProductoBodega;
 use App\Http\Livewire\InventarioCajas;
 use App\Http\Livewire\HistorialProgramacion;
 use App\Http\Livewire\DetalleProgramacion;
+use App\Http\Livewire\ListaCajas;
 
 
 
@@ -220,6 +221,9 @@ Route::get('/anadir_inventario', [App\Http\Controllers\CajasController::class, '
 
 Route::post('/importar_inv_cajas', [App\Http\Controllers\CajasController::class, 'importinvcajas'])->name('importar_inv_cajas');
 Route::get('/importar_inv_cajas', [App\Http\Controllers\CajasController::class, 'importinvcajas'])->name('importar_inv_cajas');
+Route::get('/index_importar_remision', [App\Http\Controllers\CajasController::class, 'index_importar_remision'])->name('index_importar_remision');
+Route::post('/editar_existencia', [App\Http\Controllers\CajasController::class, 'editar_existencia'])->name('editar_existencia');
+
 
 
 Route::get('/exportar_pendiente', [Pendiente::class, 'exportPendiente'])->name('exportar_pendiente');

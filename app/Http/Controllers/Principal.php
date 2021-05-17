@@ -8,7 +8,7 @@ class Principal extends Controller
 {
     function index()
     {
-     return view('principal');
+     return view('principallogo');
     }
     
  

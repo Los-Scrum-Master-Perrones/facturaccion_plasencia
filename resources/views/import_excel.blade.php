@@ -4,147 +4,95 @@
 
 @section('content')
 
-    <title></title>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" />
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<div xmlns:wire="http://www.w3.org/1999/xhtml">
+<title></title>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" />
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Hola</title>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" />
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Hola</title>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" />
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+<script src="{{ URL::asset('css/tabla.js') }}"></script>
+@livewireStyles
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-wEmeIV1mKuiNpC+IOBjI7aAzPcEZeedi5yW5f2yOq55WWLwNGmvvx4Um1vskeMj0" crossorigin="anonymous">
 
-    <link rel="stylesheet" href="{{ asset('css/principal.css') }}" />
 
-
-
-    </br>
+    
     <ul class="nav justify-content-center">
-
     <li class="nav-item">
-            <a style="color:black; font-size:16px;" href="pendiente"><strong>Pendiente</strong></a>
+            <a style="color:black;" href="pendiente"><strong>Pendiente</strong></a>
         </li>
 
          <li class="nav-item">
-            <a style="color:black; font-size:16px;" href="productos"><strong>Productos</strong></a>
+            <a style="color:black; " href="productos"><strong>Productos</strong></a>
         </li>
         
         <li class="nav-item">
-            <a style="color:black; font-size:16px;" href="import_excel"><strong>Importar pedido</strong></a>
+            <a style="color:white;" href="import_excel"><strong>Importar pedido</strong></a>
         </li>
         <li class="nav-item">
-            <a style="color:black; font-size:16px;" href="index_bodega_proceso"><strong>Reporte</strong></a>
+            <a style="color:black;" href="index_bodega_proceso"><strong>Reporte</strong></a>
         </li>
-
     </ul>
-    </br>
+
+
+
+    <div class="container" style="max-width:100%; ">
 
 
 
 
-
-
-
-
-
-    <div class="" style="width:1150px; padding-left:100px;">
-        <div class="row">
-
-            <div class="col-sm">
-                <form method="post" enctype="multipart/form-data" action="{{ url('/importar_pedido') }}">
+    <div class="row" >
+            <div class="col">
+                   <div class="input-group mb-3">
+    
+                <form method="post" enctype="multipart/form-data" action="{{ url('/importar_pedido') }}" class="form-inline">
                     @csrf
-                        <div class="row">
-                            <div class="col-sm">
-                                <input type="file" name="select_file" id="select_file"
-                                    class="btn botonprincipal form-control" style="width:350px;" />
-                            </div>
-                            <div class="col-sm">
-                                <input type="submit" name="upload" style="width:130px;"
-                                    class="btn botonprincipal form-control" value="Importar">
+                    <input type="file" name="select_file" id="select_file" class="form-control  botonprincipal mr-sm-2 " style="width:350px;" />
+                      <input type="submit" name="upload" style="width:130px;" class=" botonprincipal mr-sm-2 " value="Importar">
+                  </form>
+                           
 
-                            </div>
-                            </div>
-                </form>
-                            </div>
-
-                            <div class="col-sm">
-
-                                <form action="{{Route('pendiente')}}" method="POST">
-                                    <div class="row">
-                                        <div class="col-sm">
-                                            <a style="width: 130px;0px; color: #ffffff; font-size:16px; text-align:center"><strong>Fecha de
-                                                    pedido</strong></a>
-                                        </div>
-                                        <div class="col-sm">
-                                            <input type="date" value="" name="fecha" id="fecha" style="width: 160px;"
-                                                class="btn botonprincipal form-control" required>
-                                        </div>
-                                        <div class="col-sm">
-                                            <button type="submit" style="width:160px;"
-                                                class="btn botonprincipal form-control">Agregar a
-                                                pendiente</button>
-                                        </div>
-
-
-
-                                        @csrf
-
-                                    </div>
-                                </form>
-
-                            </div>
-
-
-                            </div>
-                            </div>
-
-
-                            </br>
-
-
-
-
-
-
-                            <div class="" style="width:1100px; padding-left:100px;">
-
-                                <div class="row">
-
-                                    <div class="col-sm">
-                                        <form action="{{Route('buscar_pedido')}}" method="POST" class="form-inline"
-                                            style="margin-bottom:0px;">
-                                            @csrf
-                                            <div class="row">
-
-                                                <div class="col-sm">
-                                                    <input name="busqueda" id="busqueda" class="btn botonprincipal form-control"
-                                                        placeholder="Búsqueda por descripción u orden" style="width:350px;">
-                                                </div>
-                                                <div class="col-sm">
-                                                    <button class="btn botonprincipal form-control" type="submit">
-                                                        <span>
-                                                            <svg xmlns="http://www.w3.org/2000/svg" width="50"
-                                                                height="20" fill="currentColor" class="bi bi-search"
-                                                                viewBox="0 0 16 16">
-                                                                <path
-                                                                    d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z" />
-                                                            </svg>
-                                                        </span>
-                                                    </button>
-                                                </div>
-                                        </form>
-                                    </div>
-
-                                </div>
-
-                            </div>
-
-                            </br>
-                            <div style="width:1150px; padding-left:0px;">
-                                <div class="table-responsive">
+                    <form action="{{Route('pendiente')}}" method="POST">
                     @csrf
-                    <table class="table table-light" id="editable" style="font-size:10px; ">
+                    <input type="date" value="" name="fecha" id="fecha" style="width: 160px;color:white;text-align:center;"  class=" form-control  botonprincipal mr-sm-2 " required>
+                    <button type="submit" style="width:160px;" class="botonprincipal mr-sm-2 ">Agregar a pendiente</button>
+                    </form>
+
+                         
+                    <form action="{{Route('buscar_pedido')}}" method="POST"style="margin-bottom:0px;">
+                    @csrf
+                    <input name="busqueda" id="busqueda" class=" form-control botonprincipal mr-sm-2" placeholder="Búsqueda por descripción u orden" style="width:350px;">
+                   
+                    <button class="botonprincipal mr-sm-2 " style="width: 50px" type="submit">
+                    <span>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20"   height="20" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
+                    <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z" />
+                    </svg>
+                    </span>
+                    </button>                                            
+                    </form>
+              
+         </div>
+    </div> 
+    </div>
+
+
+                               
+
+                        
+
+
+
+
+ <div class="panel-body" style="padding:0px;">
+    <div style="width:100%; padding-left:0px;   font-size:10px;   overflow-x: display; overflow-y: auto;
+     height:450px;">
+                    @csrf
+                    <table class="table table-light" style="font-size:10px; ">
                         <thead>
                             <tr style="font-size:16px; text-align:center;">
                                 <th  style=" text-align:center;">Item</th>
@@ -172,6 +120,12 @@
                 </div>
 
                 </div>
+
+
+
+
+
+
     </div>
     </div>
 

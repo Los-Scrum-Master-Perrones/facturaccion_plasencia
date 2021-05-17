@@ -1,13 +1,8 @@
-<!DOCTYPE html>
-<html>
-    
 @extends('principal')
 @section('content')
 
-
-
-<head>
-    <title></title>
+<div xmlns:wire="http://www.w3.org/1999/xhtml">
+<title></title>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" />
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
@@ -17,66 +12,49 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" />
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
-    <script src="{{ URL::asset('css/tabla.js') }}"></script>    
-<link rel="stylesheet" href="{{ asset('css/principal.css') }}" />
-</head>
+    <script src="{{ URL::asset('css/tabla.js') }}"></script>
+    @livewireStyles
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-wEmeIV1mKuiNpC+IOBjI7aAzPcEZeedi5yW5f2yOq55WWLwNGmvvx4Um1vskeMj0" crossorigin="anonymous">
 
-<body style=" background-size:100% 100%;">
+
+
 
 <ul class="nav justify-content-center">
-  <li class="nav-item">
-    <a style="color:white; font-size:16px;"  href="index_lista_cajas"><strong>Lista</strong></a>
+<li class="nav-item">
+    <a style="color:white;"  href="index_lista_cajas"><strong>Catálogo Cajas</strong></a>
   </li>
   <li class="nav-item">
-    <a style="color:black; font-size:16px;" href="index_importar_cajas"><strong>Importar</strong></a>
-  </li>
-  <li class="nav-item">
-    <a style="color:black; font-size:16px;"  href="index_bodega"><strong>Bodega</strong></a>
-  </li>
-  <li class="nav-item">
-    <a style="color:black; font-size:16px;"  href="index_bodega_proceso"><strong>Bodega Proceso</strong></a>
-  </li>  
-  <li class="nav-item">
-    <a style="color:black; font-size:16px;"  href="index_inventario_cajas"><strong>Total Bodega</strong></a>
+    <a style="color:black;" href="index_importar_cajas"><strong>Importar Cajas</strong></a>
   </li>
 </ul>
-</br>
 
 
-    <div class="container">
-      
+
+<div class="container" style="max-width:100%; "> 
+               
+    <div class="row">
+          <form action=  "{{Route('buscar_lista_cajas')}}" method= "POST" >
+            
+     
+          @csrf
+          <input  name="nombre"  class=" botonprincipal" style="width:300px;"   placeholder="buscar tipo de caja (Código,Producto/Servicio,Marca)" >
+
+          <button  type="submit" class=" mr-sm-2 botonprincipal "  style="width:40px;" >
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
+          <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/>
+          </svg>
+          </button>
+          <button class="botonprincipal  mr-sm-2 " style="width:120px;" data-toggle="modal" data-target="#modal_agregar_lista" >Agregar</button>
  
-               
-                <div class="row" style="width:100%;">
-                <div class="col-md-8" >
+          </form>  
 
-             <form action=  "{{Route('buscar_lista_cajas')}}" method= "POST" class="form-inline" style="margin-bottom:0px;">
-                    @csrf
-                    <input name="nombre"  class="form-control mr-sm-2 botonprincipal" style="width:100%;"   placeholder="buscar tipo de caja (Código,Producto/Servicio,Marca)" >
-                 
-                </div>
-                <div class="col-md-1">
-                       <button class="btn botonprincipal form-control mr-sm-2" type="submit">
-                    <span>
-                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
-                    <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/>
-                    </svg>
-                    </span>
-                    </button>
-                </div>
-             </form>  
-                
-               
-                <div class="col-md-3">
-                <button class="btn botonprincipal" data-toggle="modal" data-target="#modal_agregar_lista" >Agregar</button>
-                </div>
-          </div>
+    </div>
 
         
-
-            <br />
-                   
-                        <table class="table table-light"  id="editable"
+          <div class="panel-body" style="padding:0px;">   
+            <div style="width:100%; padding-left:0px;   font-size:10px;   overflow-x: display; overflow-y: auto;
+     height:450px;">
+                        <table class="table table-light"
                         style="font-size:10px;">
                             <thead>
                                 <tr>
@@ -84,6 +62,8 @@
                                     <th>Código</th>
                                     <th>Producto/Servicio</th>
                                     <th>Marca</th>
+                                    <th>Existencia</th>
+                                    <th>Editar</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -97,53 +77,97 @@
                             <td>{{$caja->codigo}}</td>
                             <td>{{$caja->productoServicio}}</td>
                             <td>{{$caja->marca}}</td>
+                            <td>{{$caja->existencia}}</td>
+                            <td style=" text-align:center;">
+
+                            <a data-toggle="modal" data-target="#modal_editar_caja" onclick ="datos_modal_editar({{$id_usuario_basicoE= $caja->id}})">
+                            <svg xmlns="http://www.w3.org/2000/svg" width=25 height="25" fill="black" class="bi bi-pencil-square" viewBox="0 0 16 16">
+                    <path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456l-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z"/>
+                    <path fill-rule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z"/>
+                  </svg>
+                  </a>
+
+                    </td>
                             </tr>
                             @endforeach
                             </tbody>
                         </table>
+
+                        {{ $listacajas->links() }}
               
                 </div>
-            </div>
-        </div>
+                </div>
 
+
+
+
+
+
+                </div>
+
+
+
+
+
+       
+
+
+
+          
 
         <script type="text/javascript">
-            $(document).ready(function () {
+    function datos_modal_editar(id){ 
 
-                $.ajaxSetup({
-                    headers: {
-                        'X-CSRF-Token': $("input[name=_token]").val()
-                    }
-                });
+var datas = '<?php echo json_encode($mostrar_lista_cajas);?>';
+var data = JSON.parse(datas);
 
-                $('#editable').Tabledit({
-                    url: '{{ route("editaryeliminarlista") }}',
-                    method: 'POST',
-                    dataType: "json",
-                    columns: {
-                        identifier: [0, 'id'],
-                        editable: [
-                            [1, 'codigo'],
-                            [2, 'productoServicio'],
-                            [3, 'marca']
-                        ]
-                    },
-                    restoreButton: false,
-
-                    onSuccess: function (data, textStatus, jqXHR) {
-                        if (data.action == 'delete') {
-                            $('#' + data.id).remove();
-                        }
-                    }
-
-                });
-
-            });
-
-        </script>
+for (var i = 0; i < data.length; i++) {  
+  if(data[i].id === id){    
+     document.formulario_mostrarEC.id_cajaE.value = data[i].id;
+     document.formulario_mostrarEC.existencia_cajaE.value = data[i].existencia;
+  
+    }
+    }
+    }   
+</script>
+       
 
 
+ <!-- INICIO MODAL CAMBIAR EXISTENCIA -->
+ 
+ <form id = "formulario_mostrarEC" name = "formulario_mostrarEC" action = "{{Route('editar_existencia')}}"  method="POST">
+@csrf
+<?php use App\Http\Controllers\CajasController; ?>
+<div hidden>{{$id_usuario_basicoE=0}}</div>  
 
+<div class="modal fade" id="modal_editar_caja" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true" style="opacity:.9;background:#212529;">
+  <div class="modal-dialog modal-dialog-centered" >
+    <div class="modal-content">
+      
+      <div class="modal-header">
+        <h5 class="modal-title" id="staticBackdropLabel">Editar existencia </h5>
+      </div>
+      
+      <div class="modal-body">
+        <input id="id_cajaE" name = "id_cajaE"   value =""  hidden/>
+        <label for="existencia_cajaE" >Existencia</label>
+        <input  class="form-control"id="existencia_cajaE" name = "existencia_cajaE" value =""  />
+      </div>
+
+      <div class="modal-footer" >
+        <button  type="button" class=" bmodal_no " data-dismiss="modal" >
+        <span>Cancelar</span>
+        </button>
+        <button type="submit" class="bmodal_yes"   >
+        <span>Actualizar</span>
+        </button>
+      </div>
+
+    </div>
+  </div>
+</div>
+</form>
+<!-- FIN MODAL CAMBIAR EXISTENCIA -->
 
 
 
@@ -151,15 +175,12 @@
 
 <!-- INICIO MODAL AGREGAR LISTA CAJA -->
 <form id = "formulario_mostrarE" name = "formulario_mostrarE" action = "{{Route('agregar_lista_caja')}}"  method="POST">
-
 @csrf
-  
-
 <div class="modal fade " id="modal_agregar_lista" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true" style="opacity:.9;background:#212529;">
   <div class="modal-dialog modal-dialog-centered modal-lg" >
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="staticBackdropLabel">Agregar caja <strong><input value ="" id="txt_usuarioE" name= "txt_usuarioE" style="border:none;"></strong> </h5>
+        <h5 class="modal-title" id="staticBackdropLabel">Agregar caja <strong><input  id="txt_usuarioE" name= "txt_usuarioE" style="border:none;"></strong> </h5>
        
       </div>
       <div class="modal-body">
@@ -174,6 +195,9 @@
         </div>
         <div class="mb-3 col">
         <input name="marca"  class="form-control " style="width:100%;"   placeholder="Marca" >
+        </div>  
+        <div class="mb-3 col">
+        <input name="existencia"  class="form-control " style="width:100%;"   placeholder="Existencia" >
         </div>
     </div>
 
@@ -193,21 +217,8 @@
   </div>
 </div>
 </form>
-
-
-
-
-
-
-
-
-
-
-        
-        
-      
+<!-- FIN MODAL AGREGAR LISTA CAJA -->
 
         @endsection
-</body>
 
-</html>
+
