@@ -103,6 +103,23 @@ Route::get('/historial_programacion', HistorialProgramacion::class)->name('histo
 Route::post('/historial_programacion', HistorialProgramacion::class)->name('historial_programacion');
 
 
+Route::get('/borrar_historial_programacion', [HistorialProgramacion::class,'eliminar_detalles_pro'])->name('borrar_historial_programacion');
+Route::post('/borrar_historial_programacion', [HistorialProgramacion::class,'eliminar_detalles_pro'])->name('borrar_historial_programacion');
+
+
+Route::get('/eliminar_programacion', [HistorialProgramacion::class,'eliminar_programacion'])->name('eliminar_programacion');
+Route::post('/eliminar_programacion', [HistorialProgramacion::class,'eliminar_programacion'])->name('eliminar_programacion');
+
+
+
+
+Route::get('/actualizar_programacion', [HistorialProgramacion::class,'actualizar_programacion'])->name('actualizar_programacion');
+Route::post('/actualizar_programacion', [HistorialProgramacion::class,'actualizar_programacion'])->name('actualizar_programacion');
+
+
+Route::get('/actualizar_historial_programacion', [HistorialProgramacion::class,'actualizar_detalles_pro'])->name('actualizar_historial_programacion');
+Route::post('/actualizar_historial_programacion', [HistorialProgramacion::class,'actualizar_detalles_pro'])->name('actualizar_historial_programacion');
+
 Route::get('/detalles_programacion', DetalleProgramacion::class)->name('detalles_programacion');
 Route::post('/detalles_programacion', DetalleProgramacion::class)->name('detalles_programacion');
 
@@ -114,6 +131,10 @@ Route::post('/borrardetalles_programacion', [DetalleProgramacion::class,'elimina
 
 Route::get('/actualizar_rdetalles_programacion', [DetalleProgramacion::class,'actualizar_saldo'])->name('actualizar_rdetalles_programacion');
 Route::post('/actualizar_rdetalles_programacion', [DetalleProgramacion::class,'actualizar_saldo'])->name('actualizar_rdetalles_programacion');
+
+Route::get('/historial_programa', [DetalleProgramacion::class,'insertarDetalle_y_actualizarPendiente'])->name('historial_programa');
+Route::post('/historial_programa', [DetalleProgramacion::class,'insertarDetalle_y_actualizarPendiente'])->name('historial_programa');
+
 
 
 
