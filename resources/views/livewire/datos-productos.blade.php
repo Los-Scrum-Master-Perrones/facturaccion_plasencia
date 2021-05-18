@@ -12,6 +12,8 @@
 <script src="{{ URL::asset('css/tabla.js') }}"></script>
 @livewireStyles
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-wEmeIV1mKuiNpC+IOBjI7aAzPcEZeedi5yW5f2yOq55WWLwNGmvvx4Um1vskeMj0" crossorigin="anonymous">
+<script src= "{{ URL::asset('https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js') }}"></script>
+<link rel="stylesheet" href="{{ URL::asset('https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css') }}">
 
 
 
@@ -33,7 +35,7 @@
       
                 <button class="mr-sm-2 botonprincipal " data-toggle="modal" data-target="#modal_vitola" style="width:150px;">Agregar Vitola</button>
        
-                    <input name="buscar" type="text" id="buscar" wire:model="busqueda"  class="btn botonprincipal form_control" placeholder="Búsqueda por item, nombre y capa" style="width:350px;">
+                    <input name="buscar" type="text" id="buscar" wire:model="busqueda"  class="  form-control botonprincipal mr-sm-2  " placeholder="Búsqueda por item, nombre y capa" style="width:350px;">
          
 
                 <form wire:submit.prevent="importar_excel"  hidden>
@@ -68,9 +70,9 @@
                     @csrf
                     <table class="table table-light" id="editable" style="font-size:10px;m">
                         <thead>
-                            <tr style="font-size:16px; text-align:center;">
-                                <th style=" text-align:center;">Código</th>
-                                <th style=" text-align:center;">Marca</th>
+                            <tr >
+                                <th >Código</th>
+                                <th>Marca</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -92,9 +94,9 @@
                     <table class="table table-light" id="editable" style="font-size:10px; overflow:scroll;
      height:50px;">
                         <thead>
-                            <tr style="font-size:16px; text-align:center;">
-                                <th style=" text-align:center;">Código</th>
-                                <th style=" text-align:center;">Capa</th>
+                            <tr>
+                                <th >Código</th>
+                                <th >Capa</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -115,9 +117,9 @@
                     @csrf
                     <table class="table table-light" id="editable" style="font-size:10px;m">
                         <thead>
-                            <tr style="font-size:16px; text-align:center;">
-                                <th style=" text-align:center;">Código</th>
-                                <th style=" text-align:center;">Nombre</th>
+                            <tr >
+                                <th >Código</th>
+                                <th >Nombre</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -138,9 +140,9 @@
                     @csrf
                     <table class="table table-light" id="editable" style="font-size:10px;m">
                         <thead>
-                            <tr style="font-size:16px; text-align:center;">
-                                <th style=" text-align:center;">Código</th>
-                                <th style=" text-align:center;">Tipo empaque</th>
+                            <tr >
+                                <th>Código</th>
+                                <th >Tipo empaque</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -161,9 +163,9 @@
                     @csrf
                     <table class="table table-light" id="editable" style="font-size:10px;m">
                         <thead>
-                            <tr style="font-size:16px; text-align:center;">
-                                <th style=" text-align:center;">Código</th>
-                                <th style=" text-align:center;">Vitola</th>
+                            <tr >
+                                <th >Código</th>
+                                <th >Vitola</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -200,15 +202,15 @@
                     <div class="modal-body">
                         <div class="mb-3 col">
                             <label for="txt_vitola" class="form-label">Nueva marca</label>
-                            <input class="form-control" id="marcam" type="text" name="marcam"
-                                placeholder="Agregar marca" style="width: 440px" maxLength="30" autocomplete="off">
+                            <input class="form-control" id="marcam" type="text" name="marcam" required
+                                placeholder="Agregar marca" style="width: 440px"  autocomplete="off">
                         </div>
                     </div>
                     <div class="modal-footer">
                         <button type="button"  class=" bmodal_no "  data-dismiss="modal">
                             <span>Cancelar</span>
                         </button>
-                        <button onclick="validar_marca()" type="submit" class=" bmodal_yes " value="Guardar">
+                        <button onclick="validar_marca()" class="bmodal_yes">
                             <span>Guardar</span>
                         </button>
                         @csrf
@@ -230,28 +232,23 @@
         function validar_marca() {
             var marca_mo = document.getElementById('marcam').value;
 
-            var marcas = '<?php echo json_encode($marcas);?>';
+            var datas = '<?php echo json_encode($marcas);?>';
+            console.log(datas);
+            var data = JSON.parse(datas);
 
-            var marca = JSON.parse(marcas);
             var mar = 0;
-            var theForm = document.forms['formmarca'];
 
 
-            for (var i = 0; i < marca.length; i++) {
-
-
-                console.info(marca[i]);
-
-                if (marca[i].marca.toLowerCase() === marca_mo.toLowerCase()) {
+            for (var i = 0; i < data.length; i++) {
+                if (data[i].marca.toLowerCase() === marca_mo.toLowerCase()) {
+                   
                     mar++;
                 }
+                }
+            
 
-
-
-            }
-
-            if (marca_mo === "") {
-                toastr.error('Llene el nombre de la vitola', 'ERROR', {
+          if (mar > 0) {
+                toastr.error('Esta Marca ya existe, favor ingrese una nueva', 'ERROR', {
                     "progressBar": true,
                     "closeButton": false,
                     "preventDuplicates": true,
@@ -259,22 +256,11 @@
                 });
                 event.preventDefault();
 
-            } else if (mar > 0) {
-                toastr.error('Esta vitola ya existe, favor ingrese una nueva', 'ERROR', {
-                    "progressBar": true,
-                    "closeButton": false,
-                    "preventDuplicates": true,
-                    "preventOpenDuplicates": true
-                });
-                event.preventDefault();
+            } else {
+                toastr.success('Tus datos se guardaron correctamente', 'BIEN', {"progressBar": true,"closeButton": false });
+                theForm.addEventListener('submit', function (event) {});
 
-            } else
-
-                toastr.success('Tus datos se guardaron correctamente', 'BIEN', {
-                    "progressBar": true,
-                    "closeButton": false
-                });
-            theForm.addEventListener('submit', function (event) {});
+        }
 
         }
     </script>
@@ -299,7 +285,7 @@
                     <div class="modal-body">
                         <div class="mb-3 col">
                             <label for="txt_vitola" class="form-label">Nueva capa</label>
-                            <input class="form-control" id="capam" type="text" name="capam" placeholder="Agregar marca"
+                            <input class="form-control" id="capam" type="text" name="capam" placeholder="Agregar marca" required
                                 style="width: 440px" maxLength="30" autocomplete="off">
                         </div>
                     </div>
@@ -346,17 +332,8 @@
                 }
             }
 
-            if (capa_m === "") {
-                toastr.error('Llene el nombre de la vitola', 'ERROR', {
-                    "progressBar": true,
-                    "closeButton": false,
-                    "preventDuplicates": true,
-                    "preventOpenDuplicates": true
-                });
-                event.preventDefault();
-
-            } else if (cap > 0) {
-                toastr.error('Esta vitola ya existe, favor ingrese una nueva', 'ERROR', {
+          if (cap > 0) {
+                toastr.error('Esta capa ya existe, favor ingrese una nueva', 'ERROR', {
                     "progressBar": true,
                     "closeButton": false,
                     "preventDuplicates": true,
@@ -365,11 +342,6 @@
                 event.preventDefault();
 
             } else
-
-                toastr.success('Tus datos se guardaron correctamente', 'BIEN', {
-                    "progressBar": true,
-                    "closeButton": false
-                });
             theForm.addEventListener('submit', function (event) {});
 
         }
@@ -393,15 +365,15 @@
                     <div class="modal-body">
                         <div class="mb-3 col">
                             <label for="txt_vitola" class="form-label">Nueva nombre</label>
-                            <input class="form-control" id="nombrem" type="text" name="nombrem"
-                                placeholder="Agregar marca" style="width: 440px" maxLength="30" autocomplete="off">
+                            <input class="form-control" id="nombrem" type="text" name="nombrem" required
+                                placeholder="Agregar marca" style="width: 440px" maxLength="100" autocomplete="off">
                         </div>
                     </div>
                     <div class="modal-footer">
                         <button  type="button" class=" bmodal_no" data-dismiss="modal">
                             <span>Cancelar</span>
                         </button>
-                        <button onclick="validar_nombre()" type="submit" class=" bmodal_yes "value="Guardar">
+                        <button onclick="validar_nombre()" class=" bmodal_yes "value="Guardar">
                             <span>Guardar</span>
                         </button>
                         @csrf
@@ -438,17 +410,8 @@
                 }
             }
 
-            if (nombre_m === "") {
-                toastr.error('Llene el nombre de la vitola', 'ERROR', {
-                    "progressBar": true,
-                    "closeButton": false,
-                    "preventDuplicates": true,
-                    "preventOpenDuplicates": true
-                });
-                event.preventDefault();
-
-            } else if (nom > 0) {
-                toastr.error('Esta vitola ya existe, favor ingrese una nueva', 'ERROR', {
+          if (nom > 0) {
+                toastr.error('Este nombre ya existe, favor ingrese uno nuevo', 'ERROR', {
                     "progressBar": true,
                     "closeButton": false,
                     "preventDuplicates": true,
@@ -458,10 +421,6 @@
 
             } else
 
-                toastr.success('Tus datos se guardaron correctamente', 'BIEN', {
-                    "progressBar": true,
-                    "closeButton": false
-                });
             theForm.addEventListener('submit', function (event) {});
 
         }
@@ -485,8 +444,8 @@
                     <div class="modal-body">
                         <div class="mb-3 col">
                             <label for="txt_vitola" class="form-label">Nuevo tipo de empaque</label>
-                            <input class="form-control" id="tipom" type="text" name="tipom"
-                                placeholder="Agregar tipo de empaque" style="width: 440px" maxLength="30"
+                            <input class="form-control" id="tipom" type="text" name="tipom" required
+                                placeholder="Agregar tipo de empaque" style="width: 440px" maxLength="100"
                                 autocomplete="off">
                         </div>
                     </div>
@@ -531,17 +490,8 @@
                 }
             }
 
-            if (tipo_m === "") {
-                toastr.error('Llene el nombre de la vitola', 'ERROR', {
-                    "progressBar": true,
-                    "closeButton": false,
-                    "preventDuplicates": true,
-                    "preventOpenDuplicates": true
-                });
-                event.preventDefault();
-
-            } else if (tip > 0) {
-                toastr.error('Esta vitola ya existe, favor ingrese una nueva', 'ERROR', {
+           if (tip > 0) {
+                toastr.error('Esta tipo de empaque ya existe, favor ingrese uno nuevo', 'ERROR', {
                     "progressBar": true,
                     "closeButton": false,
                     "preventDuplicates": true,
@@ -551,10 +501,6 @@
 
             } else
 
-                toastr.success('Tus datos se guardaron correctamente', 'BIEN', {
-                    "progressBar": true,
-                    "closeButton": false
-                });
             theForm.addEventListener('submit', function (event) {});
 
         }
@@ -573,20 +519,20 @@
             <div class="modal-dialog modal-dialog-centered">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title" id="staticBackdropLabel"><strong>Agregar tipo de empaque</strong></h5>
+                        <h5 class="modal-title" id="staticBackdropLabel"><strong>Agregar Vitola</strong></h5>
                         <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
                         <div class="mb-3 col">
-                            <label for="txt_vitola" class="form-label">Nuevo tipo de empaque</label>
-                            <input class="form-control" id="vitolam" type="text" name="vitolam"
-                                placeholder="Agregar tipo de empaque" style="width: 440px" maxLength="30"
+                            <label for="txt_vitola" class="form-label">Nueva vitola</label>
+                            <input class="form-control" id="vitolam" type="text" name="vitolam" required
+                                placeholder="Agregar nueva vitola" style="width: 440px" maxLength="30"
                                 autocomplete="off">
                         </div>
                     </div>
                     <div class="modal-footer">
                         <button  type="button" class=" bmodal_no" data-dismiss="modal"><span>Cancelar</span></button>
-                        <button onclick="validar_vitola()" type="submit" class=" bmodal_yes" value="Guardar">
+                        <button onclick="validar_vitola()" class=" bmodal_yes">
                             <span>Guardar</span>
                         </button>
                         @csrf
@@ -623,16 +569,7 @@
                 }
             }
 
-            if (vitola_m === "") {
-                toastr.error('Llene el nombre de la vitola', 'ERROR', {
-                    "progressBar": true,
-                    "closeButton": false,
-                    "preventDuplicates": true,
-                    "preventOpenDuplicates": true
-                });
-                event.preventDefault();
-
-            } else if (vit > 0) {
+      if (vit > 0) {
                 toastr.error('Esta vitola ya existe, favor ingrese una nueva', 'ERROR', {
                     "progressBar": true,
                     "closeButton": false,
@@ -641,13 +578,11 @@
                 });
                 event.preventDefault();
 
-            } else
+            } else{                  
+            theForm.addEventListener('submit', function (event) {});             
+            }
 
-                toastr.success('Tus datos se guardaron correctamente', 'BIEN', {
-                    "progressBar": true,
-                    "closeButton": false
-                });
-            theForm.addEventListener('submit', function (event) {});
+            
 
         }
     </script>

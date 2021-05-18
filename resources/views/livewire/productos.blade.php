@@ -12,6 +12,8 @@
 <script src="{{ URL::asset('css/tabla.js') }}"></script>
 @livewireStyles
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-wEmeIV1mKuiNpC+IOBjI7aAzPcEZeedi5yW5f2yOq55WWLwNGmvvx4Um1vskeMj0" crossorigin="anonymous">
+<script src= "{{ URL::asset('https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js') }}"></script>
+<link rel="stylesheet" href="{{ URL::asset('https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css') }}">
 
 
     
@@ -359,8 +361,7 @@
                 <div class="modal-content">
 
                     <div class="modal-header">
-                        <h5 style="font-size:20px; width:3000px; text-align:center; font:bold" class=""
-                            id="staticBackdropLabel"><strong>Agregar producto</strong></h5>
+                        <h5 id="staticBackdropLabel"><strong>Agregar producto</strong></h5>
                         <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close"></button>
                     </div>
 
@@ -369,7 +370,7 @@
                         <div class="card-body">
                             <div class="row">
                                 <div class="mb-3 col">
-                                    <label style="font-size:16px" for="txt_vitola" class="form-label">Marca</label>
+                                    <label for="txt_vitola" class="form-label">Marca</label>
                                     <select class="form-control" name="marca" id="marca"
                                         placeholder="Ingresa figura y tipo" style="overflow-y: scroll; height:30px;"
                                         required>
@@ -383,13 +384,13 @@
 
                             <div class="row">
                                 <div class="mb-3 col">
-                                    <label style="font-size:16px" for="txt_figuraytipo" class="form-label">Item</label>
+                                    <label  for="txt_figuraytipo" class="form-label">Item</label>
                                     <input name="item" id="item" style="font-size:16px" class="form-control" required
                                         type="text" autocomplete="off">
                                 </div>
 
                                 <div class="mb-3 col">
-                                    <label style="font-size:16px" for="txt_figuraytipo" class="form-label">Capa</label>
+                                    <label for="txt_figuraytipo" class="form-label">Capa</label>
                                     <select class="form-control" name="capa" id="capa"
                                         placeholder="Ingresa figura y tipo" style="overflow-y: scroll; height:30px;"
                                         required>
@@ -400,7 +401,7 @@
                                 </div>
 
                                 <div class="mb-3 col">
-                                    <label for="txt_total" style="font-size:16px" class="form-label">Nombre</label>
+                                    <label for="txt_total" class="form-label">Nombre</label>
 
                                     <select class="form-control" name="nombre" id="nombre"
                                         placeholder="Ingresa figura y tipo" style="overflow-y: scroll; height:30px;"
@@ -416,7 +417,7 @@
                             <div class="row">
 
                                 <div class="mb-3 col">
-                                    <label style="font-size:16px" for="txt_buenos" class="form-label">Vitola</label>
+                                    <label for="txt_buenos" class="form-label">Vitola</label>
 
                                     <select class="form-control" name="vitola" id="vitola"
                                         placeholder="Ingresa figura y tipo" style="overflow-y: scroll; height:30px;"
@@ -428,7 +429,7 @@
 
                                 </div>
                                 <div class="mb-3 col">
-                                    <label style="font-size:16px" for="txt_malos" class="form-label">Tipo de
+                                    <label for="txt_malos" class="form-label">Tipo de
                                         empaque</label>
                                     <select class="form-control" name="tipo" id="tipo"
                                         placeholder="Ingresa figura y tipo" style="overflow-y: scroll; height:30px;"
@@ -440,7 +441,7 @@
                                 </div>
 
                                 <div class="mb-3 col">
-                                    <label style="font-size:16px" for="txt_malos"
+                                    <label  for="txt_malos"
                                         class="form-label">Presentación</label>
 
                                     <select class="form-control" name="presentacion" id="presentacion"
@@ -462,22 +463,21 @@
 
 
                                 <div class="mb-3 col">
-                                    <label for="txt_total" style="font-size:16px" class="form-label">Código del
+                                    <label for="txt_total" class="form-label">Código del
                                         sistema</label>
-                                    <input name="cod_sistema" id="cod_sistema" style="font-size:16px"
+                                    <input name="cod_sistema" id="cod_sistema" 
                                         class="form-control" required type="text" autocomplete="off">
                                 </div>
                                 <div class="mb-3 col">
-                                    <label style="font-size:16px" for="txt_buenos" class="form-label">Código de
+                                    <label for="txt_buenos" class="form-label">Código de
                                         precio</label>
-                                    <input name="cod_precio" id="cod_precio" style="font-size:16px" class="form-control"
+                                    <input name="cod_precio" id="cod_precio" class="form-control"
                                         required type="text" autocomplete="off">
                                 </div>
 
                                 <div class="mb-3 col">
-                                    <label for="txt_total" style="font-size:16px" class="form-label">Código de la
-                                        cajita</label>
-                                    <input name="cod_caja" id="cod_caja" style="font-size:16px" class="form-control"
+                                    <label for="txt_total" class="form-label">Código de la  cajita</label>
+                                    <input name="cod_caja" id="cod_caja"  class="form-control"
                                         required type="text" autocomplete="off">
                                 </div>
 
@@ -487,17 +487,17 @@
                             <div class="row">
                                 <div class="mb-3 col">
                                     <input type="checkbox" name="cello" id="cello" style="font-size:20px" value="si">
-                                    <label style="font-size:16px" for="cello" class="form-label">Cello</label>
+                                    <label for="cello" class="form-label">Cello</label>
                                 </div>
                                 <div class="mb-3 col">
 
                                     <input type="checkbox" name="anillo" id="anillo" style="font-size:20px" value="si">
-                                    <label style="font-size:16px" for="anillo" class="form-label">Anillo</label>
+                                    <label  for="anillo" class="form-label">Anillo</label>
                                 </div>
                                 <div class="mb-3 col">
 
                                     <input type="checkbox" name="upc" id="upc" style="font-size:20px" value="si">
-                                    <label style="font-size:16px" for="upc" class="form-label">UPC</label>
+                                    <label for="upc" class="form-label">UPC</label>
                                 </div>
 
 
@@ -506,14 +506,11 @@
                     </div>
 
                     <div class="modal-footer">
-                        <button style=" background: #b39f64; color: #ecedf1;" type="button" class=" btn-info-claro "
-                            data-dismiss="modal">
-                            <span style="font-size:16px">Cancelar</span>
+                        <button  type="button" class=" bmodal_no"
+                            data-dismiss="modal"><span >Cancelar</span>
                             @csrf
                         </button>
-                        <button class="submit">
-                            <span style="font-size:16px">Guardar</span>
-                        </button>
+                        <button onclick="agregarproducto()"class=" bmodal_yes "> <span>Guardar</span> </button>
                     </div>
 
                 </div>
@@ -521,6 +518,53 @@
         </div>
     </form>
     <!-- FIN DEL MODAL NUEVO PRODUCTO -->
+
+    <script type="text/javascript">
+        function agregarproducto(){ 
+            var v_item = document.getElementById('item').value;
+            var unico_item = 0;
+
+            var datas = '<?php echo json_encode($productos);?>';
+        var data = JSON.parse(datas);
+
+        for (var i = 0; i < data.length; i++) {   
+        if(data[i].item.toLowerCase() === v_item.toLowerCase()){ 
+            unico_item++;
+        } 
+        }
+    
+        if(unico_item > 0){
+        toastr.error( 'Este item ya existe','ERROR',{"progressBar": true,"closeButton": false,"preventDuplicates": true
+        , "preventOpenDuplicates": true} );
+        event.preventDefault();
+        }else{
+        theForm.addEventListener('submit', function (event) {});
+        
+        }
+        }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
     <!-- INICIO MODAL ACTUALIZAR PRODUCTO-->
     <form action="{{Route('actualizar_producto')}}" method="POST" name="formulario_actualizar" id="formulario_actualizar">

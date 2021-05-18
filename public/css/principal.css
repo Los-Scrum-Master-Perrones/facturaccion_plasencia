@@ -28,15 +28,14 @@
 
   .botonprincipal {
       width: 100%;
-      background: #000;
+      background: rgba(174, 0, 255, 0.432);
       color: #fff;
       border-radius: 20px;
   }
 
   .botonprincipal:hover {
       width: 100%;
-      background: #000;
-      color: rgb(255, 255, 255);
+      background: rgba(174, 0, 255, 0.336);
       border-radius: 20px;
   }
 
