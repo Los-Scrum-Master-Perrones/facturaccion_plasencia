@@ -18,7 +18,7 @@
 
     <ul class="nav justify-content-center">
         <li class="nav-item">
-            <a style="color:white;" href="pendiente_empaque"><strong>Pendiente</strong></a>
+            <a style=" background: ;color:white;" href="pendiente_empaque"><strong>Pendiente</strong></a>
         </li>
         <li class="nav-item">
             <a style="color:black;" href="importar_c"><strong>Existencia en bodega</strong></a>
@@ -59,7 +59,7 @@
                       <button class="mr-sm-2 botonprincipal" style="width:200px;">Agregar Programación </button>
                    </form>
          
-                   <button class="mr-sm-2 botonprincipal" style="width:200px;"> <a  href="/detalles_programacion">Ver</a> </button>
+                   <a  href="/detalles_programacion"> <button class="mr-sm-2 botonprincipal" style="width:200px;"> Ver</button></a> 
            
    </div>
 </div>

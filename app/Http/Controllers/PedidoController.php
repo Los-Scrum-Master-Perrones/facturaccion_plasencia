@@ -10,12 +10,10 @@ class PedidoController extends Controller
 {
     public function import(Request $request)
     {
-
         (new pedidoImport)->import($request->select_file);
-
         $pedido_completo =  DB::select('call mostrar_pedido');
-
-        return view('import_excel')->with('success', 'Importación realizada con éxito!')->with('pedido_completo', $pedido_completo);
+        $verificar = \DB::select('call verificar_item_clase');
+        return view('import_excel')->with('success', 'Importación realizada con éxito!')->with('pedido_completo', $pedido_completo)->with('verificar', $verificar);
     }
 
 
@@ -33,7 +31,8 @@ class PedidoController extends Controller
             'call buscar_pedidos(:item)',
             ['item' => $i]
         );
-
-        return view('import_excel')->with('pedido_completo', $pedido_completo);
+        
+        $verificar = \DB::select('call verificar_item_clase');
+        return view('import_excel')->with('pedido_completo', $pedido_completo)->with('verificar', $verificar);
     }
 }

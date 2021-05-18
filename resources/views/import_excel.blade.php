@@ -40,6 +40,8 @@
 
 
 
+
+
     <div class="container" style="max-width:100%; ">
 
 
@@ -56,10 +58,10 @@
                   </form>
                            
 
-                    <form action="{{Route('pendiente')}}" method="POST">
+                    <form action="{{Route('pendiente_insertar')}}" method="POST">
                     @csrf
                     <input type="date" value="" name="fecha" id="fecha" style="width: 160px;color:white;text-align:center;"  class=" form-control  botonprincipal mr-sm-2 " required>
-                    <button type="submit" style="width:160px;" class="botonprincipal mr-sm-2 ">Agregar a pendiente</button>
+                    <button  onclick="agregarpendiente()" style="width:160px;" class="botonprincipal mr-sm-2 ">Agregar a pendiente</button>
                     </form>
 
                          
@@ -117,17 +119,83 @@
                             @endforeach
                         </tbody>
                     </table>
+
+                      
                 </div>
 
                 </div>
 
-
-
-
-
-
     </div>
     </div>
+
+
+
+
+    <div class="modal fade" id="datos_faltantes" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true" style="opacity:.9;background:#212529;">
+  <div class="modal-dialog modal-dialog-centered" >
+    <div class="modal-content">
+
+      <div class="modal-header">          
+          <h5 class="modal-title" id="staticBackdropLabel">Eliminar Usuario  </h5>  
+                            </div>
+
+      <div class="modal-body">
+      ¿Estás seguro que quieres eliminar a  <strong><input value ="" id="txt_usuarioE" name= "txt_usuarioE" style="border:none;text-align:center;" readonly></strong>?
+      <input name = "id_usuarioE" id="id_usuarioE" value ="" hidden />
+      </div>
+
+      <div class="modal-footer" >
+        <button class="bmodal_no" data-dismiss="modal" >
+            <span>Cancelar</span>
+        </button>
+        <button type="submit" class="bmodal_yes">
+            <span>Eliminar</span>
+        </button>
+      </div>
+
+    </div>
+  </div>
+
+
+
+
+
+
+
+    <script type="text/javascript">
+
+function agregarpendiente(){ 
+
+var datas = '<?php echo json_encode($verificar);?>';
+var data = JSON.parse(datas);
+
+
+
+
+
+ if( data.length > 0){
+    var bool=confirm('Necesitas agregar los productos correspondientes a los siguientes item: \n @foreach($verificar as $v) \n{{$v->item}} @endforeach ');
+  if(bool){
+    location.href ="/productos";
+  }
+     event.preventDefault();
+   
+
+}else{
+theForm.addEventListener('submit', function (event) {
+}); 
+}
+}
+</script>
+
+
+
+
+
+
+
+
+
 
     <script type="text/javascript">
         $(document).ready(function () {
