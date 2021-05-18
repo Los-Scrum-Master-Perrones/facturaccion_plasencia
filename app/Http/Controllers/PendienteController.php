@@ -14,7 +14,6 @@ class PendienteController extends Controller
 
     public function pendiente_indexi(Request $request)
     {
-
         $insertar_pendiente_empaque =   \DB::select(
             'call insertar_pendente_empaque(:fecha)',
             ['fecha' => (string)$request->fecha]
