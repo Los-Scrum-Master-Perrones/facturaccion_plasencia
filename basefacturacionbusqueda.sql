@@ -1,8 +1,8 @@
 -- --------------------------------------------------------
 -- Host:                         127.0.0.1
--- Versión del servidor:         5.7.24 - MySQL Community Server (GPL)
--- SO del servidor:              Win64
--- HeidiSQL Versión:             11.0.0.5919
+-- Server version:               5.7.31 - MySQL Community Server (GPL)
+-- Server OS:                    Win64
+-- HeidiSQL Version:             11.0.0.5919
 -- --------------------------------------------------------
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
@@ -12,11 +12,11 @@
 /*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
 
 
--- Volcando estructura de base de datos para facturacion_plasencia
+-- Dumping database structure for facturacion_plasencia
 CREATE DATABASE IF NOT EXISTS `facturacion_plasencia` /*!40100 DEFAULT CHARACTER SET latin1 */;
 USE `facturacion_plasencia`;
 
--- Volcando estructura para tabla facturacion_plasencia.anadir_inventario_cajas
+-- Dumping structure for table facturacion_plasencia.anadir_inventario_cajas
 CREATE TABLE IF NOT EXISTS `anadir_inventario_cajas` (
   `id_cajas` int(11) NOT NULL AUTO_INCREMENT,
   `codigo` varchar(50) DEFAULT NULL,
@@ -29,14 +29,63 @@ CREATE TABLE IF NOT EXISTS `anadir_inventario_cajas` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id_cajas`) USING BTREE
-) ENGINE=MyISAM AUTO_INCREMENT=21 DEFAULT CHARSET=latin1 ROW_FORMAT=DYNAMIC;
+) ENGINE=MyISAM AUTO_INCREMENT=51 DEFAULT CHARSET=latin1 ROW_FORMAT=DYNAMIC;
 
--- Volcando datos para la tabla facturacion_plasencia.anadir_inventario_cajas: 0 rows
+-- Dumping data for table facturacion_plasencia.anadir_inventario_cajas: 30 rows
 DELETE FROM `anadir_inventario_cajas`;
 /*!40000 ALTER TABLE `anadir_inventario_cajas` DISABLE KEYS */;
+INSERT INTO `anadir_inventario_cajas` (`id_cajas`, `codigo`, `descripcion`, `lote_origen`, `lote_destino`, `cantidad`, `costo_u`, `subtotal`, `created_at`, `updated_at`) VALUES
+	(21, 'CM-03572', 'CAJAS DE MADERA ROCKY PATEL  EDGE TORO COROJO BOX/20', 'CAJAS_MADERA', 'CAJAS_MADERA', '420', '4', '1680', NULL, NULL),
+	(22, 'CM-03580', 'CAJAS DE MADERA ROCKY PATEL  EDGE TORPEDO COROJO BOX/100', 'CAJAS_MADERA', 'CAJAS_MADERA', '40', '6', '240', NULL, NULL),
+	(23, 'CM-03569', 'CAJAS DE MADERA ROCKY PATEL  EDGE TORO MADURO BOX/20', 'CAJAS_MADERA', 'CAJAS_MADERA', '546', '4', '2184', NULL, NULL),
+	(24, 'CM-07031', 'CAJAS DE MADERA ROCKY PATEL EDGE TORO CELLO HABANO (WAREHOUSE) BOX/100', 'CAJAS_MADERA', 'CAJAS_MADERA', '4', '6', '24', NULL, NULL),
+	(25, 'CM-04553', 'CAJAS DE MADERA ROCKY PATEL DAVIDUS ANTIETAM ROBUSTO PRESS BOX/20', 'CAJAS_MADERA', 'CAJAS_MADERA', '25', '5', '125', NULL, NULL),
+	(26, 'CM-03506', 'CAJAS DE MADERA ROCKY PATEL DAVIDUS ANTIETAM TORO PRESS BOX/20', 'CAJAS_MADERA', 'CAJAS_MADERA', '10', '5', '50', NULL, NULL),
+	(27, 'CM-03337', 'CAJAS DE MADERA ROCKY PATEL FREDERICKTOWNE ROBUSTO ROUND BOX/20', 'CAJAS_MADERA', 'CAJAS_MADERA', '25', '5', '125', NULL, NULL),
+	(28, 'CM-04562', 'CAJAS DE MADERA ROCKY PATEL FREDERICKTOWNE CHURCHILL ROUND  BOX/20', 'CAJAS_MADERA', 'CAJAS_MADERA', '5', '5', '25', NULL, NULL),
+	(29, 'CM-05357', 'CAJAS DE MADERA ROCKY PATEL EDGE 4-1/2X60 B52 MADURO BOX/30', 'CAJAS_MADERA', 'CAJAS_MADERA', '50', '4.5', '225', NULL, NULL),
+	(30, 'CM-05356', 'CAJAS DE MADERA ROCKY PATEL EDGE 4-1/2X60 B52 COROJO BOX/30', 'CAJAS_MADERA', 'CAJAS_MADERA', '50', '4.5', '225', NULL, NULL),
+	(31, 'CM-03572', 'CAJAS DE MADERA ROCKY PATEL  EDGE TORO COROJO BOX/20', 'CAJAS_MADERA', 'CAJAS_MADERA', '420', '4', '1680', NULL, NULL),
+	(32, 'CM-03580', 'CAJAS DE MADERA ROCKY PATEL  EDGE TORPEDO COROJO BOX/100', 'CAJAS_MADERA', 'CAJAS_MADERA', '40', '6', '240', NULL, NULL),
+	(33, 'CM-03569', 'CAJAS DE MADERA ROCKY PATEL  EDGE TORO MADURO BOX/20', 'CAJAS_MADERA', 'CAJAS_MADERA', '546', '4', '2184', NULL, NULL),
+	(34, 'CM-07031', 'CAJAS DE MADERA ROCKY PATEL EDGE TORO CELLO HABANO (WAREHOUSE) BOX/100', 'CAJAS_MADERA', 'CAJAS_MADERA', '4', '6', '24', NULL, NULL),
+	(35, 'CM-04553', 'CAJAS DE MADERA ROCKY PATEL DAVIDUS ANTIETAM ROBUSTO PRESS BOX/20', 'CAJAS_MADERA', 'CAJAS_MADERA', '25', '5', '125', NULL, NULL),
+	(36, 'CM-03506', 'CAJAS DE MADERA ROCKY PATEL DAVIDUS ANTIETAM TORO PRESS BOX/20', 'CAJAS_MADERA', 'CAJAS_MADERA', '10', '5', '50', NULL, NULL),
+	(37, 'CM-03337', 'CAJAS DE MADERA ROCKY PATEL FREDERICKTOWNE ROBUSTO ROUND BOX/20', 'CAJAS_MADERA', 'CAJAS_MADERA', '25', '5', '125', NULL, NULL),
+	(38, 'CM-04562', 'CAJAS DE MADERA ROCKY PATEL FREDERICKTOWNE CHURCHILL ROUND  BOX/20', 'CAJAS_MADERA', 'CAJAS_MADERA', '5', '5', '25', NULL, NULL),
+	(39, 'CM-05357', 'CAJAS DE MADERA ROCKY PATEL EDGE 4-1/2X60 B52 MADURO BOX/30', 'CAJAS_MADERA', 'CAJAS_MADERA', '50', '4.5', '225', NULL, NULL),
+	(40, 'CM-05356', 'CAJAS DE MADERA ROCKY PATEL EDGE 4-1/2X60 B52 COROJO BOX/30', 'CAJAS_MADERA', 'CAJAS_MADERA', '50', '4.5', '225', NULL, NULL),
+	(41, 'CM-03572', 'CAJAS DE MADERA ROCKY PATEL  EDGE TORO COROJO BOX/20', 'CAJAS_MADERA', 'CAJAS_MADERA', '420', '4', '1680', NULL, NULL),
+	(42, 'CM-03580', 'CAJAS DE MADERA ROCKY PATEL  EDGE TORPEDO COROJO BOX/100', 'CAJAS_MADERA', 'CAJAS_MADERA', '40', '6', '240', NULL, NULL),
+	(43, 'CM-03569', 'CAJAS DE MADERA ROCKY PATEL  EDGE TORO MADURO BOX/20', 'CAJAS_MADERA', 'CAJAS_MADERA', '546', '4', '2184', NULL, NULL),
+	(44, 'CM-07031', 'CAJAS DE MADERA ROCKY PATEL EDGE TORO CELLO HABANO (WAREHOUSE) BOX/100', 'CAJAS_MADERA', 'CAJAS_MADERA', '4', '6', '24', NULL, NULL),
+	(45, 'CM-04553', 'CAJAS DE MADERA ROCKY PATEL DAVIDUS ANTIETAM ROBUSTO PRESS BOX/20', 'CAJAS_MADERA', 'CAJAS_MADERA', '25', '5', '125', NULL, NULL),
+	(46, 'CM-03506', 'CAJAS DE MADERA ROCKY PATEL DAVIDUS ANTIETAM TORO PRESS BOX/20', 'CAJAS_MADERA', 'CAJAS_MADERA', '10', '5', '50', NULL, NULL),
+	(47, 'CM-03337', 'CAJAS DE MADERA ROCKY PATEL FREDERICKTOWNE ROBUSTO ROUND BOX/20', 'CAJAS_MADERA', 'CAJAS_MADERA', '25', '5', '125', NULL, NULL),
+	(48, 'CM-04562', 'CAJAS DE MADERA ROCKY PATEL FREDERICKTOWNE CHURCHILL ROUND  BOX/20', 'CAJAS_MADERA', 'CAJAS_MADERA', '5', '5', '25', NULL, NULL),
+	(49, 'CM-05357', 'CAJAS DE MADERA ROCKY PATEL EDGE 4-1/2X60 B52 MADURO BOX/30', 'CAJAS_MADERA', 'CAJAS_MADERA', '50', '4.5', '225', NULL, NULL),
+	(50, 'CM-05356', 'CAJAS DE MADERA ROCKY PATEL EDGE 4-1/2X60 B52 COROJO BOX/30', 'CAJAS_MADERA', 'CAJAS_MADERA', '50', '4.5', '225', NULL, NULL);
 /*!40000 ALTER TABLE `anadir_inventario_cajas` ENABLE KEYS */;
 
--- Volcando estructura para tabla facturacion_plasencia.cajas
+-- Dumping structure for table facturacion_plasencia.archivo_producto_terminados
+CREATE TABLE IF NOT EXISTS `archivo_producto_terminados` (
+  `id` int(11) DEFAULT NULL,
+  `Lote` varchar(50) DEFAULT NULL,
+  `Marca` varchar(50) DEFAULT NULL,
+  `Alias_vitola` varchar(50) DEFAULT NULL,
+  `Vitola` varchar(50) DEFAULT NULL,
+  `Nombre_capa` varchar(50) DEFAULT NULL,
+  `Existencia_total` varchar(50) DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+
+-- Dumping data for table facturacion_plasencia.archivo_producto_terminados: 0 rows
+DELETE FROM `archivo_producto_terminados`;
+/*!40000 ALTER TABLE `archivo_producto_terminados` DISABLE KEYS */;
+/*!40000 ALTER TABLE `archivo_producto_terminados` ENABLE KEYS */;
+
+-- Dumping structure for table facturacion_plasencia.cajas
 CREATE TABLE IF NOT EXISTS `cajas` (
   `id_cajas` int(11) NOT NULL AUTO_INCREMENT,
   `codigo` varchar(50) DEFAULT NULL,
@@ -49,23 +98,85 @@ CREATE TABLE IF NOT EXISTS `cajas` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id_cajas`)
-) ENGINE=MyISAM AUTO_INCREMENT=21 DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM AUTO_INCREMENT=61 DEFAULT CHARSET=latin1;
 
--- Volcando datos para la tabla facturacion_plasencia.cajas: 0 rows
+-- Dumping data for table facturacion_plasencia.cajas: 60 rows
 DELETE FROM `cajas`;
 /*!40000 ALTER TABLE `cajas` DISABLE KEYS */;
+INSERT INTO `cajas` (`id_cajas`, `codigo`, `descripcion`, `lote_origen`, `lote_destino`, `cantidad`, `costo_u`, `subtotal`, `created_at`, `updated_at`) VALUES
+	(1, 'CM-03572', 'CAJAS DE MADERA ROCKY PATEL  EDGE TORO COROJO BOX/20', 'CAJAS_MADERA', 'CAJAS_MADERA', '420', '4', '1680', '2021-05-12 21:44:34', '2021-05-12 21:44:34'),
+	(2, 'CM-03580', 'CAJAS DE MADERA ROCKY PATEL  EDGE TORPEDO COROJO BOX/100', 'CAJAS_MADERA', 'CAJAS_MADERA', '40', '6', '240', '2021-05-12 21:44:34', '2021-05-12 21:44:34'),
+	(3, 'CM-03569', 'CAJAS DE MADERA ROCKY PATEL  EDGE TORO MADURO BOX/20', 'CAJAS_MADERA', 'CAJAS_MADERA', '546', '4', '2184', '2021-05-12 21:44:34', '2021-05-12 21:44:34'),
+	(4, 'CM-07031', 'CAJAS DE MADERA ROCKY PATEL EDGE TORO CELLO HABANO (WAREHOUSE) BOX/100', 'CAJAS_MADERA', 'CAJAS_MADERA', '4', '6', '24', '2021-05-12 21:44:34', '2021-05-12 21:44:34'),
+	(5, 'CM-04553', 'CAJAS DE MADERA ROCKY PATEL DAVIDUS ANTIETAM ROBUSTO PRESS BOX/20', 'CAJAS_MADERA', 'CAJAS_MADERA', '25', '5', '125', '2021-05-12 21:44:34', '2021-05-12 21:44:34'),
+	(6, 'CM-03506', 'CAJAS DE MADERA ROCKY PATEL DAVIDUS ANTIETAM TORO PRESS BOX/20', 'CAJAS_MADERA', 'CAJAS_MADERA', '10', '5', '50', '2021-05-12 21:44:34', '2021-05-12 21:44:34'),
+	(7, 'CM-03337', 'CAJAS DE MADERA ROCKY PATEL FREDERICKTOWNE ROBUSTO ROUND BOX/20', 'CAJAS_MADERA', 'CAJAS_MADERA', '25', '5', '125', '2021-05-12 21:44:34', '2021-05-12 21:44:34'),
+	(8, 'CM-04562', 'CAJAS DE MADERA ROCKY PATEL FREDERICKTOWNE CHURCHILL ROUND  BOX/20', 'CAJAS_MADERA', 'CAJAS_MADERA', '5', '5', '25', '2021-05-12 21:44:34', '2021-05-12 21:44:34'),
+	(9, 'CM-05357', 'CAJAS DE MADERA ROCKY PATEL EDGE 4-1/2X60 B52 MADURO BOX/30', 'CAJAS_MADERA', 'CAJAS_MADERA', '50', '4.5', '225', '2021-05-12 21:44:34', '2021-05-12 21:44:34'),
+	(10, 'CM-05356', 'CAJAS DE MADERA ROCKY PATEL EDGE 4-1/2X60 B52 COROJO BOX/30', 'CAJAS_MADERA', 'CAJAS_MADERA', '50', '4.5', '225', '2021-05-12 21:44:34', '2021-05-12 21:44:34'),
+	(11, 'CM-03572', 'CAJAS DE MADERA ROCKY PATEL  EDGE TORO COROJO BOX/20', 'CAJAS_MADERA', 'CAJAS_MADERA', '420', '4', '1680', '2021-05-12 21:46:23', '2021-05-12 21:46:23'),
+	(12, 'CM-03580', 'CAJAS DE MADERA ROCKY PATEL  EDGE TORPEDO COROJO BOX/100', 'CAJAS_MADERA', 'CAJAS_MADERA', '40', '6', '240', '2021-05-12 21:46:23', '2021-05-12 21:46:23'),
+	(13, 'CM-03569', 'CAJAS DE MADERA ROCKY PATEL  EDGE TORO MADURO BOX/20', 'CAJAS_MADERA', 'CAJAS_MADERA', '546', '4', '2184', '2021-05-12 21:46:23', '2021-05-12 21:46:23'),
+	(14, 'CM-07031', 'CAJAS DE MADERA ROCKY PATEL EDGE TORO CELLO HABANO (WAREHOUSE) BOX/100', 'CAJAS_MADERA', 'CAJAS_MADERA', '4', '6', '24', '2021-05-12 21:46:23', '2021-05-12 21:46:23'),
+	(15, 'CM-04553', 'CAJAS DE MADERA ROCKY PATEL DAVIDUS ANTIETAM ROBUSTO PRESS BOX/20', 'CAJAS_MADERA', 'CAJAS_MADERA', '25', '5', '125', '2021-05-12 21:46:23', '2021-05-12 21:46:23'),
+	(16, 'CM-03506', 'CAJAS DE MADERA ROCKY PATEL DAVIDUS ANTIETAM TORO PRESS BOX/20', 'CAJAS_MADERA', 'CAJAS_MADERA', '10', '5', '50', '2021-05-12 21:46:23', '2021-05-12 21:46:23'),
+	(17, 'CM-03337', 'CAJAS DE MADERA ROCKY PATEL FREDERICKTOWNE ROBUSTO ROUND BOX/20', 'CAJAS_MADERA', 'CAJAS_MADERA', '25', '5', '125', '2021-05-12 21:46:23', '2021-05-12 21:46:23'),
+	(18, 'CM-04562', 'CAJAS DE MADERA ROCKY PATEL FREDERICKTOWNE CHURCHILL ROUND  BOX/20', 'CAJAS_MADERA', 'CAJAS_MADERA', '5', '5', '25', '2021-05-12 21:46:23', '2021-05-12 21:46:23'),
+	(19, 'CM-05357', 'CAJAS DE MADERA ROCKY PATEL EDGE 4-1/2X60 B52 MADURO BOX/30', 'CAJAS_MADERA', 'CAJAS_MADERA', '50', '4.5', '225', '2021-05-12 21:46:23', '2021-05-12 21:46:23'),
+	(20, 'CM-05356', 'CAJAS DE MADERA ROCKY PATEL EDGE 4-1/2X60 B52 COROJO BOX/30', 'CAJAS_MADERA', 'CAJAS_MADERA', '50', '4.5', '225', '2021-05-12 21:46:23', '2021-05-12 21:46:23'),
+	(21, 'CM-03572', 'CAJAS DE MADERA ROCKY PATEL  EDGE TORO COROJO BOX/20', 'CAJAS_MADERA', 'CAJAS_MADERA', '420', '4', '1680', '2021-05-12 21:47:10', '2021-05-12 21:47:10'),
+	(22, 'CM-03580', 'CAJAS DE MADERA ROCKY PATEL  EDGE TORPEDO COROJO BOX/100', 'CAJAS_MADERA', 'CAJAS_MADERA', '40', '6', '240', '2021-05-12 21:47:10', '2021-05-12 21:47:10'),
+	(23, 'CM-03569', 'CAJAS DE MADERA ROCKY PATEL  EDGE TORO MADURO BOX/20', 'CAJAS_MADERA', 'CAJAS_MADERA', '546', '4', '2184', '2021-05-12 21:47:10', '2021-05-12 21:47:10'),
+	(24, 'CM-07031', 'CAJAS DE MADERA ROCKY PATEL EDGE TORO CELLO HABANO (WAREHOUSE) BOX/100', 'CAJAS_MADERA', 'CAJAS_MADERA', '4', '6', '24', '2021-05-12 21:47:10', '2021-05-12 21:47:10'),
+	(25, 'CM-04553', 'CAJAS DE MADERA ROCKY PATEL DAVIDUS ANTIETAM ROBUSTO PRESS BOX/20', 'CAJAS_MADERA', 'CAJAS_MADERA', '25', '5', '125', '2021-05-12 21:47:10', '2021-05-12 21:47:10'),
+	(26, 'CM-03506', 'CAJAS DE MADERA ROCKY PATEL DAVIDUS ANTIETAM TORO PRESS BOX/20', 'CAJAS_MADERA', 'CAJAS_MADERA', '10', '5', '50', '2021-05-12 21:47:10', '2021-05-12 21:47:10'),
+	(27, 'CM-03337', 'CAJAS DE MADERA ROCKY PATEL FREDERICKTOWNE ROBUSTO ROUND BOX/20', 'CAJAS_MADERA', 'CAJAS_MADERA', '25', '5', '125', '2021-05-12 21:47:10', '2021-05-12 21:47:10'),
+	(28, 'CM-04562', 'CAJAS DE MADERA ROCKY PATEL FREDERICKTOWNE CHURCHILL ROUND  BOX/20', 'CAJAS_MADERA', 'CAJAS_MADERA', '5', '5', '25', '2021-05-12 21:47:10', '2021-05-12 21:47:10'),
+	(29, 'CM-05357', 'CAJAS DE MADERA ROCKY PATEL EDGE 4-1/2X60 B52 MADURO BOX/30', 'CAJAS_MADERA', 'CAJAS_MADERA', '50', '4.5', '225', '2021-05-12 21:47:10', '2021-05-12 21:47:10'),
+	(30, 'CM-05356', 'CAJAS DE MADERA ROCKY PATEL EDGE 4-1/2X60 B52 COROJO BOX/30', 'CAJAS_MADERA', 'CAJAS_MADERA', '50', '4.5', '225', '2021-05-12 21:47:10', '2021-05-12 21:47:10'),
+	(31, 'CM-03572', 'CAJAS DE MADERA ROCKY PATEL  EDGE TORO COROJO BOX/20', 'CAJAS_MADERA', 'CAJAS_MADERA', '420', '4', '1680', '2021-05-12 21:47:18', '2021-05-12 21:47:18'),
+	(32, 'CM-03580', 'CAJAS DE MADERA ROCKY PATEL  EDGE TORPEDO COROJO BOX/100', 'CAJAS_MADERA', 'CAJAS_MADERA', '40', '6', '240', '2021-05-12 21:47:18', '2021-05-12 21:47:18'),
+	(33, 'CM-03569', 'CAJAS DE MADERA ROCKY PATEL  EDGE TORO MADURO BOX/20', 'CAJAS_MADERA', 'CAJAS_MADERA', '546', '4', '2184', '2021-05-12 21:47:18', '2021-05-12 21:47:18'),
+	(34, 'CM-07031', 'CAJAS DE MADERA ROCKY PATEL EDGE TORO CELLO HABANO (WAREHOUSE) BOX/100', 'CAJAS_MADERA', 'CAJAS_MADERA', '4', '6', '24', '2021-05-12 21:47:18', '2021-05-12 21:47:18'),
+	(35, 'CM-04553', 'CAJAS DE MADERA ROCKY PATEL DAVIDUS ANTIETAM ROBUSTO PRESS BOX/20', 'CAJAS_MADERA', 'CAJAS_MADERA', '25', '5', '125', '2021-05-12 21:47:18', '2021-05-12 21:47:18'),
+	(36, 'CM-03506', 'CAJAS DE MADERA ROCKY PATEL DAVIDUS ANTIETAM TORO PRESS BOX/20', 'CAJAS_MADERA', 'CAJAS_MADERA', '10', '5', '50', '2021-05-12 21:47:18', '2021-05-12 21:47:18'),
+	(37, 'CM-03337', 'CAJAS DE MADERA ROCKY PATEL FREDERICKTOWNE ROBUSTO ROUND BOX/20', 'CAJAS_MADERA', 'CAJAS_MADERA', '25', '5', '125', '2021-05-12 21:47:18', '2021-05-12 21:47:18'),
+	(38, 'CM-04562', 'CAJAS DE MADERA ROCKY PATEL FREDERICKTOWNE CHURCHILL ROUND  BOX/20', 'CAJAS_MADERA', 'CAJAS_MADERA', '5', '5', '25', '2021-05-12 21:47:18', '2021-05-12 21:47:18'),
+	(39, 'CM-05357', 'CAJAS DE MADERA ROCKY PATEL EDGE 4-1/2X60 B52 MADURO BOX/30', 'CAJAS_MADERA', 'CAJAS_MADERA', '50', '4.5', '225', '2021-05-12 21:47:18', '2021-05-12 21:47:18'),
+	(40, 'CM-05356', 'CAJAS DE MADERA ROCKY PATEL EDGE 4-1/2X60 B52 COROJO BOX/30', 'CAJAS_MADERA', 'CAJAS_MADERA', '50', '4.5', '225', '2021-05-12 21:47:18', '2021-05-12 21:47:18'),
+	(41, 'CM-03572', 'CAJAS DE MADERA ROCKY PATEL  EDGE TORO COROJO BOX/20', 'CAJAS_MADERA', 'CAJAS_MADERA', '420', '4', '1680', '2021-05-12 21:47:20', '2021-05-12 21:47:20'),
+	(42, 'CM-03580', 'CAJAS DE MADERA ROCKY PATEL  EDGE TORPEDO COROJO BOX/100', 'CAJAS_MADERA', 'CAJAS_MADERA', '40', '6', '240', '2021-05-12 21:47:20', '2021-05-12 21:47:20'),
+	(43, 'CM-03569', 'CAJAS DE MADERA ROCKY PATEL  EDGE TORO MADURO BOX/20', 'CAJAS_MADERA', 'CAJAS_MADERA', '546', '4', '2184', '2021-05-12 21:47:20', '2021-05-12 21:47:20'),
+	(44, 'CM-07031', 'CAJAS DE MADERA ROCKY PATEL EDGE TORO CELLO HABANO (WAREHOUSE) BOX/100', 'CAJAS_MADERA', 'CAJAS_MADERA', '4', '6', '24', '2021-05-12 21:47:20', '2021-05-12 21:47:20'),
+	(45, 'CM-04553', 'CAJAS DE MADERA ROCKY PATEL DAVIDUS ANTIETAM ROBUSTO PRESS BOX/20', 'CAJAS_MADERA', 'CAJAS_MADERA', '25', '5', '125', '2021-05-12 21:47:20', '2021-05-12 21:47:20'),
+	(46, 'CM-03506', 'CAJAS DE MADERA ROCKY PATEL DAVIDUS ANTIETAM TORO PRESS BOX/20', 'CAJAS_MADERA', 'CAJAS_MADERA', '10', '5', '50', '2021-05-12 21:47:20', '2021-05-12 21:47:20'),
+	(47, 'CM-03337', 'CAJAS DE MADERA ROCKY PATEL FREDERICKTOWNE ROBUSTO ROUND BOX/20', 'CAJAS_MADERA', 'CAJAS_MADERA', '25', '5', '125', '2021-05-12 21:47:20', '2021-05-12 21:47:20'),
+	(48, 'CM-04562', 'CAJAS DE MADERA ROCKY PATEL FREDERICKTOWNE CHURCHILL ROUND  BOX/20', 'CAJAS_MADERA', 'CAJAS_MADERA', '5', '5', '25', '2021-05-12 21:47:20', '2021-05-12 21:47:20'),
+	(49, 'CM-05357', 'CAJAS DE MADERA ROCKY PATEL EDGE 4-1/2X60 B52 MADURO BOX/30', 'CAJAS_MADERA', 'CAJAS_MADERA', '50', '4.5', '225', '2021-05-12 21:47:20', '2021-05-12 21:47:20'),
+	(50, 'CM-05356', 'CAJAS DE MADERA ROCKY PATEL EDGE 4-1/2X60 B52 COROJO BOX/30', 'CAJAS_MADERA', 'CAJAS_MADERA', '50', '4.5', '225', '2021-05-12 21:47:20', '2021-05-12 21:47:20'),
+	(51, 'CM-03572', 'CAJAS DE MADERA ROCKY PATEL  EDGE TORO COROJO BOX/20', 'CAJAS_MADERA', 'CAJAS_MADERA', '420', '4', '1680', '2021-05-12 21:47:26', '2021-05-12 21:47:26'),
+	(52, 'CM-03580', 'CAJAS DE MADERA ROCKY PATEL  EDGE TORPEDO COROJO BOX/100', 'CAJAS_MADERA', 'CAJAS_MADERA', '40', '6', '240', '2021-05-12 21:47:26', '2021-05-12 21:47:26'),
+	(53, 'CM-03569', 'CAJAS DE MADERA ROCKY PATEL  EDGE TORO MADURO BOX/20', 'CAJAS_MADERA', 'CAJAS_MADERA', '546', '4', '2184', '2021-05-12 21:47:26', '2021-05-12 21:47:26'),
+	(54, 'CM-07031', 'CAJAS DE MADERA ROCKY PATEL EDGE TORO CELLO HABANO (WAREHOUSE) BOX/100', 'CAJAS_MADERA', 'CAJAS_MADERA', '4', '6', '24', '2021-05-12 21:47:26', '2021-05-12 21:47:26'),
+	(55, 'CM-04553', 'CAJAS DE MADERA ROCKY PATEL DAVIDUS ANTIETAM ROBUSTO PRESS BOX/20', 'CAJAS_MADERA', 'CAJAS_MADERA', '25', '5', '125', '2021-05-12 21:47:26', '2021-05-12 21:47:26'),
+	(56, 'CM-03506', 'CAJAS DE MADERA ROCKY PATEL DAVIDUS ANTIETAM TORO PRESS BOX/20', 'CAJAS_MADERA', 'CAJAS_MADERA', '10', '5', '50', '2021-05-12 21:47:26', '2021-05-12 21:47:26'),
+	(57, 'CM-03337', 'CAJAS DE MADERA ROCKY PATEL FREDERICKTOWNE ROBUSTO ROUND BOX/20', 'CAJAS_MADERA', 'CAJAS_MADERA', '25', '5', '125', '2021-05-12 21:47:26', '2021-05-12 21:47:26'),
+	(58, 'CM-04562', 'CAJAS DE MADERA ROCKY PATEL FREDERICKTOWNE CHURCHILL ROUND  BOX/20', 'CAJAS_MADERA', 'CAJAS_MADERA', '5', '5', '25', '2021-05-12 21:47:26', '2021-05-12 21:47:26'),
+	(59, 'CM-05357', 'CAJAS DE MADERA ROCKY PATEL EDGE 4-1/2X60 B52 MADURO BOX/30', 'CAJAS_MADERA', 'CAJAS_MADERA', '50', '4.5', '225', '2021-05-12 21:47:26', '2021-05-12 21:47:26'),
+	(60, 'CM-05356', 'CAJAS DE MADERA ROCKY PATEL EDGE 4-1/2X60 B52 COROJO BOX/30', 'CAJAS_MADERA', 'CAJAS_MADERA', '50', '4.5', '225', '2021-05-12 21:47:26', '2021-05-12 21:47:26');
 /*!40000 ALTER TABLE `cajas` ENABLE KEYS */;
 
--- Volcando estructura para tabla facturacion_plasencia.capa_productos
+-- Dumping structure for table facturacion_plasencia.capa_productos
 CREATE TABLE IF NOT EXISTS `capa_productos` (
   `id_capa` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
-  `capa` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `capa` char(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
-  PRIMARY KEY (`id_capa`)
+  PRIMARY KEY (`id_capa`),
+  UNIQUE KEY `capa` (`capa`)
 ) ENGINE=MyISAM AUTO_INCREMENT=101 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- Volcando datos para la tabla facturacion_plasencia.capa_productos: 100 rows
+-- Dumping data for table facturacion_plasencia.capa_productos: 100 rows
 DELETE FROM `capa_productos`;
 /*!40000 ALTER TABLE `capa_productos` DISABLE KEYS */;
 INSERT INTO `capa_productos` (`id_capa`, `capa`, `created_at`, `updated_at`) VALUES
@@ -171,7 +282,7 @@ INSERT INTO `capa_productos` (`id_capa`, `capa`, `created_at`, `updated_at`) VAL
 	(100, 'LIGERO/JAMAST.', '2021-04-28 20:51:58', '2021-04-28 20:51:58');
 /*!40000 ALTER TABLE `capa_productos` ENABLE KEYS */;
 
--- Volcando estructura para tabla facturacion_plasencia.categoria
+-- Dumping structure for table facturacion_plasencia.categoria
 CREATE TABLE IF NOT EXISTS `categoria` (
   `id_categoria` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
   `categoria` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
@@ -180,7 +291,7 @@ CREATE TABLE IF NOT EXISTS `categoria` (
   PRIMARY KEY (`id_categoria`)
 ) ENGINE=MyISAM AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- Volcando datos para la tabla facturacion_plasencia.categoria: 4 rows
+-- Dumping data for table facturacion_plasencia.categoria: 4 rows
 DELETE FROM `categoria`;
 /*!40000 ALTER TABLE `categoria` DISABLE KEYS */;
 INSERT INTO `categoria` (`id_categoria`, `categoria`, `created_at`, `updated_at`) VALUES
@@ -190,7 +301,7 @@ INSERT INTO `categoria` (`id_categoria`, `categoria`, `created_at`, `updated_at`
 	(4, 'WAREHOUSE', NULL, NULL);
 /*!40000 ALTER TABLE `categoria` ENABLE KEYS */;
 
--- Volcando estructura para tabla facturacion_plasencia.cellos
+-- Dumping structure for table facturacion_plasencia.cellos
 CREATE TABLE IF NOT EXISTS `cellos` (
   `id_cello` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
   `cello` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
@@ -201,7 +312,7 @@ CREATE TABLE IF NOT EXISTS `cellos` (
   PRIMARY KEY (`id_cello`)
 ) ENGINE=MyISAM AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- Volcando datos para la tabla facturacion_plasencia.cellos: 4 rows
+-- Dumping data for table facturacion_plasencia.cellos: 4 rows
 DELETE FROM `cellos`;
 /*!40000 ALTER TABLE `cellos` DISABLE KEYS */;
 INSERT INTO `cellos` (`id_cello`, `cello`, `anillo`, `upc`, `created_at`, `updated_at`) VALUES
@@ -211,7 +322,7 @@ INSERT INTO `cellos` (`id_cello`, `cello`, `anillo`, `upc`, `created_at`, `updat
 	(4, 'SI', 'NO', 'NO', '2021-04-08 21:40:41', '2021-04-08 21:40:41');
 /*!40000 ALTER TABLE `cellos` ENABLE KEYS */;
 
--- Volcando estructura para tabla facturacion_plasencia.clase_productos
+-- Dumping structure for table facturacion_plasencia.clase_productos
 CREATE TABLE IF NOT EXISTS `clase_productos` (
   `id_producto` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
   `item` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
@@ -229,9 +340,9 @@ CREATE TABLE IF NOT EXISTS `clase_productos` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id_producto`)
-) ENGINE=MyISAM AUTO_INCREMENT=588 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=MyISAM AUTO_INCREMENT=591 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- Volcando datos para la tabla facturacion_plasencia.clase_productos: 587 rows
+-- Dumping data for table facturacion_plasencia.clase_productos: 590 rows
 DELETE FROM `clase_productos`;
 /*!40000 ALTER TABLE `clase_productos` DISABLE KEYS */;
 INSERT INTO `clase_productos` (`id_producto`, `item`, `codigo_producto`, `codigo_caja`, `codigo_precio`, `id_capa`, `id_vitola`, `id_nombre`, `id_marca`, `id_orden`, `id_cello`, `id_tipo_empaque`, `presentacion`, `created_at`, `updated_at`) VALUES
@@ -821,10 +932,13 @@ INSERT INTO `clase_productos` (`id_producto`, `item`, `codigo_producto`, `codigo
 	(584, '00303051', NULL, NULL, NULL, 3, 25, 35, 14, 248, 1, 4, NULL, '2021-05-04 14:10:26', '2021-05-04 14:10:26'),
 	(585, '00302009', 'P-02509', NULL, NULL, 6, 9, 11, 86, 213, 1, 7, 'Puros Tripa Larga', '2021-05-04 14:10:26', '2021-05-04 14:10:26'),
 	(586, '10104772', 'P-03205', NULL, NULL, 4, 5, 38, 101, 214, 1, 12, 'Puros Tripa Larga', '2021-05-04 14:10:26', '2021-05-04 14:10:26'),
-	(587, '10104150', NULL, NULL, NULL, 4, 44, 61, 101, 249, 1, 7, NULL, '2021-05-04 14:10:26', '2021-05-04 14:10:26');
+	(587, '10104150', NULL, NULL, NULL, 4, 44, 61, 101, 249, 1, 7, NULL, '2021-05-04 14:10:26', '2021-05-04 14:10:26'),
+	(588, '9900004015', '123', '1223', '1234', 1, 1, 1, 1, NULL, NULL, 1, 'Puros Tripa Larga', NULL, NULL),
+	(589, '3123', '1234', '43552', '334245', 1, 1, 1, 2, NULL, NULL, 1, 'Puros Tripa Larga', NULL, NULL),
+	(590, '7777', '4656367', '875732', '4653627', 1, 1, 1, 6, NULL, 3, 1, 'Puros Tripa Larga', NULL, NULL);
 /*!40000 ALTER TABLE `clase_productos` ENABLE KEYS */;
 
--- Volcando estructura para tabla facturacion_plasencia.detalle_clase_productos
+-- Dumping structure for table facturacion_plasencia.detalle_clase_productos
 CREATE TABLE IF NOT EXISTS `detalle_clase_productos` (
   `id_producto` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
   `item` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
@@ -840,7 +954,7 @@ CREATE TABLE IF NOT EXISTS `detalle_clase_productos` (
   PRIMARY KEY (`id_producto`) USING BTREE
 ) ENGINE=MyISAM AUTO_INCREMENT=221 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- Volcando datos para la tabla facturacion_plasencia.detalle_clase_productos: 11 rows
+-- Dumping data for table facturacion_plasencia.detalle_clase_productos: 11 rows
 DELETE FROM `detalle_clase_productos`;
 /*!40000 ALTER TABLE `detalle_clase_productos` DISABLE KEYS */;
 INSERT INTO `detalle_clase_productos` (`id_producto`, `item`, `id_capa`, `id_vitola`, `id_nombre`, `id_marca`, `id_cello`, `id_tipo_empaque`, `otra_descripcion`, `created_at`, `updated_at`) VALUES
@@ -857,44 +971,304 @@ INSERT INTO `detalle_clase_productos` (`id_producto`, `item`, `id_capa`, `id_vit
 	(220, '02008065', 19, 45, 153, 1450, 1, 27, 'df', NULL, NULL);
 /*!40000 ALTER TABLE `detalle_clase_productos` ENABLE KEYS */;
 
--- Volcando estructura para tabla facturacion_plasencia.detalle_programacion
+-- Dumping structure for table facturacion_plasencia.detalle_programacion
 CREATE TABLE IF NOT EXISTS `detalle_programacion` (
   `id_detalle_programacion` int(11) NOT NULL AUTO_INCREMENT,
   `numero_orden` varchar(50) DEFAULT NULL,
   `orden` varchar(50) DEFAULT NULL,
   `cod_producto` varchar(50) DEFAULT NULL,
-  `saldo` decimal(10,2) DEFAULT NULL,
+  `saldo` bigint(20) DEFAULT NULL,
   `id_programacion` int(11) DEFAULT NULL,
-  `id_pendiente` int(11) DEFAULT NULL,
   PRIMARY KEY (`id_detalle_programacion`)
-) ENGINE=MyISAM AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
--- Volcando datos para la tabla facturacion_plasencia.detalle_programacion: 3 rows
+-- Dumping data for table facturacion_plasencia.detalle_programacion: 0 rows
 DELETE FROM `detalle_programacion`;
 /*!40000 ALTER TABLE `detalle_programacion` DISABLE KEYS */;
-INSERT INTO `detalle_programacion` (`id_detalle_programacion`, `numero_orden`, `orden`, `cod_producto`, `saldo`, `id_programacion`, `id_pendiente`) VALUES
-	(4, '', 'HON-3135-5-21', 'P-03205', 0.00, 3, 128),
-	(3, '', 'HON-3141-5-21', 'P-02047', 1000.00, 2, 98),
-	(5, '', 'HON-3141-5-21', 'P-02098', 2000.00, 3, 218);
 /*!40000 ALTER TABLE `detalle_programacion` ENABLE KEYS */;
 
--- Volcando estructura para tabla facturacion_plasencia.detalle_programacion_temporal
+-- Dumping structure for table facturacion_plasencia.detalle_programacion_temporal
 CREATE TABLE IF NOT EXISTS `detalle_programacion_temporal` (
   `id_detalle_programacion` int(11) NOT NULL AUTO_INCREMENT,
   `numero_orden` varchar(50) DEFAULT NULL,
   `orden` varchar(50) DEFAULT NULL,
   `cod_producto` varchar(50) DEFAULT NULL,
-  `saldo` decimal(8,2) DEFAULT NULL,
-  `id_pendiente` int(11) DEFAULT NULL,
+  `saldo` bigint(20) DEFAULT NULL,
   PRIMARY KEY (`id_detalle_programacion`) USING BTREE
-) ENGINE=MyISAM AUTO_INCREMENT=17 DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM AUTO_INCREMENT=266 DEFAULT CHARSET=latin1;
 
--- Volcando datos para la tabla facturacion_plasencia.detalle_programacion_temporal: 0 rows
+-- Dumping data for table facturacion_plasencia.detalle_programacion_temporal: 265 rows
 DELETE FROM `detalle_programacion_temporal`;
 /*!40000 ALTER TABLE `detalle_programacion_temporal` DISABLE KEYS */;
+INSERT INTO `detalle_programacion_temporal` (`id_detalle_programacion`, `numero_orden`, `orden`, `cod_producto`, `saldo`) VALUES
+	(1, '78', '7', NULL, 89),
+	(2, '', 'FTT-1479', 'P-01314', 9000),
+	(3, '', 'INT-H-1234', 'P-01314', 500),
+	(4, '', 'HON-3144', 'P-22640', 200),
+	(5, '', 'HON-3144', NULL, 200),
+	(6, '', 'HON-3144', 'P-22642', 200),
+	(7, '', 'HON-3144', NULL, 200),
+	(8, '', 'INT-H-1233', NULL, 600),
+	(9, '', 'INT-H-1233', NULL, 400),
+	(10, '', 'FTT-1479', 'P-02161', 10000),
+	(11, '', 'INT-H-1212', NULL, 20),
+	(12, '', 'INT-H-1239', 'P-02507', 100),
+	(13, '', 'INT-H-1237', 'P-02507', 1000),
+	(14, '', 'INT-H-1235', 'P-02509', 40),
+	(15, '', 'HON-3142', 'P-02433', 1000),
+	(16, '', 'INT-H-1239', 'P-02433', 160),
+	(17, '', 'INT-H-1238', 'P-02433', 500),
+	(18, '', 'INT-H-1236', 'P-02433', 200),
+	(19, '', 'INT-H-1239', NULL, 40),
+	(20, '', 'INT-H-1240', NULL, 100),
+	(21, '', 'INT-H-1212', 'P-02501', 200),
+	(22, '', 'HON-3142', 'P-02032', 1200),
+	(23, '', 'HON-3142', 'P-02033', 2800),
+	(24, '', 'HON-3142', 'P-02034', 4400),
+	(25, '', 'HON-3138', 'P-02034', 5000),
+	(26, '', 'HON-3142', 'P-02924', 400),
+	(27, '', 'INT-H-1212', 'P-02162', 1400),
+	(28, '', 'FTT-1479', 'P-02162', 3000),
+	(29, '', 'HON-3142', 'P-02040', 400),
+	(30, '', 'INT-H-1238', 'P-02040', 140),
+	(31, '', 'HON-3138', 'P-02040', 7500),
+	(32, '', 'INT-H-1238', 'P-02980', 400),
+	(33, '', 'INT-H-1238', 'P-02977', 1000),
+	(34, '', 'HON-3142', 'P-02000', 9600),
+	(35, '', 'HON-3142', 'P-02001', 11600),
+	(36, '', 'INT-H-1235', 'P-02001', 400),
+	(37, '', 'HON-3142', 'P-02000', 10000),
+	(38, '', 'HON-3142', 'P-02001', 12000),
+	(39, '', 'INT-H-1235', 'P-02001', 400),
+	(40, '', 'HON-3132', 'P-02000', 1000),
+	(41, '', 'HON-3139', 'P-02000', 3000),
+	(42, '', 'HON-3142', 'P-02020', 1600),
+	(43, '', 'INT-H-1239', 'P-02020', 100),
+	(44, '', 'HON-3142', 'P-02021', 400),
+	(45, '', 'HON-3135', 'P-02016', 500),
+	(46, '', 'HON-3135', 'p-02017', 500),
+	(47, '', 'HON-3135', 'P-02031', 500),
+	(48, '', 'HON-3138', 'P-02020', 5000),
+	(49, '', 'HON-3139', 'P-02020', 500),
+	(50, '', 'HON-3142', 'P-02004', 4000),
+	(51, '', 'INT-H-1235', 'P-02004', 100),
+	(52, '', 'HON-3142', 'P-02005', 3600),
+	(53, '', 'INT-H-1235', 'P-02005', 400),
+	(54, '', 'INT-H-1239', 'P-02005', 200),
+	(55, '', 'HON-3142', 'P-02018', 400),
+	(56, '', 'HON-3142', 'P-02019', 800),
+	(57, '', 'HON-3142', 'P-22078', 800),
+	(58, '', 'INT-H-1235', 'P-22078', 80),
+	(59, '', 'INT-H-1239', 'P-22078', 40),
+	(60, '', 'HON-3133', 'P-23234', 2000),
+	(61, '', 'HON-3142', 'p-02002', 3600),
+	(62, '', 'HON-3142', 'P-02003', 3200),
+	(63, '', 'HON-3142', 'p-02002', 4000),
+	(64, '', 'HON-3142', 'P-02003', 2000),
+	(65, '', 'HON-3142', 'P-02021', 2000),
+	(66, '', 'INT-H-1235', 'P-02397', 1700),
+	(67, '', 'HON-3142', 'P-02016', 4000),
+	(68, '', 'HON-3142', 'p-02017', 7200),
+	(69, '', 'INT-H-1239', 'p-02017', 200),
+	(70, '', 'HON-3142', 'P-02031', 3600),
+	(71, '', 'HON-3142', 'P-22263', 1200),
+	(72, '', 'HON-3142', 'P-22247', 1800),
+	(73, '', 'HON-3142', 'P-22248', 1200),
+	(74, '', 'INT-H-1237', 'P-22248', 300),
+	(75, '', 'HON-3142', 'P-22288', 600),
+	(76, '', 'HON-3142', 'P-22289', 1000),
+	(77, '', 'HON-3142', NULL, 200),
+	(78, '', 'HON-3142', 'P-22368', 62800),
+	(79, '', 'HON-3142', 'P-22620', 1200),
+	(80, '', 'HON-3142', 'p-02010', 5500),
+	(81, '', 'HON-3142', 'P-02011', 1500),
+	(82, '', 'HON-3142', 'P-02024', 2000),
+	(83, '', 'INT-H-1212', 'P-02024', 460),
+	(84, '', 'HON-3142', 'P-02024', 1600),
+	(85, '', 'HON-3142', 'P-02028', 2000),
+	(86, '', 'HON-3142', 'P-02028', 2000),
+	(87, '', 'INT-H-1239', 'P-02028', 100),
+	(88, '', 'HON-3138', 'P-02028', 20000),
+	(89, '', 'HON-3142', 'P-01308', 1000),
+	(90, '', 'HON-3142', 'P-01308', 1200),
+	(91, '', 'HON-3142', 'P-02025', 1000),
+	(92, '', 'HON-3142', 'P-02025', 400),
+	(93, '', 'HON-3135', 'P-02025', 1250),
+	(94, '', 'HON-3139', NULL, 400),
+	(95, '', 'HON-3142', 'P-02001', NULL),
+	(96, '', 'HON-3135', 'P-02147', 500),
+	(97, '', 'HON-3141', 'P-02041', 325),
+	(98, '', 'HON-3141', 'P-02045', 2500),
+	(99, '', 'HON-3141', 'P-02047', 1000),
+	(100, '', 'HON-3141', 'P-02045', 1750),
+	(101, '', 'HON-3142', 'P-02179', 400),
+	(102, '', 'HON-3142', NULL, 400),
+	(103, '', 'HON-3142', 'P-02181', 400),
+	(104, '', 'HON-3142', 'P-23691', 6400),
+	(105, '', 'INT-H-1235', 'P-23693', 300),
+	(106, '', 'INT-H-1239', 'P-23693', 200),
+	(107, '', 'HON-3142', 'P-23694', 5200),
+	(108, '', 'INT-H-1235', 'P-23694', 380),
+	(109, '', 'INT-H-1239', 'P-23694', 100),
+	(110, '', 'FTT-1472', 'P-22797', 2500),
+	(111, '', 'INT-H-1235', 'P-23628', 160),
+	(112, '', 'INT-H-1239', 'P-23628', 200),
+	(113, '', 'INT-H-1239', 'P-23629', 200),
+	(114, '', 'HON-3140', 'P-02617', 360),
+	(115, '', 'HON-3140', NULL, 1920),
+	(116, '', 'HON-3140', 'P-02615', 480),
+	(117, '', 'HON-3140', 'P-22628', 320),
+	(118, '', 'HON-3140', NULL, 750),
+	(119, '', 'HON-3140', 'P-22648', 1200),
+	(120, '', 'HON-3136', 'P-02494', 500),
+	(121, '', 'HON-3136', NULL, 500),
+	(122, '', 'INT-H-1235', NULL, 140),
+	(123, '', 'HON-3142', 'P-03201', 2400),
+	(124, '', 'INT-H-1235', 'P-03201', 600),
+	(125, '', 'HON-3142', 'P-03202', 4000),
+	(126, '', 'HON-3142', 'P-03203', 800),
+	(127, '', 'HON-3142', 'P-03204', 800),
+	(128, '', 'INT-H-1237', 'P-03204', 400),
+	(129, '', 'HON-3135', 'P-03205', 1250),
+	(130, '', 'HON-3138', 'P-03202', 2000),
+	(131, '', 'HON-3139', 'P-03201', 700),
+	(132, '', 'HON-3138', 'P-02001', 10000),
+	(133, '', 'HON-3138', NULL, 10000),
+	(134, '', 'HON-3142', 'P-02004', 14300),
+	(135, '', 'HON-3126', 'P-02360', 400),
+	(136, '', 'FTT-1475', 'P-23708', 6000),
+	(137, '', 'FTT-1475', 'P-23709', 6000),
+	(138, '', 'FTT-1475', 'P-23715', 2000),
+	(139, '', 'FTT-1475', 'P-23716', 2000),
+	(140, '', 'FTT-1475', 'P-23713', 2000),
+	(141, '', 'FTT-1475', 'P-23714', 2000),
+	(142, '', 'FTT-1475', 'P-23706', 2000),
+	(143, '', 'FTT-1475', 'P-23707', 2000),
+	(144, '', 'HON-3141', NULL, NULL),
+	(145, '', 'HON-3141', NULL, NULL),
+	(146, '', 'HON-3137', NULL, 1000),
+	(147, '', 'HON-3136', 'P-22193', 750),
+	(148, '', 'HON-3136', 'P-22194', 750),
+	(149, '', 'HON-3136', NULL, 750),
+	(150, '', 'HON-3136', NULL, 1500),
+	(151, '', 'FTT-1474', 'P-22503', 32000),
+	(152, '', 'HON-3130', NULL, 1000),
+	(153, '', 'HON-3130', 'P-22993', 2000),
+	(154, '', 'HON-3131', NULL, 2000),
+	(155, '', 'HON-3130', 'P-02207', 4000),
+	(156, '', 'HON-3131', 'P-02207', 3000),
+	(157, '', 'HON-3130', NULL, 2000),
+	(158, '', 'HON-3131', 'P-02445', 2000),
+	(159, '', 'HON-3131', 'P-02209', 5000),
+	(160, '', 'HON-3131', 'P-02277', 4000),
+	(161, '', 'HON-3131', NULL, 6000),
+	(162, '', 'HON-3131', 'P-02274', 2000),
+	(163, '', 'HON-3130', 'P-02273', 1000),
+	(164, '', 'HON-3130', 'P-02274', 1000),
+	(165, '', 'HON-3130', NULL, 1000),
+	(166, '', 'HON-3130', 'P-02847', 1000),
+	(167, '', 'HON-3130', 'P-22359', 4000),
+	(168, '', 'HON-3130', 'P-22360', 2000),
+	(169, '', 'HON-3131', 'P-22359', 6000),
+	(170, '', 'HON-3131', 'P-22361', 2000),
+	(171, '', 'HON-3131', 'P-22360', 1000),
+	(172, '', 'HON-3130', 'P-02277', 2000),
+	(173, '', 'HON-3130', NULL, 2000),
+	(174, '', 'HON-3130', 'P-02481', 2000),
+	(175, '', 'HON-3130', NULL, 2400),
+	(176, '', 'HON-3130', NULL, 2000),
+	(177, '', 'HON-3130', 'P-02219', 2000),
+	(178, '', 'HON-3128', NULL, 800),
+	(179, '', 'HON-3128', NULL, 800),
+	(180, '', 'HON-3128', 'P-02913', 800),
+	(181, '', 'INT-H-1235', 'P-22251', 200),
+	(182, '', 'HON-3135', 'P-22251', 625),
+	(183, '', 'HON-3132', 'P-22300', 1000),
+	(184, '', 'HON-3138', 'P-22251', 10000),
+	(185, '', 'HON-3142', 'P-22251', 3200),
+	(186, '', 'HON-3142', 'P-22300', 3200),
+	(187, '', 'INT-H-1238', 'P-22300', 80),
+	(188, '', 'HON-3131', 'P-02220', 6000),
+	(189, '', 'HON-3141', NULL, 400),
+	(190, '', 'HON-3141', 'P-02560', 4000),
+	(191, '', 'HON-3141', 'P-03193', 1500),
+	(192, '', 'HON-3127', 'P-02260', 2000),
+	(193, '', 'HON-3127', 'P-02475', 2000),
+	(194, '', 'HON-3142', 'P-02337', 4000),
+	(195, '', 'INT-H-1235', 'P-02337', 380),
+	(196, '', 'INT-H-1238', 'P-02337', 200),
+	(197, '', 'HON-3142', 'P-02339', 8000),
+	(198, '', 'HON-3142', 'P-02338', 4800),
+	(199, '', 'HON-3142', 'P-02341', 400),
+	(200, '', 'HON-3138', 'P-02339', 25000),
+	(201, '', 'HON-3142', 'P-02342', 1200),
+	(202, '', 'INT-H-1238', 'P-02342', 200),
+	(203, '', 'HON-3141', 'P-02337', 40000),
+	(204, '', 'INT-H-1237', 'P-22372', 600),
+	(205, '', 'HON-3135', 'P-22371', 1250),
+	(206, '', 'HON-3135', 'P-22372', 1250),
+	(207, '', 'HON-3127', 'P-23833', 10000),
+	(208, '', 'HON-3127', NULL, 10000),
+	(209, '', 'HON-3127', 'P-23831', 10000),
+	(210, '', 'HON-3127', 'P-23833', 2500),
+	(211, '', 'HON-3127', NULL, 2500),
+	(212, '', 'HON-3127', 'P-23831', 2500),
+	(213, '', 'HON-3127', 'P-23833', 3000),
+	(214, '', 'HON-3127', NULL, 3000),
+	(215, '', 'HON-3127', 'P-23831', 3000),
+	(216, '', 'HON-3141', NULL, 200),
+	(217, '', 'HON-3141', 'P-02097', 7500),
+	(218, '', 'HON-3141', 'P-02097', 1200),
+	(219, '', 'HON-3141', 'P-02098', 2000),
+	(220, '', 'FTT-1473', NULL, 3000),
+	(221, '', 'FTT-1473', NULL, 3000),
+	(222, '', 'FTT-1473', NULL, 3000),
+	(223, '', 'FTT-1473', NULL, 3000),
+	(224, '', 'FTT-1472', 'P-23566', 60000),
+	(225, '', 'FTT-1472', 'P-23567', 60000),
+	(226, '', 'FTT-1477', 'P-22685', 600),
+	(227, '', 'FTT-1472', 'P-23395', 60000),
+	(228, '', 'FTT-1472', 'P-23393', 60000),
+	(229, '', 'HON-3141', 'P-23429', 1400),
+	(230, '', 'HON-3141', 'P-23431', 1600),
+	(231, '', 'HON-3142', 'P-22518', 1200),
+	(232, '', 'INT-H-1235', 'P-22518', 240),
+	(233, '', 'HON-3142', 'P-22536', 400),
+	(234, '', 'HON-3135', 'P-22518', 1250),
+	(235, '', 'HON-3138', 'P-22518', 5000),
+	(236, '', 'HON-3139', 'P-22518', 750),
+	(237, '', 'HON-3139', 'P-23193', 3000),
+	(238, '', 'HON-3142', 'P-23377', 600),
+	(239, '', 'HON-3142', 'P-23376', 1200),
+	(240, '', 'HON-3142', 'P-23432', 400),
+	(241, '', 'FTT-1472', 'P-23396', 5000),
+	(242, '', 'HON-3124', 'P-23248', 2000),
+	(243, '', 'HON-3124', 'P-23249', 2000),
+	(244, '', 'HON-3124', 'P-23250', 2000),
+	(245, '', 'HON-3146', 'P-23250', 1000),
+	(246, '', 'HON-3124', 'P-22831', 2000),
+	(247, '', 'HON-3124', 'P-22832', 3000),
+	(248, '', 'HON-3146', 'P-22831', 1000),
+	(249, '', 'HON-3124', 'P-23066', 3000),
+	(250, '', 'HON-3124', 'P-23215', 4000),
+	(251, '', 'HON-3146', 'P-23215', 1000),
+	(252, '', 'HON-3124', NULL, 2000),
+	(253, '', 'HON-3124', 'P-23763', 2000),
+	(254, '', 'HON-3124', 'P-23606', 4000),
+	(255, '', 'HON-3123', 'P-23763', 2000),
+	(256, '', 'HON-3146', 'P-23606', 1000),
+	(257, '', 'HON-3124', 'P-22868', 2000),
+	(258, '', 'HON-3124', 'P-22870', 3000),
+	(259, '', 'HON-3124', 'P-22871', 5000),
+	(260, '', 'HON-3143', 'P-22870', 4000),
+	(261, '', 'HON-3146', 'P-22871', 1000),
+	(262, '', 'HON-3124', 'P-23262', 2000),
+	(263, '', 'HON-3124', 'P-23263', 2000),
+	(264, '', 'HON-3123', 'P-23262', 2500),
+	(265, '', 'HON-3146', 'P-23263', 1000);
 /*!40000 ALTER TABLE `detalle_programacion_temporal` ENABLE KEYS */;
 
--- Volcando estructura para tabla facturacion_plasencia.importar_existencias
+-- Dumping structure for table facturacion_plasencia.importar_existencias
 CREATE TABLE IF NOT EXISTS `importar_existencias` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
   `codigo_producto` varchar(100) DEFAULT NULL,
@@ -909,7 +1283,7 @@ CREATE TABLE IF NOT EXISTS `importar_existencias` (
   PRIMARY KEY (`id`)
 ) ENGINE=MyISAM AUTO_INCREMENT=1155 DEFAULT CHARSET=latin1;
 
--- Volcando datos para la tabla facturacion_plasencia.importar_existencias: 1,154 rows
+-- Dumping data for table facturacion_plasencia.importar_existencias: 1,154 rows
 DELETE FROM `importar_existencias`;
 /*!40000 ALTER TABLE `importar_existencias` DISABLE KEYS */;
 INSERT INTO `importar_existencias` (`id`, `codigo_producto`, `marca`, `nombre`, `vitola`, `capa`, `ubicacion`, `total`, `updated_at`, `created_at`) VALUES
@@ -2069,1091 +2443,1144 @@ INSERT INTO `importar_existencias` (`id`, `codigo_producto`, `marca`, `nombre`, 
 	(1154, 'P-23833', 'The Edge Nicaragua', 'Gran Robusto', '5-1/2X54', 'HABANO', NULL, 4950.00, NULL, NULL);
 /*!40000 ALTER TABLE `importar_existencias` ENABLE KEYS */;
 
--- Volcando estructura para tabla facturacion_plasencia.lista_cajas
+-- Dumping structure for table facturacion_plasencia.inventario_productos_terminados
+CREATE TABLE IF NOT EXISTS `inventario_productos_terminados` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `lote` varchar(50) DEFAULT NULL,
+  `Marca` varchar(50) DEFAULT NULL,
+  `Alias_vitola` varchar(50) DEFAULT NULL,
+  `Vitola` varchar(50) DEFAULT NULL,
+  `Nombre_capa` varchar(50) DEFAULT NULL,
+  `Existencia` varchar(50) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM AUTO_INCREMENT=325 DEFAULT CHARSET=latin1;
+
+-- Dumping data for table facturacion_plasencia.inventario_productos_terminados: 36 rows
+DELETE FROM `inventario_productos_terminados`;
+/*!40000 ALTER TABLE `inventario_productos_terminados` DISABLE KEYS */;
+INSERT INTO `inventario_productos_terminados` (`id`, `lote`, `Marca`, `Alias_vitola`, `Vitola`, `Nombre_capa`, `Existencia`) VALUES
+	(289, 'ORD\\0000003162-FIN', '52', '13', '12', '3', '20'),
+	(290, 'ORD\\0000003168-FIN', '51', '2', '4', '5', '450'),
+	(291, 'ORD\\0000003168-FIN', '51', '2', '4', '2', '450'),
+	(292, 'ORD\\0000003168-FIN', '51', '2', '4', '3', '450'),
+	(293, 'ORD\\0000003168-FIN', '61', '2', '4', '1', '450'),
+	(294, 'ORD\\0000003173-FIN', '61', '2', '4', '1', '2000'),
+	(295, 'ORD\\0000003182-FIN', '51', '2', '4', '5', '6420'),
+	(296, 'ORD\\0000003182-FIN', '51', '2', '4', '2', '6420'),
+	(297, 'ORD\\0000003182-FIN', '51', '2', '4', '3', '6420'),
+	(298, 'ORD\\0000003182-FIN', '51', '14', '4', '3', '800'),
+	(299, 'ORD\\0000003182-FIN', '67', '40', '9', '3', '12600'),
+	(300, 'ORD\\0000003182-FIN', '61', '2', '4', '1', '19220'),
+	(301, 'ORD\\0000003182-FIN', '61', '14', '4', '1', '800'),
+	(302, 'ORD\\0000003182-FIN', '105', '11', '9', '1', '560'),
+	(303, 'ORD\\0000003182-FIN', '74', '3', '3', '5', '2400'),
+	(304, 'ORD\\0000003182-FIN', '40', '1', '2', '5', '400'),
+	(305, 'ORD\\0000003187-FIN', '51', '2', '4', '5', '4860'),
+	(306, 'ORD\\0000003187-FIN', '51', '2', '4', '2', '4860'),
+	(307, 'ORD\\0000003187-FIN', '51', '14', '4', '5', '3200'),
+	(308, 'ORD\\0000003187-FIN', '51', '2', '4', '3', '4860'),
+	(309, 'ORD\\0000003187-FIN', '90', '21', '3', '3', '2400'),
+	(310, 'ORD\\0000003187-FIN', '90', '3', '3', '3', '10640'),
+	(311, 'ORD\\0000003187-FIN', '61', '2', '4', '1', '4860'),
+	(312, 'ORD\\0000003187-FIN', '105', '11', '9', '1', '2400'),
+	(313, 'ORD\\0000003193-FIN', '99', '14', '4', '6', '1000'),
+	(314, 'ORD\\0000003193-FIN', '51', '2', '4', '5', '29600'),
+	(315, 'ORD\\0000003193-FIN', '51', '14', '4', '5', '3200'),
+	(316, 'ORD\\0000003193-FIN', '99', '2', '4', '6', '1000'),
+	(317, 'ORD\\0000003193-FIN', '99', '11', '9', '6', '2400'),
+	(318, 'ORD\\0000003193-FIN', '70', '1', '1', '6', '200'),
+	(319, 'ORD\\0000003193-FIN', '72', '11', '9', '6', '6300'),
+	(320, 'ORD\\0000003193-FIN', '74', '6', '18', '5', '1250'),
+	(321, 'ORD\\0000003193-FIN', '70', '1', '1', '2', '200'),
+	(322, 'ORD\\0000003197-FIN', '99', '2', '4', '6', '4000'),
+	(323, 'ORD\\0000003197-FIN', '90', '6', '1', '3', '12500'),
+	(324, 'ORD\\0000003197-FIN', '52', '13', '12', '3', '75');
+/*!40000 ALTER TABLE `inventario_productos_terminados` ENABLE KEYS */;
+
+-- Dumping structure for table facturacion_plasencia.lista_cajas
 CREATE TABLE IF NOT EXISTS `lista_cajas` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `codigo` varchar(50) DEFAULT NULL,
   `productoServicio` varchar(255) DEFAULT NULL,
   `marca` varchar(100) DEFAULT NULL,
-  `vitola` int(11) DEFAULT NULL,
-  `capa` int(11) DEFAULT NULL,
-  `nombre` int(11) DEFAULT NULL,
   `tipo_empaque` int(11) DEFAULT NULL,
+  `existencia` int(11) DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
 ) ENGINE=MyISAM AUTO_INCREMENT=1046 DEFAULT CHARSET=latin1;
 
--- Volcando datos para la tabla facturacion_plasencia.lista_cajas: 1,045 rows
+-- Dumping data for table facturacion_plasencia.lista_cajas: 1,045 rows
 DELETE FROM `lista_cajas`;
 /*!40000 ALTER TABLE `lista_cajas` DISABLE KEYS */;
-INSERT INTO `lista_cajas` (`id`, `codigo`, `productoServicio`, `marca`, `vitola`, `capa`, `nombre`, `tipo_empaque`, `created_at`, `updated_at`) VALUES
-	(1, 'CM-01296', 'CAJAS DE MADERA ROCKY PATEL VINTAGE 1990 ROBUSTO TUBO 5-1/2X50 MADURO BOX/10', '15', NULL, NULL, NULL, 4, NULL, NULL),
-	(2, 'CM-01413', 'CAJAS DE MADERA ROCKY PATEL VINTAGE 1999 ROBUSTO TUBO 6X50 CONERICO BOX/10', '86', NULL, NULL, NULL, 4, NULL, NULL),
-	(3, 'CM-01415', 'CAJAS DE MADERA ROCKY PATEL EDGE LITE TORO BOX/50', '99', NULL, NULL, NULL, 21, NULL, NULL),
-	(4, 'CM-01416', 'CAJAS DE MADERA ROCKY PATEL EDGE LITE TORPEDO BOX/50', '99', NULL, NULL, NULL, 21, NULL, NULL),
-	(5, 'CM-01417', 'CAJAS DE MADERA ROCKY PATEL EDGE LITE DOBLE CORONA BOX/50', '99', NULL, NULL, NULL, 21, NULL, NULL),
-	(6, 'CM-01418', 'CAJAS DE MADERA ROCKY PATEL EDGE LITE ROBUSTO BOX/50', '99', NULL, NULL, NULL, 21, NULL, NULL),
-	(7, 'CM-01419', 'CAJAS DE MADERA ROCKY PATEL EDGE LITE TORO BOX/20', '99', NULL, NULL, NULL, 7, NULL, NULL),
-	(8, 'CM-01420', 'CAJAS DE MADERA ROCKY PATEL EDGE  TORPEDO CONNECTICUT BOX/20', '99', NULL, NULL, NULL, 7, NULL, NULL),
-	(9, 'CM-01421', 'CAJAS DE MADERA ROCKY PATEL EDGE ROBUSTO CONNECTICUT BOX/20', '99', NULL, NULL, NULL, 7, NULL, NULL),
-	(10, 'CM-01422', 'CAJAS DE MADERA ROCKY PATEL EDGE DOBLE CORONA CONNETICUT BOX/20', '99', NULL, NULL, NULL, 7, NULL, NULL),
-	(11, 'CM-01423', 'CAJAS DE MADERA ROCKY PATEL FIRE ROBUSTO BOX/20', '1187', NULL, NULL, NULL, 7, NULL, NULL),
-	(12, 'CM-01424', 'CAJAS DE MADERA ROCKY PATEL VINTAGE 1999 ROBUSTO TUBO 4-1/2X50 CONERICO BOX/10', '86', NULL, NULL, NULL, 4, NULL, NULL),
-	(13, 'CM-01425', 'CAJAS DE MADERA ROCKY PATEL OLD WORLD ROBUSTO MADURO BOX/20', '1400', NULL, NULL, NULL, 7, NULL, NULL),
-	(14, 'CM-01869', 'CAJAS DE MADERA ROCKY PATEL FRED & STEVE  BOX/20', '332', NULL, NULL, NULL, 7, NULL, NULL),
-	(15, 'CM-01934', 'CAJAS DE MADERA ROCKY PATEL  VINTAGE 2003 CHURCHILL PRESS CAMEROON BOX/20', '101', NULL, NULL, NULL, 7, NULL, NULL),
-	(16, 'CM-01974', 'CAJAS DE MADERA  ROCKY PATEL PREMIUM BURN BY ROCKY PATEL TORO BOX-20', '211', NULL, NULL, NULL, 7, NULL, NULL),
-	(17, 'CM-03319', 'CAJAS DE MADERA ROCKY PATEL  CAMEROON BY R.P. LANCERO CAMEROON BOX/20', '191', NULL, NULL, NULL, 7, NULL, NULL),
-	(18, 'CM-03320', 'CAJAS DE MADERA ROCKY PATEL DECADE ROBUSTO RED. SUMATRA BOX/20', '90', NULL, NULL, NULL, 7, NULL, NULL),
-	(19, 'CM-03321', 'CAJAS DE MADERA ROCKY PATEL  VINTAGE 1990 PERFECTO RED. MADURO BOX/20', '15', NULL, NULL, NULL, 7, NULL, NULL),
-	(20, 'CM-03322', 'CAJAS DE MADERA ROCKY PATEL SAMPLER ROCK STAR ROBUSTO BOX 5', '1450', NULL, NULL, NULL, 6, NULL, NULL),
-	(21, 'CM-03323', 'CAJAS DE MADERA ROCKY PATEL MONTE TRIPLE LIGERO ROBUSTO BOX 20', '1450', NULL, NULL, NULL, 7, NULL, NULL),
-	(22, 'CM-03324', 'CAJAS DE MADERA ROCKY PATEL MONTE TRIPLE LIGERO TORPEDO BOX 20', '1450', NULL, NULL, NULL, 7, NULL, NULL),
-	(23, 'CM-03325', 'CAJAS DE MADERA ROCKY PATEL MONTE TRIPLE LIGERO TORO BOX 20', '1450', NULL, NULL, NULL, 7, NULL, NULL),
-	(24, 'CM-03326', 'CAJAS DE MADERA ROCKY PATEL MONTE TRIPLE MADURO TORPEDO BOX 20', '1450', NULL, NULL, NULL, 7, NULL, NULL),
-	(25, 'CM-03327', 'CAJAS DE MADERA ROCKY PATEL MONTE TRIPLE MADURO ROBUSTO BOX 20', '1450', NULL, NULL, NULL, 7, NULL, NULL),
-	(26, 'CM-03328', 'CAJAS DE MADERA ROCKY PATEL MONTE TRIPLE MADURO CHURCHILL BOX 20', '1450', NULL, NULL, NULL, 7, NULL, NULL),
-	(27, 'CM-03329', 'CAJAS DE MADERA ROCKY PATEL GRAN VIDA MISSILES PENSILVANIA BOX/20', '1397', NULL, NULL, NULL, 7, NULL, NULL),
-	(28, 'CM-03330', 'CAJAS DE MADERA ROCKY PATEL  MONOCACY TORO PRESS SUMATRA  BOX/20', '68', NULL, NULL, NULL, 7, NULL, NULL),
-	(29, 'CM-03331', 'CAJAS DE MADERA ROCKY PATEL VINTAGE 1999 SIXTY CONNEECTICUT BOX 20', '86', NULL, NULL, NULL, 7, NULL, NULL),
-	(30, 'CM-03332', 'CAJAS DE MADERA ROCKY PATEL STRIKE TORO BOX 20', '1409', NULL, NULL, NULL, 7, NULL, NULL),
-	(31, 'CM-03333', 'CAJAS DE MADERA ROCKY PATEL STRIKE TORPEDO BOX 20', '1409', NULL, NULL, NULL, 7, NULL, NULL),
-	(32, 'CM-03334', 'CAJAS DE MADERA ROCKY PATEL STRIKE CHURCHILL BOX 20', '1409', NULL, NULL, NULL, 7, NULL, NULL),
-	(33, 'CM-03335', 'CAJAS DE MADERA ROCKY PATEL SAMPLER LIMITE EDITION LANCERO BOX 10', '1450', NULL, NULL, NULL, 4, NULL, NULL),
-	(34, 'CM-03336', 'CAJAS DE MADERA ROCKY PATEL FREDERICKTOWNE TORO PRESS BOX/20', '65', NULL, NULL, NULL, 7, NULL, NULL),
-	(35, 'CM-03337', 'CAJAS DE MADERA ROCKY PATEL FREDERICKTOWNE ROBUSTO ROUND BOX/20', '65', NULL, NULL, NULL, 7, NULL, NULL),
-	(36, 'CM-03338', 'CAJAS DE MADERA ROCKY PATEL FREDERICKTOWNE PIRAMIDE BOX/20', '65', NULL, NULL, NULL, 7, NULL, NULL),
-	(37, 'CM-03339', 'CAJAS DE MADERA ROCKY PATEL  CUBAN CIGAR FACTORY ROJAS TORO BOX/20', '1406', NULL, NULL, NULL, 7, NULL, NULL),
-	(38, 'CM-03340', 'CAJAS DE MADERA ROCKY PATEL CCF WHITE LABEL SIXTY BOX/20', '89', NULL, NULL, NULL, 7, NULL, NULL),
-	(39, 'CM-03341', 'CAJAS DE MADERA ROCKY PATEL  OCEAN CLUB ROBUSTO PRESS SUMATRA  BOX/20', '1391', NULL, NULL, NULL, 7, NULL, NULL),
-	(40, 'CM-03342', 'CAJAS DE MADERA ROCKY PATEL  CAUCUS  SIXTY SUMATRA BOX/20', '106', NULL, NULL, NULL, 7, NULL, NULL),
-	(41, 'CM-03343', 'CAJAS DE MADERA ROCKY PATEL  AMERICAN MARKET ROBUSTO CONN BOX/20', '132', NULL, NULL, NULL, 7, NULL, NULL),
-	(42, 'CM-03344', 'CAJAS DE MADERA ROCKY PATEL OLD WORLD TORO COR/MAD BOX/10', '186', NULL, NULL, NULL, 4, NULL, NULL),
-	(43, 'CM-03345', 'CAJAS DE MADERA ROCKY PATEL 3-13 GRANDE BOX 20', '1353', NULL, NULL, NULL, 7, NULL, NULL),
-	(44, 'CM-03346', 'CAJAS DE MADERA ROCKY PATEL 3-13 ROBUSTO BOX 20', '1353', NULL, NULL, NULL, 7, NULL, NULL),
-	(45, 'CM-03347', 'CAJAS DE MADERA ROCKY PATEL 3-13 TORPEDO BOX 20', '1353', NULL, NULL, NULL, 7, NULL, NULL),
-	(46, 'CM-03500', 'CAJAS DE MADERA ROCKY PATEL  AMERICAN MARKET DOUBLE CORONA CONN BOX/20', '132', NULL, NULL, NULL, 7, NULL, NULL),
-	(47, 'CM-03501', 'CAJAS DE MADERA ROCKY PATEL  AMERICAN MARKET TORPEDO CONN BOX/20', '132', NULL, NULL, NULL, 7, NULL, NULL),
-	(48, 'CM-03502', 'CAJAS DE MADERA ROCKY PATEL  AMERICAN MARKET LONSDALES CONN BOX/20', '132', NULL, NULL, NULL, 7, NULL, NULL),
-	(49, 'CM-03503', 'CAJAS DE MADERA ROCKY PATEL  AMERICAN MARKET SIXTY CONN BOX/20', '132', NULL, NULL, NULL, 7, NULL, NULL),
-	(50, 'CM-03504', 'CAJAS DE MADERA ROCKY PATEL  AMERICAN MARKET CHURCHILL CONN BOX/20', '132', NULL, NULL, NULL, 7, NULL, NULL),
-	(51, 'CM-03505', 'CAJAS DE MADERA ROCKY PATEL  AMERICAN MARKET TORO CONN BOX/20', '132', NULL, NULL, NULL, 7, NULL, NULL),
-	(52, 'CM-03506', 'CAJAS DE MADERA ROCKY PATEL DAVIDUS ANTIETAM TORO PRESS BOX/20', '64', NULL, NULL, NULL, 7, NULL, NULL),
-	(53, 'CM-03507', 'CAJAS DE MADERA ROCKY PATEL  CAMEROON BY R.P. BELICOSO CAMEROON BOX/20', '191', NULL, NULL, NULL, 7, NULL, NULL),
-	(54, 'CM-03508', 'CAJAS DE MADERA ROCKY PATEL  CAMEROON BY R.P. TORO CAMEROON BOX/20', '191', NULL, NULL, NULL, 7, NULL, NULL),
-	(55, 'CM-03509', 'CAJAS DE MADERA ROCKY PATEL  CAMEROON BY R.P. CHURCHILL CAMEROON BOX/20', '191', NULL, NULL, NULL, 7, NULL, NULL),
-	(56, 'CM-03510', 'CAJAS DE MADERA ROCKY PATEL  CAMEROON BY R.P. ROBUSTO CAMEROON BOX/20', '191', NULL, NULL, NULL, 7, NULL, NULL),
-	(57, 'CM-03511', 'CAJAS DE MADERA ROCKY PATEL  CAMEROON LEGEND TORO GRANDE MADURO BOX/25', '1338', NULL, NULL, NULL, 13, NULL, NULL),
-	(58, 'CM-03512', 'CAJAS DE MADERA ROCKY PATEL  CAMEROON LEGEND ROBUSTO GRANDE NATURAL BOX/25', '1338', NULL, NULL, NULL, 13, NULL, NULL),
-	(59, 'CM-03513', 'CAJAS DE MADERA ROCKY PATEL  CAMEROON LEGEND SUPER TORO NATURAL BOX/25', '1338', NULL, NULL, NULL, 13, NULL, NULL),
-	(60, 'CM-03514', 'CAJAS DE MADERA ROCKY PATEL  CAMEROON LEGEND TORO GRANDE NATURAL BOX/25', '1338', NULL, NULL, NULL, 13, NULL, NULL),
-	(61, 'CM-03515', 'CAJAS DE MADERA ROCKY PATEL  CAUCUS CHURCHILL SUMATRA BOX/20', '106', NULL, NULL, NULL, 7, NULL, NULL),
-	(62, 'CM-03516', 'CAJAS DE MADERA ROCKY PATEL  CAUCUS ROBUSTO SUMATRA BOX/20', '106', NULL, NULL, NULL, 7, NULL, NULL),
-	(63, 'CM-03517', 'CAJAS DE MADERA ROCKY PATEL  CI LEGENDS ROBUSTO HAB/COL BOX/20  (VIEJAS)', '118', NULL, NULL, NULL, NULL, NULL, NULL),
-	(64, 'CM-03518', 'CAJAS DE MADERA ROCKY PATEL  CLASICO CHIEF COROJO BOX/25', '1158', NULL, NULL, NULL, 13, NULL, NULL),
-	(65, 'CM-03519', 'CAJAS DE MADERA ROCKY PATEL  CLASICO TEEPEE COROJO BOX/25', '1158', NULL, NULL, NULL, 13, NULL, NULL),
-	(66, 'CM-03520', 'CAJAS DE MADERA ROCKY PATEL  CLASICO BOXER COROJO BOX/25', '1158', NULL, NULL, NULL, 13, NULL, NULL),
-	(67, 'CM-03521', 'CAJAS DE MADERA ROCKY PATEL  CLASICO TOMAHAWK COROJO BOX/25', '1158', NULL, NULL, NULL, 13, NULL, NULL),
-	(68, 'CM-03522', 'CAJAS DE MADERA ROCKY PATEL  CLASICO TEEPEE MADURO BOX/25', '1158', NULL, NULL, NULL, 13, NULL, NULL),
-	(69, 'CM-03523', 'CAJAS DE MADERA ROCKY PATEL  CLASICO BOXER MADURO BOX/25', '1158', NULL, NULL, NULL, 13, NULL, NULL),
-	(70, 'CM-03524', 'CAJAS DE MADERA ROCKY PATEL  CLASICO TOMAHAWK MADURO BOX/25', '1158', NULL, NULL, NULL, 13, NULL, NULL),
-	(71, 'CM-03525', 'CAJAS DE MADERA ROCKY PATEL  CUNUCO TORO NATURAL BOX/20', '1362', NULL, NULL, NULL, 7, NULL, NULL),
-	(72, 'CM-03526', 'CAJAS DE MADERA ROCKY PATEL  CUNUCO SIXTY NATURAL BOX/20', '1362', NULL, NULL, NULL, 7, NULL, NULL),
-	(73, 'CM-03527', 'CAJAS DE MADERA ROCKY PATEL  CUNUCO ROBUSTO NATURAL BOX/20', '1362', NULL, NULL, NULL, 7, NULL, NULL),
-	(74, 'CM-03528', 'CAJAS DE MADERA ROCKY PATEL  CUNUCO DOUBLE CORONA NATURAL BOX/20', '1362', NULL, NULL, NULL, 7, NULL, NULL),
-	(75, 'CM-03529', 'CAJAS DE MADERA ROCKY PATEL  CUNUCO CORONA NATURAL BOX/20', '1362', NULL, NULL, NULL, 7, NULL, NULL),
-	(76, 'CM-03530', 'CAJAS DE MADERA ROCKY PATEL  CUBAN BLEND TORO COROJO BOX/20', '133', NULL, NULL, NULL, 7, NULL, NULL),
-	(77, 'CM-03531', 'CAJAS DE MADERA ROCKY PATEL  CUBAN BLEND TORO MADURO BOX/20', '133', NULL, NULL, NULL, 7, NULL, NULL),
-	(78, 'CM-03532', 'CAJAS DE MADERA ROCKY PATEL  CUBAN BLEND LONSDALES COROJO BOX/20', '133', NULL, NULL, NULL, 7, NULL, NULL),
-	(79, 'CM-03533', 'CAJAS DE MADERA ROCKY PATEL  CUBAN BLEND LONSDALES MADURO BOX/20', '133', NULL, NULL, NULL, 7, NULL, NULL),
-	(80, 'CM-03534', 'CAJAS DE MADERA ROCKY PATEL  CUBAN BLEND DOBLE CORONA MADURO BOX/20', '133', NULL, NULL, NULL, 7, NULL, NULL),
-	(81, 'CM-03535', 'CAJAS DE MADERA ROCKY PATEL  CUBAN BLEND DOBLE CORONA COROJO BOX/20', '133', NULL, NULL, NULL, 7, NULL, NULL),
-	(82, 'CM-03536', 'CAJAS DE MADERA ROCKY PATEL  CUBAN BLEND LANCERO COROJO BOX/20', '133', NULL, NULL, NULL, 7, NULL, NULL),
-	(83, 'CM-03537', 'CAJAS DE MADERA ROCKY PATEL  CUBAN BLEND SIXTY COROJO BOX/20', '133', NULL, NULL, NULL, 7, NULL, NULL),
-	(84, 'CM-03538', 'CAJAS DE MADERA ROCKY PATEL  CUBAN BLEND SIXTY MADURO BOX/20', '133', NULL, NULL, NULL, 7, NULL, NULL),
-	(85, 'CM-03539', 'CAJAS DE MADERA ROCKY PATEL  CUBAN BLEND TORPEDO COROJO BOX/20', '133', NULL, NULL, NULL, 7, NULL, NULL),
-	(86, 'CM-03540', 'CAJAS DE MADERA ROCKY PATEL  CUBAN BLEND ROBUSTO MADURO BOX/20', '133', NULL, NULL, NULL, 7, NULL, NULL),
-	(87, 'CM-03541', 'CAJAS DE MADERA ROCKY PATEL CCF WHITE LABEL ROBUSTO BOX/20', '89', NULL, NULL, NULL, 7, NULL, NULL),
-	(88, 'CM-03542', 'CAJAS DE MADERA ROCKY PATEL CCF WHITE LABEL TORPEDO BOX/20', '89', NULL, NULL, NULL, 7, NULL, NULL),
-	(89, 'CM-03543', 'CAJAS DE MADERA ROCKY PATEL  CUBAN CIGAR FACTORY ROJAS ROBUSTO BOX/20', '133', NULL, NULL, NULL, 7, NULL, NULL),
-	(90, 'CM-03544', 'CAJAS DE MADERA ROCKY PATEL  CUBAN CIGAR FACTORY ROJAS TORPEDO BOX/20', '133', NULL, NULL, NULL, 7, NULL, NULL),
-	(91, 'CM-03545', 'CAJAS DE MADERA ROCKY PATEL DECADE TORPEDO SUMATRA BOX/20', '90', NULL, NULL, NULL, 7, NULL, NULL),
-	(92, 'CM-03546', 'CAJAS DE MADERA ROCKY PATEL DECADE LONSDALES PRENSADO SUMATRA BOX/20', '90', NULL, NULL, NULL, 7, NULL, NULL),
-	(93, 'CM-03547', 'CAJAS DE MADERA ROCKY PATEL DECADE LANCERO SUMATRA BOX/26', '90', NULL, NULL, NULL, 52, NULL, NULL),
-	(94, 'CM-03548', 'CAJAS DE MADERA ROCKY PATEL DECADE RARES SAMPLER SUMATRA BOX/7', '90', NULL, NULL, NULL, 40, NULL, NULL),
-	(95, 'CM-03549', 'CAJAS DE MADERA ROCKY PATEL DECADE EMPEROR ROUND SUMATRA BOX/20', '90', NULL, NULL, NULL, 7, NULL, NULL),
-	(96, 'CM-03550', 'CAJAS DE MADERA ROCKY PATEL DECADE DISPLAY SUMATRA BOX/75', '90', NULL, NULL, NULL, 90, NULL, NULL),
-	(97, 'CM-03551', 'CAJAS DE MADERA ROCKY PATEL DECADE TORO SUMATRA BOX/10', '90', NULL, NULL, NULL, 4, NULL, NULL),
-	(98, 'CM-03552', 'CAJAS DE MADERA ROCKY PATEL DECADE FORTY SIX PRES SUMATRA BOX/20', '90', NULL, NULL, NULL, 7, NULL, NULL),
-	(99, 'CM-03553', 'CAJAS DE MADERA ROCKY PATEL  DECADA LIMITADA TORO PENSILVANIA BOX/20', '90', NULL, NULL, NULL, 7, NULL, NULL),
-	(100, 'CM-03554', 'CAJAS DE MADERA ROCKY PATEL  DECADA LIMITADA TORPEDO PENSILVANIA BOX/20', '90', NULL, NULL, NULL, 7, NULL, NULL),
-	(101, 'CM-03555', 'CAJAS DE MADERA ROCKY PATEL  DECADA LIMITADA ROBUSTO PENSILVANIA BOX/20', '90', NULL, NULL, NULL, 7, NULL, NULL),
-	(102, 'CM-03556', 'CAJAS DE MADERA ROCKY PATEL  DESIENA TORO COROJO BOX/20', '107', NULL, NULL, NULL, 7, NULL, NULL),
-	(103, 'CM-03557', 'CAJAS DE MADERA ROCKY PATEL  DESIENA ROBUSTO CONERICO BOX/20', '107', NULL, NULL, NULL, 7, NULL, NULL),
-	(104, 'CM-03558', 'CAJAS DE MADERA ROCKY PATEL  DON CASIANI CORONA BOX/20', '1376', NULL, NULL, NULL, 7, NULL, NULL),
-	(105, 'CM-03559', 'CAJAS DE MADERA ROCKY PATEL  EDGE SHORT MADURO BOX/20', '51', NULL, NULL, NULL, 7, NULL, NULL),
-	(106, 'CM-03560', 'CAJAS DE MADERA ROCKY PATEL  EDGE SHORT COROJO BOX/20', '51', NULL, NULL, NULL, 7, NULL, NULL),
-	(107, 'CM-03561', 'CAJAS DE MADERA ROCKY PATEL  EDGE ROBUSTO MADURO BOX/20', '51', NULL, NULL, NULL, 7, NULL, NULL),
-	(108, 'CM-03562', 'CAJAS DE MADERA ROCKY PATEL  EDGE LANCERO MADURO BOX/24', '51', NULL, NULL, NULL, 47, NULL, NULL),
-	(109, 'CM-03563', 'CAJAS DE MADERA ROCKY PATEL  EDGE TORO SUMATRA BOX/100', '51', NULL, NULL, NULL, 18, NULL, NULL),
-	(110, 'CM-03564', 'CAJAS DE MADERA ROCKY PATEL  EDGE ROBUSTO COROJO BOX/10', '51', NULL, NULL, NULL, 4, NULL, NULL),
-	(111, 'CM-03565', 'CAJAS DE MADERA ROCKY PATEL  EDGE ROBUSTO MADURO BOX/10 (Divisor Madera)', '51', NULL, NULL, NULL, NULL, NULL, NULL),
-	(112, 'CM-03566', 'CAJAS DE MADERA ROCKY PATEL  EDGE SAMPLER VARIADO BOX/8', '51', NULL, NULL, NULL, 50, NULL, NULL),
-	(113, 'CM-03567', 'CAJAS DE MADERA ROCKY PATEL  EDGE GRAN ROBUSTO MADURO BOX/20', '51', NULL, NULL, NULL, 7, NULL, NULL),
-	(114, 'CM-03568', 'CAJAS DE MADERA ROCKY PATEL  EDGE TORPEDO SUMATRA BOX/100', '51', NULL, NULL, NULL, 18, NULL, NULL),
-	(115, 'CM-03569', 'CAJAS DE MADERA ROCKY PATEL  EDGE TORO MADURO BOX/20', '51', NULL, NULL, NULL, 7, NULL, NULL),
-	(116, 'CM-03570', 'CAJAS DE MADERA ROCKY PATEL  EDGE TORPEDO MADURO BOX/20', '51', NULL, NULL, NULL, 7, NULL, NULL),
-	(117, 'CM-03571', 'CAJAS DE MADERA ROCKY PATEL  EDGE ROBUSTO MADURO BOX/20 (Malas)', '51', NULL, NULL, NULL, NULL, NULL, NULL),
-	(118, 'CM-03572', 'CAJAS DE MADERA ROCKY PATEL  EDGE TORO COROJO BOX/20', '51', NULL, NULL, NULL, 7, NULL, NULL),
-	(119, 'CM-03573', 'CAJAS DE MADERA ROCKY PATEL  EDGE MISSILES COROJO BOX/25', '51', NULL, NULL, NULL, 13, NULL, NULL),
-	(120, 'CM-03574', 'CAJAS DE MADERA ROCKY PATEL  EDGE TORPEDO COROJO BOX/20', '51', NULL, NULL, NULL, 7, NULL, NULL),
-	(121, 'CM-03575', 'CAJAS DE MADERA ROCKY PATEL  EDGE DOBLE CORONA MADURO BOX/20', '51', NULL, NULL, NULL, 7, NULL, NULL),
-	(122, 'CM-03576', 'CAJAS DE MADERA ROCKY PATEL  EDGE DOBLE CORONA COROJO BOX/20', '51', NULL, NULL, NULL, 7, NULL, NULL),
-	(123, 'CM-03577', 'CAJAS DE MADERA ROCKY PATEL  EDGE ROBUSTO COROJO BOX/20', '51', NULL, NULL, NULL, 7, NULL, NULL),
-	(124, 'CM-03578', 'CAJAS DE MADERA ROCKY PATEL  EDGE BATTALION MADURO BOX/20', '51', NULL, NULL, NULL, 7, NULL, NULL),
-	(125, 'CM-03579', 'CAJAS DE MADERA ROCKY PATEL  EDGE SIXTY COROJO BOX/20', '51', NULL, NULL, NULL, 7, NULL, NULL),
-	(126, 'CM-03580', 'CAJAS DE MADERA ROCKY PATEL  EDGE TORPEDO COROJO BOX/100', '51', NULL, NULL, NULL, 18, NULL, NULL),
-	(127, 'CM-03581', 'CAJAS DE MADERA ROCKY PATEL  EDGE TORO COROJO BOX/100', '51', NULL, NULL, NULL, 18, NULL, NULL),
-	(128, 'CM-03582', 'CAJAS DE MADERA ROCKY PATEL  EDGE TORO MADURO BOX/100', '51', NULL, NULL, NULL, 18, NULL, NULL),
-	(129, 'CM-03583', 'CAJAS DE MADERA ROCKY PATEL  EDGE MISSILES MADURO BOX/25', '51', NULL, NULL, NULL, 13, NULL, NULL),
-	(130, 'CM-03584', 'CAJAS DE MADERA ROCKY PATEL  EDGE CABINET CHURCHILL MADURO BOX/16', '51', NULL, NULL, NULL, 26, NULL, NULL),
-	(131, 'CM-03585', 'CAJAS DE MADERA ROCKY PATEL  EDGE CABINET CHURCHILL COROJO BOX/16', '51', NULL, NULL, NULL, 26, NULL, NULL),
-	(132, 'CM-03586', 'CAJAS DE MADERA ROCKY PATEL  EDGE DOBLE CORONA CONNECTICUT BOX/50', '99', NULL, NULL, NULL, 21, NULL, NULL),
-	(133, 'CM-03587', 'CAJAS DE MADERA ROCKY PATEL  EDGE LITE CORONA CONERICO BOX/50', '1018', NULL, NULL, NULL, 21, NULL, NULL),
-	(134, 'CM-03588', 'CAJAS DE MADERA ROCKY PATEL  EDGE  GABINET CHURCHILL CONERICO BOX/16', '51', NULL, NULL, NULL, 26, NULL, NULL),
-	(135, 'CM-03589', 'CAJAS DE MADERA ROCKY PATEL  EDGE  CORONA CONERICO BOX/20', '51', NULL, NULL, NULL, 7, NULL, NULL),
-	(136, 'CM-03590', 'CAJAS DE MADERA ROCKY PATEL  EDGE LITE SHORT CONERICO BOX/50', '1018', NULL, NULL, NULL, 21, NULL, NULL),
-	(137, 'CM-03591', 'CAJAS DE MADERA ROCKY PATEL  EDGE LITE TORPEDO CONERICO BOX/20', '1018', NULL, NULL, NULL, 7, NULL, NULL),
-	(138, 'CM-03592', 'CAJAS DE MADERA ROCKY PATEL  EDGE TORPEDO CONNECTICUT BOX/50', '51', NULL, NULL, NULL, 21, NULL, NULL),
-	(139, 'CM-03593', 'CAJAS DE MADERA ROCKY PATEL  EDGE ROBUSTO CONNECTICUT BOX/50', '51', NULL, NULL, NULL, 21, NULL, NULL),
-	(140, 'CM-03594', 'CAJAS DE MADERA ROCKY PATEL  EDGE LITE ROBUSTO CONERICO BOX/20', '1018', NULL, NULL, NULL, 7, NULL, NULL),
-	(141, 'CM-03595', 'CAJAS DE MADERA ROCKY PATEL  EDGE LITE ROBUSTO CONERICO BOX/10', '1018', NULL, NULL, NULL, 4, NULL, NULL),
-	(142, 'CM-03596', 'CAJAS DE MADERA ROCKY PATEL  EDGE LITE SIXTY CONERICO BOX/20', '99', NULL, NULL, NULL, 7, NULL, NULL),
-	(143, 'CM-03597', 'CAJAS DE MADERA ROCKY PATEL  EDGE TORO CONNETICUT BOX/20', '99', NULL, NULL, NULL, 7, NULL, NULL),
-	(144, 'CM-03598', 'CAJAS DE MADERA ROCKY PATEL  EDGE TORO CONNECTICUT BOX/50', '99', NULL, NULL, NULL, 21, NULL, NULL),
-	(145, 'CM-03599', 'CAJAS DE MADERA ROCKY PATEL  EDGE SQUARE TORPEDO COROJO BOX/50', '209', NULL, NULL, NULL, 21, NULL, NULL),
-	(146, 'CM-03600', 'CAJAS DE MADERA ROCKY PATEL  EDGE SQUARE TORO COROJO BOX/50', '209', NULL, NULL, NULL, 21, NULL, NULL),
-	(147, 'CM-03601', 'CAJAS DE MADERA ROCKY PATEL  EDGE SQUARE ROBUSTO COROJO BOX/50', '209', NULL, NULL, NULL, 21, NULL, NULL),
-	(148, 'CM-03602', 'CAJAS DE MADERA ROCKY PATEL  EMILIO SERIES TORO SUMATRA BOX/20', '1375', NULL, NULL, NULL, 7, NULL, NULL),
-	(149, 'CM-03603', 'CAJAS DE MADERA ROCKY PATEL  EMILIO SERIES TORPEDO MADURO BOX/20', '1375', NULL, NULL, NULL, 7, NULL, NULL),
-	(150, 'CM-03604', 'CAJAS DE MADERA ROCKY PATEL  EMILIO SERIES TORO MADURO BOX/20', '1375', NULL, NULL, NULL, 7, NULL, NULL),
-	(151, 'CM-03605', 'CAJAS DE MADERA  ROCKY PATEL  FAMOUS SAMPLER TOBUSTO BOX/20', '1446', NULL, NULL, NULL, 7, NULL, NULL),
-	(152, 'CM-03606', 'CAJAS DE MADERA ROCKY PATEL  FIRE TORO  BOX/20', '1188', NULL, NULL, NULL, 7, NULL, NULL),
-	(153, 'CM-03607', 'CAJAS DE MADERA ROCKY PATEL  FIRE ROBUSTO  BOX/20', '1188', NULL, NULL, NULL, 7, NULL, NULL),
-	(154, 'CM-03608', 'CAJAS DE MADERA ROCKY PATEL  FIRE DOBLE CORONA  BOX/20', '1188', NULL, NULL, NULL, 7, NULL, NULL),
-	(155, 'CM-03609', 'CAJAS DE MADERA ROCKY PATEL  FIRE CORONA  BOX/20', '1188', NULL, NULL, NULL, 7, NULL, NULL),
-	(156, 'CM-03610', 'CAJAS DE MADERA ROCKY PATEL  FIRE LANCERO  BOX/20', '1188', NULL, NULL, NULL, 7, NULL, NULL),
-	(157, 'CM-03611', 'CAJAS DE MADERA ROCKY PATEL  FIRE CHURCHILL  BOX/20', '1188', NULL, NULL, NULL, 7, NULL, NULL),
-	(158, 'CM-03612', 'CAJAS DE MADERA ROCKY PATEL  FIRE PETIT CORONA  BOX/20', '1188', NULL, NULL, NULL, 7, NULL, NULL),
-	(159, 'CM-03613', 'CAJAS DE MADERA ROCKY PATEL  GOLD BY R.P. LANCERO CONERICO  BOX/20', '211', NULL, NULL, NULL, 7, NULL, NULL),
-	(160, 'CM-03614', 'CAJAS DE MADERA ROCKY PATEL  GOLD BY R.P. LONSDALES CONERICO  BOX/20', '211', NULL, NULL, NULL, 7, NULL, NULL),
-	(161, 'CM-03615', 'CAJAS DE MADERA ROCKY PATEL  GOLD BY R.P. BELICOSO CONERICO  BOX/20', '211', NULL, NULL, NULL, 7, NULL, NULL),
-	(162, 'CM-03616', 'CAJAS DE MADERA ROCKY PATEL  GOLD BY R.P. CORONA CONERICO  BOX/20', '211', NULL, NULL, NULL, 7, NULL, NULL),
-	(163, 'CM-03617', 'CAJAS DE MADERA ROCKY PATEL  GRAN VIDA ROBUSTO PENSILVANIA  BOX/20', '1397', NULL, NULL, NULL, 7, NULL, NULL),
-	(164, 'CM-03618', 'CAJAS DE MADERA ROCKY PATEL  GRAN VIDA TORO PENSILVANIA  BOX/20', '1397', NULL, NULL, NULL, 7, NULL, NULL),
-	(165, 'CM-03619', 'CAJAS DE MADERA ROCKY PATEL  HABANA COROJO TORPEDO  BOX/20', '1388', NULL, NULL, NULL, 7, NULL, NULL),
-	(166, 'CM-03620', 'CAJAS DE MADERA ROCKY PATEL  HABANA COROJO ROBUSTO  BOX/20', '1388', NULL, NULL, NULL, 7, NULL, NULL),
-	(167, 'CM-03621', 'CAJAS DE MADERA ROCKY PATEL  HABANA COROJO TORO GRANDE  BOX/20', '1388', NULL, NULL, NULL, 7, NULL, NULL),
-	(168, 'CM-03622', 'CAJAS DE MADERA ROCKY PATEL  HABANA COROJO SIXTY  BOX/20', '1388', NULL, NULL, NULL, 7, NULL, NULL),
-	(169, 'CM-03623', 'CAJAS DE MADERA ROCKY PATEL  HABANA PREMIUN TORO CONERICO  BOX/25', '1340', NULL, NULL, NULL, 13, NULL, NULL),
-	(170, 'CM-03624', 'CAJAS DE MADERA ROCKY PATEL  HABANA PREMIUN TORPEDO CONERICO  BOX/25', '1340', NULL, NULL, NULL, 13, NULL, NULL),
-	(171, 'CM-03625', 'CAJAS DE MADERA ROCKY PATEL  HABANA PREMIUN ROBUSTO CONERICO  BOX/25', '1340', NULL, NULL, NULL, 13, NULL, NULL),
-	(172, 'CM-03626', 'CAJAS DE MADERA ROCKY PATEL  HONDURAS CLASICO ROBUSTO MADURO  BOX/20', '134', NULL, NULL, NULL, 7, NULL, NULL),
-	(173, 'CM-03627', 'CAJAS DE MADERA ROCKY PATEL  HONDURAS CLASICO LONSDALES MADURO  BOX/20', '134', NULL, NULL, NULL, 7, NULL, NULL),
-	(174, 'CM-03628', 'CAJAS DE MADERA ROCKY PATEL  HONDURAS CLASICO DOBLE CORONA MADURO  BOX/20', '134', NULL, NULL, NULL, 7, NULL, NULL),
-	(175, 'CM-03629', 'CAJAS DE MADERA ROCKY PATEL  HONDURAS CLASICO TORO MADURO  BOX/20', '134', NULL, NULL, NULL, 7, NULL, NULL),
-	(176, 'CM-03630', 'CAJAS DE MADERA ROCKY PATEL  HONDURAS CLASICO TORPEDO MADURO  BOX/20', '134', NULL, NULL, NULL, 7, NULL, NULL),
-	(177, 'CM-03631', 'CAJAS DE MADERA ROCKY PATEL  HONDURAS CLASICO LANCERO COROJO  BOX/20', '134', NULL, NULL, NULL, 7, NULL, NULL),
-	(178, 'CM-03632', 'CAJAS DE MADERA ROCKY PATEL  HONDURAS CLASICO TORPEDO COROJO  BOX/20', '134', NULL, NULL, NULL, 7, NULL, NULL),
-	(179, 'CM-03633', 'CAJAS DE MADERA ROCKY PATEL  HONDURAS CLASICO LONSDALES COROJO  BOX/20', '134', NULL, NULL, NULL, 7, NULL, NULL),
-	(180, 'CM-03634', 'CAJAS DE MADERA ROCKY PATEL  HONDURAS CLASICO DOBLE CORONA COROJO  BOX/20', '134', NULL, NULL, NULL, 7, NULL, NULL),
-	(181, 'CM-03635', 'CAJAS DE MADERA ROCKY PATEL  HONDURAS CLASICO TORO COROJO  BOX/20', '134', NULL, NULL, NULL, 7, NULL, NULL),
-	(182, 'CM-03636', 'CAJAS DE MADERA ROCKY PATEL  HONDURAS CLASICO ROBUSTO COROJO  BOX/20', '134', NULL, NULL, NULL, 7, NULL, NULL),
-	(183, 'CM-03637', 'CAJAS DE MADERA ROCKY PATEL  I-PRESS TORO MADURO  BOX/20', '1372', NULL, NULL, NULL, 7, NULL, NULL),
-	(184, 'CM-03638', 'CAJAS DE MADERA ROCKY PATEL  ITC ESMERALDA ROBUSTO  BOX/8', '1447', NULL, NULL, NULL, 50, NULL, NULL),
-	(185, 'CM-03639', 'CAJAS DE MADERA ROCKY PATEL  ITC ESMERALDA TORO  BOX/8', '1447', NULL, NULL, NULL, 50, NULL, NULL),
-	(186, 'CM-03640', 'CAJAS DE MADERA ROCKY PATEL  JUNIOR VINTAGE 1999 CONERICO  BOX/40', '159', NULL, NULL, NULL, 17, NULL, NULL),
-	(187, 'CM-03641', 'CAJAS DE MADERA ROCKY PATEL  JUNIOR VINTAGE 1992  NATURAL  BOX/40', '62', NULL, NULL, NULL, 17, NULL, NULL),
-	(188, 'CM-03642', 'CAJAS DE MADERA ROCKY PATEL  JUNIOR VINTAGE 1990 MADURO  BOX/40', '141', NULL, NULL, NULL, 17, NULL, NULL),
-	(189, 'CM-03643', 'CAJAS DE MADERA ROCKY PATEL  LA CONQUISTA TORO MADURO  BOX/20', '184', NULL, NULL, NULL, 7, NULL, NULL),
-	(190, 'CM-03644', 'CAJAS DE MADERA ROCKY PATEL  LA CONQUISTA TORPEDO MADURO  BOX/20', '184', NULL, NULL, NULL, 7, NULL, NULL),
-	(191, 'CM-03645', 'CAJAS DE MADERA ROCKY PATEL  LA CONQUISTA ROBUSTO MADURO  BOX/20', '184', NULL, NULL, NULL, 7, NULL, NULL),
-	(192, 'CM-03646', 'CAJAS DE MADERA ROCKY PATEL  LEESBURG ROBUSTO CONERICO BOX/20', '1425', NULL, NULL, NULL, 7, NULL, NULL),
-	(193, 'CM-03647', 'CAJAS DE MADERA ROCKY PATEL  LEESBURG TORPEDO CONERICO BOX/20', '1425', NULL, NULL, NULL, 7, NULL, NULL),
-	(194, 'CM-03648', 'CAJAS DE MADERA ROCKY PATEL  LIMITED EDITION SIZE A  BOX/16', '1448', NULL, NULL, NULL, 26, NULL, NULL),
-	(195, 'CM-03649', 'CAJAS DE MADERA ROCKY PATEL  M.J.K.CIGAR SOURCE DOBLE CORONA CONERICO  BOX/20', '1371', NULL, NULL, NULL, 7, NULL, NULL),
-	(196, 'CM-03650', 'CAJAS DE MADERA ROCKY PATEL  M.J.K.CIGAR SOURCE TORO CONERICO  BOX/20', '1371', NULL, NULL, NULL, 7, NULL, NULL),
-	(197, 'CM-03651', 'CAJAS DE MADERA ROCKY PATEL  MADURO COSTA RICA TORPEDO MADURO  BOX/20', '232', NULL, NULL, NULL, 7, NULL, NULL),
-	(198, 'CM-03652', 'CAJAS DE MADERA ROCKY PATEL  MADURO COSTA RICA CHURCHILL MADURO  BOX/20', '232', NULL, NULL, NULL, 7, NULL, NULL),
-	(199, 'CM-03653', 'CAJAS DE MADERA ROCKY PATEL  MADURO COSTA RICA SIXTY MADURO  BOX/20', '232', NULL, NULL, NULL, 7, NULL, NULL),
-	(200, 'CM-03654', 'CAJAS DE MADERA ROCKY PATEL  MADURO COSTA RICA ROBUSTO MADURO  BOX/20', '232', NULL, NULL, NULL, 7, NULL, NULL),
-	(201, 'CM-03655', 'CAJAS DE MADERA ROCKY PATEL  MERITAGE CHURCHILL COR/MAD  BOX/20', '142', NULL, NULL, NULL, 7, NULL, NULL),
-	(202, 'CM-03656', 'CAJAS DE MADERA ROCKY PATEL  MERITAGE TORPEDO COR/MAD  BOX/20', '142', NULL, NULL, NULL, 7, NULL, NULL),
-	(203, 'CM-03657', 'CAJAS DE MADERA ROCKY PATEL  MERITAGE ROBUSTO COR/MAD  BOX/20', '142', NULL, NULL, NULL, 7, NULL, NULL),
-	(204, 'CM-03658', 'CAJAS DE MADERA ROCKY PATEL  MONOCACY PIRAMIDE PRESS SUMATRA  BOX/20', '68', NULL, NULL, NULL, 7, NULL, NULL),
-	(205, 'CM-03659', 'CAJAS DE MADERA ROCKY PATEL  MONOCACY ROBUSTO SUMATRA  BOX/20', '68', NULL, NULL, NULL, 7, NULL, NULL),
-	(206, 'CM-03660', 'CAJAS DE MADERA ROCKY PATEL  NICARAO TORO HAB/COL  BOX/20', '1363', NULL, NULL, NULL, 7, NULL, NULL),
-	(207, 'CM-03661', 'CAJAS DE MADERA ROCKY PATEL  NICARAO TORPEDO HAB/COL  BOX/20', '1363', NULL, NULL, NULL, 7, NULL, NULL),
-	(208, 'CM-03662', 'CAJAS DE MADERA ROCKY PATEL  NICARAO ROBUSTO HAB/COL  BOX/20', '1363', NULL, NULL, NULL, 7, NULL, NULL),
-	(209, 'CM-03663', 'CAJAS DE MADERA ROCKY PATEL  NICARAO CHURCHILL HAB/COL  BOX/20', '1363', NULL, NULL, NULL, 7, NULL, NULL),
-	(210, 'CM-03664', 'CAJAS DE MADERA ROCKY PATEL  NICK CIGAR ROBUSTO CONERICO  BOX/20', '66', NULL, NULL, NULL, 7, NULL, NULL),
-	(211, 'CM-03665', 'CAJAS DE MADERA ROCKY PATEL  NICK CIGAR DOBLE CORONA CONERICO  BOX/20', '66', NULL, NULL, NULL, 7, NULL, NULL),
-	(212, 'CM-03666', 'CAJAS DE MADERA ROCKY PATEL  NORDING TORO GRANDE HAB/COL  BOX/20', '109', NULL, NULL, NULL, 7, NULL, NULL),
-	(213, 'CM-03667', 'CAJAS DE MADERA ROCKY PATEL  NORDING TORPEDO HAB/COL  BOX/20', '109', NULL, NULL, NULL, 7, NULL, NULL),
-	(214, 'CM-03668', 'CAJAS DE MADERA ROCKY PATEL  NORDING ROBUSTO HAB/COL  BOX/20', '109', NULL, NULL, NULL, 7, NULL, NULL),
-	(215, 'CM-03669', 'CAJAS DE MADERA ROCKY PATEL  NORDING TORO GRANDE HAB/COL  BOX/25 (Malas)', '109', NULL, NULL, NULL, NULL, NULL, NULL),
-	(216, 'CM-03670', 'CAJAS DE MADERA ROCKY PATEL  NORDING TORPEDO HAB/COL  BOX/25', '109', NULL, NULL, NULL, 13, NULL, NULL),
-	(217, 'CM-03671', 'CAJAS DE MADERA ROCKY PATEL  NORDING ROBUSTO HAB/COL  BOX/25', '109', NULL, NULL, NULL, 13, NULL, NULL),
-	(218, 'CM-03672', 'CAJAS DE MADERA ROCKY PATEL  NORDING CHURCHILL HAB/COL  BOX/25', '109', NULL, NULL, NULL, 13, NULL, NULL),
-	(219, 'CM-03673', 'CAJAS DE MADERA ROCKY PATEL  NORDING TORO GRANDE HAB/COL  BOX/25', '109', NULL, NULL, NULL, 13, NULL, NULL),
-	(220, 'CM-03674', 'CAJAS DE MADERA ROCKY PATEL  O.W.R. TORPEDO MADURO  BOX/20', '186', NULL, NULL, NULL, 7, NULL, NULL),
-	(221, 'CM-03675', 'CAJAS DE MADERA ROCKY PATEL  O.W.R. ROBUSTO MADURO  BOX/20', '186', NULL, NULL, NULL, 7, NULL, NULL),
-	(222, 'CM-03676', 'CAJAS DE MADERA ROCKY PATEL  O.W.R. ROBUSTO COROJO  BOX/20', '186', NULL, NULL, NULL, 7, NULL, NULL),
-	(223, 'CM-03677', 'CAJAS DE MADERA ROCKY PATEL  O.W.R. TORPEDO COROJO  BOX/20', '186', NULL, NULL, NULL, 7, NULL, NULL),
-	(224, 'CM-03678', 'CAJAS DE MADERA ROCKY PATEL  O.W.R. TORO MADURO  BOX/20', '186', NULL, NULL, NULL, 7, NULL, NULL),
-	(225, 'CM-03679', 'CAJAS DE MADERA ROCKY PATEL  O.W.R. LANCERO MADURO  BOX/24', '186', NULL, NULL, NULL, 47, NULL, NULL),
-	(226, 'CM-03680', 'CAJAS DE MADERA ROCKY PATEL  O.W.R. LANCERO COROJO  BOX/24', '186', NULL, NULL, NULL, 47, NULL, NULL),
-	(227, 'CM-03681', 'CAJAS DE MADERA ROCKY PATEL  O.W.R. TORO COROJO  BOX/20', '186', NULL, NULL, NULL, 7, NULL, NULL),
-	(228, 'CM-03682', 'CAJAS DE MADERA ROCKY PATEL  OCEAN CLUB TORPEDO PRESS SUMATRA  BOX/20', '1391', NULL, NULL, NULL, 7, NULL, NULL),
-	(229, 'CM-03683', 'CAJAS DE MADERA ROCKY PATEL  OCEAN CLUB SIXTY PRESS SUMATRA  BOX/20', '1391', NULL, NULL, NULL, 7, NULL, NULL),
-	(230, 'CM-03684', 'CAJAS DE MADERA ROCKY PATEL  PABLO MARTIN MADURO TORPEDO BOX/20', '110', NULL, NULL, NULL, 7, NULL, NULL),
-	(231, 'CM-03685', 'CAJAS DE MADERA ROCKY PATEL  PHOENIX ROBUSTO MADURO BOX/20', '1353', NULL, NULL, NULL, 7, NULL, NULL),
-	(232, 'CM-03686', 'CAJAS DE MADERA ROCKY PATEL  PHOENIX PETIT BELICOSO MADURO BOX/20', '1353', NULL, NULL, NULL, 7, NULL, NULL),
-	(233, 'CM-03687', 'CAJAS DE MADERA ROCKY PATEL  RENAISSANCE CHURCHILL SUMATRA BOX/20', '1385', NULL, NULL, NULL, 7, NULL, NULL),
-	(234, 'CM-03688', 'CAJAS DE MADERA ROCKY PATEL  RENAISSANCE TORO SUMATRA BOX/20', '1385', NULL, NULL, NULL, 7, NULL, NULL),
-	(235, 'CM-03689', 'CAJAS DE MADERA ROCKY PATEL  RENAISSANCE ROBUSTO SUMATRA BOX/20', '1385', NULL, NULL, NULL, 7, NULL, NULL),
-	(236, 'CM-03690', 'CAJAS DE MADERA ROCKY PATEL  REO CHAIRMAN HAB/COL BOX/20', '1342', NULL, NULL, NULL, 7, NULL, NULL),
-	(237, 'CM-03691', 'CAJAS DE MADERA ROCKY PATEL  REO TORPEDO HAB/COL BOX/20', '1342', NULL, NULL, NULL, 7, NULL, NULL),
-	(238, 'CM-03692', 'CAJAS DE MADERA ROCKY PATEL  REO ROBUSTO HAB/COL BOX/20', '1342', NULL, NULL, NULL, 7, NULL, NULL),
-	(239, 'CM-03693', 'CAJAS DE MADERA ROCKY PATEL CONNECTICUT BYTORO CONERICO BOX/20', '168', NULL, NULL, NULL, 7, NULL, NULL),
-	(240, 'CM-03694', 'CAJAS DE MADERA ROCKY PATEL CONNECTICUT BY TORPEDO CONERICO BOX/20', '168', NULL, NULL, NULL, 7, NULL, NULL),
-	(241, 'CM-03695', 'CAJAS DE MADERA ROCKY PATEL MADURO BY TORO BOX/20', '168', NULL, NULL, NULL, 7, NULL, NULL),
-	(242, 'CM-03696', 'CAJAS DE MADERA ROCKY PATEL MADURO BY  LANCERO BOX/20', '168', NULL, NULL, NULL, 7, NULL, NULL),
-	(243, 'CM-03697', 'CAJAS DE MADERA ROCKY PATEL MADURO BY CHURCILL BOX/20', '168', NULL, NULL, NULL, 7, NULL, NULL),
-	(244, 'CM-03698', 'CAJAS DE MADERA ROCKY PATEL  ROCKY PATEL MADURO BY BELICOSO MADURO BOX/20', '168', NULL, NULL, NULL, 7, NULL, NULL),
-	(245, 'CM-03699', 'CAJAS DE MADERA ROCKY PATEL CONNECTICUT BY ROBUSTO CONERICO BOX/20', '168', NULL, NULL, NULL, 7, NULL, NULL),
-	(246, 'CM-03700', 'CAJAS DE MADERA ROCKY PATEL  ROSADO TORO SUMATRA BOX/20', '135', NULL, NULL, NULL, 7, NULL, NULL),
-	(247, 'CM-03701', 'CAJAS DE MADERA ROCKY PATEL  ROSADO TORPEDO SUMATRA BOX/20', '135', NULL, NULL, NULL, 7, NULL, NULL),
-	(248, 'CM-03702', 'CAJAS DE MADERA ROCKY PATEL  ROSADO ROBUSTO SUMATRA BOX/20', '135', NULL, NULL, NULL, 7, NULL, NULL),
-	(249, 'CM-03703', 'CAJAS DE MADERA ROCKY PATEL  ROSADO LONSDALE SUMATRA BOX/20', '135', NULL, NULL, NULL, 7, NULL, NULL),
-	(250, 'CM-03704', 'CAJAS DE MADERA ROCKY PATEL  ROSADO LANCERO SUMATRA BOX/20', '135', NULL, NULL, NULL, 7, NULL, NULL),
-	(251, 'CM-03705', 'CAJAS DE MADERA ROCKY PATEL  ROSADO DOBLE CORONA SUMATRA BOX/20', '135', NULL, NULL, NULL, 7, NULL, NULL),
-	(252, 'CM-03706', 'CAJAS DE MADERA ROCKY PATEL  ROSADO PETIT CORONA SUMATRA BOX/20', '135', NULL, NULL, NULL, 7, NULL, NULL),
-	(253, 'CM-03707', 'CAJAS DE MADERA ROCKY PATEL  SAMPLER SIXTY 90,92,99 VARIADO BOX/10', '237', NULL, NULL, NULL, 4, NULL, NULL),
-	(254, 'CM-03708', 'CAJAS DE MADERA ROCKY PATEL  SAMPLER ROBUSTO GIFT VARIADO BOX/8', '237', NULL, NULL, NULL, 50, NULL, NULL),
-	(255, 'CM-03709', 'CAJAS DE MADERA ROCKY PATEL  SAMPLER TORO GIFT VARIADO BOX/10', '237', NULL, NULL, NULL, 4, NULL, NULL),
-	(256, 'CM-03711', 'CAJAS DE MADERA ROCKY PATEL  SAMPLER LIMITED RELEASE TORO VARIADO BOX/6', '237', NULL, NULL, NULL, 5, NULL, NULL),
-	(257, 'CM-03712', 'CAJAS DE MADERA ROCKY PATEL  SAVERIO TORO BOX/20', '1361', NULL, NULL, NULL, 7, NULL, NULL),
-	(258, 'CM-03713', 'CAJAS DE MADERA ROCKY PATEL  SAVERIO TORPEDO BOX/20', '1361', NULL, NULL, NULL, 7, NULL, NULL),
-	(259, 'CM-03714', 'CAJAS DE MADERA ROCKY PATEL  SUNGROWN PETIT CORONA SUMATRA BOX/20', '67', NULL, NULL, NULL, 7, NULL, NULL),
-	(260, 'CM-03715', 'CAJAS DE MADERA ROCKY PATEL  SUNGROWN CORONA SUMATRA BOX/20', '67', NULL, NULL, NULL, 7, NULL, NULL),
-	(261, 'CM-03716', 'CAJAS DE MADERA ROCKY PATEL  SUNGROWN SHORT ROBUSTO 4-1/2X54 SUMATRA BOX/20', '67', NULL, NULL, NULL, 7, NULL, NULL),
-	(262, 'CM-03717', 'CAJAS DE MADERA ROCKY PATEL  SUNGROWN LANCERO SUMATRA BOX/24', '67', NULL, NULL, NULL, 47, NULL, NULL),
-	(263, 'CM-03718', 'CAJAS DE MADERA ROCKY PATEL  SUNGROWN ROCKCHILL SUMATRA BOX/20', '67', NULL, NULL, NULL, 7, NULL, NULL),
-	(264, 'CM-03719', 'CAJAS DE MADERA ROCKY PATEL  SUNGROWN ROBUSTO SUMATRA BOX/20', '67', NULL, NULL, NULL, 7, NULL, NULL),
-	(265, 'CM-03720', 'CAJAS DE MADERA ROCKY PATEL  SUPER FUERTE PETIT BELICOSO PRESS MADURO BOX/25', '59', NULL, NULL, NULL, 13, NULL, NULL),
-	(266, 'CM-03721', 'CAJAS DE MADERA ROCKY PATEL  SUPER FUERTE ROBUSTO HAB-2000 BOX/25', '59', NULL, NULL, NULL, 13, NULL, NULL),
-	(267, 'CM-03722', 'CAJAS DE MADERA ROCKY PATEL  SUPER FUERTE TORO PRESS MADURO BOX/25', '59', NULL, NULL, NULL, 13, NULL, NULL),
-	(268, 'CM-03723', 'CAJAS DE MADERA ROCKY PATEL  SUPER FUERTE CORONA MADURO BOX/25', '59', NULL, NULL, NULL, 13, NULL, NULL),
-	(269, 'CM-03724', 'CAJAS DE MADERA ROCKY PATEL  THE PENINSULA CHICAGO BOX/1', '1352', NULL, NULL, NULL, 65, NULL, NULL),
-	(270, 'CM-03725', 'CAJAS DE MADERA ROCKY PATEL  VALEDOR TORPEDO SUMATRA BOX/20', '1402', NULL, NULL, NULL, 7, NULL, NULL),
-	(271, 'CM-03726', 'CAJAS DE MADERA ROCKY PATEL  VENGENCE ROBUSTO MADURO BOX/20', '1343', NULL, NULL, NULL, 7, NULL, NULL),
-	(272, 'CM-03727', 'CAJAS DE MADERA ROCKY PATEL  VENGENCE CHURCHILL MADURO BOX/20', '1343', NULL, NULL, NULL, 7, NULL, NULL),
-	(273, 'CM-03728', 'CAJAS DE MADERA ROCKY PATEL  VENGENCE TORPEDO MADURO BOX/20', '1343', NULL, NULL, NULL, 7, NULL, NULL),
-	(274, 'CM-03729', 'CAJAS DE MADERA ROCKY PATEL  VENGENCE TORO MADURO BOX/20', '1343', NULL, NULL, NULL, 7, NULL, NULL),
-	(275, 'CM-03730', 'CAJAS DE MADERA ROCKY PATEL  VIBE TORO GRANDE HAB/COL BOX/20', '1347', NULL, NULL, NULL, 7, NULL, NULL),
-	(276, 'CM-03731', 'CAJAS DE MADERA ROCKY PATEL  VIBE ROBUSTO HAB/COL BOX/20', '1347', NULL, NULL, NULL, 7, NULL, NULL),
-	(277, 'CM-03732', 'CAJAS DE MADERA ROCKY PATEL  VIBE CORONA HAB/COL BOX/20', '1347', NULL, NULL, NULL, 7, NULL, NULL),
-	(278, 'CM-03733', 'CAJAS DE MADERA ROCKY PATEL  VIGILANTE TORO GRANDE MADURO BOX/25', '1341', NULL, NULL, NULL, 13, NULL, NULL),
-	(279, 'CM-03734', 'CAJAS DE MADERA ROCKY PATEL  VIGILANTE ROBUSTO GRANDE MADURO BOX/25', '1341', NULL, NULL, NULL, 13, NULL, NULL),
-	(280, 'CM-03735', 'CAJAS DE MADERA ROCKY PATEL  VIGILANTE PETIT CORONA MADURO BOX/25', '1341', NULL, NULL, NULL, 13, NULL, NULL),
-	(281, 'CM-03737', 'CAJAS DE MADERA ROCKY PATEL  VIGILANTE PETIT CORONA COROJO BOX/25', '1341', NULL, NULL, NULL, 13, NULL, NULL),
-	(282, 'CM-03738', 'CAJAS DE MADERA ROCKY PATEL  VIGILANTE SUPER TORO COROJO BOX/25', '1341', NULL, NULL, NULL, 13, NULL, NULL),
-	(283, 'CM-03739', 'CAJAS DE MADERA ROCKY PATEL  VIGILANTE TORPEDO COROJO BOX/25', '1341', NULL, NULL, NULL, 13, NULL, NULL),
-	(284, 'CM-03740', 'CAJAS DE MADERA ROCKY PATEL  VINTAGE 1990 ROCKCHILL MADURO PRESS BOX/20', '15', NULL, NULL, NULL, 7, NULL, NULL),
-	(285, 'CM-03741', 'CAJAS DE MADERA ROCKY PATEL  VINTAGE 1990 TORPEDO MADURO PRESS BOX/20', '15', NULL, NULL, NULL, 7, NULL, NULL),
-	(286, 'CM-03742', 'CAJAS DE MADERA ROCKY PATEL  VINTAGE 1990 CHURCHILL RED. MADURO BOX/20', '15', NULL, NULL, NULL, 7, NULL, NULL),
-	(287, 'CM-03743', 'CAJAS DE MADERA ROCKY PATEL  VINTAGE 1990 PETIT CORONA MADURO REDONDO BOX/20', '15', NULL, NULL, NULL, 7, NULL, NULL),
-	(288, 'CM-03744', 'CAJAS DE MADERA ROCKY PATEL  VINTAGE 1990 TORO MADURO PRESS BOX/20', '15', NULL, NULL, NULL, 7, NULL, NULL),
-	(289, 'CM-03745', 'CAJAS DE MADERA ROCKY PATEL  VINTAGE 1990 SIXTY MADURO BOX/20', '15', NULL, NULL, NULL, 7, NULL, NULL),
-	(290, 'CM-03746', 'CAJAS DE MADERA ROCKY PATEL  VINTAGE 1990 PERFECTO MADURO BOX/20', '15', NULL, NULL, NULL, 7, NULL, NULL),
-	(291, 'CM-03747', 'CAJAS DE MADERA ROCKY PATEL  VINTAGE 1992 PETIT CORONA SUMATRA REDONDO BOX/20', '14', NULL, NULL, NULL, 7, NULL, NULL),
-	(292, 'CM-03748', 'CAJAS DE MADERA ROCKY PATEL  VINTAGE 1992 TORPEDO PRESS SUMATRA BOX/20', '14', NULL, NULL, NULL, 7, NULL, NULL),
-	(293, 'CM-03749', 'CAJAS DE MADERA ROCKY PATEL  VINTAGE 1992 TORO PRESS SUMATRA BOX/20', '14', NULL, NULL, NULL, 7, NULL, NULL),
-	(294, 'CM-03750', 'CAJAS DE MADERA ROCKY PATEL  VINTAGE 1992 ROBUSTO PRESS SUMATRA BOX/20', '14', NULL, NULL, NULL, 7, NULL, NULL),
-	(295, 'CM-03751', 'CAJAS DE MADERA ROCKY PATEL  VINTAGE 1992 SIXTY SUMATRA BOX/20', '14', NULL, NULL, NULL, 7, NULL, NULL),
-	(296, 'CM-03752', 'CAJAS DE MADERA ROCKY PATEL  VINTAGE 1999 PERFECTO CONERICO BOX/20', '86', NULL, NULL, NULL, 7, NULL, NULL),
-	(297, 'CM-03753', 'CAJAS DE MADERA ROCKY PATEL  VINTAGE 1999 CORONA CONERICO BOX/20', '86', NULL, NULL, NULL, 7, NULL, NULL),
-	(298, 'CM-03754', 'CAJAS DE MADERA ROCKY PATEL  VINTAGE 1999 ROBUSTO CONERICO BOX/20', '86', NULL, NULL, NULL, 7, NULL, NULL),
-	(299, 'CM-03755', 'CAJAS DE MADERA ROCKY PATEL  EXTREME TORO SUMATRA BOX/20', '183', NULL, NULL, NULL, 7, NULL, NULL),
-	(300, 'CM-03756', 'CAJAS DE MADERA ROCKY PATEL  EXTREME CHURCHILL SUMATRA BOX/20', '183', NULL, NULL, NULL, 7, NULL, NULL),
-	(301, 'CM-03757', 'CAJAS DE MADERA ROCKY PATEL  EXTREME ROBUSTO SUMATRA BOX/20', '183', NULL, NULL, NULL, 7, NULL, NULL),
-	(302, 'CM-03758', 'CAJAS DE MADERA ROCKY PATEL  COBUTO CHURCHILL BOX/20', '1403', NULL, NULL, NULL, 7, NULL, NULL),
-	(303, 'CM-03759', 'CAJAS DE MADERA ROCKY PATEL  COBUTO TORO BOX/20', '1403', NULL, NULL, NULL, 7, NULL, NULL),
-	(304, 'CM-03760', 'CAJAS DE MADERA ROCKY PATEL  COBUTO ROBUSTO BOX/20', '1403', NULL, NULL, NULL, 7, NULL, NULL),
-	(305, 'CM-03761', 'CAJAS DE MADERA ROCKY PATEL  SAMPLER PERFECTO BOX/10', '237', NULL, NULL, NULL, 4, NULL, NULL),
-	(306, 'CM-03762', 'CAJAS DE MADERA ROCKY PATEL  MONOCACY CHURCHILL SUMATRA BOX/20', '68', NULL, NULL, NULL, 7, NULL, NULL),
-	(307, 'CM-03763', 'CAJAS DE MADERA ROCKY PATEL CAMERON BY P.P. CAMERON BOX/20', '1384', NULL, NULL, NULL, 7, NULL, NULL),
-	(308, 'CM-03764', 'CAJAS DE MADERA ROCKY PATEL CAUCUS TORPEDO SUMATRA BOX/20', '106', NULL, NULL, NULL, 7, NULL, NULL),
-	(309, 'CM-03765', 'CAJAS DE MADERA ROCKY PATEL CAUCUS TORO SUMATRA BOX/20', '106', NULL, NULL, NULL, 7, NULL, NULL),
-	(310, 'CM-03766', 'CAJAS DE MADERA ROCKY PATEL  CUNUCO  PETIT CORONA HAB. COLORADO BOX/20', '1362', NULL, NULL, NULL, 7, NULL, NULL),
-	(311, 'CM-03767', 'CAJAS DE MADERA ROCKY PATEL CRUZ REAL ROBUSTO SUMATRA BOX/20', '1163', NULL, NULL, NULL, 7, NULL, NULL),
-	(312, 'CM-03768', 'CAJAS DE MADERA ROCKY PATEL DECADE LONSDALES REDONDO SUMATRA BOX/20', '90', NULL, NULL, NULL, 7, NULL, NULL),
-	(313, 'CM-03769', 'CAJAS DE MADERA ROCKY PATEL DECADE ROBUSTO PRENSADO SUMATRA BOX/20', '90', NULL, NULL, NULL, 7, NULL, NULL),
-	(314, 'CM-03770', 'CAJAS DE MADERA ROCKY PATEL DECADE TORO PRENSADO SUMATRA BOX/20', '90', NULL, NULL, NULL, 7, NULL, NULL),
-	(315, 'CM-03771', 'CAJAS DE MADERA ROCKY PATEL DECADE TORO REDONDO SUMATRA BOX/20', '90', NULL, NULL, NULL, 7, NULL, NULL),
-	(316, 'CM-03772', 'CAJAS DE MADERA ROCKY PATEL DECADE SHORT ROBUSTO PRENSADO SUMATRA BOX/20', '90', NULL, NULL, NULL, 7, NULL, NULL),
-	(317, 'CM-03773', 'CAJAS DE MADERA ROCKY PATEL DECADE SHORT ROBUSTO REDONDO SUMATRA BOX/20', '90', NULL, NULL, NULL, 7, NULL, NULL),
-	(318, 'CM-03774', 'CAJAS DE MADERA ROCKY PATEL DECADE TORPEDO REDONDO SUMATRA BOX/20', '90', NULL, NULL, NULL, 7, NULL, NULL),
-	(319, 'CM-03775', 'CAJAS DE MADERA ROCKY PATEL DECADE FORTY SIX REDONDO SUMATRA BOX/20', '90', NULL, NULL, NULL, 7, NULL, NULL),
-	(320, 'CM-03776', 'CAJAS DE MADERA ROCKY PATEL DECADE PETIT BELICOSO PRESADO SUMATRA BOX/20', '90', NULL, NULL, NULL, 7, NULL, NULL),
-	(321, 'CM-03777', 'CAJAS DE MADERA ROCKY PATEL DECADE PETIT BELICOSO REDONDO SUMATRA BOX/20', '90', NULL, NULL, NULL, 7, NULL, NULL),
-	(322, 'CM-03778', 'CAJAS DE MADERA ROCKY PATEL EDGE LANCERO COROJO BOX/24', '99', NULL, NULL, NULL, 47, NULL, NULL),
-	(323, 'CM-03779', 'CAJAS DE MADERA ROCKY PATEL EDGE CORONA MADURO BOX/20', '51', NULL, NULL, NULL, 7, NULL, NULL),
-	(324, 'CM-03780', 'CAJAS DE MADERA ROCKY PATEL EDGE CABINET MISIL MADURO BOX/16', '51', NULL, NULL, NULL, 26, NULL, NULL),
-	(325, 'CM-03781', 'CAJAS DE MADERA ROCKY PATEL EDGE CABINET MISIL COROJO  BOX/16', '51', NULL, NULL, NULL, 26, NULL, NULL),
-	(326, 'CM-03782', 'CAJAS DE MADERA ROCKY PATEL EDGE LIGE DOUBLE CORONA CONERICO BOX/20', '99', NULL, NULL, NULL, 7, NULL, NULL),
-	(327, 'CM-03783', 'CAJAS DE MADERA ROCKY PATEL EDGE MINI BELICOSO CONERICO BOX/20', '99', NULL, NULL, NULL, 7, NULL, NULL),
-	(328, 'CM-03784', 'CAJAS DE MADERA ROCKY PATEL EDGE SHORT ROBUSTO CONNECTICUT BOX/20', '99', NULL, NULL, NULL, 7, NULL, NULL),
-	(329, 'CM-03785', 'CAJAS DE MADERA ROCKY PATEL EVOLUTION ROBUSTO NATURAL BOX/20', '340', NULL, NULL, NULL, 7, NULL, NULL),
-	(330, 'CM-03786', 'CAJAS DE MADERA ROCKY PATEL EVOLUTION TORPEDO NATURAL BOX/20', '340', NULL, NULL, NULL, 7, NULL, NULL),
-	(331, 'CM-03787', 'CAJAS DE MADERA ROCKY PATEL EVOLUTION TORO NATURAL BOX/20', '340', NULL, NULL, NULL, 7, NULL, NULL),
-	(332, 'CM-03788', 'CAJAS DE MADERA ROCKY PATEL EVOLUTION TORO REDONDO NATURAL BOX/20', '340', NULL, NULL, NULL, 7, NULL, NULL),
-	(333, 'CM-03789', 'CAJAS DE MADERA ROCKY PATEL EVOLUTION FORTY SIX NATURAL BOX/20', '340', NULL, NULL, NULL, 7, NULL, NULL),
-	(334, 'CM-03790', 'CAJAS DE MADERA ROCKY PATEL EVOLUTION LONSDALES NATURAL BOX/20', '340', NULL, NULL, NULL, 7, NULL, NULL),
-	(335, 'CM-03791', 'CAJAS DE MADERA ROCKY PATEL EVOLUTION EMPEROR NATURAL BOX/20', '340', NULL, NULL, NULL, 7, NULL, NULL),
-	(336, 'CM-03792', 'CAJAS DE MADERA ROCKY PATEL EVOLUTION LANCERO NATURAL BOX/20', '340', NULL, NULL, NULL, 7, NULL, NULL),
-	(337, 'CM-03793', 'CAJAS DE MADERA ROCKY PATEL EVOLUTION TORPEDO MADURO BOX/20', '340', NULL, NULL, NULL, 7, NULL, NULL),
-	(338, 'CM-03794', 'CAJAS DE MADERA ROCKY PATEL EVOLUTION TORO MADURO BOX/20', '340', NULL, NULL, NULL, 7, NULL, NULL),
-	(339, 'CM-03795', 'CAJAS DE MADERA ROCKY PATEL EVOLUTION ROBUSTO MADURO BOX/20', '340', NULL, NULL, NULL, 7, NULL, NULL),
-	(340, 'CM-03796', 'CAJAS DE MADERA ROCKY PATEL EVOLUTION LANCERO MADURO BOX/20', '340', NULL, NULL, NULL, 7, NULL, NULL),
-	(341, 'CM-03797', 'CAJAS DE MADERA ROCKY PATEL EVOLUTION FORTY SIX MADURO BOX/20', '340', NULL, NULL, NULL, 7, NULL, NULL),
-	(342, 'CM-03798', 'CAJAS DE MADERA ROCKY PATEL GOLD BY R.P. CHURCHILL CONERICO BOX/20', '211', NULL, NULL, NULL, 7, NULL, NULL),
-	(343, 'CM-03799', 'CAJAS DE MADERA ROCKY PATEL GRAN VIDA SUPER TORO PENSILVANIA BOX/20', '1397', NULL, NULL, NULL, 7, NULL, NULL),
-	(344, 'CM-03800', 'CAJAS DE MADERA ROCKY PATEL HABANA RAYS TORO SUMATRA BOX/20', '1360', NULL, NULL, NULL, 7, NULL, NULL),
-	(345, 'CM-03801', 'CAJAS DE MADERA ROCKY PATEL HABANA RAYS TORPEDO SUMATRA BOX/20', '1360', NULL, NULL, NULL, 7, NULL, NULL),
-	(346, 'CM-03802', 'CAJAS DE MADERA ROCKY PATEL HABANA RAYS ROBUSTO SUMATRA BOX/20', '1360', NULL, NULL, NULL, 7, NULL, NULL),
-	(347, 'CM-03803', 'CAJAS DE MADERA ROCKY PATEL HABANA RAYS CORONA SUMATRA BOX/20', '1360', NULL, NULL, NULL, 7, NULL, NULL),
-	(348, 'CM-03804', 'CAJAS DE MADERA ROCKY PATEL HABANA RAYS LITLE RAY SUMATRA BOX/20', '1360', NULL, NULL, NULL, 7, NULL, NULL),
-	(349, 'CM-03805', 'CAJAS DE MADERA ROCKY PATEL HABANA RAYS BIG RAY SUMATRA BOX/20', '1360', NULL, NULL, NULL, 7, NULL, NULL),
-	(350, 'CM-03806', 'CAJAS DE MADERA ROCKY PATEL MADURO OF COSTA RICA MADURO TORO  BOX/20', '167', NULL, NULL, NULL, 7, NULL, NULL),
-	(351, 'CM-03807', 'CAJAS DE MADERA ROCKY PATEL MONOCASY CHURCHILL PRESS SUMATRA BOX/20', '68', NULL, NULL, NULL, 7, NULL, NULL),
-	(352, 'CM-03808', 'CAJAS DE MADERA ROCKY PATEL  NICK CIGAR TORO CONERICO BOX/20', '1258', NULL, NULL, NULL, 7, NULL, NULL),
-	(353, 'CM-03809', 'CAJAS DE MADERA ROCKY PATEL  NORDING  TORO HAB. COLORADO BOX/20', '109', NULL, NULL, NULL, 7, NULL, NULL),
-	(354, 'CM-03810', 'CAJAS DE MADERA ROCKY PATEL OLD WORLD ROBUSTO REDONDO MADURO BOX/20', '186', NULL, NULL, NULL, 7, NULL, NULL),
-	(355, 'CM-03811', 'CAJAS DE MADERA ROCKY PATEL OLD WORLD ROBUSTO REDONDO COROJO BOX/20', '186', NULL, NULL, NULL, 7, NULL, NULL),
-	(356, 'CM-03812', 'CAJAS DE MADERA ROCKY PATEL OLD WORLD TORO REDONDO MADURO BOX/20', '186', NULL, NULL, NULL, 7, NULL, NULL),
-	(357, 'CM-03813', 'CAJAS DE MADERA ROCKY PATEL CONNECTICUT BYCHURCHILL CONERICO BOX/20', '168', NULL, NULL, NULL, 7, NULL, NULL),
-	(358, 'CM-03814', 'CAJAS DE MADERA ROCKY PATEL ROCKY PATEL BLOCK ISLAND SEVERAL BOX/6', '237', NULL, NULL, NULL, 5, NULL, NULL),
-	(359, 'CM-03815', 'CAJAS DE MADERA ROCKY PATEL EVOLUTION LONSDALE MADURO BOX/ 20', '340', NULL, NULL, NULL, 7, NULL, NULL),
-	(360, 'CM-03816', 'CAJAS DE MADERA ROCKY PATEL SUNGROWN SIXTY SUMATRA BOX/20', '67', NULL, NULL, NULL, 7, NULL, NULL),
-	(361, 'CM-03817', 'CAJAS DE MADERA ROCKY PATEL SUNGROWN TORPEDO SUMATRA BOX/20', '67', NULL, NULL, NULL, 7, NULL, NULL),
-	(362, 'CM-03818', 'CAJAS DE MADERA ROCKY PATEL SUNGROWN SHORT ROBUSTO 4X54 SUMATRA BOX/20', '67', NULL, NULL, NULL, 7, NULL, NULL),
-	(363, 'CM-03819', 'CAJAS DE MADERA ROCKY PATEL SUNGROWN PETIT BELICOSO SUMATRA BOX/20', '67', NULL, NULL, NULL, 7, NULL, NULL),
-	(364, 'CM-03820', 'CAJAS DE MADERA ROCKY PATEL SUNGROWN TORO SUMATRA BOX/20', '67', NULL, NULL, NULL, 7, NULL, NULL),
-	(365, 'CM-03821', 'CAJAS DE MADERA ROCKY PATEL SUNGROWN SAMPLER SEVERAL BOX/5', '67', NULL, NULL, NULL, 6, NULL, NULL),
-	(366, 'CM-03822', 'CAJAS DE MADERA ROCKY PATEL SUPER FUERTE CORONA GRANDE COROJO BOX/25', '59', NULL, NULL, NULL, 13, NULL, NULL),
-	(367, 'CM-03823', 'CAJAS DE MADERA ROCKY PATEL VALEDOR TORO SUMATRA BOX/20', '1402', NULL, NULL, NULL, 7, NULL, NULL),
-	(368, 'CM-03824', 'CAJAS DE MADERA ROCKY PATEL VALEDOR ROBUSTO SUMATRA BOX/20', '1402', NULL, NULL, NULL, 7, NULL, NULL),
-	(369, 'CM-03825', 'CAJAS DE MADERA ROCKY PATEL VIGILANTE TORO GRANDE COROJO BOX/25', '1341', NULL, NULL, NULL, 13, NULL, NULL),
-	(370, 'CM-03826', 'CAJAS DE MADERA ROCKY PATEL VINTAGE 1990 ROBUSTO REDONDO MADURO BOX/20', '15', NULL, NULL, NULL, 7, NULL, NULL),
-	(371, 'CM-03827', 'CAJAS DE MADERA ROCKY PATEL VINTAGE 1990 ROBUSTO 5X50 RED MADURO BOX/10', '15', NULL, NULL, NULL, 4, NULL, NULL),
-	(372, 'CM-03828', 'CAJAS DE MADERA ROCKY PATEL VINTAGE 1990 TORO TUBO ROUND MADURO BOX/10', '15', NULL, NULL, NULL, 4, NULL, NULL),
-	(373, 'CM-03829', 'CAJAS DE MADERA ROCKY PATEL VINTAGE 1990 CHURCHILL PRENSADO MADURO BOX/20', '15', NULL, NULL, NULL, 7, NULL, NULL),
-	(374, 'CM-03830', 'CAJAS DE MADERA ROCKY PATEL VINTAGE 1990 CORONA PRENSADO MADURO BOX/20', '15', NULL, NULL, NULL, 7, NULL, NULL),
-	(375, 'CM-03831', 'CAJAS DE MADERA ROCKY PATEL VINTAGE 1990 CORONA REDONDO MADURO BOX/20', '15', NULL, NULL, NULL, 7, NULL, NULL),
-	(376, 'CM-03832', 'CAJAS DE MADERA ROCKY PATEL VINTAGE 1990 PETIT BELICOSO PRENSADO MADURO BOX/20', '15', NULL, NULL, NULL, 7, NULL, NULL),
-	(377, 'CM-03833', 'CAJAS DE MADERA ROCKY PATEL VINTAGE 1992 TORO TUBO ROUND SUMATRA BOX/10', '14', NULL, NULL, NULL, 4, NULL, NULL),
-	(378, 'CM-03834', 'CAJAS DE MADERA ROCKY PATEL VINTAGE 1992 ROBUSTO 5X50 TUBO SUMATRA BOX/10', '14', NULL, NULL, NULL, 4, NULL, NULL),
-	(379, 'CM-03835', 'CAJAS DE MADERA ROCKY PATEL VINTAGE 1992 ROBUSTO REDONDO SUMATRA BOX/20', '14', NULL, NULL, NULL, 7, NULL, NULL),
-	(380, 'CM-03836', 'CAJAS DE MADERA ROCKY PATEL VINTAGE 1992 CORONA PRENSADO SUMATRA BOX/20', '14', NULL, NULL, NULL, 7, NULL, NULL),
-	(381, 'CM-03837', 'CAJAS DE MADERA ROCKY PATEL VINTAGE 1992 PERFECTO SUMATRA BOX/20', '14', NULL, NULL, NULL, 7, NULL, NULL),
-	(382, 'CM-03838', 'CAJAS DE MADERA ROCKY PATEL VINTAGE 1992 PETIT CORONA REDONDO SUMATRA BOX/20', '14', NULL, NULL, NULL, 7, NULL, NULL),
-	(383, 'CM-03839', 'CAJAS DE MADERA ROCKY PATEL VINTAGE 1992 TORPEDO REDONDO SUMATRA BOX/20', '14', NULL, NULL, NULL, 7, NULL, NULL),
-	(384, 'CM-03840', 'CAJAS DE MADERA ROCKY PATEL VINTAGE 1992 PETIT BELICOSO PRENSADO SUMATRA BOX/20', '14', NULL, NULL, NULL, 7, NULL, NULL),
-	(385, 'CM-03841', 'CAJAS DE MADERA ROCKY PATEL VINTAGE 1992 CHURCHILL REDONDO SUMATRA BOX/20', '14', NULL, NULL, NULL, 7, NULL, NULL),
-	(386, 'CM-03842', 'CAJAS DE MADERA ROCKY PATEL VINTAGE 1992 CORONA REDONDO SUMATRA BOX/20', '14', NULL, NULL, NULL, 7, NULL, NULL),
-	(387, 'CM-03843', 'CAJAS DE MADERA ROCKY PATEL VINTAGE 1999 ROBUSTO TUBO 5X50 CONERICO BOX/10', '86', NULL, NULL, NULL, 4, NULL, NULL),
-	(388, 'CM-03844', 'CAJAS DE MADERA ROCKY PATEL VINTAGE 1999 PETIT CORONA CONERICO BOX/20', '86', NULL, NULL, NULL, 7, NULL, NULL),
-	(389, 'CM-03845', 'CAJAS DE MADERA ROCKY PATEL VINTAGE 1999 TORO TUBO CONERICO BOX/10', '86', NULL, NULL, NULL, 4, NULL, NULL),
-	(390, 'CM-03846', 'CAJAS DE MADERA ROCKY PATEL VINTAGE 1999 TORO CONERICO BOX/20', '86', NULL, NULL, NULL, 7, NULL, NULL),
-	(391, 'CM-03847', 'CAJAS DE MADERA ROCKY PATEL VINTAGE 1999 TORPEDO CONERICO BOX/20', '86', NULL, NULL, NULL, 7, NULL, NULL),
-	(392, 'CM-03848', 'CAJAS DE MADERA ROCKY PATEL VINTAGE 1999 PERFECTO CORTOS CONERICO BOX/20', '86', NULL, NULL, NULL, 7, NULL, NULL),
-	(393, 'CM-03849', 'CAJAS DE MADERA ROCKY PATEL VINTAGE 1999 PETIT BELICOSO CONERICO BOX/20', '86', NULL, NULL, NULL, 7, NULL, NULL),
-	(394, 'CM-03850', 'CAJAS DE MADERA ROCKY PATEL 1950 SPECIAL RESERVE SIXTY SUMATRA BOX/20', '237', NULL, NULL, NULL, 7, NULL, NULL),
-	(395, 'CM-03851', 'CAJAS DE MADERA ROCKY PATEL BEALLE STREET TORO CONERICO BOX/20', '70', NULL, NULL, NULL, 7, NULL, NULL),
-	(396, 'CM-03852', 'CAJAS DE MADERA ROCKY PATEL SAMPLER PRESS SEVERAL BOX/6', '237', NULL, NULL, NULL, 5, NULL, NULL),
-	(397, 'CM-03853', 'CAJAS DE MADERA ROCKY PATEL SAMPLER PETIT BELICOSO SEVERAL BOX/6', '237', NULL, NULL, NULL, 5, NULL, NULL),
-	(398, 'CM-03854', 'CAJAS DE MADERA ROCKY PATEL SAMPLER SUPER PREMIUN L.R. TORO SEVERAL BOX/6', '237', NULL, NULL, NULL, 5, NULL, NULL),
-	(399, 'CM-03855', 'CAJAS DE MADERA ROCKY PATEL SAMPLER EDGE ROBUSTO  SEVERAL BOX/5', '237', NULL, NULL, NULL, 6, NULL, NULL),
-	(400, 'CM-03856', 'CAJAS DE MADERA ROCKY PATEL SAMPLER EDICION ESPECIAL SHORT ROBUSTO SEVERAL BOX/6', '237', NULL, NULL, NULL, 5, NULL, NULL),
-	(401, 'CM-03857', 'CAJAS DE MADERA ROCKY PATEL SAMPLER TUBO ALUMINIO TORO SEVERAL BOX/5', '237', NULL, NULL, NULL, 6, NULL, NULL),
-	(402, 'CM-03859', 'CAJAS DE MADERA ROCKY PATEL OLD WORLD TORPEDO BOX/100', '186', NULL, NULL, NULL, 18, NULL, NULL),
-	(403, 'CM-03860', 'CAJAS DE MADERA ROCKY PATEL OLD WORLD TORO BOX/100', '186', NULL, NULL, NULL, 18, NULL, NULL),
-	(404, 'CM-03861', 'CAJAS DE MADERA  ROCKY PATEL  SAMPLER LIMITED RELEASE  TORO SEVERAL BOX/6', '237', NULL, NULL, NULL, 5, NULL, NULL),
-	(405, 'CM-03862', 'CAJAS DE MADERA ROCKY PATEL CLASICO ARROW COROJO BOX/20', '1158', NULL, NULL, NULL, 7, NULL, NULL),
-	(406, 'CM-03863', 'CAJAS DE MADERA ROCKY PATEL BEALLE STREET TORPEDO CONERICO BOX/20', '70', NULL, NULL, NULL, 7, NULL, NULL),
-	(407, 'CM-03864', 'CAJAS DE MADERA ROCKY PATEL BEALLE STREET ROBUSTO CONERICO BOX/20', '70', NULL, NULL, NULL, 7, NULL, NULL),
-	(408, 'CM-03865', 'CAJAS DE MADERA ROCKY PATEL BEALLE STREET TORO SUMATRA BOX/20', '70', NULL, NULL, NULL, 7, NULL, NULL),
-	(409, 'CM-03866', 'CAJAS DE MADERA ROCKY PATEL BEALLE STREET TORPEDO SUMATRA BOX/20', '70', NULL, NULL, NULL, 7, NULL, NULL),
-	(410, 'CM-03867', 'CAJAS DE MADERA ROCKY PATEL BEALLE STREET ROBUSTO SUMATRA BOX/20', '70', NULL, NULL, NULL, 7, NULL, NULL),
-	(411, 'CM-03868', 'CAJAS DE MADERA ROCKY PATEL  NICK CIGAR TORPEDO CONERICO  BOX/20', '66', NULL, NULL, NULL, 7, NULL, NULL),
-	(412, 'CM-03869', 'CAJAS DE MADERA ROCKY PATEL  NICK CIGAR CHURCHILL CONERICO  BOX/20', '66', NULL, NULL, NULL, 7, NULL, NULL),
-	(413, 'CM-03870', 'CAJAS DE MADERA ROCKY PATEL  CAMEROON LEGEND ROBUSTO GRANDE MADURO BOX/25', '1338', NULL, NULL, NULL, 13, NULL, NULL),
-	(414, 'CM-03871', 'CAJAS DE MADERA ROCKY PATEL  PABLO MARTIN MADURO ROBUSTO BOX/20', '110', NULL, NULL, NULL, 7, NULL, NULL),
-	(415, 'CM-03872', 'CAJAS DE MADERA ROCKY PATEL  PABLO MARTIN MADURO TORO BOX/20', '110', NULL, NULL, NULL, 7, NULL, NULL),
-	(416, 'CM-03873', 'CAJAS DE MADERA ROCKY PATEL  PABLO MARTIN CORONA MADURO BOX/20', '110', NULL, NULL, NULL, 7, NULL, NULL),
-	(417, 'CM-03874', 'CAJAS DE MADERA ROCKY PATEL  VINTAGE 2003 ROBUSTO ROUND CAMEROON BOX/20', '101', NULL, NULL, NULL, 7, NULL, NULL),
-	(418, 'CM-03875', 'CAJAS DE MADERA ROCKY PATEL  VINTAGE 2003 TORO ROUND CAMEROON BOX/20', '101', NULL, NULL, NULL, 7, NULL, NULL),
-	(419, 'CM-03876', 'CAJAS DE MADERA ROCKY PATEL  VINTAGE 2003 CHURCHILL ROUND CAMEROON BOX/20', '101', NULL, NULL, NULL, 7, NULL, NULL),
-	(420, 'CM-03877', 'CAJAS DE MADERA ROCKY PATEL  VINTAGE 2003 TORPEDO ROND CAMEROON BOX/20', '101', NULL, NULL, NULL, 7, NULL, NULL),
-	(421, 'CM-03878', 'CAJAS DE MADERA ROCKY PATEL DECADE TORPEDO PRENSADO SUMATRA BOX/20', '90', NULL, NULL, NULL, 7, NULL, NULL),
-	(422, 'CM-03879', 'CAJAS DE MADERA ROCKY PATEL  GOLD BY R.P. ROBUSTO CONERICO  BOX/20', '211', NULL, NULL, NULL, 7, NULL, NULL),
-	(423, 'CM-03880', 'CAJAS DE MADERA ROCKY PATEL  ROCKY PATEL MADURO BY ROBUSTO MADURO BOX/20 NUEVA EDICION', '167', NULL, NULL, NULL, NULL, NULL, NULL),
-	(424, 'CM-03881', 'CAJAS DE MADERA ROCKY PATEL  CAUCUS  CORONA SUMATRA BOX/20', '106', NULL, NULL, NULL, 7, NULL, NULL),
-	(425, 'CM-03882', 'CAJAS DE MADERA ROCKY PATEL LIMITED EDITION HONDURAS SAMPLER BOX/5', '237', NULL, NULL, NULL, 6, NULL, NULL),
-	(426, 'CM-03883', 'CAJAS DE MADERA ROCKY PATEL  M.J.K.CIGAR SOURCE TORPEDO CONERICO  BOX/20', '1371', NULL, NULL, NULL, 7, NULL, NULL),
-	(427, 'CM-03884', 'CAJAS DE MADERA ROCKY PATEL  M.J.K.CIGAR SOURCE ROBUSTO CONERICO  BOX/20', '1371', NULL, NULL, NULL, 7, NULL, NULL),
-	(428, 'CM-03885', 'CAJAS DE MADERA ROCKY PATEL  M.J.K.CIGAR SOURCE SIXTY CONERICO  BOX/20', '1371', NULL, NULL, NULL, 7, NULL, NULL),
-	(429, 'CM-03886', 'CAJAS DE MADERA ROCKY PATEL  VINTAGE 2003 SIXTY ROUND CAMEROON BOX/20', '101', NULL, NULL, NULL, 7, NULL, NULL),
-	(430, 'CM-03887', 'CAJAS DE MADERA ROCKY PATEL  M.J.K.CIGAR SOURCE DOBLE CORONA MADURO  BOX/20', '1371', NULL, NULL, NULL, 7, NULL, NULL),
-	(431, 'CM-03888', 'CAJAS DE MADERA ROCKY PATEL  M.J.K.CIGAR SOURCE TORO MADURO  BOX/20', '1371', NULL, NULL, NULL, 7, NULL, NULL),
-	(432, 'CM-03889', 'CAJAS DE MADERA ROCKY PATEL  M.J.K.CIGAR SOURCE ROBUSTO MADURO  BOX/20', '1371', NULL, NULL, NULL, 7, NULL, NULL),
-	(433, 'CM-03890', 'CAJAS DE MADERA ROCKY PATEL  M.J.K.CIGAR SOURCE SIXTY MADURO  BOX/20', '1371', NULL, NULL, NULL, 7, NULL, NULL),
-	(434, 'CM-03891', 'CAJAS DE MADERA ROCKY PATEL  M.J.K.CIGAR SOURCE TORPEDO MADURO BOX/20', '1371', NULL, NULL, NULL, 7, NULL, NULL),
-	(435, 'CM-03892', 'CAJAS DE MADERA ROCKY PATEL DECADE', '90', NULL, NULL, NULL, NULL, NULL, NULL),
-	(436, 'CM-03940', 'CAJAS DE MADERA ROCKY PATEL  SUPER FUERTE DOUBLE CORONA NATURAL BOX/25', '59', NULL, NULL, NULL, 13, NULL, NULL),
-	(437, 'CM-03966', 'CAJAS DE MADERA ROCKY PATEL ROYAL VINTAGE SIXTY SUMATRA  BOX/20', '147', NULL, NULL, NULL, 7, NULL, NULL),
-	(438, 'CM-03967', 'CAJAS DE MADERA ROCKY PATEL 1950 SPECIAL RESERVE ROBUSTO SUMATRA BOX/20', '237', NULL, NULL, NULL, 7, NULL, NULL),
-	(439, 'CM-03968', 'CAJAS DE MADERA ROCKY PATEL 1950 SPECIAL RESERVE TORO SUMATRA BOX/20', '237', NULL, NULL, NULL, 7, NULL, NULL),
-	(440, 'CM-03969', 'CAJAS DE MADERA ROCKY PATEL 1950 SPECIAL RESERVE TORPEDO SUMATRA BOX/20', '237', NULL, NULL, NULL, 7, NULL, NULL),
-	(441, 'CM-03970', 'CAJAS DE MADERA ROCKY PATEL THIRD COAST SINDICATE TORPEDO BOX/20', '51', NULL, NULL, NULL, 7, NULL, NULL),
-	(442, 'CM-03972', 'CAJAS DE MADERA  ROCKY PATEL  EDGE LITE  ROBUSTO BOX/12', '99', NULL, NULL, NULL, 44, NULL, NULL),
-	(443, 'CM-03973', 'CAJAS DE MADERA  ROCKY PATEL  EDGE LITE  TORO BOX/12', '99', NULL, NULL, NULL, 44, NULL, NULL),
-	(444, 'CM-03974', 'CAJAS DE MADERA  ROCKY PATEL  EDGE LITE  TORPEDO BOX/12', '99', NULL, NULL, NULL, 44, NULL, NULL),
-	(445, 'CM-03975', 'CAJAS DE MADERA  ROCKY PATEL  EDGE LITE  BATTALION BOX/12', '99', NULL, NULL, NULL, 44, NULL, NULL),
-	(446, 'CM-03976', 'CAJAS DE MADERA  ROCKY PATEL  EDGE LITE  ROBUSTO BOX/6', '99', NULL, NULL, NULL, 5, NULL, NULL),
-	(447, 'CM-03977', 'CAJAS DE MADERA  ROCKY PATEL  EDGE LITE  TORO BOX/6', '99', NULL, NULL, NULL, 5, NULL, NULL),
-	(448, 'CM-03978', 'CAJAS DE MADERA  ROCKY PATEL  EDGE LITE  TORPEDO BOX/6', '99', NULL, NULL, NULL, 5, NULL, NULL),
-	(449, 'CM-03979', 'CAJAS DE MADERA  ROCKY PATEL  EDGE LITE  BATTALION BOX/6', '99', NULL, NULL, NULL, 5, NULL, NULL),
-	(450, 'CM-03984', 'CAJAS DE MADERA ROCKY PATEL  EDGE TORO CANDELA BOX 20', '51', NULL, NULL, NULL, 7, NULL, NULL),
-	(451, 'CM-03985', 'CAJAS DE MADERA ROCKY PATEL  DESIENA ROBUSTO COROJO BOX/20', '107', NULL, NULL, NULL, 7, NULL, NULL),
-	(452, 'CM-03987', 'CAJAS DE MADERA ROCKY PATEL  ROSADO SIXTY SUMATRA BOX/20', '135', NULL, NULL, NULL, 7, NULL, NULL),
-	(453, 'CM-03988', 'CAJAS DE MADERA ROCKY PATEL COBUTO TORPEDO BOX 20', '1403', NULL, NULL, NULL, 7, NULL, NULL),
-	(454, 'CM-03989', 'CAJAS DE MADERA ROCKY PATEL  RYAN  DANGER  TORO BOX/20', '368', NULL, NULL, NULL, 7, NULL, NULL),
-	(455, 'CM-04012', 'CAJAS DE MADERA ROCKY PATEL  MERITAGE TORO COR/MAD  BOX/20', '142', NULL, NULL, NULL, 7, NULL, NULL),
-	(456, 'CM-04014', 'CAJAS DE MADERA ROCKY PATEL HIGH SEAS COLLETION BLUE BOX', '237', NULL, NULL, NULL, NULL, NULL, NULL),
-	(457, 'CM-04030', 'CAJAS DE MADERA ROCKY PATEL MISSION TOBACCO LOUNGE 4X38 MAD BOX 40', '258', NULL, NULL, NULL, 17, NULL, NULL),
-	(458, 'CM-04031', 'CAJAS DE MADERA ROCKY PATEL MISSION TOBACCO LOUNGE 4X38 SUM BOX 40', '258', NULL, NULL, NULL, 17, NULL, NULL),
-	(459, 'CM-04032', 'CAJAS DE MADERA ROCKY PATEL DECADE LIMITED GIFT PACK BOX 6', '90', NULL, NULL, NULL, 5, NULL, NULL),
-	(460, 'CM-04033', 'CAJAS DE MADERA ROCKY PATEL SUNGROWN SAMPLER BOX 5', '67', NULL, NULL, NULL, 6, NULL, NULL),
-	(461, 'CM-04034', 'CAJAS DE MADERA ROCKY PATEL DECADE VS DECADE LIMITADA TORO SAMPLER BOX 6', '90', NULL, NULL, NULL, 5, NULL, NULL),
-	(462, 'CM-04036', 'CAJAS DE MADERA ROCKY PATEL DRAIG K 5X50 MAD', '361', NULL, NULL, NULL, NULL, NULL, NULL),
-	(463, 'CM-04037', 'CAJAS DE MADERA ROCKY PATEL DRAIG K 6X50 MAD', '361', NULL, NULL, NULL, NULL, NULL, NULL),
-	(464, 'CM-04038', 'CAJAS DE MADERA ROCKY PATEL DRAIG K 5X42 MAD', '361', NULL, NULL, NULL, NULL, NULL, NULL),
-	(465, 'CM-04039', 'CAJAS DE MADERA ROCKY PATEL ROYAL VINTAGE ROBUSTO SUMATRA  BOX/20', '147', NULL, NULL, NULL, 7, NULL, NULL),
-	(466, 'CM-04042', 'CAJAS DE MADERA ROCKY PATEL SIXTY EXECUTION BOX/20', '281', NULL, NULL, NULL, 7, NULL, NULL),
-	(467, 'CM-04043', 'CAJAS DE MADERA ROCKY PATEL ROBUSTO EXECUTION BOX/20', '281', NULL, NULL, NULL, 7, NULL, NULL),
-	(468, 'CM-04049', 'CAJAS DE MADERA ROCKY PATEL  VINTAGE 2003 PRESS ROBUSTO CAMEROON BOX/20', '101', NULL, NULL, NULL, 7, NULL, NULL),
-	(469, 'CM-04050', 'CAJAS DE MADERA ROCKY PATEL  VINTAGE 2003 PRESS TORO CAMEROON BOX/20', '101', NULL, NULL, NULL, 7, NULL, NULL),
-	(470, 'CM-04052', 'CAJAS DE MADERA ROCKY PATEL  VINTAGE 2003 PRESS TORPEDO CAMEROON BOX/20', '101', NULL, NULL, NULL, 7, NULL, NULL),
-	(471, 'CM-04053', 'CAJAS DE MADERA ROCKY PATEL  CUBAN BLEND PETITE BELICOSO MADURO BOX/20', '133', NULL, NULL, NULL, 7, NULL, NULL),
-	(472, 'CM-04054', 'CAJAS DE MADERA ROCKY PATEL MADURO BY LANCERO BOX/20 NUEVA EDICION', '168', NULL, NULL, NULL, NULL, NULL, NULL),
-	(473, 'CM-04055', 'CAJAS DE MADERA ROCKY PATEL MADURO BY TORO BOX/20 NUEVA EDICION', '168', NULL, NULL, NULL, NULL, NULL, NULL),
-	(474, 'CM-04056', 'CAJAS DE MADERA ROCKY PATEL MADURO BY CHURCILL BOX/20 NUEVA EDICION', '168', NULL, NULL, NULL, NULL, NULL, NULL),
-	(475, 'CM-04057', 'CAJAS DE MADERA ROCKY PATEL  CAMEROON BY R.P. BELICOSO CAMEROON BOX/20 NUEVA EDICION', '191', NULL, NULL, NULL, NULL, NULL, NULL),
-	(476, 'CM-04058', 'CAJAS DE MADERA ROCKY PATEL EDGE LITE TORO BOX/10 (NUEVA)', '99', NULL, NULL, NULL, NULL, NULL, NULL),
-	(477, 'CM-04059', 'CAJAS DE MADERA ROCKY PATEL  EDGE TORO COROJO BOX/10', '51', NULL, NULL, NULL, 4, NULL, NULL),
-	(478, 'CM-04067', 'CAJAS DE MADERA ROCKY PATEL VINTAGE 2003 PRESS SHORT ROBUSTO BOX 10', '101', NULL, NULL, NULL, 4, NULL, NULL),
-	(479, 'CM-04068', 'CAJAS DE MADERA ROCKY PATEL HEIRES PETITE CORONA BOX 10', '388', NULL, NULL, NULL, 4, NULL, NULL),
-	(480, 'CM-04087', 'CAJAS DE MADERA ROCKY PATEL  EMILIO SERIES ROBUSTO SUMATRA BOX/20', '1375', NULL, NULL, NULL, 7, NULL, NULL),
-	(481, 'CM-04088', 'CAJAS DE MADERA ROCKY PATEL  EMILIO SERIES ROBUSTO MADURO BOX/20', '1375', NULL, NULL, NULL, 7, NULL, NULL),
-	(482, 'CM-04089', 'CAJAS DE MADERA ROCKY PATEL  EDGE ROCKCHILD COROJO BOX/20', '51', NULL, NULL, NULL, 7, NULL, NULL),
-	(483, 'CM-04090', 'CAJAS DE MADERA ROCKY PATEL  EDGE ROCKCHILD MADURO BOX/20', '51', NULL, NULL, NULL, 7, NULL, NULL),
-	(484, 'CM-04093', 'CAJAS DE MADERA  ROCKY PATEL  EL CONEJITO ROBUSTO BOX 10', '210', NULL, NULL, NULL, 4, NULL, NULL),
-	(485, 'CM-04487', 'CAJAS DE MADERA ROCKY PATEL DECADE ROCKCHILLDE PRENSADO SUMATRA BOX/20', '90', NULL, NULL, NULL, 7, NULL, NULL),
-	(486, 'CM-04488', 'CAJAS DE MADERA ROCKY PATEL  EDGE TORPEDO MADURO BOX/100', '51', NULL, NULL, NULL, 18, NULL, NULL),
-	(487, 'CM-04489', 'CAJAS DE MADERA ROCKY PATEL  TORO NAAS BOX/20', '314', NULL, NULL, NULL, 7, NULL, NULL),
-	(488, 'CM-04490', 'CAJAS DE MADERA ROCKY PATEL SUNGROWN TORO TUBO BOX/10', '67', NULL, NULL, NULL, 4, NULL, NULL),
-	(489, 'CM-04491', 'CAJAS DE MADERA ROCKY PATEL EDGE  MINI BELICOSO MADURO BOX/20', '322', NULL, NULL, NULL, 7, NULL, NULL),
-	(490, 'CM-04492', 'CAJAS DE MADERA ROCKY PATEL EDGE  MINI BELICOSO COROJO BOX/20', '322', NULL, NULL, NULL, 7, NULL, NULL),
-	(491, 'CM-04493', 'CAJAS DE MADERA ROCKY PATEL TERRY BRENNAN TORO BOX/20', '588', NULL, NULL, NULL, 7, NULL, NULL),
-	(492, 'CM-04494', 'CAJAS DE MADERA ROCKY PATEL  EDGE SHORT SHORT ROBUSTO BOX/20', '51', NULL, NULL, NULL, 7, NULL, NULL),
-	(493, 'CM-04495', 'CAJAS DE MADERA ROCKY PATEL  EDGE SHORT ROBUSTO MADURO BOX/20', '51', NULL, NULL, NULL, 7, NULL, NULL),
-	(494, 'CM-04496', 'CAJAS DE MADERA ROCKY PATEL  EDGE SHORT ROBUSTO COROJO BOX/20', '51', NULL, NULL, NULL, 7, NULL, NULL),
-	(495, 'CM-04497', 'CAJAS DE MADERA ROCKY PATEL  DOUBLE CORONA COROJO DESIENA BOX/20', '107', NULL, NULL, NULL, 7, NULL, NULL),
-	(496, 'CM-04498', 'CAJAS DE MADERA ROCKY PATEL DESIENA SUPER TORO COROJO  BOX/20', '107', NULL, NULL, NULL, 7, NULL, NULL),
-	(497, 'CM-04499', 'CAJAS DE MADERA ROCKY PATEL DESIENA TORO COROJO  BOX/20', '107', NULL, NULL, NULL, 7, NULL, NULL),
-	(498, 'CM-04500', 'CAJAS DE MADERA ROCKY PATEL DESIENA ROBUSTO MADURO BOX/20', '107', NULL, NULL, NULL, 7, NULL, NULL),
-	(499, 'CM-04501', 'CAJAS DE MADERA ROCKY PATEL DESIENA TORO MADURO BOX/20', '107', NULL, NULL, NULL, 7, NULL, NULL),
-	(500, 'CM-04502', 'CAJAS DE MADERA ROCKY PATEL  DOUBLE CORONA CONNECTICUT DESIENA BOX/20', '107', NULL, NULL, NULL, 7, NULL, NULL),
-	(501, 'CM-04503', 'CAJAS DE MADERA ROCKY PATEL  DESIENA SUPER TORO CONNECTICUT  BOX/20', '107', NULL, NULL, NULL, 7, NULL, NULL),
-	(502, 'CM-04504', 'CAJAS DE MADERA ROCKY PATEL DESIENA TORO CONNECTICUT  BOX/20', '107', NULL, NULL, NULL, 7, NULL, NULL),
-	(503, 'CM-04505', 'CAJAS DE MADERA ROCKY PATEL  O.W.R. TORO COROJO REDONDO BOX/20', '107', NULL, NULL, NULL, 7, NULL, NULL),
-	(504, 'CM-04506', 'CAJAS DE MADERA ROCKY PATEL CONNECTICUT BY GORDO CONERICO BOX/20', '168', NULL, NULL, NULL, 7, NULL, NULL),
-	(505, 'CM-04507', 'CAJAS DE MADERA ROCKY PATEL EDGE LITE CORONA BOX/20', '107', NULL, NULL, NULL, 7, NULL, NULL),
-	(506, 'CM-04508', 'CAJAS DE MADERA ROCKY PATEL EDGE LITE SHORT ROBUSTO BOX/20', '107', NULL, NULL, NULL, 7, NULL, NULL),
-	(507, 'CM-04509', 'CAJAS DE MADERA ROCKY PATEL LEGENDS CAMEROOM SUPER TORO MADURO BOX/25', '107', NULL, NULL, NULL, 13, NULL, NULL),
-	(508, 'CM-04510', 'CAJAS DE MADERA ROCKY PATEL OCEAN CLUB TORO PRESS SUMATRA BOX/20', '1391', NULL, NULL, NULL, 7, NULL, NULL),
-	(509, 'CM-04511', 'CAJAS DE MADERA ROCKY PATEL  EDGE ROBUSTO TUBO CONECTICUT BOX/10', '99', NULL, NULL, NULL, 4, NULL, NULL),
-	(510, 'CM-04512', 'CAJAS DE MADERA ROCKY PATEL  ORE GOLF ROBUSTO  CONECTICUT BOX/10', '934', NULL, NULL, NULL, 4, NULL, NULL),
-	(511, 'CM-04513', 'CAJAS DE MADERA ROCKY PATEL  ORE GOLF TORO  CONECTICUT BOX/10', '934', NULL, NULL, NULL, 4, NULL, NULL),
-	(512, 'CM-04514', 'CAJAS DE MADERA ROCKY PATEL  ORE GOLF GORDO  CONECTICUT BOX/10', '934', NULL, NULL, NULL, 4, NULL, NULL),
-	(513, 'CM-04515', 'CAJAS DE MADERA ROCKY PATEL  LA CONQUISTA ROBUSTO PRESS BOX/20', '184', NULL, NULL, NULL, 7, NULL, NULL),
-	(514, 'CM-04516', 'CAJAS DE MADERA ROCKY PATEL  LA CONQUISTA TORO PRESS BOX/20', '184', NULL, NULL, NULL, 7, NULL, NULL),
-	(515, 'CM-04517', 'CAJAS DE MADERA ROCKY PATEL  LA CONQUISTA CHURCHILL PRESS BOX/20', '184', NULL, NULL, NULL, 7, NULL, NULL),
-	(516, 'CM-04518', 'CAJAS DE MADERA ROCKY PATEL  SUPER FUERTE SUPER TORO ROUND MADURO BOX/25', '59', NULL, NULL, NULL, 13, NULL, NULL),
-	(517, 'CM-04519', 'CAJAS DE MADERA ROCKY PATEL  EDGE SELECTION 652 SUMATRA BOX/50', '51', NULL, NULL, NULL, 21, NULL, NULL),
-	(518, 'CM-04520', 'CAJAS DE MADERA ROCKY PATEL  EDGE SELECTION PYRAMID SUMATRA BOX/50', '51', NULL, NULL, NULL, 21, NULL, NULL),
-	(519, 'CM-04521', 'CAJAS DE MADERA ROCKY PATEL LA SIRENA DOBLE CORONA BOX/20', '231', NULL, NULL, NULL, 7, NULL, NULL),
-	(520, 'CM-04522', 'CAJAS DE MADERA ROCKY PATEL SMOKE INN HOUSE BLEND  GORDO TRAYS100', '911', NULL, NULL, NULL, 18, NULL, NULL),
-	(521, 'CM-04523', 'CAJAS DE MADERA ROCKY PATEL DECADE TORO TUBO  DELUXE SUMATRA BOX/10', '90', NULL, NULL, NULL, 4, NULL, NULL),
-	(522, 'CM-04524', 'CAJAS DE MADERA ROCKY PATEL  EDGE SQUARE ROBUSTO PRESS COROJO BOX/20', '209', NULL, NULL, NULL, 7, NULL, NULL),
-	(523, 'CM-04525', 'CAJAS DE MADERA ROCKY PATEL EDGE CORONA COROJO BOX/20', '51', NULL, NULL, NULL, 7, NULL, NULL),
-	(524, 'CM-04526', 'CAJAS DE MADERA ROCKY PATEL VINTAGE 1990 PETIT CORONA REDONDO SUMATRA  BOX/20', '15', NULL, NULL, NULL, 7, NULL, NULL),
-	(525, 'CM-04527', 'CAJAS DE MADERA ROCKY PATEL VINTAGE 1999 PETIT CORONA REDONDO CONN BOX/20', '86', NULL, NULL, NULL, 7, NULL, NULL),
-	(526, 'CM-04528', 'CAJAS DE MADERA ROCKY PATEL VINTAGE 1999 ROBUSTO REDONDO CONN BOX/20', '86', NULL, NULL, NULL, 7, NULL, NULL),
-	(527, 'CM-04529', 'CAJAS DE MADERA ROCKY PATEL VINTAGE 1999 TORO REDONDO SUMATRA BOX/20', '86', NULL, NULL, NULL, 7, NULL, NULL),
-	(528, 'CM-04530', 'CAJAS DE MADERA ROCKY PATEL VINTAGE 1999 CHURCHILL REDONDO CONNECTICUT BOX/20', '86', NULL, NULL, NULL, 7, NULL, NULL),
-	(529, 'CM-04531', 'CAJAS DE MADERA ROCKY PATEL MONOCASY ROBUSTO PRESS SUMATRA BOX/20', '68', NULL, NULL, NULL, 7, NULL, NULL),
-	(530, 'CM-04532', 'CAJAS DE MADERA ROCKY PATEL VINTAGE 1992 TORO REDONDO SUMATRA BOX/20', '14', NULL, NULL, NULL, 7, NULL, NULL),
-	(531, 'CM-04533', 'CAJAS DE MADERA ROCKY PATEL VINTAGE 1990 SIXTY REDONDO MADURO BOX/20', '15', NULL, NULL, NULL, 7, NULL, NULL),
-	(532, 'CM-04534', 'CAJAS DE MADERA ROCKY PATEL VINTAGE 1990 TORPEDO REDONDO BOX/20', '15', NULL, NULL, NULL, 7, NULL, NULL),
-	(533, 'CM-04535', 'CAJAS DE MADERA ROCKY PATEL VINTAGE 1990 CORONA PRENSADO SUMATRA BOX/20', '15', NULL, NULL, NULL, 7, NULL, NULL),
-	(534, 'CM-04536', 'CAJAS DE MADERA ROCKY PATEL VINTAGE 1999 TORPEDO REDONDO BOX 20', '86', NULL, NULL, NULL, 7, NULL, NULL),
-	(535, 'CM-04537', 'CAJAS DE MADERA ROCKY PATEL VINTAGE 1999 PETIT BELICOSO REDONDO BOX 20', '86', NULL, NULL, NULL, 7, NULL, NULL),
-	(536, 'CM-04538', 'CAJAS DE MADERA ROCKY PATEL VINTAGE 1990 PETIT BELICOSO REDONDO BOX 20', '15', NULL, NULL, NULL, 7, NULL, NULL),
-	(537, 'CM-04539', 'CAJAS DE MADERA ROCKY PATEL VINTAGE 1992 CHURCHILL PRENSADO BOX 20', '15', NULL, NULL, NULL, 7, NULL, NULL),
-	(538, 'CM-04540', 'CAJAS DE MADERA ROCKY PATEL VINTAGE 1992 PETIT CORONA PRENSADO BOX 20', '14', NULL, NULL, NULL, 7, NULL, NULL),
-	(539, 'CM-04541', 'CAJAS DE MADERA ROCKY PATEL VINTAGE 1990 ROBUSTO MADURO PRENSADO BOX 20', '15', NULL, NULL, NULL, 7, NULL, NULL),
-	(540, 'CM-04542', 'CAJAS DE MADERA ROCKY PATEL VINTAGE 1992 PERFECTO REDONDO BOX 20', '14', NULL, NULL, NULL, 7, NULL, NULL),
-	(541, 'CM-04543', 'CAJAS DE MADERA ROCKY PATEL VINTAGE 1999 PERFECTO PRENSADO BOX 20', '86', NULL, NULL, NULL, 7, NULL, NULL),
-	(542, 'CM-04544', 'CAJAS DE MADERA ROCKY PATEL  CAMEROON LEGEND SUPER TORO MADURO BOX/25', '59', NULL, NULL, NULL, 13, NULL, NULL),
-	(543, 'CM-04545', 'CAJAS DE MADERA ROCKY PATEL VINTAGE 1999 PERFECTO REDONDO BOX/20', '15', NULL, NULL, NULL, 7, NULL, NULL),
-	(544, 'CM-04546', 'CAJAS DE MADERA ROCKY PATEL VINTAGE 1990 TORO REDONDO BOX/20', '15', NULL, NULL, NULL, 7, NULL, NULL),
-	(545, 'CM-04547', 'CAJAS DE MADERA ROCKY PATEL VINTAGE 1992 PETIT BELICOSO REDONDO SUMATRA BOX/20', '14', NULL, NULL, NULL, 7, NULL, NULL),
-	(546, 'CM-04548', 'CAJAS DE MADERA ROCKY PATEL VINTAGE 1990 PETIT CORONA PRENSADO SUMATRA BOX/20', '15', NULL, NULL, NULL, 7, NULL, NULL),
-	(547, 'CM-04549', 'CAJAS DE MADERA ROCKY PATEL VINTAGE 1999 CHURCHILL TUBO CONN. BOX/10', '15', NULL, NULL, NULL, 4, NULL, NULL),
-	(548, 'CM-04550', 'CAJAS DE MADERA ROCKY PATEL VINTAGE 1990 CHURCHILL TUBO MADURO BOX/10', '15', NULL, NULL, NULL, 4, NULL, NULL),
-	(549, 'CM-04551', 'CAJAS DE MADERA ROCKY PATEL DAVIDUS ANTIETAM PIRAMID PRESS BOX/20', '64', NULL, NULL, NULL, 7, NULL, NULL),
-	(550, 'CM-04552', 'CAJAS DE MADERA ROCKY PATEL DAVIDUS ANTIETAM CHURCILL PRESS BOX/20', '64', NULL, NULL, NULL, 7, NULL, NULL),
-	(551, 'CM-04553', 'CAJAS DE MADERA ROCKY PATEL DAVIDUS ANTIETAM ROBUSTO PRESS BOX/20', '64', NULL, NULL, NULL, 7, NULL, NULL),
-	(552, 'CM-04554', 'CAJAS DE MADERA ROCKY PATEL  LEESBURG ROBUSTO MADURO BOX/20', '1425', NULL, NULL, NULL, 7, NULL, NULL),
-	(553, 'CM-04555', 'CAJAS DE MADERA ROCKY PATEL  LEESBURG TORPEDO MADURO BOX/20', '1425', NULL, NULL, NULL, 7, NULL, NULL),
-	(554, 'CM-04556', 'CAJAS DE MADERA ROCKY PATEL ROYAL VINTAGE TORO SUMATRA  BOX/20', '147', NULL, NULL, NULL, 7, NULL, NULL),
-	(555, 'CM-04557', 'CAJAS DE MADERA ROCKY PATEL ROYAL VINTAGE TORPEDO SUMATRA  BOX/20', '147', NULL, NULL, NULL, 7, NULL, NULL),
-	(556, 'CM-04558', 'CAJAS DE MADERA ROCKY PATEL ROYAL VINTAGE CHURCHILL SUMATRA  BOX/20', '147', NULL, NULL, NULL, 7, NULL, NULL),
-	(557, 'CM-04559', 'CAJAS DE MADERA ROCKY PATEL  HABANA PREMIUM TORPEDO MADURO BOX/20', '1340', NULL, NULL, NULL, 7, NULL, NULL),
-	(558, 'CM-04560', 'CAJAS DE MADERA ROCKY PATEL  HABANA PREMIUM ROBUSTO BOX/20', '1340', NULL, NULL, NULL, 7, NULL, NULL),
-	(559, 'CM-04561', 'CAJAS DE MADERA ROCKY PATEL SMOKE FRIENDLY BOX/20', '133', NULL, NULL, NULL, 7, NULL, NULL),
-	(560, 'CM-04562', 'CAJAS DE MADERA ROCKY PATEL FREDERICKTOWNE CHURCHILL ROUND  BOX/20', '65', NULL, NULL, NULL, 7, NULL, NULL),
-	(561, 'CM-04563', 'CAJAS DE MADERA ROCKY PATEL CCF WHITE LABEL TORO BOX/20', '89', NULL, NULL, NULL, 7, NULL, NULL),
-	(562, 'CM-04564', 'CAJAS DE MADERA ROCKY PATEL CCF WHITE LABEL SHORT ROBUSTO BOX/20', '89', NULL, NULL, NULL, 7, NULL, NULL),
-	(563, 'CM-04565', 'CAJAS DE MADERA ROCKY PATEL CCF WHITE LABEL CORONA BOX/20', '89', NULL, NULL, NULL, 7, NULL, NULL),
-	(564, 'CM-04597', 'CAJAS DE MADERA ROCKY PATEL  ORETOBERFEST TORO  CONECTICUT BOX/10', '943', NULL, NULL, NULL, 4, NULL, NULL),
-	(565, 'CM-04598', 'CAJAS DE MADERA ROCKY PATEL  ORETOBERFEST  TORO  HABANO BOX/10', '943', NULL, NULL, NULL, 4, NULL, NULL),
-	(566, 'CM-04599', 'CAJAS DE MADERA ROCKY PATEL  VINTAGE 2003 ROBUSTO ROUND CAMEROON BOX/10', '101', NULL, NULL, NULL, 4, NULL, NULL),
-	(567, 'CM-04600', 'CAJAS DE MADERA ROCKY PATEL VINTAGE 1990 ROBUSTO PRENSADO MADURO BOX 10', '15', NULL, NULL, NULL, 4, NULL, NULL),
-	(568, 'CM-04601', 'CAJAS DE MADERA ROCKY PATEL  VINTAGE 1992 ROBUSTO PRESS SUMATRA BOX/10', '14', NULL, NULL, NULL, 4, NULL, NULL),
-	(569, 'CM-04602', 'CAJAS DE MADERA ROCKY PATEL  VINTAGE 1999 ROBUSTO CONERICO 5X50 BOX/10', '86', NULL, NULL, NULL, 4, NULL, NULL),
-	(570, 'CM-04603', 'CAJAS DE MADERA ROCKY PATEL  VINTAGE 2003 TORPEDO ROND CAMEROON BOX10', '101', NULL, NULL, NULL, 4, NULL, NULL),
-	(571, 'CM-04604', 'CAJAS DE MADERA ROCKY PATEL  EDGE HABANO SIN GRABADO BOX/100', '61', NULL, NULL, NULL, 18, NULL, NULL),
-	(572, 'CM-05001', 'CAJAS DE MADERA  ROCKY PATEL PREMIUM BURN BY ROCKY PATEL TORPEDO  BOX-20', '211', NULL, NULL, NULL, 7, NULL, NULL),
-	(573, 'CM-05003', 'CAJAS DE MADERA  ROCKY PATEL PREMIUM BURN BY ROCKY PATEL ROBUSTO  BOX-20', '211', NULL, NULL, NULL, 7, NULL, NULL),
-	(574, 'CM-05128', 'CAJAS DE MADERA ROCKY PATEL  EDGE TORPEDO SUMATRA BOX/20', '51', NULL, NULL, NULL, 7, NULL, NULL),
-	(575, 'CM-05129', 'CAJAS DE MADERA ROCKY PATEL  EDGE TORO SUMATRA BOX/20', '51', NULL, NULL, NULL, 7, NULL, NULL),
-	(576, 'CM-05133', 'CAJAS DE MADERA ROCKY PATEL  CUBAN BLEND ROBUSTO COROJO BOX/20', '133', NULL, NULL, NULL, 7, NULL, NULL),
-	(577, 'CM-05140', 'CAJAS DE MADERA ROCKY PATEL  CUBAN BLEND PETITE BELICOSO COROJO BOX/20', '133', NULL, NULL, NULL, 7, NULL, NULL),
-	(578, 'CM-05141', 'CAJAS DE MADERA ROCKY PATEL  CUBAN BLEND TORPEDO MADURO BOX/20', '133', NULL, NULL, NULL, 7, NULL, NULL),
-	(579, 'CM-05151', 'CAJAS DE MADERA ROCKY PATEL  EDGE ROCKCHILDE SUMATRA BOX/20', '51', NULL, NULL, NULL, 7, NULL, NULL),
-	(580, 'CM-05166', 'CAJAS DE MADERA ROCKY PATEL  LA CONQUISTA CHURCHILL MADURO  BOX/20', '184', NULL, NULL, NULL, 7, NULL, NULL),
-	(581, 'CM-05182', 'CAJAS DE MADERA ROCKY PATEL VIVALO LONSDALE BOX/20', '416', NULL, NULL, NULL, 7, NULL, NULL),
-	(582, 'CM-05222', 'CAJAS DE MADERA ROCKY PATEL  EDGE LIMITED EDITION "A" 8-1/2X50 TRAY 12', '51', NULL, NULL, NULL, 44, NULL, NULL),
-	(583, 'CM-05247', 'CAJAS DE MADERA ROCKY PATEL ZARKA 1932 5-1/2X52 JAL.', '1392', NULL, NULL, NULL, NULL, NULL, NULL),
-	(584, 'CM-05248', 'CAJAS DE MADERA ROCKY PATEL ZARKA 1932 6-1/2X52 JAL.', '1392', NULL, NULL, NULL, NULL, NULL, NULL),
-	(585, 'CM-05249', 'CAJAS DE MADERA ROCKY PATEL ZARKA 1932 6-1/2X52 TORPEDO JAL.', '1392', NULL, NULL, NULL, NULL, NULL, NULL),
-	(586, 'CM-05250', 'CAJAS DE MADERA ROCKY PATEL ZARKA 1932 6X60 JAL.', '1392', NULL, NULL, NULL, NULL, NULL, NULL),
-	(587, 'CM-05267', 'CAJAS DE MADERA ROCKY PATEL  EDGE TORO HABANO BOX/20', '61', NULL, NULL, NULL, 7, NULL, NULL),
-	(588, 'CM-05268', 'CAJAS DE MADERA ROCKY PATEL  EDGE SIXTY BATTALION HABANO BOX/20', '51', NULL, NULL, NULL, 7, NULL, NULL),
-	(589, 'CM-05269', 'CAJAS DE MADERA ROCKY PATEL  EDGE TORO HABANO TRAYS/100', '61', NULL, NULL, NULL, 18, NULL, NULL),
-	(590, 'CM-05275', 'CAJAS DE MADERA ROCKY PATEL EDGE TRAYS', '51', NULL, NULL, NULL, NULL, NULL, NULL),
-	(591, 'CM-05276', 'CAJAS DE MADERA ROCKY PATEL SMOKER FRIENDLY TRAYS TORO', '72', NULL, NULL, NULL, NULL, NULL, NULL),
-	(592, 'CM-05277', 'CAJAS DE MADERA ROCKY PATEL DECADE TRAYS', '90', NULL, NULL, NULL, NULL, NULL, NULL),
-	(593, 'CM-05279', 'CAJAS DE MADERA ROCKY PATEL R.A.D. TORO BOX 20', '426', NULL, NULL, NULL, 7, NULL, NULL),
-	(594, 'CM-05280', 'CAJAS DE MADERA ROCKY PATEL BLACK WARRIOR TORPEDO BOX 20', '71', NULL, NULL, NULL, 7, NULL, NULL),
-	(595, 'CM-05281', 'CAJAS DE MADERA ROCKY PATEL BLACK WARRIOR ROBUSTO BOX 20', '71', NULL, NULL, NULL, 7, NULL, NULL),
-	(596, 'CM-05310', 'CAJAS DE MADERA ROCKY PATEL LUXURY COLLECTION TORO SAMPLER BOX/10', '237', NULL, NULL, NULL, 4, NULL, NULL),
-	(597, 'CM-05311', 'CAJAS DE MADERA ROCKY PATEL MARQUETTE 77 TORPEDO PRESS BOX/20', '69', NULL, NULL, NULL, 7, NULL, NULL),
-	(598, 'CM-05312', 'CAJAS DE MADERA ROCKY PATEL DOBLE CORONA MADURO DESIENA BOX/20', '107', NULL, NULL, NULL, 7, NULL, NULL),
-	(599, 'CM-05313', 'CAJAS DE MADERA ROCKY PATEL SUPER TORO MADURO DESIENA BOX/20', '107', NULL, NULL, NULL, 7, NULL, NULL),
-	(600, 'CM-05314', 'CAJAS DE MADERA ROCKY PATEL SHORT TORPEDO COROJO DESIENA BOX/20', '107', NULL, NULL, NULL, 7, NULL, NULL),
-	(601, 'CM-05315', 'CAJAS DE MADERA ROCKY PATEL SHORT TORPEDO MADURO DESIENA BOX/20', '107', NULL, NULL, NULL, 7, NULL, NULL),
-	(602, 'CM-05316', 'CAJAS DE MADERA ROCKY PATEL SHORT TORPEDO CONN DESIENA BOX/20', '107', NULL, NULL, NULL, 7, NULL, NULL),
-	(603, 'CM-05319', 'CAJAS DE MADERA ROCKY PATEL B1 BURNERS TORO BOX/20', '417', NULL, NULL, NULL, 7, NULL, NULL),
-	(604, 'CM-05320', 'CAJAS DE MADERA ROCKY PATEL B1 BURNERS ROBUSTO BOX/20', '417', NULL, NULL, NULL, 7, NULL, NULL),
-	(605, 'CM-05333', 'CAJAS DE MADERA ROCKY PATEL  EDGE ROBUSTO HABANO BOX/100', '51', NULL, NULL, NULL, 18, NULL, NULL),
-	(606, 'CM-05334', 'CAJAS DE MADERA ROCKY PATEL  EDGE TORPEDO HABANO BOX/100', '61', NULL, NULL, NULL, 18, NULL, NULL),
-	(607, 'CM-05335', 'CAJAS DE MADERA ROCKY PATEL  EDGE ROBUSTO COROJO BOX/100', '51', NULL, NULL, NULL, 18, NULL, NULL),
-	(608, 'CM-05336', 'CAJAS DE MADERA ROCKY PATEL  VINTAGE 1999 ROCKCHILDE CONERICO BOX/20', '86', NULL, NULL, NULL, 7, NULL, NULL),
-	(609, 'CM-05337', 'CAJAS DE MADERA ROCKY PATEL  SUNGROWN TRAY DELUXE TORO TUBE  SUMATRA BOX/50', '67', NULL, NULL, NULL, 21, NULL, NULL),
-	(610, 'CM-05338', 'CAJAS DE MADERA ROCKY PATEL  VINTAGE 2003 PERFECTO CAMEROON BOX/20', '101', NULL, NULL, NULL, 7, NULL, NULL),
-	(611, 'CM-05351', 'CAJAS DE MADERA ROCKY PATEL JAXX LT TORO BOX/20', '474', NULL, NULL, NULL, 7, NULL, NULL),
-	(612, 'CM-05352', 'CAJAS DE MADERA ROCKY PATEL JAXX LT ROBUSTO BOX/20', '474', NULL, NULL, NULL, 7, NULL, NULL),
-	(613, 'CM-05353', 'CAJAS DE MADERA ROCKY PATEL JAXX LT SIXTY BOX/20', '474', NULL, NULL, NULL, 7, NULL, NULL),
-	(614, 'CM-05356', 'CAJAS DE MADERA ROCKY PATEL EDGE 4-1/2X60 B52 COROJO BOX/30', '51', NULL, NULL, NULL, 19, NULL, NULL),
-	(615, 'CM-05357', 'CAJAS DE MADERA ROCKY PATEL EDGE 4-1/2X60 B52 MADURO BOX/30', '51', NULL, NULL, NULL, 19, NULL, NULL),
-	(616, 'CM-05359', 'CAJAS DE MADERA ROCKY PATEL EDGE LITE ROBUSTO BOX/100', '99', NULL, NULL, NULL, 18, NULL, NULL),
-	(617, 'CM-05379', 'CAJAS DE MADERA ROCKY PATEL VINTAGE 1992 CHURCHILL TUBO SUMATRA BOX/10', '14', NULL, NULL, NULL, 4, NULL, NULL),
-	(618, 'CM-05400', 'CAJAS DE MADERA ROCKY PATEL  VINTAGE 1990 TRAYS EMPTY', '15', NULL, NULL, NULL, NULL, NULL, NULL),
-	(619, 'CM-05402', 'CAJAS DE MADERA ROCKY PATEL  VINTAGE 1992 TRAYS EMPTY', '14', NULL, NULL, NULL, NULL, NULL, NULL),
-	(620, 'CM-05403', 'CAJAS DE MADERA ROCKY PATEL  VINTAGE 1999 TRAYS EMPTY', '86', NULL, NULL, NULL, NULL, NULL, NULL),
-	(621, 'CM-05421', 'CAJAS DE MADERA ROCKY PATEL  VINTAGE 1990 ROCKCHILL RED. MADURO BOX/20', '15', NULL, NULL, NULL, 7, NULL, NULL),
-	(622, 'CM-05429', 'CAJAS DE MADERA ROCKY PATEL  EDGE COUNTERFEIT TORO COROJO BOX/20', '51', NULL, NULL, NULL, 7, NULL, NULL),
-	(623, 'CM-05430', 'CAJAS DE MADERA ROCKY PATEL  EDGE COUNTERFEIT TORPEDO COROJO BOX/20', '51', NULL, NULL, NULL, 7, NULL, NULL),
-	(624, 'CM-05431', 'CAJAS DE MADERA ROCKY PATEL  EDGE COUNTERFEIT TORO MADURO BOX/20', '51', NULL, NULL, NULL, 7, NULL, NULL),
-	(625, 'CM-05432', 'CAJAS DE MADERA ROCKY PATEL  EDGE COUNTERFEIT TORPEDO MADURO BOX/20', '51', NULL, NULL, NULL, 7, NULL, NULL),
-	(626, 'CM-05458', 'CAJAS DE MADERA ROCKY PATEL B1 BURNERS CORONA BOX/20', '417', NULL, NULL, NULL, 7, NULL, NULL),
-	(627, 'CM-05459', 'CAJAS DE MADERA ROCKY PATEL B1 BURNERS SIXTY BOX/20', '417', NULL, NULL, NULL, 7, NULL, NULL),
-	(628, 'CM-05460', 'CAJAS DE MADERA ROCKY PATEL VIVALO ROBUSTO GRANDE BOX/20', '416', NULL, NULL, NULL, 7, NULL, NULL),
-	(629, 'CM-05461', 'CAJAS DE MADERA ROCKY PATEL VIVALO SIXTY BOX/20', '416', NULL, NULL, NULL, 7, NULL, NULL),
-	(630, 'CM-05466', 'CAJAS DE MADERA ROCKY PATEL  PABLO MARTIN TORO COROJO BOX/20', '110', NULL, NULL, NULL, 7, NULL, NULL),
-	(631, 'CM-05467', 'CAJAS DE MADERA ROCKY PATEL  PABLO MARTIN ROBUSTO COROJO BOX/20', '110', NULL, NULL, NULL, 7, NULL, NULL),
-	(632, 'CM-05468', 'CAJAS DE MADERA ROCKY PATEL  PABLO MARTIN TORO CONERICO BOX/20', '110', NULL, NULL, NULL, 7, NULL, NULL),
-	(633, 'CM-05469', 'CAJAS DE MADERA ROCKY PATEL  PABLO MARTIN ROBUSTO CONERICO BOX/20', '110', NULL, NULL, NULL, 7, NULL, NULL),
-	(634, 'CM-05470', 'CAJAS DE MADERA ROCKY PATEL  PABLO MARTIN CONERICO TORPEDO BOX/20', '110', NULL, NULL, NULL, 7, NULL, NULL),
-	(635, 'CM-05471', 'CAJAS DE MADERA ROCKY PATEL  PABLO MARTIN COROJO TORPEDO BOX/20', '110', NULL, NULL, NULL, 7, NULL, NULL),
-	(636, 'CM-05472', 'CAJAS DE MADERA ROCKY PATEL  PABLO MARTIN CONERICO GRANDE BOX/20', '110', NULL, NULL, NULL, 7, NULL, NULL),
-	(637, 'CM-05473', 'CAJAS DE MADERA ROCKY PATEL  PABLO MARTIN COROJO GRANDE BOX/20', '110', NULL, NULL, NULL, 7, NULL, NULL),
-	(638, 'CM-05478', 'CAJAS DE MADERA ROCKY PATEL VIVALO BELICOSO BOX/20', '416', NULL, NULL, NULL, 7, NULL, NULL),
-	(639, 'CM-05479', 'CAJAS DE MADERA ROCKY PATEL VIVALO ROBUSTO BOX/20', '416', NULL, NULL, NULL, 7, NULL, NULL),
-	(640, 'CM-05480', 'CAJAS DE MADERA RP NICARAGUAN BLEND TORO 6X52 HABANO BOX 20', '386', NULL, NULL, NULL, 7, NULL, NULL),
-	(641, 'CM-05481', 'CAJAS DE MADERA RP NICARAGUAN BLEND TORPEDO 6X52 HABANO BOX 20', '386', NULL, NULL, NULL, 7, NULL, NULL),
-	(642, 'CM-05482', 'CAJAS DE MADERA RP NICARAGUAN BLEND SIXTY 6X60 HABANO BOX 20', '386', NULL, NULL, NULL, 7, NULL, NULL),
-	(643, 'CM-05483', 'CAJAS DE MADERA ROCKY PATEL TAMPA BASEBALL BOX 10', '529', NULL, NULL, NULL, 4, NULL, NULL),
-	(644, 'CM-05522', 'CAJAS DE MADERA ROCKY PATEL  EDGE TORPEDO HABANO BOX/20', '61', NULL, NULL, NULL, 7, NULL, NULL),
-	(645, 'CM-05524', 'CAJAS DE MADERA ROCKY PATEL  EMILIO SERIES TORPEDO SUMATRA BOX/20', '1375', NULL, NULL, NULL, 7, NULL, NULL),
-	(646, 'CM-05528', 'CAJAS DE MADERA ROCKY PATEL  CUBAN CIGAR FACTORY ROJAS CORONA BOX/20', '133', NULL, NULL, NULL, 7, NULL, NULL),
-	(647, 'CM-05529', 'CAJAS DE MADERA ROCKY PATEL  CUBAN BLEND LANCERO MADURO BOX/20', '133', NULL, NULL, NULL, 7, NULL, NULL),
-	(648, 'CM-05530', 'CAJAS DE MADERA ROCKY PATEL EVOLUTION EMPEROR MADURO BOX/20', '340', NULL, NULL, NULL, 7, NULL, NULL),
-	(649, 'CM-05531', 'CAJAS DE MADERA ROCKY PATEL  GOLD BY R.P. TORO CONERICO  BOX/20', '211', NULL, NULL, NULL, 7, NULL, NULL),
-	(650, 'CM-05532', 'CAJAS DE MADERA ROCKY PATEL  EDGE HOWITZER COROJO BOX/10', '51', NULL, NULL, NULL, 4, NULL, NULL),
-	(651, 'CM-05533', 'CAJAS DE MADERA ROCKY PATEL  EDGE HOWITZER MADURO BOX/10', '51', NULL, NULL, NULL, 4, NULL, NULL),
-	(652, 'CM-05534', 'CAJAS DE MADERA ROCKY PATEL  LEESBURG TORO MADURO BOX/20', '1425', NULL, NULL, NULL, 7, NULL, NULL),
-	(653, 'CM-05549', 'CAJAS DE MADERA ROCKY PATEL MAN CAVE PETITE CORONA H-2000 BOX/20', '1393', NULL, NULL, NULL, 7, NULL, NULL),
-	(654, 'CM-05550', 'CAJAS DE MADERA ROCKY PATEL MAN CAVE SIXTY H-2000 BOX/20', '1393', NULL, NULL, NULL, 7, NULL, NULL),
-	(655, 'CM-05551', 'CAJAS DE MADERA ROCKY PATEL MAN CAVE TORO H-2000 BOX/20', '1393', NULL, NULL, NULL, 7, NULL, NULL),
-	(656, 'CM-05552', 'CAJAS DE MADERA ROCKY PATEL MAN CAVE TORPEDO H-2000 BOX/20', '1393', NULL, NULL, NULL, 7, NULL, NULL),
-	(657, 'CM-05553', 'CAJAS DE MADERA ROCKY PATEL MAN CAVE PETITE CORONA COROJO BOX/20', '1393', NULL, NULL, NULL, 7, NULL, NULL),
-	(658, 'CM-05554', 'CAJAS DE MADERA ROCKY PATEL MAN CAVE SIXTY COROJO BOX/20', '1393', NULL, NULL, NULL, 7, NULL, NULL),
-	(659, 'CM-05555', 'CAJAS DE MADERA ROCKY PATEL MAN CAVE TORO COROJO BOX/20', '1393', NULL, NULL, NULL, 7, NULL, NULL),
-	(660, 'CM-05556', 'CAJAS DE MADERA ROCKY PATEL MAN CAVE TORPEDO COROJO BOX/20', '1393', NULL, NULL, NULL, 7, NULL, NULL),
-	(661, 'CM-05557', 'CAJAS DE MADERA ROCKY PATEL MAN CAVE PETITE CORONA MADURO BOX/20', '1393', NULL, NULL, NULL, 7, NULL, NULL),
-	(662, 'CM-05558', 'CAJAS DE MADERA ROCKY PATEL MAN CAVE SIXTY MADURO BOX/20', '1393', NULL, NULL, NULL, 7, NULL, NULL),
-	(663, 'CM-05559', 'CAJAS DE MADERA ROCKY PATEL MAN CAVE TORO MADURO BOX/20', '1393', NULL, NULL, NULL, 7, NULL, NULL),
-	(664, 'CM-05560', 'CAJAS DE MADERA ROCKY PATEL MAN CAVE TORPEDO MADURO BOX/20', '1393', NULL, NULL, NULL, 7, NULL, NULL),
-	(665, 'CM-05561', 'CAJAS DE MADERA ROCKY PATEL MAN CAVE PETITE CORONA SUMATRA BOX/20', '1393', NULL, NULL, NULL, 7, NULL, NULL),
-	(666, 'CM-05562', 'CAJAS DE MADERA ROCKY PATEL MAN CAVE SIXTY SUMATRA BOX/20', '1393', NULL, NULL, NULL, 7, NULL, NULL),
-	(667, 'CM-05563', 'CAJAS DE MADERA ROCKY PATEL MAN CAVE TORO SUMATRA BOX/20', '1393', NULL, NULL, NULL, 7, NULL, NULL),
-	(668, 'CM-05564', 'CAJAS DE MADERA ROCKY PATEL MAN CAVE TORPEDO SUMATRA BOX/20', '1393', NULL, NULL, NULL, 7, NULL, NULL),
-	(669, 'CM-05568', 'CAJAS DE MADERA ROCKY PATEL BLOCK ISLAND TORO BOX/10', '525', NULL, NULL, NULL, 4, NULL, NULL),
-	(670, 'CM-05569', 'CAJAS DE MADERA ROCKY PATEL BLOCK ISLAND ROBUSTO BOX/10', '525', NULL, NULL, NULL, 4, NULL, NULL),
-	(671, 'CM-05571', 'CAJAS DE MADERA ROCKY PATEL SMOKER FRIENDLY TRAYS SIXTY', '72', NULL, NULL, NULL, NULL, NULL, NULL),
-	(672, 'CM-05578', 'CAJAS DE MADERA ROCKY PATEL  PABLO MARTIN CONERICO CHURCHILL BOX/20', '110', NULL, NULL, NULL, 7, NULL, NULL),
-	(673, 'CM-05587', 'CAJAS DE MADERA ROCKY PATEL  ATTACHE 5X52 ROBUSTO BOX 20', '406', NULL, NULL, NULL, 7, NULL, NULL),
-	(674, 'CM-05589', 'CAJAS DE MADERA ROCKY PATEL  ATTACHE 6X60 GRANDE BOX 20', '406', NULL, NULL, NULL, 7, NULL, NULL),
-	(675, 'CM-05590', 'CAJAS DE MADERA ROCKY PATEL  ATTACHE 6X52 TORO BOX 20', '406', NULL, NULL, NULL, 7, NULL, NULL),
-	(676, 'CM-05599', 'CAJAS DE MADERA ROCKY PATEL RP VELVET EDITION ROBUSTO CONNECTICUT BOX/20', '452', NULL, NULL, NULL, 7, NULL, NULL),
-	(677, 'CM-05600', 'CAJAS DE MADERA ROCKY PATEL RP VELVET EDITION TORO CONNECTICUT BOX/20', '452', NULL, NULL, NULL, 7, NULL, NULL),
-	(678, 'CM-05601', 'CAJAS DE MADERA ROCKY PATEL RP VELVET EDITION TORPEDO CONNECTICUT BOX/20', '452', NULL, NULL, NULL, 7, NULL, NULL),
-	(679, 'CM-05602', 'CAJAS DE MADERA ROCKY PATEL RP VELVET EDITION SIXTY CONNECTICUT BOX/20', '452', NULL, NULL, NULL, 7, NULL, NULL),
-	(680, 'CM-05622', 'CAJAS DE MADERA ROCKY PATEL HONDURAS SAMPLER', '1450', NULL, NULL, NULL, NULL, NULL, NULL),
-	(681, 'CM-05623', 'CAJAS DE MADERA ROCKY PATEL WALL STREET ROBUSTO BOX/20', '104', NULL, NULL, NULL, 7, NULL, NULL),
-	(682, 'CM-05624', 'CAJAS DE MADERA ROCKY PATEL WALL STREET TORO BOX/20', '104', NULL, NULL, NULL, 7, NULL, NULL),
-	(683, 'CM-05625', 'CAJAS DE MADERA ROCKY PATEL WALL STREET CHURCHILL BOX/20', '104', NULL, NULL, NULL, 7, NULL, NULL),
-	(684, 'CM-05626', 'CAJAS DE MADERA ROCKY PATEL WALL STREET SIXTY BOX/20', '104', NULL, NULL, NULL, 7, NULL, NULL),
-	(685, 'CM-05627', 'CAJAS DE MADERA ROCKY PATEL  EDGE ROBUSTO MADURO BOX/10 (Divisor Plastico)', '51', NULL, NULL, NULL, NULL, NULL, NULL),
-	(686, 'CM-05638', 'CAJAS DE MADERA ROCKY PATEL CAUCUS 50TH ANNIVERSARY CORONA SUMATRA BOX/10', '106', NULL, NULL, NULL, 4, NULL, NULL),
-	(687, 'CM-05639', 'CAJAS DE MADERA ROCKY PATEL CAUCUS 50TH ANNIVERSARY CHURCHILL SUMATRA BOX/10', '106', NULL, NULL, NULL, 4, NULL, NULL),
-	(688, 'CM-05642', 'CAJAS DE MADERA ROCKY PATEL BEALLE STREET LANCERO CONERICO BOX/20', '70', NULL, NULL, NULL, 7, NULL, NULL),
-	(689, 'CM-05643', 'CAJAS DE MADERA ROCKY PATEL BEALLE STREET SIXTY CONERICO BOX/20', '70', NULL, NULL, NULL, 7, NULL, NULL),
-	(690, 'CM-05644', 'CAJAS DE MADERA ROCKY PATEL BEALLE STREET LANCERO SUMATRA BOX/20', '70', NULL, NULL, NULL, 7, NULL, NULL),
-	(691, 'CM-05645', 'CAJAS DE MADERA ROCKY PATEL BEALLE STREET SIXTY SUMATRA BOX/20', '70', NULL, NULL, NULL, 7, NULL, NULL),
-	(692, 'CM-05646', 'CAJAS DE MADERA ROCKY PATEL DAVIDUS ANTIETAM ROBUSTO RED. BOX/20', '64', NULL, NULL, NULL, 7, NULL, NULL),
-	(693, 'CM-05647', 'CAJAS DE MADERA ROCKY PATEL DAVIDUS ANTIETAM CHURCHILL RED. BOX/20', '64', NULL, NULL, NULL, 7, NULL, NULL),
-	(694, 'CM-05648', 'CAJAS DE MADERA ROCKY PATEL DAVIDUS ANTIETAM PIRAMID RED. BOX/20', '64', NULL, NULL, NULL, 7, NULL, NULL),
-	(695, 'CM-05649', 'CAJAS DE MADERA ROCKY PATEL DAVIDUS ANTIETAM TORO RED. BOX/20', '64', NULL, NULL, NULL, 7, NULL, NULL),
-	(696, 'CM-05650', 'CAJAS DE MADERA ROCKY PATEL BADGE 282 LANCERO BOX/10', '190', NULL, NULL, NULL, 4, NULL, NULL),
-	(697, 'CM-05651', 'CAJAS DE MADERA ROCKY PATEL DECADE IN COFFINS', '90', NULL, NULL, NULL, NULL, NULL, NULL),
-	(698, 'CM-05673', 'CAJAS DE MADERA ROCKY PATEL JUNIOR SUNGROWN NATURAL BOX/40', '158', NULL, NULL, NULL, 17, NULL, NULL),
-	(699, 'CM-05676', 'CAJAS DE MADERA ROCKY PATEL THE DON ROBUSTO BOX/20', '1356', NULL, NULL, NULL, 7, NULL, NULL),
-	(700, 'CM-05677', 'CAJAS DE MADERA ROCKY PATEL THE DON CHURCHILL BOX/20', '1356', NULL, NULL, NULL, 7, NULL, NULL),
-	(701, 'CM-05678', 'CAJAS DE MADERA ROCKY PATEL THE DON SIXTY BOX/20', '1356', NULL, NULL, NULL, 7, NULL, NULL),
-	(702, 'CM-05679', 'CAJAS DE MADERA ROCKY PATEL THE DON TORO BOX/20', '1356', NULL, NULL, NULL, 7, NULL, NULL),
-	(703, 'CM-05690', 'CAJAS DE MADERA ROCKY PATEL CASA DE LAS ESTRELLAS TORPEDO PRESS BOX/20', '568', NULL, NULL, NULL, 7, NULL, NULL),
-	(704, 'CM-05691', 'CAJAS DE MADERA ROCKY PATEL CASA DE LAS ESTRELLAS LANCERO PRESS BOX/20', '568', NULL, NULL, NULL, 7, NULL, NULL),
-	(705, 'CM-05692', 'CAJAS DE MADERA ROCKY PATEL CASA DE LAS ESTRELLAS TORO RED BOX/20', '568', NULL, NULL, NULL, 7, NULL, NULL),
-	(706, 'CM-05717', 'CAJAS DE MADERA  ROCKY PATEL PREMIUM DISPLAY BURN BLANCOS', '360', NULL, NULL, NULL, NULL, NULL, NULL),
-	(707, 'CM-05751', 'CAJAS DE MADERA ROCKY PATEL VINTAGE 1992 ROBUSTO 5-1/2X50 TUBO SUMATRA BOX/10', '14', NULL, NULL, NULL, 4, NULL, NULL),
-	(708, 'CM-05752', 'CAJAS DE MADERA ROCKY PATEL  O.W.R. BARBER POLE  BOX/10', '186', NULL, NULL, NULL, 4, NULL, NULL),
-	(709, 'CM-05770', 'CAJAS DE MADERA ROCKY PATEL OLD WORLD ROBUSTO REDONDO CONNECTICUT BOX/20', '186', NULL, NULL, NULL, 7, NULL, NULL),
-	(710, 'CM-05771', 'CAJAS DE MADERA ROCKY PATEL OLD WORLD TORO REDONDO CONNECTICUT BOX/20', '186', NULL, NULL, NULL, 7, NULL, NULL),
-	(711, 'CM-05772', 'CAJAS DE MADERA ROCKY PATEL OLD WORLD TORPEDO REDONDO CONNECTICUT BOX/20', '186', NULL, NULL, NULL, 7, NULL, NULL),
-	(712, 'CM-05773', 'CAJAS DE MADERA ROCKY PATEL DECADE TORO PLYWOOD SUMATRA BOX/10', '90', NULL, NULL, NULL, 4, NULL, NULL),
-	(713, 'CM-05780', 'CAJAS DE MADERA ROCKY PATEL VIVALO SAMPLER BOX/5', '416', NULL, NULL, NULL, 6, NULL, NULL),
-	(714, 'CM-05790', 'CAJAS DE MADERA ROCKY PATEL THE  ZEUS BY HUMIDOR ROBUSTO MADURO BOX/20', '102', NULL, NULL, NULL, 7, NULL, NULL),
-	(715, 'CM-05791', 'CAJAS DE MADERA ROCKY PATEL THE  ZEUS BY HUMIDOR TORO MADURO BOX/20', '102', NULL, NULL, NULL, 7, NULL, NULL),
-	(716, 'CM-05792', 'CAJAS DE MADERA ROCKY PATEL THE ZEUS BY HUMIDOR LANCERO MADURO BOX/20', '102', NULL, NULL, NULL, 7, NULL, NULL),
-	(717, 'CM-05794', 'CAJAS DE MADERA ROCKY PATEL WORLD FAMOUS CIGAR BAR TORO GRANDE CONNECTICUT BOX/20', '145', NULL, NULL, NULL, 7, NULL, NULL),
-	(718, 'CM-05795', 'CAJAS DE MADERA ROCKY PATEL WORLD FAMOUS CIGAR BAR ROBUSTO CONNECTICUT BOX/20', '145', NULL, NULL, NULL, 7, NULL, NULL),
-	(719, 'CM-05798', 'CAJAS DE MADERA ROCKY PATEL  EDGE  A10 TORO  BOX/20', '91', NULL, NULL, NULL, 7, NULL, NULL),
-	(720, 'CM-05802', 'CAJAS DE MADERA ROCKY PATEL ROGER STROH TORO BOX/20', '592', NULL, NULL, NULL, 7, NULL, NULL),
-	(721, 'CM-05805', 'CAJAS DE MADERA ROCKY PATEL SIGNATURE SERIES TORO BOX 20', '547', NULL, NULL, NULL, 7, NULL, NULL),
-	(722, 'CM-05828', 'CAJAS DE MADERA ROCKY PATEL  EDGE SELECTION 652 MADURO BOX/50', '51', NULL, NULL, NULL, 21, NULL, NULL),
-	(723, 'CM-05829', 'CAJAS DE MADERA ROCKY PATEL  EDGE SELECTION PYRAMID MADURO BOX/50', '51', NULL, NULL, NULL, 21, NULL, NULL),
-	(724, 'CM-05830', 'CAJAS DE MADERA ROCKY PATEL  EDGE SELECTION 652 COROJO BOX/50', '51', NULL, NULL, NULL, 21, NULL, NULL),
-	(725, 'CM-05831', 'CAJAS DE MADERA ROCKY PATEL  EDGE SELECTION PYRAMID COROJO BOX/50', '51', NULL, NULL, NULL, 21, NULL, NULL),
-	(726, 'CM-05832', 'CAJAS DE MADERA ROCKY PATEL  EDGE SELECTION 652 HABANO BOX/50', '51', NULL, NULL, NULL, 21, NULL, NULL),
-	(727, 'CM-05833', 'CAJAS DE MADERA ROCKY PATEL  EDGE SELECTION PYRAMID HABANO BOX/50', '51', NULL, NULL, NULL, 21, NULL, NULL),
-	(728, 'CM-05859', 'CAJAS DE MADERA ROCKY PATEL  EDGE ROBUSTO HABANO BOX/20', '61', NULL, NULL, NULL, 7, NULL, NULL),
-	(729, 'CM-05890', 'CAJAS DE MADERA ROCKY PATEL DISPLAY PARA PIPA', '237', NULL, NULL, NULL, NULL, NULL, NULL),
-	(730, 'CM-05906', 'CAJAS DE MADERA ROCKY PATEL YACHT CRUISE SAMPLER BOX 6', '237', NULL, NULL, NULL, 5, NULL, NULL),
-	(731, 'CM-05930', 'CAJAS DE MADERA ROCKY PATEL  CI LEGENDS ROBUSTO HAB/COL BOX/20 (NUEVAS)', '118', NULL, NULL, NULL, NULL, NULL, NULL),
-	(732, 'CM-05931', 'CAJAS DE MADERA ROCKY PATEL RP BROADLEAF TORO BOX 20', '152', NULL, NULL, NULL, 7, NULL, NULL),
-	(733, 'CM-05932', 'CAJAS DE MADERA ROCKY PATEL RP BROADLEAF SUPER TORO BOX 20', '152', NULL, NULL, NULL, 7, NULL, NULL),
-	(734, 'CM-05933', 'CAJAS DE MADERA ROCKY PATEL RP BROADLEAF TORPEDO 6-1/4X52 BOX 20', '152', NULL, NULL, NULL, 7, NULL, NULL),
-	(735, 'CM-05934', 'CAJAS DE MADERA ROCKY PATEL RP BROADLEAF CHURCHILL BOX 20', '152', NULL, NULL, NULL, 7, NULL, NULL),
-	(736, 'CM-05935', 'CAJAS DE MADERA ROCKY PATEL RP BROADLEAF ROBUSTO BOX 20', '152', NULL, NULL, NULL, 7, NULL, NULL),
-	(737, 'CM-05972', 'CAJAS DE MADERA ROCKY PATEL  PABLO MARTIN CAMEROON ROBUSTO BOX/20', '110', NULL, NULL, NULL, 7, NULL, NULL),
-	(738, 'CM-05973', 'CAJAS DE MADERA ROCKY PATEL  PABLO MARTIN TORO CAMEROON BOX/20', '110', NULL, NULL, NULL, 7, NULL, NULL),
-	(739, 'CM-05974', 'CAJAS DE MADERA ROCKY PATEL  PABLO MARTIN CORONA CAMEROON BOX/20', '110', NULL, NULL, NULL, 7, NULL, NULL),
-	(740, 'CM-05975', 'CAJAS DE MADERA ROCKY PATEL  PABLO MARTIN CAMEROON GRANDE BOX/20', '110', NULL, NULL, NULL, 7, NULL, NULL),
-	(741, 'CM-05976', 'CAJAS DE MADERA ROCKY PATEL EDGE 4-1/2X60 B52 MADURO BOX/10', '51', NULL, NULL, NULL, 4, NULL, NULL),
-	(742, 'CM-05977', 'CAJAS DE MADERA ROCKY PATEL  EDGE  A10 TORO TRAYS/100', '91', NULL, NULL, NULL, 18, NULL, NULL),
-	(743, 'CM-05978', 'CAJAS DE MADERA ROCKY PATEL CONNECTICUT BY SUPER TORO CONERICO BOX/20', '168', NULL, NULL, NULL, 7, NULL, NULL),
-	(744, 'CM-05979', 'CAJAS DE MADERA ROCKY PATEL  EDGE SHORT ROBUSTO HABANO BOX/20', '61', NULL, NULL, NULL, 7, NULL, NULL),
-	(745, 'CM-05980', 'CAJAS DE MADERA ROCKY PATEL WALL STREET CORONA BOX/20', '104', NULL, NULL, NULL, 7, NULL, NULL),
-	(746, 'CM-05981', 'CAJAS DE MADERA ROCKY PATEL EDGE 4-1/2X60 B52 COROJO BOX/10', '51', NULL, NULL, NULL, 4, NULL, NULL),
-	(747, 'CM-05982', 'CAJAS DE MADERA ROCKY PATEL  EDGE TORO VARIADO TRAYS/75', '51', NULL, NULL, NULL, 90, NULL, NULL),
-	(748, 'CM-05983', 'CAJAS DE MADERA ROCKY PATEL DECADE ROBUSTO PLYWOOD SUMATRA BOX/5', '90', NULL, NULL, NULL, 6, NULL, NULL),
-	(749, 'CM-05984', 'CAJAS DE MADERA ROCKY PATEL RP ICE ROBUSTO BOX/10', '615', NULL, NULL, NULL, 4, NULL, NULL),
-	(750, 'CM-05985', 'CAJAS DE MADERA ROCKY PATEL RP ICE TORO BOX/10', '615', NULL, NULL, NULL, 4, NULL, NULL),
-	(751, 'CM-05986', 'CAJAS DE MADERA ROCKY PATEL RP ICE TORPEDO BOX/10', '615', NULL, NULL, NULL, 4, NULL, NULL),
-	(752, 'CM-05987', 'CAJAS DE MADERA ROCKY PATEL RP ICE GORDO BOX/10', '615', NULL, NULL, NULL, 4, NULL, NULL),
-	(753, 'CM-05988', 'CAJAS DE MADERA ROCKY PATEL CIGAR KING GOLD II TORO BOX/20 HAB.', '643', NULL, NULL, NULL, NULL, NULL, NULL),
-	(754, 'CM-06015', 'CAJAS DE MADERA ROCKY PATEL CGALLIII ROBUSTO BOX/20', '607', NULL, NULL, NULL, 7, NULL, NULL),
-	(755, 'CM-06016', 'CAJAS DE MADERA ROCKY PATEL CGALLIII TORO BOX/20', '607', NULL, NULL, NULL, 7, NULL, NULL),
-	(756, 'CM-06017', 'CAJAS DE MADERA ROCKY PATEL CGALLIII CHURCHILL BOX/20', '607', NULL, NULL, NULL, 7, NULL, NULL),
-	(757, 'CM-06018', 'CAJAS DE MADERA ROCKY PATEL BELLA CARMELLA DOUBLE CORONA BOX/20', '139', NULL, NULL, NULL, 7, NULL, NULL),
-	(758, 'CM-06019', 'CAJAS DE MADERA ROCKY PATEL BELLA CARMELLA LONSDALE BOX/20', '139', NULL, NULL, NULL, 7, NULL, NULL),
-	(759, 'CM-06020', 'CAJAS DE MADERA ROCKY PATEL BELLA CARMELLA TORO BOX/20', '139', NULL, NULL, NULL, 7, NULL, NULL),
-	(760, 'CM-06021', 'CAJAS DE MADERA ROCKY PATEL BELLA CARMELLA ROBUSTO BOX/20', '139', NULL, NULL, NULL, 7, NULL, NULL),
-	(761, 'CM-06022', 'CAJAS DE MADERA ROCKY PATEL BELLA CARMELLA GRANDE BOX/20', '139', NULL, NULL, NULL, 7, NULL, NULL),
-	(762, 'CM-06023', 'CAJAS DE MADERA ROCKY PATEL BELLA CARMELLA CORONA BOX/20', '139', NULL, NULL, NULL, 7, NULL, NULL),
-	(763, 'CM-06108', 'CAJAS DE MADERA ROCKY PATEL STRADA CHURCHILL 7X48 BOX/20', '58', NULL, NULL, NULL, 7, NULL, NULL),
-	(764, 'CM-06109', 'CAJAS DE MADERA ROCKY PATEL STRADA TORPEDO 6X52 BOX/20', '58', NULL, NULL, NULL, 7, NULL, NULL),
-	(765, 'CM-06110', 'CAJAS DE MADERA ROCKY PATEL STRADA CHURCHILL 7X50 BOX/20', '58', NULL, NULL, NULL, 7, NULL, NULL),
-	(766, 'CM-06111', 'CAJAS DE MADERA ROCKY PATEL STRADA ROBUSTO 5X50 BOX/20', '58', NULL, NULL, NULL, 7, NULL, NULL),
-	(767, 'CM-06112', 'CAJAS DE MADERA ROCKY PATEL STRADA TORO 6X52 BOX/20', '58', NULL, NULL, NULL, 7, NULL, NULL),
-	(768, 'CM-06113', 'CAJAS DE MADERA ROCKY PATEL STRADA TORO 6X50 BOX/20', '58', NULL, NULL, NULL, 7, NULL, NULL),
-	(769, 'CM-06214', 'CAJAS DE MADERA ROCKY PATEL  EDGE  A10 SIXTY  BOX/20', '91', NULL, NULL, NULL, 7, NULL, NULL),
-	(770, 'CM-06215', 'CAJAS DE MADERA ROCKY PATEL LA SIRENA ROBUSTO BOX/20', '231', NULL, NULL, NULL, 7, NULL, NULL),
-	(771, 'CM-06216', 'CAJAS DE MADERA ROCKY PATEL LA SIRENA TORO BOX/20', '231', NULL, NULL, NULL, 7, NULL, NULL),
-	(772, 'CM-06217', 'CAJAS DE MADERA ROCKY PATEL LA SIRENA SIXTY BOX/20', '231', NULL, NULL, NULL, 7, NULL, NULL),
-	(773, 'CM-06450', 'CAJAS DE MADERA ROCKY PATEL  DARK DOMINION SHORT ROBUSTO BOX 10', '117', NULL, NULL, NULL, 4, NULL, NULL),
-	(774, 'CM-06451', 'CAJAS DE MADERA ROCKY PATEL  DARK DOMINION TORO BOX 10', '117', NULL, NULL, NULL, 4, NULL, NULL),
-	(775, 'CM-06452', 'CAJAS DE MADERA ROCKY PATEL  DARK DOMINION SIXTY BOX 10', '117', NULL, NULL, NULL, 4, NULL, NULL),
-	(776, 'CM-06453', 'CAJAS DE MADERA ROCKY PATEL  DARK DOMINION LANCERO BOX 10', '117', NULL, NULL, NULL, 4, NULL, NULL),
-	(777, 'CM-06454', 'CAJAS DE MADERA ROCKY PATEL  SUNGROWN SHORT TORPEDO SUMATRA BOX/20', '67', NULL, NULL, NULL, 7, NULL, NULL),
-	(778, 'CM-06457', 'CAJAS DE MADERA ROCKY PATEL  MUESTRAS VARIADAS', '188', NULL, NULL, NULL, NULL, NULL, NULL),
-	(779, 'CM-06458', 'CAJAS DE MADERA ROCKY PATEL EDGE LITE HOWITZER CONN BOX/10', '99', NULL, NULL, NULL, 4, NULL, NULL),
-	(780, 'CM-06702', 'CAJAS DE MADERA ROCKY PATEL  VIBE TORPEDO HAB/COL BOX/20', '1347', NULL, NULL, NULL, 7, NULL, NULL),
-	(781, 'CM-06763', 'CAJAS DE MADERA ROCKY PATEL DUCKS UNLIMITED GREEN HEAD TORO BOX 20', '564', NULL, NULL, NULL, 7, NULL, NULL),
-	(782, 'CM-06765', 'CAJAS DE MADERA ROCKY PATEL  GOLD BY R.P. TORPEDO CONERICO  BOX/20', '211', NULL, NULL, NULL, 7, NULL, NULL),
-	(783, 'CM-06766', 'CAJAS DE MADERA ROCKY PATEL  EDGE MISSILES MADURO BOX/16', '51', NULL, NULL, NULL, 26, NULL, NULL),
-	(784, 'CM-06767', 'CAJAS DE MADERA ROCKY PATEL  EDGE MISSILES COROJO BOX/16', '51', NULL, NULL, NULL, 26, NULL, NULL),
-	(785, 'CM-06793', 'CAJAS DE MADERA ROCKY PATEL RP FIRE & ICE ROBUSTO SAMPLER BOX 10', '237', NULL, NULL, NULL, 4, NULL, NULL),
-	(786, 'CM-06794', 'CAJAS DE MADERA ROCKY PATEL SIGNATURE SERIES ROBUSTO BOX 20', '547', NULL, NULL, NULL, 7, NULL, NULL),
-	(787, 'CM-06814', 'CAJAS DE MADERA ROCKY PATEL DECADE TORO ESPECIAL CI20TH SUMATRA BOX/10', '90', NULL, NULL, NULL, 4, NULL, NULL),
-	(788, 'CM-06815', 'CAJAS DE MADERA ROCKY PATEL VINTAGE 2003 5X60 CAMEROON BOX/20', '101', NULL, NULL, NULL, 7, NULL, NULL),
-	(789, 'CM-06816', 'CAJAS DE MADERA ROCKY PATEL VINTAGE 2003 4X60 CAMEROON BOX/20', '101', NULL, NULL, NULL, 7, NULL, NULL),
-	(790, 'CM-06818', 'CAJAS DE MADERA ROCKY PATEL JON CARLOS ROBUSTO MADURO BOX/20', '140', NULL, NULL, NULL, 7, NULL, NULL),
-	(791, 'CM-06819', 'CAJAS DE MADERA ROCKY PATEL JON CARLOS ROBUSTO CONN BOX/20', '140', NULL, NULL, NULL, 7, NULL, NULL),
-	(792, 'CM-06820', 'CAJAS DE MADERA ROCKY PATEL JON CARLOS CHURCHILL CONN BOX/20', '140', NULL, NULL, NULL, 7, NULL, NULL),
-	(793, 'CM-06821', 'CAJAS DE MADERA ROCKY PATEL RP BROADLEAF TORPEDO 6-1/8X52 BOX 20', '152', NULL, NULL, NULL, 7, NULL, NULL),
-	(794, 'CM-06822', 'CAJAS DE MADERA ROCKY PATEL RP/HOLT CARPET COLLECTION SAMPLER BOX 20', '237', NULL, NULL, NULL, 7, NULL, NULL),
-	(795, 'CM-06823', 'CAJAS DE MADERA ROCKY PATEL JON CARLOS TORPEDO CONN BOX/20', '140', NULL, NULL, NULL, 7, NULL, NULL),
-	(796, 'CM-06824', 'CAJAS DE MADERA ROCKY PATEL JON CARLOS CHURCHILL MADURO BOX/20', '140', NULL, NULL, NULL, 7, NULL, NULL),
-	(797, 'CM-06825', 'CAJAS DE MADERA ROCKY PATEL JON CARLOS TORPEDO MADURO BOX/20', '140', NULL, NULL, NULL, 7, NULL, NULL),
-	(798, 'CM-06826', 'CAJAS DE MADERA ROCKY PATEL CRI-OJO ROBUSTO HAB. BOX 20', '99', NULL, NULL, NULL, 7, NULL, NULL),
-	(799, 'CM-06827', 'CAJAS DE MADERA ROCKY PATEL CRI-OJO TORO HAB. BOX 20', '675', NULL, NULL, NULL, 7, NULL, NULL),
-	(800, 'CM-06828', 'CAJAS DE MADERA ROCKY PATEL INKTOME TORO HAB. BOX 10 PRENSADO', '99', NULL, NULL, NULL, NULL, NULL, NULL),
-	(801, 'CM-06829', 'CAJAS DE MADERA ROCKY PATEL CRI-OJO SUPER TORO HAB. BOX 20', '99', NULL, NULL, NULL, 7, NULL, NULL),
-	(802, 'CM-06830', 'CAJAS DE MADERA ROCKY PATEL CRI-OJO TORPEDO HAB. BOX 20', '99', NULL, NULL, NULL, 7, NULL, NULL),
-	(803, 'CM-06831', 'CAJAS DE MADERA ROCKY PATEL CRI-OJO CHURCHILL HAB. BOX 20', '99', NULL, NULL, NULL, 7, NULL, NULL),
-	(804, 'CM-06832', 'CAJAS DE MADERA ROCKY PATEL VINTAGE 1999 ROBUSTO 5-1/2X50 TUBO CONERICO BOX/10', '86', NULL, NULL, NULL, 4, NULL, NULL),
-	(805, 'CM-06833', 'CAJAS DE MADERA ROCKY PATEL CIGAR KING GOLD II LANCERO BOX/20 HAB.', '643', NULL, NULL, NULL, NULL, NULL, NULL),
-	(806, 'CM-06834', 'CAJAS DE MADERA ROCKY PATEL CIGAR KING GOLD II ROBUSTO BOX/20 HAB.', '643', NULL, NULL, NULL, NULL, NULL, NULL),
-	(807, 'CM-06835', 'CAJAS DE MADERA ROCKY PATEL CIGAR KING GOLD II SIXTY BOX/20 HAB.', '643', NULL, NULL, NULL, NULL, NULL, NULL),
-	(808, 'CM-06836', 'CAJAS DE MADERA ROCKY PATEL DUCKS UNLIMITED DUCK SHOT BOX 20', '564', NULL, NULL, NULL, 7, NULL, NULL),
-	(809, 'CM-06837', 'CAJAS DE MADERA ROCKY PATEL CI- ANNIVERSARY TORO BOX 20', '1354', NULL, NULL, NULL, 7, NULL, NULL),
-	(810, 'CM-06838', 'CAJAS DE MADERA ROCKY PATEL EDGE TORO BOX/50 SUMATRA', '51', NULL, NULL, NULL, NULL, NULL, NULL),
-	(811, 'CM-06839', 'CAJAS DE MADERA ROCKY PATEL EDGE TORO BOX/50 COROJO', '51', NULL, NULL, NULL, NULL, NULL, NULL),
-	(812, 'CM-06840', 'CAJAS DE MADERA ROCKY PATEL EDGE TORO BOX/50 MADURO', '51', NULL, NULL, NULL, NULL, NULL, NULL),
-	(813, 'CM-06841', 'CAJAS DE MADERA ROCKY PATEL EDGE TORO BOX/50 HABANO', '61', NULL, NULL, NULL, NULL, NULL, NULL),
-	(814, 'CM-06842', 'CAJAS DE MADERA ROCKY PATEL EDGE TORPEDO BOX/50 SUMATRA', '51', NULL, NULL, NULL, NULL, NULL, NULL),
-	(815, 'CM-06843', 'CAJAS DE MADERA ROCKY PATEL EDGE TORPEDO BOX/50 COROJO', '51', NULL, NULL, NULL, NULL, NULL, NULL),
-	(816, 'CM-06844', 'CAJAS DE MADERA ROCKY PATEL EDGE TORPEDO BOX/50 MADURO', '51', NULL, NULL, NULL, NULL, NULL, NULL),
-	(817, 'CM-06845', 'CAJAS DE MADERA ROCKY PATEL EDGE TORPEDO BOX/50 HABANO', '51', NULL, NULL, NULL, NULL, NULL, NULL),
-	(818, 'CM-06846', 'CAJAS DE MADERA ROCKY PATEL MARTINIQUE TORO BOX 10', '684', NULL, NULL, NULL, 4, NULL, NULL),
-	(819, 'CM-06847', 'CAJAS DE MADERA ROCKY PATEL  VINTAGE 1990 LANCERO HABANO BOX/20', '15', NULL, NULL, NULL, 7, NULL, NULL),
-	(820, 'CM-06848', 'CAJAS DE MADERA ROCKY PATEL  EXTREME TORPEDO SUMATRA BOX/20', '183', NULL, NULL, NULL, 7, NULL, NULL),
-	(821, 'CM-06849', 'CAJAS DE MADERA ROCKY PATEL LA PALINA BRONZE GORDO BOX/20', '53', NULL, NULL, NULL, 7, NULL, NULL),
-	(822, 'CM-06850', 'CAJAS DE MADERA SOTO CANO TORO CONN BOX 20', '1450', NULL, NULL, NULL, 7, NULL, NULL),
-	(823, 'CM-06851', 'CAJAS DE MADERA SOTO CANO TORO HAB BOX 20', '1450', NULL, NULL, NULL, 7, NULL, NULL),
-	(824, 'CM-06852', 'CAJAS DE MADERA SOTO CANO TORO COR. BOX 20', '1450', NULL, NULL, NULL, 7, NULL, NULL),
-	(825, 'CM-06853', 'CAJAS DE MADERA ROCKY PATEL JON CARLOS ROBUSTO COROJO BOX/20', '140', NULL, NULL, NULL, 7, NULL, NULL),
-	(826, 'CM-06854', 'CAJAS DE MADERA ROCKY PATEL JON CARLOS CHURCHILL COROJO BOX/20', '140', NULL, NULL, NULL, 7, NULL, NULL),
-	(827, 'CM-06855', 'CAJAS DE MADERA ROCKY PATEL JON CARLOS TORPEDO COROJO BOX/20', '140', NULL, NULL, NULL, 7, NULL, NULL),
-	(828, 'CM-06856', 'CAJAS DE MADERA ROCKY PATEL OLD WORLD TORO PRESS COROJO BOX/20', '186', NULL, NULL, NULL, 7, NULL, NULL),
-	(829, 'CM-06857', 'CAJAS DE MADERA ROCKY PATEL OLD WORLD ROBUSTO PRESS COROJO BOX/20', '186', NULL, NULL, NULL, 7, NULL, NULL),
-	(830, 'CM-06858', 'CAJAS DE MADERA ROCKY PATEL OLD WORLD SIXTY ROUND COROJO BOX/20', '186', NULL, NULL, NULL, 7, NULL, NULL),
-	(831, 'CM-06859', 'CAJAS DE MADERA ROCKY PATEL OLD WORLD TORO PRESS MADURO BOX/20', '186', NULL, NULL, NULL, 7, NULL, NULL),
-	(832, 'CM-06860', 'CAJAS DE MADERA ROCKY PATEL OLD WORLD ROBUSTO PRESS MADURO BOX/20', '186', NULL, NULL, NULL, 7, NULL, NULL),
-	(833, 'CM-06861', 'CAJAS DE MADERA ROCKY PATEL OLD WORLD TORPEDO PRESS MADURO BOX/20', '186', NULL, NULL, NULL, 7, NULL, NULL),
-	(834, 'CM-06862', 'CAJAS DE MADERA ROCKY PATEL EDGE BATTALION HABANO BOX/20', '61', NULL, NULL, NULL, 7, NULL, NULL),
-	(835, 'CM-06863', 'CAJAS DE MADERA ROCKY PATEL  EDGE BATTALION COROJO BOX20', '51', NULL, NULL, NULL, 7, NULL, NULL),
-	(836, 'CM-06864', 'CAJAS DE MADERA ROCKY PATEL LA PALINA BRONZE TORO BOX/20', '53', NULL, NULL, NULL, 7, NULL, NULL),
-	(837, 'CM-06865', 'CAJAS DE MADERA ROCKY PATEL LA PALINA BRONZE ROBUSTO HABANO BOX/20', '53', NULL, NULL, NULL, 7, NULL, NULL),
-	(838, 'CM-06866', 'CAJAS DE MADERA ROCKY PATEL OLD WORLD RESERVE ROBUSTO PRESS COROJO NUEVO BOX 20', '186', NULL, NULL, NULL, 7, NULL, NULL),
-	(839, 'CM-06867', 'CAJAS DE MADERA ROCKY PATEL OLD WORLD RESERVE TORO PRESS COROJO NUEVO BOX 20', '186', NULL, NULL, NULL, 7, NULL, NULL),
-	(840, 'CM-06868', 'CAJAS DE MADERA ROCKY PATEL OLD WORLD RESERVE TORO PRESS COROJO LISA BOX 20', '186', NULL, NULL, NULL, 7, NULL, NULL),
-	(841, 'CM-06869', 'CAJAS DE MADERA ROCKY PATEL LA PALINA BLUE LABEL TORO BOX/20', '228', NULL, NULL, NULL, 7, NULL, NULL),
-	(842, 'CM-06870', 'CAJAS DE MADERA ROCKY PATEL EDGE 652 TORO BOX/50 HABANO', '61', NULL, NULL, NULL, NULL, NULL, NULL),
-	(843, 'CM-06871', 'CAJAS DE MADERA ROCKY PATEL LA PALINA BRONZE SHORT ROBUSTO BOX/20', '53', NULL, NULL, NULL, 7, NULL, NULL),
-	(844, 'CM-06872', 'CAJAS DE MADERA ROCKY PATEL  EDGE SQUARE TORO PRESS COROJO BOX/20', '209', NULL, NULL, NULL, 7, NULL, NULL),
-	(845, 'CM-06873', 'CAJAS DE MADERA ROCKY PATEL  EDGE SQUARE TORPEDO PRESS  COROJO BOX/20', '209', NULL, NULL, NULL, 7, NULL, NULL),
-	(846, 'CM-06874', 'CAJAS DE MADERA ROCKY PATEL  EDGE SQUARE ROBUSTO PRESS MADURO BOX/20', '209', NULL, NULL, NULL, 7, NULL, NULL),
-	(847, 'CM-06875', 'CAJAS DE MADERA ROCKY PATEL  EDGE SQUARE TORO PRESS MADURO BOX/20', '209', NULL, NULL, NULL, 7, NULL, NULL),
-	(848, 'CM-06876', 'CAJAS DE MADERA ROCKY PATEL  EDGE SQUARE TORPEDO PRESS MADURO BOX/20', '209', NULL, NULL, NULL, 7, NULL, NULL),
-	(849, 'CM-06877', 'CAJAS DE MADERA ROCKY PATEL OLD WORLD RESERVE TORO ROUN CONECTICUT BOX 20', '186', NULL, NULL, NULL, 7, NULL, NULL),
-	(850, 'CM-06878', 'CAJAS DE MADERA ROCKY PATEL OLD WORLD RESERVE TORO ROUND MADURO BOX 20', '186', NULL, NULL, NULL, 7, NULL, NULL),
-	(851, 'CM-06879', 'CAJAS DE MADERA ROCKY PATEL OLD WORLD RESERVE SIXTI PRESS COROJO NUEVO BOX 20', '186', NULL, NULL, NULL, 7, NULL, NULL),
-	(852, 'CM-06880', 'CAJAS DE MADERA ROCKY PATEL CAUCUS MINI BELICOSO SUMATRA BOX/20', '106', NULL, NULL, NULL, 7, NULL, NULL),
-	(853, 'CM-06882', 'CAJAS DE MADERA ROCKY PATEL PREMIUM  MUESTRAS TORO COLOR NATURAL BOX20', '188', NULL, NULL, NULL, 7, NULL, NULL),
-	(854, 'CM-06883', 'CAJAS DE MADERA ROCKY PATEL PREMIUM  MUESTRAS TORO COLOR CAFE BOX20', '188', NULL, NULL, NULL, 7, NULL, NULL),
-	(855, 'CM-06884', 'CAJAS DE MADERA ROCKY PATEL PREMIUM  MUESTRAS TORO COLOR NEGRO BRILLANTE BOX20', '188', NULL, NULL, NULL, 7, NULL, NULL),
-	(856, 'CM-06885', 'CAJAS DE MADERA ROCKY PATEL PREMIUM  MUESTRAS TORO COLOR ROJO  BRILLANTE  BOX20', '188', NULL, NULL, NULL, 7, NULL, NULL),
-	(857, 'CM-06886', 'CAJAS DE MADERA ROCKY PATEL  ITC ESMERALDA TORO CANDELA BOX/20', '151', NULL, NULL, NULL, 7, NULL, NULL),
-	(858, 'CM-06887', 'CAJAS DE MADERA ROCKY PATEL OLD WORLD RESERVE ROBUSTO REDONDO CONN BOX 20', '186', NULL, NULL, NULL, 7, NULL, NULL),
-	(859, 'CM-06888', 'CAJAS DE MADERA ROCKY PATEL PREMIUN FILTHY VIKING  TORO HABA-2000 BOX/20', '941', NULL, NULL, NULL, 7, NULL, NULL),
-	(860, 'CM-06889', 'CAJAS DE MADERA  ROCKY PATEL PREMIUM VICTORY CIGARS TORO PRESS SUMATRA BOX-10', '897', NULL, NULL, NULL, 4, NULL, NULL),
-	(861, 'CM-06890', 'CAJAS DE MADERA  ROCKY PATEL PREMIUM VICTORY CIGARS TORO PRESS SUMATRA BOX-100', '897', NULL, NULL, NULL, 18, NULL, NULL),
-	(862, 'CM-06891', 'CAJAS DE MADERA ROCKY PATEL  EDGE ROBUSTO GLAS TUBO COROJO BOX/10', '51', NULL, NULL, NULL, 4, NULL, NULL),
-	(863, 'CM-06892', 'CAJAS DE MADERA ROCKY PATEL  VINTAGE TRAYS 2018 VARIADO BOX100', '15', NULL, NULL, NULL, 18, NULL, NULL),
-	(864, 'CM-06893', 'CAJAS DE MADERA ROCKY PATEL  EDGE ROBUSTO GLAS TUBO MADURO BOX/10', '51', NULL, NULL, NULL, 4, NULL, NULL),
-	(865, 'CM-06894', 'CAJAS DE MADERA ROCKY PATEL SHOCKOE VALLEY LIMITED RESERVE ROBUSTO MADURO BOX 20', '63', NULL, NULL, NULL, 7, NULL, NULL),
-	(866, 'CM-06895', 'CAJAS DE MADERA ROCKY PATEL SHOCKOE VALLEY LIMITED RESERVE TORPEDO MADURO BOX 20', '63', NULL, NULL, NULL, 7, NULL, NULL),
-	(867, 'CM-06896', 'CAJAS DE MADERA ROCKY PATEL SHOCKOE VALLEY LIMITED RESERVE TORO MADURO BOX 20', '63', NULL, NULL, NULL, 7, NULL, NULL),
-	(868, 'CM-06897', 'CAJAS DE MADERA ROCKY PATEL THE FOUNDER SIXTY (GORDO) CONN BOX/20', '946', NULL, NULL, NULL, 7, NULL, NULL),
-	(869, 'CM-06898', 'CAJAS DE MADERA ROCKY PATEL THE FOUNDER ROBUSTO CONN BOX/20', '946', NULL, NULL, NULL, 7, NULL, NULL),
-	(870, 'CM-06899', 'CAJAS DE MADERA ROCKY PATEL THE FOUNDER TORO CONN BOX/20', '946', NULL, NULL, NULL, 7, NULL, NULL),
-	(871, 'CM-06900', 'CAJAS DE MADERA ROCKY PATEL THE FOUNDER ROBUSTO PRESS MADURO BOX/20', '946', NULL, NULL, NULL, 7, NULL, NULL),
-	(872, 'CM-06901', 'CAJAS DE MADERA ROCKY PATEL THE FOUNDER TORO PRESS MADURO BOX/20', '946', NULL, NULL, NULL, 7, NULL, NULL),
-	(873, 'CM-06902', 'CAJAS DE MADERA ROCKY PATEL THE FOUNDER GORDO PRESS MADURO BOX/20', '946', NULL, NULL, NULL, 7, NULL, NULL),
-	(874, 'CM-06903', 'CAJAS DE MADERA ROCKY PATEL  NICK CIGAR 10 ANIVERSARIO BOX/20', '1258', NULL, NULL, NULL, 7, NULL, NULL),
-	(875, 'CM-06904', 'CAJAS DE MADERA ROCKY PATEL BEALLE STREET ROBUSTO BASS GUITAR MADURO BOX/20', '70', NULL, NULL, NULL, 7, NULL, NULL),
-	(876, 'CM-06905', 'CAJAS DE MADERA ROCKY PATEL BEALLE STREET TORO BASS GUITAR MADURO BOX/20', '70', NULL, NULL, NULL, 7, NULL, NULL),
-	(877, 'CM-06906', 'CAJAS DE MADERA ROCKY PATEL BEALLE STREET SIXTY BASS GUITAR MADURO BOX/20', '70', NULL, NULL, NULL, 7, NULL, NULL),
-	(878, 'CM-06907', 'CAJAS DE MADERA ROCKY PATEL BEALLE STREET TORPEDO BASS GUITAR MADURO BOX/20', '70', NULL, NULL, NULL, 7, NULL, NULL),
-	(879, 'CM-06908', 'CAJAS DE MADERA ROCKY PATEL LA PALINA BLUE LABEL GORDO HABANO BOX/20', '228', NULL, NULL, NULL, 7, NULL, NULL),
-	(880, 'CM-06909', 'CAJAS DE MADERA ROCKY PATEL  VINTAGE 1999 SHORT ROBUSTO CONERICO BOX/20', '86', NULL, NULL, NULL, 7, NULL, NULL),
-	(881, 'CM-06910', 'CAJAS DE MADERA ROCKY PATEL  EDGE GRAN ROBUSTO COROJO BOX/20', '51', NULL, NULL, NULL, 7, NULL, NULL),
-	(882, 'CM-06911', 'CAJAS DE MADERA ROCKY PATEL PREMIUN FILTHY VIKING  ROBUSTO HABA-2000 BOX/20', '941', NULL, NULL, NULL, 7, NULL, NULL),
-	(883, 'CM-06912', 'CAJAS DE MADERA ROCKY PATEL VINTAGE 1990 BELICOSO RED MADURO BOX/20', '15', NULL, NULL, NULL, 7, NULL, NULL),
-	(884, 'CM-06913', 'CAJAS DE MADERA ROCKY PATEL THE COLLECTION TORO COROJO BOX/20', '947', NULL, NULL, NULL, 7, NULL, NULL),
-	(885, 'CM-06914', 'CAJAS DE MADERA ROCKY PATEL THE COLLECTION TORO CONNECTICUT BOX/20', '947', NULL, NULL, NULL, 7, NULL, NULL),
-	(886, 'CM-06915', 'CAJAS DE MADERA ROCKY PATEL THE COLLECTION TORO MADURO BOX/20', '947', NULL, NULL, NULL, 7, NULL, NULL),
-	(887, 'CM-06916', 'CAJAS DE MADERA ROCKY PATEL  OREASIS TORO SUMATRA BOX/10', '964', NULL, NULL, NULL, 4, NULL, NULL),
-	(888, 'CM-06917', 'CAJAS DE MADERA ROCKY PATEL  OREASIS GORDO SUMATRA BOX/10', '964', NULL, NULL, NULL, 4, NULL, NULL),
-	(889, 'CM-06918', 'CAJAS DE MADERA ROCKY PATEL  OREASIS CHURCHILL SUMATRA BOX/10', '964', NULL, NULL, NULL, 4, NULL, NULL),
-	(890, 'CM-06919', 'CAJAS DE MADERA ROCKY PATEL THE BACKSTOPPERS TORO HABANO BOX/10', '971', NULL, NULL, NULL, 4, NULL, NULL),
-	(891, 'CM-06920', 'CAJAS DE MADERA ROCKY PATEL STEEL CITY TORO CONNECTICUT BOX 20', '958', NULL, NULL, NULL, 7, NULL, NULL),
-	(892, 'CM-06921', 'CAJAS DE MADERA ROCKY PATEL STEEL CITY GRANDE CONNECTICUT BOX 20', '958', NULL, NULL, NULL, 7, NULL, NULL),
-	(893, 'CM-06922', 'CAJAS DE MADERA ROCKY PATEL LA PALINA REGAL RESERVE CONN ROBUSTO BOX/20', '953', NULL, NULL, NULL, 7, NULL, NULL),
-	(894, 'CM-06923', 'CAJAS DE MADERA ROCKY PATEL LA PALINA REGAL RESERVE CONN TORO BOX/20', '953', NULL, NULL, NULL, 7, NULL, NULL),
-	(895, 'CM-06924', 'CAJAS DE MADERA ROCKY PATEL LA PALINA REGAL RESERVE CONN CHURCHILL BOX/20', '953', NULL, NULL, NULL, 7, NULL, NULL),
-	(896, 'CM-06925', 'CAJAS DE MADERA ROCKY PATEL LA PALINA REGAL RESERVE HAB.OSCURO ROBUSTO BOX/20', '953', NULL, NULL, NULL, 7, NULL, NULL),
-	(897, 'CM-06926', 'CAJAS DE MADERA ROCKY PATEL LA PALINA REGAL RESERVE HAB.OSCURO TORO BOX/20', '953', NULL, NULL, NULL, 7, NULL, NULL),
-	(898, 'CM-06927', 'CAJAS DE MADERA ROCKY PATEL LA PALINA REGAL RESERVE HAB.OSCURO CHURCHILL  BOX/20', '953', NULL, NULL, NULL, 7, NULL, NULL),
-	(899, 'CM-06928', 'CAJAS DE MADERA ROCKY PATEL LA PALINA REGAL RESERVE HAB. ROBUSTO BOX/20', '953', NULL, NULL, NULL, 7, NULL, NULL),
-	(900, 'CM-06929', 'CAJAS DE MADERA ROCKY PATEL LA PALINA REGAL RESERVE HAB TORO BOX/20', '953', NULL, NULL, NULL, 7, NULL, NULL),
-	(901, 'CM-06930', 'CAJAS DE MADERA ROCKY PATEL LA PALINA REGAL RESERVE HAB. CHURCHILL BOX/20', '953', NULL, NULL, NULL, 7, NULL, NULL),
-	(902, 'CM-06932', 'CAJAS DE MADERA ROCKY PATEL  GOLD BY R.P. ROBUSTO MADURO  BOX/20', '211', NULL, NULL, NULL, 7, NULL, NULL),
-	(903, 'CM-06933', 'CAJAS DE MADERA ROCKY PATEL BEALLE STREET ROBUSTO LEAD GUITAR CONNECTICUT BOX/20', '70', NULL, NULL, NULL, 7, NULL, NULL),
-	(904, 'CM-06934', 'CAJAS DE MADERA ROCKY PATEL BEALLE STREET SIXTY LEAD GUITAR CONNECTICUT BOX/20', '70', NULL, NULL, NULL, 7, NULL, NULL),
-	(905, 'CM-06936', 'CAJAS DE MADERA ROCKY PATEL BEALLE STREET TORO LEAD GUITAR CONNECTICUT BOX/20', '70', NULL, NULL, NULL, 7, NULL, NULL),
-	(906, 'CM-06937', 'CAJAS DE MADERA ROCKY PATEL BEALLE STREET TORPEDO LEAD GUITAR CONNECTICUT BOX/20', '70', NULL, NULL, NULL, 7, NULL, NULL),
-	(907, 'CM-06938', 'CAJAS DE MADERA ROCKY PATEL DECADE TORO PRENSADO SUMATRA BOX/10', '90', NULL, NULL, NULL, 4, NULL, NULL),
-	(908, 'CM-06939', 'CAJAS DE MADERA ROCKY PATEL BEALLE STREET LANCERO BASS GUITAR MADURO BOX/20', '70', NULL, NULL, NULL, 7, NULL, NULL),
-	(909, 'CM-06940', 'CAJAS DE MADERA ROCKY PATEL  UNION SQUARE TORO PRESS HABANO BOX/20', '996', NULL, NULL, NULL, 7, NULL, NULL),
-	(910, 'CM-06941', 'CAJAS DE MADERA ROCKY PATEL LB1 CORONA HABANO BOX/20', '95', NULL, NULL, NULL, 7, NULL, NULL),
-	(911, 'CM-06942', 'CAJAS DE MADERA ROCKY PATEL LB1 ROBUSTO HABANO BOX/20', '95', NULL, NULL, NULL, 7, NULL, NULL),
-	(912, 'CM-06943', 'CAJAS DE MADERA ROCKY PATEL LB1 TORO HABANO BOX/20', '95', NULL, NULL, NULL, 7, NULL, NULL),
-	(913, 'CM-06944', 'CAJAS DE MADERA ROCKY PATEL LB1 SIXTY HABANO BOX/20', '95', NULL, NULL, NULL, 7, NULL, NULL),
-	(914, 'CM-06945', 'CAJAS DE MADERA ROCKY PATEL LB1 CHURCHILL SHAGGY HABANO BOX/20', '95', NULL, NULL, NULL, 7, NULL, NULL),
-	(915, 'CM-06946', 'CAJAS DE MADERA ROCKY PATEL  EMBASSY ROBUSTO  BOX/20', '406', NULL, NULL, NULL, 7, NULL, NULL),
-	(916, 'CM-06947', 'CAJAS DE MADERA ROCKY PATEL  EMBASSY TORO BOX/20', '406', NULL, NULL, NULL, 7, NULL, NULL),
-	(917, 'CM-06948', 'CAJAS DE MADERA ROCKY PATEL EMBASSY GRANDE  BOX/20', '406', NULL, NULL, NULL, 7, NULL, NULL),
-	(918, 'CM-06949', 'CAJAS DE MADERA ROCKY PATEL DECADE TORO TUBO PLYWOOD SUMATRA BOX/50', '90', NULL, NULL, NULL, 21, NULL, NULL),
-	(919, 'CM-06950', 'CAJAS DE MADERA ROCKY PATEL GOLD BY R.P. CHURCHILL MADURO BOX/20', '211', NULL, NULL, NULL, 7, NULL, NULL),
-	(920, 'CM-06951', 'CAJAS DE MADERA ROCKY PATEL TRAYS JML GRANDE VARIADO BOX/100', '237', NULL, NULL, NULL, 18, NULL, NULL),
-	(921, 'CM-06952', 'CAJAS DE MADERA ROCKY PATEL TRAYS JML MEDIANO VARIADO BOX50', '237', NULL, NULL, NULL, 21, NULL, NULL),
-	(922, 'CM-06953', 'CAJAS DE MADERA ROCKY PATEL  GOLD BY R.P. BELICOSO MADURO BOX/20', '211', NULL, NULL, NULL, 7, NULL, NULL),
-	(923, 'CM-06954', 'CAJAS DE MADERA ROCKY PATEL  GOLD BY R.P. TORO MADURO BOX/20', '211', NULL, NULL, NULL, 7, NULL, NULL),
-	(924, 'CM-06955', 'CAJAS DE MADERA ROCKY PATEL  ORETOBERFEST GORDO HABANO BOX/10', '943', NULL, NULL, NULL, 4, NULL, NULL),
-	(925, 'CM-06956', 'CAJAS DE MADERA ROCKY PATEL  ORETOBERFEST GORDO CONNECTICUT BOX/10', '943', NULL, NULL, NULL, 4, NULL, NULL),
-	(926, 'CM-06957', 'CAJAS DE MADERA ROCKY PATEL WINDY CITY 5-1/2X50 ROBUSTO CONECTICUT BOX20', '999', NULL, NULL, NULL, 7, NULL, NULL),
-	(927, 'CM-06958', 'CAJAS DE MADERA ROCKY PATEL  EDGE COUNTERFEIT TORO HABANO BOX/20', '51', NULL, NULL, NULL, 7, NULL, NULL),
-	(928, 'CM-06959', 'CAJAS DE MADERA ROCKY PATEL BEALLE STREET LANCERO LEAD GUITAR CONECTICUT BOX/20', '70', NULL, NULL, NULL, 7, NULL, NULL),
-	(929, 'CM-06960', 'CAJAS DE MADERA ROCKY PATEL SHOCKOE VALLEY COSTARICA CORONA  MADURO BOX 20', '63', NULL, NULL, NULL, 7, NULL, NULL),
-	(930, 'CM-06961', 'CAJAS DE MADERA ROCKY PATEL PHARAOH TORO MADURO 6X52 BOX/20', '1450', NULL, NULL, NULL, 7, NULL, NULL),
-	(931, 'CM-06962', 'CAJAS DE MADERA ROCKY PATEL PHARAOH ROBUSTO MADURO  BOX/20', '1450', NULL, NULL, NULL, 7, NULL, NULL),
-	(932, 'CM-06963', 'CAJAS DE MADERA ROCKY PATEL THE COLLECTION PETIT CORONA COROJO BOX/20', '947', NULL, NULL, NULL, 7, NULL, NULL),
-	(933, 'CM-06964', 'CAJAS DE MADERA ROCKY PATEL THE COLLECTION GRANDE COROJO BOX/20', '947', NULL, NULL, NULL, 7, NULL, NULL),
-	(934, 'CM-06965', 'CAJAS DE MADERA ROCKY PATEL THE COLLECTION PETIT CORONA CONN BOX/20', '947', NULL, NULL, NULL, 7, NULL, NULL),
-	(935, 'CM-06966', 'CAJAS DE MADERA ROCKY PATEL THE COLLECTION GRANDE CONN BOX/20', '947', NULL, NULL, NULL, 7, NULL, NULL),
-	(936, 'CM-06967', 'CAJAS DE MADERA ROCKY PATEL THE COLLECTION PETIT CORONA MADURO BOX/20', '947', NULL, NULL, NULL, 7, NULL, NULL),
-	(937, 'CM-06968', 'CAJAS DE MADERA ROCKY PATEL THE COLLECTION GRANDE MADURO BOX/20', '947', NULL, NULL, NULL, 7, NULL, NULL),
-	(938, 'CM-06969', 'CAJAS DE MADERA ROCKY PATEL THE FOUNDER LIMITED PERFECTO CONN BOX/20', '946', NULL, NULL, NULL, 7, NULL, NULL),
-	(939, 'CM-06970', 'CAJAS DE MADERA ROCKY PATEL SCREAMING ROBUSTO CONECTICUT BOX/20', '1000', NULL, NULL, NULL, 7, NULL, NULL),
-	(940, 'CM-06972', 'CAJAS DE MADERA ROCKY PATEL EDGE  A10 ROBUSTO BOX/20', '91', NULL, NULL, NULL, 7, NULL, NULL),
-	(941, 'CM-06973', 'CAJAS DE MADERA ROCKY PATEL  EXTREME SIXTY SUMATRA BOX/20', '183', NULL, NULL, NULL, 7, NULL, NULL),
-	(942, 'CM-06974', 'CAJAS DE MADERA ROCKY PATEL EDGE 4-1/2X60 B52 CONNECTICUT BOX/30', '99', NULL, NULL, NULL, 19, NULL, NULL),
-	(943, 'CM-06975', 'CAJAS DE MADERA ROCKY PATEL LA PALINA LP LINE #2 PETITE CORONA  BOX 20', '735', NULL, NULL, NULL, 7, NULL, NULL),
-	(944, 'CM-06976', 'CAJAS DE MADERA ROCKY PATEL LA PALINA LP LINE #2 GORDO BOX 20', '735', NULL, NULL, NULL, 7, NULL, NULL),
-	(945, 'CM-06977', 'CAJAS DE MADERA ROCKY PATEL LA PALINA LP LINE #2 ROBUSTO BOX 20', '735', NULL, NULL, NULL, 7, NULL, NULL),
-	(946, 'CM-06978', 'CAJAS DE MADERA ROCKY PATEL LA PALINA LP LINE #2 TORO  BOX 20', '735', NULL, NULL, NULL, 7, NULL, NULL),
-	(947, 'CM-06979', 'CAJAS DE MADERA ROCKY PATEL LA PALINA LP LINE #1 PETITE CORONA  BOX 20', '734', NULL, NULL, NULL, 7, NULL, NULL),
-	(948, 'CM-06980', 'CAJAS DE MADERA ROCKY PATEL LA PALINA LP LINE #1 GORDO BOX 20', '734', NULL, NULL, NULL, 7, NULL, NULL),
-	(949, 'CM-06981', 'CAJAS DE MADERA ROCKY PATEL LA PALINA LP LINE #1 ROBUSTO BOX 20', '734', NULL, NULL, NULL, 7, NULL, NULL),
-	(950, 'CM-06982', 'CAJAS DE MADERA ROCKY PATEL LA PALINA LP LINE #1 TORO BOX 20', '734', NULL, NULL, NULL, 7, NULL, NULL),
-	(951, 'CM-06983', 'CAJAS DE MADERA ROCKY PATEL BELLA CARMELLA TORPEDO BOX/20', '139', NULL, NULL, NULL, 7, NULL, NULL),
-	(952, 'CM-06984', 'CAJAS DE MADERA ROCKY PATEL CAJAS VARIADAS', '237', NULL, NULL, NULL, NULL, NULL, NULL),
-	(953, 'CM-06985', 'CAJAS DE MADERA ROCKY PATEL SHOCKOE VALLEY ROBUSTO HABANO BOX 20', '63', NULL, NULL, NULL, 7, NULL, NULL),
-	(954, 'CM-06986', 'CAJAS DE MADERA ROCKY PATEL SHOCKOE VALLEY CORONA HABANO BOX 20', '63', NULL, NULL, NULL, 7, NULL, NULL),
-	(955, 'CM-06987', 'CAJAS DE MADERA ROCKY PATEL SHOCKOE VALLEY TORO HABANO BOX 20', '63', NULL, NULL, NULL, 7, NULL, NULL),
-	(956, 'CM-06988', 'CAJAS DE MADERA ROCKY PATEL BLOOD-LINE RED GIGANTE BOX 20', '712', NULL, NULL, NULL, 7, NULL, NULL),
-	(957, 'CM-06989', 'CAJAS DE MADERA ROCKY PATEL BLOOD-LINE RED ROBUSTO BOX 20', '712', NULL, NULL, NULL, 7, NULL, NULL),
-	(958, 'CM-06990', 'CAJAS DE MADERA ROCKY PATEL BLOOD-LINE RED SIXTY BOX 20', '712', NULL, NULL, NULL, 7, NULL, NULL),
-	(959, 'CM-06991', 'CAJAS DE MADERA ROCKY PATEL BLOOD-LINE RED TORO BOX 20', '712', NULL, NULL, NULL, 7, NULL, NULL),
-	(960, 'CM-06992', 'CAJAS DE MADERA ROCKY PATEL BLOOD-LINE RED TORPEDO BOX 20', '712', NULL, NULL, NULL, 7, NULL, NULL),
-	(961, 'CM-06993', 'CAJAS DE MADERA ROCKY PATEL LA PALINA BLACK LABEL ROBUSTO BOX/20', '94', NULL, NULL, NULL, 7, NULL, NULL),
-	(962, 'CM-06994', 'CAJAS DE MADERA ROCKY PATEL LA PALINA BLACK LABEL GORDO MADURO BOX/20', '94', NULL, NULL, NULL, 7, NULL, NULL),
-	(963, 'CM-06995', 'CAJAS DE MADERA ROCKY PATEL LA PALINA BLACK LABEL TORO MADURO BOX/20', '94', NULL, NULL, NULL, 7, NULL, NULL),
-	(964, 'CM-06996', 'CAJAS DE MADERA ROCKY PATEL LA PALINA RED LABEL ROBUSTO BOX/20', '229', NULL, NULL, NULL, 7, NULL, NULL),
-	(965, 'CM-06997', 'CAJAS DE MADERA ROCKY PATEL LA PALINA RED LABEL TORO BOX/20', '229', NULL, NULL, NULL, 7, NULL, NULL),
-	(966, 'CM-06998', 'CAJAS DE MADERA ROCKY PATEL LA PALINA RED LABEL GORDO BOX/20', '229', NULL, NULL, NULL, 7, NULL, NULL),
-	(967, 'CM-06999', 'CAJAS DE MADERA ROCKY PATEL LA PALINA ANNIVERSARY TORO BOX/20', '93', NULL, NULL, NULL, 7, NULL, NULL),
-	(968, 'CM-07000', 'CAJAS DE MADERA ROCKY PATEL LA PALINA ANNIVERSARY ROBUSTO BOX/20', '93', NULL, NULL, NULL, 7, NULL, NULL),
-	(969, 'CM-07001', 'CAJAS DE MADERA ROCKY PATEL LA PALINA ANNIVERSARY GORDO BOX/20', '93', NULL, NULL, NULL, 7, NULL, NULL),
-	(970, 'CM-07002', 'CAJAS DE MADERA ROCKY PATEL  SUPER FUERTE DOUBLE CORONA PRESS HABANO BOX/25', '59', NULL, NULL, NULL, 13, NULL, NULL),
-	(971, 'CM-07003', 'CAJAS DE MADERA ROCKY PATEL  SUPER FUERTE ROBUSTO PRESS HABANO BOX/25', '59', NULL, NULL, NULL, 13, NULL, NULL),
-	(972, 'CM-07004', 'CAJAS DE MADERA ROCKY PATEL  SUPER FUERTE CORONA GRANDE HABANO BOX/25', '59', NULL, NULL, NULL, 13, NULL, NULL),
-	(973, 'CM-07005', 'CAJAS DE MADERA ROCKY PATEL  EDGE BATTALION CONECTICUM BOX20', '99', NULL, NULL, NULL, 7, NULL, NULL),
-	(974, 'CM-07006', 'CAJAS DE MADERA ROCKY PATEL LA PALINA BLUE LABEL ROBUSTO BOX/20', '228', NULL, NULL, NULL, 7, NULL, NULL),
-	(975, 'CM-07007', 'CAJAS DE MADERA ROCKY PATEL SCREAMING ROBUSTO MADURO BOX/20', '1000', NULL, NULL, NULL, 7, NULL, NULL),
-	(976, 'CM-07008', 'CAJAS DE MADERA ROCKY PATEL SCREAMING TORO CONECTICUT BOX/20', '1000', NULL, NULL, NULL, 7, NULL, NULL),
-	(977, 'CM-07009', 'CAJAS DE MADERA ROCKY PATEL SCREAMING TORO MADURO BOX/20', '1000', NULL, NULL, NULL, 7, NULL, NULL),
-	(978, 'CM-07011', 'CAJAS DE MADERA ROCKY PATEL CIGARS SHOP BILOXI 10TH ANNIVERSARY TORO PRESS CONN BOX20', '1012', NULL, NULL, NULL, 7, NULL, NULL),
-	(979, 'CM-07016', 'CAJAS DE MADERA ROCKY PATEL CAJUN CIGARS CZAR TRAYS', '1450', NULL, NULL, NULL, NULL, NULL, NULL),
-	(980, 'CM-07017', 'CAJAS DE MADERA ROCKY PATEL SHOCKOE VALLEY LIMITED RESERVE TORO HABANO BOX 20', '63', NULL, NULL, NULL, 7, NULL, NULL),
-	(981, 'CM-07018', 'CAJAS DE MADERA ROCKY PATEL SHOCKOE VALLEY LIMITED RESERVE CORONA HABANO BOX 20', '63', NULL, NULL, NULL, 7, NULL, NULL),
-	(982, 'CM-07020', 'CAJAS DE MADERA ROCKY PATEL  HONDURAS CLASICO TORO HABANO  BOX/20', '134', NULL, NULL, NULL, 7, NULL, NULL),
-	(983, 'CM-07021', 'CAJAS DE MADERA ROCKY PATEL SHOCKOE VALLEY COSTARICA 6-1/4X52 TORPEDO MADURO BOX 20', '63', NULL, NULL, NULL, 7, NULL, NULL),
-	(984, 'CM-07022', 'CAJAS DE MADERA ROCKY PATEL SHOCKOE VALLEY COSTARICA 6X52 TORO MADURO BOX 20', '63', NULL, NULL, NULL, 7, NULL, NULL),
-	(985, 'CM-07023', 'CAJAS DE MADERA ROCKY PATEL MEXICO ROBUSTO SAMPLER #1 BOX/100', '819', NULL, NULL, NULL, 18, NULL, NULL),
-	(986, 'CM-07024', 'CAJAS DE MADERA ROCKY PATEL MEXICO ROBUSTO SAMPLER #2 BOX/100', '819', NULL, NULL, NULL, 18, NULL, NULL),
-	(987, 'CM-07025', 'CAJAS DE MADERA ROCKY PATEL CGALIV ROBUSTO 5X50 HABANO BOX/20', '607', NULL, NULL, NULL, 7, NULL, NULL),
-	(988, 'CM-07026', 'CAJAS DE MADERA ROCKY PATEL CGALIV TORO 6-1/2X50 HABANO  BOX/20', '607', NULL, NULL, NULL, 7, NULL, NULL),
-	(989, 'CM-07028', 'CAJAS DE MADERA ROCKY PATEL EL DIABLO 5X50 ROBUSTO HABANO/COL BOX/20', '1018', NULL, NULL, NULL, 7, NULL, NULL),
-	(990, 'CM-07029', 'CAJAS DE MADERA ROCKY PATEL EL DIABLO 6-1/2X52 TORO HABANO/COL BOX/20', '1018', NULL, NULL, NULL, 7, NULL, NULL),
-	(991, 'CM-07030', 'CAJAS DE MADERA ROCKY PATEL EDGE BATTALION HABANO (WAREHOUSE) BOX/20', '61', NULL, NULL, NULL, 7, NULL, NULL),
-	(992, 'CM-07031', 'CAJAS DE MADERA ROCKY PATEL EDGE TORO CELLO HABANO (WAREHOUSE) BOX/100', '61', NULL, NULL, NULL, 18, NULL, NULL),
-	(993, 'CM-07032', 'CAJAS DE MADERA ROCKY PATEL EDGE TORO HABANO (WAREHOUSE) BOX/20', '61', NULL, NULL, NULL, 7, NULL, NULL),
-	(994, 'CM-07033', 'CAJAS DE MADERA ROCKY PATEL THE ZEUS BY HUMIDOR CHURCHILL MADURO BOX/20', '102', NULL, NULL, NULL, 7, NULL, NULL),
-	(995, 'CM-07034', 'CAJAS DE MADERA ROCKY PATEL THE ZEUS BY HUMIDOR GRANDE MADURO BOX/20', '102', NULL, NULL, NULL, 7, NULL, NULL),
-	(996, 'CM-07035', 'CAJAS DE MADERA ROCKY PATEL LA PALINA SILVER ROBUSTO HABANO BOX/20', '230', NULL, NULL, NULL, 7, NULL, NULL),
-	(997, 'CM-07036', 'CAJAS DE MADERA ROCKY PATEL LA PALINA SILVER GORDO HABANO BOX/20', '230', NULL, NULL, NULL, 7, NULL, NULL),
-	(998, 'CM-07037', 'CAJAS DE MADERA ROCKY PATEL JML TRAYS NEWBORM HABANO BOX50', '237', NULL, NULL, NULL, 21, NULL, NULL),
-	(999, 'CM-07038', 'CAJAS DE MADERA ROCKY PATEL JML TRAYS NEWBORM HAB.MADURO BOX50', '237', NULL, NULL, NULL, 21, NULL, NULL),
-	(1000, 'CM-07039', 'CAJAS DE MADERA ROCKY PATEL JML TRAYS NEWBORM HAB.SUMATRA BOX50', '237', NULL, NULL, NULL, 21, NULL, NULL),
-	(1001, 'CM-07040', 'CAJAS DE MADERA ROCKY PATEL JML TRAYS NEWBORM TORPEDO CONECTICUT BOX50', '237', NULL, NULL, NULL, 21, NULL, NULL),
-	(1002, 'CM-07041', 'CAJAS DE MADERA ROCKY PATEL JML TRAYS NEWBORM TORPEDO HABANO BOX50', '237', NULL, NULL, NULL, 21, NULL, NULL),
-	(1003, 'CM-07042', 'CAJAS DE MADERA ROCKY PATEL JML TRAYS NEWBORM TORPEDO MADURO BOX50', '237', NULL, NULL, NULL, 21, NULL, NULL),
-	(1004, 'CM-07043', 'CAJAS DE MADERA ROCKY PATEL LA PALINA SILVER TORO HABANO BOX/20', '230', NULL, NULL, NULL, 7, NULL, NULL),
-	(1005, 'CM-07044', 'CAJAS DE MADERA ROCKY PATEL PHARAOH TORO SUMATRA 6X52 BOX/20', '1450', NULL, NULL, NULL, 7, NULL, NULL),
-	(1006, 'CM-07045', 'CAJAS DE MADERA ROCKY PATEL PHARAOH ROBUSTO SUMATRA 6X52 BOX/20', '1450', NULL, NULL, NULL, 7, NULL, NULL),
-	(1007, 'CM-07046', 'CAJAS DE MADERA ROCKY PATEL PHARAOH TORO CONECTICUT 6X52 BOX/20', '1450', NULL, NULL, NULL, 7, NULL, NULL),
-	(1008, 'CM-07047', 'CAJAS DE MADERA ROCKY PATEL PHARAOH ROBUSTO CONECTICUT 6X52 BOX/20', '1450', NULL, NULL, NULL, 7, NULL, NULL),
-	(1009, 'CM-07048', 'CAJAS DE MADERA ROCKY PATEL ISLAND GIRL TORO CONECTICUT BOX/20', '213', NULL, NULL, NULL, 7, NULL, NULL),
-	(1010, 'CM-07049', 'CAJAS DE MADERA ROCKY PATEL ISLAND GIRL TORO HABANO COL. BOX/20', '213', NULL, NULL, NULL, 7, NULL, NULL),
-	(1011, 'CM-07050', 'CAJAS DE MADERA ROCKY PATEL QUARTER CENTURY 25TH ANIVERSARIO SIXTY BOX/20', '1450', NULL, NULL, NULL, 7, NULL, NULL),
-	(1012, 'CM-07051', 'CAJAS DE MADERA ROCKY PATEL QUARTER CENTURY 25TH ANIVERSARO TORO BOX/20', '1450', NULL, NULL, NULL, 7, NULL, NULL),
-	(1013, 'CM-07052', 'CAJAS DE MADERA ROCKY PATEL QUARTER CENTURY 25TH ANIVERSARIO ROBUSTO BOX/20', '1450', NULL, NULL, NULL, 7, NULL, NULL),
-	(1014, 'CM-07056', 'CAJAS DE MADERA ROCKY PATEL  EDGE TORPEDO HABANO (WAREHOUSE) BOX/20', '61', NULL, NULL, NULL, 7, NULL, NULL),
-	(1015, 'CM-07057', 'CAJAS DE MADERA ROCKY PATEL  EDGE SHORT ROBUSTO HABANO (WAREHOUSE) BOX/20', '61', NULL, NULL, NULL, 7, NULL, NULL),
-	(1016, 'CM-07594', 'CAJAS DE MADERA ROCKY PATEL EL DIABLO 7X38 LANCERO HABANO/COL BOX/20', '1018', NULL, NULL, NULL, 7, NULL, NULL),
-	(1017, 'CM-07595', 'CAJAS DE MADERA ROCKY PATEL JML TRAYS 6X52 TORO CONECTICUT BOX50', '237', NULL, NULL, NULL, 21, NULL, NULL),
-	(1018, 'CM-07596', 'CAJAS DE MADERA ROCKY PATEL JML TRAYS 6X52 TORO HABANO BOX50', '237', NULL, NULL, NULL, 21, NULL, NULL),
-	(1019, 'CM-07597', 'CAJAS DE MADERA ROCKY PATEL JML TRAYS 6X52 TORO MADURO BOX50', '237', NULL, NULL, NULL, 21, NULL, NULL),
-	(1020, 'CM-07598', 'CAJAS DE MADERA ROCKY PATEL BEALLE STREET TORO RHYTHM GUITAR SUMATRA BOX/20', '70', NULL, NULL, NULL, 7, NULL, NULL),
-	(1021, 'CM-07599', 'CAJAS DE MADERA ROCKY PATEL BEALLE STREET ROBUSTO RHYTHM GUITAR SUMATRA BOX/20', '70', NULL, NULL, NULL, 7, NULL, NULL),
-	(1022, 'CM-07600', 'CAJAS DE MADERA ROCKY PATEL BEALLE STREET TORPEDO RHYTHM GUITAR SUMATRA BOX/20', '70', NULL, NULL, NULL, 7, NULL, NULL),
-	(1023, 'CM-07601', 'CAJAS DE MADERA ROCKY PATEL BEALLE STREET SIXTY RHYTHM GUITAR SUMATRA BOX/20', '70', NULL, NULL, NULL, 7, NULL, NULL),
-	(1024, 'CM-07602', 'CAJAS DE MADERA ROCKY PATEL J.A EDITION 2021 TORO CONECTICUT BOX/20', '1062', NULL, NULL, NULL, 7, NULL, NULL),
-	(1025, 'CM-07603', 'CAJAS DE MADERA ROCKY PATEL NUMBER 6 SIXTY COROJO BOX/20', '40', NULL, NULL, NULL, 7, NULL, NULL),
-	(1026, 'CM-07604', 'CAJAS DE MADERA ROCKY PATEL NUMBER 6 TORO COROJO BOX/20', '40', NULL, NULL, NULL, 7, NULL, NULL),
-	(1027, 'CM-07605', 'CAJAS DE MADERA ROCKY PATEL NUMBER 6 CORONA COROJO BOX/20', '40', NULL, NULL, NULL, 7, NULL, NULL),
-	(1028, 'CM-07606', 'CAJAS DE MADERA ROCKY PATEL NUMBER 6 ROBUSTO COROJO BOX/20', '40', NULL, NULL, NULL, 7, NULL, NULL),
-	(1029, 'CM-07607', 'CAJAS DE MADERA ROCKY PATEL SHOCKOE VALLEY COSTARICA 5X50 ROBUSTO MADURO BOX 20', '63', NULL, NULL, NULL, 7, NULL, NULL),
-	(1030, 'CM-07608', 'CAJAS DE MADERA ROCKY PATEL BEALLE STREET SIXTY MADURO BOX/20', '70', NULL, NULL, NULL, 7, NULL, NULL),
-	(1031, 'CM-07609', 'CAJAS DE MADERA ROCKY PATEL  CIGAR OASIS O.P 5-1/2X50  ROBUSTO CONNECTICUT BOX/20', '1075', NULL, NULL, NULL, 7, NULL, NULL),
-	(1032, 'CM-07610', 'CAJAS DE MADERA ROCKY PATEL  CIGAR OASIS O.P 6X60 SIXTY CONNECTICUT BOX/20', '1075', NULL, NULL, NULL, 7, NULL, NULL),
-	(1033, 'CM-07611', 'CAJAS DE MADERA ROCKY PATEL  EL MAGO 6X44  CORONA  HABANO/COL. BOX/20', '226', NULL, NULL, NULL, 7, NULL, NULL),
-	(1034, 'CM-07612', 'CAJAS DE MADERA ROCKY PATEL  EL MAGO 6X52 TORO  HABANO/COL. BOX/20', '226', NULL, NULL, NULL, 7, NULL, NULL),
-	(1035, 'CM-07613', 'CAJAS DE MADERA ROCKY PATEL VINTAGE 2003 ROUND SHORT GORDO 5X60 BOX 20', '101', NULL, NULL, NULL, 7, NULL, NULL),
-	(1036, 'CM-07614', 'CAJAS DE MADERA ROCKY PATEL NUMBER 6 CHURCHILL COROJO BOX/20', '40', NULL, NULL, NULL, 7, NULL, NULL),
-	(1037, 'CM-07615', 'CAJAS DE MADERA ROCKY PATEL EDGE WOODEN DISPLAY TRAYS/BOX100', '51', NULL, NULL, NULL, 18, NULL, NULL),
-	(1038, 'CM-07616', 'CAJAS DE MADERA ROCKY PATEL VINTAGE WOODEN DISPALY TRAYS  BOX100', '1308', NULL, NULL, NULL, 18, NULL, NULL),
-	(1039, 'CM-07617', 'CAJAS DE MADERA ROCKY PATEL  EDGE TORPEDO HABANO (WAREHOUSE) BOX/100', '61', NULL, NULL, NULL, 18, NULL, NULL),
-	(1040, 'CM-07618', 'CAJAS DE MADERA ROCKY PATEL  PABLO MARTIN GORDO CAMEROON BOX/20', '110', NULL, NULL, NULL, 7, NULL, NULL),
-	(1041, 'CM-07619', 'CAJAS DE MADERA ROCKY PATEL MARTINIQUE TORO HABANO TRAYS BOX100', '684', NULL, NULL, NULL, 18, NULL, NULL),
-	(1042, 'CM-07620', 'CAJAS DE MADERA ROCKY PATEL CLUB REX BELICOSO GRANDE SUMATRA BOX/20', '52', NULL, NULL, NULL, 7, NULL, NULL),
-	(1043, 'CM-07621', 'CAJAS DE MADERA ROCKY PATEL  EDGE GRAN ROBUSTO HABANO BOX/20', '51', NULL, NULL, NULL, 7, NULL, NULL),
-	(1044, 'CM-07622', 'CAJAS DE MADERA ROCKY PATEL  EDGE GRAN ROBUSTO CONNECTICUT BOX/20', '51', NULL, NULL, NULL, 7, NULL, NULL),
-	(1045, 'CM-07623', 'CAJAS DE MADERA ROCKY PATEL  EDGE GRAN ROBUSTO SUMATRA BOX/20', '51', NULL, NULL, NULL, 7, NULL, NULL);
+INSERT INTO `lista_cajas` (`id`, `codigo`, `productoServicio`, `marca`, `tipo_empaque`, `existencia`, `created_at`, `updated_at`) VALUES
+	(1, 'CM-01296', 'CAJAS DE MADERA ROCKY PATEL VINTAGE 1990 ROBUSTO TUBO 5-1/2X50 MADURO BOX/10', 'Vintage 1990', 4, 0, NULL, NULL),
+	(2, 'CM-01413', 'CAJAS DE MADERA ROCKY PATEL VINTAGE 1999 ROBUSTO TUBO 6X50 CONERICO BOX/10', 'Vintage 1999', 4, 0, NULL, NULL),
+	(3, 'CM-01415', 'CAJAS DE MADERA ROCKY PATEL EDGE LITE TORO BOX/50', 'The Edge Connecticut', 21, 0, NULL, NULL),
+	(4, 'CM-01416', 'CAJAS DE MADERA ROCKY PATEL EDGE LITE TORPEDO BOX/50', 'The Edge Connecticut', 21, 0, NULL, NULL),
+	(5, 'CM-01417', 'CAJAS DE MADERA ROCKY PATEL EDGE LITE DOBLE CORONA BOX/50', 'The Edge Connecticut', 21, 0, NULL, NULL),
+	(6, 'CM-01418', 'CAJAS DE MADERA ROCKY PATEL EDGE LITE ROBUSTO BOX/50', 'The Edge Connecticut', 21, 0, NULL, NULL),
+	(7, 'CM-01419', 'CAJAS DE MADERA ROCKY PATEL EDGE LITE TORO BOX/20', 'The Edge Connecticut', 7, 0, NULL, NULL),
+	(8, 'CM-01420', 'CAJAS DE MADERA ROCKY PATEL EDGE  TORPEDO CONNECTICUT BOX/20', 'The Edge Connecticut', 7, 0, NULL, NULL),
+	(9, 'CM-01421', 'CAJAS DE MADERA ROCKY PATEL EDGE ROBUSTO CONNECTICUT BOX/20', 'The Edge Connecticut', 7, 0, NULL, NULL),
+	(10, 'CM-01422', 'CAJAS DE MADERA ROCKY PATEL EDGE DOBLE CORONA CONNETICUT BOX/20', 'The Edge Connecticut', 7, 0, NULL, NULL),
+	(11, 'CM-01423', 'CAJAS DE MADERA ROCKY PATEL FIRE ROBUSTO BOX/20', 'Fire', 7, 0, NULL, NULL),
+	(12, 'CM-01424', 'CAJAS DE MADERA ROCKY PATEL VINTAGE 1999 ROBUSTO TUBO 4-1/2X50 CONERICO BOX/10', 'Vintage 1999', 4, 0, NULL, NULL),
+	(13, 'CM-01425', 'CAJAS DE MADERA ROCKY PATEL OLD WORLD ROBUSTO MADURO BOX/20', 'Olde World Tobacco', 7, 0, NULL, NULL),
+	(14, 'CM-01869', 'CAJAS DE MADERA ROCKY PATEL FRED & STEVE  BOX/20', 'Fred & Steve', 7, 0, NULL, NULL),
+	(15, 'CM-01934', 'CAJAS DE MADERA ROCKY PATEL  VINTAGE 2003 CHURCHILL PRESS CAMEROON BOX/20', 'VINTAGE 2003', 7, 0, NULL, NULL),
+	(16, 'CM-01974', 'CAJAS DE MADERA  ROCKY PATEL PREMIUM BURN BY ROCKY PATEL TORO BOX-20', 'Gold By RP', 7, 0, NULL, NULL),
+	(17, 'CM-03319', 'CAJAS DE MADERA ROCKY PATEL  CAMEROON BY R.P. LANCERO CAMEROON BOX/20', 'Cameroon By RP', 7, 0, NULL, NULL),
+	(18, 'CM-03320', 'CAJAS DE MADERA ROCKY PATEL DECADE ROBUSTO RED. SUMATRA BOX/20', 'Decada', 7, 0, NULL, NULL),
+	(19, 'CM-03321', 'CAJAS DE MADERA ROCKY PATEL  VINTAGE 1990 PERFECTO RED. MADURO BOX/20', 'Vintage 1990', 7, 0, NULL, NULL),
+	(20, 'CM-03322', 'CAJAS DE MADERA ROCKY PATEL SAMPLER ROCK STAR ROBUSTO BOX 5', 'NINGUNA', 6, 0, NULL, NULL),
+	(21, 'CM-03323', 'CAJAS DE MADERA ROCKY PATEL MONTE TRIPLE LIGERO ROBUSTO BOX 20', 'NINGUNA', 7, 0, NULL, NULL),
+	(22, 'CM-03324', 'CAJAS DE MADERA ROCKY PATEL MONTE TRIPLE LIGERO TORPEDO BOX 20', 'NINGUNA', 7, 0, NULL, NULL),
+	(23, 'CM-03325', 'CAJAS DE MADERA ROCKY PATEL MONTE TRIPLE LIGERO TORO BOX 20', 'NINGUNA', 7, 0, NULL, NULL),
+	(24, 'CM-03326', 'CAJAS DE MADERA ROCKY PATEL MONTE TRIPLE MADURO TORPEDO BOX 20', 'NINGUNA', 7, 0, NULL, NULL),
+	(25, 'CM-03327', 'CAJAS DE MADERA ROCKY PATEL MONTE TRIPLE MADURO ROBUSTO BOX 20', 'NINGUNA', 7, 0, NULL, NULL),
+	(26, 'CM-03328', 'CAJAS DE MADERA ROCKY PATEL MONTE TRIPLE MADURO CHURCHILL BOX 20', 'NINGUNA', 7, 0, NULL, NULL),
+	(27, 'CM-03329', 'CAJAS DE MADERA ROCKY PATEL GRAN VIDA MISSILES PENSILVANIA BOX/20', 'Gran Vida', 7, 0, NULL, NULL),
+	(28, 'CM-03330', 'CAJAS DE MADERA ROCKY PATEL  MONOCACY TORO PRESS SUMATRA  BOX/20', 'Davidus PL Monocacy', 7, 0, NULL, NULL),
+	(29, 'CM-03331', 'CAJAS DE MADERA ROCKY PATEL VINTAGE 1999 SIXTY CONNEECTICUT BOX 20', 'Vintage 1999', 7, 0, NULL, NULL),
+	(30, 'CM-03332', 'CAJAS DE MADERA ROCKY PATEL STRIKE TORO BOX 20', 'Strike', 7, 0, NULL, NULL),
+	(31, 'CM-03333', 'CAJAS DE MADERA ROCKY PATEL STRIKE TORPEDO BOX 20', 'Strike', 7, 0, NULL, NULL),
+	(32, 'CM-03334', 'CAJAS DE MADERA ROCKY PATEL STRIKE CHURCHILL BOX 20', 'Strike', 7, 0, NULL, NULL),
+	(33, 'CM-03335', 'CAJAS DE MADERA ROCKY PATEL SAMPLER LIMITE EDITION LANCERO BOX 10', 'NINGUNA', 4, 0, NULL, NULL),
+	(34, 'CM-03336', 'CAJAS DE MADERA ROCKY PATEL FREDERICKTOWNE TORO PRESS BOX/20', 'Davidus Fredericktown', 7, 0, NULL, NULL),
+	(35, 'CM-03337', 'CAJAS DE MADERA ROCKY PATEL FREDERICKTOWNE ROBUSTO ROUND BOX/20', 'Davidus Fredericktown', 7, 25, NULL, NULL),
+	(36, 'CM-03338', 'CAJAS DE MADERA ROCKY PATEL FREDERICKTOWNE PIRAMIDE BOX/20', 'Davidus Fredericktown', 7, 0, NULL, NULL),
+	(37, 'CM-03339', 'CAJAS DE MADERA ROCKY PATEL  CUBAN CIGAR FACTORY ROJAS TORO BOX/20', 'Cuban Cigar Factory Cabinet Selection', 7, 0, NULL, NULL),
+	(38, 'CM-03340', 'CAJAS DE MADERA ROCKY PATEL CCF WHITE LABEL SIXTY BOX/20', 'CCF- White Label', 7, 0, NULL, NULL),
+	(39, 'CM-03341', 'CAJAS DE MADERA ROCKY PATEL  OCEAN CLUB ROBUSTO PRESS SUMATRA  BOX/20', 'RP Ocean Club', 7, 0, NULL, NULL),
+	(40, 'CM-03342', 'CAJAS DE MADERA ROCKY PATEL  CAUCUS  SIXTY SUMATRA BOX/20', 'Caucus', 7, 0, NULL, NULL),
+	(41, 'CM-03343', 'CAJAS DE MADERA ROCKY PATEL  AMERICAN MARKET ROBUSTO CONN BOX/20', 'American Market Selection', 7, 0, NULL, NULL),
+	(42, 'CM-03344', 'CAJAS DE MADERA ROCKY PATEL OLD WORLD TORO COR/MAD BOX/10', 'Old World Reserve', 4, 0, NULL, NULL),
+	(43, 'CM-03345', 'CAJAS DE MADERA ROCKY PATEL 3-13 GRANDE BOX 20', 'Phoenix', 7, 0, NULL, NULL),
+	(44, 'CM-03346', 'CAJAS DE MADERA ROCKY PATEL 3-13 ROBUSTO BOX 20', 'Phoenix', 7, 0, NULL, NULL),
+	(45, 'CM-03347', 'CAJAS DE MADERA ROCKY PATEL 3-13 TORPEDO BOX 20', 'Phoenix', 7, 0, NULL, NULL),
+	(46, 'CM-03500', 'CAJAS DE MADERA ROCKY PATEL  AMERICAN MARKET DOUBLE CORONA CONN BOX/20', 'American Market Selection', 7, 0, NULL, NULL),
+	(47, 'CM-03501', 'CAJAS DE MADERA ROCKY PATEL  AMERICAN MARKET TORPEDO CONN BOX/20', 'American Market Selection', 7, 0, NULL, NULL),
+	(48, 'CM-03502', 'CAJAS DE MADERA ROCKY PATEL  AMERICAN MARKET LONSDALES CONN BOX/20', 'American Market Selection', 7, 0, NULL, NULL),
+	(49, 'CM-03503', 'CAJAS DE MADERA ROCKY PATEL  AMERICAN MARKET SIXTY CONN BOX/20', 'American Market Selection', 7, 0, NULL, NULL),
+	(50, 'CM-03504', 'CAJAS DE MADERA ROCKY PATEL  AMERICAN MARKET CHURCHILL CONN BOX/20', 'American Market Selection', 7, 0, NULL, NULL),
+	(51, 'CM-03505', 'CAJAS DE MADERA ROCKY PATEL  AMERICAN MARKET TORO CONN BOX/20', 'American Market Selection', 7, 0, NULL, NULL),
+	(52, 'CM-03506', 'CAJAS DE MADERA ROCKY PATEL DAVIDUS ANTIETAM TORO PRESS BOX/20', 'Davidus Antietam', 7, 10, NULL, NULL),
+	(53, 'CM-03507', 'CAJAS DE MADERA ROCKY PATEL  CAMEROON BY R.P. BELICOSO CAMEROON BOX/20', 'Cameroon By RP', 7, 0, NULL, NULL),
+	(54, 'CM-03508', 'CAJAS DE MADERA ROCKY PATEL  CAMEROON BY R.P. TORO CAMEROON BOX/20', 'Cameroon By RP', 7, 0, NULL, NULL),
+	(55, 'CM-03509', 'CAJAS DE MADERA ROCKY PATEL  CAMEROON BY R.P. CHURCHILL CAMEROON BOX/20', 'Cameroon By RP', 7, 0, NULL, NULL),
+	(56, 'CM-03510', 'CAJAS DE MADERA ROCKY PATEL  CAMEROON BY R.P. ROBUSTO CAMEROON BOX/20', 'Cameroon By RP', 7, 0, NULL, NULL),
+	(57, 'CM-03511', 'CAJAS DE MADERA ROCKY PATEL  CAMEROON LEGEND TORO GRANDE MADURO BOX/25', 'Cameroon Legend', 13, 0, NULL, NULL),
+	(58, 'CM-03512', 'CAJAS DE MADERA ROCKY PATEL  CAMEROON LEGEND ROBUSTO GRANDE NATURAL BOX/25', 'Cameroon Legend', 13, 0, NULL, NULL),
+	(59, 'CM-03513', 'CAJAS DE MADERA ROCKY PATEL  CAMEROON LEGEND SUPER TORO NATURAL BOX/25', 'Cameroon Legend', 13, 0, NULL, NULL),
+	(60, 'CM-03514', 'CAJAS DE MADERA ROCKY PATEL  CAMEROON LEGEND TORO GRANDE NATURAL BOX/25', 'Cameroon Legend', 13, 0, NULL, NULL),
+	(61, 'CM-03515', 'CAJAS DE MADERA ROCKY PATEL  CAUCUS CHURCHILL SUMATRA BOX/20', 'Caucus', 7, 0, NULL, NULL),
+	(62, 'CM-03516', 'CAJAS DE MADERA ROCKY PATEL  CAUCUS ROBUSTO SUMATRA BOX/20', 'Caucus', 7, 0, NULL, NULL),
+	(63, 'CM-03517', 'CAJAS DE MADERA ROCKY PATEL  CI LEGENDS ROBUSTO HAB/COL BOX/20  (VIEJAS)', 'CI Legend', NULL, 0, NULL, NULL),
+	(64, 'CM-03518', 'CAJAS DE MADERA ROCKY PATEL  CLASICO CHIEF COROJO BOX/25', 'Classic', 13, 0, NULL, NULL),
+	(65, 'CM-03519', 'CAJAS DE MADERA ROCKY PATEL  CLASICO TEEPEE COROJO BOX/25', 'Classic', 13, 0, NULL, NULL),
+	(66, 'CM-03520', 'CAJAS DE MADERA ROCKY PATEL  CLASICO BOXER COROJO BOX/25', 'Classic', 13, 0, NULL, NULL),
+	(67, 'CM-03521', 'CAJAS DE MADERA ROCKY PATEL  CLASICO TOMAHAWK COROJO BOX/25', 'Classic', 13, 0, NULL, NULL),
+	(68, 'CM-03522', 'CAJAS DE MADERA ROCKY PATEL  CLASICO TEEPEE MADURO BOX/25', 'Classic', 13, 0, NULL, NULL),
+	(69, 'CM-03523', 'CAJAS DE MADERA ROCKY PATEL  CLASICO BOXER MADURO BOX/25', 'Classic', 13, 0, NULL, NULL),
+	(70, 'CM-03524', 'CAJAS DE MADERA ROCKY PATEL  CLASICO TOMAHAWK MADURO BOX/25', 'Classic', 13, 0, NULL, NULL),
+	(71, 'CM-03525', 'CAJAS DE MADERA ROCKY PATEL  CUNUCO TORO NATURAL BOX/20', 'Cunuco', 7, 0, NULL, NULL),
+	(72, 'CM-03526', 'CAJAS DE MADERA ROCKY PATEL  CUNUCO SIXTY NATURAL BOX/20', 'Cunuco', 7, 0, NULL, NULL),
+	(73, 'CM-03527', 'CAJAS DE MADERA ROCKY PATEL  CUNUCO ROBUSTO NATURAL BOX/20', 'Cunuco', 7, 0, NULL, NULL),
+	(74, 'CM-03528', 'CAJAS DE MADERA ROCKY PATEL  CUNUCO DOUBLE CORONA NATURAL BOX/20', 'Cunuco', 7, 0, NULL, NULL),
+	(75, 'CM-03529', 'CAJAS DE MADERA ROCKY PATEL  CUNUCO CORONA NATURAL BOX/20', 'Cunuco', 7, 0, NULL, NULL),
+	(76, 'CM-03530', 'CAJAS DE MADERA ROCKY PATEL  CUBAN BLEND TORO COROJO BOX/20', 'Cuban Blend', 7, 0, NULL, NULL),
+	(77, 'CM-03531', 'CAJAS DE MADERA ROCKY PATEL  CUBAN BLEND TORO MADURO BOX/20', 'Cuban Blend', 7, 0, NULL, NULL),
+	(78, 'CM-03532', 'CAJAS DE MADERA ROCKY PATEL  CUBAN BLEND LONSDALES COROJO BOX/20', 'Cuban Blend', 7, 0, NULL, NULL),
+	(79, 'CM-03533', 'CAJAS DE MADERA ROCKY PATEL  CUBAN BLEND LONSDALES MADURO BOX/20', 'Cuban Blend', 7, 0, NULL, NULL),
+	(80, 'CM-03534', 'CAJAS DE MADERA ROCKY PATEL  CUBAN BLEND DOBLE CORONA MADURO BOX/20', 'Cuban Blend', 7, 0, NULL, NULL),
+	(81, 'CM-03535', 'CAJAS DE MADERA ROCKY PATEL  CUBAN BLEND DOBLE CORONA COROJO BOX/20', 'Cuban Blend', 7, 0, NULL, NULL),
+	(82, 'CM-03536', 'CAJAS DE MADERA ROCKY PATEL  CUBAN BLEND LANCERO COROJO BOX/20', 'Cuban Blend', 7, 0, NULL, NULL),
+	(83, 'CM-03537', 'CAJAS DE MADERA ROCKY PATEL  CUBAN BLEND SIXTY COROJO BOX/20', 'Cuban Blend', 7, 0, NULL, NULL),
+	(84, 'CM-03538', 'CAJAS DE MADERA ROCKY PATEL  CUBAN BLEND SIXTY MADURO BOX/20', 'Cuban Blend', 7, 0, NULL, NULL),
+	(85, 'CM-03539', 'CAJAS DE MADERA ROCKY PATEL  CUBAN BLEND TORPEDO COROJO BOX/20', 'Cuban Blend', 7, 0, NULL, NULL),
+	(86, 'CM-03540', 'CAJAS DE MADERA ROCKY PATEL  CUBAN BLEND ROBUSTO MADURO BOX/20', 'Cuban Blend', 7, 0, NULL, NULL),
+	(87, 'CM-03541', 'CAJAS DE MADERA ROCKY PATEL CCF WHITE LABEL ROBUSTO BOX/20', 'CCF- White Label', 7, 0, NULL, NULL),
+	(88, 'CM-03542', 'CAJAS DE MADERA ROCKY PATEL CCF WHITE LABEL TORPEDO BOX/20', 'CCF- White Label', 7, 0, NULL, NULL),
+	(89, 'CM-03543', 'CAJAS DE MADERA ROCKY PATEL  CUBAN CIGAR FACTORY ROJAS ROBUSTO BOX/20', 'Cuban Blend', 7, 0, NULL, NULL),
+	(90, 'CM-03544', 'CAJAS DE MADERA ROCKY PATEL  CUBAN CIGAR FACTORY ROJAS TORPEDO BOX/20', 'Cuban Blend', 7, 0, NULL, NULL),
+	(91, 'CM-03545', 'CAJAS DE MADERA ROCKY PATEL DECADE TORPEDO SUMATRA BOX/20', 'Decada', 7, 0, NULL, NULL),
+	(92, 'CM-03546', 'CAJAS DE MADERA ROCKY PATEL DECADE LONSDALES PRENSADO SUMATRA BOX/20', 'Decada', 7, 0, NULL, NULL),
+	(93, 'CM-03547', 'CAJAS DE MADERA ROCKY PATEL DECADE LANCERO SUMATRA BOX/26', 'Decada', 52, 0, NULL, NULL),
+	(94, 'CM-03548', 'CAJAS DE MADERA ROCKY PATEL DECADE RARES SAMPLER SUMATRA BOX/7', 'Decada', 40, 0, NULL, NULL),
+	(95, 'CM-03549', 'CAJAS DE MADERA ROCKY PATEL DECADE EMPEROR ROUND SUMATRA BOX/20', 'Decada', 7, 0, NULL, NULL),
+	(96, 'CM-03550', 'CAJAS DE MADERA ROCKY PATEL DECADE DISPLAY SUMATRA BOX/75', 'Decada', 90, 0, NULL, NULL),
+	(97, 'CM-03551', 'CAJAS DE MADERA ROCKY PATEL DECADE TORO SUMATRA BOX/10', 'Decada', 4, 0, NULL, NULL),
+	(98, 'CM-03552', 'CAJAS DE MADERA ROCKY PATEL DECADE FORTY SIX PRES SUMATRA BOX/20', 'Decada', 7, 0, NULL, NULL),
+	(99, 'CM-03553', 'CAJAS DE MADERA ROCKY PATEL  DECADA LIMITADA TORO PENSILVANIA BOX/20', 'Decada', 7, 0, NULL, NULL),
+	(100, 'CM-03554', 'CAJAS DE MADERA ROCKY PATEL  DECADA LIMITADA TORPEDO PENSILVANIA BOX/20', 'Decada', 7, 0, NULL, NULL),
+	(101, 'CM-03555', 'CAJAS DE MADERA ROCKY PATEL  DECADA LIMITADA ROBUSTO PENSILVANIA BOX/20', 'Decada', 7, 0, NULL, NULL),
+	(102, 'CM-03556', 'CAJAS DE MADERA ROCKY PATEL  DESIENA TORO COROJO BOX/20', 'Desiena 312', 7, 0, NULL, NULL),
+	(103, 'CM-03557', 'CAJAS DE MADERA ROCKY PATEL  DESIENA ROBUSTO CONERICO BOX/20', 'Desiena 312', 7, 0, NULL, NULL),
+	(104, 'CM-03558', 'CAJAS DE MADERA ROCKY PATEL  DON CASIANI CORONA BOX/20', 'Don Cassieni PL', 7, 0, NULL, NULL),
+	(105, 'CM-03559', 'CAJAS DE MADERA ROCKY PATEL  EDGE SHORT MADURO BOX/20', 'The Edge', 7, 0, NULL, NULL),
+	(106, 'CM-03560', 'CAJAS DE MADERA ROCKY PATEL  EDGE SHORT COROJO BOX/20', 'The Edge', 7, 0, NULL, NULL),
+	(107, 'CM-03561', 'CAJAS DE MADERA ROCKY PATEL  EDGE ROBUSTO MADURO BOX/20', 'The Edge', 7, 0, NULL, NULL),
+	(108, 'CM-03562', 'CAJAS DE MADERA ROCKY PATEL  EDGE LANCERO MADURO BOX/24', 'The Edge', 47, 0, NULL, NULL),
+	(109, 'CM-03563', 'CAJAS DE MADERA ROCKY PATEL  EDGE TORO SUMATRA BOX/100', 'The Edge', 18, 0, NULL, NULL),
+	(110, 'CM-03564', 'CAJAS DE MADERA ROCKY PATEL  EDGE ROBUSTO COROJO BOX/10', 'The Edge', 4, 0, NULL, NULL),
+	(111, 'CM-03565', 'CAJAS DE MADERA ROCKY PATEL  EDGE ROBUSTO MADURO BOX/10 (Divisor Madera)', 'The Edge', NULL, 0, NULL, NULL),
+	(112, 'CM-03566', 'CAJAS DE MADERA ROCKY PATEL  EDGE SAMPLER VARIADO BOX/8', 'The Edge', 50, 0, NULL, NULL),
+	(113, 'CM-03567', 'CAJAS DE MADERA ROCKY PATEL  EDGE GRAN ROBUSTO MADURO BOX/20', 'The Edge', 7, 0, NULL, NULL),
+	(114, 'CM-03568', 'CAJAS DE MADERA ROCKY PATEL  EDGE TORPEDO SUMATRA BOX/100', 'The Edge', 18, 0, NULL, NULL),
+	(115, 'CM-03569', 'CAJAS DE MADERA ROCKY PATEL  EDGE TORO MADURO BOX/20', 'The Edge', 7, 546, NULL, NULL),
+	(116, 'CM-03570', 'CAJAS DE MADERA ROCKY PATEL  EDGE TORPEDO MADURO BOX/20', 'The Edge', 7, 0, NULL, NULL),
+	(117, 'CM-03571', 'CAJAS DE MADERA ROCKY PATEL  EDGE ROBUSTO MADURO BOX/20 (Malas)', 'The Edge', NULL, 0, NULL, NULL),
+	(118, 'CM-03572', 'CAJAS DE MADERA ROCKY PATEL  EDGE TORO COROJO BOX/20', 'The Edge', 7, 420, NULL, NULL),
+	(119, 'CM-03573', 'CAJAS DE MADERA ROCKY PATEL  EDGE MISSILES COROJO BOX/25', 'The Edge', 13, 0, NULL, NULL),
+	(120, 'CM-03574', 'CAJAS DE MADERA ROCKY PATEL  EDGE TORPEDO COROJO BOX/20', 'The Edge', 7, 0, NULL, NULL),
+	(121, 'CM-03575', 'CAJAS DE MADERA ROCKY PATEL  EDGE DOBLE CORONA MADURO BOX/20', 'The Edge', 7, 0, NULL, NULL),
+	(122, 'CM-03576', 'CAJAS DE MADERA ROCKY PATEL  EDGE DOBLE CORONA COROJO BOX/20', 'The Edge', 7, 0, NULL, NULL),
+	(123, 'CM-03577', 'CAJAS DE MADERA ROCKY PATEL  EDGE ROBUSTO COROJO BOX/20', 'The Edge', 7, 0, NULL, NULL),
+	(124, 'CM-03578', 'CAJAS DE MADERA ROCKY PATEL  EDGE BATTALION MADURO BOX/20', 'The Edge', 7, 0, NULL, NULL),
+	(125, 'CM-03579', 'CAJAS DE MADERA ROCKY PATEL  EDGE SIXTY COROJO BOX/20', 'The Edge', 7, 0, NULL, NULL),
+	(126, 'CM-03580', 'CAJAS DE MADERA ROCKY PATEL  EDGE TORPEDO COROJO BOX/100', 'The Edge', 18, 40, NULL, NULL),
+	(127, 'CM-03581', 'CAJAS DE MADERA ROCKY PATEL  EDGE TORO COROJO BOX/100', 'The Edge', 18, 0, NULL, NULL),
+	(128, 'CM-03582', 'CAJAS DE MADERA ROCKY PATEL  EDGE TORO MADURO BOX/100', 'The Edge', 18, 0, NULL, NULL),
+	(129, 'CM-03583', 'CAJAS DE MADERA ROCKY PATEL  EDGE MISSILES MADURO BOX/25', 'The Edge', 13, 0, NULL, NULL),
+	(130, 'CM-03584', 'CAJAS DE MADERA ROCKY PATEL  EDGE CABINET CHURCHILL MADURO BOX/16', 'The Edge', 26, 0, NULL, NULL),
+	(131, 'CM-03585', 'CAJAS DE MADERA ROCKY PATEL  EDGE CABINET CHURCHILL COROJO BOX/16', 'The Edge', 26, 0, NULL, NULL),
+	(132, 'CM-03586', 'CAJAS DE MADERA ROCKY PATEL  EDGE DOBLE CORONA CONNECTICUT BOX/50', 'The Edge Connecticut', 21, 0, NULL, NULL),
+	(133, 'CM-03587', 'CAJAS DE MADERA ROCKY PATEL  EDGE LITE CORONA CONERICO BOX/50', 'El Diablo', 21, 0, NULL, NULL),
+	(134, 'CM-03588', 'CAJAS DE MADERA ROCKY PATEL  EDGE  GABINET CHURCHILL CONERICO BOX/16', 'The Edge', 26, 0, NULL, NULL),
+	(135, 'CM-03589', 'CAJAS DE MADERA ROCKY PATEL  EDGE  CORONA CONERICO BOX/20', 'The Edge', 7, 0, NULL, NULL),
+	(136, 'CM-03590', 'CAJAS DE MADERA ROCKY PATEL  EDGE LITE SHORT CONERICO BOX/50', 'El Diablo', 21, 0, NULL, NULL),
+	(137, 'CM-03591', 'CAJAS DE MADERA ROCKY PATEL  EDGE LITE TORPEDO CONERICO BOX/20', 'El Diablo', 7, 0, NULL, NULL),
+	(138, 'CM-03592', 'CAJAS DE MADERA ROCKY PATEL  EDGE TORPEDO CONNECTICUT BOX/50', 'The Edge', 21, 0, NULL, NULL),
+	(139, 'CM-03593', 'CAJAS DE MADERA ROCKY PATEL  EDGE ROBUSTO CONNECTICUT BOX/50', 'The Edge', 21, 0, NULL, NULL),
+	(140, 'CM-03594', 'CAJAS DE MADERA ROCKY PATEL  EDGE LITE ROBUSTO CONERICO BOX/20', 'El Diablo', 7, 0, NULL, NULL),
+	(141, 'CM-03595', 'CAJAS DE MADERA ROCKY PATEL  EDGE LITE ROBUSTO CONERICO BOX/10', 'El Diablo', 4, 0, NULL, NULL),
+	(142, 'CM-03596', 'CAJAS DE MADERA ROCKY PATEL  EDGE LITE SIXTY CONERICO BOX/20', 'The Edge Connecticut', 7, 0, NULL, NULL),
+	(143, 'CM-03597', 'CAJAS DE MADERA ROCKY PATEL  EDGE TORO CONNETICUT BOX/20', 'The Edge Connecticut', 7, 0, NULL, NULL),
+	(144, 'CM-03598', 'CAJAS DE MADERA ROCKY PATEL  EDGE TORO CONNECTICUT BOX/50', 'The Edge Connecticut', 21, 0, NULL, NULL),
+	(145, 'CM-03599', 'CAJAS DE MADERA ROCKY PATEL  EDGE SQUARE TORPEDO COROJO BOX/50', 'Edge Square', 21, 0, NULL, NULL),
+	(146, 'CM-03600', 'CAJAS DE MADERA ROCKY PATEL  EDGE SQUARE TORO COROJO BOX/50', 'Edge Square', 21, 0, NULL, NULL),
+	(147, 'CM-03601', 'CAJAS DE MADERA ROCKY PATEL  EDGE SQUARE ROBUSTO COROJO BOX/50', 'Edge Square', 21, 0, NULL, NULL),
+	(148, 'CM-03602', 'CAJAS DE MADERA ROCKY PATEL  EMILIO SERIES TORO SUMATRA BOX/20', 'Emilio  H Serie', 7, 0, NULL, NULL),
+	(149, 'CM-03603', 'CAJAS DE MADERA ROCKY PATEL  EMILIO SERIES TORPEDO MADURO BOX/20', 'Emilio  H Serie', 7, 0, NULL, NULL),
+	(150, 'CM-03604', 'CAJAS DE MADERA ROCKY PATEL  EMILIO SERIES TORO MADURO BOX/20', 'Emilio  H Serie', 7, 0, NULL, NULL),
+	(151, 'CM-03605', 'CAJAS DE MADERA  ROCKY PATEL  FAMOUS SAMPLER TOBUSTO BOX/20', 'Judges', 7, 0, NULL, NULL),
+	(152, 'CM-03606', 'CAJAS DE MADERA ROCKY PATEL  FIRE TORO  BOX/20', 'Fire Smoke', 7, 0, NULL, NULL),
+	(153, 'CM-03607', 'CAJAS DE MADERA ROCKY PATEL  FIRE ROBUSTO  BOX/20', 'Fire Smoke', 7, 0, NULL, NULL),
+	(154, 'CM-03608', 'CAJAS DE MADERA ROCKY PATEL  FIRE DOBLE CORONA  BOX/20', 'Fire Smoke', 7, 0, NULL, NULL),
+	(155, 'CM-03609', 'CAJAS DE MADERA ROCKY PATEL  FIRE CORONA  BOX/20', 'Fire Smoke', 7, 0, NULL, NULL),
+	(156, 'CM-03610', 'CAJAS DE MADERA ROCKY PATEL  FIRE LANCERO  BOX/20', 'Fire Smoke', 7, 0, NULL, NULL),
+	(157, 'CM-03611', 'CAJAS DE MADERA ROCKY PATEL  FIRE CHURCHILL  BOX/20', 'Fire Smoke', 7, 0, NULL, NULL),
+	(158, 'CM-03612', 'CAJAS DE MADERA ROCKY PATEL  FIRE PETIT CORONA  BOX/20', 'Fire Smoke', 7, 0, NULL, NULL),
+	(159, 'CM-03613', 'CAJAS DE MADERA ROCKY PATEL  GOLD BY R.P. LANCERO CONERICO  BOX/20', 'Gold By RP', 7, 0, NULL, NULL),
+	(160, 'CM-03614', 'CAJAS DE MADERA ROCKY PATEL  GOLD BY R.P. LONSDALES CONERICO  BOX/20', 'Gold By RP', 7, 0, NULL, NULL),
+	(161, 'CM-03615', 'CAJAS DE MADERA ROCKY PATEL  GOLD BY R.P. BELICOSO CONERICO  BOX/20', 'Gold By RP', 7, 0, NULL, NULL),
+	(162, 'CM-03616', 'CAJAS DE MADERA ROCKY PATEL  GOLD BY R.P. CORONA CONERICO  BOX/20', 'Gold By RP', 7, 0, NULL, NULL),
+	(163, 'CM-03617', 'CAJAS DE MADERA ROCKY PATEL  GRAN VIDA ROBUSTO PENSILVANIA  BOX/20', 'Gran Vida', 7, 0, NULL, NULL),
+	(164, 'CM-03618', 'CAJAS DE MADERA ROCKY PATEL  GRAN VIDA TORO PENSILVANIA  BOX/20', 'Gran Vida', 7, 0, NULL, NULL),
+	(165, 'CM-03619', 'CAJAS DE MADERA ROCKY PATEL  HABANA COROJO TORPEDO  BOX/20', 'Habano Corojo By RP', 7, 0, NULL, NULL),
+	(166, 'CM-03620', 'CAJAS DE MADERA ROCKY PATEL  HABANA COROJO ROBUSTO  BOX/20', 'Habano Corojo By RP', 7, 0, NULL, NULL),
+	(167, 'CM-03621', 'CAJAS DE MADERA ROCKY PATEL  HABANA COROJO TORO GRANDE  BOX/20', 'Habano Corojo By RP', 7, 0, NULL, NULL),
+	(168, 'CM-03622', 'CAJAS DE MADERA ROCKY PATEL  HABANA COROJO SIXTY  BOX/20', 'Habano Corojo By RP', 7, 0, NULL, NULL),
+	(169, 'CM-03623', 'CAJAS DE MADERA ROCKY PATEL  HABANA PREMIUN TORO CONERICO  BOX/25', 'Habana Premiun', 13, 0, NULL, NULL),
+	(170, 'CM-03624', 'CAJAS DE MADERA ROCKY PATEL  HABANA PREMIUN TORPEDO CONERICO  BOX/25', 'Habana Premiun', 13, 0, NULL, NULL),
+	(171, 'CM-03625', 'CAJAS DE MADERA ROCKY PATEL  HABANA PREMIUN ROBUSTO CONERICO  BOX/25', 'Habana Premiun', 13, 0, NULL, NULL),
+	(172, 'CM-03626', 'CAJAS DE MADERA ROCKY PATEL  HONDURAS CLASICO ROBUSTO MADURO  BOX/20', 'Honduran Classic', 7, 0, NULL, NULL),
+	(173, 'CM-03627', 'CAJAS DE MADERA ROCKY PATEL  HONDURAS CLASICO LONSDALES MADURO  BOX/20', 'Honduran Classic', 7, 0, NULL, NULL),
+	(174, 'CM-03628', 'CAJAS DE MADERA ROCKY PATEL  HONDURAS CLASICO DOBLE CORONA MADURO  BOX/20', 'Honduran Classic', 7, 0, NULL, NULL),
+	(175, 'CM-03629', 'CAJAS DE MADERA ROCKY PATEL  HONDURAS CLASICO TORO MADURO  BOX/20', 'Honduran Classic', 7, 0, NULL, NULL),
+	(176, 'CM-03630', 'CAJAS DE MADERA ROCKY PATEL  HONDURAS CLASICO TORPEDO MADURO  BOX/20', 'Honduran Classic', 7, 0, NULL, NULL),
+	(177, 'CM-03631', 'CAJAS DE MADERA ROCKY PATEL  HONDURAS CLASICO LANCERO COROJO  BOX/20', 'Honduran Classic', 7, 0, NULL, NULL),
+	(178, 'CM-03632', 'CAJAS DE MADERA ROCKY PATEL  HONDURAS CLASICO TORPEDO COROJO  BOX/20', 'Honduran Classic', 7, 0, NULL, NULL),
+	(179, 'CM-03633', 'CAJAS DE MADERA ROCKY PATEL  HONDURAS CLASICO LONSDALES COROJO  BOX/20', 'Honduran Classic', 7, 0, NULL, NULL),
+	(180, 'CM-03634', 'CAJAS DE MADERA ROCKY PATEL  HONDURAS CLASICO DOBLE CORONA COROJO  BOX/20', 'Honduran Classic', 7, 0, NULL, NULL),
+	(181, 'CM-03635', 'CAJAS DE MADERA ROCKY PATEL  HONDURAS CLASICO TORO COROJO  BOX/20', 'Honduran Classic', 7, 0, NULL, NULL),
+	(182, 'CM-03636', 'CAJAS DE MADERA ROCKY PATEL  HONDURAS CLASICO ROBUSTO COROJO  BOX/20', 'Honduran Classic', 7, 0, NULL, NULL),
+	(183, 'CM-03637', 'CAJAS DE MADERA ROCKY PATEL  I-PRESS TORO MADURO  BOX/20', 'I Press By RP', 7, 0, NULL, NULL),
+	(184, 'CM-03638', 'CAJAS DE MADERA ROCKY PATEL  ITC ESMERALDA ROBUSTO  BOX/8', 'Stanley Papas', 50, 0, NULL, NULL),
+	(185, 'CM-03639', 'CAJAS DE MADERA ROCKY PATEL  ITC ESMERALDA TORO  BOX/8', 'Stanley Papas', 50, 0, NULL, NULL),
+	(186, 'CM-03640', 'CAJAS DE MADERA ROCKY PATEL  JUNIOR VINTAGE 1999 CONERICO  BOX/40', 'Junior Vintage 1999', NULL, 0, NULL, NULL),
+	(187, 'CM-03641', 'CAJAS DE MADERA ROCKY PATEL  JUNIOR VINTAGE 1992  NATURAL  BOX/40', 'Junior Vintage 1992', NULL, 0, NULL, NULL),
+	(188, 'CM-03642', 'CAJAS DE MADERA ROCKY PATEL  JUNIOR VINTAGE 1990 MADURO  BOX/40', 'Junior Vintage 1990', NULL, 0, NULL, NULL),
+	(189, 'CM-03643', 'CAJAS DE MADERA ROCKY PATEL  LA CONQUISTA TORO MADURO  BOX/20', 'La Conquista', 7, 0, NULL, NULL),
+	(190, 'CM-03644', 'CAJAS DE MADERA ROCKY PATEL  LA CONQUISTA TORPEDO MADURO  BOX/20', 'La Conquista', 7, 0, NULL, NULL),
+	(191, 'CM-03645', 'CAJAS DE MADERA ROCKY PATEL  LA CONQUISTA ROBUSTO MADURO  BOX/20', 'La Conquista', 7, 0, NULL, NULL),
+	(192, 'CM-03646', 'CAJAS DE MADERA ROCKY PATEL  LEESBURG ROBUSTO CONERICO BOX/20', 'Leesburg', 7, 0, NULL, NULL),
+	(193, 'CM-03647', 'CAJAS DE MADERA ROCKY PATEL  LEESBURG TORPEDO CONERICO BOX/20', 'Leesburg', 7, 0, NULL, NULL),
+	(194, 'CM-03648', 'CAJAS DE MADERA ROCKY PATEL  LIMITED EDITION SIZE A  BOX/16', 'Graveyson', 26, 0, NULL, NULL),
+	(195, 'CM-03649', 'CAJAS DE MADERA ROCKY PATEL  M.J.K.CIGAR SOURCE DOBLE CORONA CONERICO  BOX/20', 'MJK  Cigar Source', 7, 0, NULL, NULL),
+	(196, 'CM-03650', 'CAJAS DE MADERA ROCKY PATEL  M.J.K.CIGAR SOURCE TORO CONERICO  BOX/20', 'MJK  Cigar Source', 7, 0, NULL, NULL),
+	(197, 'CM-03651', 'CAJAS DE MADERA ROCKY PATEL  MADURO COSTA RICA TORPEDO MADURO  BOX/20', 'RP - Costa Rica', 7, 0, NULL, NULL),
+	(198, 'CM-03652', 'CAJAS DE MADERA ROCKY PATEL  MADURO COSTA RICA CHURCHILL MADURO  BOX/20', 'RP - Costa Rica', 7, 0, NULL, NULL),
+	(199, 'CM-03653', 'CAJAS DE MADERA ROCKY PATEL  MADURO COSTA RICA SIXTY MADURO  BOX/20', 'RP - Costa Rica', 7, 0, NULL, NULL),
+	(200, 'CM-03654', 'CAJAS DE MADERA ROCKY PATEL  MADURO COSTA RICA ROBUSTO MADURO  BOX/20', 'RP - Costa Rica', 7, 0, NULL, NULL),
+	(201, 'CM-03655', 'CAJAS DE MADERA ROCKY PATEL  MERITAGE CHURCHILL COR/MAD  BOX/20', 'Meritage', 7, 0, NULL, NULL),
+	(202, 'CM-03656', 'CAJAS DE MADERA ROCKY PATEL  MERITAGE TORPEDO COR/MAD  BOX/20', 'Meritage', 7, 0, NULL, NULL),
+	(203, 'CM-03657', 'CAJAS DE MADERA ROCKY PATEL  MERITAGE ROBUSTO COR/MAD  BOX/20', 'Meritage', 7, 0, NULL, NULL),
+	(204, 'CM-03658', 'CAJAS DE MADERA ROCKY PATEL  MONOCACY PIRAMIDE PRESS SUMATRA  BOX/20', 'Davidus PL Monocacy', 7, 0, NULL, NULL),
+	(205, 'CM-03659', 'CAJAS DE MADERA ROCKY PATEL  MONOCACY ROBUSTO SUMATRA  BOX/20', 'Davidus PL Monocacy', 7, 0, NULL, NULL),
+	(206, 'CM-03660', 'CAJAS DE MADERA ROCKY PATEL  NICARAO TORO HAB/COL  BOX/20', 'Nicarao', 7, 0, NULL, NULL),
+	(207, 'CM-03661', 'CAJAS DE MADERA ROCKY PATEL  NICARAO TORPEDO HAB/COL  BOX/20', 'Nicarao', 7, 0, NULL, NULL),
+	(208, 'CM-03662', 'CAJAS DE MADERA ROCKY PATEL  NICARAO ROBUSTO HAB/COL  BOX/20', 'Nicarao', 7, 0, NULL, NULL),
+	(209, 'CM-03663', 'CAJAS DE MADERA ROCKY PATEL  NICARAO CHURCHILL HAB/COL  BOX/20', 'Nicarao', 7, 0, NULL, NULL),
+	(210, 'CM-03664', 'CAJAS DE MADERA ROCKY PATEL  NICK CIGAR ROBUSTO CONERICO  BOX/20', 'Nick Cigar World 10 Anivereary', 7, 0, NULL, NULL),
+	(211, 'CM-03665', 'CAJAS DE MADERA ROCKY PATEL  NICK CIGAR DOBLE CORONA CONERICO  BOX/20', 'Nick Cigar World 10 Anivereary', 7, 0, NULL, NULL),
+	(212, 'CM-03666', 'CAJAS DE MADERA ROCKY PATEL  NORDING TORO GRANDE HAB/COL  BOX/20', 'Nording', 7, 0, NULL, NULL),
+	(213, 'CM-03667', 'CAJAS DE MADERA ROCKY PATEL  NORDING TORPEDO HAB/COL  BOX/20', 'Nording', 7, 0, NULL, NULL),
+	(214, 'CM-03668', 'CAJAS DE MADERA ROCKY PATEL  NORDING ROBUSTO HAB/COL  BOX/20', 'Nording', 7, 0, NULL, NULL),
+	(215, 'CM-03669', 'CAJAS DE MADERA ROCKY PATEL  NORDING TORO GRANDE HAB/COL  BOX/25 (Malas)', 'Nording', NULL, 0, NULL, NULL),
+	(216, 'CM-03670', 'CAJAS DE MADERA ROCKY PATEL  NORDING TORPEDO HAB/COL  BOX/25', 'Nording', 13, 0, NULL, NULL),
+	(217, 'CM-03671', 'CAJAS DE MADERA ROCKY PATEL  NORDING ROBUSTO HAB/COL  BOX/25', 'Nording', 13, 0, NULL, NULL),
+	(218, 'CM-03672', 'CAJAS DE MADERA ROCKY PATEL  NORDING CHURCHILL HAB/COL  BOX/25', 'Nording', 13, 0, NULL, NULL),
+	(219, 'CM-03673', 'CAJAS DE MADERA ROCKY PATEL  NORDING TORO GRANDE HAB/COL  BOX/25', 'Nording', 13, 0, NULL, NULL),
+	(220, 'CM-03674', 'CAJAS DE MADERA ROCKY PATEL  O.W.R. TORPEDO MADURO  BOX/20', 'Old World Reserve', 7, 0, NULL, NULL),
+	(221, 'CM-03675', 'CAJAS DE MADERA ROCKY PATEL  O.W.R. ROBUSTO MADURO  BOX/20', 'Old World Reserve', 7, 0, NULL, NULL),
+	(222, 'CM-03676', 'CAJAS DE MADERA ROCKY PATEL  O.W.R. ROBUSTO COROJO  BOX/20', 'Old World Reserve', 7, 0, NULL, NULL),
+	(223, 'CM-03677', 'CAJAS DE MADERA ROCKY PATEL  O.W.R. TORPEDO COROJO  BOX/20', 'Old World Reserve', 7, 0, NULL, NULL),
+	(224, 'CM-03678', 'CAJAS DE MADERA ROCKY PATEL  O.W.R. TORO MADURO  BOX/20', 'Old World Reserve', 7, 0, NULL, NULL),
+	(225, 'CM-03679', 'CAJAS DE MADERA ROCKY PATEL  O.W.R. LANCERO MADURO  BOX/24', 'Old World Reserve', 47, 0, NULL, NULL),
+	(226, 'CM-03680', 'CAJAS DE MADERA ROCKY PATEL  O.W.R. LANCERO COROJO  BOX/24', 'Old World Reserve', 47, 0, NULL, NULL),
+	(227, 'CM-03681', 'CAJAS DE MADERA ROCKY PATEL  O.W.R. TORO COROJO  BOX/20', 'Old World Reserve', 7, 0, NULL, NULL),
+	(228, 'CM-03682', 'CAJAS DE MADERA ROCKY PATEL  OCEAN CLUB TORPEDO PRESS SUMATRA  BOX/20', 'RP Ocean Club', 7, 0, NULL, NULL),
+	(229, 'CM-03683', 'CAJAS DE MADERA ROCKY PATEL  OCEAN CLUB SIXTY PRESS SUMATRA  BOX/20', 'RP Ocean Club', 7, 0, NULL, NULL),
+	(230, 'CM-03684', 'CAJAS DE MADERA ROCKY PATEL  PABLO MARTIN MADURO TORPEDO BOX/20', 'Pablo Martin', 7, 0, NULL, NULL),
+	(231, 'CM-03685', 'CAJAS DE MADERA ROCKY PATEL  PHOENIX ROBUSTO MADURO BOX/20', 'Phoenix', 7, 0, NULL, NULL),
+	(232, 'CM-03686', 'CAJAS DE MADERA ROCKY PATEL  PHOENIX PETIT BELICOSO MADURO BOX/20', 'Phoenix', 7, 0, NULL, NULL),
+	(233, 'CM-03687', 'CAJAS DE MADERA ROCKY PATEL  RENAISSANCE CHURCHILL SUMATRA BOX/20', 'Renaissance', 7, 0, NULL, NULL),
+	(234, 'CM-03688', 'CAJAS DE MADERA ROCKY PATEL  RENAISSANCE TORO SUMATRA BOX/20', 'Renaissance', 7, 0, NULL, NULL),
+	(235, 'CM-03689', 'CAJAS DE MADERA ROCKY PATEL  RENAISSANCE ROBUSTO SUMATRA BOX/20', 'Renaissance', 7, 0, NULL, NULL),
+	(236, 'CM-03690', 'CAJAS DE MADERA ROCKY PATEL  REO CHAIRMAN HAB/COL BOX/20', 'Reo', 7, 0, NULL, NULL),
+	(237, 'CM-03691', 'CAJAS DE MADERA ROCKY PATEL  REO TORPEDO HAB/COL BOX/20', 'Reo', 7, 0, NULL, NULL),
+	(238, 'CM-03692', 'CAJAS DE MADERA ROCKY PATEL  REO ROBUSTO HAB/COL BOX/20', 'Reo', 7, 0, NULL, NULL),
+	(239, 'CM-03693', 'CAJAS DE MADERA ROCKY PATEL CONNECTICUT BYTORO CONERICO BOX/20', 'Connecticut Rocky Patel', 7, 0, NULL, NULL),
+	(240, 'CM-03694', 'CAJAS DE MADERA ROCKY PATEL CONNECTICUT BY TORPEDO CONERICO BOX/20', 'Connecticut Rocky Patel', 7, 0, NULL, NULL),
+	(241, 'CM-03695', 'CAJAS DE MADERA ROCKY PATEL MADURO BY TORO BOX/20', 'Connecticut Rocky Patel', 7, 0, NULL, NULL),
+	(242, 'CM-03696', 'CAJAS DE MADERA ROCKY PATEL MADURO BY  LANCERO BOX/20', 'Connecticut Rocky Patel', 7, 0, NULL, NULL),
+	(243, 'CM-03697', 'CAJAS DE MADERA ROCKY PATEL MADURO BY CHURCILL BOX/20', 'Connecticut Rocky Patel', 7, 0, NULL, NULL),
+	(244, 'CM-03698', 'CAJAS DE MADERA ROCKY PATEL  ROCKY PATEL MADURO BY BELICOSO MADURO BOX/20', 'Connecticut Rocky Patel', 7, 0, NULL, NULL),
+	(245, 'CM-03699', 'CAJAS DE MADERA ROCKY PATEL CONNECTICUT BY ROBUSTO CONERICO BOX/20', 'Connecticut Rocky Patel', 7, 0, NULL, NULL),
+	(246, 'CM-03700', 'CAJAS DE MADERA ROCKY PATEL  ROSADO TORO SUMATRA BOX/20', 'Rosado', 7, 0, NULL, NULL),
+	(247, 'CM-03701', 'CAJAS DE MADERA ROCKY PATEL  ROSADO TORPEDO SUMATRA BOX/20', 'Rosado', 7, 0, NULL, NULL),
+	(248, 'CM-03702', 'CAJAS DE MADERA ROCKY PATEL  ROSADO ROBUSTO SUMATRA BOX/20', 'Rosado', 7, 0, NULL, NULL),
+	(249, 'CM-03703', 'CAJAS DE MADERA ROCKY PATEL  ROSADO LONSDALE SUMATRA BOX/20', 'Rosado', 7, 0, NULL, NULL),
+	(250, 'CM-03704', 'CAJAS DE MADERA ROCKY PATEL  ROSADO LANCERO SUMATRA BOX/20', 'Rosado', 7, 0, NULL, NULL),
+	(251, 'CM-03705', 'CAJAS DE MADERA ROCKY PATEL  ROSADO DOBLE CORONA SUMATRA BOX/20', 'Rosado', 7, 0, NULL, NULL),
+	(252, 'CM-03706', 'CAJAS DE MADERA ROCKY PATEL  ROSADO PETIT CORONA SUMATRA BOX/20', 'Rosado', 7, 0, NULL, NULL),
+	(253, 'CM-03707', 'CAJAS DE MADERA ROCKY PATEL  SAMPLER SIXTY 90,92,99 VARIADO BOX/10', 'VARIOS', 4, 0, NULL, NULL),
+	(254, 'CM-03708', 'CAJAS DE MADERA ROCKY PATEL  SAMPLER ROBUSTO GIFT VARIADO BOX/8', 'VARIOS', 50, 0, NULL, NULL),
+	(255, 'CM-03709', 'CAJAS DE MADERA ROCKY PATEL  SAMPLER TORO GIFT VARIADO BOX/10', 'VARIOS', 4, 0, NULL, NULL),
+	(256, 'CM-03711', 'CAJAS DE MADERA ROCKY PATEL  SAMPLER LIMITED RELEASE TORO VARIADO BOX/6', 'VARIOS', 5, 0, NULL, NULL),
+	(257, 'CM-03712', 'CAJAS DE MADERA ROCKY PATEL  SAVERIO TORO BOX/20', 'Saverio', 7, 0, NULL, NULL),
+	(258, 'CM-03713', 'CAJAS DE MADERA ROCKY PATEL  SAVERIO TORPEDO BOX/20', 'Saverio', 7, 0, NULL, NULL),
+	(259, 'CM-03714', 'CAJAS DE MADERA ROCKY PATEL  SUNGROWN PETIT CORONA SUMATRA BOX/20', 'Sungrown', 7, 0, NULL, NULL),
+	(260, 'CM-03715', 'CAJAS DE MADERA ROCKY PATEL  SUNGROWN CORONA SUMATRA BOX/20', 'Sungrown', 7, 0, NULL, NULL),
+	(261, 'CM-03716', 'CAJAS DE MADERA ROCKY PATEL  SUNGROWN SHORT ROBUSTO 4-1/2X54 SUMATRA BOX/20', 'Sungrown', 7, 0, NULL, NULL),
+	(262, 'CM-03717', 'CAJAS DE MADERA ROCKY PATEL  SUNGROWN LANCERO SUMATRA BOX/24', 'Sungrown', 47, 0, NULL, NULL),
+	(263, 'CM-03718', 'CAJAS DE MADERA ROCKY PATEL  SUNGROWN ROCKCHILL SUMATRA BOX/20', 'Sungrown', 7, 0, NULL, NULL),
+	(264, 'CM-03719', 'CAJAS DE MADERA ROCKY PATEL  SUNGROWN ROBUSTO SUMATRA BOX/20', 'Sungrown', 7, 0, NULL, NULL),
+	(265, 'CM-03720', 'CAJAS DE MADERA ROCKY PATEL  SUPER FUERTE PETIT BELICOSO PRESS MADURO BOX/25', 'Super Fuerte', 13, 0, NULL, NULL),
+	(266, 'CM-03721', 'CAJAS DE MADERA ROCKY PATEL  SUPER FUERTE ROBUSTO HAB-2000 BOX/25', 'Super Fuerte', 13, 0, NULL, NULL),
+	(267, 'CM-03722', 'CAJAS DE MADERA ROCKY PATEL  SUPER FUERTE TORO PRESS MADURO BOX/25', 'Super Fuerte', 13, 0, NULL, NULL),
+	(268, 'CM-03723', 'CAJAS DE MADERA ROCKY PATEL  SUPER FUERTE CORONA MADURO BOX/25', 'Super Fuerte', 13, 0, NULL, NULL),
+	(269, 'CM-03724', 'CAJAS DE MADERA ROCKY PATEL  THE PENINSULA CHICAGO BOX/1', 'The Peninsula', 65, 0, NULL, NULL),
+	(270, 'CM-03725', 'CAJAS DE MADERA ROCKY PATEL  VALEDOR TORPEDO SUMATRA BOX/20', 'Valedor', 7, 0, NULL, NULL),
+	(271, 'CM-03726', 'CAJAS DE MADERA ROCKY PATEL  VENGENCE ROBUSTO MADURO BOX/20', 'Vengence', 7, 0, NULL, NULL),
+	(272, 'CM-03727', 'CAJAS DE MADERA ROCKY PATEL  VENGENCE CHURCHILL MADURO BOX/20', 'Vengence', 7, 0, NULL, NULL),
+	(273, 'CM-03728', 'CAJAS DE MADERA ROCKY PATEL  VENGENCE TORPEDO MADURO BOX/20', 'Vengence', 7, 0, NULL, NULL),
+	(274, 'CM-03729', 'CAJAS DE MADERA ROCKY PATEL  VENGENCE TORO MADURO BOX/20', 'Vengence', 7, 0, NULL, NULL),
+	(275, 'CM-03730', 'CAJAS DE MADERA ROCKY PATEL  VIBE TORO GRANDE HAB/COL BOX/20', 'Vibe', 7, 0, NULL, NULL),
+	(276, 'CM-03731', 'CAJAS DE MADERA ROCKY PATEL  VIBE ROBUSTO HAB/COL BOX/20', 'Vibe', 7, 0, NULL, NULL),
+	(277, 'CM-03732', 'CAJAS DE MADERA ROCKY PATEL  VIBE CORONA HAB/COL BOX/20', 'Vibe', 7, 0, NULL, NULL),
+	(278, 'CM-03733', 'CAJAS DE MADERA ROCKY PATEL  VIGILANTE TORO GRANDE MADURO BOX/25', 'Vigilante', 13, 0, NULL, NULL),
+	(279, 'CM-03734', 'CAJAS DE MADERA ROCKY PATEL  VIGILANTE ROBUSTO GRANDE MADURO BOX/25', 'Vigilante', 13, 0, NULL, NULL),
+	(280, 'CM-03735', 'CAJAS DE MADERA ROCKY PATEL  VIGILANTE PETIT CORONA MADURO BOX/25', 'Vigilante', 13, 0, NULL, NULL),
+	(281, 'CM-03737', 'CAJAS DE MADERA ROCKY PATEL  VIGILANTE PETIT CORONA COROJO BOX/25', 'Vigilante', 13, 0, NULL, NULL),
+	(282, 'CM-03738', 'CAJAS DE MADERA ROCKY PATEL  VIGILANTE SUPER TORO COROJO BOX/25', 'Vigilante', 13, 0, NULL, NULL),
+	(283, 'CM-03739', 'CAJAS DE MADERA ROCKY PATEL  VIGILANTE TORPEDO COROJO BOX/25', 'Vigilante', 13, 0, NULL, NULL),
+	(284, 'CM-03740', 'CAJAS DE MADERA ROCKY PATEL  VINTAGE 1990 ROCKCHILL MADURO PRESS BOX/20', 'Vintage 1990', 7, 0, NULL, NULL),
+	(285, 'CM-03741', 'CAJAS DE MADERA ROCKY PATEL  VINTAGE 1990 TORPEDO MADURO PRESS BOX/20', 'Vintage 1990', 7, 0, NULL, NULL),
+	(286, 'CM-03742', 'CAJAS DE MADERA ROCKY PATEL  VINTAGE 1990 CHURCHILL RED. MADURO BOX/20', 'Vintage 1990', 7, 0, NULL, NULL),
+	(287, 'CM-03743', 'CAJAS DE MADERA ROCKY PATEL  VINTAGE 1990 PETIT CORONA MADURO REDONDO BOX/20', 'Vintage 1990', 7, 0, NULL, NULL),
+	(288, 'CM-03744', 'CAJAS DE MADERA ROCKY PATEL  VINTAGE 1990 TORO MADURO PRESS BOX/20', 'Vintage 1990', 7, 0, NULL, NULL),
+	(289, 'CM-03745', 'CAJAS DE MADERA ROCKY PATEL  VINTAGE 1990 SIXTY MADURO BOX/20', 'Vintage 1990', 7, 0, NULL, NULL),
+	(290, 'CM-03746', 'CAJAS DE MADERA ROCKY PATEL  VINTAGE 1990 PERFECTO MADURO BOX/20', 'Vintage 1990', 7, 0, NULL, NULL),
+	(291, 'CM-03747', 'CAJAS DE MADERA ROCKY PATEL  VINTAGE 1992 PETIT CORONA SUMATRA REDONDO BOX/20', 'Vintage 1992', 7, 0, NULL, NULL),
+	(292, 'CM-03748', 'CAJAS DE MADERA ROCKY PATEL  VINTAGE 1992 TORPEDO PRESS SUMATRA BOX/20', 'Vintage 1992', 7, 0, NULL, NULL),
+	(293, 'CM-03749', 'CAJAS DE MADERA ROCKY PATEL  VINTAGE 1992 TORO PRESS SUMATRA BOX/20', 'Vintage 1992', 7, 0, NULL, NULL),
+	(294, 'CM-03750', 'CAJAS DE MADERA ROCKY PATEL  VINTAGE 1992 ROBUSTO PRESS SUMATRA BOX/20', 'Vintage 1992', 7, 0, NULL, NULL),
+	(295, 'CM-03751', 'CAJAS DE MADERA ROCKY PATEL  VINTAGE 1992 SIXTY SUMATRA BOX/20', 'Vintage 1992', 7, 0, NULL, NULL),
+	(296, 'CM-03752', 'CAJAS DE MADERA ROCKY PATEL  VINTAGE 1999 PERFECTO CONERICO BOX/20', 'Vintage 1999', 7, 0, NULL, NULL),
+	(297, 'CM-03753', 'CAJAS DE MADERA ROCKY PATEL  VINTAGE 1999 CORONA CONERICO BOX/20', 'Vintage 1999', 7, 0, NULL, NULL),
+	(298, 'CM-03754', 'CAJAS DE MADERA ROCKY PATEL  VINTAGE 1999 ROBUSTO CONERICO BOX/20', 'Vintage 1999', 7, 0, NULL, NULL),
+	(299, 'CM-03755', 'CAJAS DE MADERA ROCKY PATEL  EXTREME TORO SUMATRA BOX/20', 'Extreme', 7, 0, NULL, NULL),
+	(300, 'CM-03756', 'CAJAS DE MADERA ROCKY PATEL  EXTREME CHURCHILL SUMATRA BOX/20', 'Extreme', 7, 0, NULL, NULL),
+	(301, 'CM-03757', 'CAJAS DE MADERA ROCKY PATEL  EXTREME ROBUSTO SUMATRA BOX/20', 'Extreme', 7, 0, NULL, NULL),
+	(302, 'CM-03758', 'CAJAS DE MADERA ROCKY PATEL  COBUTO CHURCHILL BOX/20', 'Cobuto', 7, 0, NULL, NULL),
+	(303, 'CM-03759', 'CAJAS DE MADERA ROCKY PATEL  COBUTO TORO BOX/20', 'Cobuto', 7, 0, NULL, NULL),
+	(304, 'CM-03760', 'CAJAS DE MADERA ROCKY PATEL  COBUTO ROBUSTO BOX/20', 'Cobuto', 7, 0, NULL, NULL),
+	(305, 'CM-03761', 'CAJAS DE MADERA ROCKY PATEL  SAMPLER PERFECTO BOX/10', 'VARIOS', 4, 0, NULL, NULL),
+	(306, 'CM-03762', 'CAJAS DE MADERA ROCKY PATEL  MONOCACY CHURCHILL SUMATRA BOX/20', 'Davidus PL Monocacy', 7, 0, NULL, NULL),
+	(307, 'CM-03763', 'CAJAS DE MADERA ROCKY PATEL CAMERON BY P.P. CAMERON BOX/20', 'RP Cameroon Especial', 7, 0, NULL, NULL),
+	(308, 'CM-03764', 'CAJAS DE MADERA ROCKY PATEL CAUCUS TORPEDO SUMATRA BOX/20', 'Caucus', 7, 0, NULL, NULL),
+	(309, 'CM-03765', 'CAJAS DE MADERA ROCKY PATEL CAUCUS TORO SUMATRA BOX/20', 'Caucus', 7, 0, NULL, NULL),
+	(310, 'CM-03766', 'CAJAS DE MADERA ROCKY PATEL  CUNUCO  PETIT CORONA HAB. COLORADO BOX/20', 'Cunuco', 7, 0, NULL, NULL),
+	(311, 'CM-03767', 'CAJAS DE MADERA ROCKY PATEL CRUZ REAL ROBUSTO SUMATRA BOX/20', 'Cruz Real', 7, 0, NULL, NULL),
+	(312, 'CM-03768', 'CAJAS DE MADERA ROCKY PATEL DECADE LONSDALES REDONDO SUMATRA BOX/20', 'Decada', 7, 0, NULL, NULL),
+	(313, 'CM-03769', 'CAJAS DE MADERA ROCKY PATEL DECADE ROBUSTO PRENSADO SUMATRA BOX/20', 'Decada', 7, 0, NULL, NULL),
+	(314, 'CM-03770', 'CAJAS DE MADERA ROCKY PATEL DECADE TORO PRENSADO SUMATRA BOX/20', 'Decada', 7, 0, NULL, NULL),
+	(315, 'CM-03771', 'CAJAS DE MADERA ROCKY PATEL DECADE TORO REDONDO SUMATRA BOX/20', 'Decada', 7, 0, NULL, NULL),
+	(316, 'CM-03772', 'CAJAS DE MADERA ROCKY PATEL DECADE SHORT ROBUSTO PRENSADO SUMATRA BOX/20', 'Decada', 7, 0, NULL, NULL),
+	(317, 'CM-03773', 'CAJAS DE MADERA ROCKY PATEL DECADE SHORT ROBUSTO REDONDO SUMATRA BOX/20', 'Decada', 7, 0, NULL, NULL),
+	(318, 'CM-03774', 'CAJAS DE MADERA ROCKY PATEL DECADE TORPEDO REDONDO SUMATRA BOX/20', 'Decada', 7, 0, NULL, NULL),
+	(319, 'CM-03775', 'CAJAS DE MADERA ROCKY PATEL DECADE FORTY SIX REDONDO SUMATRA BOX/20', 'Decada', 7, 0, NULL, NULL),
+	(320, 'CM-03776', 'CAJAS DE MADERA ROCKY PATEL DECADE PETIT BELICOSO PRESADO SUMATRA BOX/20', 'Decada', 7, 0, NULL, NULL),
+	(321, 'CM-03777', 'CAJAS DE MADERA ROCKY PATEL DECADE PETIT BELICOSO REDONDO SUMATRA BOX/20', 'Decada', 7, 0, NULL, NULL),
+	(322, 'CM-03778', 'CAJAS DE MADERA ROCKY PATEL EDGE LANCERO COROJO BOX/24', 'The Edge Connecticut', 47, 0, NULL, NULL),
+	(323, 'CM-03779', 'CAJAS DE MADERA ROCKY PATEL EDGE CORONA MADURO BOX/20', 'The Edge', 7, 0, NULL, NULL),
+	(324, 'CM-03780', 'CAJAS DE MADERA ROCKY PATEL EDGE CABINET MISIL MADURO BOX/16', 'The Edge', 26, 0, NULL, NULL),
+	(325, 'CM-03781', 'CAJAS DE MADERA ROCKY PATEL EDGE CABINET MISIL COROJO  BOX/16', 'The Edge', 26, 0, NULL, NULL),
+	(326, 'CM-03782', 'CAJAS DE MADERA ROCKY PATEL EDGE LIGE DOUBLE CORONA CONERICO BOX/20', 'The Edge Connecticut', 7, 0, NULL, NULL),
+	(327, 'CM-03783', 'CAJAS DE MADERA ROCKY PATEL EDGE MINI BELICOSO CONERICO BOX/20', 'The Edge Connecticut', 7, 0, NULL, NULL),
+	(328, 'CM-03784', 'CAJAS DE MADERA ROCKY PATEL EDGE SHORT ROBUSTO CONNECTICUT BOX/20', 'The Edge Connecticut', 7, 0, NULL, NULL),
+	(329, 'CM-03785', 'CAJAS DE MADERA ROCKY PATEL EVOLUTION ROBUSTO NATURAL BOX/20', 'Evolution', 7, 0, NULL, NULL),
+	(330, 'CM-03786', 'CAJAS DE MADERA ROCKY PATEL EVOLUTION TORPEDO NATURAL BOX/20', 'Evolution', 7, 0, NULL, NULL),
+	(331, 'CM-03787', 'CAJAS DE MADERA ROCKY PATEL EVOLUTION TORO NATURAL BOX/20', 'Evolution', 7, 0, NULL, NULL),
+	(332, 'CM-03788', 'CAJAS DE MADERA ROCKY PATEL EVOLUTION TORO REDONDO NATURAL BOX/20', 'Evolution', 7, 0, NULL, NULL),
+	(333, 'CM-03789', 'CAJAS DE MADERA ROCKY PATEL EVOLUTION FORTY SIX NATURAL BOX/20', 'Evolution', 7, 0, NULL, NULL),
+	(334, 'CM-03790', 'CAJAS DE MADERA ROCKY PATEL EVOLUTION LONSDALES NATURAL BOX/20', 'Evolution', 7, 0, NULL, NULL),
+	(335, 'CM-03791', 'CAJAS DE MADERA ROCKY PATEL EVOLUTION EMPEROR NATURAL BOX/20', 'Evolution', 7, 0, NULL, NULL),
+	(336, 'CM-03792', 'CAJAS DE MADERA ROCKY PATEL EVOLUTION LANCERO NATURAL BOX/20', 'Evolution', 7, 0, NULL, NULL),
+	(337, 'CM-03793', 'CAJAS DE MADERA ROCKY PATEL EVOLUTION TORPEDO MADURO BOX/20', 'Evolution', 7, 0, NULL, NULL),
+	(338, 'CM-03794', 'CAJAS DE MADERA ROCKY PATEL EVOLUTION TORO MADURO BOX/20', 'Evolution', 7, 0, NULL, NULL),
+	(339, 'CM-03795', 'CAJAS DE MADERA ROCKY PATEL EVOLUTION ROBUSTO MADURO BOX/20', 'Evolution', 7, 0, NULL, NULL),
+	(340, 'CM-03796', 'CAJAS DE MADERA ROCKY PATEL EVOLUTION LANCERO MADURO BOX/20', 'Evolution', 7, 0, NULL, NULL),
+	(341, 'CM-03797', 'CAJAS DE MADERA ROCKY PATEL EVOLUTION FORTY SIX MADURO BOX/20', 'Evolution', 7, 0, NULL, NULL),
+	(342, 'CM-03798', 'CAJAS DE MADERA ROCKY PATEL GOLD BY R.P. CHURCHILL CONERICO BOX/20', 'Gold By RP', 7, 0, NULL, NULL),
+	(343, 'CM-03799', 'CAJAS DE MADERA ROCKY PATEL GRAN VIDA SUPER TORO PENSILVANIA BOX/20', 'Gran Vida', 7, 0, NULL, NULL),
+	(344, 'CM-03800', 'CAJAS DE MADERA ROCKY PATEL HABANA RAYS TORO SUMATRA BOX/20', 'Havana Rays Signature', 7, 0, NULL, NULL),
+	(345, 'CM-03801', 'CAJAS DE MADERA ROCKY PATEL HABANA RAYS TORPEDO SUMATRA BOX/20', 'Havana Rays Signature', 7, 0, NULL, NULL),
+	(346, 'CM-03802', 'CAJAS DE MADERA ROCKY PATEL HABANA RAYS ROBUSTO SUMATRA BOX/20', 'Havana Rays Signature', 7, 0, NULL, NULL),
+	(347, 'CM-03803', 'CAJAS DE MADERA ROCKY PATEL HABANA RAYS CORONA SUMATRA BOX/20', 'Havana Rays Signature', 7, 0, NULL, NULL),
+	(348, 'CM-03804', 'CAJAS DE MADERA ROCKY PATEL HABANA RAYS LITLE RAY SUMATRA BOX/20', 'Havana Rays Signature', 7, 0, NULL, NULL),
+	(349, 'CM-03805', 'CAJAS DE MADERA ROCKY PATEL HABANA RAYS BIG RAY SUMATRA BOX/20', 'Havana Rays Signature', 7, 0, NULL, NULL),
+	(350, 'CM-03806', 'CAJAS DE MADERA ROCKY PATEL MADURO OF COSTA RICA MADURO TORO  BOX/20', 'Gold Maduro By RP', 7, 0, NULL, NULL),
+	(351, 'CM-03807', 'CAJAS DE MADERA ROCKY PATEL MONOCASY CHURCHILL PRESS SUMATRA BOX/20', 'Davidus PL Monocacy', 7, 0, NULL, NULL),
+	(352, 'CM-03808', 'CAJAS DE MADERA ROCKY PATEL  NICK CIGAR TORO CONERICO BOX/20', 'Nick`s Perdomo', 7, 0, NULL, NULL),
+	(353, 'CM-03809', 'CAJAS DE MADERA ROCKY PATEL  NORDING  TORO HAB. COLORADO BOX/20', 'Nording', 7, 0, NULL, NULL),
+	(354, 'CM-03810', 'CAJAS DE MADERA ROCKY PATEL OLD WORLD ROBUSTO REDONDO MADURO BOX/20', 'Old World Reserve', 7, 0, NULL, NULL),
+	(355, 'CM-03811', 'CAJAS DE MADERA ROCKY PATEL OLD WORLD ROBUSTO REDONDO COROJO BOX/20', 'Old World Reserve', 7, 0, NULL, NULL),
+	(356, 'CM-03812', 'CAJAS DE MADERA ROCKY PATEL OLD WORLD TORO REDONDO MADURO BOX/20', 'Old World Reserve', 7, 0, NULL, NULL),
+	(357, 'CM-03813', 'CAJAS DE MADERA ROCKY PATEL CONNECTICUT BYCHURCHILL CONERICO BOX/20', 'Connecticut Rocky Patel', 7, 0, NULL, NULL),
+	(358, 'CM-03814', 'CAJAS DE MADERA ROCKY PATEL ROCKY PATEL BLOCK ISLAND SEVERAL BOX/6', 'VARIOS', 5, 0, NULL, NULL),
+	(359, 'CM-03815', 'CAJAS DE MADERA ROCKY PATEL EVOLUTION LONSDALE MADURO BOX/ 20', 'Evolution', 7, 0, NULL, NULL),
+	(360, 'CM-03816', 'CAJAS DE MADERA ROCKY PATEL SUNGROWN SIXTY SUMATRA BOX/20', 'Sungrown', 7, 0, NULL, NULL),
+	(361, 'CM-03817', 'CAJAS DE MADERA ROCKY PATEL SUNGROWN TORPEDO SUMATRA BOX/20', 'Sungrown', 7, 0, NULL, NULL),
+	(362, 'CM-03818', 'CAJAS DE MADERA ROCKY PATEL SUNGROWN SHORT ROBUSTO 4X54 SUMATRA BOX/20', 'Sungrown', 7, 0, NULL, NULL),
+	(363, 'CM-03819', 'CAJAS DE MADERA ROCKY PATEL SUNGROWN PETIT BELICOSO SUMATRA BOX/20', 'Sungrown', 7, 0, NULL, NULL),
+	(364, 'CM-03820', 'CAJAS DE MADERA ROCKY PATEL SUNGROWN TORO SUMATRA BOX/20', 'Sungrown', 7, 0, NULL, NULL),
+	(365, 'CM-03821', 'CAJAS DE MADERA ROCKY PATEL SUNGROWN SAMPLER SEVERAL BOX/5', 'Sungrown', 6, 0, NULL, NULL),
+	(366, 'CM-03822', 'CAJAS DE MADERA ROCKY PATEL SUPER FUERTE CORONA GRANDE COROJO BOX/25', 'Super Fuerte', 13, 0, NULL, NULL),
+	(367, 'CM-03823', 'CAJAS DE MADERA ROCKY PATEL VALEDOR TORO SUMATRA BOX/20', 'Valedor', 7, 0, NULL, NULL),
+	(368, 'CM-03824', 'CAJAS DE MADERA ROCKY PATEL VALEDOR ROBUSTO SUMATRA BOX/20', 'Valedor', 7, 0, NULL, NULL),
+	(369, 'CM-03825', 'CAJAS DE MADERA ROCKY PATEL VIGILANTE TORO GRANDE COROJO BOX/25', 'Vigilante', 13, 0, NULL, NULL),
+	(370, 'CM-03826', 'CAJAS DE MADERA ROCKY PATEL VINTAGE 1990 ROBUSTO REDONDO MADURO BOX/20', 'Vintage 1990', 7, 0, NULL, NULL),
+	(371, 'CM-03827', 'CAJAS DE MADERA ROCKY PATEL VINTAGE 1990 ROBUSTO 5X50 RED MADURO BOX/10', 'Vintage 1990', 4, 0, NULL, NULL),
+	(372, 'CM-03828', 'CAJAS DE MADERA ROCKY PATEL VINTAGE 1990 TORO TUBO ROUND MADURO BOX/10', 'Vintage 1990', 4, 0, NULL, NULL),
+	(373, 'CM-03829', 'CAJAS DE MADERA ROCKY PATEL VINTAGE 1990 CHURCHILL PRENSADO MADURO BOX/20', 'Vintage 1990', 7, 0, NULL, NULL),
+	(374, 'CM-03830', 'CAJAS DE MADERA ROCKY PATEL VINTAGE 1990 CORONA PRENSADO MADURO BOX/20', 'Vintage 1990', 7, 0, NULL, NULL),
+	(375, 'CM-03831', 'CAJAS DE MADERA ROCKY PATEL VINTAGE 1990 CORONA REDONDO MADURO BOX/20', 'Vintage 1990', 7, 0, NULL, NULL),
+	(376, 'CM-03832', 'CAJAS DE MADERA ROCKY PATEL VINTAGE 1990 PETIT BELICOSO PRENSADO MADURO BOX/20', 'Vintage 1990', 7, 0, NULL, NULL),
+	(377, 'CM-03833', 'CAJAS DE MADERA ROCKY PATEL VINTAGE 1992 TORO TUBO ROUND SUMATRA BOX/10', 'Vintage 1992', 4, 0, NULL, NULL),
+	(378, 'CM-03834', 'CAJAS DE MADERA ROCKY PATEL VINTAGE 1992 ROBUSTO 5X50 TUBO SUMATRA BOX/10', 'Vintage 1992', 4, 0, NULL, NULL),
+	(379, 'CM-03835', 'CAJAS DE MADERA ROCKY PATEL VINTAGE 1992 ROBUSTO REDONDO SUMATRA BOX/20', 'Vintage 1992', 7, 0, NULL, NULL),
+	(380, 'CM-03836', 'CAJAS DE MADERA ROCKY PATEL VINTAGE 1992 CORONA PRENSADO SUMATRA BOX/20', 'Vintage 1992', 7, 0, NULL, NULL),
+	(381, 'CM-03837', 'CAJAS DE MADERA ROCKY PATEL VINTAGE 1992 PERFECTO SUMATRA BOX/20', 'Vintage 1992', 7, 0, NULL, NULL),
+	(382, 'CM-03838', 'CAJAS DE MADERA ROCKY PATEL VINTAGE 1992 PETIT CORONA REDONDO SUMATRA BOX/20', 'Vintage 1992', 7, 0, NULL, NULL),
+	(383, 'CM-03839', 'CAJAS DE MADERA ROCKY PATEL VINTAGE 1992 TORPEDO REDONDO SUMATRA BOX/20', 'Vintage 1992', 7, 0, NULL, NULL),
+	(384, 'CM-03840', 'CAJAS DE MADERA ROCKY PATEL VINTAGE 1992 PETIT BELICOSO PRENSADO SUMATRA BOX/20', 'Vintage 1992', 7, 0, NULL, NULL),
+	(385, 'CM-03841', 'CAJAS DE MADERA ROCKY PATEL VINTAGE 1992 CHURCHILL REDONDO SUMATRA BOX/20', 'Vintage 1992', 7, 0, NULL, NULL),
+	(386, 'CM-03842', 'CAJAS DE MADERA ROCKY PATEL VINTAGE 1992 CORONA REDONDO SUMATRA BOX/20', 'Vintage 1992', 7, 0, NULL, NULL),
+	(387, 'CM-03843', 'CAJAS DE MADERA ROCKY PATEL VINTAGE 1999 ROBUSTO TUBO 5X50 CONERICO BOX/10', 'Vintage 1999', 4, 0, NULL, NULL),
+	(388, 'CM-03844', 'CAJAS DE MADERA ROCKY PATEL VINTAGE 1999 PETIT CORONA CONERICO BOX/20', 'Vintage 1999', 7, 0, NULL, NULL),
+	(389, 'CM-03845', 'CAJAS DE MADERA ROCKY PATEL VINTAGE 1999 TORO TUBO CONERICO BOX/10', 'Vintage 1999', 4, 0, NULL, NULL),
+	(390, 'CM-03846', 'CAJAS DE MADERA ROCKY PATEL VINTAGE 1999 TORO CONERICO BOX/20', 'Vintage 1999', 7, 0, NULL, NULL),
+	(391, 'CM-03847', 'CAJAS DE MADERA ROCKY PATEL VINTAGE 1999 TORPEDO CONERICO BOX/20', 'Vintage 1999', 7, 0, NULL, NULL),
+	(392, 'CM-03848', 'CAJAS DE MADERA ROCKY PATEL VINTAGE 1999 PERFECTO CORTOS CONERICO BOX/20', 'Vintage 1999', 7, 0, NULL, NULL),
+	(393, 'CM-03849', 'CAJAS DE MADERA ROCKY PATEL VINTAGE 1999 PETIT BELICOSO CONERICO BOX/20', 'Vintage 1999', 7, 0, NULL, NULL),
+	(394, 'CM-03850', 'CAJAS DE MADERA ROCKY PATEL 1950 SPECIAL RESERVE SIXTY SUMATRA BOX/20', 'VARIOS', 7, 0, NULL, NULL),
+	(395, 'CM-03851', 'CAJAS DE MADERA ROCKY PATEL BEALLE STREET TORO CONERICO BOX/20', 'Bealle Street', 7, 0, NULL, NULL),
+	(396, 'CM-03852', 'CAJAS DE MADERA ROCKY PATEL SAMPLER PRESS SEVERAL BOX/6', 'VARIOS', 5, 0, NULL, NULL),
+	(397, 'CM-03853', 'CAJAS DE MADERA ROCKY PATEL SAMPLER PETIT BELICOSO SEVERAL BOX/6', 'VARIOS', 5, 0, NULL, NULL),
+	(398, 'CM-03854', 'CAJAS DE MADERA ROCKY PATEL SAMPLER SUPER PREMIUN L.R. TORO SEVERAL BOX/6', 'VARIOS', 5, 0, NULL, NULL),
+	(399, 'CM-03855', 'CAJAS DE MADERA ROCKY PATEL SAMPLER EDGE ROBUSTO  SEVERAL BOX/5', 'VARIOS', 6, 0, NULL, NULL),
+	(400, 'CM-03856', 'CAJAS DE MADERA ROCKY PATEL SAMPLER EDICION ESPECIAL SHORT ROBUSTO SEVERAL BOX/6', 'VARIOS', 5, 0, NULL, NULL),
+	(401, 'CM-03857', 'CAJAS DE MADERA ROCKY PATEL SAMPLER TUBO ALUMINIO TORO SEVERAL BOX/5', 'VARIOS', 6, 0, NULL, NULL),
+	(402, 'CM-03859', 'CAJAS DE MADERA ROCKY PATEL OLD WORLD TORPEDO BOX/100', 'Old World Reserve', 18, 0, NULL, NULL),
+	(403, 'CM-03860', 'CAJAS DE MADERA ROCKY PATEL OLD WORLD TORO BOX/100', 'Old World Reserve', 18, 0, NULL, NULL),
+	(404, 'CM-03861', 'CAJAS DE MADERA  ROCKY PATEL  SAMPLER LIMITED RELEASE  TORO SEVERAL BOX/6', 'VARIOS', 5, 0, NULL, NULL),
+	(405, 'CM-03862', 'CAJAS DE MADERA ROCKY PATEL CLASICO ARROW COROJO BOX/20', 'Classic', 7, 0, NULL, NULL),
+	(406, 'CM-03863', 'CAJAS DE MADERA ROCKY PATEL BEALLE STREET TORPEDO CONERICO BOX/20', 'Bealle Street', 7, 0, NULL, NULL),
+	(407, 'CM-03864', 'CAJAS DE MADERA ROCKY PATEL BEALLE STREET ROBUSTO CONERICO BOX/20', 'Bealle Street', 7, 0, NULL, NULL),
+	(408, 'CM-03865', 'CAJAS DE MADERA ROCKY PATEL BEALLE STREET TORO SUMATRA BOX/20', 'Bealle Street', 7, 0, NULL, NULL),
+	(409, 'CM-03866', 'CAJAS DE MADERA ROCKY PATEL BEALLE STREET TORPEDO SUMATRA BOX/20', 'Bealle Street', 7, 0, NULL, NULL),
+	(410, 'CM-03867', 'CAJAS DE MADERA ROCKY PATEL BEALLE STREET ROBUSTO SUMATRA BOX/20', 'Bealle Street', 7, 0, NULL, NULL),
+	(411, 'CM-03868', 'CAJAS DE MADERA ROCKY PATEL  NICK CIGAR TORPEDO CONERICO  BOX/20', 'Nick Cigar World 10 Anivereary', 7, 0, NULL, NULL),
+	(412, 'CM-03869', 'CAJAS DE MADERA ROCKY PATEL  NICK CIGAR CHURCHILL CONERICO  BOX/20', 'Nick Cigar World 10 Anivereary', 7, 0, NULL, NULL),
+	(413, 'CM-03870', 'CAJAS DE MADERA ROCKY PATEL  CAMEROON LEGEND ROBUSTO GRANDE MADURO BOX/25', 'Cameroon Legend', 13, 0, NULL, NULL),
+	(414, 'CM-03871', 'CAJAS DE MADERA ROCKY PATEL  PABLO MARTIN MADURO ROBUSTO BOX/20', 'Pablo Martin', 7, 0, NULL, NULL),
+	(415, 'CM-03872', 'CAJAS DE MADERA ROCKY PATEL  PABLO MARTIN MADURO TORO BOX/20', 'Pablo Martin', 7, 0, NULL, NULL),
+	(416, 'CM-03873', 'CAJAS DE MADERA ROCKY PATEL  PABLO MARTIN CORONA MADURO BOX/20', 'Pablo Martin', 7, 0, NULL, NULL),
+	(417, 'CM-03874', 'CAJAS DE MADERA ROCKY PATEL  VINTAGE 2003 ROBUSTO ROUND CAMEROON BOX/20', 'VINTAGE 2003', 7, 0, NULL, NULL),
+	(418, 'CM-03875', 'CAJAS DE MADERA ROCKY PATEL  VINTAGE 2003 TORO ROUND CAMEROON BOX/20', 'VINTAGE 2003', 7, 0, NULL, NULL),
+	(419, 'CM-03876', 'CAJAS DE MADERA ROCKY PATEL  VINTAGE 2003 CHURCHILL ROUND CAMEROON BOX/20', 'VINTAGE 2003', 7, 0, NULL, NULL),
+	(420, 'CM-03877', 'CAJAS DE MADERA ROCKY PATEL  VINTAGE 2003 TORPEDO ROND CAMEROON BOX/20', 'VINTAGE 2003', 7, 0, NULL, NULL),
+	(421, 'CM-03878', 'CAJAS DE MADERA ROCKY PATEL DECADE TORPEDO PRENSADO SUMATRA BOX/20', 'Decada', 7, 0, NULL, NULL),
+	(422, 'CM-03879', 'CAJAS DE MADERA ROCKY PATEL  GOLD BY R.P. ROBUSTO CONERICO  BOX/20', 'Gold By RP', 7, 0, NULL, NULL),
+	(423, 'CM-03880', 'CAJAS DE MADERA ROCKY PATEL  ROCKY PATEL MADURO BY ROBUSTO MADURO BOX/20 NUEVA EDICION', 'Gold Maduro By RP', NULL, 0, NULL, NULL),
+	(424, 'CM-03881', 'CAJAS DE MADERA ROCKY PATEL  CAUCUS  CORONA SUMATRA BOX/20', 'Caucus', 7, 0, NULL, NULL),
+	(425, 'CM-03882', 'CAJAS DE MADERA ROCKY PATEL LIMITED EDITION HONDURAS SAMPLER BOX/5', 'VARIOS', 6, 0, NULL, NULL),
+	(426, 'CM-03883', 'CAJAS DE MADERA ROCKY PATEL  M.J.K.CIGAR SOURCE TORPEDO CONERICO  BOX/20', 'MJK  Cigar Source', 7, 0, NULL, NULL),
+	(427, 'CM-03884', 'CAJAS DE MADERA ROCKY PATEL  M.J.K.CIGAR SOURCE ROBUSTO CONERICO  BOX/20', 'MJK  Cigar Source', 7, 0, NULL, NULL),
+	(428, 'CM-03885', 'CAJAS DE MADERA ROCKY PATEL  M.J.K.CIGAR SOURCE SIXTY CONERICO  BOX/20', 'MJK  Cigar Source', 7, 0, NULL, NULL),
+	(429, 'CM-03886', 'CAJAS DE MADERA ROCKY PATEL  VINTAGE 2003 SIXTY ROUND CAMEROON BOX/20', 'VINTAGE 2003', 7, 0, NULL, NULL),
+	(430, 'CM-03887', 'CAJAS DE MADERA ROCKY PATEL  M.J.K.CIGAR SOURCE DOBLE CORONA MADURO  BOX/20', 'MJK  Cigar Source', 7, 0, NULL, NULL),
+	(431, 'CM-03888', 'CAJAS DE MADERA ROCKY PATEL  M.J.K.CIGAR SOURCE TORO MADURO  BOX/20', 'MJK  Cigar Source', 7, 0, NULL, NULL),
+	(432, 'CM-03889', 'CAJAS DE MADERA ROCKY PATEL  M.J.K.CIGAR SOURCE ROBUSTO MADURO  BOX/20', 'MJK  Cigar Source', 7, 0, NULL, NULL),
+	(433, 'CM-03890', 'CAJAS DE MADERA ROCKY PATEL  M.J.K.CIGAR SOURCE SIXTY MADURO  BOX/20', 'MJK  Cigar Source', 7, 0, NULL, NULL),
+	(434, 'CM-03891', 'CAJAS DE MADERA ROCKY PATEL  M.J.K.CIGAR SOURCE TORPEDO MADURO BOX/20', 'MJK  Cigar Source', 7, 0, NULL, NULL),
+	(435, 'CM-03892', 'CAJAS DE MADERA ROCKY PATEL DECADE', 'Decada', NULL, 0, NULL, NULL),
+	(436, 'CM-03940', 'CAJAS DE MADERA ROCKY PATEL  SUPER FUERTE DOUBLE CORONA NATURAL BOX/25', 'Super Fuerte', 13, 0, NULL, NULL),
+	(437, 'CM-03966', 'CAJAS DE MADERA ROCKY PATEL ROYAL VINTAGE SIXTY SUMATRA  BOX/20', 'Royal vintage By RP', 7, 0, NULL, NULL),
+	(438, 'CM-03967', 'CAJAS DE MADERA ROCKY PATEL 1950 SPECIAL RESERVE ROBUSTO SUMATRA BOX/20', 'VARIOS', 7, 0, NULL, NULL),
+	(439, 'CM-03968', 'CAJAS DE MADERA ROCKY PATEL 1950 SPECIAL RESERVE TORO SUMATRA BOX/20', 'VARIOS', 7, 0, NULL, NULL),
+	(440, 'CM-03969', 'CAJAS DE MADERA ROCKY PATEL 1950 SPECIAL RESERVE TORPEDO SUMATRA BOX/20', 'VARIOS', 7, 0, NULL, NULL),
+	(441, 'CM-03970', 'CAJAS DE MADERA ROCKY PATEL THIRD COAST SINDICATE TORPEDO BOX/20', 'The Edge', 7, 0, NULL, NULL),
+	(442, 'CM-03972', 'CAJAS DE MADERA  ROCKY PATEL  EDGE LITE  ROBUSTO BOX/12', 'The Edge Connecticut', 44, 0, NULL, NULL),
+	(443, 'CM-03973', 'CAJAS DE MADERA  ROCKY PATEL  EDGE LITE  TORO BOX/12', 'The Edge Connecticut', 44, 0, NULL, NULL),
+	(444, 'CM-03974', 'CAJAS DE MADERA  ROCKY PATEL  EDGE LITE  TORPEDO BOX/12', 'The Edge Connecticut', 44, 0, NULL, NULL),
+	(445, 'CM-03975', 'CAJAS DE MADERA  ROCKY PATEL  EDGE LITE  BATTALION BOX/12', 'The Edge Connecticut', 44, 0, NULL, NULL),
+	(446, 'CM-03976', 'CAJAS DE MADERA  ROCKY PATEL  EDGE LITE  ROBUSTO BOX/6', 'The Edge Connecticut', 5, 0, NULL, NULL),
+	(447, 'CM-03977', 'CAJAS DE MADERA  ROCKY PATEL  EDGE LITE  TORO BOX/6', 'The Edge Connecticut', 5, 0, NULL, NULL),
+	(448, 'CM-03978', 'CAJAS DE MADERA  ROCKY PATEL  EDGE LITE  TORPEDO BOX/6', 'The Edge Connecticut', 5, 0, NULL, NULL),
+	(449, 'CM-03979', 'CAJAS DE MADERA  ROCKY PATEL  EDGE LITE  BATTALION BOX/6', 'The Edge Connecticut', 5, 0, NULL, NULL),
+	(450, 'CM-03984', 'CAJAS DE MADERA ROCKY PATEL  EDGE TORO CANDELA BOX 20', 'The Edge', 7, 0, NULL, NULL),
+	(451, 'CM-03985', 'CAJAS DE MADERA ROCKY PATEL  DESIENA ROBUSTO COROJO BOX/20', 'Desiena 312', 7, 0, NULL, NULL),
+	(452, 'CM-03987', 'CAJAS DE MADERA ROCKY PATEL  ROSADO SIXTY SUMATRA BOX/20', 'Rosado', 7, 0, NULL, NULL),
+	(453, 'CM-03988', 'CAJAS DE MADERA ROCKY PATEL COBUTO TORPEDO BOX 20', 'Cobuto', 7, 0, NULL, NULL),
+	(454, 'CM-03989', 'CAJAS DE MADERA ROCKY PATEL  RYAN  DANGER  TORO BOX/20', 'Ryan Danger', 7, 0, NULL, NULL),
+	(455, 'CM-04012', 'CAJAS DE MADERA ROCKY PATEL  MERITAGE TORO COR/MAD  BOX/20', 'Meritage', 7, 0, NULL, NULL),
+	(456, 'CM-04014', 'CAJAS DE MADERA ROCKY PATEL HIGH SEAS COLLETION BLUE BOX', 'VARIOS', NULL, 0, NULL, NULL),
+	(457, 'CM-04030', 'CAJAS DE MADERA ROCKY PATEL MISSION TOBACCO LOUNGE 4X38 MAD BOX 40', 'Mission Tobacco Lounge', NULL, 0, NULL, NULL),
+	(458, 'CM-04031', 'CAJAS DE MADERA ROCKY PATEL MISSION TOBACCO LOUNGE 4X38 SUM BOX 40', 'Mission Tobacco Lounge', NULL, 0, NULL, NULL),
+	(459, 'CM-04032', 'CAJAS DE MADERA ROCKY PATEL DECADE LIMITED GIFT PACK BOX 6', 'Decada', 5, 0, NULL, NULL),
+	(460, 'CM-04033', 'CAJAS DE MADERA ROCKY PATEL SUNGROWN SAMPLER BOX 5', 'Sungrown', 6, 0, NULL, NULL),
+	(461, 'CM-04034', 'CAJAS DE MADERA ROCKY PATEL DECADE VS DECADE LIMITADA TORO SAMPLER BOX 6', 'Decada', 5, 0, NULL, NULL),
+	(462, 'CM-04036', 'CAJAS DE MADERA ROCKY PATEL DRAIG K 5X50 MAD', 'Draig K', NULL, 0, NULL, NULL),
+	(463, 'CM-04037', 'CAJAS DE MADERA ROCKY PATEL DRAIG K 6X50 MAD', 'Draig K', NULL, 0, NULL, NULL),
+	(464, 'CM-04038', 'CAJAS DE MADERA ROCKY PATEL DRAIG K 5X42 MAD', 'Draig K', NULL, 0, NULL, NULL),
+	(465, 'CM-04039', 'CAJAS DE MADERA ROCKY PATEL ROYAL VINTAGE ROBUSTO SUMATRA  BOX/20', 'Royal vintage By RP', 7, 0, NULL, NULL),
+	(466, 'CM-04042', 'CAJAS DE MADERA ROCKY PATEL SIXTY EXECUTION BOX/20', 'Execution by RP', 7, 0, NULL, NULL),
+	(467, 'CM-04043', 'CAJAS DE MADERA ROCKY PATEL ROBUSTO EXECUTION BOX/20', 'Execution by RP', 7, 0, NULL, NULL),
+	(468, 'CM-04049', 'CAJAS DE MADERA ROCKY PATEL  VINTAGE 2003 PRESS ROBUSTO CAMEROON BOX/20', 'VINTAGE 2003', 7, 0, NULL, NULL),
+	(469, 'CM-04050', 'CAJAS DE MADERA ROCKY PATEL  VINTAGE 2003 PRESS TORO CAMEROON BOX/20', 'VINTAGE 2003', 7, 0, NULL, NULL),
+	(470, 'CM-04052', 'CAJAS DE MADERA ROCKY PATEL  VINTAGE 2003 PRESS TORPEDO CAMEROON BOX/20', 'VINTAGE 2003', 7, 0, NULL, NULL),
+	(471, 'CM-04053', 'CAJAS DE MADERA ROCKY PATEL  CUBAN BLEND PETITE BELICOSO MADURO BOX/20', 'Cuban Blend', 7, 0, NULL, NULL),
+	(472, 'CM-04054', 'CAJAS DE MADERA ROCKY PATEL MADURO BY LANCERO BOX/20 NUEVA EDICION', 'Connecticut Rocky Patel', NULL, 0, NULL, NULL),
+	(473, 'CM-04055', 'CAJAS DE MADERA ROCKY PATEL MADURO BY TORO BOX/20 NUEVA EDICION', 'Connecticut Rocky Patel', NULL, 0, NULL, NULL),
+	(474, 'CM-04056', 'CAJAS DE MADERA ROCKY PATEL MADURO BY CHURCILL BOX/20 NUEVA EDICION', 'Connecticut Rocky Patel', NULL, 0, NULL, NULL),
+	(475, 'CM-04057', 'CAJAS DE MADERA ROCKY PATEL  CAMEROON BY R.P. BELICOSO CAMEROON BOX/20 NUEVA EDICION', 'Cameroon By RP', NULL, 0, NULL, NULL),
+	(476, 'CM-04058', 'CAJAS DE MADERA ROCKY PATEL EDGE LITE TORO BOX/10 (NUEVA)', 'The Edge Connecticut', NULL, 0, NULL, NULL),
+	(477, 'CM-04059', 'CAJAS DE MADERA ROCKY PATEL  EDGE TORO COROJO BOX/10', 'The Edge', 4, 0, NULL, NULL),
+	(478, 'CM-04067', 'CAJAS DE MADERA ROCKY PATEL VINTAGE 2003 PRESS SHORT ROBUSTO BOX 10', 'VINTAGE 2003', 4, 0, NULL, NULL),
+	(479, 'CM-04068', 'CAJAS DE MADERA ROCKY PATEL HEIRES PETITE CORONA BOX 10', 'Heiress', 4, 0, NULL, NULL),
+	(480, 'CM-04087', 'CAJAS DE MADERA ROCKY PATEL  EMILIO SERIES ROBUSTO SUMATRA BOX/20', 'Emilio  H Serie', 7, 0, NULL, NULL),
+	(481, 'CM-04088', 'CAJAS DE MADERA ROCKY PATEL  EMILIO SERIES ROBUSTO MADURO BOX/20', 'Emilio  H Serie', 7, 0, NULL, NULL),
+	(482, 'CM-04089', 'CAJAS DE MADERA ROCKY PATEL  EDGE ROCKCHILD COROJO BOX/20', 'The Edge', 7, 0, NULL, NULL),
+	(483, 'CM-04090', 'CAJAS DE MADERA ROCKY PATEL  EDGE ROCKCHILD MADURO BOX/20', 'The Edge', 7, 0, NULL, NULL),
+	(484, 'CM-04093', 'CAJAS DE MADERA  ROCKY PATEL  EL CONEJITO ROBUSTO BOX 10', 'El Conejito', 4, 0, NULL, NULL),
+	(485, 'CM-04487', 'CAJAS DE MADERA ROCKY PATEL DECADE ROCKCHILLDE PRENSADO SUMATRA BOX/20', 'Decada', 7, 0, NULL, NULL),
+	(486, 'CM-04488', 'CAJAS DE MADERA ROCKY PATEL  EDGE TORPEDO MADURO BOX/100', 'The Edge', 18, 0, NULL, NULL),
+	(487, 'CM-04489', 'CAJAS DE MADERA ROCKY PATEL  TORO NAAS BOX/20', 'Naas', 7, 0, NULL, NULL),
+	(488, 'CM-04490', 'CAJAS DE MADERA ROCKY PATEL SUNGROWN TORO TUBO BOX/10', 'Sungrown', 4, 0, NULL, NULL),
+	(489, 'CM-04491', 'CAJAS DE MADERA ROCKY PATEL EDGE  MINI BELICOSO MADURO BOX/20', 'Edition Special', 7, 0, NULL, NULL),
+	(490, 'CM-04492', 'CAJAS DE MADERA ROCKY PATEL EDGE  MINI BELICOSO COROJO BOX/20', 'Edition Special', 7, 0, NULL, NULL),
+	(491, 'CM-04493', 'CAJAS DE MADERA ROCKY PATEL TERRY BRENNAN TORO BOX/20', 'Terry Brennan', 7, 0, NULL, NULL),
+	(492, 'CM-04494', 'CAJAS DE MADERA ROCKY PATEL  EDGE SHORT SHORT ROBUSTO BOX/20', 'The Edge', 7, 0, NULL, NULL),
+	(493, 'CM-04495', 'CAJAS DE MADERA ROCKY PATEL  EDGE SHORT ROBUSTO MADURO BOX/20', 'The Edge', 7, 0, NULL, NULL),
+	(494, 'CM-04496', 'CAJAS DE MADERA ROCKY PATEL  EDGE SHORT ROBUSTO COROJO BOX/20', 'The Edge', 7, 0, NULL, NULL),
+	(495, 'CM-04497', 'CAJAS DE MADERA ROCKY PATEL  DOUBLE CORONA COROJO DESIENA BOX/20', 'Desiena 312', 7, 0, NULL, NULL),
+	(496, 'CM-04498', 'CAJAS DE MADERA ROCKY PATEL DESIENA SUPER TORO COROJO  BOX/20', 'Desiena 312', 7, 0, NULL, NULL),
+	(497, 'CM-04499', 'CAJAS DE MADERA ROCKY PATEL DESIENA TORO COROJO  BOX/20', 'Desiena 312', 7, 0, NULL, NULL),
+	(498, 'CM-04500', 'CAJAS DE MADERA ROCKY PATEL DESIENA ROBUSTO MADURO BOX/20', 'Desiena 312', 7, 0, NULL, NULL),
+	(499, 'CM-04501', 'CAJAS DE MADERA ROCKY PATEL DESIENA TORO MADURO BOX/20', 'Desiena 312', 7, 0, NULL, NULL),
+	(500, 'CM-04502', 'CAJAS DE MADERA ROCKY PATEL  DOUBLE CORONA CONNECTICUT DESIENA BOX/20', 'Desiena 312', 7, 0, NULL, NULL),
+	(501, 'CM-04503', 'CAJAS DE MADERA ROCKY PATEL  DESIENA SUPER TORO CONNECTICUT  BOX/20', 'Desiena 312', 7, 0, NULL, NULL),
+	(502, 'CM-04504', 'CAJAS DE MADERA ROCKY PATEL DESIENA TORO CONNECTICUT  BOX/20', 'Desiena 312', 7, 0, NULL, NULL),
+	(503, 'CM-04505', 'CAJAS DE MADERA ROCKY PATEL  O.W.R. TORO COROJO REDONDO BOX/20', 'Desiena 312', 7, 0, NULL, NULL),
+	(504, 'CM-04506', 'CAJAS DE MADERA ROCKY PATEL CONNECTICUT BY GORDO CONERICO BOX/20', 'Connecticut Rocky Patel', 7, 0, NULL, NULL),
+	(505, 'CM-04507', 'CAJAS DE MADERA ROCKY PATEL EDGE LITE CORONA BOX/20', 'Desiena 312', 7, 0, NULL, NULL),
+	(506, 'CM-04508', 'CAJAS DE MADERA ROCKY PATEL EDGE LITE SHORT ROBUSTO BOX/20', 'Desiena 312', 7, 0, NULL, NULL),
+	(507, 'CM-04509', 'CAJAS DE MADERA ROCKY PATEL LEGENDS CAMEROOM SUPER TORO MADURO BOX/25', 'Desiena 312', 13, 0, NULL, NULL),
+	(508, 'CM-04510', 'CAJAS DE MADERA ROCKY PATEL OCEAN CLUB TORO PRESS SUMATRA BOX/20', 'RP Ocean Club', 7, 0, NULL, NULL),
+	(509, 'CM-04511', 'CAJAS DE MADERA ROCKY PATEL  EDGE ROBUSTO TUBO CONECTICUT BOX/10', 'The Edge Connecticut', 4, 0, NULL, NULL),
+	(510, 'CM-04512', 'CAJAS DE MADERA ROCKY PATEL  ORE GOLF ROBUSTO  CONECTICUT BOX/10', 'Ore Golf', 4, 0, NULL, NULL),
+	(511, 'CM-04513', 'CAJAS DE MADERA ROCKY PATEL  ORE GOLF TORO  CONECTICUT BOX/10', 'Ore Golf', 4, 0, NULL, NULL),
+	(512, 'CM-04514', 'CAJAS DE MADERA ROCKY PATEL  ORE GOLF GORDO  CONECTICUT BOX/10', 'Ore Golf', 4, 0, NULL, NULL),
+	(513, 'CM-04515', 'CAJAS DE MADERA ROCKY PATEL  LA CONQUISTA ROBUSTO PRESS BOX/20', 'La Conquista', 7, 0, NULL, NULL),
+	(514, 'CM-04516', 'CAJAS DE MADERA ROCKY PATEL  LA CONQUISTA TORO PRESS BOX/20', 'La Conquista', 7, 0, NULL, NULL),
+	(515, 'CM-04517', 'CAJAS DE MADERA ROCKY PATEL  LA CONQUISTA CHURCHILL PRESS BOX/20', 'La Conquista', 7, 0, NULL, NULL),
+	(516, 'CM-04518', 'CAJAS DE MADERA ROCKY PATEL  SUPER FUERTE SUPER TORO ROUND MADURO BOX/25', 'Super Fuerte', 13, 0, NULL, NULL),
+	(517, 'CM-04519', 'CAJAS DE MADERA ROCKY PATEL  EDGE SELECTION 652 SUMATRA BOX/50', 'The Edge', 21, 0, NULL, NULL),
+	(518, 'CM-04520', 'CAJAS DE MADERA ROCKY PATEL  EDGE SELECTION PYRAMID SUMATRA BOX/50', 'The Edge', 21, 0, NULL, NULL),
+	(519, 'CM-04521', 'CAJAS DE MADERA ROCKY PATEL LA SIRENA DOBLE CORONA BOX/20', 'La Sirena', 7, 0, NULL, NULL),
+	(520, 'CM-04522', 'CAJAS DE MADERA ROCKY PATEL SMOKE INN HOUSE BLEND  GORDO TRAYS100', 'Smoke Inn House Blend', 18, 0, NULL, NULL),
+	(521, 'CM-04523', 'CAJAS DE MADERA ROCKY PATEL DECADE TORO TUBO  DELUXE SUMATRA BOX/10', 'Decada', 4, 0, NULL, NULL),
+	(522, 'CM-04524', 'CAJAS DE MADERA ROCKY PATEL  EDGE SQUARE ROBUSTO PRESS COROJO BOX/20', 'Edge Square', 7, 0, NULL, NULL),
+	(523, 'CM-04525', 'CAJAS DE MADERA ROCKY PATEL EDGE CORONA COROJO BOX/20', 'The Edge', 7, 0, NULL, NULL),
+	(524, 'CM-04526', 'CAJAS DE MADERA ROCKY PATEL VINTAGE 1990 PETIT CORONA REDONDO SUMATRA  BOX/20', 'Vintage 1990', 7, 0, NULL, NULL),
+	(525, 'CM-04527', 'CAJAS DE MADERA ROCKY PATEL VINTAGE 1999 PETIT CORONA REDONDO CONN BOX/20', 'Vintage 1999', 7, 0, NULL, NULL),
+	(526, 'CM-04528', 'CAJAS DE MADERA ROCKY PATEL VINTAGE 1999 ROBUSTO REDONDO CONN BOX/20', 'Vintage 1999', 7, 0, NULL, NULL),
+	(527, 'CM-04529', 'CAJAS DE MADERA ROCKY PATEL VINTAGE 1999 TORO REDONDO SUMATRA BOX/20', 'Vintage 1999', 7, 0, NULL, NULL),
+	(528, 'CM-04530', 'CAJAS DE MADERA ROCKY PATEL VINTAGE 1999 CHURCHILL REDONDO CONNECTICUT BOX/20', 'Vintage 1999', 7, 0, NULL, NULL),
+	(529, 'CM-04531', 'CAJAS DE MADERA ROCKY PATEL MONOCASY ROBUSTO PRESS SUMATRA BOX/20', 'Davidus PL Monocacy', 7, 0, NULL, NULL),
+	(530, 'CM-04532', 'CAJAS DE MADERA ROCKY PATEL VINTAGE 1992 TORO REDONDO SUMATRA BOX/20', 'Vintage 1992', 7, 0, NULL, NULL),
+	(531, 'CM-04533', 'CAJAS DE MADERA ROCKY PATEL VINTAGE 1990 SIXTY REDONDO MADURO BOX/20', 'Vintage 1990', 7, 0, NULL, NULL),
+	(532, 'CM-04534', 'CAJAS DE MADERA ROCKY PATEL VINTAGE 1990 TORPEDO REDONDO BOX/20', 'Vintage 1990', 7, 0, NULL, NULL),
+	(533, 'CM-04535', 'CAJAS DE MADERA ROCKY PATEL VINTAGE 1990 CORONA PRENSADO SUMATRA BOX/20', 'Vintage 1990', 7, 0, NULL, NULL),
+	(534, 'CM-04536', 'CAJAS DE MADERA ROCKY PATEL VINTAGE 1999 TORPEDO REDONDO BOX 20', 'Vintage 1999', 7, 0, NULL, NULL),
+	(535, 'CM-04537', 'CAJAS DE MADERA ROCKY PATEL VINTAGE 1999 PETIT BELICOSO REDONDO BOX 20', 'Vintage 1999', 7, 0, NULL, NULL),
+	(536, 'CM-04538', 'CAJAS DE MADERA ROCKY PATEL VINTAGE 1990 PETIT BELICOSO REDONDO BOX 20', 'Vintage 1990', 7, 0, NULL, NULL),
+	(537, 'CM-04539', 'CAJAS DE MADERA ROCKY PATEL VINTAGE 1992 CHURCHILL PRENSADO BOX 20', 'Vintage 1990', 7, 0, NULL, NULL),
+	(538, 'CM-04540', 'CAJAS DE MADERA ROCKY PATEL VINTAGE 1992 PETIT CORONA PRENSADO BOX 20', 'Vintage 1992', 7, 0, NULL, NULL),
+	(539, 'CM-04541', 'CAJAS DE MADERA ROCKY PATEL VINTAGE 1990 ROBUSTO MADURO PRENSADO BOX 20', 'Vintage 1990', 7, 0, NULL, NULL),
+	(540, 'CM-04542', 'CAJAS DE MADERA ROCKY PATEL VINTAGE 1992 PERFECTO REDONDO BOX 20', 'Vintage 1992', 7, 0, NULL, NULL),
+	(541, 'CM-04543', 'CAJAS DE MADERA ROCKY PATEL VINTAGE 1999 PERFECTO PRENSADO BOX 20', 'Vintage 1999', 7, 0, NULL, NULL),
+	(542, 'CM-04544', 'CAJAS DE MADERA ROCKY PATEL  CAMEROON LEGEND SUPER TORO MADURO BOX/25', 'Super Fuerte', 13, 0, NULL, NULL),
+	(543, 'CM-04545', 'CAJAS DE MADERA ROCKY PATEL VINTAGE 1999 PERFECTO REDONDO BOX/20', 'Vintage 1990', 7, 0, NULL, NULL),
+	(544, 'CM-04546', 'CAJAS DE MADERA ROCKY PATEL VINTAGE 1990 TORO REDONDO BOX/20', 'Vintage 1990', 7, 0, NULL, NULL),
+	(545, 'CM-04547', 'CAJAS DE MADERA ROCKY PATEL VINTAGE 1992 PETIT BELICOSO REDONDO SUMATRA BOX/20', 'Vintage 1992', 7, 0, NULL, NULL),
+	(546, 'CM-04548', 'CAJAS DE MADERA ROCKY PATEL VINTAGE 1990 PETIT CORONA PRENSADO SUMATRA BOX/20', 'Vintage 1990', 7, 0, NULL, NULL),
+	(547, 'CM-04549', 'CAJAS DE MADERA ROCKY PATEL VINTAGE 1999 CHURCHILL TUBO CONN. BOX/10', 'Vintage 1990', 4, 0, NULL, NULL),
+	(548, 'CM-04550', 'CAJAS DE MADERA ROCKY PATEL VINTAGE 1990 CHURCHILL TUBO MADURO BOX/10', 'Vintage 1990', 4, 0, NULL, NULL),
+	(549, 'CM-04551', 'CAJAS DE MADERA ROCKY PATEL DAVIDUS ANTIETAM PIRAMID PRESS BOX/20', 'Davidus Antietam', 7, 0, NULL, NULL),
+	(550, 'CM-04552', 'CAJAS DE MADERA ROCKY PATEL DAVIDUS ANTIETAM CHURCILL PRESS BOX/20', 'Davidus Antietam', 7, 0, NULL, NULL),
+	(551, 'CM-04553', 'CAJAS DE MADERA ROCKY PATEL DAVIDUS ANTIETAM ROBUSTO PRESS BOX/20', 'Davidus Antietam', 7, 25, NULL, NULL),
+	(552, 'CM-04554', 'CAJAS DE MADERA ROCKY PATEL  LEESBURG ROBUSTO MADURO BOX/20', 'Leesburg', 7, 0, NULL, NULL),
+	(553, 'CM-04555', 'CAJAS DE MADERA ROCKY PATEL  LEESBURG TORPEDO MADURO BOX/20', 'Leesburg', 7, 0, NULL, NULL),
+	(554, 'CM-04556', 'CAJAS DE MADERA ROCKY PATEL ROYAL VINTAGE TORO SUMATRA  BOX/20', 'Royal vintage By RP', 7, 0, NULL, NULL),
+	(555, 'CM-04557', 'CAJAS DE MADERA ROCKY PATEL ROYAL VINTAGE TORPEDO SUMATRA  BOX/20', 'Royal vintage By RP', 7, 0, NULL, NULL),
+	(556, 'CM-04558', 'CAJAS DE MADERA ROCKY PATEL ROYAL VINTAGE CHURCHILL SUMATRA  BOX/20', 'Royal vintage By RP', 7, 0, NULL, NULL),
+	(557, 'CM-04559', 'CAJAS DE MADERA ROCKY PATEL  HABANA PREMIUM TORPEDO MADURO BOX/20', 'Habana Premiun', 7, 0, NULL, NULL),
+	(558, 'CM-04560', 'CAJAS DE MADERA ROCKY PATEL  HABANA PREMIUM ROBUSTO BOX/20', 'Habana Premiun', 7, 0, NULL, NULL),
+	(559, 'CM-04561', 'CAJAS DE MADERA ROCKY PATEL SMOKE FRIENDLY BOX/20', 'Cuban Blend', 7, 0, NULL, NULL),
+	(560, 'CM-04562', 'CAJAS DE MADERA ROCKY PATEL FREDERICKTOWNE CHURCHILL ROUND  BOX/20', 'Davidus Fredericktown', 7, 5, NULL, NULL),
+	(561, 'CM-04563', 'CAJAS DE MADERA ROCKY PATEL CCF WHITE LABEL TORO BOX/20', 'CCF- White Label', 7, 0, NULL, NULL),
+	(562, 'CM-04564', 'CAJAS DE MADERA ROCKY PATEL CCF WHITE LABEL SHORT ROBUSTO BOX/20', 'CCF- White Label', 7, 0, NULL, NULL),
+	(563, 'CM-04565', 'CAJAS DE MADERA ROCKY PATEL CCF WHITE LABEL CORONA BOX/20', 'CCF- White Label', 7, 0, NULL, NULL),
+	(564, 'CM-04597', 'CAJAS DE MADERA ROCKY PATEL  ORETOBERFEST TORO  CONECTICUT BOX/10', 'Oretoberfest', 4, 0, NULL, NULL),
+	(565, 'CM-04598', 'CAJAS DE MADERA ROCKY PATEL  ORETOBERFEST  TORO  HABANO BOX/10', 'Oretoberfest', 4, 0, NULL, NULL),
+	(566, 'CM-04599', 'CAJAS DE MADERA ROCKY PATEL  VINTAGE 2003 ROBUSTO ROUND CAMEROON BOX/10', 'VINTAGE 2003', 4, 0, NULL, NULL),
+	(567, 'CM-04600', 'CAJAS DE MADERA ROCKY PATEL VINTAGE 1990 ROBUSTO PRENSADO MADURO BOX 10', 'Vintage 1990', 4, 0, NULL, NULL),
+	(568, 'CM-04601', 'CAJAS DE MADERA ROCKY PATEL  VINTAGE 1992 ROBUSTO PRESS SUMATRA BOX/10', 'Vintage 1992', 4, 0, NULL, NULL),
+	(569, 'CM-04602', 'CAJAS DE MADERA ROCKY PATEL  VINTAGE 1999 ROBUSTO CONERICO 5X50 BOX/10', 'Vintage 1999', 4, 0, NULL, NULL),
+	(570, 'CM-04603', 'CAJAS DE MADERA ROCKY PATEL  VINTAGE 2003 TORPEDO ROND CAMEROON BOX10', 'VINTAGE 2003', 4, 0, NULL, NULL),
+	(571, 'CM-04604', 'CAJAS DE MADERA ROCKY PATEL  EDGE HABANO SIN GRABADO BOX/100', 'The Edge Nicaragua', 18, 0, NULL, NULL),
+	(572, 'CM-05001', 'CAJAS DE MADERA  ROCKY PATEL PREMIUM BURN BY ROCKY PATEL TORPEDO  BOX-20', 'Gold By RP', 7, 0, NULL, NULL),
+	(573, 'CM-05003', 'CAJAS DE MADERA  ROCKY PATEL PREMIUM BURN BY ROCKY PATEL ROBUSTO  BOX-20', 'Gold By RP', 7, 0, NULL, NULL),
+	(574, 'CM-05128', 'CAJAS DE MADERA ROCKY PATEL  EDGE TORPEDO SUMATRA BOX/20', 'The Edge', 7, 0, NULL, NULL),
+	(575, 'CM-05129', 'CAJAS DE MADERA ROCKY PATEL  EDGE TORO SUMATRA BOX/20', 'The Edge', 7, 0, NULL, NULL),
+	(576, 'CM-05133', 'CAJAS DE MADERA ROCKY PATEL  CUBAN BLEND ROBUSTO COROJO BOX/20', 'Cuban Blend', 7, 0, NULL, NULL),
+	(577, 'CM-05140', 'CAJAS DE MADERA ROCKY PATEL  CUBAN BLEND PETITE BELICOSO COROJO BOX/20', 'Cuban Blend', 7, 0, NULL, NULL),
+	(578, 'CM-05141', 'CAJAS DE MADERA ROCKY PATEL  CUBAN BLEND TORPEDO MADURO BOX/20', 'Cuban Blend', 7, 0, NULL, NULL),
+	(579, 'CM-05151', 'CAJAS DE MADERA ROCKY PATEL  EDGE ROCKCHILDE SUMATRA BOX/20', 'The Edge', 7, 0, NULL, NULL),
+	(580, 'CM-05166', 'CAJAS DE MADERA ROCKY PATEL  LA CONQUISTA CHURCHILL MADURO  BOX/20', 'La Conquista', 7, 0, NULL, NULL),
+	(581, 'CM-05182', 'CAJAS DE MADERA ROCKY PATEL VIVALO LONSDALE BOX/20', 'Vivalo', 7, 0, NULL, NULL),
+	(582, 'CM-05222', 'CAJAS DE MADERA ROCKY PATEL  EDGE LIMITED EDITION "A" 8-1/2X50 TRAY 12', 'The Edge', 44, 0, NULL, NULL),
+	(583, 'CM-05247', 'CAJAS DE MADERA ROCKY PATEL ZARKA 1932 5-1/2X52 JAL.', 'Zarka 1932', NULL, 0, NULL, NULL),
+	(584, 'CM-05248', 'CAJAS DE MADERA ROCKY PATEL ZARKA 1932 6-1/2X52 JAL.', 'Zarka 1932', NULL, 0, NULL, NULL),
+	(585, 'CM-05249', 'CAJAS DE MADERA ROCKY PATEL ZARKA 1932 6-1/2X52 TORPEDO JAL.', 'Zarka 1932', NULL, 0, NULL, NULL),
+	(586, 'CM-05250', 'CAJAS DE MADERA ROCKY PATEL ZARKA 1932 6X60 JAL.', 'Zarka 1932', NULL, 0, NULL, NULL),
+	(587, 'CM-05267', 'CAJAS DE MADERA ROCKY PATEL  EDGE TORO HABANO BOX/20', 'The Edge Nicaragua', 7, 0, NULL, NULL),
+	(588, 'CM-05268', 'CAJAS DE MADERA ROCKY PATEL  EDGE SIXTY BATTALION HABANO BOX/20', 'The Edge', 7, 0, NULL, NULL),
+	(589, 'CM-05269', 'CAJAS DE MADERA ROCKY PATEL  EDGE TORO HABANO TRAYS/100', 'The Edge Nicaragua', 18, 0, NULL, NULL),
+	(590, 'CM-05275', 'CAJAS DE MADERA ROCKY PATEL EDGE TRAYS', 'The Edge', NULL, 0, NULL, NULL),
+	(591, 'CM-05276', 'CAJAS DE MADERA ROCKY PATEL SMOKER FRIENDLY TRAYS TORO', 'Smoker Friendly', NULL, 0, NULL, NULL),
+	(592, 'CM-05277', 'CAJAS DE MADERA ROCKY PATEL DECADE TRAYS', 'Decada', NULL, 0, NULL, NULL),
+	(593, 'CM-05279', 'CAJAS DE MADERA ROCKY PATEL R.A.D. TORO BOX 20', 'R.A.D.', 7, 0, NULL, NULL),
+	(594, 'CM-05280', 'CAJAS DE MADERA ROCKY PATEL BLACK WARRIOR TORPEDO BOX 20', 'Black Warrior', 7, 0, NULL, NULL),
+	(595, 'CM-05281', 'CAJAS DE MADERA ROCKY PATEL BLACK WARRIOR ROBUSTO BOX 20', 'Black Warrior', 7, 0, NULL, NULL),
+	(596, 'CM-05310', 'CAJAS DE MADERA ROCKY PATEL LUXURY COLLECTION TORO SAMPLER BOX/10', 'VARIOS', 4, 0, NULL, NULL),
+	(597, 'CM-05311', 'CAJAS DE MADERA ROCKY PATEL MARQUETTE 77 TORPEDO PRESS BOX/20', 'Marquette 77', 7, 0, NULL, NULL),
+	(598, 'CM-05312', 'CAJAS DE MADERA ROCKY PATEL DOBLE CORONA MADURO DESIENA BOX/20', 'Desiena 312', 7, 0, NULL, NULL),
+	(599, 'CM-05313', 'CAJAS DE MADERA ROCKY PATEL SUPER TORO MADURO DESIENA BOX/20', 'Desiena 312', 7, 0, NULL, NULL),
+	(600, 'CM-05314', 'CAJAS DE MADERA ROCKY PATEL SHORT TORPEDO COROJO DESIENA BOX/20', 'Desiena 312', 7, 0, NULL, NULL),
+	(601, 'CM-05315', 'CAJAS DE MADERA ROCKY PATEL SHORT TORPEDO MADURO DESIENA BOX/20', 'Desiena 312', 7, 0, NULL, NULL),
+	(602, 'CM-05316', 'CAJAS DE MADERA ROCKY PATEL SHORT TORPEDO CONN DESIENA BOX/20', 'Desiena 312', 7, 0, NULL, NULL),
+	(603, 'CM-05319', 'CAJAS DE MADERA ROCKY PATEL B1 BURNERS TORO BOX/20', 'B1 Burners Private Label', 7, 0, NULL, NULL),
+	(604, 'CM-05320', 'CAJAS DE MADERA ROCKY PATEL B1 BURNERS ROBUSTO BOX/20', 'B1 Burners Private Label', 7, 0, NULL, NULL),
+	(605, 'CM-05333', 'CAJAS DE MADERA ROCKY PATEL  EDGE ROBUSTO HABANO BOX/100', 'The Edge', 18, 0, NULL, NULL),
+	(606, 'CM-05334', 'CAJAS DE MADERA ROCKY PATEL  EDGE TORPEDO HABANO BOX/100', 'The Edge Nicaragua', 18, 0, NULL, NULL),
+	(607, 'CM-05335', 'CAJAS DE MADERA ROCKY PATEL  EDGE ROBUSTO COROJO BOX/100', 'The Edge', 18, 0, NULL, NULL),
+	(608, 'CM-05336', 'CAJAS DE MADERA ROCKY PATEL  VINTAGE 1999 ROCKCHILDE CONERICO BOX/20', 'Vintage 1999', 7, 0, NULL, NULL),
+	(609, 'CM-05337', 'CAJAS DE MADERA ROCKY PATEL  SUNGROWN TRAY DELUXE TORO TUBE  SUMATRA BOX/50', 'Sungrown', 21, 0, NULL, NULL),
+	(610, 'CM-05338', 'CAJAS DE MADERA ROCKY PATEL  VINTAGE 2003 PERFECTO CAMEROON BOX/20', 'VINTAGE 2003', 7, 0, NULL, NULL),
+	(611, 'CM-05351', 'CAJAS DE MADERA ROCKY PATEL JAXX LT TORO BOX/20', 'Jaxx LT', 7, 0, NULL, NULL),
+	(612, 'CM-05352', 'CAJAS DE MADERA ROCKY PATEL JAXX LT ROBUSTO BOX/20', 'Jaxx LT', 7, 0, NULL, NULL),
+	(613, 'CM-05353', 'CAJAS DE MADERA ROCKY PATEL JAXX LT SIXTY BOX/20', 'Jaxx LT', 7, 0, NULL, NULL),
+	(614, 'CM-05356', 'CAJAS DE MADERA ROCKY PATEL EDGE 4-1/2X60 B52 COROJO BOX/30', 'The Edge', 19, 50, NULL, NULL),
+	(615, 'CM-05357', 'CAJAS DE MADERA ROCKY PATEL EDGE 4-1/2X60 B52 MADURO BOX/30', 'The Edge', 19, 50, NULL, NULL),
+	(616, 'CM-05359', 'CAJAS DE MADERA ROCKY PATEL EDGE LITE ROBUSTO BOX/100', 'The Edge Connecticut', 18, 0, NULL, NULL),
+	(617, 'CM-05379', 'CAJAS DE MADERA ROCKY PATEL VINTAGE 1992 CHURCHILL TUBO SUMATRA BOX/10', 'Vintage 1992', 4, 0, NULL, NULL),
+	(618, 'CM-05400', 'CAJAS DE MADERA ROCKY PATEL  VINTAGE 1990 TRAYS EMPTY', 'Vintage 1990', NULL, 0, NULL, NULL),
+	(619, 'CM-05402', 'CAJAS DE MADERA ROCKY PATEL  VINTAGE 1992 TRAYS EMPTY', 'Vintage 1992', NULL, 0, NULL, NULL),
+	(620, 'CM-05403', 'CAJAS DE MADERA ROCKY PATEL  VINTAGE 1999 TRAYS EMPTY', 'Vintage 1999', NULL, 0, NULL, NULL),
+	(621, 'CM-05421', 'CAJAS DE MADERA ROCKY PATEL  VINTAGE 1990 ROCKCHILL RED. MADURO BOX/20', 'Vintage 1990', 7, 0, NULL, NULL),
+	(622, 'CM-05429', 'CAJAS DE MADERA ROCKY PATEL  EDGE COUNTERFEIT TORO COROJO BOX/20', 'The Edge', 7, 0, NULL, NULL),
+	(623, 'CM-05430', 'CAJAS DE MADERA ROCKY PATEL  EDGE COUNTERFEIT TORPEDO COROJO BOX/20', 'The Edge', 7, 0, NULL, NULL),
+	(624, 'CM-05431', 'CAJAS DE MADERA ROCKY PATEL  EDGE COUNTERFEIT TORO MADURO BOX/20', 'The Edge', 7, 0, NULL, NULL),
+	(625, 'CM-05432', 'CAJAS DE MADERA ROCKY PATEL  EDGE COUNTERFEIT TORPEDO MADURO BOX/20', 'The Edge', 7, 0, NULL, NULL),
+	(626, 'CM-05458', 'CAJAS DE MADERA ROCKY PATEL B1 BURNERS CORONA BOX/20', 'B1 Burners Private Label', 7, 0, NULL, NULL),
+	(627, 'CM-05459', 'CAJAS DE MADERA ROCKY PATEL B1 BURNERS SIXTY BOX/20', 'B1 Burners Private Label', 7, 0, NULL, NULL),
+	(628, 'CM-05460', 'CAJAS DE MADERA ROCKY PATEL VIVALO ROBUSTO GRANDE BOX/20', 'Vivalo', 7, 0, NULL, NULL),
+	(629, 'CM-05461', 'CAJAS DE MADERA ROCKY PATEL VIVALO SIXTY BOX/20', 'Vivalo', 7, 0, NULL, NULL),
+	(630, 'CM-05466', 'CAJAS DE MADERA ROCKY PATEL  PABLO MARTIN TORO COROJO BOX/20', 'Pablo Martin', 7, 0, NULL, NULL),
+	(631, 'CM-05467', 'CAJAS DE MADERA ROCKY PATEL  PABLO MARTIN ROBUSTO COROJO BOX/20', 'Pablo Martin', 7, 0, NULL, NULL),
+	(632, 'CM-05468', 'CAJAS DE MADERA ROCKY PATEL  PABLO MARTIN TORO CONERICO BOX/20', 'Pablo Martin', 7, 0, NULL, NULL),
+	(633, 'CM-05469', 'CAJAS DE MADERA ROCKY PATEL  PABLO MARTIN ROBUSTO CONERICO BOX/20', 'Pablo Martin', 7, 0, NULL, NULL),
+	(634, 'CM-05470', 'CAJAS DE MADERA ROCKY PATEL  PABLO MARTIN CONERICO TORPEDO BOX/20', 'Pablo Martin', 7, 0, NULL, NULL),
+	(635, 'CM-05471', 'CAJAS DE MADERA ROCKY PATEL  PABLO MARTIN COROJO TORPEDO BOX/20', 'Pablo Martin', 7, 0, NULL, NULL),
+	(636, 'CM-05472', 'CAJAS DE MADERA ROCKY PATEL  PABLO MARTIN CONERICO GRANDE BOX/20', 'Pablo Martin', 7, 0, NULL, NULL),
+	(637, 'CM-05473', 'CAJAS DE MADERA ROCKY PATEL  PABLO MARTIN COROJO GRANDE BOX/20', 'Pablo Martin', 7, 0, NULL, NULL),
+	(638, 'CM-05478', 'CAJAS DE MADERA ROCKY PATEL VIVALO BELICOSO BOX/20', 'Vivalo', 7, 0, NULL, NULL),
+	(639, 'CM-05479', 'CAJAS DE MADERA ROCKY PATEL VIVALO ROBUSTO BOX/20', 'Vivalo', 7, 0, NULL, NULL),
+	(640, 'CM-05480', 'CAJAS DE MADERA RP NICARAGUAN BLEND TORO 6X52 HABANO BOX 20', 'Nicaragua Selection', 7, 0, NULL, NULL),
+	(641, 'CM-05481', 'CAJAS DE MADERA RP NICARAGUAN BLEND TORPEDO 6X52 HABANO BOX 20', 'Nicaragua Selection', 7, 0, NULL, NULL),
+	(642, 'CM-05482', 'CAJAS DE MADERA RP NICARAGUAN BLEND SIXTY 6X60 HABANO BOX 20', 'Nicaragua Selection', 7, 0, NULL, NULL),
+	(643, 'CM-05483', 'CAJAS DE MADERA ROCKY PATEL TAMPA BASEBALL BOX 10', 'Tampa Baseball', 4, 0, NULL, NULL),
+	(644, 'CM-05522', 'CAJAS DE MADERA ROCKY PATEL  EDGE TORPEDO HABANO BOX/20', 'The Edge Nicaragua', 7, 0, NULL, NULL),
+	(645, 'CM-05524', 'CAJAS DE MADERA ROCKY PATEL  EMILIO SERIES TORPEDO SUMATRA BOX/20', 'Emilio  H Serie', 7, 0, NULL, NULL),
+	(646, 'CM-05528', 'CAJAS DE MADERA ROCKY PATEL  CUBAN CIGAR FACTORY ROJAS CORONA BOX/20', 'Cuban Blend', 7, 0, NULL, NULL),
+	(647, 'CM-05529', 'CAJAS DE MADERA ROCKY PATEL  CUBAN BLEND LANCERO MADURO BOX/20', 'Cuban Blend', 7, 0, NULL, NULL),
+	(648, 'CM-05530', 'CAJAS DE MADERA ROCKY PATEL EVOLUTION EMPEROR MADURO BOX/20', 'Evolution', 7, 0, NULL, NULL),
+	(649, 'CM-05531', 'CAJAS DE MADERA ROCKY PATEL  GOLD BY R.P. TORO CONERICO  BOX/20', 'Gold By RP', 7, 0, NULL, NULL),
+	(650, 'CM-05532', 'CAJAS DE MADERA ROCKY PATEL  EDGE HOWITZER COROJO BOX/10', 'The Edge', 4, 0, NULL, NULL),
+	(651, 'CM-05533', 'CAJAS DE MADERA ROCKY PATEL  EDGE HOWITZER MADURO BOX/10', 'The Edge', 4, 0, NULL, NULL),
+	(652, 'CM-05534', 'CAJAS DE MADERA ROCKY PATEL  LEESBURG TORO MADURO BOX/20', 'Leesburg', 7, 0, NULL, NULL),
+	(653, 'CM-05549', 'CAJAS DE MADERA ROCKY PATEL MAN CAVE PETITE CORONA H-2000 BOX/20', 'Man Cave', 7, 0, NULL, NULL),
+	(654, 'CM-05550', 'CAJAS DE MADERA ROCKY PATEL MAN CAVE SIXTY H-2000 BOX/20', 'Man Cave', 7, 0, NULL, NULL),
+	(655, 'CM-05551', 'CAJAS DE MADERA ROCKY PATEL MAN CAVE TORO H-2000 BOX/20', 'Man Cave', 7, 0, NULL, NULL),
+	(656, 'CM-05552', 'CAJAS DE MADERA ROCKY PATEL MAN CAVE TORPEDO H-2000 BOX/20', 'Man Cave', 7, 0, NULL, NULL),
+	(657, 'CM-05553', 'CAJAS DE MADERA ROCKY PATEL MAN CAVE PETITE CORONA COROJO BOX/20', 'Man Cave', 7, 0, NULL, NULL),
+	(658, 'CM-05554', 'CAJAS DE MADERA ROCKY PATEL MAN CAVE SIXTY COROJO BOX/20', 'Man Cave', 7, 0, NULL, NULL),
+	(659, 'CM-05555', 'CAJAS DE MADERA ROCKY PATEL MAN CAVE TORO COROJO BOX/20', 'Man Cave', 7, 0, NULL, NULL),
+	(660, 'CM-05556', 'CAJAS DE MADERA ROCKY PATEL MAN CAVE TORPEDO COROJO BOX/20', 'Man Cave', 7, 0, NULL, NULL),
+	(661, 'CM-05557', 'CAJAS DE MADERA ROCKY PATEL MAN CAVE PETITE CORONA MADURO BOX/20', 'Man Cave', 7, 0, NULL, NULL),
+	(662, 'CM-05558', 'CAJAS DE MADERA ROCKY PATEL MAN CAVE SIXTY MADURO BOX/20', 'Man Cave', 7, 0, NULL, NULL),
+	(663, 'CM-05559', 'CAJAS DE MADERA ROCKY PATEL MAN CAVE TORO MADURO BOX/20', 'Man Cave', 7, 0, NULL, NULL),
+	(664, 'CM-05560', 'CAJAS DE MADERA ROCKY PATEL MAN CAVE TORPEDO MADURO BOX/20', 'Man Cave', 7, 0, NULL, NULL),
+	(665, 'CM-05561', 'CAJAS DE MADERA ROCKY PATEL MAN CAVE PETITE CORONA SUMATRA BOX/20', 'Man Cave', 7, 0, NULL, NULL),
+	(666, 'CM-05562', 'CAJAS DE MADERA ROCKY PATEL MAN CAVE SIXTY SUMATRA BOX/20', 'Man Cave', 7, 0, NULL, NULL),
+	(667, 'CM-05563', 'CAJAS DE MADERA ROCKY PATEL MAN CAVE TORO SUMATRA BOX/20', 'Man Cave', 7, 0, NULL, NULL),
+	(668, 'CM-05564', 'CAJAS DE MADERA ROCKY PATEL MAN CAVE TORPEDO SUMATRA BOX/20', 'Man Cave', 7, 0, NULL, NULL),
+	(669, 'CM-05568', 'CAJAS DE MADERA ROCKY PATEL BLOCK ISLAND TORO BOX/10', 'Block Island', 4, 0, NULL, NULL),
+	(670, 'CM-05569', 'CAJAS DE MADERA ROCKY PATEL BLOCK ISLAND ROBUSTO BOX/10', 'Block Island', 4, 0, NULL, NULL),
+	(671, 'CM-05571', 'CAJAS DE MADERA ROCKY PATEL SMOKER FRIENDLY TRAYS SIXTY', 'Smoker Friendly', NULL, 0, NULL, NULL),
+	(672, 'CM-05578', 'CAJAS DE MADERA ROCKY PATEL  PABLO MARTIN CONERICO CHURCHILL BOX/20', 'Pablo Martin', 7, 0, NULL, NULL),
+	(673, 'CM-05587', 'CAJAS DE MADERA ROCKY PATEL  ATTACHE 5X52 ROBUSTO BOX 20', 'Embassy', 7, 0, NULL, NULL),
+	(674, 'CM-05589', 'CAJAS DE MADERA ROCKY PATEL  ATTACHE 6X60 GRANDE BOX 20', 'Embassy', 7, 0, NULL, NULL),
+	(675, 'CM-05590', 'CAJAS DE MADERA ROCKY PATEL  ATTACHE 6X52 TORO BOX 20', 'Embassy', 7, 0, NULL, NULL),
+	(676, 'CM-05599', 'CAJAS DE MADERA ROCKY PATEL RP VELVET EDITION ROBUSTO CONNECTICUT BOX/20', 'Velvet', 7, 0, NULL, NULL),
+	(677, 'CM-05600', 'CAJAS DE MADERA ROCKY PATEL RP VELVET EDITION TORO CONNECTICUT BOX/20', 'Velvet', 7, 0, NULL, NULL),
+	(678, 'CM-05601', 'CAJAS DE MADERA ROCKY PATEL RP VELVET EDITION TORPEDO CONNECTICUT BOX/20', 'Velvet', 7, 0, NULL, NULL),
+	(679, 'CM-05602', 'CAJAS DE MADERA ROCKY PATEL RP VELVET EDITION SIXTY CONNECTICUT BOX/20', 'Velvet', 7, 0, NULL, NULL),
+	(680, 'CM-05622', 'CAJAS DE MADERA ROCKY PATEL HONDURAS SAMPLER', 'NINGUNA', NULL, 0, NULL, NULL),
+	(681, 'CM-05623', 'CAJAS DE MADERA ROCKY PATEL WALL STREET ROBUSTO BOX/20', 'Wall Street', 7, 0, NULL, NULL),
+	(682, 'CM-05624', 'CAJAS DE MADERA ROCKY PATEL WALL STREET TORO BOX/20', 'Wall Street', 7, 0, NULL, NULL),
+	(683, 'CM-05625', 'CAJAS DE MADERA ROCKY PATEL WALL STREET CHURCHILL BOX/20', 'Wall Street', 7, 0, NULL, NULL),
+	(684, 'CM-05626', 'CAJAS DE MADERA ROCKY PATEL WALL STREET SIXTY BOX/20', 'Wall Street', 7, 0, NULL, NULL),
+	(685, 'CM-05627', 'CAJAS DE MADERA ROCKY PATEL  EDGE ROBUSTO MADURO BOX/10 (Divisor Plastico)', 'The Edge', NULL, 0, NULL, NULL),
+	(686, 'CM-05638', 'CAJAS DE MADERA ROCKY PATEL CAUCUS 50TH ANNIVERSARY CORONA SUMATRA BOX/10', 'Caucus', 4, 0, NULL, NULL),
+	(687, 'CM-05639', 'CAJAS DE MADERA ROCKY PATEL CAUCUS 50TH ANNIVERSARY CHURCHILL SUMATRA BOX/10', 'Caucus', 4, 0, NULL, NULL),
+	(688, 'CM-05642', 'CAJAS DE MADERA ROCKY PATEL BEALLE STREET LANCERO CONERICO BOX/20', 'Bealle Street', 7, 0, NULL, NULL),
+	(689, 'CM-05643', 'CAJAS DE MADERA ROCKY PATEL BEALLE STREET SIXTY CONERICO BOX/20', 'Bealle Street', 7, 0, NULL, NULL),
+	(690, 'CM-05644', 'CAJAS DE MADERA ROCKY PATEL BEALLE STREET LANCERO SUMATRA BOX/20', 'Bealle Street', 7, 0, NULL, NULL),
+	(691, 'CM-05645', 'CAJAS DE MADERA ROCKY PATEL BEALLE STREET SIXTY SUMATRA BOX/20', 'Bealle Street', 7, 0, NULL, NULL),
+	(692, 'CM-05646', 'CAJAS DE MADERA ROCKY PATEL DAVIDUS ANTIETAM ROBUSTO RED. BOX/20', 'Davidus Antietam', 7, 0, NULL, NULL),
+	(693, 'CM-05647', 'CAJAS DE MADERA ROCKY PATEL DAVIDUS ANTIETAM CHURCHILL RED. BOX/20', 'Davidus Antietam', 7, 0, NULL, NULL),
+	(694, 'CM-05648', 'CAJAS DE MADERA ROCKY PATEL DAVIDUS ANTIETAM PIRAMID RED. BOX/20', 'Davidus Antietam', 7, 0, NULL, NULL),
+	(695, 'CM-05649', 'CAJAS DE MADERA ROCKY PATEL DAVIDUS ANTIETAM TORO RED. BOX/20', 'Davidus Antietam', 7, 0, NULL, NULL),
+	(696, 'CM-05650', 'CAJAS DE MADERA ROCKY PATEL BADGE 282 LANCERO BOX/10', 'Badge 282', 4, 0, NULL, NULL),
+	(697, 'CM-05651', 'CAJAS DE MADERA ROCKY PATEL DECADE IN COFFINS', 'Decada', NULL, 0, NULL, NULL),
+	(698, 'CM-05673', 'CAJAS DE MADERA ROCKY PATEL JUNIOR SUNGROWN NATURAL BOX/40', 'Junior Sungrown', NULL, 0, NULL, NULL),
+	(699, 'CM-05676', 'CAJAS DE MADERA ROCKY PATEL THE DON ROBUSTO BOX/20', 'The Don', 7, 0, NULL, NULL),
+	(700, 'CM-05677', 'CAJAS DE MADERA ROCKY PATEL THE DON CHURCHILL BOX/20', 'The Don', 7, 0, NULL, NULL),
+	(701, 'CM-05678', 'CAJAS DE MADERA ROCKY PATEL THE DON SIXTY BOX/20', 'The Don', 7, 0, NULL, NULL),
+	(702, 'CM-05679', 'CAJAS DE MADERA ROCKY PATEL THE DON TORO BOX/20', 'The Don', 7, 0, NULL, NULL),
+	(703, 'CM-05690', 'CAJAS DE MADERA ROCKY PATEL CASA DE LAS ESTRELLAS TORPEDO PRESS BOX/20', 'Casa de las Estrellas', 7, 0, NULL, NULL),
+	(704, 'CM-05691', 'CAJAS DE MADERA ROCKY PATEL CASA DE LAS ESTRELLAS LANCERO PRESS BOX/20', 'Casa de las Estrellas', 7, 0, NULL, NULL),
+	(705, 'CM-05692', 'CAJAS DE MADERA ROCKY PATEL CASA DE LAS ESTRELLAS TORO RED BOX/20', 'Casa de las Estrellas', 7, 0, NULL, NULL),
+	(706, 'CM-05717', 'CAJAS DE MADERA  ROCKY PATEL PREMIUM DISPLAY BURN BLANCOS', 'Burn', NULL, 0, NULL, NULL),
+	(707, 'CM-05751', 'CAJAS DE MADERA ROCKY PATEL VINTAGE 1992 ROBUSTO 5-1/2X50 TUBO SUMATRA BOX/10', 'Vintage 1992', 4, 0, NULL, NULL),
+	(708, 'CM-05752', 'CAJAS DE MADERA ROCKY PATEL  O.W.R. BARBER POLE  BOX/10', 'Old World Reserve', 4, 0, NULL, NULL),
+	(709, 'CM-05770', 'CAJAS DE MADERA ROCKY PATEL OLD WORLD ROBUSTO REDONDO CONNECTICUT BOX/20', 'Old World Reserve', 7, 0, NULL, NULL),
+	(710, 'CM-05771', 'CAJAS DE MADERA ROCKY PATEL OLD WORLD TORO REDONDO CONNECTICUT BOX/20', 'Old World Reserve', 7, 0, NULL, NULL),
+	(711, 'CM-05772', 'CAJAS DE MADERA ROCKY PATEL OLD WORLD TORPEDO REDONDO CONNECTICUT BOX/20', 'Old World Reserve', 7, 0, NULL, NULL),
+	(712, 'CM-05773', 'CAJAS DE MADERA ROCKY PATEL DECADE TORO PLYWOOD SUMATRA BOX/10', 'Decada', 4, 0, NULL, NULL),
+	(713, 'CM-05780', 'CAJAS DE MADERA ROCKY PATEL VIVALO SAMPLER BOX/5', 'Vivalo', 6, 0, NULL, NULL),
+	(714, 'CM-05790', 'CAJAS DE MADERA ROCKY PATEL THE  ZEUS BY HUMIDOR ROBUSTO MADURO BOX/20', 'Zeus by Humidour', 7, 0, NULL, NULL),
+	(715, 'CM-05791', 'CAJAS DE MADERA ROCKY PATEL THE  ZEUS BY HUMIDOR TORO MADURO BOX/20', 'Zeus by Humidour', 7, 0, NULL, NULL),
+	(716, 'CM-05792', 'CAJAS DE MADERA ROCKY PATEL THE ZEUS BY HUMIDOR LANCERO MADURO BOX/20', 'Zeus by Humidour', 7, 0, NULL, NULL),
+	(717, 'CM-05794', 'CAJAS DE MADERA ROCKY PATEL WORLD FAMOUS CIGAR BAR TORO GRANDE CONNECTICUT BOX/20', 'World Famous Cigar Bar', 7, 0, NULL, NULL),
+	(718, 'CM-05795', 'CAJAS DE MADERA ROCKY PATEL WORLD FAMOUS CIGAR BAR ROBUSTO CONNECTICUT BOX/20', 'World Famous Cigar Bar', 7, 0, NULL, NULL),
+	(719, 'CM-05798', 'CAJAS DE MADERA ROCKY PATEL  EDGE  A10 TORO  BOX/20', 'Edge 10th Anniversary', 7, 0, NULL, NULL),
+	(720, 'CM-05802', 'CAJAS DE MADERA ROCKY PATEL ROGER STROH TORO BOX/20', 'Roger Stroh', 7, 0, NULL, NULL),
+	(721, 'CM-05805', 'CAJAS DE MADERA ROCKY PATEL SIGNATURE SERIES TORO BOX 20', 'Signature', 7, 0, NULL, NULL),
+	(722, 'CM-05828', 'CAJAS DE MADERA ROCKY PATEL  EDGE SELECTION 652 MADURO BOX/50', 'The Edge', 21, 0, NULL, NULL),
+	(723, 'CM-05829', 'CAJAS DE MADERA ROCKY PATEL  EDGE SELECTION PYRAMID MADURO BOX/50', 'The Edge', 21, 0, NULL, NULL),
+	(724, 'CM-05830', 'CAJAS DE MADERA ROCKY PATEL  EDGE SELECTION 652 COROJO BOX/50', 'The Edge', 21, 0, NULL, NULL),
+	(725, 'CM-05831', 'CAJAS DE MADERA ROCKY PATEL  EDGE SELECTION PYRAMID COROJO BOX/50', 'The Edge', 21, 0, NULL, NULL),
+	(726, 'CM-05832', 'CAJAS DE MADERA ROCKY PATEL  EDGE SELECTION 652 HABANO BOX/50', 'The Edge', 21, 0, NULL, NULL),
+	(727, 'CM-05833', 'CAJAS DE MADERA ROCKY PATEL  EDGE SELECTION PYRAMID HABANO BOX/50', 'The Edge', 21, 0, NULL, NULL),
+	(728, 'CM-05859', 'CAJAS DE MADERA ROCKY PATEL  EDGE ROBUSTO HABANO BOX/20', 'The Edge Nicaragua', 7, 0, NULL, NULL),
+	(729, 'CM-05890', 'CAJAS DE MADERA ROCKY PATEL DISPLAY PARA PIPA', 'VARIOS', NULL, 0, NULL, NULL),
+	(730, 'CM-05906', 'CAJAS DE MADERA ROCKY PATEL YACHT CRUISE SAMPLER BOX 6', 'VARIOS', 5, 0, NULL, NULL),
+	(731, 'CM-05930', 'CAJAS DE MADERA ROCKY PATEL  CI LEGENDS ROBUSTO HAB/COL BOX/20 (NUEVAS)', 'CI Legend', NULL, 0, NULL, NULL),
+	(732, 'CM-05931', 'CAJAS DE MADERA ROCKY PATEL RP BROADLEAF TORO BOX 20', 'RP Broadleaf', 7, 0, NULL, NULL),
+	(733, 'CM-05932', 'CAJAS DE MADERA ROCKY PATEL RP BROADLEAF SUPER TORO BOX 20', 'RP Broadleaf', 7, 0, NULL, NULL),
+	(734, 'CM-05933', 'CAJAS DE MADERA ROCKY PATEL RP BROADLEAF TORPEDO 6-1/4X52 BOX 20', 'RP Broadleaf', 7, 0, NULL, NULL),
+	(735, 'CM-05934', 'CAJAS DE MADERA ROCKY PATEL RP BROADLEAF CHURCHILL BOX 20', 'RP Broadleaf', 7, 0, NULL, NULL),
+	(736, 'CM-05935', 'CAJAS DE MADERA ROCKY PATEL RP BROADLEAF ROBUSTO BOX 20', 'RP Broadleaf', 7, 0, NULL, NULL),
+	(737, 'CM-05972', 'CAJAS DE MADERA ROCKY PATEL  PABLO MARTIN CAMEROON ROBUSTO BOX/20', 'Pablo Martin', 7, 0, NULL, NULL),
+	(738, 'CM-05973', 'CAJAS DE MADERA ROCKY PATEL  PABLO MARTIN TORO CAMEROON BOX/20', 'Pablo Martin', 7, 0, NULL, NULL),
+	(739, 'CM-05974', 'CAJAS DE MADERA ROCKY PATEL  PABLO MARTIN CORONA CAMEROON BOX/20', 'Pablo Martin', 7, 0, NULL, NULL),
+	(740, 'CM-05975', 'CAJAS DE MADERA ROCKY PATEL  PABLO MARTIN CAMEROON GRANDE BOX/20', 'Pablo Martin', 7, 0, NULL, NULL),
+	(741, 'CM-05976', 'CAJAS DE MADERA ROCKY PATEL EDGE 4-1/2X60 B52 MADURO BOX/10', 'The Edge', 4, 0, NULL, NULL),
+	(742, 'CM-05977', 'CAJAS DE MADERA ROCKY PATEL  EDGE  A10 TORO TRAYS/100', 'Edge 10th Anniversary', 18, 0, NULL, NULL),
+	(743, 'CM-05978', 'CAJAS DE MADERA ROCKY PATEL CONNECTICUT BY SUPER TORO CONERICO BOX/20', 'Connecticut Rocky Patel', 7, 0, NULL, NULL),
+	(744, 'CM-05979', 'CAJAS DE MADERA ROCKY PATEL  EDGE SHORT ROBUSTO HABANO BOX/20', 'The Edge Nicaragua', 7, 0, NULL, NULL),
+	(745, 'CM-05980', 'CAJAS DE MADERA ROCKY PATEL WALL STREET CORONA BOX/20', 'Wall Street', 7, 0, NULL, NULL),
+	(746, 'CM-05981', 'CAJAS DE MADERA ROCKY PATEL EDGE 4-1/2X60 B52 COROJO BOX/10', 'The Edge', 4, 0, NULL, NULL),
+	(747, 'CM-05982', 'CAJAS DE MADERA ROCKY PATEL  EDGE TORO VARIADO TRAYS/75', 'The Edge', 90, 0, NULL, NULL),
+	(748, 'CM-05983', 'CAJAS DE MADERA ROCKY PATEL DECADE ROBUSTO PLYWOOD SUMATRA BOX/5', 'Decada', 6, 0, NULL, NULL),
+	(749, 'CM-05984', 'CAJAS DE MADERA ROCKY PATEL RP ICE ROBUSTO BOX/10', 'RP Ice', 4, 0, NULL, NULL),
+	(750, 'CM-05985', 'CAJAS DE MADERA ROCKY PATEL RP ICE TORO BOX/10', 'RP Ice', 4, 0, NULL, NULL),
+	(751, 'CM-05986', 'CAJAS DE MADERA ROCKY PATEL RP ICE TORPEDO BOX/10', 'RP Ice', 4, 0, NULL, NULL),
+	(752, 'CM-05987', 'CAJAS DE MADERA ROCKY PATEL RP ICE GORDO BOX/10', 'RP Ice', 4, 0, NULL, NULL),
+	(753, 'CM-05988', 'CAJAS DE MADERA ROCKY PATEL CIGAR KING GOLD II TORO BOX/20 HAB.', 'Cigar King Gold II', NULL, 0, NULL, NULL),
+	(754, 'CM-06015', 'CAJAS DE MADERA ROCKY PATEL CGALLIII ROBUSTO BOX/20', 'Segaliii', 7, 0, NULL, NULL),
+	(755, 'CM-06016', 'CAJAS DE MADERA ROCKY PATEL CGALLIII TORO BOX/20', 'Segaliii', 7, 0, NULL, NULL),
+	(756, 'CM-06017', 'CAJAS DE MADERA ROCKY PATEL CGALLIII CHURCHILL BOX/20', 'Segaliii', 7, 0, NULL, NULL),
+	(757, 'CM-06018', 'CAJAS DE MADERA ROCKY PATEL BELLA CARMELLA DOUBLE CORONA BOX/20', 'Bella Camella', 7, 0, NULL, NULL),
+	(758, 'CM-06019', 'CAJAS DE MADERA ROCKY PATEL BELLA CARMELLA LONSDALE BOX/20', 'Bella Camella', 7, 0, NULL, NULL),
+	(759, 'CM-06020', 'CAJAS DE MADERA ROCKY PATEL BELLA CARMELLA TORO BOX/20', 'Bella Camella', 7, 0, NULL, NULL),
+	(760, 'CM-06021', 'CAJAS DE MADERA ROCKY PATEL BELLA CARMELLA ROBUSTO BOX/20', 'Bella Camella', 7, 0, NULL, NULL),
+	(761, 'CM-06022', 'CAJAS DE MADERA ROCKY PATEL BELLA CARMELLA GRANDE BOX/20', 'Bella Camella', 7, 0, NULL, NULL),
+	(762, 'CM-06023', 'CAJAS DE MADERA ROCKY PATEL BELLA CARMELLA CORONA BOX/20', 'Bella Camella', 7, 0, NULL, NULL),
+	(763, 'CM-06108', 'CAJAS DE MADERA ROCKY PATEL STRADA CHURCHILL 7X48 BOX/20', 'RP Strada', 7, 0, NULL, NULL),
+	(764, 'CM-06109', 'CAJAS DE MADERA ROCKY PATEL STRADA TORPEDO 6X52 BOX/20', 'RP Strada', 7, 0, NULL, NULL),
+	(765, 'CM-06110', 'CAJAS DE MADERA ROCKY PATEL STRADA CHURCHILL 7X50 BOX/20', 'RP Strada', 7, 0, NULL, NULL),
+	(766, 'CM-06111', 'CAJAS DE MADERA ROCKY PATEL STRADA ROBUSTO 5X50 BOX/20', 'RP Strada', 7, 0, NULL, NULL),
+	(767, 'CM-06112', 'CAJAS DE MADERA ROCKY PATEL STRADA TORO 6X52 BOX/20', 'RP Strada', 7, 0, NULL, NULL),
+	(768, 'CM-06113', 'CAJAS DE MADERA ROCKY PATEL STRADA TORO 6X50 BOX/20', 'RP Strada', 7, 0, NULL, NULL),
+	(769, 'CM-06214', 'CAJAS DE MADERA ROCKY PATEL  EDGE  A10 SIXTY  BOX/20', 'Edge 10th Anniversary', 7, 0, NULL, NULL),
+	(770, 'CM-06215', 'CAJAS DE MADERA ROCKY PATEL LA SIRENA ROBUSTO BOX/20', 'La Sirena', 7, 0, NULL, NULL),
+	(771, 'CM-06216', 'CAJAS DE MADERA ROCKY PATEL LA SIRENA TORO BOX/20', 'La Sirena', 7, 0, NULL, NULL),
+	(772, 'CM-06217', 'CAJAS DE MADERA ROCKY PATEL LA SIRENA SIXTY BOX/20', 'La Sirena', 7, 0, NULL, NULL),
+	(773, 'CM-06450', 'CAJAS DE MADERA ROCKY PATEL  DARK DOMINION SHORT ROBUSTO BOX 10', 'Dark Dominion', 4, 0, NULL, NULL),
+	(774, 'CM-06451', 'CAJAS DE MADERA ROCKY PATEL  DARK DOMINION TORO BOX 10', 'Dark Dominion', 4, 0, NULL, NULL),
+	(775, 'CM-06452', 'CAJAS DE MADERA ROCKY PATEL  DARK DOMINION SIXTY BOX 10', 'Dark Dominion', 4, 0, NULL, NULL),
+	(776, 'CM-06453', 'CAJAS DE MADERA ROCKY PATEL  DARK DOMINION LANCERO BOX 10', 'Dark Dominion', 4, 0, NULL, NULL),
+	(777, 'CM-06454', 'CAJAS DE MADERA ROCKY PATEL  SUNGROWN SHORT TORPEDO SUMATRA BOX/20', 'Sungrown', 7, 0, NULL, NULL),
+	(778, 'CM-06457', 'CAJAS DE MADERA ROCKY PATEL  MUESTRAS VARIADAS', 'Muestras', NULL, 0, NULL, NULL),
+	(779, 'CM-06458', 'CAJAS DE MADERA ROCKY PATEL EDGE LITE HOWITZER CONN BOX/10', 'The Edge Connecticut', 4, 0, NULL, NULL),
+	(780, 'CM-06702', 'CAJAS DE MADERA ROCKY PATEL  VIBE TORPEDO HAB/COL BOX/20', 'Vibe', 7, 0, NULL, NULL),
+	(781, 'CM-06763', 'CAJAS DE MADERA ROCKY PATEL DUCKS UNLIMITED GREEN HEAD TORO BOX 20', 'Daniel Marshall', 7, 0, NULL, NULL),
+	(782, 'CM-06765', 'CAJAS DE MADERA ROCKY PATEL  GOLD BY R.P. TORPEDO CONERICO  BOX/20', 'Gold By RP', 7, 0, NULL, NULL),
+	(783, 'CM-06766', 'CAJAS DE MADERA ROCKY PATEL  EDGE MISSILES MADURO BOX/16', 'The Edge', 26, 0, NULL, NULL),
+	(784, 'CM-06767', 'CAJAS DE MADERA ROCKY PATEL  EDGE MISSILES COROJO BOX/16', 'The Edge', 26, 0, NULL, NULL),
+	(785, 'CM-06793', 'CAJAS DE MADERA ROCKY PATEL RP FIRE & ICE ROBUSTO SAMPLER BOX 10', 'VARIOS', 4, 0, NULL, NULL),
+	(786, 'CM-06794', 'CAJAS DE MADERA ROCKY PATEL SIGNATURE SERIES ROBUSTO BOX 20', 'Signature', 7, 0, NULL, NULL),
+	(787, 'CM-06814', 'CAJAS DE MADERA ROCKY PATEL DECADE TORO ESPECIAL CI20TH SUMATRA BOX/10', 'Decada', 4, 0, NULL, NULL),
+	(788, 'CM-06815', 'CAJAS DE MADERA ROCKY PATEL VINTAGE 2003 5X60 CAMEROON BOX/20', 'VINTAGE 2003', 7, 0, NULL, NULL),
+	(789, 'CM-06816', 'CAJAS DE MADERA ROCKY PATEL VINTAGE 2003 4X60 CAMEROON BOX/20', 'VINTAGE 2003', 7, 0, NULL, NULL),
+	(790, 'CM-06818', 'CAJAS DE MADERA ROCKY PATEL JON CARLOS ROBUSTO MADURO BOX/20', 'Jon Carlos', 7, 0, NULL, NULL),
+	(791, 'CM-06819', 'CAJAS DE MADERA ROCKY PATEL JON CARLOS ROBUSTO CONN BOX/20', 'Jon Carlos', 7, 0, NULL, NULL),
+	(792, 'CM-06820', 'CAJAS DE MADERA ROCKY PATEL JON CARLOS CHURCHILL CONN BOX/20', 'Jon Carlos', 7, 0, NULL, NULL),
+	(793, 'CM-06821', 'CAJAS DE MADERA ROCKY PATEL RP BROADLEAF TORPEDO 6-1/8X52 BOX 20', 'RP Broadleaf', 7, 0, NULL, NULL),
+	(794, 'CM-06822', 'CAJAS DE MADERA ROCKY PATEL RP/HOLT CARPET COLLECTION SAMPLER BOX 20', 'VARIOS', 7, 0, NULL, NULL),
+	(795, 'CM-06823', 'CAJAS DE MADERA ROCKY PATEL JON CARLOS TORPEDO CONN BOX/20', 'Jon Carlos', 7, 0, NULL, NULL),
+	(796, 'CM-06824', 'CAJAS DE MADERA ROCKY PATEL JON CARLOS CHURCHILL MADURO BOX/20', 'Jon Carlos', 7, 0, NULL, NULL),
+	(797, 'CM-06825', 'CAJAS DE MADERA ROCKY PATEL JON CARLOS TORPEDO MADURO BOX/20', 'Jon Carlos', 7, 0, NULL, NULL),
+	(798, 'CM-06826', 'CAJAS DE MADERA ROCKY PATEL CRI-OJO ROBUSTO HAB. BOX 20', 'The Edge Connecticut', 7, 0, NULL, NULL),
+	(799, 'CM-06827', 'CAJAS DE MADERA ROCKY PATEL CRI-OJO TORO HAB. BOX 20', 'Crio-ojo By RP', 7, 0, NULL, NULL),
+	(800, 'CM-06828', 'CAJAS DE MADERA ROCKY PATEL INKTOME TORO HAB. BOX 10 PRENSADO', 'The Edge Connecticut', NULL, 0, NULL, NULL),
+	(801, 'CM-06829', 'CAJAS DE MADERA ROCKY PATEL CRI-OJO SUPER TORO HAB. BOX 20', 'The Edge Connecticut', 7, 0, NULL, NULL),
+	(802, 'CM-06830', 'CAJAS DE MADERA ROCKY PATEL CRI-OJO TORPEDO HAB. BOX 20', 'The Edge Connecticut', 7, 0, NULL, NULL),
+	(803, 'CM-06831', 'CAJAS DE MADERA ROCKY PATEL CRI-OJO CHURCHILL HAB. BOX 20', 'The Edge Connecticut', 7, 0, NULL, NULL),
+	(804, 'CM-06832', 'CAJAS DE MADERA ROCKY PATEL VINTAGE 1999 ROBUSTO 5-1/2X50 TUBO CONERICO BOX/10', 'Vintage 1999', 4, 0, NULL, NULL),
+	(805, 'CM-06833', 'CAJAS DE MADERA ROCKY PATEL CIGAR KING GOLD II LANCERO BOX/20 HAB.', 'Cigar King Gold II', NULL, 0, NULL, NULL),
+	(806, 'CM-06834', 'CAJAS DE MADERA ROCKY PATEL CIGAR KING GOLD II ROBUSTO BOX/20 HAB.', 'Cigar King Gold II', NULL, 0, NULL, NULL),
+	(807, 'CM-06835', 'CAJAS DE MADERA ROCKY PATEL CIGAR KING GOLD II SIXTY BOX/20 HAB.', 'Cigar King Gold II', NULL, 0, NULL, NULL),
+	(808, 'CM-06836', 'CAJAS DE MADERA ROCKY PATEL DUCKS UNLIMITED DUCK SHOT BOX 20', 'Daniel Marshall', 7, 0, NULL, NULL),
+	(809, 'CM-06837', 'CAJAS DE MADERA ROCKY PATEL CI- ANNIVERSARY TORO BOX 20', 'Ci - Anniversary', 7, 0, NULL, NULL),
+	(810, 'CM-06838', 'CAJAS DE MADERA ROCKY PATEL EDGE TORO BOX/50 SUMATRA', 'The Edge', NULL, 0, NULL, NULL),
+	(811, 'CM-06839', 'CAJAS DE MADERA ROCKY PATEL EDGE TORO BOX/50 COROJO', 'The Edge', NULL, 0, NULL, NULL),
+	(812, 'CM-06840', 'CAJAS DE MADERA ROCKY PATEL EDGE TORO BOX/50 MADURO', 'The Edge', NULL, 0, NULL, NULL),
+	(813, 'CM-06841', 'CAJAS DE MADERA ROCKY PATEL EDGE TORO BOX/50 HABANO', 'The Edge Nicaragua', NULL, 0, NULL, NULL),
+	(814, 'CM-06842', 'CAJAS DE MADERA ROCKY PATEL EDGE TORPEDO BOX/50 SUMATRA', 'The Edge', NULL, 0, NULL, NULL),
+	(815, 'CM-06843', 'CAJAS DE MADERA ROCKY PATEL EDGE TORPEDO BOX/50 COROJO', 'The Edge', NULL, 0, NULL, NULL),
+	(816, 'CM-06844', 'CAJAS DE MADERA ROCKY PATEL EDGE TORPEDO BOX/50 MADURO', 'The Edge', NULL, 0, NULL, NULL),
+	(817, 'CM-06845', 'CAJAS DE MADERA ROCKY PATEL EDGE TORPEDO BOX/50 HABANO', 'The Edge', NULL, 0, NULL, NULL),
+	(818, 'CM-06846', 'CAJAS DE MADERA ROCKY PATEL MARTINIQUE TORO BOX 10', 'Martinique TAA By RP', 4, 0, NULL, NULL),
+	(819, 'CM-06847', 'CAJAS DE MADERA ROCKY PATEL  VINTAGE 1990 LANCERO HABANO BOX/20', 'Vintage 1990', 7, 0, NULL, NULL),
+	(820, 'CM-06848', 'CAJAS DE MADERA ROCKY PATEL  EXTREME TORPEDO SUMATRA BOX/20', 'Extreme', 7, 0, NULL, NULL),
+	(821, 'CM-06849', 'CAJAS DE MADERA ROCKY PATEL LA PALINA BRONZE GORDO BOX/20', 'La Palina Bronze Label', 7, 0, NULL, NULL),
+	(822, 'CM-06850', 'CAJAS DE MADERA SOTO CANO TORO CONN BOX 20', 'NINGUNA', 7, 0, NULL, NULL),
+	(823, 'CM-06851', 'CAJAS DE MADERA SOTO CANO TORO HAB BOX 20', 'NINGUNA', 7, 0, NULL, NULL),
+	(824, 'CM-06852', 'CAJAS DE MADERA SOTO CANO TORO COR. BOX 20', 'NINGUNA', 7, 0, NULL, NULL),
+	(825, 'CM-06853', 'CAJAS DE MADERA ROCKY PATEL JON CARLOS ROBUSTO COROJO BOX/20', 'Jon Carlos', 7, 0, NULL, NULL),
+	(826, 'CM-06854', 'CAJAS DE MADERA ROCKY PATEL JON CARLOS CHURCHILL COROJO BOX/20', 'Jon Carlos', 7, 0, NULL, NULL),
+	(827, 'CM-06855', 'CAJAS DE MADERA ROCKY PATEL JON CARLOS TORPEDO COROJO BOX/20', 'Jon Carlos', 7, 0, NULL, NULL),
+	(828, 'CM-06856', 'CAJAS DE MADERA ROCKY PATEL OLD WORLD TORO PRESS COROJO BOX/20', 'Old World Reserve', 7, 0, NULL, NULL),
+	(829, 'CM-06857', 'CAJAS DE MADERA ROCKY PATEL OLD WORLD ROBUSTO PRESS COROJO BOX/20', 'Old World Reserve', 7, 0, NULL, NULL),
+	(830, 'CM-06858', 'CAJAS DE MADERA ROCKY PATEL OLD WORLD SIXTY ROUND COROJO BOX/20', 'Old World Reserve', 7, 0, NULL, NULL),
+	(831, 'CM-06859', 'CAJAS DE MADERA ROCKY PATEL OLD WORLD TORO PRESS MADURO BOX/20', 'Old World Reserve', 7, 0, NULL, NULL),
+	(832, 'CM-06860', 'CAJAS DE MADERA ROCKY PATEL OLD WORLD ROBUSTO PRESS MADURO BOX/20', 'Old World Reserve', 7, 0, NULL, NULL),
+	(833, 'CM-06861', 'CAJAS DE MADERA ROCKY PATEL OLD WORLD TORPEDO PRESS MADURO BOX/20', 'Old World Reserve', 7, 0, NULL, NULL),
+	(834, 'CM-06862', 'CAJAS DE MADERA ROCKY PATEL EDGE BATTALION HABANO BOX/20', 'The Edge Nicaragua', 7, 0, NULL, NULL),
+	(835, 'CM-06863', 'CAJAS DE MADERA ROCKY PATEL  EDGE BATTALION COROJO BOX20', 'The Edge', 7, 0, NULL, NULL),
+	(836, 'CM-06864', 'CAJAS DE MADERA ROCKY PATEL LA PALINA BRONZE TORO BOX/20', 'La Palina Bronze Label', 7, 0, NULL, NULL),
+	(837, 'CM-06865', 'CAJAS DE MADERA ROCKY PATEL LA PALINA BRONZE ROBUSTO HABANO BOX/20', 'La Palina Bronze Label', 7, 0, NULL, NULL),
+	(838, 'CM-06866', 'CAJAS DE MADERA ROCKY PATEL OLD WORLD RESERVE ROBUSTO PRESS COROJO NUEVO BOX 20', 'Old World Reserve', 7, 0, NULL, NULL),
+	(839, 'CM-06867', 'CAJAS DE MADERA ROCKY PATEL OLD WORLD RESERVE TORO PRESS COROJO NUEVO BOX 20', 'Old World Reserve', 7, 0, NULL, NULL),
+	(840, 'CM-06868', 'CAJAS DE MADERA ROCKY PATEL OLD WORLD RESERVE TORO PRESS COROJO LISA BOX 20', 'Old World Reserve', 7, 0, NULL, NULL),
+	(841, 'CM-06869', 'CAJAS DE MADERA ROCKY PATEL LA PALINA BLUE LABEL TORO BOX/20', 'La Palina Blue Label', 7, 0, NULL, NULL),
+	(842, 'CM-06870', 'CAJAS DE MADERA ROCKY PATEL EDGE 652 TORO BOX/50 HABANO', 'The Edge Nicaragua', NULL, 0, NULL, NULL),
+	(843, 'CM-06871', 'CAJAS DE MADERA ROCKY PATEL LA PALINA BRONZE SHORT ROBUSTO BOX/20', 'La Palina Bronze Label', 7, 0, NULL, NULL),
+	(844, 'CM-06872', 'CAJAS DE MADERA ROCKY PATEL  EDGE SQUARE TORO PRESS COROJO BOX/20', 'Edge Square', 7, 0, NULL, NULL),
+	(845, 'CM-06873', 'CAJAS DE MADERA ROCKY PATEL  EDGE SQUARE TORPEDO PRESS  COROJO BOX/20', 'Edge Square', 7, 0, NULL, NULL),
+	(846, 'CM-06874', 'CAJAS DE MADERA ROCKY PATEL  EDGE SQUARE ROBUSTO PRESS MADURO BOX/20', 'Edge Square', 7, 0, NULL, NULL),
+	(847, 'CM-06875', 'CAJAS DE MADERA ROCKY PATEL  EDGE SQUARE TORO PRESS MADURO BOX/20', 'Edge Square', 7, 0, NULL, NULL),
+	(848, 'CM-06876', 'CAJAS DE MADERA ROCKY PATEL  EDGE SQUARE TORPEDO PRESS MADURO BOX/20', 'Edge Square', 7, 0, NULL, NULL),
+	(849, 'CM-06877', 'CAJAS DE MADERA ROCKY PATEL OLD WORLD RESERVE TORO ROUN CONECTICUT BOX 20', 'Old World Reserve', 7, 0, NULL, NULL),
+	(850, 'CM-06878', 'CAJAS DE MADERA ROCKY PATEL OLD WORLD RESERVE TORO ROUND MADURO BOX 20', 'Old World Reserve', 7, 0, NULL, NULL),
+	(851, 'CM-06879', 'CAJAS DE MADERA ROCKY PATEL OLD WORLD RESERVE SIXTI PRESS COROJO NUEVO BOX 20', 'Old World Reserve', 7, 0, NULL, NULL),
+	(852, 'CM-06880', 'CAJAS DE MADERA ROCKY PATEL CAUCUS MINI BELICOSO SUMATRA BOX/20', 'Caucus', 7, 0, NULL, NULL),
+	(853, 'CM-06882', 'CAJAS DE MADERA ROCKY PATEL PREMIUM  MUESTRAS TORO COLOR NATURAL BOX20', 'Muestras', 7, 0, NULL, NULL),
+	(854, 'CM-06883', 'CAJAS DE MADERA ROCKY PATEL PREMIUM  MUESTRAS TORO COLOR CAFE BOX20', 'Muestras', 7, 0, NULL, NULL),
+	(855, 'CM-06884', 'CAJAS DE MADERA ROCKY PATEL PREMIUM  MUESTRAS TORO COLOR NEGRO BRILLANTE BOX20', 'Muestras', 7, 0, NULL, NULL),
+	(856, 'CM-06885', 'CAJAS DE MADERA ROCKY PATEL PREMIUM  MUESTRAS TORO COLOR ROJO  BRILLANTE  BOX20', 'Muestras', 7, 0, NULL, NULL),
+	(857, 'CM-06886', 'CAJAS DE MADERA ROCKY PATEL  ITC ESMERALDA TORO CANDELA BOX/20', 'ITC Emerald', 7, 0, NULL, NULL),
+	(858, 'CM-06887', 'CAJAS DE MADERA ROCKY PATEL OLD WORLD RESERVE ROBUSTO REDONDO CONN BOX 20', 'Old World Reserve', 7, 0, NULL, NULL),
+	(859, 'CM-06888', 'CAJAS DE MADERA ROCKY PATEL PREMIUN FILTHY VIKING  TORO HABA-2000 BOX/20', 'Filthy Vilking', 7, 0, NULL, NULL),
+	(860, 'CM-06889', 'CAJAS DE MADERA  ROCKY PATEL PREMIUM VICTORY CIGARS TORO PRESS SUMATRA BOX-10', 'Victory', 4, 0, NULL, NULL),
+	(861, 'CM-06890', 'CAJAS DE MADERA  ROCKY PATEL PREMIUM VICTORY CIGARS TORO PRESS SUMATRA BOX-100', 'Victory', 18, 0, NULL, NULL),
+	(862, 'CM-06891', 'CAJAS DE MADERA ROCKY PATEL  EDGE ROBUSTO GLAS TUBO COROJO BOX/10', 'The Edge', 4, 0, NULL, NULL),
+	(863, 'CM-06892', 'CAJAS DE MADERA ROCKY PATEL  VINTAGE TRAYS 2018 VARIADO BOX100', 'Vintage 1990', 18, 0, NULL, NULL),
+	(864, 'CM-06893', 'CAJAS DE MADERA ROCKY PATEL  EDGE ROBUSTO GLAS TUBO MADURO BOX/10', 'The Edge', 4, 0, NULL, NULL),
+	(865, 'CM-06894', 'CAJAS DE MADERA ROCKY PATEL SHOCKOE VALLEY LIMITED RESERVE ROBUSTO MADURO BOX 20', 'Shockoe Valley', 7, 0, NULL, NULL),
+	(866, 'CM-06895', 'CAJAS DE MADERA ROCKY PATEL SHOCKOE VALLEY LIMITED RESERVE TORPEDO MADURO BOX 20', 'Shockoe Valley', 7, 0, NULL, NULL),
+	(867, 'CM-06896', 'CAJAS DE MADERA ROCKY PATEL SHOCKOE VALLEY LIMITED RESERVE TORO MADURO BOX 20', 'Shockoe Valley', 7, 0, NULL, NULL),
+	(868, 'CM-06897', 'CAJAS DE MADERA ROCKY PATEL THE FOUNDER SIXTY (GORDO) CONN BOX/20', 'The Founder', 7, 0, NULL, NULL),
+	(869, 'CM-06898', 'CAJAS DE MADERA ROCKY PATEL THE FOUNDER ROBUSTO CONN BOX/20', 'The Founder', 7, 0, NULL, NULL),
+	(870, 'CM-06899', 'CAJAS DE MADERA ROCKY PATEL THE FOUNDER TORO CONN BOX/20', 'The Founder', 7, 0, NULL, NULL),
+	(871, 'CM-06900', 'CAJAS DE MADERA ROCKY PATEL THE FOUNDER ROBUSTO PRESS MADURO BOX/20', 'The Founder', 7, 0, NULL, NULL),
+	(872, 'CM-06901', 'CAJAS DE MADERA ROCKY PATEL THE FOUNDER TORO PRESS MADURO BOX/20', 'The Founder', 7, 0, NULL, NULL),
+	(873, 'CM-06902', 'CAJAS DE MADERA ROCKY PATEL THE FOUNDER GORDO PRESS MADURO BOX/20', 'The Founder', 7, 0, NULL, NULL),
+	(874, 'CM-06903', 'CAJAS DE MADERA ROCKY PATEL  NICK CIGAR 10 ANIVERSARIO BOX/20', 'Nick`s Perdomo', 7, 0, NULL, NULL),
+	(875, 'CM-06904', 'CAJAS DE MADERA ROCKY PATEL BEALLE STREET ROBUSTO BASS GUITAR MADURO BOX/20', 'Bealle Street', 7, 0, NULL, NULL),
+	(876, 'CM-06905', 'CAJAS DE MADERA ROCKY PATEL BEALLE STREET TORO BASS GUITAR MADURO BOX/20', 'Bealle Street', 7, 0, NULL, NULL),
+	(877, 'CM-06906', 'CAJAS DE MADERA ROCKY PATEL BEALLE STREET SIXTY BASS GUITAR MADURO BOX/20', 'Bealle Street', 7, 0, NULL, NULL),
+	(878, 'CM-06907', 'CAJAS DE MADERA ROCKY PATEL BEALLE STREET TORPEDO BASS GUITAR MADURO BOX/20', 'Bealle Street', 7, 0, NULL, NULL),
+	(879, 'CM-06908', 'CAJAS DE MADERA ROCKY PATEL LA PALINA BLUE LABEL GORDO HABANO BOX/20', 'La Palina Blue Label', 7, 0, NULL, NULL),
+	(880, 'CM-06909', 'CAJAS DE MADERA ROCKY PATEL  VINTAGE 1999 SHORT ROBUSTO CONERICO BOX/20', 'Vintage 1999', 7, 0, NULL, NULL),
+	(881, 'CM-06910', 'CAJAS DE MADERA ROCKY PATEL  EDGE GRAN ROBUSTO COROJO BOX/20', 'The Edge', 7, 0, NULL, NULL),
+	(882, 'CM-06911', 'CAJAS DE MADERA ROCKY PATEL PREMIUN FILTHY VIKING  ROBUSTO HABA-2000 BOX/20', 'Filthy Vilking', 7, 0, NULL, NULL),
+	(883, 'CM-06912', 'CAJAS DE MADERA ROCKY PATEL VINTAGE 1990 BELICOSO RED MADURO BOX/20', 'Vintage 1990', 7, 0, NULL, NULL),
+	(884, 'CM-06913', 'CAJAS DE MADERA ROCKY PATEL THE COLLECTION TORO COROJO BOX/20', 'The Collection Fuma', 7, 0, NULL, NULL),
+	(885, 'CM-06914', 'CAJAS DE MADERA ROCKY PATEL THE COLLECTION TORO CONNECTICUT BOX/20', 'The Collection Fuma', 7, 0, NULL, NULL),
+	(886, 'CM-06915', 'CAJAS DE MADERA ROCKY PATEL THE COLLECTION TORO MADURO BOX/20', 'The Collection Fuma', 7, 0, NULL, NULL),
+	(887, 'CM-06916', 'CAJAS DE MADERA ROCKY PATEL  OREASIS TORO SUMATRA BOX/10', 'Oreasis', 4, 0, NULL, NULL),
+	(888, 'CM-06917', 'CAJAS DE MADERA ROCKY PATEL  OREASIS GORDO SUMATRA BOX/10', 'Oreasis', 4, 0, NULL, NULL),
+	(889, 'CM-06918', 'CAJAS DE MADERA ROCKY PATEL  OREASIS CHURCHILL SUMATRA BOX/10', 'Oreasis', 4, 0, NULL, NULL),
+	(890, 'CM-06919', 'CAJAS DE MADERA ROCKY PATEL THE BACKSTOPPERS TORO HABANO BOX/10', 'Backstoppers', 4, 0, NULL, NULL),
+	(891, 'CM-06920', 'CAJAS DE MADERA ROCKY PATEL STEEL CITY TORO CONNECTICUT BOX 20', 'Steel City', 7, 0, NULL, NULL),
+	(892, 'CM-06921', 'CAJAS DE MADERA ROCKY PATEL STEEL CITY GRANDE CONNECTICUT BOX 20', 'Steel City', 7, 0, NULL, NULL),
+	(893, 'CM-06922', 'CAJAS DE MADERA ROCKY PATEL LA PALINA REGAL RESERVE CONN ROBUSTO BOX/20', 'La Palina Regal Reserve', 7, 0, NULL, NULL),
+	(894, 'CM-06923', 'CAJAS DE MADERA ROCKY PATEL LA PALINA REGAL RESERVE CONN TORO BOX/20', 'La Palina Regal Reserve', 7, 0, NULL, NULL),
+	(895, 'CM-06924', 'CAJAS DE MADERA ROCKY PATEL LA PALINA REGAL RESERVE CONN CHURCHILL BOX/20', 'La Palina Regal Reserve', 7, 0, NULL, NULL),
+	(896, 'CM-06925', 'CAJAS DE MADERA ROCKY PATEL LA PALINA REGAL RESERVE HAB.OSCURO ROBUSTO BOX/20', 'La Palina Regal Reserve', 7, 0, NULL, NULL),
+	(897, 'CM-06926', 'CAJAS DE MADERA ROCKY PATEL LA PALINA REGAL RESERVE HAB.OSCURO TORO BOX/20', 'La Palina Regal Reserve', 7, 0, NULL, NULL),
+	(898, 'CM-06927', 'CAJAS DE MADERA ROCKY PATEL LA PALINA REGAL RESERVE HAB.OSCURO CHURCHILL  BOX/20', 'La Palina Regal Reserve', 7, 0, NULL, NULL),
+	(899, 'CM-06928', 'CAJAS DE MADERA ROCKY PATEL LA PALINA REGAL RESERVE HAB. ROBUSTO BOX/20', 'La Palina Regal Reserve', 7, 0, NULL, NULL),
+	(900, 'CM-06929', 'CAJAS DE MADERA ROCKY PATEL LA PALINA REGAL RESERVE HAB TORO BOX/20', 'La Palina Regal Reserve', 7, 0, NULL, NULL),
+	(901, 'CM-06930', 'CAJAS DE MADERA ROCKY PATEL LA PALINA REGAL RESERVE HAB. CHURCHILL BOX/20', 'La Palina Regal Reserve', 7, 0, NULL, NULL),
+	(902, 'CM-06932', 'CAJAS DE MADERA ROCKY PATEL  GOLD BY R.P. ROBUSTO MADURO  BOX/20', 'Gold By RP', 7, 0, NULL, NULL),
+	(903, 'CM-06933', 'CAJAS DE MADERA ROCKY PATEL BEALLE STREET ROBUSTO LEAD GUITAR CONNECTICUT BOX/20', 'Bealle Street', 7, 0, NULL, NULL),
+	(904, 'CM-06934', 'CAJAS DE MADERA ROCKY PATEL BEALLE STREET SIXTY LEAD GUITAR CONNECTICUT BOX/20', 'Bealle Street', 7, 0, NULL, NULL),
+	(905, 'CM-06936', 'CAJAS DE MADERA ROCKY PATEL BEALLE STREET TORO LEAD GUITAR CONNECTICUT BOX/20', 'Bealle Street', 7, 0, NULL, NULL),
+	(906, 'CM-06937', 'CAJAS DE MADERA ROCKY PATEL BEALLE STREET TORPEDO LEAD GUITAR CONNECTICUT BOX/20', 'Bealle Street', 7, 0, NULL, NULL),
+	(907, 'CM-06938', 'CAJAS DE MADERA ROCKY PATEL DECADE TORO PRENSADO SUMATRA BOX/10', 'Decada', 4, 0, NULL, NULL),
+	(908, 'CM-06939', 'CAJAS DE MADERA ROCKY PATEL BEALLE STREET LANCERO BASS GUITAR MADURO BOX/20', 'Bealle Street', 7, 0, NULL, NULL),
+	(909, 'CM-06940', 'CAJAS DE MADERA ROCKY PATEL  UNION SQUARE TORO PRESS HABANO BOX/20', 'Union Square', 7, 0, NULL, NULL),
+	(910, 'CM-06941', 'CAJAS DE MADERA ROCKY PATEL LB1 CORONA HABANO BOX/20', 'RP LB1', 7, 0, NULL, NULL),
+	(911, 'CM-06942', 'CAJAS DE MADERA ROCKY PATEL LB1 ROBUSTO HABANO BOX/20', 'RP LB1', 7, 0, NULL, NULL),
+	(912, 'CM-06943', 'CAJAS DE MADERA ROCKY PATEL LB1 TORO HABANO BOX/20', 'RP LB1', 7, 0, NULL, NULL),
+	(913, 'CM-06944', 'CAJAS DE MADERA ROCKY PATEL LB1 SIXTY HABANO BOX/20', 'RP LB1', 7, 0, NULL, NULL),
+	(914, 'CM-06945', 'CAJAS DE MADERA ROCKY PATEL LB1 CHURCHILL SHAGGY HABANO BOX/20', 'RP LB1', 7, 0, NULL, NULL),
+	(915, 'CM-06946', 'CAJAS DE MADERA ROCKY PATEL  EMBASSY ROBUSTO  BOX/20', 'Embassy', 7, 0, NULL, NULL),
+	(916, 'CM-06947', 'CAJAS DE MADERA ROCKY PATEL  EMBASSY TORO BOX/20', 'Embassy', 7, 0, NULL, NULL),
+	(917, 'CM-06948', 'CAJAS DE MADERA ROCKY PATEL EMBASSY GRANDE  BOX/20', 'Embassy', 7, 0, NULL, NULL),
+	(918, 'CM-06949', 'CAJAS DE MADERA ROCKY PATEL DECADE TORO TUBO PLYWOOD SUMATRA BOX/50', 'Decada', 21, 0, NULL, NULL),
+	(919, 'CM-06950', 'CAJAS DE MADERA ROCKY PATEL GOLD BY R.P. CHURCHILL MADURO BOX/20', 'Gold By RP', 7, 0, NULL, NULL),
+	(920, 'CM-06951', 'CAJAS DE MADERA ROCKY PATEL TRAYS JML GRANDE VARIADO BOX/100', 'VARIOS', 18, 0, NULL, NULL),
+	(921, 'CM-06952', 'CAJAS DE MADERA ROCKY PATEL TRAYS JML MEDIANO VARIADO BOX50', 'VARIOS', 21, 0, NULL, NULL),
+	(922, 'CM-06953', 'CAJAS DE MADERA ROCKY PATEL  GOLD BY R.P. BELICOSO MADURO BOX/20', 'Gold By RP', 7, 0, NULL, NULL),
+	(923, 'CM-06954', 'CAJAS DE MADERA ROCKY PATEL  GOLD BY R.P. TORO MADURO BOX/20', 'Gold By RP', 7, 0, NULL, NULL),
+	(924, 'CM-06955', 'CAJAS DE MADERA ROCKY PATEL  ORETOBERFEST GORDO HABANO BOX/10', 'Oretoberfest', 4, 0, NULL, NULL),
+	(925, 'CM-06956', 'CAJAS DE MADERA ROCKY PATEL  ORETOBERFEST GORDO CONNECTICUT BOX/10', 'Oretoberfest', 4, 0, NULL, NULL),
+	(926, 'CM-06957', 'CAJAS DE MADERA ROCKY PATEL WINDY CITY 5-1/2X50 ROBUSTO CONECTICUT BOX20', 'Windy City', 7, 0, NULL, NULL),
+	(927, 'CM-06958', 'CAJAS DE MADERA ROCKY PATEL  EDGE COUNTERFEIT TORO HABANO BOX/20', 'The Edge', 7, 0, NULL, NULL),
+	(928, 'CM-06959', 'CAJAS DE MADERA ROCKY PATEL BEALLE STREET LANCERO LEAD GUITAR CONECTICUT BOX/20', 'Bealle Street', 7, 0, NULL, NULL),
+	(929, 'CM-06960', 'CAJAS DE MADERA ROCKY PATEL SHOCKOE VALLEY COSTARICA CORONA  MADURO BOX 20', 'Shockoe Valley', 7, 0, NULL, NULL),
+	(930, 'CM-06961', 'CAJAS DE MADERA ROCKY PATEL PHARAOH TORO MADURO 6X52 BOX/20', 'NINGUNA', 7, 0, NULL, NULL),
+	(931, 'CM-06962', 'CAJAS DE MADERA ROCKY PATEL PHARAOH ROBUSTO MADURO  BOX/20', 'NINGUNA', 7, 0, NULL, NULL),
+	(932, 'CM-06963', 'CAJAS DE MADERA ROCKY PATEL THE COLLECTION PETIT CORONA COROJO BOX/20', 'The Collection Fuma', 7, 0, NULL, NULL),
+	(933, 'CM-06964', 'CAJAS DE MADERA ROCKY PATEL THE COLLECTION GRANDE COROJO BOX/20', 'The Collection Fuma', 7, 0, NULL, NULL),
+	(934, 'CM-06965', 'CAJAS DE MADERA ROCKY PATEL THE COLLECTION PETIT CORONA CONN BOX/20', 'The Collection Fuma', 7, 0, NULL, NULL),
+	(935, 'CM-06966', 'CAJAS DE MADERA ROCKY PATEL THE COLLECTION GRANDE CONN BOX/20', 'The Collection Fuma', 7, 0, NULL, NULL),
+	(936, 'CM-06967', 'CAJAS DE MADERA ROCKY PATEL THE COLLECTION PETIT CORONA MADURO BOX/20', 'The Collection Fuma', 7, 0, NULL, NULL),
+	(937, 'CM-06968', 'CAJAS DE MADERA ROCKY PATEL THE COLLECTION GRANDE MADURO BOX/20', 'The Collection Fuma', 7, 0, NULL, NULL),
+	(938, 'CM-06969', 'CAJAS DE MADERA ROCKY PATEL THE FOUNDER LIMITED PERFECTO CONN BOX/20', 'The Founder', 7, 0, NULL, NULL),
+	(939, 'CM-06970', 'CAJAS DE MADERA ROCKY PATEL SCREAMING ROBUSTO CONECTICUT BOX/20', 'Screaming Eagle', 7, 0, NULL, NULL),
+	(940, 'CM-06972', 'CAJAS DE MADERA ROCKY PATEL EDGE  A10 ROBUSTO BOX/20', 'Edge 10th Anniversary', 7, 0, NULL, NULL),
+	(941, 'CM-06973', 'CAJAS DE MADERA ROCKY PATEL  EXTREME SIXTY SUMATRA BOX/20', 'Extreme', 7, 0, NULL, NULL),
+	(942, 'CM-06974', 'CAJAS DE MADERA ROCKY PATEL EDGE 4-1/2X60 B52 CONNECTICUT BOX/30', 'The Edge Connecticut', 19, 0, NULL, NULL),
+	(943, 'CM-06975', 'CAJAS DE MADERA ROCKY PATEL LA PALINA LP LINE #2 PETITE CORONA  BOX 20', 'La Palina LP Line 2', 7, 0, NULL, NULL),
+	(944, 'CM-06976', 'CAJAS DE MADERA ROCKY PATEL LA PALINA LP LINE #2 GORDO BOX 20', 'La Palina LP Line 2', 7, 0, NULL, NULL),
+	(945, 'CM-06977', 'CAJAS DE MADERA ROCKY PATEL LA PALINA LP LINE #2 ROBUSTO BOX 20', 'La Palina LP Line 2', 7, 0, NULL, NULL),
+	(946, 'CM-06978', 'CAJAS DE MADERA ROCKY PATEL LA PALINA LP LINE #2 TORO  BOX 20', 'La Palina LP Line 2', 7, 0, NULL, NULL),
+	(947, 'CM-06979', 'CAJAS DE MADERA ROCKY PATEL LA PALINA LP LINE #1 PETITE CORONA  BOX 20', 'La Palina LP Line 1', 7, 0, NULL, NULL),
+	(948, 'CM-06980', 'CAJAS DE MADERA ROCKY PATEL LA PALINA LP LINE #1 GORDO BOX 20', 'La Palina LP Line 1', 7, 0, NULL, NULL),
+	(949, 'CM-06981', 'CAJAS DE MADERA ROCKY PATEL LA PALINA LP LINE #1 ROBUSTO BOX 20', 'La Palina LP Line 1', 7, 0, NULL, NULL),
+	(950, 'CM-06982', 'CAJAS DE MADERA ROCKY PATEL LA PALINA LP LINE #1 TORO BOX 20', 'La Palina LP Line 1', 7, 0, NULL, NULL),
+	(951, 'CM-06983', 'CAJAS DE MADERA ROCKY PATEL BELLA CARMELLA TORPEDO BOX/20', 'Bella Camella', 7, 0, NULL, NULL),
+	(952, 'CM-06984', 'CAJAS DE MADERA ROCKY PATEL CAJAS VARIADAS', 'VARIOS', NULL, 0, NULL, NULL),
+	(953, 'CM-06985', 'CAJAS DE MADERA ROCKY PATEL SHOCKOE VALLEY ROBUSTO HABANO BOX 20', 'Shockoe Valley', 7, 0, NULL, NULL),
+	(954, 'CM-06986', 'CAJAS DE MADERA ROCKY PATEL SHOCKOE VALLEY CORONA HABANO BOX 20', 'Shockoe Valley', 7, 0, NULL, NULL),
+	(955, 'CM-06987', 'CAJAS DE MADERA ROCKY PATEL SHOCKOE VALLEY TORO HABANO BOX 20', 'Shockoe Valley', 7, 0, NULL, NULL),
+	(956, 'CM-06988', 'CAJAS DE MADERA ROCKY PATEL BLOOD-LINE RED GIGANTE BOX 20', 'Blood-Line Red Head', 7, 0, NULL, NULL),
+	(957, 'CM-06989', 'CAJAS DE MADERA ROCKY PATEL BLOOD-LINE RED ROBUSTO BOX 20', 'Blood-Line Red Head', 7, 0, NULL, NULL),
+	(958, 'CM-06990', 'CAJAS DE MADERA ROCKY PATEL BLOOD-LINE RED SIXTY BOX 20', 'Blood-Line Red Head', 7, 0, NULL, NULL),
+	(959, 'CM-06991', 'CAJAS DE MADERA ROCKY PATEL BLOOD-LINE RED TORO BOX 20', 'Blood-Line Red Head', 7, 0, NULL, NULL),
+	(960, 'CM-06992', 'CAJAS DE MADERA ROCKY PATEL BLOOD-LINE RED TORPEDO BOX 20', 'Blood-Line Red Head', 7, 0, NULL, NULL),
+	(961, 'CM-06993', 'CAJAS DE MADERA ROCKY PATEL LA PALINA BLACK LABEL ROBUSTO BOX/20', 'La Palina Black Label', 7, 0, NULL, NULL),
+	(962, 'CM-06994', 'CAJAS DE MADERA ROCKY PATEL LA PALINA BLACK LABEL GORDO MADURO BOX/20', 'La Palina Black Label', 7, 0, NULL, NULL),
+	(963, 'CM-06995', 'CAJAS DE MADERA ROCKY PATEL LA PALINA BLACK LABEL TORO MADURO BOX/20', 'La Palina Black Label', 7, 0, NULL, NULL),
+	(964, 'CM-06996', 'CAJAS DE MADERA ROCKY PATEL LA PALINA RED LABEL ROBUSTO BOX/20', 'La Palina Red Label', 7, 0, NULL, NULL),
+	(965, 'CM-06997', 'CAJAS DE MADERA ROCKY PATEL LA PALINA RED LABEL TORO BOX/20', 'La Palina Red Label', 7, 0, NULL, NULL),
+	(966, 'CM-06998', 'CAJAS DE MADERA ROCKY PATEL LA PALINA RED LABEL GORDO BOX/20', 'La Palina Red Label', 7, 0, NULL, NULL),
+	(967, 'CM-06999', 'CAJAS DE MADERA ROCKY PATEL LA PALINA ANNIVERSARY TORO BOX/20', 'La Palina Anniversary', 7, 0, NULL, NULL),
+	(968, 'CM-07000', 'CAJAS DE MADERA ROCKY PATEL LA PALINA ANNIVERSARY ROBUSTO BOX/20', 'La Palina Anniversary', 7, 0, NULL, NULL),
+	(969, 'CM-07001', 'CAJAS DE MADERA ROCKY PATEL LA PALINA ANNIVERSARY GORDO BOX/20', 'La Palina Anniversary', 7, 0, NULL, NULL),
+	(970, 'CM-07002', 'CAJAS DE MADERA ROCKY PATEL  SUPER FUERTE DOUBLE CORONA PRESS HABANO BOX/25', 'Super Fuerte', 13, 0, NULL, NULL),
+	(971, 'CM-07003', 'CAJAS DE MADERA ROCKY PATEL  SUPER FUERTE ROBUSTO PRESS HABANO BOX/25', 'Super Fuerte', 13, 0, NULL, NULL),
+	(972, 'CM-07004', 'CAJAS DE MADERA ROCKY PATEL  SUPER FUERTE CORONA GRANDE HABANO BOX/25', 'Super Fuerte', 13, 0, NULL, NULL),
+	(973, 'CM-07005', 'CAJAS DE MADERA ROCKY PATEL  EDGE BATTALION CONECTICUM BOX20', 'The Edge Connecticut', 7, 0, NULL, NULL),
+	(974, 'CM-07006', 'CAJAS DE MADERA ROCKY PATEL LA PALINA BLUE LABEL ROBUSTO BOX/20', 'La Palina Blue Label', 7, 0, NULL, NULL),
+	(975, 'CM-07007', 'CAJAS DE MADERA ROCKY PATEL SCREAMING ROBUSTO MADURO BOX/20', 'Screaming Eagle', 7, 0, NULL, NULL),
+	(976, 'CM-07008', 'CAJAS DE MADERA ROCKY PATEL SCREAMING TORO CONECTICUT BOX/20', 'Screaming Eagle', 7, 0, NULL, NULL),
+	(977, 'CM-07009', 'CAJAS DE MADERA ROCKY PATEL SCREAMING TORO MADURO BOX/20', 'Screaming Eagle', 7, 0, NULL, NULL),
+	(978, 'CM-07011', 'CAJAS DE MADERA ROCKY PATEL CIGARS SHOP BILOXI 10TH ANNIVERSARY TORO PRESS CONN BOX20', 'Cigar Shop Biloxi 10th Anniversary', 7, 0, NULL, NULL),
+	(979, 'CM-07016', 'CAJAS DE MADERA ROCKY PATEL CAJUN CIGARS CZAR TRAYS', 'NINGUNA', NULL, 0, NULL, NULL),
+	(980, 'CM-07017', 'CAJAS DE MADERA ROCKY PATEL SHOCKOE VALLEY LIMITED RESERVE TORO HABANO BOX 20', 'Shockoe Valley', 7, 0, NULL, NULL),
+	(981, 'CM-07018', 'CAJAS DE MADERA ROCKY PATEL SHOCKOE VALLEY LIMITED RESERVE CORONA HABANO BOX 20', 'Shockoe Valley', 7, 0, NULL, NULL),
+	(982, 'CM-07020', 'CAJAS DE MADERA ROCKY PATEL  HONDURAS CLASICO TORO HABANO  BOX/20', 'Honduran Classic', 7, 0, NULL, NULL),
+	(983, 'CM-07021', 'CAJAS DE MADERA ROCKY PATEL SHOCKOE VALLEY COSTARICA 6-1/4X52 TORPEDO MADURO BOX 20', 'Shockoe Valley', 7, 0, NULL, NULL),
+	(984, 'CM-07022', 'CAJAS DE MADERA ROCKY PATEL SHOCKOE VALLEY COSTARICA 6X52 TORO MADURO BOX 20', 'Shockoe Valley', 7, 0, NULL, NULL),
+	(985, 'CM-07023', 'CAJAS DE MADERA ROCKY PATEL MEXICO ROBUSTO SAMPLER #1 BOX/100', 'Sampler Varios', 18, 0, NULL, NULL),
+	(986, 'CM-07024', 'CAJAS DE MADERA ROCKY PATEL MEXICO ROBUSTO SAMPLER #2 BOX/100', 'Sampler Varios', 18, 0, NULL, NULL),
+	(987, 'CM-07025', 'CAJAS DE MADERA ROCKY PATEL CGALIV ROBUSTO 5X50 HABANO BOX/20', 'Segaliii', 7, 0, NULL, NULL),
+	(988, 'CM-07026', 'CAJAS DE MADERA ROCKY PATEL CGALIV TORO 6-1/2X50 HABANO  BOX/20', 'Segaliii', 7, 0, NULL, NULL),
+	(989, 'CM-07028', 'CAJAS DE MADERA ROCKY PATEL EL DIABLO 5X50 ROBUSTO HABANO/COL BOX/20', 'El Diablo', 7, 0, NULL, NULL),
+	(990, 'CM-07029', 'CAJAS DE MADERA ROCKY PATEL EL DIABLO 6-1/2X52 TORO HABANO/COL BOX/20', 'El Diablo', 7, 0, NULL, NULL),
+	(991, 'CM-07030', 'CAJAS DE MADERA ROCKY PATEL EDGE BATTALION HABANO (WAREHOUSE) BOX/20', 'The Edge Nicaragua', 7, 0, NULL, NULL),
+	(992, 'CM-07031', 'CAJAS DE MADERA ROCKY PATEL EDGE TORO CELLO HABANO (WAREHOUSE) BOX/100', 'The Edge Nicaragua', 18, 4, NULL, NULL),
+	(993, 'CM-07032', 'CAJAS DE MADERA ROCKY PATEL EDGE TORO HABANO (WAREHOUSE) BOX/20', 'The Edge Nicaragua', 7, 0, NULL, NULL),
+	(994, 'CM-07033', 'CAJAS DE MADERA ROCKY PATEL THE ZEUS BY HUMIDOR CHURCHILL MADURO BOX/20', 'Zeus by Humidour', 7, 0, NULL, NULL),
+	(995, 'CM-07034', 'CAJAS DE MADERA ROCKY PATEL THE ZEUS BY HUMIDOR GRANDE MADURO BOX/20', 'Zeus by Humidour', 7, 0, NULL, NULL),
+	(996, 'CM-07035', 'CAJAS DE MADERA ROCKY PATEL LA PALINA SILVER ROBUSTO HABANO BOX/20', 'La Palina Silver Label', 7, 0, NULL, NULL),
+	(997, 'CM-07036', 'CAJAS DE MADERA ROCKY PATEL LA PALINA SILVER GORDO HABANO BOX/20', 'La Palina Silver Label', 7, 0, NULL, NULL),
+	(998, 'CM-07037', 'CAJAS DE MADERA ROCKY PATEL JML TRAYS NEWBORM HABANO BOX50', 'VARIOS', 21, 0, NULL, NULL),
+	(999, 'CM-07038', 'CAJAS DE MADERA ROCKY PATEL JML TRAYS NEWBORM HAB.MADURO BOX50', 'VARIOS', 21, 0, NULL, NULL),
+	(1000, 'CM-07039', 'CAJAS DE MADERA ROCKY PATEL JML TRAYS NEWBORM HAB.SUMATRA BOX50', 'VARIOS', 21, 0, NULL, NULL),
+	(1001, 'CM-07040', 'CAJAS DE MADERA ROCKY PATEL JML TRAYS NEWBORM TORPEDO CONECTICUT BOX50', 'VARIOS', 21, 0, NULL, NULL),
+	(1002, 'CM-07041', 'CAJAS DE MADERA ROCKY PATEL JML TRAYS NEWBORM TORPEDO HABANO BOX50', 'VARIOS', 21, 0, NULL, NULL),
+	(1003, 'CM-07042', 'CAJAS DE MADERA ROCKY PATEL JML TRAYS NEWBORM TORPEDO MADURO BOX50', 'VARIOS', 21, 0, NULL, NULL),
+	(1004, 'CM-07043', 'CAJAS DE MADERA ROCKY PATEL LA PALINA SILVER TORO HABANO BOX/20', 'La Palina Silver Label', 7, 0, NULL, NULL),
+	(1005, 'CM-07044', 'CAJAS DE MADERA ROCKY PATEL PHARAOH TORO SUMATRA 6X52 BOX/20', 'NINGUNA', 7, 0, NULL, NULL),
+	(1006, 'CM-07045', 'CAJAS DE MADERA ROCKY PATEL PHARAOH ROBUSTO SUMATRA 6X52 BOX/20', 'NINGUNA', 7, 0, NULL, NULL),
+	(1007, 'CM-07046', 'CAJAS DE MADERA ROCKY PATEL PHARAOH TORO CONECTICUT 6X52 BOX/20', 'NINGUNA', 7, 0, NULL, NULL),
+	(1008, 'CM-07047', 'CAJAS DE MADERA ROCKY PATEL PHARAOH ROBUSTO CONECTICUT 6X52 BOX/20', 'NINGUNA', 7, 0, NULL, NULL),
+	(1009, 'CM-07048', 'CAJAS DE MADERA ROCKY PATEL ISLAND GIRL TORO CONECTICUT BOX/20', 'Island Girl (TOH-60-14)', 7, 0, NULL, NULL),
+	(1010, 'CM-07049', 'CAJAS DE MADERA ROCKY PATEL ISLAND GIRL TORO HABANO COL. BOX/20', 'Island Girl (TOH-60-14)', 7, 0, NULL, NULL),
+	(1011, 'CM-07050', 'CAJAS DE MADERA ROCKY PATEL QUARTER CENTURY 25TH ANIVERSARIO SIXTY BOX/20', 'NINGUNA', 7, 0, NULL, NULL),
+	(1012, 'CM-07051', 'CAJAS DE MADERA ROCKY PATEL QUARTER CENTURY 25TH ANIVERSARO TORO BOX/20', 'NINGUNA', 7, 0, NULL, NULL),
+	(1013, 'CM-07052', 'CAJAS DE MADERA ROCKY PATEL QUARTER CENTURY 25TH ANIVERSARIO ROBUSTO BOX/20', 'NINGUNA', 7, 0, NULL, NULL),
+	(1014, 'CM-07056', 'CAJAS DE MADERA ROCKY PATEL  EDGE TORPEDO HABANO (WAREHOUSE) BOX/20', 'The Edge Nicaragua', 7, 0, NULL, NULL),
+	(1015, 'CM-07057', 'CAJAS DE MADERA ROCKY PATEL  EDGE SHORT ROBUSTO HABANO (WAREHOUSE) BOX/20', 'The Edge Nicaragua', 7, 0, NULL, NULL),
+	(1016, 'CM-07594', 'CAJAS DE MADERA ROCKY PATEL EL DIABLO 7X38 LANCERO HABANO/COL BOX/20', 'El Diablo', 7, 0, NULL, NULL),
+	(1017, 'CM-07595', 'CAJAS DE MADERA ROCKY PATEL JML TRAYS 6X52 TORO CONECTICUT BOX50', 'VARIOS', 21, 0, NULL, NULL),
+	(1018, 'CM-07596', 'CAJAS DE MADERA ROCKY PATEL JML TRAYS 6X52 TORO HABANO BOX50', 'VARIOS', 21, 0, NULL, NULL),
+	(1019, 'CM-07597', 'CAJAS DE MADERA ROCKY PATEL JML TRAYS 6X52 TORO MADURO BOX50', 'VARIOS', 21, 0, NULL, NULL),
+	(1020, 'CM-07598', 'CAJAS DE MADERA ROCKY PATEL BEALLE STREET TORO RHYTHM GUITAR SUMATRA BOX/20', 'Bealle Street', 7, 0, NULL, NULL),
+	(1021, 'CM-07599', 'CAJAS DE MADERA ROCKY PATEL BEALLE STREET ROBUSTO RHYTHM GUITAR SUMATRA BOX/20', 'Bealle Street', 7, 0, NULL, NULL),
+	(1022, 'CM-07600', 'CAJAS DE MADERA ROCKY PATEL BEALLE STREET TORPEDO RHYTHM GUITAR SUMATRA BOX/20', 'Bealle Street', 7, 0, NULL, NULL),
+	(1023, 'CM-07601', 'CAJAS DE MADERA ROCKY PATEL BEALLE STREET SIXTY RHYTHM GUITAR SUMATRA BOX/20', 'Bealle Street', 7, 0, NULL, NULL),
+	(1024, 'CM-07602', 'CAJAS DE MADERA ROCKY PATEL J.A EDITION 2021 TORO CONECTICUT BOX/20', 'J.A. Edition 2021', 7, 0, NULL, NULL),
+	(1025, 'CM-07603', 'CAJAS DE MADERA ROCKY PATEL NUMBER 6 SIXTY COROJO BOX/20', 'Number 6', 7, 0, NULL, NULL),
+	(1026, 'CM-07604', 'CAJAS DE MADERA ROCKY PATEL NUMBER 6 TORO COROJO BOX/20', 'Number 6', 7, 0, NULL, NULL),
+	(1027, 'CM-07605', 'CAJAS DE MADERA ROCKY PATEL NUMBER 6 CORONA COROJO BOX/20', 'Number 6', 7, 0, NULL, NULL),
+	(1028, 'CM-07606', 'CAJAS DE MADERA ROCKY PATEL NUMBER 6 ROBUSTO COROJO BOX/20', 'Number 6', 7, 0, NULL, NULL),
+	(1029, 'CM-07607', 'CAJAS DE MADERA ROCKY PATEL SHOCKOE VALLEY COSTARICA 5X50 ROBUSTO MADURO BOX 20', 'Shockoe Valley', 7, 0, NULL, NULL),
+	(1030, 'CM-07608', 'CAJAS DE MADERA ROCKY PATEL BEALLE STREET SIXTY MADURO BOX/20', 'Bealle Street', 7, 0, NULL, NULL),
+	(1031, 'CM-07609', 'CAJAS DE MADERA ROCKY PATEL  CIGAR OASIS O.P 5-1/2X50  ROBUSTO CONNECTICUT BOX/20', 'Cigar Oasis O.P.', 7, 0, NULL, NULL),
+	(1032, 'CM-07610', 'CAJAS DE MADERA ROCKY PATEL  CIGAR OASIS O.P 6X60 SIXTY CONNECTICUT BOX/20', 'Cigar Oasis O.P.', 7, 0, NULL, NULL),
+	(1033, 'CM-07611', 'CAJAS DE MADERA ROCKY PATEL  EL MAGO 6X44  CORONA  HABANO/COL. BOX/20', 'El Mago', 7, 0, NULL, NULL),
+	(1034, 'CM-07612', 'CAJAS DE MADERA ROCKY PATEL  EL MAGO 6X52 TORO  HABANO/COL. BOX/20', 'El Mago', 7, 0, NULL, NULL),
+	(1035, 'CM-07613', 'CAJAS DE MADERA ROCKY PATEL VINTAGE 2003 ROUND SHORT GORDO 5X60 BOX 20', 'VINTAGE 2003', 7, 0, NULL, NULL),
+	(1036, 'CM-07614', 'CAJAS DE MADERA ROCKY PATEL NUMBER 6 CHURCHILL COROJO BOX/20', 'Number 6', 7, 0, NULL, NULL),
+	(1037, 'CM-07615', 'CAJAS DE MADERA ROCKY PATEL EDGE WOODEN DISPLAY TRAYS/BOX100', 'The Edge', 18, 0, NULL, NULL),
+	(1038, 'CM-07616', 'CAJAS DE MADERA ROCKY PATEL VINTAGE WOODEN DISPALY TRAYS  BOX100', 'Vintage Especial', 18, 0, NULL, NULL),
+	(1039, 'CM-07617', 'CAJAS DE MADERA ROCKY PATEL  EDGE TORPEDO HABANO (WAREHOUSE) BOX/100', 'The Edge Nicaragua', 18, 0, NULL, NULL),
+	(1040, 'CM-07618', 'CAJAS DE MADERA ROCKY PATEL  PABLO MARTIN GORDO CAMEROON BOX/20', 'Pablo Martin', 7, 0, NULL, NULL),
+	(1041, 'CM-07619', 'CAJAS DE MADERA ROCKY PATEL MARTINIQUE TORO HABANO TRAYS BOX100', 'Martinique TAA By RP', 18, 0, NULL, NULL),
+	(1042, 'CM-07620', 'CAJAS DE MADERA ROCKY PATEL CLUB REX BELICOSO GRANDE SUMATRA BOX/20', 'Club Rex', 7, 0, NULL, NULL),
+	(1043, 'CM-07621', 'CAJAS DE MADERA ROCKY PATEL  EDGE GRAN ROBUSTO HABANO BOX/20', 'The Edge', 7, 0, NULL, NULL),
+	(1044, 'CM-07622', 'CAJAS DE MADERA ROCKY PATEL  EDGE GRAN ROBUSTO CONNECTICUT BOX/20', 'The Edge', 7, 0, NULL, NULL),
+	(1045, 'CM-07623', 'CAJAS DE MADERA ROCKY PATEL  EDGE GRAN ROBUSTO SUMATRA BOX/20', 'The Edge', 7, 0, NULL, NULL);
 /*!40000 ALTER TABLE `lista_cajas` ENABLE KEYS */;
 
--- Volcando estructura para tabla facturacion_plasencia.marca_productos
+-- Dumping structure for table facturacion_plasencia.marca_productos
 CREATE TABLE IF NOT EXISTS `marca_productos` (
   `id_marca` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
-  `marca` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `marca` char(100) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '0',
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
-  PRIMARY KEY (`id_marca`)
-) ENGINE=MyISAM AUTO_INCREMENT=1451 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+  PRIMARY KEY (`id_marca`),
+  UNIQUE KEY `marca` (`marca`)
+) ENGINE=MyISAM AUTO_INCREMENT=1462 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- Volcando datos para la tabla facturacion_plasencia.marca_productos: 1,450 rows
+-- Dumping data for table facturacion_plasencia.marca_productos: 1,450 rows
 DELETE FROM `marca_productos`;
 /*!40000 ALTER TABLE `marca_productos` DISABLE KEYS */;
 INSERT INTO `marca_productos` (`id_marca`, `marca`, `created_at`, `updated_at`) VALUES
-	(1, 'PENDIENTE ', '2021-04-08 21:40:35', '2021-04-08 21:40:35'),
+	(1, 'PENDIENTE', '2021-04-08 21:40:35', '2021-04-08 21:40:35'),
 	(2, 'RP HONDURAN ROBUSTO 2015 SAMPLER 20TH ANNIVERSARY', '2021-04-08 21:40:35', '2021-04-08 21:40:35'),
 	(3, 'RP HONDURAN ROBUSTO 2015 SAMPLER SUNGROWN  TVC', '2021-04-08 21:40:35', '2021-04-08 21:40:35'),
 	(4, 'RP HONDURAN ROBUSTO 2015 SAMPLER DECADE', '2021-04-08 21:40:35', '2021-04-08 21:40:35'),
 	(5, 'RP HONDURAN ROBUSTO 2015 SAMPLER DECADE CAMEROON', '2021-04-08 21:40:35', '2021-04-08 21:40:35'),
-	(6, 'RP HONDURAN ROBUSTO 2015 SAMPLER SUNGROWN ', '2021-04-08 21:40:35', '2021-04-08 21:40:35'),
+	(6, 'RP HONDURAN ROBUSTO 2015 SAMPLER SUNGROWN', '2021-04-08 21:40:35', '2021-04-08 21:40:35'),
 	(7, 'RP HONDURAN ROBUSTO 2015 SAMPLER SUPER LIGERO', '2021-04-08 21:40:35', '2021-04-08 21:40:35'),
 	(8, 'RP HUMIDOR SELECTION GIFT PACK BURN', '2021-04-08 21:40:35', '2021-04-08 21:40:35'),
 	(9, 'RP HUMIDOR SELECTION GIFT PACK DECADE', '2021-04-08 21:40:35', '2021-04-08 21:40:35'),
@@ -3203,7 +3630,7 @@ INSERT INTO `marca_productos` (`id_marca`, `marca`, `created_at`, `updated_at`) 
 	(53, 'La Palina Bronze Label', '2021-04-08 21:40:35', '2021-04-08 21:40:35'),
 	(54, 'Connecticut Rocky Patel Mega Sampler', '2021-04-08 21:40:35', '2021-04-08 21:40:35'),
 	(55, 'Limited Reserve', '2021-04-08 21:40:35', '2021-04-08 21:40:35'),
-	(56, 'RP Freedom ', '2021-04-08 21:40:35', '2021-04-08 21:40:35'),
+	(56, 'RP Freedom', '2021-04-08 21:40:35', '2021-04-08 21:40:35'),
 	(57, 'RP Imperial', '2021-04-08 21:40:35', '2021-04-08 21:40:35'),
 	(58, 'RP Strada', '2021-04-08 21:40:35', '2021-04-08 21:40:35'),
 	(59, 'Super Fuerte', '2021-04-08 21:40:35', '2021-04-08 21:40:35'),
@@ -3325,7 +3752,7 @@ INSERT INTO `marca_productos` (`id_marca`, `marca`, `created_at`, `updated_at`) 
 	(175, 'CI Mildn Mellow Sampler  Connecticut Rocky Patel', '2021-04-08 21:40:35', '2021-04-08 21:40:35'),
 	(176, 'RP Connecticut Fuma', '2021-04-08 21:40:35', '2021-04-08 21:40:35'),
 	(177, 'Cargo By RP', '2021-04-08 21:40:35', '2021-04-08 21:40:35'),
-	(178, 'RP/Santa clara vintage short gordo VINTAGE 1990 GEN-1798 ', '2021-04-08 21:40:35', '2021-04-08 21:40:35'),
+	(178, 'RP/Santa clara vintage short gordo VINTAGE 1990 GEN-1798', '2021-04-08 21:40:35', '2021-04-08 21:40:35'),
 	(179, 'RP/Santa clara vintage short gordo VINTAGE 2003', '2021-04-08 21:40:35', '2021-04-08 21:40:35'),
 	(180, 'RP/Santa clara vintage short gordo VINTAGE 2006  TVC-2620FZT', '2021-04-08 21:40:35', '2021-04-08 21:40:35'),
 	(181, 'RP Factory Over- Runs-E (edge lite)', '2021-04-08 21:40:35', '2021-04-08 21:40:35'),
@@ -3334,7 +3761,7 @@ INSERT INTO `marca_productos` (`id_marca`, `marca`, `created_at`, `updated_at`) 
 	(184, 'La Conquista', '2021-04-08 21:40:36', '2021-04-08 21:40:36'),
 	(185, 'Garage Blend', '2021-04-08 21:40:36', '2021-04-08 21:40:36'),
 	(186, 'Old World Reserve', '2021-04-08 21:40:36', '2021-04-08 21:40:36'),
-	(187, 'Martinique ', '2021-04-08 21:40:36', '2021-04-08 21:40:36'),
+	(187, 'Martinique', '2021-04-08 21:40:36', '2021-04-08 21:40:36'),
 	(188, 'MUESTRAS', '2021-04-08 21:40:36', '2021-04-08 21:40:36'),
 	(189, '15th Anniversary Fuma', '2021-04-08 21:40:36', '2021-04-08 21:40:36'),
 	(190, 'Badge 282', '2021-04-08 21:40:36', '2021-04-08 21:40:36'),
@@ -3628,7 +4055,7 @@ INSERT INTO `marca_productos` (`id_marca`, `marca`, `created_at`, `updated_at`) 
 	(478, '5 Vegas Shorty', '2021-04-28 20:51:59', '2021-04-28 20:51:59'),
 	(479, 'Doog  Good', '2021-04-28 20:51:59', '2021-04-28 20:51:59'),
 	(480, 'Gonzo Celebración 2007', '2021-04-28 20:51:59', '2021-04-28 20:51:59'),
-	(481, 'La Invicta ', '2021-04-28 20:51:59', '2021-04-28 20:51:59'),
+	(481, 'La Invicta', '2021-04-28 20:51:59', '2021-04-28 20:51:59'),
 	(482, 'Nicaraguan', '2021-04-28 20:51:59', '2021-04-28 20:51:59'),
 	(483, 'Mayorga', '2021-04-28 20:51:59', '2021-04-28 20:51:59'),
 	(484, 'Gold Series', '2021-04-28 20:51:59', '2021-04-28 20:51:59'),
@@ -3654,7 +4081,7 @@ INSERT INTO `marca_productos` (`id_marca`, `marca`, `created_at`, `updated_at`) 
 	(504, 'Ibis Nic.', '2021-04-28 20:51:59', '2021-04-28 20:51:59'),
 	(505, 'Rodrigo de Jerez Nic.', '2021-04-28 20:51:59', '2021-04-28 20:51:59'),
 	(506, 'Casa de Torres', '2021-04-28 20:51:59', '2021-04-28 20:51:59'),
-	(507, 'Plantation Blend ', '2021-04-28 20:51:59', '2021-04-28 20:51:59'),
+	(507, 'Plantation Blend', '2021-04-28 20:51:59', '2021-04-28 20:51:59'),
 	(508, 'Liga 5-A', '2021-04-28 20:51:59', '2021-04-28 20:51:59'),
 	(509, 'Alec Bradley', '2021-04-28 20:51:59', '2021-04-28 20:51:59'),
 	(510, 'Raices Cubanas', '2021-04-28 20:51:59', '2021-04-28 20:51:59'),
@@ -3722,7 +4149,7 @@ INSERT INTO `marca_productos` (`id_marca`, `marca`, `created_at`, `updated_at`) 
 	(572, 'Edge Mistic', '2021-04-28 20:52:00', '2021-04-28 20:52:00'),
 	(573, '7/Treinta', '2021-04-28 20:52:00', '2021-04-28 20:52:00'),
 	(574, 'Zechbawer', '2021-04-28 20:52:00', '2021-04-28 20:52:00'),
-	(575, 'M. M. Vintage Edition ', '2021-04-28 20:52:00', '2021-04-28 20:52:00'),
+	(575, 'M. M. Vintage Edition', '2021-04-28 20:52:00', '2021-04-28 20:52:00'),
 	(576, 'Sea Knight', '2021-04-28 20:52:00', '2021-04-28 20:52:00'),
 	(577, 'TOHJBC-1-14', '2021-04-28 20:52:00', '2021-04-28 20:52:00'),
 	(578, 'TOHJBM-1-14', '2021-04-28 20:52:00', '2021-04-28 20:52:00'),
@@ -3747,7 +4174,7 @@ INSERT INTO `marca_productos` (`id_marca`, `marca`, `created_at`, `updated_at`) 
 	(597, 'Vudu Dark', '2021-04-28 20:52:00', '2021-04-28 20:52:00'),
 	(598, 'Connecticut By J.Fuego', '2021-04-28 20:52:00', '2021-04-28 20:52:00'),
 	(599, 'Habana Collection White Sungrown', '2021-04-28 20:52:00', '2021-04-28 20:52:00'),
-	(600, 'Padilla La Terraza ', '2021-04-28 20:52:00', '2021-04-28 20:52:00'),
+	(600, 'Padilla La Terraza', '2021-04-28 20:52:00', '2021-04-28 20:52:00'),
 	(601, 'Padilla Hybrid', '2021-04-28 20:52:00', '2021-04-28 20:52:00'),
 	(602, 'AB1', '2021-04-28 20:52:00', '2021-04-28 20:52:00'),
 	(603, 'AB3', '2021-04-28 20:52:00', '2021-04-28 20:52:00'),
@@ -3802,7 +4229,7 @@ INSERT INTO `marca_productos` (`id_marca`, `marca`, `created_at`, `updated_at`) 
 	(652, 'The Project', '2021-04-28 20:52:00', '2021-04-28 20:52:00'),
 	(653, 'Reposado', '2021-04-28 20:52:00', '2021-04-28 20:52:00'),
 	(654, 'Formula', '2021-04-28 20:52:00', '2021-04-28 20:52:00'),
-	(655, 'Oliveros Gran Retorno ', '2021-04-28 20:52:00', '2021-04-28 20:52:00'),
+	(655, 'Oliveros Gran Retorno', '2021-04-28 20:52:00', '2021-04-28 20:52:00'),
 	(656, 'Vudu Blood', '2021-04-28 20:52:00', '2021-04-28 20:52:00'),
 	(657, 'Vudu Dambala', '2021-04-28 20:52:00', '2021-04-28 20:52:00'),
 	(658, 'Origen JF. Connoisseur', '2021-04-28 20:52:00', '2021-04-28 20:52:00'),
@@ -3817,7 +4244,7 @@ INSERT INTO `marca_productos` (`id_marca`, `marca`, `created_at`, `updated_at`) 
 	(667, 'Liga 1', '2021-04-28 20:52:00', '2021-04-28 20:52:00'),
 	(668, 'LIga 2', '2021-04-28 20:52:00', '2021-04-28 20:52:00'),
 	(669, 'Santa Karina', '2021-04-28 20:52:00', '2021-04-28 20:52:00'),
-	(670, 'Favorita de Nicaragua ', '2021-04-28 20:52:00', '2021-04-28 20:52:00'),
+	(670, 'Favorita de Nicaragua', '2021-04-28 20:52:00', '2021-04-28 20:52:00'),
 	(671, 'Nicaragua Segundos', '2021-04-28 20:52:00', '2021-04-28 20:52:00'),
 	(672, 'Palmetto State DW Reserve', '2021-04-28 20:52:00', '2021-04-28 20:52:00'),
 	(673, 'Secession DW Reserve', '2021-04-28 20:52:00', '2021-04-28 20:52:00'),
@@ -3860,12 +4287,12 @@ INSERT INTO `marca_productos` (`id_marca`, `marca`, `created_at`, `updated_at`) 
 	(710, 'Inktome', '2021-04-28 20:52:00', '2021-04-28 20:52:00'),
 	(711, 'Brazil', '2021-04-28 20:52:00', '2021-04-28 20:52:00'),
 	(712, 'Blood-Line Red Head', '2021-04-28 20:52:00', '2021-04-28 20:52:00'),
-	(713, 'Burn Special Reserve ', '2021-04-28 20:52:00', '2021-04-28 20:52:00'),
+	(713, 'Burn Special Reserve', '2021-04-28 20:52:00', '2021-04-28 20:52:00'),
 	(714, 'Edge Dominican', '2021-04-28 20:52:00', '2021-04-28 20:52:00'),
 	(715, 'Edge San Andreas', '2021-04-28 20:52:00', '2021-04-28 20:52:00'),
 	(716, 'Embarcadero', '2021-04-28 20:52:00', '2021-04-28 20:52:00'),
 	(717, 'Four Kicks Black Belt Buckle', '2021-04-28 20:52:00', '2021-04-28 20:52:00'),
-	(718, 'Hamlet Tabaquero ', '2021-04-28 20:52:00', '2021-04-28 20:52:00'),
+	(718, 'Hamlet Tabaquero', '2021-04-28 20:52:00', '2021-04-28 20:52:00'),
 	(719, 'Headley Grange', '2021-04-28 20:52:00', '2021-04-28 20:52:00'),
 	(720, 'Headley Grange Black Dog', '2021-04-28 20:52:00', '2021-04-28 20:52:00'),
 	(721, 'Honduran Selection 2000', '2021-04-28 20:52:00', '2021-04-28 20:52:00'),
@@ -3901,10 +4328,10 @@ INSERT INTO `marca_productos` (`id_marca`, `marca`, `created_at`, `updated_at`) 
 	(751, 'NP Special Edition', '2021-04-28 20:52:00', '2021-04-28 20:52:00'),
 	(752, 'NP Special Edition 2nds', '2021-04-28 20:52:00', '2021-04-28 20:52:00'),
 	(753, 'Prohibition San Andreas 2nds', '2021-04-28 20:52:00', '2021-04-28 20:52:00'),
-	(754, 'Royale ', '2021-04-28 20:52:00', '2021-04-28 20:52:00'),
+	(754, 'Royale', '2021-04-28 20:52:00', '2021-04-28 20:52:00'),
 	(755, 'Prohibition Connecticut 2nds', '2021-04-28 20:52:00', '2021-04-28 20:52:00'),
 	(756, 'RP Equis', '2021-04-28 20:52:00', '2021-04-28 20:52:00'),
-	(757, 'RP ES350  ', '2021-04-28 20:52:00', '2021-04-28 20:52:00'),
+	(757, 'RP ES350', '2021-04-28 20:52:00', '2021-04-28 20:52:00'),
 	(758, 'RP Fusion 2nds', '2021-04-28 20:52:00', '2021-04-28 20:52:00'),
 	(759, 'RP Hall of Fame', '2021-04-28 20:52:00', '2021-04-28 20:52:00'),
 	(760, 'RP Hall of Fame 2nds', '2021-04-28 20:52:00', '2021-04-28 20:52:00'),
@@ -3976,7 +4403,7 @@ INSERT INTO `marca_productos` (`id_marca`, `marca`, `created_at`, `updated_at`) 
 	(826, 'Post Embargo', '2021-04-28 20:52:01', '2021-04-28 20:52:01'),
 	(827, 'Maria Mancini Red', '2021-04-28 20:52:01', '2021-04-28 20:52:01'),
 	(828, 'Maria Mancini Limited', '2021-04-28 20:52:01', '2021-04-28 20:52:01'),
-	(829, 'It\' A ', '2021-04-28 20:52:01', '2021-04-28 20:52:01'),
+	(829, 'It\' A', '2021-04-28 20:52:01', '2021-04-28 20:52:01'),
 	(830, 'It\' S', '2021-04-28 20:52:01', '2021-04-28 20:52:01'),
 	(831, 'Vitolas Varias', '2021-04-28 20:52:01', '2021-04-28 20:52:01'),
 	(832, 'Vintage 1990 Second', '2021-04-28 20:52:01', '2021-04-28 20:52:01'),
@@ -4026,11 +4453,11 @@ INSERT INTO `marca_productos` (`id_marca`, `marca`, `created_at`, `updated_at`) 
 	(876, 'Bismarck', '2021-04-28 20:52:01', '2021-04-28 20:52:01'),
 	(877, 'Gold Crown', '2021-04-28 20:52:01', '2021-04-28 20:52:01'),
 	(878, 'Plasencia Cosecha 146', '2021-04-28 20:52:01', '2021-04-28 20:52:01'),
-	(879, 'Round Tour ', '2021-04-28 20:52:01', '2021-04-28 20:52:01'),
+	(879, 'Round Tour', '2021-04-28 20:52:01', '2021-04-28 20:52:01'),
 	(880, 'Ab Reserve Connecticut', '2021-04-28 20:52:01', '2021-04-28 20:52:01'),
 	(881, 'Ab Reserve Nicaragua', '2021-04-28 20:52:01', '2021-04-28 20:52:01'),
 	(882, 'Third Street', '2021-04-28 20:52:01', '2021-04-28 20:52:01'),
-	(883, 'Micheleros ', '2021-04-28 20:52:01', '2021-04-28 20:52:01'),
+	(883, 'Micheleros', '2021-04-28 20:52:01', '2021-04-28 20:52:01'),
 	(884, '7 Pecados', '2021-04-28 20:52:01', '2021-04-28 20:52:01'),
 	(885, 'Soto Cano', '2021-04-28 20:52:01', '2021-04-28 20:52:01'),
 	(886, 'La Rosa', '2021-04-28 20:52:01', '2021-04-28 20:52:01'),
@@ -4080,7 +4507,7 @@ INSERT INTO `marca_productos` (`id_marca`, `marca`, `created_at`, `updated_at`) 
 	(930, 'JR Esteli Reserva', '2021-04-28 20:52:01', '2021-04-28 20:52:01'),
 	(931, 'Magnificat', '2021-04-28 20:52:01', '2021-04-28 20:52:01'),
 	(932, 'Farniente', '2021-04-28 20:52:01', '2021-04-28 20:52:01'),
-	(933, 'Plasencia Original ', '2021-04-28 20:52:01', '2021-04-28 20:52:01'),
+	(933, 'Plasencia Original', '2021-04-28 20:52:01', '2021-04-28 20:52:01'),
 	(934, 'Ore Golf', '2021-04-28 20:52:01', '2021-04-28 20:52:01'),
 	(935, 'Midnight 5', '2021-04-28 20:52:01', '2021-04-28 20:52:01'),
 	(936, 'Classic Series Nica', '2021-04-28 20:52:01', '2021-04-28 20:52:01'),
@@ -4112,7 +4539,7 @@ INSERT INTO `marca_productos` (`id_marca`, `marca`, `created_at`, `updated_at`) 
 	(962, 'Panatrading (TOH-60-14)', '2021-04-28 20:52:01', '2021-04-28 20:52:01'),
 	(963, 'Plasencia Rojo', '2021-04-28 20:52:01', '2021-04-28 20:52:01'),
 	(964, 'Oreasis', '2021-04-28 20:52:01', '2021-04-28 20:52:01'),
-	(965, 'Plasencia Reserva Original ', '2021-04-28 20:52:01', '2021-04-28 20:52:01'),
+	(965, 'Plasencia Reserva Original', '2021-04-28 20:52:01', '2021-04-28 20:52:01'),
 	(966, 'Plasencia Reserva 1898', '2021-04-28 20:52:01', '2021-04-28 20:52:01'),
 	(967, 'Tempus Medius Nicaragua', '2021-04-28 20:52:01', '2021-04-28 20:52:01'),
 	(968, 'Liga Secreta', '2021-04-28 20:52:01', '2021-04-28 20:52:01'),
@@ -4220,7 +4647,7 @@ INSERT INTO `marca_productos` (`id_marca`, `marca`, `created_at`, `updated_at`) 
 	(1070, 'CI Don Tomas Maduro', '2021-04-28 20:52:02', '2021-04-28 20:52:02'),
 	(1071, 'CI Don Tomas Sun Grown', '2021-04-28 20:52:02', '2021-04-28 20:52:02'),
 	(1072, 'CI Hoyo', '2021-04-28 20:52:02', '2021-04-28 20:52:02'),
-	(1073, 'CI Excalibur ', '2021-04-28 20:52:02', '2021-04-28 20:52:02'),
+	(1073, 'CI Excalibur', '2021-04-28 20:52:02', '2021-04-28 20:52:02'),
 	(1074, 'CI Helix', '2021-04-28 20:52:02', '2021-04-28 20:52:02'),
 	(1075, 'Cigar Oasis O.P.', '2021-04-28 20:52:02', '2021-04-28 20:52:02'),
 	(1076, 'CI Foundry Chillin M.', '2021-04-28 20:52:02', '2021-04-28 20:52:02'),
@@ -4238,7 +4665,7 @@ INSERT INTO `marca_productos` (`id_marca`, `marca`, `created_at`, `updated_at`) 
 	(1088, 'CI Arganese Maduro', '2021-04-28 20:52:02', '2021-04-28 20:52:02'),
 	(1089, 'CI Punch Knuckle Buster', '2021-04-28 20:52:02', '2021-04-28 20:52:02'),
 	(1090, 'CI Mac Inspirado Orange', '2021-04-28 20:52:02', '2021-04-28 20:52:02'),
-	(1091, 'CI Don Tomas Thompson ', '2021-04-28 20:52:02', '2021-04-28 20:52:02'),
+	(1091, 'CI Don Tomas Thompson', '2021-04-28 20:52:02', '2021-04-28 20:52:02'),
 	(1092, 'Cao Pilon', '2021-04-28 20:52:02', '2021-04-28 20:52:02'),
 	(1093, 'Cao Gold', '2021-04-28 20:52:02', '2021-04-28 20:52:02'),
 	(1094, 'Cao Consigliere', '2021-04-28 20:52:02', '2021-04-28 20:52:02'),
@@ -4600,7 +5027,7 @@ INSERT INTO `marca_productos` (`id_marca`, `marca`, `created_at`, `updated_at`) 
 	(1450, 'NINGUNA', '2021-04-28 20:52:04', '2021-04-28 20:52:04');
 /*!40000 ALTER TABLE `marca_productos` ENABLE KEYS */;
 
--- Volcando estructura para tabla facturacion_plasencia.migrations
+-- Dumping structure for table facturacion_plasencia.migrations
 CREATE TABLE IF NOT EXISTS `migrations` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `migration` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
@@ -4608,7 +5035,7 @@ CREATE TABLE IF NOT EXISTS `migrations` (
   PRIMARY KEY (`id`)
 ) ENGINE=MyISAM AUTO_INCREMENT=241 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- Volcando datos para la tabla facturacion_plasencia.migrations: 13 rows
+-- Dumping data for table facturacion_plasencia.migrations: 13 rows
 DELETE FROM `migrations`;
 /*!40000 ALTER TABLE `migrations` DISABLE KEYS */;
 INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
@@ -4627,16 +5054,17 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 	(240, '2021_04_08_221327_detalle_clase_producto', 2);
 /*!40000 ALTER TABLE `migrations` ENABLE KEYS */;
 
--- Volcando estructura para tabla facturacion_plasencia.nombre_productos
+-- Dumping structure for table facturacion_plasencia.nombre_productos
 CREATE TABLE IF NOT EXISTS `nombre_productos` (
   `id_nombre` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
-  `nombre` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `nombre` char(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
-  PRIMARY KEY (`id_nombre`)
+  PRIMARY KEY (`id_nombre`),
+  UNIQUE KEY `nombre` (`nombre`)
 ) ENGINE=MyISAM AUTO_INCREMENT=154 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- Volcando datos para la tabla facturacion_plasencia.nombre_productos: 153 rows
+-- Dumping data for table facturacion_plasencia.nombre_productos: 153 rows
 DELETE FROM `nombre_productos`;
 /*!40000 ALTER TABLE `nombre_productos` DISABLE KEYS */;
 INSERT INTO `nombre_productos` (`id_nombre`, `nombre`, `created_at`, `updated_at`) VALUES
@@ -4795,7 +5223,7 @@ INSERT INTO `nombre_productos` (`id_nombre`, `nombre`, `created_at`, `updated_at
 	(153, 'NINGUNA', NULL, NULL);
 /*!40000 ALTER TABLE `nombre_productos` ENABLE KEYS */;
 
--- Volcando estructura para tabla facturacion_plasencia.orden_productos
+-- Dumping structure for table facturacion_plasencia.orden_productos
 CREATE TABLE IF NOT EXISTS `orden_productos` (
   `id_orden` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
   `orden` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
@@ -4804,7 +5232,7 @@ CREATE TABLE IF NOT EXISTS `orden_productos` (
   PRIMARY KEY (`id_orden`)
 ) ENGINE=MyISAM AUTO_INCREMENT=252 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- Volcando datos para la tabla facturacion_plasencia.orden_productos: 251 rows
+-- Dumping data for table facturacion_plasencia.orden_productos: 251 rows
 DELETE FROM `orden_productos`;
 /*!40000 ALTER TABLE `orden_productos` DISABLE KEYS */;
 INSERT INTO `orden_productos` (`id_orden`, `orden`, `created_at`, `updated_at`) VALUES
@@ -5061,19 +5489,19 @@ INSERT INTO `orden_productos` (`id_orden`, `orden`, `created_at`, `updated_at`) 
 	(251, 'Oscar', '2021-04-08 21:40:38', '2021-04-08 21:40:38');
 /*!40000 ALTER TABLE `orden_productos` ENABLE KEYS */;
 
--- Volcando estructura para tabla facturacion_plasencia.password_resets
+-- Dumping structure for table facturacion_plasencia.password_resets
 CREATE TABLE IF NOT EXISTS `password_resets` (
   `email` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `token` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- Volcando datos para la tabla facturacion_plasencia.password_resets: 0 rows
+-- Dumping data for table facturacion_plasencia.password_resets: 0 rows
 DELETE FROM `password_resets`;
 /*!40000 ALTER TABLE `password_resets` DISABLE KEYS */;
 /*!40000 ALTER TABLE `password_resets` ENABLE KEYS */;
 
--- Volcando estructura para tabla facturacion_plasencia.pedidos
+-- Dumping structure for table facturacion_plasencia.pedidos
 CREATE TABLE IF NOT EXISTS `pedidos` (
   `item` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `cant_paquetes` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
@@ -5084,12 +5512,567 @@ CREATE TABLE IF NOT EXISTS `pedidos` (
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- Volcando datos para la tabla facturacion_plasencia.pedidos: 0 rows
+-- Dumping data for table facturacion_plasencia.pedidos: 554 rows
 DELETE FROM `pedidos`;
 /*!40000 ALTER TABLE `pedidos` DISABLE KEYS */;
+INSERT INTO `pedidos` (`item`, `cant_paquetes`, `unidades`, `numero_orden`, `categoria`, `created_at`, `updated_at`) VALUES
+	('00504006', '100', '100', 'HON-3142', '1', '2021-05-17 19:03:16', '2021-05-17 19:03:16'),
+	('00505006', '100', '40', 'HON-3142', '1', '2021-05-17 19:03:16', '2021-05-17 19:03:16'),
+	('00504041', '5', '100', 'HON-3135', '1', '2021-05-17 19:03:16', '2021-05-17 19:03:16'),
+	('00508000', '20', '200', 'HON-3142', '1', '2021-05-17 19:03:16', '2021-05-17 19:03:16'),
+	('00508015', '10', '60', 'HON-3142', '1', '2021-05-17 19:03:16', '2021-05-17 19:03:16'),
+	('00605002', '25', '220', 'HON-3142', '1', '2021-05-17 19:03:16', '2021-05-17 19:03:16'),
+	('00508010', '30', '60', 'HON-3142', '1', '2021-05-17 19:03:16', '2021-05-17 19:03:16'),
+	('00504100', '20', '200', 'HON-3142', '1', '2021-05-17 19:03:16', '2021-05-17 19:03:16'),
+	('00504102', '20', '20', 'HON-3142', '1', '2021-05-17 19:03:16', '2021-05-17 19:03:16'),
+	('00504002', '20', '480', 'HON-3142', '1', '2021-05-17 19:03:16', '2021-05-17 19:03:16'),
+	('00505002', '20', '180', 'HON-3142', '1', '2021-05-17 19:03:16', '2021-05-17 19:03:16'),
+	('10104130', '20', '25', 'HON-3136', '1', '2021-05-17 19:03:16', '2021-05-17 19:03:16'),
+	('10104817', '5', '2000', 'HON-3138', '1', '2021-05-17 19:03:16', '2021-05-17 19:03:16'),
+	('10515002', '10', '20', 'HON-3142', '1', '2021-05-17 19:03:16', '2021-05-17 19:03:16'),
+	('10105565', '20', '100', 'FTT-1475', '1', '2021-05-17 19:03:16', '2021-05-17 19:03:16'),
+	('10105566', '20', '100', 'FTT-1475', '1', '2021-05-17 19:03:16', '2021-05-17 19:03:16'),
+	('00504007', '100', '120', 'HON-3142', '1', '2021-05-17 19:03:16', '2021-05-17 19:03:16'),
+	('00505007', '100', '20', 'HON-3142', '1', '2021-05-17 19:03:16', '2021-05-17 19:03:16'),
+	('00504042', '5', '100', 'HON-3135', '1', '2021-05-17 19:03:16', '2021-05-17 19:03:16'),
+	('00508016', '10', '100', 'HON-3142', '1', '2021-05-17 19:03:16', '2021-05-17 19:03:16'),
+	('00605003', '25', '60', 'HON-3142', '1', '2021-05-17 19:03:16', '2021-05-17 19:03:16'),
+	('00508011', '30', '40', 'HON-3142', '1', '2021-05-17 19:03:16', '2021-05-17 19:03:16'),
+	('00508001', '20', '360', 'HON-3142', '1', '2021-05-17 19:03:16', '2021-05-17 19:03:16'),
+	('00504003', '20', '580', 'HON-3142', '1', '2021-05-17 19:03:16', '2021-05-17 19:03:16'),
+	('00505003', '20', '160', 'HON-3142', '1', '2021-05-17 19:03:16', '2021-05-17 19:03:16'),
+	('00504101', '20', '180', 'HON-3142', '1', '2021-05-17 19:03:16', '2021-05-17 19:03:16'),
+	('00504103', '20', '40', 'HON-3142', '1', '2021-05-17 19:03:16', '2021-05-17 19:03:16'),
+	('10104816', '5', '2000', 'HON-3138', '1', '2021-05-17 19:03:16', '2021-05-17 19:03:16'),
+	('9900009110', '20', '100', 'HON-3124', '1', '2021-05-17 19:03:16', '2021-05-17 19:03:16'),
+	('9900009111', '20', '100', 'HON-3124', '1', '2021-05-17 19:03:16', '2021-05-17 19:03:16'),
+	('9900009117', '20', '50', 'HON-3146', '1', '2021-05-17 19:03:16', '2021-05-17 19:03:16'),
+	('9900009115', '25', '100', 'HON-3123', '1', '2021-05-17 19:03:16', '2021-05-17 19:03:16'),
+	('10105005', '20', '20', 'HON-3126', '1', '2021-05-17 19:03:16', '2021-05-17 19:03:16'),
+	('9900004000', '20', '100', 'HON-3124', '1', '2021-05-17 19:03:16', '2021-05-17 19:03:16'),
+	('9900004002', '20', '100', 'HON-3124', '1', '2021-05-17 19:03:16', '2021-05-17 19:03:16'),
+	('9900004003', '20', '100', 'HON-3124', '1', '2021-05-17 19:03:16', '2021-05-17 19:03:16'),
+	('9900004005', '20', '50', 'HON-3146', '1', '2021-05-17 19:03:16', '2021-05-17 19:03:16'),
+	('10105550', '20', '300', 'FTT-1475', '1', '2021-05-17 19:03:16', '2021-05-17 19:03:16'),
+	('10105551', '20', '300', 'FTT-1475', '1', '2021-05-17 19:03:16', '2021-05-17 19:03:16'),
+	('00508020', '20', '3140', 'HON-3142', '1', '2021-05-17 19:03:16', '2021-05-17 19:03:16'),
+	('00508022', '20', '60', 'HON-3142', '1', '2021-05-17 19:03:16', '2021-05-17 19:03:16'),
+	('00401000', '20', '60', 'HON-3142', '1', '2021-05-17 19:03:16', '2021-05-17 19:03:16'),
+	('00403000', '20', '140', 'HON-3142', '1', '2021-05-17 19:03:16', '2021-05-17 19:03:16'),
+	('00404000', '20', '220', 'HON-3142', '1', '2021-05-17 19:03:16', '2021-05-17 19:03:16'),
+	('00405000', '20', '20', 'HON-3142', '1', '2021-05-17 19:03:16', '2021-05-17 19:03:16'),
+	('00408000', '20', '20', 'HON-3142', '1', '2021-05-17 19:03:16', '2021-05-17 19:03:16'),
+	('00303007', '10', '100', 'HON-3142', '1', '2021-05-17 19:03:16', '2021-05-17 19:03:16'),
+	('00407000', '50', '60', 'FTT-1479', '1', '2021-05-17 19:03:16', '2021-05-17 19:03:16'),
+	('10104111', '20', '25', 'HON-3136', '1', '2021-05-17 19:03:16', '2021-05-17 19:03:16'),
+	('20005000', '20', '200', 'HON-3142', '1', '2021-05-17 19:03:16', '2021-05-17 19:03:16'),
+	('20005001', '20', '400', 'HON-3142', '1', '2021-05-17 19:03:16', '2021-05-17 19:03:16'),
+	('20005002', '20', '240', 'HON-3142', '1', '2021-05-17 19:03:16', '2021-05-17 19:03:16'),
+	('20005005', '20', '20', 'HON-3142', '1', '2021-05-17 19:03:16', '2021-05-17 19:03:16'),
+	('20005007', '20', '60', 'HON-3142', '1', '2021-05-17 19:03:16', '2021-05-17 19:03:16'),
+	('20005010', '10', '60', 'HON-3142', '1', '2021-05-17 19:03:16', '2021-05-17 19:03:16'),
+	('00505019', '100', '20', 'HON-3142', '1', '2021-05-17 19:03:16', '2021-05-17 19:03:16'),
+	('00504032', '20', '80', 'HON-3142', '1', '2021-05-17 19:03:16', '2021-05-17 19:03:16'),
+	('00504033', '20', '20', 'HON-3142', '1', '2021-05-17 19:03:16', '2021-05-17 19:03:16'),
+	('00231000', '50', '200', 'FTT-1479', '1', '2021-05-17 19:03:16', '2021-05-17 19:03:16'),
+	('9900004035', '20', '100', 'HON-3124', '1', '2021-05-17 19:03:16', '2021-05-17 19:03:16'),
+	('9900004037', '20', '150', 'HON-3124', '1', '2021-05-17 19:03:16', '2021-05-17 19:03:16'),
+	('9900004038', '20', '250', 'HON-3124', '1', '2021-05-17 19:03:16', '2021-05-17 19:03:16'),
+	('9900004039', '20', '200', 'HON-3143', '1', '2021-05-17 19:03:16', '2021-05-17 19:03:16'),
+	('9900004040', '20', '50', 'HON-3146', '1', '2021-05-17 19:03:16', '2021-05-17 19:03:16'),
+	('13105120', '10', '40', 'HON-3142', '1', '2021-05-17 19:03:16', '2021-05-17 19:03:16'),
+	('00703001', '50', '40', 'HON-3142', '1', '2021-05-17 19:03:16', '2021-05-17 19:03:16'),
+	('00704001', '50', '40', 'HON-3142', '1', '2021-05-17 19:03:16', '2021-05-17 19:03:16'),
+	('00705001', '50', '20', 'HON-3142', '1', '2021-05-17 19:03:16', '2021-05-17 19:03:16'),
+	('00712001', '50', '20', 'HON-3142', '1', '2021-05-17 19:03:16', '2021-05-17 19:03:16'),
+	('00508002', '20', '180', 'HON-3142', '1', '2021-05-17 19:03:16', '2021-05-17 19:03:16'),
+	('00508017', '10', '20', 'HON-3142', '1', '2021-05-17 19:03:16', '2021-05-17 19:03:16'),
+	('00703003', '20', '80', 'HON-3142', '1', '2021-05-17 19:03:16', '2021-05-17 19:03:16'),
+	('00712003', '20', '20', 'HON-3142', '1', '2021-05-17 19:03:16', '2021-05-17 19:03:16'),
+	('00704003', '20', '100', 'HON-3142', '1', '2021-05-17 19:03:16', '2021-05-17 19:03:16'),
+	('00705003', '20', '60', 'HON-3142', '1', '2021-05-17 19:03:16', '2021-05-17 19:03:16'),
+	('00504043', '5', '100', 'HON-3135', '1', '2021-05-17 19:03:16', '2021-05-17 19:03:16'),
+	('00712004', '25', '50', 'HON-3135', '1', '2021-05-17 19:03:16', '2021-05-17 19:03:16'),
+	('10515004', '10', '40', 'HON-3142', '1', '2021-05-17 19:03:16', '2021-05-17 19:03:16'),
+	('10603007', '20', '50', 'HON-3137', '1', '2021-05-17 19:03:16', '2021-05-17 19:03:16'),
+	('00110060', '20', '10', 'HON-3144', '1', '2021-05-17 19:03:16', '2021-05-17 19:03:16'),
+	('00110061', '20', '10', 'HON-3144', '1', '2021-05-17 19:03:16', '2021-05-17 19:03:16'),
+	('00110062', '20', '10', 'HON-3144', '1', '2021-05-17 19:03:16', '2021-05-17 19:03:16'),
+	('00110063', '20', '10', 'HON-3144', '1', '2021-05-17 19:03:16', '2021-05-17 19:03:16'),
+	('10105560', '20', '100', 'FTT-1475', '1', '2021-05-17 19:03:16', '2021-05-17 19:03:16'),
+	('10105561', '20', '100', 'FTT-1475', '1', '2021-05-17 19:03:16', '2021-05-17 19:03:16'),
+	('00504150', '20', '40', 'HON-3142', '1', '2021-05-17 19:03:16', '2021-05-17 19:03:16'),
+	('00508003', '20', '60', 'HON-3142', '1', '2021-05-17 19:03:16', '2021-05-17 19:03:16'),
+	('12506020', '20', '160', 'HON-3142', '1', '2021-05-17 19:03:16', '2021-05-17 19:03:16'),
+	('12506021', '20', '160', 'HON-3142', '1', '2021-05-17 19:03:16', '2021-05-17 19:03:16'),
+	('12506010', '25', '25', 'HON-3135', '1', '2021-05-17 19:03:16', '2021-05-17 19:03:16'),
+	('12506012', '5', '2000', 'HON-3138', '1', '2021-05-17 19:03:16', '2021-05-17 19:03:16'),
+	('00504252', '50', '40', 'HON-3133', '1', '2021-05-17 19:03:16', '2021-05-17 19:03:16'),
+	('01604010', '20', '20', 'HON-3142', '1', '2021-05-17 19:03:16', '2021-05-17 19:03:16'),
+	('01604011', '20', '20', 'HON-3142', '1', '2021-05-17 19:03:16', '2021-05-17 19:03:16'),
+	('01604012', '20', '20', 'HON-3142', '1', '2021-05-17 19:03:16', '2021-05-17 19:03:16'),
+	('01606675', '20', '320', 'HON-3142', '1', '2021-05-17 19:03:16', '2021-05-17 19:03:16'),
+	('01606678', '20', '260', 'HON-3142', '1', '2021-05-17 19:03:16', '2021-05-17 19:03:16'),
+	('603004002', '20', '60', 'HON-3142', '1', '2021-05-17 19:03:16', '2021-05-17 19:03:16'),
+	('603004004', '20', '20', 'HON-3142', '1', '2021-05-17 19:03:16', '2021-05-17 19:03:16'),
+	('603005750', '10', '60', 'HON-3142', '1', '2021-05-17 19:03:16', '2021-05-17 19:03:16'),
+	('603005751', '10', '120', 'HON-3142', '1', '2021-05-17 19:03:16', '2021-05-17 19:03:16'),
+	('603005752', '10', '40', 'HON-3142', '1', '2021-05-17 19:03:16', '2021-05-17 19:03:16'),
+	('9900004027', '20', '100', 'HON-3124', '1', '2021-05-17 19:03:16', '2021-05-17 19:03:16'),
+	('9900004028', '20', '200', 'HON-3124', '1', '2021-05-17 19:03:16', '2021-05-17 19:03:16'),
+	('9900004025', '20', '100', 'HON-3124', '1', '2021-05-17 19:03:16', '2021-05-17 19:03:16'),
+	('9900004030', '20', '100', 'HON-3123', '1', '2021-05-17 19:03:16', '2021-05-17 19:03:16'),
+	('9900004031', '20', '50', 'HON-3146', '1', '2021-05-17 19:03:16', '2021-05-17 19:03:16'),
+	('9900004019', '20', '150', 'HON-3124', '1', '2021-05-17 19:03:16', '2021-05-17 19:03:16'),
+	('9900004020', '20', '200', 'HON-3124', '1', '2021-05-17 19:03:16', '2021-05-17 19:03:16'),
+	('9900004023', '20', '50', 'HON-3146', '1', '2021-05-17 19:03:16', '2021-05-17 19:03:16'),
+	('00107000', '50', '180', 'FTT-1479', '1', '2021-05-17 19:03:16', '2021-05-17 19:03:16'),
+	('9900004011', '20', '100', 'HON-3124', '1', '2021-05-17 19:03:16', '2021-05-17 19:03:16'),
+	('9900004012', '20', '150', 'HON-3124', '1', '2021-05-17 19:03:16', '2021-05-17 19:03:16'),
+	('9900004015', '20', '100', 'HON-3123', '1', '2021-05-17 19:03:16', '2021-05-17 19:03:16'),
+	('9900004016', '20', '50', 'HON-3146', '1', '2021-05-17 19:03:16', '2021-05-17 19:03:16'),
+	('12503005', '20', '40', 'HON-3128', '1', '2021-05-17 19:03:16', '2021-05-17 19:03:16'),
+	('12503003', '20', '40', 'HON-3128', '1', '2021-05-17 19:03:16', '2021-05-17 19:03:16'),
+	('12503010', '20', '40', 'HON-3128', '1', '2021-05-17 19:03:16', '2021-05-17 19:03:16'),
+	('10105555', '20', '100', 'FTT-1475', '1', '2021-05-17 19:03:16', '2021-05-17 19:03:16'),
+	('10105556', '20', '100', 'FTT-1475', '1', '2021-05-17 19:03:16', '2021-05-17 19:03:16'),
+	('10104750', '20', '120', 'HON-3142', '1', '2021-05-17 19:03:16', '2021-05-17 19:03:16'),
+	('10104751', '20', '200', 'HON-3142', '1', '2021-05-17 19:03:17', '2021-05-17 19:03:17'),
+	('10104752', '20', '40', 'HON-3142', '1', '2021-05-17 19:03:17', '2021-05-17 19:03:17'),
+	('10104754', '20', '40', 'HON-3142', '1', '2021-05-17 19:03:17', '2021-05-17 19:03:17'),
+	('10104150', '20', '100', 'HON-3134. ', '1', '2021-05-17 19:03:17', '2021-05-17 19:03:17'),
+	('15003000', '20', '100', 'HON-3127', '1', '2021-05-17 19:03:17', '2021-05-17 19:03:17'),
+	('15004001', '20', '100', 'HON-3127', '1', '2021-05-17 19:03:17', '2021-05-17 19:03:17'),
+	('00110276', '5', '100', 'HON-3129', '1', '2021-05-17 19:03:17', '2021-05-17 19:03:17'),
+	('00110275', '5', '100', 'HON-3129', '1', '2021-05-17 19:03:17', '2021-05-17 19:03:17'),
+	('00110277', '5', '100', 'HON-3129', '1', '2021-05-17 19:03:17', '2021-05-17 19:03:17'),
+	('10104912', '5', '2860', 'HON-3142', '1', '2021-05-17 19:03:17', '2021-05-17 19:03:17'),
+	('00904038', NULL, '420', 'HON-3142', '1', '2021-05-17 19:03:17', '2021-05-17 19:03:17'),
+	('00504026', '5', '600', 'HON-3139', '2', '2021-05-17 19:03:17', '2021-05-17 19:03:17'),
+	('00504009', '25', '40', 'HON-3132', '2', '2021-05-17 19:03:17', '2021-05-17 19:03:17'),
+	('47801040', '20', '150', 'FTT-1473', '2', '2021-05-17 19:03:17', '2021-05-17 19:03:17'),
+	('00804065', '20', '20', 'HON-3139', '2', '2021-05-17 19:03:17', '2021-05-17 19:03:17'),
+	('603004050', '5', '600', 'HON-3139', '2', '2021-05-17 19:03:17', '2021-05-17 19:03:17'),
+	('00904111', '10', '50', 'HON-3135', '2', '2021-05-17 19:03:17', '2021-05-17 19:03:17'),
+	('01104000', '25', '70', 'HON-3141', '2', '2021-05-17 19:03:17', '2021-05-17 19:03:17'),
+	('01103006', '5', '500', 'HON-3141', '2', '2021-05-17 19:03:17', '2021-05-17 19:03:17'),
+	('01103010', '5', '200', 'HON-3141', '2', '2021-05-17 19:03:17', '2021-05-17 19:03:17'),
+	('47801563', '20', '3000', 'FTT-1472', '2', '2021-05-17 19:03:17', '2021-05-17 19:03:17'),
+	('00404005', '25', '200', 'HON-3138', '2', '2021-05-17 19:03:17', '2021-05-17 19:03:17'),
+	('00408003', '25', '300', 'HON-3138', '2', '2021-05-17 19:03:17', '2021-05-17 19:03:17'),
+	('20005006', '5', '5000', 'HON-3138', '2', '2021-05-17 19:03:17', '2021-05-17 19:03:17'),
+	('20005016', '5', '8000', 'HON-3141', '2', '2021-05-17 19:03:17', '2021-05-17 19:03:17'),
+	('00504048', '5', '1000', 'HON-3138', '2', '2021-05-17 19:03:17', '2021-05-17 19:03:17'),
+	('00504048', '5', '100', 'HON-3139', '2', '2021-05-17 19:03:17', '2021-05-17 19:03:17'),
+	('40503005', '20', '500', 'HON-3127', '2', '2021-05-17 19:03:17', '2021-05-17 19:03:17'),
+	('40503022', '10', '300', 'HON-3127', '2', '2021-05-17 19:03:17', '2021-05-17 19:03:17'),
+	('40503016', '5', '500', 'HON-3127', '2', '2021-05-17 19:03:17', '2021-05-17 19:03:17'),
+	('6030066060', '10', '500', 'FTT-1472', '2', '2021-05-17 19:03:17', '2021-05-17 19:03:17'),
+	('47801044', '20', '150', 'FTT-1473', '2', '2021-05-17 19:03:17', '2021-05-17 19:03:17'),
+	('14399005', '5', '80', 'HON-3141', '2', '2021-05-17 19:03:17', '2021-05-17 19:03:17'),
+	('14399006', '5', '800', 'HON-3141', '2', '2021-05-17 19:03:17', '2021-05-17 19:03:17'),
+	('14399010', '5', '300', 'HON-3141', '2', '2021-05-17 19:03:17', '2021-05-17 19:03:17'),
+	('47801501', '20', '30', 'FTT-1477', '2', '2021-05-17 19:03:17', '2021-05-17 19:03:17'),
+	('40503004', '20', '500', 'HON-3127', '2', '2021-05-17 19:03:17', '2021-05-17 19:03:17'),
+	('40503021', '10', '300', 'HON-3127', '2', '2021-05-17 19:03:17', '2021-05-17 19:03:17'),
+	('40503015', '5', '500', 'HON-3127', '2', '2021-05-17 19:03:17', '2021-05-17 19:03:17'),
+	('00704004', '25', '800', 'HON-3138', '2', '2021-05-17 19:03:17', '2021-05-17 19:03:17'),
+	('47801004', '20', '100', 'HON-3141', '2', '2021-05-17 19:03:17', '2021-05-17 19:03:17'),
+	('47801002', '20', '60', 'HON-3141', '2', '2021-05-17 19:03:17', '2021-05-17 19:03:17'),
+	('47705002', '5', '1500', 'HON-3141', '2', '2021-05-17 19:03:17', '2021-05-17 19:03:17'),
+	('01606872', '5', '500', 'FTT-1472', '2', '2021-05-17 19:03:17', '2021-05-17 19:03:17'),
+	('47801042', '20', '150', 'FTT-1473', '2', '2021-05-17 19:03:17', '2021-05-17 19:03:17'),
+	('40503003', '20', '500', 'HON-3127', '2', '2021-05-17 19:03:17', '2021-05-17 19:03:17'),
+	('40503020', '10', '300', 'HON-3127', '2', '2021-05-17 19:03:17', '2021-05-17 19:03:17'),
+	('40503014', '5', '500', 'HON-3127', '2', '2021-05-17 19:03:17', '2021-05-17 19:03:17'),
+	('12506011', '25', '40', 'HON-3132', '2', '2021-05-17 19:03:17', '2021-05-17 19:03:17'),
+	('603004023', '25', '50', 'HON-3135', '2', '2021-05-17 19:03:17', '2021-05-17 19:03:17'),
+	('603004023', '25', '200', 'HON-3138', '2', '2021-05-17 19:03:17', '2021-05-17 19:03:17'),
+	('603004031', '5', '150', 'HON-3139', '2', '2021-05-17 19:03:17', '2021-05-17 19:03:17'),
+	('20018021', '25', '50', 'HON-3135', '2', '2021-05-17 19:03:17', '2021-05-17 19:03:17'),
+	('20018022', '25', '50', 'HON-3135', '2', '2021-05-17 19:03:17', '2021-05-17 19:03:17'),
+	('01103004', '5', '65', 'HON-3141', '2', '2021-05-17 19:03:17', '2021-05-17 19:03:17'),
+	('41112001', '5', '40', 'HON-3141', '2', '2021-05-17 19:03:17', '2021-05-17 19:03:17'),
+	('47801420', '20', '3000', 'FTT-1472', '2', '2021-05-17 19:03:17', '2021-05-17 19:03:17'),
+	('47801421', '20', '3000', 'FTT-1472', '2', '2021-05-17 19:03:17', '2021-05-17 19:03:17'),
+	('47801561', '20', '3000', 'FTT-1472', '2', '2021-05-17 19:03:17', '2021-05-17 19:03:17'),
+	('47801043', '20', '150', 'FTT-1473', '2', '2021-05-17 19:03:17', '2021-05-17 19:03:17'),
+	('47801890', '10', '140', 'HON-3141', '2', '2021-05-17 19:03:17', '2021-05-17 19:03:17'),
+	('47801892', '10', '160', 'HON-3141', '2', '2021-05-17 19:03:17', '2021-05-17 19:03:17'),
+	('10104775', '25', '80', 'HON-3138', '2', '2021-05-17 19:03:17', '2021-05-17 19:03:17'),
+	('10104772', '25', '50', 'HON-3135', '2', '2021-05-17 19:03:17', '2021-05-17 19:03:17'),
+	('10104778', '5', '140', 'HON-3139', '2', '2021-05-17 19:03:17', '2021-05-17 19:03:17'),
+	('10499060', NULL, '1000', 'HON-3141', '2', '2021-05-17 19:03:17', '2021-05-17 19:03:17'),
+	('10499015', NULL, '500', 'HON-3141', '2', '2021-05-17 19:03:17', '2021-05-17 19:03:17'),
+	('10499010', NULL, '2000', NULL, '2', '2021-05-17 19:03:17', '2021-05-17 19:03:17'),
+	('12104000', '20', '120', 'HON-3130', '3', '2021-05-17 19:03:17', '2021-05-17 19:03:17'),
+	('11803000', '20', '200', 'HON-3130', '3', '2021-05-17 19:03:17', '2021-05-17 19:03:17'),
+	('11812002', '20', '100', 'HON-3130', '3', '2021-05-17 19:03:17', '2021-05-17 19:03:17'),
+	('11812010', '25', '200', 'HON-3131', '3', '2021-05-17 19:03:17', '2021-05-17 19:03:17'),
+	('11803002', '25', '120', 'HON-3131', '3', '2021-05-17 19:03:17', '2021-05-17 19:03:17'),
+	('11812008', '25', '80', 'HON-3131', '3', '2021-05-17 19:03:17', '2021-05-17 19:03:17'),
+	('11710050', '20', '50', 'HON-3130', '3', '2021-05-17 19:03:17', '2021-05-17 19:03:17'),
+	('11710052', '20', '100', 'HON-3130', '3', '2021-05-17 19:03:17', '2021-05-17 19:03:17'),
+	('11710055', '25', '80', 'HON-3131', '3', '2021-05-17 19:03:17', '2021-05-17 19:03:17'),
+	('12301000', '20', '100', 'HON-3130', '3', '2021-05-17 19:03:17', '2021-05-17 19:03:17'),
+	('12303000', '20', '100', 'HON-3130', '3', '2021-05-17 19:03:17', '2021-05-17 19:03:17'),
+	('13403010', '25', '240', 'HON-3131', '3', '2021-05-17 19:03:17', '2021-05-17 19:03:17'),
+	('12003050', '20', '200', 'HON-3130', '3', '2021-05-17 19:03:17', '2021-05-17 19:03:17'),
+	('12003051', '20', '100', 'HON-3130', '3', '2021-05-17 19:03:17', '2021-05-17 19:03:17'),
+	('12003061', '25', '80', 'HON-3131', '3', '2021-05-17 19:03:17', '2021-05-17 19:03:17'),
+	('12003062', '25', '40', 'HON-3131', '3', '2021-05-17 19:03:17', '2021-05-17 19:03:17'),
+	('12003060', '25', '240', 'HON-3131', '3', '2021-05-17 19:03:17', '2021-05-17 19:03:17'),
+	('12003001', '25', '80', 'HON-3131', '3', '2021-05-17 19:03:17', '2021-05-17 19:03:17'),
+	('12002998', '25', '160', 'HON-3131', '3', '2021-05-17 19:03:17', '2021-05-17 19:03:17'),
+	('12002999', '25', '240', 'HON-3131', '3', '2021-05-17 19:03:17', '2021-05-17 19:03:17'),
+	('12004001', '20', '100', 'HON-3130', '3', '2021-05-17 19:03:17', '2021-05-17 19:03:17'),
+	('12004000', '20', '100', 'HON-3130', '3', '2021-05-17 19:03:17', '2021-05-17 19:03:17'),
+	('12003003', '20', '50', 'HON-3130', '3', '2021-05-17 19:03:17', '2021-05-17 19:03:17'),
+	('12003002', '20', '50', 'HON-3130', '3', '2021-05-17 19:03:17', '2021-05-17 19:03:17'),
+	('12003005', '20', '50', 'HON-3130', '3', '2021-05-17 19:03:17', '2021-05-17 19:03:17'),
+	('12003007', '20', '50', 'HON-3130', '3', '2021-05-17 19:03:17', '2021-05-17 19:03:17'),
+	('12005003', '20', '100', 'HON-3130', '3', '2021-05-17 19:03:17', '2021-05-17 19:03:17'),
+	('11707003', '40', '800', 'FTT-1474', '3', '2021-05-17 19:03:17', '2021-05-17 19:03:17'),
+	('09906000', '12', '30', 'HON-3140', '3', '2021-05-17 19:03:17', '2021-05-17 19:03:17'),
+	('09906012', '16', '120', 'HON-3140', '3', '2021-05-17 19:03:17', '2021-05-17 19:03:17'),
+	('09906018', '16', '30', 'HON-3140', '3', '2021-05-17 19:03:17', '2021-05-17 19:03:17'),
+	('09906035', '16', '20', 'HON-3140', '3', '2021-05-17 19:03:17', '2021-05-17 19:03:17'),
+	('09906037', '15', '50', 'HON-3140', '3', '2021-05-17 19:03:17', '2021-05-17 19:03:17'),
+	('09906039', '15', '80', 'HON-3140', '3', '2021-05-17 19:03:17', '2021-05-17 19:03:17'),
+	('10610017', '15', '50', 'HON-3136', '3', '2021-05-17 19:03:17', '2021-05-17 19:03:17'),
+	('10610018', '15', '50', 'HON-3136', '3', '2021-05-17 19:03:17', '2021-05-17 19:03:17'),
+	('10610019', '15', '50', 'HON-3136', '3', '2021-05-17 19:03:17', '2021-05-17 19:03:17'),
+	('10610020', '15', '100', 'HON-3136', '3', '2021-05-17 19:03:17', '2021-05-17 19:03:17'),
+	('00503009', '20', '50', 'INT-H-1238', '4', '2021-05-17 19:03:18', '2021-05-17 19:03:18'),
+	('00504100', '20', '5', 'INT-H-1235', '4', '2021-05-17 19:03:18', '2021-05-17 19:03:18'),
+	('00504007', '100', '4', 'INT-H-1235', '4', '2021-05-17 19:03:18', '2021-05-17 19:03:18'),
+	('00508011', '30', '10', 'INT-H-1237', '4', '2021-05-17 19:03:18', '2021-05-17 19:03:18'),
+	('00503008', '20', '20', 'INT-H-1238', '4', '2021-05-17 19:03:18', '2021-05-17 19:03:18'),
+	('00504101', '20', '20', 'INT-H-1235', '4', '2021-05-17 19:03:18', '2021-05-17 19:03:18'),
+	('00504101', '20', '10', 'INT-H-1239', '4', '2021-05-17 19:03:18', '2021-05-17 19:03:18'),
+	('00504003', '20', '20', 'INT-H-1235', '4', '2021-05-17 19:03:18', '2021-05-17 19:03:18'),
+	('00508001', '20', '10', 'INT-H-1239', '4', '2021-05-17 19:03:18', '2021-05-17 19:03:18'),
+	('00303050', '10', '15', 'INT-H-1235', '4', '2021-05-17 19:03:18', '2021-05-17 19:03:18'),
+	('00303007', '10', '50', 'INT-H-1238', '4', '2021-05-17 19:03:18', '2021-05-17 19:03:18'),
+	('00303007', '10', '20', 'INT-H-1236', '4', '2021-05-17 19:03:18', '2021-05-17 19:03:18'),
+	('00303007', '10', '16', 'INT-H-1239', '4', '2021-05-17 19:03:18', '2021-05-17 19:03:18'),
+	('00407000', '50', '28', 'INT-H-1212', '4', '2021-05-17 19:03:18', '2021-05-17 19:03:18'),
+	('00408000', '20', '7', 'INT-H-1238', '4', '2021-05-17 19:03:18', '2021-05-17 19:03:18'),
+	('10104210', '20', '7', 'INT-H-1235', '4', '2021-05-17 19:03:18', '2021-05-17 19:03:18'),
+	('00303051', '10', '10', 'INT-H-1240', '4', '2021-05-17 19:03:18', '2021-05-17 19:03:18'),
+	('00303051', '10', '4', 'INT-H-1239', '4', '2021-05-17 19:03:18', '2021-05-17 19:03:18'),
+	('20005000', '20', '19', 'INT-H-1235', '4', '2021-05-17 19:03:18', '2021-05-17 19:03:18'),
+	('20005000', '20', '10', 'INT-H-1238', '4', '2021-05-17 19:03:18', '2021-05-17 19:03:18'),
+	('20005010', '10', '5', 'INT-H-1239', '4', '2021-05-17 19:03:18', '2021-05-17 19:03:18'),
+	('20005007', '20', '10', 'INT-H-1238', '4', '2021-05-17 19:03:18', '2021-05-17 19:03:18'),
+	('20005010', '10', '20', 'INT-H-1238', '4', '2021-05-17 19:03:18', '2021-05-17 19:03:18'),
+	('00504032', '20', '5', 'INT-H-1239', '4', '2021-05-17 19:03:18', '2021-05-17 19:03:18'),
+	('00703003', '20', '23', 'INT-H-1212', '4', '2021-05-17 19:03:18', '2021-05-17 19:03:18'),
+	('00704003', '20', '5', 'INT-H-1239', '4', '2021-05-17 19:03:18', '2021-05-17 19:03:18'),
+	('00302007', '20', '50', 'INT-H-1237', '4', '2021-05-17 19:03:18', '2021-05-17 19:03:18'),
+	('00302007', '20', '5', 'INT-H-1239', '4', '2021-05-17 19:03:18', '2021-05-17 19:03:18'),
+	('00302009', '20', '2', 'INT-H-1235', '4', '2021-05-17 19:03:18', '2021-05-17 19:03:18'),
+	('00302004', '20', '1', 'INT-H-1212', '4', '2021-05-17 19:03:18', '2021-05-17 19:03:18'),
+	('00303065', '20', '10', 'INT-H-1212', '4', '2021-05-17 19:03:18', '2021-05-17 19:03:18'),
+	('00507001', '50', '34', 'INT-H-1235', '4', '2021-05-17 19:03:18', '2021-05-17 19:03:18'),
+	('20018002', '20', '30', 'INT-H-1237', '4', '2021-05-17 19:03:18', '2021-05-17 19:03:18'),
+	('12506001', '100', '2', 'INT-H-1235', '4', '2021-05-17 19:03:18', '2021-05-17 19:03:18'),
+	('12506021', '20', '4', 'INT-H-1238', '4', '2021-05-17 19:03:18', '2021-05-17 19:03:18'),
+	('00107000', '50', '10', 'INT-H-1234', '4', '2021-05-17 19:03:18', '2021-05-17 19:03:18'),
+	('603004002', '20', '12', 'INT-H-1235', '4', '2021-05-17 19:03:18', '2021-05-17 19:03:18'),
+	('01607602', '20', '8', 'INT-H-1235', '4', '2021-05-17 19:03:18', '2021-05-17 19:03:18'),
+	('01607602', '20', '10', 'INT-H-1239', '4', '2021-05-17 19:03:18', '2021-05-17 19:03:18'),
+	('01607603', '20', '10', 'INT-H-1239', '4', '2021-05-17 19:03:18', '2021-05-17 19:03:18'),
+	('01606677', '20', '15', 'INT-H-1235', '4', '2021-05-17 19:03:18', '2021-05-17 19:03:18'),
+	('01606678', '20', '19', 'INT-H-1235', '4', '2021-05-17 19:03:18', '2021-05-17 19:03:18'),
+	('01606678', '20', '5', 'INT-H-1239', '4', '2021-05-17 19:03:18', '2021-05-17 19:03:18'),
+	('01606677', '20', '10', 'INT-H-1239', '4', '2021-05-17 19:03:18', '2021-05-17 19:03:18'),
+	('10104750', '20', '30', 'INT-H-1235', '4', '2021-05-17 19:03:18', '2021-05-17 19:03:18'),
+	('10104754', '20', '20', 'INT-H-1237', '4', '2021-05-17 19:03:18', '2021-05-17 19:03:18'),
+	('00504150', '20', '4', 'INT-H-1235', '4', '2021-05-17 19:03:18', '2021-05-17 19:03:18'),
+	('00504150', '20', '2', 'INT-H-1239', '4', '2021-05-17 19:03:18', '2021-05-17 19:03:18'),
+	('00110347', '20', '20', 'INT-H-1233', '4', '2021-05-17 19:03:18', '2021-05-17 19:03:18'),
+	('00110346', '20', '30', 'INT-H-1233', '4', '2021-05-17 19:03:18', '2021-05-17 19:03:18'),
+	('00504006', '100', '100', 'HON-3142', '1', '2021-05-17 22:10:17', '2021-05-17 22:10:17'),
+	('00505006', '100', '40', 'HON-3142', '1', '2021-05-17 22:10:17', '2021-05-17 22:10:17'),
+	('00504041', '5', '100', 'HON-3135', '1', '2021-05-17 22:10:17', '2021-05-17 22:10:17'),
+	('00508000', '20', '200', 'HON-3142', '1', '2021-05-17 22:10:17', '2021-05-17 22:10:17'),
+	('00508015', '10', '60', 'HON-3142', '1', '2021-05-17 22:10:17', '2021-05-17 22:10:17'),
+	('00605002', '25', '220', 'HON-3142', '1', '2021-05-17 22:10:17', '2021-05-17 22:10:17'),
+	('00508010', '30', '60', 'HON-3142', '1', '2021-05-17 22:10:17', '2021-05-17 22:10:17'),
+	('00504100', '20', '200', 'HON-3142', '1', '2021-05-17 22:10:17', '2021-05-17 22:10:17'),
+	('00504102', '20', '20', 'HON-3142', '1', '2021-05-17 22:10:17', '2021-05-17 22:10:17'),
+	('00504002', '20', '480', 'HON-3142', '1', '2021-05-17 22:10:17', '2021-05-17 22:10:17'),
+	('00505002', '20', '180', 'HON-3142', '1', '2021-05-17 22:10:17', '2021-05-17 22:10:17'),
+	('10104130', '20', '25', 'HON-3136', '1', '2021-05-17 22:10:17', '2021-05-17 22:10:17'),
+	('10104817', '5', '2000', 'HON-3138', '1', '2021-05-17 22:10:17', '2021-05-17 22:10:17'),
+	('10515002', '10', '20', 'HON-3142', '1', '2021-05-17 22:10:17', '2021-05-17 22:10:17'),
+	('10105565', '20', '100', 'FTT-1475', '1', '2021-05-17 22:10:17', '2021-05-17 22:10:17'),
+	('10105566', '20', '100', 'FTT-1475', '1', '2021-05-17 22:10:17', '2021-05-17 22:10:17'),
+	('00504007', '100', '120', 'HON-3142', '1', '2021-05-17 22:10:17', '2021-05-17 22:10:17'),
+	('00505007', '100', '20', 'HON-3142', '1', '2021-05-17 22:10:17', '2021-05-17 22:10:17'),
+	('00504042', '5', '100', 'HON-3135', '1', '2021-05-17 22:10:17', '2021-05-17 22:10:17'),
+	('00508016', '10', '100', 'HON-3142', '1', '2021-05-17 22:10:17', '2021-05-17 22:10:17'),
+	('00605003', '25', '60', 'HON-3142', '1', '2021-05-17 22:10:17', '2021-05-17 22:10:17'),
+	('00508011', '30', '40', 'HON-3142', '1', '2021-05-17 22:10:17', '2021-05-17 22:10:17'),
+	('00508001', '20', '360', 'HON-3142', '1', '2021-05-17 22:10:17', '2021-05-17 22:10:17'),
+	('00504003', '20', '580', 'HON-3142', '1', '2021-05-17 22:10:17', '2021-05-17 22:10:17'),
+	('00505003', '20', '160', 'HON-3142', '1', '2021-05-17 22:10:17', '2021-05-17 22:10:17'),
+	('00504101', '20', '180', 'HON-3142', '1', '2021-05-17 22:10:17', '2021-05-17 22:10:17'),
+	('00504103', '20', '40', 'HON-3142', '1', '2021-05-17 22:10:17', '2021-05-17 22:10:17'),
+	('10104816', '5', '2000', 'HON-3138', '1', '2021-05-17 22:10:17', '2021-05-17 22:10:17'),
+	('9900009110', '20', '100', 'HON-3124', '1', '2021-05-17 22:10:17', '2021-05-17 22:10:17'),
+	('9900009111', '20', '100', 'HON-3124', '1', '2021-05-17 22:10:17', '2021-05-17 22:10:17'),
+	('9900009117', '20', '50', 'HON-3146', '1', '2021-05-17 22:10:17', '2021-05-17 22:10:17'),
+	('9900009115', '25', '100', 'HON-3123', '1', '2021-05-17 22:10:17', '2021-05-17 22:10:17'),
+	('10105005', '20', '20', 'HON-3126', '1', '2021-05-17 22:10:17', '2021-05-17 22:10:17'),
+	('9900004000', '20', '100', 'HON-3124', '1', '2021-05-17 22:10:17', '2021-05-17 22:10:17'),
+	('9900004002', '20', '100', 'HON-3124', '1', '2021-05-17 22:10:17', '2021-05-17 22:10:17'),
+	('9900004003', '20', '100', 'HON-3124', '1', '2021-05-17 22:10:17', '2021-05-17 22:10:17'),
+	('9900004005', '20', '50', 'HON-3146', '1', '2021-05-17 22:10:17', '2021-05-17 22:10:17'),
+	('10105550', '20', '300', 'FTT-1475', '1', '2021-05-17 22:10:17', '2021-05-17 22:10:17'),
+	('10105551', '20', '300', 'FTT-1475', '1', '2021-05-17 22:10:17', '2021-05-17 22:10:17'),
+	('00508020', '20', '3140', 'HON-3142', '1', '2021-05-17 22:10:17', '2021-05-17 22:10:17'),
+	('00508022', '20', '60', 'HON-3142', '1', '2021-05-17 22:10:17', '2021-05-17 22:10:17'),
+	('00401000', '20', '60', 'HON-3142', '1', '2021-05-17 22:10:17', '2021-05-17 22:10:17'),
+	('00403000', '20', '140', 'HON-3142', '1', '2021-05-17 22:10:17', '2021-05-17 22:10:17'),
+	('00404000', '20', '220', 'HON-3142', '1', '2021-05-17 22:10:17', '2021-05-17 22:10:17'),
+	('00405000', '20', '20', 'HON-3142', '1', '2021-05-17 22:10:17', '2021-05-17 22:10:17'),
+	('00408000', '20', '20', 'HON-3142', '1', '2021-05-17 22:10:17', '2021-05-17 22:10:17'),
+	('00303007', '10', '100', 'HON-3142', '1', '2021-05-17 22:10:17', '2021-05-17 22:10:17'),
+	('00407000', '50', '60', 'FTT-1479', '1', '2021-05-17 22:10:17', '2021-05-17 22:10:17'),
+	('10104111', '20', '25', 'HON-3136', '1', '2021-05-17 22:10:17', '2021-05-17 22:10:17'),
+	('20005000', '20', '200', 'HON-3142', '1', '2021-05-17 22:10:17', '2021-05-17 22:10:17'),
+	('20005001', '20', '400', 'HON-3142', '1', '2021-05-17 22:10:17', '2021-05-17 22:10:17'),
+	('20005002', '20', '240', 'HON-3142', '1', '2021-05-17 22:10:17', '2021-05-17 22:10:17'),
+	('20005005', '20', '20', 'HON-3142', '1', '2021-05-17 22:10:17', '2021-05-17 22:10:17'),
+	('20005007', '20', '60', 'HON-3142', '1', '2021-05-17 22:10:17', '2021-05-17 22:10:17'),
+	('20005010', '10', '60', 'HON-3142', '1', '2021-05-17 22:10:17', '2021-05-17 22:10:17'),
+	('00505019', '100', '20', 'HON-3142', '1', '2021-05-17 22:10:17', '2021-05-17 22:10:17'),
+	('00504032', '20', '80', 'HON-3142', '1', '2021-05-17 22:10:17', '2021-05-17 22:10:17'),
+	('00504033', '20', '20', 'HON-3142', '1', '2021-05-17 22:10:17', '2021-05-17 22:10:17'),
+	('00231000', '50', '200', 'FTT-1479', '1', '2021-05-17 22:10:17', '2021-05-17 22:10:17'),
+	('9900004035', '20', '100', 'HON-3124', '1', '2021-05-17 22:10:17', '2021-05-17 22:10:17'),
+	('9900004037', '20', '150', 'HON-3124', '1', '2021-05-17 22:10:17', '2021-05-17 22:10:17'),
+	('9900004038', '20', '250', 'HON-3124', '1', '2021-05-17 22:10:17', '2021-05-17 22:10:17'),
+	('9900004039', '20', '200', 'HON-3143', '1', '2021-05-17 22:10:17', '2021-05-17 22:10:17'),
+	('9900004040', '20', '50', 'HON-3146', '1', '2021-05-17 22:10:17', '2021-05-17 22:10:17'),
+	('13105120', '10', '40', 'HON-3142', '1', '2021-05-17 22:10:17', '2021-05-17 22:10:17'),
+	('00703001', '50', '40', 'HON-3142', '1', '2021-05-17 22:10:17', '2021-05-17 22:10:17'),
+	('00704001', '50', '40', 'HON-3142', '1', '2021-05-17 22:10:17', '2021-05-17 22:10:17'),
+	('00705001', '50', '20', 'HON-3142', '1', '2021-05-17 22:10:17', '2021-05-17 22:10:17'),
+	('00712001', '50', '20', 'HON-3142', '1', '2021-05-17 22:10:17', '2021-05-17 22:10:17'),
+	('00508002', '20', '180', 'HON-3142', '1', '2021-05-17 22:10:17', '2021-05-17 22:10:17'),
+	('00508017', '10', '20', 'HON-3142', '1', '2021-05-17 22:10:17', '2021-05-17 22:10:17'),
+	('00703003', '20', '80', 'HON-3142', '1', '2021-05-17 22:10:17', '2021-05-17 22:10:17'),
+	('00712003', '20', '20', 'HON-3142', '1', '2021-05-17 22:10:17', '2021-05-17 22:10:17'),
+	('00704003', '20', '100', 'HON-3142', '1', '2021-05-17 22:10:17', '2021-05-17 22:10:17'),
+	('00705003', '20', '60', 'HON-3142', '1', '2021-05-17 22:10:17', '2021-05-17 22:10:17'),
+	('00504043', '5', '100', 'HON-3135', '1', '2021-05-17 22:10:17', '2021-05-17 22:10:17'),
+	('00712004', '25', '50', 'HON-3135', '1', '2021-05-17 22:10:17', '2021-05-17 22:10:17'),
+	('10515004', '10', '40', 'HON-3142', '1', '2021-05-17 22:10:17', '2021-05-17 22:10:17'),
+	('10603007', '20', '50', 'HON-3137', '1', '2021-05-17 22:10:17', '2021-05-17 22:10:17'),
+	('00110060', '20', '10', 'HON-3144', '1', '2021-05-17 22:10:17', '2021-05-17 22:10:17'),
+	('00110061', '20', '10', 'HON-3144', '1', '2021-05-17 22:10:17', '2021-05-17 22:10:17'),
+	('00110062', '20', '10', 'HON-3144', '1', '2021-05-17 22:10:17', '2021-05-17 22:10:17'),
+	('00110063', '20', '10', 'HON-3144', '1', '2021-05-17 22:10:17', '2021-05-17 22:10:17'),
+	('10105560', '20', '100', 'FTT-1475', '1', '2021-05-17 22:10:17', '2021-05-17 22:10:17'),
+	('10105561', '20', '100', 'FTT-1475', '1', '2021-05-17 22:10:17', '2021-05-17 22:10:17'),
+	('00504150', '20', '40', 'HON-3142', '1', '2021-05-17 22:10:17', '2021-05-17 22:10:17'),
+	('00508003', '20', '60', 'HON-3142', '1', '2021-05-17 22:10:17', '2021-05-17 22:10:17'),
+	('12506020', '20', '160', 'HON-3142', '1', '2021-05-17 22:10:17', '2021-05-17 22:10:17'),
+	('12506021', '20', '160', 'HON-3142', '1', '2021-05-17 22:10:18', '2021-05-17 22:10:18'),
+	('12506010', '25', '25', 'HON-3135', '1', '2021-05-17 22:10:18', '2021-05-17 22:10:18'),
+	('12506012', '5', '2000', 'HON-3138', '1', '2021-05-17 22:10:18', '2021-05-17 22:10:18'),
+	('00504252', '50', '40', 'HON-3133', '1', '2021-05-17 22:10:18', '2021-05-17 22:10:18'),
+	('01604010', '20', '20', 'HON-3142', '1', '2021-05-17 22:10:18', '2021-05-17 22:10:18'),
+	('01604011', '20', '20', 'HON-3142', '1', '2021-05-17 22:10:18', '2021-05-17 22:10:18'),
+	('01604012', '20', '20', 'HON-3142', '1', '2021-05-17 22:10:18', '2021-05-17 22:10:18'),
+	('01606675', '20', '320', 'HON-3142', '1', '2021-05-17 22:10:18', '2021-05-17 22:10:18'),
+	('01606678', '20', '260', 'HON-3142', '1', '2021-05-17 22:10:18', '2021-05-17 22:10:18'),
+	('603004002', '20', '60', 'HON-3142', '1', '2021-05-17 22:10:18', '2021-05-17 22:10:18'),
+	('603004004', '20', '20', 'HON-3142', '1', '2021-05-17 22:10:18', '2021-05-17 22:10:18'),
+	('603005750', '10', '60', 'HON-3142', '1', '2021-05-17 22:10:18', '2021-05-17 22:10:18'),
+	('603005751', '10', '120', 'HON-3142', '1', '2021-05-17 22:10:18', '2021-05-17 22:10:18'),
+	('603005752', '10', '40', 'HON-3142', '1', '2021-05-17 22:10:18', '2021-05-17 22:10:18'),
+	('9900004027', '20', '100', 'HON-3124', '1', '2021-05-17 22:10:18', '2021-05-17 22:10:18'),
+	('9900004028', '20', '200', 'HON-3124', '1', '2021-05-17 22:10:18', '2021-05-17 22:10:18'),
+	('9900004025', '20', '100', 'HON-3124', '1', '2021-05-17 22:10:18', '2021-05-17 22:10:18'),
+	('9900004030', '20', '100', 'HON-3123', '1', '2021-05-17 22:10:18', '2021-05-17 22:10:18'),
+	('9900004031', '20', '50', 'HON-3146', '1', '2021-05-17 22:10:18', '2021-05-17 22:10:18'),
+	('9900004019', '20', '150', 'HON-3124', '1', '2021-05-17 22:10:18', '2021-05-17 22:10:18'),
+	('9900004020', '20', '200', 'HON-3124', '1', '2021-05-17 22:10:18', '2021-05-17 22:10:18'),
+	('9900004023', '20', '50', 'HON-3146', '1', '2021-05-17 22:10:18', '2021-05-17 22:10:18'),
+	('00107000', '50', '180', 'FTT-1479', '1', '2021-05-17 22:10:18', '2021-05-17 22:10:18'),
+	('9900004011', '20', '100', 'HON-3124', '1', '2021-05-17 22:10:18', '2021-05-17 22:10:18'),
+	('9900004012', '20', '150', 'HON-3124', '1', '2021-05-17 22:10:18', '2021-05-17 22:10:18'),
+	('9900004015', '20', '100', 'HON-3123', '1', '2021-05-17 22:10:18', '2021-05-17 22:10:18'),
+	('9900004016', '20', '50', 'HON-3146', '1', '2021-05-17 22:10:18', '2021-05-17 22:10:18'),
+	('12503005', '20', '40', 'HON-3128', '1', '2021-05-17 22:10:18', '2021-05-17 22:10:18'),
+	('12503003', '20', '40', 'HON-3128', '1', '2021-05-17 22:10:18', '2021-05-17 22:10:18'),
+	('12503010', '20', '40', 'HON-3128', '1', '2021-05-17 22:10:18', '2021-05-17 22:10:18'),
+	('10105555', '20', '100', 'FTT-1475', '1', '2021-05-17 22:10:18', '2021-05-17 22:10:18'),
+	('10105556', '20', '100', 'FTT-1475', '1', '2021-05-17 22:10:18', '2021-05-17 22:10:18'),
+	('10104750', '20', '120', 'HON-3142', '1', '2021-05-17 22:10:18', '2021-05-17 22:10:18'),
+	('10104751', '20', '200', 'HON-3142', '1', '2021-05-17 22:10:18', '2021-05-17 22:10:18'),
+	('10104752', '20', '40', 'HON-3142', '1', '2021-05-17 22:10:18', '2021-05-17 22:10:18'),
+	('10104754', '20', '40', 'HON-3142', '1', '2021-05-17 22:10:18', '2021-05-17 22:10:18'),
+	('10104150', '20', '100', 'HON-3134. ', '1', '2021-05-17 22:10:18', '2021-05-17 22:10:18'),
+	('15003000', '20', '100', 'HON-3127', '1', '2021-05-17 22:10:18', '2021-05-17 22:10:18'),
+	('15004001', '20', '100', 'HON-3127', '1', '2021-05-17 22:10:18', '2021-05-17 22:10:18'),
+	('00110276', '5', '100', 'HON-3129', '1', '2021-05-17 22:10:18', '2021-05-17 22:10:18'),
+	('00110275', '5', '100', 'HON-3129', '1', '2021-05-17 22:10:18', '2021-05-17 22:10:18'),
+	('00110277', '5', '100', 'HON-3129', '1', '2021-05-17 22:10:18', '2021-05-17 22:10:18'),
+	('10104912', '5', '2860', 'HON-3142', '1', '2021-05-17 22:10:18', '2021-05-17 22:10:18'),
+	('00904038', NULL, '420', 'HON-3142', '1', '2021-05-17 22:10:18', '2021-05-17 22:10:18'),
+	('00504026', '5', '600', 'HON-3139', '2', '2021-05-17 22:10:18', '2021-05-17 22:10:18'),
+	('00504009', '25', '40', 'HON-3132', '2', '2021-05-17 22:10:18', '2021-05-17 22:10:18'),
+	('47801040', '20', '150', 'FTT-1473', '2', '2021-05-17 22:10:18', '2021-05-17 22:10:18'),
+	('00804065', '20', '20', 'HON-3139', '2', '2021-05-17 22:10:18', '2021-05-17 22:10:18'),
+	('603004050', '5', '600', 'HON-3139', '2', '2021-05-17 22:10:18', '2021-05-17 22:10:18'),
+	('00904111', '10', '50', 'HON-3135', '2', '2021-05-17 22:10:18', '2021-05-17 22:10:18'),
+	('01104000', '25', '70', 'HON-3141', '2', '2021-05-17 22:10:18', '2021-05-17 22:10:18'),
+	('01103006', '5', '500', 'HON-3141', '2', '2021-05-17 22:10:18', '2021-05-17 22:10:18'),
+	('01103010', '5', '200', 'HON-3141', '2', '2021-05-17 22:10:18', '2021-05-17 22:10:18'),
+	('47801563', '20', '3000', 'FTT-1472', '2', '2021-05-17 22:10:18', '2021-05-17 22:10:18'),
+	('00404005', '25', '200', 'HON-3138', '2', '2021-05-17 22:10:18', '2021-05-17 22:10:18'),
+	('00408003', '25', '300', 'HON-3138', '2', '2021-05-17 22:10:18', '2021-05-17 22:10:18'),
+	('20005006', '5', '5000', 'HON-3138', '2', '2021-05-17 22:10:18', '2021-05-17 22:10:18'),
+	('20005016', '5', '8000', 'HON-3141', '2', '2021-05-17 22:10:18', '2021-05-17 22:10:18'),
+	('00504048', '5', '1000', 'HON-3138', '2', '2021-05-17 22:10:18', '2021-05-17 22:10:18'),
+	('00504048', '5', '100', 'HON-3139', '2', '2021-05-17 22:10:18', '2021-05-17 22:10:18'),
+	('40503005', '20', '500', 'HON-3127', '2', '2021-05-17 22:10:18', '2021-05-17 22:10:18'),
+	('40503022', '10', '300', 'HON-3127', '2', '2021-05-17 22:10:18', '2021-05-17 22:10:18'),
+	('40503016', '5', '500', 'HON-3127', '2', '2021-05-17 22:10:18', '2021-05-17 22:10:18'),
+	('6030066060', '10', '500', 'FTT-1472', '2', '2021-05-17 22:10:18', '2021-05-17 22:10:18'),
+	('47801044', '20', '150', 'FTT-1473', '2', '2021-05-17 22:10:18', '2021-05-17 22:10:18'),
+	('14399005', '5', '80', 'HON-3141', '2', '2021-05-17 22:10:18', '2021-05-17 22:10:18'),
+	('14399006', '5', '800', 'HON-3141', '2', '2021-05-17 22:10:18', '2021-05-17 22:10:18'),
+	('14399010', '5', '300', 'HON-3141', '2', '2021-05-17 22:10:18', '2021-05-17 22:10:18'),
+	('47801501', '20', '30', 'FTT-1477', '2', '2021-05-17 22:10:18', '2021-05-17 22:10:18'),
+	('40503004', '20', '500', 'HON-3127', '2', '2021-05-17 22:10:18', '2021-05-17 22:10:18'),
+	('40503021', '10', '300', 'HON-3127', '2', '2021-05-17 22:10:18', '2021-05-17 22:10:18'),
+	('40503015', '5', '500', 'HON-3127', '2', '2021-05-17 22:10:18', '2021-05-17 22:10:18'),
+	('00704004', '25', '800', 'HON-3138', '2', '2021-05-17 22:10:18', '2021-05-17 22:10:18'),
+	('47801004', '20', '100', 'HON-3141', '2', '2021-05-17 22:10:18', '2021-05-17 22:10:18'),
+	('47801002', '20', '60', 'HON-3141', '2', '2021-05-17 22:10:18', '2021-05-17 22:10:18'),
+	('47705002', '5', '1500', 'HON-3141', '2', '2021-05-17 22:10:18', '2021-05-17 22:10:18'),
+	('01606872', '5', '500', 'FTT-1472', '2', '2021-05-17 22:10:18', '2021-05-17 22:10:18'),
+	('47801042', '20', '150', 'FTT-1473', '2', '2021-05-17 22:10:18', '2021-05-17 22:10:18'),
+	('40503003', '20', '500', 'HON-3127', '2', '2021-05-17 22:10:18', '2021-05-17 22:10:18'),
+	('40503020', '10', '300', 'HON-3127', '2', '2021-05-17 22:10:18', '2021-05-17 22:10:18'),
+	('40503014', '5', '500', 'HON-3127', '2', '2021-05-17 22:10:18', '2021-05-17 22:10:18'),
+	('12506011', '25', '40', 'HON-3132', '2', '2021-05-17 22:10:18', '2021-05-17 22:10:18'),
+	('603004023', '25', '50', 'HON-3135', '2', '2021-05-17 22:10:18', '2021-05-17 22:10:18'),
+	('603004023', '25', '200', 'HON-3138', '2', '2021-05-17 22:10:18', '2021-05-17 22:10:18'),
+	('603004031', '5', '150', 'HON-3139', '2', '2021-05-17 22:10:18', '2021-05-17 22:10:18'),
+	('20018021', '25', '50', 'HON-3135', '2', '2021-05-17 22:10:18', '2021-05-17 22:10:18'),
+	('20018022', '25', '50', 'HON-3135', '2', '2021-05-17 22:10:18', '2021-05-17 22:10:18'),
+	('01103004', '5', '65', 'HON-3141', '2', '2021-05-17 22:10:18', '2021-05-17 22:10:18'),
+	('41112001', '5', '40', 'HON-3141', '2', '2021-05-17 22:10:18', '2021-05-17 22:10:18'),
+	('47801420', '20', '3000', 'FTT-1472', '2', '2021-05-17 22:10:18', '2021-05-17 22:10:18'),
+	('47801421', '20', '3000', 'FTT-1472', '2', '2021-05-17 22:10:18', '2021-05-17 22:10:18'),
+	('47801561', '20', '3000', 'FTT-1472', '2', '2021-05-17 22:10:18', '2021-05-17 22:10:18'),
+	('47801043', '20', '150', 'FTT-1473', '2', '2021-05-17 22:10:18', '2021-05-17 22:10:18'),
+	('47801890', '10', '140', 'HON-3141', '2', '2021-05-17 22:10:18', '2021-05-17 22:10:18'),
+	('47801892', '10', '160', 'HON-3141', '2', '2021-05-17 22:10:18', '2021-05-17 22:10:18'),
+	('10104775', '25', '80', 'HON-3138', '2', '2021-05-17 22:10:18', '2021-05-17 22:10:18'),
+	('10104772', '25', '50', 'HON-3135', '2', '2021-05-17 22:10:18', '2021-05-17 22:10:18'),
+	('10104778', '5', '140', 'HON-3139', '2', '2021-05-17 22:10:18', '2021-05-17 22:10:18'),
+	('10499060', NULL, '1000', 'HON-3141', '2', '2021-05-17 22:10:18', '2021-05-17 22:10:18'),
+	('10499015', NULL, '500', 'HON-3141', '2', '2021-05-17 22:10:18', '2021-05-17 22:10:18'),
+	('10499010', NULL, '2000', NULL, '2', '2021-05-17 22:10:18', '2021-05-17 22:10:18'),
+	('12104000', '20', '120', 'HON-3130', '3', '2021-05-17 22:10:18', '2021-05-17 22:10:18'),
+	('11803000', '20', '200', 'HON-3130', '3', '2021-05-17 22:10:18', '2021-05-17 22:10:18'),
+	('11812002', '20', '100', 'HON-3130', '3', '2021-05-17 22:10:18', '2021-05-17 22:10:18'),
+	('11812010', '25', '200', 'HON-3131', '3', '2021-05-17 22:10:18', '2021-05-17 22:10:18'),
+	('11803002', '25', '120', 'HON-3131', '3', '2021-05-17 22:10:18', '2021-05-17 22:10:18'),
+	('11812008', '25', '80', 'HON-3131', '3', '2021-05-17 22:10:18', '2021-05-17 22:10:18'),
+	('11710050', '20', '50', 'HON-3130', '3', '2021-05-17 22:10:18', '2021-05-17 22:10:18'),
+	('11710052', '20', '100', 'HON-3130', '3', '2021-05-17 22:10:18', '2021-05-17 22:10:18'),
+	('11710055', '25', '80', 'HON-3131', '3', '2021-05-17 22:10:18', '2021-05-17 22:10:18'),
+	('12301000', '20', '100', 'HON-3130', '3', '2021-05-17 22:10:18', '2021-05-17 22:10:18'),
+	('12303000', '20', '100', 'HON-3130', '3', '2021-05-17 22:10:18', '2021-05-17 22:10:18'),
+	('13403010', '25', '240', 'HON-3131', '3', '2021-05-17 22:10:18', '2021-05-17 22:10:18'),
+	('12003050', '20', '200', 'HON-3130', '3', '2021-05-17 22:10:19', '2021-05-17 22:10:19'),
+	('12003051', '20', '100', 'HON-3130', '3', '2021-05-17 22:10:19', '2021-05-17 22:10:19'),
+	('12003061', '25', '80', 'HON-3131', '3', '2021-05-17 22:10:19', '2021-05-17 22:10:19'),
+	('12003062', '25', '40', 'HON-3131', '3', '2021-05-17 22:10:19', '2021-05-17 22:10:19'),
+	('12003060', '25', '240', 'HON-3131', '3', '2021-05-17 22:10:19', '2021-05-17 22:10:19'),
+	('12003001', '25', '80', 'HON-3131', '3', '2021-05-17 22:10:19', '2021-05-17 22:10:19'),
+	('12002998', '25', '160', 'HON-3131', '3', '2021-05-17 22:10:19', '2021-05-17 22:10:19'),
+	('12002999', '25', '240', 'HON-3131', '3', '2021-05-17 22:10:19', '2021-05-17 22:10:19'),
+	('12004001', '20', '100', 'HON-3130', '3', '2021-05-17 22:10:19', '2021-05-17 22:10:19'),
+	('12004000', '20', '100', 'HON-3130', '3', '2021-05-17 22:10:19', '2021-05-17 22:10:19'),
+	('12003003', '20', '50', 'HON-3130', '3', '2021-05-17 22:10:19', '2021-05-17 22:10:19'),
+	('12003002', '20', '50', 'HON-3130', '3', '2021-05-17 22:10:19', '2021-05-17 22:10:19'),
+	('12003005', '20', '50', 'HON-3130', '3', '2021-05-17 22:10:19', '2021-05-17 22:10:19'),
+	('12003007', '20', '50', 'HON-3130', '3', '2021-05-17 22:10:19', '2021-05-17 22:10:19'),
+	('12005003', '20', '100', 'HON-3130', '3', '2021-05-17 22:10:19', '2021-05-17 22:10:19'),
+	('11707003', '40', '800', 'FTT-1474', '3', '2021-05-17 22:10:19', '2021-05-17 22:10:19'),
+	('09906000', '12', '30', 'HON-3140', '3', '2021-05-17 22:10:19', '2021-05-17 22:10:19'),
+	('09906012', '16', '120', 'HON-3140', '3', '2021-05-17 22:10:19', '2021-05-17 22:10:19'),
+	('09906018', '16', '30', 'HON-3140', '3', '2021-05-17 22:10:19', '2021-05-17 22:10:19'),
+	('09906035', '16', '20', 'HON-3140', '3', '2021-05-17 22:10:19', '2021-05-17 22:10:19'),
+	('09906037', '15', '50', 'HON-3140', '3', '2021-05-17 22:10:19', '2021-05-17 22:10:19'),
+	('09906039', '15', '80', 'HON-3140', '3', '2021-05-17 22:10:19', '2021-05-17 22:10:19'),
+	('10610017', '15', '50', 'HON-3136', '3', '2021-05-17 22:10:19', '2021-05-17 22:10:19'),
+	('10610018', '15', '50', 'HON-3136', '3', '2021-05-17 22:10:19', '2021-05-17 22:10:19'),
+	('10610019', '15', '50', 'HON-3136', '3', '2021-05-17 22:10:19', '2021-05-17 22:10:19'),
+	('10610020', '15', '100', 'HON-3136', '3', '2021-05-17 22:10:19', '2021-05-17 22:10:19'),
+	('00503009', '20', '50', 'INT-H-1238', '4', '2021-05-17 22:10:19', '2021-05-17 22:10:19'),
+	('00504100', '20', '5', 'INT-H-1235', '4', '2021-05-17 22:10:19', '2021-05-17 22:10:19'),
+	('00504007', '100', '4', 'INT-H-1235', '4', '2021-05-17 22:10:19', '2021-05-17 22:10:19'),
+	('00508011', '30', '10', 'INT-H-1237', '4', '2021-05-17 22:10:19', '2021-05-17 22:10:19'),
+	('00503008', '20', '20', 'INT-H-1238', '4', '2021-05-17 22:10:19', '2021-05-17 22:10:19'),
+	('00504101', '20', '20', 'INT-H-1235', '4', '2021-05-17 22:10:19', '2021-05-17 22:10:19'),
+	('00504101', '20', '10', 'INT-H-1239', '4', '2021-05-17 22:10:19', '2021-05-17 22:10:19'),
+	('00504003', '20', '20', 'INT-H-1235', '4', '2021-05-17 22:10:19', '2021-05-17 22:10:19'),
+	('00508001', '20', '10', 'INT-H-1239', '4', '2021-05-17 22:10:19', '2021-05-17 22:10:19'),
+	('00303050', '10', '15', 'INT-H-1235', '4', '2021-05-17 22:10:19', '2021-05-17 22:10:19'),
+	('00303007', '10', '50', 'INT-H-1238', '4', '2021-05-17 22:10:19', '2021-05-17 22:10:19'),
+	('00303007', '10', '20', 'INT-H-1236', '4', '2021-05-17 22:10:19', '2021-05-17 22:10:19'),
+	('00303007', '10', '16', 'INT-H-1239', '4', '2021-05-17 22:10:19', '2021-05-17 22:10:19'),
+	('00407000', '50', '28', 'INT-H-1212', '4', '2021-05-17 22:10:19', '2021-05-17 22:10:19'),
+	('00408000', '20', '7', 'INT-H-1238', '4', '2021-05-17 22:10:19', '2021-05-17 22:10:19'),
+	('10104210', '20', '7', 'INT-H-1235', '4', '2021-05-17 22:10:19', '2021-05-17 22:10:19'),
+	('00303051', '10', '10', 'INT-H-1240', '4', '2021-05-17 22:10:19', '2021-05-17 22:10:19'),
+	('00303051', '10', '4', 'INT-H-1239', '4', '2021-05-17 22:10:19', '2021-05-17 22:10:19'),
+	('20005000', '20', '19', 'INT-H-1235', '4', '2021-05-17 22:10:19', '2021-05-17 22:10:19'),
+	('20005000', '20', '10', 'INT-H-1238', '4', '2021-05-17 22:10:19', '2021-05-17 22:10:19'),
+	('20005010', '10', '5', 'INT-H-1239', '4', '2021-05-17 22:10:19', '2021-05-17 22:10:19'),
+	('20005007', '20', '10', 'INT-H-1238', '4', '2021-05-17 22:10:19', '2021-05-17 22:10:19'),
+	('20005010', '10', '20', 'INT-H-1238', '4', '2021-05-17 22:10:19', '2021-05-17 22:10:19'),
+	('00504032', '20', '5', 'INT-H-1239', '4', '2021-05-17 22:10:19', '2021-05-17 22:10:19'),
+	('00703003', '20', '23', 'INT-H-1212', '4', '2021-05-17 22:10:19', '2021-05-17 22:10:19'),
+	('00704003', '20', '5', 'INT-H-1239', '4', '2021-05-17 22:10:19', '2021-05-17 22:10:19'),
+	('00302007', '20', '50', 'INT-H-1237', '4', '2021-05-17 22:10:19', '2021-05-17 22:10:19'),
+	('00302007', '20', '5', 'INT-H-1239', '4', '2021-05-17 22:10:19', '2021-05-17 22:10:19'),
+	('00302009', '20', '2', 'INT-H-1235', '4', '2021-05-17 22:10:19', '2021-05-17 22:10:19'),
+	('00302004', '20', '1', 'INT-H-1212', '4', '2021-05-17 22:10:19', '2021-05-17 22:10:19'),
+	('00303065', '20', '10', 'INT-H-1212', '4', '2021-05-17 22:10:19', '2021-05-17 22:10:19'),
+	('00507001', '50', '34', 'INT-H-1235', '4', '2021-05-17 22:10:19', '2021-05-17 22:10:19'),
+	('20018002', '20', '30', 'INT-H-1237', '4', '2021-05-17 22:10:19', '2021-05-17 22:10:19'),
+	('12506001', '100', '2', 'INT-H-1235', '4', '2021-05-17 22:10:19', '2021-05-17 22:10:19'),
+	('12506021', '20', '4', 'INT-H-1238', '4', '2021-05-17 22:10:19', '2021-05-17 22:10:19'),
+	('00107000', '50', '10', 'INT-H-1234', '4', '2021-05-17 22:10:19', '2021-05-17 22:10:19'),
+	('603004002', '20', '12', 'INT-H-1235', '4', '2021-05-17 22:10:19', '2021-05-17 22:10:19'),
+	('01607602', '20', '8', 'INT-H-1235', '4', '2021-05-17 22:10:19', '2021-05-17 22:10:19'),
+	('01607602', '20', '10', 'INT-H-1239', '4', '2021-05-17 22:10:19', '2021-05-17 22:10:19'),
+	('01607603', '20', '10', 'INT-H-1239', '4', '2021-05-17 22:10:19', '2021-05-17 22:10:19'),
+	('01606677', '20', '15', 'INT-H-1235', '4', '2021-05-17 22:10:19', '2021-05-17 22:10:19'),
+	('01606678', '20', '19', 'INT-H-1235', '4', '2021-05-17 22:10:19', '2021-05-17 22:10:19'),
+	('01606678', '20', '5', 'INT-H-1239', '4', '2021-05-17 22:10:19', '2021-05-17 22:10:19'),
+	('01606677', '20', '10', 'INT-H-1239', '4', '2021-05-17 22:10:19', '2021-05-17 22:10:19'),
+	('10104750', '20', '30', 'INT-H-1235', '4', '2021-05-17 22:10:19', '2021-05-17 22:10:19'),
+	('10104754', '20', '20', 'INT-H-1237', '4', '2021-05-17 22:10:19', '2021-05-17 22:10:19'),
+	('00504150', '20', '4', 'INT-H-1235', '4', '2021-05-17 22:10:19', '2021-05-17 22:10:19'),
+	('00504150', '20', '2', 'INT-H-1239', '4', '2021-05-17 22:10:19', '2021-05-17 22:10:19'),
+	('00110347', '20', '20', 'INT-H-1233', '4', '2021-05-17 22:10:19', '2021-05-17 22:10:19'),
+	('00110346', '20', '30', 'INT-H-1233', '4', '2021-05-17 22:10:19', '2021-05-17 22:10:19');
 /*!40000 ALTER TABLE `pedidos` ENABLE KEYS */;
 
--- Volcando estructura para tabla facturacion_plasencia.pendiente
+-- Dumping structure for table facturacion_plasencia.pendiente
 CREATE TABLE IF NOT EXISTS `pendiente` (
   `id_pendiente` int(11) NOT NULL AUTO_INCREMENT,
   `categoria` int(11) DEFAULT NULL,
@@ -5106,296 +6089,283 @@ CREATE TABLE IF NOT EXISTS `pendiente` (
   `tipo_empaque` int(11) DEFAULT NULL,
   `cello` int(11) DEFAULT NULL,
   `pendiente` int(11) DEFAULT NULL,
+  `factura_del_mes` int(11) DEFAULT NULL,
+  `cantidad_enviada_mes` int(11) DEFAULT NULL,
   `saldo` int(11) DEFAULT NULL,
-  `paquetes` varchar(50) DEFAULT NULL,
-  `unidades` varchar(50) DEFAULT NULL,
   PRIMARY KEY (`id_pendiente`)
-) ENGINE=InnoDB AUTO_INCREMENT=512 DEFAULT CHARSET=latin1 COMMENT='CATEGORIA	ITEM	ORDEN DEL SISTEMA	OBSERVACÓN	PRESENTACIÓN	MES	ORDEN	MARCA	VITOLA	NOMBRE	CAPA	TIPO DE EMPAQUE	ANILLO	CELLO	UPC	PENDIENTE	MARZO 2021 FACTURA #17976(Warehouse)	ENVIADO MES	SALDO';
+) ENGINE=MyISAM AUTO_INCREMENT=265 DEFAULT CHARSET=latin1 COMMENT='CATEGORIA	ITEM	ORDEN DEL SISTEMA	OBSERVACÓN	PRESENTACIÓN	MES	ORDEN	MARCA	VITOLA	NOMBRE	CAPA	TIPO DE EMPAQUE	ANILLO	CELLO	UPC	PENDIENTE	MARZO 2021 FACTURA #17976(Warehouse)	ENVIADO MES	SALDO';
 
--- Volcando datos para la tabla facturacion_plasencia.pendiente: ~0 rows (aproximadamente)
+-- Dumping data for table facturacion_plasencia.pendiente: 264 rows
 DELETE FROM `pendiente`;
 /*!40000 ALTER TABLE `pendiente` DISABLE KEYS */;
-INSERT INTO `pendiente` (`id_pendiente`, `categoria`, `item`, `orden_del_sitema`, `observacion`, `presentacion`, `mes`, `orden`, `marca`, `vitola`, `nombre`, `capa`, `tipo_empaque`, `cello`, `pendiente`, `saldo`, `paquetes`, `unidades`) VALUES
-	(1, 1, '00504006', '', '', 'Puros Tripa Larga', '2021-05-18', 95, 51, 4, 2, 5, 18, 3, 10000, 10000, '100', '100'),
-	(2, 1, '00505006', '', '', 'Puros Tripa Larga', '2021-05-18', 53, 51, 4, 14, 5, 18, 3, 4000, 4000, '100', '40'),
-	(3, 1, '00504041', '', '', 'Puros Tripa Larga', '2021-05-18', 116, 51, 9, 32, 5, 11, 1, 500, 500, '5', '100'),
-	(4, 1, '00508000', '', '', 'Puros Tripa Larga', '2021-05-18', 95, 51, 9, 32, 5, 7, 3, 4000, 4000, '20', '200'),
-	(5, 1, '00508015', '', '', 'Puros Tripa Larga', '2021-05-18', 28, 51, 11, 12, 5, 4, 1, 600, 600, '10', '60'),
-	(6, 1, '00605002', '', '', 'Puros Tripa Larga', '2021-05-18', 95, 51, 14, 17, 5, 13, 3, 5500, 5500, '25', '220'),
-	(7, 1, '00508010', '', '', 'Puros Tripa Larga', '2021-05-18', 53, 51, 21, 33, 5, 19, 1, 1800, 1800, '30', '60'),
-	(8, 1, '00504100', '', '', 'Puros Tripa Larga', '2021-05-18', 123, 51, 2, 1, 5, 7, 1, 4000, 4000, '20', '200'),
-	(9, 1, '00504102', '', '', 'Puros Tripa Larga', '2021-05-18', 66, 51, 22, 34, 5, 7, 1, 400, 400, '20', '20'),
-	(10, 1, '00504002', '', '', 'Puros Tripa Larga', '2021-05-18', 95, 51, 4, 2, 5, 7, 3, 9600, 9600, '20', '480'),
-	(11, 1, '00505002', '', '', 'Puros Tripa Larga', '2021-05-18', 66, 51, 4, 14, 5, 7, 3, 3600, 3600, '20', '180'),
-	(12, 1, '10104130', '', '', NULL, '2021-05-18', 223, 51, 6, 67, 5, 7, 1, 500, 500, '20', '25'),
-	(13, 1, '10104817', '', '', NULL, '2021-05-18', 215, 234, 4, 2, 5, 11, 1, 10000, 10000, '5', '2000'),
-	(14, 1, '10515002', '', '', 'Puros Tripa Larga', '2021-05-18', 173, 51, 2, 1, 5, 4, NULL, 200, 200, '10', '20'),
-	(15, 1, '10105565', '', '', 'Puros Tripa Corta', '2021-05-18', 225, 227, 1, 1, 5, 10, 1, 2000, 2000, '20', '100'),
-	(16, 1, '10105566', '', '', 'Puros Tripa Corta', '2021-05-18', 225, 227, 4, 2, 5, 10, 1, 2000, 2000, '20', '100'),
-	(17, 1, '00504007', '', '', 'Puros Tripa Larga', '2021-05-18', 66, 51, 4, 2, 2, 18, 3, 12000, 12000, '100', '120'),
-	(18, 1, '00505007', '', '', 'Puros Tripa Larga', '2021-05-18', 53, 51, 4, 14, 2, 18, 3, 2000, 2000, '100', '20'),
-	(19, 1, '00504042', '', '', 'Puros Tripa Larga', '2021-05-18', 63, 51, 9, 32, 2, 11, 1, 500, 500, '5', '100'),
-	(20, 1, '00508016', '', '', 'Puros Tripa Larga', '2021-05-18', 28, 51, 11, 12, 2, 4, 1, 1000, 1000, '10', '100'),
-	(21, 1, '00605003', '', '', 'Puros Tripa Larga', '2021-05-18', 38, 51, 14, 17, 2, 13, 3, 1500, 1500, '25', '60'),
-	(22, 1, '00508011', '', '', 'Puros Tripa Larga', '2021-05-18', 53, 51, 21, 33, 2, 19, 1, 1200, 1200, '30', '40'),
-	(23, 1, '00508001', '', '', 'Puros Tripa Larga', '2021-05-18', 53, 51, 9, 32, 2, 7, 3, 7200, 7200, '20', '360'),
-	(24, 1, '00504003', '', '', 'Puros Tripa Larga', '2021-05-18', 95, 51, 4, 2, 2, 7, 3, 11600, 11600, '20', '580'),
-	(25, 1, '00505003', '', '', 'Puros Tripa Larga', '2021-05-18', 37, 51, 4, 14, 2, 7, 3, 3200, 3200, '20', '160'),
-	(26, 1, '00504101', '', '', 'Puros Tripa Larga', '2021-05-18', 95, 51, 2, 1, 2, 7, 3, 3600, 3600, '20', '180'),
-	(27, 1, '00504103', '', '', 'Puros Tripa Larga', '2021-05-18', 173, 51, 22, 34, 2, 7, 1, 800, 800, '20', '40'),
-	(28, 1, '10104816', '', '', 'Puros Tripa Larga', '2021-05-18', 188, 51, 4, 2, 2, 11, 1, 10000, 10000, '5', '2000'),
-	(29, 1, '9900009110', '', '', 'Puros Tripa Larga', '2021-05-18', 230, 93, 2, 79, 2, 7, 1, 2000, 2000, '20', '100'),
-	(30, 1, '9900009111', '', '', 'Puros Tripa Larga', '2021-05-18', 56, 93, 3, 27, 2, 7, 1, 2000, 2000, '20', '100'),
-	(31, 1, '9900009117', '', '', 'Puros Tripa Larga', '2021-05-18', 232, 93, 3, 27, 2, 10, 1, 1000, 1000, '20', '50'),
-	(32, 1, '9900009115', '', '', 'Puros Tripa Larga', '2021-05-18', 231, 93, 2, 79, 2, 12, 1, 2500, 2500, '25', '100'),
-	(33, 1, '10105005', '', '', 'Puros Tripa Larga', '2021-05-18', 235, 232, 5, 4, 2, 7, 1, 400, 400, '20', '20'),
-	(34, 1, '9900004000', '', '', 'Puros Tripa Larga', '2021-05-18', 230, 94, 9, 16, 2, 7, 1, 2000, 2000, '20', '100'),
-	(35, 1, '9900004002', '', '', 'Puros Tripa Larga', '2021-05-18', 230, 94, 2, 1, 2, 7, 1, 2000, 2000, '20', '100'),
-	(36, 1, '9900004003', '', '', 'Puros Tripa Larga', '2021-05-18', 230, 94, 25, 2, 2, 7, 1, 2000, 2000, '20', '100'),
-	(37, 1, '9900004005', '', '', 'Puros Tripa Larga', '2021-05-18', 232, 94, 25, 2, 2, 10, 1, 1000, 1000, '20', '50'),
-	(38, 1, '10105550', '', '', 'Puros Tripa Corta', '2021-05-18', 225, 227, 1, 1, 2, 10, 1, 6000, 6000, '20', '300'),
-	(39, 1, '10105551', '', '', 'Puros Tripa Corta', '2021-05-18', 225, 227, 4, 2, 2, 10, 1, 6000, 6000, '20', '300'),
-	(40, 1, '00508020', '', '', 'Puros Tripa Larga', '2021-05-18', 95, 91, 4, 2, 10, 7, 1, 62800, 62800, '20', '3140'),
-	(41, 1, '00508022', '', '', 'Puros Tripa Larga', '2021-05-18', 53, 91, 9, 11, 10, 7, 1, 1200, 1200, '20', '60'),
-	(42, 1, '00401000', '', '', 'Puros Tripa Larga', '2021-05-18', 95, 67, 19, 25, 3, 7, 3, 1200, 1200, '20', '60'),
-	(43, 1, '00403000', '', '', 'Puros Tripa Larga', '2021-05-18', 95, 67, 2, 1, 3, 7, 3, 2800, 2800, '20', '140'),
-	(44, 1, '00404000', '', '', 'Puros Tripa Larga', '2021-05-18', 66, 67, 3, 2, 3, 7, 3, 4400, 4400, '20', '220'),
-	(45, 1, '00405000', '', '', 'Puros Tripa Larga', '2021-05-18', 66, 67, 16, 14, 3, 7, 3, 400, 400, '20', '20'),
-	(46, 1, '00408000', '', '', 'Puros Tripa Larga', '2021-05-18', 66, 67, 9, 40, 3, 7, 3, 400, 400, '20', '20'),
-	(47, 1, '00303007', '', '', 'Puros Tripa Larga', '2021-05-18', 67, 67, 25, 2, 3, 4, 1, 1000, 1000, '10', '100'),
-	(48, 1, '00407000', '', '', 'Puros Tripa Larga', '2021-05-18', 123, 158, 15, 46, 9, 15, 1, 3000, 3000, '50', '60'),
-	(49, 1, '10104111', '', '', 'Puros Tripa Larga', '2021-05-18', 86, 90, 6, 44, 3, 7, 1, 500, 500, '20', '25'),
-	(50, 1, '20005000', '', '', 'Puros Tripa Larga', '2021-05-18', 95, 90, 1, 6, 3, 7, 1, 4000, 4000, '20', '200'),
-	(51, 1, '20005001', '', '', 'Puros Tripa Larga', '2021-05-18', 53, 90, 3, 3, 3, 7, 3, 8000, 8000, '20', '400'),
-	(52, 1, '20005002', '', '', 'Puros Tripa Larga', '2021-05-18', 53, 90, 3, 21, 3, 7, 3, 4800, 4800, '20', '240'),
-	(53, 1, '20005005', '', '', 'Puros Tripa Larga', '2021-05-18', 95, 90, 34, 52, 3, 7, 1, 400, 400, '20', '20'),
-	(54, 1, '20005007', '', '', 'Puros Tripa Larga', '2021-05-18', 53, 90, 9, 26, 3, 7, 1, 1200, 1200, '20', '60'),
-	(55, 1, '20005010', '', '', 'Puros Tripa Larga', '2021-05-18', 95, 90, 3, 35, 3, 4, NULL, 600, 600, '10', '60'),
-	(56, 1, '00505019', '', '', 'Puros Tripa Larga', '2021-05-18', 53, 51, 4, 14, 3, 18, 1, 2000, 2000, '100', '20'),
-	(57, 1, '00504032', '', '', 'Puros Tripa Larga', '2021-05-18', 95, 51, 4, 2, 3, 7, 1, 1600, 1600, '20', '80'),
-	(58, 1, '00504033', '', '', 'Puros Tripa Larga', '2021-05-18', 66, 51, 4, 14, 3, 7, 1, 400, 400, '20', '20'),
-	(59, 1, '00231000', '', '', 'Puros Tripa Larga', '2021-05-18', 39, 62, 15, 18, 3, 15, 1, 10000, 10000, '50', '200'),
-	(60, 1, '9900004035', '', '', 'Puros Tripa Larga', '2021-05-18', 230, 229, 9, 16, 3, 7, 1, 2000, 2000, '20', '100'),
-	(61, 1, '9900004037', '', '', 'Puros Tripa Larga', '2021-05-18', 230, 229, 2, 1, 3, 7, 1, 3000, 3000, '20', '150'),
-	(62, 1, '9900004038', '', '', 'Puros Tripa Larga', '2021-05-18', 230, 229, 3, 2, 3, 7, 1, 5000, 5000, '20', '250'),
-	(63, 1, '9900004039', '', '', 'Puros Tripa Larga', '2021-05-18', 233, 229, 2, 1, 3, 10, 1, 4000, 4000, '20', '200'),
-	(64, 1, '9900004040', '', '', 'Puros Tripa Larga', '2021-05-18', 232, 229, 3, 2, 3, 10, 1, 1000, 1000, '20', '50'),
-	(65, 1, '13105120', '', '', 'Puros Tripa Larga', '2021-05-18', 173, 210, 2, 1, 3, 4, NULL, 400, 400, '10', '40'),
-	(66, 1, '00703001', '', '', 'Puros Tripa Larga', '2021-05-18', 95, 99, 2, 1, 6, 21, 3, 2000, 2000, '50', '40'),
-	(67, 1, '00704001', '', '', 'Puros Tripa Larga', '2021-05-18', 173, 99, 4, 2, 6, 21, 3, 2000, 2000, '50', '40'),
-	(68, 1, '00705001', '', '', 'Puros Tripa Larga', '2021-05-18', 95, 99, 4, 14, 6, 21, 3, 1000, 1000, '50', '20'),
-	(69, 1, '00712001', '', '', 'Puros Tripa Larga', '2021-05-18', 79, 99, 22, 34, 6, 21, 3, 1000, 1000, '50', '20'),
-	(70, 1, '00508002', '', '', 'Puros Tripa Larga', '2021-05-18', 95, 99, 9, 11, 6, 7, 1, 3600, 3600, '20', '180'),
-	(71, 1, '00508017', '', '', NULL, '2021-05-18', 37, 73, 11, 12, 6, 4, 1, 200, 200, '10', '20'),
-	(72, 1, '00703003', '', '', 'Puros Tripa Larga', '2021-05-18', 95, 99, 2, 1, 6, 7, 1, 1600, 1600, '20', '80'),
-	(73, 1, '00712003', '', '', 'Puros Tripa Larga', '2021-05-18', 95, 99, 22, 34, 6, 7, 1, 400, 400, '20', '20'),
-	(74, 1, '00704003', '', '', 'Puros Tripa Larga', '2021-05-18', 122, 99, 4, 2, 6, 7, 1, 2000, 2000, '20', '100'),
-	(75, 1, '00705003', '', '', 'Puros Tripa Larga', '2021-05-18', 95, 99, 4, 14, 6, 7, 1, 1200, 1200, '20', '60'),
-	(76, 1, '00504043', '', '', 'Puros Tripa Larga', '2021-05-18', 201, 99, 9, 11, 6, 11, 1, 500, 500, '5', '100'),
-	(77, 1, '00712004', '', '', 'Puros Tripa Larga', '2021-05-18', 175, 99, 22, 34, 6, 12, 1, 1250, 1250, '25', '50'),
-	(78, 1, '10515004', '', '', NULL, '2021-05-18', 173, 99, 2, 76, 6, 4, NULL, 400, 400, '10', '40'),
-	(79, 1, '10603007', '', '', NULL, '2021-05-18', 115, 145, 36, 57, 6, 10, 1, 1000, 1000, '20', '50'),
-	(80, 1, '00110060', '', '', 'Puros Tripa Larga', '2021-05-18', 234, 231, 2, 1, 6, 7, 1, 200, 200, '20', '10'),
-	(81, 1, '00110061', '', '', NULL, '2021-05-18', 234, 231, 4, 2, 6, 7, 1, 200, 200, '20', '10'),
-	(82, 1, '00110062', '', '', 'Puros Tripa Larga', '2021-05-18', 234, 231, 9, 11, 6, 7, 1, 200, 200, '20', '10'),
-	(83, 1, '00110063', '', '', NULL, '2021-05-18', 234, 231, 22, 34, 6, 7, 1, 200, 200, '20', '10'),
-	(84, 1, '10105560', '', '', 'Puros Tripa Corta', '2021-05-18', 225, 227, 1, 1, 6, 10, 1, 2000, 2000, '20', '100'),
-	(85, 1, '10105561', '', '', 'Puros Tripa Corta', '2021-05-18', 225, 227, 4, 2, 6, 10, 1, 2000, 2000, '20', '100'),
-	(86, 1, '00504150', '', '', 'Puros Tripa Larga', '2021-05-18', 95, 51, 4, 2, 15, 7, 1, 800, 800, '20', '40'),
-	(87, 1, '00508003', '', '', 'Puros Tripa Larga', '2021-05-18', 66, 61, 9, 11, 1, 7, 1, 1200, 1200, '20', '60'),
-	(88, 1, '12506020', '', '', 'Puros Tripa Larga', '2021-05-18', 36, 61, 4, 2, 1, 7, 1, 3200, 3200, '20', '160'),
-	(89, 1, '12506021', '', '', 'Puros Tripa Larga', '2021-05-18', 53, 61, 4, 14, 1, 7, 1, 3200, 3200, '20', '160'),
-	(90, 1, '12506010', '', '', 'Puros Tripa Larga', '2021-05-18', 63, 61, 4, 2, 1, 12, 1, 625, 625, '25', '25'),
-	(91, 1, '12506012', '', '', 'Puros Tripa Larga', '2021-05-18', 50, 61, 4, 2, 1, 11, 1, 10000, 10000, '5', '2000'),
-	(92, 1, '00504252', '', '', 'Puros Tripa Larga', '2021-05-18', 113, 144, 4, 54, 1, 21, 1, 2000, 2000, '50', '40'),
-	(93, 1, '01604010', '', '', 'Puros Tripa Larga', '2021-05-18', 66, 109, 24, 41, 1, 7, 1, 400, 400, '20', '20'),
-	(94, 1, '01604011', '', '', NULL, '2021-05-18', 66, 109, 3, 2, 1, 7, 1, 400, 400, '20', '20'),
-	(95, 1, '01604012', '', '', 'Puros Tripa Larga', '2021-05-18', 173, 109, 28, 14, 1, 7, 1, 400, 400, '20', '20'),
-	(96, 1, '01606675', '', '', 'Puros Tripa Larga', '2021-05-18', 95, 40, 20, 30, 5, 7, 1, 6400, 6400, '20', '320'),
-	(97, 1, '01606678', '', '', 'Puros Tripa Larga', '2021-05-18', 95, 40, 3, 2, 5, 7, 1, 5200, 5200, '20', '260'),
-	(98, 1, '603004002', '', '', 'Puros Tripa Larga', '2021-05-18', 53, 88, 4, 3, 1, 7, 1, 1200, 1200, '20', '60'),
-	(99, 1, '603004004', '', '', 'Puros Tripa Larga', '2021-05-18', 173, 88, 17, 23, 1, 7, 1, 400, 400, '20', '20'),
-	(100, 1, '603005750', '', '', 'Puros Tripa Larga', '2021-05-18', 55, 92, 2, 1, 1, 4, 1, 600, 600, '10', '60'),
-	(101, 1, '603005751', '', '', 'Puros Tripa Larga', '2021-05-18', 55, 92, 4, 2, 1, 4, 1, 1200, 1200, '10', '120'),
-	(102, 1, '603005752', '', '', 'Puros Tripa Larga', '2021-05-18', 53, 92, 9, 11, 1, 4, 1, 400, 400, '10', '40'),
-	(103, 1, '9900004027', '', '', 'Puros Tripa Larga', '2021-05-18', 230, 230, 2, 1, 1, 7, 1, 2000, 2000, '20', '100'),
-	(104, 1, '9900004028', '', '', 'Puros Tripa Larga', '2021-05-18', 230, 230, 3, 2, 1, 7, 1, 4000, 4000, '20', '200'),
-	(105, 1, '9900004025', '', '', NULL, '2021-05-18', 230, 230, 9, 16, 1, 7, 1, 2000, 2000, '20', '100'),
-	(106, 1, '9900004030', '', '', 'Puros Tripa Larga', '2021-05-18', 231, 230, 2, 1, 1, 10, 1, 2000, 2000, '20', '100'),
-	(107, 1, '9900004031', '', '', 'Puros Tripa Larga', '2021-05-18', 232, 230, 3, 2, 1, 10, 1, 1000, 1000, '20', '50'),
-	(108, 1, '9900004019', '', '', 'Puros Tripa Larga', '2021-05-18', 230, 53, 2, 1, 1, 7, 1, 3000, 3000, '20', '150'),
-	(109, 1, '9900004020', '', '', 'Puros Tripa Larga', '2021-05-18', 56, 53, 3, 2, 1, 7, 1, 4000, 4000, '20', '200'),
-	(110, 1, '9900004023', '', '', 'Puros Tripa Larga', '2021-05-18', 232, 53, 3, 2, 1, 10, 1, 1000, 1000, '20', '50'),
-	(111, 1, '00107000', '', '', 'Puros Tripa Larga', '2021-05-18', 105, 141, 15, 53, 9, 15, 1, 9000, 9000, '50', '180'),
-	(112, 1, '9900004011', '', '', 'Puros Tripa Larga', '2021-05-18', 230, 228, 2, 1, 1, 7, 1, 2000, 2000, '20', '100'),
-	(113, 1, '9900004012', '', '', 'Puros Tripa Larga', '2021-05-18', 230, 228, 3, 2, 1, 7, 1, 3000, 3000, '20', '150'),
-	(114, 1, NULL, '', '', NULL, '2021-05-18', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 2000, 2000, '20', '100'),
-	(115, 1, '9900004016', '', '', 'Puros Tripa Larga', '2021-05-18', 231, 228, 2, 1, 1, 10, 1, 1000, 1000, '20', '50'),
-	(116, 1, '12503005', '', '', NULL, '2021-05-18', 240, 63, 19, 30, 2, 7, 1, 800, 800, '20', '40'),
-	(117, 1, '12503003', '', '', NULL, '2021-05-18', 240, 63, 4, 2, 1, 7, 1, 800, 800, '20', '40'),
-	(118, 1, '12503010', '', '', 'Puros Tripa Larga', '2021-05-18', 240, 63, 1, 1, 1, 7, 1, 800, 800, '20', '40'),
-	(119, 1, '10105555', '', '', 'Puros Tripa Corta', '2021-05-18', 225, 227, 1, 1, 1, 10, 1, 2000, 2000, '20', '100'),
-	(120, 1, '10105556', '', '', 'Puros Tripa Corta', '2021-05-18', 225, 227, 4, 2, 1, 10, 1, 2000, 2000, '20', '100'),
-	(121, 1, '10104750', '', '', 'Puros Tripa Larga', '2021-05-18', 124, 101, 2, 5, 4, 7, 1, 2400, 2400, '20', '120'),
-	(122, 1, '10104751', '', '', 'Puros Tripa Larga', '2021-05-18', 53, 101, 3, 35, 4, 7, 1, 4000, 4000, '20', '200'),
-	(123, 1, '10104752', '', '', 'Puros Tripa Larga', '2021-05-18', 53, 101, 16, 36, 4, 7, 1, 800, 800, '20', '40'),
-	(124, 1, '10104754', '', '', 'Puros Tripa Larga', '2021-05-18', 53, 101, 9, 37, 4, 7, 1, 800, 800, '20', '40'),
-	(125, 1, '10104150', '', '', NULL, '2021-05-18', 249, 101, 44, 61, 4, 7, 1, 2000, 2000, '20', '100'),
-	(126, 1, '15003000', '', '', 'Puros Tripa Larga', '2021-05-18', 161, 184, 24, 6, 2, 7, 1, 2000, 2000, '20', '100'),
-	(127, 1, '15004001', '', '', 'Puros Tripa Larga', '2021-05-18', 229, 184, 5, 51, 2, 7, 1, 2000, 2000, '20', '100'),
-	(128, 1, '00110276', '', '', NULL, '2021-05-18', 241, 72, 2, 1, 6, 23, NULL, 500, 500, '5', '100'),
-	(129, 1, '00110275', '', '', 'Puros Tripa Larga', '2021-05-18', 241, 72, 2, 1, 5, 23, NULL, 500, 500, '5', '100'),
-	(130, 1, '00110277', '', '', 'Puros Tripa Larga', '2021-05-18', 241, 72, 2, 1, 2, 23, NULL, 500, 500, '5', '100'),
-	(131, 1, '10104912', '', '', 'Puros Tripa Larga', '2021-05-18', 157, 51, 2, 1, 5, 23, 1, 14300, 14300, '5', '2860'),
-	(132, 1, '00904038', '', '', 'Puros Tripa Larga', '2021-05-18', 36, 51, 4, 2, 2, 14, 1, NULL, NULL, NULL, '420'),
-	(133, 2, '00504026', '', '', 'Puros Tripa Larga', '2021-05-18', 145, 51, 4, 2, 5, 11, 3, 3000, 3000, '5', '600'),
-	(134, 2, '00504009', '', '', 'Puros Tripa Larga', '2021-05-18', 209, 51, 4, 2, 5, 12, 1, 1000, 1000, '25', '40'),
-	(135, 2, '47801040', '', '', NULL, '2021-05-18', 146, 148, 4, 2, 5, 10, 1, 3000, 3000, '20', '150'),
-	(136, 2, '00804065', '', '', NULL, '2021-05-18', 216, 209, 18, 6, 2, 7, 1, 400, 400, '20', '20'),
-	(137, 2, '603004050', '', '', 'Puros Tripa Larga', '2021-05-18', 130, 88, 4, 3, 13, 11, 1, 3000, 3000, '5', '600'),
-	(138, 2, '00904111', '', '', 'Puros Tripa Larga', '2021-05-18', 168, 186, 3, 3, 2, 9, 1, 500, 500, '10', '50'),
-	(139, 2, '01104000', '', '', 'Puros Tripa Larga', '2021-05-18', 34, 59, 4, 3, 2, 13, 3, 1750, 1750, '25', '70'),
-	(140, 2, '01103006', '', '', 'Puros Tripa Larga', '2021-05-18', 181, 59, 4, 3, 2, 11, 1, 2500, 2500, '5', '500'),
-	(141, 2, '01103010', '', '', 'Puros Tripa Larga', '2021-05-18', 184, 59, 38, 68, 2, 11, 1, 1000, 1000, '5', '200'),
-	(142, 2, '47801563', '', '', 'Puros Tripa Corta', '2021-05-18', 217, 166, 4, 2, 2, 10, 1, 60000, 60000, '20', '3000'),
-	(143, 2, '00404005', '', '', 'Puros Tripa Larga', '2021-05-18', 102, 67, 3, 2, 3, 12, 1, 5000, 5000, '25', '200'),
-	(144, 2, '00408003', '', '', 'Puros Tripa Larga', '2021-05-18', 215, 67, 9, 40, 3, 12, 1, 7500, 7500, '25', '300'),
-	(145, 2, '20005006', '', '', 'Puros Tripa Larga', '2021-05-18', 188, 90, 3, 3, 3, 11, 1, 25000, 25000, '5', '5000'),
-	(146, 2, '20005016', '', '', 'Puros Tripa Larga', '2021-05-18', 130, 90, 1, 6, 3, 11, 1, 40000, 40000, '5', '8000'),
-	(147, 2, '00504048', '', '', 'Puros Tripa Larga', '2021-05-18', 108, 51, 4, 2, 3, 11, 1, 5000, 5000, '5', '1000'),
-	(148, 2, '00504048', '', '', 'Puros Tripa Larga', '2021-05-18', 108, 51, 4, 2, 3, 11, 1, 500, 500, '5', '100'),
-	(149, 2, '40503005', '', '', 'Puros Tripa Larga', '2021-05-18', 229, 51, 18, 80, 3, 7, 1, 10000, 10000, '20', '500'),
-	(150, 2, '40503022', '', '', 'Puros Tripa Larga', '2021-05-18', 229, 51, 18, 80, 3, 9, 1, 3000, 3000, '10', '300'),
-	(151, 2, '40503016', '', '', 'Puros Tripa Larga', '2021-05-18', 229, 51, 18, 80, 3, 11, 1, 2500, 2500, '5', '500'),
-	(152, 2, '6030066060', '', '', 'Puros Tripa Larga', '2021-05-18', 217, 56, 4, 2, 3, 9, 1, 5000, 5000, '10', '500'),
-	(153, 2, '47801044', '', '', NULL, '2021-05-18', 146, 148, 4, 2, 3, 10, 1, 3000, 3000, '20', '150'),
-	(154, 2, '14399005', '', '', NULL, '2021-05-18', 184, 147, 2, 6, 3, 11, 1, 400, 400, '5', '80'),
-	(155, 2, '14399006', '', '', 'Puros Tripa Larga', '2021-05-18', 181, 147, 3, 3, 3, 11, 1, 4000, 4000, '5', '800'),
-	(156, 2, '14399010', '', '', 'Puros Tripa Larga', '2021-05-18', 184, 147, 9, 11, 3, 11, 1, 1500, 1500, '5', '300'),
-	(157, 2, '47801501', '', '', 'Puros Tripa Larga', '2021-05-18', 171, 220, 8, 1, 13, 10, 4, 600, 600, '20', '30'),
-	(158, 2, '40503004', '', '', 'Puros Tripa Larga', '2021-05-18', 229, 99, 18, 80, 6, 7, 1, 10000, 10000, '20', '500'),
-	(159, 2, '40503021', '', '', NULL, '2021-05-18', 229, 99, 18, 80, 6, 9, 1, 3000, 3000, '10', '300'),
-	(160, 2, '40503015', '', '', NULL, '2021-05-18', 229, 99, 18, 80, 6, 11, 1, 2500, 2500, '5', '500'),
-	(161, 2, '00704004', '', '', 'Puros Tripa Larga', '2021-05-18', 87, 99, 4, 2, 6, 12, 1, 20000, 20000, '25', '800'),
-	(162, 2, '47801004', '', '', 'Puros Tripa Larga', '2021-05-18', 181, 168, 5, 4, 6, 7, 1, 2000, 2000, '20', '100'),
-	(163, 2, '47801002', '', '', 'Puros Tripa Larga', '2021-05-18', 181, 168, 3, 14, 6, 7, 1, 1200, 1200, '20', '60'),
-	(164, 2, '47705002', '', '', 'Puros Tripa Larga', '2021-05-18', 220, 168, 3, 14, 6, 11, 1, 7500, 7500, '5', '1500'),
-	(165, 2, '01606872', '', '', 'Puros Tripa Larga', '2021-05-18', 31, 56, 4, 2, 6, 11, 1, 2500, 2500, '5', '500'),
-	(166, 2, '47801042', '', '', NULL, '2021-05-18', 119, 148, 4, 2, 6, 10, 1, 3000, 3000, '20', '150'),
-	(167, 2, '40503003', '', '', 'Puros Tripa Larga', '2021-05-18', 229, 61, 18, 24, 1, 7, 1, 10000, 10000, '20', '500'),
-	(168, 2, '40503020', '', '', 'Puros Tripa Larga', '2021-05-18', 229, 61, 18, 24, 1, 9, 1, 3000, 3000, '10', '300'),
-	(169, 2, '40503014', '', '', 'Puros Tripa Larga', '2021-05-18', 229, 61, 18, 24, 1, 11, 1, 2500, 2500, '5', '500'),
-	(170, 2, '12506011', '', '', 'Puros Tripa Larga', '2021-05-18', 63, 61, 4, 14, 1, 12, 1, 1000, 1000, '25', '40'),
-	(171, 2, '603004023', '', '', 'Puros Tripa Larga', '2021-05-18', 96, 88, 4, 3, 1, 12, 1, 1250, 1250, '25', '50'),
-	(172, 2, '603004023', '', '', 'Puros Tripa Larga', '2021-05-18', 96, 88, 4, 3, 1, 12, 1, 5000, 5000, '25', '200'),
-	(173, 2, '603004031', '', '', 'Puros Tripa Larga', '2021-05-18', 176, 88, 4, 3, 1, 11, 1, 750, 750, '5', '150'),
-	(174, 2, '20018021', '', '', 'Puros Tripa Larga', '2021-05-18', 214, 113, 3, 2, 1, 12, 1, 1250, 1250, '25', '50'),
-	(175, 2, '20018022', '', '', 'Puros Tripa Larga', '2021-05-18', 214, 113, 9, 11, 1, 12, 1, 1250, 1250, '25', '50'),
-	(176, 2, '01103004', '', '', 'Puros Tripa Larga', '2021-05-18', 181, 59, 1, 6, 18, 11, 1, 325, 325, '5', '65'),
-	(177, 2, '41112001', '', '', NULL, '2021-05-18', 184, 59, 22, 74, 1, 11, 1, 200, 200, '5', '40'),
-	(178, 2, '47801420', '', '', 'Puros Tripa Corta', '2021-05-18', 88, 60, 1, 1, 8, 10, 1, 60000, 60000, '20', '3000'),
-	(179, 2, '47801421', '', '', 'Puros Tripa Corta', '2021-05-18', 35, 60, 4, 2, 8, 10, 1, 60000, 60000, '20', '3000'),
-	(180, 2, '47801561', '', '', 'Puros Tripa Corta', '2021-05-18', 217, 166, 4, 2, 1, 10, 1, 60000, 60000, '20', '3000'),
-	(181, 2, '47801043', '', '', NULL, '2021-05-18', 146, 148, 4, 2, 1, 10, 1, 3000, 3000, '20', '150'),
-	(182, 2, '47801890', '', '', 'Puros Tripa Larga', '2021-05-18', 147, 57, 2, 1, 1, 9, 1, 1400, 1400, '10', '140'),
-	(183, 2, '47801892', '', '', 'Puros Tripa Larga', '2021-05-18', 32, 57, 9, 16, 1, 9, 1, 1600, 1600, '10', '160'),
-	(184, 2, '10104775', '', '', 'Puros Tripa Larga', '2021-05-18', 78, 101, 3, 35, 4, 12, 1, 2000, 2000, '25', '80'),
-	(185, 2, '10104772', '', '', 'Puros Tripa Larga', '2021-05-18', 214, 101, 5, 38, 4, 12, 1, 1250, 1250, '25', '50'),
-	(186, 2, '10104778', '', '', 'Puros Tripa Larga', '2021-05-18', 130, 101, 2, 5, 4, 11, 1, 700, 700, '5', '140'),
-	(187, 2, '10499060', '', '', NULL, '2021-05-18', 183, 197, 1, 6, 3, 11, 1, NULL, NULL, NULL, '1000'),
-	(188, 2, '10499015', '', '', NULL, '2021-05-18', 181, 204, 3, 3, 3, 11, 1, NULL, NULL, NULL, '500'),
-	(189, 2, '10499010', '', '', 'Puros Tripa Corta', '2021-05-18', 147, 176, 4, 2, 6, 25, 1, NULL, NULL, NULL, '2000'),
-	(190, 3, '12104000', '', '', NULL, '2021-05-18', 218, 134, 3, 3, 5, 7, 1, 2400, 2400, '20', '120'),
-	(191, 3, '11803000', '', '', 'Puros Tripa Larga', '2021-05-18', 218, 132, 2, 1, 6, 7, 1, 4000, 4000, '20', '200'),
-	(192, 3, '11812002', '', '', NULL, '2021-05-18', 90, 132, 9, 11, 6, 7, 1, 2000, 2000, '20', '100'),
-	(193, 3, '11812010', '', '', 'Puros Tripa Larga', '2021-05-18', 219, 132, 4, 2, 6, 12, 1, 5000, 5000, '25', '200'),
-	(194, 3, '11803002', '', '', 'Puros Tripa Larga', '2021-05-18', 219, 132, 2, 1, 6, 12, 1, 3000, 3000, '25', '120'),
-	(195, 3, '11812008', '', '', 'Puros Tripa Larga', '2021-05-18', 219, 132, 31, 4, 6, 12, 1, 2000, 2000, '25', '80'),
-	(196, 3, '11710050', '', '', NULL, '2021-05-18', 218, 183, 2, 1, 3, 7, 1, 1000, 1000, '20', '50'),
-	(197, 3, '11710052', '', '', 'Puros Tripa Larga', '2021-05-18', 156, 183, 16, 14, 3, 7, 1, 2000, 2000, '20', '100'),
-	(198, 3, '11710055', '', '', NULL, '2021-05-18', 219, 183, 2, 1, 3, 12, 1, 2000, 2000, '25', '80'),
-	(199, 3, '12301000', '', '', NULL, '2021-05-18', 218, 135, 19, 25, 3, 7, 1, 2000, 2000, '20', '100'),
-	(200, 3, '12303000', '', '', 'Puros Tripa Larga', '2021-05-18', 218, 135, 2, 1, 3, 7, 1, 2000, 2000, '20', '100'),
-	(201, 3, '13403010', '', '', 'Puros Tripa Larga', '2021-05-18', 219, 135, 3, 2, 3, 12, 1, 6000, 6000, '25', '240'),
-	(202, 3, '12003050', '', '', 'Puros Tripa Larga', '2021-05-18', 94, 105, 4, 2, 1, 7, 1, 4000, 4000, '20', '200'),
-	(203, 3, '12003051', '', '', 'Puros Tripa Larga', '2021-05-18', 94, 105, 4, 14, 1, 7, 1, 2000, 2000, '20', '100'),
-	(204, 3, '12003061', '', '', 'Puros Tripa Larga', '2021-05-18', 219, 105, 9, 11, 1, 12, 1, 2000, 2000, '25', '80'),
-	(205, 3, '12003062', '', '', 'Puros Tripa Larga', '2021-05-18', 219, 105, 4, 14, 1, 12, 1, 1000, 1000, '25', '40'),
-	(206, 3, '12003060', '', '', 'Puros Tripa Larga', '2021-05-18', 219, 105, 4, 2, 1, 12, 1, 6000, 6000, '25', '240'),
-	(207, 3, '12003001', '', '', 'Puros Tripa Larga', '2021-05-18', 219, 133, 2, 1, 5, 12, 1, 2000, 2000, '25', '80'),
-	(208, 3, '12002998', '', '', 'Puros Tripa Larga', '2021-05-18', 219, 133, 4, 2, 2, 12, 1, 4000, 4000, '25', '160'),
-	(209, 3, '12002999', '', '', NULL, '2021-05-18', 219, 133, 4, 2, 5, 12, 1, 6000, 6000, '25', '240'),
-	(210, 3, '12004001', '', '', NULL, '2021-05-18', 218, 133, 4, 2, 5, 7, 1, 2000, 2000, '20', '100'),
-	(211, 3, '12004000', '', '', 'Puros Tripa Larga', '2021-05-18', 218, 133, 4, 2, 2, 7, 1, 2000, 2000, '20', '100'),
-	(212, 3, '12003003', '', '', 'Puros Tripa Larga', '2021-05-18', 218, 133, 2, 1, 5, 7, 1, 1000, 1000, '20', '50'),
-	(213, 3, '12003002', '', '', 'Puros Tripa Larga', '2021-05-18', 218, 133, 2, 1, 2, 7, 1, 1000, 1000, '20', '50'),
-	(214, 3, '12003005', '', '', NULL, '2021-05-18', 91, 133, 22, 34, 5, 7, 1, 1000, 1000, '20', '50'),
-	(215, 3, '12003007', '', '', 'Puros Tripa Larga', '2021-05-18', 91, 133, 22, 34, 2, 7, 1, 1000, 1000, '20', '50'),
-	(216, 3, '12005003', '', '', 'Puros Tripa Larga', '2021-05-18', 91, 133, 9, 11, 2, 7, 1, 2000, 2000, '20', '100'),
-	(217, 3, '11707003', '', '', 'Puros Tripa Larga', '2021-05-18', 73, 138, 15, 48, 6, 17, 4, 32000, 32000, '40', '800'),
-	(218, 3, '09906000', '', '', 'Puros Tripa Larga', '2021-05-18', 183, 219, 3, 3, 3, 24, 4, 360, 360, '12', '30'),
-	(219, 3, '09906012', '', '', NULL, '2021-05-18', 206, 181, 4, 2, 6, 20, 4, 1920, 1920, '16', '120'),
-	(220, 3, '09906018', '', '', 'Puros Tripa Larga', '2021-05-18', 237, 181, 22, 34, 6, 20, 4, 480, 480, '16', '30'),
-	(221, 3, '09906035', '', '', 'Puros Tripa Larga', '2021-05-18', 111, 161, 4, 2, 2, 20, 4, 320, 320, '16', '20'),
-	(222, 3, '09906037', '', '', NULL, '2021-05-18', 183, 182, 3, 2, 3, 22, 4, 750, 750, '15', '50'),
-	(223, 3, '09906039', '', '', 'Puros Tripa Larga', '2021-05-18', 148, 182, 9, 40, 3, 22, 4, 1200, 1200, '15', '80'),
-	(224, 3, '10610017', '', '', 'Puros Tripa Larga', '2021-05-18', 223, 162, 9, 11, 5, 22, 4, 750, 750, '15', '50'),
-	(225, 3, '10610018', '', '', 'Puros Tripa Larga', '2021-05-18', 129, 162, 9, 11, 2, 22, 4, 750, 750, '15', '50'),
-	(226, 3, '10610019', '', '', NULL, '2021-05-18', 129, 162, 4, 2, 5, 22, 4, 750, 750, '15', '50'),
-	(227, 3, '10610020', '', '', NULL, '2021-05-18', 223, 162, 4, 2, 2, 22, 4, 1500, 1500, '15', '100'),
-	(228, 4, '00503009', '', '', 'Puros Tripa Larga', '2021-05-18', 222, 51, 6, 43, 5, 7, 1, 1000, 1000, '20', '50'),
-	(229, 4, '00504100', '', '', 'Puros Tripa Larga', '2021-05-18', 123, 51, 2, 1, 5, 7, 1, 100, 100, '20', '5'),
-	(230, 4, '00504007', '', '', 'Puros Tripa Larga', '2021-05-18', 66, 51, 4, 2, 2, 18, 3, 400, 400, '100', '4'),
-	(231, 4, '00508011', '', '', 'Puros Tripa Larga', '2021-05-18', 53, 51, 21, 33, 2, 19, 1, 300, 300, '30', '10'),
-	(232, 4, '00503008', '', '', 'Puros Tripa Larga', '2021-05-18', 80, 51, 6, 43, 2, 7, 1, 400, 400, '20', '20'),
-	(233, 4, '00504101', '', '', 'Puros Tripa Larga', '2021-05-18', 95, 51, 2, 1, 2, 7, 3, 400, 400, '20', '20'),
-	(234, 4, '00504101', '', '', 'Puros Tripa Larga', '2021-05-18', 95, 51, 2, 1, 2, 7, 3, 200, 200, '20', '10'),
-	(235, 4, '00504003', '', '', 'Puros Tripa Larga', '2021-05-18', 95, 51, 4, 2, 2, 7, 3, 400, 400, '20', '20'),
-	(236, 4, '00508001', '', '', 'Puros Tripa Larga', '2021-05-18', 53, 51, 9, 32, 2, 7, 3, 200, 200, '20', '10'),
-	(237, 4, '00303050', '', '', NULL, '2021-05-18', 211, 15, 25, 77, 2, 4, NULL, 150, 150, '10', '15'),
-	(238, 4, '00303007', '', '', 'Puros Tripa Larga', '2021-05-18', 67, 67, 25, 2, 3, 4, 1, 500, 500, '10', '50'),
-	(239, 4, '00303007', '', '', 'Puros Tripa Larga', '2021-05-18', 67, 67, 25, 2, 3, 4, 1, 200, 200, '10', '20'),
-	(240, 4, '00303007', '', '', 'Puros Tripa Larga', '2021-05-18', 67, 67, 25, 2, 3, 4, 1, 160, 160, '10', '16'),
-	(241, 4, '00407000', '', '', 'Puros Tripa Larga', '2021-05-18', 123, 158, 15, 46, 9, 15, 1, 1400, 1400, '50', '28'),
-	(242, 4, '00408000', '', '', 'Puros Tripa Larga', '2021-05-18', 66, 67, 9, 40, 3, 7, 3, 140, 140, '20', '7'),
-	(243, 4, '10104210', '', '', NULL, '2021-05-18', 213, 14, 2, 6, 3, 7, 1, 140, 140, '20', '7'),
-	(244, 4, '00303051', '', '', NULL, '2021-05-18', 248, 14, 25, 35, 3, 4, 1, 100, 100, '10', '10'),
-	(245, 4, '00303051', '', '', NULL, '2021-05-18', 248, 14, 25, 35, 3, 4, 1, 40, 40, '10', '4'),
-	(246, 4, '20005000', '', '', 'Puros Tripa Larga', '2021-05-18', 95, 90, 1, 6, 3, 7, 1, 380, 380, '20', '19'),
-	(247, 4, '20005000', '', '', 'Puros Tripa Larga', '2021-05-18', 95, 90, 1, 6, 3, 7, 1, 200, 200, '20', '10'),
-	(248, 4, '20005010', '', '', 'Puros Tripa Larga', '2021-05-18', 95, 90, 3, 35, 3, 4, NULL, 50, 50, '10', '5'),
-	(249, 4, '20005007', '', '', 'Puros Tripa Larga', '2021-05-18', 53, 90, 9, 26, 3, 7, 1, 200, 200, '20', '10'),
-	(250, 4, '20005010', '', '', 'Puros Tripa Larga', '2021-05-18', 95, 90, 3, 35, 3, 4, NULL, 200, 200, '10', '20'),
-	(251, 4, '00504032', '', '', 'Puros Tripa Larga', '2021-05-18', 95, 51, 4, 2, 3, 7, 1, 100, 100, '20', '5'),
-	(252, 4, '00703003', '', '', 'Puros Tripa Larga', '2021-05-18', 95, 99, 2, 1, 6, 7, 1, 460, 460, '20', '23'),
-	(253, 4, '00704003', '', '', 'Puros Tripa Larga', '2021-05-18', 122, 99, 4, 2, 6, 7, 1, 100, 100, '20', '5'),
-	(254, 4, '00302007', '', '', 'Puros Tripa Larga', '2021-05-18', 193, 86, 3, 2, 6, 7, 1, 1000, 1000, '20', '50'),
-	(255, 4, '00302007', '', '', 'Puros Tripa Larga', '2021-05-18', 193, 86, 3, 2, 6, 7, 1, 100, 100, '20', '5'),
-	(256, 4, '00302009', '', '', 'Puros Tripa Larga', '2021-05-18', 213, 86, 9, 11, 6, 7, 1, 40, 40, '20', '2'),
-	(257, 4, '00302004', '', '', NULL, '2021-05-18', 124, 86, 37, 61, 6, 3, 1, 20, 20, '20', '1'),
-	(258, 4, '00303065', '', '', 'Puros Tripa Larga', '2021-05-18', 123, 86, 2, 1, 6, 10, 1, 200, 200, '20', '10'),
-	(259, 4, '00507001', '', '', 'Puros Tripa Larga', '2021-05-18', 122, 159, 15, 62, 6, 15, 1, 1700, 1700, '50', '34'),
-	(260, 4, '20018002', '', '', 'Puros Tripa Larga', '2021-05-18', 244, 113, 9, 11, 1, 7, 1, 600, 600, '20', '30'),
-	(261, 4, '12506001', '', '', 'Puros Tripa Larga', '2021-05-18', 38, 61, 4, 2, 1, 16, 1, 200, 200, '100', '2'),
-	(262, 4, '12506021', '', '', 'Puros Tripa Larga', '2021-05-18', 53, 61, 4, 14, 1, 7, 1, 80, 80, '20', '4'),
-	(263, 4, '00107000', '', '', 'Puros Tripa Larga', '2021-05-18', 105, 141, 15, 53, 9, 15, 1, 500, 500, '50', '10'),
-	(264, 4, '603004002', '', '', 'Puros Tripa Larga', '2021-05-18', 53, 88, 4, 3, 1, 7, 1, 240, 240, '20', '12'),
-	(265, 4, '01607602', '', '', 'Puros Tripa Larga', '2021-05-18', 53, 95, 3, 2, 11, 7, 1, 160, 160, '20', '8'),
-	(266, 4, '01607602', '', '', 'Puros Tripa Larga', '2021-05-18', 53, 95, 3, 2, 11, 7, 1, 200, 200, '20', '10'),
-	(267, 4, '01607603', '', '', 'Puros Tripa Larga', '2021-05-18', 53, 95, 9, 11, 11, 7, 1, 200, 200, '20', '10'),
-	(268, 4, '01606677', '', '', 'Puros Tripa Larga', '2021-05-18', 53, 40, 9, 11, 5, 7, 1, 300, 300, '20', '15'),
-	(269, 4, '01606678', '', '', 'Puros Tripa Larga', '2021-05-18', 95, 40, 3, 2, 5, 7, 1, 380, 380, '20', '19'),
-	(270, 4, '01606678', '', '', 'Puros Tripa Larga', '2021-05-18', 95, 40, 3, 2, 5, 7, 1, 100, 100, '20', '5'),
-	(271, 4, '01606677', '', '', 'Puros Tripa Larga', '2021-05-18', 53, 40, 9, 11, 5, 7, 1, 200, 200, '20', '10'),
-	(272, 4, '10104750', '', '', 'Puros Tripa Larga', '2021-05-18', 124, 101, 2, 5, 4, 7, 1, 600, 600, '20', '30'),
-	(273, 4, '10104754', '', '', 'Puros Tripa Larga', '2021-05-18', 53, 101, 9, 37, 4, 7, 1, 400, 400, '20', '20'),
-	(274, 4, '00504150', '', '', 'Puros Tripa Larga', '2021-05-18', 95, 51, 4, 2, 15, 7, 1, 80, 80, '20', '4'),
-	(275, 4, '00504150', '', '', 'Puros Tripa Larga', '2021-05-18', 95, 51, 4, 2, 15, 7, 1, 40, 40, '20', '2'),
-	(276, 4, '00110347', '', '', NULL, '2021-05-18', 224, 226, 20, 30, 9, 7, 1, 400, 400, '20', '20'),
-	(277, 4, '00110346', '', '', NULL, '2021-05-18', 224, 226, 4, 2, 9, 7, 1, 600, 600, '20', '30');
+INSERT INTO `pendiente` (`id_pendiente`, `categoria`, `item`, `orden_del_sitema`, `observacion`, `presentacion`, `mes`, `orden`, `marca`, `vitola`, `nombre`, `capa`, `tipo_empaque`, `cello`, `pendiente`, `factura_del_mes`, `cantidad_enviada_mes`, `saldo`) VALUES
+	(1, 1, '00107000', '', '', 'Puros Tripa Larga', '2021-05-05', 226, 141, 15, 53, 9, 15, 1, 9000, 0, 0, 9000),
+	(2, 4, '00107000', '', '', 'Puros Tripa Larga', '2021-05-05', 227, 141, 15, 53, 9, 15, 1, 500, 0, 0, 500),
+	(3, 1, '00110060', '', '', 'Puros Tripa Larga', '2021-05-05', 234, 231, 2, 1, 6, 7, 1, 200, 0, 0, 200),
+	(4, 1, '00110061', '', '', NULL, '2021-05-05', 234, 231, 4, 2, 6, 7, 1, 200, 0, 0, 200),
+	(5, 1, '00110062', '', '', 'Puros Tripa Larga', '2021-05-05', 234, 231, 9, 11, 6, 7, 1, 200, 0, 0, 200),
+	(6, 1, '00110063', '', '', NULL, '2021-05-05', 234, 231, 22, 34, 6, 7, 1, 200, 0, 0, 200),
+	(7, 4, '00110346', '', '', NULL, '2021-05-05', 224, 226, 4, 2, 9, 7, 1, 600, 0, 0, 600),
+	(8, 4, '00110347', '', '', NULL, '2021-05-05', 224, 226, 20, 30, 9, 7, 1, 400, 0, 0, 400),
+	(9, 1, '00231000', '', '', 'Puros Tripa Larga', '2021-05-05', 226, 62, 15, 18, 3, 15, 1, 10000, 0, 0, 10000),
+	(10, 4, '00302004', '', '', NULL, '2021-05-05', 124, 86, 37, 61, 6, 3, 1, 20, 0, 0, 20),
+	(11, 4, '00302007', '', '', 'Puros Tripa Larga', '2021-05-05', 244, 86, 3, 2, 6, 7, 1, 1000, 0, 0, 1000),
+	(12, 4, '00302007', '', '', 'Puros Tripa Larga', '2021-05-05', 221, 86, 3, 2, 6, 7, 1, 100, 0, 0, 100),
+	(13, 4, '00302009', '', '', 'Puros Tripa Larga', '2021-05-05', 213, 86, 9, 11, 6, 7, 1, 40, 0, 0, 40),
+	(14, 1, '00303007', '', '', 'Puros Tripa Larga', '2021-05-05', 212, 67, 25, 2, 3, 4, 1, 1000, 0, 0, 1000),
+	(15, 4, '00303007', '', '', 'Puros Tripa Larga', '2021-05-05', 243, 67, 25, 2, 3, 4, 1, 200, 0, 0, 200),
+	(16, 4, '00303007', '', '', 'Puros Tripa Larga', '2021-05-05', 222, 67, 25, 2, 3, 4, 1, 500, 0, 0, 500),
+	(17, 4, '00303007', '', '', 'Puros Tripa Larga', '2021-05-05', 221, 67, 25, 2, 3, 4, 1, 160, 0, 0, 160),
+	(18, 4, '00303051', '', '', NULL, '2021-05-05', 221, 14, 25, 35, 3, 4, 1, 40, 0, 0, 40),
+	(19, 4, '00303051', '', '', NULL, '2021-05-05', 248, 14, 25, 35, 3, 4, 1, 100, 0, 0, 100),
+	(20, 4, '00303065', '', '', 'Puros Tripa Larga', '2021-05-05', 124, 86, 2, 1, 6, 10, 1, 200, 0, 0, 200),
+	(21, 1, '00401000', '', '', 'Puros Tripa Larga', '2021-05-05', 212, 67, 19, 25, 3, 7, 3, 1200, 0, 0, 1200),
+	(22, 1, '00403000', '', '', 'Puros Tripa Larga', '2021-05-05', 212, 67, 2, 1, 3, 7, 3, 2800, 0, 0, 2800),
+	(23, 1, '00404000', '', '', 'Puros Tripa Larga', '2021-05-05', 212, 67, 3, 2, 3, 7, 3, 4400, 0, 0, 4400),
+	(24, 2, '00404005', '', '', 'Puros Tripa Larga', '2021-05-05', 215, 67, 3, 2, 3, 12, 1, 5000, 0, 0, 5000),
+	(25, 1, '00405000', '', '', 'Puros Tripa Larga', '2021-05-05', 212, 67, 16, 14, 3, 7, 3, 400, 0, 0, 400),
+	(26, 1, '00407000', '', '', 'Puros Tripa Larga', '2021-05-05', 226, 158, 15, 46, 9, 15, 1, 3000, 0, 0, 3000),
+	(27, 4, '00407000', '', '', 'Puros Tripa Larga', '2021-05-05', 124, 158, 15, 46, 9, 15, 1, 1400, 0, 0, 1400),
+	(28, 1, '00408000', '', '', 'Puros Tripa Larga', '2021-05-05', 212, 67, 9, 40, 3, 7, 3, 400, 0, 0, 400),
+	(29, 4, '00408000', '', '', 'Puros Tripa Larga', '2021-05-05', 222, 67, 9, 40, 3, 7, 3, 140, 0, 0, 140),
+	(30, 2, '00408003', '', '', 'Puros Tripa Larga', '2021-05-05', 215, 67, 9, 40, 3, 12, 1, 7500, 0, 0, 7500),
+	(31, 4, '00503008', '', '', 'Puros Tripa Larga', '2021-05-05', 222, 51, 6, 43, 2, 7, 1, 400, 0, 0, 400),
+	(32, 4, '00503009', '', '', 'Puros Tripa Larga', '2021-05-05', 222, 51, 6, 43, 5, 7, 1, 1000, 0, 0, 1000),
+	(33, 1, '00504002', '', '', 'Puros Tripa Larga', '2021-05-05', 212, 51, 4, 2, 5, 7, 3, 9600, 0, 0, 9600),
+	(34, 1, '00504003', '', '', 'Puros Tripa Larga', '2021-05-05', 212, 51, 4, 2, 2, 7, 3, 11600, 0, 0, 11600),
+	(35, 4, '00504003', '', '', 'Puros Tripa Larga', '2021-05-05', 213, 51, 4, 2, 2, 7, 3, 400, 0, 0, 400),
+	(36, 1, '00504006', '', '', 'Puros Tripa Larga', '2021-05-05', 212, 51, 4, 2, 5, 18, 3, 10000, 0, 0, 10000),
+	(37, 1, '00504007', '', '', 'Puros Tripa Larga', '2021-05-05', 212, 51, 4, 2, 2, 18, 3, 12000, 0, 0, 12000),
+	(38, 4, '00504007', '', '', 'Puros Tripa Larga', '2021-05-05', 213, 51, 4, 2, 2, 18, 3, 400, 0, 0, 400),
+	(39, 2, '00504009', '', '', 'Puros Tripa Larga', '2021-05-05', 245, 51, 4, 2, 5, 12, 1, 1000, 0, 0, 1000),
+	(40, 2, '00504026', '', '', 'Puros Tripa Larga', '2021-05-05', 216, 51, 4, 2, 5, 11, 3, 3000, 0, 0, 3000),
+	(41, 1, '00504032', '', '', 'Puros Tripa Larga', '2021-05-05', 212, 51, 4, 2, 3, 7, 1, 1600, 0, 0, 1600),
+	(42, 4, '00504032', '', '', 'Puros Tripa Larga', '2021-05-05', 221, 51, 4, 2, 3, 7, 1, 100, 0, 0, 100),
+	(43, 1, '00504033', '', '', 'Puros Tripa Larga', '2021-05-05', 212, 51, 4, 14, 3, 7, 1, 400, 0, 0, 400),
+	(44, 1, '00504041', '', '', 'Puros Tripa Larga', '2021-05-05', 214, 51, 9, 32, 5, 11, 1, 500, 0, 0, 500),
+	(45, 1, '00504042', '', '', 'Puros Tripa Larga', '2021-05-05', 214, 51, 9, 32, 2, 11, 1, 500, 0, 0, 500),
+	(46, 1, '00504043', '', '', 'Puros Tripa Larga', '2021-05-05', 214, 99, 9, 11, 6, 11, 1, 500, 0, 0, 500),
+	(47, 2, '00504048', '', '', 'Puros Tripa Larga', '2021-05-05', 215, 51, 4, 2, 3, 11, 1, 5000, 0, 0, 5000),
+	(48, 2, '00504048', '', '', 'Puros Tripa Larga', '2021-05-05', 216, 51, 4, 2, 3, 11, 1, 500, 0, 0, 500),
+	(49, 1, '00504100', '', '', 'Puros Tripa Larga', '2021-05-05', 212, 51, 2, 1, 5, 7, 1, 4000, 0, 0, 4000),
+	(50, 4, '00504100', '', '', 'Puros Tripa Larga', '2021-05-05', 213, 51, 2, 1, 5, 7, 1, 100, 0, 0, 100),
+	(51, 1, '00504101', '', '', 'Puros Tripa Larga', '2021-05-05', 212, 51, 2, 1, 2, 7, 3, 3600, 0, 0, 3600),
+	(52, 4, '00504101', '', '', 'Puros Tripa Larga', '2021-05-05', 213, 51, 2, 1, 2, 7, 3, 400, 0, 0, 400),
+	(53, 4, '00504101', '', '', 'Puros Tripa Larga', '2021-05-05', 221, 51, 2, 1, 2, 7, 3, 200, 0, 0, 200),
+	(54, 1, '00504102', '', '', 'Puros Tripa Larga', '2021-05-05', 212, 51, 22, 34, 5, 7, 1, 400, 0, 0, 400),
+	(55, 1, '00504103', '', '', 'Puros Tripa Larga', '2021-05-05', 212, 51, 22, 34, 2, 7, 1, 800, 0, 0, 800),
+	(56, 1, '00504150', '', '', 'Puros Tripa Larga', '2021-05-05', 212, 51, 4, 2, 15, 7, 1, 800, 0, 0, 800),
+	(57, 4, '00504150', '', '', 'Puros Tripa Larga', '2021-05-05', 213, 51, 4, 2, 15, 7, 1, 80, 0, 0, 80),
+	(58, 4, '00504150', '', '', 'Puros Tripa Larga', '2021-05-05', 221, 51, 4, 2, 15, 7, 1, 40, 0, 0, 40),
+	(59, 1, '00504252', '', '', 'Puros Tripa Larga', '2021-05-05', 247, 144, 4, 54, 1, 21, 1, 2000, 0, 0, 2000),
+	(60, 1, '00505002', '', '', 'Puros Tripa Larga', '2021-05-05', 212, 51, 4, 14, 5, 7, 3, 3600, 0, 0, 3600),
+	(61, 1, '00505003', '', '', 'Puros Tripa Larga', '2021-05-05', 212, 51, 4, 14, 2, 7, 3, 3200, 0, 0, 3200),
+	(62, 1, '00505006', '', '', 'Puros Tripa Larga', '2021-05-05', 212, 51, 4, 14, 5, 18, 3, 4000, 0, 0, 4000),
+	(63, 1, '00505007', '', '', 'Puros Tripa Larga', '2021-05-05', 212, 51, 4, 14, 2, 18, 3, 2000, 0, 0, 2000),
+	(64, 1, '00505019', '', '', 'Puros Tripa Larga', '2021-05-05', 212, 51, 4, 14, 3, 18, 1, 2000, 0, 0, 2000),
+	(65, 4, '00507001', '', '', 'Puros Tripa Larga', '2021-05-05', 213, 159, 15, 62, 6, 15, 1, 1700, 0, 0, 1700),
+	(66, 1, '00508000', '', '', 'Puros Tripa Larga', '2021-05-05', 212, 51, 9, 32, 5, 7, 3, 4000, 0, 0, 4000),
+	(67, 1, '00508001', '', '', 'Puros Tripa Larga', '2021-05-05', 212, 51, 9, 32, 2, 7, 3, 7200, 0, 0, 7200),
+	(68, 4, '00508001', '', '', 'Puros Tripa Larga', '2021-05-05', 221, 51, 9, 32, 2, 7, 3, 200, 0, 0, 200),
+	(69, 1, '00508002', '', '', 'Puros Tripa Larga', '2021-05-05', 212, 99, 9, 11, 6, 7, 1, 3600, 0, 0, 3600),
+	(70, 1, '00508003', '', '', 'Puros Tripa Larga', '2021-05-05', 212, 61, 9, 11, 1, 7, 1, 1200, 0, 0, 1200),
+	(71, 1, '00508010', '', '', 'Puros Tripa Larga', '2021-05-05', 212, 51, 21, 33, 5, 19, 1, 1800, 0, 0, 1800),
+	(72, 1, '00508011', '', '', 'Puros Tripa Larga', '2021-05-05', 212, 51, 21, 33, 2, 19, 1, 1200, 0, 0, 1200),
+	(73, 4, '00508011', '', '', 'Puros Tripa Larga', '2021-05-05', 244, 51, 21, 33, 2, 19, 1, 300, 0, 0, 300),
+	(74, 1, '00508015', '', '', 'Puros Tripa Larga', '2021-05-05', 212, 51, 11, 12, 5, 4, 1, 600, 0, 0, 600),
+	(75, 1, '00508016', '', '', 'Puros Tripa Larga', '2021-05-05', 212, 51, 11, 12, 2, 4, 1, 1000, 0, 0, 1000),
+	(76, 1, '00508017', '', '', NULL, '2021-05-05', 212, 73, 11, 12, 6, 4, 1, 200, 0, 0, 200),
+	(77, 1, '00508020', '', '', 'Puros Tripa Larga', '2021-05-05', 212, 91, 4, 2, 10, 7, 1, 62800, 0, 0, 62800),
+	(78, 1, '00508022', '', '', 'Puros Tripa Larga', '2021-05-05', 212, 91, 9, 11, 10, 7, 1, 1200, 0, 0, 1200),
+	(79, 1, '00605002', '', '', 'Puros Tripa Larga', '2021-05-05', 212, 51, 14, 17, 5, 13, 3, 5500, 0, 0, 5500),
+	(80, 1, '00605003', '', '', 'Puros Tripa Larga', '2021-05-05', 212, 51, 14, 17, 2, 13, 3, 1500, 0, 0, 1500),
+	(81, 1, '00703001', '', '', 'Puros Tripa Larga', '2021-05-05', 212, 99, 2, 1, 6, 21, 3, 2000, 0, 0, 2000),
+	(82, 1, '00703003', '', '', 'Puros Tripa Larga', '2021-05-05', 212, 99, 2, 1, 6, 7, 1, 1600, 0, 0, 1600),
+	(83, 4, '00703003', '', '', 'Puros Tripa Larga', '2021-05-05', 124, 99, 2, 1, 6, 7, 1, 460, 0, 0, 460),
+	(84, 1, '00704001', '', '', 'Puros Tripa Larga', '2021-05-05', 212, 99, 4, 2, 6, 21, 3, 2000, 0, 0, 2000),
+	(85, 1, '00704003', '', '', 'Puros Tripa Larga', '2021-05-05', 212, 99, 4, 2, 6, 7, 1, 2000, 0, 0, 2000),
+	(86, 4, '00704003', '', '', 'Puros Tripa Larga', '2021-05-05', 221, 99, 4, 2, 6, 7, 1, 100, 0, 0, 100),
+	(87, 2, '00704004', '', '', 'Puros Tripa Larga', '2021-05-05', 215, 99, 4, 2, 6, 12, 1, 20000, 0, 0, 20000),
+	(88, 1, '00705001', '', '', 'Puros Tripa Larga', '2021-05-05', 212, 99, 4, 14, 6, 21, 3, 1000, 0, 0, 1000),
+	(89, 1, '00705003', '', '', 'Puros Tripa Larga', '2021-05-05', 212, 99, 4, 14, 6, 7, 1, 1200, 0, 0, 1200),
+	(90, 1, '00712001', '', '', 'Puros Tripa Larga', '2021-05-05', 212, 99, 22, 34, 6, 21, 3, 1000, 0, 0, 1000),
+	(91, 1, '00712003', '', '', 'Puros Tripa Larga', '2021-05-05', 212, 99, 22, 34, 6, 7, 1, 400, 0, 0, 400),
+	(92, 1, '00712004', '', '', 'Puros Tripa Larga', '2021-05-05', 214, 99, 22, 34, 6, 12, 1, 1250, 0, 0, 1250),
+	(93, 2, '00804065', '', '', NULL, '2021-05-05', 216, 209, 18, 6, 2, 7, 1, 400, 0, 0, 400),
+	(94, 1, '00904038', '', '', 'Puros Tripa Larga', '2021-05-05', 212, 51, 4, 2, 2, 14, 1, NULL, 0, 0, NULL),
+	(95, 2, '00904111', '', '', 'Puros Tripa Larga', '2021-05-05', 214, 186, 3, 3, 2, 9, 1, 500, 0, 0, 500),
+	(96, 2, '01103004', '', '', 'Puros Tripa Larga', '2021-05-05', 220, 59, 1, 6, 18, 11, 1, 325, 0, 0, 325),
+	(97, 2, '01103006', '', '', 'Puros Tripa Larga', '2021-05-05', 220, 59, 4, 3, 2, 11, 1, 2500, 0, 0, 2500),
+	(98, 2, '01103010', '', '', 'Puros Tripa Larga', '2021-05-05', 220, 59, 38, 68, 2, 11, 1, 1000, 0, 0, 1000),
+	(99, 2, '01104000', '', '', 'Puros Tripa Larga', '2021-05-05', 220, 59, 4, 3, 2, 13, 3, 1750, 0, 0, 1750),
+	(100, 1, '01604010', '', '', 'Puros Tripa Larga', '2021-05-05', 212, 109, 24, 41, 1, 7, 1, 400, 0, 0, 400),
+	(101, 1, '01604011', '', '', NULL, '2021-05-05', 212, 109, 3, 2, 1, 7, 1, 400, 0, 0, 400),
+	(102, 1, '01604012', '', '', 'Puros Tripa Larga', '2021-05-05', 212, 109, 28, 14, 1, 7, 1, 400, 0, 0, 400),
+	(103, 1, '01606675', '', '', 'Puros Tripa Larga', '2021-05-05', 212, 40, 20, 30, 5, 7, 1, 6400, 0, 0, 6400),
+	(104, 4, '01606677', '', '', 'Puros Tripa Larga', '2021-05-05', 213, 40, 9, 11, 5, 7, 1, 300, 0, 0, 300),
+	(105, 4, '01606677', '', '', 'Puros Tripa Larga', '2021-05-05', 221, 40, 9, 11, 5, 7, 1, 200, 0, 0, 200),
+	(106, 1, '01606678', '', '', 'Puros Tripa Larga', '2021-05-05', 212, 40, 3, 2, 5, 7, 1, 5200, 0, 0, 5200),
+	(107, 4, '01606678', '', '', 'Puros Tripa Larga', '2021-05-05', 213, 40, 3, 2, 5, 7, 1, 380, 0, 0, 380),
+	(108, 4, '01606678', '', '', 'Puros Tripa Larga', '2021-05-05', 221, 40, 3, 2, 5, 7, 1, 100, 0, 0, 100),
+	(109, 2, '01606872', '', '', 'Puros Tripa Larga', '2021-05-05', 217, 56, 4, 2, 6, 11, 1, 2500, 0, 0, 2500),
+	(110, 4, '01607602', '', '', 'Puros Tripa Larga', '2021-05-05', 213, 95, 3, 2, 11, 7, 1, 160, 0, 0, 160),
+	(111, 4, '01607602', '', '', 'Puros Tripa Larga', '2021-05-05', 221, 95, 3, 2, 11, 7, 1, 200, 0, 0, 200),
+	(112, 4, '01607603', '', '', 'Puros Tripa Larga', '2021-05-05', 221, 95, 9, 11, 11, 7, 1, 200, 0, 0, 200),
+	(113, 3, '09906000', '', '', 'Puros Tripa Larga', '2021-05-05', 237, 219, 3, 3, 3, 24, 4, 360, 0, 0, 360),
+	(114, 3, '09906012', '', '', NULL, '2021-05-05', 237, 181, 4, 2, 6, 20, 4, 1920, 0, 0, 1920),
+	(115, 3, '09906018', '', '', 'Puros Tripa Larga', '2021-05-05', 237, 181, 22, 34, 6, 20, 4, 480, 0, 0, 480),
+	(116, 3, '09906035', '', '', 'Puros Tripa Larga', '2021-05-05', 237, 161, 4, 2, 2, 20, 4, 320, 0, 0, 320),
+	(117, 3, '09906037', '', '', NULL, '2021-05-05', 237, 182, 3, 2, 3, 22, 4, 750, 0, 0, 750),
+	(118, 3, '09906039', '', '', 'Puros Tripa Larga', '2021-05-05', 237, 182, 9, 40, 3, 22, 4, 1200, 0, 0, 1200),
+	(119, 1, '10104111', '', '', 'Puros Tripa Larga', '2021-05-05', 223, 90, 6, 44, 3, 7, 1, 500, 0, 0, 500),
+	(120, 1, '10104130', '', '', NULL, '2021-05-05', 223, 51, 6, 67, 5, 7, 1, 500, 0, 0, 500),
+	(121, 4, '10104210', '', '', NULL, '2021-05-05', 213, 14, 2, 6, 3, 7, 1, 140, 0, 0, 140),
+	(122, 1, '10104750', '', '', 'Puros Tripa Larga', '2021-05-05', 212, 101, 2, 5, 4, 7, 1, 2400, 0, 0, 2400),
+	(123, 4, '10104750', '', '', 'Puros Tripa Larga', '2021-05-05', 213, 101, 2, 5, 4, 7, 1, 600, 0, 0, 600),
+	(124, 1, '10104751', '', '', 'Puros Tripa Larga', '2021-05-05', 212, 101, 3, 35, 4, 7, 1, 4000, 0, 0, 4000),
+	(125, 1, '10104752', '', '', 'Puros Tripa Larga', '2021-05-05', 212, 101, 16, 36, 4, 7, 1, 800, 0, 0, 800),
+	(126, 1, '10104754', '', '', 'Puros Tripa Larga', '2021-05-05', 212, 101, 9, 37, 4, 7, 1, 800, 0, 0, 800),
+	(127, 4, '10104754', '', '', 'Puros Tripa Larga', '2021-05-05', 244, 101, 9, 37, 4, 7, 1, 400, 0, 0, 400),
+	(128, 2, '10104772', '', '', 'Puros Tripa Larga', '2021-05-05', 214, 101, 5, 38, 4, 12, 1, 1250, 0, 0, 1250),
+	(129, 2, '10104775', '', '', 'Puros Tripa Larga', '2021-05-05', 215, 101, 3, 35, 4, 12, 1, 2000, 0, 0, 2000),
+	(130, 2, '10104778', '', '', 'Puros Tripa Larga', '2021-05-05', 216, 101, 2, 5, 4, 11, 1, 700, 0, 0, 700),
+	(131, 1, '10104816', '', '', 'Puros Tripa Larga', '2021-05-05', 215, 51, 4, 2, 2, 11, 1, 10000, 0, 0, 10000),
+	(132, 1, '10104817', '', '', NULL, '2021-05-05', 215, 234, 4, 2, 5, 11, 1, 10000, 0, 0, 10000),
+	(133, 1, '10104912', '', '', 'Puros Tripa Larga', '2021-05-05', 212, 51, 2, 1, 5, 23, 1, 14300, 0, 0, 14300),
+	(134, 1, '10105005', '', '', 'Puros Tripa Larga', '2021-05-05', 235, 232, 5, 4, 2, 7, 1, 400, 0, 0, 400),
+	(135, 1, '10105550', '', '', 'Puros Tripa Corta', '2021-05-05', 225, 227, 1, 1, 2, 10, 1, 6000, 0, 0, 6000),
+	(136, 1, '10105551', '', '', 'Puros Tripa Corta', '2021-05-05', 225, 227, 4, 2, 2, 10, 1, 6000, 0, 0, 6000),
+	(137, 1, '10105555', '', '', 'Puros Tripa Corta', '2021-05-05', 225, 227, 1, 1, 1, 10, 1, 2000, 0, 0, 2000),
+	(138, 1, '10105556', '', '', 'Puros Tripa Corta', '2021-05-05', 225, 227, 4, 2, 1, 10, 1, 2000, 0, 0, 2000),
+	(139, 1, '10105560', '', '', 'Puros Tripa Corta', '2021-05-05', 225, 227, 1, 1, 6, 10, 1, 2000, 0, 0, 2000),
+	(140, 1, '10105561', '', '', 'Puros Tripa Corta', '2021-05-05', 225, 227, 4, 2, 6, 10, 1, 2000, 0, 0, 2000),
+	(141, 1, '10105565', '', '', 'Puros Tripa Corta', '2021-05-05', 225, 227, 1, 1, 5, 10, 1, 2000, 0, 0, 2000),
+	(142, 1, '10105566', '', '', 'Puros Tripa Corta', '2021-05-05', 225, 227, 4, 2, 5, 10, 1, 2000, 0, 0, 2000),
+	(143, 2, '10499015', '', '', NULL, '2021-05-05', 220, 204, 3, 3, 3, 11, 1, NULL, 0, 0, NULL),
+	(144, 2, '10499060', '', '', NULL, '2021-05-05', 220, 197, 1, 6, 3, 11, 1, NULL, 0, 0, NULL),
+	(145, 1, '10603007', '', '', NULL, '2021-05-05', 250, 145, 36, 57, 6, 10, 1, 1000, 0, 0, 1000),
+	(146, 3, '10610017', '', '', 'Puros Tripa Larga', '2021-05-05', 223, 162, 9, 11, 5, 22, 4, 750, 0, 0, 750),
+	(147, 3, '10610018', '', '', 'Puros Tripa Larga', '2021-05-05', 223, 162, 9, 11, 2, 22, 4, 750, 0, 0, 750),
+	(148, 3, '10610019', '', '', NULL, '2021-05-05', 223, 162, 4, 2, 5, 22, 4, 750, 0, 0, 750),
+	(149, 3, '10610020', '', '', NULL, '2021-05-05', 223, 162, 4, 2, 2, 22, 4, 1500, 0, 0, 1500),
+	(150, 3, '11707003', '', '', 'Puros Tripa Larga', '2021-05-05', 228, 138, 15, 48, 6, 17, 4, 32000, 0, 0, 32000),
+	(151, 3, '11710050', '', '', NULL, '2021-05-05', 218, 183, 2, 1, 3, 7, 1, 1000, 0, 0, 1000),
+	(152, 3, '11710052', '', '', 'Puros Tripa Larga', '2021-05-05', 218, 183, 16, 14, 3, 7, 1, 2000, 0, 0, 2000),
+	(153, 3, '11710055', '', '', NULL, '2021-05-05', 219, 183, 2, 1, 3, 12, 1, 2000, 0, 0, 2000),
+	(154, 3, '11803000', '', '', 'Puros Tripa Larga', '2021-05-05', 218, 132, 2, 1, 6, 7, 1, 4000, 0, 0, 4000),
+	(155, 3, '11803002', '', '', 'Puros Tripa Larga', '2021-05-05', 219, 132, 2, 1, 6, 12, 1, 3000, 0, 0, 3000),
+	(156, 3, '11812002', '', '', NULL, '2021-05-05', 218, 132, 9, 11, 6, 7, 1, 2000, 0, 0, 2000),
+	(157, 3, '11812008', '', '', 'Puros Tripa Larga', '2021-05-05', 219, 132, 31, 4, 6, 12, 1, 2000, 0, 0, 2000),
+	(158, 3, '11812010', '', '', 'Puros Tripa Larga', '2021-05-05', 219, 132, 4, 2, 6, 12, 1, 5000, 0, 0, 5000),
+	(159, 3, '12002998', '', '', 'Puros Tripa Larga', '2021-05-05', 219, 133, 4, 2, 2, 12, 1, 4000, 0, 0, 4000),
+	(160, 3, '12002999', '', '', NULL, '2021-05-05', 219, 133, 4, 2, 5, 12, 1, 6000, 0, 0, 6000),
+	(161, 3, '12003001', '', '', 'Puros Tripa Larga', '2021-05-05', 219, 133, 2, 1, 5, 12, 1, 2000, 0, 0, 2000),
+	(162, 3, '12003002', '', '', 'Puros Tripa Larga', '2021-05-05', 218, 133, 2, 1, 2, 7, 1, 1000, 0, 0, 1000),
+	(163, 3, '12003003', '', '', 'Puros Tripa Larga', '2021-05-05', 218, 133, 2, 1, 5, 7, 1, 1000, 0, 0, 1000),
+	(164, 3, '12003005', '', '', NULL, '2021-05-05', 218, 133, 22, 34, 5, 7, 1, 1000, 0, 0, 1000),
+	(165, 3, '12003007', '', '', 'Puros Tripa Larga', '2021-05-05', 218, 133, 22, 34, 2, 7, 1, 1000, 0, 0, 1000),
+	(166, 3, '12003050', '', '', 'Puros Tripa Larga', '2021-05-05', 218, 105, 4, 2, 1, 7, 1, 4000, 0, 0, 4000),
+	(167, 3, '12003051', '', '', 'Puros Tripa Larga', '2021-05-05', 218, 105, 4, 14, 1, 7, 1, 2000, 0, 0, 2000),
+	(168, 3, '12003060', '', '', 'Puros Tripa Larga', '2021-05-05', 219, 105, 4, 2, 1, 12, 1, 6000, 0, 0, 6000),
+	(169, 3, '12003061', '', '', 'Puros Tripa Larga', '2021-05-05', 219, 105, 9, 11, 1, 12, 1, 2000, 0, 0, 2000),
+	(170, 3, '12003062', '', '', 'Puros Tripa Larga', '2021-05-05', 219, 105, 4, 14, 1, 12, 1, 1000, 0, 0, 1000),
+	(171, 3, '12004000', '', '', 'Puros Tripa Larga', '2021-05-05', 218, 133, 4, 2, 2, 7, 1, 2000, 0, 0, 2000),
+	(172, 3, '12004001', '', '', NULL, '2021-05-05', 218, 133, 4, 2, 5, 7, 1, 2000, 0, 0, 2000),
+	(173, 3, '12005003', '', '', 'Puros Tripa Larga', '2021-05-05', 218, 133, 9, 11, 2, 7, 1, 2000, 0, 0, 2000),
+	(174, 3, '12104000', '', '', NULL, '2021-05-05', 218, 134, 3, 3, 5, 7, 1, 2400, 0, 0, 2400),
+	(175, 3, '12301000', '', '', NULL, '2021-05-05', 218, 135, 19, 25, 3, 7, 1, 2000, 0, 0, 2000),
+	(176, 3, '12303000', '', '', 'Puros Tripa Larga', '2021-05-05', 218, 135, 2, 1, 3, 7, 1, 2000, 0, 0, 2000),
+	(177, 1, '12503003', '', '', NULL, '2021-05-05', 240, 63, 4, 2, 1, 7, 1, 800, 0, 0, 800),
+	(178, 1, '12503005', '', '', NULL, '2021-05-05', 240, 63, 19, 30, 2, 7, 1, 800, 0, 0, 800),
+	(179, 1, '12503010', '', '', 'Puros Tripa Larga', '2021-05-05', 240, 63, 1, 1, 1, 7, 1, 800, 0, 0, 800),
+	(180, 4, '12506001', '', '', 'Puros Tripa Larga', '2021-05-05', 213, 61, 4, 2, 1, 16, 1, 200, 0, 0, 200),
+	(181, 1, '12506010', '', '', 'Puros Tripa Larga', '2021-05-05', 214, 61, 4, 2, 1, 12, 1, 625, 0, 0, 625),
+	(182, 2, '12506011', '', '', 'Puros Tripa Larga', '2021-05-05', 245, 61, 4, 14, 1, 12, 1, 1000, 0, 0, 1000),
+	(183, 1, '12506012', '', '', 'Puros Tripa Larga', '2021-05-05', 215, 61, 4, 2, 1, 11, 1, 10000, 0, 0, 10000),
+	(184, 1, '12506020', '', '', 'Puros Tripa Larga', '2021-05-05', 212, 61, 4, 2, 1, 7, 1, 3200, 0, 0, 3200),
+	(185, 1, '12506021', '', '', 'Puros Tripa Larga', '2021-05-05', 212, 61, 4, 14, 1, 7, 1, 3200, 0, 0, 3200),
+	(186, 4, '12506021', '', '', 'Puros Tripa Larga', '2021-05-05', 222, 61, 4, 14, 1, 7, 1, 80, 0, 0, 80),
+	(187, 3, '13403010', '', '', 'Puros Tripa Larga', '2021-05-05', 219, 135, 3, 2, 3, 12, 1, 6000, 0, 0, 6000),
+	(188, 2, '14399005', '', '', NULL, '2021-05-05', 220, 147, 2, 6, 3, 11, 1, 400, 0, 0, 400),
+	(189, 2, '14399006', '', '', 'Puros Tripa Larga', '2021-05-05', 220, 147, 3, 3, 3, 11, 1, 4000, 0, 0, 4000),
+	(190, 2, '14399010', '', '', 'Puros Tripa Larga', '2021-05-05', 220, 147, 9, 11, 3, 11, 1, 1500, 0, 0, 1500),
+	(191, 1, '15003000', '', '', 'Puros Tripa Larga', '2021-05-05', 229, 184, 24, 6, 2, 7, 1, 2000, 0, 0, 2000),
+	(192, 1, '15004001', '', '', 'Puros Tripa Larga', '2021-05-05', 229, 184, 5, 51, 2, 7, 1, 2000, 0, 0, 2000),
+	(193, 1, '20005000', '', '', 'Puros Tripa Larga', '2021-05-05', 212, 90, 1, 6, 3, 7, 1, 4000, 0, 0, 4000),
+	(194, 4, '20005000', '', '', 'Puros Tripa Larga', '2021-05-05', 213, 90, 1, 6, 3, 7, 1, 380, 0, 0, 380),
+	(195, 4, '20005000', '', '', 'Puros Tripa Larga', '2021-05-05', 222, 90, 1, 6, 3, 7, 1, 200, 0, 0, 200),
+	(196, 1, '20005001', '', '', 'Puros Tripa Larga', '2021-05-05', 212, 90, 3, 3, 3, 7, 3, 8000, 0, 0, 8000),
+	(197, 1, '20005002', '', '', 'Puros Tripa Larga', '2021-05-05', 212, 90, 3, 21, 3, 7, 3, 4800, 0, 0, 4800),
+	(198, 1, '20005005', '', '', 'Puros Tripa Larga', '2021-05-05', 212, 90, 34, 52, 3, 7, 1, 400, 0, 0, 400),
+	(199, 2, '20005006', '', '', 'Puros Tripa Larga', '2021-05-05', 215, 90, 3, 3, 3, 11, 1, 25000, 0, 0, 25000),
+	(200, 1, '20005007', '', '', 'Puros Tripa Larga', '2021-05-05', 212, 90, 9, 26, 3, 7, 1, 1200, 0, 0, 1200),
+	(201, 4, '20005007', '', '', 'Puros Tripa Larga', '2021-05-05', 222, 90, 9, 26, 3, 7, 1, 200, 0, 0, 200),
+	(202, 2, '20005016', '', '', 'Puros Tripa Larga', '2021-05-05', 220, 90, 1, 6, 3, 11, 1, 40000, 0, 0, 40000),
+	(203, 4, '20018002', '', '', 'Puros Tripa Larga', '2021-05-05', 244, 113, 9, 11, 1, 7, 1, 600, 0, 0, 600),
+	(204, 2, '20018021', '', '', 'Puros Tripa Larga', '2021-05-05', 214, 113, 3, 2, 1, 12, 1, 1250, 0, 0, 1250),
+	(205, 2, '20018022', '', '', 'Puros Tripa Larga', '2021-05-05', 214, 113, 9, 11, 1, 12, 1, 1250, 0, 0, 1250),
+	(206, 2, '40503003', '', '', 'Puros Tripa Larga', '2021-05-05', 229, 61, 18, 24, 1, 7, 1, 10000, 0, 0, 10000),
+	(207, 2, '40503004', '', '', NULL, '2021-05-05', 229, 99, 18, 80, 6, 7, 1, 10000, 0, 0, 10000),
+	(208, 2, '40503005', '', '', 'Puros Tripa Larga', '2021-05-05', 229, 51, 18, 80, 3, 7, 1, 10000, 0, 0, 10000),
+	(209, 2, '40503014', '', '', 'Puros Tripa Larga', '2021-05-05', 229, 61, 18, 24, 1, 11, 1, 2500, 0, 0, 2500),
+	(210, 2, '40503015', '', '', NULL, '2021-05-05', 229, 99, 18, 80, 6, 11, 1, 2500, 0, 0, 2500),
+	(211, 2, '40503016', '', '', 'Puros Tripa Larga', '2021-05-05', 229, 51, 18, 80, 3, 11, 1, 2500, 0, 0, 2500),
+	(212, 2, '40503020', '', '', 'Puros Tripa Larga', '2021-05-05', 229, 61, 18, 24, 1, 9, 1, 3000, 0, 0, 3000),
+	(213, 2, '40503021', '', '', NULL, '2021-05-05', 229, 99, 18, 80, 6, 9, 1, 3000, 0, 0, 3000),
+	(214, 2, '40503022', '', '', 'Puros Tripa Larga', '2021-05-05', 229, 51, 18, 80, 3, 9, 1, 3000, 0, 0, 3000),
+	(215, 2, '41112001', '', '', NULL, '2021-05-05', 220, 59, 22, 74, 1, 11, 1, 200, 0, 0, 200),
+	(216, 2, '47705002', '', '', 'Puros Tripa Larga', '2021-05-05', 220, 168, 3, 14, 6, 11, 1, 7500, 0, 0, 7500),
+	(217, 2, '47801002', '', '', 'Puros Tripa Larga', '2021-05-05', 220, 168, 3, 14, 6, 7, 1, 1200, 0, 0, 1200),
+	(218, 2, '47801004', '', '', 'Puros Tripa Larga', '2021-05-05', 220, 168, 5, 4, 6, 7, 1, 2000, 0, 0, 2000),
+	(219, 2, '47801040', '', '', NULL, '2021-05-05', 246, 148, 4, 2, 5, 10, 1, 3000, 0, 0, 3000),
+	(220, 2, '47801042', '', '', NULL, '2021-05-05', 246, 148, 4, 2, 6, 10, 1, 3000, 0, 0, 3000),
+	(221, 2, '47801043', '', '', NULL, '2021-05-05', 246, 148, 4, 2, 1, 10, 1, 3000, 0, 0, 3000),
+	(222, 2, '47801044', '', '', NULL, '2021-05-05', 246, 148, 4, 2, 3, 10, 1, 3000, 0, 0, 3000),
+	(223, 2, '47801420', '', '', 'Puros Tripa Corta', '2021-05-05', 217, 60, 1, 1, 8, 10, 1, 60000, 0, 0, 60000),
+	(224, 2, '47801421', '', '', 'Puros Tripa Corta', '2021-05-05', 217, 60, 4, 2, 8, 10, 1, 60000, 0, 0, 60000),
+	(225, 2, '47801501', '', '', 'Puros Tripa Larga', '2021-05-05', 239, 220, 8, 1, 13, 10, 4, 600, 0, 0, 600),
+	(226, 2, '47801561', '', '', 'Puros Tripa Corta', '2021-05-05', 217, 166, 4, 2, 1, 10, 1, 60000, 0, 0, 60000),
+	(227, 2, '47801563', '', '', 'Puros Tripa Corta', '2021-05-05', 217, 166, 4, 2, 2, 10, 1, 60000, 0, 0, 60000),
+	(228, 2, '47801890', '', '', 'Puros Tripa Larga', '2021-05-05', 220, 57, 2, 1, 1, 9, 1, 1400, 0, 0, 1400),
+	(229, 2, '47801892', '', '', 'Puros Tripa Larga', '2021-05-05', 220, 57, 9, 16, 1, 9, 1, 1600, 0, 0, 1600),
+	(230, 1, '603004002', '', '', 'Puros Tripa Larga', '2021-05-05', 212, 88, 4, 3, 1, 7, 1, 1200, 0, 0, 1200),
+	(231, 4, '603004002', '', '', 'Puros Tripa Larga', '2021-05-05', 213, 88, 4, 3, 1, 7, 1, 240, 0, 0, 240),
+	(232, 1, '603004004', '', '', 'Puros Tripa Larga', '2021-05-05', 212, 88, 17, 23, 1, 7, 1, 400, 0, 0, 400),
+	(233, 2, '603004023', '', '', 'Puros Tripa Larga', '2021-05-05', 214, 88, 4, 3, 1, 12, 1, 1250, 0, 0, 1250),
+	(234, 2, '603004023', '', '', 'Puros Tripa Larga', '2021-05-05', 215, 88, 4, 3, 1, 12, 1, 5000, 0, 0, 5000),
+	(235, 2, '603004031', '', '', 'Puros Tripa Larga', '2021-05-05', 216, 88, 4, 3, 1, 11, 1, 750, 0, 0, 750),
+	(236, 2, '603004050', '', '', 'Puros Tripa Larga', '2021-05-05', 216, 88, 4, 3, 13, 11, 1, 3000, 0, 0, 3000),
+	(237, 1, '603005750', '', '', 'Puros Tripa Larga', '2021-05-05', 212, 92, 2, 1, 1, 4, 1, 600, 0, 0, 600),
+	(238, 1, '603005751', '', '', 'Puros Tripa Larga', '2021-05-05', 212, 92, 4, 2, 1, 4, 1, 1200, 0, 0, 1200),
+	(239, 1, '603005752', '', '', 'Puros Tripa Larga', '2021-05-05', 212, 92, 9, 11, 1, 4, 1, 400, 0, 0, 400),
+	(240, 2, '6030066060', '', '', 'Puros Tripa Larga', '2021-05-05', 217, 56, 4, 2, 3, 9, 1, 5000, 0, 0, 5000),
+	(241, 1, '9900004000', '', '', 'Puros Tripa Larga', '2021-05-05', 230, 94, 9, 16, 2, 7, 1, 2000, 0, 0, 2000),
+	(242, 1, '9900004002', '', '', 'Puros Tripa Larga', '2021-05-05', 230, 94, 2, 1, 2, 7, 1, 2000, 0, 0, 2000),
+	(243, 1, '9900004003', '', '', 'Puros Tripa Larga', '2021-05-05', 230, 94, 25, 2, 2, 7, 1, 2000, 0, 0, 2000),
+	(244, 1, '9900004005', '', '', 'Puros Tripa Larga', '2021-05-05', 232, 94, 25, 2, 2, 10, 1, 1000, 0, 0, 1000),
+	(245, 1, '9900004011', '', '', 'Puros Tripa Larga', '2021-05-05', 230, 228, 2, 1, 1, 7, 1, 2000, 0, 0, 2000),
+	(246, 1, '9900004012', '', '', 'Puros Tripa Larga', '2021-05-05', 230, 228, 3, 2, 1, 7, 1, 3000, 0, 0, 3000),
+	(247, 1, '9900004016', '', '', 'Puros Tripa Larga', '2021-05-05', 232, 228, 2, 1, 1, 10, 1, 1000, 0, 0, 1000),
+	(248, 1, '9900004019', '', '', 'Puros Tripa Larga', '2021-05-05', 230, 53, 2, 1, 1, 7, 1, 3000, 0, 0, 3000),
+	(249, 1, '9900004020', '', '', 'Puros Tripa Larga', '2021-05-05', 230, 53, 3, 2, 1, 7, 1, 4000, 0, 0, 4000),
+	(250, 1, '9900004023', '', '', 'Puros Tripa Larga', '2021-05-05', 232, 53, 3, 2, 1, 10, 1, 1000, 0, 0, 1000),
+	(251, 1, '9900004025', '', '', NULL, '2021-05-05', 230, 230, 9, 16, 1, 7, 1, 2000, 0, 0, 2000),
+	(252, 1, '9900004027', '', '', 'Puros Tripa Larga', '2021-05-05', 230, 230, 2, 1, 1, 7, 1, 2000, 0, 0, 2000),
+	(253, 1, '9900004028', '', '', 'Puros Tripa Larga', '2021-05-05', 230, 230, 3, 2, 1, 7, 1, 4000, 0, 0, 4000),
+	(254, 1, '9900004030', '', '', 'Puros Tripa Larga', '2021-05-05', 231, 230, 2, 1, 1, 10, 1, 2000, 0, 0, 2000),
+	(255, 1, '9900004031', '', '', 'Puros Tripa Larga', '2021-05-05', 232, 230, 3, 2, 1, 10, 1, 1000, 0, 0, 1000),
+	(256, 1, '9900004035', '', '', 'Puros Tripa Larga', '2021-05-05', 230, 229, 9, 16, 3, 7, 1, 2000, 0, 0, 2000),
+	(257, 1, '9900004037', '', '', 'Puros Tripa Larga', '2021-05-05', 230, 229, 2, 1, 3, 7, 1, 3000, 0, 0, 3000),
+	(258, 1, '9900004038', '', '', 'Puros Tripa Larga', '2021-05-05', 230, 229, 3, 2, 3, 7, 1, 5000, 0, 0, 5000),
+	(259, 1, '9900004039', '', '', 'Puros Tripa Larga', '2021-05-05', 233, 229, 2, 1, 3, 10, 1, 4000, 0, 0, 4000),
+	(260, 1, '9900004040', '', '', 'Puros Tripa Larga', '2021-05-05', 232, 229, 3, 2, 3, 10, 1, 1000, 0, 0, 1000),
+	(261, 1, '9900009110', '', '', 'Puros Tripa Larga', '2021-05-05', 230, 93, 2, 79, 2, 7, 1, 2000, 0, 0, 2000),
+	(262, 1, '9900009111', '', '', 'Puros Tripa Larga', '2021-05-05', 230, 93, 3, 27, 2, 7, 1, 2000, 0, 0, 2000),
+	(263, 1, '9900009115', '', '', 'Puros Tripa Larga', '2021-05-05', 231, 93, 2, 79, 2, 12, 1, 2500, 0, 0, 2500),
+	(264, 1, '9900009117', '', '', 'Puros Tripa Larga', '2021-05-05', 232, 93, 3, 27, 2, 10, 1, 1000, 0, 0, 1000);
 /*!40000 ALTER TABLE `pendiente` ENABLE KEYS */;
 
--- Volcando estructura para tabla facturacion_plasencia.pendiente_empaque
+-- Dumping structure for table facturacion_plasencia.pendiente_empaque
 CREATE TABLE IF NOT EXISTS `pendiente_empaque` (
   `id_pendiente` int(11) NOT NULL AUTO_INCREMENT,
   `categoria` int(11) DEFAULT NULL,
@@ -5414,310 +6384,295 @@ CREATE TABLE IF NOT EXISTS `pendiente_empaque` (
   `pendiente` int(11) DEFAULT NULL,
   `factura_del_mes` int(11) DEFAULT NULL,
   `cantidad_enviada_mes` int(11) DEFAULT NULL,
-  `saldo` decimal(10,2) DEFAULT NULL,
+  `saldo` int(11) DEFAULT NULL,
   PRIMARY KEY (`id_pendiente`)
-) ENGINE=MyISAM AUTO_INCREMENT=278 DEFAULT CHARSET=latin1 COMMENT='CATEGORIA	ITEM	ORDEN DEL SISTEMA	OBSERVACÓN	PRESENTACIÓN	MES	ORDEN	MARCA	VITOLA	NOMBRE	CAPA	TIPO DE EMPAQUE	ANILLO	CELLO	UPC	PENDIENTE	MARZO 2021 FACTURA #17976(Warehouse)	ENVIADO MES	SALDO';
+) ENGINE=MyISAM AUTO_INCREMENT=265 DEFAULT CHARSET=latin1 COMMENT='CATEGORIA	ITEM	ORDEN DEL SISTEMA	OBSERVACÓN	PRESENTACIÓN	MES	ORDEN	MARCA	VITOLA	NOMBRE	CAPA	TIPO DE EMPAQUE	ANILLO	CELLO	UPC	PENDIENTE	MARZO 2021 FACTURA #17976(Warehouse)	ENVIADO MES	SALDO';
 
--- Volcando datos para la tabla facturacion_plasencia.pendiente_empaque: 0 rows
+-- Dumping data for table facturacion_plasencia.pendiente_empaque: 264 rows
 DELETE FROM `pendiente_empaque`;
 /*!40000 ALTER TABLE `pendiente_empaque` DISABLE KEYS */;
 INSERT INTO `pendiente_empaque` (`id_pendiente`, `categoria`, `item`, `orden_del_sitema`, `observacion`, `presentacion`, `mes`, `orden`, `marca`, `vitola`, `nombre`, `capa`, `tipo_empaque`, `cello`, `pendiente`, `factura_del_mes`, `cantidad_enviada_mes`, `saldo`) VALUES
-	(1, 1, '00504006', '', '', 'Puros Tripa Larga', '2021-05-18', 95, 51, 4, 2, 5, 18, 3, 10000, NULL, NULL, 10000.00),
-	(2, 1, '00505006', '', '', 'Puros Tripa Larga', '2021-05-18', 53, 51, 4, 14, 5, 18, 3, 4000, NULL, NULL, 4000.00),
-	(3, 1, '00504041', '', '', 'Puros Tripa Larga', '2021-05-18', 116, 51, 9, 32, 5, 11, 1, 500, NULL, NULL, 500.00),
-	(4, 1, '00508000', '', '', 'Puros Tripa Larga', '2021-05-18', 95, 51, 9, 32, 5, 7, 3, 4000, NULL, NULL, 4000.00),
-	(5, 1, '00508015', '', '', 'Puros Tripa Larga', '2021-05-18', 28, 51, 11, 12, 5, 4, 1, 600, NULL, NULL, 600.00),
-	(6, 1, '00605002', '', '', 'Puros Tripa Larga', '2021-05-18', 95, 51, 14, 17, 5, 13, 3, 5500, NULL, NULL, 5500.00),
-	(7, 1, '00508010', '', '', 'Puros Tripa Larga', '2021-05-18', 53, 51, 21, 33, 5, 19, 1, 1800, NULL, NULL, 1800.00),
-	(8, 1, '00504100', '', '', 'Puros Tripa Larga', '2021-05-18', 123, 51, 2, 1, 5, 7, 1, 4000, NULL, NULL, 4000.00),
-	(9, 1, '00504102', '', '', 'Puros Tripa Larga', '2021-05-18', 66, 51, 22, 34, 5, 7, 1, 400, NULL, NULL, 400.00),
-	(10, 1, '00504002', '', '', 'Puros Tripa Larga', '2021-05-18', 95, 51, 4, 2, 5, 7, 3, 9600, NULL, NULL, 9600.00),
-	(11, 1, '00505002', '', '', 'Puros Tripa Larga', '2021-05-18', 66, 51, 4, 14, 5, 7, 3, 3600, NULL, NULL, 3600.00),
-	(12, 1, '10104130', '', '', NULL, '2021-05-18', 223, 51, 6, 67, 5, 7, 1, 500, NULL, NULL, 500.00),
-	(13, 1, '10104817', '', '', NULL, '2021-05-18', 215, 234, 4, 2, 5, 11, 1, 10000, NULL, NULL, 10000.00),
-	(14, 1, '10515002', '', '', 'Puros Tripa Larga', '2021-05-18', 173, 51, 2, 1, 5, 4, NULL, 200, NULL, NULL, 200.00),
-	(15, 1, '10105565', '', '', 'Puros Tripa Corta', '2021-05-18', 225, 227, 1, 1, 5, 10, 1, 2000, NULL, NULL, 2000.00),
-	(16, 1, '10105566', '', '', 'Puros Tripa Corta', '2021-05-18', 225, 227, 4, 2, 5, 10, 1, 2000, NULL, NULL, 2000.00),
-	(17, 1, '00504007', '', '', 'Puros Tripa Larga', '2021-05-18', 66, 51, 4, 2, 2, 18, 3, 12000, NULL, NULL, 12000.00),
-	(18, 1, '00505007', '', '', 'Puros Tripa Larga', '2021-05-18', 53, 51, 4, 14, 2, 18, 3, 2000, NULL, NULL, 2000.00),
-	(19, 1, '00504042', '', '', 'Puros Tripa Larga', '2021-05-18', 63, 51, 9, 32, 2, 11, 1, 500, NULL, NULL, 500.00),
-	(20, 1, '00508016', '', '', 'Puros Tripa Larga', '2021-05-18', 28, 51, 11, 12, 2, 4, 1, 1000, NULL, NULL, 1000.00),
-	(21, 1, '00605003', '', '', 'Puros Tripa Larga', '2021-05-18', 38, 51, 14, 17, 2, 13, 3, 1500, NULL, NULL, 1500.00),
-	(22, 1, '00508011', '', '', 'Puros Tripa Larga', '2021-05-18', 53, 51, 21, 33, 2, 19, 1, 1200, NULL, NULL, 1200.00),
-	(23, 1, '00508001', '', '', 'Puros Tripa Larga', '2021-05-18', 53, 51, 9, 32, 2, 7, 3, 7200, NULL, NULL, 7200.00),
-	(24, 1, '00504003', '', '', 'Puros Tripa Larga', '2021-05-18', 95, 51, 4, 2, 2, 7, 3, 11600, NULL, NULL, 11600.00),
-	(25, 1, '00505003', '', '', 'Puros Tripa Larga', '2021-05-18', 37, 51, 4, 14, 2, 7, 3, 3200, NULL, NULL, 3200.00),
-	(26, 1, '00504101', '', '', 'Puros Tripa Larga', '2021-05-18', 95, 51, 2, 1, 2, 7, 3, 3600, NULL, NULL, 3600.00),
-	(27, 1, '00504103', '', '', 'Puros Tripa Larga', '2021-05-18', 173, 51, 22, 34, 2, 7, 1, 800, NULL, NULL, 800.00),
-	(28, 1, '10104816', '', '', 'Puros Tripa Larga', '2021-05-18', 188, 51, 4, 2, 2, 11, 1, 10000, NULL, NULL, 10000.00),
-	(29, 1, '9900009110', '', '', 'Puros Tripa Larga', '2021-05-18', 230, 93, 2, 79, 2, 7, 1, 2000, NULL, NULL, 2000.00),
-	(30, 1, '9900009111', '', '', 'Puros Tripa Larga', '2021-05-18', 56, 93, 3, 27, 2, 7, 1, 2000, NULL, NULL, 2000.00),
-	(31, 1, '9900009117', '', '', 'Puros Tripa Larga', '2021-05-18', 232, 93, 3, 27, 2, 10, 1, 1000, NULL, NULL, 1000.00),
-	(32, 1, '9900009115', '', '', 'Puros Tripa Larga', '2021-05-18', 231, 93, 2, 79, 2, 12, 1, 2500, NULL, NULL, 2500.00),
-	(33, 1, '10105005', '', '', 'Puros Tripa Larga', '2021-05-18', 235, 232, 5, 4, 2, 7, 1, 400, NULL, NULL, 400.00),
-	(34, 1, '9900004000', '', '', 'Puros Tripa Larga', '2021-05-18', 230, 94, 9, 16, 2, 7, 1, 2000, NULL, NULL, 2000.00),
-	(35, 1, '9900004002', '', '', 'Puros Tripa Larga', '2021-05-18', 230, 94, 2, 1, 2, 7, 1, 2000, NULL, NULL, 2000.00),
-	(36, 1, '9900004003', '', '', 'Puros Tripa Larga', '2021-05-18', 230, 94, 25, 2, 2, 7, 1, 2000, NULL, NULL, 2000.00),
-	(37, 1, '9900004005', '', '', 'Puros Tripa Larga', '2021-05-18', 232, 94, 25, 2, 2, 10, 1, 1000, NULL, NULL, 1000.00),
-	(38, 1, '10105550', '', '', 'Puros Tripa Corta', '2021-05-18', 225, 227, 1, 1, 2, 10, 1, 6000, NULL, NULL, 6000.00),
-	(39, 1, '10105551', '', '', 'Puros Tripa Corta', '2021-05-18', 225, 227, 4, 2, 2, 10, 1, 6000, NULL, NULL, 6000.00),
-	(40, 1, '00508020', '', '', 'Puros Tripa Larga', '2021-05-18', 95, 91, 4, 2, 10, 7, 1, 62800, NULL, NULL, 62800.00),
-	(41, 1, '00508022', '', '', 'Puros Tripa Larga', '2021-05-18', 53, 91, 9, 11, 10, 7, 1, 1200, NULL, NULL, 1200.00),
-	(42, 1, '00401000', '', '', 'Puros Tripa Larga', '2021-05-18', 95, 67, 19, 25, 3, 7, 3, 1200, NULL, NULL, 1200.00),
-	(43, 1, '00403000', '', '', 'Puros Tripa Larga', '2021-05-18', 95, 67, 2, 1, 3, 7, 3, 2800, NULL, NULL, 2800.00),
-	(44, 1, '00404000', '', '', 'Puros Tripa Larga', '2021-05-18', 66, 67, 3, 2, 3, 7, 3, 4400, NULL, NULL, 4400.00),
-	(45, 1, '00405000', '', '', 'Puros Tripa Larga', '2021-05-18', 66, 67, 16, 14, 3, 7, 3, 400, NULL, NULL, 400.00),
-	(46, 1, '00408000', '', '', 'Puros Tripa Larga', '2021-05-18', 66, 67, 9, 40, 3, 7, 3, 400, NULL, NULL, 400.00),
-	(47, 1, '00303007', '', '', 'Puros Tripa Larga', '2021-05-18', 67, 67, 25, 2, 3, 4, 1, 1000, NULL, NULL, 1000.00),
-	(48, 1, '00407000', '', '', 'Puros Tripa Larga', '2021-05-18', 123, 158, 15, 46, 9, 15, 1, 3000, NULL, NULL, 3000.00),
-	(49, 1, '10104111', '', '', 'Puros Tripa Larga', '2021-05-18', 86, 90, 6, 44, 3, 7, 1, 500, NULL, NULL, 500.00),
-	(50, 1, '20005000', '', '', 'Puros Tripa Larga', '2021-05-18', 95, 90, 1, 6, 3, 7, 1, 4000, NULL, NULL, 4000.00),
-	(51, 1, '20005001', '', '', 'Puros Tripa Larga', '2021-05-18', 53, 90, 3, 3, 3, 7, 3, 8000, NULL, NULL, 8000.00),
-	(52, 1, '20005002', '', '', 'Puros Tripa Larga', '2021-05-18', 53, 90, 3, 21, 3, 7, 3, 4800, NULL, NULL, 4800.00),
-	(53, 1, '20005005', '', '', 'Puros Tripa Larga', '2021-05-18', 95, 90, 34, 52, 3, 7, 1, 400, NULL, NULL, 400.00),
-	(54, 1, '20005007', '', '', 'Puros Tripa Larga', '2021-05-18', 53, 90, 9, 26, 3, 7, 1, 1200, NULL, NULL, 1200.00),
-	(55, 1, '20005010', '', '', 'Puros Tripa Larga', '2021-05-18', 95, 90, 3, 35, 3, 4, NULL, 600, NULL, NULL, 600.00),
-	(56, 1, '00505019', '', '', 'Puros Tripa Larga', '2021-05-18', 53, 51, 4, 14, 3, 18, 1, 2000, NULL, NULL, 2000.00),
-	(57, 1, '00504032', '', '', 'Puros Tripa Larga', '2021-05-18', 95, 51, 4, 2, 3, 7, 1, 1600, NULL, NULL, 1600.00),
-	(58, 1, '00504033', '', '', 'Puros Tripa Larga', '2021-05-18', 66, 51, 4, 14, 3, 7, 1, 400, NULL, NULL, 400.00),
-	(59, 1, '00231000', '', '', 'Puros Tripa Larga', '2021-05-18', 39, 62, 15, 18, 3, 15, 1, 10000, NULL, NULL, 10000.00),
-	(60, 1, '9900004035', '', '', 'Puros Tripa Larga', '2021-05-18', 230, 229, 9, 16, 3, 7, 1, 2000, NULL, NULL, 2000.00),
-	(61, 1, '9900004037', '', '', 'Puros Tripa Larga', '2021-05-18', 230, 229, 2, 1, 3, 7, 1, 3000, NULL, NULL, 3000.00),
-	(62, 1, '9900004038', '', '', 'Puros Tripa Larga', '2021-05-18', 230, 229, 3, 2, 3, 7, 1, 5000, NULL, NULL, 5000.00),
-	(63, 1, '9900004039', '', '', 'Puros Tripa Larga', '2021-05-18', 233, 229, 2, 1, 3, 10, 1, 4000, NULL, NULL, 4000.00),
-	(64, 1, '9900004040', '', '', 'Puros Tripa Larga', '2021-05-18', 232, 229, 3, 2, 3, 10, 1, 1000, NULL, NULL, 1000.00),
-	(65, 1, '13105120', '', '', 'Puros Tripa Larga', '2021-05-18', 173, 210, 2, 1, 3, 4, NULL, 400, NULL, NULL, 400.00),
-	(66, 1, '00703001', '', '', 'Puros Tripa Larga', '2021-05-18', 95, 99, 2, 1, 6, 21, 3, 2000, NULL, NULL, 2000.00),
-	(67, 1, '00704001', '', '', 'Puros Tripa Larga', '2021-05-18', 173, 99, 4, 2, 6, 21, 3, 2000, NULL, NULL, 2000.00),
-	(68, 1, '00705001', '', '', 'Puros Tripa Larga', '2021-05-18', 95, 99, 4, 14, 6, 21, 3, 1000, NULL, NULL, 1000.00),
-	(69, 1, '00712001', '', '', 'Puros Tripa Larga', '2021-05-18', 79, 99, 22, 34, 6, 21, 3, 1000, NULL, NULL, 1000.00),
-	(70, 1, '00508002', '', '', 'Puros Tripa Larga', '2021-05-18', 95, 99, 9, 11, 6, 7, 1, 3600, NULL, NULL, 3600.00),
-	(71, 1, '00508017', '', '', NULL, '2021-05-18', 37, 73, 11, 12, 6, 4, 1, 200, NULL, NULL, 200.00),
-	(72, 1, '00703003', '', '', 'Puros Tripa Larga', '2021-05-18', 95, 99, 2, 1, 6, 7, 1, 1600, NULL, NULL, 1600.00),
-	(73, 1, '00712003', '', '', 'Puros Tripa Larga', '2021-05-18', 95, 99, 22, 34, 6, 7, 1, 400, NULL, NULL, 400.00),
-	(74, 1, '00704003', '', '', 'Puros Tripa Larga', '2021-05-18', 122, 99, 4, 2, 6, 7, 1, 2000, NULL, NULL, 2000.00),
-	(75, 1, '00705003', '', '', 'Puros Tripa Larga', '2021-05-18', 95, 99, 4, 14, 6, 7, 1, 1200, NULL, NULL, 1200.00),
-	(76, 1, '00504043', '', '', 'Puros Tripa Larga', '2021-05-18', 201, 99, 9, 11, 6, 11, 1, 500, NULL, NULL, 500.00),
-	(77, 1, '00712004', '', '', 'Puros Tripa Larga', '2021-05-18', 175, 99, 22, 34, 6, 12, 1, 1250, NULL, NULL, 1250.00),
-	(78, 1, '10515004', '', '', NULL, '2021-05-18', 173, 99, 2, 76, 6, 4, NULL, 400, NULL, NULL, 400.00),
-	(79, 1, '10603007', '', '', NULL, '2021-05-18', 115, 145, 36, 57, 6, 10, 1, 1000, NULL, NULL, 1000.00),
-	(80, 1, '00110060', '', '', 'Puros Tripa Larga', '2021-05-18', 234, 231, 2, 1, 6, 7, 1, 200, NULL, NULL, 200.00),
-	(81, 1, '00110061', '', '', NULL, '2021-05-18', 234, 231, 4, 2, 6, 7, 1, 200, NULL, NULL, 200.00),
-	(82, 1, '00110062', '', '', 'Puros Tripa Larga', '2021-05-18', 234, 231, 9, 11, 6, 7, 1, 200, NULL, NULL, 200.00),
-	(83, 1, '00110063', '', '', NULL, '2021-05-18', 234, 231, 22, 34, 6, 7, 1, 200, NULL, NULL, 200.00),
-	(84, 1, '10105560', '', '', 'Puros Tripa Corta', '2021-05-18', 225, 227, 1, 1, 6, 10, 1, 2000, NULL, NULL, 2000.00),
-	(85, 1, '10105561', '', '', 'Puros Tripa Corta', '2021-05-18', 225, 227, 4, 2, 6, 10, 1, 2000, NULL, NULL, 2000.00),
-	(86, 1, '00504150', '', '', 'Puros Tripa Larga', '2021-05-18', 95, 51, 4, 2, 15, 7, 1, 800, NULL, NULL, 800.00),
-	(87, 1, '00508003', '', '', 'Puros Tripa Larga', '2021-05-18', 66, 61, 9, 11, 1, 7, 1, 1200, NULL, NULL, 1200.00),
-	(88, 1, '12506020', '', '', 'Puros Tripa Larga', '2021-05-18', 36, 61, 4, 2, 1, 7, 1, 3200, NULL, NULL, 3200.00),
-	(89, 1, '12506021', '', '', 'Puros Tripa Larga', '2021-05-18', 53, 61, 4, 14, 1, 7, 1, 3200, NULL, NULL, 3200.00),
-	(90, 1, '12506010', '', '', 'Puros Tripa Larga', '2021-05-18', 63, 61, 4, 2, 1, 12, 1, 625, NULL, NULL, 625.00),
-	(91, 1, '12506012', '', '', 'Puros Tripa Larga', '2021-05-18', 50, 61, 4, 2, 1, 11, 1, 10000, NULL, NULL, 10000.00),
-	(92, 1, '00504252', '', '', 'Puros Tripa Larga', '2021-05-18', 113, 144, 4, 54, 1, 21, 1, 2000, NULL, NULL, 2000.00),
-	(93, 1, '01604010', '', '', 'Puros Tripa Larga', '2021-05-18', 66, 109, 24, 41, 1, 7, 1, 400, NULL, NULL, 400.00),
-	(94, 1, '01604011', '', '', NULL, '2021-05-18', 66, 109, 3, 2, 1, 7, 1, 400, NULL, NULL, 400.00),
-	(95, 1, '01604012', '', '', 'Puros Tripa Larga', '2021-05-18', 173, 109, 28, 14, 1, 7, 1, 400, NULL, NULL, 400.00),
-	(96, 1, '01606675', '', '', 'Puros Tripa Larga', '2021-05-18', 95, 40, 20, 30, 5, 7, 1, 6400, NULL, NULL, 6400.00),
-	(97, 1, '01606678', '', '', 'Puros Tripa Larga', '2021-05-18', 95, 40, 3, 2, 5, 7, 1, 5200, NULL, NULL, 5200.00),
-	(98, 1, '603004002', '', '', 'Puros Tripa Larga', '2021-05-18', 53, 88, 4, 3, 1, 7, 1, 1200, NULL, NULL, 1200.00),
-	(99, 1, '603004004', '', '', 'Puros Tripa Larga', '2021-05-18', 173, 88, 17, 23, 1, 7, 1, 400, NULL, NULL, 400.00),
-	(100, 1, '603005750', '', '', 'Puros Tripa Larga', '2021-05-18', 55, 92, 2, 1, 1, 4, 1, 600, NULL, NULL, 600.00),
-	(101, 1, '603005751', '', '', 'Puros Tripa Larga', '2021-05-18', 55, 92, 4, 2, 1, 4, 1, 1200, NULL, NULL, 1200.00),
-	(102, 1, '603005752', '', '', 'Puros Tripa Larga', '2021-05-18', 53, 92, 9, 11, 1, 4, 1, 400, NULL, NULL, 400.00),
-	(103, 1, '9900004027', '', '', 'Puros Tripa Larga', '2021-05-18', 230, 230, 2, 1, 1, 7, 1, 2000, NULL, NULL, 2000.00),
-	(104, 1, '9900004028', '', '', 'Puros Tripa Larga', '2021-05-18', 230, 230, 3, 2, 1, 7, 1, 4000, NULL, NULL, 4000.00),
-	(105, 1, '9900004025', '', '', NULL, '2021-05-18', 230, 230, 9, 16, 1, 7, 1, 2000, NULL, NULL, 2000.00),
-	(106, 1, '9900004030', '', '', 'Puros Tripa Larga', '2021-05-18', 231, 230, 2, 1, 1, 10, 1, 2000, NULL, NULL, 2000.00),
-	(107, 1, '9900004031', '', '', 'Puros Tripa Larga', '2021-05-18', 232, 230, 3, 2, 1, 10, 1, 1000, NULL, NULL, 1000.00),
-	(108, 1, '9900004019', '', '', 'Puros Tripa Larga', '2021-05-18', 230, 53, 2, 1, 1, 7, 1, 3000, NULL, NULL, 3000.00),
-	(109, 1, '9900004020', '', '', 'Puros Tripa Larga', '2021-05-18', 56, 53, 3, 2, 1, 7, 1, 4000, NULL, NULL, 4000.00),
-	(110, 1, '9900004023', '', '', 'Puros Tripa Larga', '2021-05-18', 232, 53, 3, 2, 1, 10, 1, 1000, NULL, NULL, 1000.00),
-	(111, 1, '00107000', '', '', 'Puros Tripa Larga', '2021-05-18', 105, 141, 15, 53, 9, 15, 1, 9000, NULL, NULL, 9000.00),
-	(112, 1, '9900004011', '', '', 'Puros Tripa Larga', '2021-05-18', 230, 228, 2, 1, 1, 7, 1, 2000, NULL, NULL, 2000.00),
-	(113, 1, '9900004012', '', '', 'Puros Tripa Larga', '2021-05-18', 230, 228, 3, 2, 1, 7, 1, 3000, NULL, NULL, 3000.00),
-	(114, 1, NULL, '', '', NULL, '2021-05-18', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 2000, NULL, NULL, 2000.00),
-	(115, 1, '9900004016', '', '', 'Puros Tripa Larga', '2021-05-18', 231, 228, 2, 1, 1, 10, 1, 1000, NULL, NULL, 1000.00),
-	(116, 1, '12503005', '', '', NULL, '2021-05-18', 240, 63, 19, 30, 2, 7, 1, 800, NULL, NULL, 800.00),
-	(117, 1, '12503003', '', '', NULL, '2021-05-18', 240, 63, 4, 2, 1, 7, 1, 800, NULL, NULL, 800.00),
-	(118, 1, '12503010', '', '', 'Puros Tripa Larga', '2021-05-18', 240, 63, 1, 1, 1, 7, 1, 800, NULL, NULL, 800.00),
-	(119, 1, '10105555', '', '', 'Puros Tripa Corta', '2021-05-18', 225, 227, 1, 1, 1, 10, 1, 2000, NULL, NULL, 2000.00),
-	(120, 1, '10105556', '', '', 'Puros Tripa Corta', '2021-05-18', 225, 227, 4, 2, 1, 10, 1, 2000, NULL, NULL, 2000.00),
-	(121, 1, '10104750', '', '', 'Puros Tripa Larga', '2021-05-18', 124, 101, 2, 5, 4, 7, 1, 2400, NULL, NULL, 2400.00),
-	(122, 1, '10104751', '', '', 'Puros Tripa Larga', '2021-05-18', 53, 101, 3, 35, 4, 7, 1, 4000, NULL, NULL, 4000.00),
-	(123, 1, '10104752', '', '', 'Puros Tripa Larga', '2021-05-18', 53, 101, 16, 36, 4, 7, 1, 800, NULL, NULL, 800.00),
-	(124, 1, '10104754', '', '', 'Puros Tripa Larga', '2021-05-18', 53, 101, 9, 37, 4, 7, 1, 800, NULL, NULL, 800.00),
-	(125, 1, '10104150', '', '', NULL, '2021-05-18', 249, 101, 44, 61, 4, 7, 1, 2000, NULL, NULL, 2000.00),
-	(126, 1, '15003000', '', '', 'Puros Tripa Larga', '2021-05-18', 161, 184, 24, 6, 2, 7, 1, 2000, NULL, NULL, 2000.00),
-	(127, 1, '15004001', '', '', 'Puros Tripa Larga', '2021-05-18', 229, 184, 5, 51, 2, 7, 1, 2000, NULL, NULL, 2000.00),
-	(128, 1, '00110276', '', '', NULL, '2021-05-18', 241, 72, 2, 1, 6, 23, NULL, 500, NULL, NULL, 500.00),
-	(129, 1, '00110275', '', '', 'Puros Tripa Larga', '2021-05-18', 241, 72, 2, 1, 5, 23, NULL, 500, NULL, NULL, 500.00),
-	(130, 1, '00110277', '', '', 'Puros Tripa Larga', '2021-05-18', 241, 72, 2, 1, 2, 23, NULL, 500, NULL, NULL, 500.00),
-	(131, 1, '10104912', '', '', 'Puros Tripa Larga', '2021-05-18', 157, 51, 2, 1, 5, 23, 1, 14300, NULL, NULL, 14300.00),
-	(132, 1, '00904038', '', '', 'Puros Tripa Larga', '2021-05-18', 36, 51, 4, 2, 2, 14, 1, NULL, NULL, NULL, NULL),
-	(133, 2, '00504026', '', '', 'Puros Tripa Larga', '2021-05-18', 145, 51, 4, 2, 5, 11, 3, 3000, NULL, NULL, 3000.00),
-	(134, 2, '00504009', '', '', 'Puros Tripa Larga', '2021-05-18', 209, 51, 4, 2, 5, 12, 1, 1000, NULL, NULL, 1000.00),
-	(135, 2, '47801040', '', '', NULL, '2021-05-18', 146, 148, 4, 2, 5, 10, 1, 3000, NULL, NULL, 3000.00),
-	(136, 2, '00804065', '', '', NULL, '2021-05-18', 216, 209, 18, 6, 2, 7, 1, 400, NULL, NULL, 400.00),
-	(137, 2, '603004050', '', '', 'Puros Tripa Larga', '2021-05-18', 130, 88, 4, 3, 13, 11, 1, 3000, NULL, NULL, 3000.00),
-	(138, 2, '00904111', '', '', 'Puros Tripa Larga', '2021-05-18', 168, 186, 3, 3, 2, 9, 1, 500, NULL, NULL, 500.00),
-	(139, 2, '01104000', '', '', 'Puros Tripa Larga', '2021-05-18', 34, 59, 4, 3, 2, 13, 3, 1750, NULL, NULL, 1750.00),
-	(140, 2, '01103006', '', '', 'Puros Tripa Larga', '2021-05-18', 181, 59, 4, 3, 2, 11, 1, 2500, NULL, NULL, 2500.00),
-	(141, 2, '01103010', '', '', 'Puros Tripa Larga', '2021-05-18', 184, 59, 38, 68, 2, 11, 1, 1000, NULL, NULL, 1000.00),
-	(142, 2, '47801563', '', '', 'Puros Tripa Corta', '2021-05-18', 217, 166, 4, 2, 2, 10, 1, 60000, NULL, NULL, 60000.00),
-	(143, 2, '00404005', '', '', 'Puros Tripa Larga', '2021-05-18', 102, 67, 3, 2, 3, 12, 1, 5000, NULL, NULL, 5000.00),
-	(144, 2, '00408003', '', '', 'Puros Tripa Larga', '2021-05-18', 215, 67, 9, 40, 3, 12, 1, 7500, NULL, NULL, 7500.00),
-	(145, 2, '20005006', '', '', 'Puros Tripa Larga', '2021-05-18', 188, 90, 3, 3, 3, 11, 1, 25000, NULL, NULL, 25000.00),
-	(146, 2, '20005016', '', '', 'Puros Tripa Larga', '2021-05-18', 130, 90, 1, 6, 3, 11, 1, 40000, NULL, NULL, 40000.00),
-	(147, 2, '00504048', '', '', 'Puros Tripa Larga', '2021-05-18', 108, 51, 4, 2, 3, 11, 1, 5000, NULL, NULL, 5000.00),
-	(148, 2, '00504048', '', '', 'Puros Tripa Larga', '2021-05-18', 108, 51, 4, 2, 3, 11, 1, 500, NULL, NULL, 500.00),
-	(149, 2, '40503005', '', '', 'Puros Tripa Larga', '2021-05-18', 229, 51, 18, 80, 3, 7, 1, 10000, NULL, NULL, 10000.00),
-	(150, 2, '40503022', '', '', 'Puros Tripa Larga', '2021-05-18', 229, 51, 18, 80, 3, 9, 1, 3000, NULL, NULL, 3000.00),
-	(151, 2, '40503016', '', '', 'Puros Tripa Larga', '2021-05-18', 229, 51, 18, 80, 3, 11, 1, 2500, NULL, NULL, 2500.00),
-	(152, 2, '6030066060', '', '', 'Puros Tripa Larga', '2021-05-18', 217, 56, 4, 2, 3, 9, 1, 5000, NULL, NULL, 5000.00),
-	(153, 2, '47801044', '', '', NULL, '2021-05-18', 146, 148, 4, 2, 3, 10, 1, 3000, NULL, NULL, 3000.00),
-	(154, 2, '14399005', '', '', NULL, '2021-05-18', 184, 147, 2, 6, 3, 11, 1, 400, NULL, NULL, 400.00),
-	(155, 2, '14399006', '', '', 'Puros Tripa Larga', '2021-05-18', 181, 147, 3, 3, 3, 11, 1, 4000, NULL, NULL, 4000.00),
-	(156, 2, '14399010', '', '', 'Puros Tripa Larga', '2021-05-18', 184, 147, 9, 11, 3, 11, 1, 1500, NULL, NULL, 1500.00),
-	(157, 2, '47801501', '', '', 'Puros Tripa Larga', '2021-05-18', 171, 220, 8, 1, 13, 10, 4, 600, NULL, NULL, 600.00),
-	(158, 2, '40503004', '', '', 'Puros Tripa Larga', '2021-05-18', 229, 99, 18, 80, 6, 7, 1, 10000, NULL, NULL, 10000.00),
-	(159, 2, '40503021', '', '', NULL, '2021-05-18', 229, 99, 18, 80, 6, 9, 1, 3000, NULL, NULL, 3000.00),
-	(160, 2, '40503015', '', '', NULL, '2021-05-18', 229, 99, 18, 80, 6, 11, 1, 2500, NULL, NULL, 2500.00),
-	(161, 2, '00704004', '', '', 'Puros Tripa Larga', '2021-05-18', 87, 99, 4, 2, 6, 12, 1, 20000, NULL, NULL, 20000.00),
-	(162, 2, '47801004', '', '', 'Puros Tripa Larga', '2021-05-18', 181, 168, 5, 4, 6, 7, 1, 2000, NULL, NULL, 2000.00),
-	(163, 2, '47801002', '', '', 'Puros Tripa Larga', '2021-05-18', 181, 168, 3, 14, 6, 7, 1, 1200, NULL, NULL, 1200.00),
-	(164, 2, '47705002', '', '', 'Puros Tripa Larga', '2021-05-18', 220, 168, 3, 14, 6, 11, 1, 7500, NULL, NULL, 7500.00),
-	(165, 2, '01606872', '', '', 'Puros Tripa Larga', '2021-05-18', 31, 56, 4, 2, 6, 11, 1, 2500, NULL, NULL, 2500.00),
-	(166, 2, '47801042', '', '', NULL, '2021-05-18', 119, 148, 4, 2, 6, 10, 1, 3000, NULL, NULL, 3000.00),
-	(167, 2, '40503003', '', '', 'Puros Tripa Larga', '2021-05-18', 229, 61, 18, 24, 1, 7, 1, 10000, NULL, NULL, 10000.00),
-	(168, 2, '40503020', '', '', 'Puros Tripa Larga', '2021-05-18', 229, 61, 18, 24, 1, 9, 1, 3000, NULL, NULL, 3000.00),
-	(169, 2, '40503014', '', '', 'Puros Tripa Larga', '2021-05-18', 229, 61, 18, 24, 1, 11, 1, 2500, NULL, NULL, 2500.00),
-	(170, 2, '12506011', '', '', 'Puros Tripa Larga', '2021-05-18', 63, 61, 4, 14, 1, 12, 1, 1000, NULL, NULL, 1000.00),
-	(171, 2, '603004023', '', '', 'Puros Tripa Larga', '2021-05-18', 96, 88, 4, 3, 1, 12, 1, 1250, NULL, NULL, 1250.00),
-	(172, 2, '603004023', '', '', 'Puros Tripa Larga', '2021-05-18', 96, 88, 4, 3, 1, 12, 1, 5000, NULL, NULL, 5000.00),
-	(173, 2, '603004031', '', '', 'Puros Tripa Larga', '2021-05-18', 176, 88, 4, 3, 1, 11, 1, 750, NULL, NULL, 750.00),
-	(174, 2, '20018021', '', '', 'Puros Tripa Larga', '2021-05-18', 214, 113, 3, 2, 1, 12, 1, 1250, NULL, NULL, 1250.00),
-	(175, 2, '20018022', '', '', 'Puros Tripa Larga', '2021-05-18', 214, 113, 9, 11, 1, 12, 1, 1250, NULL, NULL, 1250.00),
-	(176, 2, '01103004', '', '', 'Puros Tripa Larga', '2021-05-18', 181, 59, 1, 6, 18, 11, 1, 325, NULL, NULL, 325.00),
-	(177, 2, '41112001', '', '', NULL, '2021-05-18', 184, 59, 22, 74, 1, 11, 1, 200, NULL, NULL, 200.00),
-	(178, 2, '47801420', '', '', 'Puros Tripa Corta', '2021-05-18', 88, 60, 1, 1, 8, 10, 1, 60000, NULL, NULL, 60000.00),
-	(179, 2, '47801421', '', '', 'Puros Tripa Corta', '2021-05-18', 35, 60, 4, 2, 8, 10, 1, 60000, NULL, NULL, 60000.00),
-	(180, 2, '47801561', '', '', 'Puros Tripa Corta', '2021-05-18', 217, 166, 4, 2, 1, 10, 1, 60000, NULL, NULL, 60000.00),
-	(181, 2, '47801043', '', '', NULL, '2021-05-18', 146, 148, 4, 2, 1, 10, 1, 3000, NULL, NULL, 3000.00),
-	(182, 2, '47801890', '', '', 'Puros Tripa Larga', '2021-05-18', 147, 57, 2, 1, 1, 9, 1, 1400, NULL, NULL, 1400.00),
-	(183, 2, '47801892', '', '', 'Puros Tripa Larga', '2021-05-18', 32, 57, 9, 16, 1, 9, 1, 1600, NULL, NULL, 1600.00),
-	(184, 2, '10104775', '', '', 'Puros Tripa Larga', '2021-05-18', 78, 101, 3, 35, 4, 12, 1, 2000, NULL, NULL, 2000.00),
-	(185, 2, '10104772', '', '', 'Puros Tripa Larga', '2021-05-18', 214, 101, 5, 38, 4, 12, 1, 1250, NULL, NULL, 1250.00),
-	(186, 2, '10104778', '', '', 'Puros Tripa Larga', '2021-05-18', 130, 101, 2, 5, 4, 11, 1, 700, NULL, NULL, 700.00),
-	(187, 2, '10499060', '', '', NULL, '2021-05-18', 183, 197, 1, 6, 3, 11, 1, NULL, NULL, NULL, NULL),
-	(188, 2, '10499015', '', '', NULL, '2021-05-18', 181, 204, 3, 3, 3, 11, 1, NULL, NULL, NULL, NULL),
-	(189, 2, '10499010', '', '', 'Puros Tripa Corta', '2021-05-18', 147, 176, 4, 2, 6, 25, 1, NULL, NULL, NULL, NULL),
-	(190, 3, '12104000', '', '', NULL, '2021-05-18', 218, 134, 3, 3, 5, 7, 1, 2400, NULL, NULL, 2400.00),
-	(191, 3, '11803000', '', '', 'Puros Tripa Larga', '2021-05-18', 218, 132, 2, 1, 6, 7, 1, 4000, NULL, NULL, 4000.00),
-	(192, 3, '11812002', '', '', NULL, '2021-05-18', 90, 132, 9, 11, 6, 7, 1, 2000, NULL, NULL, 2000.00),
-	(193, 3, '11812010', '', '', 'Puros Tripa Larga', '2021-05-18', 219, 132, 4, 2, 6, 12, 1, 5000, NULL, NULL, 5000.00),
-	(194, 3, '11803002', '', '', 'Puros Tripa Larga', '2021-05-18', 219, 132, 2, 1, 6, 12, 1, 3000, NULL, NULL, 3000.00),
-	(195, 3, '11812008', '', '', 'Puros Tripa Larga', '2021-05-18', 219, 132, 31, 4, 6, 12, 1, 2000, NULL, NULL, 2000.00),
-	(196, 3, '11710050', '', '', NULL, '2021-05-18', 218, 183, 2, 1, 3, 7, 1, 1000, NULL, NULL, 1000.00),
-	(197, 3, '11710052', '', '', 'Puros Tripa Larga', '2021-05-18', 156, 183, 16, 14, 3, 7, 1, 2000, NULL, NULL, 2000.00),
-	(198, 3, '11710055', '', '', NULL, '2021-05-18', 219, 183, 2, 1, 3, 12, 1, 2000, NULL, NULL, 2000.00),
-	(199, 3, '12301000', '', '', NULL, '2021-05-18', 218, 135, 19, 25, 3, 7, 1, 2000, NULL, NULL, 2000.00),
-	(200, 3, '12303000', '', '', 'Puros Tripa Larga', '2021-05-18', 218, 135, 2, 1, 3, 7, 1, 2000, NULL, NULL, 2000.00),
-	(201, 3, '13403010', '', '', 'Puros Tripa Larga', '2021-05-18', 219, 135, 3, 2, 3, 12, 1, 6000, NULL, NULL, 6000.00),
-	(202, 3, '12003050', '', '', 'Puros Tripa Larga', '2021-05-18', 94, 105, 4, 2, 1, 7, 1, 4000, NULL, NULL, 4000.00),
-	(203, 3, '12003051', '', '', 'Puros Tripa Larga', '2021-05-18', 94, 105, 4, 14, 1, 7, 1, 2000, NULL, NULL, 2000.00),
-	(204, 3, '12003061', '', '', 'Puros Tripa Larga', '2021-05-18', 219, 105, 9, 11, 1, 12, 1, 2000, NULL, NULL, 2000.00),
-	(205, 3, '12003062', '', '', 'Puros Tripa Larga', '2021-05-18', 219, 105, 4, 14, 1, 12, 1, 1000, NULL, NULL, 1000.00),
-	(206, 3, '12003060', '', '', 'Puros Tripa Larga', '2021-05-18', 219, 105, 4, 2, 1, 12, 1, 6000, NULL, NULL, 6000.00),
-	(207, 3, '12003001', '', '', 'Puros Tripa Larga', '2021-05-18', 219, 133, 2, 1, 5, 12, 1, 2000, NULL, NULL, 2000.00),
-	(208, 3, '12002998', '', '', 'Puros Tripa Larga', '2021-05-18', 219, 133, 4, 2, 2, 12, 1, 4000, NULL, NULL, 4000.00),
-	(209, 3, '12002999', '', '', NULL, '2021-05-18', 219, 133, 4, 2, 5, 12, 1, 6000, NULL, NULL, 6000.00),
-	(210, 3, '12004001', '', '', NULL, '2021-05-18', 218, 133, 4, 2, 5, 7, 1, 2000, NULL, NULL, 2000.00),
-	(211, 3, '12004000', '', '', 'Puros Tripa Larga', '2021-05-18', 218, 133, 4, 2, 2, 7, 1, 2000, NULL, NULL, 2000.00),
-	(212, 3, '12003003', '', '', 'Puros Tripa Larga', '2021-05-18', 218, 133, 2, 1, 5, 7, 1, 1000, NULL, NULL, 1000.00),
-	(213, 3, '12003002', '', '', 'Puros Tripa Larga', '2021-05-18', 218, 133, 2, 1, 2, 7, 1, 1000, NULL, NULL, 1000.00),
-	(214, 3, '12003005', '', '', NULL, '2021-05-18', 91, 133, 22, 34, 5, 7, 1, 1000, NULL, NULL, 1000.00),
-	(215, 3, '12003007', '', '', 'Puros Tripa Larga', '2021-05-18', 91, 133, 22, 34, 2, 7, 1, 1000, NULL, NULL, 1000.00),
-	(216, 3, '12005003', '', '', 'Puros Tripa Larga', '2021-05-18', 91, 133, 9, 11, 2, 7, 1, 2000, NULL, NULL, 2000.00),
-	(217, 3, '11707003', '', '', 'Puros Tripa Larga', '2021-05-18', 73, 138, 15, 48, 6, 17, 4, 32000, NULL, NULL, 32000.00),
-	(218, 3, '09906000', '', '', 'Puros Tripa Larga', '2021-05-18', 183, 219, 3, 3, 3, 24, 4, 360, NULL, NULL, 360.00),
-	(219, 3, '09906012', '', '', NULL, '2021-05-18', 206, 181, 4, 2, 6, 20, 4, 1920, NULL, NULL, 1920.00),
-	(220, 3, '09906018', '', '', 'Puros Tripa Larga', '2021-05-18', 237, 181, 22, 34, 6, 20, 4, 480, NULL, NULL, 480.00),
-	(221, 3, '09906035', '', '', 'Puros Tripa Larga', '2021-05-18', 111, 161, 4, 2, 2, 20, 4, 320, NULL, NULL, 320.00),
-	(222, 3, '09906037', '', '', NULL, '2021-05-18', 183, 182, 3, 2, 3, 22, 4, 750, NULL, NULL, 750.00),
-	(223, 3, '09906039', '', '', 'Puros Tripa Larga', '2021-05-18', 148, 182, 9, 40, 3, 22, 4, 1200, NULL, NULL, 1200.00),
-	(224, 3, '10610017', '', '', 'Puros Tripa Larga', '2021-05-18', 223, 162, 9, 11, 5, 22, 4, 750, NULL, NULL, 750.00),
-	(225, 3, '10610018', '', '', 'Puros Tripa Larga', '2021-05-18', 129, 162, 9, 11, 2, 22, 4, 750, NULL, NULL, 750.00),
-	(226, 3, '10610019', '', '', NULL, '2021-05-18', 129, 162, 4, 2, 5, 22, 4, 750, NULL, NULL, 750.00),
-	(227, 3, '10610020', '', '', NULL, '2021-05-18', 223, 162, 4, 2, 2, 22, 4, 1500, NULL, NULL, 1500.00),
-	(228, 4, '00503009', '', '', 'Puros Tripa Larga', '2021-05-18', 222, 51, 6, 43, 5, 7, 1, 1000, NULL, NULL, 1000.00),
-	(229, 4, '00504100', '', '', 'Puros Tripa Larga', '2021-05-18', 123, 51, 2, 1, 5, 7, 1, 100, NULL, NULL, 100.00),
-	(230, 4, '00504007', '', '', 'Puros Tripa Larga', '2021-05-18', 66, 51, 4, 2, 2, 18, 3, 400, NULL, NULL, 400.00),
-	(231, 4, '00508011', '', '', 'Puros Tripa Larga', '2021-05-18', 53, 51, 21, 33, 2, 19, 1, 300, NULL, NULL, 300.00),
-	(232, 4, '00503008', '', '', 'Puros Tripa Larga', '2021-05-18', 80, 51, 6, 43, 2, 7, 1, 400, NULL, NULL, 400.00),
-	(233, 4, '00504101', '', '', 'Puros Tripa Larga', '2021-05-18', 95, 51, 2, 1, 2, 7, 3, 400, NULL, NULL, 400.00),
-	(234, 4, '00504101', '', '', 'Puros Tripa Larga', '2021-05-18', 95, 51, 2, 1, 2, 7, 3, 200, NULL, NULL, 200.00),
-	(235, 4, '00504003', '', '', 'Puros Tripa Larga', '2021-05-18', 95, 51, 4, 2, 2, 7, 3, 400, NULL, NULL, 400.00),
-	(236, 4, '00508001', '', '', 'Puros Tripa Larga', '2021-05-18', 53, 51, 9, 32, 2, 7, 3, 200, NULL, NULL, 200.00),
-	(237, 4, '00303050', '', '', NULL, '2021-05-18', 211, 15, 25, 77, 2, 4, NULL, 150, NULL, NULL, 150.00),
-	(238, 4, '00303007', '', '', 'Puros Tripa Larga', '2021-05-18', 67, 67, 25, 2, 3, 4, 1, 500, NULL, NULL, 500.00),
-	(239, 4, '00303007', '', '', 'Puros Tripa Larga', '2021-05-18', 67, 67, 25, 2, 3, 4, 1, 200, NULL, NULL, 200.00),
-	(240, 4, '00303007', '', '', 'Puros Tripa Larga', '2021-05-18', 67, 67, 25, 2, 3, 4, 1, 160, NULL, NULL, 160.00),
-	(241, 4, '00407000', '', '', 'Puros Tripa Larga', '2021-05-18', 123, 158, 15, 46, 9, 15, 1, 1400, NULL, NULL, 1400.00),
-	(242, 4, '00408000', '', '', 'Puros Tripa Larga', '2021-05-18', 66, 67, 9, 40, 3, 7, 3, 140, NULL, NULL, 140.00),
-	(243, 4, '10104210', '', '', NULL, '2021-05-18', 213, 14, 2, 6, 3, 7, 1, 140, NULL, NULL, 140.00),
-	(244, 4, '00303051', '', '', NULL, '2021-05-18', 248, 14, 25, 35, 3, 4, 1, 100, NULL, NULL, 100.00),
-	(245, 4, '00303051', '', '', NULL, '2021-05-18', 248, 14, 25, 35, 3, 4, 1, 40, NULL, NULL, 40.00),
-	(246, 4, '20005000', '', '', 'Puros Tripa Larga', '2021-05-18', 95, 90, 1, 6, 3, 7, 1, 380, NULL, NULL, 380.00),
-	(247, 4, '20005000', '', '', 'Puros Tripa Larga', '2021-05-18', 95, 90, 1, 6, 3, 7, 1, 200, NULL, NULL, 200.00),
-	(248, 4, '20005010', '', '', 'Puros Tripa Larga', '2021-05-18', 95, 90, 3, 35, 3, 4, NULL, 50, NULL, NULL, 50.00),
-	(249, 4, '20005007', '', '', 'Puros Tripa Larga', '2021-05-18', 53, 90, 9, 26, 3, 7, 1, 200, NULL, NULL, 200.00),
-	(250, 4, '20005010', '', '', 'Puros Tripa Larga', '2021-05-18', 95, 90, 3, 35, 3, 4, NULL, 200, NULL, NULL, 200.00),
-	(251, 4, '00504032', '', '', 'Puros Tripa Larga', '2021-05-18', 95, 51, 4, 2, 3, 7, 1, 100, NULL, NULL, 100.00),
-	(252, 4, '00703003', '', '', 'Puros Tripa Larga', '2021-05-18', 95, 99, 2, 1, 6, 7, 1, 460, NULL, NULL, 460.00),
-	(253, 4, '00704003', '', '', 'Puros Tripa Larga', '2021-05-18', 122, 99, 4, 2, 6, 7, 1, 100, NULL, NULL, 100.00),
-	(254, 4, '00302007', '', '', 'Puros Tripa Larga', '2021-05-18', 193, 86, 3, 2, 6, 7, 1, 1000, NULL, NULL, 1000.00),
-	(255, 4, '00302007', '', '', 'Puros Tripa Larga', '2021-05-18', 193, 86, 3, 2, 6, 7, 1, 100, NULL, NULL, 100.00),
-	(256, 4, '00302009', '', '', 'Puros Tripa Larga', '2021-05-18', 213, 86, 9, 11, 6, 7, 1, 40, NULL, NULL, 40.00),
-	(257, 4, '00302004', '', '', NULL, '2021-05-18', 124, 86, 37, 61, 6, 3, 1, 20, NULL, NULL, 20.00),
-	(258, 4, '00303065', '', '', 'Puros Tripa Larga', '2021-05-18', 123, 86, 2, 1, 6, 10, 1, 200, NULL, NULL, 200.00),
-	(259, 4, '00507001', '', '', 'Puros Tripa Larga', '2021-05-18', 122, 159, 15, 62, 6, 15, 1, 1700, NULL, NULL, 1700.00),
-	(260, 4, '20018002', '', '', 'Puros Tripa Larga', '2021-05-18', 244, 113, 9, 11, 1, 7, 1, 600, NULL, NULL, 600.00),
-	(261, 4, '12506001', '', '', 'Puros Tripa Larga', '2021-05-18', 38, 61, 4, 2, 1, 16, 1, 200, NULL, NULL, 200.00),
-	(262, 4, '12506021', '', '', 'Puros Tripa Larga', '2021-05-18', 53, 61, 4, 14, 1, 7, 1, 80, NULL, NULL, 80.00),
-	(263, 4, '00107000', '', '', 'Puros Tripa Larga', '2021-05-18', 105, 141, 15, 53, 9, 15, 1, 500, NULL, NULL, 500.00),
-	(264, 4, '603004002', '', '', 'Puros Tripa Larga', '2021-05-18', 53, 88, 4, 3, 1, 7, 1, 240, NULL, NULL, 240.00),
-	(265, 4, '01607602', '', '', 'Puros Tripa Larga', '2021-05-18', 53, 95, 3, 2, 11, 7, 1, 160, NULL, NULL, 160.00),
-	(266, 4, '01607602', '', '', 'Puros Tripa Larga', '2021-05-18', 53, 95, 3, 2, 11, 7, 1, 200, NULL, NULL, 200.00),
-	(267, 4, '01607603', '', '', 'Puros Tripa Larga', '2021-05-18', 53, 95, 9, 11, 11, 7, 1, 200, NULL, NULL, 200.00),
-	(268, 4, '01606677', '', '', 'Puros Tripa Larga', '2021-05-18', 53, 40, 9, 11, 5, 7, 1, 300, NULL, NULL, 300.00),
-	(269, 4, '01606678', '', '', 'Puros Tripa Larga', '2021-05-18', 95, 40, 3, 2, 5, 7, 1, 380, NULL, NULL, 380.00),
-	(270, 4, '01606678', '', '', 'Puros Tripa Larga', '2021-05-18', 95, 40, 3, 2, 5, 7, 1, 100, NULL, NULL, 100.00),
-	(271, 4, '01606677', '', '', 'Puros Tripa Larga', '2021-05-18', 53, 40, 9, 11, 5, 7, 1, 200, NULL, NULL, 200.00),
-	(272, 4, '10104750', '', '', 'Puros Tripa Larga', '2021-05-18', 124, 101, 2, 5, 4, 7, 1, 600, NULL, NULL, 600.00),
-	(273, 4, '10104754', '', '', 'Puros Tripa Larga', '2021-05-18', 53, 101, 9, 37, 4, 7, 1, 400, NULL, NULL, 400.00),
-	(274, 4, '00504150', '', '', 'Puros Tripa Larga', '2021-05-18', 95, 51, 4, 2, 15, 7, 1, 80, NULL, NULL, 80.00),
-	(275, 4, '00504150', '', '', 'Puros Tripa Larga', '2021-05-18', 95, 51, 4, 2, 15, 7, 1, 40, NULL, NULL, 40.00),
-	(276, 4, '00110347', '', '', NULL, '2021-05-18', 224, 226, 20, 30, 9, 7, 1, 400, NULL, NULL, 400.00),
-	(277, 4, '00110346', '', '', NULL, '2021-05-18', 224, 226, 4, 2, 9, 7, 1, 600, NULL, NULL, 600.00);
+	(1, 1, '00107000', '', '', 'Puros Tripa Larga', '2021-05-05', 226, 141, 15, 53, 9, 15, 1, 9000, 0, 0, 9000),
+	(2, 4, '00107000', '', '', 'Puros Tripa Larga', '2021-05-05', 227, 141, 15, 53, 9, 15, 1, 500, 0, 0, 500),
+	(3, 1, '00110060', '', '', 'Puros Tripa Larga', '2021-05-05', 234, 231, 2, 1, 6, 7, 1, 200, 0, 0, 200),
+	(4, 1, '00110061', '', '', NULL, '2021-05-05', 234, 231, 4, 2, 6, 7, 1, 200, 0, 0, 200),
+	(5, 1, '00110062', '', '', 'Puros Tripa Larga', '2021-05-05', 234, 231, 9, 11, 6, 7, 1, 200, 0, 0, 200),
+	(6, 1, '00110063', '', '', NULL, '2021-05-05', 234, 231, 22, 34, 6, 7, 1, 200, 0, 0, 200),
+	(7, 4, '00110346', '', '', NULL, '2021-05-05', 224, 226, 4, 2, 9, 7, 1, 600, 0, 0, 600),
+	(8, 4, '00110347', '', '', NULL, '2021-05-05', 224, 226, 20, 30, 9, 7, 1, 400, 0, 0, 400),
+	(9, 1, '00231000', '', '', 'Puros Tripa Larga', '2021-05-05', 226, 62, 15, 18, 3, 15, 1, 10000, 0, 0, 10000),
+	(10, 4, '00302004', '', '', NULL, '2021-05-05', 124, 86, 37, 61, 6, 3, 1, 20, 0, 0, 20),
+	(11, 4, '00302007', '', '', 'Puros Tripa Larga', '2021-05-05', 244, 86, 3, 2, 6, 7, 1, 1000, 0, 0, 1000),
+	(12, 4, '00302007', '', '', 'Puros Tripa Larga', '2021-05-05', 221, 86, 3, 2, 6, 7, 1, 100, 0, 0, 100),
+	(13, 4, '00302009', '', '', 'Puros Tripa Larga', '2021-05-05', 213, 86, 9, 11, 6, 7, 1, 40, 0, 0, 40),
+	(14, 1, '00303007', '', '', 'Puros Tripa Larga', '2021-05-05', 212, 67, 25, 2, 3, 4, 1, 1000, 0, 0, 1000),
+	(15, 4, '00303007', '', '', 'Puros Tripa Larga', '2021-05-05', 243, 67, 25, 2, 3, 4, 1, 200, 0, 0, 200),
+	(16, 4, '00303007', '', '', 'Puros Tripa Larga', '2021-05-05', 222, 67, 25, 2, 3, 4, 1, 500, 0, 0, 500),
+	(17, 4, '00303007', '', '', 'Puros Tripa Larga', '2021-05-05', 221, 67, 25, 2, 3, 4, 1, 160, 0, 0, 160),
+	(18, 4, '00303051', '', '', NULL, '2021-05-05', 221, 14, 25, 35, 3, 4, 1, 40, 0, 0, 40),
+	(19, 4, '00303051', '', '', NULL, '2021-05-05', 248, 14, 25, 35, 3, 4, 1, 100, 0, 0, 100),
+	(20, 4, '00303065', '', '', 'Puros Tripa Larga', '2021-05-05', 124, 86, 2, 1, 6, 10, 1, 200, 0, 0, 200),
+	(21, 1, '00401000', '', '', 'Puros Tripa Larga', '2021-05-05', 212, 67, 19, 25, 3, 7, 3, 1200, 0, 0, 1200),
+	(22, 1, '00403000', '', '', 'Puros Tripa Larga', '2021-05-05', 212, 67, 2, 1, 3, 7, 3, 2800, 0, 0, 2800),
+	(23, 1, '00404000', '', '', 'Puros Tripa Larga', '2021-05-05', 212, 67, 3, 2, 3, 7, 3, 4400, 0, 0, 4400),
+	(24, 2, '00404005', '', '', 'Puros Tripa Larga', '2021-05-05', 215, 67, 3, 2, 3, 12, 1, 5000, 0, 0, 5000),
+	(25, 1, '00405000', '', '', 'Puros Tripa Larga', '2021-05-05', 212, 67, 16, 14, 3, 7, 3, 400, 0, 0, 400),
+	(26, 1, '00407000', '', '', 'Puros Tripa Larga', '2021-05-05', 226, 158, 15, 46, 9, 15, 1, 3000, 0, 0, 3000),
+	(27, 4, '00407000', '', '', 'Puros Tripa Larga', '2021-05-05', 124, 158, 15, 46, 9, 15, 1, 1400, 0, 0, 1400),
+	(28, 1, '00408000', '', '', 'Puros Tripa Larga', '2021-05-05', 212, 67, 9, 40, 3, 7, 3, 400, 0, 0, 400),
+	(29, 4, '00408000', '', '', 'Puros Tripa Larga', '2021-05-05', 222, 67, 9, 40, 3, 7, 3, 140, 0, 0, 140),
+	(30, 2, '00408003', '', '', 'Puros Tripa Larga', '2021-05-05', 215, 67, 9, 40, 3, 12, 1, 7500, 0, 0, 7500),
+	(31, 4, '00503008', '', '', 'Puros Tripa Larga', '2021-05-05', 222, 51, 6, 43, 2, 7, 1, 400, 0, 0, 400),
+	(32, 4, '00503009', '', '', 'Puros Tripa Larga', '2021-05-05', 222, 51, 6, 43, 5, 7, 1, 1000, 0, 0, 1000),
+	(33, 1, '00504002', '', '', 'Puros Tripa Larga', '2021-05-05', 212, 51, 4, 2, 5, 7, 3, 9600, 0, 0, 9600),
+	(34, 1, '00504003', '', '', 'Puros Tripa Larga', '2021-05-05', 212, 51, 4, 2, 2, 7, 3, 11600, 0, 0, 11600),
+	(35, 4, '00504003', '', '', 'Puros Tripa Larga', '2021-05-05', 213, 51, 4, 2, 2, 7, 3, 400, 0, 0, 400),
+	(36, 1, '00504006', '', '', 'Puros Tripa Larga', '2021-05-05', 212, 51, 4, 2, 5, 18, 3, 10000, 0, 0, 10000),
+	(37, 1, '00504007', '', '', 'Puros Tripa Larga', '2021-05-05', 212, 51, 4, 2, 2, 18, 3, 12000, 0, 0, 12000),
+	(38, 4, '00504007', '', '', 'Puros Tripa Larga', '2021-05-05', 213, 51, 4, 2, 2, 18, 3, 400, 0, 0, 400),
+	(39, 2, '00504009', '', '', 'Puros Tripa Larga', '2021-05-05', 245, 51, 4, 2, 5, 12, 1, 1000, 0, 0, 1000),
+	(40, 2, '00504026', '', '', 'Puros Tripa Larga', '2021-05-05', 216, 51, 4, 2, 5, 11, 3, 3000, 0, 0, 3000),
+	(41, 1, '00504032', '', '', 'Puros Tripa Larga', '2021-05-05', 212, 51, 4, 2, 3, 7, 1, 1600, 0, 0, 1600),
+	(42, 4, '00504032', '', '', 'Puros Tripa Larga', '2021-05-05', 221, 51, 4, 2, 3, 7, 1, 100, 0, 0, 100),
+	(43, 1, '00504033', '', '', 'Puros Tripa Larga', '2021-05-05', 212, 51, 4, 14, 3, 7, 1, 400, 0, 0, 400),
+	(44, 1, '00504041', '', '', 'Puros Tripa Larga', '2021-05-05', 214, 51, 9, 32, 5, 11, 1, 500, 0, 0, 500),
+	(45, 1, '00504042', '', '', 'Puros Tripa Larga', '2021-05-05', 214, 51, 9, 32, 2, 11, 1, 500, 0, 0, 500),
+	(46, 1, '00504043', '', '', 'Puros Tripa Larga', '2021-05-05', 214, 99, 9, 11, 6, 11, 1, 500, 0, 0, 500),
+	(47, 2, '00504048', '', '', 'Puros Tripa Larga', '2021-05-05', 215, 51, 4, 2, 3, 11, 1, 5000, 0, 0, 5000),
+	(48, 2, '00504048', '', '', 'Puros Tripa Larga', '2021-05-05', 216, 51, 4, 2, 3, 11, 1, 500, 0, 0, 500),
+	(49, 1, '00504100', '', '', 'Puros Tripa Larga', '2021-05-05', 212, 51, 2, 1, 5, 7, 1, 4000, 0, 0, 4000),
+	(50, 4, '00504100', '', '', 'Puros Tripa Larga', '2021-05-05', 213, 51, 2, 1, 5, 7, 1, 100, 0, 0, 100),
+	(51, 1, '00504101', '', '', 'Puros Tripa Larga', '2021-05-05', 212, 51, 2, 1, 2, 7, 3, 3600, 0, 0, 3600),
+	(52, 4, '00504101', '', '', 'Puros Tripa Larga', '2021-05-05', 213, 51, 2, 1, 2, 7, 3, 400, 0, 0, 400),
+	(53, 4, '00504101', '', '', 'Puros Tripa Larga', '2021-05-05', 221, 51, 2, 1, 2, 7, 3, 200, 0, 0, 200),
+	(54, 1, '00504102', '', '', 'Puros Tripa Larga', '2021-05-05', 212, 51, 22, 34, 5, 7, 1, 400, 0, 0, 400),
+	(55, 1, '00504103', '', '', 'Puros Tripa Larga', '2021-05-05', 212, 51, 22, 34, 2, 7, 1, 800, 0, 0, 800),
+	(56, 1, '00504150', '', '', 'Puros Tripa Larga', '2021-05-05', 212, 51, 4, 2, 15, 7, 1, 800, 0, 0, 800),
+	(57, 4, '00504150', '', '', 'Puros Tripa Larga', '2021-05-05', 213, 51, 4, 2, 15, 7, 1, 80, 0, 0, 80),
+	(58, 4, '00504150', '', '', 'Puros Tripa Larga', '2021-05-05', 221, 51, 4, 2, 15, 7, 1, 40, 0, 0, 40),
+	(59, 1, '00504252', '', '', 'Puros Tripa Larga', '2021-05-05', 247, 144, 4, 54, 1, 21, 1, 2000, 0, 0, 2000),
+	(60, 1, '00505002', '', '', 'Puros Tripa Larga', '2021-05-05', 212, 51, 4, 14, 5, 7, 3, 3600, 0, 0, 3600),
+	(61, 1, '00505003', '', '', 'Puros Tripa Larga', '2021-05-05', 212, 51, 4, 14, 2, 7, 3, 3200, 0, 0, 3200),
+	(62, 1, '00505006', '', '', 'Puros Tripa Larga', '2021-05-05', 212, 51, 4, 14, 5, 18, 3, 4000, 0, 0, 4000),
+	(63, 1, '00505007', '', '', 'Puros Tripa Larga', '2021-05-05', 212, 51, 4, 14, 2, 18, 3, 2000, 0, 0, 2000),
+	(64, 1, '00505019', '', '', 'Puros Tripa Larga', '2021-05-05', 212, 51, 4, 14, 3, 18, 1, 2000, 0, 0, 2000),
+	(65, 4, '00507001', '', '', 'Puros Tripa Larga', '2021-05-05', 213, 159, 15, 62, 6, 15, 1, 1700, 0, 0, 1700),
+	(66, 1, '00508000', '', '', 'Puros Tripa Larga', '2021-05-05', 212, 51, 9, 32, 5, 7, 3, 4000, 0, 0, 4000),
+	(67, 1, '00508001', '', '', 'Puros Tripa Larga', '2021-05-05', 212, 51, 9, 32, 2, 7, 3, 7200, 0, 0, 7200),
+	(68, 4, '00508001', '', '', 'Puros Tripa Larga', '2021-05-05', 221, 51, 9, 32, 2, 7, 3, 200, 0, 0, 200),
+	(69, 1, '00508002', '', '', 'Puros Tripa Larga', '2021-05-05', 212, 99, 9, 11, 6, 7, 1, 3600, 0, 0, 3600),
+	(70, 1, '00508003', '', '', 'Puros Tripa Larga', '2021-05-05', 212, 61, 9, 11, 1, 7, 1, 1200, 0, 0, 1200),
+	(71, 1, '00508010', '', '', 'Puros Tripa Larga', '2021-05-05', 212, 51, 21, 33, 5, 19, 1, 1800, 0, 0, 1800),
+	(72, 1, '00508011', '', '', 'Puros Tripa Larga', '2021-05-05', 212, 51, 21, 33, 2, 19, 1, 1200, 0, 0, 1200),
+	(73, 4, '00508011', '', '', 'Puros Tripa Larga', '2021-05-05', 244, 51, 21, 33, 2, 19, 1, 300, 0, 0, 300),
+	(74, 1, '00508015', '', '', 'Puros Tripa Larga', '2021-05-05', 212, 51, 11, 12, 5, 4, 1, 600, 0, 0, 600),
+	(75, 1, '00508016', '', '', 'Puros Tripa Larga', '2021-05-05', 212, 51, 11, 12, 2, 4, 1, 1000, 0, 0, 1000),
+	(76, 1, '00508017', '', '', NULL, '2021-05-05', 212, 73, 11, 12, 6, 4, 1, 200, 0, 0, 200),
+	(77, 1, '00508020', '', '', 'Puros Tripa Larga', '2021-05-05', 212, 91, 4, 2, 10, 7, 1, 62800, 0, 0, 62800),
+	(78, 1, '00508022', '', '', 'Puros Tripa Larga', '2021-05-05', 212, 91, 9, 11, 10, 7, 1, 1200, 0, 0, 1200),
+	(79, 1, '00605002', '', '', 'Puros Tripa Larga', '2021-05-05', 212, 51, 14, 17, 5, 13, 3, 5500, 0, 0, 5500),
+	(80, 1, '00605003', '', '', 'Puros Tripa Larga', '2021-05-05', 212, 51, 14, 17, 2, 13, 3, 1500, 0, 0, 1500),
+	(81, 1, '00703001', '', '', 'Puros Tripa Larga', '2021-05-05', 212, 99, 2, 1, 6, 21, 3, 2000, 0, 0, 2000),
+	(82, 1, '00703003', '', '', 'Puros Tripa Larga', '2021-05-05', 212, 99, 2, 1, 6, 7, 1, 1600, 0, 0, 1600),
+	(83, 4, '00703003', '', '', 'Puros Tripa Larga', '2021-05-05', 124, 99, 2, 1, 6, 7, 1, 460, 0, 0, 460),
+	(84, 1, '00704001', '', '', 'Puros Tripa Larga', '2021-05-05', 212, 99, 4, 2, 6, 21, 3, 2000, 0, 0, 2000),
+	(85, 1, '00704003', '', '', 'Puros Tripa Larga', '2021-05-05', 212, 99, 4, 2, 6, 7, 1, 2000, 0, 0, 2000),
+	(86, 4, '00704003', '', '', 'Puros Tripa Larga', '2021-05-05', 221, 99, 4, 2, 6, 7, 1, 100, 0, 0, 100),
+	(87, 2, '00704004', '', '', 'Puros Tripa Larga', '2021-05-05', 215, 99, 4, 2, 6, 12, 1, 20000, 0, 0, 20000),
+	(88, 1, '00705001', '', '', 'Puros Tripa Larga', '2021-05-05', 212, 99, 4, 14, 6, 21, 3, 1000, 0, 0, 1000),
+	(89, 1, '00705003', '', '', 'Puros Tripa Larga', '2021-05-05', 212, 99, 4, 14, 6, 7, 1, 1200, 0, 0, 1200),
+	(90, 1, '00712001', '', '', 'Puros Tripa Larga', '2021-05-05', 212, 99, 22, 34, 6, 21, 3, 1000, 0, 0, 1000),
+	(91, 1, '00712003', '', '', 'Puros Tripa Larga', '2021-05-05', 212, 99, 22, 34, 6, 7, 1, 400, 0, 0, 400),
+	(92, 1, '00712004', '', '', 'Puros Tripa Larga', '2021-05-05', 214, 99, 22, 34, 6, 12, 1, 1250, 0, 0, 1250),
+	(93, 2, '00804065', '', '', NULL, '2021-05-05', 216, 209, 18, 6, 2, 7, 1, 400, 0, 0, 400),
+	(94, 1, '00904038', '', '', 'Puros Tripa Larga', '2021-05-05', 212, 51, 4, 2, 2, 14, 1, NULL, 0, 0, NULL),
+	(95, 2, '00904111', '', '', 'Puros Tripa Larga', '2021-05-05', 214, 186, 3, 3, 2, 9, 1, 500, 0, 0, 500),
+	(96, 2, '01103004', '', '', 'Puros Tripa Larga', '2021-05-05', 220, 59, 1, 6, 18, 11, 1, 325, 0, 0, 325),
+	(97, 2, '01103006', '', '', 'Puros Tripa Larga', '2021-05-05', 220, 59, 4, 3, 2, 11, 1, 2500, 0, 0, 2500),
+	(98, 2, '01103010', '', '', 'Puros Tripa Larga', '2021-05-05', 220, 59, 38, 68, 2, 11, 1, 1000, 0, 0, 1000),
+	(99, 2, '01104000', '', '', 'Puros Tripa Larga', '2021-05-05', 220, 59, 4, 3, 2, 13, 3, 1750, 0, 0, 1750),
+	(100, 1, '01604010', '', '', 'Puros Tripa Larga', '2021-05-05', 212, 109, 24, 41, 1, 7, 1, 400, 0, 0, 400),
+	(101, 1, '01604011', '', '', NULL, '2021-05-05', 212, 109, 3, 2, 1, 7, 1, 400, 0, 0, 400),
+	(102, 1, '01604012', '', '', 'Puros Tripa Larga', '2021-05-05', 212, 109, 28, 14, 1, 7, 1, 400, 0, 0, 400),
+	(103, 1, '01606675', '', '', 'Puros Tripa Larga', '2021-05-05', 212, 40, 20, 30, 5, 7, 1, 6400, 0, 0, 6400),
+	(104, 4, '01606677', '', '', 'Puros Tripa Larga', '2021-05-05', 213, 40, 9, 11, 5, 7, 1, 300, 0, 0, 300),
+	(105, 4, '01606677', '', '', 'Puros Tripa Larga', '2021-05-05', 221, 40, 9, 11, 5, 7, 1, 200, 0, 0, 200),
+	(106, 1, '01606678', '', '', 'Puros Tripa Larga', '2021-05-05', 212, 40, 3, 2, 5, 7, 1, 5200, 0, 0, 5200),
+	(107, 4, '01606678', '', '', 'Puros Tripa Larga', '2021-05-05', 213, 40, 3, 2, 5, 7, 1, 380, 0, 0, 380),
+	(108, 4, '01606678', '', '', 'Puros Tripa Larga', '2021-05-05', 221, 40, 3, 2, 5, 7, 1, 100, 0, 0, 100),
+	(109, 2, '01606872', '', '', 'Puros Tripa Larga', '2021-05-05', 217, 56, 4, 2, 6, 11, 1, 2500, 0, 0, 2500),
+	(110, 4, '01607602', '', '', 'Puros Tripa Larga', '2021-05-05', 213, 95, 3, 2, 11, 7, 1, 160, 0, 0, 160),
+	(111, 4, '01607602', '', '', 'Puros Tripa Larga', '2021-05-05', 221, 95, 3, 2, 11, 7, 1, 200, 0, 0, 200),
+	(112, 4, '01607603', '', '', 'Puros Tripa Larga', '2021-05-05', 221, 95, 9, 11, 11, 7, 1, 200, 0, 0, 200),
+	(113, 3, '09906000', '', '', 'Puros Tripa Larga', '2021-05-05', 237, 219, 3, 3, 3, 24, 4, 360, 0, 0, 360),
+	(114, 3, '09906012', '', '', NULL, '2021-05-05', 237, 181, 4, 2, 6, 20, 4, 1920, 0, 0, 1920),
+	(115, 3, '09906018', '', '', 'Puros Tripa Larga', '2021-05-05', 237, 181, 22, 34, 6, 20, 4, 480, 0, 0, 480),
+	(116, 3, '09906035', '', '', 'Puros Tripa Larga', '2021-05-05', 237, 161, 4, 2, 2, 20, 4, 320, 0, 0, 320),
+	(117, 3, '09906037', '', '', NULL, '2021-05-05', 237, 182, 3, 2, 3, 22, 4, 750, 0, 0, 750),
+	(118, 3, '09906039', '', '', 'Puros Tripa Larga', '2021-05-05', 237, 182, 9, 40, 3, 22, 4, 1200, 0, 0, 1200),
+	(119, 1, '10104111', '', '', 'Puros Tripa Larga', '2021-05-05', 223, 90, 6, 44, 3, 7, 1, 500, 0, 0, 500),
+	(120, 1, '10104130', '', '', NULL, '2021-05-05', 223, 51, 6, 67, 5, 7, 1, 500, 0, 0, 500),
+	(121, 4, '10104210', '', '', NULL, '2021-05-05', 213, 14, 2, 6, 3, 7, 1, 140, 0, 0, 140),
+	(122, 1, '10104750', '', '', 'Puros Tripa Larga', '2021-05-05', 212, 101, 2, 5, 4, 7, 1, 2400, 0, 0, 2400),
+	(123, 4, '10104750', '', '', 'Puros Tripa Larga', '2021-05-05', 213, 101, 2, 5, 4, 7, 1, 600, 0, 0, 600),
+	(124, 1, '10104751', '', '', 'Puros Tripa Larga', '2021-05-05', 212, 101, 3, 35, 4, 7, 1, 4000, 0, 0, 4000),
+	(125, 1, '10104752', '', '', 'Puros Tripa Larga', '2021-05-05', 212, 101, 16, 36, 4, 7, 1, 800, 0, 0, 800),
+	(126, 1, '10104754', '', '', 'Puros Tripa Larga', '2021-05-05', 212, 101, 9, 37, 4, 7, 1, 800, 0, 0, 800),
+	(127, 4, '10104754', '', '', 'Puros Tripa Larga', '2021-05-05', 244, 101, 9, 37, 4, 7, 1, 400, 0, 0, 400),
+	(128, 2, '10104772', '', '', 'Puros Tripa Larga', '2021-05-05', 214, 101, 5, 38, 4, 12, 1, 1250, 0, 0, 1250),
+	(129, 2, '10104775', '', '', 'Puros Tripa Larga', '2021-05-05', 215, 101, 3, 35, 4, 12, 1, 2000, 0, 0, 2000),
+	(130, 2, '10104778', '', '', 'Puros Tripa Larga', '2021-05-05', 216, 101, 2, 5, 4, 11, 1, 700, 0, 0, 700),
+	(131, 1, '10104816', '', '', 'Puros Tripa Larga', '2021-05-05', 215, 51, 4, 2, 2, 11, 1, 10000, 0, 0, 10000),
+	(132, 1, '10104817', '', '', NULL, '2021-05-05', 215, 234, 4, 2, 5, 11, 1, 10000, 0, 0, 10000),
+	(133, 1, '10104912', '', '', 'Puros Tripa Larga', '2021-05-05', 212, 51, 2, 1, 5, 23, 1, 14300, 0, 0, 14300),
+	(134, 1, '10105005', '', '', 'Puros Tripa Larga', '2021-05-05', 235, 232, 5, 4, 2, 7, 1, 400, 0, 0, 400),
+	(135, 1, '10105550', '', '', 'Puros Tripa Corta', '2021-05-05', 225, 227, 1, 1, 2, 10, 1, 6000, 0, 0, 6000),
+	(136, 1, '10105551', '', '', 'Puros Tripa Corta', '2021-05-05', 225, 227, 4, 2, 2, 10, 1, 6000, 0, 0, 6000),
+	(137, 1, '10105555', '', '', 'Puros Tripa Corta', '2021-05-05', 225, 227, 1, 1, 1, 10, 1, 2000, 0, 0, 2000),
+	(138, 1, '10105556', '', '', 'Puros Tripa Corta', '2021-05-05', 225, 227, 4, 2, 1, 10, 1, 2000, 0, 0, 2000),
+	(139, 1, '10105560', '', '', 'Puros Tripa Corta', '2021-05-05', 225, 227, 1, 1, 6, 10, 1, 2000, 0, 0, 2000),
+	(140, 1, '10105561', '', '', 'Puros Tripa Corta', '2021-05-05', 225, 227, 4, 2, 6, 10, 1, 2000, 0, 0, 2000),
+	(141, 1, '10105565', '', '', 'Puros Tripa Corta', '2021-05-05', 225, 227, 1, 1, 5, 10, 1, 2000, 0, 0, 2000),
+	(142, 1, '10105566', '', '', 'Puros Tripa Corta', '2021-05-05', 225, 227, 4, 2, 5, 10, 1, 2000, 0, 0, 2000),
+	(143, 2, '10499015', '', '', NULL, '2021-05-05', 220, 204, 3, 3, 3, 11, 1, NULL, 0, 0, NULL),
+	(144, 2, '10499060', '', '', NULL, '2021-05-05', 220, 197, 1, 6, 3, 11, 1, NULL, 0, 0, NULL),
+	(145, 1, '10603007', '', '', NULL, '2021-05-05', 250, 145, 36, 57, 6, 10, 1, 1000, 0, 0, 1000),
+	(146, 3, '10610017', '', '', 'Puros Tripa Larga', '2021-05-05', 223, 162, 9, 11, 5, 22, 4, 750, 0, 0, 750),
+	(147, 3, '10610018', '', '', 'Puros Tripa Larga', '2021-05-05', 223, 162, 9, 11, 2, 22, 4, 750, 0, 0, 750),
+	(148, 3, '10610019', '', '', NULL, '2021-05-05', 223, 162, 4, 2, 5, 22, 4, 750, 0, 0, 750),
+	(149, 3, '10610020', '', '', NULL, '2021-05-05', 223, 162, 4, 2, 2, 22, 4, 1500, 0, 0, 1500),
+	(150, 3, '11707003', '', '', 'Puros Tripa Larga', '2021-05-05', 228, 138, 15, 48, 6, 17, 4, 32000, 0, 0, 32000),
+	(151, 3, '11710050', '', '', NULL, '2021-05-05', 218, 183, 2, 1, 3, 7, 1, 1000, 0, 0, 1000),
+	(152, 3, '11710052', '', '', 'Puros Tripa Larga', '2021-05-05', 218, 183, 16, 14, 3, 7, 1, 2000, 0, 0, 2000),
+	(153, 3, '11710055', '', '', NULL, '2021-05-05', 219, 183, 2, 1, 3, 12, 1, 2000, 0, 0, 2000),
+	(154, 3, '11803000', '', '', 'Puros Tripa Larga', '2021-05-05', 218, 132, 2, 1, 6, 7, 1, 4000, 0, 0, 4000),
+	(155, 3, '11803002', '', '', 'Puros Tripa Larga', '2021-05-05', 219, 132, 2, 1, 6, 12, 1, 3000, 0, 0, 3000),
+	(156, 3, '11812002', '', '', NULL, '2021-05-05', 218, 132, 9, 11, 6, 7, 1, 2000, 0, 0, 2000),
+	(157, 3, '11812008', '', '', 'Puros Tripa Larga', '2021-05-05', 219, 132, 31, 4, 6, 12, 1, 2000, 0, 0, 2000),
+	(158, 3, '11812010', '', '', 'Puros Tripa Larga', '2021-05-05', 219, 132, 4, 2, 6, 12, 1, 5000, 0, 0, 5000),
+	(159, 3, '12002998', '', '', 'Puros Tripa Larga', '2021-05-05', 219, 133, 4, 2, 2, 12, 1, 4000, 0, 0, 4000),
+	(160, 3, '12002999', '', '', NULL, '2021-05-05', 219, 133, 4, 2, 5, 12, 1, 6000, 0, 0, 6000),
+	(161, 3, '12003001', '', '', 'Puros Tripa Larga', '2021-05-05', 219, 133, 2, 1, 5, 12, 1, 2000, 0, 0, 2000),
+	(162, 3, '12003002', '', '', 'Puros Tripa Larga', '2021-05-05', 218, 133, 2, 1, 2, 7, 1, 1000, 0, 0, 1000),
+	(163, 3, '12003003', '', '', 'Puros Tripa Larga', '2021-05-05', 218, 133, 2, 1, 5, 7, 1, 1000, 0, 0, 1000),
+	(164, 3, '12003005', '', '', NULL, '2021-05-05', 218, 133, 22, 34, 5, 7, 1, 1000, 0, 0, 1000),
+	(165, 3, '12003007', '', '', 'Puros Tripa Larga', '2021-05-05', 218, 133, 22, 34, 2, 7, 1, 1000, 0, 0, 1000),
+	(166, 3, '12003050', '', '', 'Puros Tripa Larga', '2021-05-05', 218, 105, 4, 2, 1, 7, 1, 4000, 0, 0, 4000),
+	(167, 3, '12003051', '', '', 'Puros Tripa Larga', '2021-05-05', 218, 105, 4, 14, 1, 7, 1, 2000, 0, 0, 2000),
+	(168, 3, '12003060', '', '', 'Puros Tripa Larga', '2021-05-05', 219, 105, 4, 2, 1, 12, 1, 6000, 0, 0, 6000),
+	(169, 3, '12003061', '', '', 'Puros Tripa Larga', '2021-05-05', 219, 105, 9, 11, 1, 12, 1, 2000, 0, 0, 2000),
+	(170, 3, '12003062', '', '', 'Puros Tripa Larga', '2021-05-05', 219, 105, 4, 14, 1, 12, 1, 1000, 0, 0, 1000),
+	(171, 3, '12004000', '', '', 'Puros Tripa Larga', '2021-05-05', 218, 133, 4, 2, 2, 7, 1, 2000, 0, 0, 2000),
+	(172, 3, '12004001', '', '', NULL, '2021-05-05', 218, 133, 4, 2, 5, 7, 1, 2000, 0, 0, 2000),
+	(173, 3, '12005003', '', '', 'Puros Tripa Larga', '2021-05-05', 218, 133, 9, 11, 2, 7, 1, 2000, 0, 0, 2000),
+	(174, 3, '12104000', '', '', NULL, '2021-05-05', 218, 134, 3, 3, 5, 7, 1, 2400, 0, 0, 2400),
+	(175, 3, '12301000', '', '', NULL, '2021-05-05', 218, 135, 19, 25, 3, 7, 1, 2000, 0, 0, 2000),
+	(176, 3, '12303000', '', '', 'Puros Tripa Larga', '2021-05-05', 218, 135, 2, 1, 3, 7, 1, 2000, 0, 0, 2000),
+	(177, 1, '12503003', '', '', NULL, '2021-05-05', 240, 63, 4, 2, 1, 7, 1, 800, 0, 0, 800),
+	(178, 1, '12503005', '', '', NULL, '2021-05-05', 240, 63, 19, 30, 2, 7, 1, 800, 0, 0, 800),
+	(179, 1, '12503010', '', '', 'Puros Tripa Larga', '2021-05-05', 240, 63, 1, 1, 1, 7, 1, 800, 0, 0, 800),
+	(180, 4, '12506001', '', '', 'Puros Tripa Larga', '2021-05-05', 213, 61, 4, 2, 1, 16, 1, 200, 0, 0, 200),
+	(181, 1, '12506010', '', '', 'Puros Tripa Larga', '2021-05-05', 214, 61, 4, 2, 1, 12, 1, 625, 0, 0, 625),
+	(182, 2, '12506011', '', '', 'Puros Tripa Larga', '2021-05-05', 245, 61, 4, 14, 1, 12, 1, 1000, 0, 0, 1000),
+	(183, 1, '12506012', '', '', 'Puros Tripa Larga', '2021-05-05', 215, 61, 4, 2, 1, 11, 1, 10000, 0, 0, 10000),
+	(184, 1, '12506020', '', '', 'Puros Tripa Larga', '2021-05-05', 212, 61, 4, 2, 1, 7, 1, 3200, 0, 0, 3200),
+	(185, 1, '12506021', '', '', 'Puros Tripa Larga', '2021-05-05', 212, 61, 4, 14, 1, 7, 1, 3200, 0, 0, 3200),
+	(186, 4, '12506021', '', '', 'Puros Tripa Larga', '2021-05-05', 222, 61, 4, 14, 1, 7, 1, 80, 0, 0, 80),
+	(187, 3, '13403010', '', '', 'Puros Tripa Larga', '2021-05-05', 219, 135, 3, 2, 3, 12, 1, 6000, 0, 0, 6000),
+	(188, 2, '14399005', '', '', NULL, '2021-05-05', 220, 147, 2, 6, 3, 11, 1, 400, 0, 0, 400),
+	(189, 2, '14399006', '', '', 'Puros Tripa Larga', '2021-05-05', 220, 147, 3, 3, 3, 11, 1, 4000, 0, 0, 4000),
+	(190, 2, '14399010', '', '', 'Puros Tripa Larga', '2021-05-05', 220, 147, 9, 11, 3, 11, 1, 1500, 0, 0, 1500),
+	(191, 1, '15003000', '', '', 'Puros Tripa Larga', '2021-05-05', 229, 184, 24, 6, 2, 7, 1, 2000, 0, 0, 2000),
+	(192, 1, '15004001', '', '', 'Puros Tripa Larga', '2021-05-05', 229, 184, 5, 51, 2, 7, 1, 2000, 0, 0, 2000),
+	(193, 1, '20005000', '', '', 'Puros Tripa Larga', '2021-05-05', 212, 90, 1, 6, 3, 7, 1, 4000, 0, 0, 4000),
+	(194, 4, '20005000', '', '', 'Puros Tripa Larga', '2021-05-05', 213, 90, 1, 6, 3, 7, 1, 380, 0, 0, 380),
+	(195, 4, '20005000', '', '', 'Puros Tripa Larga', '2021-05-05', 222, 90, 1, 6, 3, 7, 1, 200, 0, 0, 200),
+	(196, 1, '20005001', '', '', 'Puros Tripa Larga', '2021-05-05', 212, 90, 3, 3, 3, 7, 3, 8000, 0, 0, 8000),
+	(197, 1, '20005002', '', '', 'Puros Tripa Larga', '2021-05-05', 212, 90, 3, 21, 3, 7, 3, 4800, 0, 0, 4800),
+	(198, 1, '20005005', '', '', 'Puros Tripa Larga', '2021-05-05', 212, 90, 34, 52, 3, 7, 1, 400, 0, 0, 400),
+	(199, 2, '20005006', '', '', 'Puros Tripa Larga', '2021-05-05', 215, 90, 3, 3, 3, 11, 1, 25000, 0, 0, 25000),
+	(200, 1, '20005007', '', '', 'Puros Tripa Larga', '2021-05-05', 212, 90, 9, 26, 3, 7, 1, 1200, 0, 0, 1200),
+	(201, 4, '20005007', '', '', 'Puros Tripa Larga', '2021-05-05', 222, 90, 9, 26, 3, 7, 1, 200, 0, 0, 200),
+	(202, 2, '20005016', '', '', 'Puros Tripa Larga', '2021-05-05', 220, 90, 1, 6, 3, 11, 1, 40000, 0, 0, 40000),
+	(203, 4, '20018002', '', '', 'Puros Tripa Larga', '2021-05-05', 244, 113, 9, 11, 1, 7, 1, 600, 0, 0, 600),
+	(204, 2, '20018021', '', '', 'Puros Tripa Larga', '2021-05-05', 214, 113, 3, 2, 1, 12, 1, 1250, 0, 0, 1250),
+	(205, 2, '20018022', '', '', 'Puros Tripa Larga', '2021-05-05', 214, 113, 9, 11, 1, 12, 1, 1250, 0, 0, 1250),
+	(206, 2, '40503003', '', '', 'Puros Tripa Larga', '2021-05-05', 229, 61, 18, 24, 1, 7, 1, 10000, 0, 0, 10000),
+	(207, 2, '40503004', '', '', NULL, '2021-05-05', 229, 99, 18, 80, 6, 7, 1, 10000, 0, 0, 10000),
+	(208, 2, '40503005', '', '', 'Puros Tripa Larga', '2021-05-05', 229, 51, 18, 80, 3, 7, 1, 10000, 0, 0, 10000),
+	(209, 2, '40503014', '', '', 'Puros Tripa Larga', '2021-05-05', 229, 61, 18, 24, 1, 11, 1, 2500, 0, 0, 2500),
+	(210, 2, '40503015', '', '', NULL, '2021-05-05', 229, 99, 18, 80, 6, 11, 1, 2500, 0, 0, 2500),
+	(211, 2, '40503016', '', '', 'Puros Tripa Larga', '2021-05-05', 229, 51, 18, 80, 3, 11, 1, 2500, 0, 0, 2500),
+	(212, 2, '40503020', '', '', 'Puros Tripa Larga', '2021-05-05', 229, 61, 18, 24, 1, 9, 1, 3000, 0, 0, 3000),
+	(213, 2, '40503021', '', '', NULL, '2021-05-05', 229, 99, 18, 80, 6, 9, 1, 3000, 0, 0, 3000),
+	(214, 2, '40503022', '', '', 'Puros Tripa Larga', '2021-05-05', 229, 51, 18, 80, 3, 9, 1, 3000, 0, 0, 3000),
+	(215, 2, '41112001', '', '', NULL, '2021-05-05', 220, 59, 22, 74, 1, 11, 1, 200, 0, 0, 200),
+	(216, 2, '47705002', '', '', 'Puros Tripa Larga', '2021-05-05', 220, 168, 3, 14, 6, 11, 1, 7500, 0, 0, 7500),
+	(217, 2, '47801002', '', '', 'Puros Tripa Larga', '2021-05-05', 220, 168, 3, 14, 6, 7, 1, 1200, 0, 0, 1200),
+	(218, 2, '47801004', '', '', 'Puros Tripa Larga', '2021-05-05', 220, 168, 5, 4, 6, 7, 1, 2000, 0, 0, 2000),
+	(219, 2, '47801040', '', '', NULL, '2021-05-05', 246, 148, 4, 2, 5, 10, 1, 3000, 0, 0, 3000),
+	(220, 2, '47801042', '', '', NULL, '2021-05-05', 246, 148, 4, 2, 6, 10, 1, 3000, 0, 0, 3000),
+	(221, 2, '47801043', '', '', NULL, '2021-05-05', 246, 148, 4, 2, 1, 10, 1, 3000, 0, 0, 3000),
+	(222, 2, '47801044', '', '', NULL, '2021-05-05', 246, 148, 4, 2, 3, 10, 1, 3000, 0, 0, 3000),
+	(223, 2, '47801420', '', '', 'Puros Tripa Corta', '2021-05-05', 217, 60, 1, 1, 8, 10, 1, 60000, 0, 0, 60000),
+	(224, 2, '47801421', '', '', 'Puros Tripa Corta', '2021-05-05', 217, 60, 4, 2, 8, 10, 1, 60000, 0, 0, 60000),
+	(225, 2, '47801501', '', '', 'Puros Tripa Larga', '2021-05-05', 239, 220, 8, 1, 13, 10, 4, 600, 0, 0, 600),
+	(226, 2, '47801561', '', '', 'Puros Tripa Corta', '2021-05-05', 217, 166, 4, 2, 1, 10, 1, 60000, 0, 0, 60000),
+	(227, 2, '47801563', '', '', 'Puros Tripa Corta', '2021-05-05', 217, 166, 4, 2, 2, 10, 1, 60000, 0, 0, 60000),
+	(228, 2, '47801890', '', '', 'Puros Tripa Larga', '2021-05-05', 220, 57, 2, 1, 1, 9, 1, 1400, 0, 0, 1400),
+	(229, 2, '47801892', '', '', 'Puros Tripa Larga', '2021-05-05', 220, 57, 9, 16, 1, 9, 1, 1600, 0, 0, 1600),
+	(230, 1, '603004002', '', '', 'Puros Tripa Larga', '2021-05-05', 212, 88, 4, 3, 1, 7, 1, 1200, 0, 0, 1200),
+	(231, 4, '603004002', '', '', 'Puros Tripa Larga', '2021-05-05', 213, 88, 4, 3, 1, 7, 1, 240, 0, 0, 240),
+	(232, 1, '603004004', '', '', 'Puros Tripa Larga', '2021-05-05', 212, 88, 17, 23, 1, 7, 1, 400, 0, 0, 400),
+	(233, 2, '603004023', '', '', 'Puros Tripa Larga', '2021-05-05', 214, 88, 4, 3, 1, 12, 1, 1250, 0, 0, 1250),
+	(234, 2, '603004023', '', '', 'Puros Tripa Larga', '2021-05-05', 215, 88, 4, 3, 1, 12, 1, 5000, 0, 0, 5000),
+	(235, 2, '603004031', '', '', 'Puros Tripa Larga', '2021-05-05', 216, 88, 4, 3, 1, 11, 1, 750, 0, 0, 750),
+	(236, 2, '603004050', '', '', 'Puros Tripa Larga', '2021-05-05', 216, 88, 4, 3, 13, 11, 1, 3000, 0, 0, 3000),
+	(237, 1, '603005750', '', '', 'Puros Tripa Larga', '2021-05-05', 212, 92, 2, 1, 1, 4, 1, 600, 0, 0, 600),
+	(238, 1, '603005751', '', '', 'Puros Tripa Larga', '2021-05-05', 212, 92, 4, 2, 1, 4, 1, 1200, 0, 0, 1200),
+	(239, 1, '603005752', '', '', 'Puros Tripa Larga', '2021-05-05', 212, 92, 9, 11, 1, 4, 1, 400, 0, 0, 400),
+	(240, 2, '6030066060', '', '', 'Puros Tripa Larga', '2021-05-05', 217, 56, 4, 2, 3, 9, 1, 5000, 0, 0, 5000),
+	(241, 1, '9900004000', '', '', 'Puros Tripa Larga', '2021-05-05', 230, 94, 9, 16, 2, 7, 1, 2000, 0, 0, 2000),
+	(242, 1, '9900004002', '', '', 'Puros Tripa Larga', '2021-05-05', 230, 94, 2, 1, 2, 7, 1, 2000, 0, 0, 2000),
+	(243, 1, '9900004003', '', '', 'Puros Tripa Larga', '2021-05-05', 230, 94, 25, 2, 2, 7, 1, 2000, 0, 0, 2000),
+	(244, 1, '9900004005', '', '', 'Puros Tripa Larga', '2021-05-05', 232, 94, 25, 2, 2, 10, 1, 1000, 0, 0, 1000),
+	(245, 1, '9900004011', '', '', 'Puros Tripa Larga', '2021-05-05', 230, 228, 2, 1, 1, 7, 1, 2000, 0, 0, 2000),
+	(246, 1, '9900004012', '', '', 'Puros Tripa Larga', '2021-05-05', 230, 228, 3, 2, 1, 7, 1, 3000, 0, 0, 3000),
+	(247, 1, '9900004016', '', '', 'Puros Tripa Larga', '2021-05-05', 232, 228, 2, 1, 1, 10, 1, 1000, 0, 0, 1000),
+	(248, 1, '9900004019', '', '', 'Puros Tripa Larga', '2021-05-05', 230, 53, 2, 1, 1, 7, 1, 3000, 0, 0, 3000),
+	(249, 1, '9900004020', '', '', 'Puros Tripa Larga', '2021-05-05', 230, 53, 3, 2, 1, 7, 1, 4000, 0, 0, 4000),
+	(250, 1, '9900004023', '', '', 'Puros Tripa Larga', '2021-05-05', 232, 53, 3, 2, 1, 10, 1, 1000, 0, 0, 1000),
+	(251, 1, '9900004025', '', '', NULL, '2021-05-05', 230, 230, 9, 16, 1, 7, 1, 2000, 0, 0, 2000),
+	(252, 1, '9900004027', '', '', 'Puros Tripa Larga', '2021-05-05', 230, 230, 2, 1, 1, 7, 1, 2000, 0, 0, 2000),
+	(253, 1, '9900004028', '', '', 'Puros Tripa Larga', '2021-05-05', 230, 230, 3, 2, 1, 7, 1, 4000, 0, 0, 4000),
+	(254, 1, '9900004030', '', '', 'Puros Tripa Larga', '2021-05-05', 231, 230, 2, 1, 1, 10, 1, 2000, 0, 0, 2000),
+	(255, 1, '9900004031', '', '', 'Puros Tripa Larga', '2021-05-05', 232, 230, 3, 2, 1, 10, 1, 1000, 0, 0, 1000),
+	(256, 1, '9900004035', '', '', 'Puros Tripa Larga', '2021-05-05', 230, 229, 9, 16, 3, 7, 1, 2000, 0, 0, 2000),
+	(257, 1, '9900004037', '', '', 'Puros Tripa Larga', '2021-05-05', 230, 229, 2, 1, 3, 7, 1, 3000, 0, 0, 3000),
+	(258, 1, '9900004038', '', '', 'Puros Tripa Larga', '2021-05-05', 230, 229, 3, 2, 3, 7, 1, 5000, 0, 0, 5000),
+	(259, 1, '9900004039', '', '', 'Puros Tripa Larga', '2021-05-05', 233, 229, 2, 1, 3, 10, 1, 4000, 0, 0, 4000),
+	(260, 1, '9900004040', '', '', 'Puros Tripa Larga', '2021-05-05', 232, 229, 3, 2, 3, 10, 1, 1000, 0, 0, 1000),
+	(261, 1, '9900009110', '', '', 'Puros Tripa Larga', '2021-05-05', 230, 93, 2, 79, 2, 7, 1, 2000, 0, 0, 2000),
+	(262, 1, '9900009111', '', '', 'Puros Tripa Larga', '2021-05-05', 230, 93, 3, 27, 2, 7, 1, 2000, 0, 0, 2000),
+	(263, 1, '9900009115', '', '', 'Puros Tripa Larga', '2021-05-05', 231, 93, 2, 79, 2, 12, 1, 2500, 0, 0, 2500),
+	(264, 1, '9900009117', '', '', 'Puros Tripa Larga', '2021-05-05', 232, 93, 3, 27, 2, 10, 1, 1000, 0, 0, 1000);
 /*!40000 ALTER TABLE `pendiente_empaque` ENABLE KEYS */;
 
--- Volcando estructura para tabla facturacion_plasencia.prograamacion
+-- Dumping structure for table facturacion_plasencia.prograamacion
 CREATE TABLE IF NOT EXISTS `prograamacion` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `fecha` date DEFAULT NULL,
-  `mes_contenedor` varchar(100) DEFAULT NULL,
+  `mes_contenedor` varchar(50) DEFAULT NULL,
+  `numero_contenedor_mes` varchar(50) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
--- Volcando datos para la tabla facturacion_plasencia.prograamacion: 2 rows
+-- Dumping data for table facturacion_plasencia.prograamacion: 0 rows
 DELETE FROM `prograamacion`;
 /*!40000 ALTER TABLE `prograamacion` DISABLE KEYS */;
-INSERT INTO `prograamacion` (`id`, `fecha`, `mes_contenedor`) VALUES
-	(2, '2021-05-17', 'primer contenedor de mayo'),
-	(3, '2021-05-17', 'segundo contenedor de mayo');
 /*!40000 ALTER TABLE `prograamacion` ENABLE KEYS */;
 
--- Volcando estructura para tabla facturacion_plasencia.sample_datas
+-- Dumping structure for table facturacion_plasencia.sample_datas
 CREATE TABLE IF NOT EXISTS `sample_datas` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `first_name` varchar(50) DEFAULT NULL,
@@ -5728,7 +6683,7 @@ CREATE TABLE IF NOT EXISTS `sample_datas` (
   PRIMARY KEY (`id`) USING BTREE
 ) ENGINE=MyISAM AUTO_INCREMENT=15 DEFAULT CHARSET=latin1;
 
--- Volcando datos para la tabla facturacion_plasencia.sample_datas: 2 rows
+-- Dumping data for table facturacion_plasencia.sample_datas: 2 rows
 DELETE FROM `sample_datas`;
 /*!40000 ALTER TABLE `sample_datas` DISABLE KEYS */;
 INSERT INTO `sample_datas` (`id`, `first_name`, `last_name`, `gender`, `created_at`, `update_at`) VALUES
@@ -5736,7 +6691,7 @@ INSERT INTO `sample_datas` (`id`, `first_name`, `last_name`, `gender`, `created_
 	(14, 'Karina', 'Sevilla', 3443, NULL, NULL);
 /*!40000 ALTER TABLE `sample_datas` ENABLE KEYS */;
 
--- Volcando estructura para tabla facturacion_plasencia.tabla_codigo_programacions
+-- Dumping structure for table facturacion_plasencia.tabla_codigo_programacions
 CREATE TABLE IF NOT EXISTS `tabla_codigo_programacions` (
   `codigo` varchar(50) DEFAULT NULL,
   `presentacion` varchar(50) DEFAULT NULL,
@@ -5748,7 +6703,7 @@ CREATE TABLE IF NOT EXISTS `tabla_codigo_programacions` (
   `created_at` timestamp NULL DEFAULT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
--- Volcando datos para la tabla facturacion_plasencia.tabla_codigo_programacions: 620 rows
+-- Dumping data for table facturacion_plasencia.tabla_codigo_programacions: 620 rows
 DELETE FROM `tabla_codigo_programacions`;
 /*!40000 ALTER TABLE `tabla_codigo_programacions` DISABLE KEYS */;
 INSERT INTO `tabla_codigo_programacions` (`codigo`, `presentacion`, `marca`, `nombre`, `vitola`, `capa`, `updated_at`, `created_at`) VALUES
@@ -6374,7 +7329,7 @@ INSERT INTO `tabla_codigo_programacions` (`codigo`, `presentacion`, `marca`, `no
 	('P-23763', 'Puros Tripa Larga', 230, 1, 2, 1, '2021-05-04 13:40:44', '2021-05-04 13:40:44');
 /*!40000 ALTER TABLE `tabla_codigo_programacions` ENABLE KEYS */;
 
--- Volcando estructura para tabla facturacion_plasencia.tbl_customer
+-- Dumping structure for table facturacion_plasencia.tbl_customer
 CREATE TABLE IF NOT EXISTS `tbl_customer` (
   `CustomerID` int(11) NOT NULL AUTO_INCREMENT,
   `CustomerName` varchar(50) DEFAULT NULL,
@@ -6386,21 +7341,22 @@ CREATE TABLE IF NOT EXISTS `tbl_customer` (
   PRIMARY KEY (`CustomerID`)
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
--- Volcando datos para la tabla facturacion_plasencia.tbl_customer: 0 rows
+-- Dumping data for table facturacion_plasencia.tbl_customer: 0 rows
 DELETE FROM `tbl_customer`;
 /*!40000 ALTER TABLE `tbl_customer` DISABLE KEYS */;
 /*!40000 ALTER TABLE `tbl_customer` ENABLE KEYS */;
 
--- Volcando estructura para tabla facturacion_plasencia.tipo_empaques
+-- Dumping structure for table facturacion_plasencia.tipo_empaques
 CREATE TABLE IF NOT EXISTS `tipo_empaques` (
   `id_tipo_empaque` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
-  `tipo_empaque` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `tipo_empaque` char(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
-  PRIMARY KEY (`id_tipo_empaque`)
+  PRIMARY KEY (`id_tipo_empaque`),
+  UNIQUE KEY `tipo_empaque` (`tipo_empaque`)
 ) ENGINE=MyISAM AUTO_INCREMENT=115 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- Volcando datos para la tabla facturacion_plasencia.tipo_empaques: 114 rows
+-- Dumping data for table facturacion_plasencia.tipo_empaques: 114 rows
 DELETE FROM `tipo_empaques`;
 /*!40000 ALTER TABLE `tipo_empaques` DISABLE KEYS */;
 INSERT INTO `tipo_empaques` (`id_tipo_empaque`, `tipo_empaque`, `created_at`, `updated_at`) VALUES
@@ -6520,25 +7476,30 @@ INSERT INTO `tipo_empaques` (`id_tipo_empaque`, `tipo_empaque`, `created_at`, `u
 	(114, 'UP/15', '2021-04-28 20:52:07', '2021-04-28 20:52:07');
 /*!40000 ALTER TABLE `tipo_empaques` ENABLE KEYS */;
 
--- Volcando estructura para tabla facturacion_plasencia.users
+-- Dumping structure for table facturacion_plasencia.users
 CREATE TABLE IF NOT EXISTS `users` (
   `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
   `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `email` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `codigo` int(11) DEFAULT NULL,
+  `rol` int(11) DEFAULT NULL,
   `email_verified_at` timestamp NULL DEFAULT NULL,
   `password` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `remember_token` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=MyISAM AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- Volcando datos para la tabla facturacion_plasencia.users: 0 rows
+-- Dumping data for table facturacion_plasencia.users: 2 rows
 DELETE FROM `users`;
 /*!40000 ALTER TABLE `users` DISABLE KEYS */;
+INSERT INTO `users` (`id`, `name`, `email`, `codigo`, `rol`, `email_verified_at`, `password`, `remember_token`, `created_at`, `updated_at`) VALUES
+	(3, 'melvin', 'melvin@gmail.com', 1234, 0, NULL, '$2y$10$ILcbmV.tPOvMSVbYk6NaOe4SkhECWoV4o/2ZuAXfs1XRgFzGDFdCG', NULL, '2021-05-11 21:43:55', '2021-05-11 21:43:55'),
+	(2, 'karina', 'karina@gmail.com', 321, 1, NULL, '$2y$10$dlxZnbJgRGfUxxynk9ZOG.hXWeFh9CxmI4USj4ndqXi1gBqXfrP2.', NULL, '2021-05-11 21:32:54', '2021-05-11 21:32:54');
 /*!40000 ALTER TABLE `users` ENABLE KEYS */;
 
--- Volcando estructura para tabla facturacion_plasencia.vehicles
+-- Dumping structure for table facturacion_plasencia.vehicles
 CREATE TABLE IF NOT EXISTS `vehicles` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `registration_number` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
@@ -6554,21 +7515,22 @@ CREATE TABLE IF NOT EXISTS `vehicles` (
   PRIMARY KEY (`id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- Volcando datos para la tabla facturacion_plasencia.vehicles: 0 rows
+-- Dumping data for table facturacion_plasencia.vehicles: 0 rows
 DELETE FROM `vehicles`;
 /*!40000 ALTER TABLE `vehicles` DISABLE KEYS */;
 /*!40000 ALTER TABLE `vehicles` ENABLE KEYS */;
 
--- Volcando estructura para tabla facturacion_plasencia.vitola_productos
+-- Dumping structure for table facturacion_plasencia.vitola_productos
 CREATE TABLE IF NOT EXISTS `vitola_productos` (
   `id_vitola` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
-  `vitola` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `vitola` char(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
-  PRIMARY KEY (`id_vitola`)
-) ENGINE=MyISAM AUTO_INCREMENT=509 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+  PRIMARY KEY (`id_vitola`),
+  UNIQUE KEY `vitola` (`vitola`)
+) ENGINE=MyISAM AUTO_INCREMENT=510 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- Volcando datos para la tabla facturacion_plasencia.vitola_productos: 508 rows
+-- Dumping data for table facturacion_plasencia.vitola_productos: 509 rows
 DELETE FROM `vitola_productos`;
 /*!40000 ALTER TABLE `vitola_productos` DISABLE KEYS */;
 INSERT INTO `vitola_productos` (`id_vitola`, `vitola`, `created_at`, `updated_at`) VALUES
@@ -6622,7 +7584,7 @@ INSERT INTO `vitola_productos` (`id_vitola`, `vitola`, `created_at`, `updated_at
 	(48, '3-3/4X44', '2021-04-28 20:52:04', '2021-04-28 20:52:04'),
 	(49, '3-3/4X48', '2021-04-28 20:52:04', '2021-04-28 20:52:04'),
 	(50, '3-3/8X48', '2021-04-28 20:52:04', '2021-04-28 20:52:04'),
-	(51, '3-5/16X50 ', '2021-04-28 20:52:04', '2021-04-28 20:52:04'),
+	(51, '3-5/16X50', '2021-04-28 20:52:04', '2021-04-28 20:52:04'),
 	(52, '3-7/8X30', '2021-04-28 20:52:04', '2021-04-28 20:52:04'),
 	(53, '4-1/4X26', '2021-04-28 20:52:04', '2021-04-28 20:52:04'),
 	(54, '4-1/2X30', '2021-04-28 20:52:04', '2021-04-28 20:52:04'),
@@ -6693,7 +7655,7 @@ INSERT INTO `vitola_productos` (`id_vitola`, `vitola`, `created_at`, `updated_at
 	(119, '5-1/4X43', '2021-04-28 20:52:04', '2021-04-28 20:52:04'),
 	(120, '5-1/4X50', '2021-04-28 20:52:04', '2021-04-28 20:52:04'),
 	(121, '5-1/4X52', '2021-04-28 20:52:04', '2021-04-28 20:52:04'),
-	(122, '5-1/8X52 ', '2021-04-28 20:52:04', '2021-04-28 20:52:04'),
+	(122, '5-1/8X52', '2021-04-28 20:52:04', '2021-04-28 20:52:04'),
 	(123, '5-3/16X45', '2021-04-28 20:52:04', '2021-04-28 20:52:04'),
 	(124, '5-3/4X34', '2021-04-28 20:52:04', '2021-04-28 20:52:04'),
 	(125, '5-3/4X41', '2021-04-28 20:52:04', '2021-04-28 20:52:04'),
@@ -6704,8 +7666,8 @@ INSERT INTO `vitola_productos` (`id_vitola`, `vitola`, `created_at`, `updated_at
 	(130, '5-3/4X46', '2021-04-28 20:52:04', '2021-04-28 20:52:04'),
 	(131, '5-3/4X50', '2021-04-28 20:52:04', '2021-04-28 20:52:04'),
 	(132, '5-3/4X52', '2021-04-28 20:52:04', '2021-04-28 20:52:04'),
-	(133, '5-3/4X52X36 ', '2021-04-28 20:52:04', '2021-04-28 20:52:04'),
-	(134, '5-3/4X54X36 ', '2021-04-28 20:52:04', '2021-04-28 20:52:04'),
+	(133, '5-3/4X52X36', '2021-04-28 20:52:04', '2021-04-28 20:52:04'),
+	(134, '5-3/4X54X36', '2021-04-28 20:52:04', '2021-04-28 20:52:04'),
 	(135, '5-3/4X60', '2021-04-28 20:52:04', '2021-04-28 20:52:04'),
 	(136, '5-3/8X42', '2021-04-28 20:52:04', '2021-04-28 20:52:04'),
 	(137, '5-3/8X43', '2021-04-28 20:52:04', '2021-04-28 20:52:04'),
@@ -7079,28 +8041,11 @@ INSERT INTO `vitola_productos` (`id_vitola`, `vitola`, `created_at`, `updated_at
 	(505, '3-1/2X30', '2021-04-28 20:52:06', '2021-04-28 20:52:06'),
 	(506, '6-1/4X58', '2021-04-28 20:52:06', '2021-04-28 20:52:06'),
 	(507, '6X50 Figurado', '2021-04-28 20:52:06', '2021-04-28 20:52:06'),
-	(508, '5-1/8X55', '2021-04-28 20:52:06', '2021-04-28 20:52:06');
+	(508, '5-1/8X55', '2021-04-28 20:52:06', '2021-04-28 20:52:06'),
+	(509, '50x5', NULL, NULL);
 /*!40000 ALTER TABLE `vitola_productos` ENABLE KEYS */;
 
--- Volcando estructura para procedimiento facturacion_plasencia.Actualizar
-DELIMITER //
-CREATE PROCEDURE `Actualizar`(
-	IN `id_pro` INT,
-	IN `saldo_programacion` DECIMAL(10,2),
-	IN `id_pendiente` INT,
-	IN `saldo_pendiente` DECIMAL(10,2)
-)
-BEGIN
-
-UPDATE detalle_programacion SET detalle_programacion.saldo = saldo_programacion WHERE detalle_programacion.id_detalle_programacion =
-id_pro;
-
-UPDATE pendiente_empaque SET pendiente_empaque.saldo =  pendiente_empaque.saldo + saldo_pendiente WHERE pendiente_empaque.id_pendiente
-= id_pendiente;
-END//
-DELIMITER ;
-
--- Volcando estructura para procedimiento facturacion_plasencia.actualizar_contrasenia
+-- Dumping structure for procedure facturacion_plasencia.actualizar_contrasenia
 DELIMITER //
 CREATE PROCEDURE `actualizar_contrasenia`(
 	IN `pa_id` INT,
@@ -7118,51 +8063,7 @@ BEGIN
 END//
 DELIMITER ;
 
--- Volcando estructura para procedimiento facturacion_plasencia.actualizar_detalle_pendiente
-DELIMITER //
-CREATE PROCEDURE `actualizar_detalle_pendiente`(
-	IN `id_pro` INT,
-	IN `id_pen` INT,
-	IN `saldo` DECIMAL(10,2),
-	IN `saldo_pendiente` DECIMAL(10,2)
-)
-BEGIN
-
-
-UPDATE pendiente_empaque SET pendiente_empaque.saldo = pendiente_empaque.saldo + saldo_pendiente WHERE pendiente_empaque.id_pendiente =
-id_pen;
-
-UPDATE detalle_programacion SET detalle_programacion.saldo = saldo WHERE detalle_programacion.id_detalle_programacion = id_pro;
-
-
-END//
-DELIMITER ;
-
--- Volcando estructura para procedimiento facturacion_plasencia.actualizar_pendientes
-DELIMITER //
-CREATE PROCEDURE `actualizar_pendientes`(
-	IN `id` INT,
-	IN `item` VARCHAR(50),
-	IN `orden_sistema` VARCHAR(50),
-	IN `observeacion` VARCHAR(50),
-	IN `presentacion` VARCHAR(50)
-)
-BEGIN
-
-UPDATE pendiente, pendiente_empaque set pendiente.orden_del_sitema = orden_sistema,
-pendiente.observacion = observeacion, pendiente.presentacion = presentacion,
-pendiente_empaque.orden_del_sitema = orden_sistema,
-pendiente_empaque.observacion = observeacion,
- pendiente_empaque.presentacion = presentacion
- WHERE pendiente.id_pendiente = id and pendiente_empaque.id_pendiente = id ;
- 
- 
- UPDATE clase_productos SET clase_productos.presentacion = presentacion
- WHERE clase_productos.item = item;
- end//
-DELIMITER ;
-
--- Volcando estructura para procedimiento facturacion_plasencia.actualizar_productos
+-- Dumping structure for procedure facturacion_plasencia.actualizar_productos
 DELIMITER //
 CREATE PROCEDURE `actualizar_productos`(
 	IN `id` INT,
@@ -7210,34 +8111,7 @@ WHERE clase_productos.id_producto = id;
 END//
 DELIMITER ;
 
--- Volcando estructura para procedimiento facturacion_plasencia.actualizar_programacion
-DELIMITER //
-CREATE PROCEDURE `actualizar_programacion`(
-	IN `id_pro` INT,
-	IN `con` VARCHAR(50)
-)
-BEGIN
-
-UPDATE prograamacion SET prograamacion.mes_contenedor = con WHERE prograamacion.id = id_pro; 
-
-END//
-DELIMITER ;
-
--- Volcando estructura para procedimiento facturacion_plasencia.actualizar_saldo_programacion
-DELIMITER //
-CREATE PROCEDURE `actualizar_saldo_programacion`(
-	IN `id_detalle` INT,
-	IN `saldo` DECIMAL(8,2)
-)
-BEGIN
-
-UPDATE detalle_programacion_temporal SET detalle_programacion_temporal.saldo = saldo
-WHERE detalle_programacion_temporal.id_detalle_programacion = id_detalle;
-
-END//
-DELIMITER ;
-
--- Volcando estructura para procedimiento facturacion_plasencia.actualizar_usuarios
+-- Dumping structure for procedure facturacion_plasencia.actualizar_usuarios
 DELIMITER //
 CREATE PROCEDURE `actualizar_usuarios`(
 	IN `pa_id` INT,
@@ -7257,19 +8131,36 @@ BEGIN
 END//
 DELIMITER ;
 
--- Volcando estructura para procedimiento facturacion_plasencia.agregar_lista_caja
+-- Dumping structure for procedure facturacion_plasencia.agregar_lista_caja
 DELIMITER //
 CREATE PROCEDURE `agregar_lista_caja`(
 	IN `pa_codigo` VARCHAR(50),
 	IN `pa_producto` VARCHAR(255),
-	IN `pa_marca` VARCHAR(50)
+	IN `pa_marca` VARCHAR(50),
+	IN `pa_existencia` INT
 )
 BEGIN
-INSERT INTO lista_cajas (lista_cajas.codigo,lista_cajas.productoServicio,lista_cajas.marca) VALUES (pa_codigo,pa_producto,pa_marca);
+INSERT INTO lista_cajas (lista_cajas.codigo,lista_cajas.productoServicio,lista_cajas.marca,lista_cajas.existencia)
+ VALUES (pa_codigo,pa_producto,pa_marca,pa_existencia);
 END//
 DELIMITER ;
 
--- Volcando estructura para procedimiento facturacion_plasencia.borrar_datos_existencia
+-- Dumping structure for procedure facturacion_plasencia.anadir_cajas_a_inventario
+DELIMITER //
+CREATE PROCEDURE `anadir_cajas_a_inventario`(
+	IN `pa_codigo` VARCHAR(50),
+	IN `pa_cantidad` INT
+)
+BEGIN
+      UPDATE lista_cajas
+		 SET lista_cajas.existencia = lista_cajas.existencia + pa_cantidad 
+		 WHERE 
+     lista_cajas.codigo = pa_codigo;  	  
+        
+END//
+DELIMITER ;
+
+-- Dumping structure for procedure facturacion_plasencia.borrar_datos_existencia
 DELIMITER //
 CREATE PROCEDURE `borrar_datos_existencia`()
 BEGIN
@@ -7277,20 +8168,7 @@ BEGIN
 END//
 DELIMITER ;
 
--- Volcando estructura para procedimiento facturacion_plasencia.borrar_pendientes
-DELIMITER //
-CREATE PROCEDURE `borrar_pendientes`(
-	IN `id` INT
-)
-BEGIN
-
-DELETE FROM pendiente WHERE pendiente.id_pendiente = id;
-DELETE FROM pendiente_empaque WHERE pendiente_empaque.id_pendiente = id;
-
-END//
-DELIMITER ;
-
--- Volcando estructura para procedimiento facturacion_plasencia.buscar_capa
+-- Dumping structure for procedure facturacion_plasencia.buscar_capa
 DELIMITER //
 CREATE PROCEDURE `buscar_capa`(
 	IN `capa` VARCHAR(50)
@@ -7307,7 +8185,7 @@ END if;
 END//
 DELIMITER ;
 
--- Volcando estructura para procedimiento facturacion_plasencia.buscar_existencia
+-- Dumping structure for procedure facturacion_plasencia.buscar_existencia
 DELIMITER //
 CREATE PROCEDURE `buscar_existencia`(
 	IN `busqueda` VARCHAR(50)
@@ -7333,7 +8211,7 @@ END if;
 END//
 DELIMITER ;
 
--- Volcando estructura para procedimiento facturacion_plasencia.buscar_listadecajas
+-- Dumping structure for procedure facturacion_plasencia.buscar_listadecajas
 DELIMITER //
 CREATE PROCEDURE `buscar_listadecajas`(
 	IN `buscar` VARCHAR(50)
@@ -7353,7 +8231,7 @@ if buscar=""then
 END//
 DELIMITER ;
 
--- Volcando estructura para procedimiento facturacion_plasencia.buscar_lista_cajas
+-- Dumping structure for procedure facturacion_plasencia.buscar_lista_cajas
 DELIMITER //
 CREATE PROCEDURE `buscar_lista_cajas`(
 	IN `pa_nombre` VARCHAR(50)
@@ -7367,7 +8245,7 @@ lista_cajas.marca LIKE CONCAT("%",pa_nombre,"%") ;
 END//
 DELIMITER ;
 
--- Volcando estructura para procedimiento facturacion_plasencia.buscar_marca
+-- Dumping structure for procedure facturacion_plasencia.buscar_marca
 DELIMITER //
 CREATE PROCEDURE `buscar_marca`(
 	IN `marca` VARCHAR(50)
@@ -7383,7 +8261,7 @@ END if;
 END//
 DELIMITER ;
 
--- Volcando estructura para procedimiento facturacion_plasencia.buscar_nombre
+-- Dumping structure for procedure facturacion_plasencia.buscar_nombre
 DELIMITER //
 CREATE PROCEDURE `buscar_nombre`(
 	IN `nombre` VARCHAR(50)
@@ -7399,7 +8277,7 @@ END if;
 END//
 DELIMITER ;
 
--- Volcando estructura para procedimiento facturacion_plasencia.buscar_pedidos
+-- Dumping structure for procedure facturacion_plasencia.buscar_pedidos
 DELIMITER //
 CREATE PROCEDURE `buscar_pedidos`(
 	IN `item` VARCHAR(50)
@@ -7434,7 +8312,7 @@ END if;
 END//
 DELIMITER ;
 
--- Volcando estructura para procedimiento facturacion_plasencia.buscar_pendiente
+-- Dumping structure for procedure facturacion_plasencia.buscar_pendiente
 DELIMITER //
 CREATE PROCEDURE `buscar_pendiente`(
 	IN `nombre` VARCHAR(50),
@@ -7444,31 +8322,30 @@ CREATE PROCEDURE `buscar_pendiente`(
 BEGIN
 if nombre="" && fechade="" && fechahasta="" then
 
-SELECT pendiente.id_pendiente ,categoria.categoria AS categoria, pendiente.item AS item,pendiente.orden_del_sitema ,pendiente.observacion 
+SELECT pendiente.id_pendiente , categoria.categoria AS categoria, pendiente.item AS item,pendiente.orden_del_sitema ,pendiente.observacion 
 ,pendiente.presentacion ,pendiente.mes AS mes ,orden_productos.orden AS orden, marca_productos.marca AS marca,vitola_productos.vitola AS vitola, 
 nombre_productos.nombre AS nombre, capa_productos.capa AS capa,
-cellos.anillo AS anillo,cellos.cello AS cello, cellos.upc AS upc, pendiente.pendiente as pendiente, pendiente.saldo,
- tipo_empaques.tipo_empaque AS tipo_empaque, pendiente.paquetes AS paquetes, pendiente.unidades AS unidades
+cellos.anillo AS anillo,cellos.cello AS cello, cellos.upc AS upc, pendiente.pendiente as pendiente,pendiente.factura_del_mes, pendiente.cantidad_enviada_mes, pendiente.saldo, tipo_empaques.tipo_empaque AS tipo_empaque
 FROM categoria, clase_productos, marca_productos, vitola_productos,nombre_productos, capa_productos, orden_productos,cellos,
 tipo_empaques, pendiente
 WHERE pendiente.vitola = vitola_productos.id_vitola AND pendiente.capa = capa_productos.id_capa AND pendiente.orden = orden_productos.id_orden and
  pendiente.nombre = nombre_productos.id_nombre AND  pendiente.marca = marca_productos.id_marca AND cellos.id_cello=pendiente.cello and
-   pendiente.tipo_empaque = tipo_empaques.id_tipo_empaque AND pendiente.categoria = categoria.id_categoria 
+   clase_productos.id_tipo_empaque = tipo_empaques.id_tipo_empaque AND pendiente.categoria = categoria.id_categoria 
 	GROUP BY pendiente.item, pendiente.orden, pendiente.categoria;
 	
 ELSE  
 
 if fechade = ""   && fechahasta = ""  && nombre != "" then
 
-SELECT pendiente.id_pendiente , categoria.categoria AS categoria, pendiente.item AS item,pendiente.orden_del_sitema ,pendiente.observacion 
+SELECT pendiente.id_pendiente, categoria.categoria AS categoria, pendiente.item AS item,pendiente.orden_del_sitema ,pendiente.observacion 
 ,pendiente.presentacion ,pendiente.mes AS mes ,orden_productos.orden AS orden, marca_productos.marca AS marca,vitola_productos.vitola AS vitola, 
 nombre_productos.nombre AS nombre, capa_productos.capa AS capa,
-cellos.anillo AS anillo,cellos.cello AS cello, cellos.upc AS upc, pendiente.saldo, tipo_empaques.tipo_empaque AS tipo_empaque, pendiente.paquetes AS paquetes, pendiente.unidades AS unidades
+cellos.anillo AS anillo,cellos.cello AS cello, cellos.upc AS upc, pendiente.pendiente as pendiente,pendiente.factura_del_mes, pendiente.cantidad_enviada_mes, pendiente.saldo, tipo_empaques.tipo_empaque AS tipo_empaque
 FROM categoria, clase_productos, marca_productos, vitola_productos,nombre_productos, capa_productos, orden_productos,cellos,
 tipo_empaques, pendiente
 WHERE pendiente.vitola = vitola_productos.id_vitola AND pendiente.capa = capa_productos.id_capa AND pendiente.orden = orden_productos.id_orden and
  pendiente.nombre = nombre_productos.id_nombre AND  pendiente.marca = marca_productos.id_marca AND cellos.id_cello=pendiente.cello and
-   pendiente.tipo_empaque = tipo_empaques.id_tipo_empaque AND pendiente.categoria = categoria.id_categoria  and
+   clase_productos.id_tipo_empaque = tipo_empaques.id_tipo_empaque AND pendiente.categoria = categoria.id_categoria  and
   (nombre_productos.nombre LIKE  CONCAT("%",nombre, "%") or  capa_productos.capa LIKE  CONCAT("%",nombre, "%") or  marca_productos.marca LIKE  CONCAT("%",nombre, "%") or
   categoria.categoria LIKE  CONCAT("%",nombre, "%") or  tipo_empaques.tipo_empaque LIKE  CONCAT("%",nombre, "%") or
   vitola_productos.vitola LIKE  CONCAT("%",nombre, "%") or  pendiente.orden_del_sitema LIKE  CONCAT("%",nombre, "%"))
@@ -7485,12 +8362,12 @@ WHERE pendiente.vitola = vitola_productos.id_vitola AND pendiente.capa = capa_pr
 	SELECT categoria.categoria AS categoria, pendiente.item AS item,pendiente.orden_del_sitema ,pendiente.observacion 
 ,pendiente.presentacion ,pendiente.mes AS mes ,orden_productos.orden AS orden, marca_productos.marca AS marca,vitola_productos.vitola AS vitola, 
 nombre_productos.nombre AS nombre, capa_productos.capa AS capa,
-cellos.anillo AS anillo,cellos.cello AS cello, cellos.upc AS upc, pendiente.saldo, tipo_empaques.tipo_empaque AS tipo_empaque, pendiente.paquetes AS paquetes, pendiente.unidades AS unidades
+cellos.anillo AS anillo,cellos.cello AS cello, cellos.upc AS upc, pendiente.pendiente as pendiente,pendiente.factura_del_mes, pendiente.cantidad_enviada_mes, pendiente.saldo, tipo_empaques.tipo_empaque AS tipo_empaque
 FROM categoria, clase_productos, marca_productos, vitola_productos,nombre_productos, capa_productos, orden_productos,cellos,
 tipo_empaques, pendiente
 WHERE pendiente.vitola = vitola_productos.id_vitola AND pendiente.capa = capa_productos.id_capa AND pendiente.orden = orden_productos.id_orden and
  pendiente.nombre = nombre_productos.id_nombre AND  pendiente.marca = marca_productos.id_marca AND cellos.id_cello=pendiente.cello and
-   pendiente.tipo_empaque = tipo_empaques.id_tipo_empaque AND pendiente.categoria = categoria.id_categoria  AND  pendiente.mes between  STR_TO_DATE( fechade,"%Y-%m-%d") AND STR_TO_DATE(  fechahasta, "%Y-%m-%d") 
+   clase_productos.id_tipo_empaque = tipo_empaques.id_tipo_empaque AND pendiente.categoria = categoria.id_categoria  AND  pendiente.mes between  STR_TO_DATE( fechade,"%Y-%m-%d") AND STR_TO_DATE(  fechahasta, "%Y-%m-%d") 
                       
   
 
@@ -7503,12 +8380,12 @@ WHERE pendiente.vitola = vitola_productos.id_vitola AND pendiente.capa = capa_pr
 	SELECT categoria.categoria AS categoria, pendiente.item AS item,pendiente.orden_del_sitema ,pendiente.observacion 
 ,pendiente.presentacion ,pendiente.mes AS mes ,orden_productos.orden AS orden, marca_productos.marca AS marca,vitola_productos.vitola AS vitola, 
 nombre_productos.nombre AS nombre, capa_productos.capa AS capa,
-cellos.anillo AS anillo,cellos.cello AS cello, cellos.upc AS upc, pendiente.saldo, tipo_empaques.tipo_empaque AS tipo_empaque , pendiente.paquetes AS paquetes, pendiente.unidades AS unidades
+cellos.anillo AS anillo,cellos.cello AS cello, cellos.upc AS upc, pendiente.pendiente as pendiente,pendiente.factura_del_mes, pendiente.cantidad_enviada_mes, pendiente.saldo, tipo_empaques.tipo_empaque AS tipo_empaque
 FROM categoria, clase_productos, marca_productos, vitola_productos,nombre_productos, capa_productos, orden_productos,cellos,
 tipo_empaques, pendiente
 WHERE pendiente.vitola = vitola_productos.id_vitola AND pendiente.capa = capa_productos.id_capa AND pendiente.orden = orden_productos.id_orden and
  pendiente.nombre = nombre_productos.id_nombre AND  pendiente.marca = marca_productos.id_marca AND cellos.id_cello=pendiente.cello and
-   pendiente.tipo_empaque  = tipo_empaques.id_tipo_empaque AND pendiente.categoria = categoria.id_categoria  AND  pendiente.mes = STR_TO_DATE( fechade,"%Y-%m-%d")
+   clase_productos.id_tipo_empaque = tipo_empaques.id_tipo_empaque AND pendiente.categoria = categoria.id_categoria  AND  pendiente.mes = STR_TO_DATE( fechade,"%Y-%m-%d")
                       
   
 
@@ -7523,12 +8400,12 @@ WHERE pendiente.vitola = vitola_productos.id_vitola AND pendiente.capa = capa_pr
 	SELECT categoria.categoria AS categoria, pendiente.item AS item,pendiente.orden_del_sitema ,pendiente.observacion 
 ,pendiente.presentacion ,pendiente.mes AS mes ,orden_productos.orden AS orden, marca_productos.marca AS marca,vitola_productos.vitola AS vitola, 
 nombre_productos.nombre AS nombre, capa_productos.capa AS capa,
-cellos.anillo AS anillo,cellos.cello AS cello, cellos.upc AS upc, pendiente.saldo, tipo_empaques.tipo_empaque AS tipo_empaque, pendiente.paquetes AS paquetes, pendiente.unidades AS unidades
+cellos.anillo AS anillo,cellos.cello AS cello, cellos.upc AS upc, pendiente.pendiente as pendiente,pendiente.factura_del_mes, pendiente.cantidad_enviada_mes, pendiente.saldo, tipo_empaques.tipo_empaque AS tipo_empaque
 FROM categoria, clase_productos, marca_productos, vitola_productos,nombre_productos, capa_productos, orden_productos,cellos,
 tipo_empaques, pendiente
 WHERE pendiente.vitola = vitola_productos.id_vitola AND pendiente.capa = capa_productos.id_capa AND pendiente.orden = orden_productos.id_orden and
  pendiente.nombre = nombre_productos.id_nombre AND  pendiente.marca = marca_productos.id_marca AND cellos.id_cello=pendiente.cello and
-   pendiente.tipo_empaque = tipo_empaques.id_tipo_empaque AND pendiente.categoria = categoria.id_categoria  AND  pendiente.mes = STR_TO_DATE(  fechahasta, "%Y-%m-%d") 
+   clase_productos.id_tipo_empaque = tipo_empaques.id_tipo_empaque AND pendiente.categoria = categoria.id_categoria  AND  pendiente.mes = STR_TO_DATE(  fechahasta, "%Y-%m-%d") 
                       
   
 
@@ -7545,7 +8422,7 @@ END if;
 END//
 DELIMITER ;
 
--- Volcando estructura para procedimiento facturacion_plasencia.buscar_pendiente_empaque
+-- Dumping structure for procedure facturacion_plasencia.buscar_pendiente_empaque
 DELIMITER //
 CREATE PROCEDURE `buscar_pendiente_empaque`(
 	IN `nombre` VARCHAR(50),
@@ -7556,22 +8433,21 @@ BEGIN
 if nombre="" && fechade="" && fechahasta="" then
 
 
-SELECT pendiente_empaque.id_pendiente, categoria.categoria AS categoria, pendiente_empaque.item AS item,pendiente_empaque.orden_del_sitema AS orden_del_sitema,pendiente_empaque.observacion AS observacion,pendiente_empaque.presentacion AS presentacion ,pendiente_empaque.mes AS mes ,orden_productos.orden AS orden, marca_productos.marca AS marca,vitola_productos.vitola AS vitola, 
+SELECT categoria.categoria AS categoria, pendiente_empaque.item AS item,pendiente_empaque.orden_del_sitema AS orden_del_sitema,pendiente_empaque.observacion AS observacion,pendiente_empaque.presentacion AS presentacion ,pendiente_empaque.mes AS mes ,orden_productos.orden AS orden, marca_productos.marca AS marca,vitola_productos.vitola AS vitola, 
 nombre_productos.nombre AS nombre, capa_productos.capa AS capa,
 cellos.anillo AS anillo,cellos.cello AS cello, cellos.upc AS upc, pendiente_empaque.pendiente as pendiente_empaque,pendiente_empaque.factura_del_mes as factura_del_mes, pendiente_empaque.cantidad_enviada_mes AS cantidad_enviada_mes, pendiente_empaque.saldo AS saldo, tipo_empaques.tipo_empaque AS tipo_empaque
 FROM categoria, clase_productos, marca_productos, vitola_productos,nombre_productos, capa_productos, orden_productos,cellos,
 tipo_empaques, pendiente_empaque
 WHERE pendiente_empaque.vitola = vitola_productos.id_vitola AND pendiente_empaque.capa = capa_productos.id_capa AND pendiente_empaque.orden =  orden_productos.id_orden and
  pendiente_empaque.nombre = nombre_productos.id_nombre AND  pendiente_empaque.marca = marca_productos.id_marca AND cellos.id_cello=pendiente_empaque.cello and
-   pendiente_empaque.tipo_empaque = tipo_empaques.id_tipo_empaque AND pendiente_empaque.categoria = categoria.id_categoria AND 
-   pendiente_empaque.saldo > 0
-	GROUP BY pendiente_empaque.item, pendiente_empaque.orden, pendiente_empaque.categoria ;
+   pendiente_empaque.tipo_empaque = tipo_empaques.id_tipo_empaque AND pendiente_empaque.categoria = categoria.id_categoria 
+	GROUP BY pendiente_empaque.item, pendiente_empaque.orden, pendiente_empaque.categoria;
 	
 ELSE  
 
 if fechade = ""   && fechahasta = ""  && nombre != "" then
 
-SELECT pendiente_empaque.id_pendiente,  categoria.categoria AS categoria, pendiente_empaque.item AS item,pendiente_empaque.orden_del_sitema AS orden_del_sitema,pendiente_empaque.observacion AS observacion,pendiente_empaque.presentacion AS presentacion ,pendiente_empaque.mes AS mes ,orden_productos.orden AS orden, marca_productos.marca AS marca,vitola_productos.vitola AS vitola, 
+SELECT categoria.categoria AS categoria, pendiente_empaque.item AS item,pendiente_empaque.orden_del_sitema AS orden_del_sitema,pendiente_empaque.observacion AS observacion,pendiente_empaque.presentacion AS presentacion ,pendiente_empaque.mes AS mes ,orden_productos.orden AS orden, marca_productos.marca AS marca,vitola_productos.vitola AS vitola, 
 nombre_productos.nombre AS nombre, capa_productos.capa AS capa,
 cellos.anillo AS anillo,cellos.cello AS cello, cellos.upc AS upc, pendiente_empaque.pendiente as pendiente_empaque,pendiente_empaque.factura_del_mes as factura_del_mes, pendiente_empaque.cantidad_enviada_mes AS cantidad_enviada_mes, pendiente_empaque.saldo AS saldo, tipo_empaques.tipo_empaque AS tipo_empaque
 FROM categoria, clase_productos, marca_productos, vitola_productos,nombre_productos, capa_productos, orden_productos,cellos,
@@ -7580,8 +8456,7 @@ WHERE pendiente_empaque.vitola = vitola_productos.id_vitola AND pendiente_empaqu
  pendiente_empaque.nombre = nombre_productos.id_nombre AND  pendiente_empaque.marca = marca_productos.id_marca AND cellos.id_cello=pendiente_empaque.cello and
    pendiente_empaque.tipo_empaque = tipo_empaques.id_tipo_empaque AND pendiente_empaque.categoria = categoria.id_categoria   and
   (nombre_productos.nombre LIKE  CONCAT("%",nombre, "%") or  capa_productos.capa LIKE  CONCAT("%",nombre, "%") or  marca_productos.marca LIKE  CONCAT("%",nombre, "%") )
-AND 
-   pendiente_empaque.saldo > 0
+
 	GROUP BY pendiente_empaque.item, pendiente_empaque.orden, pendiente_empaque.categoria;
 	
 	
@@ -7591,7 +8466,7 @@ AND
 	
 	
 	
-SELECT pendiente_empaque.id_pendiente, categoria.categoria AS categoria, pendiente_empaque.item AS item,pendiente_empaque.orden_del_sitema AS orden_del_sitema,
+SELECT categoria.categoria AS categoria, pendiente_empaque.item AS item,pendiente_empaque.orden_del_sitema AS orden_del_sitema,
 pendiente_empaque.observacion AS observacion,pendiente_empaque.presentacion AS presentacion ,pendiente_empaque.mes AS mes ,
 orden_productos.orden AS orden, marca_productos.marca AS marca,vitola_productos.vitola AS vitola, nombre_productos.nombre AS nombre
 , capa_productos.capa AS capa,cellos.anillo AS anillo,cellos.cello AS cello, cellos.upc AS upc, pendiente_empaque.pendiente 
@@ -7604,8 +8479,7 @@ WHERE pendiente_empaque.vitola = vitola_productos.id_vitola AND pendiente_empaqu
    pendiente_empaque.tipo_empaque = tipo_empaques.id_tipo_empaque AND pendiente_empaque.categoria = categoria.id_categoria 
 	 AND  pendiente_empaque.mes between  STR_TO_DATE( fechade,"%Y-%m-%d") AND STR_TO_DATE(  fechahasta, "%Y-%m-%d") 
                       
-  AND 
-   pendiente_empaque.saldo > 0
+  
 
 GROUP BY pendiente_empaque.item, pendiente_empaque.orden, pendiente_empaque.categoria;
 		else
@@ -7613,7 +8487,7 @@ GROUP BY pendiente_empaque.item, pendiente_empaque.orden, pendiente_empaque.cate
 	if fechade != ""   && fechahasta = ""  && nombre = "" then
 	
 	
-	SELECT pendiente_empaque.id_pendiente, categoria.categoria AS categoria, pendiente_empaque.item AS item,pendiente_empaque.orden_del_sitema ,
+	SELECT categoria.categoria AS categoria, pendiente_empaque.item AS item,pendiente_empaque.orden_del_sitema ,
 	pendiente_empaque.observacion AS observacion,pendiente_empaque.presentacion  AS presentacion,pendiente_empaque.mes AS mes 
 	,orden_productos.orden AS orden, marca_productos.marca AS marca,vitola_productos.vitola AS vitola, 
 nombre_productos.nombre AS nombre, capa_productos.capa AS capa,
@@ -7624,8 +8498,7 @@ tipo_empaques, pendiente_empaque
 WHERE pendiente_empaque.vitola = vitola_productos.id_vitola AND pendiente_empaque.capa = capa_productos.id_capa AND pendiente_empaque.orden =  orden_productos.id_orden and
  pendiente_empaque.nombre = nombre_productos.id_nombre AND  pendiente_empaque.marca = marca_productos.id_marca AND cellos.id_cello=pendiente_empaque.cello and
    pendiente_empaque.tipo_empaque = tipo_empaques.id_tipo_empaque AND pendiente_empaque.categoria = categoria.id_categoria  AND  pendiente_empaque.mes = STR_TO_DATE( fechade,"%Y-%m-%d")
-                  AND 
-   pendiente_empaque.saldo > 0
+                  
 	GROUP BY pendiente_empaque.item, pendiente_empaque.orden, pendiente_empaque.categoria;
 	
 	
@@ -7634,7 +8507,7 @@ WHERE pendiente_empaque.vitola = vitola_productos.id_vitola AND pendiente_empaqu
 	if fechade = ""   && fechahasta != ""  && nombre = "" then
 	
 	
-SELECT pendiente_empaque.id_pendiente,categoria.categoria AS categoria, pendiente_empaque.item AS item,pendiente_empaque.orden_del_sitema AS orden_del_sitema,pendiente_empaque.observacion AS observacion,pendiente_empaque.presentacion AS presentacion ,pendiente_empaque.mes AS mes ,orden_productos.orden AS orden, marca_productos.marca AS marca,vitola_productos.vitola AS vitola, 
+SELECT categoria.categoria AS categoria, pendiente_empaque.item AS item,pendiente_empaque.orden_del_sitema AS orden_del_sitema,pendiente_empaque.observacion AS observacion,pendiente_empaque.presentacion AS presentacion ,pendiente_empaque.mes AS mes ,orden_productos.orden AS orden, marca_productos.marca AS marca,vitola_productos.vitola AS vitola, 
 nombre_productos.nombre AS nombre, capa_productos.capa AS capa,
 cellos.anillo AS anillo,cellos.cello AS cello, cellos.upc AS upc, pendiente_empaque.pendiente as pendiente_empaque,
 pendiente_empaque.factura_del_mes as factura_del_mes, pendiente_empaque.cantidad_enviada_mes AS cantidad_enviada_mes,
@@ -7646,8 +8519,7 @@ WHERE pendiente_empaque.vitola = vitola_productos.id_vitola AND pendiente_empaqu
    pendiente_empaque.tipo_empaque = tipo_empaques.id_tipo_empaque AND pendiente_empaque.categoria = categoria.id_categoria 
 	AND  pendiente_empaque.mes = STR_TO_DATE(  fechahasta, "%Y-%m-%d") 
                       
-  AND 
-   pendiente_empaque.saldo > 0
+  
 
 GROUP BY pendiente_empaque.item, pendiente_empaque.orden, pendiente_empaque.categoria;
 	
@@ -7656,7 +8528,7 @@ GROUP BY pendiente_empaque.item, pendiente_empaque.orden, pendiente_empaque.cate
 	
 		
 	
-SELECT pendiente_empaque.id_pendiente, categoria.categoria AS categoria, pendiente_empaque.item AS item,pendiente_empaque.orden_del_sitema AS orden_del_sitema,
+SELECT categoria.categoria AS categoria, pendiente_empaque.item AS item,pendiente_empaque.orden_del_sitema AS orden_del_sitema,
 pendiente_empaque.observacion AS observacion,pendiente_empaque.presentacion AS presentacion ,pendiente_empaque.mes AS mes ,
 orden_productos.orden AS orden, marca_productos.marca AS marca,vitola_productos.vitola AS vitola, 
 nombre_productos.nombre AS nombre, capa_productos.capa AS capa,
@@ -7668,8 +8540,6 @@ WHERE pendiente_empaque.vitola = vitola_productos.id_vitola AND pendiente_empaqu
    pendiente_empaque.tipo_empaque = tipo_empaques.id_tipo_empaque AND pendiente_empaque.categoria = categoria.id_categoria 
    AND pendiente_empaque.mes between  STR_TO_DATE( fechade,"%Y-%m-%d") AND STR_TO_DATE(  fechahasta, "%Y-%m-%d") AND 
    (nombre_productos.nombre LIKE CONCAT("%",nombre, "%") or  capa_productos.capa LIKE  CONCAT("%",nombre, "%") or  marca_productos.marca LIKE  CONCAT("%",nombre, "%") )   
-   AND 
-   pendiente_empaque.saldo > 0
 	GROUP BY pendiente_empaque.item, pendiente_empaque.orden, pendiente_empaque.categoria;
 	
 	else
@@ -7685,7 +8555,7 @@ END if;
 END//
 DELIMITER ;
 
--- Volcando estructura para procedimiento facturacion_plasencia.buscar_producto
+-- Dumping structure for procedure facturacion_plasencia.buscar_producto
 DELIMITER //
 CREATE PROCEDURE `buscar_producto`(
 	IN `todo` VARCHAR(50)
@@ -7721,7 +8591,7 @@ END if;
 END//
 DELIMITER ;
 
--- Volcando estructura para procedimiento facturacion_plasencia.buscar_tipo_empaque
+-- Dumping structure for procedure facturacion_plasencia.buscar_tipo_empaque
 DELIMITER //
 CREATE PROCEDURE `buscar_tipo_empaque`(
 	IN `tipo` VARCHAR(50)
@@ -7735,7 +8605,7 @@ END if;
 END//
 DELIMITER ;
 
--- Volcando estructura para procedimiento facturacion_plasencia.buscar_vitola
+-- Dumping structure for procedure facturacion_plasencia.buscar_vitola
 DELIMITER //
 CREATE PROCEDURE `buscar_vitola`(
 	IN `vitola` VARCHAR(50)
@@ -7750,7 +8620,39 @@ END if;
 END//
 DELIMITER ;
 
--- Volcando estructura para procedimiento facturacion_plasencia.eliminar_detalles
+-- Dumping structure for procedure facturacion_plasencia.editar_existencia
+DELIMITER //
+CREATE PROCEDURE `editar_existencia`(
+	IN `pa_id` INT,
+	IN `pa_existencia` INT
+)
+BEGIN
+ UPDATE lista_cajas 
+                SET 
+                      lista_cajas.existencia = pa_existencia
+                      
+        
+                WHERE lista_cajas.id = pa_id;
+END//
+DELIMITER ;
+
+-- Dumping structure for procedure facturacion_plasencia.editar_existencia_producto
+DELIMITER //
+CREATE PROCEDURE `editar_existencia_producto`(
+	IN `pa_id` INT,
+	IN `pa_existencia` INT
+)
+BEGIN
+ UPDATE inventario_productos_terminados 
+                SET 
+                      inventario_productos_terminados.Existencia = pa_existencia
+                      
+        
+                WHERE inventario_productos_terminados.id = pa_id;
+END//
+DELIMITER ;
+
+-- Dumping structure for procedure facturacion_plasencia.eliminar_detalles
 DELIMITER //
 CREATE PROCEDURE `eliminar_detalles`(
 	IN `id` INT
@@ -7762,37 +8664,7 @@ DELETE FROM detalle_programacion_temporal WHERE detalle_programacion_temporal.id
 END//
 DELIMITER ;
 
--- Volcando estructura para procedimiento facturacion_plasencia.eliminar_detalle_programacion
-DELIMITER //
-CREATE PROCEDURE `eliminar_detalle_programacion`(
-	IN `id` INT,
-	IN `id_pendiente` INT,
-	IN `saldo` DECIMAL(10,2)
-)
-BEGIN
-
-
-UPDATE pendiente_empaque SET pendiente_empaque.saldo = saldo + pendiente_empaque.saldo WHERE pendiente_empaque.id_pendiente = id_pendiente;
-
-DELETE FROM detalle_programacion WHERE detalle_programacion.id_detalle_programacion = id;
-END//
-DELIMITER ;
-
--- Volcando estructura para procedimiento facturacion_plasencia.eliminar_programacion
-DELIMITER //
-CREATE PROCEDURE `eliminar_programacion`(
-	IN `id_pro` INT
-)
-BEGIN
-
-
-DELETE FROM prograamacion WHERE prograamacion.id = id_pro;
-
-DELETE FROM detalle_programacion WHERE detalle_programacion.id_programacion = id_pro;
-END//
-DELIMITER ;
-
--- Volcando estructura para procedimiento facturacion_plasencia.eliminar_usuario
+-- Dumping structure for procedure facturacion_plasencia.eliminar_usuario
 DELIMITER //
 CREATE PROCEDURE `eliminar_usuario`(
 	IN `pa_id_usuario` INT
@@ -7805,7 +8677,7 @@ BEGIN
         END//
 DELIMITER ;
 
--- Volcando estructura para procedimiento facturacion_plasencia.ingresar_presentacion
+-- Dumping structure for procedure facturacion_plasencia.ingresar_presentacion
 DELIMITER //
 CREATE PROCEDURE `ingresar_presentacion`()
 BEGIN
@@ -7822,7 +8694,7 @@ x.nombre AND clase_productos.id_marca = x.marca;
 END//
 DELIMITER ;
 
--- Volcando estructura para procedimiento facturacion_plasencia.insertar_actualizar_existencias
+-- Dumping structure for procedure facturacion_plasencia.insertar_actualizar_existencias
 DELIMITER //
 CREATE PROCEDURE `insertar_actualizar_existencias`(
 	IN `ubicacion` VARCHAR(50),
@@ -7866,7 +8738,7 @@ importar_existencias.ubicacion,importar_existencias.total)VALUES(codigo,marca,no
 END//
 DELIMITER ;
 
--- Volcando estructura para procedimiento facturacion_plasencia.insertar_capa
+-- Dumping structure for procedure facturacion_plasencia.insertar_capa
 DELIMITER //
 CREATE PROCEDURE `insertar_capa`(
 	IN `capa` VARCHAR(50)
@@ -7876,7 +8748,7 @@ BEGIN
 END//
 DELIMITER ;
 
--- Volcando estructura para procedimiento facturacion_plasencia.insertar_clase_producto
+-- Dumping structure for procedure facturacion_plasencia.insertar_clase_producto
 DELIMITER //
 CREATE PROCEDURE `insertar_clase_producto`(
 	IN `item` VARCHAR(50),
@@ -7924,7 +8796,7 @@ VALUES(item,cod_producto,cod_caja,cod_precio,icapa,ivitola,inombre,imarca,icello
 END//
 DELIMITER ;
 
--- Volcando estructura para procedimiento facturacion_plasencia.insertar_codigoproducto_presentacion
+-- Dumping structure for procedure facturacion_plasencia.insertar_codigoproducto_presentacion
 DELIMITER //
 CREATE PROCEDURE `insertar_codigoproducto_presentacion`()
 BEGIN
@@ -7937,7 +8809,7 @@ clase_productos.id_capa = tabla_codigo_programacions.capa;
 END//
 DELIMITER ;
 
--- Volcando estructura para procedimiento facturacion_plasencia.insertar_detalle_clase_producto
+-- Dumping structure for procedure facturacion_plasencia.insertar_detalle_clase_producto
 DELIMITER //
 CREATE PROCEDURE `insertar_detalle_clase_producto`(
 	IN `item` VARCHAR(50),
@@ -7975,42 +8847,35 @@ VALUES(item, icapa,ivitola,inombre,imarca,icello,itipo,precio);
 END//
 DELIMITER ;
 
--- Volcando estructura para procedimiento facturacion_plasencia.insertar_detalle_programacion
+-- Dumping structure for procedure facturacion_plasencia.insertar_detalle_programacion
 DELIMITER //
 CREATE PROCEDURE `insertar_detalle_programacion`(
 	IN `numero_orden` VARCHAR(50),
 	IN `orden` VARCHAR(50),
 	IN `cod_producto` VARCHAR(50),
 	IN `saldo` BIGINT,
-	IN `id_pendiente` INT
+	IN `fecha` DATE,
+	IN `numero_contenedor` VARCHAR(50),
+	IN `mes_contenedor` VARCHAR(50)
 )
 BEGIN
-
 DECLARE id INT;
-
-SET id= (SELECT MAX(prograamacion.id) AS id FROM prograamacion);
-
+SET id = (SELECT prograamacion.id from prograamacion WHERE prograamacion.fecha = fecha AND
+prograamacion.mes_contenedor = mes_contenedor AND prograamacion.numero_contenedor_mes = numero_contenedor);
 
 INSERT INTO detalle_programacion(detalle_programacion.numero_orden,detalle_programacion.orden,
-detalle_programacion.cod_producto,detalle_programacion.saldo, detalle_programacion.id_programacion,detalle_programacion.id_pendiente)
-VALUES(numero_orden,orden,cod_producto,saldo,id,id_pendiente);
-
-UPDATE pendiente_empaque SET pendiente_empaque.saldo = (pendiente_empaque.saldo- saldo)
-WHERE pendiente_empaque.id_pendiente= id_pendiente;
-
-DELETE FROM detalle_programacion_temporal;
-
+detalle_programacion.cod_producto,detalle_programacion.saldo, detalle_programacion.id_programacion)
+VALUES(numero_orden,orden,cod_producto,saldo,id);
 END//
 DELIMITER ;
 
--- Volcando estructura para procedimiento facturacion_plasencia.insertar_detalle_temporal
+-- Dumping structure for procedure facturacion_plasencia.insertar_detalle_temporal
 DELIMITER //
 CREATE PROCEDURE `insertar_detalle_temporal`(
 	IN `numero_orden` VARCHAR(50),
 	IN `orden` VARCHAR(50),
 	IN `cod_producto` VARCHAR(50),
-	IN `saldo` DECIMAL(10,2),
-	IN `id_pendiente` INT
+	IN `saldo` DECIMAL(10,2)
 )
 BEGIN
 
@@ -8025,21 +8890,17 @@ SET total_Existencia= (SELECT sum(importar_existencias.total) FROM importar_exis
 importar_existencias.codigo_producto = cod_producto);
 
 
-if EXISTS(SELECT importar_existencias.codigo_producto FROM importar_existencias WHERE
-importar_existencias.codigo_producto = c)then
+
 INSERT INTO detalle_programacion_temporal(detalle_programacion_temporal.numero_orden,detalle_programacion_temporal.orden,
-detalle_programacion_temporal.cod_producto,detalle_programacion_temporal.saldo, detalle_programacion_temporal.id_pendiente)
-VALUES(numero_orden,orden,c,saldo,id_pendiente);
+detalle_programacion_temporal.cod_producto,detalle_programacion_temporal.saldo)
+VALUES(numero_orden,orden,c,saldo);
 
-ELSE 
 
-SELECT "nada";
-END if;
 
 END//
 DELIMITER ;
 
--- Volcando estructura para procedimiento facturacion_plasencia.insertar_lista_cajas
+-- Dumping structure for procedure facturacion_plasencia.insertar_lista_cajas
 DELIMITER //
 CREATE PROCEDURE `insertar_lista_cajas`(
 	IN `pa_item` VARCHAR(50),
@@ -8079,8 +8940,6 @@ SET vl_palabra_empaque = SUBSTRING(vl_palabra_empaque, LENGTH(vl_palabra_empaque
 
 
 
-SET imarca = (SELECT marca_productos.id_marca FROM marca_productos WHERE marca_productos.marca = pa_marca);
-
 IF EXISTS (SELECT tipo_empaques.id_tipo_empaque FROM tipo_empaques WHERE tipo_empaques.tipo_empaque = CONCAT("CAJAS 1/",vl_palabra_empaque)) THEN
   		SET itipo_empaque = (SELECT tipo_empaques.id_tipo_empaque FROM tipo_empaques WHERE tipo_empaques.tipo_empaque = CONCAT("CAJAS 1/",vl_palabra_empaque));
 ELSE
@@ -8102,16 +8961,16 @@ END IF;
 	
 	
 	
-	INSERT INTO lista_cajas(lista_cajas.marca,lista_cajas.productoServicio,lista_cajas.codigo,lista_cajas.tipo_empaque)
+	INSERT INTO lista_cajas(lista_cajas.marca,lista_cajas.productoServicio,lista_cajas.codigo,lista_cajas.tipo_empaque,lista_cajas.existencia)
 	
-	VALUES(imarca,pa_productoServicio,pa_item,itipo_empaque);
+	VALUES(pa_marca,pa_productoServicio,pa_item,itipo_empaque,0);
 
 
 
 END//
 DELIMITER ;
 
--- Volcando estructura para procedimiento facturacion_plasencia.insertar_marca
+-- Dumping structure for procedure facturacion_plasencia.insertar_marca
 DELIMITER //
 CREATE PROCEDURE `insertar_marca`(
 	IN `marca` VARCHAR(100)
@@ -8121,7 +8980,7 @@ BEGIN
  end//
 DELIMITER ;
 
--- Volcando estructura para procedimiento facturacion_plasencia.insertar_nombre
+-- Dumping structure for procedure facturacion_plasencia.insertar_nombre
 DELIMITER //
 CREATE PROCEDURE `insertar_nombre`(
 	IN `nombre` VARCHAR(50)
@@ -8131,114 +8990,100 @@ BEGIN
 END//
 DELIMITER ;
 
--- Volcando estructura para procedimiento facturacion_plasencia.insertar_pendente_empaque
+-- Dumping structure for procedure facturacion_plasencia.insertar_pendente_empaque
 DELIMITER //
 CREATE PROCEDURE `insertar_pendente_empaque`(
 	IN `fecha` VARCHAR(50)
 )
 BEGIN
 
-insert into pendiente_empaque( 
-	`categoria`, 
-	`item`,
-	`orden_del_sitema`,
-	`observacion`, 
-	`presentacion`, 
-	`mes`,
-	`orden`, 
-	`marca`,
-	`vitola`, 
-	`nombre`, 
-	`capa`, 
-	`tipo_empaque`, 
-	`cello`, 
-	`pendiente`, 
-	`saldo`) (SELECT 
-  pedidos.categoria  AS categoria,
- (SELECT clase_productos.item  FROM clase_productos WHERE clase_productos.item = pedidos.item) AS item,
- '' AS orden_del_sistema,
- '' AS observacion,
- (SELECT clase_productos.presentacion FROM clase_productos WHERE clase_productos.item = pedidos.item) AS presentacion, 
- fecha AS mes,
- (SELECT clase_productos.id_orden  FROM clase_productos WHERE clase_productos.item = pedidos.item)  AS orden,
- (SELECT clase_productos.id_marca FROM clase_productos WHERE clase_productos.item = pedidos.item) AS marca,
- (SELECT clase_productos.id_vitola FROM clase_productos WHERE clase_productos.item = pedidos.item) AS vitola,
- (SELECT clase_productos.id_nombre FROM clase_productos WHERE clase_productos.item = pedidos.item) AS nombre,
- (SELECT clase_productos.id_capa FROM clase_productos WHERE clase_productos.item = pedidos.item) AS capa,
- (SELECT clase_productos.id_tipo_empaque FROM clase_productos WHERE clase_productos.item = pedidos.item) AS tipo_empaque,
- (SELECT clase_productos.id_cello FROM clase_productos WHERE clase_productos.item = pedidos.item) AS cello,
-  (pedidos.cant_paquetes * pedidos.unidades)  AS pendiente,
-    (pedidos.cant_paquetes * pedidos.unidades) AS saldo
-       FROM pedidos);
+
+insert into pendiente_empaque(SELECT categoria.id_categoria AS categoria, pedidos.item AS item,"" AS orden_del_sitema,"" AS observacion,clase_productos.presentacion  AS presentacion ,fecha AS mes ,orden_productos.id_orden AS orden, marca_productos.id_marca AS marca,vitola_productos.id_vitola AS vitola, 
+nombre_productos.id_nombre AS nombre, capa_productos.id_capa AS capa,tipo_empaques.id_tipo_empaque AS tipo_empaque,
+cellos.id_cello AS cello,(pedidos.cant_paquetes * pedidos.unidades)  as pendiente,0 as factura_del_mes, 0 AS cantidad_enviada_mes, (pedidos.cant_paquetes * pedidos.unidades) AS saldo
+FROM categoria, clase_productos, pedidos, marca_productos, vitola_productos,nombre_productos, capa_productos, orden_productos,cellos,
+tipo_empaques
+WHERE clase_productos.id_vitola = vitola_productos.id_vitola AND pedidos.numero_orden = orden_productos.orden AND clase_productos.id_capa = capa_productos.id_capa AND 
+ clase_productos.id_nombre = nombre_productos.id_nombre AND  clase_productos.id_marca = marca_productos.id_marca AND cellos.id_cello=clase_productos.id_cello and
+   clase_productos.id_tipo_empaque = tipo_empaques.id_tipo_empaque AND pedidos.item = clase_productos.item AND categoria.id_categoria=pedidos.categoria
+ GROUP BY pedidos.item, pedidos.numero_orden, pedidos.categoria);
 END//
 DELIMITER ;
 
--- Volcando estructura para procedimiento facturacion_plasencia.insertar_pendiente
+-- Dumping structure for procedure facturacion_plasencia.insertar_pendiente
 DELIMITER //
 CREATE PROCEDURE `insertar_pendiente`(
 	IN `fecha` DATE
 )
 BEGIN
 
-insert into pendiente( 
-	`categoria`, 
-	`item`,
-	`orden_del_sitema`,
-	`observacion`, 
-	`presentacion`, 
-	`mes`,
-	`orden`, 
-	`marca`,
-	`vitola`, 
-	`nombre`, 
-	`capa`, 
-	`tipo_empaque`,  
-	`cello`, 
-	`pendiente`, 
-	`saldo`, 
-	`paquetes`, 
-	`unidades`) (SELECT 
-  pedidos.categoria  AS categoria,
- (SELECT clase_productos.item  FROM clase_productos WHERE clase_productos.item = pedidos.item) AS item,
- '' AS orden_del_sistema,
- '' AS observacion,
- (SELECT clase_productos.presentacion FROM clase_productos WHERE clase_productos.item = pedidos.item) AS presentacion,
- fecha AS mes,
- (SELECT clase_productos.id_orden  FROM clase_productos WHERE clase_productos.item = pedidos.item)  AS orden,
- (SELECT clase_productos.id_marca FROM clase_productos WHERE clase_productos.item = pedidos.item) AS marca,
- (SELECT clase_productos.id_vitola FROM clase_productos WHERE clase_productos.item = pedidos.item) AS vitola,
- (SELECT clase_productos.id_nombre FROM clase_productos WHERE clase_productos.item = pedidos.item) AS nombre,
- (SELECT clase_productos.id_capa FROM clase_productos WHERE clase_productos.item = pedidos.item) AS capa,
- (SELECT clase_productos.id_tipo_empaque FROM clase_productos WHERE clase_productos.item = pedidos.item) AS tipo_empaque,
- (SELECT clase_productos.id_cello FROM clase_productos WHERE clase_productos.item = pedidos.item) AS cello,
-  (pedidos.cant_paquetes * pedidos.unidades)  AS pendiente,
-    (pedidos.cant_paquetes * pedidos.unidades) AS saldo,
-     pedidos.cant_paquetes AS paquetes,
-      pedidos.unidades AS unidades
-       FROM pedidos);
+
+insert into pendiente(SELECT categoria.id_categoria AS categoria, pedidos.item AS item,"" AS orden_del_sitema,"" AS observacion,clase_productos.presentacion AS presentacion ,fecha AS mes ,orden_productos.id_orden AS orden, marca_productos.id_marca AS marca,vitola_productos.id_vitola AS vitola, 
+nombre_productos.id_nombre AS nombre, capa_productos.id_capa AS capa,tipo_empaques.id_tipo_empaque AS tipo_empaque,
+cellos.id_cello AS cello,(pedidos.cant_paquetes * pedidos.unidades)  as pendiente,0 as factura_del_mes, 0 AS cantidad_enviada_mes, (pedidos.cant_paquetes * pedidos.unidades) AS saldo
+FROM categoria, clase_productos, pedidos, marca_productos, vitola_productos,nombre_productos, capa_productos, orden_productos,cellos,
+tipo_empaques
+WHERE clase_productos.id_vitola = vitola_productos.id_vitola AND pedidos.numero_orden = orden_productos.orden AND clase_productos.id_capa = capa_productos.id_capa AND 
+ clase_productos.id_nombre = nombre_productos.id_nombre AND  clase_productos.id_marca = marca_productos.id_marca AND cellos.id_cello=clase_productos.id_cello and
+   clase_productos.id_tipo_empaque = tipo_empaques.id_tipo_empaque AND pedidos.item = clase_productos.item AND categoria.id_categoria=pedidos.categoria
+ GROUP BY pedidos.item, pedidos.numero_orden, pedidos.categoria);
+
 
 
 DELETE FROM pedidos;
 END//
 DELIMITER ;
 
--- Volcando estructura para procedimiento facturacion_plasencia.insertar_programacion
+-- Dumping structure for procedure facturacion_plasencia.insertar_productos_terminados
 DELIMITER //
-CREATE PROCEDURE `insertar_programacion`(
-	IN `fecha` DATETIME,
-	IN `contenedor` VARCHAR(100)
+CREATE PROCEDURE `insertar_productos_terminados`(
+	IN `lote` VARCHAR(50),
+	IN `marca` VARCHAR(50),
+	IN `nombre` VARCHAR(50),
+	IN `vitola` VARCHAR(50),
+	IN `capa` VARCHAR(50),
+	IN `existencia` INT
 )
 BEGIN
 
+DECLARE imarca INT;
+DECLARE inombre INT;
+DECLARE ivitola INT;
+DECLARE icapa INT;
 
 
-INSERT INTO prograamacion(prograamacion.fecha,prograamacion.mes_contenedor)VALUES(cast(fecha AS date),contenedor);
+SET imarca = (SELECT marca_productos.id_marca FROM marca_productos WHERE marca_productos.marca = marca);
+SET inombre = (SELECT nombre_productos.id_nombre FROM nombre_productos WHERE nombre_productos.nombre = nombre);
+SET ivitola = (SELECT vitola_productos.id_vitola FROM  vitola_productos WHERE vitola_productos.vitola = vitola);
+SET icapa = (SELECT capa_productos.id_capa FROM  capa_productos WHERE capa_productos.capa = capa);
+
+
+INSERT INTO inventario_productos_terminados
+(inventario_productos_terminados.lote,inventario_productos_terminados.Marca,
+inventario_productos_terminados.Alias_vitola,inventario_productos_terminados.Vitola,
+inventario_productos_terminados.Nombre_capa,inventario_productos_terminados.Existencia)
+VALUES(lote,imarca,inombre,ivitola,icapa,existencia);
+
+
 
 
 END//
 DELIMITER ;
 
--- Volcando estructura para procedimiento facturacion_plasencia.insertar_tipo
+-- Dumping structure for procedure facturacion_plasencia.insertar_programacion
+DELIMITER //
+CREATE PROCEDURE `insertar_programacion`(
+	IN `fecha` DATE,
+	IN `mes_contenedor` VARCHAR(50),
+	IN `numero_contenedor` VARCHAR(50)
+)
+BEGIN
+INSERT INTO prograamacion(prograamacion.fecha,prograamacion.mes_contenedor,prograamacion.numero_contenedor_mes)
+VALUES(fecha,mes_contenedor,numero_contenedor);
+END//
+DELIMITER ;
+
+-- Dumping structure for procedure facturacion_plasencia.insertar_tipo
 DELIMITER //
 CREATE PROCEDURE `insertar_tipo`(
 	IN `tipo` VARCHAR(50)
@@ -8248,7 +9093,7 @@ INSERT INTO tipo_empaques(tipo_empaques.tipo_empaque)VALUES(tipo);
 END//
 DELIMITER ;
 
--- Volcando estructura para procedimiento facturacion_plasencia.insertar_vitola
+-- Dumping structure for procedure facturacion_plasencia.insertar_vitola
 DELIMITER //
 CREATE PROCEDURE `insertar_vitola`(
 	IN `vitola` VARCHAR(50)
@@ -8258,27 +9103,7 @@ INSERT INTO vitola_productos(vitola_productos.vitola)VALUES(vitola);
 END//
 DELIMITER ;
 
--- Volcando estructura para procedimiento facturacion_plasencia.max_programacion
-DELIMITER //
-CREATE PROCEDURE `max_programacion`(
-	IN `id` INT
-)
-BEGIN
-
-DECLARE MAXi INT;
-SET maxi= (SELECT max(prograamacion.id) FROM prograamacion);
-
-if id = 0 then
- SELECT prograamacion.mes_contenedor FROM prograamacion  WHERE prograamacion.id  = maxi;
- else
- 
-  SELECT prograamacion.mes_contenedor FROM prograamacion  WHERE prograamacion.id  = id;
- 
- END if;
-END//
-DELIMITER ;
-
--- Volcando estructura para procedimiento facturacion_plasencia.mostrar_cajas
+-- Dumping structure for procedure facturacion_plasencia.mostrar_cajas
 DELIMITER //
 CREATE PROCEDURE `mostrar_cajas`()
 BEGIN
@@ -8286,7 +9111,7 @@ BEGIN
 END//
 DELIMITER ;
 
--- Volcando estructura para procedimiento facturacion_plasencia.mostrar_clase_paradetalle
+-- Dumping structure for procedure facturacion_plasencia.mostrar_clase_paradetalle
 DELIMITER //
 CREATE PROCEDURE `mostrar_clase_paradetalle`(
 	IN `item` VARCHAR(50)
@@ -8304,7 +9129,7 @@ WHERE  clase_productos.id_vitola = vitola_productos.id_vitola AND
 END//
 DELIMITER ;
 
--- Volcando estructura para procedimiento facturacion_plasencia.mostrar_datos_para_editar
+-- Dumping structure for procedure facturacion_plasencia.mostrar_datos_para_editar
 DELIMITER //
 CREATE PROCEDURE `mostrar_datos_para_editar`(
 	IN `id` INT
@@ -8324,7 +9149,7 @@ WHERE  clase_productos.id_vitola = vitola_productos.id_vitola AND capa_productos
 END//
 DELIMITER ;
 
--- Volcando estructura para procedimiento facturacion_plasencia.mostrar_detalles_productos
+-- Dumping structure for procedure facturacion_plasencia.mostrar_detalles_productos
 DELIMITER //
 CREATE PROCEDURE `mostrar_detalles_productos`()
 BEGIN
@@ -8340,217 +9165,19 @@ WHERE  detalle_clase_productos.id_vitola = vitola_productos.id_vitola AND
 END//
 DELIMITER ;
 
--- Volcando estructura para procedimiento facturacion_plasencia.mostrar_detalles_programacion
-DELIMITER //
-CREATE PROCEDURE `mostrar_detalles_programacion`(
-	IN `busqueda` VARCHAR(50),
-	IN `id` INT
-)
-BEGIN	
-		
-		DECLARE id_max INT;
-		SET id_max = (select MAX(prograamacion.id) FROM prograamacion);
-		
-      if busqueda = "" && id = 0 then 
-
-
-SELECT  detalle_programacion.id_detalle_programacion ,
-        detalle_programacion.numero_orden, 
-			detalle_programacion.cod_producto, 
-			detalle_programacion.orden,
-			marca_productos.marca,
-			vitola_productos.vitola,
-			nombre_productos.nombre,             
-			capa_productos.capa,
- 			tipo_empaques.tipo_empaque, 
- 			cellos.anillo,
- 			cellos.cello,
-			cellos.upc,
-			detalle_programacion.saldo,
-			prograamacion.id,
-			detalle_programacion.id_pendiente
-			
- FROM  detalle_programacion, 
- 		 clase_productos,
-	    marca_productos, 
-		 vitola_productos, 
-		 nombre_productos,
- 		 capa_productos, 
-		 tipo_empaques,
-		 cellos, 
-		 
-		 importar_existencias,prograamacion
- WHERE  clase_productos.codigo_producto =  detalle_programacion.cod_producto AND 
-        clase_productos.id_capa = capa_productos.id_capa AND 
- 		  clase_productos.id_marca = marca_productos.id_marca AND 
-        clase_productos.id_vitola = vitola_productos.id_vitola AND 
-		  clase_productos.id_nombre =  nombre_productos.id_nombre and 
- 		  clase_productos.id_tipo_empaque = tipo_empaques.id_tipo_empaque AND 
- 		  clase_productos.id_cello = cellos.id_cello and
- 		  detalle_programacion.cod_producto = importar_existencias.codigo_producto and
- 		  importar_existencias.codigo_producto = clase_productos.codigo_producto and
- 		  detalle_programacion.id_programacion =id_max
-			
-GROUP BY 1;
-ELSE
-
-if  busqueda != "" && id = 0  then 
-
-SELECT detalle_programacion.id_detalle_programacion ,
-        detalle_programacion.numero_orden, 
-			detalle_programacion.cod_producto, 
-			detalle_programacion.orden,
-			marca_productos.marca,
-			vitola_productos.vitola,
-			nombre_productos.nombre,             
-			capa_productos.capa,
- 			tipo_empaques.tipo_empaque, 
- 			cellos.anillo,
- 			cellos.cello,
-			cellos.upc,
-			detalle_programacion.saldo,
-			prograamacion.id ,
-			detalle_programacion.id_pendiente
-			
- FROM  detalle_programacion, 
- 		 clase_productos,
-	    marca_productos, 
-		 vitola_productos, 
-		 nombre_productos,
- 		 capa_productos, 
-		 tipo_empaques,
-		 cellos,
-		 importar_existencias, prograamacion
- WHERE  clase_productos.codigo_producto =  detalle_programacion.cod_producto AND 
-        clase_productos.id_capa = capa_productos.id_capa AND 
- 		  clase_productos.id_marca = marca_productos.id_marca AND 
-        clase_productos.id_vitola = vitola_productos.id_vitola AND 
-		  clase_productos.id_nombre =  nombre_productos.id_nombre and 
- 		  clase_productos.id_tipo_empaque = tipo_empaques.id_tipo_empaque AND 
- 		  clase_productos.id_cello = cellos.id_cello and
- 		  detalle_programacion.cod_producto = importar_existencias.codigo_producto and
- 		  importar_existencias.codigo_producto = clase_productos.codigo_producto and
- 		  (detalle_programacion.numero_orden LIKE CONCAT("%",busqueda,"%")||
-			detalle_programacion.orden LIKE CONCAT("%",busqueda,"%")||
-			marca_productos.marca LIKE CONCAT("%",busqueda,"%")||
-			nombre_productos.nombre LIKE CONCAT("%",busqueda,"%")||
-			capa_productos.capa LIKE CONCAT("%",busqueda,"%")) AND 
-			detalle_programacion.id_programacion = id_max
-			
-GROUP BY 1;		  
-		 
-
-
-else
-
-SELECT detalle_programacion.id_detalle_programacion,
-        detalle_programacion.numero_orden, 
-			detalle_programacion.cod_producto, 
-			detalle_programacion.orden,
-			marca_productos.marca,
-			vitola_productos.vitola,
-			nombre_productos.nombre,             
-			capa_productos.capa,
- 			tipo_empaques.tipo_empaque, 
- 			cellos.anillo,
- 			cellos.cello,
-			cellos.upc,
-			detalle_programacion.saldo,
-			prograamacion.id,
-			detalle_programacion.id_pendiente
- FROM  detalle_programacion, 
- 		 clase_productos,
-	    marca_productos, 
-		 vitola_productos, 
-		 nombre_productos,
- 		 capa_productos, 
-		 tipo_empaques,
-		 cellos,
-		 importar_existencias, prograamacion
- WHERE  clase_productos.codigo_producto =  detalle_programacion.cod_producto AND 
-        clase_productos.id_capa = capa_productos.id_capa AND 
- 		  clase_productos.id_marca = marca_productos.id_marca AND 
-        clase_productos.id_vitola = vitola_productos.id_vitola AND 
-		  clase_productos.id_nombre =  nombre_productos.id_nombre and 
- 		  clase_productos.id_tipo_empaque = tipo_empaques.id_tipo_empaque AND 
- 		  clase_productos.id_cello = cellos.id_cello and
- 		  detalle_programacion.cod_producto = importar_existencias.codigo_producto and
- 		  importar_existencias.codigo_producto = clase_productos.codigo_producto and
- 		  (detalle_programacion.numero_orden LIKE CONCAT("%",busqueda,"%")||
-			detalle_programacion.orden LIKE CONCAT("%",busqueda,"%")||
-			marca_productos.marca LIKE CONCAT("%",busqueda,"%")||
-			nombre_productos.nombre LIKE CONCAT("%",busqueda,"%")||
-			capa_productos.capa LIKE CONCAT("%",busqueda,"%")) AND 
-			detalle_programacion.id_programacion = id
-			
-GROUP BY 1;		  
-		 
-		 END if; 
-		 	 END if; 
-		 
-END//
-DELIMITER ;
-
--- Volcando estructura para procedimiento facturacion_plasencia.mostrar_detalles_provicional
+-- Dumping structure for procedure facturacion_plasencia.mostrar_detalles_provicional
 DELIMITER //
 CREATE PROCEDURE `mostrar_detalles_provicional`(
 	IN `busqueda` VARCHAR(50)
 )
 BEGIN
 
-
-
-
-		
-		
 if busqueda = "" then 
-
-
 SELECT  detalle_programacion_temporal.id_detalle_programacion AS id,
 detalle_programacion_temporal.numero_orden, 
 			detalle_programacion_temporal.cod_producto , 
-			(SELECT concat(detalle_programacion_temporal.orden ,"-", MONTH(pendiente_empaque.mes) , "-" , date_format(pendiente_empaque.mes,'%y')) 
-		   FROM pendiente_empaque WHERE pendiente_empaque.id_pendiente = detalle_programacion_temporal.id_pendiente) AS orden,
+			detalle_programacion_temporal.orden,
 			marca_productos.marca,
-			vitola_productos.vitola,
-			nombre_productos.nombre,             
-			capa_productos.capa,
- 			tipo_empaques.tipo_empaque, 
- 			cellos.anillo,
- 			cellos.cello,
-			cellos.upc,
-			detalle_programacion_temporal.saldo,
-			(SELECT SUM(importar_existencias.total) FROM importar_existencias WHERE importar_existencias.codigo_producto = detalle_programacion_temporal.cod_producto)  AS total_existencia,
-			((SELECT SUM(importar_existencias.total) FROM importar_existencias WHERE importar_existencias.codigo_producto = detalle_programacion_temporal.cod_producto) - detalle_programacion_temporal.saldo) AS diferencia,
-			detalle_programacion_temporal.id_pendiente
- FROM  detalle_programacion_temporal, 
- 		 clase_productos,
-	    marca_productos, 
-		 vitola_productos, 
-		 nombre_productos,
- 		 capa_productos, 
-		 tipo_empaques,
-		 cellos, 
-		 importar_existencias
- WHERE  clase_productos.codigo_producto =  detalle_programacion_temporal.cod_producto AND 
-        clase_productos.id_capa = capa_productos.id_capa AND 
- 		  clase_productos.id_marca = marca_productos.id_marca AND 
-        clase_productos.id_vitola = vitola_productos.id_vitola AND 
-		  clase_productos.id_nombre =  nombre_productos.id_nombre and 
- 		  clase_productos.id_tipo_empaque = tipo_empaques.id_tipo_empaque AND 
- 		  clase_productos.id_cello = cellos.id_cello and
- 		  detalle_programacion_temporal.cod_producto = importar_existencias.codigo_producto and
- 		  importar_existencias.codigo_producto = clase_productos.codigo_producto
-			
-GROUP BY 1;
-ELSE
-
-SELECT  detalle_programacion_temporal.id_detalle_programacion AS id,
-detalle_programacion_temporal.numero_orden, 
-			detalle_programacion_temporal.cod_producto , 
-			(SELECT concat(detalle_programacion_temporal.orden ,"-", MONTH(pendiente_empaque.mes) , "-" , date_format(pendiente_empaque.mes,'%y')) 
-		   FROM pendiente_empaque WHERE pendiente_empaque.id_pendiente = detalle_programacion_temporal.id_pendiente) AS orden,
-		marca_productos.marca,
 			vitola_productos.vitola,
 			nombre_productos.nombre,
 			capa_productos.capa,
@@ -8558,9 +9185,7 @@ detalle_programacion_temporal.numero_orden,
  			cellos.anillo,
  			cellos.cello,
 			cellos.upc,
-			detalle_programacion_temporal.saldo,
-			(SELECT SUM(importar_existencias.total) FROM importar_existencias WHERE importar_existencias.codigo_producto = detalle_programacion_temporal.cod_producto)  AS total_existencia,
-			((SELECT SUM(importar_existencias.total) FROM importar_existencias WHERE importar_existencias.codigo_producto = detalle_programacion_temporal.cod_producto)- detalle_programacion_temporal.saldo) AS diferencia
+			detalle_programacion_temporal.saldo
  FROM  detalle_programacion_temporal, 
  		 clase_productos,
 	    marca_productos, 
@@ -8568,8 +9193,40 @@ detalle_programacion_temporal.numero_orden,
 		 nombre_productos,
  		 capa_productos, 
 		 tipo_empaques,
-		 cellos,
-		 importar_existencias
+		 cellos
+ WHERE  clase_productos.codigo_producto =  detalle_programacion_temporal.cod_producto AND 
+        clase_productos.id_capa = capa_productos.id_capa AND 
+ 		  clase_productos.id_marca = marca_productos.id_marca AND 
+        clase_productos.id_vitola = vitola_productos.id_vitola AND 
+		  clase_productos.id_nombre =  nombre_productos.id_nombre and 
+ 		  clase_productos.id_tipo_empaque = tipo_empaques.id_tipo_empaque AND 
+ 		  clase_productos.id_cello = cellos.id_cello
+			
+GROUP BY 1;
+
+ELSE
+
+SELECT  detalle_programacion_temporal.id_detalle_programacion AS id,
+detalle_programacion_temporal.numero_orden, 
+			detalle_programacion_temporal.cod_producto , 
+			detalle_programacion_temporal.orden,
+			marca_productos.marca,
+			vitola_productos.vitola,
+			nombre_productos.nombre,
+			capa_productos.capa,
+ 			tipo_empaques.tipo_empaque, 
+ 			cellos.anillo,
+ 			cellos.cello,
+			cellos.upc,
+			detalle_programacion_temporal.saldo
+ FROM  detalle_programacion_temporal, 
+ 		 clase_productos,
+	    marca_productos, 
+		 vitola_productos, 
+		 nombre_productos,
+ 		 capa_productos, 
+		 tipo_empaques,
+		 cellos
  WHERE  clase_productos.codigo_producto =  detalle_programacion_temporal.cod_producto AND 
         clase_productos.id_capa = capa_productos.id_capa AND 
  		  clase_productos.id_marca = marca_productos.id_marca AND 
@@ -8577,8 +9234,6 @@ detalle_programacion_temporal.numero_orden,
 		  clase_productos.id_nombre =  nombre_productos.id_nombre and 
  		  clase_productos.id_tipo_empaque = tipo_empaques.id_tipo_empaque AND 
  		  clase_productos.id_cello = cellos.id_cello and
- 		  detalle_programacion_temporal.cod_producto = importar_existencias.codigo_producto and
- 		  importar_existencias.codigo_producto = clase_productos.codigo_producto and
  		  (detalle_programacion_temporal.numero_orden LIKE CONCAT("%",busqueda,"%")||
 			detalle_programacion_temporal.orden LIKE CONCAT("%",busqueda,"%")||
 			marca_productos.marca LIKE CONCAT("%",busqueda,"%")||
@@ -8592,7 +9247,7 @@ GROUP BY 1;
 END//
 DELIMITER ;
 
--- Volcando estructura para procedimiento facturacion_plasencia.mostrar_existencia_bodega
+-- Dumping structure for procedure facturacion_plasencia.mostrar_existencia_bodega
 DELIMITER //
 CREATE PROCEDURE `mostrar_existencia_bodega`()
 BEGIN
@@ -8603,7 +9258,42 @@ from  importar_existencias;
 END//
 DELIMITER ;
 
--- Volcando estructura para procedimiento facturacion_plasencia.mostrar_pedido
+-- Dumping structure for procedure facturacion_plasencia.mostrar_lista_cajas
+DELIMITER //
+CREATE PROCEDURE `mostrar_lista_cajas`()
+BEGIN
+SELECT id, existencia FROM lista_cajas;
+END//
+DELIMITER ;
+
+-- Dumping structure for procedure facturacion_plasencia.mostrar_lista_inventario
+DELIMITER //
+CREATE PROCEDURE `mostrar_lista_inventario`()
+BEGIN
+
+SELECT  inventario_productos_terminados.id,inventario_productos_terminados.lote, 
+marca_productos.marca, nombre_productos.nombre
+,vitola_productos.vitola, capa_productos.capa,
+inventario_productos_terminados.Existencia 
+ FROM inventario_productos_terminados, marca_productos, nombre_productos,vitola_productos
+ ,capa_productos
+ WHERE inventario_productos_terminados.Marca = marca_productos.id_marca and
+  inventario_productos_terminados.Alias_vitola = nombre_productos.id_nombre and
+inventario_productos_terminados.Vitola = vitola_productos.id_vitola AND
+ inventario_productos_terminados.Nombre_capa = capa_productos.id_capa;
+
+END//
+DELIMITER ;
+
+-- Dumping structure for procedure facturacion_plasencia.mostrar_lista_productos_terminados
+DELIMITER //
+CREATE PROCEDURE `mostrar_lista_productos_terminados`()
+BEGIN
+SELECT inventario_productos_terminados.id,inventario_productos_terminados.Existencia FROM inventario_productos_terminados;
+END//
+DELIMITER ;
+
+-- Dumping structure for procedure facturacion_plasencia.mostrar_pedido
 DELIMITER //
 CREATE PROCEDURE `mostrar_pedido`()
 BEGIN
@@ -8618,12 +9308,12 @@ vitola_productos.vitola," ",capa_productos.capa) AS descripcion ,pedidos.unidade
 END//
 DELIMITER ;
 
--- Volcando estructura para procedimiento facturacion_plasencia.mostrar_pendiente
+-- Dumping structure for procedure facturacion_plasencia.mostrar_pendiente
 DELIMITER //
 CREATE PROCEDURE `mostrar_pendiente`()
 BEGIN
 
-SELECT pendiente.id_pendiente, categoria.categoria AS categoria, pendiente.item AS item,pendiente.orden_del_sitema AS orden_del_sitema,pendiente.observacion AS observacion,pendiente.presentacion AS presentacion ,pendiente.mes AS mes ,orden_productos.orden AS orden, marca_productos.marca AS marca,vitola_productos.vitola AS vitola, 
+SELECT pendiente.id_pendiente , categoria.categoria AS categoria, pendiente.item AS item,pendiente.orden_del_sitema AS orden_del_sitema,pendiente.observacion AS observacion,pendiente.presentacion AS presentacion ,pendiente.mes AS mes ,orden_productos.orden AS orden, marca_productos.marca AS marca,vitola_productos.vitola AS vitola, 
 nombre_productos.nombre AS nombre, capa_productos.capa AS capa,
 cellos.anillo AS anillo,cellos.cello AS cello, cellos.upc AS upc, pendiente.pendiente as pendiente,pendiente.factura_del_mes as factura_del_mes, pendiente.cantidad_enviada_mes AS cantidad_enviada_mes, pendiente.saldo AS saldo, tipo_empaques.tipo_empaque AS tipo_empaque
 FROM categoria, clase_productos, marca_productos, vitola_productos,nombre_productos, capa_productos, orden_productos,cellos,
@@ -8637,7 +9327,7 @@ WHERE pendiente.vitola = vitola_productos.id_vitola AND pendiente.capa = capa_pr
 END//
 DELIMITER ;
 
--- Volcando estructura para procedimiento facturacion_plasencia.mostrar_pendiente_empaque
+-- Dumping structure for procedure facturacion_plasencia.mostrar_pendiente_empaque
 DELIMITER //
 CREATE PROCEDURE `mostrar_pendiente_empaque`()
 BEGIN
@@ -8649,14 +9339,13 @@ FROM categoria, clase_productos, marca_productos, vitola_productos,nombre_produc
 tipo_empaques, pendiente_empaque
 WHERE pendiente_empaque.vitola = vitola_productos.id_vitola AND pendiente_empaque.capa = capa_productos.id_capa  and
  pendiente_empaque.nombre = nombre_productos.id_nombre AND  pendiente_empaque.marca = marca_productos.id_marca AND cellos.id_cello=pendiente_empaque.cello AND orden_productos.id_orden =pendiente_empaque.orden and
-   pendiente_empaque.tipo_empaque = tipo_empaques.id_tipo_empaque AND pendiente_empaque.categoria = categoria.id_categoria AND 
-   pendiente_empaque.saldo > 0
-	GROUP BY pendiente_empaque.item, pendiente_empaque.orden, pendiente_empaque.categoria;
-	
+   pendiente_empaque.tipo_empaque = tipo_empaques.id_tipo_empaque AND pendiente_empaque.categoria = categoria.id_categoria 
+	GROUP BY pendiente_empaque.item, pendiente_empaque.orden, pendiente_empaque.categoria
+	;
 END//
 DELIMITER ;
 
--- Volcando estructura para procedimiento facturacion_plasencia.mostrar_productos
+-- Dumping structure for procedure facturacion_plasencia.mostrar_productos
 DELIMITER //
 CREATE PROCEDURE `mostrar_productos`()
 BEGIN
@@ -8674,17 +9363,7 @@ WHERE  clase_productos.id_vitola = vitola_productos.id_vitola AND clase_producto
 END//
 DELIMITER ;
 
--- Volcando estructura para procedimiento facturacion_plasencia.mostrar_programacion
-DELIMITER //
-CREATE PROCEDURE `mostrar_programacion`()
-BEGIN
-  
-  
-  SELECT * FROM prograamacion ORDER by prograamacion.id desc;
-END//
-DELIMITER ;
-
--- Volcando estructura para procedimiento facturacion_plasencia.sustraer_total
+-- Dumping structure for procedure facturacion_plasencia.sustraer_total
 DELIMITER //
 CREATE PROCEDURE `sustraer_total`(
 	IN `total` VARCHAR(50)
@@ -8720,7 +9399,7 @@ SELECT CAST(nuevo_total AS DECIMAL(10,2)), fin, inicio;
 END//
 DELIMITER ;
 
--- Volcando estructura para procedimiento facturacion_plasencia.traer_maximo_registro_existencia
+-- Dumping structure for procedure facturacion_plasencia.traer_maximo_registro_existencia
 DELIMITER //
 CREATE PROCEDURE `traer_maximo_registro_existencia`()
 BEGIN
@@ -8736,7 +9415,7 @@ WHERE importar_existencias.id = max_id;
 END//
 DELIMITER ;
 
--- Volcando estructura para procedimiento facturacion_plasencia.traer_ubicacion
+-- Dumping structure for procedure facturacion_plasencia.traer_ubicacion
 DELIMITER //
 CREATE PROCEDURE `traer_ubicacion`(
 	IN `ubicacion` VARCHAR(50)
@@ -8747,6 +9426,14 @@ importar_existencias.nombre,importar_existencias.vitola,importar_existencias.cap
 importar_existencias.total
 FROM importar_existencias
 WHERE importar_existencias.ubicacion  = ubicacion;
+END//
+DELIMITER ;
+
+-- Dumping structure for procedure facturacion_plasencia.verificar_item_clase
+DELIMITER //
+CREATE PROCEDURE `verificar_item_clase`()
+BEGIN
+SELECT item FROM pedidos WHERE pedidos.item NOT IN(SELECT clase_productos.item FROM clase_productos);
 END//
 DELIMITER ;
 
