@@ -82,6 +82,9 @@ Route::get('/importar_clase', [CapaProductoController::class, 'import']);
 Route::get('/pendiente', Pendiente::class)->name('pendiente');
 Route::post('/pendiente', Pendiente::class)->name('pendiente');
 
+Route::post('/pendiente_insertar', [Pendiente::class,'pendiente_indexi'])->name('pendiente_insertar');
+
+
 Route::get('/borrarpendiente',[ Pendiente::class,'eliminar_pendiente'])->name('borrarpendiente');
 Route::post('/borrarpendiente',[ Pendiente::class,'eliminar_pendiente'])->name('borrarpendiente');
 

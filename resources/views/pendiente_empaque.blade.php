@@ -55,7 +55,7 @@
                         </div>
                         <div class="col-sm">
                             <input type="date" name="fecha_hasta" id="fecha_hasta"
-                                class="form-control mr-sm-2 botonprincipal" style="width:200px;" placeholder="Nombre">
+                              class="form-control mr-sm-2 botonprincipal" style="width:200px;" placeholder="Nombre">
                         </div>
                         <div class="col-sm">
                             <input name="nombre" id="nombre" class="form-control mr-sm-2 botonprincipal"
