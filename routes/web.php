@@ -220,6 +220,7 @@ Route::post('/agregar_lista_caja', [App\Http\Controllers\CajasController::class,
 
 Route::post('/importar_cajas', [App\Http\Controllers\CajasController::class, 'import'])->name('importar_cajas');
 Route::get('/importar_cajas', [App\Http\Controllers\CajasController::class, 'import'])->name('importar_cajas');
+
 Route::get('/anadir_inventario', [App\Http\Controllers\CajasController::class, 'anadir_inventario'])->name('anadir_inventario');
 
 Route::post('/importar_inv_cajas', [App\Http\Controllers\CajasController::class, 'importinvcajas'])->name('importar_inv_cajas');
@@ -236,3 +237,21 @@ Route::get('/exportar_pendiente', [Pendiente::class, 'exportPendiente'])->name('
 Route::get('/productos_terminado', ProductosTerminados::class)->name('p_terminado');
 
 Route::get('/factura_terminados', FacturaTerminado::class)->name('f_terminado');
+
+
+
+
+
+
+
+
+
+
+Route::get('/importar_productos_terminado', [ImportExcelController::class, 'importar_productos_terminado'])->name('importar_productos_terminado');
+Route::post('/importar_archivoproductos_terminados', [App\Http\Controllers\ImportExcelController::class, 'importar_archivoproductos_terminados'])->name('importar_archivoproductos_terminados');
+Route::get('/importar_archivoproductos_terminados', [App\Http\Controllers\ImportExcelController::class, 'importar_archivoproductos_terminados'])->name('importar_archivoproductos_terminados');
+Route::post('/reemplazar_productos_terminado', [App\Http\Controllers\ImportExcelController::class, 'reemplazar_productos_terminado'])->name('reemplazar_productos_terminado');
+Route::get('/reemplazar_productos_terminado', [App\Http\Controllers\ImportExcelController::class, 'reemplazar_productos_terminado'])->name('reemplazar_productos_terminado');
+Route::get('/index_lista_productos', [App\Http\Controllers\ImportExcelController::class, 'index_lista_productos'])->name('index_lista_productos');
+Route::post('/editar_existencia_producto', [App\Http\Controllers\ImportExcelController::class, 'editar_existencia_producto'])->name('editar_existencia_producto');
+Route::get('/editar_existencia_producto', [App\Http\Controllers\ImportExcelController::class, 'editar_existencia_producto'])->name('editar_existencia_producto');
