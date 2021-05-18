@@ -11,8 +11,9 @@ class ImportExcelController extends Controller
 {
     function index()    {
      $data = DB::table('vitola_productos')->get();
-     $pedido_completo =  \DB::select('call mostrar_pedido');     
-     return view('import_excel', compact('data'))->with('pedido_completo', $pedido_completo);
+     $pedido_completo =  \DB::select('call mostrar_pedido');    
+     $verificar = \DB::select('call verificar_item_clase');
+     return view('import_excel', compact('data'))->with('pedido_completo', $pedido_completo)->with('verificar', $verificar);
     }
 
     function index_lista_productos(){

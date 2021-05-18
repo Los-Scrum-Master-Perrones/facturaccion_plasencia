@@ -63,12 +63,7 @@ class Pendiente extends Component
 
     public function pendiente_indexi(Request $request)
     {
-        $verificar = \DB::select('call verificar_item_clase');
-    
-
-        if( $verificar.count() === 0){
-            
-            $insertar_pendiente_empaque =   \DB::select(
+        $insertar_pendiente_empaque =   \DB::select(
                 'call insertar_pendente_empaque(:fecha)',
                 ['fecha' => (string)$request->fecha]
             );
@@ -87,16 +82,7 @@ class Pendiente extends Component
                 ]
             );
             return redirect()->route('pendiente')->with('insertar_pendiente', $insertar_pendiente)->with('insertar_pendiente_empaque', $insertar_pendiente_empaque);
-       
-
-           
-    }else{
-        
-        echo 'La variable SÍ está vacía, su contenido es: '.$verificar;
-             
-    }
-
-  }
+         }
 
 
 

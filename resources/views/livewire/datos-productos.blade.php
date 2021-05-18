@@ -1,67 +1,40 @@
 <div xmlns:wire="http://www.w3.org/1999/xhtml">
+<title></title>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" />
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
-    <title></title>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" />
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Hola</title>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" />
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
-
-    @livewireStyles
-    <link rel="stylesheet" href="{{ asset('css/principal.css') }}" />
-
-
-    <br />
-
-    <div style="width:1250px; padding-left:130px;">
-        <div class="row">
-
-            <div class="col-sm">
-                <button class="btn botonprincipal form-control" data-toggle="modal" data-target="#modal_marca"
-                    style="width:180px;">Agregar Marca</button>
-            </div>
-            <div class="col-sm">
-                <button class="btn botonprincipal form-control" data-toggle="modal" data-target="#modal_capa"
-                    style="width:180px;">Agregar Capa</button>
-            </div>
-
-            <div class="col-sm">
-                <button class="btn botonprincipal form-control" data-toggle="modal" data-target="#modal_nombre"
-                    style="width:180px;">Agregar Nombre</button>
-            </div>
-
-            <div class="col-sm">
-
-                <button class="btn botonprincipal form-control" data-toggle="modal" data-target="#modal_tipo"
-                    style="width:180px;">Agregar Tipo empaque</button>
-            </div>
-            <div class="col-sm">
-
-                <button class="btn botonprincipal form-control" data-toggle="modal" data-target="#modal_vitola"
-                    style="width:180px;">Agregar Vitola</button>
-            </div>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Hola</title>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" />
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+<script src="{{ URL::asset('css/tabla.js') }}"></script>
+@livewireStyles
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-wEmeIV1mKuiNpC+IOBjI7aAzPcEZeedi5yW5f2yOq55WWLwNGmvvx4Um1vskeMj0" crossorigin="anonymous">
 
 
 
-        </div>
-    </div>
 
-    <br>
+<div class="container" style="max-width:100%; ">
+    
+    <div class="row" style="text-align:center;">
 
+            <div class="col">
+                   <div class="input-group mb-3">
 
-    <div class="" style="width:1250px; padding-left:130px;">
-        
-            <div class="row">
+                <button class="mr-sm-2 botonprincipal " data-toggle="modal" data-target="#modal_marca"style="width:150px;">Agregar Marca</button>
+         
+                <button class="mr-sm-2 botonprincipal " data-toggle="modal" data-target="#modal_capa" style="width:150px;">Agregar Capa</button>
+      
+                <button class=" mr-sm-2 botonprincipal " data-toggle="modal" data-target="#modal_nombre"  style="width:150px;">Agregar Nombre</button>
 
-                <div class="col-sm">
-                    <input name="buscar" type="text" id="buscar" wire:model="busqueda"
-                        class="btn botonprincipal form_control" placeholder="Búsqueda por item, nombre y capa"
-                        style="width:350px;">
-                </div>
+                <button class="mr-sm-2 botonprincipal " data-toggle="modal" data-target="#modal_tipo" style="width:150px;">Agregar Tipo empaque</button>
+      
+                <button class="mr-sm-2 botonprincipal " data-toggle="modal" data-target="#modal_vitola" style="width:150px;">Agregar Vitola</button>
+       
+                    <input name="buscar" type="text" id="buscar" wire:model="busqueda"  class="btn botonprincipal form_control" placeholder="Búsqueda por item, nombre y capa" style="width:350px;">
+         
 
                 <form wire:submit.prevent="importar_excel"  hidden>
                     <div class="col-sm">
@@ -74,15 +47,24 @@
                             value="Importar">
                     </div>
                 </form>
-            </div>
-        
+
+        </div> 
+         </div>
     </div>
-    <br>
-    <div style="width:1250px; padding-left:100px;">
+
+
+
+  
+
+
+
+
+
+
+    <div style="width:100%;">
         <div class="">
             <div class="row">
-                <div class="col-sm" style="font-size:10px; overflow:scroll;
-     height:450px;">
+                <div class="col-sm" style="font-size:10px; overflow:scroll;height:500px;">
                     @csrf
                     <table class="table table-light" id="editable" style="font-size:10px;m">
                         <thead>
@@ -105,7 +87,7 @@
                 </div>
 
                 <div class="col-sm" style="font-size:10px; overflow:scroll;
-     height:450px;">
+     height:500px;">
                     @csrf
                     <table class="table table-light" id="editable" style="font-size:10px; overflow:scroll;
      height:50px;">
@@ -129,7 +111,7 @@
                 </div>
 
                 <div class="col-sm" style="font-size:10px; overflow:scroll;
-     height:450px;">
+     height:500px;">
                     @csrf
                     <table class="table table-light" id="editable" style="font-size:10px;m">
                         <thead>
@@ -152,7 +134,7 @@
                 </div>
 
                 <div class="col-sm" style="font-size:10px; overflow:scroll;
-     height:450px;">
+     height:500px;">
                     @csrf
                     <table class="table table-light" id="editable" style="font-size:10px;m">
                         <thead>
@@ -175,7 +157,7 @@
                 </div>
 
                 <div class="col-sm" style="font-size:10px; overflow:scroll;
-     height:450px;">
+     height:500px;">
                     @csrf
                     <table class="table table-light" id="editable" style="font-size:10px;m">
                         <thead>
@@ -212,26 +194,21 @@
             <div class="modal-dialog modal-dialog-centered">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title" id="staticBackdropLabel"
-                            style="width:450px; text-align:center; font-size:20px;"><strong>Agregar marca</strong></h5>
+                        <h5 class="modal-title" id="staticBackdropLabel"><strong>Agregar marca</strong></h5>
                         <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
                         <div class="mb-3 col">
-                            <label for="txt_vitola" class="form-label"
-                                style="width:440px; text-align:center; font-size:20px;">Nueva marca</label>
+                            <label for="txt_vitola" class="form-label">Nueva marca</label>
                             <input class="form-control" id="marcam" type="text" name="marcam"
                                 placeholder="Agregar marca" style="width: 440px" maxLength="30" autocomplete="off">
                         </div>
                     </div>
                     <div class="modal-footer">
-                        <button style=" background: #b39f64; color: #ecedf1;" type="button" class=" btn-info-claro "
-                            data-dismiss="modal">
+                        <button type="button"  class=" bmodal_no "  data-dismiss="modal">
                             <span>Cancelar</span>
                         </button>
-                        <button onclick="validar_marca()" type="submit" class=" btn-info float-right" value="Guardar"
-                            style="margin-right: 10px">
-
+                        <button onclick="validar_marca()" type="submit" class=" bmodal_yes " value="Guardar">
                             <span>Guardar</span>
                         </button>
                         @csrf
@@ -316,25 +293,21 @@
             <div class="modal-dialog modal-dialog-centered">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title" id="staticBackdropLabel"
-                            style="width:450px; text-align:center; font-size:20px;"><strong>Agregar capa</strong></h5>
+                        <h5 class="modal-title" id="staticBackdropLabel"><strong>Agregar capa</strong></h5>
                         <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
                         <div class="mb-3 col">
-                            <label for="txt_vitola" class="form-label"
-                                style="width:440px; text-align:center; font-size:20px;">Nueva capa</label>
+                            <label for="txt_vitola" class="form-label">Nueva capa</label>
                             <input class="form-control" id="capam" type="text" name="capam" placeholder="Agregar marca"
                                 style="width: 440px" maxLength="30" autocomplete="off">
                         </div>
                     </div>
                     <div class="modal-footer">
-                        <button style=" background: #b39f64; color: #ecedf1;" type="button" class=" btn-info-claro "
-                            data-dismiss="modal">
+                        <button type="button"class=" bmodal_no "data-dismiss="modal">
                             <span>Cancelar</span>
                         </button>
-                        <button onclick="validar_capa()" type="submit" class=" btn-info float-right" value="Guardar"
-                            style="margin-right: 10px">
+                        <button onclick="validar_capa()" type="submit" class=" bmodal_yes " value="Guardar">
 
                             <span>Guardar</span>
                         </button>
@@ -414,26 +387,21 @@
             <div class="modal-dialog modal-dialog-centered">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title" id="staticBackdropLabel"
-                            style="width:450px; text-align:center; font-size:20px;"><strong>Agregar nombre</strong></h5>
+                        <h5 class="modal-title" id="staticBackdropLabel"><strong>Agregar nombre</strong></h5>
                         <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
                         <div class="mb-3 col">
-                            <label for="txt_vitola" class="form-label"
-                                style="width:440px; text-align:center; font-size:20px;">Nueva nombre</label>
+                            <label for="txt_vitola" class="form-label">Nueva nombre</label>
                             <input class="form-control" id="nombrem" type="text" name="nombrem"
                                 placeholder="Agregar marca" style="width: 440px" maxLength="30" autocomplete="off">
                         </div>
                     </div>
                     <div class="modal-footer">
-                        <button style=" background: #b39f64; color: #ecedf1;" type="button" class=" btn-info-claro "
-                            data-dismiss="modal">
+                        <button  type="button" class=" bmodal_no" data-dismiss="modal">
                             <span>Cancelar</span>
                         </button>
-                        <button onclick="validar_nombre()" type="submit" class=" btn-info float-right" value="Guardar"
-                            style="margin-right: 10px">
-
+                        <button onclick="validar_nombre()" type="submit" class=" bmodal_yes "value="Guardar">
                             <span>Guardar</span>
                         </button>
                         @csrf
@@ -511,28 +479,22 @@
             <div class="modal-dialog modal-dialog-centered">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title" id="staticBackdropLabel"
-                            style="width:450px; text-align:center; font-size:20px;"><strong>Agregar tipo de
-                                empaque</strong></h5>
+                        <h5 class="modal-title" id="staticBackdropLabel"><strong>Agregar tipo de empaque</strong></h5>
                         <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
                         <div class="mb-3 col">
-                            <label for="txt_vitola" class="form-label"
-                                style="width:440px; text-align:center; font-size:20px;">Nuevo tipo de empaque</label>
+                            <label for="txt_vitola" class="form-label">Nuevo tipo de empaque</label>
                             <input class="form-control" id="tipom" type="text" name="tipom"
                                 placeholder="Agregar tipo de empaque" style="width: 440px" maxLength="30"
                                 autocomplete="off">
                         </div>
                     </div>
                     <div class="modal-footer">
-                        <button style=" background: #b39f64; color: #ecedf1;" type="button" class=" btn-info-claro "
-                            data-dismiss="modal">
+                        <button  type="button" class=" bmodal_no " data-dismiss="modal">
                             <span>Cancelar</span>
                         </button>
-                        <button onclick="validar_tipo()" type="submit" class=" btn-info float-right" value="Guardar"
-                            style="margin-right: 10px">
-
+                        <button onclick="validar_tipo()" type="submit"class=" bmodal_yes " value="Guardar">
                             <span>Guardar</span>
                         </button>
                         @csrf
@@ -611,28 +573,20 @@
             <div class="modal-dialog modal-dialog-centered">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title" id="staticBackdropLabel"
-                            style="width:450px; text-align:center; font-size:20px;"><strong>Agregar tipo de
-                                empaque</strong></h5>
+                        <h5 class="modal-title" id="staticBackdropLabel"><strong>Agregar tipo de empaque</strong></h5>
                         <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
                         <div class="mb-3 col">
-                            <label for="txt_vitola" class="form-label"
-                                style="width:440px; text-align:center; font-size:20px;">Nuevo tipo de empaque</label>
+                            <label for="txt_vitola" class="form-label">Nuevo tipo de empaque</label>
                             <input class="form-control" id="vitolam" type="text" name="vitolam"
                                 placeholder="Agregar tipo de empaque" style="width: 440px" maxLength="30"
                                 autocomplete="off">
                         </div>
                     </div>
                     <div class="modal-footer">
-                        <button style=" background: #b39f64; color: #ecedf1;" type="button" class=" btn-info-claro "
-                            data-dismiss="modal">
-                            <span>Cancelar</span>
-                        </button>
-                        <button onclick="validar_vitola()" type="submit" class=" btn-info float-right" value="Guardar"
-                            style="margin-right: 10px">
-
+                        <button  type="button" class=" bmodal_no" data-dismiss="modal"><span>Cancelar</span></button>
+                        <button onclick="validar_vitola()" type="submit" class=" bmodal_yes" value="Guardar">
                             <span>Guardar</span>
                         </button>
                         @csrf
