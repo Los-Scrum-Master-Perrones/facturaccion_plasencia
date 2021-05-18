@@ -232,6 +232,8 @@ Route::post('/editar_existencia', [App\Http\Controllers\CajasController::class, 
 
 Route::get('/exportar_pendiente', [Pendiente::class, 'exportPendiente'])->name('exportar_pendiente');
 
+Route::get('/exportar_programacion', [HistorialProgramacion::class, 'exportProgramacion'])->name('exportar_programacion');
+
 
 //Produtco terminado y Facturacion
 Route::get('/productos_terminado', ProductosTerminados::class)->name('p_terminado');

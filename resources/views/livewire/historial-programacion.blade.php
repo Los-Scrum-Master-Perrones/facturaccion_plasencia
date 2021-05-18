@@ -17,42 +17,61 @@
     </br>
     <ul class="nav justify-content-center">
         <li class="nav-item">
-            <a style="color:black; font-size:16px;" href="pendiente_empaque"><strong>Pendiente</strong></a>
+            <a style="color:white; font-size:12px;" href="pendiente_empaque"><strong>Pendiente</strong></a>
         </li>
         <li class="nav-item">
-            <a style="color:black; font-size:16px;" href="importar_c"><strong>Existencia en bodega</strong></a>
+            <a style="color:white; font-size:12px;" href="importar_c"><strong>Existencia en bodega</strong></a>
         </li>
         <li class="nav-item">
-            <a style="color:black; font-size:16px;" href="inventario_cajas"><strong>Existencia de cajas</strong></a>
+            <a style="color:white; font-size:12px;" href="inventario_cajas"><strong>Existencia de cajas</strong></a>
         </li>
         <li class="nav-item">
-            <a style="color:black; font-size:16px;" href=""><strong>Programaciones</strong></a>
+            <a style="color:#E5B1E2; font-size:12px;" href=""><strong>Programaciones</strong></a>
         </li>
     </ul>
     <br>
 
-    <div class="" style="width:1100px; padding-left:200px;">
+    <div class="" style="width:1100px; padding-left:250px;">
 
         <div class="row" style="width:1100px;">
 
 
-        <div class="col-sm-6" style="text-align:right;">
-        @foreach($titulo as $programacion)
-           <h4 style="color:#ffffff;" id="contenedor" name="contenedor" value="" wire:model="titulo"><strong> {{$programacion ->mes_contenedor}}</strong></h4> 
-           @endforeach
+            <div class="col-sm-4" style="text-align:right;">
+                @foreach($titulo as $programacion)
+                <h4 style="color:#ffffff;" id="contenedor" name="contenedor" value="" wire:model="titulo"><strong>
+                        {{$programacion ->mes_contenedor}}</strong></h4>
+                @endforeach
             </div>
-            <div class="col-sm-6" style="text-align:right;">
+            <div class="col-sm-4" style="text-align:right;">
+                <form action="{{Route('exportar_programacion')}}" id="formver" name="formver">
+                    <input name="buscar" id="buscar" value="{{isset($busqueda)?$busqueda:null}}"
+                        class="btn botonprincipal form-control" wire:model="busqueda"
+                        placeholder="Búsqueda por Marca, Nombre y Vitola" style="width:400px; padding:right;">
+            </div>
+            <div class="col-sm-2" style="text-align:right;">
 
-                <input name="buscar" id="buscar" class="btn botonprincipal form-control" wire:model="busqueda"
-                    placeholder="Búsqueda por Marca, Nombre y Vitola" style="width:400px; padding:right;">
+                <input value="{{isset($id_tov)?$id_tov:0}}" name="id_tov" id="id_tov" hidden wire:model="id_tov">
+
+                <button class="botonprincipal" type="submit" style="width:120px;">Exportar
+                </button>
+            </div>
+            </form>
+            <div class="col-sm-2" style="text-align:right;">
+
+            <button class="botonprincipal" type="submit" style="width:120px;">
+            <span>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor"
+                        class="bi bi-printer" viewBox="0 0 16 16">
+                        <path d="M2.5 8a.5.5 0 1 0 0-1 .5.5 0 0 0 0 1z" />
+                        <path
+                            d="M5 1a2 2 0 0 0-2 2v2H2a2 2 0 0 0-2 2v3a2 2 0 0 0 2 2h1v1a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2v-1h1a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2h-1V3a2 2 0 0 0-2-2H5zM4 3a1 1 0 0 1 1-1h6a1 1 0 0 1 1 1v2H4V3zm1 5a2 2 0 0 0-2 2v1H2a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1h12a1 1 0 0 1 1 1v3a1 1 0 0 1-1 1h-1v-1a2 2 0 0 0-2-2H5zm7 2v3a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1v-3a1 1 0 0 1 1-1h6a1 1 0 0 1 1 1z" />
+                    </svg>
+                </span>
+                </button>
+
             </div>
 
-           
-
-
-
-
-    </div>
+        </div>
     </div>
 
     </br>
@@ -116,7 +135,9 @@
                                     
                                    
                                         <form wire:submit.prevent="ver({{$programacion->id}})">
-                                            <button data-toggle="modal" data-target="" href="" style="background: none; color: inherit;   border: none;  padding: 0;
+                                        <a style=" width:10px; height:10px;"  type="submit"
+                                            onclick="verpro({{$programacion->id}})">
+                                             <button data-toggle="modal" data-target="" href="" style="background: none; color: inherit;   border: none;  padding: 0;
                                                 font: inherit;  cursor: pointer; outline: inherit;" >
                                                
                                                 <abbr title="Mostrar detalles de la programación"><svg
@@ -130,6 +151,7 @@
                                                 </abbr>
                                                
                                             </button>
+                                            </a>
                                         </form>
                                         
 
@@ -309,6 +331,22 @@
                 }
             }
 
+        }
+    </script>
+
+<script type="text/javascript">
+        function verpro(id) {
+            var datas = '<?php echo json_encode($programaciones);?>';
+
+            var data = JSON.parse(datas);
+            for (var i = 0; i < data.length; i++) {
+                if (data[i].id === id) {
+
+                    document.formver.id_tov.value = data[i].id;
+                    document.formver.buscar.value = "";
+
+                }
+            }
         }
     </script>
 

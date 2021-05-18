@@ -19,24 +19,18 @@
 
     <ul class="nav justify-content-center">
         <li class="nav-item">
-            <a style="color:black;" href="pendiente_empaque"><strong>Pendiente</strong></a>
+            <a style="color:white;font-size:12px;" href="pendiente_empaque"><strong>Pendiente</strong></a>
         </li>
         <li class="nav-item">
-            <a style="color:white;" href="importar_c"><strong>Existencia en bodega</strong></a>
+            <a  style="color:#E5B1E2; font-size:12px;" href="importar_c"><strong>Existencia en bodega</strong></a>
         </li>
         <li class="nav-item">
-            <a style="color:black;" href="inventario_cajas"><strong>Existencia de cajas</strong></a>
+            <a style="color:white; font-size:12px;" href="inventario_cajas"><strong>Existencia de cajas</strong></a>
         </li>
         <li class="nav-item">
-            <a style="color:black; " href="historial_programacion"><strong>Programaciones</strong></a>
+            <a style="color:white; font-size:12px;" href="historial_programacion"><strong>Programaciones</strong></a>
         </li>
     </ul>
-
-
-
-
-
-
 
 
     <div class="container" style="max-width:100%; ">

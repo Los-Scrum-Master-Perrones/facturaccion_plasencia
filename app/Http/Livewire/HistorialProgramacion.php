@@ -6,6 +6,10 @@ use Livewire\Component;
 use DB;
 use Illuminate\Http\Request;
 
+use Maatwebsite\Excel\Facades\Excel;
+
+use App\Exports\ProgramcionExport;
+
 class HistorialProgramacion extends Component
 {
     public $programaciones;
@@ -18,6 +22,7 @@ public $detallestodos;
     public $idp;
     public $saldo;
     public $id_pen;
+    
     public function render()
     {
         $this->programaciones= \DB::select('call mostrar_programacion()');
@@ -120,5 +125,23 @@ public $detallestodos;
                return redirect()->route('historial_programacion'); 
             
                 }
+
+                
+    function exportProgramacion(Request $request)
+    {
+       
+        
+
+        if ($request->buscar===null){
+            $bus = "";
+
+        }else{
+            $bus =  $request->buscar;
+        }
+
+        
+        
+        return Excel::download(new ProgramcionExport($bus, $request->id_tov), 'Programación.xlsx');
+    }
    
 }
