@@ -1,8 +1,8 @@
 -- --------------------------------------------------------
 -- Host:                         127.0.0.1
--- Server version:               5.7.31 - MySQL Community Server (GPL)
--- Server OS:                    Win64
--- HeidiSQL Version:             11.0.0.5919
+-- Versión del servidor:         10.5.8-MariaDB - mariadb.org binary distribution
+-- SO del servidor:              Win64
+-- HeidiSQL Versión:             11.0.0.5919
 -- --------------------------------------------------------
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
@@ -12,26 +12,26 @@
 /*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
 
 
--- Dumping database structure for facturacion_plasencia
+-- Volcando estructura de base de datos para facturacion_plasencia
 CREATE DATABASE IF NOT EXISTS `facturacion_plasencia` /*!40100 DEFAULT CHARACTER SET latin1 */;
 USE `facturacion_plasencia`;
 
--- Dumping structure for table facturacion_plasencia.anadir_inventario_cajas
+-- Volcando estructura para tabla facturacion_plasencia.anadir_inventario_cajas
 CREATE TABLE IF NOT EXISTS `anadir_inventario_cajas` (
   `id_cajas` int(11) NOT NULL AUTO_INCREMENT,
   `codigo` varchar(50) DEFAULT NULL,
-  `descripcion` longtext,
-  `lote_origen` longtext,
-  `lote_destino` longtext,
-  `cantidad` longtext,
-  `costo_u` longtext,
-  `subtotal` longtext,
+  `descripcion` longtext DEFAULT NULL,
+  `lote_origen` longtext DEFAULT NULL,
+  `lote_destino` longtext DEFAULT NULL,
+  `cantidad` longtext DEFAULT NULL,
+  `costo_u` longtext DEFAULT NULL,
+  `subtotal` longtext DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id_cajas`) USING BTREE
 ) ENGINE=MyISAM AUTO_INCREMENT=51 DEFAULT CHARSET=latin1 ROW_FORMAT=DYNAMIC;
 
--- Dumping data for table facturacion_plasencia.anadir_inventario_cajas: 30 rows
+-- Volcando datos para la tabla facturacion_plasencia.anadir_inventario_cajas: 30 rows
 DELETE FROM `anadir_inventario_cajas`;
 /*!40000 ALTER TABLE `anadir_inventario_cajas` DISABLE KEYS */;
 INSERT INTO `anadir_inventario_cajas` (`id_cajas`, `codigo`, `descripcion`, `lote_origen`, `lote_destino`, `cantidad`, `costo_u`, `subtotal`, `created_at`, `updated_at`) VALUES
@@ -67,7 +67,7 @@ INSERT INTO `anadir_inventario_cajas` (`id_cajas`, `codigo`, `descripcion`, `lot
 	(50, 'CM-05356', 'CAJAS DE MADERA ROCKY PATEL EDGE 4-1/2X60 B52 COROJO BOX/30', 'CAJAS_MADERA', 'CAJAS_MADERA', '50', '4.5', '225', NULL, NULL);
 /*!40000 ALTER TABLE `anadir_inventario_cajas` ENABLE KEYS */;
 
--- Dumping structure for table facturacion_plasencia.archivo_producto_terminados
+-- Volcando estructura para tabla facturacion_plasencia.archivo_producto_terminados
 CREATE TABLE IF NOT EXISTS `archivo_producto_terminados` (
   `id` int(11) DEFAULT NULL,
   `Lote` varchar(50) DEFAULT NULL,
@@ -80,27 +80,27 @@ CREATE TABLE IF NOT EXISTS `archivo_producto_terminados` (
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
--- Dumping data for table facturacion_plasencia.archivo_producto_terminados: 0 rows
+-- Volcando datos para la tabla facturacion_plasencia.archivo_producto_terminados: 0 rows
 DELETE FROM `archivo_producto_terminados`;
 /*!40000 ALTER TABLE `archivo_producto_terminados` DISABLE KEYS */;
 /*!40000 ALTER TABLE `archivo_producto_terminados` ENABLE KEYS */;
 
--- Dumping structure for table facturacion_plasencia.cajas
+-- Volcando estructura para tabla facturacion_plasencia.cajas
 CREATE TABLE IF NOT EXISTS `cajas` (
   `id_cajas` int(11) NOT NULL AUTO_INCREMENT,
   `codigo` varchar(50) DEFAULT NULL,
-  `descripcion` longtext,
-  `lote_origen` longtext,
-  `lote_destino` longtext,
-  `cantidad` longtext,
-  `costo_u` longtext,
-  `subtotal` longtext,
+  `descripcion` longtext DEFAULT NULL,
+  `lote_origen` longtext DEFAULT NULL,
+  `lote_destino` longtext DEFAULT NULL,
+  `cantidad` longtext DEFAULT NULL,
+  `costo_u` longtext DEFAULT NULL,
+  `subtotal` longtext DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id_cajas`)
 ) ENGINE=MyISAM AUTO_INCREMENT=61 DEFAULT CHARSET=latin1;
 
--- Dumping data for table facturacion_plasencia.cajas: 60 rows
+-- Volcando datos para la tabla facturacion_plasencia.cajas: 60 rows
 DELETE FROM `cajas`;
 /*!40000 ALTER TABLE `cajas` DISABLE KEYS */;
 INSERT INTO `cajas` (`id_cajas`, `codigo`, `descripcion`, `lote_origen`, `lote_destino`, `cantidad`, `costo_u`, `subtotal`, `created_at`, `updated_at`) VALUES
@@ -166,7 +166,7 @@ INSERT INTO `cajas` (`id_cajas`, `codigo`, `descripcion`, `lote_origen`, `lote_d
 	(60, 'CM-05356', 'CAJAS DE MADERA ROCKY PATEL EDGE 4-1/2X60 B52 COROJO BOX/30', 'CAJAS_MADERA', 'CAJAS_MADERA', '50', '4.5', '225', '2021-05-12 21:47:26', '2021-05-12 21:47:26');
 /*!40000 ALTER TABLE `cajas` ENABLE KEYS */;
 
--- Dumping structure for table facturacion_plasencia.capa_productos
+-- Volcando estructura para tabla facturacion_plasencia.capa_productos
 CREATE TABLE IF NOT EXISTS `capa_productos` (
   `id_capa` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
   `capa` char(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
@@ -176,7 +176,7 @@ CREATE TABLE IF NOT EXISTS `capa_productos` (
   UNIQUE KEY `capa` (`capa`)
 ) ENGINE=MyISAM AUTO_INCREMENT=101 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- Dumping data for table facturacion_plasencia.capa_productos: 100 rows
+-- Volcando datos para la tabla facturacion_plasencia.capa_productos: 100 rows
 DELETE FROM `capa_productos`;
 /*!40000 ALTER TABLE `capa_productos` DISABLE KEYS */;
 INSERT INTO `capa_productos` (`id_capa`, `capa`, `created_at`, `updated_at`) VALUES
@@ -282,7 +282,7 @@ INSERT INTO `capa_productos` (`id_capa`, `capa`, `created_at`, `updated_at`) VAL
 	(100, 'LIGERO/JAMAST.', '2021-04-28 20:51:58', '2021-04-28 20:51:58');
 /*!40000 ALTER TABLE `capa_productos` ENABLE KEYS */;
 
--- Dumping structure for table facturacion_plasencia.categoria
+-- Volcando estructura para tabla facturacion_plasencia.categoria
 CREATE TABLE IF NOT EXISTS `categoria` (
   `id_categoria` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
   `categoria` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
@@ -291,7 +291,7 @@ CREATE TABLE IF NOT EXISTS `categoria` (
   PRIMARY KEY (`id_categoria`)
 ) ENGINE=MyISAM AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- Dumping data for table facturacion_plasencia.categoria: 4 rows
+-- Volcando datos para la tabla facturacion_plasencia.categoria: 4 rows
 DELETE FROM `categoria`;
 /*!40000 ALTER TABLE `categoria` DISABLE KEYS */;
 INSERT INTO `categoria` (`id_categoria`, `categoria`, `created_at`, `updated_at`) VALUES
@@ -301,7 +301,7 @@ INSERT INTO `categoria` (`id_categoria`, `categoria`, `created_at`, `updated_at`
 	(4, 'WAREHOUSE', NULL, NULL);
 /*!40000 ALTER TABLE `categoria` ENABLE KEYS */;
 
--- Dumping structure for table facturacion_plasencia.cellos
+-- Volcando estructura para tabla facturacion_plasencia.cellos
 CREATE TABLE IF NOT EXISTS `cellos` (
   `id_cello` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
   `cello` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
@@ -312,7 +312,7 @@ CREATE TABLE IF NOT EXISTS `cellos` (
   PRIMARY KEY (`id_cello`)
 ) ENGINE=MyISAM AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- Dumping data for table facturacion_plasencia.cellos: 4 rows
+-- Volcando datos para la tabla facturacion_plasencia.cellos: 4 rows
 DELETE FROM `cellos`;
 /*!40000 ALTER TABLE `cellos` DISABLE KEYS */;
 INSERT INTO `cellos` (`id_cello`, `cello`, `anillo`, `upc`, `created_at`, `updated_at`) VALUES
@@ -322,7 +322,7 @@ INSERT INTO `cellos` (`id_cello`, `cello`, `anillo`, `upc`, `created_at`, `updat
 	(4, 'SI', 'NO', 'NO', '2021-04-08 21:40:41', '2021-04-08 21:40:41');
 /*!40000 ALTER TABLE `cellos` ENABLE KEYS */;
 
--- Dumping structure for table facturacion_plasencia.clase_productos
+-- Volcando estructura para tabla facturacion_plasencia.clase_productos
 CREATE TABLE IF NOT EXISTS `clase_productos` (
   `id_producto` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
   `item` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
@@ -342,7 +342,7 @@ CREATE TABLE IF NOT EXISTS `clase_productos` (
   PRIMARY KEY (`id_producto`)
 ) ENGINE=MyISAM AUTO_INCREMENT=591 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- Dumping data for table facturacion_plasencia.clase_productos: 590 rows
+-- Volcando datos para la tabla facturacion_plasencia.clase_productos: 590 rows
 DELETE FROM `clase_productos`;
 /*!40000 ALTER TABLE `clase_productos` DISABLE KEYS */;
 INSERT INTO `clase_productos` (`id_producto`, `item`, `codigo_producto`, `codigo_caja`, `codigo_precio`, `id_capa`, `id_vitola`, `id_nombre`, `id_marca`, `id_orden`, `id_cello`, `id_tipo_empaque`, `presentacion`, `created_at`, `updated_at`) VALUES
@@ -938,7 +938,7 @@ INSERT INTO `clase_productos` (`id_producto`, `item`, `codigo_producto`, `codigo
 	(590, '7777', '4656367', '875732', '4653627', 1, 1, 1, 6, NULL, 3, 1, 'Puros Tripa Larga', NULL, NULL);
 /*!40000 ALTER TABLE `clase_productos` ENABLE KEYS */;
 
--- Dumping structure for table facturacion_plasencia.detalle_clase_productos
+-- Volcando estructura para tabla facturacion_plasencia.detalle_clase_productos
 CREATE TABLE IF NOT EXISTS `detalle_clase_productos` (
   `id_producto` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
   `item` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
@@ -948,13 +948,13 @@ CREATE TABLE IF NOT EXISTS `detalle_clase_productos` (
   `id_marca` int(11) NOT NULL,
   `id_cello` int(11) NOT NULL,
   `id_tipo_empaque` int(11) NOT NULL,
-  `otra_descripcion` text COLLATE utf8mb4_unicode_ci,
+  `otra_descripcion` text COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id_producto`) USING BTREE
 ) ENGINE=MyISAM AUTO_INCREMENT=221 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- Dumping data for table facturacion_plasencia.detalle_clase_productos: 11 rows
+-- Volcando datos para la tabla facturacion_plasencia.detalle_clase_productos: 11 rows
 DELETE FROM `detalle_clase_productos`;
 /*!40000 ALTER TABLE `detalle_clase_productos` DISABLE KEYS */;
 INSERT INTO `detalle_clase_productos` (`id_producto`, `item`, `id_capa`, `id_vitola`, `id_nombre`, `id_marca`, `id_cello`, `id_tipo_empaque`, `otra_descripcion`, `created_at`, `updated_at`) VALUES
@@ -971,304 +971,90 @@ INSERT INTO `detalle_clase_productos` (`id_producto`, `item`, `id_capa`, `id_vit
 	(220, '02008065', 19, 45, 153, 1450, 1, 27, 'df', NULL, NULL);
 /*!40000 ALTER TABLE `detalle_clase_productos` ENABLE KEYS */;
 
--- Dumping structure for table facturacion_plasencia.detalle_programacion
+-- Volcando estructura para tabla facturacion_plasencia.detalle_factura
+CREATE TABLE IF NOT EXISTS `detalle_factura` (
+  `id_detalle` bigint(20) NOT NULL AUTO_INCREMENT,
+  `id_pendiente` bigint(20) NOT NULL DEFAULT 0,
+  `id_venta` int(11) NOT NULL,
+  `cantidad_cajas` smallint(6) DEFAULT NULL,
+  `peso_bruto` decimal(5,2) NOT NULL,
+  `peso_neto` decimal(5,2) NOT NULL,
+  `back_order` decimal(5,2) NOT NULL,
+  `cantidad_puros` smallint(6) NOT NULL,
+  `unidad` smallint(6) NOT NULL,
+  `upc_bundle` bit(1) NOT NULL,
+  `observaciones` tinytext DEFAULT NULL,
+  `facturado` char(1) DEFAULT NULL,
+  PRIMARY KEY (`id_detalle`) USING BTREE
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
+
+-- Volcando datos para la tabla facturacion_plasencia.detalle_factura: ~3 rows (aproximadamente)
+DELETE FROM `detalle_factura`;
+/*!40000 ALTER TABLE `detalle_factura` DISABLE KEYS */;
+INSERT INTO `detalle_factura` (`id_detalle`, `id_pendiente`, `id_venta`, `cantidad_cajas`, `peso_bruto`, `peso_neto`, `back_order`, `cantidad_puros`, `unidad`, `upc_bundle`, `observaciones`, `facturado`) VALUES
+	(1, 14, 0, 10, 30.00, 23.00, 0.00, 2, 500, b'0', NULL, 'N'),
+	(2, 15, 0, 10, 30.00, 23.00, 0.00, 1, 100, b'0', NULL, 'N'),
+	(3, 16, 0, 10, 30.00, 23.00, 0.00, 1, 500, b'0', NULL, 'N');
+/*!40000 ALTER TABLE `detalle_factura` ENABLE KEYS */;
+
+-- Volcando estructura para tabla facturacion_plasencia.detalle_programacion
 CREATE TABLE IF NOT EXISTS `detalle_programacion` (
   `id_detalle_programacion` int(11) NOT NULL AUTO_INCREMENT,
   `numero_orden` varchar(50) DEFAULT NULL,
   `orden` varchar(50) DEFAULT NULL,
   `cod_producto` varchar(50) DEFAULT NULL,
-  `saldo` bigint(20) DEFAULT NULL,
+  `saldo` decimal(10,2) DEFAULT NULL,
   `id_programacion` int(11) DEFAULT NULL,
+  `id_pendiente` int(11) DEFAULT NULL,
   PRIMARY KEY (`id_detalle_programacion`)
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
 
--- Dumping data for table facturacion_plasencia.detalle_programacion: 0 rows
+-- Volcando datos para la tabla facturacion_plasencia.detalle_programacion: 3 rows
 DELETE FROM `detalle_programacion`;
 /*!40000 ALTER TABLE `detalle_programacion` DISABLE KEYS */;
+INSERT INTO `detalle_programacion` (`id_detalle_programacion`, `numero_orden`, `orden`, `cod_producto`, `saldo`, `id_programacion`, `id_pendiente`) VALUES
+	(4, '', 'HON-3135-5-21', 'P-03205', 0.00, 3, 128),
+	(3, '', 'HON-3141-5-21', 'P-02047', 1000.00, 2, 98),
+	(5, '', 'HON-3141-5-21', 'P-02098', 2000.00, 3, 218);
 /*!40000 ALTER TABLE `detalle_programacion` ENABLE KEYS */;
 
--- Dumping structure for table facturacion_plasencia.detalle_programacion_temporal
+-- Volcando estructura para tabla facturacion_plasencia.detalle_programacion_temporal
 CREATE TABLE IF NOT EXISTS `detalle_programacion_temporal` (
   `id_detalle_programacion` int(11) NOT NULL AUTO_INCREMENT,
   `numero_orden` varchar(50) DEFAULT NULL,
   `orden` varchar(50) DEFAULT NULL,
   `cod_producto` varchar(50) DEFAULT NULL,
-  `saldo` bigint(20) DEFAULT NULL,
+  `saldo` decimal(8,2) DEFAULT NULL,
+  `id_pendiente` int(11) DEFAULT NULL,
   PRIMARY KEY (`id_detalle_programacion`) USING BTREE
-) ENGINE=MyISAM AUTO_INCREMENT=266 DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM AUTO_INCREMENT=17 DEFAULT CHARSET=latin1;
 
--- Dumping data for table facturacion_plasencia.detalle_programacion_temporal: 265 rows
+-- Volcando datos para la tabla facturacion_plasencia.detalle_programacion_temporal: 0 rows
 DELETE FROM `detalle_programacion_temporal`;
 /*!40000 ALTER TABLE `detalle_programacion_temporal` DISABLE KEYS */;
-INSERT INTO `detalle_programacion_temporal` (`id_detalle_programacion`, `numero_orden`, `orden`, `cod_producto`, `saldo`) VALUES
-	(1, '78', '7', NULL, 89),
-	(2, '', 'FTT-1479', 'P-01314', 9000),
-	(3, '', 'INT-H-1234', 'P-01314', 500),
-	(4, '', 'HON-3144', 'P-22640', 200),
-	(5, '', 'HON-3144', NULL, 200),
-	(6, '', 'HON-3144', 'P-22642', 200),
-	(7, '', 'HON-3144', NULL, 200),
-	(8, '', 'INT-H-1233', NULL, 600),
-	(9, '', 'INT-H-1233', NULL, 400),
-	(10, '', 'FTT-1479', 'P-02161', 10000),
-	(11, '', 'INT-H-1212', NULL, 20),
-	(12, '', 'INT-H-1239', 'P-02507', 100),
-	(13, '', 'INT-H-1237', 'P-02507', 1000),
-	(14, '', 'INT-H-1235', 'P-02509', 40),
-	(15, '', 'HON-3142', 'P-02433', 1000),
-	(16, '', 'INT-H-1239', 'P-02433', 160),
-	(17, '', 'INT-H-1238', 'P-02433', 500),
-	(18, '', 'INT-H-1236', 'P-02433', 200),
-	(19, '', 'INT-H-1239', NULL, 40),
-	(20, '', 'INT-H-1240', NULL, 100),
-	(21, '', 'INT-H-1212', 'P-02501', 200),
-	(22, '', 'HON-3142', 'P-02032', 1200),
-	(23, '', 'HON-3142', 'P-02033', 2800),
-	(24, '', 'HON-3142', 'P-02034', 4400),
-	(25, '', 'HON-3138', 'P-02034', 5000),
-	(26, '', 'HON-3142', 'P-02924', 400),
-	(27, '', 'INT-H-1212', 'P-02162', 1400),
-	(28, '', 'FTT-1479', 'P-02162', 3000),
-	(29, '', 'HON-3142', 'P-02040', 400),
-	(30, '', 'INT-H-1238', 'P-02040', 140),
-	(31, '', 'HON-3138', 'P-02040', 7500),
-	(32, '', 'INT-H-1238', 'P-02980', 400),
-	(33, '', 'INT-H-1238', 'P-02977', 1000),
-	(34, '', 'HON-3142', 'P-02000', 9600),
-	(35, '', 'HON-3142', 'P-02001', 11600),
-	(36, '', 'INT-H-1235', 'P-02001', 400),
-	(37, '', 'HON-3142', 'P-02000', 10000),
-	(38, '', 'HON-3142', 'P-02001', 12000),
-	(39, '', 'INT-H-1235', 'P-02001', 400),
-	(40, '', 'HON-3132', 'P-02000', 1000),
-	(41, '', 'HON-3139', 'P-02000', 3000),
-	(42, '', 'HON-3142', 'P-02020', 1600),
-	(43, '', 'INT-H-1239', 'P-02020', 100),
-	(44, '', 'HON-3142', 'P-02021', 400),
-	(45, '', 'HON-3135', 'P-02016', 500),
-	(46, '', 'HON-3135', 'p-02017', 500),
-	(47, '', 'HON-3135', 'P-02031', 500),
-	(48, '', 'HON-3138', 'P-02020', 5000),
-	(49, '', 'HON-3139', 'P-02020', 500),
-	(50, '', 'HON-3142', 'P-02004', 4000),
-	(51, '', 'INT-H-1235', 'P-02004', 100),
-	(52, '', 'HON-3142', 'P-02005', 3600),
-	(53, '', 'INT-H-1235', 'P-02005', 400),
-	(54, '', 'INT-H-1239', 'P-02005', 200),
-	(55, '', 'HON-3142', 'P-02018', 400),
-	(56, '', 'HON-3142', 'P-02019', 800),
-	(57, '', 'HON-3142', 'P-22078', 800),
-	(58, '', 'INT-H-1235', 'P-22078', 80),
-	(59, '', 'INT-H-1239', 'P-22078', 40),
-	(60, '', 'HON-3133', 'P-23234', 2000),
-	(61, '', 'HON-3142', 'p-02002', 3600),
-	(62, '', 'HON-3142', 'P-02003', 3200),
-	(63, '', 'HON-3142', 'p-02002', 4000),
-	(64, '', 'HON-3142', 'P-02003', 2000),
-	(65, '', 'HON-3142', 'P-02021', 2000),
-	(66, '', 'INT-H-1235', 'P-02397', 1700),
-	(67, '', 'HON-3142', 'P-02016', 4000),
-	(68, '', 'HON-3142', 'p-02017', 7200),
-	(69, '', 'INT-H-1239', 'p-02017', 200),
-	(70, '', 'HON-3142', 'P-02031', 3600),
-	(71, '', 'HON-3142', 'P-22263', 1200),
-	(72, '', 'HON-3142', 'P-22247', 1800),
-	(73, '', 'HON-3142', 'P-22248', 1200),
-	(74, '', 'INT-H-1237', 'P-22248', 300),
-	(75, '', 'HON-3142', 'P-22288', 600),
-	(76, '', 'HON-3142', 'P-22289', 1000),
-	(77, '', 'HON-3142', NULL, 200),
-	(78, '', 'HON-3142', 'P-22368', 62800),
-	(79, '', 'HON-3142', 'P-22620', 1200),
-	(80, '', 'HON-3142', 'p-02010', 5500),
-	(81, '', 'HON-3142', 'P-02011', 1500),
-	(82, '', 'HON-3142', 'P-02024', 2000),
-	(83, '', 'INT-H-1212', 'P-02024', 460),
-	(84, '', 'HON-3142', 'P-02024', 1600),
-	(85, '', 'HON-3142', 'P-02028', 2000),
-	(86, '', 'HON-3142', 'P-02028', 2000),
-	(87, '', 'INT-H-1239', 'P-02028', 100),
-	(88, '', 'HON-3138', 'P-02028', 20000),
-	(89, '', 'HON-3142', 'P-01308', 1000),
-	(90, '', 'HON-3142', 'P-01308', 1200),
-	(91, '', 'HON-3142', 'P-02025', 1000),
-	(92, '', 'HON-3142', 'P-02025', 400),
-	(93, '', 'HON-3135', 'P-02025', 1250),
-	(94, '', 'HON-3139', NULL, 400),
-	(95, '', 'HON-3142', 'P-02001', NULL),
-	(96, '', 'HON-3135', 'P-02147', 500),
-	(97, '', 'HON-3141', 'P-02041', 325),
-	(98, '', 'HON-3141', 'P-02045', 2500),
-	(99, '', 'HON-3141', 'P-02047', 1000),
-	(100, '', 'HON-3141', 'P-02045', 1750),
-	(101, '', 'HON-3142', 'P-02179', 400),
-	(102, '', 'HON-3142', NULL, 400),
-	(103, '', 'HON-3142', 'P-02181', 400),
-	(104, '', 'HON-3142', 'P-23691', 6400),
-	(105, '', 'INT-H-1235', 'P-23693', 300),
-	(106, '', 'INT-H-1239', 'P-23693', 200),
-	(107, '', 'HON-3142', 'P-23694', 5200),
-	(108, '', 'INT-H-1235', 'P-23694', 380),
-	(109, '', 'INT-H-1239', 'P-23694', 100),
-	(110, '', 'FTT-1472', 'P-22797', 2500),
-	(111, '', 'INT-H-1235', 'P-23628', 160),
-	(112, '', 'INT-H-1239', 'P-23628', 200),
-	(113, '', 'INT-H-1239', 'P-23629', 200),
-	(114, '', 'HON-3140', 'P-02617', 360),
-	(115, '', 'HON-3140', NULL, 1920),
-	(116, '', 'HON-3140', 'P-02615', 480),
-	(117, '', 'HON-3140', 'P-22628', 320),
-	(118, '', 'HON-3140', NULL, 750),
-	(119, '', 'HON-3140', 'P-22648', 1200),
-	(120, '', 'HON-3136', 'P-02494', 500),
-	(121, '', 'HON-3136', NULL, 500),
-	(122, '', 'INT-H-1235', NULL, 140),
-	(123, '', 'HON-3142', 'P-03201', 2400),
-	(124, '', 'INT-H-1235', 'P-03201', 600),
-	(125, '', 'HON-3142', 'P-03202', 4000),
-	(126, '', 'HON-3142', 'P-03203', 800),
-	(127, '', 'HON-3142', 'P-03204', 800),
-	(128, '', 'INT-H-1237', 'P-03204', 400),
-	(129, '', 'HON-3135', 'P-03205', 1250),
-	(130, '', 'HON-3138', 'P-03202', 2000),
-	(131, '', 'HON-3139', 'P-03201', 700),
-	(132, '', 'HON-3138', 'P-02001', 10000),
-	(133, '', 'HON-3138', NULL, 10000),
-	(134, '', 'HON-3142', 'P-02004', 14300),
-	(135, '', 'HON-3126', 'P-02360', 400),
-	(136, '', 'FTT-1475', 'P-23708', 6000),
-	(137, '', 'FTT-1475', 'P-23709', 6000),
-	(138, '', 'FTT-1475', 'P-23715', 2000),
-	(139, '', 'FTT-1475', 'P-23716', 2000),
-	(140, '', 'FTT-1475', 'P-23713', 2000),
-	(141, '', 'FTT-1475', 'P-23714', 2000),
-	(142, '', 'FTT-1475', 'P-23706', 2000),
-	(143, '', 'FTT-1475', 'P-23707', 2000),
-	(144, '', 'HON-3141', NULL, NULL),
-	(145, '', 'HON-3141', NULL, NULL),
-	(146, '', 'HON-3137', NULL, 1000),
-	(147, '', 'HON-3136', 'P-22193', 750),
-	(148, '', 'HON-3136', 'P-22194', 750),
-	(149, '', 'HON-3136', NULL, 750),
-	(150, '', 'HON-3136', NULL, 1500),
-	(151, '', 'FTT-1474', 'P-22503', 32000),
-	(152, '', 'HON-3130', NULL, 1000),
-	(153, '', 'HON-3130', 'P-22993', 2000),
-	(154, '', 'HON-3131', NULL, 2000),
-	(155, '', 'HON-3130', 'P-02207', 4000),
-	(156, '', 'HON-3131', 'P-02207', 3000),
-	(157, '', 'HON-3130', NULL, 2000),
-	(158, '', 'HON-3131', 'P-02445', 2000),
-	(159, '', 'HON-3131', 'P-02209', 5000),
-	(160, '', 'HON-3131', 'P-02277', 4000),
-	(161, '', 'HON-3131', NULL, 6000),
-	(162, '', 'HON-3131', 'P-02274', 2000),
-	(163, '', 'HON-3130', 'P-02273', 1000),
-	(164, '', 'HON-3130', 'P-02274', 1000),
-	(165, '', 'HON-3130', NULL, 1000),
-	(166, '', 'HON-3130', 'P-02847', 1000),
-	(167, '', 'HON-3130', 'P-22359', 4000),
-	(168, '', 'HON-3130', 'P-22360', 2000),
-	(169, '', 'HON-3131', 'P-22359', 6000),
-	(170, '', 'HON-3131', 'P-22361', 2000),
-	(171, '', 'HON-3131', 'P-22360', 1000),
-	(172, '', 'HON-3130', 'P-02277', 2000),
-	(173, '', 'HON-3130', NULL, 2000),
-	(174, '', 'HON-3130', 'P-02481', 2000),
-	(175, '', 'HON-3130', NULL, 2400),
-	(176, '', 'HON-3130', NULL, 2000),
-	(177, '', 'HON-3130', 'P-02219', 2000),
-	(178, '', 'HON-3128', NULL, 800),
-	(179, '', 'HON-3128', NULL, 800),
-	(180, '', 'HON-3128', 'P-02913', 800),
-	(181, '', 'INT-H-1235', 'P-22251', 200),
-	(182, '', 'HON-3135', 'P-22251', 625),
-	(183, '', 'HON-3132', 'P-22300', 1000),
-	(184, '', 'HON-3138', 'P-22251', 10000),
-	(185, '', 'HON-3142', 'P-22251', 3200),
-	(186, '', 'HON-3142', 'P-22300', 3200),
-	(187, '', 'INT-H-1238', 'P-22300', 80),
-	(188, '', 'HON-3131', 'P-02220', 6000),
-	(189, '', 'HON-3141', NULL, 400),
-	(190, '', 'HON-3141', 'P-02560', 4000),
-	(191, '', 'HON-3141', 'P-03193', 1500),
-	(192, '', 'HON-3127', 'P-02260', 2000),
-	(193, '', 'HON-3127', 'P-02475', 2000),
-	(194, '', 'HON-3142', 'P-02337', 4000),
-	(195, '', 'INT-H-1235', 'P-02337', 380),
-	(196, '', 'INT-H-1238', 'P-02337', 200),
-	(197, '', 'HON-3142', 'P-02339', 8000),
-	(198, '', 'HON-3142', 'P-02338', 4800),
-	(199, '', 'HON-3142', 'P-02341', 400),
-	(200, '', 'HON-3138', 'P-02339', 25000),
-	(201, '', 'HON-3142', 'P-02342', 1200),
-	(202, '', 'INT-H-1238', 'P-02342', 200),
-	(203, '', 'HON-3141', 'P-02337', 40000),
-	(204, '', 'INT-H-1237', 'P-22372', 600),
-	(205, '', 'HON-3135', 'P-22371', 1250),
-	(206, '', 'HON-3135', 'P-22372', 1250),
-	(207, '', 'HON-3127', 'P-23833', 10000),
-	(208, '', 'HON-3127', NULL, 10000),
-	(209, '', 'HON-3127', 'P-23831', 10000),
-	(210, '', 'HON-3127', 'P-23833', 2500),
-	(211, '', 'HON-3127', NULL, 2500),
-	(212, '', 'HON-3127', 'P-23831', 2500),
-	(213, '', 'HON-3127', 'P-23833', 3000),
-	(214, '', 'HON-3127', NULL, 3000),
-	(215, '', 'HON-3127', 'P-23831', 3000),
-	(216, '', 'HON-3141', NULL, 200),
-	(217, '', 'HON-3141', 'P-02097', 7500),
-	(218, '', 'HON-3141', 'P-02097', 1200),
-	(219, '', 'HON-3141', 'P-02098', 2000),
-	(220, '', 'FTT-1473', NULL, 3000),
-	(221, '', 'FTT-1473', NULL, 3000),
-	(222, '', 'FTT-1473', NULL, 3000),
-	(223, '', 'FTT-1473', NULL, 3000),
-	(224, '', 'FTT-1472', 'P-23566', 60000),
-	(225, '', 'FTT-1472', 'P-23567', 60000),
-	(226, '', 'FTT-1477', 'P-22685', 600),
-	(227, '', 'FTT-1472', 'P-23395', 60000),
-	(228, '', 'FTT-1472', 'P-23393', 60000),
-	(229, '', 'HON-3141', 'P-23429', 1400),
-	(230, '', 'HON-3141', 'P-23431', 1600),
-	(231, '', 'HON-3142', 'P-22518', 1200),
-	(232, '', 'INT-H-1235', 'P-22518', 240),
-	(233, '', 'HON-3142', 'P-22536', 400),
-	(234, '', 'HON-3135', 'P-22518', 1250),
-	(235, '', 'HON-3138', 'P-22518', 5000),
-	(236, '', 'HON-3139', 'P-22518', 750),
-	(237, '', 'HON-3139', 'P-23193', 3000),
-	(238, '', 'HON-3142', 'P-23377', 600),
-	(239, '', 'HON-3142', 'P-23376', 1200),
-	(240, '', 'HON-3142', 'P-23432', 400),
-	(241, '', 'FTT-1472', 'P-23396', 5000),
-	(242, '', 'HON-3124', 'P-23248', 2000),
-	(243, '', 'HON-3124', 'P-23249', 2000),
-	(244, '', 'HON-3124', 'P-23250', 2000),
-	(245, '', 'HON-3146', 'P-23250', 1000),
-	(246, '', 'HON-3124', 'P-22831', 2000),
-	(247, '', 'HON-3124', 'P-22832', 3000),
-	(248, '', 'HON-3146', 'P-22831', 1000),
-	(249, '', 'HON-3124', 'P-23066', 3000),
-	(250, '', 'HON-3124', 'P-23215', 4000),
-	(251, '', 'HON-3146', 'P-23215', 1000),
-	(252, '', 'HON-3124', NULL, 2000),
-	(253, '', 'HON-3124', 'P-23763', 2000),
-	(254, '', 'HON-3124', 'P-23606', 4000),
-	(255, '', 'HON-3123', 'P-23763', 2000),
-	(256, '', 'HON-3146', 'P-23606', 1000),
-	(257, '', 'HON-3124', 'P-22868', 2000),
-	(258, '', 'HON-3124', 'P-22870', 3000),
-	(259, '', 'HON-3124', 'P-22871', 5000),
-	(260, '', 'HON-3143', 'P-22870', 4000),
-	(261, '', 'HON-3146', 'P-22871', 1000),
-	(262, '', 'HON-3124', 'P-23262', 2000),
-	(263, '', 'HON-3124', 'P-23263', 2000),
-	(264, '', 'HON-3123', 'P-23262', 2500),
-	(265, '', 'HON-3146', 'P-23263', 1000);
 /*!40000 ALTER TABLE `detalle_programacion_temporal` ENABLE KEYS */;
 
--- Dumping structure for table facturacion_plasencia.importar_existencias
+-- Volcando estructura para tabla facturacion_plasencia.factura_terminados
+CREATE TABLE IF NOT EXISTS `factura_terminados` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `cliente` varchar(100) NOT NULL DEFAULT '0',
+  `numero_factura` varchar(30) DEFAULT '0',
+  `contenedor` varchar(50) NOT NULL DEFAULT '0',
+  `cantidad_bultos` smallint(6) NOT NULL DEFAULT 0,
+  `total_puros` mediumint(9) NOT NULL DEFAULT 0,
+  `total_peso_bruto` mediumint(9) NOT NULL DEFAULT 0,
+  `total_peso_neto` mediumint(9) NOT NULL DEFAULT 0,
+  `fecha_factura` date DEFAULT NULL,
+  `facturado` char(1) DEFAULT NULL,
+  PRIMARY KEY (`id`) USING BTREE
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+
+-- Volcando datos para la tabla facturacion_plasencia.factura_terminados: ~0 rows (aproximadamente)
+DELETE FROM `factura_terminados`;
+/*!40000 ALTER TABLE `factura_terminados` DISABLE KEYS */;
+/*!40000 ALTER TABLE `factura_terminados` ENABLE KEYS */;
+
+-- Volcando estructura para tabla facturacion_plasencia.importar_existencias
 CREATE TABLE IF NOT EXISTS `importar_existencias` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
   `codigo_producto` varchar(100) DEFAULT NULL,
@@ -1283,7 +1069,7 @@ CREATE TABLE IF NOT EXISTS `importar_existencias` (
   PRIMARY KEY (`id`)
 ) ENGINE=MyISAM AUTO_INCREMENT=1155 DEFAULT CHARSET=latin1;
 
--- Dumping data for table facturacion_plasencia.importar_existencias: 1,154 rows
+-- Volcando datos para la tabla facturacion_plasencia.importar_existencias: 1,154 rows
 DELETE FROM `importar_existencias`;
 /*!40000 ALTER TABLE `importar_existencias` DISABLE KEYS */;
 INSERT INTO `importar_existencias` (`id`, `codigo_producto`, `marca`, `nombre`, `vitola`, `capa`, `ubicacion`, `total`, `updated_at`, `created_at`) VALUES
@@ -2443,7 +2229,7 @@ INSERT INTO `importar_existencias` (`id`, `codigo_producto`, `marca`, `nombre`, 
 	(1154, 'P-23833', 'The Edge Nicaragua', 'Gran Robusto', '5-1/2X54', 'HABANO', NULL, 4950.00, NULL, NULL);
 /*!40000 ALTER TABLE `importar_existencias` ENABLE KEYS */;
 
--- Dumping structure for table facturacion_plasencia.inventario_productos_terminados
+-- Volcando estructura para tabla facturacion_plasencia.inventario_productos_terminados
 CREATE TABLE IF NOT EXISTS `inventario_productos_terminados` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `lote` varchar(50) DEFAULT NULL,
@@ -2455,7 +2241,7 @@ CREATE TABLE IF NOT EXISTS `inventario_productos_terminados` (
   PRIMARY KEY (`id`)
 ) ENGINE=MyISAM AUTO_INCREMENT=325 DEFAULT CHARSET=latin1;
 
--- Dumping data for table facturacion_plasencia.inventario_productos_terminados: 36 rows
+-- Volcando datos para la tabla facturacion_plasencia.inventario_productos_terminados: 36 rows
 DELETE FROM `inventario_productos_terminados`;
 /*!40000 ALTER TABLE `inventario_productos_terminados` DISABLE KEYS */;
 INSERT INTO `inventario_productos_terminados` (`id`, `lote`, `Marca`, `Alias_vitola`, `Vitola`, `Nombre_capa`, `Existencia`) VALUES
@@ -2497,7 +2283,7 @@ INSERT INTO `inventario_productos_terminados` (`id`, `lote`, `Marca`, `Alias_vit
 	(324, 'ORD\\0000003197-FIN', '52', '13', '12', '3', '75');
 /*!40000 ALTER TABLE `inventario_productos_terminados` ENABLE KEYS */;
 
--- Dumping structure for table facturacion_plasencia.lista_cajas
+-- Volcando estructura para tabla facturacion_plasencia.lista_cajas
 CREATE TABLE IF NOT EXISTS `lista_cajas` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `codigo` varchar(50) DEFAULT NULL,
@@ -2510,7 +2296,7 @@ CREATE TABLE IF NOT EXISTS `lista_cajas` (
   PRIMARY KEY (`id`) USING BTREE
 ) ENGINE=MyISAM AUTO_INCREMENT=1046 DEFAULT CHARSET=latin1;
 
--- Dumping data for table facturacion_plasencia.lista_cajas: 1,045 rows
+-- Volcando datos para la tabla facturacion_plasencia.lista_cajas: 1,045 rows
 DELETE FROM `lista_cajas`;
 /*!40000 ALTER TABLE `lista_cajas` DISABLE KEYS */;
 INSERT INTO `lista_cajas` (`id`, `codigo`, `productoServicio`, `marca`, `tipo_empaque`, `existencia`, `created_at`, `updated_at`) VALUES
@@ -3561,7 +3347,7 @@ INSERT INTO `lista_cajas` (`id`, `codigo`, `productoServicio`, `marca`, `tipo_em
 	(1045, 'CM-07623', 'CAJAS DE MADERA ROCKY PATEL  EDGE GRAN ROBUSTO SUMATRA BOX/20', 'The Edge', 7, 0, NULL, NULL);
 /*!40000 ALTER TABLE `lista_cajas` ENABLE KEYS */;
 
--- Dumping structure for table facturacion_plasencia.marca_productos
+-- Volcando estructura para tabla facturacion_plasencia.marca_productos
 CREATE TABLE IF NOT EXISTS `marca_productos` (
   `id_marca` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
   `marca` char(100) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '0',
@@ -3571,7 +3357,7 @@ CREATE TABLE IF NOT EXISTS `marca_productos` (
   UNIQUE KEY `marca` (`marca`)
 ) ENGINE=MyISAM AUTO_INCREMENT=1462 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- Dumping data for table facturacion_plasencia.marca_productos: 1,450 rows
+-- Volcando datos para la tabla facturacion_plasencia.marca_productos: 1,450 rows
 DELETE FROM `marca_productos`;
 /*!40000 ALTER TABLE `marca_productos` DISABLE KEYS */;
 INSERT INTO `marca_productos` (`id_marca`, `marca`, `created_at`, `updated_at`) VALUES
@@ -5027,7 +4813,7 @@ INSERT INTO `marca_productos` (`id_marca`, `marca`, `created_at`, `updated_at`) 
 	(1450, 'NINGUNA', '2021-04-28 20:52:04', '2021-04-28 20:52:04');
 /*!40000 ALTER TABLE `marca_productos` ENABLE KEYS */;
 
--- Dumping structure for table facturacion_plasencia.migrations
+-- Volcando estructura para tabla facturacion_plasencia.migrations
 CREATE TABLE IF NOT EXISTS `migrations` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `migration` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
@@ -5035,7 +4821,7 @@ CREATE TABLE IF NOT EXISTS `migrations` (
   PRIMARY KEY (`id`)
 ) ENGINE=MyISAM AUTO_INCREMENT=241 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- Dumping data for table facturacion_plasencia.migrations: 13 rows
+-- Volcando datos para la tabla facturacion_plasencia.migrations: 13 rows
 DELETE FROM `migrations`;
 /*!40000 ALTER TABLE `migrations` DISABLE KEYS */;
 INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
@@ -5054,7 +4840,7 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 	(240, '2021_04_08_221327_detalle_clase_producto', 2);
 /*!40000 ALTER TABLE `migrations` ENABLE KEYS */;
 
--- Dumping structure for table facturacion_plasencia.nombre_productos
+-- Volcando estructura para tabla facturacion_plasencia.nombre_productos
 CREATE TABLE IF NOT EXISTS `nombre_productos` (
   `id_nombre` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
   `nombre` char(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
@@ -5064,7 +4850,7 @@ CREATE TABLE IF NOT EXISTS `nombre_productos` (
   UNIQUE KEY `nombre` (`nombre`)
 ) ENGINE=MyISAM AUTO_INCREMENT=154 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- Dumping data for table facturacion_plasencia.nombre_productos: 153 rows
+-- Volcando datos para la tabla facturacion_plasencia.nombre_productos: 153 rows
 DELETE FROM `nombre_productos`;
 /*!40000 ALTER TABLE `nombre_productos` DISABLE KEYS */;
 INSERT INTO `nombre_productos` (`id_nombre`, `nombre`, `created_at`, `updated_at`) VALUES
@@ -5223,7 +5009,7 @@ INSERT INTO `nombre_productos` (`id_nombre`, `nombre`, `created_at`, `updated_at
 	(153, 'NINGUNA', NULL, NULL);
 /*!40000 ALTER TABLE `nombre_productos` ENABLE KEYS */;
 
--- Dumping structure for table facturacion_plasencia.orden_productos
+-- Volcando estructura para tabla facturacion_plasencia.orden_productos
 CREATE TABLE IF NOT EXISTS `orden_productos` (
   `id_orden` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
   `orden` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
@@ -5232,7 +5018,7 @@ CREATE TABLE IF NOT EXISTS `orden_productos` (
   PRIMARY KEY (`id_orden`)
 ) ENGINE=MyISAM AUTO_INCREMENT=252 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- Dumping data for table facturacion_plasencia.orden_productos: 251 rows
+-- Volcando datos para la tabla facturacion_plasencia.orden_productos: 251 rows
 DELETE FROM `orden_productos`;
 /*!40000 ALTER TABLE `orden_productos` DISABLE KEYS */;
 INSERT INTO `orden_productos` (`id_orden`, `orden`, `created_at`, `updated_at`) VALUES
@@ -5489,19 +5275,19 @@ INSERT INTO `orden_productos` (`id_orden`, `orden`, `created_at`, `updated_at`) 
 	(251, 'Oscar', '2021-04-08 21:40:38', '2021-04-08 21:40:38');
 /*!40000 ALTER TABLE `orden_productos` ENABLE KEYS */;
 
--- Dumping structure for table facturacion_plasencia.password_resets
+-- Volcando estructura para tabla facturacion_plasencia.password_resets
 CREATE TABLE IF NOT EXISTS `password_resets` (
   `email` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `token` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- Dumping data for table facturacion_plasencia.password_resets: 0 rows
+-- Volcando datos para la tabla facturacion_plasencia.password_resets: 0 rows
 DELETE FROM `password_resets`;
 /*!40000 ALTER TABLE `password_resets` DISABLE KEYS */;
 /*!40000 ALTER TABLE `password_resets` ENABLE KEYS */;
 
--- Dumping structure for table facturacion_plasencia.pedidos
+-- Volcando estructura para tabla facturacion_plasencia.pedidos
 CREATE TABLE IF NOT EXISTS `pedidos` (
   `item` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `cant_paquetes` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
@@ -5512,567 +5298,12 @@ CREATE TABLE IF NOT EXISTS `pedidos` (
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- Dumping data for table facturacion_plasencia.pedidos: 554 rows
+-- Volcando datos para la tabla facturacion_plasencia.pedidos: 0 rows
 DELETE FROM `pedidos`;
 /*!40000 ALTER TABLE `pedidos` DISABLE KEYS */;
-INSERT INTO `pedidos` (`item`, `cant_paquetes`, `unidades`, `numero_orden`, `categoria`, `created_at`, `updated_at`) VALUES
-	('00504006', '100', '100', 'HON-3142', '1', '2021-05-17 19:03:16', '2021-05-17 19:03:16'),
-	('00505006', '100', '40', 'HON-3142', '1', '2021-05-17 19:03:16', '2021-05-17 19:03:16'),
-	('00504041', '5', '100', 'HON-3135', '1', '2021-05-17 19:03:16', '2021-05-17 19:03:16'),
-	('00508000', '20', '200', 'HON-3142', '1', '2021-05-17 19:03:16', '2021-05-17 19:03:16'),
-	('00508015', '10', '60', 'HON-3142', '1', '2021-05-17 19:03:16', '2021-05-17 19:03:16'),
-	('00605002', '25', '220', 'HON-3142', '1', '2021-05-17 19:03:16', '2021-05-17 19:03:16'),
-	('00508010', '30', '60', 'HON-3142', '1', '2021-05-17 19:03:16', '2021-05-17 19:03:16'),
-	('00504100', '20', '200', 'HON-3142', '1', '2021-05-17 19:03:16', '2021-05-17 19:03:16'),
-	('00504102', '20', '20', 'HON-3142', '1', '2021-05-17 19:03:16', '2021-05-17 19:03:16'),
-	('00504002', '20', '480', 'HON-3142', '1', '2021-05-17 19:03:16', '2021-05-17 19:03:16'),
-	('00505002', '20', '180', 'HON-3142', '1', '2021-05-17 19:03:16', '2021-05-17 19:03:16'),
-	('10104130', '20', '25', 'HON-3136', '1', '2021-05-17 19:03:16', '2021-05-17 19:03:16'),
-	('10104817', '5', '2000', 'HON-3138', '1', '2021-05-17 19:03:16', '2021-05-17 19:03:16'),
-	('10515002', '10', '20', 'HON-3142', '1', '2021-05-17 19:03:16', '2021-05-17 19:03:16'),
-	('10105565', '20', '100', 'FTT-1475', '1', '2021-05-17 19:03:16', '2021-05-17 19:03:16'),
-	('10105566', '20', '100', 'FTT-1475', '1', '2021-05-17 19:03:16', '2021-05-17 19:03:16'),
-	('00504007', '100', '120', 'HON-3142', '1', '2021-05-17 19:03:16', '2021-05-17 19:03:16'),
-	('00505007', '100', '20', 'HON-3142', '1', '2021-05-17 19:03:16', '2021-05-17 19:03:16'),
-	('00504042', '5', '100', 'HON-3135', '1', '2021-05-17 19:03:16', '2021-05-17 19:03:16'),
-	('00508016', '10', '100', 'HON-3142', '1', '2021-05-17 19:03:16', '2021-05-17 19:03:16'),
-	('00605003', '25', '60', 'HON-3142', '1', '2021-05-17 19:03:16', '2021-05-17 19:03:16'),
-	('00508011', '30', '40', 'HON-3142', '1', '2021-05-17 19:03:16', '2021-05-17 19:03:16'),
-	('00508001', '20', '360', 'HON-3142', '1', '2021-05-17 19:03:16', '2021-05-17 19:03:16'),
-	('00504003', '20', '580', 'HON-3142', '1', '2021-05-17 19:03:16', '2021-05-17 19:03:16'),
-	('00505003', '20', '160', 'HON-3142', '1', '2021-05-17 19:03:16', '2021-05-17 19:03:16'),
-	('00504101', '20', '180', 'HON-3142', '1', '2021-05-17 19:03:16', '2021-05-17 19:03:16'),
-	('00504103', '20', '40', 'HON-3142', '1', '2021-05-17 19:03:16', '2021-05-17 19:03:16'),
-	('10104816', '5', '2000', 'HON-3138', '1', '2021-05-17 19:03:16', '2021-05-17 19:03:16'),
-	('9900009110', '20', '100', 'HON-3124', '1', '2021-05-17 19:03:16', '2021-05-17 19:03:16'),
-	('9900009111', '20', '100', 'HON-3124', '1', '2021-05-17 19:03:16', '2021-05-17 19:03:16'),
-	('9900009117', '20', '50', 'HON-3146', '1', '2021-05-17 19:03:16', '2021-05-17 19:03:16'),
-	('9900009115', '25', '100', 'HON-3123', '1', '2021-05-17 19:03:16', '2021-05-17 19:03:16'),
-	('10105005', '20', '20', 'HON-3126', '1', '2021-05-17 19:03:16', '2021-05-17 19:03:16'),
-	('9900004000', '20', '100', 'HON-3124', '1', '2021-05-17 19:03:16', '2021-05-17 19:03:16'),
-	('9900004002', '20', '100', 'HON-3124', '1', '2021-05-17 19:03:16', '2021-05-17 19:03:16'),
-	('9900004003', '20', '100', 'HON-3124', '1', '2021-05-17 19:03:16', '2021-05-17 19:03:16'),
-	('9900004005', '20', '50', 'HON-3146', '1', '2021-05-17 19:03:16', '2021-05-17 19:03:16'),
-	('10105550', '20', '300', 'FTT-1475', '1', '2021-05-17 19:03:16', '2021-05-17 19:03:16'),
-	('10105551', '20', '300', 'FTT-1475', '1', '2021-05-17 19:03:16', '2021-05-17 19:03:16'),
-	('00508020', '20', '3140', 'HON-3142', '1', '2021-05-17 19:03:16', '2021-05-17 19:03:16'),
-	('00508022', '20', '60', 'HON-3142', '1', '2021-05-17 19:03:16', '2021-05-17 19:03:16'),
-	('00401000', '20', '60', 'HON-3142', '1', '2021-05-17 19:03:16', '2021-05-17 19:03:16'),
-	('00403000', '20', '140', 'HON-3142', '1', '2021-05-17 19:03:16', '2021-05-17 19:03:16'),
-	('00404000', '20', '220', 'HON-3142', '1', '2021-05-17 19:03:16', '2021-05-17 19:03:16'),
-	('00405000', '20', '20', 'HON-3142', '1', '2021-05-17 19:03:16', '2021-05-17 19:03:16'),
-	('00408000', '20', '20', 'HON-3142', '1', '2021-05-17 19:03:16', '2021-05-17 19:03:16'),
-	('00303007', '10', '100', 'HON-3142', '1', '2021-05-17 19:03:16', '2021-05-17 19:03:16'),
-	('00407000', '50', '60', 'FTT-1479', '1', '2021-05-17 19:03:16', '2021-05-17 19:03:16'),
-	('10104111', '20', '25', 'HON-3136', '1', '2021-05-17 19:03:16', '2021-05-17 19:03:16'),
-	('20005000', '20', '200', 'HON-3142', '1', '2021-05-17 19:03:16', '2021-05-17 19:03:16'),
-	('20005001', '20', '400', 'HON-3142', '1', '2021-05-17 19:03:16', '2021-05-17 19:03:16'),
-	('20005002', '20', '240', 'HON-3142', '1', '2021-05-17 19:03:16', '2021-05-17 19:03:16'),
-	('20005005', '20', '20', 'HON-3142', '1', '2021-05-17 19:03:16', '2021-05-17 19:03:16'),
-	('20005007', '20', '60', 'HON-3142', '1', '2021-05-17 19:03:16', '2021-05-17 19:03:16'),
-	('20005010', '10', '60', 'HON-3142', '1', '2021-05-17 19:03:16', '2021-05-17 19:03:16'),
-	('00505019', '100', '20', 'HON-3142', '1', '2021-05-17 19:03:16', '2021-05-17 19:03:16'),
-	('00504032', '20', '80', 'HON-3142', '1', '2021-05-17 19:03:16', '2021-05-17 19:03:16'),
-	('00504033', '20', '20', 'HON-3142', '1', '2021-05-17 19:03:16', '2021-05-17 19:03:16'),
-	('00231000', '50', '200', 'FTT-1479', '1', '2021-05-17 19:03:16', '2021-05-17 19:03:16'),
-	('9900004035', '20', '100', 'HON-3124', '1', '2021-05-17 19:03:16', '2021-05-17 19:03:16'),
-	('9900004037', '20', '150', 'HON-3124', '1', '2021-05-17 19:03:16', '2021-05-17 19:03:16'),
-	('9900004038', '20', '250', 'HON-3124', '1', '2021-05-17 19:03:16', '2021-05-17 19:03:16'),
-	('9900004039', '20', '200', 'HON-3143', '1', '2021-05-17 19:03:16', '2021-05-17 19:03:16'),
-	('9900004040', '20', '50', 'HON-3146', '1', '2021-05-17 19:03:16', '2021-05-17 19:03:16'),
-	('13105120', '10', '40', 'HON-3142', '1', '2021-05-17 19:03:16', '2021-05-17 19:03:16'),
-	('00703001', '50', '40', 'HON-3142', '1', '2021-05-17 19:03:16', '2021-05-17 19:03:16'),
-	('00704001', '50', '40', 'HON-3142', '1', '2021-05-17 19:03:16', '2021-05-17 19:03:16'),
-	('00705001', '50', '20', 'HON-3142', '1', '2021-05-17 19:03:16', '2021-05-17 19:03:16'),
-	('00712001', '50', '20', 'HON-3142', '1', '2021-05-17 19:03:16', '2021-05-17 19:03:16'),
-	('00508002', '20', '180', 'HON-3142', '1', '2021-05-17 19:03:16', '2021-05-17 19:03:16'),
-	('00508017', '10', '20', 'HON-3142', '1', '2021-05-17 19:03:16', '2021-05-17 19:03:16'),
-	('00703003', '20', '80', 'HON-3142', '1', '2021-05-17 19:03:16', '2021-05-17 19:03:16'),
-	('00712003', '20', '20', 'HON-3142', '1', '2021-05-17 19:03:16', '2021-05-17 19:03:16'),
-	('00704003', '20', '100', 'HON-3142', '1', '2021-05-17 19:03:16', '2021-05-17 19:03:16'),
-	('00705003', '20', '60', 'HON-3142', '1', '2021-05-17 19:03:16', '2021-05-17 19:03:16'),
-	('00504043', '5', '100', 'HON-3135', '1', '2021-05-17 19:03:16', '2021-05-17 19:03:16'),
-	('00712004', '25', '50', 'HON-3135', '1', '2021-05-17 19:03:16', '2021-05-17 19:03:16'),
-	('10515004', '10', '40', 'HON-3142', '1', '2021-05-17 19:03:16', '2021-05-17 19:03:16'),
-	('10603007', '20', '50', 'HON-3137', '1', '2021-05-17 19:03:16', '2021-05-17 19:03:16'),
-	('00110060', '20', '10', 'HON-3144', '1', '2021-05-17 19:03:16', '2021-05-17 19:03:16'),
-	('00110061', '20', '10', 'HON-3144', '1', '2021-05-17 19:03:16', '2021-05-17 19:03:16'),
-	('00110062', '20', '10', 'HON-3144', '1', '2021-05-17 19:03:16', '2021-05-17 19:03:16'),
-	('00110063', '20', '10', 'HON-3144', '1', '2021-05-17 19:03:16', '2021-05-17 19:03:16'),
-	('10105560', '20', '100', 'FTT-1475', '1', '2021-05-17 19:03:16', '2021-05-17 19:03:16'),
-	('10105561', '20', '100', 'FTT-1475', '1', '2021-05-17 19:03:16', '2021-05-17 19:03:16'),
-	('00504150', '20', '40', 'HON-3142', '1', '2021-05-17 19:03:16', '2021-05-17 19:03:16'),
-	('00508003', '20', '60', 'HON-3142', '1', '2021-05-17 19:03:16', '2021-05-17 19:03:16'),
-	('12506020', '20', '160', 'HON-3142', '1', '2021-05-17 19:03:16', '2021-05-17 19:03:16'),
-	('12506021', '20', '160', 'HON-3142', '1', '2021-05-17 19:03:16', '2021-05-17 19:03:16'),
-	('12506010', '25', '25', 'HON-3135', '1', '2021-05-17 19:03:16', '2021-05-17 19:03:16'),
-	('12506012', '5', '2000', 'HON-3138', '1', '2021-05-17 19:03:16', '2021-05-17 19:03:16'),
-	('00504252', '50', '40', 'HON-3133', '1', '2021-05-17 19:03:16', '2021-05-17 19:03:16'),
-	('01604010', '20', '20', 'HON-3142', '1', '2021-05-17 19:03:16', '2021-05-17 19:03:16'),
-	('01604011', '20', '20', 'HON-3142', '1', '2021-05-17 19:03:16', '2021-05-17 19:03:16'),
-	('01604012', '20', '20', 'HON-3142', '1', '2021-05-17 19:03:16', '2021-05-17 19:03:16'),
-	('01606675', '20', '320', 'HON-3142', '1', '2021-05-17 19:03:16', '2021-05-17 19:03:16'),
-	('01606678', '20', '260', 'HON-3142', '1', '2021-05-17 19:03:16', '2021-05-17 19:03:16'),
-	('603004002', '20', '60', 'HON-3142', '1', '2021-05-17 19:03:16', '2021-05-17 19:03:16'),
-	('603004004', '20', '20', 'HON-3142', '1', '2021-05-17 19:03:16', '2021-05-17 19:03:16'),
-	('603005750', '10', '60', 'HON-3142', '1', '2021-05-17 19:03:16', '2021-05-17 19:03:16'),
-	('603005751', '10', '120', 'HON-3142', '1', '2021-05-17 19:03:16', '2021-05-17 19:03:16'),
-	('603005752', '10', '40', 'HON-3142', '1', '2021-05-17 19:03:16', '2021-05-17 19:03:16'),
-	('9900004027', '20', '100', 'HON-3124', '1', '2021-05-17 19:03:16', '2021-05-17 19:03:16'),
-	('9900004028', '20', '200', 'HON-3124', '1', '2021-05-17 19:03:16', '2021-05-17 19:03:16'),
-	('9900004025', '20', '100', 'HON-3124', '1', '2021-05-17 19:03:16', '2021-05-17 19:03:16'),
-	('9900004030', '20', '100', 'HON-3123', '1', '2021-05-17 19:03:16', '2021-05-17 19:03:16'),
-	('9900004031', '20', '50', 'HON-3146', '1', '2021-05-17 19:03:16', '2021-05-17 19:03:16'),
-	('9900004019', '20', '150', 'HON-3124', '1', '2021-05-17 19:03:16', '2021-05-17 19:03:16'),
-	('9900004020', '20', '200', 'HON-3124', '1', '2021-05-17 19:03:16', '2021-05-17 19:03:16'),
-	('9900004023', '20', '50', 'HON-3146', '1', '2021-05-17 19:03:16', '2021-05-17 19:03:16'),
-	('00107000', '50', '180', 'FTT-1479', '1', '2021-05-17 19:03:16', '2021-05-17 19:03:16'),
-	('9900004011', '20', '100', 'HON-3124', '1', '2021-05-17 19:03:16', '2021-05-17 19:03:16'),
-	('9900004012', '20', '150', 'HON-3124', '1', '2021-05-17 19:03:16', '2021-05-17 19:03:16'),
-	('9900004015', '20', '100', 'HON-3123', '1', '2021-05-17 19:03:16', '2021-05-17 19:03:16'),
-	('9900004016', '20', '50', 'HON-3146', '1', '2021-05-17 19:03:16', '2021-05-17 19:03:16'),
-	('12503005', '20', '40', 'HON-3128', '1', '2021-05-17 19:03:16', '2021-05-17 19:03:16'),
-	('12503003', '20', '40', 'HON-3128', '1', '2021-05-17 19:03:16', '2021-05-17 19:03:16'),
-	('12503010', '20', '40', 'HON-3128', '1', '2021-05-17 19:03:16', '2021-05-17 19:03:16'),
-	('10105555', '20', '100', 'FTT-1475', '1', '2021-05-17 19:03:16', '2021-05-17 19:03:16'),
-	('10105556', '20', '100', 'FTT-1475', '1', '2021-05-17 19:03:16', '2021-05-17 19:03:16'),
-	('10104750', '20', '120', 'HON-3142', '1', '2021-05-17 19:03:16', '2021-05-17 19:03:16'),
-	('10104751', '20', '200', 'HON-3142', '1', '2021-05-17 19:03:17', '2021-05-17 19:03:17'),
-	('10104752', '20', '40', 'HON-3142', '1', '2021-05-17 19:03:17', '2021-05-17 19:03:17'),
-	('10104754', '20', '40', 'HON-3142', '1', '2021-05-17 19:03:17', '2021-05-17 19:03:17'),
-	('10104150', '20', '100', 'HON-3134. ', '1', '2021-05-17 19:03:17', '2021-05-17 19:03:17'),
-	('15003000', '20', '100', 'HON-3127', '1', '2021-05-17 19:03:17', '2021-05-17 19:03:17'),
-	('15004001', '20', '100', 'HON-3127', '1', '2021-05-17 19:03:17', '2021-05-17 19:03:17'),
-	('00110276', '5', '100', 'HON-3129', '1', '2021-05-17 19:03:17', '2021-05-17 19:03:17'),
-	('00110275', '5', '100', 'HON-3129', '1', '2021-05-17 19:03:17', '2021-05-17 19:03:17'),
-	('00110277', '5', '100', 'HON-3129', '1', '2021-05-17 19:03:17', '2021-05-17 19:03:17'),
-	('10104912', '5', '2860', 'HON-3142', '1', '2021-05-17 19:03:17', '2021-05-17 19:03:17'),
-	('00904038', NULL, '420', 'HON-3142', '1', '2021-05-17 19:03:17', '2021-05-17 19:03:17'),
-	('00504026', '5', '600', 'HON-3139', '2', '2021-05-17 19:03:17', '2021-05-17 19:03:17'),
-	('00504009', '25', '40', 'HON-3132', '2', '2021-05-17 19:03:17', '2021-05-17 19:03:17'),
-	('47801040', '20', '150', 'FTT-1473', '2', '2021-05-17 19:03:17', '2021-05-17 19:03:17'),
-	('00804065', '20', '20', 'HON-3139', '2', '2021-05-17 19:03:17', '2021-05-17 19:03:17'),
-	('603004050', '5', '600', 'HON-3139', '2', '2021-05-17 19:03:17', '2021-05-17 19:03:17'),
-	('00904111', '10', '50', 'HON-3135', '2', '2021-05-17 19:03:17', '2021-05-17 19:03:17'),
-	('01104000', '25', '70', 'HON-3141', '2', '2021-05-17 19:03:17', '2021-05-17 19:03:17'),
-	('01103006', '5', '500', 'HON-3141', '2', '2021-05-17 19:03:17', '2021-05-17 19:03:17'),
-	('01103010', '5', '200', 'HON-3141', '2', '2021-05-17 19:03:17', '2021-05-17 19:03:17'),
-	('47801563', '20', '3000', 'FTT-1472', '2', '2021-05-17 19:03:17', '2021-05-17 19:03:17'),
-	('00404005', '25', '200', 'HON-3138', '2', '2021-05-17 19:03:17', '2021-05-17 19:03:17'),
-	('00408003', '25', '300', 'HON-3138', '2', '2021-05-17 19:03:17', '2021-05-17 19:03:17'),
-	('20005006', '5', '5000', 'HON-3138', '2', '2021-05-17 19:03:17', '2021-05-17 19:03:17'),
-	('20005016', '5', '8000', 'HON-3141', '2', '2021-05-17 19:03:17', '2021-05-17 19:03:17'),
-	('00504048', '5', '1000', 'HON-3138', '2', '2021-05-17 19:03:17', '2021-05-17 19:03:17'),
-	('00504048', '5', '100', 'HON-3139', '2', '2021-05-17 19:03:17', '2021-05-17 19:03:17'),
-	('40503005', '20', '500', 'HON-3127', '2', '2021-05-17 19:03:17', '2021-05-17 19:03:17'),
-	('40503022', '10', '300', 'HON-3127', '2', '2021-05-17 19:03:17', '2021-05-17 19:03:17'),
-	('40503016', '5', '500', 'HON-3127', '2', '2021-05-17 19:03:17', '2021-05-17 19:03:17'),
-	('6030066060', '10', '500', 'FTT-1472', '2', '2021-05-17 19:03:17', '2021-05-17 19:03:17'),
-	('47801044', '20', '150', 'FTT-1473', '2', '2021-05-17 19:03:17', '2021-05-17 19:03:17'),
-	('14399005', '5', '80', 'HON-3141', '2', '2021-05-17 19:03:17', '2021-05-17 19:03:17'),
-	('14399006', '5', '800', 'HON-3141', '2', '2021-05-17 19:03:17', '2021-05-17 19:03:17'),
-	('14399010', '5', '300', 'HON-3141', '2', '2021-05-17 19:03:17', '2021-05-17 19:03:17'),
-	('47801501', '20', '30', 'FTT-1477', '2', '2021-05-17 19:03:17', '2021-05-17 19:03:17'),
-	('40503004', '20', '500', 'HON-3127', '2', '2021-05-17 19:03:17', '2021-05-17 19:03:17'),
-	('40503021', '10', '300', 'HON-3127', '2', '2021-05-17 19:03:17', '2021-05-17 19:03:17'),
-	('40503015', '5', '500', 'HON-3127', '2', '2021-05-17 19:03:17', '2021-05-17 19:03:17'),
-	('00704004', '25', '800', 'HON-3138', '2', '2021-05-17 19:03:17', '2021-05-17 19:03:17'),
-	('47801004', '20', '100', 'HON-3141', '2', '2021-05-17 19:03:17', '2021-05-17 19:03:17'),
-	('47801002', '20', '60', 'HON-3141', '2', '2021-05-17 19:03:17', '2021-05-17 19:03:17'),
-	('47705002', '5', '1500', 'HON-3141', '2', '2021-05-17 19:03:17', '2021-05-17 19:03:17'),
-	('01606872', '5', '500', 'FTT-1472', '2', '2021-05-17 19:03:17', '2021-05-17 19:03:17'),
-	('47801042', '20', '150', 'FTT-1473', '2', '2021-05-17 19:03:17', '2021-05-17 19:03:17'),
-	('40503003', '20', '500', 'HON-3127', '2', '2021-05-17 19:03:17', '2021-05-17 19:03:17'),
-	('40503020', '10', '300', 'HON-3127', '2', '2021-05-17 19:03:17', '2021-05-17 19:03:17'),
-	('40503014', '5', '500', 'HON-3127', '2', '2021-05-17 19:03:17', '2021-05-17 19:03:17'),
-	('12506011', '25', '40', 'HON-3132', '2', '2021-05-17 19:03:17', '2021-05-17 19:03:17'),
-	('603004023', '25', '50', 'HON-3135', '2', '2021-05-17 19:03:17', '2021-05-17 19:03:17'),
-	('603004023', '25', '200', 'HON-3138', '2', '2021-05-17 19:03:17', '2021-05-17 19:03:17'),
-	('603004031', '5', '150', 'HON-3139', '2', '2021-05-17 19:03:17', '2021-05-17 19:03:17'),
-	('20018021', '25', '50', 'HON-3135', '2', '2021-05-17 19:03:17', '2021-05-17 19:03:17'),
-	('20018022', '25', '50', 'HON-3135', '2', '2021-05-17 19:03:17', '2021-05-17 19:03:17'),
-	('01103004', '5', '65', 'HON-3141', '2', '2021-05-17 19:03:17', '2021-05-17 19:03:17'),
-	('41112001', '5', '40', 'HON-3141', '2', '2021-05-17 19:03:17', '2021-05-17 19:03:17'),
-	('47801420', '20', '3000', 'FTT-1472', '2', '2021-05-17 19:03:17', '2021-05-17 19:03:17'),
-	('47801421', '20', '3000', 'FTT-1472', '2', '2021-05-17 19:03:17', '2021-05-17 19:03:17'),
-	('47801561', '20', '3000', 'FTT-1472', '2', '2021-05-17 19:03:17', '2021-05-17 19:03:17'),
-	('47801043', '20', '150', 'FTT-1473', '2', '2021-05-17 19:03:17', '2021-05-17 19:03:17'),
-	('47801890', '10', '140', 'HON-3141', '2', '2021-05-17 19:03:17', '2021-05-17 19:03:17'),
-	('47801892', '10', '160', 'HON-3141', '2', '2021-05-17 19:03:17', '2021-05-17 19:03:17'),
-	('10104775', '25', '80', 'HON-3138', '2', '2021-05-17 19:03:17', '2021-05-17 19:03:17'),
-	('10104772', '25', '50', 'HON-3135', '2', '2021-05-17 19:03:17', '2021-05-17 19:03:17'),
-	('10104778', '5', '140', 'HON-3139', '2', '2021-05-17 19:03:17', '2021-05-17 19:03:17'),
-	('10499060', NULL, '1000', 'HON-3141', '2', '2021-05-17 19:03:17', '2021-05-17 19:03:17'),
-	('10499015', NULL, '500', 'HON-3141', '2', '2021-05-17 19:03:17', '2021-05-17 19:03:17'),
-	('10499010', NULL, '2000', NULL, '2', '2021-05-17 19:03:17', '2021-05-17 19:03:17'),
-	('12104000', '20', '120', 'HON-3130', '3', '2021-05-17 19:03:17', '2021-05-17 19:03:17'),
-	('11803000', '20', '200', 'HON-3130', '3', '2021-05-17 19:03:17', '2021-05-17 19:03:17'),
-	('11812002', '20', '100', 'HON-3130', '3', '2021-05-17 19:03:17', '2021-05-17 19:03:17'),
-	('11812010', '25', '200', 'HON-3131', '3', '2021-05-17 19:03:17', '2021-05-17 19:03:17'),
-	('11803002', '25', '120', 'HON-3131', '3', '2021-05-17 19:03:17', '2021-05-17 19:03:17'),
-	('11812008', '25', '80', 'HON-3131', '3', '2021-05-17 19:03:17', '2021-05-17 19:03:17'),
-	('11710050', '20', '50', 'HON-3130', '3', '2021-05-17 19:03:17', '2021-05-17 19:03:17'),
-	('11710052', '20', '100', 'HON-3130', '3', '2021-05-17 19:03:17', '2021-05-17 19:03:17'),
-	('11710055', '25', '80', 'HON-3131', '3', '2021-05-17 19:03:17', '2021-05-17 19:03:17'),
-	('12301000', '20', '100', 'HON-3130', '3', '2021-05-17 19:03:17', '2021-05-17 19:03:17'),
-	('12303000', '20', '100', 'HON-3130', '3', '2021-05-17 19:03:17', '2021-05-17 19:03:17'),
-	('13403010', '25', '240', 'HON-3131', '3', '2021-05-17 19:03:17', '2021-05-17 19:03:17'),
-	('12003050', '20', '200', 'HON-3130', '3', '2021-05-17 19:03:17', '2021-05-17 19:03:17'),
-	('12003051', '20', '100', 'HON-3130', '3', '2021-05-17 19:03:17', '2021-05-17 19:03:17'),
-	('12003061', '25', '80', 'HON-3131', '3', '2021-05-17 19:03:17', '2021-05-17 19:03:17'),
-	('12003062', '25', '40', 'HON-3131', '3', '2021-05-17 19:03:17', '2021-05-17 19:03:17'),
-	('12003060', '25', '240', 'HON-3131', '3', '2021-05-17 19:03:17', '2021-05-17 19:03:17'),
-	('12003001', '25', '80', 'HON-3131', '3', '2021-05-17 19:03:17', '2021-05-17 19:03:17'),
-	('12002998', '25', '160', 'HON-3131', '3', '2021-05-17 19:03:17', '2021-05-17 19:03:17'),
-	('12002999', '25', '240', 'HON-3131', '3', '2021-05-17 19:03:17', '2021-05-17 19:03:17'),
-	('12004001', '20', '100', 'HON-3130', '3', '2021-05-17 19:03:17', '2021-05-17 19:03:17'),
-	('12004000', '20', '100', 'HON-3130', '3', '2021-05-17 19:03:17', '2021-05-17 19:03:17'),
-	('12003003', '20', '50', 'HON-3130', '3', '2021-05-17 19:03:17', '2021-05-17 19:03:17'),
-	('12003002', '20', '50', 'HON-3130', '3', '2021-05-17 19:03:17', '2021-05-17 19:03:17'),
-	('12003005', '20', '50', 'HON-3130', '3', '2021-05-17 19:03:17', '2021-05-17 19:03:17'),
-	('12003007', '20', '50', 'HON-3130', '3', '2021-05-17 19:03:17', '2021-05-17 19:03:17'),
-	('12005003', '20', '100', 'HON-3130', '3', '2021-05-17 19:03:17', '2021-05-17 19:03:17'),
-	('11707003', '40', '800', 'FTT-1474', '3', '2021-05-17 19:03:17', '2021-05-17 19:03:17'),
-	('09906000', '12', '30', 'HON-3140', '3', '2021-05-17 19:03:17', '2021-05-17 19:03:17'),
-	('09906012', '16', '120', 'HON-3140', '3', '2021-05-17 19:03:17', '2021-05-17 19:03:17'),
-	('09906018', '16', '30', 'HON-3140', '3', '2021-05-17 19:03:17', '2021-05-17 19:03:17'),
-	('09906035', '16', '20', 'HON-3140', '3', '2021-05-17 19:03:17', '2021-05-17 19:03:17'),
-	('09906037', '15', '50', 'HON-3140', '3', '2021-05-17 19:03:17', '2021-05-17 19:03:17'),
-	('09906039', '15', '80', 'HON-3140', '3', '2021-05-17 19:03:17', '2021-05-17 19:03:17'),
-	('10610017', '15', '50', 'HON-3136', '3', '2021-05-17 19:03:17', '2021-05-17 19:03:17'),
-	('10610018', '15', '50', 'HON-3136', '3', '2021-05-17 19:03:17', '2021-05-17 19:03:17'),
-	('10610019', '15', '50', 'HON-3136', '3', '2021-05-17 19:03:17', '2021-05-17 19:03:17'),
-	('10610020', '15', '100', 'HON-3136', '3', '2021-05-17 19:03:17', '2021-05-17 19:03:17'),
-	('00503009', '20', '50', 'INT-H-1238', '4', '2021-05-17 19:03:18', '2021-05-17 19:03:18'),
-	('00504100', '20', '5', 'INT-H-1235', '4', '2021-05-17 19:03:18', '2021-05-17 19:03:18'),
-	('00504007', '100', '4', 'INT-H-1235', '4', '2021-05-17 19:03:18', '2021-05-17 19:03:18'),
-	('00508011', '30', '10', 'INT-H-1237', '4', '2021-05-17 19:03:18', '2021-05-17 19:03:18'),
-	('00503008', '20', '20', 'INT-H-1238', '4', '2021-05-17 19:03:18', '2021-05-17 19:03:18'),
-	('00504101', '20', '20', 'INT-H-1235', '4', '2021-05-17 19:03:18', '2021-05-17 19:03:18'),
-	('00504101', '20', '10', 'INT-H-1239', '4', '2021-05-17 19:03:18', '2021-05-17 19:03:18'),
-	('00504003', '20', '20', 'INT-H-1235', '4', '2021-05-17 19:03:18', '2021-05-17 19:03:18'),
-	('00508001', '20', '10', 'INT-H-1239', '4', '2021-05-17 19:03:18', '2021-05-17 19:03:18'),
-	('00303050', '10', '15', 'INT-H-1235', '4', '2021-05-17 19:03:18', '2021-05-17 19:03:18'),
-	('00303007', '10', '50', 'INT-H-1238', '4', '2021-05-17 19:03:18', '2021-05-17 19:03:18'),
-	('00303007', '10', '20', 'INT-H-1236', '4', '2021-05-17 19:03:18', '2021-05-17 19:03:18'),
-	('00303007', '10', '16', 'INT-H-1239', '4', '2021-05-17 19:03:18', '2021-05-17 19:03:18'),
-	('00407000', '50', '28', 'INT-H-1212', '4', '2021-05-17 19:03:18', '2021-05-17 19:03:18'),
-	('00408000', '20', '7', 'INT-H-1238', '4', '2021-05-17 19:03:18', '2021-05-17 19:03:18'),
-	('10104210', '20', '7', 'INT-H-1235', '4', '2021-05-17 19:03:18', '2021-05-17 19:03:18'),
-	('00303051', '10', '10', 'INT-H-1240', '4', '2021-05-17 19:03:18', '2021-05-17 19:03:18'),
-	('00303051', '10', '4', 'INT-H-1239', '4', '2021-05-17 19:03:18', '2021-05-17 19:03:18'),
-	('20005000', '20', '19', 'INT-H-1235', '4', '2021-05-17 19:03:18', '2021-05-17 19:03:18'),
-	('20005000', '20', '10', 'INT-H-1238', '4', '2021-05-17 19:03:18', '2021-05-17 19:03:18'),
-	('20005010', '10', '5', 'INT-H-1239', '4', '2021-05-17 19:03:18', '2021-05-17 19:03:18'),
-	('20005007', '20', '10', 'INT-H-1238', '4', '2021-05-17 19:03:18', '2021-05-17 19:03:18'),
-	('20005010', '10', '20', 'INT-H-1238', '4', '2021-05-17 19:03:18', '2021-05-17 19:03:18'),
-	('00504032', '20', '5', 'INT-H-1239', '4', '2021-05-17 19:03:18', '2021-05-17 19:03:18'),
-	('00703003', '20', '23', 'INT-H-1212', '4', '2021-05-17 19:03:18', '2021-05-17 19:03:18'),
-	('00704003', '20', '5', 'INT-H-1239', '4', '2021-05-17 19:03:18', '2021-05-17 19:03:18'),
-	('00302007', '20', '50', 'INT-H-1237', '4', '2021-05-17 19:03:18', '2021-05-17 19:03:18'),
-	('00302007', '20', '5', 'INT-H-1239', '4', '2021-05-17 19:03:18', '2021-05-17 19:03:18'),
-	('00302009', '20', '2', 'INT-H-1235', '4', '2021-05-17 19:03:18', '2021-05-17 19:03:18'),
-	('00302004', '20', '1', 'INT-H-1212', '4', '2021-05-17 19:03:18', '2021-05-17 19:03:18'),
-	('00303065', '20', '10', 'INT-H-1212', '4', '2021-05-17 19:03:18', '2021-05-17 19:03:18'),
-	('00507001', '50', '34', 'INT-H-1235', '4', '2021-05-17 19:03:18', '2021-05-17 19:03:18'),
-	('20018002', '20', '30', 'INT-H-1237', '4', '2021-05-17 19:03:18', '2021-05-17 19:03:18'),
-	('12506001', '100', '2', 'INT-H-1235', '4', '2021-05-17 19:03:18', '2021-05-17 19:03:18'),
-	('12506021', '20', '4', 'INT-H-1238', '4', '2021-05-17 19:03:18', '2021-05-17 19:03:18'),
-	('00107000', '50', '10', 'INT-H-1234', '4', '2021-05-17 19:03:18', '2021-05-17 19:03:18'),
-	('603004002', '20', '12', 'INT-H-1235', '4', '2021-05-17 19:03:18', '2021-05-17 19:03:18'),
-	('01607602', '20', '8', 'INT-H-1235', '4', '2021-05-17 19:03:18', '2021-05-17 19:03:18'),
-	('01607602', '20', '10', 'INT-H-1239', '4', '2021-05-17 19:03:18', '2021-05-17 19:03:18'),
-	('01607603', '20', '10', 'INT-H-1239', '4', '2021-05-17 19:03:18', '2021-05-17 19:03:18'),
-	('01606677', '20', '15', 'INT-H-1235', '4', '2021-05-17 19:03:18', '2021-05-17 19:03:18'),
-	('01606678', '20', '19', 'INT-H-1235', '4', '2021-05-17 19:03:18', '2021-05-17 19:03:18'),
-	('01606678', '20', '5', 'INT-H-1239', '4', '2021-05-17 19:03:18', '2021-05-17 19:03:18'),
-	('01606677', '20', '10', 'INT-H-1239', '4', '2021-05-17 19:03:18', '2021-05-17 19:03:18'),
-	('10104750', '20', '30', 'INT-H-1235', '4', '2021-05-17 19:03:18', '2021-05-17 19:03:18'),
-	('10104754', '20', '20', 'INT-H-1237', '4', '2021-05-17 19:03:18', '2021-05-17 19:03:18'),
-	('00504150', '20', '4', 'INT-H-1235', '4', '2021-05-17 19:03:18', '2021-05-17 19:03:18'),
-	('00504150', '20', '2', 'INT-H-1239', '4', '2021-05-17 19:03:18', '2021-05-17 19:03:18'),
-	('00110347', '20', '20', 'INT-H-1233', '4', '2021-05-17 19:03:18', '2021-05-17 19:03:18'),
-	('00110346', '20', '30', 'INT-H-1233', '4', '2021-05-17 19:03:18', '2021-05-17 19:03:18'),
-	('00504006', '100', '100', 'HON-3142', '1', '2021-05-17 22:10:17', '2021-05-17 22:10:17'),
-	('00505006', '100', '40', 'HON-3142', '1', '2021-05-17 22:10:17', '2021-05-17 22:10:17'),
-	('00504041', '5', '100', 'HON-3135', '1', '2021-05-17 22:10:17', '2021-05-17 22:10:17'),
-	('00508000', '20', '200', 'HON-3142', '1', '2021-05-17 22:10:17', '2021-05-17 22:10:17'),
-	('00508015', '10', '60', 'HON-3142', '1', '2021-05-17 22:10:17', '2021-05-17 22:10:17'),
-	('00605002', '25', '220', 'HON-3142', '1', '2021-05-17 22:10:17', '2021-05-17 22:10:17'),
-	('00508010', '30', '60', 'HON-3142', '1', '2021-05-17 22:10:17', '2021-05-17 22:10:17'),
-	('00504100', '20', '200', 'HON-3142', '1', '2021-05-17 22:10:17', '2021-05-17 22:10:17'),
-	('00504102', '20', '20', 'HON-3142', '1', '2021-05-17 22:10:17', '2021-05-17 22:10:17'),
-	('00504002', '20', '480', 'HON-3142', '1', '2021-05-17 22:10:17', '2021-05-17 22:10:17'),
-	('00505002', '20', '180', 'HON-3142', '1', '2021-05-17 22:10:17', '2021-05-17 22:10:17'),
-	('10104130', '20', '25', 'HON-3136', '1', '2021-05-17 22:10:17', '2021-05-17 22:10:17'),
-	('10104817', '5', '2000', 'HON-3138', '1', '2021-05-17 22:10:17', '2021-05-17 22:10:17'),
-	('10515002', '10', '20', 'HON-3142', '1', '2021-05-17 22:10:17', '2021-05-17 22:10:17'),
-	('10105565', '20', '100', 'FTT-1475', '1', '2021-05-17 22:10:17', '2021-05-17 22:10:17'),
-	('10105566', '20', '100', 'FTT-1475', '1', '2021-05-17 22:10:17', '2021-05-17 22:10:17'),
-	('00504007', '100', '120', 'HON-3142', '1', '2021-05-17 22:10:17', '2021-05-17 22:10:17'),
-	('00505007', '100', '20', 'HON-3142', '1', '2021-05-17 22:10:17', '2021-05-17 22:10:17'),
-	('00504042', '5', '100', 'HON-3135', '1', '2021-05-17 22:10:17', '2021-05-17 22:10:17'),
-	('00508016', '10', '100', 'HON-3142', '1', '2021-05-17 22:10:17', '2021-05-17 22:10:17'),
-	('00605003', '25', '60', 'HON-3142', '1', '2021-05-17 22:10:17', '2021-05-17 22:10:17'),
-	('00508011', '30', '40', 'HON-3142', '1', '2021-05-17 22:10:17', '2021-05-17 22:10:17'),
-	('00508001', '20', '360', 'HON-3142', '1', '2021-05-17 22:10:17', '2021-05-17 22:10:17'),
-	('00504003', '20', '580', 'HON-3142', '1', '2021-05-17 22:10:17', '2021-05-17 22:10:17'),
-	('00505003', '20', '160', 'HON-3142', '1', '2021-05-17 22:10:17', '2021-05-17 22:10:17'),
-	('00504101', '20', '180', 'HON-3142', '1', '2021-05-17 22:10:17', '2021-05-17 22:10:17'),
-	('00504103', '20', '40', 'HON-3142', '1', '2021-05-17 22:10:17', '2021-05-17 22:10:17'),
-	('10104816', '5', '2000', 'HON-3138', '1', '2021-05-17 22:10:17', '2021-05-17 22:10:17'),
-	('9900009110', '20', '100', 'HON-3124', '1', '2021-05-17 22:10:17', '2021-05-17 22:10:17'),
-	('9900009111', '20', '100', 'HON-3124', '1', '2021-05-17 22:10:17', '2021-05-17 22:10:17'),
-	('9900009117', '20', '50', 'HON-3146', '1', '2021-05-17 22:10:17', '2021-05-17 22:10:17'),
-	('9900009115', '25', '100', 'HON-3123', '1', '2021-05-17 22:10:17', '2021-05-17 22:10:17'),
-	('10105005', '20', '20', 'HON-3126', '1', '2021-05-17 22:10:17', '2021-05-17 22:10:17'),
-	('9900004000', '20', '100', 'HON-3124', '1', '2021-05-17 22:10:17', '2021-05-17 22:10:17'),
-	('9900004002', '20', '100', 'HON-3124', '1', '2021-05-17 22:10:17', '2021-05-17 22:10:17'),
-	('9900004003', '20', '100', 'HON-3124', '1', '2021-05-17 22:10:17', '2021-05-17 22:10:17'),
-	('9900004005', '20', '50', 'HON-3146', '1', '2021-05-17 22:10:17', '2021-05-17 22:10:17'),
-	('10105550', '20', '300', 'FTT-1475', '1', '2021-05-17 22:10:17', '2021-05-17 22:10:17'),
-	('10105551', '20', '300', 'FTT-1475', '1', '2021-05-17 22:10:17', '2021-05-17 22:10:17'),
-	('00508020', '20', '3140', 'HON-3142', '1', '2021-05-17 22:10:17', '2021-05-17 22:10:17'),
-	('00508022', '20', '60', 'HON-3142', '1', '2021-05-17 22:10:17', '2021-05-17 22:10:17'),
-	('00401000', '20', '60', 'HON-3142', '1', '2021-05-17 22:10:17', '2021-05-17 22:10:17'),
-	('00403000', '20', '140', 'HON-3142', '1', '2021-05-17 22:10:17', '2021-05-17 22:10:17'),
-	('00404000', '20', '220', 'HON-3142', '1', '2021-05-17 22:10:17', '2021-05-17 22:10:17'),
-	('00405000', '20', '20', 'HON-3142', '1', '2021-05-17 22:10:17', '2021-05-17 22:10:17'),
-	('00408000', '20', '20', 'HON-3142', '1', '2021-05-17 22:10:17', '2021-05-17 22:10:17'),
-	('00303007', '10', '100', 'HON-3142', '1', '2021-05-17 22:10:17', '2021-05-17 22:10:17'),
-	('00407000', '50', '60', 'FTT-1479', '1', '2021-05-17 22:10:17', '2021-05-17 22:10:17'),
-	('10104111', '20', '25', 'HON-3136', '1', '2021-05-17 22:10:17', '2021-05-17 22:10:17'),
-	('20005000', '20', '200', 'HON-3142', '1', '2021-05-17 22:10:17', '2021-05-17 22:10:17'),
-	('20005001', '20', '400', 'HON-3142', '1', '2021-05-17 22:10:17', '2021-05-17 22:10:17'),
-	('20005002', '20', '240', 'HON-3142', '1', '2021-05-17 22:10:17', '2021-05-17 22:10:17'),
-	('20005005', '20', '20', 'HON-3142', '1', '2021-05-17 22:10:17', '2021-05-17 22:10:17'),
-	('20005007', '20', '60', 'HON-3142', '1', '2021-05-17 22:10:17', '2021-05-17 22:10:17'),
-	('20005010', '10', '60', 'HON-3142', '1', '2021-05-17 22:10:17', '2021-05-17 22:10:17'),
-	('00505019', '100', '20', 'HON-3142', '1', '2021-05-17 22:10:17', '2021-05-17 22:10:17'),
-	('00504032', '20', '80', 'HON-3142', '1', '2021-05-17 22:10:17', '2021-05-17 22:10:17'),
-	('00504033', '20', '20', 'HON-3142', '1', '2021-05-17 22:10:17', '2021-05-17 22:10:17'),
-	('00231000', '50', '200', 'FTT-1479', '1', '2021-05-17 22:10:17', '2021-05-17 22:10:17'),
-	('9900004035', '20', '100', 'HON-3124', '1', '2021-05-17 22:10:17', '2021-05-17 22:10:17'),
-	('9900004037', '20', '150', 'HON-3124', '1', '2021-05-17 22:10:17', '2021-05-17 22:10:17'),
-	('9900004038', '20', '250', 'HON-3124', '1', '2021-05-17 22:10:17', '2021-05-17 22:10:17'),
-	('9900004039', '20', '200', 'HON-3143', '1', '2021-05-17 22:10:17', '2021-05-17 22:10:17'),
-	('9900004040', '20', '50', 'HON-3146', '1', '2021-05-17 22:10:17', '2021-05-17 22:10:17'),
-	('13105120', '10', '40', 'HON-3142', '1', '2021-05-17 22:10:17', '2021-05-17 22:10:17'),
-	('00703001', '50', '40', 'HON-3142', '1', '2021-05-17 22:10:17', '2021-05-17 22:10:17'),
-	('00704001', '50', '40', 'HON-3142', '1', '2021-05-17 22:10:17', '2021-05-17 22:10:17'),
-	('00705001', '50', '20', 'HON-3142', '1', '2021-05-17 22:10:17', '2021-05-17 22:10:17'),
-	('00712001', '50', '20', 'HON-3142', '1', '2021-05-17 22:10:17', '2021-05-17 22:10:17'),
-	('00508002', '20', '180', 'HON-3142', '1', '2021-05-17 22:10:17', '2021-05-17 22:10:17'),
-	('00508017', '10', '20', 'HON-3142', '1', '2021-05-17 22:10:17', '2021-05-17 22:10:17'),
-	('00703003', '20', '80', 'HON-3142', '1', '2021-05-17 22:10:17', '2021-05-17 22:10:17'),
-	('00712003', '20', '20', 'HON-3142', '1', '2021-05-17 22:10:17', '2021-05-17 22:10:17'),
-	('00704003', '20', '100', 'HON-3142', '1', '2021-05-17 22:10:17', '2021-05-17 22:10:17'),
-	('00705003', '20', '60', 'HON-3142', '1', '2021-05-17 22:10:17', '2021-05-17 22:10:17'),
-	('00504043', '5', '100', 'HON-3135', '1', '2021-05-17 22:10:17', '2021-05-17 22:10:17'),
-	('00712004', '25', '50', 'HON-3135', '1', '2021-05-17 22:10:17', '2021-05-17 22:10:17'),
-	('10515004', '10', '40', 'HON-3142', '1', '2021-05-17 22:10:17', '2021-05-17 22:10:17'),
-	('10603007', '20', '50', 'HON-3137', '1', '2021-05-17 22:10:17', '2021-05-17 22:10:17'),
-	('00110060', '20', '10', 'HON-3144', '1', '2021-05-17 22:10:17', '2021-05-17 22:10:17'),
-	('00110061', '20', '10', 'HON-3144', '1', '2021-05-17 22:10:17', '2021-05-17 22:10:17'),
-	('00110062', '20', '10', 'HON-3144', '1', '2021-05-17 22:10:17', '2021-05-17 22:10:17'),
-	('00110063', '20', '10', 'HON-3144', '1', '2021-05-17 22:10:17', '2021-05-17 22:10:17'),
-	('10105560', '20', '100', 'FTT-1475', '1', '2021-05-17 22:10:17', '2021-05-17 22:10:17'),
-	('10105561', '20', '100', 'FTT-1475', '1', '2021-05-17 22:10:17', '2021-05-17 22:10:17'),
-	('00504150', '20', '40', 'HON-3142', '1', '2021-05-17 22:10:17', '2021-05-17 22:10:17'),
-	('00508003', '20', '60', 'HON-3142', '1', '2021-05-17 22:10:17', '2021-05-17 22:10:17'),
-	('12506020', '20', '160', 'HON-3142', '1', '2021-05-17 22:10:17', '2021-05-17 22:10:17'),
-	('12506021', '20', '160', 'HON-3142', '1', '2021-05-17 22:10:18', '2021-05-17 22:10:18'),
-	('12506010', '25', '25', 'HON-3135', '1', '2021-05-17 22:10:18', '2021-05-17 22:10:18'),
-	('12506012', '5', '2000', 'HON-3138', '1', '2021-05-17 22:10:18', '2021-05-17 22:10:18'),
-	('00504252', '50', '40', 'HON-3133', '1', '2021-05-17 22:10:18', '2021-05-17 22:10:18'),
-	('01604010', '20', '20', 'HON-3142', '1', '2021-05-17 22:10:18', '2021-05-17 22:10:18'),
-	('01604011', '20', '20', 'HON-3142', '1', '2021-05-17 22:10:18', '2021-05-17 22:10:18'),
-	('01604012', '20', '20', 'HON-3142', '1', '2021-05-17 22:10:18', '2021-05-17 22:10:18'),
-	('01606675', '20', '320', 'HON-3142', '1', '2021-05-17 22:10:18', '2021-05-17 22:10:18'),
-	('01606678', '20', '260', 'HON-3142', '1', '2021-05-17 22:10:18', '2021-05-17 22:10:18'),
-	('603004002', '20', '60', 'HON-3142', '1', '2021-05-17 22:10:18', '2021-05-17 22:10:18'),
-	('603004004', '20', '20', 'HON-3142', '1', '2021-05-17 22:10:18', '2021-05-17 22:10:18'),
-	('603005750', '10', '60', 'HON-3142', '1', '2021-05-17 22:10:18', '2021-05-17 22:10:18'),
-	('603005751', '10', '120', 'HON-3142', '1', '2021-05-17 22:10:18', '2021-05-17 22:10:18'),
-	('603005752', '10', '40', 'HON-3142', '1', '2021-05-17 22:10:18', '2021-05-17 22:10:18'),
-	('9900004027', '20', '100', 'HON-3124', '1', '2021-05-17 22:10:18', '2021-05-17 22:10:18'),
-	('9900004028', '20', '200', 'HON-3124', '1', '2021-05-17 22:10:18', '2021-05-17 22:10:18'),
-	('9900004025', '20', '100', 'HON-3124', '1', '2021-05-17 22:10:18', '2021-05-17 22:10:18'),
-	('9900004030', '20', '100', 'HON-3123', '1', '2021-05-17 22:10:18', '2021-05-17 22:10:18'),
-	('9900004031', '20', '50', 'HON-3146', '1', '2021-05-17 22:10:18', '2021-05-17 22:10:18'),
-	('9900004019', '20', '150', 'HON-3124', '1', '2021-05-17 22:10:18', '2021-05-17 22:10:18'),
-	('9900004020', '20', '200', 'HON-3124', '1', '2021-05-17 22:10:18', '2021-05-17 22:10:18'),
-	('9900004023', '20', '50', 'HON-3146', '1', '2021-05-17 22:10:18', '2021-05-17 22:10:18'),
-	('00107000', '50', '180', 'FTT-1479', '1', '2021-05-17 22:10:18', '2021-05-17 22:10:18'),
-	('9900004011', '20', '100', 'HON-3124', '1', '2021-05-17 22:10:18', '2021-05-17 22:10:18'),
-	('9900004012', '20', '150', 'HON-3124', '1', '2021-05-17 22:10:18', '2021-05-17 22:10:18'),
-	('9900004015', '20', '100', 'HON-3123', '1', '2021-05-17 22:10:18', '2021-05-17 22:10:18'),
-	('9900004016', '20', '50', 'HON-3146', '1', '2021-05-17 22:10:18', '2021-05-17 22:10:18'),
-	('12503005', '20', '40', 'HON-3128', '1', '2021-05-17 22:10:18', '2021-05-17 22:10:18'),
-	('12503003', '20', '40', 'HON-3128', '1', '2021-05-17 22:10:18', '2021-05-17 22:10:18'),
-	('12503010', '20', '40', 'HON-3128', '1', '2021-05-17 22:10:18', '2021-05-17 22:10:18'),
-	('10105555', '20', '100', 'FTT-1475', '1', '2021-05-17 22:10:18', '2021-05-17 22:10:18'),
-	('10105556', '20', '100', 'FTT-1475', '1', '2021-05-17 22:10:18', '2021-05-17 22:10:18'),
-	('10104750', '20', '120', 'HON-3142', '1', '2021-05-17 22:10:18', '2021-05-17 22:10:18'),
-	('10104751', '20', '200', 'HON-3142', '1', '2021-05-17 22:10:18', '2021-05-17 22:10:18'),
-	('10104752', '20', '40', 'HON-3142', '1', '2021-05-17 22:10:18', '2021-05-17 22:10:18'),
-	('10104754', '20', '40', 'HON-3142', '1', '2021-05-17 22:10:18', '2021-05-17 22:10:18'),
-	('10104150', '20', '100', 'HON-3134. ', '1', '2021-05-17 22:10:18', '2021-05-17 22:10:18'),
-	('15003000', '20', '100', 'HON-3127', '1', '2021-05-17 22:10:18', '2021-05-17 22:10:18'),
-	('15004001', '20', '100', 'HON-3127', '1', '2021-05-17 22:10:18', '2021-05-17 22:10:18'),
-	('00110276', '5', '100', 'HON-3129', '1', '2021-05-17 22:10:18', '2021-05-17 22:10:18'),
-	('00110275', '5', '100', 'HON-3129', '1', '2021-05-17 22:10:18', '2021-05-17 22:10:18'),
-	('00110277', '5', '100', 'HON-3129', '1', '2021-05-17 22:10:18', '2021-05-17 22:10:18'),
-	('10104912', '5', '2860', 'HON-3142', '1', '2021-05-17 22:10:18', '2021-05-17 22:10:18'),
-	('00904038', NULL, '420', 'HON-3142', '1', '2021-05-17 22:10:18', '2021-05-17 22:10:18'),
-	('00504026', '5', '600', 'HON-3139', '2', '2021-05-17 22:10:18', '2021-05-17 22:10:18'),
-	('00504009', '25', '40', 'HON-3132', '2', '2021-05-17 22:10:18', '2021-05-17 22:10:18'),
-	('47801040', '20', '150', 'FTT-1473', '2', '2021-05-17 22:10:18', '2021-05-17 22:10:18'),
-	('00804065', '20', '20', 'HON-3139', '2', '2021-05-17 22:10:18', '2021-05-17 22:10:18'),
-	('603004050', '5', '600', 'HON-3139', '2', '2021-05-17 22:10:18', '2021-05-17 22:10:18'),
-	('00904111', '10', '50', 'HON-3135', '2', '2021-05-17 22:10:18', '2021-05-17 22:10:18'),
-	('01104000', '25', '70', 'HON-3141', '2', '2021-05-17 22:10:18', '2021-05-17 22:10:18'),
-	('01103006', '5', '500', 'HON-3141', '2', '2021-05-17 22:10:18', '2021-05-17 22:10:18'),
-	('01103010', '5', '200', 'HON-3141', '2', '2021-05-17 22:10:18', '2021-05-17 22:10:18'),
-	('47801563', '20', '3000', 'FTT-1472', '2', '2021-05-17 22:10:18', '2021-05-17 22:10:18'),
-	('00404005', '25', '200', 'HON-3138', '2', '2021-05-17 22:10:18', '2021-05-17 22:10:18'),
-	('00408003', '25', '300', 'HON-3138', '2', '2021-05-17 22:10:18', '2021-05-17 22:10:18'),
-	('20005006', '5', '5000', 'HON-3138', '2', '2021-05-17 22:10:18', '2021-05-17 22:10:18'),
-	('20005016', '5', '8000', 'HON-3141', '2', '2021-05-17 22:10:18', '2021-05-17 22:10:18'),
-	('00504048', '5', '1000', 'HON-3138', '2', '2021-05-17 22:10:18', '2021-05-17 22:10:18'),
-	('00504048', '5', '100', 'HON-3139', '2', '2021-05-17 22:10:18', '2021-05-17 22:10:18'),
-	('40503005', '20', '500', 'HON-3127', '2', '2021-05-17 22:10:18', '2021-05-17 22:10:18'),
-	('40503022', '10', '300', 'HON-3127', '2', '2021-05-17 22:10:18', '2021-05-17 22:10:18'),
-	('40503016', '5', '500', 'HON-3127', '2', '2021-05-17 22:10:18', '2021-05-17 22:10:18'),
-	('6030066060', '10', '500', 'FTT-1472', '2', '2021-05-17 22:10:18', '2021-05-17 22:10:18'),
-	('47801044', '20', '150', 'FTT-1473', '2', '2021-05-17 22:10:18', '2021-05-17 22:10:18'),
-	('14399005', '5', '80', 'HON-3141', '2', '2021-05-17 22:10:18', '2021-05-17 22:10:18'),
-	('14399006', '5', '800', 'HON-3141', '2', '2021-05-17 22:10:18', '2021-05-17 22:10:18'),
-	('14399010', '5', '300', 'HON-3141', '2', '2021-05-17 22:10:18', '2021-05-17 22:10:18'),
-	('47801501', '20', '30', 'FTT-1477', '2', '2021-05-17 22:10:18', '2021-05-17 22:10:18'),
-	('40503004', '20', '500', 'HON-3127', '2', '2021-05-17 22:10:18', '2021-05-17 22:10:18'),
-	('40503021', '10', '300', 'HON-3127', '2', '2021-05-17 22:10:18', '2021-05-17 22:10:18'),
-	('40503015', '5', '500', 'HON-3127', '2', '2021-05-17 22:10:18', '2021-05-17 22:10:18'),
-	('00704004', '25', '800', 'HON-3138', '2', '2021-05-17 22:10:18', '2021-05-17 22:10:18'),
-	('47801004', '20', '100', 'HON-3141', '2', '2021-05-17 22:10:18', '2021-05-17 22:10:18'),
-	('47801002', '20', '60', 'HON-3141', '2', '2021-05-17 22:10:18', '2021-05-17 22:10:18'),
-	('47705002', '5', '1500', 'HON-3141', '2', '2021-05-17 22:10:18', '2021-05-17 22:10:18'),
-	('01606872', '5', '500', 'FTT-1472', '2', '2021-05-17 22:10:18', '2021-05-17 22:10:18'),
-	('47801042', '20', '150', 'FTT-1473', '2', '2021-05-17 22:10:18', '2021-05-17 22:10:18'),
-	('40503003', '20', '500', 'HON-3127', '2', '2021-05-17 22:10:18', '2021-05-17 22:10:18'),
-	('40503020', '10', '300', 'HON-3127', '2', '2021-05-17 22:10:18', '2021-05-17 22:10:18'),
-	('40503014', '5', '500', 'HON-3127', '2', '2021-05-17 22:10:18', '2021-05-17 22:10:18'),
-	('12506011', '25', '40', 'HON-3132', '2', '2021-05-17 22:10:18', '2021-05-17 22:10:18'),
-	('603004023', '25', '50', 'HON-3135', '2', '2021-05-17 22:10:18', '2021-05-17 22:10:18'),
-	('603004023', '25', '200', 'HON-3138', '2', '2021-05-17 22:10:18', '2021-05-17 22:10:18'),
-	('603004031', '5', '150', 'HON-3139', '2', '2021-05-17 22:10:18', '2021-05-17 22:10:18'),
-	('20018021', '25', '50', 'HON-3135', '2', '2021-05-17 22:10:18', '2021-05-17 22:10:18'),
-	('20018022', '25', '50', 'HON-3135', '2', '2021-05-17 22:10:18', '2021-05-17 22:10:18'),
-	('01103004', '5', '65', 'HON-3141', '2', '2021-05-17 22:10:18', '2021-05-17 22:10:18'),
-	('41112001', '5', '40', 'HON-3141', '2', '2021-05-17 22:10:18', '2021-05-17 22:10:18'),
-	('47801420', '20', '3000', 'FTT-1472', '2', '2021-05-17 22:10:18', '2021-05-17 22:10:18'),
-	('47801421', '20', '3000', 'FTT-1472', '2', '2021-05-17 22:10:18', '2021-05-17 22:10:18'),
-	('47801561', '20', '3000', 'FTT-1472', '2', '2021-05-17 22:10:18', '2021-05-17 22:10:18'),
-	('47801043', '20', '150', 'FTT-1473', '2', '2021-05-17 22:10:18', '2021-05-17 22:10:18'),
-	('47801890', '10', '140', 'HON-3141', '2', '2021-05-17 22:10:18', '2021-05-17 22:10:18'),
-	('47801892', '10', '160', 'HON-3141', '2', '2021-05-17 22:10:18', '2021-05-17 22:10:18'),
-	('10104775', '25', '80', 'HON-3138', '2', '2021-05-17 22:10:18', '2021-05-17 22:10:18'),
-	('10104772', '25', '50', 'HON-3135', '2', '2021-05-17 22:10:18', '2021-05-17 22:10:18'),
-	('10104778', '5', '140', 'HON-3139', '2', '2021-05-17 22:10:18', '2021-05-17 22:10:18'),
-	('10499060', NULL, '1000', 'HON-3141', '2', '2021-05-17 22:10:18', '2021-05-17 22:10:18'),
-	('10499015', NULL, '500', 'HON-3141', '2', '2021-05-17 22:10:18', '2021-05-17 22:10:18'),
-	('10499010', NULL, '2000', NULL, '2', '2021-05-17 22:10:18', '2021-05-17 22:10:18'),
-	('12104000', '20', '120', 'HON-3130', '3', '2021-05-17 22:10:18', '2021-05-17 22:10:18'),
-	('11803000', '20', '200', 'HON-3130', '3', '2021-05-17 22:10:18', '2021-05-17 22:10:18'),
-	('11812002', '20', '100', 'HON-3130', '3', '2021-05-17 22:10:18', '2021-05-17 22:10:18'),
-	('11812010', '25', '200', 'HON-3131', '3', '2021-05-17 22:10:18', '2021-05-17 22:10:18'),
-	('11803002', '25', '120', 'HON-3131', '3', '2021-05-17 22:10:18', '2021-05-17 22:10:18'),
-	('11812008', '25', '80', 'HON-3131', '3', '2021-05-17 22:10:18', '2021-05-17 22:10:18'),
-	('11710050', '20', '50', 'HON-3130', '3', '2021-05-17 22:10:18', '2021-05-17 22:10:18'),
-	('11710052', '20', '100', 'HON-3130', '3', '2021-05-17 22:10:18', '2021-05-17 22:10:18'),
-	('11710055', '25', '80', 'HON-3131', '3', '2021-05-17 22:10:18', '2021-05-17 22:10:18'),
-	('12301000', '20', '100', 'HON-3130', '3', '2021-05-17 22:10:18', '2021-05-17 22:10:18'),
-	('12303000', '20', '100', 'HON-3130', '3', '2021-05-17 22:10:18', '2021-05-17 22:10:18'),
-	('13403010', '25', '240', 'HON-3131', '3', '2021-05-17 22:10:18', '2021-05-17 22:10:18'),
-	('12003050', '20', '200', 'HON-3130', '3', '2021-05-17 22:10:19', '2021-05-17 22:10:19'),
-	('12003051', '20', '100', 'HON-3130', '3', '2021-05-17 22:10:19', '2021-05-17 22:10:19'),
-	('12003061', '25', '80', 'HON-3131', '3', '2021-05-17 22:10:19', '2021-05-17 22:10:19'),
-	('12003062', '25', '40', 'HON-3131', '3', '2021-05-17 22:10:19', '2021-05-17 22:10:19'),
-	('12003060', '25', '240', 'HON-3131', '3', '2021-05-17 22:10:19', '2021-05-17 22:10:19'),
-	('12003001', '25', '80', 'HON-3131', '3', '2021-05-17 22:10:19', '2021-05-17 22:10:19'),
-	('12002998', '25', '160', 'HON-3131', '3', '2021-05-17 22:10:19', '2021-05-17 22:10:19'),
-	('12002999', '25', '240', 'HON-3131', '3', '2021-05-17 22:10:19', '2021-05-17 22:10:19'),
-	('12004001', '20', '100', 'HON-3130', '3', '2021-05-17 22:10:19', '2021-05-17 22:10:19'),
-	('12004000', '20', '100', 'HON-3130', '3', '2021-05-17 22:10:19', '2021-05-17 22:10:19'),
-	('12003003', '20', '50', 'HON-3130', '3', '2021-05-17 22:10:19', '2021-05-17 22:10:19'),
-	('12003002', '20', '50', 'HON-3130', '3', '2021-05-17 22:10:19', '2021-05-17 22:10:19'),
-	('12003005', '20', '50', 'HON-3130', '3', '2021-05-17 22:10:19', '2021-05-17 22:10:19'),
-	('12003007', '20', '50', 'HON-3130', '3', '2021-05-17 22:10:19', '2021-05-17 22:10:19'),
-	('12005003', '20', '100', 'HON-3130', '3', '2021-05-17 22:10:19', '2021-05-17 22:10:19'),
-	('11707003', '40', '800', 'FTT-1474', '3', '2021-05-17 22:10:19', '2021-05-17 22:10:19'),
-	('09906000', '12', '30', 'HON-3140', '3', '2021-05-17 22:10:19', '2021-05-17 22:10:19'),
-	('09906012', '16', '120', 'HON-3140', '3', '2021-05-17 22:10:19', '2021-05-17 22:10:19'),
-	('09906018', '16', '30', 'HON-3140', '3', '2021-05-17 22:10:19', '2021-05-17 22:10:19'),
-	('09906035', '16', '20', 'HON-3140', '3', '2021-05-17 22:10:19', '2021-05-17 22:10:19'),
-	('09906037', '15', '50', 'HON-3140', '3', '2021-05-17 22:10:19', '2021-05-17 22:10:19'),
-	('09906039', '15', '80', 'HON-3140', '3', '2021-05-17 22:10:19', '2021-05-17 22:10:19'),
-	('10610017', '15', '50', 'HON-3136', '3', '2021-05-17 22:10:19', '2021-05-17 22:10:19'),
-	('10610018', '15', '50', 'HON-3136', '3', '2021-05-17 22:10:19', '2021-05-17 22:10:19'),
-	('10610019', '15', '50', 'HON-3136', '3', '2021-05-17 22:10:19', '2021-05-17 22:10:19'),
-	('10610020', '15', '100', 'HON-3136', '3', '2021-05-17 22:10:19', '2021-05-17 22:10:19'),
-	('00503009', '20', '50', 'INT-H-1238', '4', '2021-05-17 22:10:19', '2021-05-17 22:10:19'),
-	('00504100', '20', '5', 'INT-H-1235', '4', '2021-05-17 22:10:19', '2021-05-17 22:10:19'),
-	('00504007', '100', '4', 'INT-H-1235', '4', '2021-05-17 22:10:19', '2021-05-17 22:10:19'),
-	('00508011', '30', '10', 'INT-H-1237', '4', '2021-05-17 22:10:19', '2021-05-17 22:10:19'),
-	('00503008', '20', '20', 'INT-H-1238', '4', '2021-05-17 22:10:19', '2021-05-17 22:10:19'),
-	('00504101', '20', '20', 'INT-H-1235', '4', '2021-05-17 22:10:19', '2021-05-17 22:10:19'),
-	('00504101', '20', '10', 'INT-H-1239', '4', '2021-05-17 22:10:19', '2021-05-17 22:10:19'),
-	('00504003', '20', '20', 'INT-H-1235', '4', '2021-05-17 22:10:19', '2021-05-17 22:10:19'),
-	('00508001', '20', '10', 'INT-H-1239', '4', '2021-05-17 22:10:19', '2021-05-17 22:10:19'),
-	('00303050', '10', '15', 'INT-H-1235', '4', '2021-05-17 22:10:19', '2021-05-17 22:10:19'),
-	('00303007', '10', '50', 'INT-H-1238', '4', '2021-05-17 22:10:19', '2021-05-17 22:10:19'),
-	('00303007', '10', '20', 'INT-H-1236', '4', '2021-05-17 22:10:19', '2021-05-17 22:10:19'),
-	('00303007', '10', '16', 'INT-H-1239', '4', '2021-05-17 22:10:19', '2021-05-17 22:10:19'),
-	('00407000', '50', '28', 'INT-H-1212', '4', '2021-05-17 22:10:19', '2021-05-17 22:10:19'),
-	('00408000', '20', '7', 'INT-H-1238', '4', '2021-05-17 22:10:19', '2021-05-17 22:10:19'),
-	('10104210', '20', '7', 'INT-H-1235', '4', '2021-05-17 22:10:19', '2021-05-17 22:10:19'),
-	('00303051', '10', '10', 'INT-H-1240', '4', '2021-05-17 22:10:19', '2021-05-17 22:10:19'),
-	('00303051', '10', '4', 'INT-H-1239', '4', '2021-05-17 22:10:19', '2021-05-17 22:10:19'),
-	('20005000', '20', '19', 'INT-H-1235', '4', '2021-05-17 22:10:19', '2021-05-17 22:10:19'),
-	('20005000', '20', '10', 'INT-H-1238', '4', '2021-05-17 22:10:19', '2021-05-17 22:10:19'),
-	('20005010', '10', '5', 'INT-H-1239', '4', '2021-05-17 22:10:19', '2021-05-17 22:10:19'),
-	('20005007', '20', '10', 'INT-H-1238', '4', '2021-05-17 22:10:19', '2021-05-17 22:10:19'),
-	('20005010', '10', '20', 'INT-H-1238', '4', '2021-05-17 22:10:19', '2021-05-17 22:10:19'),
-	('00504032', '20', '5', 'INT-H-1239', '4', '2021-05-17 22:10:19', '2021-05-17 22:10:19'),
-	('00703003', '20', '23', 'INT-H-1212', '4', '2021-05-17 22:10:19', '2021-05-17 22:10:19'),
-	('00704003', '20', '5', 'INT-H-1239', '4', '2021-05-17 22:10:19', '2021-05-17 22:10:19'),
-	('00302007', '20', '50', 'INT-H-1237', '4', '2021-05-17 22:10:19', '2021-05-17 22:10:19'),
-	('00302007', '20', '5', 'INT-H-1239', '4', '2021-05-17 22:10:19', '2021-05-17 22:10:19'),
-	('00302009', '20', '2', 'INT-H-1235', '4', '2021-05-17 22:10:19', '2021-05-17 22:10:19'),
-	('00302004', '20', '1', 'INT-H-1212', '4', '2021-05-17 22:10:19', '2021-05-17 22:10:19'),
-	('00303065', '20', '10', 'INT-H-1212', '4', '2021-05-17 22:10:19', '2021-05-17 22:10:19'),
-	('00507001', '50', '34', 'INT-H-1235', '4', '2021-05-17 22:10:19', '2021-05-17 22:10:19'),
-	('20018002', '20', '30', 'INT-H-1237', '4', '2021-05-17 22:10:19', '2021-05-17 22:10:19'),
-	('12506001', '100', '2', 'INT-H-1235', '4', '2021-05-17 22:10:19', '2021-05-17 22:10:19'),
-	('12506021', '20', '4', 'INT-H-1238', '4', '2021-05-17 22:10:19', '2021-05-17 22:10:19'),
-	('00107000', '50', '10', 'INT-H-1234', '4', '2021-05-17 22:10:19', '2021-05-17 22:10:19'),
-	('603004002', '20', '12', 'INT-H-1235', '4', '2021-05-17 22:10:19', '2021-05-17 22:10:19'),
-	('01607602', '20', '8', 'INT-H-1235', '4', '2021-05-17 22:10:19', '2021-05-17 22:10:19'),
-	('01607602', '20', '10', 'INT-H-1239', '4', '2021-05-17 22:10:19', '2021-05-17 22:10:19'),
-	('01607603', '20', '10', 'INT-H-1239', '4', '2021-05-17 22:10:19', '2021-05-17 22:10:19'),
-	('01606677', '20', '15', 'INT-H-1235', '4', '2021-05-17 22:10:19', '2021-05-17 22:10:19'),
-	('01606678', '20', '19', 'INT-H-1235', '4', '2021-05-17 22:10:19', '2021-05-17 22:10:19'),
-	('01606678', '20', '5', 'INT-H-1239', '4', '2021-05-17 22:10:19', '2021-05-17 22:10:19'),
-	('01606677', '20', '10', 'INT-H-1239', '4', '2021-05-17 22:10:19', '2021-05-17 22:10:19'),
-	('10104750', '20', '30', 'INT-H-1235', '4', '2021-05-17 22:10:19', '2021-05-17 22:10:19'),
-	('10104754', '20', '20', 'INT-H-1237', '4', '2021-05-17 22:10:19', '2021-05-17 22:10:19'),
-	('00504150', '20', '4', 'INT-H-1235', '4', '2021-05-17 22:10:19', '2021-05-17 22:10:19'),
-	('00504150', '20', '2', 'INT-H-1239', '4', '2021-05-17 22:10:19', '2021-05-17 22:10:19'),
-	('00110347', '20', '20', 'INT-H-1233', '4', '2021-05-17 22:10:19', '2021-05-17 22:10:19'),
-	('00110346', '20', '30', 'INT-H-1233', '4', '2021-05-17 22:10:19', '2021-05-17 22:10:19');
 /*!40000 ALTER TABLE `pedidos` ENABLE KEYS */;
 
--- Dumping structure for table facturacion_plasencia.pendiente
+-- Volcando estructura para tabla facturacion_plasencia.pendiente
 CREATE TABLE IF NOT EXISTS `pendiente` (
   `id_pendiente` int(11) NOT NULL AUTO_INCREMENT,
   `categoria` int(11) DEFAULT NULL,
@@ -6089,283 +5320,296 @@ CREATE TABLE IF NOT EXISTS `pendiente` (
   `tipo_empaque` int(11) DEFAULT NULL,
   `cello` int(11) DEFAULT NULL,
   `pendiente` int(11) DEFAULT NULL,
-  `factura_del_mes` int(11) DEFAULT NULL,
-  `cantidad_enviada_mes` int(11) DEFAULT NULL,
   `saldo` int(11) DEFAULT NULL,
+  `paquetes` varchar(50) DEFAULT NULL,
+  `unidades` varchar(50) DEFAULT NULL,
   PRIMARY KEY (`id_pendiente`)
-) ENGINE=MyISAM AUTO_INCREMENT=265 DEFAULT CHARSET=latin1 COMMENT='CATEGORIA	ITEM	ORDEN DEL SISTEMA	OBSERVACÓN	PRESENTACIÓN	MES	ORDEN	MARCA	VITOLA	NOMBRE	CAPA	TIPO DE EMPAQUE	ANILLO	CELLO	UPC	PENDIENTE	MARZO 2021 FACTURA #17976(Warehouse)	ENVIADO MES	SALDO';
+) ENGINE=InnoDB AUTO_INCREMENT=512 DEFAULT CHARSET=latin1 COMMENT='CATEGORIA	ITEM	ORDEN DEL SISTEMA	OBSERVACÓN	PRESENTACIÓN	MES	ORDEN	MARCA	VITOLA	NOMBRE	CAPA	TIPO DE EMPAQUE	ANILLO	CELLO	UPC	PENDIENTE	MARZO 2021 FACTURA #17976(Warehouse)	ENVIADO MES	SALDO';
 
--- Dumping data for table facturacion_plasencia.pendiente: 264 rows
+-- Volcando datos para la tabla facturacion_plasencia.pendiente: ~277 rows (aproximadamente)
 DELETE FROM `pendiente`;
 /*!40000 ALTER TABLE `pendiente` DISABLE KEYS */;
-INSERT INTO `pendiente` (`id_pendiente`, `categoria`, `item`, `orden_del_sitema`, `observacion`, `presentacion`, `mes`, `orden`, `marca`, `vitola`, `nombre`, `capa`, `tipo_empaque`, `cello`, `pendiente`, `factura_del_mes`, `cantidad_enviada_mes`, `saldo`) VALUES
-	(1, 1, '00107000', '', '', 'Puros Tripa Larga', '2021-05-05', 226, 141, 15, 53, 9, 15, 1, 9000, 0, 0, 9000),
-	(2, 4, '00107000', '', '', 'Puros Tripa Larga', '2021-05-05', 227, 141, 15, 53, 9, 15, 1, 500, 0, 0, 500),
-	(3, 1, '00110060', '', '', 'Puros Tripa Larga', '2021-05-05', 234, 231, 2, 1, 6, 7, 1, 200, 0, 0, 200),
-	(4, 1, '00110061', '', '', NULL, '2021-05-05', 234, 231, 4, 2, 6, 7, 1, 200, 0, 0, 200),
-	(5, 1, '00110062', '', '', 'Puros Tripa Larga', '2021-05-05', 234, 231, 9, 11, 6, 7, 1, 200, 0, 0, 200),
-	(6, 1, '00110063', '', '', NULL, '2021-05-05', 234, 231, 22, 34, 6, 7, 1, 200, 0, 0, 200),
-	(7, 4, '00110346', '', '', NULL, '2021-05-05', 224, 226, 4, 2, 9, 7, 1, 600, 0, 0, 600),
-	(8, 4, '00110347', '', '', NULL, '2021-05-05', 224, 226, 20, 30, 9, 7, 1, 400, 0, 0, 400),
-	(9, 1, '00231000', '', '', 'Puros Tripa Larga', '2021-05-05', 226, 62, 15, 18, 3, 15, 1, 10000, 0, 0, 10000),
-	(10, 4, '00302004', '', '', NULL, '2021-05-05', 124, 86, 37, 61, 6, 3, 1, 20, 0, 0, 20),
-	(11, 4, '00302007', '', '', 'Puros Tripa Larga', '2021-05-05', 244, 86, 3, 2, 6, 7, 1, 1000, 0, 0, 1000),
-	(12, 4, '00302007', '', '', 'Puros Tripa Larga', '2021-05-05', 221, 86, 3, 2, 6, 7, 1, 100, 0, 0, 100),
-	(13, 4, '00302009', '', '', 'Puros Tripa Larga', '2021-05-05', 213, 86, 9, 11, 6, 7, 1, 40, 0, 0, 40),
-	(14, 1, '00303007', '', '', 'Puros Tripa Larga', '2021-05-05', 212, 67, 25, 2, 3, 4, 1, 1000, 0, 0, 1000),
-	(15, 4, '00303007', '', '', 'Puros Tripa Larga', '2021-05-05', 243, 67, 25, 2, 3, 4, 1, 200, 0, 0, 200),
-	(16, 4, '00303007', '', '', 'Puros Tripa Larga', '2021-05-05', 222, 67, 25, 2, 3, 4, 1, 500, 0, 0, 500),
-	(17, 4, '00303007', '', '', 'Puros Tripa Larga', '2021-05-05', 221, 67, 25, 2, 3, 4, 1, 160, 0, 0, 160),
-	(18, 4, '00303051', '', '', NULL, '2021-05-05', 221, 14, 25, 35, 3, 4, 1, 40, 0, 0, 40),
-	(19, 4, '00303051', '', '', NULL, '2021-05-05', 248, 14, 25, 35, 3, 4, 1, 100, 0, 0, 100),
-	(20, 4, '00303065', '', '', 'Puros Tripa Larga', '2021-05-05', 124, 86, 2, 1, 6, 10, 1, 200, 0, 0, 200),
-	(21, 1, '00401000', '', '', 'Puros Tripa Larga', '2021-05-05', 212, 67, 19, 25, 3, 7, 3, 1200, 0, 0, 1200),
-	(22, 1, '00403000', '', '', 'Puros Tripa Larga', '2021-05-05', 212, 67, 2, 1, 3, 7, 3, 2800, 0, 0, 2800),
-	(23, 1, '00404000', '', '', 'Puros Tripa Larga', '2021-05-05', 212, 67, 3, 2, 3, 7, 3, 4400, 0, 0, 4400),
-	(24, 2, '00404005', '', '', 'Puros Tripa Larga', '2021-05-05', 215, 67, 3, 2, 3, 12, 1, 5000, 0, 0, 5000),
-	(25, 1, '00405000', '', '', 'Puros Tripa Larga', '2021-05-05', 212, 67, 16, 14, 3, 7, 3, 400, 0, 0, 400),
-	(26, 1, '00407000', '', '', 'Puros Tripa Larga', '2021-05-05', 226, 158, 15, 46, 9, 15, 1, 3000, 0, 0, 3000),
-	(27, 4, '00407000', '', '', 'Puros Tripa Larga', '2021-05-05', 124, 158, 15, 46, 9, 15, 1, 1400, 0, 0, 1400),
-	(28, 1, '00408000', '', '', 'Puros Tripa Larga', '2021-05-05', 212, 67, 9, 40, 3, 7, 3, 400, 0, 0, 400),
-	(29, 4, '00408000', '', '', 'Puros Tripa Larga', '2021-05-05', 222, 67, 9, 40, 3, 7, 3, 140, 0, 0, 140),
-	(30, 2, '00408003', '', '', 'Puros Tripa Larga', '2021-05-05', 215, 67, 9, 40, 3, 12, 1, 7500, 0, 0, 7500),
-	(31, 4, '00503008', '', '', 'Puros Tripa Larga', '2021-05-05', 222, 51, 6, 43, 2, 7, 1, 400, 0, 0, 400),
-	(32, 4, '00503009', '', '', 'Puros Tripa Larga', '2021-05-05', 222, 51, 6, 43, 5, 7, 1, 1000, 0, 0, 1000),
-	(33, 1, '00504002', '', '', 'Puros Tripa Larga', '2021-05-05', 212, 51, 4, 2, 5, 7, 3, 9600, 0, 0, 9600),
-	(34, 1, '00504003', '', '', 'Puros Tripa Larga', '2021-05-05', 212, 51, 4, 2, 2, 7, 3, 11600, 0, 0, 11600),
-	(35, 4, '00504003', '', '', 'Puros Tripa Larga', '2021-05-05', 213, 51, 4, 2, 2, 7, 3, 400, 0, 0, 400),
-	(36, 1, '00504006', '', '', 'Puros Tripa Larga', '2021-05-05', 212, 51, 4, 2, 5, 18, 3, 10000, 0, 0, 10000),
-	(37, 1, '00504007', '', '', 'Puros Tripa Larga', '2021-05-05', 212, 51, 4, 2, 2, 18, 3, 12000, 0, 0, 12000),
-	(38, 4, '00504007', '', '', 'Puros Tripa Larga', '2021-05-05', 213, 51, 4, 2, 2, 18, 3, 400, 0, 0, 400),
-	(39, 2, '00504009', '', '', 'Puros Tripa Larga', '2021-05-05', 245, 51, 4, 2, 5, 12, 1, 1000, 0, 0, 1000),
-	(40, 2, '00504026', '', '', 'Puros Tripa Larga', '2021-05-05', 216, 51, 4, 2, 5, 11, 3, 3000, 0, 0, 3000),
-	(41, 1, '00504032', '', '', 'Puros Tripa Larga', '2021-05-05', 212, 51, 4, 2, 3, 7, 1, 1600, 0, 0, 1600),
-	(42, 4, '00504032', '', '', 'Puros Tripa Larga', '2021-05-05', 221, 51, 4, 2, 3, 7, 1, 100, 0, 0, 100),
-	(43, 1, '00504033', '', '', 'Puros Tripa Larga', '2021-05-05', 212, 51, 4, 14, 3, 7, 1, 400, 0, 0, 400),
-	(44, 1, '00504041', '', '', 'Puros Tripa Larga', '2021-05-05', 214, 51, 9, 32, 5, 11, 1, 500, 0, 0, 500),
-	(45, 1, '00504042', '', '', 'Puros Tripa Larga', '2021-05-05', 214, 51, 9, 32, 2, 11, 1, 500, 0, 0, 500),
-	(46, 1, '00504043', '', '', 'Puros Tripa Larga', '2021-05-05', 214, 99, 9, 11, 6, 11, 1, 500, 0, 0, 500),
-	(47, 2, '00504048', '', '', 'Puros Tripa Larga', '2021-05-05', 215, 51, 4, 2, 3, 11, 1, 5000, 0, 0, 5000),
-	(48, 2, '00504048', '', '', 'Puros Tripa Larga', '2021-05-05', 216, 51, 4, 2, 3, 11, 1, 500, 0, 0, 500),
-	(49, 1, '00504100', '', '', 'Puros Tripa Larga', '2021-05-05', 212, 51, 2, 1, 5, 7, 1, 4000, 0, 0, 4000),
-	(50, 4, '00504100', '', '', 'Puros Tripa Larga', '2021-05-05', 213, 51, 2, 1, 5, 7, 1, 100, 0, 0, 100),
-	(51, 1, '00504101', '', '', 'Puros Tripa Larga', '2021-05-05', 212, 51, 2, 1, 2, 7, 3, 3600, 0, 0, 3600),
-	(52, 4, '00504101', '', '', 'Puros Tripa Larga', '2021-05-05', 213, 51, 2, 1, 2, 7, 3, 400, 0, 0, 400),
-	(53, 4, '00504101', '', '', 'Puros Tripa Larga', '2021-05-05', 221, 51, 2, 1, 2, 7, 3, 200, 0, 0, 200),
-	(54, 1, '00504102', '', '', 'Puros Tripa Larga', '2021-05-05', 212, 51, 22, 34, 5, 7, 1, 400, 0, 0, 400),
-	(55, 1, '00504103', '', '', 'Puros Tripa Larga', '2021-05-05', 212, 51, 22, 34, 2, 7, 1, 800, 0, 0, 800),
-	(56, 1, '00504150', '', '', 'Puros Tripa Larga', '2021-05-05', 212, 51, 4, 2, 15, 7, 1, 800, 0, 0, 800),
-	(57, 4, '00504150', '', '', 'Puros Tripa Larga', '2021-05-05', 213, 51, 4, 2, 15, 7, 1, 80, 0, 0, 80),
-	(58, 4, '00504150', '', '', 'Puros Tripa Larga', '2021-05-05', 221, 51, 4, 2, 15, 7, 1, 40, 0, 0, 40),
-	(59, 1, '00504252', '', '', 'Puros Tripa Larga', '2021-05-05', 247, 144, 4, 54, 1, 21, 1, 2000, 0, 0, 2000),
-	(60, 1, '00505002', '', '', 'Puros Tripa Larga', '2021-05-05', 212, 51, 4, 14, 5, 7, 3, 3600, 0, 0, 3600),
-	(61, 1, '00505003', '', '', 'Puros Tripa Larga', '2021-05-05', 212, 51, 4, 14, 2, 7, 3, 3200, 0, 0, 3200),
-	(62, 1, '00505006', '', '', 'Puros Tripa Larga', '2021-05-05', 212, 51, 4, 14, 5, 18, 3, 4000, 0, 0, 4000),
-	(63, 1, '00505007', '', '', 'Puros Tripa Larga', '2021-05-05', 212, 51, 4, 14, 2, 18, 3, 2000, 0, 0, 2000),
-	(64, 1, '00505019', '', '', 'Puros Tripa Larga', '2021-05-05', 212, 51, 4, 14, 3, 18, 1, 2000, 0, 0, 2000),
-	(65, 4, '00507001', '', '', 'Puros Tripa Larga', '2021-05-05', 213, 159, 15, 62, 6, 15, 1, 1700, 0, 0, 1700),
-	(66, 1, '00508000', '', '', 'Puros Tripa Larga', '2021-05-05', 212, 51, 9, 32, 5, 7, 3, 4000, 0, 0, 4000),
-	(67, 1, '00508001', '', '', 'Puros Tripa Larga', '2021-05-05', 212, 51, 9, 32, 2, 7, 3, 7200, 0, 0, 7200),
-	(68, 4, '00508001', '', '', 'Puros Tripa Larga', '2021-05-05', 221, 51, 9, 32, 2, 7, 3, 200, 0, 0, 200),
-	(69, 1, '00508002', '', '', 'Puros Tripa Larga', '2021-05-05', 212, 99, 9, 11, 6, 7, 1, 3600, 0, 0, 3600),
-	(70, 1, '00508003', '', '', 'Puros Tripa Larga', '2021-05-05', 212, 61, 9, 11, 1, 7, 1, 1200, 0, 0, 1200),
-	(71, 1, '00508010', '', '', 'Puros Tripa Larga', '2021-05-05', 212, 51, 21, 33, 5, 19, 1, 1800, 0, 0, 1800),
-	(72, 1, '00508011', '', '', 'Puros Tripa Larga', '2021-05-05', 212, 51, 21, 33, 2, 19, 1, 1200, 0, 0, 1200),
-	(73, 4, '00508011', '', '', 'Puros Tripa Larga', '2021-05-05', 244, 51, 21, 33, 2, 19, 1, 300, 0, 0, 300),
-	(74, 1, '00508015', '', '', 'Puros Tripa Larga', '2021-05-05', 212, 51, 11, 12, 5, 4, 1, 600, 0, 0, 600),
-	(75, 1, '00508016', '', '', 'Puros Tripa Larga', '2021-05-05', 212, 51, 11, 12, 2, 4, 1, 1000, 0, 0, 1000),
-	(76, 1, '00508017', '', '', NULL, '2021-05-05', 212, 73, 11, 12, 6, 4, 1, 200, 0, 0, 200),
-	(77, 1, '00508020', '', '', 'Puros Tripa Larga', '2021-05-05', 212, 91, 4, 2, 10, 7, 1, 62800, 0, 0, 62800),
-	(78, 1, '00508022', '', '', 'Puros Tripa Larga', '2021-05-05', 212, 91, 9, 11, 10, 7, 1, 1200, 0, 0, 1200),
-	(79, 1, '00605002', '', '', 'Puros Tripa Larga', '2021-05-05', 212, 51, 14, 17, 5, 13, 3, 5500, 0, 0, 5500),
-	(80, 1, '00605003', '', '', 'Puros Tripa Larga', '2021-05-05', 212, 51, 14, 17, 2, 13, 3, 1500, 0, 0, 1500),
-	(81, 1, '00703001', '', '', 'Puros Tripa Larga', '2021-05-05', 212, 99, 2, 1, 6, 21, 3, 2000, 0, 0, 2000),
-	(82, 1, '00703003', '', '', 'Puros Tripa Larga', '2021-05-05', 212, 99, 2, 1, 6, 7, 1, 1600, 0, 0, 1600),
-	(83, 4, '00703003', '', '', 'Puros Tripa Larga', '2021-05-05', 124, 99, 2, 1, 6, 7, 1, 460, 0, 0, 460),
-	(84, 1, '00704001', '', '', 'Puros Tripa Larga', '2021-05-05', 212, 99, 4, 2, 6, 21, 3, 2000, 0, 0, 2000),
-	(85, 1, '00704003', '', '', 'Puros Tripa Larga', '2021-05-05', 212, 99, 4, 2, 6, 7, 1, 2000, 0, 0, 2000),
-	(86, 4, '00704003', '', '', 'Puros Tripa Larga', '2021-05-05', 221, 99, 4, 2, 6, 7, 1, 100, 0, 0, 100),
-	(87, 2, '00704004', '', '', 'Puros Tripa Larga', '2021-05-05', 215, 99, 4, 2, 6, 12, 1, 20000, 0, 0, 20000),
-	(88, 1, '00705001', '', '', 'Puros Tripa Larga', '2021-05-05', 212, 99, 4, 14, 6, 21, 3, 1000, 0, 0, 1000),
-	(89, 1, '00705003', '', '', 'Puros Tripa Larga', '2021-05-05', 212, 99, 4, 14, 6, 7, 1, 1200, 0, 0, 1200),
-	(90, 1, '00712001', '', '', 'Puros Tripa Larga', '2021-05-05', 212, 99, 22, 34, 6, 21, 3, 1000, 0, 0, 1000),
-	(91, 1, '00712003', '', '', 'Puros Tripa Larga', '2021-05-05', 212, 99, 22, 34, 6, 7, 1, 400, 0, 0, 400),
-	(92, 1, '00712004', '', '', 'Puros Tripa Larga', '2021-05-05', 214, 99, 22, 34, 6, 12, 1, 1250, 0, 0, 1250),
-	(93, 2, '00804065', '', '', NULL, '2021-05-05', 216, 209, 18, 6, 2, 7, 1, 400, 0, 0, 400),
-	(94, 1, '00904038', '', '', 'Puros Tripa Larga', '2021-05-05', 212, 51, 4, 2, 2, 14, 1, NULL, 0, 0, NULL),
-	(95, 2, '00904111', '', '', 'Puros Tripa Larga', '2021-05-05', 214, 186, 3, 3, 2, 9, 1, 500, 0, 0, 500),
-	(96, 2, '01103004', '', '', 'Puros Tripa Larga', '2021-05-05', 220, 59, 1, 6, 18, 11, 1, 325, 0, 0, 325),
-	(97, 2, '01103006', '', '', 'Puros Tripa Larga', '2021-05-05', 220, 59, 4, 3, 2, 11, 1, 2500, 0, 0, 2500),
-	(98, 2, '01103010', '', '', 'Puros Tripa Larga', '2021-05-05', 220, 59, 38, 68, 2, 11, 1, 1000, 0, 0, 1000),
-	(99, 2, '01104000', '', '', 'Puros Tripa Larga', '2021-05-05', 220, 59, 4, 3, 2, 13, 3, 1750, 0, 0, 1750),
-	(100, 1, '01604010', '', '', 'Puros Tripa Larga', '2021-05-05', 212, 109, 24, 41, 1, 7, 1, 400, 0, 0, 400),
-	(101, 1, '01604011', '', '', NULL, '2021-05-05', 212, 109, 3, 2, 1, 7, 1, 400, 0, 0, 400),
-	(102, 1, '01604012', '', '', 'Puros Tripa Larga', '2021-05-05', 212, 109, 28, 14, 1, 7, 1, 400, 0, 0, 400),
-	(103, 1, '01606675', '', '', 'Puros Tripa Larga', '2021-05-05', 212, 40, 20, 30, 5, 7, 1, 6400, 0, 0, 6400),
-	(104, 4, '01606677', '', '', 'Puros Tripa Larga', '2021-05-05', 213, 40, 9, 11, 5, 7, 1, 300, 0, 0, 300),
-	(105, 4, '01606677', '', '', 'Puros Tripa Larga', '2021-05-05', 221, 40, 9, 11, 5, 7, 1, 200, 0, 0, 200),
-	(106, 1, '01606678', '', '', 'Puros Tripa Larga', '2021-05-05', 212, 40, 3, 2, 5, 7, 1, 5200, 0, 0, 5200),
-	(107, 4, '01606678', '', '', 'Puros Tripa Larga', '2021-05-05', 213, 40, 3, 2, 5, 7, 1, 380, 0, 0, 380),
-	(108, 4, '01606678', '', '', 'Puros Tripa Larga', '2021-05-05', 221, 40, 3, 2, 5, 7, 1, 100, 0, 0, 100),
-	(109, 2, '01606872', '', '', 'Puros Tripa Larga', '2021-05-05', 217, 56, 4, 2, 6, 11, 1, 2500, 0, 0, 2500),
-	(110, 4, '01607602', '', '', 'Puros Tripa Larga', '2021-05-05', 213, 95, 3, 2, 11, 7, 1, 160, 0, 0, 160),
-	(111, 4, '01607602', '', '', 'Puros Tripa Larga', '2021-05-05', 221, 95, 3, 2, 11, 7, 1, 200, 0, 0, 200),
-	(112, 4, '01607603', '', '', 'Puros Tripa Larga', '2021-05-05', 221, 95, 9, 11, 11, 7, 1, 200, 0, 0, 200),
-	(113, 3, '09906000', '', '', 'Puros Tripa Larga', '2021-05-05', 237, 219, 3, 3, 3, 24, 4, 360, 0, 0, 360),
-	(114, 3, '09906012', '', '', NULL, '2021-05-05', 237, 181, 4, 2, 6, 20, 4, 1920, 0, 0, 1920),
-	(115, 3, '09906018', '', '', 'Puros Tripa Larga', '2021-05-05', 237, 181, 22, 34, 6, 20, 4, 480, 0, 0, 480),
-	(116, 3, '09906035', '', '', 'Puros Tripa Larga', '2021-05-05', 237, 161, 4, 2, 2, 20, 4, 320, 0, 0, 320),
-	(117, 3, '09906037', '', '', NULL, '2021-05-05', 237, 182, 3, 2, 3, 22, 4, 750, 0, 0, 750),
-	(118, 3, '09906039', '', '', 'Puros Tripa Larga', '2021-05-05', 237, 182, 9, 40, 3, 22, 4, 1200, 0, 0, 1200),
-	(119, 1, '10104111', '', '', 'Puros Tripa Larga', '2021-05-05', 223, 90, 6, 44, 3, 7, 1, 500, 0, 0, 500),
-	(120, 1, '10104130', '', '', NULL, '2021-05-05', 223, 51, 6, 67, 5, 7, 1, 500, 0, 0, 500),
-	(121, 4, '10104210', '', '', NULL, '2021-05-05', 213, 14, 2, 6, 3, 7, 1, 140, 0, 0, 140),
-	(122, 1, '10104750', '', '', 'Puros Tripa Larga', '2021-05-05', 212, 101, 2, 5, 4, 7, 1, 2400, 0, 0, 2400),
-	(123, 4, '10104750', '', '', 'Puros Tripa Larga', '2021-05-05', 213, 101, 2, 5, 4, 7, 1, 600, 0, 0, 600),
-	(124, 1, '10104751', '', '', 'Puros Tripa Larga', '2021-05-05', 212, 101, 3, 35, 4, 7, 1, 4000, 0, 0, 4000),
-	(125, 1, '10104752', '', '', 'Puros Tripa Larga', '2021-05-05', 212, 101, 16, 36, 4, 7, 1, 800, 0, 0, 800),
-	(126, 1, '10104754', '', '', 'Puros Tripa Larga', '2021-05-05', 212, 101, 9, 37, 4, 7, 1, 800, 0, 0, 800),
-	(127, 4, '10104754', '', '', 'Puros Tripa Larga', '2021-05-05', 244, 101, 9, 37, 4, 7, 1, 400, 0, 0, 400),
-	(128, 2, '10104772', '', '', 'Puros Tripa Larga', '2021-05-05', 214, 101, 5, 38, 4, 12, 1, 1250, 0, 0, 1250),
-	(129, 2, '10104775', '', '', 'Puros Tripa Larga', '2021-05-05', 215, 101, 3, 35, 4, 12, 1, 2000, 0, 0, 2000),
-	(130, 2, '10104778', '', '', 'Puros Tripa Larga', '2021-05-05', 216, 101, 2, 5, 4, 11, 1, 700, 0, 0, 700),
-	(131, 1, '10104816', '', '', 'Puros Tripa Larga', '2021-05-05', 215, 51, 4, 2, 2, 11, 1, 10000, 0, 0, 10000),
-	(132, 1, '10104817', '', '', NULL, '2021-05-05', 215, 234, 4, 2, 5, 11, 1, 10000, 0, 0, 10000),
-	(133, 1, '10104912', '', '', 'Puros Tripa Larga', '2021-05-05', 212, 51, 2, 1, 5, 23, 1, 14300, 0, 0, 14300),
-	(134, 1, '10105005', '', '', 'Puros Tripa Larga', '2021-05-05', 235, 232, 5, 4, 2, 7, 1, 400, 0, 0, 400),
-	(135, 1, '10105550', '', '', 'Puros Tripa Corta', '2021-05-05', 225, 227, 1, 1, 2, 10, 1, 6000, 0, 0, 6000),
-	(136, 1, '10105551', '', '', 'Puros Tripa Corta', '2021-05-05', 225, 227, 4, 2, 2, 10, 1, 6000, 0, 0, 6000),
-	(137, 1, '10105555', '', '', 'Puros Tripa Corta', '2021-05-05', 225, 227, 1, 1, 1, 10, 1, 2000, 0, 0, 2000),
-	(138, 1, '10105556', '', '', 'Puros Tripa Corta', '2021-05-05', 225, 227, 4, 2, 1, 10, 1, 2000, 0, 0, 2000),
-	(139, 1, '10105560', '', '', 'Puros Tripa Corta', '2021-05-05', 225, 227, 1, 1, 6, 10, 1, 2000, 0, 0, 2000),
-	(140, 1, '10105561', '', '', 'Puros Tripa Corta', '2021-05-05', 225, 227, 4, 2, 6, 10, 1, 2000, 0, 0, 2000),
-	(141, 1, '10105565', '', '', 'Puros Tripa Corta', '2021-05-05', 225, 227, 1, 1, 5, 10, 1, 2000, 0, 0, 2000),
-	(142, 1, '10105566', '', '', 'Puros Tripa Corta', '2021-05-05', 225, 227, 4, 2, 5, 10, 1, 2000, 0, 0, 2000),
-	(143, 2, '10499015', '', '', NULL, '2021-05-05', 220, 204, 3, 3, 3, 11, 1, NULL, 0, 0, NULL),
-	(144, 2, '10499060', '', '', NULL, '2021-05-05', 220, 197, 1, 6, 3, 11, 1, NULL, 0, 0, NULL),
-	(145, 1, '10603007', '', '', NULL, '2021-05-05', 250, 145, 36, 57, 6, 10, 1, 1000, 0, 0, 1000),
-	(146, 3, '10610017', '', '', 'Puros Tripa Larga', '2021-05-05', 223, 162, 9, 11, 5, 22, 4, 750, 0, 0, 750),
-	(147, 3, '10610018', '', '', 'Puros Tripa Larga', '2021-05-05', 223, 162, 9, 11, 2, 22, 4, 750, 0, 0, 750),
-	(148, 3, '10610019', '', '', NULL, '2021-05-05', 223, 162, 4, 2, 5, 22, 4, 750, 0, 0, 750),
-	(149, 3, '10610020', '', '', NULL, '2021-05-05', 223, 162, 4, 2, 2, 22, 4, 1500, 0, 0, 1500),
-	(150, 3, '11707003', '', '', 'Puros Tripa Larga', '2021-05-05', 228, 138, 15, 48, 6, 17, 4, 32000, 0, 0, 32000),
-	(151, 3, '11710050', '', '', NULL, '2021-05-05', 218, 183, 2, 1, 3, 7, 1, 1000, 0, 0, 1000),
-	(152, 3, '11710052', '', '', 'Puros Tripa Larga', '2021-05-05', 218, 183, 16, 14, 3, 7, 1, 2000, 0, 0, 2000),
-	(153, 3, '11710055', '', '', NULL, '2021-05-05', 219, 183, 2, 1, 3, 12, 1, 2000, 0, 0, 2000),
-	(154, 3, '11803000', '', '', 'Puros Tripa Larga', '2021-05-05', 218, 132, 2, 1, 6, 7, 1, 4000, 0, 0, 4000),
-	(155, 3, '11803002', '', '', 'Puros Tripa Larga', '2021-05-05', 219, 132, 2, 1, 6, 12, 1, 3000, 0, 0, 3000),
-	(156, 3, '11812002', '', '', NULL, '2021-05-05', 218, 132, 9, 11, 6, 7, 1, 2000, 0, 0, 2000),
-	(157, 3, '11812008', '', '', 'Puros Tripa Larga', '2021-05-05', 219, 132, 31, 4, 6, 12, 1, 2000, 0, 0, 2000),
-	(158, 3, '11812010', '', '', 'Puros Tripa Larga', '2021-05-05', 219, 132, 4, 2, 6, 12, 1, 5000, 0, 0, 5000),
-	(159, 3, '12002998', '', '', 'Puros Tripa Larga', '2021-05-05', 219, 133, 4, 2, 2, 12, 1, 4000, 0, 0, 4000),
-	(160, 3, '12002999', '', '', NULL, '2021-05-05', 219, 133, 4, 2, 5, 12, 1, 6000, 0, 0, 6000),
-	(161, 3, '12003001', '', '', 'Puros Tripa Larga', '2021-05-05', 219, 133, 2, 1, 5, 12, 1, 2000, 0, 0, 2000),
-	(162, 3, '12003002', '', '', 'Puros Tripa Larga', '2021-05-05', 218, 133, 2, 1, 2, 7, 1, 1000, 0, 0, 1000),
-	(163, 3, '12003003', '', '', 'Puros Tripa Larga', '2021-05-05', 218, 133, 2, 1, 5, 7, 1, 1000, 0, 0, 1000),
-	(164, 3, '12003005', '', '', NULL, '2021-05-05', 218, 133, 22, 34, 5, 7, 1, 1000, 0, 0, 1000),
-	(165, 3, '12003007', '', '', 'Puros Tripa Larga', '2021-05-05', 218, 133, 22, 34, 2, 7, 1, 1000, 0, 0, 1000),
-	(166, 3, '12003050', '', '', 'Puros Tripa Larga', '2021-05-05', 218, 105, 4, 2, 1, 7, 1, 4000, 0, 0, 4000),
-	(167, 3, '12003051', '', '', 'Puros Tripa Larga', '2021-05-05', 218, 105, 4, 14, 1, 7, 1, 2000, 0, 0, 2000),
-	(168, 3, '12003060', '', '', 'Puros Tripa Larga', '2021-05-05', 219, 105, 4, 2, 1, 12, 1, 6000, 0, 0, 6000),
-	(169, 3, '12003061', '', '', 'Puros Tripa Larga', '2021-05-05', 219, 105, 9, 11, 1, 12, 1, 2000, 0, 0, 2000),
-	(170, 3, '12003062', '', '', 'Puros Tripa Larga', '2021-05-05', 219, 105, 4, 14, 1, 12, 1, 1000, 0, 0, 1000),
-	(171, 3, '12004000', '', '', 'Puros Tripa Larga', '2021-05-05', 218, 133, 4, 2, 2, 7, 1, 2000, 0, 0, 2000),
-	(172, 3, '12004001', '', '', NULL, '2021-05-05', 218, 133, 4, 2, 5, 7, 1, 2000, 0, 0, 2000),
-	(173, 3, '12005003', '', '', 'Puros Tripa Larga', '2021-05-05', 218, 133, 9, 11, 2, 7, 1, 2000, 0, 0, 2000),
-	(174, 3, '12104000', '', '', NULL, '2021-05-05', 218, 134, 3, 3, 5, 7, 1, 2400, 0, 0, 2400),
-	(175, 3, '12301000', '', '', NULL, '2021-05-05', 218, 135, 19, 25, 3, 7, 1, 2000, 0, 0, 2000),
-	(176, 3, '12303000', '', '', 'Puros Tripa Larga', '2021-05-05', 218, 135, 2, 1, 3, 7, 1, 2000, 0, 0, 2000),
-	(177, 1, '12503003', '', '', NULL, '2021-05-05', 240, 63, 4, 2, 1, 7, 1, 800, 0, 0, 800),
-	(178, 1, '12503005', '', '', NULL, '2021-05-05', 240, 63, 19, 30, 2, 7, 1, 800, 0, 0, 800),
-	(179, 1, '12503010', '', '', 'Puros Tripa Larga', '2021-05-05', 240, 63, 1, 1, 1, 7, 1, 800, 0, 0, 800),
-	(180, 4, '12506001', '', '', 'Puros Tripa Larga', '2021-05-05', 213, 61, 4, 2, 1, 16, 1, 200, 0, 0, 200),
-	(181, 1, '12506010', '', '', 'Puros Tripa Larga', '2021-05-05', 214, 61, 4, 2, 1, 12, 1, 625, 0, 0, 625),
-	(182, 2, '12506011', '', '', 'Puros Tripa Larga', '2021-05-05', 245, 61, 4, 14, 1, 12, 1, 1000, 0, 0, 1000),
-	(183, 1, '12506012', '', '', 'Puros Tripa Larga', '2021-05-05', 215, 61, 4, 2, 1, 11, 1, 10000, 0, 0, 10000),
-	(184, 1, '12506020', '', '', 'Puros Tripa Larga', '2021-05-05', 212, 61, 4, 2, 1, 7, 1, 3200, 0, 0, 3200),
-	(185, 1, '12506021', '', '', 'Puros Tripa Larga', '2021-05-05', 212, 61, 4, 14, 1, 7, 1, 3200, 0, 0, 3200),
-	(186, 4, '12506021', '', '', 'Puros Tripa Larga', '2021-05-05', 222, 61, 4, 14, 1, 7, 1, 80, 0, 0, 80),
-	(187, 3, '13403010', '', '', 'Puros Tripa Larga', '2021-05-05', 219, 135, 3, 2, 3, 12, 1, 6000, 0, 0, 6000),
-	(188, 2, '14399005', '', '', NULL, '2021-05-05', 220, 147, 2, 6, 3, 11, 1, 400, 0, 0, 400),
-	(189, 2, '14399006', '', '', 'Puros Tripa Larga', '2021-05-05', 220, 147, 3, 3, 3, 11, 1, 4000, 0, 0, 4000),
-	(190, 2, '14399010', '', '', 'Puros Tripa Larga', '2021-05-05', 220, 147, 9, 11, 3, 11, 1, 1500, 0, 0, 1500),
-	(191, 1, '15003000', '', '', 'Puros Tripa Larga', '2021-05-05', 229, 184, 24, 6, 2, 7, 1, 2000, 0, 0, 2000),
-	(192, 1, '15004001', '', '', 'Puros Tripa Larga', '2021-05-05', 229, 184, 5, 51, 2, 7, 1, 2000, 0, 0, 2000),
-	(193, 1, '20005000', '', '', 'Puros Tripa Larga', '2021-05-05', 212, 90, 1, 6, 3, 7, 1, 4000, 0, 0, 4000),
-	(194, 4, '20005000', '', '', 'Puros Tripa Larga', '2021-05-05', 213, 90, 1, 6, 3, 7, 1, 380, 0, 0, 380),
-	(195, 4, '20005000', '', '', 'Puros Tripa Larga', '2021-05-05', 222, 90, 1, 6, 3, 7, 1, 200, 0, 0, 200),
-	(196, 1, '20005001', '', '', 'Puros Tripa Larga', '2021-05-05', 212, 90, 3, 3, 3, 7, 3, 8000, 0, 0, 8000),
-	(197, 1, '20005002', '', '', 'Puros Tripa Larga', '2021-05-05', 212, 90, 3, 21, 3, 7, 3, 4800, 0, 0, 4800),
-	(198, 1, '20005005', '', '', 'Puros Tripa Larga', '2021-05-05', 212, 90, 34, 52, 3, 7, 1, 400, 0, 0, 400),
-	(199, 2, '20005006', '', '', 'Puros Tripa Larga', '2021-05-05', 215, 90, 3, 3, 3, 11, 1, 25000, 0, 0, 25000),
-	(200, 1, '20005007', '', '', 'Puros Tripa Larga', '2021-05-05', 212, 90, 9, 26, 3, 7, 1, 1200, 0, 0, 1200),
-	(201, 4, '20005007', '', '', 'Puros Tripa Larga', '2021-05-05', 222, 90, 9, 26, 3, 7, 1, 200, 0, 0, 200),
-	(202, 2, '20005016', '', '', 'Puros Tripa Larga', '2021-05-05', 220, 90, 1, 6, 3, 11, 1, 40000, 0, 0, 40000),
-	(203, 4, '20018002', '', '', 'Puros Tripa Larga', '2021-05-05', 244, 113, 9, 11, 1, 7, 1, 600, 0, 0, 600),
-	(204, 2, '20018021', '', '', 'Puros Tripa Larga', '2021-05-05', 214, 113, 3, 2, 1, 12, 1, 1250, 0, 0, 1250),
-	(205, 2, '20018022', '', '', 'Puros Tripa Larga', '2021-05-05', 214, 113, 9, 11, 1, 12, 1, 1250, 0, 0, 1250),
-	(206, 2, '40503003', '', '', 'Puros Tripa Larga', '2021-05-05', 229, 61, 18, 24, 1, 7, 1, 10000, 0, 0, 10000),
-	(207, 2, '40503004', '', '', NULL, '2021-05-05', 229, 99, 18, 80, 6, 7, 1, 10000, 0, 0, 10000),
-	(208, 2, '40503005', '', '', 'Puros Tripa Larga', '2021-05-05', 229, 51, 18, 80, 3, 7, 1, 10000, 0, 0, 10000),
-	(209, 2, '40503014', '', '', 'Puros Tripa Larga', '2021-05-05', 229, 61, 18, 24, 1, 11, 1, 2500, 0, 0, 2500),
-	(210, 2, '40503015', '', '', NULL, '2021-05-05', 229, 99, 18, 80, 6, 11, 1, 2500, 0, 0, 2500),
-	(211, 2, '40503016', '', '', 'Puros Tripa Larga', '2021-05-05', 229, 51, 18, 80, 3, 11, 1, 2500, 0, 0, 2500),
-	(212, 2, '40503020', '', '', 'Puros Tripa Larga', '2021-05-05', 229, 61, 18, 24, 1, 9, 1, 3000, 0, 0, 3000),
-	(213, 2, '40503021', '', '', NULL, '2021-05-05', 229, 99, 18, 80, 6, 9, 1, 3000, 0, 0, 3000),
-	(214, 2, '40503022', '', '', 'Puros Tripa Larga', '2021-05-05', 229, 51, 18, 80, 3, 9, 1, 3000, 0, 0, 3000),
-	(215, 2, '41112001', '', '', NULL, '2021-05-05', 220, 59, 22, 74, 1, 11, 1, 200, 0, 0, 200),
-	(216, 2, '47705002', '', '', 'Puros Tripa Larga', '2021-05-05', 220, 168, 3, 14, 6, 11, 1, 7500, 0, 0, 7500),
-	(217, 2, '47801002', '', '', 'Puros Tripa Larga', '2021-05-05', 220, 168, 3, 14, 6, 7, 1, 1200, 0, 0, 1200),
-	(218, 2, '47801004', '', '', 'Puros Tripa Larga', '2021-05-05', 220, 168, 5, 4, 6, 7, 1, 2000, 0, 0, 2000),
-	(219, 2, '47801040', '', '', NULL, '2021-05-05', 246, 148, 4, 2, 5, 10, 1, 3000, 0, 0, 3000),
-	(220, 2, '47801042', '', '', NULL, '2021-05-05', 246, 148, 4, 2, 6, 10, 1, 3000, 0, 0, 3000),
-	(221, 2, '47801043', '', '', NULL, '2021-05-05', 246, 148, 4, 2, 1, 10, 1, 3000, 0, 0, 3000),
-	(222, 2, '47801044', '', '', NULL, '2021-05-05', 246, 148, 4, 2, 3, 10, 1, 3000, 0, 0, 3000),
-	(223, 2, '47801420', '', '', 'Puros Tripa Corta', '2021-05-05', 217, 60, 1, 1, 8, 10, 1, 60000, 0, 0, 60000),
-	(224, 2, '47801421', '', '', 'Puros Tripa Corta', '2021-05-05', 217, 60, 4, 2, 8, 10, 1, 60000, 0, 0, 60000),
-	(225, 2, '47801501', '', '', 'Puros Tripa Larga', '2021-05-05', 239, 220, 8, 1, 13, 10, 4, 600, 0, 0, 600),
-	(226, 2, '47801561', '', '', 'Puros Tripa Corta', '2021-05-05', 217, 166, 4, 2, 1, 10, 1, 60000, 0, 0, 60000),
-	(227, 2, '47801563', '', '', 'Puros Tripa Corta', '2021-05-05', 217, 166, 4, 2, 2, 10, 1, 60000, 0, 0, 60000),
-	(228, 2, '47801890', '', '', 'Puros Tripa Larga', '2021-05-05', 220, 57, 2, 1, 1, 9, 1, 1400, 0, 0, 1400),
-	(229, 2, '47801892', '', '', 'Puros Tripa Larga', '2021-05-05', 220, 57, 9, 16, 1, 9, 1, 1600, 0, 0, 1600),
-	(230, 1, '603004002', '', '', 'Puros Tripa Larga', '2021-05-05', 212, 88, 4, 3, 1, 7, 1, 1200, 0, 0, 1200),
-	(231, 4, '603004002', '', '', 'Puros Tripa Larga', '2021-05-05', 213, 88, 4, 3, 1, 7, 1, 240, 0, 0, 240),
-	(232, 1, '603004004', '', '', 'Puros Tripa Larga', '2021-05-05', 212, 88, 17, 23, 1, 7, 1, 400, 0, 0, 400),
-	(233, 2, '603004023', '', '', 'Puros Tripa Larga', '2021-05-05', 214, 88, 4, 3, 1, 12, 1, 1250, 0, 0, 1250),
-	(234, 2, '603004023', '', '', 'Puros Tripa Larga', '2021-05-05', 215, 88, 4, 3, 1, 12, 1, 5000, 0, 0, 5000),
-	(235, 2, '603004031', '', '', 'Puros Tripa Larga', '2021-05-05', 216, 88, 4, 3, 1, 11, 1, 750, 0, 0, 750),
-	(236, 2, '603004050', '', '', 'Puros Tripa Larga', '2021-05-05', 216, 88, 4, 3, 13, 11, 1, 3000, 0, 0, 3000),
-	(237, 1, '603005750', '', '', 'Puros Tripa Larga', '2021-05-05', 212, 92, 2, 1, 1, 4, 1, 600, 0, 0, 600),
-	(238, 1, '603005751', '', '', 'Puros Tripa Larga', '2021-05-05', 212, 92, 4, 2, 1, 4, 1, 1200, 0, 0, 1200),
-	(239, 1, '603005752', '', '', 'Puros Tripa Larga', '2021-05-05', 212, 92, 9, 11, 1, 4, 1, 400, 0, 0, 400),
-	(240, 2, '6030066060', '', '', 'Puros Tripa Larga', '2021-05-05', 217, 56, 4, 2, 3, 9, 1, 5000, 0, 0, 5000),
-	(241, 1, '9900004000', '', '', 'Puros Tripa Larga', '2021-05-05', 230, 94, 9, 16, 2, 7, 1, 2000, 0, 0, 2000),
-	(242, 1, '9900004002', '', '', 'Puros Tripa Larga', '2021-05-05', 230, 94, 2, 1, 2, 7, 1, 2000, 0, 0, 2000),
-	(243, 1, '9900004003', '', '', 'Puros Tripa Larga', '2021-05-05', 230, 94, 25, 2, 2, 7, 1, 2000, 0, 0, 2000),
-	(244, 1, '9900004005', '', '', 'Puros Tripa Larga', '2021-05-05', 232, 94, 25, 2, 2, 10, 1, 1000, 0, 0, 1000),
-	(245, 1, '9900004011', '', '', 'Puros Tripa Larga', '2021-05-05', 230, 228, 2, 1, 1, 7, 1, 2000, 0, 0, 2000),
-	(246, 1, '9900004012', '', '', 'Puros Tripa Larga', '2021-05-05', 230, 228, 3, 2, 1, 7, 1, 3000, 0, 0, 3000),
-	(247, 1, '9900004016', '', '', 'Puros Tripa Larga', '2021-05-05', 232, 228, 2, 1, 1, 10, 1, 1000, 0, 0, 1000),
-	(248, 1, '9900004019', '', '', 'Puros Tripa Larga', '2021-05-05', 230, 53, 2, 1, 1, 7, 1, 3000, 0, 0, 3000),
-	(249, 1, '9900004020', '', '', 'Puros Tripa Larga', '2021-05-05', 230, 53, 3, 2, 1, 7, 1, 4000, 0, 0, 4000),
-	(250, 1, '9900004023', '', '', 'Puros Tripa Larga', '2021-05-05', 232, 53, 3, 2, 1, 10, 1, 1000, 0, 0, 1000),
-	(251, 1, '9900004025', '', '', NULL, '2021-05-05', 230, 230, 9, 16, 1, 7, 1, 2000, 0, 0, 2000),
-	(252, 1, '9900004027', '', '', 'Puros Tripa Larga', '2021-05-05', 230, 230, 2, 1, 1, 7, 1, 2000, 0, 0, 2000),
-	(253, 1, '9900004028', '', '', 'Puros Tripa Larga', '2021-05-05', 230, 230, 3, 2, 1, 7, 1, 4000, 0, 0, 4000),
-	(254, 1, '9900004030', '', '', 'Puros Tripa Larga', '2021-05-05', 231, 230, 2, 1, 1, 10, 1, 2000, 0, 0, 2000),
-	(255, 1, '9900004031', '', '', 'Puros Tripa Larga', '2021-05-05', 232, 230, 3, 2, 1, 10, 1, 1000, 0, 0, 1000),
-	(256, 1, '9900004035', '', '', 'Puros Tripa Larga', '2021-05-05', 230, 229, 9, 16, 3, 7, 1, 2000, 0, 0, 2000),
-	(257, 1, '9900004037', '', '', 'Puros Tripa Larga', '2021-05-05', 230, 229, 2, 1, 3, 7, 1, 3000, 0, 0, 3000),
-	(258, 1, '9900004038', '', '', 'Puros Tripa Larga', '2021-05-05', 230, 229, 3, 2, 3, 7, 1, 5000, 0, 0, 5000),
-	(259, 1, '9900004039', '', '', 'Puros Tripa Larga', '2021-05-05', 233, 229, 2, 1, 3, 10, 1, 4000, 0, 0, 4000),
-	(260, 1, '9900004040', '', '', 'Puros Tripa Larga', '2021-05-05', 232, 229, 3, 2, 3, 10, 1, 1000, 0, 0, 1000),
-	(261, 1, '9900009110', '', '', 'Puros Tripa Larga', '2021-05-05', 230, 93, 2, 79, 2, 7, 1, 2000, 0, 0, 2000),
-	(262, 1, '9900009111', '', '', 'Puros Tripa Larga', '2021-05-05', 230, 93, 3, 27, 2, 7, 1, 2000, 0, 0, 2000),
-	(263, 1, '9900009115', '', '', 'Puros Tripa Larga', '2021-05-05', 231, 93, 2, 79, 2, 12, 1, 2500, 0, 0, 2500),
-	(264, 1, '9900009117', '', '', 'Puros Tripa Larga', '2021-05-05', 232, 93, 3, 27, 2, 10, 1, 1000, 0, 0, 1000);
+INSERT INTO `pendiente` (`id_pendiente`, `categoria`, `item`, `orden_del_sitema`, `observacion`, `presentacion`, `mes`, `orden`, `marca`, `vitola`, `nombre`, `capa`, `tipo_empaque`, `cello`, `pendiente`, `saldo`, `paquetes`, `unidades`) VALUES
+	(1, 1, '00504006', '', '', 'Puros Tripa Larga', '2021-05-18', 95, 51, 4, 2, 5, 18, 3, 10000, 10000, '100', '100'),
+	(2, 1, '00505006', '', '', 'Puros Tripa Larga', '2021-05-18', 53, 51, 4, 14, 5, 18, 3, 4000, 4000, '100', '40'),
+	(3, 1, '00504041', '', '', 'Puros Tripa Larga', '2021-05-18', 116, 51, 9, 32, 5, 11, 1, 500, 500, '5', '100'),
+	(4, 1, '00508000', '', '', 'Puros Tripa Larga', '2021-05-18', 95, 51, 9, 32, 5, 7, 3, 4000, 4000, '20', '200'),
+	(5, 1, '00508015', '', '', 'Puros Tripa Larga', '2021-05-18', 28, 51, 11, 12, 5, 4, 1, 600, 600, '10', '60'),
+	(6, 1, '00605002', '', '', 'Puros Tripa Larga', '2021-05-18', 95, 51, 14, 17, 5, 13, 3, 5500, 5500, '25', '220'),
+	(7, 1, '00508010', '', '', 'Puros Tripa Larga', '2021-05-18', 53, 51, 21, 33, 5, 19, 1, 1800, 1800, '30', '60'),
+	(8, 1, '00504100', '', '', 'Puros Tripa Larga', '2021-05-18', 123, 51, 2, 1, 5, 7, 1, 4000, 4000, '20', '200'),
+	(9, 1, '00504102', '', '', 'Puros Tripa Larga', '2021-05-18', 66, 51, 22, 34, 5, 7, 1, 400, 400, '20', '20'),
+	(10, 1, '00504002', '', '', 'Puros Tripa Larga', '2021-05-18', 95, 51, 4, 2, 5, 7, 3, 9600, 9600, '20', '480'),
+	(11, 1, '00505002', '', '', 'Puros Tripa Larga', '2021-05-18', 66, 51, 4, 14, 5, 7, 3, 3600, 3600, '20', '180'),
+	(12, 1, '10104130', '', '', NULL, '2021-05-18', 223, 51, 6, 67, 5, 7, 1, 500, 500, '20', '25'),
+	(13, 1, '10104817', '', '', NULL, '2021-05-18', 215, 234, 4, 2, 5, 11, 1, 10000, 10000, '5', '2000'),
+	(14, 1, '10515002', '', '', 'Puros Tripa Larga', '2021-05-18', 173, 51, 2, 1, 5, 4, NULL, 200, 200, '10', '20'),
+	(15, 1, '10105565', '', '', 'Puros Tripa Corta', '2021-05-18', 225, 227, 1, 1, 5, 10, 1, 2000, 2000, '20', '100'),
+	(16, 1, '10105566', '', '', 'Puros Tripa Corta', '2021-05-18', 225, 227, 4, 2, 5, 10, 1, 2000, 2000, '20', '100'),
+	(17, 1, '00504007', '', '', 'Puros Tripa Larga', '2021-05-18', 66, 51, 4, 2, 2, 18, 3, 12000, 12000, '100', '120'),
+	(18, 1, '00505007', '', '', 'Puros Tripa Larga', '2021-05-18', 53, 51, 4, 14, 2, 18, 3, 2000, 2000, '100', '20'),
+	(19, 1, '00504042', '', '', 'Puros Tripa Larga', '2021-05-18', 63, 51, 9, 32, 2, 11, 1, 500, 500, '5', '100'),
+	(20, 1, '00508016', '', '', 'Puros Tripa Larga', '2021-05-18', 28, 51, 11, 12, 2, 4, 1, 1000, 1000, '10', '100'),
+	(21, 1, '00605003', '', '', 'Puros Tripa Larga', '2021-05-18', 38, 51, 14, 17, 2, 13, 3, 1500, 1500, '25', '60'),
+	(22, 1, '00508011', '', '', 'Puros Tripa Larga', '2021-05-18', 53, 51, 21, 33, 2, 19, 1, 1200, 1200, '30', '40'),
+	(23, 1, '00508001', '', '', 'Puros Tripa Larga', '2021-05-18', 53, 51, 9, 32, 2, 7, 3, 7200, 7200, '20', '360'),
+	(24, 1, '00504003', '', '', 'Puros Tripa Larga', '2021-05-18', 95, 51, 4, 2, 2, 7, 3, 11600, 11600, '20', '580'),
+	(25, 1, '00505003', '', '', 'Puros Tripa Larga', '2021-05-18', 37, 51, 4, 14, 2, 7, 3, 3200, 3200, '20', '160'),
+	(26, 1, '00504101', '', '', 'Puros Tripa Larga', '2021-05-18', 95, 51, 2, 1, 2, 7, 3, 3600, 3600, '20', '180'),
+	(27, 1, '00504103', '', '', 'Puros Tripa Larga', '2021-05-18', 173, 51, 22, 34, 2, 7, 1, 800, 800, '20', '40'),
+	(28, 1, '10104816', '', '', 'Puros Tripa Larga', '2021-05-18', 188, 51, 4, 2, 2, 11, 1, 10000, 10000, '5', '2000'),
+	(29, 1, '9900009110', '', '', 'Puros Tripa Larga', '2021-05-18', 230, 93, 2, 79, 2, 7, 1, 2000, 2000, '20', '100'),
+	(30, 1, '9900009111', '', '', 'Puros Tripa Larga', '2021-05-18', 56, 93, 3, 27, 2, 7, 1, 2000, 2000, '20', '100'),
+	(31, 1, '9900009117', '', '', 'Puros Tripa Larga', '2021-05-18', 232, 93, 3, 27, 2, 10, 1, 1000, 1000, '20', '50'),
+	(32, 1, '9900009115', '', '', 'Puros Tripa Larga', '2021-05-18', 231, 93, 2, 79, 2, 12, 1, 2500, 2500, '25', '100'),
+	(33, 1, '10105005', '', '', 'Puros Tripa Larga', '2021-05-18', 235, 232, 5, 4, 2, 7, 1, 400, 400, '20', '20'),
+	(34, 1, '9900004000', '', '', 'Puros Tripa Larga', '2021-05-18', 230, 94, 9, 16, 2, 7, 1, 2000, 2000, '20', '100'),
+	(35, 1, '9900004002', '', '', 'Puros Tripa Larga', '2021-05-18', 230, 94, 2, 1, 2, 7, 1, 2000, 2000, '20', '100'),
+	(36, 1, '9900004003', '', '', 'Puros Tripa Larga', '2021-05-18', 230, 94, 25, 2, 2, 7, 1, 2000, 2000, '20', '100'),
+	(37, 1, '9900004005', '', '', 'Puros Tripa Larga', '2021-05-18', 232, 94, 25, 2, 2, 10, 1, 1000, 1000, '20', '50'),
+	(38, 1, '10105550', '', '', 'Puros Tripa Corta', '2021-05-18', 225, 227, 1, 1, 2, 10, 1, 6000, 6000, '20', '300'),
+	(39, 1, '10105551', '', '', 'Puros Tripa Corta', '2021-05-18', 225, 227, 4, 2, 2, 10, 1, 6000, 6000, '20', '300'),
+	(40, 1, '00508020', '', '', 'Puros Tripa Larga', '2021-05-18', 95, 91, 4, 2, 10, 7, 1, 62800, 62800, '20', '3140'),
+	(41, 1, '00508022', '', '', 'Puros Tripa Larga', '2021-05-18', 53, 91, 9, 11, 10, 7, 1, 1200, 1200, '20', '60'),
+	(42, 1, '00401000', '', '', 'Puros Tripa Larga', '2021-05-18', 95, 67, 19, 25, 3, 7, 3, 1200, 1200, '20', '60'),
+	(43, 1, '00403000', '', '', 'Puros Tripa Larga', '2021-05-18', 95, 67, 2, 1, 3, 7, 3, 2800, 2800, '20', '140'),
+	(44, 1, '00404000', '', '', 'Puros Tripa Larga', '2021-05-18', 66, 67, 3, 2, 3, 7, 3, 4400, 4400, '20', '220'),
+	(45, 1, '00405000', '', '', 'Puros Tripa Larga', '2021-05-18', 66, 67, 16, 14, 3, 7, 3, 400, 400, '20', '20'),
+	(46, 1, '00408000', '', '', 'Puros Tripa Larga', '2021-05-18', 66, 67, 9, 40, 3, 7, 3, 400, 400, '20', '20'),
+	(47, 1, '00303007', '', '', 'Puros Tripa Larga', '2021-05-18', 67, 67, 25, 2, 3, 4, 1, 1000, 1000, '10', '100'),
+	(48, 1, '00407000', '', '', 'Puros Tripa Larga', '2021-05-18', 123, 158, 15, 46, 9, 15, 1, 3000, 3000, '50', '60'),
+	(49, 1, '10104111', '', '', 'Puros Tripa Larga', '2021-05-18', 86, 90, 6, 44, 3, 7, 1, 500, 500, '20', '25'),
+	(50, 1, '20005000', '', '', 'Puros Tripa Larga', '2021-05-18', 95, 90, 1, 6, 3, 7, 1, 4000, 4000, '20', '200'),
+	(51, 1, '20005001', '', '', 'Puros Tripa Larga', '2021-05-18', 53, 90, 3, 3, 3, 7, 3, 8000, 8000, '20', '400'),
+	(52, 1, '20005002', '', '', 'Puros Tripa Larga', '2021-05-18', 53, 90, 3, 21, 3, 7, 3, 4800, 4800, '20', '240'),
+	(53, 1, '20005005', '', '', 'Puros Tripa Larga', '2021-05-18', 95, 90, 34, 52, 3, 7, 1, 400, 400, '20', '20'),
+	(54, 1, '20005007', '', '', 'Puros Tripa Larga', '2021-05-18', 53, 90, 9, 26, 3, 7, 1, 1200, 1200, '20', '60'),
+	(55, 1, '20005010', '', '', 'Puros Tripa Larga', '2021-05-18', 95, 90, 3, 35, 3, 4, NULL, 600, 600, '10', '60'),
+	(56, 1, '00505019', '', '', 'Puros Tripa Larga', '2021-05-18', 53, 51, 4, 14, 3, 18, 1, 2000, 2000, '100', '20'),
+	(57, 1, '00504032', '', '', 'Puros Tripa Larga', '2021-05-18', 95, 51, 4, 2, 3, 7, 1, 1600, 1600, '20', '80'),
+	(58, 1, '00504033', '', '', 'Puros Tripa Larga', '2021-05-18', 66, 51, 4, 14, 3, 7, 1, 400, 400, '20', '20'),
+	(59, 1, '00231000', '', '', 'Puros Tripa Larga', '2021-05-18', 39, 62, 15, 18, 3, 15, 1, 10000, 10000, '50', '200'),
+	(60, 1, '9900004035', '', '', 'Puros Tripa Larga', '2021-05-18', 230, 229, 9, 16, 3, 7, 1, 2000, 2000, '20', '100'),
+	(61, 1, '9900004037', '', '', 'Puros Tripa Larga', '2021-05-18', 230, 229, 2, 1, 3, 7, 1, 3000, 3000, '20', '150'),
+	(62, 1, '9900004038', '', '', 'Puros Tripa Larga', '2021-05-18', 230, 229, 3, 2, 3, 7, 1, 5000, 5000, '20', '250'),
+	(63, 1, '9900004039', '', '', 'Puros Tripa Larga', '2021-05-18', 233, 229, 2, 1, 3, 10, 1, 4000, 4000, '20', '200'),
+	(64, 1, '9900004040', '', '', 'Puros Tripa Larga', '2021-05-18', 232, 229, 3, 2, 3, 10, 1, 1000, 1000, '20', '50'),
+	(65, 1, '13105120', '', '', 'Puros Tripa Larga', '2021-05-18', 173, 210, 2, 1, 3, 4, NULL, 400, 400, '10', '40'),
+	(66, 1, '00703001', '', '', 'Puros Tripa Larga', '2021-05-18', 95, 99, 2, 1, 6, 21, 3, 2000, 2000, '50', '40'),
+	(67, 1, '00704001', '', '', 'Puros Tripa Larga', '2021-05-18', 173, 99, 4, 2, 6, 21, 3, 2000, 2000, '50', '40'),
+	(68, 1, '00705001', '', '', 'Puros Tripa Larga', '2021-05-18', 95, 99, 4, 14, 6, 21, 3, 1000, 1000, '50', '20'),
+	(69, 1, '00712001', '', '', 'Puros Tripa Larga', '2021-05-18', 79, 99, 22, 34, 6, 21, 3, 1000, 1000, '50', '20'),
+	(70, 1, '00508002', '', '', 'Puros Tripa Larga', '2021-05-18', 95, 99, 9, 11, 6, 7, 1, 3600, 3600, '20', '180'),
+	(71, 1, '00508017', '', '', NULL, '2021-05-18', 37, 73, 11, 12, 6, 4, 1, 200, 200, '10', '20'),
+	(72, 1, '00703003', '', '', 'Puros Tripa Larga', '2021-05-18', 95, 99, 2, 1, 6, 7, 1, 1600, 1600, '20', '80'),
+	(73, 1, '00712003', '', '', 'Puros Tripa Larga', '2021-05-18', 95, 99, 22, 34, 6, 7, 1, 400, 400, '20', '20'),
+	(74, 1, '00704003', '', '', 'Puros Tripa Larga', '2021-05-18', 122, 99, 4, 2, 6, 7, 1, 2000, 2000, '20', '100'),
+	(75, 1, '00705003', '', '', 'Puros Tripa Larga', '2021-05-18', 95, 99, 4, 14, 6, 7, 1, 1200, 1200, '20', '60'),
+	(76, 1, '00504043', '', '', 'Puros Tripa Larga', '2021-05-18', 201, 99, 9, 11, 6, 11, 1, 500, 500, '5', '100'),
+	(77, 1, '00712004', '', '', 'Puros Tripa Larga', '2021-05-18', 175, 99, 22, 34, 6, 12, 1, 1250, 1250, '25', '50'),
+	(78, 1, '10515004', '', '', NULL, '2021-05-18', 173, 99, 2, 76, 6, 4, NULL, 400, 400, '10', '40'),
+	(79, 1, '10603007', '', '', NULL, '2021-05-18', 115, 145, 36, 57, 6, 10, 1, 1000, 1000, '20', '50'),
+	(80, 1, '00110060', '', '', 'Puros Tripa Larga', '2021-05-18', 234, 231, 2, 1, 6, 7, 1, 200, 200, '20', '10'),
+	(81, 1, '00110061', '', '', NULL, '2021-05-18', 234, 231, 4, 2, 6, 7, 1, 200, 200, '20', '10'),
+	(82, 1, '00110062', '', '', 'Puros Tripa Larga', '2021-05-18', 234, 231, 9, 11, 6, 7, 1, 200, 200, '20', '10'),
+	(83, 1, '00110063', '', '', NULL, '2021-05-18', 234, 231, 22, 34, 6, 7, 1, 200, 200, '20', '10'),
+	(84, 1, '10105560', '', '', 'Puros Tripa Corta', '2021-05-18', 225, 227, 1, 1, 6, 10, 1, 2000, 2000, '20', '100'),
+	(85, 1, '10105561', '', '', 'Puros Tripa Corta', '2021-05-18', 225, 227, 4, 2, 6, 10, 1, 2000, 2000, '20', '100'),
+	(86, 1, '00504150', '', '', 'Puros Tripa Larga', '2021-05-18', 95, 51, 4, 2, 15, 7, 1, 800, 800, '20', '40'),
+	(87, 1, '00508003', '', '', 'Puros Tripa Larga', '2021-05-18', 66, 61, 9, 11, 1, 7, 1, 1200, 1200, '20', '60'),
+	(88, 1, '12506020', '', '', 'Puros Tripa Larga', '2021-05-18', 36, 61, 4, 2, 1, 7, 1, 3200, 3200, '20', '160'),
+	(89, 1, '12506021', '', '', 'Puros Tripa Larga', '2021-05-18', 53, 61, 4, 14, 1, 7, 1, 3200, 3200, '20', '160'),
+	(90, 1, '12506010', '', '', 'Puros Tripa Larga', '2021-05-18', 63, 61, 4, 2, 1, 12, 1, 625, 625, '25', '25'),
+	(91, 1, '12506012', '', '', 'Puros Tripa Larga', '2021-05-18', 50, 61, 4, 2, 1, 11, 1, 10000, 10000, '5', '2000'),
+	(92, 1, '00504252', '', '', 'Puros Tripa Larga', '2021-05-18', 113, 144, 4, 54, 1, 21, 1, 2000, 2000, '50', '40'),
+	(93, 1, '01604010', '', '', 'Puros Tripa Larga', '2021-05-18', 66, 109, 24, 41, 1, 7, 1, 400, 400, '20', '20'),
+	(94, 1, '01604011', '', '', NULL, '2021-05-18', 66, 109, 3, 2, 1, 7, 1, 400, 400, '20', '20'),
+	(95, 1, '01604012', '', '', 'Puros Tripa Larga', '2021-05-18', 173, 109, 28, 14, 1, 7, 1, 400, 400, '20', '20'),
+	(96, 1, '01606675', '', '', 'Puros Tripa Larga', '2021-05-18', 95, 40, 20, 30, 5, 7, 1, 6400, 6400, '20', '320'),
+	(97, 1, '01606678', '', '', 'Puros Tripa Larga', '2021-05-18', 95, 40, 3, 2, 5, 7, 1, 5200, 5200, '20', '260'),
+	(98, 1, '603004002', '', '', 'Puros Tripa Larga', '2021-05-18', 53, 88, 4, 3, 1, 7, 1, 1200, 1200, '20', '60'),
+	(99, 1, '603004004', '', '', 'Puros Tripa Larga', '2021-05-18', 173, 88, 17, 23, 1, 7, 1, 400, 400, '20', '20'),
+	(100, 1, '603005750', '', '', 'Puros Tripa Larga', '2021-05-18', 55, 92, 2, 1, 1, 4, 1, 600, 600, '10', '60'),
+	(101, 1, '603005751', '', '', 'Puros Tripa Larga', '2021-05-18', 55, 92, 4, 2, 1, 4, 1, 1200, 1200, '10', '120'),
+	(102, 1, '603005752', '', '', 'Puros Tripa Larga', '2021-05-18', 53, 92, 9, 11, 1, 4, 1, 400, 400, '10', '40'),
+	(103, 1, '9900004027', '', '', 'Puros Tripa Larga', '2021-05-18', 230, 230, 2, 1, 1, 7, 1, 2000, 2000, '20', '100'),
+	(104, 1, '9900004028', '', '', 'Puros Tripa Larga', '2021-05-18', 230, 230, 3, 2, 1, 7, 1, 4000, 4000, '20', '200'),
+	(105, 1, '9900004025', '', '', NULL, '2021-05-18', 230, 230, 9, 16, 1, 7, 1, 2000, 2000, '20', '100'),
+	(106, 1, '9900004030', '', '', 'Puros Tripa Larga', '2021-05-18', 231, 230, 2, 1, 1, 10, 1, 2000, 2000, '20', '100'),
+	(107, 1, '9900004031', '', '', 'Puros Tripa Larga', '2021-05-18', 232, 230, 3, 2, 1, 10, 1, 1000, 1000, '20', '50'),
+	(108, 1, '9900004019', '', '', 'Puros Tripa Larga', '2021-05-18', 230, 53, 2, 1, 1, 7, 1, 3000, 3000, '20', '150'),
+	(109, 1, '9900004020', '', '', 'Puros Tripa Larga', '2021-05-18', 56, 53, 3, 2, 1, 7, 1, 4000, 4000, '20', '200'),
+	(110, 1, '9900004023', '', '', 'Puros Tripa Larga', '2021-05-18', 232, 53, 3, 2, 1, 10, 1, 1000, 1000, '20', '50'),
+	(111, 1, '00107000', '', '', 'Puros Tripa Larga', '2021-05-18', 105, 141, 15, 53, 9, 15, 1, 9000, 9000, '50', '180'),
+	(112, 1, '9900004011', '', '', 'Puros Tripa Larga', '2021-05-18', 230, 228, 2, 1, 1, 7, 1, 2000, 2000, '20', '100'),
+	(113, 1, '9900004012', '', '', 'Puros Tripa Larga', '2021-05-18', 230, 228, 3, 2, 1, 7, 1, 3000, 3000, '20', '150'),
+	(114, 1, NULL, '', '', NULL, '2021-05-18', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 2000, 2000, '20', '100'),
+	(115, 1, '9900004016', '', '', 'Puros Tripa Larga', '2021-05-18', 231, 228, 2, 1, 1, 10, 1, 1000, 1000, '20', '50'),
+	(116, 1, '12503005', '', '', NULL, '2021-05-18', 240, 63, 19, 30, 2, 7, 1, 800, 800, '20', '40'),
+	(117, 1, '12503003', '', '', NULL, '2021-05-18', 240, 63, 4, 2, 1, 7, 1, 800, 800, '20', '40'),
+	(118, 1, '12503010', '', '', 'Puros Tripa Larga', '2021-05-18', 240, 63, 1, 1, 1, 7, 1, 800, 800, '20', '40'),
+	(119, 1, '10105555', '', '', 'Puros Tripa Corta', '2021-05-18', 225, 227, 1, 1, 1, 10, 1, 2000, 2000, '20', '100'),
+	(120, 1, '10105556', '', '', 'Puros Tripa Corta', '2021-05-18', 225, 227, 4, 2, 1, 10, 1, 2000, 2000, '20', '100'),
+	(121, 1, '10104750', '', '', 'Puros Tripa Larga', '2021-05-18', 124, 101, 2, 5, 4, 7, 1, 2400, 2400, '20', '120'),
+	(122, 1, '10104751', '', '', 'Puros Tripa Larga', '2021-05-18', 53, 101, 3, 35, 4, 7, 1, 4000, 4000, '20', '200'),
+	(123, 1, '10104752', '', '', 'Puros Tripa Larga', '2021-05-18', 53, 101, 16, 36, 4, 7, 1, 800, 800, '20', '40'),
+	(124, 1, '10104754', '', '', 'Puros Tripa Larga', '2021-05-18', 53, 101, 9, 37, 4, 7, 1, 800, 800, '20', '40'),
+	(125, 1, '10104150', '', '', NULL, '2021-05-18', 249, 101, 44, 61, 4, 7, 1, 2000, 2000, '20', '100'),
+	(126, 1, '15003000', '', '', 'Puros Tripa Larga', '2021-05-18', 161, 184, 24, 6, 2, 7, 1, 2000, 2000, '20', '100'),
+	(127, 1, '15004001', '', '', 'Puros Tripa Larga', '2021-05-18', 229, 184, 5, 51, 2, 7, 1, 2000, 2000, '20', '100'),
+	(128, 1, '00110276', '', '', NULL, '2021-05-18', 241, 72, 2, 1, 6, 23, NULL, 500, 500, '5', '100'),
+	(129, 1, '00110275', '', '', 'Puros Tripa Larga', '2021-05-18', 241, 72, 2, 1, 5, 23, NULL, 500, 500, '5', '100'),
+	(130, 1, '00110277', '', '', 'Puros Tripa Larga', '2021-05-18', 241, 72, 2, 1, 2, 23, NULL, 500, 500, '5', '100'),
+	(131, 1, '10104912', '', '', 'Puros Tripa Larga', '2021-05-18', 157, 51, 2, 1, 5, 23, 1, 14300, 14300, '5', '2860'),
+	(132, 1, '00904038', '', '', 'Puros Tripa Larga', '2021-05-18', 36, 51, 4, 2, 2, 14, 1, NULL, NULL, NULL, '420'),
+	(133, 2, '00504026', '', '', 'Puros Tripa Larga', '2021-05-18', 145, 51, 4, 2, 5, 11, 3, 3000, 3000, '5', '600'),
+	(134, 2, '00504009', '', '', 'Puros Tripa Larga', '2021-05-18', 209, 51, 4, 2, 5, 12, 1, 1000, 1000, '25', '40'),
+	(135, 2, '47801040', '', '', NULL, '2021-05-18', 146, 148, 4, 2, 5, 10, 1, 3000, 3000, '20', '150'),
+	(136, 2, '00804065', '', '', NULL, '2021-05-18', 216, 209, 18, 6, 2, 7, 1, 400, 400, '20', '20'),
+	(137, 2, '603004050', '', '', 'Puros Tripa Larga', '2021-05-18', 130, 88, 4, 3, 13, 11, 1, 3000, 3000, '5', '600'),
+	(138, 2, '00904111', '', '', 'Puros Tripa Larga', '2021-05-18', 168, 186, 3, 3, 2, 9, 1, 500, 500, '10', '50'),
+	(139, 2, '01104000', '', '', 'Puros Tripa Larga', '2021-05-18', 34, 59, 4, 3, 2, 13, 3, 1750, 1750, '25', '70'),
+	(140, 2, '01103006', '', '', 'Puros Tripa Larga', '2021-05-18', 181, 59, 4, 3, 2, 11, 1, 2500, 2500, '5', '500'),
+	(141, 2, '01103010', '', '', 'Puros Tripa Larga', '2021-05-18', 184, 59, 38, 68, 2, 11, 1, 1000, 1000, '5', '200'),
+	(142, 2, '47801563', '', '', 'Puros Tripa Corta', '2021-05-18', 217, 166, 4, 2, 2, 10, 1, 60000, 60000, '20', '3000'),
+	(143, 2, '00404005', '', '', 'Puros Tripa Larga', '2021-05-18', 102, 67, 3, 2, 3, 12, 1, 5000, 5000, '25', '200'),
+	(144, 2, '00408003', '', '', 'Puros Tripa Larga', '2021-05-18', 215, 67, 9, 40, 3, 12, 1, 7500, 7500, '25', '300'),
+	(145, 2, '20005006', '', '', 'Puros Tripa Larga', '2021-05-18', 188, 90, 3, 3, 3, 11, 1, 25000, 25000, '5', '5000'),
+	(146, 2, '20005016', '', '', 'Puros Tripa Larga', '2021-05-18', 130, 90, 1, 6, 3, 11, 1, 40000, 40000, '5', '8000'),
+	(147, 2, '00504048', '', '', 'Puros Tripa Larga', '2021-05-18', 108, 51, 4, 2, 3, 11, 1, 5000, 5000, '5', '1000'),
+	(148, 2, '00504048', '', '', 'Puros Tripa Larga', '2021-05-18', 108, 51, 4, 2, 3, 11, 1, 500, 500, '5', '100'),
+	(149, 2, '40503005', '', '', 'Puros Tripa Larga', '2021-05-18', 229, 51, 18, 80, 3, 7, 1, 10000, 10000, '20', '500'),
+	(150, 2, '40503022', '', '', 'Puros Tripa Larga', '2021-05-18', 229, 51, 18, 80, 3, 9, 1, 3000, 3000, '10', '300'),
+	(151, 2, '40503016', '', '', 'Puros Tripa Larga', '2021-05-18', 229, 51, 18, 80, 3, 11, 1, 2500, 2500, '5', '500'),
+	(152, 2, '6030066060', '', '', 'Puros Tripa Larga', '2021-05-18', 217, 56, 4, 2, 3, 9, 1, 5000, 5000, '10', '500'),
+	(153, 2, '47801044', '', '', NULL, '2021-05-18', 146, 148, 4, 2, 3, 10, 1, 3000, 3000, '20', '150'),
+	(154, 2, '14399005', '', '', NULL, '2021-05-18', 184, 147, 2, 6, 3, 11, 1, 400, 400, '5', '80'),
+	(155, 2, '14399006', '', '', 'Puros Tripa Larga', '2021-05-18', 181, 147, 3, 3, 3, 11, 1, 4000, 4000, '5', '800'),
+	(156, 2, '14399010', '', '', 'Puros Tripa Larga', '2021-05-18', 184, 147, 9, 11, 3, 11, 1, 1500, 1500, '5', '300'),
+	(157, 2, '47801501', '', '', 'Puros Tripa Larga', '2021-05-18', 171, 220, 8, 1, 13, 10, 4, 600, 600, '20', '30'),
+	(158, 2, '40503004', '', '', 'Puros Tripa Larga', '2021-05-18', 229, 99, 18, 80, 6, 7, 1, 10000, 10000, '20', '500'),
+	(159, 2, '40503021', '', '', NULL, '2021-05-18', 229, 99, 18, 80, 6, 9, 1, 3000, 3000, '10', '300'),
+	(160, 2, '40503015', '', '', NULL, '2021-05-18', 229, 99, 18, 80, 6, 11, 1, 2500, 2500, '5', '500'),
+	(161, 2, '00704004', '', '', 'Puros Tripa Larga', '2021-05-18', 87, 99, 4, 2, 6, 12, 1, 20000, 20000, '25', '800'),
+	(162, 2, '47801004', '', '', 'Puros Tripa Larga', '2021-05-18', 181, 168, 5, 4, 6, 7, 1, 2000, 2000, '20', '100'),
+	(163, 2, '47801002', '', '', 'Puros Tripa Larga', '2021-05-18', 181, 168, 3, 14, 6, 7, 1, 1200, 1200, '20', '60'),
+	(164, 2, '47705002', '', '', 'Puros Tripa Larga', '2021-05-18', 220, 168, 3, 14, 6, 11, 1, 7500, 7500, '5', '1500'),
+	(165, 2, '01606872', '', '', 'Puros Tripa Larga', '2021-05-18', 31, 56, 4, 2, 6, 11, 1, 2500, 2500, '5', '500'),
+	(166, 2, '47801042', '', '', NULL, '2021-05-18', 119, 148, 4, 2, 6, 10, 1, 3000, 3000, '20', '150'),
+	(167, 2, '40503003', '', '', 'Puros Tripa Larga', '2021-05-18', 229, 61, 18, 24, 1, 7, 1, 10000, 10000, '20', '500'),
+	(168, 2, '40503020', '', '', 'Puros Tripa Larga', '2021-05-18', 229, 61, 18, 24, 1, 9, 1, 3000, 3000, '10', '300'),
+	(169, 2, '40503014', '', '', 'Puros Tripa Larga', '2021-05-18', 229, 61, 18, 24, 1, 11, 1, 2500, 2500, '5', '500'),
+	(170, 2, '12506011', '', '', 'Puros Tripa Larga', '2021-05-18', 63, 61, 4, 14, 1, 12, 1, 1000, 1000, '25', '40'),
+	(171, 2, '603004023', '', '', 'Puros Tripa Larga', '2021-05-18', 96, 88, 4, 3, 1, 12, 1, 1250, 1250, '25', '50'),
+	(172, 2, '603004023', '', '', 'Puros Tripa Larga', '2021-05-18', 96, 88, 4, 3, 1, 12, 1, 5000, 5000, '25', '200'),
+	(173, 2, '603004031', '', '', 'Puros Tripa Larga', '2021-05-18', 176, 88, 4, 3, 1, 11, 1, 750, 750, '5', '150'),
+	(174, 2, '20018021', '', '', 'Puros Tripa Larga', '2021-05-18', 214, 113, 3, 2, 1, 12, 1, 1250, 1250, '25', '50'),
+	(175, 2, '20018022', '', '', 'Puros Tripa Larga', '2021-05-18', 214, 113, 9, 11, 1, 12, 1, 1250, 1250, '25', '50'),
+	(176, 2, '01103004', '', '', 'Puros Tripa Larga', '2021-05-18', 181, 59, 1, 6, 18, 11, 1, 325, 325, '5', '65'),
+	(177, 2, '41112001', '', '', NULL, '2021-05-18', 184, 59, 22, 74, 1, 11, 1, 200, 200, '5', '40'),
+	(178, 2, '47801420', '', '', 'Puros Tripa Corta', '2021-05-18', 88, 60, 1, 1, 8, 10, 1, 60000, 60000, '20', '3000'),
+	(179, 2, '47801421', '', '', 'Puros Tripa Corta', '2021-05-18', 35, 60, 4, 2, 8, 10, 1, 60000, 60000, '20', '3000'),
+	(180, 2, '47801561', '', '', 'Puros Tripa Corta', '2021-05-18', 217, 166, 4, 2, 1, 10, 1, 60000, 60000, '20', '3000'),
+	(181, 2, '47801043', '', '', NULL, '2021-05-18', 146, 148, 4, 2, 1, 10, 1, 3000, 3000, '20', '150'),
+	(182, 2, '47801890', '', '', 'Puros Tripa Larga', '2021-05-18', 147, 57, 2, 1, 1, 9, 1, 1400, 1400, '10', '140'),
+	(183, 2, '47801892', '', '', 'Puros Tripa Larga', '2021-05-18', 32, 57, 9, 16, 1, 9, 1, 1600, 1600, '10', '160'),
+	(184, 2, '10104775', '', '', 'Puros Tripa Larga', '2021-05-18', 78, 101, 3, 35, 4, 12, 1, 2000, 2000, '25', '80'),
+	(185, 2, '10104772', '', '', 'Puros Tripa Larga', '2021-05-18', 214, 101, 5, 38, 4, 12, 1, 1250, 1250, '25', '50'),
+	(186, 2, '10104778', '', '', 'Puros Tripa Larga', '2021-05-18', 130, 101, 2, 5, 4, 11, 1, 700, 700, '5', '140'),
+	(187, 2, '10499060', '', '', NULL, '2021-05-18', 183, 197, 1, 6, 3, 11, 1, NULL, NULL, NULL, '1000'),
+	(188, 2, '10499015', '', '', NULL, '2021-05-18', 181, 204, 3, 3, 3, 11, 1, NULL, NULL, NULL, '500'),
+	(189, 2, '10499010', '', '', 'Puros Tripa Corta', '2021-05-18', 147, 176, 4, 2, 6, 25, 1, NULL, NULL, NULL, '2000'),
+	(190, 3, '12104000', '', '', NULL, '2021-05-18', 218, 134, 3, 3, 5, 7, 1, 2400, 2400, '20', '120'),
+	(191, 3, '11803000', '', '', 'Puros Tripa Larga', '2021-05-18', 218, 132, 2, 1, 6, 7, 1, 4000, 4000, '20', '200'),
+	(192, 3, '11812002', '', '', NULL, '2021-05-18', 90, 132, 9, 11, 6, 7, 1, 2000, 2000, '20', '100'),
+	(193, 3, '11812010', '', '', 'Puros Tripa Larga', '2021-05-18', 219, 132, 4, 2, 6, 12, 1, 5000, 5000, '25', '200'),
+	(194, 3, '11803002', '', '', 'Puros Tripa Larga', '2021-05-18', 219, 132, 2, 1, 6, 12, 1, 3000, 3000, '25', '120'),
+	(195, 3, '11812008', '', '', 'Puros Tripa Larga', '2021-05-18', 219, 132, 31, 4, 6, 12, 1, 2000, 2000, '25', '80'),
+	(196, 3, '11710050', '', '', NULL, '2021-05-18', 218, 183, 2, 1, 3, 7, 1, 1000, 1000, '20', '50'),
+	(197, 3, '11710052', '', '', 'Puros Tripa Larga', '2021-05-18', 156, 183, 16, 14, 3, 7, 1, 2000, 2000, '20', '100'),
+	(198, 3, '11710055', '', '', NULL, '2021-05-18', 219, 183, 2, 1, 3, 12, 1, 2000, 2000, '25', '80'),
+	(199, 3, '12301000', '', '', NULL, '2021-05-18', 218, 135, 19, 25, 3, 7, 1, 2000, 2000, '20', '100'),
+	(200, 3, '12303000', '', '', 'Puros Tripa Larga', '2021-05-18', 218, 135, 2, 1, 3, 7, 1, 2000, 2000, '20', '100'),
+	(201, 3, '13403010', '', '', 'Puros Tripa Larga', '2021-05-18', 219, 135, 3, 2, 3, 12, 1, 6000, 6000, '25', '240'),
+	(202, 3, '12003050', '', '', 'Puros Tripa Larga', '2021-05-18', 94, 105, 4, 2, 1, 7, 1, 4000, 4000, '20', '200'),
+	(203, 3, '12003051', '', '', 'Puros Tripa Larga', '2021-05-18', 94, 105, 4, 14, 1, 7, 1, 2000, 2000, '20', '100'),
+	(204, 3, '12003061', '', '', 'Puros Tripa Larga', '2021-05-18', 219, 105, 9, 11, 1, 12, 1, 2000, 2000, '25', '80'),
+	(205, 3, '12003062', '', '', 'Puros Tripa Larga', '2021-05-18', 219, 105, 4, 14, 1, 12, 1, 1000, 1000, '25', '40'),
+	(206, 3, '12003060', '', '', 'Puros Tripa Larga', '2021-05-18', 219, 105, 4, 2, 1, 12, 1, 6000, 6000, '25', '240'),
+	(207, 3, '12003001', '', '', 'Puros Tripa Larga', '2021-05-18', 219, 133, 2, 1, 5, 12, 1, 2000, 2000, '25', '80'),
+	(208, 3, '12002998', '', '', 'Puros Tripa Larga', '2021-05-18', 219, 133, 4, 2, 2, 12, 1, 4000, 4000, '25', '160'),
+	(209, 3, '12002999', '', '', NULL, '2021-05-18', 219, 133, 4, 2, 5, 12, 1, 6000, 6000, '25', '240'),
+	(210, 3, '12004001', '', '', NULL, '2021-05-18', 218, 133, 4, 2, 5, 7, 1, 2000, 2000, '20', '100'),
+	(211, 3, '12004000', '', '', 'Puros Tripa Larga', '2021-05-18', 218, 133, 4, 2, 2, 7, 1, 2000, 2000, '20', '100'),
+	(212, 3, '12003003', '', '', 'Puros Tripa Larga', '2021-05-18', 218, 133, 2, 1, 5, 7, 1, 1000, 1000, '20', '50'),
+	(213, 3, '12003002', '', '', 'Puros Tripa Larga', '2021-05-18', 218, 133, 2, 1, 2, 7, 1, 1000, 1000, '20', '50'),
+	(214, 3, '12003005', '', '', NULL, '2021-05-18', 91, 133, 22, 34, 5, 7, 1, 1000, 1000, '20', '50'),
+	(215, 3, '12003007', '', '', 'Puros Tripa Larga', '2021-05-18', 91, 133, 22, 34, 2, 7, 1, 1000, 1000, '20', '50'),
+	(216, 3, '12005003', '', '', 'Puros Tripa Larga', '2021-05-18', 91, 133, 9, 11, 2, 7, 1, 2000, 2000, '20', '100'),
+	(217, 3, '11707003', '', '', 'Puros Tripa Larga', '2021-05-18', 73, 138, 15, 48, 6, 17, 4, 32000, 32000, '40', '800'),
+	(218, 3, '09906000', '', '', 'Puros Tripa Larga', '2021-05-18', 183, 219, 3, 3, 3, 24, 4, 360, 360, '12', '30'),
+	(219, 3, '09906012', '', '', NULL, '2021-05-18', 206, 181, 4, 2, 6, 20, 4, 1920, 1920, '16', '120'),
+	(220, 3, '09906018', '', '', 'Puros Tripa Larga', '2021-05-18', 237, 181, 22, 34, 6, 20, 4, 480, 480, '16', '30'),
+	(221, 3, '09906035', '', '', 'Puros Tripa Larga', '2021-05-18', 111, 161, 4, 2, 2, 20, 4, 320, 320, '16', '20'),
+	(222, 3, '09906037', '', '', NULL, '2021-05-18', 183, 182, 3, 2, 3, 22, 4, 750, 750, '15', '50'),
+	(223, 3, '09906039', '', '', 'Puros Tripa Larga', '2021-05-18', 148, 182, 9, 40, 3, 22, 4, 1200, 1200, '15', '80'),
+	(224, 3, '10610017', '', '', 'Puros Tripa Larga', '2021-05-18', 223, 162, 9, 11, 5, 22, 4, 750, 750, '15', '50'),
+	(225, 3, '10610018', '', '', 'Puros Tripa Larga', '2021-05-18', 129, 162, 9, 11, 2, 22, 4, 750, 750, '15', '50'),
+	(226, 3, '10610019', '', '', NULL, '2021-05-18', 129, 162, 4, 2, 5, 22, 4, 750, 750, '15', '50'),
+	(227, 3, '10610020', '', '', NULL, '2021-05-18', 223, 162, 4, 2, 2, 22, 4, 1500, 1500, '15', '100'),
+	(228, 4, '00503009', '', '', 'Puros Tripa Larga', '2021-05-18', 222, 51, 6, 43, 5, 7, 1, 1000, 1000, '20', '50'),
+	(229, 4, '00504100', '', '', 'Puros Tripa Larga', '2021-05-18', 123, 51, 2, 1, 5, 7, 1, 100, 100, '20', '5'),
+	(230, 4, '00504007', '', '', 'Puros Tripa Larga', '2021-05-18', 66, 51, 4, 2, 2, 18, 3, 400, 400, '100', '4'),
+	(231, 4, '00508011', '', '', 'Puros Tripa Larga', '2021-05-18', 53, 51, 21, 33, 2, 19, 1, 300, 300, '30', '10'),
+	(232, 4, '00503008', '', '', 'Puros Tripa Larga', '2021-05-18', 80, 51, 6, 43, 2, 7, 1, 400, 400, '20', '20'),
+	(233, 4, '00504101', '', '', 'Puros Tripa Larga', '2021-05-18', 95, 51, 2, 1, 2, 7, 3, 400, 400, '20', '20'),
+	(234, 4, '00504101', '', '', 'Puros Tripa Larga', '2021-05-18', 95, 51, 2, 1, 2, 7, 3, 200, 200, '20', '10'),
+	(235, 4, '00504003', '', '', 'Puros Tripa Larga', '2021-05-18', 95, 51, 4, 2, 2, 7, 3, 400, 400, '20', '20'),
+	(236, 4, '00508001', '', '', 'Puros Tripa Larga', '2021-05-18', 53, 51, 9, 32, 2, 7, 3, 200, 200, '20', '10'),
+	(237, 4, '00303050', '', '', NULL, '2021-05-18', 211, 15, 25, 77, 2, 4, NULL, 150, 150, '10', '15'),
+	(238, 4, '00303007', '', '', 'Puros Tripa Larga', '2021-05-18', 67, 67, 25, 2, 3, 4, 1, 500, 500, '10', '50'),
+	(239, 4, '00303007', '', '', 'Puros Tripa Larga', '2021-05-18', 67, 67, 25, 2, 3, 4, 1, 200, 200, '10', '20'),
+	(240, 4, '00303007', '', '', 'Puros Tripa Larga', '2021-05-18', 67, 67, 25, 2, 3, 4, 1, 160, 160, '10', '16'),
+	(241, 4, '00407000', '', '', 'Puros Tripa Larga', '2021-05-18', 123, 158, 15, 46, 9, 15, 1, 1400, 1400, '50', '28'),
+	(242, 4, '00408000', '', '', 'Puros Tripa Larga', '2021-05-18', 66, 67, 9, 40, 3, 7, 3, 140, 140, '20', '7'),
+	(243, 4, '10104210', '', '', NULL, '2021-05-18', 213, 14, 2, 6, 3, 7, 1, 140, 140, '20', '7'),
+	(244, 4, '00303051', '', '', NULL, '2021-05-18', 248, 14, 25, 35, 3, 4, 1, 100, 100, '10', '10'),
+	(245, 4, '00303051', '', '', NULL, '2021-05-18', 248, 14, 25, 35, 3, 4, 1, 40, 40, '10', '4'),
+	(246, 4, '20005000', '', '', 'Puros Tripa Larga', '2021-05-18', 95, 90, 1, 6, 3, 7, 1, 380, 380, '20', '19'),
+	(247, 4, '20005000', '', '', 'Puros Tripa Larga', '2021-05-18', 95, 90, 1, 6, 3, 7, 1, 200, 200, '20', '10'),
+	(248, 4, '20005010', '', '', 'Puros Tripa Larga', '2021-05-18', 95, 90, 3, 35, 3, 4, NULL, 50, 50, '10', '5'),
+	(249, 4, '20005007', '', '', 'Puros Tripa Larga', '2021-05-18', 53, 90, 9, 26, 3, 7, 1, 200, 200, '20', '10'),
+	(250, 4, '20005010', '', '', 'Puros Tripa Larga', '2021-05-18', 95, 90, 3, 35, 3, 4, NULL, 200, 200, '10', '20'),
+	(251, 4, '00504032', '', '', 'Puros Tripa Larga', '2021-05-18', 95, 51, 4, 2, 3, 7, 1, 100, 100, '20', '5'),
+	(252, 4, '00703003', '', '', 'Puros Tripa Larga', '2021-05-18', 95, 99, 2, 1, 6, 7, 1, 460, 460, '20', '23'),
+	(253, 4, '00704003', '', '', 'Puros Tripa Larga', '2021-05-18', 122, 99, 4, 2, 6, 7, 1, 100, 100, '20', '5'),
+	(254, 4, '00302007', '', '', 'Puros Tripa Larga', '2021-05-18', 193, 86, 3, 2, 6, 7, 1, 1000, 1000, '20', '50'),
+	(255, 4, '00302007', '', '', 'Puros Tripa Larga', '2021-05-18', 193, 86, 3, 2, 6, 7, 1, 100, 100, '20', '5'),
+	(256, 4, '00302009', '', '', 'Puros Tripa Larga', '2021-05-18', 213, 86, 9, 11, 6, 7, 1, 40, 40, '20', '2'),
+	(257, 4, '00302004', '', '', NULL, '2021-05-18', 124, 86, 37, 61, 6, 3, 1, 20, 20, '20', '1'),
+	(258, 4, '00303065', '', '', 'Puros Tripa Larga', '2021-05-18', 123, 86, 2, 1, 6, 10, 1, 200, 200, '20', '10'),
+	(259, 4, '00507001', '', '', 'Puros Tripa Larga', '2021-05-18', 122, 159, 15, 62, 6, 15, 1, 1700, 1700, '50', '34'),
+	(260, 4, '20018002', '', '', 'Puros Tripa Larga', '2021-05-18', 244, 113, 9, 11, 1, 7, 1, 600, 600, '20', '30'),
+	(261, 4, '12506001', '', '', 'Puros Tripa Larga', '2021-05-18', 38, 61, 4, 2, 1, 16, 1, 200, 200, '100', '2'),
+	(262, 4, '12506021', '', '', 'Puros Tripa Larga', '2021-05-18', 53, 61, 4, 14, 1, 7, 1, 80, 80, '20', '4'),
+	(263, 4, '00107000', '', '', 'Puros Tripa Larga', '2021-05-18', 105, 141, 15, 53, 9, 15, 1, 500, 500, '50', '10'),
+	(264, 4, '603004002', '', '', 'Puros Tripa Larga', '2021-05-18', 53, 88, 4, 3, 1, 7, 1, 240, 240, '20', '12'),
+	(265, 4, '01607602', '', '', 'Puros Tripa Larga', '2021-05-18', 53, 95, 3, 2, 11, 7, 1, 160, 160, '20', '8'),
+	(266, 4, '01607602', '', '', 'Puros Tripa Larga', '2021-05-18', 53, 95, 3, 2, 11, 7, 1, 200, 200, '20', '10'),
+	(267, 4, '01607603', '', '', 'Puros Tripa Larga', '2021-05-18', 53, 95, 9, 11, 11, 7, 1, 200, 200, '20', '10'),
+	(268, 4, '01606677', '', '', 'Puros Tripa Larga', '2021-05-18', 53, 40, 9, 11, 5, 7, 1, 300, 300, '20', '15'),
+	(269, 4, '01606678', '', '', 'Puros Tripa Larga', '2021-05-18', 95, 40, 3, 2, 5, 7, 1, 380, 380, '20', '19'),
+	(270, 4, '01606678', '', '', 'Puros Tripa Larga', '2021-05-18', 95, 40, 3, 2, 5, 7, 1, 100, 100, '20', '5'),
+	(271, 4, '01606677', '', '', 'Puros Tripa Larga', '2021-05-18', 53, 40, 9, 11, 5, 7, 1, 200, 200, '20', '10'),
+	(272, 4, '10104750', '', '', 'Puros Tripa Larga', '2021-05-18', 124, 101, 2, 5, 4, 7, 1, 600, 600, '20', '30'),
+	(273, 4, '10104754', '', '', 'Puros Tripa Larga', '2021-05-18', 53, 101, 9, 37, 4, 7, 1, 400, 400, '20', '20'),
+	(274, 4, '00504150', '', '', 'Puros Tripa Larga', '2021-05-18', 95, 51, 4, 2, 15, 7, 1, 80, 80, '20', '4'),
+	(275, 4, '00504150', '', '', 'Puros Tripa Larga', '2021-05-18', 95, 51, 4, 2, 15, 7, 1, 40, 40, '20', '2'),
+	(276, 4, '00110347', '', '', NULL, '2021-05-18', 224, 226, 20, 30, 9, 7, 1, 400, 400, '20', '20'),
+	(277, 4, '00110346', '', '', NULL, '2021-05-18', 224, 226, 4, 2, 9, 7, 1, 600, 600, '20', '30');
 /*!40000 ALTER TABLE `pendiente` ENABLE KEYS */;
 
--- Dumping structure for table facturacion_plasencia.pendiente_empaque
+-- Volcando estructura para tabla facturacion_plasencia.pendiente_empaque
 CREATE TABLE IF NOT EXISTS `pendiente_empaque` (
   `id_pendiente` int(11) NOT NULL AUTO_INCREMENT,
   `categoria` int(11) DEFAULT NULL,
@@ -6384,295 +5628,310 @@ CREATE TABLE IF NOT EXISTS `pendiente_empaque` (
   `pendiente` int(11) DEFAULT NULL,
   `factura_del_mes` int(11) DEFAULT NULL,
   `cantidad_enviada_mes` int(11) DEFAULT NULL,
-  `saldo` int(11) DEFAULT NULL,
+  `saldo` decimal(10,2) DEFAULT NULL,
   PRIMARY KEY (`id_pendiente`)
-) ENGINE=MyISAM AUTO_INCREMENT=265 DEFAULT CHARSET=latin1 COMMENT='CATEGORIA	ITEM	ORDEN DEL SISTEMA	OBSERVACÓN	PRESENTACIÓN	MES	ORDEN	MARCA	VITOLA	NOMBRE	CAPA	TIPO DE EMPAQUE	ANILLO	CELLO	UPC	PENDIENTE	MARZO 2021 FACTURA #17976(Warehouse)	ENVIADO MES	SALDO';
+) ENGINE=MyISAM AUTO_INCREMENT=278 DEFAULT CHARSET=latin1 COMMENT='CATEGORIA	ITEM	ORDEN DEL SISTEMA	OBSERVACÓN	PRESENTACIÓN	MES	ORDEN	MARCA	VITOLA	NOMBRE	CAPA	TIPO DE EMPAQUE	ANILLO	CELLO	UPC	PENDIENTE	MARZO 2021 FACTURA #17976(Warehouse)	ENVIADO MES	SALDO';
 
--- Dumping data for table facturacion_plasencia.pendiente_empaque: 264 rows
+-- Volcando datos para la tabla facturacion_plasencia.pendiente_empaque: 277 rows
 DELETE FROM `pendiente_empaque`;
 /*!40000 ALTER TABLE `pendiente_empaque` DISABLE KEYS */;
 INSERT INTO `pendiente_empaque` (`id_pendiente`, `categoria`, `item`, `orden_del_sitema`, `observacion`, `presentacion`, `mes`, `orden`, `marca`, `vitola`, `nombre`, `capa`, `tipo_empaque`, `cello`, `pendiente`, `factura_del_mes`, `cantidad_enviada_mes`, `saldo`) VALUES
-	(1, 1, '00107000', '', '', 'Puros Tripa Larga', '2021-05-05', 226, 141, 15, 53, 9, 15, 1, 9000, 0, 0, 9000),
-	(2, 4, '00107000', '', '', 'Puros Tripa Larga', '2021-05-05', 227, 141, 15, 53, 9, 15, 1, 500, 0, 0, 500),
-	(3, 1, '00110060', '', '', 'Puros Tripa Larga', '2021-05-05', 234, 231, 2, 1, 6, 7, 1, 200, 0, 0, 200),
-	(4, 1, '00110061', '', '', NULL, '2021-05-05', 234, 231, 4, 2, 6, 7, 1, 200, 0, 0, 200),
-	(5, 1, '00110062', '', '', 'Puros Tripa Larga', '2021-05-05', 234, 231, 9, 11, 6, 7, 1, 200, 0, 0, 200),
-	(6, 1, '00110063', '', '', NULL, '2021-05-05', 234, 231, 22, 34, 6, 7, 1, 200, 0, 0, 200),
-	(7, 4, '00110346', '', '', NULL, '2021-05-05', 224, 226, 4, 2, 9, 7, 1, 600, 0, 0, 600),
-	(8, 4, '00110347', '', '', NULL, '2021-05-05', 224, 226, 20, 30, 9, 7, 1, 400, 0, 0, 400),
-	(9, 1, '00231000', '', '', 'Puros Tripa Larga', '2021-05-05', 226, 62, 15, 18, 3, 15, 1, 10000, 0, 0, 10000),
-	(10, 4, '00302004', '', '', NULL, '2021-05-05', 124, 86, 37, 61, 6, 3, 1, 20, 0, 0, 20),
-	(11, 4, '00302007', '', '', 'Puros Tripa Larga', '2021-05-05', 244, 86, 3, 2, 6, 7, 1, 1000, 0, 0, 1000),
-	(12, 4, '00302007', '', '', 'Puros Tripa Larga', '2021-05-05', 221, 86, 3, 2, 6, 7, 1, 100, 0, 0, 100),
-	(13, 4, '00302009', '', '', 'Puros Tripa Larga', '2021-05-05', 213, 86, 9, 11, 6, 7, 1, 40, 0, 0, 40),
-	(14, 1, '00303007', '', '', 'Puros Tripa Larga', '2021-05-05', 212, 67, 25, 2, 3, 4, 1, 1000, 0, 0, 1000),
-	(15, 4, '00303007', '', '', 'Puros Tripa Larga', '2021-05-05', 243, 67, 25, 2, 3, 4, 1, 200, 0, 0, 200),
-	(16, 4, '00303007', '', '', 'Puros Tripa Larga', '2021-05-05', 222, 67, 25, 2, 3, 4, 1, 500, 0, 0, 500),
-	(17, 4, '00303007', '', '', 'Puros Tripa Larga', '2021-05-05', 221, 67, 25, 2, 3, 4, 1, 160, 0, 0, 160),
-	(18, 4, '00303051', '', '', NULL, '2021-05-05', 221, 14, 25, 35, 3, 4, 1, 40, 0, 0, 40),
-	(19, 4, '00303051', '', '', NULL, '2021-05-05', 248, 14, 25, 35, 3, 4, 1, 100, 0, 0, 100),
-	(20, 4, '00303065', '', '', 'Puros Tripa Larga', '2021-05-05', 124, 86, 2, 1, 6, 10, 1, 200, 0, 0, 200),
-	(21, 1, '00401000', '', '', 'Puros Tripa Larga', '2021-05-05', 212, 67, 19, 25, 3, 7, 3, 1200, 0, 0, 1200),
-	(22, 1, '00403000', '', '', 'Puros Tripa Larga', '2021-05-05', 212, 67, 2, 1, 3, 7, 3, 2800, 0, 0, 2800),
-	(23, 1, '00404000', '', '', 'Puros Tripa Larga', '2021-05-05', 212, 67, 3, 2, 3, 7, 3, 4400, 0, 0, 4400),
-	(24, 2, '00404005', '', '', 'Puros Tripa Larga', '2021-05-05', 215, 67, 3, 2, 3, 12, 1, 5000, 0, 0, 5000),
-	(25, 1, '00405000', '', '', 'Puros Tripa Larga', '2021-05-05', 212, 67, 16, 14, 3, 7, 3, 400, 0, 0, 400),
-	(26, 1, '00407000', '', '', 'Puros Tripa Larga', '2021-05-05', 226, 158, 15, 46, 9, 15, 1, 3000, 0, 0, 3000),
-	(27, 4, '00407000', '', '', 'Puros Tripa Larga', '2021-05-05', 124, 158, 15, 46, 9, 15, 1, 1400, 0, 0, 1400),
-	(28, 1, '00408000', '', '', 'Puros Tripa Larga', '2021-05-05', 212, 67, 9, 40, 3, 7, 3, 400, 0, 0, 400),
-	(29, 4, '00408000', '', '', 'Puros Tripa Larga', '2021-05-05', 222, 67, 9, 40, 3, 7, 3, 140, 0, 0, 140),
-	(30, 2, '00408003', '', '', 'Puros Tripa Larga', '2021-05-05', 215, 67, 9, 40, 3, 12, 1, 7500, 0, 0, 7500),
-	(31, 4, '00503008', '', '', 'Puros Tripa Larga', '2021-05-05', 222, 51, 6, 43, 2, 7, 1, 400, 0, 0, 400),
-	(32, 4, '00503009', '', '', 'Puros Tripa Larga', '2021-05-05', 222, 51, 6, 43, 5, 7, 1, 1000, 0, 0, 1000),
-	(33, 1, '00504002', '', '', 'Puros Tripa Larga', '2021-05-05', 212, 51, 4, 2, 5, 7, 3, 9600, 0, 0, 9600),
-	(34, 1, '00504003', '', '', 'Puros Tripa Larga', '2021-05-05', 212, 51, 4, 2, 2, 7, 3, 11600, 0, 0, 11600),
-	(35, 4, '00504003', '', '', 'Puros Tripa Larga', '2021-05-05', 213, 51, 4, 2, 2, 7, 3, 400, 0, 0, 400),
-	(36, 1, '00504006', '', '', 'Puros Tripa Larga', '2021-05-05', 212, 51, 4, 2, 5, 18, 3, 10000, 0, 0, 10000),
-	(37, 1, '00504007', '', '', 'Puros Tripa Larga', '2021-05-05', 212, 51, 4, 2, 2, 18, 3, 12000, 0, 0, 12000),
-	(38, 4, '00504007', '', '', 'Puros Tripa Larga', '2021-05-05', 213, 51, 4, 2, 2, 18, 3, 400, 0, 0, 400),
-	(39, 2, '00504009', '', '', 'Puros Tripa Larga', '2021-05-05', 245, 51, 4, 2, 5, 12, 1, 1000, 0, 0, 1000),
-	(40, 2, '00504026', '', '', 'Puros Tripa Larga', '2021-05-05', 216, 51, 4, 2, 5, 11, 3, 3000, 0, 0, 3000),
-	(41, 1, '00504032', '', '', 'Puros Tripa Larga', '2021-05-05', 212, 51, 4, 2, 3, 7, 1, 1600, 0, 0, 1600),
-	(42, 4, '00504032', '', '', 'Puros Tripa Larga', '2021-05-05', 221, 51, 4, 2, 3, 7, 1, 100, 0, 0, 100),
-	(43, 1, '00504033', '', '', 'Puros Tripa Larga', '2021-05-05', 212, 51, 4, 14, 3, 7, 1, 400, 0, 0, 400),
-	(44, 1, '00504041', '', '', 'Puros Tripa Larga', '2021-05-05', 214, 51, 9, 32, 5, 11, 1, 500, 0, 0, 500),
-	(45, 1, '00504042', '', '', 'Puros Tripa Larga', '2021-05-05', 214, 51, 9, 32, 2, 11, 1, 500, 0, 0, 500),
-	(46, 1, '00504043', '', '', 'Puros Tripa Larga', '2021-05-05', 214, 99, 9, 11, 6, 11, 1, 500, 0, 0, 500),
-	(47, 2, '00504048', '', '', 'Puros Tripa Larga', '2021-05-05', 215, 51, 4, 2, 3, 11, 1, 5000, 0, 0, 5000),
-	(48, 2, '00504048', '', '', 'Puros Tripa Larga', '2021-05-05', 216, 51, 4, 2, 3, 11, 1, 500, 0, 0, 500),
-	(49, 1, '00504100', '', '', 'Puros Tripa Larga', '2021-05-05', 212, 51, 2, 1, 5, 7, 1, 4000, 0, 0, 4000),
-	(50, 4, '00504100', '', '', 'Puros Tripa Larga', '2021-05-05', 213, 51, 2, 1, 5, 7, 1, 100, 0, 0, 100),
-	(51, 1, '00504101', '', '', 'Puros Tripa Larga', '2021-05-05', 212, 51, 2, 1, 2, 7, 3, 3600, 0, 0, 3600),
-	(52, 4, '00504101', '', '', 'Puros Tripa Larga', '2021-05-05', 213, 51, 2, 1, 2, 7, 3, 400, 0, 0, 400),
-	(53, 4, '00504101', '', '', 'Puros Tripa Larga', '2021-05-05', 221, 51, 2, 1, 2, 7, 3, 200, 0, 0, 200),
-	(54, 1, '00504102', '', '', 'Puros Tripa Larga', '2021-05-05', 212, 51, 22, 34, 5, 7, 1, 400, 0, 0, 400),
-	(55, 1, '00504103', '', '', 'Puros Tripa Larga', '2021-05-05', 212, 51, 22, 34, 2, 7, 1, 800, 0, 0, 800),
-	(56, 1, '00504150', '', '', 'Puros Tripa Larga', '2021-05-05', 212, 51, 4, 2, 15, 7, 1, 800, 0, 0, 800),
-	(57, 4, '00504150', '', '', 'Puros Tripa Larga', '2021-05-05', 213, 51, 4, 2, 15, 7, 1, 80, 0, 0, 80),
-	(58, 4, '00504150', '', '', 'Puros Tripa Larga', '2021-05-05', 221, 51, 4, 2, 15, 7, 1, 40, 0, 0, 40),
-	(59, 1, '00504252', '', '', 'Puros Tripa Larga', '2021-05-05', 247, 144, 4, 54, 1, 21, 1, 2000, 0, 0, 2000),
-	(60, 1, '00505002', '', '', 'Puros Tripa Larga', '2021-05-05', 212, 51, 4, 14, 5, 7, 3, 3600, 0, 0, 3600),
-	(61, 1, '00505003', '', '', 'Puros Tripa Larga', '2021-05-05', 212, 51, 4, 14, 2, 7, 3, 3200, 0, 0, 3200),
-	(62, 1, '00505006', '', '', 'Puros Tripa Larga', '2021-05-05', 212, 51, 4, 14, 5, 18, 3, 4000, 0, 0, 4000),
-	(63, 1, '00505007', '', '', 'Puros Tripa Larga', '2021-05-05', 212, 51, 4, 14, 2, 18, 3, 2000, 0, 0, 2000),
-	(64, 1, '00505019', '', '', 'Puros Tripa Larga', '2021-05-05', 212, 51, 4, 14, 3, 18, 1, 2000, 0, 0, 2000),
-	(65, 4, '00507001', '', '', 'Puros Tripa Larga', '2021-05-05', 213, 159, 15, 62, 6, 15, 1, 1700, 0, 0, 1700),
-	(66, 1, '00508000', '', '', 'Puros Tripa Larga', '2021-05-05', 212, 51, 9, 32, 5, 7, 3, 4000, 0, 0, 4000),
-	(67, 1, '00508001', '', '', 'Puros Tripa Larga', '2021-05-05', 212, 51, 9, 32, 2, 7, 3, 7200, 0, 0, 7200),
-	(68, 4, '00508001', '', '', 'Puros Tripa Larga', '2021-05-05', 221, 51, 9, 32, 2, 7, 3, 200, 0, 0, 200),
-	(69, 1, '00508002', '', '', 'Puros Tripa Larga', '2021-05-05', 212, 99, 9, 11, 6, 7, 1, 3600, 0, 0, 3600),
-	(70, 1, '00508003', '', '', 'Puros Tripa Larga', '2021-05-05', 212, 61, 9, 11, 1, 7, 1, 1200, 0, 0, 1200),
-	(71, 1, '00508010', '', '', 'Puros Tripa Larga', '2021-05-05', 212, 51, 21, 33, 5, 19, 1, 1800, 0, 0, 1800),
-	(72, 1, '00508011', '', '', 'Puros Tripa Larga', '2021-05-05', 212, 51, 21, 33, 2, 19, 1, 1200, 0, 0, 1200),
-	(73, 4, '00508011', '', '', 'Puros Tripa Larga', '2021-05-05', 244, 51, 21, 33, 2, 19, 1, 300, 0, 0, 300),
-	(74, 1, '00508015', '', '', 'Puros Tripa Larga', '2021-05-05', 212, 51, 11, 12, 5, 4, 1, 600, 0, 0, 600),
-	(75, 1, '00508016', '', '', 'Puros Tripa Larga', '2021-05-05', 212, 51, 11, 12, 2, 4, 1, 1000, 0, 0, 1000),
-	(76, 1, '00508017', '', '', NULL, '2021-05-05', 212, 73, 11, 12, 6, 4, 1, 200, 0, 0, 200),
-	(77, 1, '00508020', '', '', 'Puros Tripa Larga', '2021-05-05', 212, 91, 4, 2, 10, 7, 1, 62800, 0, 0, 62800),
-	(78, 1, '00508022', '', '', 'Puros Tripa Larga', '2021-05-05', 212, 91, 9, 11, 10, 7, 1, 1200, 0, 0, 1200),
-	(79, 1, '00605002', '', '', 'Puros Tripa Larga', '2021-05-05', 212, 51, 14, 17, 5, 13, 3, 5500, 0, 0, 5500),
-	(80, 1, '00605003', '', '', 'Puros Tripa Larga', '2021-05-05', 212, 51, 14, 17, 2, 13, 3, 1500, 0, 0, 1500),
-	(81, 1, '00703001', '', '', 'Puros Tripa Larga', '2021-05-05', 212, 99, 2, 1, 6, 21, 3, 2000, 0, 0, 2000),
-	(82, 1, '00703003', '', '', 'Puros Tripa Larga', '2021-05-05', 212, 99, 2, 1, 6, 7, 1, 1600, 0, 0, 1600),
-	(83, 4, '00703003', '', '', 'Puros Tripa Larga', '2021-05-05', 124, 99, 2, 1, 6, 7, 1, 460, 0, 0, 460),
-	(84, 1, '00704001', '', '', 'Puros Tripa Larga', '2021-05-05', 212, 99, 4, 2, 6, 21, 3, 2000, 0, 0, 2000),
-	(85, 1, '00704003', '', '', 'Puros Tripa Larga', '2021-05-05', 212, 99, 4, 2, 6, 7, 1, 2000, 0, 0, 2000),
-	(86, 4, '00704003', '', '', 'Puros Tripa Larga', '2021-05-05', 221, 99, 4, 2, 6, 7, 1, 100, 0, 0, 100),
-	(87, 2, '00704004', '', '', 'Puros Tripa Larga', '2021-05-05', 215, 99, 4, 2, 6, 12, 1, 20000, 0, 0, 20000),
-	(88, 1, '00705001', '', '', 'Puros Tripa Larga', '2021-05-05', 212, 99, 4, 14, 6, 21, 3, 1000, 0, 0, 1000),
-	(89, 1, '00705003', '', '', 'Puros Tripa Larga', '2021-05-05', 212, 99, 4, 14, 6, 7, 1, 1200, 0, 0, 1200),
-	(90, 1, '00712001', '', '', 'Puros Tripa Larga', '2021-05-05', 212, 99, 22, 34, 6, 21, 3, 1000, 0, 0, 1000),
-	(91, 1, '00712003', '', '', 'Puros Tripa Larga', '2021-05-05', 212, 99, 22, 34, 6, 7, 1, 400, 0, 0, 400),
-	(92, 1, '00712004', '', '', 'Puros Tripa Larga', '2021-05-05', 214, 99, 22, 34, 6, 12, 1, 1250, 0, 0, 1250),
-	(93, 2, '00804065', '', '', NULL, '2021-05-05', 216, 209, 18, 6, 2, 7, 1, 400, 0, 0, 400),
-	(94, 1, '00904038', '', '', 'Puros Tripa Larga', '2021-05-05', 212, 51, 4, 2, 2, 14, 1, NULL, 0, 0, NULL),
-	(95, 2, '00904111', '', '', 'Puros Tripa Larga', '2021-05-05', 214, 186, 3, 3, 2, 9, 1, 500, 0, 0, 500),
-	(96, 2, '01103004', '', '', 'Puros Tripa Larga', '2021-05-05', 220, 59, 1, 6, 18, 11, 1, 325, 0, 0, 325),
-	(97, 2, '01103006', '', '', 'Puros Tripa Larga', '2021-05-05', 220, 59, 4, 3, 2, 11, 1, 2500, 0, 0, 2500),
-	(98, 2, '01103010', '', '', 'Puros Tripa Larga', '2021-05-05', 220, 59, 38, 68, 2, 11, 1, 1000, 0, 0, 1000),
-	(99, 2, '01104000', '', '', 'Puros Tripa Larga', '2021-05-05', 220, 59, 4, 3, 2, 13, 3, 1750, 0, 0, 1750),
-	(100, 1, '01604010', '', '', 'Puros Tripa Larga', '2021-05-05', 212, 109, 24, 41, 1, 7, 1, 400, 0, 0, 400),
-	(101, 1, '01604011', '', '', NULL, '2021-05-05', 212, 109, 3, 2, 1, 7, 1, 400, 0, 0, 400),
-	(102, 1, '01604012', '', '', 'Puros Tripa Larga', '2021-05-05', 212, 109, 28, 14, 1, 7, 1, 400, 0, 0, 400),
-	(103, 1, '01606675', '', '', 'Puros Tripa Larga', '2021-05-05', 212, 40, 20, 30, 5, 7, 1, 6400, 0, 0, 6400),
-	(104, 4, '01606677', '', '', 'Puros Tripa Larga', '2021-05-05', 213, 40, 9, 11, 5, 7, 1, 300, 0, 0, 300),
-	(105, 4, '01606677', '', '', 'Puros Tripa Larga', '2021-05-05', 221, 40, 9, 11, 5, 7, 1, 200, 0, 0, 200),
-	(106, 1, '01606678', '', '', 'Puros Tripa Larga', '2021-05-05', 212, 40, 3, 2, 5, 7, 1, 5200, 0, 0, 5200),
-	(107, 4, '01606678', '', '', 'Puros Tripa Larga', '2021-05-05', 213, 40, 3, 2, 5, 7, 1, 380, 0, 0, 380),
-	(108, 4, '01606678', '', '', 'Puros Tripa Larga', '2021-05-05', 221, 40, 3, 2, 5, 7, 1, 100, 0, 0, 100),
-	(109, 2, '01606872', '', '', 'Puros Tripa Larga', '2021-05-05', 217, 56, 4, 2, 6, 11, 1, 2500, 0, 0, 2500),
-	(110, 4, '01607602', '', '', 'Puros Tripa Larga', '2021-05-05', 213, 95, 3, 2, 11, 7, 1, 160, 0, 0, 160),
-	(111, 4, '01607602', '', '', 'Puros Tripa Larga', '2021-05-05', 221, 95, 3, 2, 11, 7, 1, 200, 0, 0, 200),
-	(112, 4, '01607603', '', '', 'Puros Tripa Larga', '2021-05-05', 221, 95, 9, 11, 11, 7, 1, 200, 0, 0, 200),
-	(113, 3, '09906000', '', '', 'Puros Tripa Larga', '2021-05-05', 237, 219, 3, 3, 3, 24, 4, 360, 0, 0, 360),
-	(114, 3, '09906012', '', '', NULL, '2021-05-05', 237, 181, 4, 2, 6, 20, 4, 1920, 0, 0, 1920),
-	(115, 3, '09906018', '', '', 'Puros Tripa Larga', '2021-05-05', 237, 181, 22, 34, 6, 20, 4, 480, 0, 0, 480),
-	(116, 3, '09906035', '', '', 'Puros Tripa Larga', '2021-05-05', 237, 161, 4, 2, 2, 20, 4, 320, 0, 0, 320),
-	(117, 3, '09906037', '', '', NULL, '2021-05-05', 237, 182, 3, 2, 3, 22, 4, 750, 0, 0, 750),
-	(118, 3, '09906039', '', '', 'Puros Tripa Larga', '2021-05-05', 237, 182, 9, 40, 3, 22, 4, 1200, 0, 0, 1200),
-	(119, 1, '10104111', '', '', 'Puros Tripa Larga', '2021-05-05', 223, 90, 6, 44, 3, 7, 1, 500, 0, 0, 500),
-	(120, 1, '10104130', '', '', NULL, '2021-05-05', 223, 51, 6, 67, 5, 7, 1, 500, 0, 0, 500),
-	(121, 4, '10104210', '', '', NULL, '2021-05-05', 213, 14, 2, 6, 3, 7, 1, 140, 0, 0, 140),
-	(122, 1, '10104750', '', '', 'Puros Tripa Larga', '2021-05-05', 212, 101, 2, 5, 4, 7, 1, 2400, 0, 0, 2400),
-	(123, 4, '10104750', '', '', 'Puros Tripa Larga', '2021-05-05', 213, 101, 2, 5, 4, 7, 1, 600, 0, 0, 600),
-	(124, 1, '10104751', '', '', 'Puros Tripa Larga', '2021-05-05', 212, 101, 3, 35, 4, 7, 1, 4000, 0, 0, 4000),
-	(125, 1, '10104752', '', '', 'Puros Tripa Larga', '2021-05-05', 212, 101, 16, 36, 4, 7, 1, 800, 0, 0, 800),
-	(126, 1, '10104754', '', '', 'Puros Tripa Larga', '2021-05-05', 212, 101, 9, 37, 4, 7, 1, 800, 0, 0, 800),
-	(127, 4, '10104754', '', '', 'Puros Tripa Larga', '2021-05-05', 244, 101, 9, 37, 4, 7, 1, 400, 0, 0, 400),
-	(128, 2, '10104772', '', '', 'Puros Tripa Larga', '2021-05-05', 214, 101, 5, 38, 4, 12, 1, 1250, 0, 0, 1250),
-	(129, 2, '10104775', '', '', 'Puros Tripa Larga', '2021-05-05', 215, 101, 3, 35, 4, 12, 1, 2000, 0, 0, 2000),
-	(130, 2, '10104778', '', '', 'Puros Tripa Larga', '2021-05-05', 216, 101, 2, 5, 4, 11, 1, 700, 0, 0, 700),
-	(131, 1, '10104816', '', '', 'Puros Tripa Larga', '2021-05-05', 215, 51, 4, 2, 2, 11, 1, 10000, 0, 0, 10000),
-	(132, 1, '10104817', '', '', NULL, '2021-05-05', 215, 234, 4, 2, 5, 11, 1, 10000, 0, 0, 10000),
-	(133, 1, '10104912', '', '', 'Puros Tripa Larga', '2021-05-05', 212, 51, 2, 1, 5, 23, 1, 14300, 0, 0, 14300),
-	(134, 1, '10105005', '', '', 'Puros Tripa Larga', '2021-05-05', 235, 232, 5, 4, 2, 7, 1, 400, 0, 0, 400),
-	(135, 1, '10105550', '', '', 'Puros Tripa Corta', '2021-05-05', 225, 227, 1, 1, 2, 10, 1, 6000, 0, 0, 6000),
-	(136, 1, '10105551', '', '', 'Puros Tripa Corta', '2021-05-05', 225, 227, 4, 2, 2, 10, 1, 6000, 0, 0, 6000),
-	(137, 1, '10105555', '', '', 'Puros Tripa Corta', '2021-05-05', 225, 227, 1, 1, 1, 10, 1, 2000, 0, 0, 2000),
-	(138, 1, '10105556', '', '', 'Puros Tripa Corta', '2021-05-05', 225, 227, 4, 2, 1, 10, 1, 2000, 0, 0, 2000),
-	(139, 1, '10105560', '', '', 'Puros Tripa Corta', '2021-05-05', 225, 227, 1, 1, 6, 10, 1, 2000, 0, 0, 2000),
-	(140, 1, '10105561', '', '', 'Puros Tripa Corta', '2021-05-05', 225, 227, 4, 2, 6, 10, 1, 2000, 0, 0, 2000),
-	(141, 1, '10105565', '', '', 'Puros Tripa Corta', '2021-05-05', 225, 227, 1, 1, 5, 10, 1, 2000, 0, 0, 2000),
-	(142, 1, '10105566', '', '', 'Puros Tripa Corta', '2021-05-05', 225, 227, 4, 2, 5, 10, 1, 2000, 0, 0, 2000),
-	(143, 2, '10499015', '', '', NULL, '2021-05-05', 220, 204, 3, 3, 3, 11, 1, NULL, 0, 0, NULL),
-	(144, 2, '10499060', '', '', NULL, '2021-05-05', 220, 197, 1, 6, 3, 11, 1, NULL, 0, 0, NULL),
-	(145, 1, '10603007', '', '', NULL, '2021-05-05', 250, 145, 36, 57, 6, 10, 1, 1000, 0, 0, 1000),
-	(146, 3, '10610017', '', '', 'Puros Tripa Larga', '2021-05-05', 223, 162, 9, 11, 5, 22, 4, 750, 0, 0, 750),
-	(147, 3, '10610018', '', '', 'Puros Tripa Larga', '2021-05-05', 223, 162, 9, 11, 2, 22, 4, 750, 0, 0, 750),
-	(148, 3, '10610019', '', '', NULL, '2021-05-05', 223, 162, 4, 2, 5, 22, 4, 750, 0, 0, 750),
-	(149, 3, '10610020', '', '', NULL, '2021-05-05', 223, 162, 4, 2, 2, 22, 4, 1500, 0, 0, 1500),
-	(150, 3, '11707003', '', '', 'Puros Tripa Larga', '2021-05-05', 228, 138, 15, 48, 6, 17, 4, 32000, 0, 0, 32000),
-	(151, 3, '11710050', '', '', NULL, '2021-05-05', 218, 183, 2, 1, 3, 7, 1, 1000, 0, 0, 1000),
-	(152, 3, '11710052', '', '', 'Puros Tripa Larga', '2021-05-05', 218, 183, 16, 14, 3, 7, 1, 2000, 0, 0, 2000),
-	(153, 3, '11710055', '', '', NULL, '2021-05-05', 219, 183, 2, 1, 3, 12, 1, 2000, 0, 0, 2000),
-	(154, 3, '11803000', '', '', 'Puros Tripa Larga', '2021-05-05', 218, 132, 2, 1, 6, 7, 1, 4000, 0, 0, 4000),
-	(155, 3, '11803002', '', '', 'Puros Tripa Larga', '2021-05-05', 219, 132, 2, 1, 6, 12, 1, 3000, 0, 0, 3000),
-	(156, 3, '11812002', '', '', NULL, '2021-05-05', 218, 132, 9, 11, 6, 7, 1, 2000, 0, 0, 2000),
-	(157, 3, '11812008', '', '', 'Puros Tripa Larga', '2021-05-05', 219, 132, 31, 4, 6, 12, 1, 2000, 0, 0, 2000),
-	(158, 3, '11812010', '', '', 'Puros Tripa Larga', '2021-05-05', 219, 132, 4, 2, 6, 12, 1, 5000, 0, 0, 5000),
-	(159, 3, '12002998', '', '', 'Puros Tripa Larga', '2021-05-05', 219, 133, 4, 2, 2, 12, 1, 4000, 0, 0, 4000),
-	(160, 3, '12002999', '', '', NULL, '2021-05-05', 219, 133, 4, 2, 5, 12, 1, 6000, 0, 0, 6000),
-	(161, 3, '12003001', '', '', 'Puros Tripa Larga', '2021-05-05', 219, 133, 2, 1, 5, 12, 1, 2000, 0, 0, 2000),
-	(162, 3, '12003002', '', '', 'Puros Tripa Larga', '2021-05-05', 218, 133, 2, 1, 2, 7, 1, 1000, 0, 0, 1000),
-	(163, 3, '12003003', '', '', 'Puros Tripa Larga', '2021-05-05', 218, 133, 2, 1, 5, 7, 1, 1000, 0, 0, 1000),
-	(164, 3, '12003005', '', '', NULL, '2021-05-05', 218, 133, 22, 34, 5, 7, 1, 1000, 0, 0, 1000),
-	(165, 3, '12003007', '', '', 'Puros Tripa Larga', '2021-05-05', 218, 133, 22, 34, 2, 7, 1, 1000, 0, 0, 1000),
-	(166, 3, '12003050', '', '', 'Puros Tripa Larga', '2021-05-05', 218, 105, 4, 2, 1, 7, 1, 4000, 0, 0, 4000),
-	(167, 3, '12003051', '', '', 'Puros Tripa Larga', '2021-05-05', 218, 105, 4, 14, 1, 7, 1, 2000, 0, 0, 2000),
-	(168, 3, '12003060', '', '', 'Puros Tripa Larga', '2021-05-05', 219, 105, 4, 2, 1, 12, 1, 6000, 0, 0, 6000),
-	(169, 3, '12003061', '', '', 'Puros Tripa Larga', '2021-05-05', 219, 105, 9, 11, 1, 12, 1, 2000, 0, 0, 2000),
-	(170, 3, '12003062', '', '', 'Puros Tripa Larga', '2021-05-05', 219, 105, 4, 14, 1, 12, 1, 1000, 0, 0, 1000),
-	(171, 3, '12004000', '', '', 'Puros Tripa Larga', '2021-05-05', 218, 133, 4, 2, 2, 7, 1, 2000, 0, 0, 2000),
-	(172, 3, '12004001', '', '', NULL, '2021-05-05', 218, 133, 4, 2, 5, 7, 1, 2000, 0, 0, 2000),
-	(173, 3, '12005003', '', '', 'Puros Tripa Larga', '2021-05-05', 218, 133, 9, 11, 2, 7, 1, 2000, 0, 0, 2000),
-	(174, 3, '12104000', '', '', NULL, '2021-05-05', 218, 134, 3, 3, 5, 7, 1, 2400, 0, 0, 2400),
-	(175, 3, '12301000', '', '', NULL, '2021-05-05', 218, 135, 19, 25, 3, 7, 1, 2000, 0, 0, 2000),
-	(176, 3, '12303000', '', '', 'Puros Tripa Larga', '2021-05-05', 218, 135, 2, 1, 3, 7, 1, 2000, 0, 0, 2000),
-	(177, 1, '12503003', '', '', NULL, '2021-05-05', 240, 63, 4, 2, 1, 7, 1, 800, 0, 0, 800),
-	(178, 1, '12503005', '', '', NULL, '2021-05-05', 240, 63, 19, 30, 2, 7, 1, 800, 0, 0, 800),
-	(179, 1, '12503010', '', '', 'Puros Tripa Larga', '2021-05-05', 240, 63, 1, 1, 1, 7, 1, 800, 0, 0, 800),
-	(180, 4, '12506001', '', '', 'Puros Tripa Larga', '2021-05-05', 213, 61, 4, 2, 1, 16, 1, 200, 0, 0, 200),
-	(181, 1, '12506010', '', '', 'Puros Tripa Larga', '2021-05-05', 214, 61, 4, 2, 1, 12, 1, 625, 0, 0, 625),
-	(182, 2, '12506011', '', '', 'Puros Tripa Larga', '2021-05-05', 245, 61, 4, 14, 1, 12, 1, 1000, 0, 0, 1000),
-	(183, 1, '12506012', '', '', 'Puros Tripa Larga', '2021-05-05', 215, 61, 4, 2, 1, 11, 1, 10000, 0, 0, 10000),
-	(184, 1, '12506020', '', '', 'Puros Tripa Larga', '2021-05-05', 212, 61, 4, 2, 1, 7, 1, 3200, 0, 0, 3200),
-	(185, 1, '12506021', '', '', 'Puros Tripa Larga', '2021-05-05', 212, 61, 4, 14, 1, 7, 1, 3200, 0, 0, 3200),
-	(186, 4, '12506021', '', '', 'Puros Tripa Larga', '2021-05-05', 222, 61, 4, 14, 1, 7, 1, 80, 0, 0, 80),
-	(187, 3, '13403010', '', '', 'Puros Tripa Larga', '2021-05-05', 219, 135, 3, 2, 3, 12, 1, 6000, 0, 0, 6000),
-	(188, 2, '14399005', '', '', NULL, '2021-05-05', 220, 147, 2, 6, 3, 11, 1, 400, 0, 0, 400),
-	(189, 2, '14399006', '', '', 'Puros Tripa Larga', '2021-05-05', 220, 147, 3, 3, 3, 11, 1, 4000, 0, 0, 4000),
-	(190, 2, '14399010', '', '', 'Puros Tripa Larga', '2021-05-05', 220, 147, 9, 11, 3, 11, 1, 1500, 0, 0, 1500),
-	(191, 1, '15003000', '', '', 'Puros Tripa Larga', '2021-05-05', 229, 184, 24, 6, 2, 7, 1, 2000, 0, 0, 2000),
-	(192, 1, '15004001', '', '', 'Puros Tripa Larga', '2021-05-05', 229, 184, 5, 51, 2, 7, 1, 2000, 0, 0, 2000),
-	(193, 1, '20005000', '', '', 'Puros Tripa Larga', '2021-05-05', 212, 90, 1, 6, 3, 7, 1, 4000, 0, 0, 4000),
-	(194, 4, '20005000', '', '', 'Puros Tripa Larga', '2021-05-05', 213, 90, 1, 6, 3, 7, 1, 380, 0, 0, 380),
-	(195, 4, '20005000', '', '', 'Puros Tripa Larga', '2021-05-05', 222, 90, 1, 6, 3, 7, 1, 200, 0, 0, 200),
-	(196, 1, '20005001', '', '', 'Puros Tripa Larga', '2021-05-05', 212, 90, 3, 3, 3, 7, 3, 8000, 0, 0, 8000),
-	(197, 1, '20005002', '', '', 'Puros Tripa Larga', '2021-05-05', 212, 90, 3, 21, 3, 7, 3, 4800, 0, 0, 4800),
-	(198, 1, '20005005', '', '', 'Puros Tripa Larga', '2021-05-05', 212, 90, 34, 52, 3, 7, 1, 400, 0, 0, 400),
-	(199, 2, '20005006', '', '', 'Puros Tripa Larga', '2021-05-05', 215, 90, 3, 3, 3, 11, 1, 25000, 0, 0, 25000),
-	(200, 1, '20005007', '', '', 'Puros Tripa Larga', '2021-05-05', 212, 90, 9, 26, 3, 7, 1, 1200, 0, 0, 1200),
-	(201, 4, '20005007', '', '', 'Puros Tripa Larga', '2021-05-05', 222, 90, 9, 26, 3, 7, 1, 200, 0, 0, 200),
-	(202, 2, '20005016', '', '', 'Puros Tripa Larga', '2021-05-05', 220, 90, 1, 6, 3, 11, 1, 40000, 0, 0, 40000),
-	(203, 4, '20018002', '', '', 'Puros Tripa Larga', '2021-05-05', 244, 113, 9, 11, 1, 7, 1, 600, 0, 0, 600),
-	(204, 2, '20018021', '', '', 'Puros Tripa Larga', '2021-05-05', 214, 113, 3, 2, 1, 12, 1, 1250, 0, 0, 1250),
-	(205, 2, '20018022', '', '', 'Puros Tripa Larga', '2021-05-05', 214, 113, 9, 11, 1, 12, 1, 1250, 0, 0, 1250),
-	(206, 2, '40503003', '', '', 'Puros Tripa Larga', '2021-05-05', 229, 61, 18, 24, 1, 7, 1, 10000, 0, 0, 10000),
-	(207, 2, '40503004', '', '', NULL, '2021-05-05', 229, 99, 18, 80, 6, 7, 1, 10000, 0, 0, 10000),
-	(208, 2, '40503005', '', '', 'Puros Tripa Larga', '2021-05-05', 229, 51, 18, 80, 3, 7, 1, 10000, 0, 0, 10000),
-	(209, 2, '40503014', '', '', 'Puros Tripa Larga', '2021-05-05', 229, 61, 18, 24, 1, 11, 1, 2500, 0, 0, 2500),
-	(210, 2, '40503015', '', '', NULL, '2021-05-05', 229, 99, 18, 80, 6, 11, 1, 2500, 0, 0, 2500),
-	(211, 2, '40503016', '', '', 'Puros Tripa Larga', '2021-05-05', 229, 51, 18, 80, 3, 11, 1, 2500, 0, 0, 2500),
-	(212, 2, '40503020', '', '', 'Puros Tripa Larga', '2021-05-05', 229, 61, 18, 24, 1, 9, 1, 3000, 0, 0, 3000),
-	(213, 2, '40503021', '', '', NULL, '2021-05-05', 229, 99, 18, 80, 6, 9, 1, 3000, 0, 0, 3000),
-	(214, 2, '40503022', '', '', 'Puros Tripa Larga', '2021-05-05', 229, 51, 18, 80, 3, 9, 1, 3000, 0, 0, 3000),
-	(215, 2, '41112001', '', '', NULL, '2021-05-05', 220, 59, 22, 74, 1, 11, 1, 200, 0, 0, 200),
-	(216, 2, '47705002', '', '', 'Puros Tripa Larga', '2021-05-05', 220, 168, 3, 14, 6, 11, 1, 7500, 0, 0, 7500),
-	(217, 2, '47801002', '', '', 'Puros Tripa Larga', '2021-05-05', 220, 168, 3, 14, 6, 7, 1, 1200, 0, 0, 1200),
-	(218, 2, '47801004', '', '', 'Puros Tripa Larga', '2021-05-05', 220, 168, 5, 4, 6, 7, 1, 2000, 0, 0, 2000),
-	(219, 2, '47801040', '', '', NULL, '2021-05-05', 246, 148, 4, 2, 5, 10, 1, 3000, 0, 0, 3000),
-	(220, 2, '47801042', '', '', NULL, '2021-05-05', 246, 148, 4, 2, 6, 10, 1, 3000, 0, 0, 3000),
-	(221, 2, '47801043', '', '', NULL, '2021-05-05', 246, 148, 4, 2, 1, 10, 1, 3000, 0, 0, 3000),
-	(222, 2, '47801044', '', '', NULL, '2021-05-05', 246, 148, 4, 2, 3, 10, 1, 3000, 0, 0, 3000),
-	(223, 2, '47801420', '', '', 'Puros Tripa Corta', '2021-05-05', 217, 60, 1, 1, 8, 10, 1, 60000, 0, 0, 60000),
-	(224, 2, '47801421', '', '', 'Puros Tripa Corta', '2021-05-05', 217, 60, 4, 2, 8, 10, 1, 60000, 0, 0, 60000),
-	(225, 2, '47801501', '', '', 'Puros Tripa Larga', '2021-05-05', 239, 220, 8, 1, 13, 10, 4, 600, 0, 0, 600),
-	(226, 2, '47801561', '', '', 'Puros Tripa Corta', '2021-05-05', 217, 166, 4, 2, 1, 10, 1, 60000, 0, 0, 60000),
-	(227, 2, '47801563', '', '', 'Puros Tripa Corta', '2021-05-05', 217, 166, 4, 2, 2, 10, 1, 60000, 0, 0, 60000),
-	(228, 2, '47801890', '', '', 'Puros Tripa Larga', '2021-05-05', 220, 57, 2, 1, 1, 9, 1, 1400, 0, 0, 1400),
-	(229, 2, '47801892', '', '', 'Puros Tripa Larga', '2021-05-05', 220, 57, 9, 16, 1, 9, 1, 1600, 0, 0, 1600),
-	(230, 1, '603004002', '', '', 'Puros Tripa Larga', '2021-05-05', 212, 88, 4, 3, 1, 7, 1, 1200, 0, 0, 1200),
-	(231, 4, '603004002', '', '', 'Puros Tripa Larga', '2021-05-05', 213, 88, 4, 3, 1, 7, 1, 240, 0, 0, 240),
-	(232, 1, '603004004', '', '', 'Puros Tripa Larga', '2021-05-05', 212, 88, 17, 23, 1, 7, 1, 400, 0, 0, 400),
-	(233, 2, '603004023', '', '', 'Puros Tripa Larga', '2021-05-05', 214, 88, 4, 3, 1, 12, 1, 1250, 0, 0, 1250),
-	(234, 2, '603004023', '', '', 'Puros Tripa Larga', '2021-05-05', 215, 88, 4, 3, 1, 12, 1, 5000, 0, 0, 5000),
-	(235, 2, '603004031', '', '', 'Puros Tripa Larga', '2021-05-05', 216, 88, 4, 3, 1, 11, 1, 750, 0, 0, 750),
-	(236, 2, '603004050', '', '', 'Puros Tripa Larga', '2021-05-05', 216, 88, 4, 3, 13, 11, 1, 3000, 0, 0, 3000),
-	(237, 1, '603005750', '', '', 'Puros Tripa Larga', '2021-05-05', 212, 92, 2, 1, 1, 4, 1, 600, 0, 0, 600),
-	(238, 1, '603005751', '', '', 'Puros Tripa Larga', '2021-05-05', 212, 92, 4, 2, 1, 4, 1, 1200, 0, 0, 1200),
-	(239, 1, '603005752', '', '', 'Puros Tripa Larga', '2021-05-05', 212, 92, 9, 11, 1, 4, 1, 400, 0, 0, 400),
-	(240, 2, '6030066060', '', '', 'Puros Tripa Larga', '2021-05-05', 217, 56, 4, 2, 3, 9, 1, 5000, 0, 0, 5000),
-	(241, 1, '9900004000', '', '', 'Puros Tripa Larga', '2021-05-05', 230, 94, 9, 16, 2, 7, 1, 2000, 0, 0, 2000),
-	(242, 1, '9900004002', '', '', 'Puros Tripa Larga', '2021-05-05', 230, 94, 2, 1, 2, 7, 1, 2000, 0, 0, 2000),
-	(243, 1, '9900004003', '', '', 'Puros Tripa Larga', '2021-05-05', 230, 94, 25, 2, 2, 7, 1, 2000, 0, 0, 2000),
-	(244, 1, '9900004005', '', '', 'Puros Tripa Larga', '2021-05-05', 232, 94, 25, 2, 2, 10, 1, 1000, 0, 0, 1000),
-	(245, 1, '9900004011', '', '', 'Puros Tripa Larga', '2021-05-05', 230, 228, 2, 1, 1, 7, 1, 2000, 0, 0, 2000),
-	(246, 1, '9900004012', '', '', 'Puros Tripa Larga', '2021-05-05', 230, 228, 3, 2, 1, 7, 1, 3000, 0, 0, 3000),
-	(247, 1, '9900004016', '', '', 'Puros Tripa Larga', '2021-05-05', 232, 228, 2, 1, 1, 10, 1, 1000, 0, 0, 1000),
-	(248, 1, '9900004019', '', '', 'Puros Tripa Larga', '2021-05-05', 230, 53, 2, 1, 1, 7, 1, 3000, 0, 0, 3000),
-	(249, 1, '9900004020', '', '', 'Puros Tripa Larga', '2021-05-05', 230, 53, 3, 2, 1, 7, 1, 4000, 0, 0, 4000),
-	(250, 1, '9900004023', '', '', 'Puros Tripa Larga', '2021-05-05', 232, 53, 3, 2, 1, 10, 1, 1000, 0, 0, 1000),
-	(251, 1, '9900004025', '', '', NULL, '2021-05-05', 230, 230, 9, 16, 1, 7, 1, 2000, 0, 0, 2000),
-	(252, 1, '9900004027', '', '', 'Puros Tripa Larga', '2021-05-05', 230, 230, 2, 1, 1, 7, 1, 2000, 0, 0, 2000),
-	(253, 1, '9900004028', '', '', 'Puros Tripa Larga', '2021-05-05', 230, 230, 3, 2, 1, 7, 1, 4000, 0, 0, 4000),
-	(254, 1, '9900004030', '', '', 'Puros Tripa Larga', '2021-05-05', 231, 230, 2, 1, 1, 10, 1, 2000, 0, 0, 2000),
-	(255, 1, '9900004031', '', '', 'Puros Tripa Larga', '2021-05-05', 232, 230, 3, 2, 1, 10, 1, 1000, 0, 0, 1000),
-	(256, 1, '9900004035', '', '', 'Puros Tripa Larga', '2021-05-05', 230, 229, 9, 16, 3, 7, 1, 2000, 0, 0, 2000),
-	(257, 1, '9900004037', '', '', 'Puros Tripa Larga', '2021-05-05', 230, 229, 2, 1, 3, 7, 1, 3000, 0, 0, 3000),
-	(258, 1, '9900004038', '', '', 'Puros Tripa Larga', '2021-05-05', 230, 229, 3, 2, 3, 7, 1, 5000, 0, 0, 5000),
-	(259, 1, '9900004039', '', '', 'Puros Tripa Larga', '2021-05-05', 233, 229, 2, 1, 3, 10, 1, 4000, 0, 0, 4000),
-	(260, 1, '9900004040', '', '', 'Puros Tripa Larga', '2021-05-05', 232, 229, 3, 2, 3, 10, 1, 1000, 0, 0, 1000),
-	(261, 1, '9900009110', '', '', 'Puros Tripa Larga', '2021-05-05', 230, 93, 2, 79, 2, 7, 1, 2000, 0, 0, 2000),
-	(262, 1, '9900009111', '', '', 'Puros Tripa Larga', '2021-05-05', 230, 93, 3, 27, 2, 7, 1, 2000, 0, 0, 2000),
-	(263, 1, '9900009115', '', '', 'Puros Tripa Larga', '2021-05-05', 231, 93, 2, 79, 2, 12, 1, 2500, 0, 0, 2500),
-	(264, 1, '9900009117', '', '', 'Puros Tripa Larga', '2021-05-05', 232, 93, 3, 27, 2, 10, 1, 1000, 0, 0, 1000);
+	(1, 1, '00504006', '', '', 'Puros Tripa Larga', '2021-05-18', 95, 51, 4, 2, 5, 18, 3, 10000, NULL, NULL, 10000.00),
+	(2, 1, '00505006', '', '', 'Puros Tripa Larga', '2021-05-18', 53, 51, 4, 14, 5, 18, 3, 4000, NULL, NULL, 4000.00),
+	(3, 1, '00504041', '', '', 'Puros Tripa Larga', '2021-05-18', 116, 51, 9, 32, 5, 11, 1, 500, NULL, NULL, 500.00),
+	(4, 1, '00508000', '', '', 'Puros Tripa Larga', '2021-05-18', 95, 51, 9, 32, 5, 7, 3, 4000, NULL, NULL, 4000.00),
+	(5, 1, '00508015', '', '', 'Puros Tripa Larga', '2021-05-18', 28, 51, 11, 12, 5, 4, 1, 600, NULL, NULL, 600.00),
+	(6, 1, '00605002', '', '', 'Puros Tripa Larga', '2021-05-18', 95, 51, 14, 17, 5, 13, 3, 5500, NULL, NULL, 5500.00),
+	(7, 1, '00508010', '', '', 'Puros Tripa Larga', '2021-05-18', 53, 51, 21, 33, 5, 19, 1, 1800, NULL, NULL, 1800.00),
+	(8, 1, '00504100', '', '', 'Puros Tripa Larga', '2021-05-18', 123, 51, 2, 1, 5, 7, 1, 4000, NULL, NULL, 4000.00),
+	(9, 1, '00504102', '', '', 'Puros Tripa Larga', '2021-05-18', 66, 51, 22, 34, 5, 7, 1, 400, NULL, NULL, 400.00),
+	(10, 1, '00504002', '', '', 'Puros Tripa Larga', '2021-05-18', 95, 51, 4, 2, 5, 7, 3, 9600, NULL, NULL, 9600.00),
+	(11, 1, '00505002', '', '', 'Puros Tripa Larga', '2021-05-18', 66, 51, 4, 14, 5, 7, 3, 3600, NULL, NULL, 3600.00),
+	(12, 1, '10104130', '', '', NULL, '2021-05-18', 223, 51, 6, 67, 5, 7, 1, 500, NULL, NULL, 500.00),
+	(13, 1, '10104817', '', '', NULL, '2021-05-18', 215, 234, 4, 2, 5, 11, 1, 10000, NULL, NULL, 10000.00),
+	(14, 1, '10515002', '', '', 'Puros Tripa Larga', '2021-05-18', 173, 51, 2, 1, 5, 4, NULL, 200, NULL, NULL, 200.00),
+	(15, 1, '10105565', '', '', 'Puros Tripa Corta', '2021-05-18', 225, 227, 1, 1, 5, 10, 1, 2000, NULL, NULL, 2000.00),
+	(16, 1, '10105566', '', '', 'Puros Tripa Corta', '2021-05-18', 225, 227, 4, 2, 5, 10, 1, 2000, NULL, NULL, 2000.00),
+	(17, 1, '00504007', '', '', 'Puros Tripa Larga', '2021-05-18', 66, 51, 4, 2, 2, 18, 3, 12000, NULL, NULL, 12000.00),
+	(18, 1, '00505007', '', '', 'Puros Tripa Larga', '2021-05-18', 53, 51, 4, 14, 2, 18, 3, 2000, NULL, NULL, 2000.00),
+	(19, 1, '00504042', '', '', 'Puros Tripa Larga', '2021-05-18', 63, 51, 9, 32, 2, 11, 1, 500, NULL, NULL, 500.00),
+	(20, 1, '00508016', '', '', 'Puros Tripa Larga', '2021-05-18', 28, 51, 11, 12, 2, 4, 1, 1000, NULL, NULL, 1000.00),
+	(21, 1, '00605003', '', '', 'Puros Tripa Larga', '2021-05-18', 38, 51, 14, 17, 2, 13, 3, 1500, NULL, NULL, 1500.00),
+	(22, 1, '00508011', '', '', 'Puros Tripa Larga', '2021-05-18', 53, 51, 21, 33, 2, 19, 1, 1200, NULL, NULL, 1200.00),
+	(23, 1, '00508001', '', '', 'Puros Tripa Larga', '2021-05-18', 53, 51, 9, 32, 2, 7, 3, 7200, NULL, NULL, 7200.00),
+	(24, 1, '00504003', '', '', 'Puros Tripa Larga', '2021-05-18', 95, 51, 4, 2, 2, 7, 3, 11600, NULL, NULL, 11600.00),
+	(25, 1, '00505003', '', '', 'Puros Tripa Larga', '2021-05-18', 37, 51, 4, 14, 2, 7, 3, 3200, NULL, NULL, 3200.00),
+	(26, 1, '00504101', '', '', 'Puros Tripa Larga', '2021-05-18', 95, 51, 2, 1, 2, 7, 3, 3600, NULL, NULL, 3600.00),
+	(27, 1, '00504103', '', '', 'Puros Tripa Larga', '2021-05-18', 173, 51, 22, 34, 2, 7, 1, 800, NULL, NULL, 800.00),
+	(28, 1, '10104816', '', '', 'Puros Tripa Larga', '2021-05-18', 188, 51, 4, 2, 2, 11, 1, 10000, NULL, NULL, 10000.00),
+	(29, 1, '9900009110', '', '', 'Puros Tripa Larga', '2021-05-18', 230, 93, 2, 79, 2, 7, 1, 2000, NULL, NULL, 2000.00),
+	(30, 1, '9900009111', '', '', 'Puros Tripa Larga', '2021-05-18', 56, 93, 3, 27, 2, 7, 1, 2000, NULL, NULL, 2000.00),
+	(31, 1, '9900009117', '', '', 'Puros Tripa Larga', '2021-05-18', 232, 93, 3, 27, 2, 10, 1, 1000, NULL, NULL, 1000.00),
+	(32, 1, '9900009115', '', '', 'Puros Tripa Larga', '2021-05-18', 231, 93, 2, 79, 2, 12, 1, 2500, NULL, NULL, 2500.00),
+	(33, 1, '10105005', '', '', 'Puros Tripa Larga', '2021-05-18', 235, 232, 5, 4, 2, 7, 1, 400, NULL, NULL, 400.00),
+	(34, 1, '9900004000', '', '', 'Puros Tripa Larga', '2021-05-18', 230, 94, 9, 16, 2, 7, 1, 2000, NULL, NULL, 2000.00),
+	(35, 1, '9900004002', '', '', 'Puros Tripa Larga', '2021-05-18', 230, 94, 2, 1, 2, 7, 1, 2000, NULL, NULL, 2000.00),
+	(36, 1, '9900004003', '', '', 'Puros Tripa Larga', '2021-05-18', 230, 94, 25, 2, 2, 7, 1, 2000, NULL, NULL, 2000.00),
+	(37, 1, '9900004005', '', '', 'Puros Tripa Larga', '2021-05-18', 232, 94, 25, 2, 2, 10, 1, 1000, NULL, NULL, 1000.00),
+	(38, 1, '10105550', '', '', 'Puros Tripa Corta', '2021-05-18', 225, 227, 1, 1, 2, 10, 1, 6000, NULL, NULL, 6000.00),
+	(39, 1, '10105551', '', '', 'Puros Tripa Corta', '2021-05-18', 225, 227, 4, 2, 2, 10, 1, 6000, NULL, NULL, 6000.00),
+	(40, 1, '00508020', '', '', 'Puros Tripa Larga', '2021-05-18', 95, 91, 4, 2, 10, 7, 1, 62800, NULL, NULL, 62800.00),
+	(41, 1, '00508022', '', '', 'Puros Tripa Larga', '2021-05-18', 53, 91, 9, 11, 10, 7, 1, 1200, NULL, NULL, 1200.00),
+	(42, 1, '00401000', '', '', 'Puros Tripa Larga', '2021-05-18', 95, 67, 19, 25, 3, 7, 3, 1200, NULL, NULL, 1200.00),
+	(43, 1, '00403000', '', '', 'Puros Tripa Larga', '2021-05-18', 95, 67, 2, 1, 3, 7, 3, 2800, NULL, NULL, 2800.00),
+	(44, 1, '00404000', '', '', 'Puros Tripa Larga', '2021-05-18', 66, 67, 3, 2, 3, 7, 3, 4400, NULL, NULL, 4400.00),
+	(45, 1, '00405000', '', '', 'Puros Tripa Larga', '2021-05-18', 66, 67, 16, 14, 3, 7, 3, 400, NULL, NULL, 400.00),
+	(46, 1, '00408000', '', '', 'Puros Tripa Larga', '2021-05-18', 66, 67, 9, 40, 3, 7, 3, 400, NULL, NULL, 400.00),
+	(47, 1, '00303007', '', '', 'Puros Tripa Larga', '2021-05-18', 67, 67, 25, 2, 3, 4, 1, 1000, NULL, NULL, 1000.00),
+	(48, 1, '00407000', '', '', 'Puros Tripa Larga', '2021-05-18', 123, 158, 15, 46, 9, 15, 1, 3000, NULL, NULL, 3000.00),
+	(49, 1, '10104111', '', '', 'Puros Tripa Larga', '2021-05-18', 86, 90, 6, 44, 3, 7, 1, 500, NULL, NULL, 500.00),
+	(50, 1, '20005000', '', '', 'Puros Tripa Larga', '2021-05-18', 95, 90, 1, 6, 3, 7, 1, 4000, NULL, NULL, 4000.00),
+	(51, 1, '20005001', '', '', 'Puros Tripa Larga', '2021-05-18', 53, 90, 3, 3, 3, 7, 3, 8000, NULL, NULL, 8000.00),
+	(52, 1, '20005002', '', '', 'Puros Tripa Larga', '2021-05-18', 53, 90, 3, 21, 3, 7, 3, 4800, NULL, NULL, 4800.00),
+	(53, 1, '20005005', '', '', 'Puros Tripa Larga', '2021-05-18', 95, 90, 34, 52, 3, 7, 1, 400, NULL, NULL, 400.00),
+	(54, 1, '20005007', '', '', 'Puros Tripa Larga', '2021-05-18', 53, 90, 9, 26, 3, 7, 1, 1200, NULL, NULL, 1200.00),
+	(55, 1, '20005010', '', '', 'Puros Tripa Larga', '2021-05-18', 95, 90, 3, 35, 3, 4, NULL, 600, NULL, NULL, 600.00),
+	(56, 1, '00505019', '', '', 'Puros Tripa Larga', '2021-05-18', 53, 51, 4, 14, 3, 18, 1, 2000, NULL, NULL, 2000.00),
+	(57, 1, '00504032', '', '', 'Puros Tripa Larga', '2021-05-18', 95, 51, 4, 2, 3, 7, 1, 1600, NULL, NULL, 1600.00),
+	(58, 1, '00504033', '', '', 'Puros Tripa Larga', '2021-05-18', 66, 51, 4, 14, 3, 7, 1, 400, NULL, NULL, 400.00),
+	(59, 1, '00231000', '', '', 'Puros Tripa Larga', '2021-05-18', 39, 62, 15, 18, 3, 15, 1, 10000, NULL, NULL, 10000.00),
+	(60, 1, '9900004035', '', '', 'Puros Tripa Larga', '2021-05-18', 230, 229, 9, 16, 3, 7, 1, 2000, NULL, NULL, 2000.00),
+	(61, 1, '9900004037', '', '', 'Puros Tripa Larga', '2021-05-18', 230, 229, 2, 1, 3, 7, 1, 3000, NULL, NULL, 3000.00),
+	(62, 1, '9900004038', '', '', 'Puros Tripa Larga', '2021-05-18', 230, 229, 3, 2, 3, 7, 1, 5000, NULL, NULL, 5000.00),
+	(63, 1, '9900004039', '', '', 'Puros Tripa Larga', '2021-05-18', 233, 229, 2, 1, 3, 10, 1, 4000, NULL, NULL, 4000.00),
+	(64, 1, '9900004040', '', '', 'Puros Tripa Larga', '2021-05-18', 232, 229, 3, 2, 3, 10, 1, 1000, NULL, NULL, 1000.00),
+	(65, 1, '13105120', '', '', 'Puros Tripa Larga', '2021-05-18', 173, 210, 2, 1, 3, 4, NULL, 400, NULL, NULL, 400.00),
+	(66, 1, '00703001', '', '', 'Puros Tripa Larga', '2021-05-18', 95, 99, 2, 1, 6, 21, 3, 2000, NULL, NULL, 2000.00),
+	(67, 1, '00704001', '', '', 'Puros Tripa Larga', '2021-05-18', 173, 99, 4, 2, 6, 21, 3, 2000, NULL, NULL, 2000.00),
+	(68, 1, '00705001', '', '', 'Puros Tripa Larga', '2021-05-18', 95, 99, 4, 14, 6, 21, 3, 1000, NULL, NULL, 1000.00),
+	(69, 1, '00712001', '', '', 'Puros Tripa Larga', '2021-05-18', 79, 99, 22, 34, 6, 21, 3, 1000, NULL, NULL, 1000.00),
+	(70, 1, '00508002', '', '', 'Puros Tripa Larga', '2021-05-18', 95, 99, 9, 11, 6, 7, 1, 3600, NULL, NULL, 3600.00),
+	(71, 1, '00508017', '', '', NULL, '2021-05-18', 37, 73, 11, 12, 6, 4, 1, 200, NULL, NULL, 200.00),
+	(72, 1, '00703003', '', '', 'Puros Tripa Larga', '2021-05-18', 95, 99, 2, 1, 6, 7, 1, 1600, NULL, NULL, 1600.00),
+	(73, 1, '00712003', '', '', 'Puros Tripa Larga', '2021-05-18', 95, 99, 22, 34, 6, 7, 1, 400, NULL, NULL, 400.00),
+	(74, 1, '00704003', '', '', 'Puros Tripa Larga', '2021-05-18', 122, 99, 4, 2, 6, 7, 1, 2000, NULL, NULL, 2000.00),
+	(75, 1, '00705003', '', '', 'Puros Tripa Larga', '2021-05-18', 95, 99, 4, 14, 6, 7, 1, 1200, NULL, NULL, 1200.00),
+	(76, 1, '00504043', '', '', 'Puros Tripa Larga', '2021-05-18', 201, 99, 9, 11, 6, 11, 1, 500, NULL, NULL, 500.00),
+	(77, 1, '00712004', '', '', 'Puros Tripa Larga', '2021-05-18', 175, 99, 22, 34, 6, 12, 1, 1250, NULL, NULL, 1250.00),
+	(78, 1, '10515004', '', '', NULL, '2021-05-18', 173, 99, 2, 76, 6, 4, NULL, 400, NULL, NULL, 400.00),
+	(79, 1, '10603007', '', '', NULL, '2021-05-18', 115, 145, 36, 57, 6, 10, 1, 1000, NULL, NULL, 1000.00),
+	(80, 1, '00110060', '', '', 'Puros Tripa Larga', '2021-05-18', 234, 231, 2, 1, 6, 7, 1, 200, NULL, NULL, 200.00),
+	(81, 1, '00110061', '', '', NULL, '2021-05-18', 234, 231, 4, 2, 6, 7, 1, 200, NULL, NULL, 200.00),
+	(82, 1, '00110062', '', '', 'Puros Tripa Larga', '2021-05-18', 234, 231, 9, 11, 6, 7, 1, 200, NULL, NULL, 200.00),
+	(83, 1, '00110063', '', '', NULL, '2021-05-18', 234, 231, 22, 34, 6, 7, 1, 200, NULL, NULL, 200.00),
+	(84, 1, '10105560', '', '', 'Puros Tripa Corta', '2021-05-18', 225, 227, 1, 1, 6, 10, 1, 2000, NULL, NULL, 2000.00),
+	(85, 1, '10105561', '', '', 'Puros Tripa Corta', '2021-05-18', 225, 227, 4, 2, 6, 10, 1, 2000, NULL, NULL, 2000.00),
+	(86, 1, '00504150', '', '', 'Puros Tripa Larga', '2021-05-18', 95, 51, 4, 2, 15, 7, 1, 800, NULL, NULL, 800.00),
+	(87, 1, '00508003', '', '', 'Puros Tripa Larga', '2021-05-18', 66, 61, 9, 11, 1, 7, 1, 1200, NULL, NULL, 1200.00),
+	(88, 1, '12506020', '', '', 'Puros Tripa Larga', '2021-05-18', 36, 61, 4, 2, 1, 7, 1, 3200, NULL, NULL, 3200.00),
+	(89, 1, '12506021', '', '', 'Puros Tripa Larga', '2021-05-18', 53, 61, 4, 14, 1, 7, 1, 3200, NULL, NULL, 3200.00),
+	(90, 1, '12506010', '', '', 'Puros Tripa Larga', '2021-05-18', 63, 61, 4, 2, 1, 12, 1, 625, NULL, NULL, 625.00),
+	(91, 1, '12506012', '', '', 'Puros Tripa Larga', '2021-05-18', 50, 61, 4, 2, 1, 11, 1, 10000, NULL, NULL, 10000.00),
+	(92, 1, '00504252', '', '', 'Puros Tripa Larga', '2021-05-18', 113, 144, 4, 54, 1, 21, 1, 2000, NULL, NULL, 2000.00),
+	(93, 1, '01604010', '', '', 'Puros Tripa Larga', '2021-05-18', 66, 109, 24, 41, 1, 7, 1, 400, NULL, NULL, 400.00),
+	(94, 1, '01604011', '', '', NULL, '2021-05-18', 66, 109, 3, 2, 1, 7, 1, 400, NULL, NULL, 400.00),
+	(95, 1, '01604012', '', '', 'Puros Tripa Larga', '2021-05-18', 173, 109, 28, 14, 1, 7, 1, 400, NULL, NULL, 400.00),
+	(96, 1, '01606675', '', '', 'Puros Tripa Larga', '2021-05-18', 95, 40, 20, 30, 5, 7, 1, 6400, NULL, NULL, 6400.00),
+	(97, 1, '01606678', '', '', 'Puros Tripa Larga', '2021-05-18', 95, 40, 3, 2, 5, 7, 1, 5200, NULL, NULL, 5200.00),
+	(98, 1, '603004002', '', '', 'Puros Tripa Larga', '2021-05-18', 53, 88, 4, 3, 1, 7, 1, 1200, NULL, NULL, 1200.00),
+	(99, 1, '603004004', '', '', 'Puros Tripa Larga', '2021-05-18', 173, 88, 17, 23, 1, 7, 1, 400, NULL, NULL, 400.00),
+	(100, 1, '603005750', '', '', 'Puros Tripa Larga', '2021-05-18', 55, 92, 2, 1, 1, 4, 1, 600, NULL, NULL, 600.00),
+	(101, 1, '603005751', '', '', 'Puros Tripa Larga', '2021-05-18', 55, 92, 4, 2, 1, 4, 1, 1200, NULL, NULL, 1200.00),
+	(102, 1, '603005752', '', '', 'Puros Tripa Larga', '2021-05-18', 53, 92, 9, 11, 1, 4, 1, 400, NULL, NULL, 400.00),
+	(103, 1, '9900004027', '', '', 'Puros Tripa Larga', '2021-05-18', 230, 230, 2, 1, 1, 7, 1, 2000, NULL, NULL, 2000.00),
+	(104, 1, '9900004028', '', '', 'Puros Tripa Larga', '2021-05-18', 230, 230, 3, 2, 1, 7, 1, 4000, NULL, NULL, 4000.00),
+	(105, 1, '9900004025', '', '', NULL, '2021-05-18', 230, 230, 9, 16, 1, 7, 1, 2000, NULL, NULL, 2000.00),
+	(106, 1, '9900004030', '', '', 'Puros Tripa Larga', '2021-05-18', 231, 230, 2, 1, 1, 10, 1, 2000, NULL, NULL, 2000.00),
+	(107, 1, '9900004031', '', '', 'Puros Tripa Larga', '2021-05-18', 232, 230, 3, 2, 1, 10, 1, 1000, NULL, NULL, 1000.00),
+	(108, 1, '9900004019', '', '', 'Puros Tripa Larga', '2021-05-18', 230, 53, 2, 1, 1, 7, 1, 3000, NULL, NULL, 3000.00),
+	(109, 1, '9900004020', '', '', 'Puros Tripa Larga', '2021-05-18', 56, 53, 3, 2, 1, 7, 1, 4000, NULL, NULL, 4000.00),
+	(110, 1, '9900004023', '', '', 'Puros Tripa Larga', '2021-05-18', 232, 53, 3, 2, 1, 10, 1, 1000, NULL, NULL, 1000.00),
+	(111, 1, '00107000', '', '', 'Puros Tripa Larga', '2021-05-18', 105, 141, 15, 53, 9, 15, 1, 9000, NULL, NULL, 9000.00),
+	(112, 1, '9900004011', '', '', 'Puros Tripa Larga', '2021-05-18', 230, 228, 2, 1, 1, 7, 1, 2000, NULL, NULL, 2000.00),
+	(113, 1, '9900004012', '', '', 'Puros Tripa Larga', '2021-05-18', 230, 228, 3, 2, 1, 7, 1, 3000, NULL, NULL, 3000.00),
+	(114, 1, NULL, '', '', NULL, '2021-05-18', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 2000, NULL, NULL, 2000.00),
+	(115, 1, '9900004016', '', '', 'Puros Tripa Larga', '2021-05-18', 231, 228, 2, 1, 1, 10, 1, 1000, NULL, NULL, 1000.00),
+	(116, 1, '12503005', '', '', NULL, '2021-05-18', 240, 63, 19, 30, 2, 7, 1, 800, NULL, NULL, 800.00),
+	(117, 1, '12503003', '', '', NULL, '2021-05-18', 240, 63, 4, 2, 1, 7, 1, 800, NULL, NULL, 800.00),
+	(118, 1, '12503010', '', '', 'Puros Tripa Larga', '2021-05-18', 240, 63, 1, 1, 1, 7, 1, 800, NULL, NULL, 800.00),
+	(119, 1, '10105555', '', '', 'Puros Tripa Corta', '2021-05-18', 225, 227, 1, 1, 1, 10, 1, 2000, NULL, NULL, 2000.00),
+	(120, 1, '10105556', '', '', 'Puros Tripa Corta', '2021-05-18', 225, 227, 4, 2, 1, 10, 1, 2000, NULL, NULL, 2000.00),
+	(121, 1, '10104750', '', '', 'Puros Tripa Larga', '2021-05-18', 124, 101, 2, 5, 4, 7, 1, 2400, NULL, NULL, 2400.00),
+	(122, 1, '10104751', '', '', 'Puros Tripa Larga', '2021-05-18', 53, 101, 3, 35, 4, 7, 1, 4000, NULL, NULL, 4000.00),
+	(123, 1, '10104752', '', '', 'Puros Tripa Larga', '2021-05-18', 53, 101, 16, 36, 4, 7, 1, 800, NULL, NULL, 800.00),
+	(124, 1, '10104754', '', '', 'Puros Tripa Larga', '2021-05-18', 53, 101, 9, 37, 4, 7, 1, 800, NULL, NULL, 800.00),
+	(125, 1, '10104150', '', '', NULL, '2021-05-18', 249, 101, 44, 61, 4, 7, 1, 2000, NULL, NULL, 2000.00),
+	(126, 1, '15003000', '', '', 'Puros Tripa Larga', '2021-05-18', 161, 184, 24, 6, 2, 7, 1, 2000, NULL, NULL, 2000.00),
+	(127, 1, '15004001', '', '', 'Puros Tripa Larga', '2021-05-18', 229, 184, 5, 51, 2, 7, 1, 2000, NULL, NULL, 2000.00),
+	(128, 1, '00110276', '', '', NULL, '2021-05-18', 241, 72, 2, 1, 6, 23, NULL, 500, NULL, NULL, 500.00),
+	(129, 1, '00110275', '', '', 'Puros Tripa Larga', '2021-05-18', 241, 72, 2, 1, 5, 23, NULL, 500, NULL, NULL, 500.00),
+	(130, 1, '00110277', '', '', 'Puros Tripa Larga', '2021-05-18', 241, 72, 2, 1, 2, 23, NULL, 500, NULL, NULL, 500.00),
+	(131, 1, '10104912', '', '', 'Puros Tripa Larga', '2021-05-18', 157, 51, 2, 1, 5, 23, 1, 14300, NULL, NULL, 14300.00),
+	(132, 1, '00904038', '', '', 'Puros Tripa Larga', '2021-05-18', 36, 51, 4, 2, 2, 14, 1, NULL, NULL, NULL, NULL),
+	(133, 2, '00504026', '', '', 'Puros Tripa Larga', '2021-05-18', 145, 51, 4, 2, 5, 11, 3, 3000, NULL, NULL, 3000.00),
+	(134, 2, '00504009', '', '', 'Puros Tripa Larga', '2021-05-18', 209, 51, 4, 2, 5, 12, 1, 1000, NULL, NULL, 1000.00),
+	(135, 2, '47801040', '', '', NULL, '2021-05-18', 146, 148, 4, 2, 5, 10, 1, 3000, NULL, NULL, 3000.00),
+	(136, 2, '00804065', '', '', NULL, '2021-05-18', 216, 209, 18, 6, 2, 7, 1, 400, NULL, NULL, 400.00),
+	(137, 2, '603004050', '', '', 'Puros Tripa Larga', '2021-05-18', 130, 88, 4, 3, 13, 11, 1, 3000, NULL, NULL, 3000.00),
+	(138, 2, '00904111', '', '', 'Puros Tripa Larga', '2021-05-18', 168, 186, 3, 3, 2, 9, 1, 500, NULL, NULL, 500.00),
+	(139, 2, '01104000', '', '', 'Puros Tripa Larga', '2021-05-18', 34, 59, 4, 3, 2, 13, 3, 1750, NULL, NULL, 1750.00),
+	(140, 2, '01103006', '', '', 'Puros Tripa Larga', '2021-05-18', 181, 59, 4, 3, 2, 11, 1, 2500, NULL, NULL, 2500.00),
+	(141, 2, '01103010', '', '', 'Puros Tripa Larga', '2021-05-18', 184, 59, 38, 68, 2, 11, 1, 1000, NULL, NULL, 1000.00),
+	(142, 2, '47801563', '', '', 'Puros Tripa Corta', '2021-05-18', 217, 166, 4, 2, 2, 10, 1, 60000, NULL, NULL, 60000.00),
+	(143, 2, '00404005', '', '', 'Puros Tripa Larga', '2021-05-18', 102, 67, 3, 2, 3, 12, 1, 5000, NULL, NULL, 5000.00),
+	(144, 2, '00408003', '', '', 'Puros Tripa Larga', '2021-05-18', 215, 67, 9, 40, 3, 12, 1, 7500, NULL, NULL, 7500.00),
+	(145, 2, '20005006', '', '', 'Puros Tripa Larga', '2021-05-18', 188, 90, 3, 3, 3, 11, 1, 25000, NULL, NULL, 25000.00),
+	(146, 2, '20005016', '', '', 'Puros Tripa Larga', '2021-05-18', 130, 90, 1, 6, 3, 11, 1, 40000, NULL, NULL, 40000.00),
+	(147, 2, '00504048', '', '', 'Puros Tripa Larga', '2021-05-18', 108, 51, 4, 2, 3, 11, 1, 5000, NULL, NULL, 5000.00),
+	(148, 2, '00504048', '', '', 'Puros Tripa Larga', '2021-05-18', 108, 51, 4, 2, 3, 11, 1, 500, NULL, NULL, 500.00),
+	(149, 2, '40503005', '', '', 'Puros Tripa Larga', '2021-05-18', 229, 51, 18, 80, 3, 7, 1, 10000, NULL, NULL, 10000.00),
+	(150, 2, '40503022', '', '', 'Puros Tripa Larga', '2021-05-18', 229, 51, 18, 80, 3, 9, 1, 3000, NULL, NULL, 3000.00),
+	(151, 2, '40503016', '', '', 'Puros Tripa Larga', '2021-05-18', 229, 51, 18, 80, 3, 11, 1, 2500, NULL, NULL, 2500.00),
+	(152, 2, '6030066060', '', '', 'Puros Tripa Larga', '2021-05-18', 217, 56, 4, 2, 3, 9, 1, 5000, NULL, NULL, 5000.00),
+	(153, 2, '47801044', '', '', NULL, '2021-05-18', 146, 148, 4, 2, 3, 10, 1, 3000, NULL, NULL, 3000.00),
+	(154, 2, '14399005', '', '', NULL, '2021-05-18', 184, 147, 2, 6, 3, 11, 1, 400, NULL, NULL, 400.00),
+	(155, 2, '14399006', '', '', 'Puros Tripa Larga', '2021-05-18', 181, 147, 3, 3, 3, 11, 1, 4000, NULL, NULL, 4000.00),
+	(156, 2, '14399010', '', '', 'Puros Tripa Larga', '2021-05-18', 184, 147, 9, 11, 3, 11, 1, 1500, NULL, NULL, 1500.00),
+	(157, 2, '47801501', '', '', 'Puros Tripa Larga', '2021-05-18', 171, 220, 8, 1, 13, 10, 4, 600, NULL, NULL, 600.00),
+	(158, 2, '40503004', '', '', 'Puros Tripa Larga', '2021-05-18', 229, 99, 18, 80, 6, 7, 1, 10000, NULL, NULL, 10000.00),
+	(159, 2, '40503021', '', '', NULL, '2021-05-18', 229, 99, 18, 80, 6, 9, 1, 3000, NULL, NULL, 3000.00),
+	(160, 2, '40503015', '', '', NULL, '2021-05-18', 229, 99, 18, 80, 6, 11, 1, 2500, NULL, NULL, 2500.00),
+	(161, 2, '00704004', '', '', 'Puros Tripa Larga', '2021-05-18', 87, 99, 4, 2, 6, 12, 1, 20000, NULL, NULL, 20000.00),
+	(162, 2, '47801004', '', '', 'Puros Tripa Larga', '2021-05-18', 181, 168, 5, 4, 6, 7, 1, 2000, NULL, NULL, 2000.00),
+	(163, 2, '47801002', '', '', 'Puros Tripa Larga', '2021-05-18', 181, 168, 3, 14, 6, 7, 1, 1200, NULL, NULL, 1200.00),
+	(164, 2, '47705002', '', '', 'Puros Tripa Larga', '2021-05-18', 220, 168, 3, 14, 6, 11, 1, 7500, NULL, NULL, 7500.00),
+	(165, 2, '01606872', '', '', 'Puros Tripa Larga', '2021-05-18', 31, 56, 4, 2, 6, 11, 1, 2500, NULL, NULL, 2500.00),
+	(166, 2, '47801042', '', '', NULL, '2021-05-18', 119, 148, 4, 2, 6, 10, 1, 3000, NULL, NULL, 3000.00),
+	(167, 2, '40503003', '', '', 'Puros Tripa Larga', '2021-05-18', 229, 61, 18, 24, 1, 7, 1, 10000, NULL, NULL, 10000.00),
+	(168, 2, '40503020', '', '', 'Puros Tripa Larga', '2021-05-18', 229, 61, 18, 24, 1, 9, 1, 3000, NULL, NULL, 3000.00),
+	(169, 2, '40503014', '', '', 'Puros Tripa Larga', '2021-05-18', 229, 61, 18, 24, 1, 11, 1, 2500, NULL, NULL, 2500.00),
+	(170, 2, '12506011', '', '', 'Puros Tripa Larga', '2021-05-18', 63, 61, 4, 14, 1, 12, 1, 1000, NULL, NULL, 1000.00),
+	(171, 2, '603004023', '', '', 'Puros Tripa Larga', '2021-05-18', 96, 88, 4, 3, 1, 12, 1, 1250, NULL, NULL, 1250.00),
+	(172, 2, '603004023', '', '', 'Puros Tripa Larga', '2021-05-18', 96, 88, 4, 3, 1, 12, 1, 5000, NULL, NULL, 5000.00),
+	(173, 2, '603004031', '', '', 'Puros Tripa Larga', '2021-05-18', 176, 88, 4, 3, 1, 11, 1, 750, NULL, NULL, 750.00),
+	(174, 2, '20018021', '', '', 'Puros Tripa Larga', '2021-05-18', 214, 113, 3, 2, 1, 12, 1, 1250, NULL, NULL, 1250.00),
+	(175, 2, '20018022', '', '', 'Puros Tripa Larga', '2021-05-18', 214, 113, 9, 11, 1, 12, 1, 1250, NULL, NULL, 1250.00),
+	(176, 2, '01103004', '', '', 'Puros Tripa Larga', '2021-05-18', 181, 59, 1, 6, 18, 11, 1, 325, NULL, NULL, 325.00),
+	(177, 2, '41112001', '', '', NULL, '2021-05-18', 184, 59, 22, 74, 1, 11, 1, 200, NULL, NULL, 200.00),
+	(178, 2, '47801420', '', '', 'Puros Tripa Corta', '2021-05-18', 88, 60, 1, 1, 8, 10, 1, 60000, NULL, NULL, 60000.00),
+	(179, 2, '47801421', '', '', 'Puros Tripa Corta', '2021-05-18', 35, 60, 4, 2, 8, 10, 1, 60000, NULL, NULL, 60000.00),
+	(180, 2, '47801561', '', '', 'Puros Tripa Corta', '2021-05-18', 217, 166, 4, 2, 1, 10, 1, 60000, NULL, NULL, 60000.00),
+	(181, 2, '47801043', '', '', NULL, '2021-05-18', 146, 148, 4, 2, 1, 10, 1, 3000, NULL, NULL, 3000.00),
+	(182, 2, '47801890', '', '', 'Puros Tripa Larga', '2021-05-18', 147, 57, 2, 1, 1, 9, 1, 1400, NULL, NULL, 1400.00),
+	(183, 2, '47801892', '', '', 'Puros Tripa Larga', '2021-05-18', 32, 57, 9, 16, 1, 9, 1, 1600, NULL, NULL, 1600.00),
+	(184, 2, '10104775', '', '', 'Puros Tripa Larga', '2021-05-18', 78, 101, 3, 35, 4, 12, 1, 2000, NULL, NULL, 2000.00),
+	(185, 2, '10104772', '', '', 'Puros Tripa Larga', '2021-05-18', 214, 101, 5, 38, 4, 12, 1, 1250, NULL, NULL, 1250.00),
+	(186, 2, '10104778', '', '', 'Puros Tripa Larga', '2021-05-18', 130, 101, 2, 5, 4, 11, 1, 700, NULL, NULL, 700.00),
+	(187, 2, '10499060', '', '', NULL, '2021-05-18', 183, 197, 1, 6, 3, 11, 1, NULL, NULL, NULL, NULL),
+	(188, 2, '10499015', '', '', NULL, '2021-05-18', 181, 204, 3, 3, 3, 11, 1, NULL, NULL, NULL, NULL),
+	(189, 2, '10499010', '', '', 'Puros Tripa Corta', '2021-05-18', 147, 176, 4, 2, 6, 25, 1, NULL, NULL, NULL, NULL),
+	(190, 3, '12104000', '', '', NULL, '2021-05-18', 218, 134, 3, 3, 5, 7, 1, 2400, NULL, NULL, 2400.00),
+	(191, 3, '11803000', '', '', 'Puros Tripa Larga', '2021-05-18', 218, 132, 2, 1, 6, 7, 1, 4000, NULL, NULL, 4000.00),
+	(192, 3, '11812002', '', '', NULL, '2021-05-18', 90, 132, 9, 11, 6, 7, 1, 2000, NULL, NULL, 2000.00),
+	(193, 3, '11812010', '', '', 'Puros Tripa Larga', '2021-05-18', 219, 132, 4, 2, 6, 12, 1, 5000, NULL, NULL, 5000.00),
+	(194, 3, '11803002', '', '', 'Puros Tripa Larga', '2021-05-18', 219, 132, 2, 1, 6, 12, 1, 3000, NULL, NULL, 3000.00),
+	(195, 3, '11812008', '', '', 'Puros Tripa Larga', '2021-05-18', 219, 132, 31, 4, 6, 12, 1, 2000, NULL, NULL, 2000.00),
+	(196, 3, '11710050', '', '', NULL, '2021-05-18', 218, 183, 2, 1, 3, 7, 1, 1000, NULL, NULL, 1000.00),
+	(197, 3, '11710052', '', '', 'Puros Tripa Larga', '2021-05-18', 156, 183, 16, 14, 3, 7, 1, 2000, NULL, NULL, 2000.00),
+	(198, 3, '11710055', '', '', NULL, '2021-05-18', 219, 183, 2, 1, 3, 12, 1, 2000, NULL, NULL, 2000.00),
+	(199, 3, '12301000', '', '', NULL, '2021-05-18', 218, 135, 19, 25, 3, 7, 1, 2000, NULL, NULL, 2000.00),
+	(200, 3, '12303000', '', '', 'Puros Tripa Larga', '2021-05-18', 218, 135, 2, 1, 3, 7, 1, 2000, NULL, NULL, 2000.00),
+	(201, 3, '13403010', '', '', 'Puros Tripa Larga', '2021-05-18', 219, 135, 3, 2, 3, 12, 1, 6000, NULL, NULL, 6000.00),
+	(202, 3, '12003050', '', '', 'Puros Tripa Larga', '2021-05-18', 94, 105, 4, 2, 1, 7, 1, 4000, NULL, NULL, 4000.00),
+	(203, 3, '12003051', '', '', 'Puros Tripa Larga', '2021-05-18', 94, 105, 4, 14, 1, 7, 1, 2000, NULL, NULL, 2000.00),
+	(204, 3, '12003061', '', '', 'Puros Tripa Larga', '2021-05-18', 219, 105, 9, 11, 1, 12, 1, 2000, NULL, NULL, 2000.00),
+	(205, 3, '12003062', '', '', 'Puros Tripa Larga', '2021-05-18', 219, 105, 4, 14, 1, 12, 1, 1000, NULL, NULL, 1000.00),
+	(206, 3, '12003060', '', '', 'Puros Tripa Larga', '2021-05-18', 219, 105, 4, 2, 1, 12, 1, 6000, NULL, NULL, 6000.00),
+	(207, 3, '12003001', '', '', 'Puros Tripa Larga', '2021-05-18', 219, 133, 2, 1, 5, 12, 1, 2000, NULL, NULL, 2000.00),
+	(208, 3, '12002998', '', '', 'Puros Tripa Larga', '2021-05-18', 219, 133, 4, 2, 2, 12, 1, 4000, NULL, NULL, 4000.00),
+	(209, 3, '12002999', '', '', NULL, '2021-05-18', 219, 133, 4, 2, 5, 12, 1, 6000, NULL, NULL, 6000.00),
+	(210, 3, '12004001', '', '', NULL, '2021-05-18', 218, 133, 4, 2, 5, 7, 1, 2000, NULL, NULL, 2000.00),
+	(211, 3, '12004000', '', '', 'Puros Tripa Larga', '2021-05-18', 218, 133, 4, 2, 2, 7, 1, 2000, NULL, NULL, 2000.00),
+	(212, 3, '12003003', '', '', 'Puros Tripa Larga', '2021-05-18', 218, 133, 2, 1, 5, 7, 1, 1000, NULL, NULL, 1000.00),
+	(213, 3, '12003002', '', '', 'Puros Tripa Larga', '2021-05-18', 218, 133, 2, 1, 2, 7, 1, 1000, NULL, NULL, 1000.00),
+	(214, 3, '12003005', '', '', NULL, '2021-05-18', 91, 133, 22, 34, 5, 7, 1, 1000, NULL, NULL, 1000.00),
+	(215, 3, '12003007', '', '', 'Puros Tripa Larga', '2021-05-18', 91, 133, 22, 34, 2, 7, 1, 1000, NULL, NULL, 1000.00),
+	(216, 3, '12005003', '', '', 'Puros Tripa Larga', '2021-05-18', 91, 133, 9, 11, 2, 7, 1, 2000, NULL, NULL, 2000.00),
+	(217, 3, '11707003', '', '', 'Puros Tripa Larga', '2021-05-18', 73, 138, 15, 48, 6, 17, 4, 32000, NULL, NULL, 32000.00),
+	(218, 3, '09906000', '', '', 'Puros Tripa Larga', '2021-05-18', 183, 219, 3, 3, 3, 24, 4, 360, NULL, NULL, 360.00),
+	(219, 3, '09906012', '', '', NULL, '2021-05-18', 206, 181, 4, 2, 6, 20, 4, 1920, NULL, NULL, 1920.00),
+	(220, 3, '09906018', '', '', 'Puros Tripa Larga', '2021-05-18', 237, 181, 22, 34, 6, 20, 4, 480, NULL, NULL, 480.00),
+	(221, 3, '09906035', '', '', 'Puros Tripa Larga', '2021-05-18', 111, 161, 4, 2, 2, 20, 4, 320, NULL, NULL, 320.00),
+	(222, 3, '09906037', '', '', NULL, '2021-05-18', 183, 182, 3, 2, 3, 22, 4, 750, NULL, NULL, 750.00),
+	(223, 3, '09906039', '', '', 'Puros Tripa Larga', '2021-05-18', 148, 182, 9, 40, 3, 22, 4, 1200, NULL, NULL, 1200.00),
+	(224, 3, '10610017', '', '', 'Puros Tripa Larga', '2021-05-18', 223, 162, 9, 11, 5, 22, 4, 750, NULL, NULL, 750.00),
+	(225, 3, '10610018', '', '', 'Puros Tripa Larga', '2021-05-18', 129, 162, 9, 11, 2, 22, 4, 750, NULL, NULL, 750.00),
+	(226, 3, '10610019', '', '', NULL, '2021-05-18', 129, 162, 4, 2, 5, 22, 4, 750, NULL, NULL, 750.00),
+	(227, 3, '10610020', '', '', NULL, '2021-05-18', 223, 162, 4, 2, 2, 22, 4, 1500, NULL, NULL, 1500.00),
+	(228, 4, '00503009', '', '', 'Puros Tripa Larga', '2021-05-18', 222, 51, 6, 43, 5, 7, 1, 1000, NULL, NULL, 1000.00),
+	(229, 4, '00504100', '', '', 'Puros Tripa Larga', '2021-05-18', 123, 51, 2, 1, 5, 7, 1, 100, NULL, NULL, 100.00),
+	(230, 4, '00504007', '', '', 'Puros Tripa Larga', '2021-05-18', 66, 51, 4, 2, 2, 18, 3, 400, NULL, NULL, 400.00),
+	(231, 4, '00508011', '', '', 'Puros Tripa Larga', '2021-05-18', 53, 51, 21, 33, 2, 19, 1, 300, NULL, NULL, 300.00),
+	(232, 4, '00503008', '', '', 'Puros Tripa Larga', '2021-05-18', 80, 51, 6, 43, 2, 7, 1, 400, NULL, NULL, 400.00),
+	(233, 4, '00504101', '', '', 'Puros Tripa Larga', '2021-05-18', 95, 51, 2, 1, 2, 7, 3, 400, NULL, NULL, 400.00),
+	(234, 4, '00504101', '', '', 'Puros Tripa Larga', '2021-05-18', 95, 51, 2, 1, 2, 7, 3, 200, NULL, NULL, 200.00),
+	(235, 4, '00504003', '', '', 'Puros Tripa Larga', '2021-05-18', 95, 51, 4, 2, 2, 7, 3, 400, NULL, NULL, 400.00),
+	(236, 4, '00508001', '', '', 'Puros Tripa Larga', '2021-05-18', 53, 51, 9, 32, 2, 7, 3, 200, NULL, NULL, 200.00),
+	(237, 4, '00303050', '', '', NULL, '2021-05-18', 211, 15, 25, 77, 2, 4, NULL, 150, NULL, NULL, 150.00),
+	(238, 4, '00303007', '', '', 'Puros Tripa Larga', '2021-05-18', 67, 67, 25, 2, 3, 4, 1, 500, NULL, NULL, 500.00),
+	(239, 4, '00303007', '', '', 'Puros Tripa Larga', '2021-05-18', 67, 67, 25, 2, 3, 4, 1, 200, NULL, NULL, 200.00),
+	(240, 4, '00303007', '', '', 'Puros Tripa Larga', '2021-05-18', 67, 67, 25, 2, 3, 4, 1, 160, NULL, NULL, 160.00),
+	(241, 4, '00407000', '', '', 'Puros Tripa Larga', '2021-05-18', 123, 158, 15, 46, 9, 15, 1, 1400, NULL, NULL, 1400.00),
+	(242, 4, '00408000', '', '', 'Puros Tripa Larga', '2021-05-18', 66, 67, 9, 40, 3, 7, 3, 140, NULL, NULL, 140.00),
+	(243, 4, '10104210', '', '', NULL, '2021-05-18', 213, 14, 2, 6, 3, 7, 1, 140, NULL, NULL, 140.00),
+	(244, 4, '00303051', '', '', NULL, '2021-05-18', 248, 14, 25, 35, 3, 4, 1, 100, NULL, NULL, 100.00),
+	(245, 4, '00303051', '', '', NULL, '2021-05-18', 248, 14, 25, 35, 3, 4, 1, 40, NULL, NULL, 40.00),
+	(246, 4, '20005000', '', '', 'Puros Tripa Larga', '2021-05-18', 95, 90, 1, 6, 3, 7, 1, 380, NULL, NULL, 380.00),
+	(247, 4, '20005000', '', '', 'Puros Tripa Larga', '2021-05-18', 95, 90, 1, 6, 3, 7, 1, 200, NULL, NULL, 200.00),
+	(248, 4, '20005010', '', '', 'Puros Tripa Larga', '2021-05-18', 95, 90, 3, 35, 3, 4, NULL, 50, NULL, NULL, 50.00),
+	(249, 4, '20005007', '', '', 'Puros Tripa Larga', '2021-05-18', 53, 90, 9, 26, 3, 7, 1, 200, NULL, NULL, 200.00),
+	(250, 4, '20005010', '', '', 'Puros Tripa Larga', '2021-05-18', 95, 90, 3, 35, 3, 4, NULL, 200, NULL, NULL, 200.00),
+	(251, 4, '00504032', '', '', 'Puros Tripa Larga', '2021-05-18', 95, 51, 4, 2, 3, 7, 1, 100, NULL, NULL, 100.00),
+	(252, 4, '00703003', '', '', 'Puros Tripa Larga', '2021-05-18', 95, 99, 2, 1, 6, 7, 1, 460, NULL, NULL, 460.00),
+	(253, 4, '00704003', '', '', 'Puros Tripa Larga', '2021-05-18', 122, 99, 4, 2, 6, 7, 1, 100, NULL, NULL, 100.00),
+	(254, 4, '00302007', '', '', 'Puros Tripa Larga', '2021-05-18', 193, 86, 3, 2, 6, 7, 1, 1000, NULL, NULL, 1000.00),
+	(255, 4, '00302007', '', '', 'Puros Tripa Larga', '2021-05-18', 193, 86, 3, 2, 6, 7, 1, 100, NULL, NULL, 100.00),
+	(256, 4, '00302009', '', '', 'Puros Tripa Larga', '2021-05-18', 213, 86, 9, 11, 6, 7, 1, 40, NULL, NULL, 40.00),
+	(257, 4, '00302004', '', '', NULL, '2021-05-18', 124, 86, 37, 61, 6, 3, 1, 20, NULL, NULL, 20.00),
+	(258, 4, '00303065', '', '', 'Puros Tripa Larga', '2021-05-18', 123, 86, 2, 1, 6, 10, 1, 200, NULL, NULL, 200.00),
+	(259, 4, '00507001', '', '', 'Puros Tripa Larga', '2021-05-18', 122, 159, 15, 62, 6, 15, 1, 1700, NULL, NULL, 1700.00),
+	(260, 4, '20018002', '', '', 'Puros Tripa Larga', '2021-05-18', 244, 113, 9, 11, 1, 7, 1, 600, NULL, NULL, 600.00),
+	(261, 4, '12506001', '', '', 'Puros Tripa Larga', '2021-05-18', 38, 61, 4, 2, 1, 16, 1, 200, NULL, NULL, 200.00),
+	(262, 4, '12506021', '', '', 'Puros Tripa Larga', '2021-05-18', 53, 61, 4, 14, 1, 7, 1, 80, NULL, NULL, 80.00),
+	(263, 4, '00107000', '', '', 'Puros Tripa Larga', '2021-05-18', 105, 141, 15, 53, 9, 15, 1, 500, NULL, NULL, 500.00),
+	(264, 4, '603004002', '', '', 'Puros Tripa Larga', '2021-05-18', 53, 88, 4, 3, 1, 7, 1, 240, NULL, NULL, 240.00),
+	(265, 4, '01607602', '', '', 'Puros Tripa Larga', '2021-05-18', 53, 95, 3, 2, 11, 7, 1, 160, NULL, NULL, 160.00),
+	(266, 4, '01607602', '', '', 'Puros Tripa Larga', '2021-05-18', 53, 95, 3, 2, 11, 7, 1, 200, NULL, NULL, 200.00),
+	(267, 4, '01607603', '', '', 'Puros Tripa Larga', '2021-05-18', 53, 95, 9, 11, 11, 7, 1, 200, NULL, NULL, 200.00),
+	(268, 4, '01606677', '', '', 'Puros Tripa Larga', '2021-05-18', 53, 40, 9, 11, 5, 7, 1, 300, NULL, NULL, 300.00),
+	(269, 4, '01606678', '', '', 'Puros Tripa Larga', '2021-05-18', 95, 40, 3, 2, 5, 7, 1, 380, NULL, NULL, 380.00),
+	(270, 4, '01606678', '', '', 'Puros Tripa Larga', '2021-05-18', 95, 40, 3, 2, 5, 7, 1, 100, NULL, NULL, 100.00),
+	(271, 4, '01606677', '', '', 'Puros Tripa Larga', '2021-05-18', 53, 40, 9, 11, 5, 7, 1, 200, NULL, NULL, 200.00),
+	(272, 4, '10104750', '', '', 'Puros Tripa Larga', '2021-05-18', 124, 101, 2, 5, 4, 7, 1, 600, NULL, NULL, 600.00),
+	(273, 4, '10104754', '', '', 'Puros Tripa Larga', '2021-05-18', 53, 101, 9, 37, 4, 7, 1, 400, NULL, NULL, 400.00),
+	(274, 4, '00504150', '', '', 'Puros Tripa Larga', '2021-05-18', 95, 51, 4, 2, 15, 7, 1, 80, NULL, NULL, 80.00),
+	(275, 4, '00504150', '', '', 'Puros Tripa Larga', '2021-05-18', 95, 51, 4, 2, 15, 7, 1, 40, NULL, NULL, 40.00),
+	(276, 4, '00110347', '', '', NULL, '2021-05-18', 224, 226, 20, 30, 9, 7, 1, 400, NULL, NULL, 400.00),
+	(277, 4, '00110346', '', '', NULL, '2021-05-18', 224, 226, 4, 2, 9, 7, 1, 600, NULL, NULL, 600.00);
 /*!40000 ALTER TABLE `pendiente_empaque` ENABLE KEYS */;
 
--- Dumping structure for table facturacion_plasencia.prograamacion
+-- Volcando estructura para tabla facturacion_plasencia.prograamacion
 CREATE TABLE IF NOT EXISTS `prograamacion` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `fecha` date DEFAULT NULL,
-  `mes_contenedor` varchar(50) DEFAULT NULL,
-  `numero_contenedor_mes` varchar(50) DEFAULT NULL,
+  `mes_contenedor` varchar(100) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
 
--- Dumping data for table facturacion_plasencia.prograamacion: 0 rows
+-- Volcando datos para la tabla facturacion_plasencia.prograamacion: 2 rows
 DELETE FROM `prograamacion`;
 /*!40000 ALTER TABLE `prograamacion` DISABLE KEYS */;
+INSERT INTO `prograamacion` (`id`, `fecha`, `mes_contenedor`) VALUES
+	(2, '2021-05-17', 'primer contenedor de mayo'),
+	(3, '2021-05-17', 'segundo contenedor de mayo');
 /*!40000 ALTER TABLE `prograamacion` ENABLE KEYS */;
 
--- Dumping structure for table facturacion_plasencia.sample_datas
+-- Volcando estructura para tabla facturacion_plasencia.sample_datas
 CREATE TABLE IF NOT EXISTS `sample_datas` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `first_name` varchar(50) DEFAULT NULL,
@@ -6683,7 +5942,7 @@ CREATE TABLE IF NOT EXISTS `sample_datas` (
   PRIMARY KEY (`id`) USING BTREE
 ) ENGINE=MyISAM AUTO_INCREMENT=15 DEFAULT CHARSET=latin1;
 
--- Dumping data for table facturacion_plasencia.sample_datas: 2 rows
+-- Volcando datos para la tabla facturacion_plasencia.sample_datas: 2 rows
 DELETE FROM `sample_datas`;
 /*!40000 ALTER TABLE `sample_datas` DISABLE KEYS */;
 INSERT INTO `sample_datas` (`id`, `first_name`, `last_name`, `gender`, `created_at`, `update_at`) VALUES
@@ -6691,7 +5950,7 @@ INSERT INTO `sample_datas` (`id`, `first_name`, `last_name`, `gender`, `created_
 	(14, 'Karina', 'Sevilla', 3443, NULL, NULL);
 /*!40000 ALTER TABLE `sample_datas` ENABLE KEYS */;
 
--- Dumping structure for table facturacion_plasencia.tabla_codigo_programacions
+-- Volcando estructura para tabla facturacion_plasencia.tabla_codigo_programacions
 CREATE TABLE IF NOT EXISTS `tabla_codigo_programacions` (
   `codigo` varchar(50) DEFAULT NULL,
   `presentacion` varchar(50) DEFAULT NULL,
@@ -6703,7 +5962,7 @@ CREATE TABLE IF NOT EXISTS `tabla_codigo_programacions` (
   `created_at` timestamp NULL DEFAULT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
--- Dumping data for table facturacion_plasencia.tabla_codigo_programacions: 620 rows
+-- Volcando datos para la tabla facturacion_plasencia.tabla_codigo_programacions: 620 rows
 DELETE FROM `tabla_codigo_programacions`;
 /*!40000 ALTER TABLE `tabla_codigo_programacions` DISABLE KEYS */;
 INSERT INTO `tabla_codigo_programacions` (`codigo`, `presentacion`, `marca`, `nombre`, `vitola`, `capa`, `updated_at`, `created_at`) VALUES
@@ -7329,154 +6588,137 @@ INSERT INTO `tabla_codigo_programacions` (`codigo`, `presentacion`, `marca`, `no
 	('P-23763', 'Puros Tripa Larga', 230, 1, 2, 1, '2021-05-04 13:40:44', '2021-05-04 13:40:44');
 /*!40000 ALTER TABLE `tabla_codigo_programacions` ENABLE KEYS */;
 
--- Dumping structure for table facturacion_plasencia.tbl_customer
-CREATE TABLE IF NOT EXISTS `tbl_customer` (
-  `CustomerID` int(11) NOT NULL AUTO_INCREMENT,
-  `CustomerName` varchar(50) DEFAULT NULL,
-  `Gender` varchar(50) DEFAULT NULL,
-  `Address` varchar(50) DEFAULT NULL,
-  `City` varchar(50) DEFAULT NULL,
-  `PostalCode` varchar(50) DEFAULT NULL,
-  `Country` varchar(50) DEFAULT NULL,
-  PRIMARY KEY (`CustomerID`)
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
-
--- Dumping data for table facturacion_plasencia.tbl_customer: 0 rows
-DELETE FROM `tbl_customer`;
-/*!40000 ALTER TABLE `tbl_customer` DISABLE KEYS */;
-/*!40000 ALTER TABLE `tbl_customer` ENABLE KEYS */;
-
--- Dumping structure for table facturacion_plasencia.tipo_empaques
+-- Volcando estructura para tabla facturacion_plasencia.tipo_empaques
 CREATE TABLE IF NOT EXISTS `tipo_empaques` (
   `id_tipo_empaque` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
   `tipo_empaque` char(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `tipo_empaque_ingles` varchar(50) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
-  PRIMARY KEY (`id_tipo_empaque`),
-  UNIQUE KEY `tipo_empaque` (`tipo_empaque`)
+  PRIMARY KEY (`id_tipo_empaque`)
 ) ENGINE=MyISAM AUTO_INCREMENT=115 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- Dumping data for table facturacion_plasencia.tipo_empaques: 114 rows
+-- Volcando datos para la tabla facturacion_plasencia.tipo_empaques: 114 rows
 DELETE FROM `tipo_empaques`;
 /*!40000 ALTER TABLE `tipo_empaques` DISABLE KEYS */;
-INSERT INTO `tipo_empaques` (`id_tipo_empaque`, `tipo_empaque`, `created_at`, `updated_at`) VALUES
-	(1, 'BOX 6', '2021-04-08 21:40:44', '2021-04-08 21:40:44'),
-	(2, 'BOX 5', '2021-04-08 21:40:44', '2021-04-08 21:40:44'),
-	(3, 'BOX 20', '2021-04-08 21:40:44', '2021-04-08 21:40:44'),
-	(4, 'CAJAS 1/10', '2021-04-08 21:40:44', '2021-04-08 21:40:44'),
-	(5, 'CAJAS 1/6', '2021-04-08 21:40:44', '2021-04-08 21:40:44'),
-	(6, 'CAJAS 1/5', '2021-04-08 21:40:44', '2021-04-08 21:40:44'),
-	(7, 'CAJAS 1/20', '2021-04-08 21:40:44', '2021-04-08 21:40:44'),
-	(8, 'MAZOS 1/8', '2021-04-08 21:40:44', '2021-04-08 21:40:44'),
-	(9, 'MAZOS 1/10', '2021-04-08 21:40:44', '2021-04-08 21:40:44'),
-	(10, 'MAZOS 1/20', '2021-04-08 21:40:44', '2021-04-08 21:40:44'),
-	(11, 'MAZOS 1/5', '2021-04-08 21:40:44', '2021-04-08 21:40:44'),
-	(12, 'MAZOS 1/25', '2021-04-08 21:40:44', '2021-04-08 21:40:44'),
-	(13, 'CAJAS 1/25', '2021-04-08 21:40:44', '2021-04-08 21:40:44'),
-	(14, 'PK 4', '2021-04-08 21:40:44', '2021-04-08 21:40:44'),
-	(15, 'TINS 1/5', '2021-04-08 21:40:44', '2021-04-08 21:40:44'),
-	(16, 'CAJAS 1/100C', '2021-04-08 21:40:44', '2021-04-08 21:40:44'),
-	(17, 'CAJA 1/40', '2021-04-08 21:40:44', '2021-04-08 21:40:44'),
-	(18, 'CAJAS 1/100', '2021-04-08 21:40:44', '2021-04-08 21:40:44'),
-	(19, 'CAJAS 1/30', '2021-04-08 21:40:44', '2021-04-08 21:40:44'),
-	(20, 'MAZOS 1/16', '2021-04-08 21:40:44', '2021-04-08 21:40:44'),
-	(21, 'CAJAS 1/50', '2021-04-08 21:40:44', '2021-04-08 21:40:44'),
-	(22, 'MAZOS 1/15', '2021-04-08 21:40:44', '2021-04-08 21:40:44'),
-	(23, 'Display 5', '2021-04-08 21:40:45', '2021-04-08 21:40:45'),
-	(24, 'MAZOS 1/12', '2021-04-08 21:40:45', '2021-04-08 21:40:45'),
-	(25, 'MAZOS 1/30', '2021-04-08 21:40:45', '2021-04-08 21:40:45'),
-	(26, 'CAJAS 1/16', '2021-04-08 21:40:45', '2021-04-08 21:40:45'),
-	(27, 'N/D', '2021-04-28 20:52:06', '2021-04-28 20:52:06'),
-	(28, 'CAJAS 1/21', '2021-04-28 20:52:06', '2021-04-28 20:52:06'),
-	(29, 'CAJAS 1/13', '2021-04-28 20:52:06', '2021-04-28 20:52:06'),
-	(30, 'CAJAS 1/22', '2021-04-28 20:52:06', '2021-04-28 20:52:06'),
-	(31, 'CAJAS 1/27', '2021-04-28 20:52:06', '2021-04-28 20:52:06'),
-	(32, 'CAJAS 1/55', '2021-04-28 20:52:06', '2021-04-28 20:52:06'),
-	(33, 'MAZOS 1/24', '2021-04-28 20:52:06', '2021-04-28 20:52:06'),
-	(34, 'MAZOS 1/60', '2021-04-28 20:52:06', '2021-04-28 20:52:06'),
-	(35, 'PK 8/8', '2021-04-28 20:52:06', '2021-04-28 20:52:06'),
-	(36, 'CAJA 1/28', '2021-04-28 20:52:06', '2021-04-28 20:52:06'),
-	(37, 'MAZOS 1/22', '2021-04-28 20:52:06', '2021-04-28 20:52:06'),
-	(38, 'MAZOS 1/4', '2021-04-28 20:52:06', '2021-04-28 20:52:06'),
-	(39, 'CAJAS 1/3', '2021-04-28 20:52:06', '2021-04-28 20:52:06'),
-	(40, 'CAJAS 1/7', '2021-04-28 20:52:06', '2021-04-28 20:52:06'),
-	(41, 'ETCHE 1/20', '2021-04-28 20:52:06', '2021-04-28 20:52:06'),
-	(42, 'PACK 10/8', '2021-04-28 20:52:06', '2021-04-28 20:52:06'),
-	(43, 'CAJAS 1/15', '2021-04-28 20:52:06', '2021-04-28 20:52:06'),
-	(44, 'CAJAS 1/12', '2021-04-28 20:52:06', '2021-04-28 20:52:06'),
-	(45, 'PK-10/4', '2021-04-28 20:52:06', '2021-04-28 20:52:06'),
-	(46, 'PK-TINS', '2021-04-28 20:52:06', '2021-04-28 20:52:06'),
-	(47, 'CAJAS 1/24', '2021-04-28 20:52:06', '2021-04-28 20:52:06'),
-	(48, 'CAJAS 1/48', '2021-04-28 20:52:06', '2021-04-28 20:52:06'),
-	(49, 'MAZOS 1/50', '2021-04-28 20:52:06', '2021-04-28 20:52:06'),
-	(50, 'CAJAS 1/8', '2021-04-28 20:52:06', '2021-04-28 20:52:06'),
-	(51, 'PK/60', '2021-04-28 20:52:06', '2021-04-28 20:52:06'),
-	(52, 'CAJAS 1/26', '2021-04-28 20:52:06', '2021-04-28 20:52:06'),
-	(53, 'MAZOS 1/6', '2021-04-28 20:52:06', '2021-04-28 20:52:06'),
-	(54, 'TINS/8', '2021-04-28 20:52:06', '2021-04-28 20:52:06'),
-	(55, 'CAJA 1/4', '2021-04-28 20:52:06', '2021-04-28 20:52:06'),
-	(56, 'MAZOS 1/27', '2021-04-28 20:52:06', '2021-04-28 20:52:06'),
-	(57, 'BOLSA 1/1', '2021-04-28 20:52:06', '2021-04-28 20:52:06'),
-	(58, 'MAZOS 1/14', '2021-04-28 20:52:06', '2021-04-28 20:52:06'),
-	(59, 'MAZOS 1/48', '2021-04-28 20:52:06', '2021-04-28 20:52:06'),
-	(60, 'UPRIGHT 1/20', '2021-04-28 20:52:06', '2021-04-28 20:52:06'),
-	(61, 'PK-2/2', '2021-04-28 20:52:06', '2021-04-28 20:52:06'),
-	(62, 'CAJA 1/9', '2021-04-28 20:52:06', '2021-04-28 20:52:06'),
-	(63, 'MAZOS 1/2', '2021-04-28 20:52:06', '2021-04-28 20:52:06'),
-	(64, 'PK /40', '2021-04-28 20:52:06', '2021-04-28 20:52:06'),
-	(65, 'CAJAS 1/1', '2021-04-28 20:52:06', '2021-04-28 20:52:06'),
-	(66, 'PK 4/5', '2021-04-28 20:52:06', '2021-04-28 20:52:06'),
-	(67, 'MAZOS 1/9', '2021-04-28 20:52:06', '2021-04-28 20:52:06'),
-	(68, 'MAZOS 1/3', '2021-04-28 20:52:06', '2021-04-28 20:52:06'),
-	(69, 'CAJAS 1/18', '2021-04-28 20:52:06', '2021-04-28 20:52:06'),
-	(70, 'PK 20/2', '2021-04-28 20:52:06', '2021-04-28 20:52:06'),
-	(71, 'TINS 1/10', '2021-04-28 20:52:06', '2021-04-28 20:52:06'),
-	(72, 'MAZOS 1/55', '2021-04-28 20:52:06', '2021-04-28 20:52:06'),
-	(73, 'MAZOS 1/21', '2021-04-28 20:52:06', '2021-04-28 20:52:06'),
-	(74, 'MAZOS 1/18', '2021-04-28 20:52:06', '2021-04-28 20:52:06'),
-	(75, 'CAJAS 1/725', '2021-04-28 20:52:06', '2021-04-28 20:52:06'),
-	(76, 'MAZOS 1/19', '2021-04-28 20:52:06', '2021-04-28 20:52:06'),
-	(77, 'PK-6/8', '2021-04-28 20:52:06', '2021-04-28 20:52:06'),
-	(78, 'MAZOS 1/11', '2021-04-28 20:52:06', '2021-04-28 20:52:06'),
-	(79, 'MAZOS 1/23', '2021-04-28 20:52:06', '2021-04-28 20:52:06'),
-	(80, 'PK-3/10', '2021-04-28 20:52:06', '2021-04-28 20:52:06'),
-	(81, 'MAZOS 1/40', '2021-04-28 20:52:06', '2021-04-28 20:52:06'),
-	(82, 'CAJAS 1/60', '2021-04-28 20:52:06', '2021-04-28 20:52:06'),
-	(83, 'MAZOS 1/1', '2021-04-28 20:52:06', '2021-04-28 20:52:06'),
-	(84, 'MAZOS 1/28', '2021-04-28 20:52:06', '2021-04-28 20:52:06'),
-	(85, 'CAJAS 1/250', '2021-04-28 20:52:06', '2021-04-28 20:52:06'),
-	(86, 'MAZOS 1/100', '2021-04-28 20:52:06', '2021-04-28 20:52:06'),
-	(87, 'MAZOS 1/7', '2021-04-28 20:52:06', '2021-04-28 20:52:06'),
-	(88, 'MAZOS 1/13', '2021-04-28 20:52:06', '2021-04-28 20:52:06'),
-	(89, 'CAJAS 1/14', '2021-04-28 20:52:06', '2021-04-28 20:52:06'),
-	(90, 'CAJAS 1/75', '2021-04-28 20:52:06', '2021-04-28 20:52:06'),
-	(91, 'BOLSA 1/3', '2021-04-28 20:52:06', '2021-04-28 20:52:06'),
-	(92, 'TINS 1/7', '2021-04-28 20:52:06', '2021-04-28 20:52:06'),
-	(93, 'MAZOS 1/29', '2021-04-28 20:52:07', '2021-04-28 20:52:07'),
-	(94, 'MOLDES 1/10', '2021-04-28 20:52:07', '2021-04-28 20:52:07'),
-	(95, 'PK 5/8', '2021-04-28 20:52:07', '2021-04-28 20:52:07'),
-	(96, 'Jars of 16', '2021-04-28 20:52:07', '2021-04-28 20:52:07'),
-	(97, 'Jars of 20', '2021-04-28 20:52:07', '2021-04-28 20:52:07'),
-	(98, 'CENICEROS 1/5', '2021-04-28 20:52:07', '2021-04-28 20:52:07'),
-	(99, 'CAJA 1/36', '2021-04-28 20:52:07', '2021-04-28 20:52:07'),
-	(100, 'CAJON 1/160', '2021-04-28 20:52:07', '2021-04-28 20:52:07'),
-	(101, 'CAJON/140', '2021-04-28 20:52:07', '2021-04-28 20:52:07'),
-	(102, 'MAZOS 1/150', '2021-04-28 20:52:07', '2021-04-28 20:52:07'),
-	(103, 'BOLSA 1/4', '2021-04-28 20:52:07', '2021-04-28 20:52:07'),
-	(104, 'PACK 1/35', '2021-04-28 20:52:07', '2021-04-28 20:52:07'),
-	(105, 'PK-1/20', '2021-04-28 20:52:07', '2021-04-28 20:52:07'),
-	(106, 'PK-1/25', '2021-04-28 20:52:07', '2021-04-28 20:52:07'),
-	(107, 'PACK 1/10', '2021-04-28 20:52:07', '2021-04-28 20:52:07'),
-	(108, 'PACK 1/5', '2021-04-28 20:52:07', '2021-04-28 20:52:07'),
-	(109, 'Display 12', '2021-04-28 20:52:07', '2021-04-28 20:52:07'),
-	(110, 'Displays/10', '2021-04-28 20:52:07', '2021-04-28 20:52:07'),
-	(111, 'PK/100', '2021-04-28 20:52:07', '2021-04-28 20:52:07'),
-	(112, 'PK/12', '2021-04-28 20:52:07', '2021-04-28 20:52:07'),
-	(113, 'PK/30', '2021-04-28 20:52:07', '2021-04-28 20:52:07'),
-	(114, 'UP/15', '2021-04-28 20:52:07', '2021-04-28 20:52:07');
+INSERT INTO `tipo_empaques` (`id_tipo_empaque`, `tipo_empaque`, `tipo_empaque_ingles`, `created_at`, `updated_at`) VALUES
+	(1, 'BOX 6', 'BOX 6', '2021-04-08 21:40:44', '2021-04-08 21:40:44'),
+	(2, 'BOX 5', 'BOX 5', '2021-04-08 21:40:44', '2021-04-08 21:40:44'),
+	(3, 'BOX 20', 'BOX 20', '2021-04-08 21:40:44', '2021-04-08 21:40:44'),
+	(4, 'CAJAS 1/10', 'BOX 10', '2021-04-08 21:40:44', '2021-04-08 21:40:44'),
+	(5, 'CAJAS 1/6', 'BOX 6', '2021-04-08 21:40:44', '2021-04-08 21:40:44'),
+	(6, 'CAJAS 1/5', 'BOX 5', '2021-04-08 21:40:44', '2021-04-08 21:40:44'),
+	(7, 'CAJAS 1/20', 'BOX 20', '2021-04-08 21:40:44', '2021-04-08 21:40:44'),
+	(8, 'MAZOS 1/8', 'BUNDLE 8', '2021-04-08 21:40:44', '2021-04-08 21:40:44'),
+	(9, 'MAZOS 1/10', 'BUNDLE 10', '2021-04-08 21:40:44', '2021-04-08 21:40:44'),
+	(10, 'MAZOS 1/20', 'BUNDLE 20', '2021-04-08 21:40:44', '2021-04-08 21:40:44'),
+	(11, 'MAZOS 1/5', 'BUNDLE 5', '2021-04-08 21:40:44', '2021-04-08 21:40:44'),
+	(12, 'MAZOS 1/25', 'BUNDLE 25', '2021-04-08 21:40:44', '2021-04-08 21:40:44'),
+	(13, 'CAJAS 1/25', 'BOX 25', '2021-04-08 21:40:44', '2021-04-08 21:40:44'),
+	(14, 'PK 4', 'PK 4', '2021-04-08 21:40:44', '2021-04-08 21:40:44'),
+	(15, 'TINS 1/5', 'TINS 1/5', '2021-04-08 21:40:44', '2021-04-08 21:40:44'),
+	(16, 'CAJAS 1/100C', 'BOX 100C', '2021-04-08 21:40:44', '2021-04-08 21:40:44'),
+	(17, 'CAJA 1/40', 'BOX 40', '2021-04-08 21:40:44', '2021-04-08 21:40:44'),
+	(18, 'CAJAS 1/100', 'BOX 100', '2021-04-08 21:40:44', '2021-04-08 21:40:44'),
+	(19, 'CAJAS 1/30', 'BOX 30', '2021-04-08 21:40:44', '2021-04-08 21:40:44'),
+	(20, 'MAZOS 1/16', 'BUNDLE 16', '2021-04-08 21:40:44', '2021-04-08 21:40:44'),
+	(21, 'CAJAS 1/50', 'BOX 50', '2021-04-08 21:40:44', '2021-04-08 21:40:44'),
+	(22, 'MAZOS 1/15', 'BUNDLE 15', '2021-04-08 21:40:44', '2021-04-08 21:40:44'),
+	(23, 'Display 5', 'Display 5', '2021-04-08 21:40:45', '2021-04-08 21:40:45'),
+	(24, 'MAZOS 1/12', 'BUNDLE 12', '2021-04-08 21:40:45', '2021-04-08 21:40:45'),
+	(25, 'MAZOS 1/30', 'BUNDLE 30', '2021-04-08 21:40:45', '2021-04-08 21:40:45'),
+	(26, 'CAJAS 1/16', 'BOX 16', '2021-04-08 21:40:45', '2021-04-08 21:40:45'),
+	(27, 'N/D', 'N/D', '2021-04-28 20:52:06', '2021-04-28 20:52:06'),
+	(28, 'CAJAS 1/21', 'BOX 21', '2021-04-28 20:52:06', '2021-04-28 20:52:06'),
+	(29, 'CAJAS 1/13', 'BOX 13', '2021-04-28 20:52:06', '2021-04-28 20:52:06'),
+	(30, 'CAJAS 1/22', 'BOX 22', '2021-04-28 20:52:06', '2021-04-28 20:52:06'),
+	(31, 'CAJAS 1/27', 'BOX 27', '2021-04-28 20:52:06', '2021-04-28 20:52:06'),
+	(32, 'CAJAS 1/55', 'BOX 55', '2021-04-28 20:52:06', '2021-04-28 20:52:06'),
+	(33, 'MAZOS 1/24', 'BUNDLE 24', '2021-04-28 20:52:06', '2021-04-28 20:52:06'),
+	(34, 'MAZOS 1/60', 'BUNDLE 60', '2021-04-28 20:52:06', '2021-04-28 20:52:06'),
+	(35, 'PK 8/8', 'PK 8/8', '2021-04-28 20:52:06', '2021-04-28 20:52:06'),
+	(36, 'CAJA 1/28', 'BOX 28', '2021-04-28 20:52:06', '2021-04-28 20:52:06'),
+	(37, 'MAZOS 1/22', 'BUNDLE 22', '2021-04-28 20:52:06', '2021-04-28 20:52:06'),
+	(38, 'MAZOS 1/4', 'BUNDLE 4', '2021-04-28 20:52:06', '2021-04-28 20:52:06'),
+	(39, 'CAJAS 1/3', 'BOX 3', '2021-04-28 20:52:06', '2021-04-28 20:52:06'),
+	(40, 'CAJAS 1/7', 'BOX 7', '2021-04-28 20:52:06', '2021-04-28 20:52:06'),
+	(41, 'ETCHE 1/20', 'ETCHE 1/20', '2021-04-28 20:52:06', '2021-04-28 20:52:06'),
+	(42, 'PACK 10/8', NULL, '2021-04-28 20:52:06', '2021-04-28 20:52:06'),
+	(43, 'CAJAS 1/15', 'BOX 15', '2021-04-28 20:52:06', '2021-04-28 20:52:06'),
+	(44, 'CAJAS 1/12', 'BOX 12', '2021-04-28 20:52:06', '2021-04-28 20:52:06'),
+	(45, 'PK-10/4', NULL, '2021-04-28 20:52:06', '2021-04-28 20:52:06'),
+	(46, 'PK-TINS', NULL, '2021-04-28 20:52:06', '2021-04-28 20:52:06'),
+	(47, 'CAJAS 1/24', 'BOX 24', '2021-04-28 20:52:06', '2021-04-28 20:52:06'),
+	(48, 'CAJAS 1/48', 'BOX 48', '2021-04-28 20:52:06', '2021-04-28 20:52:06'),
+	(49, 'MAZOS 1/50', 'BUNDLE 50', '2021-04-28 20:52:06', '2021-04-28 20:52:06'),
+	(50, 'CAJAS 1/8', 'BOX 8', '2021-04-28 20:52:06', '2021-04-28 20:52:06'),
+	(51, 'PK/60', NULL, '2021-04-28 20:52:06', '2021-04-28 20:52:06'),
+	(52, 'CAJAS 1/26', 'BOX 26', '2021-04-28 20:52:06', '2021-04-28 20:52:06'),
+	(53, 'MAZOS 1/6', 'BUNDLE 6', '2021-04-28 20:52:06', '2021-04-28 20:52:06'),
+	(54, 'TINS/8', NULL, '2021-04-28 20:52:06', '2021-04-28 20:52:06'),
+	(55, 'CAJA 1/4', 'BOX 4', '2021-04-28 20:52:06', '2021-04-28 20:52:06'),
+	(56, 'MAZOS 1/27', 'BUNDLE 27', '2021-04-28 20:52:06', '2021-04-28 20:52:06'),
+	(57, 'BOLSA 1/1', NULL, '2021-04-28 20:52:06', '2021-04-28 20:52:06'),
+	(58, 'MAZOS 1/14', 'BUNDLE 14', '2021-04-28 20:52:06', '2021-04-28 20:52:06'),
+	(59, 'MAZOS 1/48', 'BUNDLE 48', '2021-04-28 20:52:06', '2021-04-28 20:52:06'),
+	(60, 'UPRIGHT 1/20', NULL, '2021-04-28 20:52:06', '2021-04-28 20:52:06'),
+	(61, 'PK-2/2', NULL, '2021-04-28 20:52:06', '2021-04-28 20:52:06'),
+	(62, 'CAJA 1/9', 'BOX 9', '2021-04-28 20:52:06', '2021-04-28 20:52:06'),
+	(63, 'MAZOS 1/2', 'BUNDLE 2', '2021-04-28 20:52:06', '2021-04-28 20:52:06'),
+	(64, 'PK /40', NULL, '2021-04-28 20:52:06', '2021-04-28 20:52:06'),
+	(65, 'CAJAS 1/1', 'BOX 1', '2021-04-28 20:52:06', '2021-04-28 20:52:06'),
+	(66, 'PK 4/5', NULL, '2021-04-28 20:52:06', '2021-04-28 20:52:06'),
+	(67, 'MAZOS 1/9', 'BUNDLE 9', '2021-04-28 20:52:06', '2021-04-28 20:52:06'),
+	(68, 'MAZOS 1/3', 'BUNDLE 3', '2021-04-28 20:52:06', '2021-04-28 20:52:06'),
+	(69, 'CAJAS 1/18', 'BOX 18', '2021-04-28 20:52:06', '2021-04-28 20:52:06'),
+	(70, 'PK 20/2', NULL, '2021-04-28 20:52:06', '2021-04-28 20:52:06'),
+	(71, 'TINS 1/10', NULL, '2021-04-28 20:52:06', '2021-04-28 20:52:06'),
+	(72, 'MAZOS 1/55', 'BUNDLE 55', '2021-04-28 20:52:06', '2021-04-28 20:52:06'),
+	(73, 'MAZOS 1/21', 'BUNDLE 21', '2021-04-28 20:52:06', '2021-04-28 20:52:06'),
+	(74, 'MAZOS 1/18', 'BUNDLE 18', '2021-04-28 20:52:06', '2021-04-28 20:52:06'),
+	(75, 'CAJAS 1/725', 'BOX 725', '2021-04-28 20:52:06', '2021-04-28 20:52:06'),
+	(76, 'MAZOS 1/19', 'BUNDLE 19', '2021-04-28 20:52:06', '2021-04-28 20:52:06'),
+	(77, 'PK-6/8', NULL, '2021-04-28 20:52:06', '2021-04-28 20:52:06'),
+	(78, 'MAZOS 1/11', 'BUNDLE 11', '2021-04-28 20:52:06', '2021-04-28 20:52:06'),
+	(79, 'MAZOS 1/23', 'BUNDLE 23', '2021-04-28 20:52:06', '2021-04-28 20:52:06'),
+	(80, 'PK-3/10', NULL, '2021-04-28 20:52:06', '2021-04-28 20:52:06'),
+	(81, 'MAZOS 1/40', 'BUNDLE 40', '2021-04-28 20:52:06', '2021-04-28 20:52:06'),
+	(82, 'CAJAS 1/60', 'BOX 60', '2021-04-28 20:52:06', '2021-04-28 20:52:06'),
+	(83, 'MAZOS 1/1', 'BUNDLE 1', '2021-04-28 20:52:06', '2021-04-28 20:52:06'),
+	(84, 'MAZOS 1/28', 'BUNDLE 28', '2021-04-28 20:52:06', '2021-04-28 20:52:06'),
+	(85, 'CAJAS 1/250', 'BOX 250', '2021-04-28 20:52:06', '2021-04-28 20:52:06'),
+	(86, 'MAZOS 1/100', 'BUNDLE 100', '2021-04-28 20:52:06', '2021-04-28 20:52:06'),
+	(87, 'MAZOS 1/7', 'BUNDLE 7', '2021-04-28 20:52:06', '2021-04-28 20:52:06'),
+	(88, 'MAZOS 1/13', 'BUNDLE 13', '2021-04-28 20:52:06', '2021-04-28 20:52:06'),
+	(89, 'CAJAS 1/14', 'BOX 14', '2021-04-28 20:52:06', '2021-04-28 20:52:06'),
+	(90, 'CAJAS 1/75', 'BOX 75', '2021-04-28 20:52:06', '2021-04-28 20:52:06'),
+	(91, 'BOLSA 1/3', NULL, '2021-04-28 20:52:06', '2021-04-28 20:52:06'),
+	(92, 'TINS 1/7', NULL, '2021-04-28 20:52:06', '2021-04-28 20:52:06'),
+	(93, 'MAZOS 1/29', 'BUNDLE 29', '2021-04-28 20:52:07', '2021-04-28 20:52:07'),
+	(94, 'MOLDES 1/10', NULL, '2021-04-28 20:52:07', '2021-04-28 20:52:07'),
+	(95, 'PK 5/8', NULL, '2021-04-28 20:52:07', '2021-04-28 20:52:07'),
+	(96, 'Jars of 16', NULL, '2021-04-28 20:52:07', '2021-04-28 20:52:07'),
+	(97, 'Jars of 20', NULL, '2021-04-28 20:52:07', '2021-04-28 20:52:07'),
+	(98, 'CENICEROS 1/5', NULL, '2021-04-28 20:52:07', '2021-04-28 20:52:07'),
+	(99, 'CAJA 1/36', 'BOX 36', '2021-04-28 20:52:07', '2021-04-28 20:52:07'),
+	(100, 'CAJON 1/160', '', '2021-04-28 20:52:07', '2021-04-28 20:52:07'),
+	(101, 'CAJON/140', NULL, '2021-04-28 20:52:07', '2021-04-28 20:52:07'),
+	(102, 'MAZOS 1/150', 'BUNDLE 150', '2021-04-28 20:52:07', '2021-04-28 20:52:07'),
+	(103, 'BOLSA 1/4', NULL, '2021-04-28 20:52:07', '2021-04-28 20:52:07'),
+	(104, 'PACK 1/35', NULL, '2021-04-28 20:52:07', '2021-04-28 20:52:07'),
+	(105, 'PK-1/20', NULL, '2021-04-28 20:52:07', '2021-04-28 20:52:07'),
+	(106, 'PK-1/25', NULL, '2021-04-28 20:52:07', '2021-04-28 20:52:07'),
+	(107, 'PACK 1/10', NULL, '2021-04-28 20:52:07', '2021-04-28 20:52:07'),
+	(108, 'PACK 1/5', NULL, '2021-04-28 20:52:07', '2021-04-28 20:52:07'),
+	(109, 'Display 12', 'Display 12', '2021-04-28 20:52:07', '2021-04-28 20:52:07'),
+	(110, 'Displays/10', 'Displays/10', '2021-04-28 20:52:07', '2021-04-28 20:52:07'),
+	(111, 'PK/100', NULL, '2021-04-28 20:52:07', '2021-04-28 20:52:07'),
+	(112, 'PK/12', NULL, '2021-04-28 20:52:07', '2021-04-28 20:52:07'),
+	(113, 'PK/30', NULL, '2021-04-28 20:52:07', '2021-04-28 20:52:07'),
+	(114, 'UP/15', NULL, '2021-04-28 20:52:07', '2021-04-28 20:52:07');
 /*!40000 ALTER TABLE `tipo_empaques` ENABLE KEYS */;
 
--- Dumping structure for table facturacion_plasencia.users
+-- Volcando estructura para tabla facturacion_plasencia.users
 CREATE TABLE IF NOT EXISTS `users` (
   `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
   `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
@@ -7491,7 +6733,7 @@ CREATE TABLE IF NOT EXISTS `users` (
   PRIMARY KEY (`id`)
 ) ENGINE=MyISAM AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- Dumping data for table facturacion_plasencia.users: 2 rows
+-- Volcando datos para la tabla facturacion_plasencia.users: 2 rows
 DELETE FROM `users`;
 /*!40000 ALTER TABLE `users` DISABLE KEYS */;
 INSERT INTO `users` (`id`, `name`, `email`, `codigo`, `rol`, `email_verified_at`, `password`, `remember_token`, `created_at`, `updated_at`) VALUES
@@ -7499,28 +6741,7 @@ INSERT INTO `users` (`id`, `name`, `email`, `codigo`, `rol`, `email_verified_at`
 	(2, 'karina', 'karina@gmail.com', 321, 1, NULL, '$2y$10$dlxZnbJgRGfUxxynk9ZOG.hXWeFh9CxmI4USj4ndqXi1gBqXfrP2.', NULL, '2021-05-11 21:32:54', '2021-05-11 21:32:54');
 /*!40000 ALTER TABLE `users` ENABLE KEYS */;
 
--- Dumping structure for table facturacion_plasencia.vehicles
-CREATE TABLE IF NOT EXISTS `vehicles` (
-  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `registration_number` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `brand` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `model` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `type` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `fuel_type` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `doors` int(11) NOT NULL,
-  `year` int(11) NOT NULL,
-  `is_active` tinyint(1) NOT NULL,
-  `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
--- Dumping data for table facturacion_plasencia.vehicles: 0 rows
-DELETE FROM `vehicles`;
-/*!40000 ALTER TABLE `vehicles` DISABLE KEYS */;
-/*!40000 ALTER TABLE `vehicles` ENABLE KEYS */;
-
--- Dumping structure for table facturacion_plasencia.vitola_productos
+-- Volcando estructura para tabla facturacion_plasencia.vitola_productos
 CREATE TABLE IF NOT EXISTS `vitola_productos` (
   `id_vitola` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
   `vitola` char(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
@@ -7530,7 +6751,7 @@ CREATE TABLE IF NOT EXISTS `vitola_productos` (
   UNIQUE KEY `vitola` (`vitola`)
 ) ENGINE=MyISAM AUTO_INCREMENT=510 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- Dumping data for table facturacion_plasencia.vitola_productos: 509 rows
+-- Volcando datos para la tabla facturacion_plasencia.vitola_productos: 509 rows
 DELETE FROM `vitola_productos`;
 /*!40000 ALTER TABLE `vitola_productos` DISABLE KEYS */;
 INSERT INTO `vitola_productos` (`id_vitola`, `vitola`, `created_at`, `updated_at`) VALUES
@@ -8045,7 +7266,25 @@ INSERT INTO `vitola_productos` (`id_vitola`, `vitola`, `created_at`, `updated_at
 	(509, '50x5', NULL, NULL);
 /*!40000 ALTER TABLE `vitola_productos` ENABLE KEYS */;
 
--- Dumping structure for procedure facturacion_plasencia.actualizar_contrasenia
+-- Volcando estructura para procedimiento facturacion_plasencia.Actualizar
+DELIMITER //
+CREATE PROCEDURE `Actualizar`(
+	IN `id_pro` INT,
+	IN `saldo_programacion` DECIMAL(10,2),
+	IN `id_pendiente` INT,
+	IN `saldo_pendiente` DECIMAL(10,2)
+)
+BEGIN
+
+UPDATE detalle_programacion SET detalle_programacion.saldo = saldo_programacion WHERE detalle_programacion.id_detalle_programacion =
+id_pro;
+
+UPDATE pendiente_empaque SET pendiente_empaque.saldo =  pendiente_empaque.saldo + saldo_pendiente WHERE pendiente_empaque.id_pendiente
+= id_pendiente;
+END//
+DELIMITER ;
+
+-- Volcando estructura para procedimiento facturacion_plasencia.actualizar_contrasenia
 DELIMITER //
 CREATE PROCEDURE `actualizar_contrasenia`(
 	IN `pa_id` INT,
@@ -8063,7 +7302,51 @@ BEGIN
 END//
 DELIMITER ;
 
--- Dumping structure for procedure facturacion_plasencia.actualizar_productos
+-- Volcando estructura para procedimiento facturacion_plasencia.actualizar_detalle_pendiente
+DELIMITER //
+CREATE PROCEDURE `actualizar_detalle_pendiente`(
+	IN `id_pro` INT,
+	IN `id_pen` INT,
+	IN `saldo` DECIMAL(10,2),
+	IN `saldo_pendiente` DECIMAL(10,2)
+)
+BEGIN
+
+
+UPDATE pendiente_empaque SET pendiente_empaque.saldo = pendiente_empaque.saldo + saldo_pendiente WHERE pendiente_empaque.id_pendiente =
+id_pen;
+
+UPDATE detalle_programacion SET detalle_programacion.saldo = saldo WHERE detalle_programacion.id_detalle_programacion = id_pro;
+
+
+END//
+DELIMITER ;
+
+-- Volcando estructura para procedimiento facturacion_plasencia.actualizar_pendientes
+DELIMITER //
+CREATE PROCEDURE `actualizar_pendientes`(
+	IN `id` INT,
+	IN `item` VARCHAR(50),
+	IN `orden_sistema` VARCHAR(50),
+	IN `observeacion` VARCHAR(50),
+	IN `presentacion` VARCHAR(50)
+)
+BEGIN
+
+UPDATE pendiente, pendiente_empaque set pendiente.orden_del_sitema = orden_sistema,
+pendiente.observacion = observeacion, pendiente.presentacion = presentacion,
+pendiente_empaque.orden_del_sitema = orden_sistema,
+pendiente_empaque.observacion = observeacion,
+ pendiente_empaque.presentacion = presentacion
+ WHERE pendiente.id_pendiente = id and pendiente_empaque.id_pendiente = id ;
+ 
+ 
+ UPDATE clase_productos SET clase_productos.presentacion = presentacion
+ WHERE clase_productos.item = item;
+ end//
+DELIMITER ;
+
+-- Volcando estructura para procedimiento facturacion_plasencia.actualizar_productos
 DELIMITER //
 CREATE PROCEDURE `actualizar_productos`(
 	IN `id` INT,
@@ -8111,7 +7394,34 @@ WHERE clase_productos.id_producto = id;
 END//
 DELIMITER ;
 
--- Dumping structure for procedure facturacion_plasencia.actualizar_usuarios
+-- Volcando estructura para procedimiento facturacion_plasencia.actualizar_programacion
+DELIMITER //
+CREATE PROCEDURE `actualizar_programacion`(
+	IN `id_pro` INT,
+	IN `con` VARCHAR(50)
+)
+BEGIN
+
+UPDATE prograamacion SET prograamacion.mes_contenedor = con WHERE prograamacion.id = id_pro; 
+
+END//
+DELIMITER ;
+
+-- Volcando estructura para procedimiento facturacion_plasencia.actualizar_saldo_programacion
+DELIMITER //
+CREATE PROCEDURE `actualizar_saldo_programacion`(
+	IN `id_detalle` INT,
+	IN `saldo` DECIMAL(8,2)
+)
+BEGIN
+
+UPDATE detalle_programacion_temporal SET detalle_programacion_temporal.saldo = saldo
+WHERE detalle_programacion_temporal.id_detalle_programacion = id_detalle;
+
+END//
+DELIMITER ;
+
+-- Volcando estructura para procedimiento facturacion_plasencia.actualizar_usuarios
 DELIMITER //
 CREATE PROCEDURE `actualizar_usuarios`(
 	IN `pa_id` INT,
@@ -8131,7 +7441,7 @@ BEGIN
 END//
 DELIMITER ;
 
--- Dumping structure for procedure facturacion_plasencia.agregar_lista_caja
+-- Volcando estructura para procedimiento facturacion_plasencia.agregar_lista_caja
 DELIMITER //
 CREATE PROCEDURE `agregar_lista_caja`(
 	IN `pa_codigo` VARCHAR(50),
@@ -8145,7 +7455,7 @@ INSERT INTO lista_cajas (lista_cajas.codigo,lista_cajas.productoServicio,lista_c
 END//
 DELIMITER ;
 
--- Dumping structure for procedure facturacion_plasencia.anadir_cajas_a_inventario
+-- Volcando estructura para procedimiento facturacion_plasencia.anadir_cajas_a_inventario
 DELIMITER //
 CREATE PROCEDURE `anadir_cajas_a_inventario`(
 	IN `pa_codigo` VARCHAR(50),
@@ -8160,7 +7470,7 @@ BEGIN
 END//
 DELIMITER ;
 
--- Dumping structure for procedure facturacion_plasencia.borrar_datos_existencia
+-- Volcando estructura para procedimiento facturacion_plasencia.borrar_datos_existencia
 DELIMITER //
 CREATE PROCEDURE `borrar_datos_existencia`()
 BEGIN
@@ -8168,7 +7478,20 @@ BEGIN
 END//
 DELIMITER ;
 
--- Dumping structure for procedure facturacion_plasencia.buscar_capa
+-- Volcando estructura para procedimiento facturacion_plasencia.borrar_pendientes
+DELIMITER //
+CREATE PROCEDURE `borrar_pendientes`(
+	IN `id` INT
+)
+BEGIN
+
+DELETE FROM pendiente WHERE pendiente.id_pendiente = id;
+DELETE FROM pendiente_empaque WHERE pendiente_empaque.id_pendiente = id;
+
+END//
+DELIMITER ;
+
+-- Volcando estructura para procedimiento facturacion_plasencia.buscar_capa
 DELIMITER //
 CREATE PROCEDURE `buscar_capa`(
 	IN `capa` VARCHAR(50)
@@ -8185,7 +7508,7 @@ END if;
 END//
 DELIMITER ;
 
--- Dumping structure for procedure facturacion_plasencia.buscar_existencia
+-- Volcando estructura para procedimiento facturacion_plasencia.buscar_existencia
 DELIMITER //
 CREATE PROCEDURE `buscar_existencia`(
 	IN `busqueda` VARCHAR(50)
@@ -8211,7 +7534,7 @@ END if;
 END//
 DELIMITER ;
 
--- Dumping structure for procedure facturacion_plasencia.buscar_listadecajas
+-- Volcando estructura para procedimiento facturacion_plasencia.buscar_listadecajas
 DELIMITER //
 CREATE PROCEDURE `buscar_listadecajas`(
 	IN `buscar` VARCHAR(50)
@@ -8231,7 +7554,7 @@ if buscar=""then
 END//
 DELIMITER ;
 
--- Dumping structure for procedure facturacion_plasencia.buscar_lista_cajas
+-- Volcando estructura para procedimiento facturacion_plasencia.buscar_lista_cajas
 DELIMITER //
 CREATE PROCEDURE `buscar_lista_cajas`(
 	IN `pa_nombre` VARCHAR(50)
@@ -8245,7 +7568,7 @@ lista_cajas.marca LIKE CONCAT("%",pa_nombre,"%") ;
 END//
 DELIMITER ;
 
--- Dumping structure for procedure facturacion_plasencia.buscar_marca
+-- Volcando estructura para procedimiento facturacion_plasencia.buscar_marca
 DELIMITER //
 CREATE PROCEDURE `buscar_marca`(
 	IN `marca` VARCHAR(50)
@@ -8261,7 +7584,7 @@ END if;
 END//
 DELIMITER ;
 
--- Dumping structure for procedure facturacion_plasencia.buscar_nombre
+-- Volcando estructura para procedimiento facturacion_plasencia.buscar_nombre
 DELIMITER //
 CREATE PROCEDURE `buscar_nombre`(
 	IN `nombre` VARCHAR(50)
@@ -8277,7 +7600,7 @@ END if;
 END//
 DELIMITER ;
 
--- Dumping structure for procedure facturacion_plasencia.buscar_pedidos
+-- Volcando estructura para procedimiento facturacion_plasencia.buscar_pedidos
 DELIMITER //
 CREATE PROCEDURE `buscar_pedidos`(
 	IN `item` VARCHAR(50)
@@ -8312,7 +7635,7 @@ END if;
 END//
 DELIMITER ;
 
--- Dumping structure for procedure facturacion_plasencia.buscar_pendiente
+-- Volcando estructura para procedimiento facturacion_plasencia.buscar_pendiente
 DELIMITER //
 CREATE PROCEDURE `buscar_pendiente`(
 	IN `nombre` VARCHAR(50),
@@ -8322,30 +7645,31 @@ CREATE PROCEDURE `buscar_pendiente`(
 BEGIN
 if nombre="" && fechade="" && fechahasta="" then
 
-SELECT pendiente.id_pendiente , categoria.categoria AS categoria, pendiente.item AS item,pendiente.orden_del_sitema ,pendiente.observacion 
+SELECT pendiente.id_pendiente ,categoria.categoria AS categoria, pendiente.item AS item,pendiente.orden_del_sitema ,pendiente.observacion 
 ,pendiente.presentacion ,pendiente.mes AS mes ,orden_productos.orden AS orden, marca_productos.marca AS marca,vitola_productos.vitola AS vitola, 
 nombre_productos.nombre AS nombre, capa_productos.capa AS capa,
-cellos.anillo AS anillo,cellos.cello AS cello, cellos.upc AS upc, pendiente.pendiente as pendiente,pendiente.factura_del_mes, pendiente.cantidad_enviada_mes, pendiente.saldo, tipo_empaques.tipo_empaque AS tipo_empaque
+cellos.anillo AS anillo,cellos.cello AS cello, cellos.upc AS upc, pendiente.pendiente as pendiente, pendiente.saldo,
+ tipo_empaques.tipo_empaque AS tipo_empaque, pendiente.paquetes AS paquetes, pendiente.unidades AS unidades
 FROM categoria, clase_productos, marca_productos, vitola_productos,nombre_productos, capa_productos, orden_productos,cellos,
 tipo_empaques, pendiente
 WHERE pendiente.vitola = vitola_productos.id_vitola AND pendiente.capa = capa_productos.id_capa AND pendiente.orden = orden_productos.id_orden and
  pendiente.nombre = nombre_productos.id_nombre AND  pendiente.marca = marca_productos.id_marca AND cellos.id_cello=pendiente.cello and
-   clase_productos.id_tipo_empaque = tipo_empaques.id_tipo_empaque AND pendiente.categoria = categoria.id_categoria 
+   pendiente.tipo_empaque = tipo_empaques.id_tipo_empaque AND pendiente.categoria = categoria.id_categoria 
 	GROUP BY pendiente.item, pendiente.orden, pendiente.categoria;
 	
 ELSE  
 
 if fechade = ""   && fechahasta = ""  && nombre != "" then
 
-SELECT pendiente.id_pendiente, categoria.categoria AS categoria, pendiente.item AS item,pendiente.orden_del_sitema ,pendiente.observacion 
+SELECT pendiente.id_pendiente , categoria.categoria AS categoria, pendiente.item AS item,pendiente.orden_del_sitema ,pendiente.observacion 
 ,pendiente.presentacion ,pendiente.mes AS mes ,orden_productos.orden AS orden, marca_productos.marca AS marca,vitola_productos.vitola AS vitola, 
 nombre_productos.nombre AS nombre, capa_productos.capa AS capa,
-cellos.anillo AS anillo,cellos.cello AS cello, cellos.upc AS upc, pendiente.pendiente as pendiente,pendiente.factura_del_mes, pendiente.cantidad_enviada_mes, pendiente.saldo, tipo_empaques.tipo_empaque AS tipo_empaque
+cellos.anillo AS anillo,cellos.cello AS cello, cellos.upc AS upc, pendiente.saldo, tipo_empaques.tipo_empaque AS tipo_empaque, pendiente.paquetes AS paquetes, pendiente.unidades AS unidades
 FROM categoria, clase_productos, marca_productos, vitola_productos,nombre_productos, capa_productos, orden_productos,cellos,
 tipo_empaques, pendiente
 WHERE pendiente.vitola = vitola_productos.id_vitola AND pendiente.capa = capa_productos.id_capa AND pendiente.orden = orden_productos.id_orden and
  pendiente.nombre = nombre_productos.id_nombre AND  pendiente.marca = marca_productos.id_marca AND cellos.id_cello=pendiente.cello and
-   clase_productos.id_tipo_empaque = tipo_empaques.id_tipo_empaque AND pendiente.categoria = categoria.id_categoria  and
+   pendiente.tipo_empaque = tipo_empaques.id_tipo_empaque AND pendiente.categoria = categoria.id_categoria  and
   (nombre_productos.nombre LIKE  CONCAT("%",nombre, "%") or  capa_productos.capa LIKE  CONCAT("%",nombre, "%") or  marca_productos.marca LIKE  CONCAT("%",nombre, "%") or
   categoria.categoria LIKE  CONCAT("%",nombre, "%") or  tipo_empaques.tipo_empaque LIKE  CONCAT("%",nombre, "%") or
   vitola_productos.vitola LIKE  CONCAT("%",nombre, "%") or  pendiente.orden_del_sitema LIKE  CONCAT("%",nombre, "%"))
@@ -8362,12 +7686,12 @@ WHERE pendiente.vitola = vitola_productos.id_vitola AND pendiente.capa = capa_pr
 	SELECT categoria.categoria AS categoria, pendiente.item AS item,pendiente.orden_del_sitema ,pendiente.observacion 
 ,pendiente.presentacion ,pendiente.mes AS mes ,orden_productos.orden AS orden, marca_productos.marca AS marca,vitola_productos.vitola AS vitola, 
 nombre_productos.nombre AS nombre, capa_productos.capa AS capa,
-cellos.anillo AS anillo,cellos.cello AS cello, cellos.upc AS upc, pendiente.pendiente as pendiente,pendiente.factura_del_mes, pendiente.cantidad_enviada_mes, pendiente.saldo, tipo_empaques.tipo_empaque AS tipo_empaque
+cellos.anillo AS anillo,cellos.cello AS cello, cellos.upc AS upc, pendiente.saldo, tipo_empaques.tipo_empaque AS tipo_empaque, pendiente.paquetes AS paquetes, pendiente.unidades AS unidades
 FROM categoria, clase_productos, marca_productos, vitola_productos,nombre_productos, capa_productos, orden_productos,cellos,
 tipo_empaques, pendiente
 WHERE pendiente.vitola = vitola_productos.id_vitola AND pendiente.capa = capa_productos.id_capa AND pendiente.orden = orden_productos.id_orden and
  pendiente.nombre = nombre_productos.id_nombre AND  pendiente.marca = marca_productos.id_marca AND cellos.id_cello=pendiente.cello and
-   clase_productos.id_tipo_empaque = tipo_empaques.id_tipo_empaque AND pendiente.categoria = categoria.id_categoria  AND  pendiente.mes between  STR_TO_DATE( fechade,"%Y-%m-%d") AND STR_TO_DATE(  fechahasta, "%Y-%m-%d") 
+   pendiente.tipo_empaque = tipo_empaques.id_tipo_empaque AND pendiente.categoria = categoria.id_categoria  AND  pendiente.mes between  STR_TO_DATE( fechade,"%Y-%m-%d") AND STR_TO_DATE(  fechahasta, "%Y-%m-%d") 
                       
   
 
@@ -8380,12 +7704,12 @@ WHERE pendiente.vitola = vitola_productos.id_vitola AND pendiente.capa = capa_pr
 	SELECT categoria.categoria AS categoria, pendiente.item AS item,pendiente.orden_del_sitema ,pendiente.observacion 
 ,pendiente.presentacion ,pendiente.mes AS mes ,orden_productos.orden AS orden, marca_productos.marca AS marca,vitola_productos.vitola AS vitola, 
 nombre_productos.nombre AS nombre, capa_productos.capa AS capa,
-cellos.anillo AS anillo,cellos.cello AS cello, cellos.upc AS upc, pendiente.pendiente as pendiente,pendiente.factura_del_mes, pendiente.cantidad_enviada_mes, pendiente.saldo, tipo_empaques.tipo_empaque AS tipo_empaque
+cellos.anillo AS anillo,cellos.cello AS cello, cellos.upc AS upc, pendiente.saldo, tipo_empaques.tipo_empaque AS tipo_empaque , pendiente.paquetes AS paquetes, pendiente.unidades AS unidades
 FROM categoria, clase_productos, marca_productos, vitola_productos,nombre_productos, capa_productos, orden_productos,cellos,
 tipo_empaques, pendiente
 WHERE pendiente.vitola = vitola_productos.id_vitola AND pendiente.capa = capa_productos.id_capa AND pendiente.orden = orden_productos.id_orden and
  pendiente.nombre = nombre_productos.id_nombre AND  pendiente.marca = marca_productos.id_marca AND cellos.id_cello=pendiente.cello and
-   clase_productos.id_tipo_empaque = tipo_empaques.id_tipo_empaque AND pendiente.categoria = categoria.id_categoria  AND  pendiente.mes = STR_TO_DATE( fechade,"%Y-%m-%d")
+   pendiente.tipo_empaque  = tipo_empaques.id_tipo_empaque AND pendiente.categoria = categoria.id_categoria  AND  pendiente.mes = STR_TO_DATE( fechade,"%Y-%m-%d")
                       
   
 
@@ -8400,12 +7724,12 @@ WHERE pendiente.vitola = vitola_productos.id_vitola AND pendiente.capa = capa_pr
 	SELECT categoria.categoria AS categoria, pendiente.item AS item,pendiente.orden_del_sitema ,pendiente.observacion 
 ,pendiente.presentacion ,pendiente.mes AS mes ,orden_productos.orden AS orden, marca_productos.marca AS marca,vitola_productos.vitola AS vitola, 
 nombre_productos.nombre AS nombre, capa_productos.capa AS capa,
-cellos.anillo AS anillo,cellos.cello AS cello, cellos.upc AS upc, pendiente.pendiente as pendiente,pendiente.factura_del_mes, pendiente.cantidad_enviada_mes, pendiente.saldo, tipo_empaques.tipo_empaque AS tipo_empaque
+cellos.anillo AS anillo,cellos.cello AS cello, cellos.upc AS upc, pendiente.saldo, tipo_empaques.tipo_empaque AS tipo_empaque, pendiente.paquetes AS paquetes, pendiente.unidades AS unidades
 FROM categoria, clase_productos, marca_productos, vitola_productos,nombre_productos, capa_productos, orden_productos,cellos,
 tipo_empaques, pendiente
 WHERE pendiente.vitola = vitola_productos.id_vitola AND pendiente.capa = capa_productos.id_capa AND pendiente.orden = orden_productos.id_orden and
  pendiente.nombre = nombre_productos.id_nombre AND  pendiente.marca = marca_productos.id_marca AND cellos.id_cello=pendiente.cello and
-   clase_productos.id_tipo_empaque = tipo_empaques.id_tipo_empaque AND pendiente.categoria = categoria.id_categoria  AND  pendiente.mes = STR_TO_DATE(  fechahasta, "%Y-%m-%d") 
+   pendiente.tipo_empaque = tipo_empaques.id_tipo_empaque AND pendiente.categoria = categoria.id_categoria  AND  pendiente.mes = STR_TO_DATE(  fechahasta, "%Y-%m-%d") 
                       
   
 
@@ -8422,7 +7746,7 @@ END if;
 END//
 DELIMITER ;
 
--- Dumping structure for procedure facturacion_plasencia.buscar_pendiente_empaque
+-- Volcando estructura para procedimiento facturacion_plasencia.buscar_pendiente_empaque
 DELIMITER //
 CREATE PROCEDURE `buscar_pendiente_empaque`(
 	IN `nombre` VARCHAR(50),
@@ -8433,21 +7757,22 @@ BEGIN
 if nombre="" && fechade="" && fechahasta="" then
 
 
-SELECT categoria.categoria AS categoria, pendiente_empaque.item AS item,pendiente_empaque.orden_del_sitema AS orden_del_sitema,pendiente_empaque.observacion AS observacion,pendiente_empaque.presentacion AS presentacion ,pendiente_empaque.mes AS mes ,orden_productos.orden AS orden, marca_productos.marca AS marca,vitola_productos.vitola AS vitola, 
+SELECT pendiente_empaque.id_pendiente, categoria.categoria AS categoria, pendiente_empaque.item AS item,pendiente_empaque.orden_del_sitema AS orden_del_sitema,pendiente_empaque.observacion AS observacion,pendiente_empaque.presentacion AS presentacion ,pendiente_empaque.mes AS mes ,orden_productos.orden AS orden, marca_productos.marca AS marca,vitola_productos.vitola AS vitola, 
 nombre_productos.nombre AS nombre, capa_productos.capa AS capa,
 cellos.anillo AS anillo,cellos.cello AS cello, cellos.upc AS upc, pendiente_empaque.pendiente as pendiente_empaque,pendiente_empaque.factura_del_mes as factura_del_mes, pendiente_empaque.cantidad_enviada_mes AS cantidad_enviada_mes, pendiente_empaque.saldo AS saldo, tipo_empaques.tipo_empaque AS tipo_empaque
 FROM categoria, clase_productos, marca_productos, vitola_productos,nombre_productos, capa_productos, orden_productos,cellos,
 tipo_empaques, pendiente_empaque
 WHERE pendiente_empaque.vitola = vitola_productos.id_vitola AND pendiente_empaque.capa = capa_productos.id_capa AND pendiente_empaque.orden =  orden_productos.id_orden and
  pendiente_empaque.nombre = nombre_productos.id_nombre AND  pendiente_empaque.marca = marca_productos.id_marca AND cellos.id_cello=pendiente_empaque.cello and
-   pendiente_empaque.tipo_empaque = tipo_empaques.id_tipo_empaque AND pendiente_empaque.categoria = categoria.id_categoria 
-	GROUP BY pendiente_empaque.item, pendiente_empaque.orden, pendiente_empaque.categoria;
+   pendiente_empaque.tipo_empaque = tipo_empaques.id_tipo_empaque AND pendiente_empaque.categoria = categoria.id_categoria AND 
+   pendiente_empaque.saldo > 0
+	GROUP BY pendiente_empaque.item, pendiente_empaque.orden, pendiente_empaque.categoria ;
 	
 ELSE  
 
 if fechade = ""   && fechahasta = ""  && nombre != "" then
 
-SELECT categoria.categoria AS categoria, pendiente_empaque.item AS item,pendiente_empaque.orden_del_sitema AS orden_del_sitema,pendiente_empaque.observacion AS observacion,pendiente_empaque.presentacion AS presentacion ,pendiente_empaque.mes AS mes ,orden_productos.orden AS orden, marca_productos.marca AS marca,vitola_productos.vitola AS vitola, 
+SELECT pendiente_empaque.id_pendiente,  categoria.categoria AS categoria, pendiente_empaque.item AS item,pendiente_empaque.orden_del_sitema AS orden_del_sitema,pendiente_empaque.observacion AS observacion,pendiente_empaque.presentacion AS presentacion ,pendiente_empaque.mes AS mes ,orden_productos.orden AS orden, marca_productos.marca AS marca,vitola_productos.vitola AS vitola, 
 nombre_productos.nombre AS nombre, capa_productos.capa AS capa,
 cellos.anillo AS anillo,cellos.cello AS cello, cellos.upc AS upc, pendiente_empaque.pendiente as pendiente_empaque,pendiente_empaque.factura_del_mes as factura_del_mes, pendiente_empaque.cantidad_enviada_mes AS cantidad_enviada_mes, pendiente_empaque.saldo AS saldo, tipo_empaques.tipo_empaque AS tipo_empaque
 FROM categoria, clase_productos, marca_productos, vitola_productos,nombre_productos, capa_productos, orden_productos,cellos,
@@ -8456,7 +7781,8 @@ WHERE pendiente_empaque.vitola = vitola_productos.id_vitola AND pendiente_empaqu
  pendiente_empaque.nombre = nombre_productos.id_nombre AND  pendiente_empaque.marca = marca_productos.id_marca AND cellos.id_cello=pendiente_empaque.cello and
    pendiente_empaque.tipo_empaque = tipo_empaques.id_tipo_empaque AND pendiente_empaque.categoria = categoria.id_categoria   and
   (nombre_productos.nombre LIKE  CONCAT("%",nombre, "%") or  capa_productos.capa LIKE  CONCAT("%",nombre, "%") or  marca_productos.marca LIKE  CONCAT("%",nombre, "%") )
-
+AND 
+   pendiente_empaque.saldo > 0
 	GROUP BY pendiente_empaque.item, pendiente_empaque.orden, pendiente_empaque.categoria;
 	
 	
@@ -8466,7 +7792,7 @@ WHERE pendiente_empaque.vitola = vitola_productos.id_vitola AND pendiente_empaqu
 	
 	
 	
-SELECT categoria.categoria AS categoria, pendiente_empaque.item AS item,pendiente_empaque.orden_del_sitema AS orden_del_sitema,
+SELECT pendiente_empaque.id_pendiente, categoria.categoria AS categoria, pendiente_empaque.item AS item,pendiente_empaque.orden_del_sitema AS orden_del_sitema,
 pendiente_empaque.observacion AS observacion,pendiente_empaque.presentacion AS presentacion ,pendiente_empaque.mes AS mes ,
 orden_productos.orden AS orden, marca_productos.marca AS marca,vitola_productos.vitola AS vitola, nombre_productos.nombre AS nombre
 , capa_productos.capa AS capa,cellos.anillo AS anillo,cellos.cello AS cello, cellos.upc AS upc, pendiente_empaque.pendiente 
@@ -8479,7 +7805,8 @@ WHERE pendiente_empaque.vitola = vitola_productos.id_vitola AND pendiente_empaqu
    pendiente_empaque.tipo_empaque = tipo_empaques.id_tipo_empaque AND pendiente_empaque.categoria = categoria.id_categoria 
 	 AND  pendiente_empaque.mes between  STR_TO_DATE( fechade,"%Y-%m-%d") AND STR_TO_DATE(  fechahasta, "%Y-%m-%d") 
                       
-  
+  AND 
+   pendiente_empaque.saldo > 0
 
 GROUP BY pendiente_empaque.item, pendiente_empaque.orden, pendiente_empaque.categoria;
 		else
@@ -8487,7 +7814,7 @@ GROUP BY pendiente_empaque.item, pendiente_empaque.orden, pendiente_empaque.cate
 	if fechade != ""   && fechahasta = ""  && nombre = "" then
 	
 	
-	SELECT categoria.categoria AS categoria, pendiente_empaque.item AS item,pendiente_empaque.orden_del_sitema ,
+	SELECT pendiente_empaque.id_pendiente, categoria.categoria AS categoria, pendiente_empaque.item AS item,pendiente_empaque.orden_del_sitema ,
 	pendiente_empaque.observacion AS observacion,pendiente_empaque.presentacion  AS presentacion,pendiente_empaque.mes AS mes 
 	,orden_productos.orden AS orden, marca_productos.marca AS marca,vitola_productos.vitola AS vitola, 
 nombre_productos.nombre AS nombre, capa_productos.capa AS capa,
@@ -8498,7 +7825,8 @@ tipo_empaques, pendiente_empaque
 WHERE pendiente_empaque.vitola = vitola_productos.id_vitola AND pendiente_empaque.capa = capa_productos.id_capa AND pendiente_empaque.orden =  orden_productos.id_orden and
  pendiente_empaque.nombre = nombre_productos.id_nombre AND  pendiente_empaque.marca = marca_productos.id_marca AND cellos.id_cello=pendiente_empaque.cello and
    pendiente_empaque.tipo_empaque = tipo_empaques.id_tipo_empaque AND pendiente_empaque.categoria = categoria.id_categoria  AND  pendiente_empaque.mes = STR_TO_DATE( fechade,"%Y-%m-%d")
-                  
+                  AND 
+   pendiente_empaque.saldo > 0
 	GROUP BY pendiente_empaque.item, pendiente_empaque.orden, pendiente_empaque.categoria;
 	
 	
@@ -8507,7 +7835,7 @@ WHERE pendiente_empaque.vitola = vitola_productos.id_vitola AND pendiente_empaqu
 	if fechade = ""   && fechahasta != ""  && nombre = "" then
 	
 	
-SELECT categoria.categoria AS categoria, pendiente_empaque.item AS item,pendiente_empaque.orden_del_sitema AS orden_del_sitema,pendiente_empaque.observacion AS observacion,pendiente_empaque.presentacion AS presentacion ,pendiente_empaque.mes AS mes ,orden_productos.orden AS orden, marca_productos.marca AS marca,vitola_productos.vitola AS vitola, 
+SELECT pendiente_empaque.id_pendiente,categoria.categoria AS categoria, pendiente_empaque.item AS item,pendiente_empaque.orden_del_sitema AS orden_del_sitema,pendiente_empaque.observacion AS observacion,pendiente_empaque.presentacion AS presentacion ,pendiente_empaque.mes AS mes ,orden_productos.orden AS orden, marca_productos.marca AS marca,vitola_productos.vitola AS vitola, 
 nombre_productos.nombre AS nombre, capa_productos.capa AS capa,
 cellos.anillo AS anillo,cellos.cello AS cello, cellos.upc AS upc, pendiente_empaque.pendiente as pendiente_empaque,
 pendiente_empaque.factura_del_mes as factura_del_mes, pendiente_empaque.cantidad_enviada_mes AS cantidad_enviada_mes,
@@ -8519,7 +7847,8 @@ WHERE pendiente_empaque.vitola = vitola_productos.id_vitola AND pendiente_empaqu
    pendiente_empaque.tipo_empaque = tipo_empaques.id_tipo_empaque AND pendiente_empaque.categoria = categoria.id_categoria 
 	AND  pendiente_empaque.mes = STR_TO_DATE(  fechahasta, "%Y-%m-%d") 
                       
-  
+  AND 
+   pendiente_empaque.saldo > 0
 
 GROUP BY pendiente_empaque.item, pendiente_empaque.orden, pendiente_empaque.categoria;
 	
@@ -8528,7 +7857,7 @@ GROUP BY pendiente_empaque.item, pendiente_empaque.orden, pendiente_empaque.cate
 	
 		
 	
-SELECT categoria.categoria AS categoria, pendiente_empaque.item AS item,pendiente_empaque.orden_del_sitema AS orden_del_sitema,
+SELECT pendiente_empaque.id_pendiente, categoria.categoria AS categoria, pendiente_empaque.item AS item,pendiente_empaque.orden_del_sitema AS orden_del_sitema,
 pendiente_empaque.observacion AS observacion,pendiente_empaque.presentacion AS presentacion ,pendiente_empaque.mes AS mes ,
 orden_productos.orden AS orden, marca_productos.marca AS marca,vitola_productos.vitola AS vitola, 
 nombre_productos.nombre AS nombre, capa_productos.capa AS capa,
@@ -8540,6 +7869,8 @@ WHERE pendiente_empaque.vitola = vitola_productos.id_vitola AND pendiente_empaqu
    pendiente_empaque.tipo_empaque = tipo_empaques.id_tipo_empaque AND pendiente_empaque.categoria = categoria.id_categoria 
    AND pendiente_empaque.mes between  STR_TO_DATE( fechade,"%Y-%m-%d") AND STR_TO_DATE(  fechahasta, "%Y-%m-%d") AND 
    (nombre_productos.nombre LIKE CONCAT("%",nombre, "%") or  capa_productos.capa LIKE  CONCAT("%",nombre, "%") or  marca_productos.marca LIKE  CONCAT("%",nombre, "%") )   
+   AND 
+   pendiente_empaque.saldo > 0
 	GROUP BY pendiente_empaque.item, pendiente_empaque.orden, pendiente_empaque.categoria;
 	
 	else
@@ -8555,7 +7886,7 @@ END if;
 END//
 DELIMITER ;
 
--- Dumping structure for procedure facturacion_plasencia.buscar_producto
+-- Volcando estructura para procedimiento facturacion_plasencia.buscar_producto
 DELIMITER //
 CREATE PROCEDURE `buscar_producto`(
 	IN `todo` VARCHAR(50)
@@ -8591,7 +7922,7 @@ END if;
 END//
 DELIMITER ;
 
--- Dumping structure for procedure facturacion_plasencia.buscar_tipo_empaque
+-- Volcando estructura para procedimiento facturacion_plasencia.buscar_tipo_empaque
 DELIMITER //
 CREATE PROCEDURE `buscar_tipo_empaque`(
 	IN `tipo` VARCHAR(50)
@@ -8605,7 +7936,7 @@ END if;
 END//
 DELIMITER ;
 
--- Dumping structure for procedure facturacion_plasencia.buscar_vitola
+-- Volcando estructura para procedimiento facturacion_plasencia.buscar_vitola
 DELIMITER //
 CREATE PROCEDURE `buscar_vitola`(
 	IN `vitola` VARCHAR(50)
@@ -8620,7 +7951,7 @@ END if;
 END//
 DELIMITER ;
 
--- Dumping structure for procedure facturacion_plasencia.editar_existencia
+-- Volcando estructura para procedimiento facturacion_plasencia.editar_existencia
 DELIMITER //
 CREATE PROCEDURE `editar_existencia`(
 	IN `pa_id` INT,
@@ -8636,7 +7967,7 @@ BEGIN
 END//
 DELIMITER ;
 
--- Dumping structure for procedure facturacion_plasencia.editar_existencia_producto
+-- Volcando estructura para procedimiento facturacion_plasencia.editar_existencia_producto
 DELIMITER //
 CREATE PROCEDURE `editar_existencia_producto`(
 	IN `pa_id` INT,
@@ -8652,7 +7983,7 @@ BEGIN
 END//
 DELIMITER ;
 
--- Dumping structure for procedure facturacion_plasencia.eliminar_detalles
+-- Volcando estructura para procedimiento facturacion_plasencia.eliminar_detalles
 DELIMITER //
 CREATE PROCEDURE `eliminar_detalles`(
 	IN `id` INT
@@ -8664,7 +7995,37 @@ DELETE FROM detalle_programacion_temporal WHERE detalle_programacion_temporal.id
 END//
 DELIMITER ;
 
--- Dumping structure for procedure facturacion_plasencia.eliminar_usuario
+-- Volcando estructura para procedimiento facturacion_plasencia.eliminar_detalle_programacion
+DELIMITER //
+CREATE PROCEDURE `eliminar_detalle_programacion`(
+	IN `id` INT,
+	IN `id_pendiente` INT,
+	IN `saldo` DECIMAL(10,2)
+)
+BEGIN
+
+
+UPDATE pendiente_empaque SET pendiente_empaque.saldo = saldo + pendiente_empaque.saldo WHERE pendiente_empaque.id_pendiente = id_pendiente;
+
+DELETE FROM detalle_programacion WHERE detalle_programacion.id_detalle_programacion = id;
+END//
+DELIMITER ;
+
+-- Volcando estructura para procedimiento facturacion_plasencia.eliminar_programacion
+DELIMITER //
+CREATE PROCEDURE `eliminar_programacion`(
+	IN `id_pro` INT
+)
+BEGIN
+
+
+DELETE FROM prograamacion WHERE prograamacion.id = id_pro;
+
+DELETE FROM detalle_programacion WHERE detalle_programacion.id_programacion = id_pro;
+END//
+DELIMITER ;
+
+-- Volcando estructura para procedimiento facturacion_plasencia.eliminar_usuario
 DELIMITER //
 CREATE PROCEDURE `eliminar_usuario`(
 	IN `pa_id_usuario` INT
@@ -8677,7 +8038,7 @@ BEGIN
         END//
 DELIMITER ;
 
--- Dumping structure for procedure facturacion_plasencia.ingresar_presentacion
+-- Volcando estructura para procedimiento facturacion_plasencia.ingresar_presentacion
 DELIMITER //
 CREATE PROCEDURE `ingresar_presentacion`()
 BEGIN
@@ -8694,7 +8055,7 @@ x.nombre AND clase_productos.id_marca = x.marca;
 END//
 DELIMITER ;
 
--- Dumping structure for procedure facturacion_plasencia.insertar_actualizar_existencias
+-- Volcando estructura para procedimiento facturacion_plasencia.insertar_actualizar_existencias
 DELIMITER //
 CREATE PROCEDURE `insertar_actualizar_existencias`(
 	IN `ubicacion` VARCHAR(50),
@@ -8738,7 +8099,7 @@ importar_existencias.ubicacion,importar_existencias.total)VALUES(codigo,marca,no
 END//
 DELIMITER ;
 
--- Dumping structure for procedure facturacion_plasencia.insertar_capa
+-- Volcando estructura para procedimiento facturacion_plasencia.insertar_capa
 DELIMITER //
 CREATE PROCEDURE `insertar_capa`(
 	IN `capa` VARCHAR(50)
@@ -8748,7 +8109,7 @@ BEGIN
 END//
 DELIMITER ;
 
--- Dumping structure for procedure facturacion_plasencia.insertar_clase_producto
+-- Volcando estructura para procedimiento facturacion_plasencia.insertar_clase_producto
 DELIMITER //
 CREATE PROCEDURE `insertar_clase_producto`(
 	IN `item` VARCHAR(50),
@@ -8796,7 +8157,7 @@ VALUES(item,cod_producto,cod_caja,cod_precio,icapa,ivitola,inombre,imarca,icello
 END//
 DELIMITER ;
 
--- Dumping structure for procedure facturacion_plasencia.insertar_codigoproducto_presentacion
+-- Volcando estructura para procedimiento facturacion_plasencia.insertar_codigoproducto_presentacion
 DELIMITER //
 CREATE PROCEDURE `insertar_codigoproducto_presentacion`()
 BEGIN
@@ -8809,7 +8170,7 @@ clase_productos.id_capa = tabla_codigo_programacions.capa;
 END//
 DELIMITER ;
 
--- Dumping structure for procedure facturacion_plasencia.insertar_detalle_clase_producto
+-- Volcando estructura para procedimiento facturacion_plasencia.insertar_detalle_clase_producto
 DELIMITER //
 CREATE PROCEDURE `insertar_detalle_clase_producto`(
 	IN `item` VARCHAR(50),
@@ -8847,35 +8208,42 @@ VALUES(item, icapa,ivitola,inombre,imarca,icello,itipo,precio);
 END//
 DELIMITER ;
 
--- Dumping structure for procedure facturacion_plasencia.insertar_detalle_programacion
+-- Volcando estructura para procedimiento facturacion_plasencia.insertar_detalle_programacion
 DELIMITER //
 CREATE PROCEDURE `insertar_detalle_programacion`(
 	IN `numero_orden` VARCHAR(50),
 	IN `orden` VARCHAR(50),
 	IN `cod_producto` VARCHAR(50),
 	IN `saldo` BIGINT,
-	IN `fecha` DATE,
-	IN `numero_contenedor` VARCHAR(50),
-	IN `mes_contenedor` VARCHAR(50)
+	IN `id_pendiente` INT
 )
 BEGIN
+
 DECLARE id INT;
-SET id = (SELECT prograamacion.id from prograamacion WHERE prograamacion.fecha = fecha AND
-prograamacion.mes_contenedor = mes_contenedor AND prograamacion.numero_contenedor_mes = numero_contenedor);
+
+SET id= (SELECT MAX(prograamacion.id) AS id FROM prograamacion);
+
 
 INSERT INTO detalle_programacion(detalle_programacion.numero_orden,detalle_programacion.orden,
-detalle_programacion.cod_producto,detalle_programacion.saldo, detalle_programacion.id_programacion)
-VALUES(numero_orden,orden,cod_producto,saldo,id);
+detalle_programacion.cod_producto,detalle_programacion.saldo, detalle_programacion.id_programacion,detalle_programacion.id_pendiente)
+VALUES(numero_orden,orden,cod_producto,saldo,id,id_pendiente);
+
+UPDATE pendiente_empaque SET pendiente_empaque.saldo = (pendiente_empaque.saldo- saldo)
+WHERE pendiente_empaque.id_pendiente= id_pendiente;
+
+DELETE FROM detalle_programacion_temporal;
+
 END//
 DELIMITER ;
 
--- Dumping structure for procedure facturacion_plasencia.insertar_detalle_temporal
+-- Volcando estructura para procedimiento facturacion_plasencia.insertar_detalle_temporal
 DELIMITER //
 CREATE PROCEDURE `insertar_detalle_temporal`(
 	IN `numero_orden` VARCHAR(50),
 	IN `orden` VARCHAR(50),
 	IN `cod_producto` VARCHAR(50),
-	IN `saldo` DECIMAL(10,2)
+	IN `saldo` DECIMAL(10,2),
+	IN `id_pendiente` INT
 )
 BEGIN
 
@@ -8890,17 +8258,42 @@ SET total_Existencia= (SELECT sum(importar_existencias.total) FROM importar_exis
 importar_existencias.codigo_producto = cod_producto);
 
 
-
+if EXISTS(SELECT importar_existencias.codigo_producto FROM importar_existencias WHERE
+importar_existencias.codigo_producto = c)then
 INSERT INTO detalle_programacion_temporal(detalle_programacion_temporal.numero_orden,detalle_programacion_temporal.orden,
-detalle_programacion_temporal.cod_producto,detalle_programacion_temporal.saldo)
-VALUES(numero_orden,orden,c,saldo);
+detalle_programacion_temporal.cod_producto,detalle_programacion_temporal.saldo, detalle_programacion_temporal.id_pendiente)
+VALUES(numero_orden,orden,c,saldo,id_pendiente);
 
+ELSE 
 
+SELECT "nada";
+END if;
 
 END//
 DELIMITER ;
 
--- Dumping structure for procedure facturacion_plasencia.insertar_lista_cajas
+-- Volcando estructura para procedimiento facturacion_plasencia.insertar_factura_terminado
+DELIMITER //
+CREATE PROCEDURE `insertar_factura_terminado`()
+BEGIN
+  INSERT INTO factura_terminados(
+  		factura_terminados.cliente,
+  		factura_terminados.numero_factura,
+  		factura_terminados.contenedor,
+		factura_terminados.cantidad_bultos,
+		factura_terminados.total_puros,
+		factura_terminados.total_peso_bruto,
+		factura_terminados.total_peso_neto,
+		factura_terminados.fecha_factura,
+		factura_terminados.facturado)
+	VALUES( 
+		"",
+		"",
+		"",0,0,0,0,NULL,'N');
+END//
+DELIMITER ;
+
+-- Volcando estructura para procedimiento facturacion_plasencia.insertar_lista_cajas
 DELIMITER //
 CREATE PROCEDURE `insertar_lista_cajas`(
 	IN `pa_item` VARCHAR(50),
@@ -8970,7 +8363,7 @@ END IF;
 END//
 DELIMITER ;
 
--- Dumping structure for procedure facturacion_plasencia.insertar_marca
+-- Volcando estructura para procedimiento facturacion_plasencia.insertar_marca
 DELIMITER //
 CREATE PROCEDURE `insertar_marca`(
 	IN `marca` VARCHAR(100)
@@ -8980,7 +8373,7 @@ BEGIN
  end//
 DELIMITER ;
 
--- Dumping structure for procedure facturacion_plasencia.insertar_nombre
+-- Volcando estructura para procedimiento facturacion_plasencia.insertar_nombre
 DELIMITER //
 CREATE PROCEDURE `insertar_nombre`(
 	IN `nombre` VARCHAR(50)
@@ -8990,51 +8383,98 @@ BEGIN
 END//
 DELIMITER ;
 
--- Dumping structure for procedure facturacion_plasencia.insertar_pendente_empaque
+-- Volcando estructura para procedimiento facturacion_plasencia.insertar_pendente_empaque
 DELIMITER //
 CREATE PROCEDURE `insertar_pendente_empaque`(
 	IN `fecha` VARCHAR(50)
 )
 BEGIN
 
-
-insert into pendiente_empaque(SELECT categoria.id_categoria AS categoria, pedidos.item AS item,"" AS orden_del_sitema,"" AS observacion,clase_productos.presentacion  AS presentacion ,fecha AS mes ,orden_productos.id_orden AS orden, marca_productos.id_marca AS marca,vitola_productos.id_vitola AS vitola, 
-nombre_productos.id_nombre AS nombre, capa_productos.id_capa AS capa,tipo_empaques.id_tipo_empaque AS tipo_empaque,
-cellos.id_cello AS cello,(pedidos.cant_paquetes * pedidos.unidades)  as pendiente,0 as factura_del_mes, 0 AS cantidad_enviada_mes, (pedidos.cant_paquetes * pedidos.unidades) AS saldo
-FROM categoria, clase_productos, pedidos, marca_productos, vitola_productos,nombre_productos, capa_productos, orden_productos,cellos,
-tipo_empaques
-WHERE clase_productos.id_vitola = vitola_productos.id_vitola AND pedidos.numero_orden = orden_productos.orden AND clase_productos.id_capa = capa_productos.id_capa AND 
- clase_productos.id_nombre = nombre_productos.id_nombre AND  clase_productos.id_marca = marca_productos.id_marca AND cellos.id_cello=clase_productos.id_cello and
-   clase_productos.id_tipo_empaque = tipo_empaques.id_tipo_empaque AND pedidos.item = clase_productos.item AND categoria.id_categoria=pedidos.categoria
- GROUP BY pedidos.item, pedidos.numero_orden, pedidos.categoria);
+insert into pendiente_empaque( 
+	`categoria`, 
+	`item`,
+	`orden_del_sitema`,
+	`observacion`, 
+	`presentacion`, 
+	`mes`,
+	`orden`, 
+	`marca`,
+	`vitola`, 
+	`nombre`, 
+	`capa`, 
+	`tipo_empaque`, 
+	`cello`, 
+	`pendiente`, 
+	`saldo`) (SELECT 
+  pedidos.categoria  AS categoria,
+ (SELECT clase_productos.item  FROM clase_productos WHERE clase_productos.item = pedidos.item) AS item,
+ '' AS orden_del_sistema,
+ '' AS observacion,
+ (SELECT clase_productos.presentacion FROM clase_productos WHERE clase_productos.item = pedidos.item) AS presentacion, 
+ fecha AS mes,
+ (SELECT clase_productos.id_orden  FROM clase_productos WHERE clase_productos.item = pedidos.item)  AS orden,
+ (SELECT clase_productos.id_marca FROM clase_productos WHERE clase_productos.item = pedidos.item) AS marca,
+ (SELECT clase_productos.id_vitola FROM clase_productos WHERE clase_productos.item = pedidos.item) AS vitola,
+ (SELECT clase_productos.id_nombre FROM clase_productos WHERE clase_productos.item = pedidos.item) AS nombre,
+ (SELECT clase_productos.id_capa FROM clase_productos WHERE clase_productos.item = pedidos.item) AS capa,
+ (SELECT clase_productos.id_tipo_empaque FROM clase_productos WHERE clase_productos.item = pedidos.item) AS tipo_empaque,
+ (SELECT clase_productos.id_cello FROM clase_productos WHERE clase_productos.item = pedidos.item) AS cello,
+  (pedidos.cant_paquetes * pedidos.unidades)  AS pendiente,
+    (pedidos.cant_paquetes * pedidos.unidades) AS saldo
+       FROM pedidos);
 END//
 DELIMITER ;
 
--- Dumping structure for procedure facturacion_plasencia.insertar_pendiente
+-- Volcando estructura para procedimiento facturacion_plasencia.insertar_pendiente
 DELIMITER //
 CREATE PROCEDURE `insertar_pendiente`(
 	IN `fecha` DATE
 )
 BEGIN
 
-
-insert into pendiente(SELECT categoria.id_categoria AS categoria, pedidos.item AS item,"" AS orden_del_sitema,"" AS observacion,clase_productos.presentacion AS presentacion ,fecha AS mes ,orden_productos.id_orden AS orden, marca_productos.id_marca AS marca,vitola_productos.id_vitola AS vitola, 
-nombre_productos.id_nombre AS nombre, capa_productos.id_capa AS capa,tipo_empaques.id_tipo_empaque AS tipo_empaque,
-cellos.id_cello AS cello,(pedidos.cant_paquetes * pedidos.unidades)  as pendiente,0 as factura_del_mes, 0 AS cantidad_enviada_mes, (pedidos.cant_paquetes * pedidos.unidades) AS saldo
-FROM categoria, clase_productos, pedidos, marca_productos, vitola_productos,nombre_productos, capa_productos, orden_productos,cellos,
-tipo_empaques
-WHERE clase_productos.id_vitola = vitola_productos.id_vitola AND pedidos.numero_orden = orden_productos.orden AND clase_productos.id_capa = capa_productos.id_capa AND 
- clase_productos.id_nombre = nombre_productos.id_nombre AND  clase_productos.id_marca = marca_productos.id_marca AND cellos.id_cello=clase_productos.id_cello and
-   clase_productos.id_tipo_empaque = tipo_empaques.id_tipo_empaque AND pedidos.item = clase_productos.item AND categoria.id_categoria=pedidos.categoria
- GROUP BY pedidos.item, pedidos.numero_orden, pedidos.categoria);
-
+insert into pendiente( 
+	`categoria`, 
+	`item`,
+	`orden_del_sitema`,
+	`observacion`, 
+	`presentacion`, 
+	`mes`,
+	`orden`, 
+	`marca`,
+	`vitola`, 
+	`nombre`, 
+	`capa`, 
+	`tipo_empaque`,  
+	`cello`, 
+	`pendiente`, 
+	`saldo`, 
+	`paquetes`, 
+	`unidades`) (SELECT 
+  pedidos.categoria  AS categoria,
+ (SELECT clase_productos.item  FROM clase_productos WHERE clase_productos.item = pedidos.item) AS item,
+ '' AS orden_del_sistema,
+ '' AS observacion,
+ (SELECT clase_productos.presentacion FROM clase_productos WHERE clase_productos.item = pedidos.item) AS presentacion,
+ fecha AS mes,
+ (SELECT clase_productos.id_orden  FROM clase_productos WHERE clase_productos.item = pedidos.item)  AS orden,
+ (SELECT clase_productos.id_marca FROM clase_productos WHERE clase_productos.item = pedidos.item) AS marca,
+ (SELECT clase_productos.id_vitola FROM clase_productos WHERE clase_productos.item = pedidos.item) AS vitola,
+ (SELECT clase_productos.id_nombre FROM clase_productos WHERE clase_productos.item = pedidos.item) AS nombre,
+ (SELECT clase_productos.id_capa FROM clase_productos WHERE clase_productos.item = pedidos.item) AS capa,
+ (SELECT clase_productos.id_tipo_empaque FROM clase_productos WHERE clase_productos.item = pedidos.item) AS tipo_empaque,
+ (SELECT clase_productos.id_cello FROM clase_productos WHERE clase_productos.item = pedidos.item) AS cello,
+  (pedidos.cant_paquetes * pedidos.unidades)  AS pendiente,
+    (pedidos.cant_paquetes * pedidos.unidades) AS saldo,
+     pedidos.cant_paquetes AS paquetes,
+      pedidos.unidades AS unidades
+       FROM pedidos);
 
 
 DELETE FROM pedidos;
 END//
 DELIMITER ;
 
--- Dumping structure for procedure facturacion_plasencia.insertar_productos_terminados
+-- Volcando estructura para procedimiento facturacion_plasencia.insertar_productos_terminados
 DELIMITER //
 CREATE PROCEDURE `insertar_productos_terminados`(
 	IN `lote` VARCHAR(50),
@@ -9070,20 +8510,23 @@ VALUES(lote,imarca,inombre,ivitola,icapa,existencia);
 END//
 DELIMITER ;
 
--- Dumping structure for procedure facturacion_plasencia.insertar_programacion
+-- Volcando estructura para procedimiento facturacion_plasencia.insertar_programacion
 DELIMITER //
 CREATE PROCEDURE `insertar_programacion`(
-	IN `fecha` DATE,
-	IN `mes_contenedor` VARCHAR(50),
-	IN `numero_contenedor` VARCHAR(50)
+	IN `fecha` DATETIME,
+	IN `contenedor` VARCHAR(100)
 )
 BEGIN
-INSERT INTO prograamacion(prograamacion.fecha,prograamacion.mes_contenedor,prograamacion.numero_contenedor_mes)
-VALUES(fecha,mes_contenedor,numero_contenedor);
+
+
+
+INSERT INTO prograamacion(prograamacion.fecha,prograamacion.mes_contenedor)VALUES(cast(fecha AS date),contenedor);
+
+
 END//
 DELIMITER ;
 
--- Dumping structure for procedure facturacion_plasencia.insertar_tipo
+-- Volcando estructura para procedimiento facturacion_plasencia.insertar_tipo
 DELIMITER //
 CREATE PROCEDURE `insertar_tipo`(
 	IN `tipo` VARCHAR(50)
@@ -9093,7 +8536,7 @@ INSERT INTO tipo_empaques(tipo_empaques.tipo_empaque)VALUES(tipo);
 END//
 DELIMITER ;
 
--- Dumping structure for procedure facturacion_plasencia.insertar_vitola
+-- Volcando estructura para procedimiento facturacion_plasencia.insertar_vitola
 DELIMITER //
 CREATE PROCEDURE `insertar_vitola`(
 	IN `vitola` VARCHAR(50)
@@ -9103,7 +8546,27 @@ INSERT INTO vitola_productos(vitola_productos.vitola)VALUES(vitola);
 END//
 DELIMITER ;
 
--- Dumping structure for procedure facturacion_plasencia.mostrar_cajas
+-- Volcando estructura para procedimiento facturacion_plasencia.max_programacion
+DELIMITER //
+CREATE PROCEDURE `max_programacion`(
+	IN `id` INT
+)
+BEGIN
+
+DECLARE MAXi INT;
+SET maxi= (SELECT max(prograamacion.id) FROM prograamacion);
+
+if id = 0 then
+ SELECT prograamacion.mes_contenedor FROM prograamacion  WHERE prograamacion.id  = maxi;
+ else
+ 
+  SELECT prograamacion.mes_contenedor FROM prograamacion  WHERE prograamacion.id  = id;
+ 
+ END if;
+END//
+DELIMITER ;
+
+-- Volcando estructura para procedimiento facturacion_plasencia.mostrar_cajas
 DELIMITER //
 CREATE PROCEDURE `mostrar_cajas`()
 BEGIN
@@ -9111,7 +8574,7 @@ BEGIN
 END//
 DELIMITER ;
 
--- Dumping structure for procedure facturacion_plasencia.mostrar_clase_paradetalle
+-- Volcando estructura para procedimiento facturacion_plasencia.mostrar_clase_paradetalle
 DELIMITER //
 CREATE PROCEDURE `mostrar_clase_paradetalle`(
 	IN `item` VARCHAR(50)
@@ -9129,7 +8592,7 @@ WHERE  clase_productos.id_vitola = vitola_productos.id_vitola AND
 END//
 DELIMITER ;
 
--- Dumping structure for procedure facturacion_plasencia.mostrar_datos_para_editar
+-- Volcando estructura para procedimiento facturacion_plasencia.mostrar_datos_para_editar
 DELIMITER //
 CREATE PROCEDURE `mostrar_datos_para_editar`(
 	IN `id` INT
@@ -9149,7 +8612,7 @@ WHERE  clase_productos.id_vitola = vitola_productos.id_vitola AND capa_productos
 END//
 DELIMITER ;
 
--- Dumping structure for procedure facturacion_plasencia.mostrar_detalles_productos
+-- Volcando estructura para procedimiento facturacion_plasencia.mostrar_detalles_productos
 DELIMITER //
 CREATE PROCEDURE `mostrar_detalles_productos`()
 BEGIN
@@ -9165,27 +8628,189 @@ WHERE  detalle_clase_productos.id_vitola = vitola_productos.id_vitola AND
 END//
 DELIMITER ;
 
--- Dumping structure for procedure facturacion_plasencia.mostrar_detalles_provicional
+-- Volcando estructura para procedimiento facturacion_plasencia.mostrar_detalles_programacion
+DELIMITER //
+CREATE PROCEDURE `mostrar_detalles_programacion`(
+	IN `busqueda` VARCHAR(50),
+	IN `id` INT
+)
+BEGIN	
+		
+		DECLARE id_max INT;
+		SET id_max = (select MAX(prograamacion.id) FROM prograamacion);
+		
+      if busqueda = "" && id = 0 then 
+
+
+SELECT  detalle_programacion.id_detalle_programacion ,
+        detalle_programacion.numero_orden, 
+			detalle_programacion.cod_producto, 
+			detalle_programacion.orden,
+			marca_productos.marca,
+			vitola_productos.vitola,
+			nombre_productos.nombre,             
+			capa_productos.capa,
+ 			tipo_empaques.tipo_empaque, 
+ 			cellos.anillo,
+ 			cellos.cello,
+			cellos.upc,
+			detalle_programacion.saldo,
+			prograamacion.id,
+			detalle_programacion.id_pendiente
+			
+ FROM  detalle_programacion, 
+ 		 clase_productos,
+	    marca_productos, 
+		 vitola_productos, 
+		 nombre_productos,
+ 		 capa_productos, 
+		 tipo_empaques,
+		 cellos, 
+		 
+		 importar_existencias,prograamacion
+ WHERE  clase_productos.codigo_producto =  detalle_programacion.cod_producto AND 
+        clase_productos.id_capa = capa_productos.id_capa AND 
+ 		  clase_productos.id_marca = marca_productos.id_marca AND 
+        clase_productos.id_vitola = vitola_productos.id_vitola AND 
+		  clase_productos.id_nombre =  nombre_productos.id_nombre and 
+ 		  clase_productos.id_tipo_empaque = tipo_empaques.id_tipo_empaque AND 
+ 		  clase_productos.id_cello = cellos.id_cello and
+ 		  detalle_programacion.cod_producto = importar_existencias.codigo_producto and
+ 		  importar_existencias.codigo_producto = clase_productos.codigo_producto and
+ 		  detalle_programacion.id_programacion =id_max
+			
+GROUP BY 1;
+ELSE
+
+if  busqueda != "" && id = 0  then 
+
+SELECT detalle_programacion.id_detalle_programacion ,
+        detalle_programacion.numero_orden, 
+			detalle_programacion.cod_producto, 
+			detalle_programacion.orden,
+			marca_productos.marca,
+			vitola_productos.vitola,
+			nombre_productos.nombre,             
+			capa_productos.capa,
+ 			tipo_empaques.tipo_empaque, 
+ 			cellos.anillo,
+ 			cellos.cello,
+			cellos.upc,
+			detalle_programacion.saldo,
+			prograamacion.id ,
+			detalle_programacion.id_pendiente
+			
+ FROM  detalle_programacion, 
+ 		 clase_productos,
+	    marca_productos, 
+		 vitola_productos, 
+		 nombre_productos,
+ 		 capa_productos, 
+		 tipo_empaques,
+		 cellos,
+		 importar_existencias, prograamacion
+ WHERE  clase_productos.codigo_producto =  detalle_programacion.cod_producto AND 
+        clase_productos.id_capa = capa_productos.id_capa AND 
+ 		  clase_productos.id_marca = marca_productos.id_marca AND 
+        clase_productos.id_vitola = vitola_productos.id_vitola AND 
+		  clase_productos.id_nombre =  nombre_productos.id_nombre and 
+ 		  clase_productos.id_tipo_empaque = tipo_empaques.id_tipo_empaque AND 
+ 		  clase_productos.id_cello = cellos.id_cello and
+ 		  detalle_programacion.cod_producto = importar_existencias.codigo_producto and
+ 		  importar_existencias.codigo_producto = clase_productos.codigo_producto and
+ 		  (detalle_programacion.numero_orden LIKE CONCAT("%",busqueda,"%")||
+			detalle_programacion.orden LIKE CONCAT("%",busqueda,"%")||
+			marca_productos.marca LIKE CONCAT("%",busqueda,"%")||
+			nombre_productos.nombre LIKE CONCAT("%",busqueda,"%")||
+			capa_productos.capa LIKE CONCAT("%",busqueda,"%")) AND 
+			detalle_programacion.id_programacion = id_max
+			
+GROUP BY 1;		  
+		 
+
+
+else
+
+SELECT detalle_programacion.id_detalle_programacion,
+        detalle_programacion.numero_orden, 
+			detalle_programacion.cod_producto, 
+			detalle_programacion.orden,
+			marca_productos.marca,
+			vitola_productos.vitola,
+			nombre_productos.nombre,             
+			capa_productos.capa,
+ 			tipo_empaques.tipo_empaque, 
+ 			cellos.anillo,
+ 			cellos.cello,
+			cellos.upc,
+			detalle_programacion.saldo,
+			prograamacion.id,
+			detalle_programacion.id_pendiente
+ FROM  detalle_programacion, 
+ 		 clase_productos,
+	    marca_productos, 
+		 vitola_productos, 
+		 nombre_productos,
+ 		 capa_productos, 
+		 tipo_empaques,
+		 cellos,
+		 importar_existencias, prograamacion
+ WHERE  clase_productos.codigo_producto =  detalle_programacion.cod_producto AND 
+        clase_productos.id_capa = capa_productos.id_capa AND 
+ 		  clase_productos.id_marca = marca_productos.id_marca AND 
+        clase_productos.id_vitola = vitola_productos.id_vitola AND 
+		  clase_productos.id_nombre =  nombre_productos.id_nombre and 
+ 		  clase_productos.id_tipo_empaque = tipo_empaques.id_tipo_empaque AND 
+ 		  clase_productos.id_cello = cellos.id_cello and
+ 		  detalle_programacion.cod_producto = importar_existencias.codigo_producto and
+ 		  importar_existencias.codigo_producto = clase_productos.codigo_producto and
+ 		  (detalle_programacion.numero_orden LIKE CONCAT("%",busqueda,"%")||
+			detalle_programacion.orden LIKE CONCAT("%",busqueda,"%")||
+			marca_productos.marca LIKE CONCAT("%",busqueda,"%")||
+			nombre_productos.nombre LIKE CONCAT("%",busqueda,"%")||
+			capa_productos.capa LIKE CONCAT("%",busqueda,"%")) AND 
+			detalle_programacion.id_programacion = id
+			
+GROUP BY 1;		  
+		 
+		 END if; 
+		 	 END if; 
+		 
+END//
+DELIMITER ;
+
+-- Volcando estructura para procedimiento facturacion_plasencia.mostrar_detalles_provicional
 DELIMITER //
 CREATE PROCEDURE `mostrar_detalles_provicional`(
 	IN `busqueda` VARCHAR(50)
 )
 BEGIN
 
+
+
+
+		
+		
 if busqueda = "" then 
+
+
 SELECT  detalle_programacion_temporal.id_detalle_programacion AS id,
 detalle_programacion_temporal.numero_orden, 
 			detalle_programacion_temporal.cod_producto , 
-			detalle_programacion_temporal.orden,
+			(SELECT concat(detalle_programacion_temporal.orden ,"-", MONTH(pendiente_empaque.mes) , "-" , date_format(pendiente_empaque.mes,'%y')) 
+		   FROM pendiente_empaque WHERE pendiente_empaque.id_pendiente = detalle_programacion_temporal.id_pendiente) AS orden,
 			marca_productos.marca,
 			vitola_productos.vitola,
-			nombre_productos.nombre,
+			nombre_productos.nombre,             
 			capa_productos.capa,
  			tipo_empaques.tipo_empaque, 
  			cellos.anillo,
  			cellos.cello,
 			cellos.upc,
-			detalle_programacion_temporal.saldo
+			detalle_programacion_temporal.saldo,
+			(SELECT SUM(importar_existencias.total) FROM importar_existencias WHERE importar_existencias.codigo_producto = detalle_programacion_temporal.cod_producto)  AS total_existencia,
+			((SELECT SUM(importar_existencias.total) FROM importar_existencias WHERE importar_existencias.codigo_producto = detalle_programacion_temporal.cod_producto) - detalle_programacion_temporal.saldo) AS diferencia,
+			detalle_programacion_temporal.id_pendiente
  FROM  detalle_programacion_temporal, 
  		 clase_productos,
 	    marca_productos, 
@@ -9193,40 +8818,8 @@ detalle_programacion_temporal.numero_orden,
 		 nombre_productos,
  		 capa_productos, 
 		 tipo_empaques,
-		 cellos
- WHERE  clase_productos.codigo_producto =  detalle_programacion_temporal.cod_producto AND 
-        clase_productos.id_capa = capa_productos.id_capa AND 
- 		  clase_productos.id_marca = marca_productos.id_marca AND 
-        clase_productos.id_vitola = vitola_productos.id_vitola AND 
-		  clase_productos.id_nombre =  nombre_productos.id_nombre and 
- 		  clase_productos.id_tipo_empaque = tipo_empaques.id_tipo_empaque AND 
- 		  clase_productos.id_cello = cellos.id_cello
-			
-GROUP BY 1;
-
-ELSE
-
-SELECT  detalle_programacion_temporal.id_detalle_programacion AS id,
-detalle_programacion_temporal.numero_orden, 
-			detalle_programacion_temporal.cod_producto , 
-			detalle_programacion_temporal.orden,
-			marca_productos.marca,
-			vitola_productos.vitola,
-			nombre_productos.nombre,
-			capa_productos.capa,
- 			tipo_empaques.tipo_empaque, 
- 			cellos.anillo,
- 			cellos.cello,
-			cellos.upc,
-			detalle_programacion_temporal.saldo
- FROM  detalle_programacion_temporal, 
- 		 clase_productos,
-	    marca_productos, 
-		 vitola_productos, 
-		 nombre_productos,
- 		 capa_productos, 
-		 tipo_empaques,
-		 cellos
+		 cellos, 
+		 importar_existencias
  WHERE  clase_productos.codigo_producto =  detalle_programacion_temporal.cod_producto AND 
         clase_productos.id_capa = capa_productos.id_capa AND 
  		  clase_productos.id_marca = marca_productos.id_marca AND 
@@ -9234,6 +8827,46 @@ detalle_programacion_temporal.numero_orden,
 		  clase_productos.id_nombre =  nombre_productos.id_nombre and 
  		  clase_productos.id_tipo_empaque = tipo_empaques.id_tipo_empaque AND 
  		  clase_productos.id_cello = cellos.id_cello and
+ 		  detalle_programacion_temporal.cod_producto = importar_existencias.codigo_producto and
+ 		  importar_existencias.codigo_producto = clase_productos.codigo_producto
+			
+GROUP BY 1;
+ELSE
+
+SELECT  detalle_programacion_temporal.id_detalle_programacion AS id,
+detalle_programacion_temporal.numero_orden, 
+			detalle_programacion_temporal.cod_producto , 
+			(SELECT concat(detalle_programacion_temporal.orden ,"-", MONTH(pendiente_empaque.mes) , "-" , date_format(pendiente_empaque.mes,'%y')) 
+		   FROM pendiente_empaque WHERE pendiente_empaque.id_pendiente = detalle_programacion_temporal.id_pendiente) AS orden,
+		marca_productos.marca,
+			vitola_productos.vitola,
+			nombre_productos.nombre,
+			capa_productos.capa,
+ 			tipo_empaques.tipo_empaque, 
+ 			cellos.anillo,
+ 			cellos.cello,
+			cellos.upc,
+			detalle_programacion_temporal.saldo,
+			(SELECT SUM(importar_existencias.total) FROM importar_existencias WHERE importar_existencias.codigo_producto = detalle_programacion_temporal.cod_producto)  AS total_existencia,
+			((SELECT SUM(importar_existencias.total) FROM importar_existencias WHERE importar_existencias.codigo_producto = detalle_programacion_temporal.cod_producto)- detalle_programacion_temporal.saldo) AS diferencia
+ FROM  detalle_programacion_temporal, 
+ 		 clase_productos,
+	    marca_productos, 
+		 vitola_productos, 
+		 nombre_productos,
+ 		 capa_productos, 
+		 tipo_empaques,
+		 cellos,
+		 importar_existencias
+ WHERE  clase_productos.codigo_producto =  detalle_programacion_temporal.cod_producto AND 
+        clase_productos.id_capa = capa_productos.id_capa AND 
+ 		  clase_productos.id_marca = marca_productos.id_marca AND 
+        clase_productos.id_vitola = vitola_productos.id_vitola AND 
+		  clase_productos.id_nombre =  nombre_productos.id_nombre and 
+ 		  clase_productos.id_tipo_empaque = tipo_empaques.id_tipo_empaque AND 
+ 		  clase_productos.id_cello = cellos.id_cello and
+ 		  detalle_programacion_temporal.cod_producto = importar_existencias.codigo_producto and
+ 		  importar_existencias.codigo_producto = clase_productos.codigo_producto and
  		  (detalle_programacion_temporal.numero_orden LIKE CONCAT("%",busqueda,"%")||
 			detalle_programacion_temporal.orden LIKE CONCAT("%",busqueda,"%")||
 			marca_productos.marca LIKE CONCAT("%",busqueda,"%")||
@@ -9247,7 +8880,75 @@ GROUP BY 1;
 END//
 DELIMITER ;
 
--- Dumping structure for procedure facturacion_plasencia.mostrar_existencia_bodega
+-- Volcando estructura para procedimiento facturacion_plasencia.mostrar_detalle_factura
+DELIMITER //
+CREATE PROCEDURE `mostrar_detalle_factura`()
+BEGIN
+SELECT `id_detalle`,
+	`id_venta`,
+	`id_pendiente`,
+	`cantidad_puros`,
+	`unidad`,
+	(CAST(((`cantidad_puros`*`unidad`)/cantidad_cajas) AS INT)) AS cantidad_cajas,
+	`cantidad_puros`*`unidad` AS total_tabacos,
+	
+	(SELECT (UPPER((SELECT capa_productos.capa FROM capa_productos WHERE capa_productos.id_capa = clase_productos.id_capa))) AS capa
+FROM clase_productos
+WHERE clase_productos.item = (SELECT pendiente_factura.item FROM pendiente_factura 
+											WHERE pendiente_factura.id_pendiente =  detalle_factura.id_pendiente)) AS capas,
+	`cantidad_cajas` AS 'cantidad_por_caja'
+	
+	,(SELECT UPPER(CONCAT((SELECT tipo_empaques.tipo_empaque_ingles FROM tipo_empaques WHERE tipo_empaques.id_tipo_empaque = clase_productos.id_tipo_empaque)
+		 ," ",
+	    (SELECT vitola_productos.vitola FROM vitola_productos WHERE vitola_productos.id_vitola = clase_productos.id_vitola)
+		 ," ",
+		 (SELECT marca_productos.marca FROM marca_productos WHERE marca_productos.id_marca = clase_productos.id_marca)
+		 ," ",
+		 (SELECT nombre_productos.nombre FROM nombre_productos WHERE nombre_productos.id_nombre = clase_productos.id_nombre)
+		 ," ",
+		 (SELECT case cello
+			 	when cello != "SI"  then  "CELLO"
+			 	when cello != "NO"  then  ""
+		 	END AS celloss
+			FROM cellos 
+		   WHERE cellos.id_cello = clase_productos.id_cello)
+		 )) AS producto
+	FROM clase_productos
+	WHERE clase_productos.item = (SELECT pendiente_factura.item FROM pendiente_factura 
+											WHERE pendiente_factura.id_pendiente = detalle_factura.id_pendiente)
+	) AS producto,
+	
+	(SELECT clase_productos.codigo_precio 
+		FROM clase_productos
+		WHERE clase_productos.item = (SELECT pendiente_factura.item FROM pendiente_factura 
+													WHERE pendiente_factura.id_pendiente = detalle_factura.id_pendiente)) AS codigo
+	,
+	
+	(SELECT clase_productos.item 
+		FROM clase_productos
+		WHERE clase_productos.item = (SELECT pendiente_factura.item FROM pendiente_factura 
+													WHERE pendiente_factura.id_pendiente = detalle_factura.id_pendiente)) AS codigo_item
+	,
+	(SELECT CONCAT((select orden_productos.orden from orden_productos where orden_productos.id_orden = pendiente_factura.orden) ,"-", MONTH(pendiente_factura.mes) , "-" , date_format(pendiente_factura.mes,'%y')) AS oer
+	FROM pendiente_factura WHERE pendiente_factura.id_pendiente = detalle_factura.id_pendiente) AS orden,
+	
+		(SELECT  pendiente_factura.pendiente
+	FROM pendiente_factura WHERE pendiente_factura.id_pendiente = detalle_factura.id_pendiente) AS orden_total,
+	
+		(SELECT pendiente_factura.saldo - total_tabacos
+	FROM pendiente_factura WHERE pendiente_factura.id_pendiente = detalle_factura.id_pendiente) AS orden_restante,
+		
+	`peso_bruto`*`cantidad_puros` AS total_bruto,
+	`peso_neto`*`cantidad_puros`AS total_neto
+FROM detalle_factura 
+WHERE `facturado` = "N"; 
+
+
+
+END//
+DELIMITER ;
+
+-- Volcando estructura para procedimiento facturacion_plasencia.mostrar_existencia_bodega
 DELIMITER //
 CREATE PROCEDURE `mostrar_existencia_bodega`()
 BEGIN
@@ -9258,7 +8959,7 @@ from  importar_existencias;
 END//
 DELIMITER ;
 
--- Dumping structure for procedure facturacion_plasencia.mostrar_lista_cajas
+-- Volcando estructura para procedimiento facturacion_plasencia.mostrar_lista_cajas
 DELIMITER //
 CREATE PROCEDURE `mostrar_lista_cajas`()
 BEGIN
@@ -9266,7 +8967,7 @@ SELECT id, existencia FROM lista_cajas;
 END//
 DELIMITER ;
 
--- Dumping structure for procedure facturacion_plasencia.mostrar_lista_inventario
+-- Volcando estructura para procedimiento facturacion_plasencia.mostrar_lista_inventario
 DELIMITER //
 CREATE PROCEDURE `mostrar_lista_inventario`()
 BEGIN
@@ -9285,7 +8986,7 @@ inventario_productos_terminados.Vitola = vitola_productos.id_vitola AND
 END//
 DELIMITER ;
 
--- Dumping structure for procedure facturacion_plasencia.mostrar_lista_productos_terminados
+-- Volcando estructura para procedimiento facturacion_plasencia.mostrar_lista_productos_terminados
 DELIMITER //
 CREATE PROCEDURE `mostrar_lista_productos_terminados`()
 BEGIN
@@ -9293,7 +8994,7 @@ SELECT inventario_productos_terminados.id,inventario_productos_terminados.Existe
 END//
 DELIMITER ;
 
--- Dumping structure for procedure facturacion_plasencia.mostrar_pedido
+-- Volcando estructura para procedimiento facturacion_plasencia.mostrar_pedido
 DELIMITER //
 CREATE PROCEDURE `mostrar_pedido`()
 BEGIN
@@ -9308,12 +9009,12 @@ vitola_productos.vitola," ",capa_productos.capa) AS descripcion ,pedidos.unidade
 END//
 DELIMITER ;
 
--- Dumping structure for procedure facturacion_plasencia.mostrar_pendiente
+-- Volcando estructura para procedimiento facturacion_plasencia.mostrar_pendiente
 DELIMITER //
 CREATE PROCEDURE `mostrar_pendiente`()
 BEGIN
 
-SELECT pendiente.id_pendiente , categoria.categoria AS categoria, pendiente.item AS item,pendiente.orden_del_sitema AS orden_del_sitema,pendiente.observacion AS observacion,pendiente.presentacion AS presentacion ,pendiente.mes AS mes ,orden_productos.orden AS orden, marca_productos.marca AS marca,vitola_productos.vitola AS vitola, 
+SELECT pendiente.id_pendiente, categoria.categoria AS categoria, pendiente.item AS item,pendiente.orden_del_sitema AS orden_del_sitema,pendiente.observacion AS observacion,pendiente.presentacion AS presentacion ,pendiente.mes AS mes ,orden_productos.orden AS orden, marca_productos.marca AS marca,vitola_productos.vitola AS vitola, 
 nombre_productos.nombre AS nombre, capa_productos.capa AS capa,
 cellos.anillo AS anillo,cellos.cello AS cello, cellos.upc AS upc, pendiente.pendiente as pendiente,pendiente.factura_del_mes as factura_del_mes, pendiente.cantidad_enviada_mes AS cantidad_enviada_mes, pendiente.saldo AS saldo, tipo_empaques.tipo_empaque AS tipo_empaque
 FROM categoria, clase_productos, marca_productos, vitola_productos,nombre_productos, capa_productos, orden_productos,cellos,
@@ -9327,7 +9028,7 @@ WHERE pendiente.vitola = vitola_productos.id_vitola AND pendiente.capa = capa_pr
 END//
 DELIMITER ;
 
--- Dumping structure for procedure facturacion_plasencia.mostrar_pendiente_empaque
+-- Volcando estructura para procedimiento facturacion_plasencia.mostrar_pendiente_empaque
 DELIMITER //
 CREATE PROCEDURE `mostrar_pendiente_empaque`()
 BEGIN
@@ -9339,13 +9040,14 @@ FROM categoria, clase_productos, marca_productos, vitola_productos,nombre_produc
 tipo_empaques, pendiente_empaque
 WHERE pendiente_empaque.vitola = vitola_productos.id_vitola AND pendiente_empaque.capa = capa_productos.id_capa  and
  pendiente_empaque.nombre = nombre_productos.id_nombre AND  pendiente_empaque.marca = marca_productos.id_marca AND cellos.id_cello=pendiente_empaque.cello AND orden_productos.id_orden =pendiente_empaque.orden and
-   pendiente_empaque.tipo_empaque = tipo_empaques.id_tipo_empaque AND pendiente_empaque.categoria = categoria.id_categoria 
-	GROUP BY pendiente_empaque.item, pendiente_empaque.orden, pendiente_empaque.categoria
-	;
+   pendiente_empaque.tipo_empaque = tipo_empaques.id_tipo_empaque AND pendiente_empaque.categoria = categoria.id_categoria AND 
+   pendiente_empaque.saldo > 0
+	GROUP BY pendiente_empaque.item, pendiente_empaque.orden, pendiente_empaque.categoria;
+	
 END//
 DELIMITER ;
 
--- Dumping structure for procedure facturacion_plasencia.mostrar_productos
+-- Volcando estructura para procedimiento facturacion_plasencia.mostrar_productos
 DELIMITER //
 CREATE PROCEDURE `mostrar_productos`()
 BEGIN
@@ -9363,7 +9065,17 @@ WHERE  clase_productos.id_vitola = vitola_productos.id_vitola AND clase_producto
 END//
 DELIMITER ;
 
--- Dumping structure for procedure facturacion_plasencia.sustraer_total
+-- Volcando estructura para procedimiento facturacion_plasencia.mostrar_programacion
+DELIMITER //
+CREATE PROCEDURE `mostrar_programacion`()
+BEGIN
+  
+  
+  SELECT * FROM prograamacion ORDER by prograamacion.id desc;
+END//
+DELIMITER ;
+
+-- Volcando estructura para procedimiento facturacion_plasencia.sustraer_total
 DELIMITER //
 CREATE PROCEDURE `sustraer_total`(
 	IN `total` VARCHAR(50)
@@ -9399,7 +9111,7 @@ SELECT CAST(nuevo_total AS DECIMAL(10,2)), fin, inicio;
 END//
 DELIMITER ;
 
--- Dumping structure for procedure facturacion_plasencia.traer_maximo_registro_existencia
+-- Volcando estructura para procedimiento facturacion_plasencia.traer_maximo_registro_existencia
 DELIMITER //
 CREATE PROCEDURE `traer_maximo_registro_existencia`()
 BEGIN
@@ -9415,7 +9127,7 @@ WHERE importar_existencias.id = max_id;
 END//
 DELIMITER ;
 
--- Dumping structure for procedure facturacion_plasencia.traer_ubicacion
+-- Volcando estructura para procedimiento facturacion_plasencia.traer_ubicacion
 DELIMITER //
 CREATE PROCEDURE `traer_ubicacion`(
 	IN `ubicacion` VARCHAR(50)
@@ -9429,7 +9141,15 @@ WHERE importar_existencias.ubicacion  = ubicacion;
 END//
 DELIMITER ;
 
--- Dumping structure for procedure facturacion_plasencia.verificar_item_clase
+-- Volcando estructura para procedimiento facturacion_plasencia.trae_factura_venta_actual
+DELIMITER //
+CREATE PROCEDURE `trae_factura_venta_actual`()
+BEGIN
+ SELECT * FROM factura_terminados WHERE factura_terminados.facturado = 'N';
+END//
+DELIMITER ;
+
+-- Volcando estructura para procedimiento facturacion_plasencia.verificar_item_clase
 DELIMITER //
 CREATE PROCEDURE `verificar_item_clase`()
 BEGIN
