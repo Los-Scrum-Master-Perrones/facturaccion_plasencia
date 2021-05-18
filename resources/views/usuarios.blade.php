@@ -25,6 +25,7 @@
       <div class="col-md-3">
     <button class="btn botonprincipal"    data-toggle="modal" data-target="#modal_agregar_usuarios">
       <span> Agregar Usuarios</span>
+   
   </button>
     </div>
     </div>    

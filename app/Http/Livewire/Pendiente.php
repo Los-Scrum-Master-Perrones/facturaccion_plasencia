@@ -63,27 +63,48 @@ class Pendiente extends Component
 
     public function pendiente_indexi(Request $request)
     {
+        $verificar = \DB::select('call verificar_item_clase');
+    
 
-        $insertar_pendiente_empaque =   \DB::select(
-            'call insertar_pendente_empaque(:fecha)',
-            ['fecha' => (string)$request->fecha]
-        );
+        if( $verificar.count() === 0){
+            
+            $insertar_pendiente_empaque =   \DB::select(
+                'call insertar_pendente_empaque(:fecha)',
+                ['fecha' => (string)$request->fecha]
+            );
+    
+            $insertar_pendiente = DB::select(
+                'call insertar_pendiente(:fecha)',
+                ['fecha' => (string)$request->fecha]
+            );
+    
+            $this->datos_pendiente = DB::select(
+                'call buscar_pendiente(:nombre,:fechade,:fechahasta)',
+                [
+                    'nombre' =>  $this->nom,
+                    'fechade' =>  $this->fede,
+                    'fechahasta' => $this->fecha,
+                ]
+            );
+            return redirect()->route('pendiente')->with('insertar_pendiente', $insertar_pendiente)->with('insertar_pendiente_empaque', $insertar_pendiente_empaque);
+       
 
-        $insertar_pendiente = DB::select(
-            'call insertar_pendiente(:fecha)',
-            ['fecha' => (string)$request->fecha]
-        );
-
-        $this->datos_pendiente = DB::select(
-            'call buscar_pendiente(:nombre,:fechade,:fechahasta)',
-            [
-                'nombre' =>  $this->nom,
-                'fechade' =>  $this->fede,
-                'fechahasta' => $this->fecha,
-            ]
-        );
-        return redirect()->route('pendiente')->with('insertar_pendiente', $insertar_pendiente)->with('insertar_pendiente_empaque', $insertar_pendiente_empaque);
+           
+    }else{
+        
+        echo 'La variable SÍ está vacía, su contenido es: '.$verificar;
+             
     }
+
+  }
+
+
+
+
+
+
+
+
 
 
     public function pendiente_index(Request $request)
@@ -138,19 +159,14 @@ class Pendiente extends Component
 
     public function eliminar_pendiente(Request $request){
 
-        $this->datos_pendiente =[];
-
-    
+        $this->datos_pendiente =[];    
         $this->borrar=\DB::select('call borrar_pendientes(:eliminar)',['eliminar'=>$request->id_pendiente]);
-
      
         return redirect()->route('pendiente'); 
     
         }
 
-        public function actualizar_pendiente(Request $request){
-
-          
+        public function actualizar_pendiente(Request $request){         
     
         
             $this->actualizar=\DB::select('call actualizar_pendientes(:id,:item,:orden,:observacion,:presentacion)',
