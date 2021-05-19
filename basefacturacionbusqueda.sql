@@ -8882,7 +8882,8 @@ DELIMITER ;
 
 -- Volcando estructura para procedimiento facturacion_plasencia.mostrar_detalle_factura
 DELIMITER //
-CREATE PROCEDURE `mostrar_detalle_factura`()
+CREATE  PROCEDURE `mostrar_detalle_factura`()
+
 BEGIN
 SELECT `id_detalle`,
 	`id_venta`,
