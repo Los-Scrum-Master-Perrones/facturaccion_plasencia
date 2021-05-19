@@ -57,7 +57,8 @@
             </div>
             </form>
             <div class="col-sm-2" style="text-align:right;">
-
+            <form action="{{Route('exportar_programacion')}}" id="formverid" name="formverid">
+            <input value="{{isset($id_tov)?$id_tov:0}}" name="id_tov" id="id_tov" hidden wire:model="id_tov">
             <button class="botonprincipal" type="submit" style="width:120px;">
             <span>
                     <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor"
@@ -68,6 +69,8 @@
                     </svg>
                 </span>
                 </button>
+                
+            </form>
 
             </div>
 
