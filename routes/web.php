@@ -44,7 +44,8 @@ Route::post('/import', [VehicleController::class, 'import']);
 
 Route::post('/importar_pedido', [PedidoController::class, 'import']);
 Route::get('/importar_pedido', [PedidoController::class, 'import']);
-
+Route::post('/vaciar_import_excel', [PedidoController::class, 'vaciar_import_excel'])->name('vaciar_import_excel');
+Route::get('/vaciar_import_excel', [PedidoController::class, 'vaciar_import_excel'])->name('vaciar_import_excel');
 
 
 Route::get('/productos', Productos::class)->name('productos');
@@ -220,10 +221,12 @@ Route::post('/editaryeliminarlista', [App\Http\Controllers\CajasController::clas
 
 
 Route::post('/buscar_lista_cajas', [App\Http\Controllers\CajasController::class, 'buscar_lista_cajas'])->name('buscar_lista_cajas');
+Route::get('/buscar_lista_cajas', [App\Http\Controllers\CajasController::class, 'buscar_lista_cajas'])->name('buscar_lista_cajas');
 Route::post('/agregar_lista_caja', [App\Http\Controllers\CajasController::class, 'agregar_lista_caja'])->name('agregar_lista_caja');
 
 Route::post('/importar_cajas', [App\Http\Controllers\CajasController::class, 'import'])->name('importar_cajas');
 Route::get('/importar_cajas', [App\Http\Controllers\CajasController::class, 'import'])->name('importar_cajas');
+Route::post('/vaciar_import_tabla', [App\Http\Controllers\CajasController::class, 'vaciar_import_tabla'])->name('vaciar_import_tabla');
 
 Route::get('/anadir_inventario', [App\Http\Controllers\CajasController::class, 'anadir_inventario'])->name('anadir_inventario');
 

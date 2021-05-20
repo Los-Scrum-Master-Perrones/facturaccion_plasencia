@@ -46,6 +46,11 @@
                     <input type="submit" name="upload" style="width:130px;" class="botonprincipal mr-sm-2 " value="Importar">
                     </form>
 
+                    <form wire:submit.prevent="vaciar" >
+                    @csrf 
+                    <input type="submit" style="width:130px;" class=" botonprincipal mr-sm-2 "  value="Vaciar tabla">
+                    </form>
+
                     <input name="busqueda" id="busqueda"  wire:model= "busqueda" class="botonprincipal  form-control"    placeholder="Búsqueda por Marca, Nombre y Capa" >
                     </div>
 

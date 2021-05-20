@@ -30,13 +30,16 @@
 
 
 
-<div class="container" style="max-width:100%; "> 
-               
-    <div class="row">
-          <form action=  "{{Route('buscar_lista_cajas')}}" method= "POST" >
-            
-     
-          @csrf
+<div class="container" style="max-width:100%; ">
+    
+    <div class="row" style="text-align:center;">
+
+            <div class="col">
+                   <div class="input-group mb-3">
+
+
+          <form action=  "{{Route('buscar_lista_cajas')}}" method= "POST" >        
+           @csrf
           <input  name="nombre"  class=" botonprincipal" style="width:300px;"   placeholder="buscar tipo de caja (Código,Producto/Servicio,Marca)" >
 
           <button  type="submit" class=" mr-sm-2 botonprincipal "  style="width:40px;" >
@@ -44,10 +47,12 @@
           <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/>
           </svg>
           </button>
-          <button class="botonprincipal  mr-sm-2 " style="width:120px;" data-toggle="modal" data-target="#modal_agregar_lista" >Agregar</button>
- 
           </form>  
+          
+          <button class="botonprincipal  mr-sm-2 " style="width:120px;" data-toggle="modal" data-target="#modal_agregar_lista" >Agregar</button>
 
+          </div>                
+          </div>
     </div>
 
         
@@ -93,7 +98,6 @@
                             </tbody>
                         </table>
 
-                        {{ $listacajas->links() }}
               
                 </div>
                 </div>

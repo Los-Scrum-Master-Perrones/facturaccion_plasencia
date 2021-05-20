@@ -56,7 +56,11 @@
                     <input type="file" name="select_file" id="select_file" class="form-control  botonprincipal mr-sm-2 " style="width:350px;" />
                       <input type="submit" name="upload" style="width:130px;" class=" botonprincipal mr-sm-2 " value="Importar">
                   </form>
-                           
+
+                    <form method="post"  action="{{ url('/vaciar_import_excel') }}" >
+                    @csrf 
+                    <input type="submit" style="width:130px;" class=" botonprincipal mr-sm-2 "  value="Vaciar tabla">
+                    </form>
 
                     <form action="{{Route('pendiente_insertar')}}" method="POST">
                     @csrf
@@ -67,7 +71,7 @@
                          
                     <form action="{{Route('buscar_pedido')}}" method="POST"style="margin-bottom:0px;">
                     @csrf
-                    <input name="busqueda" id="busqueda" class=" form-control botonprincipal mr-sm-2" placeholder="Búsqueda por descripción u orden" style="width:350px;">
+                    <input name="busqueda" id="busqueda" class=" form-control botonprincipal mr-sm-2" placeholder="Búsqueda por descripción u orden" style="width:250px;">
                    
                     <button class="botonprincipal mr-sm-2 " style="width: 50px" type="submit">
                     <span>
@@ -77,6 +81,9 @@
                     </span>
                     </button>                                            
                     </form>
+
+                    
+
               
          </div>
     </div> 

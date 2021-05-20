@@ -20,10 +20,14 @@ class CajasController extends Controller
 
 
     function index_lista(){
-        $listacajas = DB::table('lista_cajas')->orderBy('existencia', 'desc')->paginate('50');
+        $listacajas = DB::table('lista_cajas')->orderBy('existencia', 'desc')->get();
         $mostrar_lista_cajas = \DB::select('call mostrar_lista_cajas');
         return view('lista_cajas')->with('listacajas', $listacajas)->with('mostrar_lista_cajas', $mostrar_lista_cajas);
     }
+    
+
+
+    
 
 
     
@@ -35,13 +39,14 @@ class CajasController extends Controller
         } else {
             $nombre = $request->nombre;
         }
-
+        
+        $mostrar_lista_cajas = \DB::select('call mostrar_lista_cajas');
         $listacajas = \DB::select(
             'call buscar_lista_cajas(:nombre)',
             ['nombre' => $nombre]
         );
 
-        return view('lista_cajas')->with('listacajas', $listacajas);
+        return view('lista_cajas')->with('listacajas', $listacajas)->with('mostrar_lista_cajas', $mostrar_lista_cajas);
     }
 
 
@@ -86,7 +91,11 @@ class CajasController extends Controller
         $cajas = DB::table('cajas')->get();
         return view('import_cajas')->with('cajas', $cajas);
     }
-
+    function vaciar_import_tabla(){
+        $borrar = DB::table('cajas')->delete();
+        $cajas = DB::table('cajas')->get();
+        return view('import_cajas')->with('cajas', $cajas);
+    }
 
 
 

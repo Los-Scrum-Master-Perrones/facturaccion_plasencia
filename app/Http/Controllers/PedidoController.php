@@ -16,6 +16,17 @@ class PedidoController extends Controller
         return view('import_excel')->with('success', 'Importación realizada con éxito!')->with('pedido_completo', $pedido_completo)->with('verificar', $verificar);
     }
 
+    function vaciar_import_excel(){
+        $borrar = DB::table('pedidos')->delete();
+        $pedido_completo =  DB::select('call mostrar_pedido');
+        $verificar = \DB::select('call verificar_item_clase');
+        return view('import_excel')->with('success', 'Importación realizada con éxito!')->with('pedido_completo', $pedido_completo)->with('verificar', $verificar);
+     }
+
+
+
+     
+
 
 
     function buscar(Request $request)
