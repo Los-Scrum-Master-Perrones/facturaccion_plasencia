@@ -58,6 +58,7 @@
                     <th>Código</th>
                     <th>Producto/Servicio</th>
                     <th>Marca</th>
+                    <th>Existencia</th>
                 </tr>
             </thead>
             <tbody>
@@ -70,7 +71,7 @@
                     <td>{{$caja->codigo}}</td>
                     <td>{{$caja->productoServicio}}</td>
                     <td>{{$caja->marca}}</td>
-
+                    <td>{{$caja->existencia}}</td>
                 </tr>
                 @endforeach
             </tbody>

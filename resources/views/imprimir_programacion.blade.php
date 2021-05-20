@@ -1,7 +1,14 @@
-<title>Programación <?php echo($fecha);?></title>
-
-
-
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+<title>Programación </title>
 
 <div class="row" style="width: 100%;margin:10px; text-align:center;">
     <h4 style="margin:10px;font-style:oblique;"> Programación, Tabacos de Oriente </h4>
@@ -11,7 +18,7 @@
 <div class="row">
     <div class="col">
 
-        <div style="text-size:20px;margin-bottom:5px;">Fecha: <?php echo($fecha);?></div>
+        <div style="text-size:20px;margin-bottom:5px;">Fecha:</div>
 
         <table class="table table-light" id="editable" style="font-size:10px;m">
                     <thead>
@@ -33,19 +40,19 @@
                     </thead>
                     <tbody>
 
-                        @foreach($detalles_programaciones as $detalles_programacione)
+                        @foreach($depros as $depro)
                         <tr>
-                            <td> {{$detalles_programacione->numero_orden}}</td>
-                            <td> {{$detalles_programacione->orden}}</td>
-                            <td> {{$detalles_programacione->marca}}</td>
-                            <td> {{$detalles_programacione->vitola}}</td>
-                            <td> {{$detalles_programacione->nombre}}</td>
-                            <td> {{$detalles_programacione->capa}}</td>
-                            <td> {{$detalles_programacione->tipo_empaque}}</td>
-                            <td> {{$detalles_programacione->anillo}}</td>
-                            <td> {{$detalles_programacione->cello}}</td>
-                            <td> {{$detalles_programacione->upc}}</td>
-                            <td> {{$detalles_programacione->saldo}}</td>
+                            <td> {{$depro->numero_orden}}</td>
+                            <td> {{$depro->orden}}</td>
+                            <td> {{$depro->marca}}</td>
+                            <td> {{$depro->vitola}}</td>
+                            <td> {{$depro->nombre}}</td>
+                            <td> {{$depro->capa}}</td>
+                            <td> {{$depro->tipo_empaque}}</td>
+                            <td> {{$depro->anillo}}</td>
+                            <td> {{$depro->cello}}</td>
+                            <td> {{$depro->upc}}</td>
+                            <td> {{$depro->saldo}}</td>
                            
 
 
@@ -59,4 +66,7 @@
     </div>
 
 </div>
-<!-- FIN DEL TABLA REMISIONES PARAISO -->
+
+
+</body>
+</html>

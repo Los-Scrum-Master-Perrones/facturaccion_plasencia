@@ -110,6 +110,10 @@ Route::get('/borrar_historial_programacion', [HistorialProgramacion::class,'elim
 Route::post('/borrar_historial_programacion', [HistorialProgramacion::class,'eliminar_detalles_pro'])->name('borrar_historial_programacion');
 
 
+
+Route::get('/imprimir_detalles', [programacion::class,'imprimir_programa'])->name('imprimir_detalles');
+Route::post('/imprimir_detalles', [programacion::class,'imprimir_programa'])->name('imprimir_detalles');
+
 Route::get('/eliminar_programacion', [HistorialProgramacion::class,'eliminar_programacion'])->name('eliminar_programacion');
 Route::post('/eliminar_programacion', [HistorialProgramacion::class,'eliminar_programacion'])->name('eliminar_programacion');
 

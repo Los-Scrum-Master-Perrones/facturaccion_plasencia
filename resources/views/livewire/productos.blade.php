@@ -568,6 +568,7 @@
 
     <!-- INICIO MODAL ACTUALIZAR PRODUCTO-->
     <form action="{{Route('actualizar_producto')}}" method="POST" name="formulario_actualizar" id="formulario_actualizar">
+    @csrf
         <div class="modal fade"  id="modal_actualizarproducto" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true" style="opacity:.9;background:#212529;width=800px;">
             <div class="modal-dialog modal-dialog-centered modal-lg" >
                 <div class="modal-content">
@@ -714,7 +715,7 @@
         <div class="modal fade" id="modal_agregarproducto" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true"  style="opacity:.9;background:#212529;width=800px;">
             <div class="modal-dialog modal-dialog-centered 	modal-xl">
                 <div class="modal-content">
-
+                @csrf
                     <div class="modal-header">
                         <h5 class="modal-title" id="staticBackdropLabel">Agregar detalle del producto</h5>
                     </div>

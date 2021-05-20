@@ -5,8 +5,9 @@ namespace App\Http\Livewire;
 use Livewire\Component;
 use DB;
 use Illuminate\Http\Request;
-
+use Carbon\Carbon;
 use Maatwebsite\Excel\Facades\Excel;
+use Barryvdh\DomPDF\Facade as PDF;
 
 use App\Exports\ProgramcionExport;
 
@@ -22,13 +23,14 @@ public $detallestodos;
     public $idp;
     public $saldo;
     public $id_pen;
+    public $id_tov_imprimir;
     
     public function render()
     {
         $this->programaciones= \DB::select('call mostrar_programacion()');
        
         
-
+      
         $this->detalles_programaciones=\DB::select('call mostrar_detalles_programacion(:buscar,:id)',
         ['buscar'=>  $this->busqueda,
         'id'=>$this->id_tov]);
@@ -54,12 +56,14 @@ public $detallestodos;
          $this->id_pen =0;
          $this->detallestodos = [];
          $this->titulo =[];
+         $this->id_tov_imprimir = 0;
     }
 
 
 
     public function ver($id){
         $this->id_tov = $id;
+        $this->id_tov_imprimir =$id;
     }
 
 
@@ -144,4 +148,29 @@ public $detallestodos;
         return Excel::download(new ProgramcionExport($bus, $request->id_tov), 'Programación.xlsx');
     }
    
+
+    
+    public function imprimir_programacion(){
+                
+        $fecha =Carbon::now();
+        $fecha = $fecha->format('d-m-Y');
+    
+    
+           
+        $ffecha =Carbon::now();
+        $fecha_imp = $ffecha->format('d-m-Y/h:i');
+   
+    
+       $depros = \DB::select('call mostrar_detalles_programacion(:buscar,:id)',
+       ['buscar'=> $this->busqueda,
+       'id'=> $this->id_tov_imprimir]);
+    
+
+       return redirect()->route('imprimir_detalles',['fecha'=>$fecha,'depros'=> $depros]); 
+      
+       
+    
+    }
+
+       
 }

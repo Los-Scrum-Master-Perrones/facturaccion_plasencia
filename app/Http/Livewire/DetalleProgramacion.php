@@ -87,12 +87,14 @@ class DetalleProgramacion extends Component
                
                     
                 for($i = 0 ; $this->tuplas > $i ; $i++){
-                $this->actualizar_insertar = \DB::select('call insertar_detalle_programacion(:numero_orden, :orden,:cod_producto,:saldo,:id_pendiente)',
+                $this->actualizar_insertar = \DB::select('call insertar_detalle_programacion(:numero_orden, :orden,:cod_producto,:saldo,:id_pendiente,:caja)',
                 ['numero_orden'=>isset($this->detalles_provicionales[$i]->numero_orden)?$this->detalles_provicionales[$i]->numero_orden:null,
                 'orden'=>isset($this->detalles_provicionales[$i]->orden)?$this->detalles_provicionales[$i]->orden:null,
                 'cod_producto'=>isset($this->detalles_provicionales[$i]->cod_producto)?$this->detalles_provicionales[$i]->cod_producto:null,
                 'saldo'=>isset($this->detalles_provicionales[$i]->saldo)?$this->detalles_provicionales[$i]->saldo:null,
-                'id_pendiente'=>isset($this->detalles_provicionales[$i]->id_pendiente)?$this->detalles_provicionales[$i]->id_pendiente:null
+                'id_pendiente'=>isset($this->detalles_provicionales[$i]->id_pendiente)?$this->detalles_provicionales[$i]->id_pendiente:null,
+                'caja'=>isset($this->detalles_provicionales[$i]->existencia)?$this->detalles_provicionales[$i]->existencia:null
+
                ]);
             }
                

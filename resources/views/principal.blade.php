@@ -138,7 +138,7 @@
         </div>
 
         <div class="righter">
-            <form action="{{Route('tabla')}}" method="GET">
+            <form action="{{Route('index_lista_cajas')}}" method="GET">
                 @csrf
                 <button type="submit" class="buttonsubmit">
                     <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="white" class="bi bi-box"

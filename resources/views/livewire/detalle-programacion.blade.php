@@ -14,24 +14,10 @@
     @livewireStyles
     <link rel="stylesheet" href="{{ asset('css/principal.css') }}" />
 
-    </br>
-    <ul class="nav justify-content-center">
-        <li class="nav-item">
-            <a style="color:black; font-size:16px;" href="pendiente_empaque"><strong>Pendiente</strong></a>
-        </li>
-        <li class="nav-item">
-            <a style="color:black; font-size:16px;" href="importar_c"><strong>Existencia en bodega</strong></a>
-        </li>
-        <li class="nav-item">
-            <a style="color:black; font-size:16px;" href="inventario_cajas"><strong>Existencia de cajas</strong></a>
-        </li>
-        <li class="nav-item">
-            <a style="color:black; font-size:16px;" href="historial_programacion"><strong>Programaciones</strong></a>
-        </li>
-    </ul>
+   
     <br>
 
-    <div class="" style="width:1350px; padding-left:50px;">
+    <div class="" style="width:1200px; padding-left:50px;">
 
         <div class="row">
         <form  wire:submit.prevent="insertarDetalle_y_actualizarPendiente()"  style="width:auto; padding-left:50px; " >
@@ -103,26 +89,27 @@
     </script> -->
 
     </br>
+    <div class="panel-body" style="padding:0px;">
+    <div style="width:100%; padding-left:0px;   font-size:10px;   overflow-x: display; overflow-y: auto;
+     height:450px;">
 
-    <div style="width:1350px; padding-left:20px; padding-right:20px;">
-
-        <div class="col-sm">
-            <table class="table table-light" id="editable" style="font-size:10px;m">
+            <table class="table table-light" id="editable"  style="font-size:10px;">
                 <thead>
-                    <tr style="font-size:16px; text-align:center;">
+                    <tr style="text-align:center;">
                         <th># ORDEN</th>
                         <th style=" text-align:center;">ORDEN</th>
                         <th style=" text-align:center;">MARCA</th>
                         <th style=" text-align:center;">VITOLA</th>
                         <th style=" text-align:center;">NOMBRE</th>
                         <th style=" text-align:center;">CAPA</th>
-                        <th style=" text-align:center;">TIPO DE EMPAQUE</th>
+                        <th style=" text-align:center;">TIPO EMPAQUE</th>
                         <th style=" text-align:center;">ANILLO</th>
                         <th style=" text-align:center;">CELLO</th>
                         <th style=" text-align:center;">UPC</th>
                         <th style=" text-align:center;">SALDO</th>
                         <th style=" text-align:center;">EXISTENCIA</th>
-                        <th style=" text-align:center;">SOBRANTE/FALTANTE</th>
+                        <th style=" text-align:center;">SOB/FAL</th>
+                        <th style=" text-align:center;">SOLICITAR(CAJAS)</th>
                         <th style=" text-align:center;">OPERACIONES</th>
 
 
@@ -152,6 +139,17 @@
                         echo '<td>' .$detalle_provicional->diferencia. '</td>' ;
                         }
                         ?>
+
+                        <?php   if($detalle_provicional->existencia < 0){
+
+                        echo '<td style="color:red;">'.$detalle_provicional->existencia.'</td>' ;
+
+                        }else{
+
+                        echo '<td>' .$detalle_provicional->existencia. '</td>' ;
+                        }
+                        ?>
+                        
                         <td style="text-align:center">
 
                             <a data-toggle="modal" data-target="#modal_eliminar_detalle"
