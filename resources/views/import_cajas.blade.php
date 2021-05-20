@@ -58,6 +58,15 @@
       <input type="submit" name="upload" class=" botonprincipal " value="Añadir a inventario">
       </form>
      </li>
+
+     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  
+  
+  <li class="nav-item">
+  <form method="post" enctype="multipart/form-data" action="{{ url('/vaciar_import_tabla') }}" >
+      @csrf 
+      <input type="submit" class=" botonprincipal " value="Vaciar tabla">
+      </form>
+     </li>
   </ul>
    
  

@@ -40,13 +40,23 @@ class ImportarProductoBodega extends Component
 
 
     }
+
       public  function import()  {  
-
-
         $this->borrar =  DB::select('call borrar_datos_existencia');
         $this->validate([
             'select_file' => 'max:1024', // 1MB Max
         ]);
         (new existenciaImport)->import($this->select_file);
     }
+
+    public  function vaciar()  {  
+        $this->borrar =  DB::select('call borrar_datos_existencia');    
+    }
+
+
+
+
+
+
+
 }
