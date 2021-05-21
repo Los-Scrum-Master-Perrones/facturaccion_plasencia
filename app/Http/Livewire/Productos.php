@@ -165,11 +165,16 @@ class Productos extends Component
                     $upc = "no";
                 }
             
-        
+                if(isset($request->sampler)){
+                    $sam = $request->sampler;
+                   
+                }else{
+                    $sam = "no";
+                }
 
 
                 $clase_producto = \DB::select('call actualizar_productos(:id,:item,:cod_producto,:cod_caja,:cod_precio,
-                :capa,:vitola,:nombre,:marca,:cello,:anillo,:upc,:tipo,:presentacion)',
+                :capa,:vitola,:nombre,:marca,:cello,:anillo,:upc,:tipo,:presentacion,:sampler,:des)',
                      ['id' =>$request->id_producto,
                      'item' => $request->item_ac,
                      'cod_producto' => $request->cod_sistema_ac,
@@ -183,7 +188,9 @@ class Productos extends Component
                     'anillo'=> $anillo,
                     'upc'=> $upc,
                     'tipo' => $request->tipo_ac,
-                    'presentacion' => $request->presentacion_ac
+                    'presentacion' => $request->presentacion_ac,
+                    'sampler'=> $sam,
+                    'des'=> $request->des,
                      ]);
                      $this->capas= \DB::select('call buscar_capa("")');
                      $this->marcas=\DB::select('call buscar_marca("")');
