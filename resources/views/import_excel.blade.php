@@ -42,9 +42,25 @@
 
 
 
-    <div class="container" style="max-width:100%; ">
+    <div class="container" style="max-width:100%;  text-align:right;">
+
+    <div class="row" >
+            <div class="col" style="max-width:100%;  text-align:right;">
+                   <div class="input-group mb-3"  style="max-width:100%;  padding:right;">
+                   <form method="post"  action="{{ url('/vaciar_import_excel') }}" >
+                    @csrf 
+                    <input type="submit" style="width:130px;" class=" botonprincipal mr-sm-2 "  value="Nuevo producto">
+                    </form>
+
+                    <form method="post"  action="{{ url('/vaciar_import_excel') }}" >
+                    @csrf 
+                    <input type="submit" style="width:130px;" class=" botonprincipal mr-sm-2 "  value="Vaciar tabla">
+                    </form>
 
 
+                   </div>
+    </div> 
+    </div>
 
 
     <div class="row" >
@@ -57,10 +73,7 @@
                       <input type="submit" name="upload" style="width:130px;" class=" botonprincipal mr-sm-2 " value="Importar">
                   </form>
 
-                    <form method="post"  action="{{ url('/vaciar_import_excel') }}" >
-                    @csrf 
-                    <input type="submit" style="width:130px;" class=" botonprincipal mr-sm-2 "  value="Vaciar tabla">
-                    </form>
+                   
 
                     <form action="{{Route('pendiente_insertar')}}" method="POST">
                     @csrf

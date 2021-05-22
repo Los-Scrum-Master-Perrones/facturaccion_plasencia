@@ -10,6 +10,7 @@ use App\Models\pedido;
 use DB;
 use Maatwebsite\Excel\Concerns\Importable;
 use Maatwebsite\Excel\Concerns\ToModel;
+
 class newrollImport implements ToModel
 {
 
@@ -47,7 +48,7 @@ class newrollImport implements ToModel
                                     'cant_paquetes' => $row[1],
                                     'unidades' => (int)(Static_Vars::getpaquetes() * $row[1]),
                                     'numero_orden' =>Static_Vars::getordenes(),
-                                    'categoria' => "2",
+                                    'categoria' => "1",
                                     ]);
 
                                 $ount = Static_Vars::getconteos();
@@ -94,7 +95,7 @@ class newrollImport implements ToModel
                             'unidades' =>$row[3]==null? 0 : ((intval(Static_Vars::getpaquetes()) )* (intval($row[1]))),
                            
                             'numero_orden' =>Static_Vars::getordenes(),
-                            'categoria' => "5",
+                            'categoria' => "1",
                             ]);
                             $ount = Static_Vars::getconteos();
                             $ount--;
