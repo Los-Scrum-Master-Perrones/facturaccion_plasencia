@@ -47,10 +47,11 @@
     <div class="row" >
             <div class="col" style="max-width:100%;  text-align:right;">
                    <div class="input-group mb-3"  style="max-width:100%;  padding:right;">
-                   <form method="post"  action="{{ url('/vaciar_import_excel') }}" >
+                  
                     @csrf 
-                    <input type="submit" style="width:130px;" class=" botonprincipal mr-sm-2 "  value="Nuevo producto">
-                    </form>
+                   
+                    <input   data-toggle="modal"  style="width:130px;" class=" botonprincipal mr-sm-2 "  data-target="#modal_actualizar" type="submit"  value="Nuevo producto">
+                  
 
                     <form method="post"  action="{{ url('/vaciar_import_excel') }}" >
                     @csrf 
@@ -105,7 +106,86 @@
 
                                
 
+     
+
+<form action="{{Route('nuevo_pedido')}}" method="POST" id="nuevo_pedido" name="nuevo_pedido">
+    <div class="modal fade" role="dialog" id="modal_actualizar" data-backdrop="static" data-keyboard="false"
+        tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true"
+        style="opacity:.9;background:#212529;width=800px;">
+        <div class="modal-dialog modal-dialog-centered modal-lg" style="opacity:.9;background:#212529;width=80%">
+            <div class="modal-content">
+
+                <div class="modal-header">
+                <h5  id="staticBackdropLabel"><strong>Agregar a la orden el producto: </strong><span id="titulo"   name="titulo"></span></h5>  
+             </div>
+             @csrf
+
+
+                <div class="modal-body">
+
+                <div class="row">
+
+                <div class="mb-6 col">
+                                    <label  for="txt_figuraytipo" class="form-label">Item</label>
+                                    <input name="item" id="item" 
+                                        class="form-control"  type="text" autocomplete="off">
+                                </div>
+                                <div class="mb-6 col">
+                                    <label for="txt_figuraytipo"  class="form-label">Orden</label>
+                                    <input name="orden" id="orden" class="form-control"
+                                        type="text" autocomplete="off">
+                                </div>
+
+                                
+
+                </div>
+                        <div class="row">
+
+                            <input name = "id_pendientea" id="id_pendientea" value ="" hidden />
+                            
+                            <input name = "itema" id="itema" value ="" hidden />
+                                <div class="mb-3 col">
+                                    <label  for="txt_figuraytipo" class="form-label">Cant. Paquetes</label>
+                                    <input name="paquetes" id="paquetes" 
+                                        class="form-control" \ type="text" autocomplete="off">
+                                </div>
+                                <div class="mb-3 col">
+                                    <label for="txt_figuraytipo"  class="form-label">Unidades</label>
+                                    <input name="unidades" id="unidades" class="form-control"
+                                        type="text" autocomplete="off">
+                                </div>
+
+                                <div class="mb-3 col">
+                                    <label for="txt_figuraytipo"  class="form-label">Categoria</label>
+                                    
+                                    <select class="form-control" name="categoria" id="categoria"
+                                        placeholder="Ingresa figura y tipo" style="overflow-y: scroll; height:30px;"
+                                        required>
+                                        <option value="1">NEW ROLL</option>
+                                        <option value="2">CATALOGO</option>
+                                        <option value="3">TAKE FROM EXISTING INVENT</option>
+                                        <option value="4">INTERNATIONAL SALES</option>
                         
+                                    </select>
+                                </div>
+
+                        </div>
+                </div>
+
+                <div class="modal-footer" >
+        <button class="bmodal_no" data-dismiss="modal" >
+            <span>Cancelar</span>
+        </button>
+        <button type="submit" class="bmodal_yes">
+            <span>Añadir</span>
+        </button>
+      </div>
+
+            </div>
+        </div>
+    </div>
+</form>
+
 
 
 

@@ -44,8 +44,17 @@ Route::post('/import', [VehicleController::class, 'import']);
 
 Route::post('/importar_pedido', [PedidoController::class, 'import']);
 Route::get('/importar_pedido', [PedidoController::class, 'import']);
+
+
+
+
+
+
 Route::post('/vaciar_import_excel', [PedidoController::class, 'vaciar_import_excel'])->name('vaciar_import_excel');
 Route::get('/vaciar_import_excel', [PedidoController::class, 'vaciar_import_excel'])->name('vaciar_import_excel');
+
+Route::post('/nuevo_pedido', [PedidoController::class, 'nuevo_pedido'])->name('nuevo_pedido');
+Route::get('/nuevo_pedido', [PedidoController::class, 'nuevo_pedido'])->name('nuevo_pedido');
 
 
 Route::get('/productos', Productos::class)->name('productos');

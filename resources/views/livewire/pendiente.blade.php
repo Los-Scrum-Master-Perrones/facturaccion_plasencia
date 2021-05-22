@@ -150,7 +150,7 @@
 
 
 <!-- INICIO MODAL ELMINAR DATO PENDIENTE -->
-<form  action ="{{Route('borrarpendiente')}}" id = "formulario_mostrarE" name = "formulario_mostrarE" action = ""  method="POST">
+<form  action ="{{Route('borrarpendiente')}}" id = "formulario_mostrarE" name = "formulario_mostrarE"   method="POST">
 
 @csrf
 <?php use App\Http\Controllers\UserController; ?>

@@ -24,6 +24,19 @@ class PedidoController extends Controller
      }
 
 
+     function nuevo_pedido(Request $request){
+        
+        $pedido_completo =  DB::select('call mostrar_pedido');
+        $verificar = \DB::select('call verificar_item_clase');
+        $nuevo_pedido = DB::select('call insertar_nuevo_pedido(:item,:paquetes,:unidades,:orden,:cate)',[
+            'item'=>$request->item,
+            'paquetes'=>$request->paquetes,
+            'unidades'=>$request->unidades,
+            'orden' =>$request->orden,
+            'cate'=>$request->categoria
+        ]);
+        return view('import_excel')->with('nuevo_pedido ', $nuevo_pedido )->with( 'pedido_completo',$pedido_completo )->with('verificar', $verificar);
+     }
 
      
 
