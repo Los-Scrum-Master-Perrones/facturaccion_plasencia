@@ -52,7 +52,7 @@
                        
                         <input name="nombre" id="nombre" class="form-control mr-sm-2 botonprincipal" style="width:200px;" placeholder="Nombre" wire:model= "nom">
            
-                        <form action="{{Route('exportar_pendiente')}}">
+                        <form wire:submit.prevent="exportPendiente()">
                         <input type="text" value= "{{isset($nom)?$nom:null}}" name="nombre" id="nombre" hidden wire:model= "nom" >
                         <input type="date" value= "{{isset($fede)?$fede:null}}" name="fecha_de" id="fecha_de" hidden wire:model= "fede">
                         <input type="date" value= "{{isset($feha)?$feha:null}}" name="fecha_hasta" id="fecha_hasta" hidden wire:model= "fecha">

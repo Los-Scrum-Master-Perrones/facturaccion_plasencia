@@ -310,16 +310,20 @@ CREATE TABLE IF NOT EXISTS `cellos` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id_cello`)
-) ENGINE=MyISAM AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=MyISAM AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- Volcando datos para la tabla facturacion_plasencia.cellos: 4 rows
+-- Volcando datos para la tabla facturacion_plasencia.cellos: 8 rows
 DELETE FROM `cellos`;
 /*!40000 ALTER TABLE `cellos` DISABLE KEYS */;
 INSERT INTO `cellos` (`id_cello`, `cello`, `anillo`, `upc`, `created_at`, `updated_at`) VALUES
 	(1, 'SI', 'SI', 'NO', '2021-04-08 21:40:41', '2021-04-08 21:40:41'),
 	(2, 'NO', 'SI', 'NO', '2021-04-08 21:40:41', '2021-04-08 21:40:41'),
 	(3, 'SI', 'SI', 'SI', '2021-04-08 21:40:41', '2021-04-08 21:40:41'),
-	(4, 'SI', 'NO', 'NO', '2021-04-08 21:40:41', '2021-04-08 21:40:41');
+	(4, 'SI', 'NO', 'NO', '2021-04-08 21:40:41', '2021-04-08 21:40:41'),
+	(5, 'SI', 'NO', 'SI', '2021-05-20 08:59:53', '2021-05-20 08:59:54'),
+	(6, 'NO', 'NO', 'SI', '2021-05-20 09:00:50', '2021-05-20 09:00:51'),
+	(7, 'NO', 'SI', 'SI', '2021-05-20 09:00:52', '2021-05-20 09:00:52'),
+	(8, 'NO', 'NO', 'NO', '2021-05-20 09:01:42', '2021-05-20 09:01:43');
 /*!40000 ALTER TABLE `cellos` ENABLE KEYS */;
 
 -- Volcando estructura para tabla facturacion_plasencia.clase_productos
@@ -991,27 +995,27 @@ INSERT INTO `detalle_clase_productos` (`id_producto`, `item`, `id_capa`, `id_vit
 -- Volcando estructura para tabla facturacion_plasencia.detalle_factura
 CREATE TABLE IF NOT EXISTS `detalle_factura` (
   `id_detalle` bigint(20) NOT NULL AUTO_INCREMENT,
-  `id_pendiente` bigint(20) NOT NULL DEFAULT '0',
+  `id_pendiente` bigint(20) NOT NULL DEFAULT 0,
   `id_venta` int(11) NOT NULL,
   `cantidad_cajas` smallint(6) DEFAULT NULL,
   `peso_bruto` decimal(5,2) NOT NULL,
   `peso_neto` decimal(5,2) NOT NULL,
-  `back_order` decimal(5,2) NOT NULL,
   `cantidad_puros` smallint(6) NOT NULL,
   `unidad` smallint(6) NOT NULL,
-  `upc_bundle` bit(1) NOT NULL,
-  `observaciones` tinytext,
+  `observaciones` tinytext DEFAULT NULL,
   `facturado` char(1) DEFAULT NULL,
   PRIMARY KEY (`id_detalle`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
 
--- Volcando datos para la tabla facturacion_plasencia.detalle_factura: ~3 rows (aproximadamente)
+-- Volcando datos para la tabla facturacion_plasencia.detalle_factura: ~5 rows (aproximadamente)
 DELETE FROM `detalle_factura`;
 /*!40000 ALTER TABLE `detalle_factura` DISABLE KEYS */;
-INSERT INTO `detalle_factura` (`id_detalle`, `id_pendiente`, `id_venta`, `cantidad_cajas`, `peso_bruto`, `peso_neto`, `back_order`, `cantidad_puros`, `unidad`, `upc_bundle`, `observaciones`, `facturado`) VALUES
-	(1, 14, 0, 10, 30.00, 23.00, 0.00, 2, 500, b'0', NULL, 'N'),
-	(2, 15, 0, 10, 30.00, 23.00, 0.00, 1, 100, b'0', NULL, 'N'),
-	(3, 16, 0, 10, 30.00, 23.00, 0.00, 1, 500, b'0', NULL, 'N');
+INSERT INTO `detalle_factura` (`id_detalle`, `id_pendiente`, `id_venta`, `cantidad_cajas`, `peso_bruto`, `peso_neto`, `cantidad_puros`, `unidad`, `observaciones`, `facturado`) VALUES
+	(1, 14, 0, 10, 30.00, 23.00, 2, 500, NULL, 'N'),
+	(2, 15, 0, 10, 30.00, 23.00, 1, 100, NULL, 'N'),
+	(3, 16, 0, 10, 30.00, 23.00, 1, 500, NULL, 'N'),
+	(4, 229, 0, 20, 23.00, 18.00, 1, 100, 'Sin Facturar', 'N'),
+	(5, 272, 0, 20, 39.00, 35.00, 3, 200, 'Sin Facturar', 'N');
 /*!40000 ALTER TABLE `detalle_factura` ENABLE KEYS */;
 
 -- Volcando estructura para tabla facturacion_plasencia.detalle_programacion
@@ -2245,7 +2249,6 @@ INSERT INTO `importar_existencias` (`id`, `codigo_producto`, `marca`, `nombre`, 
 	(1153, 'P-23831', 'The Edge', 'Grand Robusto', '5-1/2X54', 'SUMATRA ', NULL, 5975.00, NULL, NULL),
 	(1154, 'P-23833', 'The Edge Nicaragua', 'Gran Robusto', '5-1/2X54', 'HABANO', NULL, 4950.00, NULL, NULL);
 /*!40000 ALTER TABLE `importar_existencias` ENABLE KEYS */;
-
 -- Volcando estructura para tabla facturacion_plasencia.inventario_productos_terminados
 CREATE TABLE IF NOT EXISTS `inventario_productos_terminados` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
@@ -2258,9 +2261,46 @@ CREATE TABLE IF NOT EXISTS `inventario_productos_terminados` (
   PRIMARY KEY (`id`)
 ) ENGINE=MyISAM AUTO_INCREMENT=325 DEFAULT CHARSET=latin1;
 
--- Volcando datos para la tabla facturacion_plasencia.inventario_productos_terminados: 0 rows
+-- Volcando datos para la tabla facturacion_plasencia.inventario_productos_terminados: 36 rows
 DELETE FROM `inventario_productos_terminados`;
 /*!40000 ALTER TABLE `inventario_productos_terminados` DISABLE KEYS */;
+INSERT INTO `inventario_productos_terminados` (`id`, `lote`, `Marca`, `Alias_vitola`, `Vitola`, `Nombre_capa`, `Existencia`) VALUES
+	(289, 'ORD\\0000003162-FIN', '52', '13', '12', '3', '20'),
+	(290, 'ORD\\0000003168-FIN', '51', '2', '4', '5', '450'),
+	(291, 'ORD\\0000003168-FIN', '51', '2', '4', '2', '450'),
+	(292, 'ORD\\0000003168-FIN', '51', '2', '4', '3', '450'),
+	(293, 'ORD\\0000003168-FIN', '61', '2', '4', '1', '450'),
+	(294, 'ORD\\0000003173-FIN', '61', '2', '4', '1', '2000'),
+	(295, 'ORD\\0000003182-FIN', '51', '2', '4', '5', '6420'),
+	(296, 'ORD\\0000003182-FIN', '51', '2', '4', '2', '6420'),
+	(297, 'ORD\\0000003182-FIN', '51', '2', '4', '3', '6420'),
+	(298, 'ORD\\0000003182-FIN', '51', '14', '4', '3', '800'),
+	(299, 'ORD\\0000003182-FIN', '67', '40', '9', '3', '12600'),
+	(300, 'ORD\\0000003182-FIN', '61', '2', '4', '1', '19220'),
+	(301, 'ORD\\0000003182-FIN', '61', '14', '4', '1', '800'),
+	(302, 'ORD\\0000003182-FIN', '105', '11', '9', '1', '560'),
+	(303, 'ORD\\0000003182-FIN', '74', '3', '3', '5', '2400'),
+	(304, 'ORD\\0000003182-FIN', '40', '1', '2', '5', '400'),
+	(305, 'ORD\\0000003187-FIN', '51', '2', '4', '5', '4860'),
+	(306, 'ORD\\0000003187-FIN', '51', '2', '4', '2', '4860'),
+	(307, 'ORD\\0000003187-FIN', '51', '14', '4', '5', '3200'),
+	(308, 'ORD\\0000003187-FIN', '51', '2', '4', '3', '4860'),
+	(309, 'ORD\\0000003187-FIN', '90', '21', '3', '3', '2400'),
+	(310, 'ORD\\0000003187-FIN', '90', '3', '3', '3', '10640'),
+	(311, 'ORD\\0000003187-FIN', '61', '2', '4', '1', '4860'),
+	(312, 'ORD\\0000003187-FIN', '105', '11', '9', '1', '2400'),
+	(313, 'ORD\\0000003193-FIN', '99', '14', '4', '6', '1000'),
+	(314, 'ORD\\0000003193-FIN', '51', '2', '4', '5', '29600'),
+	(315, 'ORD\\0000003193-FIN', '51', '14', '4', '5', '3200'),
+	(316, 'ORD\\0000003193-FIN', '99', '2', '4', '6', '1000'),
+	(317, 'ORD\\0000003193-FIN', '99', '11', '9', '6', '2400'),
+	(318, 'ORD\\0000003193-FIN', '70', '1', '1', '6', '200'),
+	(319, 'ORD\\0000003193-FIN', '72', '11', '9', '6', '6300'),
+	(320, 'ORD\\0000003193-FIN', '74', '6', '18', '5', '1250'),
+	(321, 'ORD\\0000003193-FIN', '70', '1', '1', '2', '200'),
+	(322, 'ORD\\0000003197-FIN', '99', '2', '4', '6', '4000'),
+	(323, 'ORD\\0000003197-FIN', '90', '6', '1', '3', '12500'),
+	(324, 'ORD\\0000003197-FIN', '52', '13', '12', '3', '75');
 /*!40000 ALTER TABLE `inventario_productos_terminados` ENABLE KEYS */;
 
 -- Volcando estructura para tabla facturacion_plasencia.lista_cajas
@@ -4804,20 +4844,6 @@ CREATE TABLE IF NOT EXISTS `migrations` (
 -- Volcando datos para la tabla facturacion_plasencia.migrations: 13 rows
 DELETE FROM `migrations`;
 /*!40000 ALTER TABLE `migrations` DISABLE KEYS */;
-INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
-	(228, '2021_04_05_173706_create_vehicles_table', 1),
-	(229, '2021_04_06_165639_create_pedidos_table', 1),
-	(230, '2021_04_07_142708_create_pendientes_table', 1),
-	(231, '2021_04_07_144520_create_vitola_productos_table', 1),
-	(232, '2021_04_07_144600_create_orden_productos_table', 1),
-	(233, '2021_04_07_144647_create_marca_productos_table', 1),
-	(234, '2021_04_07_144756_create_nombre_productos_table', 1),
-	(235, '2021_04_07_144818_create_capa_productos_table', 1),
-	(236, '2021_04_07_145308_categoria', 1),
-	(237, '2021_04_08_142500_clase_producto', 1),
-	(238, '2021_04_08_145445_create_cellos_table', 1),
-	(239, '2021_04_08_145514_create_tipo_empaques_table', 1),
-	(240, '2021_04_08_221327_detalle_clase_producto', 2);
 /*!40000 ALTER TABLE `migrations` ENABLE KEYS */;
 
 -- Volcando estructura para tabla facturacion_plasencia.nombre_productos
@@ -7645,6 +7671,147 @@ END if;
 END if;	
 END//
 DELIMITER ;
+-- Volcando estructura para procedimiento facturacion_plasencia.buscar_pendiente_factura
+DELIMITER //
+CREATE PROCEDURE `buscar_pendiente_factura`(
+	IN `pa_factura` VARCHAR(10),
+	IN `nombre` VARCHAR(50),
+	IN `fechade` VARCHAR(50),
+	IN `fechahasta` VARCHAR(50)
+)
+BEGIN
+
+if nombre="" && fechade="" && fechahasta="" then
+
+SELECT pendiente.id_pendiente ,categoria.categoria AS categoria, pendiente.item AS item,pendiente.orden_del_sitema ,pendiente.observacion 
+,pendiente.presentacion ,pendiente.mes AS mes ,
+pendiente.orden AS orden,
+ marca_productos.marca AS marca,vitola_productos.vitola AS vitola, 
+nombre_productos.nombre AS nombre, capa_productos.capa AS capa,
+
+(SELECT cellos.anillo AS anillo FROM cellos WHERE cellos.id_cello = pendiente.cello) AS anillo,
+(SELECT cellos.cello AS cello FROM cellos WHERE cellos.id_cello = pendiente.cello) AS cello, 
+(SELECT cellos.upc AS upc FROM cellos WHERE cellos.id_cello = pendiente.cello) AS upc, 
+pendiente.pendiente as pendiente, pendiente.saldo,
+ tipo_empaques.tipo_empaque AS tipo_empaque, pendiente.paquetes AS paquetes, pendiente.unidades AS unidades
+FROM categoria, clase_productos, marca_productos, vitola_productos,nombre_productos, capa_productos,
+tipo_empaques, pendiente
+WHERE pendiente.vitola = vitola_productos.id_vitola AND pendiente.capa = capa_productos.id_capa AND
+ pendiente.nombre = nombre_productos.id_nombre AND  pendiente.marca = marca_productos.id_marca AND 
+   pendiente.tipo_empaque = tipo_empaques.id_tipo_empaque AND pendiente.categoria = categoria.id_categoria AND pendiente.orden like CONCAT("%",pa_factura,"%")
+	GROUP BY pendiente.id_pendiente;
+	
+ELSE  
+
+if fechade = ""   && fechahasta = ""  && nombre != "" then
+
+sELECT pendiente.id_pendiente ,categoria.categoria AS categoria, pendiente.item AS item,pendiente.orden_del_sitema ,pendiente.observacion 
+,pendiente.presentacion ,pendiente.mes AS mes ,
+pendiente.orden AS orden,
+ marca_productos.marca AS marca,vitola_productos.vitola AS vitola, 
+nombre_productos.nombre AS nombre, capa_productos.capa AS capa,
+(SELECT cellos.anillo AS anillo FROM cellos WHERE cellos.id_cello = pendiente.cello) AS anillo,
+(SELECT cellos.cello AS cello FROM cellos WHERE cellos.id_cello = pendiente.cello) AS cello, 
+(SELECT cellos.upc AS upc FROM cellos WHERE cellos.id_cello = pendiente.cello) AS upc, 
+pendiente.pendiente as pendiente, pendiente.saldo,
+ tipo_empaques.tipo_empaque AS tipo_empaque, pendiente.paquetes AS paquetes, pendiente.unidades AS unidades
+FROM categoria, clase_productos, marca_productos, vitola_productos,nombre_productos, capa_productos,
+tipo_empaques, pendiente
+WHERE pendiente.vitola = vitola_productos.id_vitola AND pendiente.orden like CONCAT("%",pa_factura,"%") AND pendiente.capa = capa_productos.id_capa AND 
+ pendiente.nombre = nombre_productos.id_nombre AND  pendiente.marca = marca_productos.id_marca AND 
+   pendiente.tipo_empaque = tipo_empaques.id_tipo_empaque AND pendiente.categoria = categoria.id_categoria  and
+  (nombre_productos.nombre LIKE  CONCAT("%",nombre, "%") or  capa_productos.capa LIKE  CONCAT("%",nombre, "%") or  marca_productos.marca LIKE  CONCAT("%",nombre, "%") or
+  categoria.categoria LIKE  CONCAT("%",nombre, "%") or  tipo_empaques.tipo_empaque LIKE  CONCAT("%",nombre, "%") or
+  vitola_productos.vitola LIKE  CONCAT("%",nombre, "%") or  pendiente.orden_del_sitema LIKE  CONCAT("%",nombre, "%"))
+
+GROUP BY pendiente.id_pendiente;
+	
+	
+	
+	else
+	
+	if fechade != ""   && fechahasta !=""  && nombre = "" then
+	
+	
+sELECT pendiente.id_pendiente ,categoria.categoria AS categoria, pendiente.item AS item,pendiente.orden_del_sitema ,pendiente.observacion 
+,pendiente.presentacion ,pendiente.mes AS mes ,
+pendiente.orden AS orden,
+ marca_productos.marca AS marca,vitola_productos.vitola AS vitola, 
+nombre_productos.nombre AS nombre, capa_productos.capa AS capa,
+(SELECT cellos.anillo AS anillo FROM cellos WHERE cellos.id_cello = pendiente.cello) AS anillo,
+(SELECT cellos.cello AS cello FROM cellos WHERE cellos.id_cello = pendiente.cello) AS cello, 
+(SELECT cellos.upc AS upc FROM cellos WHERE cellos.id_cello = pendiente.cello) AS upc, 
+pendiente.pendiente as pendiente, pendiente.saldo,
+ tipo_empaques.tipo_empaque AS tipo_empaque, pendiente.paquetes AS paquetes, pendiente.unidades AS unidades
+FROM categoria, clase_productos, marca_productos, vitola_productos,nombre_productos, capa_productos,
+tipo_empaques, pendiente
+WHERE pendiente.vitola = vitola_productos.id_vitola AND pendiente.orden like CONCAT("%",pa_factura,"%") AND pendiente.capa = capa_productos.id_capa AND
+ pendiente.nombre = nombre_productos.id_nombre AND  pendiente.marca = marca_productos.id_marca AND 
+   pendiente.tipo_empaque = tipo_empaques.id_tipo_empaque AND pendiente.categoria = categoria.id_categoria  AND  pendiente.mes between  STR_TO_DATE( fechade,"%Y-%m-%d") AND STR_TO_DATE(  fechahasta, "%Y-%m-%d") 
+                      
+  
+
+GROUP BY pendiente.id_pendiente;
+		else
+	
+	if fechade != ""   && fechahasta = ""  && nombre = "" then
+	
+sELECT pendiente.id_pendiente ,categoria.categoria AS categoria, pendiente.item AS item,pendiente.orden_del_sitema ,pendiente.observacion 
+,pendiente.presentacion ,pendiente.mes AS mes ,
+pendiente.orden AS orden,
+ marca_productos.marca AS marca,vitola_productos.vitola AS vitola, 
+nombre_productos.nombre AS nombre, capa_productos.capa AS capa,
+(SELECT cellos.anillo AS anillo FROM cellos WHERE cellos.id_cello = pendiente.cello) AS anillo,
+(SELECT cellos.cello AS cello FROM cellos WHERE cellos.id_cello = pendiente.cello) AS cello, 
+(SELECT cellos.upc AS upc FROM cellos WHERE cellos.id_cello = pendiente.cello) AS upc, 
+pendiente.pendiente as pendiente, pendiente.saldo,
+ tipo_empaques.tipo_empaque AS tipo_empaque, pendiente.paquetes AS paquetes, pendiente.unidades AS unidades
+FROM categoria, clase_productos, marca_productos, vitola_productos,nombre_productos, capa_productos,
+tipo_empaques, pendiente
+WHERE pendiente.vitola = vitola_productos.id_vitola AND pendiente.orden like CONCAT("%",pa_factura,"%") AND pendiente.capa = capa_productos.id_capa AND
+ pendiente.nombre = nombre_productos.id_nombre AND  pendiente.marca = marca_productos.id_marca AND 
+   pendiente.tipo_empaque = tipo_empaques.id_tipo_empaque AND pendiente.categoria = categoria.id_categoria  AND  pendiente.mes = STR_TO_DATE( fechade,"%Y-%m-%d")
+                      
+  
+
+GROUP BY pendiente.id_pendiente;
+	
+	
+		else
+	
+	if fechade = ""   && fechahasta != ""  && nombre = "" then
+	
+sELECT pendiente.id_pendiente ,categoria.categoria AS categoria, pendiente.item AS item,pendiente.orden_del_sitema ,pendiente.observacion 
+,pendiente.presentacion ,pendiente.mes AS mes ,
+pendiente.orden AS orden,
+ marca_productos.marca AS marca,vitola_productos.vitola AS vitola, 
+nombre_productos.nombre AS nombre, capa_productos.capa AS capa,
+(SELECT cellos.anillo AS anillo FROM cellos WHERE cellos.id_cello = pendiente.cello) AS anillo,
+(SELECT cellos.cello AS cello FROM cellos WHERE cellos.id_cello = pendiente.cello) AS cello, 
+(SELECT cellos.upc AS upc FROM cellos WHERE cellos.id_cello = pendiente.cello) AS upc, 
+pendiente.pendiente as pendiente, pendiente.saldo,
+ tipo_empaques.tipo_empaque AS tipo_empaque, pendiente.paquetes AS paquetes, pendiente.unidades AS unidades
+FROM categoria, clase_productos, marca_productos, vitola_productos,nombre_productos, capa_productos,
+tipo_empaques, pendiente
+WHERE pendiente.vitola = vitola_productos.id_vitola AND pendiente.orden like CONCAT("%",pa_factura,"%") AND pendiente.capa = capa_productos.id_capa AND
+ pendiente.nombre = nombre_productos.id_nombre AND  pendiente.marca = marca_productos.id_marca AND 
+   pendiente.tipo_empaque = tipo_empaques.id_tipo_empaque AND pendiente.categoria = categoria.id_categoria  AND  pendiente.mes = STR_TO_DATE(  fechahasta, "%Y-%m-%d") 
+                      
+  
+GROUP BY pendiente.id_pendiente;
+	
+	else
+	SELECT "";
+	
+	END if;
+		END if;
+			END if;
+END if;	
+END if;	
+	
+
+END//
+DELIMITER ;
 
 -- Volcando estructura para procedimiento facturacion_plasencia.buscar_producto
 DELIMITER //
@@ -7710,6 +7877,7 @@ SELECT * FROM vitola_productos WHERE vitola_productos.vitola   like CONCAT("%",v
 END if;
 END//
 DELIMITER ;
+
 
 -- Volcando estructura para procedimiento facturacion_plasencia.cantidad_cajas
 DELIMITER //
@@ -7989,6 +8157,41 @@ detalle_clase_productos.id_nombre,detalle_clase_productos.id_marca, detalle_clas
 ,detalle_clase_productos.otra_descripcion)
 VALUES(item, icapa,ivitola,inombre,imarca,icello,itipo,precio);
 
+END//
+DELIMITER ;
+
+-- Volcando estructura para procedimiento facturacion_plasencia.insertar_detalle_factura
+DELIMITER //
+CREATE PROCEDURE `insertar_detalle_factura`(
+	IN `pa_id_pendiente` BIGINT,
+	IN `pa_cantidad_cajas` INT,
+	IN `pa_peso_bruto` INT,
+	IN `pa_peso_neto` INT,
+	IN `pa_cantidad_puros` INT,
+	IN `pa_unidad` INT,
+	IN `pa_observaciones` TEXT
+)
+BEGIN
+	INSERT INTO detalle_factura(
+		detalle_factura.id_pendiente,
+		detalle_factura.id_venta,
+		detalle_factura.cantidad_cajas,
+		detalle_factura.peso_bruto,
+		detalle_factura.peso_neto,
+		detalle_factura.cantidad_puros,
+		detalle_factura.unidad,
+		detalle_factura.observaciones,
+		detalle_factura.facturado)
+   VALUES(
+		pa_id_pendiente,
+		0,
+		pa_cantidad_cajas,
+		pa_peso_bruto,
+		pa_peso_neto,
+		pa_cantidad_puros,
+		pa_unidad,
+		pa_observaciones,
+		'N');
 END//
 DELIMITER ;
 
@@ -8822,7 +9025,9 @@ DELIMITER ;
 
 -- Volcando estructura para procedimiento facturacion_plasencia.mostrar_detalle_factura
 DELIMITER //
-CREATE PROCEDURE `mostrar_detalle_factura`()
+CREATE PROCEDURE `mostrar_detalle_factura`(
+	IN `pa_tipo_factura` VARCHAR(10)
+)
 BEGIN
 SELECT `id_detalle`,
 	`id_venta`,
@@ -8881,7 +9086,8 @@ WHERE clase_productos.item = (SELECT pendiente.item FROM pendiente
 	`peso_bruto`*`cantidad_puros` AS total_bruto,
 	`peso_neto`*`cantidad_puros`AS total_neto
 FROM detalle_factura 
-WHERE `facturado` = "N"; 
+WHERE `facturado` = "N" AND 	(SELECT CONCAT(pendiente.orden ,"-", MONTH(pendiente.mes) , "-" , date_format(pendiente.mes,'%y')) AS oer
+	FROM pendiente WHERE pendiente.id_pendiente = detalle_factura.id_pendiente) LIKE CONCAT("%",pa_tipo_factura,"%"); 
 
 
 
@@ -9048,6 +9254,34 @@ BEGIN
 
 SELECT CAST(nuevo_total AS DECIMAL(10,2)), fin, inicio;
 
+END//
+DELIMITER ;
+
+-- Volcando estructura para procedimiento facturacion_plasencia.traer_descripcion_factura
+DELIMITER //
+CREATE PROCEDURE `traer_descripcion_factura`(
+	IN `pa_id_pendiente` INT
+)
+BEGIN
+(SELECT UPPER(CONCAT((SELECT tipo_empaques.tipo_empaque_ingles FROM tipo_empaques WHERE tipo_empaques.id_tipo_empaque = clase_productos.id_tipo_empaque)
+		 ," ",
+	    (SELECT vitola_productos.vitola FROM vitola_productos WHERE vitola_productos.id_vitola = clase_productos.id_vitola)
+		 ," ",
+		 (SELECT marca_productos.marca FROM marca_productos WHERE marca_productos.id_marca = clase_productos.id_marca)
+		 ," ",
+		 (SELECT nombre_productos.nombre FROM nombre_productos WHERE nombre_productos.id_nombre = clase_productos.id_nombre)
+		 ," ",
+		 (SELECT case cello
+			 	when cello != "SI"  then  "CELLO"
+			 	when cello != "NO"  then  ""
+		 	END AS celloss
+			FROM cellos 
+		   WHERE cellos.id_cello = clase_productos.id_cello)
+		 )) AS producto
+	FROM clase_productos
+	WHERE clase_productos.item = (SELECT pendiente.item FROM pendiente 
+											WHERE pendiente.id_pendiente = pa_id_pendiente     )
+	);  
 END//
 DELIMITER ;
 

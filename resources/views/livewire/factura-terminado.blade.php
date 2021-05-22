@@ -1,19 +1,7 @@
 <div xmlns:wire="http://www.w3.org/1999/xhtml">
 
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" />
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" />
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
-    <script src="{{ URL::asset('css/tabla.js') }}"></script>
-
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-wEmeIV1mKuiNpC+IOBjI7aAzPcEZeedi5yW5f2yOq55WWLwNGmvvx4Um1vskeMj0" crossorigin="anonymous">
-
-
 
     @livewireStyles
     <link rel="stylesheet" href="{{ asset('css/principal.css') }}" />
@@ -66,26 +54,44 @@
             </div>
         </div>
         <div class="row">
-            <div class="col-sm-12" id="boton_agregar" name="boton_agregar">
+            <div class="col-sm-3" id="boton_agregar" name="boton_agregar">
                 <button onclick="mostrarPendiente()" class="form-control mr-sm-2 botonprincipal"
                     style="width:200px;">Agregar Producto
                 </button>
             </div>
-            <div class="col-sm-12" style="display: none" id="boton_regresar" name="boton_regresar">
+            <div class="col-sm-3" style="display: none" id="boton_regresar" name="boton_regresar">
                 <button onclick="mostrarDetalleFactura()" class="form-control mr-sm-2 botonprincipal"
                     style="width:200px;">Regresar
                 </button>
             </div>
 
+            <div class="col-sm-3" id="tipo_orden" name="tipo_orden">
+                <select class="form-control" wire:model="tipo_factura" style="overflow-y: scroll; height:40px;" >
+                    <option style="overflow-y: scroll;">HON</option>
+                    <option style="overflow-y: scroll;">FTT</option>
+                    <option style="overflow-y: scroll;">INT-H</option>
+                </select>
+            </div>
+
+            <div class="col-sm-3"  id="vacio1" name="vacio1">
+                
+            </div>
+
+            <div class="col-sm-3" id="vacio2" name="vacio2">
+                
+            </div>
+
+
         </div>
 
     </div>
 
+    <br>
 
     <div class="panel-body" id="facura_cliente" name="facura_cliente">
         <div style="overflow-x: none; overflow-y: noe;
  height:device-height" class="table-responsive">
-            <table class="table table-light" id="editable" >
+            <table class="table table-light" id="editable">
                 <thead style="position: static;">
                     <tr style="font-size:10px; text-align:center">
                         <th style="text-align:center;">Bulto<br>Package<br>No.
@@ -127,7 +133,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    
+
                     @foreach($detalles_venta as $detalles)
                     <tr style="font-size:10px;">
                         <td style="width:100px; max-width: 400px;overflow-x:auto;">Bultos</td>
@@ -206,7 +212,7 @@
                         <td>{{$datos->saldo}}</td>
 
                         <td style="text-align:center;">
-                            <a data-toggle="modal" data-target="#modal_actualizar"  href="">
+                            <a data-toggle="modal" wire:click="abrir_modal({{$datos->id_pendiente}})" href="">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
                                     class="bi bi-bag-plus-fill" viewBox="0 0 16 16">
                                     <path fill-rule="evenodd"
@@ -230,7 +236,9 @@
             document.getElementById('facura_cliente').style.display = 'none';
             document.getElementById('boton_regresar').style.display = 'block';
             document.getElementById('boton_agregar').style.display = 'none';
-
+            document.getElementById('tipo_orden').style.display = 'none';
+            document.getElementById('vacio1').style.display = 'none';
+            document.getElementById('vacio2').style.display = 'none';
         }
 
         function mostrarDetalleFactura() {
@@ -238,53 +246,51 @@
             document.getElementById('facura_cliente').style.display = 'block';
             document.getElementById('boton_regresar').style.display = 'none';
             document.getElementById('boton_agregar').style.display = 'block';
+            document.getElementById('tipo_orden').style.display = 'block';
+            document.getElementById('vacio1').style.display = 'block';
+            document.getElementById('vacio2').style.display = 'block';
         }
     </script>
 
 
     <!-- INICIO MODAL ACTUALIZAR DATO PENDIENTE -->
 
-    <form  method="POST" id="actualizar_pendiente" name="actualizar_pendiente">
+    <form action="{{Route('insertar_detalle_factura')}}" method="POST" id="actualizar_pendiente" name="actualizar_pendiente">
         <div class="modal fade" role="dialog" id="modal_actualizar" data-backdrop="static" data-keyboard="false"
             tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true"
             style="opacity:.9;background:#212529;width=900px;">
             <div class="modal-dialog modal-dialog-centered modal-lg" style="opacity:.9;background:#212529;width=40%">
                 <div class="modal-content">
-
+                    @csrf
                     <div class="modal-header">
                         <h5 id="staticBackdropLabel"><strong>Descripción del producto: </strong><span id="titulo"
-                                name="titulo"></span></h5>
+                                name="titulo">{{$descripcion_producto}}</span></h5>
                     </div>
 
                     <div class="modal-body">
                         <div class="row">
 
-                            <input name="id_pendientea" id="id_pendientea" value="" hidden />
+                            <input name="id_pendi" id="id_pendi" wire:model="id_pendiente" hidden />
 
                             <div class="mb-3 col">
                                 <label for="txt_bultos" class="form-label">Cantidad de Bultos:</label>
-                                <input wire:model="cantidad_bultos" class="form-control" type="text"
-                                    autocomplete="off">
+                                <input id="cantidad_bultos" name="cantidad_bultos" class="form-control" type="text" autocomplete="off">
                             </div>
                             <div class="mb-3 col">
                                 <label for="txt_unidades" class="form-label">Unidades de Puros por Bulto:</label>
-                                <input wire:model="unidades_bultos" class="form-control" type="text"
-                                    autocomplete="off">
+                                <input id="unidades_bultos" name="unidades_bultos" class="form-control" type="text" autocomplete="off">
                             </div>
                             <div class="mb-3 col">
                                 <label for="txt_unidad_cajon" class="form-label">Unidad por Cajon:</label>
-                                <input wire:model="unidades_cajon" class="form-control" type="text"
-                                    autocomplete="off">
+                                <input id="unidades_cajon" name="unidades_cajon" class="form-control" type="text" autocomplete="off">
                             </div>
                             <div class="mb-3 col">
                                 <label for="txt_peso_bruto" class="form-label">Preso Bruto (Lbs)</label>
-                                <input wire:model="peso_bruto" class="form-control" type="text"
-                                    autocomplete="off">
-                            </div>
+                                <input id="peso_bruto" name="peso_bruto"  class="form-control" type="text" autocomplete="off">
+                            </div>     
                             <div class="mb-3 col">
                                 <label for="txt_peso_neto" class="form-label">Preso Neto (Lbs)</label>
-                                <input wire:model="peso_neto" class="form-control" type="text"
-                                    autocomplete="off">
+                                <input id="peso_neto" name="peso_neto" class="form-control" type="text" autocomplete="off">
                             </div>
 
                         </div>
@@ -305,6 +311,16 @@
     </form>
 
 
+    <script>
+        window.addEventListener('abrir', event => {
+            $("#modal_actualizar").modal('show');
+            mostrarPendiente();
+        })
+
+        window.addEventListener('cerrar', event => {
+            $("#modal_actualizar").modal('hide');
+        })
+    </script>
 
     <!-- FIN MODAL ACTUALIZAR DATO PENDIENTE -->
 

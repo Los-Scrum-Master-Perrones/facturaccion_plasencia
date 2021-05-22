@@ -134,10 +134,8 @@ class Pendiente extends Component
                 'fechahasta' => $this->fecha,
             ]
         );
-
-
-        return redirect()->route('pendiente');
-            
+        
+        return redirect()->route('pendiente'); 
     }
 
     
@@ -179,9 +177,8 @@ class Pendiente extends Component
 
 
 
-    function exportPendiente(Request $request)
+    function exportPendiente()
     {
-       
         return Excel::download(new PendienteExport($this->nom, $this->fede, $this->fecha), 'Pendiente.xlsx');
     }
 

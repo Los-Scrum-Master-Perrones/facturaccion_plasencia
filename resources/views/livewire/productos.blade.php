@@ -140,7 +140,7 @@
     <!-- SCRIPT MODAL EDITAR MOLDE -->
 
     <script type="text/javascript">
-        function cargar_datos_editar(id) {
+        function      (id) {
 
             if (document.formulario_actualizar.cello_ac.checked) {
 

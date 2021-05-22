@@ -102,7 +102,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach($datos_pendiente_empaque as $datos)
+                    @foreach($datos_pendiente_empaque as $datos)      
                     <tr>
                         <td style="width:100px; max-width: 400px;overflow-x:auto;">{{$datos->categoria}}</td>
                         <td>{{$datos->item}}</td>
