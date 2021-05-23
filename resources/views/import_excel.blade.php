@@ -206,8 +206,11 @@
                             </tr>
                         </thead>
                         <tbody>
+                            <?php $count = 1; ?>
+
                             @foreach($pedido_completo as $pedido)
                             <tr>
+                            <td>{{$count}}</td>
                                 <td>{{$pedido->item}}</td>
                                 <td>{{$pedido->cant_paquetes}}</td>
                                 <td>{{$pedido->descripcion}}</td>
@@ -216,6 +219,7 @@
                                 <td>{{$pedido->numero_orden}}</td>
 
                             </tr>
+                            <?php $count++; ?>
                             @endforeach
                         </tbody>
                     </table>
