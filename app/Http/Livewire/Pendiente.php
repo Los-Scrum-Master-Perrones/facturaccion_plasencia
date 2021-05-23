@@ -63,7 +63,7 @@ class Pendiente extends Component
 
     public function pendiente_indexi(Request $request)
     {
-        $insertar_pendiente_empaque =   \DB::select(
+            $insertar_pendiente_empaque =   \DB::select(
                 'call insertar_pendente_empaque(:fecha)',
                 ['fecha' => (string)$request->fecha]
             );
@@ -81,7 +81,9 @@ class Pendiente extends Component
                     'fechahasta' => $this->fecha,
                 ]
             );
-            return redirect()->route('pendiente')->with('insertar_pendiente', $insertar_pendiente)->with('insertar_pendiente_empaque', $insertar_pendiente_empaque);
+
+             
+            return redirect()->route('pendiente')->with('insertar_pendiente', $insertar_pendiente);
          }
 
 

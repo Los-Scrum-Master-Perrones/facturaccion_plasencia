@@ -8677,6 +8677,22 @@ BEGIN
 END//
 DELIMITER ;
 
+-- Volcando estructura para procedimiento facturacion_plasencia.insertar_nuevo_pedido
+DELIMITER //
+CREATE PROCEDURE `insertar_nuevo_pedido`(
+	IN `item` VARCHAR(50),
+	IN `paquetes` VARCHAR(50),
+	IN `unidades` VARCHAR(50),
+	IN `orden` VARCHAR(50),
+	IN `categori` VARCHAR(50)
+)
+BEGIN
+
+INSERT INTO pedidos(pedidos.item,pedidos.cant_paquetes,pedidos.unidades,pedidos.numero_orden,pedidos.categoria)
+VALUEs(item, paquetes, unidades, orden, categori);
+END//
+DELIMITER ;
+
 -- Volcando estructura para procedimiento facturacion_plasencia.insertar_pendente_empaque
 DELIMITER //
 CREATE PROCEDURE `insertar_pendente_empaque`(

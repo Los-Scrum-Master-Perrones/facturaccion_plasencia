@@ -78,7 +78,7 @@ class PedidoController extends Controller
                 $pedido_completo[$id]->descripcion = $pedido_completo[$id]->descripcion." ".
                     DB::select('CALL `traer_numero_detalles_productos_datos`(:item,:tupla)', 
                     ['item'=>$pedido_completo[$id]->item , 'tupla'=>$conteo])[0]->nombre;
-                    $conteo++;
+                $conteo++;
 
                 $valor_nuevo = $detalles_produ - 1;
 

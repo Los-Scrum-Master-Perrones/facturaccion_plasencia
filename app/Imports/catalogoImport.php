@@ -90,7 +90,7 @@ class catalogoImport implements ToModel
                     $pedio = new pedido([
                         'item' =>  Static_Vars::getitems(),
                         'cant_paquetes' => $row[1],
-                        'unidades' =>$row[3]==null? 0 : ((intval(Static_Vars::getpaquetes()) )* (intval($row[1]))),
+                        'unidades' =>$row[3]==null? 0 : (intval(Static_Vars::getpaquetes())),
                         'numero_orden' =>Static_Vars::getordenes(),
                         'categoria' => "2",
                         ]);
