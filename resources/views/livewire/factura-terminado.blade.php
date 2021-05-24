@@ -113,6 +113,8 @@
 </div>
 </div>
 
+
+
             <table class="table table-light" id="editable">
                 <thead style="position: static;">
                     <tr style="font-size:10px; text-align:center">
@@ -186,34 +188,11 @@
                     @endforeach
                 </tbody>
             </table>
-        
-        </div>
-
-        
-</br>
-    <div class="row">
-            <div class="col-sm-3 input-group mb-3">
-                <span id="de" class="input-group-text form-control "  style="background:rgba(174, 0, 255, 0.432);color:white;">Total Bultos</span>
-                <input type="number" class="form-control  mr-sm-4" placeholder="0" wire:model="total_cantidad_bultos" readonly>
-                
-                <span id="de" class="input-group-text form-control"  style="background:rgba(174, 0, 255, 0.432);color:white;">Total Puros</span>
-                <input type="number" class="form-control  mr-sm-4" placeholder="0" wire:model="total_total_puros" readonly>
 
 
-                <span id="de" class="input-group-text form-control"  style="background:rgba(174, 0, 255, 0.432);color:white;" >Peso Bruto Total</span>
-                <input type="number" class="form-control  mr-sm-4" placeholder="0.00" wire:model="total_peso_bruto" readonly>
-
-                <span id="de" class="input-group-text form-control"  style="background:rgba(174, 0, 255, 0.432);color:white;" >Peso Neto Total</span>
-                <input type="number" class="form-control " placeholder="0.00" wire:model="total_peso_neto" readonly>
-            </div>
-    </div>
 
 
-    <div class="panel-body" style="padding:0px; display:none" id="pendiente_factura" >
-            <div style="width:100%; padding-left:0px;   font-size:10px;   overflow-x: display; overflow-y: auto;
-     height:450px;">
-            @csrf
-            <table class="table table-light" style="font-size:10px;">
+            <table class="table table-light" style="font-size:10px;display:none;" id="pendiente_factura"  >
                 <thead>
                     <tr>
                         <th style="width:100px;">CATEGORIA</th>
@@ -272,8 +251,39 @@
                     @endforeach
                 </tbody>
             </table>
+
+
+
+
+
+
+
+
+
+        
         </div>
+
+        
+</br>
+    <div class="row">
+            <div class="col-sm-3 input-group mb-3">
+                <span id="de" class="input-group-text form-control "  style="background:rgba(174, 0, 255, 0.432);color:white;">Total Bultos</span>
+                <input type="number" class="form-control  mr-sm-4" placeholder="0" wire:model="total_cantidad_bultos" readonly>
+                
+                <span id="de" class="input-group-text form-control"  style="background:rgba(174, 0, 255, 0.432);color:white;">Total Puros</span>
+                <input type="number" class="form-control  mr-sm-4" placeholder="0" wire:model="total_total_puros" readonly>
+
+
+                <span id="de" class="input-group-text form-control"  style="background:rgba(174, 0, 255, 0.432);color:white;" >Peso Bruto Total</span>
+                <input type="number" class="form-control  mr-sm-4" placeholder="0.00" wire:model="total_peso_bruto" readonly>
+
+                <span id="de" class="input-group-text form-control"  style="background:rgba(174, 0, 255, 0.432);color:white;" >Peso Neto Total</span>
+                <input type="number" class="form-control " placeholder="0.00" wire:model="total_peso_neto" readonly>
+            </div>
     </div>
+
+
+ 
 
 
 
@@ -289,6 +299,8 @@
 
     <script type="text/javascript">
         function mostrarPendiente() {
+           
+            document.getElementById('pendiente_factura').style.display = 'block';
             document.getElementById('boton_regresar').style.display = 'block';
             document.getElementById('de').style.display = 'block';
             document.getElementById('hasta').style.display = 'block';
@@ -297,6 +309,7 @@
             document.getElementById('busqueda_pendiente2').style.display = 'block';
 
             
+            document.getElementById('editable').style.display = 'none';
             document.getElementById('tipo_orden').style.display = 'none';
             document.getElementById('btn_guardar').style.display = 'none';
             document.getElementById('boton_agregar').style.display = 'none';
@@ -309,6 +322,7 @@
         }
 
         function mostrarDetalleFactura() {
+            document.getElementById('pendiente_factura').style.display = 'none';
             document.getElementById('boton_regresar').style.display = 'none';
              document.getElementById('de').style.display = 'none';
             document.getElementById('hasta').style.display = 'none';
@@ -321,6 +335,7 @@
             document.getElementById('nombre').value = "";
             document.getElementById('fecha_de').value = "";
 
+            document.getElementById('editable').style.display = 'block';
             document.getElementById('tipo_orden').style.display = 'block';
             document.getElementById('btn_guardar').style.display = 'block';
             document.getElementById('boton_agregar').style.display = 'block';
