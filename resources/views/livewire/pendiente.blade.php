@@ -21,12 +21,7 @@
     <li class="nav-item">
             <a style="color:#E5B1E2; font-size:12px;" href="pendiente"><strong>Pendiente</strong></a>
         </li>
-
          <li class="nav-item">
-            <a style="color:white; font-size:12px;" href="productos"><strong>Productos</strong></a>
-        </li>
-        
-        <li class="nav-item">
             <a style="color:white; font-size:12px;" href="import_excel"><strong>Importar pedido</strong></a>
         </li>
         <li class="nav-item">
@@ -43,14 +38,14 @@
             <div class="col">
                    <div class="input-group mb-3">
                         <span class="input-group-text form-control ">De</span>
-                        <input type="date" name="fecha_de" id="fecha_de" class="form-control botonprincipal"
+                        <input type="date" name="fecha_de" id="fecha_de" class="form-control "
                                 style="width:200px;" placeholder="Nombre" wire:model= "fede">
                         <span class="input-group-text form-control">Hasta</span>
                         <input type="date" name="fecha_hasta" id="fecha_hasta" wire:model= "fecha"
-                                class="form-control mr-sm-2 botonprincipal" style="width:200px;" placeholder="Nombre">
+                                class="form-control mr-sm-2 " style="width:200px;" placeholder="Nombre">
                         
                        
-                        <input name="nombre" id="nombre" class="form-control mr-sm-2 botonprincipal" style="width:200px;" placeholder="Nombre" wire:model= "nom">
+                        <input name="nombre" id="nombre" class="form-control mr-sm-2 " style="width:200px;" placeholder="Nombre" wire:model= "nom">
            
                         <form wire:submit.prevent="exportPendiente()">
                         <input type="text" value= "{{isset($nom)?$nom:null}}" name="nombre" id="nombre" hidden wire:model= "nom" >

@@ -55,8 +55,12 @@
                   <td>Administrador</td>
                   <?php endif; ?>
 
-                  <?php if($usuario->rol == 1): ?>
-                  <td>Usuario</td>
+                  <?php if($usuario->rol == 1): ?>                  
+                    <td>Operador de datos</td>
+                  <?php endif; ?>
+
+                  <?php if($usuario->rol == 2): ?>
+                  <td>Facturador</td>
                   <?php endif; ?>
                  
 
@@ -213,7 +217,8 @@
         <label for="rol" class="form-label">Rol</label>
         <select id="rol" type="rol" class="form-control @error('rol') is-invalid @enderror" name="rol" value="{{ old('rol') }}" required autocomplete="off">
         <option value =  "0" >Administrador</option>
-        <option value =  "1" >Usuario</option>
+        <option value =  "1" >Operador de datos</option>
+        <option value =  "2" >Facturador</option>
         </select> 
         @error('rol')
             <span class="invalid-feedback" role="alert">
@@ -595,12 +600,20 @@ if(contraseniaA != confirmacion_contraseniaA ){
   <select id="txt_rol" type="rol" class="form-control" name="txt_rol" required autocomplete="rol">
         <?php if($usuario->rol == 0): ?>
         <option value =  "0" >Administrador</option>
-        <option value =  "1" >Usuario</option>
+        <option value =  "1" >Operador de datos</option>        
+        <option value =  "2" >Facturador</option>
         <?php endif; ?>
 
         <?php if($usuario->rol == 1): ?>
-        <option value =  "1" >Usuario</option>
+        <option value =  "1" >Operador de datos</option>
         <option value =  "0" >Administrador</option>
+        <option value =  "2" >Facturador</option>
+        <?php endif; ?>
+
+        <?php if($usuario->rol == 2): ?>
+        <option value =  "2" >Facturador</option>
+        <option value =  "0" >Administrador</option>
+        <option value =  "1" >Operador de datos</option>
         <?php endif; ?>
        
         </select> 

@@ -20,18 +20,7 @@
     <ul class="nav justify-content-center">
     <li class="nav-item">
             <a style="color:white; font-size:12px;" href="pendiente"><strong>Pendiente</strong></a>
-        </li>
-
-         <li class="nav-item">
-            <a style="color:#E5B1E2; font-size:12px;" href="productos"><strong>Productos</strong></a>
-        </li>
-        
-        <li class="nav-item">
-            <a style="color:white; font-size:12px;" href="import_excel"><strong>Importar pedido</strong></a>
-        </li>
-        <li class="nav-item">
-            <a style="color:white; font-size:12px;" href="index_bodega_proceso"><strong>Reporte</strong></a>
-        </li>
+        </li>          
     </ul>
 
 
@@ -45,7 +34,7 @@
     <div class="row" >
             <div class="col">
                    <div class="input-group mb-3">
-                     <input name="buscar" id="buscar"  style="width:350px;" class=" form-control botonprincipal mr-sm-2 " wire:model="busqueda" placeholder="Búsqueda por Marca, Nombre y Vitola">
+                     <input name="buscar" id="buscar"  style="width:350px;" class=" form-control  mr-sm-2 " wire:model="busqueda" placeholder="Búsqueda por Marca, Nombre y Vitola">
                      <button class=" botonprincipal mr-sm-2 " style="width:200px;" >        <a  href="{{Route('datos_producto')}}"   >Datos adicionales</a></button>
                          <button class=" botonprincipal mr-sm-2 " data-toggle="modal" data-target="#modal_nuevoproducto" style="width:200px;">Nuevo producto</button>
    </div>
