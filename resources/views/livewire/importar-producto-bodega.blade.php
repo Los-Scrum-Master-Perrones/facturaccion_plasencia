@@ -61,19 +61,19 @@
 
  
             <div class="panel-body" style="padding:0px;">
-            <div style="width:100%; padding-left:0px;   font-size:10px;   overflow-x: display; overflow-y: auto;
+            <div style="width:100%; padding-left:0px;    overflow-x: display; overflow-y: auto;
      height:450px;">
             @csrf
-            <table class="table table-light" style="font-size:10px; ">
+            <table class="table table-light">
                 <thead>
-                    <tr style="font-size:16px; text-align:center;">
-                        <th style=" text-align:center;">Código sistema</th>
-                        <th style=" text-align:center;">Marca</th>
-                        <th style=" text-align:center;">Alias vitola</th>
-                        <th style=" text-align:center;">Vitola</th>
-                        <th style=" text-align:center;">Capa</th>
-                        <th style=" text-align:center;">Ubicación</th>
-                        <th style=" text-align:center;">Existencia</th>
+                    <tr>
+                        <th>Código sistema</th>
+                        <th >Marca</th>
+                        <th >Alias vitola</th>
+                        <th >Vitola</th>
+                        <th >Capa</th>
+                        <th >Ubicación</th>
+                        <th >Existencia</th>
                     </tr>
                 </thead>
                 <tbody>

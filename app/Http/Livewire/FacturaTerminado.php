@@ -34,6 +34,11 @@ class FacturaTerminado extends Component
     public $peso_bruto;
     public $peso_neto;
 
+    public $nom;
+    public $fede;
+    public $fecha;
+
+   
 
     public function render(){
         $this->total_cantidad_bultos=0;
@@ -48,9 +53,12 @@ class FacturaTerminado extends Component
         $this->titulo_cliente = $this->cliente;
 
         $this->datos_pendiente = DB::select(
-                'call buscar_pendiente_factura(:orden,"","","")',
+                'call buscar_pendiente_factura(:orden,:nombre,:fechade,:fechahasta)',
                 [
-                    'orden' => $this->tipo_factura
+                    'orden' => $this->tipo_factura,
+                    'nombre' =>  $this->nom,
+                    'fechade' =>  $this->fede,
+                    'fechahasta' => $this->fecha
                 ]
             );
 
@@ -60,13 +68,17 @@ class FacturaTerminado extends Component
             'ordenes' => $this->tipo_factura
         ]);
 
+        if( $this->nom != "" || $this->fede != "" || $this->fecha != ""){
+            $this->dispatchBrowserEvent("pendiente");
+        }
+        
+
         for($i=0;$i<count($this->detalles_venta);$i++){
             $this->total_cantidad_bultos += $this->detalles_venta[$i]->cantidad_puros;
             $this->total_total_puros += $this->detalles_venta[$i]->total_tabacos;
             $this->total_peso_bruto += $this->detalles_venta[$i]->total_bruto;
             $this->total_peso_neto += $this->detalles_venta[$i]->total_neto;
         }
-
 
         return view('livewire.factura-terminado')->extends('principal')->section('content');
     }
@@ -93,6 +105,10 @@ class FacturaTerminado extends Component
   
 
     public function mount(){
+
+        $this->nom = "";
+        $this->fede = "";
+        $this->fecha = "";
 
         $this->titulo_factura = "Factura";
         $this->num_factura_sistema = "FA-00-00000000";

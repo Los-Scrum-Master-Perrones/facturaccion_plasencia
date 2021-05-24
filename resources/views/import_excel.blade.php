@@ -25,11 +25,6 @@
     <li class="nav-item">
             <a style="color:white; font-size:12px;" href="pendiente"><strong>Pendiente</strong></a>
         </li>
-
-         <li class="nav-item">
-            <a style="color:white;  font-size:12px;" href="productos"><strong>Productos</strong></a>
-        </li>
-        
         <li class="nav-item">
             <a style="color:#E5B1E2; font-size:12px;"  href="import_excel"><strong>Importar pedido</strong></a>
         </li>
@@ -42,35 +37,15 @@
 
 
 
-    <div class="container" style="max-width:100%;  text-align:right;">
-
-    <div class="row" >
-            <div class="col" style="max-width:100%;  text-align:right;">
-                   <div class="input-group mb-3"  style="max-width:100%;  padding:right;">
-                  
-                    @csrf 
-                   
-                    <input   data-toggle="modal"  style="width:130px;" class=" botonprincipal mr-sm-2 "  data-target="#modal_actualizar" type="submit"  value="Nuevo producto">
-                  
-
-                    <form method="post"  action="{{ url('/vaciar_import_excel') }}" >
-                    @csrf 
-                    <input type="submit" style="width:130px;" class=" botonprincipal mr-sm-2 "  value="Vaciar tabla">
-                    </form>
-
-
-                   </div>
-    </div> 
-    </div>
-
-
-    <div class="row" >
+    <div class="container" style="max-width:100%; ">
+    
+    <div class="row" style="text-align:center;">
             <div class="col">
                    <div class="input-group mb-3">
     
                 <form method="post" enctype="multipart/form-data" action="{{ url('/importar_pedido') }}" class="form-inline">
                     @csrf
-                    <input type="file" name="select_file" id="select_file" class="form-control  botonprincipal mr-sm-2 " style="width:350px;" />
+                    <input type="file" name="select_file" id="select_file" class="form-control   mr-sm-2 " style="width:350px;" />
                       <input type="submit" name="upload" style="width:130px;" class=" botonprincipal mr-sm-2 " value="Importar">
                   </form>
 
@@ -78,16 +53,20 @@
 
                     <form action="{{Route('pendiente_insertar')}}" method="POST">
                     @csrf
+<<<<<<< HEAD
+                    <input type="date" value="" name="fecha" id="fecha" style="width: 130px;text-align:center;"  class=" form-control   mr-sm-2 " required>
+=======
                     <input type="date" value="" name="fecha" id="fecha" style="width: 160px; color:black ;text-align:center;"  class=" form-control  botonprincipal mr-sm-2 " required>
+>>>>>>> b7feee2e402b9df064d9a8516835a88e82e29d2a
                     <button  onclick="agregarpendiente()" style="width:160px;" class="botonprincipal mr-sm-2 ">Agregar a pendiente</button>
                     </form>
 
                          
                     <form action="{{Route('buscar_pedido')}}" method="POST"style="margin-bottom:0px;">
                     @csrf
-                    <input name="busqueda" id="busqueda" class=" form-control botonprincipal mr-sm-2" placeholder="Búsqueda por descripción u orden" style="width:250px;">
+                    <input name="busqueda" id="busqueda" class=" form-control  mr-sm-2" placeholder="Búsqueda por descripción u orden" style="width:250px;">
                    
-                    <button class="botonprincipal mr-sm-2 " style="width: 50px" type="submit">
+                    <button class="botonprincipal mr-sm-2 " style="width: 30px" type="submit">
                     <span>
                     <svg xmlns="http://www.w3.org/2000/svg" width="20"   height="20" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
                     <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z" />
@@ -96,6 +75,22 @@
                     </button>                                            
                     </form>
 
+                    <button   data-toggle="modal"  style="width:30px;" class=" botonprincipal mr-sm-2 "  data-target="#modal_actualizar" >
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-plus-circle" viewBox="0 0 16 16">
+                    <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
+                    <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z"/>
+                    </svg>
+                    </button>
+
+                    <form method="post"  action="{{ url('/vaciar_import_excel') }}" >
+                    @csrf 
+                    <button type="submit" style="width:30px;" class=" botonprincipal mr-sm-2 " >
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-folder-x" viewBox="0 0 16 16">
+                    <path d="M.54 3.87.5 3a2 2 0 0 1 2-2h3.672a2 2 0 0 1 1.414.586l.828.828A2 2 0 0 0 9.828 3h3.982a2 2 0 0 1 1.992 2.181L15.546 8H14.54l.265-2.91A1 1 0 0 0 13.81 4H2.19a1 1 0 0 0-.996 1.09l.637 7a1 1 0 0 0 .995.91H9v1H2.826a2 2 0 0 1-1.991-1.819l-.637-7a1.99 1.99 0 0 1 .342-1.31zm6.339-1.577A1 1 0 0 0 6.172 2H2.5a1 1 0 0 0-1 .981l.006.139C1.72 3.042 1.95 3 2.19 3h5.396l-.707-.707z"/>
+                    <path d="M11.854 10.146a.5.5 0 0 0-.707.708L12.293 12l-1.146 1.146a.5.5 0 0 0 .707.708L13 12.707l1.146 1.147a.5.5 0 0 0 .708-.708L13.707 12l1.147-1.146a.5.5 0 0 0-.707-.708L13 11.293l-1.146-1.147z"/>
+                    </svg>
+                    </button>
+                    </form>
                     
 
               
@@ -229,6 +224,7 @@
 
                 </div>
 
+    </div>
     </div>
     </div>
 

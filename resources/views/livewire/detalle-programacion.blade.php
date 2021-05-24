@@ -1,76 +1,48 @@
 <div xmlns:wire="http://www.w3.org/1999/xhtml">
+<title></title>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" />
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
-    <title></title>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" />
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Hola</title>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" />
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+<script src="{{ URL::asset('css/tabla.js') }}"></script>
+@livewireStyles
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-wEmeIV1mKuiNpC+IOBjI7aAzPcEZeedi5yW5f2yOq55WWLwNGmvvx4Um1vskeMj0" crossorigin="anonymous">
 
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Hola</title>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" />
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
-
-    @livewireStyles
-    <link rel="stylesheet" href="{{ asset('css/principal.css') }}" />
-
-   
-    <br>
-
-    <div class="" style="width:1200px; padding-left:50px;">
-
-        <div class="row">
-        <form  wire:submit.prevent="insertarDetalle_y_actualizarPendiente()"  style="width:auto; padding-left:50px; " >
-           
-            <div class="col-sm-3" style=" width:auto; padding-left:20px; ">
-                <input name="buscar" id="buscar" class="btn botonprincipal form-control" wire:model="busqueda"
-                    placeholder="Búsqueda por Marca, Nombre y Vitola" style="width:350px;">
-            </div>
-            
-            @csrf
-                <div class="col-sm-4" style="width:auto; padding-right:0px ">
-                    <input name="fecha_creacion" id="fecha_creacion" type="date" class="btn botonprincipal form-control"
-                        placeholder="" style="width:200px;" wire:model="fecha">
-                </div>
-
-                <div class="col-sm-4" style=" width:auto ; adding-left:50px; ">
-                    <input name="fecha_contenedor" id="fecha_contenedor" type="text"
-                        class="btn botonprincipal form-control" placeholder="Número y fecha del contenedor"
-                        style="width:300px;" required wire:model="contenedor">
-
-                </div>
-
-                <div class="col-sm-4" style="text-align:right;adding-left:50px;  padding-right:0px; ">
-                    <button type=" button" name="crear_programacion" id="crear_programacion"
-                        class="btn botonprincipal form-control" value="" style="width:auto;">
-                        Crear programación</button>
+    </br>
 
 
 
-                </div>
+    <div class="container" style="max-width:100%; ">
+    
+    <div class="row" style="text-align:center;">
 
-            </form>
-
-
-           
-
-            <div class="col-sm-1" style="text-align:right;   padding-right:0px;" >
-
-                <a type="button" name="crear_programacion" id="crear_programacion" href="pendiente_empaque"
-                    class="btn botonprincipal form-control" value="" style="width:70px; ">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor"
-                        class="bi bi-reply-all-fill" viewBox="0 0 16 16">
-                        <path
-                            d="M8.021 11.9 3.453 8.62a.719.719 0 0 1 0-1.238L8.021 4.1a.716.716 0 0 1 1.079.619V6c1.5 0 6 0 7 8-2.5-4.5-7-4-7-4v1.281c0 .56-.606.898-1.079.62z" />
-                        <path
-                            d="M5.232 4.293a.5.5 0 0 1-.106.7L1.114 7.945a.5.5 0 0 1-.042.028.147.147 0 0 0 0 .252.503.503 0 0 1 .042.028l4.012 2.954a.5.5 0 1 1-.593.805L.539 9.073a1.147 1.147 0 0 1 0-1.946l3.994-2.94a.5.5 0 0 1 .699.106z" />
+            <div class="col">
+                   <div class="input-group mb-3">
+       
+                    <a type="button" name="crear_programacion" id="crear_programacion" href="pendiente_empaque" class=" botonprincipal   mr-sm-2" value="" style="width:70px; ">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor"class="bi bi-reply-all-fill" viewBox="0 0 16 16">
+                    <path d="M8.021 11.9 3.453 8.62a.719.719 0 0 1 0-1.238L8.021 4.1a.716.716 0 0 1 1.079.619V6c1.5 0 6 0 7 8-2.5-4.5-7-4-7-4v1.281c0 .56-.606.898-1.079.62z" />
+                    <path d="M5.232 4.293a.5.5 0 0 1-.106.7L1.114 7.945a.5.5 0 0 1-.042.028.147.147 0 0 0 0 .252.503.503 0 0 1 .042.028l4.012 2.954a.5.5 0 1 1-.593.805L.539 9.073a1.147 1.147 0 0 1 0-1.946l3.994-2.94a.5.5 0 0 1 .699.106z" />
                     </svg>
-                </a>
+                    </a>
+
+                    <input name="buscar" id="buscar" class="  form-control  mr-sm-2" wire:model="busqueda" placeholder="Búsqueda por Marca, Nombre y Vitola" style="width:350px;">
+                    
+                    <form  wire:submit.prevent="insertarDetalle_y_actualizarPendiente()"  style="width:auto; padding-left:50px; " >
+                    @csrf
+                    <input name="fecha_creacion" id="fecha_creacion" type="date" class="  form-control  mr-sm-2" placeholder="" style="width:200px;" wire:model="fecha">
+                    <input name="fecha_contenedor" id="fecha_contenedor" type="text" class="  form-control  mr-sm-2" placeholder="Número y fecha del contenedor" style="width:300px;" required wire:model="contenedor">
+                    <button type=" button" name="crear_programacion" id="crear_programacion" class=" botonprincipal " value="" style="width:auto;"> Crear programación</button>
+                    </form> 
+
             </div>
-
-
-        </div>
-    </div>
+            </div>
+            </div>
 
 
     <!-- <script type="text/javascript">
@@ -85,13 +57,12 @@
                 mes = '0' + mes //agrega cero si el menor de 10
             document.getElementById('fecha_creacion').value = ano + "-" + mes + "-" + dia;
         }
-
     </script> -->
 
-    </br>
+
+
     <div class="panel-body" style="padding:0px;">
-    <div style="width:100%; padding-left:0px;   font-size:10px;   overflow-x: display; overflow-y: auto;
-     height:450px;">
+            <div style="width:100%; padding-left:0px;   font-size:10px;   overflow-x: display; overflow-y: auto; height:450px;">
 
             <table class="table table-light" id="editable"  style="font-size:10px;">
                 <thead>
@@ -178,9 +149,10 @@
                     @endforeach
                 </tbody>
             </table>
-        </div>
 
+        </div>
     </div>
+ </div>
 
 
 
@@ -219,7 +191,6 @@
                 </div>
             </div>
         </div>
-
     </form>
     <!-- FIN MODAL  ACTUALIZAR SALDO -->
 
@@ -239,9 +210,7 @@
 
                 }
             }
-
         }
-
     </script>
 
 
@@ -256,12 +225,9 @@
                 if (data[i].id === id) {
                     document.formulario_mostrarE.id_usuarioE.value = data[i].id;
 
-
                 }
             }
-
         }
-
     </script>
 
 
@@ -307,4 +273,3 @@
 
     <!-- FIN MODAL ELMINAR DETALLE -->
 
-</div>
