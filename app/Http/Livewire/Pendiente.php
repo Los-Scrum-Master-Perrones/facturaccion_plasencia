@@ -16,6 +16,8 @@ class Pendiente extends Component
     public $nom;
     public $fede;
     public $fecha;
+
+    
     public $busqueda;
     public $borrar;
     public $actualizar;
@@ -155,12 +157,16 @@ class Pendiente extends Component
         public function actualizar_pendiente(Request $request){         
     
         
-            $this->actualizar=\DB::select('call actualizar_pendientes(:id,:item,:orden,:observacion,:presentacion)',
+            $this->actualizar=\DB::select('call actualizar_pendientes(:id,:item,:orden,:observacion,:presentacion,:pendiente,:cprecio,:precio)',
             ['id'=>$request->id_pendientea,
             'item'=>$request->itema,
             'orden'=>$request->orden_sistema,
             'observacion'=>$request->observacion,
             'presentacion'=>$request->presentacion,
+            'pendiente'=>$request->pendiente,
+            'cprecio'=>$request->cprecio,
+            'precio'=>$request->precio
+
             ]);
     
             

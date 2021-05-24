@@ -20,7 +20,18 @@ class ImportExcelController extends Controller
         
         $listaproductos = \DB::select('call mostrar_lista_inventario');   
         $listaproductoseditar =   \DB::select('call mostrar_lista_productos_terminados');   
-        return view('lista_productos_terminados')->with('listaproductos', $listaproductos)->with('listaproductoseditar', $listaproductoseditar);
+
+        $capas= \DB::select('call buscar_capa("")');
+        $marcas=\DB::select('call buscar_marca("")');
+        $nombres= \DB::select('call buscar_nombre("")');
+        $vitolas= \DB::select('call buscar_vitola("")');
+        $tipo_empaques= \DB::select('call buscar_tipo_empaque("")');
+        $productos = DB::table('archivo_producto_terminados')->get();
+
+        return view('lista_productos_terminados')->with('listaproductos', $listaproductos)->with('listaproductoseditar', $listaproductoseditar)->with('capas', $capas)->with('marcas', $marcas)->with('nombres', $nombres)
+        ->with('vitolas', $vitolas)->with('tipo_empaques', $tipo_empaques);
+
+        
     }
     
     function editar_existencia_producto(Request $request){
@@ -30,9 +41,16 @@ class ImportExcelController extends Controller
             'b' => $request->existencia_productoE,
             ]);
         
+            $capas= \DB::select('call buscar_capa("")');
+            $marcas=\DB::select('call buscar_marca("")');
+            $nombres= \DB::select('call buscar_nombre("")');
+            $vitolas= \DB::select('call buscar_vitola("")');
+            $tipo_empaques= \DB::select('call buscar_tipo_empaque("")');
+            $productos = DB::table('archivo_producto_terminados')->get();
         $listaproductos = \DB::select('call mostrar_lista_inventario');   
         $listaproductoseditar =   \DB::select('call mostrar_lista_productos_terminados');   
-        return view('lista_productos_terminados')->with('listaproductos', $listaproductos)->with('listaproductoseditar', $listaproductoseditar);
+        return view('lista_productos_terminados')->with('listaproductos', $listaproductos)->with('listaproductoseditar', $listaproductoseditar)->with('capas', $capas)->with('marcas', $marcas)->with('nombres', $nombres)
+        ->with('vitolas', $vitolas)->with('tipo_empaques', $tipo_empaques);
     }
 
 
@@ -80,13 +98,29 @@ class ImportExcelController extends Controller
     function importar_archivoproductos_terminados(Request $request)
     {
         (new ArchivoProductosTerminados)->import($request->select_file);
+
         $productos = DB::table('archivo_producto_terminados')->get();
-        return view('importar_producto_terminado_mes')->with('productos', $productos);
+        $capas= \DB::select('call buscar_capa("")');
+        $marcas=\DB::select('call buscar_marca("")');
+        $nombres= \DB::select('call buscar_nombre("")');
+        $vitolas= \DB::select('call buscar_vitola("")');
+        $tipo_empaques= \DB::select('call buscar_tipo_empaque("")');
+        $productos = DB::table('archivo_producto_terminados')->get();
+        return view('importar_producto_terminado_mes')->with('productos', $productos)->with('capas', $capas)->with('marcas', $marcas)->with('nombres', $nombres)
+        ->with('vitolas', $vitolas)->with('tipo_empaques', $tipo_empaques);
+
     }
 
     function importar_productos_terminado(){
         $productos = DB::table('archivo_producto_terminados')->get();
-        return view('importar_producto_terminado_mes')->with('productos', $productos);
+        $marcas=\DB::select('call buscar_marca("")');
+        $nombres= \DB::select('call buscar_nombre("")');
+        $vitolas= \DB::select('call buscar_vitola("")');
+        $tipo_empaques= \DB::select('call buscar_tipo_empaque("")');
+        $productos = DB::table('archivo_producto_terminados')->get();
+        return view('importar_producto_terminado_mes')->with('productos', $productos)->with('capas', $capas)->with('marcas', $marcas)->with('nombres', $nombres)
+        ->with('vitolas', $vitolas)->with('tipo_empaques', $tipo_empaques);
+
        }
 
        function reemplazar_productos_terminado(){
@@ -115,8 +149,41 @@ class ImportExcelController extends Controller
        $borrararchivo_producto_terminados = DB::table('archivo_producto_terminados')->delete();
 
           $productos = DB::table('archivo_producto_terminados')->get();
-        return view('importar_producto_terminado_mes')->with('productos', $productos);
 
+          $capas= \DB::select('call buscar_capa("")');
+          $marcas=\DB::select('call buscar_marca("")');
+          $nombres= \DB::select('call buscar_nombre("")');
+          $vitolas= \DB::select('call buscar_vitola("")');
+          $tipo_empaques= \DB::select('call buscar_tipo_empaque("")');
+  
+        return view('importar_producto_terminado_mes')->with('productos', $productos)->with('capas', $capas)->with('marcas', $marcas)->with('nombres', $nombres)
+        ->with('vitolas', $vitolas)->with('tipo_empaques', $tipo_empaques);
+
+
+     }
+
+     function nuevo_pro_terminado(Request $request){
+
+        $capas= \DB::select('call buscar_capa("")');
+        $marcas=\DB::select('call buscar_marca("")');
+        $nombres= \DB::select('call buscar_nombre("")');
+        $vitolas= \DB::select('call buscar_vitola("")');
+        $tipo_empaques= \DB::select('call buscar_tipo_empaque("")');
+        $productos = DB::table('archivo_producto_terminados')->get();
+
+        $insertar_pro_terminado = DB::select('call insertar_pro_terminado(:lote,:marca,:nombre,:vitola,:capa,:existencia)',[
+            'lote'=>$request->lote,
+            'marca'=>$request->marca,
+            'nombre'=>$request->nombre,
+            'vitola'=>$request->vitola,
+            'capa'=>$request->capa,
+            'existencia'=>$request->existencia
+        ]);
+
+      
+
+        return view('lista_productos_terminados')->with('productos', $productos)->with('capas', $capas)->with('marcas', $marcas)->with('nombres', $nombres)
+        ->with('vitolas', $vitolas)->with('tipo_empaques', $tipo_empaques);
 
      }
 

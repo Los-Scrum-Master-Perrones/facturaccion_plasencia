@@ -274,3 +274,6 @@ Route::get('/reemplazar_productos_terminado', [App\Http\Controllers\ImportExcelC
 Route::get('/index_lista_productos', [App\Http\Controllers\ImportExcelController::class, 'index_lista_productos'])->name('index_lista_productos');
 Route::post('/editar_existencia_producto', [App\Http\Controllers\ImportExcelController::class, 'editar_existencia_producto'])->name('editar_existencia_producto');
 Route::get('/editar_existencia_producto', [App\Http\Controllers\ImportExcelController::class, 'editar_existencia_producto'])->name('editar_existencia_producto');
+
+Route::post('/insertar_pro', [App\Http\Controllers\ImportExcelController::class, 'nuevo_pro_terminado'])->name('insertar_pro');
+Route::get('/insertar_pro', [App\Http\Controllers\ImportExcelController::class, 'nuevo_pro_terminado'])->name('insertar_pro');

@@ -21,16 +21,25 @@
 
 <ul class="nav justify-content-center">
 <li class="nav-item">
-    <a style="color:white;"  href="index_lista_productos"><strong>Productos Terminado </strong></a>
+    <a style="color:#E5B1E2; font-size:12px;"  href="index_lista_productos"><strong>Productos Terminado </strong></a>
   </li>
   <li class="nav-item">
-    <a style="color:black;" href="importar_productos_terminado"><strong>Importar Productos Terminado</strong></a>
+    <a style="color:white;  font-size:12px;" href="importar_productos_terminado"><strong>Importar Productos Terminado</strong></a>
   </li>
 </ul>
 
 
 
 <div class="container" style="max-width:100%; "> 
+<div class="row"  style="width:100%%; text-align:right;">
+<div class="col">
+
+<input   data-toggle="modal"  style="width:20%; font-size:12px " class=" botonprincipal mr-sm-2 "  data-target="#modal_actualizar" type="submit"  value="Agregar producto al inventario">
+                  
+</div>
+</div>
+
+<br>
                
 <div class="panel-body" style="padding:0px;">   
             <div style="width:100%; padding-left:0px;   font-size:10px;   overflow-x: display; overflow-y: auto;
@@ -103,7 +112,121 @@ for (var i = 0; i < data.length; i++) {
     }   
 </script>
        
+       
+       
+    <!-- INICIO DEL MODAL NUEVO PRODUCTO -->
 
+    <form action="{{Route('insertar_pro')}} " method="POST">
+        <div class="modal fade" role="dialog" id="modal_actualizar" data-backdrop="static" data-keyboard="false"
+            tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true"
+            style="opacity:.9;background:#212529;width=800px;">
+            <div class="modal-dialog modal-dialog-centered modal-lg" style="opacity:.9;background:#212529;width=80%">
+                <div class="modal-content">
+
+                    <div class="modal-header">
+                        <h5 id="staticBackdropLabel"><strong>Agregar producto</strong></h5>
+                        <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close"></button>
+                    </div>
+
+                    <div class="modal-body">
+
+                        <div class="card-body">
+                            <div class="row">
+                            <div class="mb-3 col">
+                                    <label  for="txt_figuraytipo" class="form-label">Lote</label>
+                                    <input name="lote" id="lote" style="font-size:16px; height:30px;" class="form-control" required
+                                        type="text" autocomplete="off">
+                                </div>
+                         
+
+                            
+
+                            <div class="mb-3 col">
+                                    <label for="txt_vitola" class="form-label">Marca</label>
+                                    <select class="form-control" name="marca" id="marca"
+                                        placeholder="Ingresa figura y tipo" style="overflow-y: scroll; height:30px;"
+                                        required>
+                                        @foreach($marcas as $marca)
+                                        <option style="overflow-y: scroll;"> {{$marca->marca}}</option>
+                                        @endforeach
+                                    </select>
+
+                                </div>
+
+                                <div class="mb-3 col">
+                                    <label for="txt_total" class="form-label">Nombre</label>
+
+                                    <select class="form-control" name="nombre" id="nombre"
+                                        placeholder="Ingresa figura y tipo" style="overflow-y: scroll; height:30px;"
+                                        required>
+                                        @foreach($nombres as $nombre)
+                                        <option style="overflow-y: scroll;"> {{$nombre->nombre}}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                               
+
+                                </div>
+
+                                <div class="row">
+                               
+
+                            
+
+                                <div class="mb-3 col">
+                                    <label for="txt_buenos" class="form-label">Vitola</label>
+
+                                    <select class="form-control" name="vitola" id="vitola"
+                                        placeholder="Ingresa figura y tipo" style="overflow-y: scroll; height:30px;"
+                                        required>
+                                        @foreach($vitolas as $vitola)
+                                        <option style="overflow-y: scroll;"> {{$vitola->vitola}}</option>
+                                        @endforeach
+                                    </select>
+
+                                </div>
+
+
+                                <div class="mb-3 col">
+                                    <label for="txt_figuraytipo" class="form-label">Capa</label>
+                                    <select class="form-control" name="capa" id="capa"
+                                        placeholder="Ingresa figura y tipo" style="overflow-y: scroll; height:30px;"
+                                        required>
+                                        @foreach($capas as $capa)
+                                        <option style="overflow-y: scroll;"> {{$capa->capa}}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+
+
+                    
+
+                                <div class="mb-3 col">
+                                    <label for="txt_total" class="form-label">Existencia</label>
+                                    <input name="existencia" id="existencia"  style="height:30px;"
+                                        class="form-control" required type="text" autocomplete="off">
+                                </div>
+                               
+                            </div>
+
+
+
+                        </div>
+                    </div>
+
+                    <div class="modal-footer">
+                        <button  type="button" class=" bmodal_no"
+                            data-dismiss="modal"><span >Cancelar</span>
+                            @csrf
+                        </button>
+                        <button onclick="agregarproducto()"class=" bmodal_yes "> <span>Guardar</span> </button>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </form>
+    <!-- FIN DEL MODAL NUEVO PRODUCTO -->
 
  <!-- INICIO MODAL CAMBIAR EXISTENCIA -->
  

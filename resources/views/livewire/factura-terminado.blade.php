@@ -56,14 +56,27 @@
         <div class="row">
             <div class="col-sm-3" id="boton_agregar" name="boton_agregar">
                 <button onclick="mostrarPendiente()" class="form-control mr-sm-2 botonprincipal"
-                    style="width:200px;">Agregar Producto
+                    >Agregar Producto
                 </button>
             </div>
             <div class="col-sm-3" style="display: none" id="boton_regresar" name="boton_regresar">
                 <button onclick="mostrarDetalleFactura()" class="form-control mr-sm-2 botonprincipal"
-                    style="width:200px;">Regresar
+                    >Regresar
                 </button>
             </div>
+            <div class="col-sm-3" style="display: none" id="busqueda_pendiente1" name="busqueda_pendiente1">
+                <span class="input-group-text form-control ">De <input type="date" name="fecha_de" id="fecha_de" class="form-control botonprincipal"
+                    style="width:200px;" placeholder="Nombre" wire:model= "fede"></span>
+            </div>
+            <div class="col-sm-3"  style="display: none" id="busqueda_pendiente2" name="busqueda_pendiente2">
+                <span class="input-group-text form-control">Hasta <input type="date" name="fecha_hasta" id="fecha_hasta" wire:model= "fecha"
+                    class="form-control mr-sm-2 botonprincipal" placeholder="Nombre">  </span>
+            </div>
+            <div class="col-sm-3" style="display: none" id="busqueda_pendiente3" name="busqueda_pendiente3">     
+                <input name="nombre" id="nombre" class="form-control mr-sm-2 botonprincipal" placeholder="Nombre" wire:model= "nom">
+            </div>
+
+            
 
             <div class="col-sm-3" id="tipo_orden" name="tipo_orden">
                 <select class="form-control" wire:model="tipo_factura" style="overflow-y: scroll; height:40px;" >
@@ -72,15 +85,16 @@
                     <option style="overflow-y: scroll;">INT-H</option>
                 </select>
             </div>
-
+           
             <div class="col-sm-3"  id="vacio1" name="vacio1">
                 
             </div>
 
             <div class="col-sm-3" id="vacio2" name="vacio2">
-                
+                <button onclick="" class="form-control mr-sm-2 botonprincipal"
+                >Guardar
+                </button>
             </div>
-
 
         </div>
 
@@ -238,6 +252,9 @@
     <script type="text/javascript">
         function mostrarPendiente() {
             document.getElementById('pendiente_factura').style.display = 'block';
+            document.getElementById('busqueda_pendiente1').style.display = 'block';
+            document.getElementById('busqueda_pendiente2').style.display = 'block';
+            document.getElementById('busqueda_pendiente3').style.display = 'block';
             document.getElementById('facura_cliente').style.display = 'none';
             document.getElementById('boton_regresar').style.display = 'block';
             document.getElementById('boton_agregar').style.display = 'none';
@@ -248,12 +265,19 @@
 
         function mostrarDetalleFactura() {
             document.getElementById('pendiente_factura').style.display = 'none';
+            document.getElementById('busqueda_pendiente1').style.display = 'none';
+            document.getElementById('busqueda_pendiente2').style.display = 'none';
+            document.getElementById('busqueda_pendiente3').style.display = 'none';
             document.getElementById('facura_cliente').style.display = 'block';
             document.getElementById('boton_regresar').style.display = 'none';
             document.getElementById('boton_agregar').style.display = 'block';
             document.getElementById('tipo_orden').style.display = 'block';
             document.getElementById('vacio1').style.display = 'block';
             document.getElementById('vacio2').style.display = 'block';
+
+            document.getElementById('fecha_hasta').value = "";
+            document.getElementById('nombre').value = "";
+            document.getElementById('fecha_de').value = "";
         }
     </script>
 
@@ -322,9 +346,14 @@
             mostrarPendiente();
         })
 
+        window.addEventListener('pendiente', event => {
+            mostrarPendiente();
+        })
+
         window.addEventListener('cerrar', event => {
             $("#modal_actualizar").modal('hide');
         })
+
     </script>
 
     <!-- FIN MODAL ACTUALIZAR DATO PENDIENTE -->
