@@ -25,10 +25,10 @@
 
 <ul class="nav justify-content-center">
 <li class="nav-item">
-    <a style="color:black;"  href="index_lista_productos"><strong>Productos Terminado </strong></a>
+    <a style="color:white; font-size:12px;"  href="index_lista_productos"><strong>Productos Terminado </strong></a>
   </li>
   <li class="nav-item">
-    <a style="color:white;" href="importar_productos_terminado"><strong>Importar Productos Terminado</strong></a>
+    <a style="color:#E5B1E2; font-size:12px;"   href="importar_productos_terminado"><strong>Importar Productos Terminado</strong></a>
   </li>
 </ul>
 

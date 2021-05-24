@@ -78,7 +78,7 @@
 
                     <form action="{{Route('pendiente_insertar')}}" method="POST">
                     @csrf
-                    <input type="date" value="" name="fecha" id="fecha" style="width: 160px;color:white;text-align:center;"  class=" form-control  botonprincipal mr-sm-2 " required>
+                    <input type="date" value="" name="fecha" id="fecha" style="width: 160px; color:black ;text-align:center;"  class=" form-control  botonprincipal mr-sm-2 " required>
                     <button  onclick="agregarpendiente()" style="width:160px;" class="botonprincipal mr-sm-2 ">Agregar a pendiente</button>
                     </form>
 
