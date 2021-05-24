@@ -16,6 +16,8 @@ class Pendiente extends Component
     public $nom;
     public $fede;
     public $fecha;
+
+    
     public $busqueda;
     public $borrar;
     public $actualizar;
