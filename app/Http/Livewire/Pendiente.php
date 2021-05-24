@@ -16,6 +16,11 @@ class Pendiente extends Component
     public $nom;
     public $fede;
     public $fecha;
+    public $marcas;
+    public $capas;
+    public $nombres;
+    public $vitolas;
+    public $tipo_empaques;
 
     
     public $busqueda;
@@ -47,6 +52,12 @@ class Pendiente extends Component
         $this->borrar = [];
         $this->actualizar= [];
 
+
+        $this->capas= \DB::select('call buscar_capa("")');
+        $this->marcas=\DB::select('call buscar_marca("")');
+        $this->nombres= \DB::select('call buscar_nombre("")');
+        $this->vitolas= \DB::select('call buscar_vitola("")');
+        $this->tipo_empaques= \DB::select('call buscar_tipo_empaque("")');
         $this->datos_pendiente = DB::select(
             'call buscar_pendiente(:nombre,:fechade,:fechahasta)',
             [

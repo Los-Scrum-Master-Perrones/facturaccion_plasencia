@@ -38,6 +38,15 @@
  
     <div class="container" style="max-width:100%; ">
     
+
+    <div class="row" style="max-width:100%; text-align:right;">
+    <div class="input-group mb-3" style="text-align:right;">
+
+    <button class="botonprincipal"  data-toggle="modal" data-target="#modal_crear_nuevo"
+                            onclick="" type="submit" style="width:20%; ">Agregar producto al pendiente
+                        </button>
+    </div> 
+    </div> 
     <div class="row" style="text-align:center;">
 
             <div class="col">
@@ -245,6 +254,179 @@
 
 <!-- FIN MODAL ACTUALIZAR DATO PENDIENTE -->
 
+
+
+
+    <!-- INICIO DEL MODAL NUEVO PRODUCTO -->
+
+    <form action="{{Route('nuevo_producto')}} " method="POST">
+        <div class="modal fade" role="dialog" id="modal_crear_nuevo" data-backdrop="static" data-keyboard="false"
+            tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true"
+            style="opacity:.9;background:#212529;width=800px;">
+            <div class="modal-dialog modal-dialog-centered modal-lg" style="opacity:.9;background:#212529;width=80%">
+                <div class="modal-content">
+
+                    <div class="modal-header">
+                        <h5 id="staticBackdropLabel"><strong>Agregar producto</strong></h5>
+                        <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close"></button>
+                    </div>
+
+                    <div class="modal-body">
+
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="mb-3 col">
+                                    <label for="txt_vitola" class="form-label">Marca</label>
+                                    <select class="form-control" name="marca" id="marca"
+                                        placeholder="Ingresa figura y tipo" style="overflow-y: scroll; height:30px;"
+                                        required>
+                                        @foreach($marcas as $marca)
+                                        <option style="overflow-y: scroll;"> {{$marca->marca}}</option>
+                                        @endforeach
+                                    </select>
+
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="mb-3 col">
+                                    <label  for="txt_figuraytipo" class="form-label">Item</label>
+                                    <input name="item" id="item" style="font-size:16px" class="form-control" required
+                                        type="text" autocomplete="off">
+                                </div>
+
+                                <div class="mb-3 col">
+                                    <label for="txt_figuraytipo" class="form-label">Capa</label>
+                                    <select class="form-control" name="capa" id="capa"
+                                        placeholder="Ingresa figura y tipo" style="overflow-y: scroll; height:30px;"
+                                        required>
+                                        @foreach($capas as $capa)
+                                        <option style="overflow-y: scroll;"> {{$capa->capa}}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+
+                                <div class="mb-3 col">
+                                    <label for="txt_total" class="form-label">Nombre</label>
+
+                                    <select class="form-control" name="nombre" id="nombre"
+                                        placeholder="Ingresa figura y tipo" style="overflow-y: scroll; height:30px;"
+                                        required>
+                                        @foreach($nombres as $nombre)
+                                        <option style="overflow-y: scroll;"> {{$nombre->nombre}}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                            </div>
+
+
+                            <div class="row">
+
+                                <div class="mb-3 col">
+                                    <label for="txt_buenos" class="form-label">Vitola</label>
+
+                                    <select class="form-control" name="vitola" id="vitola"
+                                        placeholder="Ingresa figura y tipo" style="overflow-y: scroll; height:30px;"
+                                        required>
+                                        @foreach($vitolas as $vitola)
+                                        <option style="overflow-y: scroll;"> {{$vitola->vitola}}</option>
+                                        @endforeach
+                                    </select>
+
+                                </div>
+                                <div class="mb-3 col">
+                                    <label for="txt_malos" class="form-label">Tipo de
+                                        empaque</label>
+                                    <select class="form-control" name="tipo" id="tipo"
+                                        placeholder="Ingresa figura y tipo" style="overflow-y: scroll; height:30px;"
+                                        required>
+                                        @foreach($tipo_empaques as $tipo_empaque)
+                                        <option style="overflow-y: scroll;"> {{$tipo_empaque->tipo_empaque}}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+
+                                <div class="mb-3 col">
+                                    <label  for="txt_malos"
+                                        class="form-label">Presentación</label>
+
+                                    <select class="form-control" name="presentacion" id="presentacion"
+                                        placeholder="Ingresa figura y tipo" style="overflow-y: scroll; height:30px;"
+                                        required>
+
+                                        <option value="Puros Tripa Larga" style="overflow-y: scroll;">Puros Tripa Larga
+                                        </option>
+                                        <option value="Puros Tripa Corta" style="overflow-y: scroll;">Puros Tripa Corta
+                                        </option>
+
+                                    </select>
+                                </div>
+                            </div>
+
+
+
+                            <div class="row">
+
+
+                                <div class="mb-3 col">
+                                    <label for="txt_total" class="form-label">Código del
+                                        sistema</label>
+                                    <input name="cod_sistema" id="cod_sistema" 
+                                        class="form-control" required type="text" autocomplete="off">
+                                </div>
+                                <div class="mb-3 col">
+                                    <label for="txt_buenos" class="form-label">Código de
+                                        precio</label>
+                                    <input name="cod_precio" id="cod_precio" class="form-control"
+                                        required type="text" autocomplete="off">
+                                </div>
+
+                                <div class="mb-3 col">
+                                    <label for="txt_total" class="form-label">Código de la  cajita</label>
+                                    <input name="cod_caja" id="cod_caja"  class="form-control"
+                                        required type="text" autocomplete="off">
+                                </div>
+
+                            </div>
+
+
+                            <div class="row">
+                                <div class="mb-3 col">
+                                    <input type="checkbox" name="cello" id="cello" style="font-size:20px" value="si">
+                                    <label for="cello" class="form-label">Cello</label>
+                                </div>
+                                <div class="mb-3 col">
+
+                                    <input type="checkbox" name="anillo" id="anillo" style="font-size:20px" value="si">
+                                    <label  for="anillo" class="form-label">Anillo</label>
+                                </div>
+                                <div class="mb-3 col">
+
+                                    <input type="checkbox" name="upc" id="upc" style="font-size:20px" value="si">
+                                    <label for="upc" class="form-label">UPC</label>
+                                </div>
+
+
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="modal-footer">
+                        <button  type="button" class=" bmodal_no"
+                            data-dismiss="modal"><span >Cancelar</span>
+                            @csrf
+                        </button>
+                        <button onclick="agregarproducto()"class=" bmodal_yes "> <span>Guardar</span> </button>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </form>
+    <!-- FIN DEL MODAL NUEVO PRODUCTO -->
+
+
+
 <script type="text/javascript">
     function datos_modal_eliminar(id){ 
 var datas = '<?php echo json_encode($datos_pendiente);?>';
@@ -290,6 +472,15 @@ for (var i = 0; i < data.length; i++) {
      document.actualizar_pendiente.observacion.value = data[i].observacion;
      
      document.actualizar_pendiente.orden_sistema.value = data[i].orden_del_sitema;
+<<<<<<< Updated upstream
+=======
+     
+     document.actualizar_pendiente.pendiente.value = data[i].pendiente;
+     document.actualizar_pendiente.cprecio.value = data[i].serie_precio;
+     
+     document.actualizar_pendiente.precio.value = data[i].precio;
+
+>>>>>>> Stashed changes
     
      
      
