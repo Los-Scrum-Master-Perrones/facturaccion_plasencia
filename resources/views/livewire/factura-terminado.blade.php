@@ -1,110 +1,118 @@
 <div xmlns:wire="http://www.w3.org/1999/xhtml">
+<title></title>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" />
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Hola</title>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" />
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+<script src="{{ URL::asset('css/tabla.js') }}"></script>
+@livewireStyles
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-wEmeIV1mKuiNpC+IOBjI7aAzPcEZeedi5yW5f2yOq55WWLwNGmvvx4Um1vskeMj0" crossorigin="anonymous">
 
 
-    <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    @livewireStyles
-    <link rel="stylesheet" href="{{ asset('css/principal.css') }}" />
 
-    <br>
-    <div class="container" style="width:auto; align-content: center">
-        <div class="row">
-            <div class="form-group col-sm-12">
-                <h2 wire:model="titulo_cliente">{{$titulo_factura." ".$titulo_cliente." ". $contenedor." ".$titulo_mes}}
-                </h2>
-            </div>
-        </div>
-        <div class="row">
 
-            <div class="form-group col-sm-3">
-                <br>
-                <label>
-                    <h4>Factura N#: {{$num_factura_sistema}}</h4>
-                </label>
-            </div>
-            <div class="form-group col-sm-3">
-                <label>Cliente</label>
-                <input type="text" class="form-control" wire:model="cliente" placeholder="Rocky,  Hatsa">
-            </div>
-            <div class="form-group col-sm-3">
-                <label>Fecha</label>
-                <input type="date" class="form-control" wire:model="fecha_factura">
-            </div>
-            <div class="form-group col-sm-3">
-                <label>Contenedor</label>
-                <input type="text" class="form-control" wire:model="contenedor" placeholder="Primer Contenedor">
-            </div>
-        </div>
-        <div class="row">
-            <div class="form-group col-sm-3">
-                <label for="exampleInputEmail1">Total Bultos</label>
-                <input type="number" class="form-control" placeholder="0" wire:model="total_cantidad_bultos" readonly>
-            </div>
-            <div class="form-group col-sm-3">
-                <label for="exampleInputEmail1">Total Puros</label>
-                <input type="number" class="form-control" placeholder="0" wire:model="total_total_puros" readonly>
-            </div>
-            <div class="form-group col-sm-3">
-                <label for="exampleInputEmail1">Peso Bruto Total</label>
-                <input type="number" class="form-control" placeholder="0.00" wire:model="total_peso_bruto" readonly>
-            </div>
-            <div class="form-group col-sm-3">
-                <label for="exampleInputEmail1">Peso Neto Total</label>
-                <input type="number" class="form-control" placeholder="0.00" wire:model="total_peso_neto" readonly>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-sm-3" id="boton_agregar" name="boton_agregar">
-                <button onclick="mostrarPendiente()" class="form-control mr-sm-2 botonprincipal"
-                    >Agregar Producto
+
+
+
+<div class="container" style="max-width:100%; ">
+</br>
+
+    <div class="row" style="text-align:center;">
+
+            <div class="col">
+                   <div class="input-group mb-3">
+
+               
+                <button id="boton_agregar" name="boton_agregar" onclick="mostrarPendiente()" class=" mr-sm-2 botonprincipal" style="width:120px;" >
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-plus-circle" viewBox="0 0 16 16">
+                <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
+                <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z"/>
+                </svg>
+                 Producto 
                 </button>
-            </div>
-            <div class="col-sm-3" style="display: none" id="boton_regresar" name="boton_regresar">
-                <button onclick="mostrarDetalleFactura()" class="form-control mr-sm-2 botonprincipal"
-                    >Regresar
-                </button>
-            </div>
-            <div class="col-sm-3" style="display: none" id="busqueda_pendiente1" name="busqueda_pendiente1">
-                <span class="input-group-text form-control ">De <input type="date" name="fecha_de" id="fecha_de" class="form-control botonprincipal"
-                    style="width:200px;" placeholder="Nombre" wire:model= "fede"></span>
-            </div>
-            <div class="col-sm-3"  style="display: none" id="busqueda_pendiente2" name="busqueda_pendiente2">
-                <span class="input-group-text form-control">Hasta <input type="date" name="fecha_hasta" id="fecha_hasta" wire:model= "fecha"
-                    class="form-control mr-sm-2 botonprincipal" placeholder="Nombre">  </span>
-            </div>
-            <div class="col-sm-3" style="display: none" id="busqueda_pendiente3" name="busqueda_pendiente3">     
-                <input name="nombre" id="nombre" class="form-control mr-sm-2 botonprincipal" placeholder="Nombre" wire:model= "nom">
-            </div>
 
-            
+                <button style="display: none;width:120px;" id="boton_regresar"  onclick="mostrarDetalleFactura()" class=" mr-sm-2 botonprincipal">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-left-circle" viewBox="0 0 16 16">
+                <path fill-rule="evenodd" d="M1 8a7 7 0 1 0 14 0A7 7 0 0 0 1 8zm15 0A8 8 0 1 1 0 8a8 8 0 0 1 16 0zm-4.5-.5a.5.5 0 0 1 0 1H5.707l2.147 2.146a.5.5 0 0 1-.708.708l-3-3a.5.5 0 0 1 0-.708l3-3a.5.5 0 1 1 .708.708L5.707 7.5H11.5z"/>
+                </svg>
+                Regresar </button>
+               
+                <span id="lbl_cliente" name="lbl_cliente" class="form-control input-group-text "  >Cliente</span>
+                <input style="width:150px;" id="txt_cliente" name="txt_cliente" type="text" class="form-control mr-sm-2 " wire:model="cliente" placeholder="Rocky,  Hatsa" >
+         
+                <span id="lbl_fecha" name="lbl_fecha"class="input-group-text form-control">Fecha</span>
+                <input style="width:150px;" id="txt_fecha" name="txt_fecha" type="date" class="form-control mr-sm-2 " wire:model="fecha_factura">
+           
+                <span id="lbl_contenedor" name="lbl_contenedor" class="input-group-text form-control">Contenedor</span>
+                <input style="width:150px;" id="txt_contenedor" name="txt_contenedor" type="text" class="form-control mr-sm-2 " wire:model="contenedor" placeholder="Primer Contenedor">
 
-            <div class="col-sm-3" id="tipo_orden" name="tipo_orden">
-                <select class="form-control" wire:model="tipo_factura" style="overflow-y: scroll; height:40px;" >
+                <select id="tipo_orden" name="tipo_orden" class="form-control mr-sm-2 " wire:model="tipo_factura" style="overflow-y: scroll;" >
                     <option style="overflow-y: scroll;">HON</option>
                     <option style="overflow-y: scroll;">FTT</option>
                     <option style="overflow-y: scroll;">INT-H</option>
                 </select>
-            </div>
-           
-            <div class="col-sm-3"  id="vacio1" name="vacio1">
-                
+
+                <button id="btn_guardar" onclick="" class="botonprincipal" style="width:120px;">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-save2" viewBox="0 0 16 16">
+                <path d="M2 1a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H9.5a1 1 0 0 0-1 1v4.5h2a.5.5 0 0 1 .354.854l-2.5 2.5a.5.5 0 0 1-.708 0l-2.5-2.5A.5.5 0 0 1 5.5 6.5h2V2a2 2 0 0 1 2-2H14a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V2a2 2 0 0 1 2-2h2.5a.5.5 0 0 1 0 1H2z"/>
+                </svg>
+                Guardar </button>
+
+
+                <span id="de" class="input-group-text form-control" style="display: none" >De</span>
+                <input type="date" name="fecha_de" id="fecha_de" class="form-control " style="width:200px;display: none" placeholder="Nombre" wire:model= "fede">
+                <span id="hasta" class="input-group-text form-control" style="display: none" >Hasta</span>
+                <input type="date" name="fecha_hasta" id="fecha_hasta" wire:model= "fecha" style="width:200px;display: none" class="form-control mr-sm-2 " placeholder="Nombre">
+          
+
+            <div style="display: none" id="busqueda_pendiente2" name="busqueda_pendiente2">     
+                <input name="nombre" id="nombre" class="form-control mr-sm-2 "  style="width:300px;" placeholder="Nombre" wire:model= "nom">
             </div>
 
-            <div class="col-sm-3" id="vacio2" name="vacio2">
-                <button onclick="" class="form-control mr-sm-2 botonprincipal"
-                >Guardar
-                </button>
-            </div>
 
+
+
+
+            </div>
         </div>
+     </div>
 
-    </div>
 
-    <br>
 
-    <div class="panel-body" id="facura_cliente" name="facura_cliente">
-        <div style="overflow-x: none; overflow-y: noe;
- height:device-height" class="table-responsive">
+           
+
+      
+
+             
+           
+           
+         
+
+           
+
+      
+
+  
+
+     <div class="panel-body" style="padding:0px;">
+            <div style="width:100%; padding-left:0px;   font-size:10px;   overflow-x: display; overflow-y: auto;
+     height:450px;">
+
+<div class="row">
+<div class="col">
+<label wire:model="titulo_cliente" style="font-size:15px;color:white;">{{$titulo_factura." ".$titulo_cliente." ". $contenedor." ".$titulo_mes}} </label> 
+</div>
+<div class="col" style="text-align:end;">
+<label style="font-size:15px;color:white;">Factura N#: {{$num_factura_sistema}}</label>
+</div>
+</div>
+
             <table class="table table-light" id="editable">
                 <thead style="position: static;">
                     <tr style="font-size:10px; text-align:center">
@@ -178,7 +186,26 @@
                     @endforeach
                 </tbody>
             </table>
+        
         </div>
+
+        
+</br>
+    <div class="row">
+            <div class="col-sm-3 input-group mb-3">
+                <span id="de" class="input-group-text form-control "  style="background:rgba(174, 0, 255, 0.432);color:white;">Total Bultos</span>
+                <input type="number" class="form-control  mr-sm-4" placeholder="0" wire:model="total_cantidad_bultos" readonly>
+                
+                <span id="de" class="input-group-text form-control"  style="background:rgba(174, 0, 255, 0.432);color:white;">Total Puros</span>
+                <input type="number" class="form-control  mr-sm-4" placeholder="0" wire:model="total_total_puros" readonly>
+
+
+                <span id="de" class="input-group-text form-control"  style="background:rgba(174, 0, 255, 0.432);color:white;" >Peso Bruto Total</span>
+                <input type="number" class="form-control  mr-sm-4" placeholder="0.00" wire:model="total_peso_bruto" readonly>
+
+                <span id="de" class="input-group-text form-control"  style="background:rgba(174, 0, 255, 0.432);color:white;" >Peso Neto Total</span>
+                <input type="number" class="form-control " placeholder="0.00" wire:model="total_peso_neto" readonly>
+            </div>
     </div>
 
 
@@ -249,35 +276,60 @@
     </div>
 
 
+
+
+
+
+
+
+
+
+
+
+
     <script type="text/javascript">
         function mostrarPendiente() {
-            document.getElementById('pendiente_factura').style.display = 'block';
-            document.getElementById('busqueda_pendiente1').style.display = 'block';
-            document.getElementById('busqueda_pendiente2').style.display = 'block';
-            document.getElementById('busqueda_pendiente3').style.display = 'block';
-            document.getElementById('facura_cliente').style.display = 'none';
             document.getElementById('boton_regresar').style.display = 'block';
-            document.getElementById('boton_agregar').style.display = 'none';
+            document.getElementById('de').style.display = 'block';
+            document.getElementById('hasta').style.display = 'block';
+            document.getElementById('fecha_de').style.display = 'block';
+            document.getElementById('fecha_hasta').style.display = 'block';
+            document.getElementById('busqueda_pendiente2').style.display = 'block';
+
+            
             document.getElementById('tipo_orden').style.display = 'none';
-            document.getElementById('vacio1').style.display = 'none';
-            document.getElementById('vacio2').style.display = 'none';
+            document.getElementById('btn_guardar').style.display = 'none';
+            document.getElementById('boton_agregar').style.display = 'none';
+            document.getElementById('lbl_cliente').style.display = 'none';
+            document.getElementById('lbl_fecha').style.display = 'none';
+            document.getElementById('lbl_contenedor').style.display = 'none';
+            document.getElementById('txt_cliente').style.display = 'none';
+            document.getElementById('txt_fecha').style.display = 'none';
+            document.getElementById('txt_contenedor').style.display = 'none';
         }
 
         function mostrarDetalleFactura() {
-            document.getElementById('pendiente_factura').style.display = 'none';
-            document.getElementById('busqueda_pendiente1').style.display = 'none';
-            document.getElementById('busqueda_pendiente2').style.display = 'none';
-            document.getElementById('busqueda_pendiente3').style.display = 'none';
-            document.getElementById('facura_cliente').style.display = 'block';
             document.getElementById('boton_regresar').style.display = 'none';
-            document.getElementById('boton_agregar').style.display = 'block';
-            document.getElementById('tipo_orden').style.display = 'block';
-            document.getElementById('vacio1').style.display = 'block';
-            document.getElementById('vacio2').style.display = 'block';
+             document.getElementById('de').style.display = 'none';
+            document.getElementById('hasta').style.display = 'none';
+            document.getElementById('fecha_de').style.display = 'none';
+            document.getElementById('fecha_hasta').style.display = 'none';
+            document.getElementById('busqueda_pendiente2').style.display = 'none';
+            
 
             document.getElementById('fecha_hasta').value = "";
             document.getElementById('nombre').value = "";
             document.getElementById('fecha_de').value = "";
+
+            document.getElementById('tipo_orden').style.display = 'block';
+            document.getElementById('btn_guardar').style.display = 'block';
+            document.getElementById('boton_agregar').style.display = 'block';
+            document.getElementById('lbl_cliente').style.display = 'block';
+            document.getElementById('lbl_fecha').style.display = 'block';
+            document.getElementById('lbl_contenedor').style.display = 'block';
+            document.getElementById('txt_cliente').style.display = 'block';
+            document.getElementById('txt_fecha').style.display = 'block';
+            document.getElementById('txt_contenedor').style.display = 'block';
         }
     </script>
 

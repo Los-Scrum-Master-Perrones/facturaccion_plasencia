@@ -21,7 +21,12 @@
     <li class="nav-item">
             <a style="color:#E5B1E2; font-size:12px;" href="pendiente"><strong>Pendiente</strong></a>
         </li>
+
          <li class="nav-item">
+            <a style="color:white; font-size:12px;" href="productos"><strong>Productos</strong></a>
+        </li>
+        
+        <li class="nav-item">
             <a style="color:white; font-size:12px;" href="import_excel"><strong>Importar pedido</strong></a>
         </li>
         <li class="nav-item">
@@ -38,14 +43,14 @@
             <div class="col">
                    <div class="input-group mb-3">
                         <span class="input-group-text form-control ">De</span>
-                        <input type="date" name="fecha_de" id="fecha_de" class="form-control "
+                        <input type="date" name="fecha_de" id="fecha_de" class="form-control botonprincipal"
                                 style="width:200px;" placeholder="Nombre" wire:model= "fede">
                         <span class="input-group-text form-control">Hasta</span>
                         <input type="date" name="fecha_hasta" id="fecha_hasta" wire:model= "fecha"
-                                class="form-control mr-sm-2 " style="width:200px;" placeholder="Nombre">
+                                class="form-control mr-sm-2 botonprincipal" style="width:200px;" placeholder="Nombre">
                         
                        
-                        <input name="nombre" id="nombre" class="form-control mr-sm-2 " style="width:200px;" placeholder="Nombre" wire:model= "nom">
+                        <input name="nombre" id="nombre" class="form-control mr-sm-2 botonprincipal" style="width:200px;" placeholder="Nombre" wire:model= "nom">
            
                         <form wire:submit.prevent="exportPendiente()">
                         <input type="text" value= "{{isset($nom)?$nom:null}}" name="nombre" id="nombre" hidden wire:model= "nom" >
@@ -83,8 +88,6 @@
                         <th>ANILLO</th>
                         <th>CELLO</th>
                         <th>UPC</th>
-                        <th>COD.PRECIO</th>
-                        <th>PRECIO</th>
                         <th>PENDIENTE</th>
                         <th>SALDO</th>
                         <th>OPERACIONES</th>
@@ -108,8 +111,6 @@
                         <td>{{$datos->anillo}}</td>
                         <td>{{$datos->cello}}</td>
                         <td>{{$datos->upc}}</td>
-                        <td>{{$datos->serie_precio}}</td>
-                        <td>{{$datos->precio}}</td>
                         <td>{{$datos->pendiente}}</td>
                         <td>{{$datos->saldo}}</td>
                         
@@ -193,7 +194,7 @@
         style="opacity:.9;background:#212529;width=800px;">
         <div class="modal-dialog modal-dialog-centered modal-lg" style="opacity:.9;background:#212529;width=80%">
             <div class="modal-content">
-            @csrf
+
                 <div class="modal-header">
                 <h5  id="staticBackdropLabel"><strong>Descripción del producto: </strong><span id="titulo"   name="titulo"></span></h5>  
              </div>
@@ -216,42 +217,11 @@
                                     <input name="observacion" id="observacion" class="form-control"
                                         type="text" autocomplete="off">
                                 </div>
-                                </div>
-                                <div class="row">
-                                
+
                                 <div class="mb-3 col">
                                     <label for="txt_figuraytipo"  class="form-label">Presentación</label>
                                     <input name="presentacion" id="presentacion"  class="form-control"
                                     type="text" autocomplete="off">
-
-
-                                </div>
-
-                                <div class="mb-3 col">
-                                    <label for="txt_figuraytipo"  class="form-label">Pendiente</label>
-                                    <input name="pendiente" id="pendiente"  class="form-control"
-                                    type="text" autocomplete="off">
-
-                                    
-                                </div>
-
-                        </div>
-                        <div class="row">
-                                
-                                <div class="mb-3 col">
-                                    <label for="txt_figuraytipo"  class="form-label">Código precio</label>
-                                    <input name="cprecio" id="cprecio"  class="form-control"
-                                    type="text" autocomplete="off">
-
-
-                                </div>
-
-                                <div class="mb-3 col">
-                                    <label for="txt_figuraytipo"  class="form-label">Precio</label>
-                                    <input name="precio" id="precio"  class="form-control"
-                                    type="text" autocomplete="off">
-
-                                    
                                 </div>
 
                         </div>
@@ -311,7 +281,8 @@ for (var i = 0; i < data.length; i++) {
 
      document.actualizar_pendiente.itema.value = data[i].item;
 
-     producto =  document.getElementById("titulo").innerHTML ="".concat(data[i].marca, " ", data[i].nombre , " ", data[i].capa, " ", data[i].vitola);;
+     producto = 
+     document.getElementById("titulo").innerHTML ="".concat(data[i].marca, " ", data[i].nombre , " ", data[i].capa, " ", data[i].vitola);;
 
      
      document.actualizar_pendiente.presentacion.value = data[i].presentacion;
@@ -319,11 +290,6 @@ for (var i = 0; i < data.length; i++) {
      document.actualizar_pendiente.observacion.value = data[i].observacion;
      
      document.actualizar_pendiente.orden_sistema.value = data[i].orden_del_sitema;
-     
-     document.actualizar_pendiente.cprecio.value = data[i].serie_precio;
-     
-     document.actualizar_pendiente.precio.value = data[i].precio;
-
     
      
      
@@ -335,6 +301,40 @@ for (var i = 0; i < data.length; i++) {
 
 
 
+    <script type="text/javascript">
+        $(document).ready(function () {
+
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-Token': $("input[name=_token]").val()
+                }
+            });
+
+            $('#editable').Tabledit({
+                url: '{{ route("tabledit.action") }}',
+                method: 'POST',
+                dataType: "json",
+                columns: {
+                    identifier: [0, 'id'],
+                    editable: [
+                        [1, 'first_name'],
+                        [2, 'last_name'],
+                        [3, 'gender']
+                    ]
+                },
+                restoreButton: false,
+
+                onSuccess: function (data, textStatus, jqXHR) {
+                    if (data.action == 'delete') {
+                        $('#' + data.id).remove();
+                    }
+                }
+
+            });
+
+        });
+    </script>
+     
 
 
 </div>
