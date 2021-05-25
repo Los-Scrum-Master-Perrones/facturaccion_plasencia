@@ -129,7 +129,7 @@
     <!-- SCRIPT MODAL EDITAR MOLDE -->
 
     <script type="text/javascript">
-        function      (id) {
+        function cargar_datos_editar(id) {
 
             if (document.formulario_actualizar.cello_ac.checked) {
 
@@ -703,16 +703,17 @@ document.formulario_actualizar.sampler.click();
 
                             <div class="row">
 
-                            <div class="mb-4 col">   
-                                <input type="checkbox" name="sampler" id="sampler" value="si" onclick="ocultar()">
+                           <div>
+                                    <input type="checkbox" name="sampler" id="sampler" value="si" onclick="ocultar()">
                                     <label for="upc" class="form-label">SAMPLER</label>
-                                 </div>
 
+                                    <input type="text" name="des" id="des" value="" style="display:none; width:60%;">
+                                    </div>
 
-                                 <div class="mb-8 col">  
-                                 <input type="text" name="des" id="des" value="" style="display:none">
+ 
+                                
 
-                                 </div> 
+                                
 
 
                                  </div>

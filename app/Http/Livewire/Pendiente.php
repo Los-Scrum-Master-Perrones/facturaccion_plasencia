@@ -16,6 +16,11 @@ class Pendiente extends Component
     public $nom;
     public $fede;
     public $fecha;
+
+
+
+
+
     public $marcas;
     public $capas;
     public $nombres;
@@ -58,6 +63,7 @@ class Pendiente extends Component
         $this->nombres= \DB::select('call buscar_nombre("")');
         $this->vitolas= \DB::select('call buscar_vitola("")');
         $this->tipo_empaques= \DB::select('call buscar_tipo_empaque("")');
+
         $this->datos_pendiente = DB::select(
             'call buscar_pendiente(:nombre,:fechade,:fechahasta)',
             [
@@ -141,6 +147,11 @@ class Pendiente extends Component
             $nom = $request->nombre;
         }
 
+        $this->capas= \DB::select('call buscar_capa("")');
+        $this->marcas=\DB::select('call buscar_marca("")');
+        $this->nombres= \DB::select('call buscar_nombre("")');
+        $this->vitolas= \DB::select('call buscar_vitola("")');
+        $this->tipo_empaques= \DB::select('call buscar_tipo_empaque("")');
         $this->datos_pendiente = DB::select(
             'call buscar_pendiente(:nombre,:fechade,:fechahasta)',
             [
@@ -168,7 +179,7 @@ class Pendiente extends Component
         public function actualizar_pendiente(Request $request){         
     
         
-            $this->actualizar=\DB::select('call actualizar_pendientes(:id,:item,:orden,:observacion,:presentacion,:pendiente,:cprecio,:precio)',
+            $this->actualizar=\DB::select('call actualizar_pendientes(:id,:item,:orden,:observacion,:presentacion,:pendiente,:cprecio,:precio,:orden1)',
             ['id'=>$request->id_pendientea,
             'item'=>$request->itema,
             'orden'=>$request->orden_sistema,
@@ -176,8 +187,8 @@ class Pendiente extends Component
             'presentacion'=>$request->presentacion,
             'pendiente'=>$request->pendiente,
             'cprecio'=>$request->cprecio,
-            'precio'=>$request->precio
-
+            'precio'=>$request->precio,
+            'orden1'=>$request->orden
             ]);
     
             
@@ -195,14 +206,64 @@ class Pendiente extends Component
             }
 
 
+            
 
     function exportPendiente()
     {
         return Excel::download(new PendienteExport($this->nom, $this->fede, $this->fecha), 'Pendiente.xlsx');
     }
+	
 
 
+    function insertar_nuevo_pendiente(Request $request){
+        if(isset($request->cello)){
+           
+            $cello = $request->cello;
+        }else{
+            $cello = "no";
+        }
 
+        if(isset($request->anillo)){
+            $anillo = $request->anillo;
+            
+        }else{
+            $anillo = "no";
+        }
 
+        if(isset($request->upc)){
+            $upc = $request->upc;
+           
+        }else{
+            $upc = "no";
+        }
+
+        $insertar_nuevo_pendiente=\DB::select('call insertar_nuevo_pendiente(:categoria,:item,:orden,:observacion,:presentacion,:mes,:orden1,:marca,
+        :vitola,:nombre,:capa,:tipo_empaque,:cello,:anillo,:upc,:pendiente,:saldo,:paquetes,:unidades,:cprecio,:precio)',
+        
+        ['categoria'=>$request->categoria,
+        'item'=>$request->itemn,
+        'orden'=>$request->ordensis,
+        'observacion'=>$request->observacionn,
+        'presentacion'=>$request->presentacionn,
+        'mes'=>$request->fechan,
+        'orden1'=>$request->ordenn,
+        'marca'=>$request->marca,
+        'vitola'=>$request->vitola,
+        'nombre'=>$request->nombre,
+        'capa'=>$request->capa,
+        'tipo_empaque'=>$request->tipo,
+        'cello'=>$cello,
+        'anillo'=>$anillo,
+        'upc'=>$upc,
+        'pendiente'=>$request->pendienten,
+        'saldo'=>$request->saldon,
+        'paquetes'=>$request->paquetes,
+        'unidades'=>$request->unidades,
+        'cprecio'=>$request->c_precion,
+        'precio'=>$request->precion
+        ]);
+                
+        return redirect()->route('pendiente'); 
+    }
 
 }

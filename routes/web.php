@@ -103,6 +103,10 @@ Route::get('/actualizar_pendiente',[ Pendiente::class,'actualizar_pendiente'])->
 Route::post('/actualizar_pendiente',[ Pendiente::class,'actualizar_pendiente'])->name('actualizar_pendiente');
 
 
+Route::get('/nuevo_pendiente',[ Pendiente::class,'insertar_nuevo_pendiente'])->name('nuevo_pendiente');
+Route::post('/nuevo_pendiente',[ Pendiente::class,'insertar_nuevo_pendiente'])->name('nuevo_pendiente');
+
+
 
 Route::get('/inventario_cajas', InventarioCajas::class)->name('inventario_cajas');
 Route::post('/inventario_cajas', InventarioCajas::class)->name('inventario_cajas');
