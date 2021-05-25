@@ -1,18 +1,17 @@
 <div xmlns:wire="http://www.w3.org/1999/xhtml">
+<title></title>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" />
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
-    <title></title>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" />
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Hola</title>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" />
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
-
-    @livewireStyles
-    <link rel="stylesheet" href="{{ asset('css/principal.css') }}" />
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Hola</title>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" />
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+<script src="{{ URL::asset('css/tabla.js') }}"></script>
+@livewireStyles
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-wEmeIV1mKuiNpC+IOBjI7aAzPcEZeedi5yW5f2yOq55WWLwNGmvvx4Um1vskeMj0" crossorigin="anonymous">
 
     </br>
     <ul class="nav justify-content-center">
@@ -29,7 +28,8 @@
             <a style="color:#E5B1E2; font-size:12px;" href=""><strong>Programaciones</strong></a>
         </li>
     </ul>
-    <br>
+
+
 
     <div class="" style="width:100%; padding-left:250px;">
 
@@ -44,23 +44,22 @@
             </div>
             <div class="col-sm-4" style="text-align:right;">
                 <form action="{{Route('exportar_programacion')}}" id="formver" name="formver">
-                    <input name="buscar" id="buscar" value="{{isset($busqueda)?$busqueda:null}}"
-                        onKeyDown="copiar('buscar','b');" class="btn  form-control" wire:model="busqueda"
-                        placeholder="Búsqueda por Marca, Nombre y Vitola" style="width:400px; padding:right;">
+                    <input name="buscar" id="buscar" value="{{isset($busqueda)?$busqueda:null}}" onKeyDown="copiar('buscar','b');" class="  form-control" wire:model="busqueda"  placeholder="Búsqueda por Marca, Nombre y Vitola" style="width:400px; padding:right;">
             </div>
             <div class="col-sm-3" style="text-align:right;">
 
                 <input value="{{isset($id_tov)?$id_tov:0}}" name="id_tov" id="id_tov" hidden wire:model="id_tov">
 
-                <button class="botonprincipal" type="submit" style="width:120px;">Exportar
-                </button>
+                <button class="botonprincipal" type="submit" style="width:120px;">Exportar </button>
             </div>
             </form>
             
         </div>
     </div>
 
-    </br>
+
+
+
 
 
     <div style="width:100%; padding-left:25px; padding-right:10px;">
@@ -93,7 +92,7 @@
                                             onclick="datos_modal_eliminar_pro({{ $programacion->id}})" href="">
                                             <abbr title="Eliminar programación"><svg xmlns="http://www.w3.org/2000/svg"
                                                     width="16" height="16" fill="currentColor" class="bi bi-trash-fill"
-                                                    viewBox="0 0 16 16" style="color:red;">
+                                                    viewBox="0 0 16 16" style="color:black;">
                                                     <path
                                                         d="M2.5 1a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1H3v9a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V4h.5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1H2.5zm3 4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5zM8 5a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7A.5.5 0 0 1 8 5zm3 .5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 1 0z" />
                                                 </svg>
@@ -107,7 +106,7 @@
                                             <abbr title="Editar programacion"> <svg xmlns="http://www.w3.org/2000/svg"
                                                     width="20" height="20" fill="currentColor"
                                                     class="bi bi-pencil-square" viewBox="0 0 16 16"
-                                                    style="color:yellow;">
+                                                    style="color:black;">
                                                     <path
                                                         d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z" />
                                                     <path fill-rule="evenodd"
@@ -129,7 +128,7 @@
                                                     <abbr title="Mostrar detalles de la programación"><svg
                                                             xmlns="http://www.w3.org/2000/svg" width="20" height="20"
                                                             fill="currentColor" class="bi bi-eye-fill"
-                                                            viewBox="0 0 16 16" style="color:green;">
+                                                            viewBox="0 0 16 16" style="color:black;">
                                                             <path d="M10.5 8a2.5 2.5 0 1 1-5 0 2.5 2.5 0 0 1 5 0z" />
                                                             <path
                                                                 d="M0 8s3-5.5 8-5.5S16 8 16 8s-3 5.5-8 5.5S0 8 0 8zm8 3.5a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7z" />
@@ -409,21 +408,20 @@
             <div class="modal-dialog modal-dialog-centered">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title" id="staticBackdropLabel">Eliminar a <strong><input value=""
-                                    id="txt_usuarioE" name="txt_usuarioE" style="border:none;"></strong> </h5>
-                        <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close"></button>
+                        <h5 class="modal-title" id="staticBackdropLabel">Eliminar</h5>
                     </div>
                     <div class="modal-body">
+                    ¿Estás seguro que quieres eliminar esta programación?
                     </div>
                     <div class="modal-footer">
 
 
                         <input name="id_pro" id="id_pro" hidden />
-                        <button style=" background: #b39f64; color: #ecedf1;" type="button" class=" btn-info-claro "
+                        <button  type="button" class=" btn_no "
                             data-dismiss="modal">
                             <span>Cancelar</span>
                         </button>
-                        <button type="submit" class=" btn-info ">
+                        <button type="submit" class=" btn_yes ">
                             <span>Eliminar</span>
                         </button>
                     </div>
@@ -450,14 +448,11 @@
                 <div class="modal-content">
                     <div class="modal-header">
 
-                        <h5 class="modal-title" id="staticBackdropLabel"
-                            style="width:450px; text-align:center; font-size:20px;">Actualizar fecha del contenedor</h5>
-                        <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close"></button>
+                        <h5 class="modal-title" id="staticBackdropLabel">Actualizar fecha del contenedor</h5>
                     </div>
                     <div class="modal-body">
                         <div class="mb-3 col">
-                            <label for="txt_figuraytipo" class="form-label"
-                                style="width:440px; text-align:center; font-size:20px;">Fecha del contenedor</label>
+                            <label for="txt_figuraytipo" class="form-label">Fecha del contenedor</label>
 
 
                             <input type="text" class="form-control" name="saldo_p" id="saldo_p"
@@ -471,12 +466,12 @@
 
 
 
-                        <button style=" background: #b39f64; color: #ecedf1;" type="button" class=" btn-info-claro "
+                        <button type="button" class=" btn_no "
                             data-dismiss="modal">
                             <span>Cancelar</span>
                         </button>
-                        <button type="submit" class=" btn-info ">
-                            <span>Eliminar</span>
+                        <button type="submit" class="btn_yes">
+                            <span>Actualizar</span>
                         </button>
                     </div>
                 </div>
