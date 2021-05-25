@@ -471,7 +471,7 @@
                             <span>Cancelar</span>
                         </button>
                         <button type="submit" class="btn_yes">
-                            <span>Eliminar</span>
+                            <span>Actualizar</span>
                         </button>
                     </div>
                 </div>
