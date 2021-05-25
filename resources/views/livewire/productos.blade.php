@@ -55,6 +55,7 @@
                         <th style=" text-align:center;">Marca</th>
                         <th style=" text-align:center;">Nombre</th>
                         <th style=" text-align:center;">Vitola</th>
+                        <th style=" text-align:center;">Capa</th>
                         <th style=" text-align:center;">Tipo de empaque</th>
                         <th style=" text-align:center;">Detalles</th>
 
@@ -68,6 +69,7 @@
                         <td>{{$producto->marca}}</td>
                         <td>{{$producto->nombre}}</td>
                         <td>{{$producto->vitola}}</td>
+                        <td>{{$producto->capa}}</td>
                         <td>{{$producto->tipo_empaque}}</td>
 
 
