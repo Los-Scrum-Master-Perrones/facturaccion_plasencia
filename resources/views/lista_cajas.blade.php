@@ -3,18 +3,19 @@
 
 <div xmlns:wire="http://www.w3.org/1999/xhtml">
 <title></title>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" />
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" />
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Hola</title>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" />
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
-    <script src="{{ URL::asset('css/tabla.js') }}"></script>
-    @livewireStyles
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Hola</title>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" />
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+<script src="{{ URL::asset('css/tabla.js') }}"></script>
+@livewireStyles
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-wEmeIV1mKuiNpC+IOBjI7aAzPcEZeedi5yW5f2yOq55WWLwNGmvvx4Um1vskeMj0" crossorigin="anonymous">
+
 
 
 
@@ -40,7 +41,7 @@
 
           <form action=  "{{Route('buscar_lista_cajas')}}" method= "POST" >        
            @csrf
-          <input  name="nombre"  class=" botonprincipal" style="width:300px;"   placeholder="buscar tipo de caja (Código,Producto/Servicio,Marca)" >
+          <input  name="nombre"  class="form-control mr-sm-2" style="width:300px;"   placeholder="buscar tipo de caja (Código,Producto/Servicio,Marca)" >
 
           <button  type="submit" class=" mr-sm-2 botonprincipal "  style="width:40px;" >
           <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
@@ -50,7 +51,12 @@
           </form>  
           
           <button class="botonprincipal  mr-sm-2 " style="width:120px;" data-toggle="modal" data-target="#modal_agregar_lista" >Agregar</button>
-
+          
+          <form action=  "{{Route('exportar_cajas')}}" >
+     @csrf
+     <button type="submit"  class="botonprincipal" style="width:120px;" >Exportar</button> 
+        </form>
+         
           </div>                
           </div>
     </div>
@@ -184,7 +190,7 @@ for (var i = 0; i < data.length; i++) {
   <div class="modal-dialog modal-dialog-centered modal-lg" >
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="staticBackdropLabel">Agregar caja <strong><input  id="txt_usuarioE" name= "txt_usuarioE" style="border:none;"></strong> </h5>
+        <h5 class="modal-title" id="staticBackdropLabel">Agregar caja </h5>
        
       </div>
       <div class="modal-body">
@@ -209,12 +215,12 @@ for (var i = 0; i < data.length; i++) {
 
       </div>
       <div class="modal-footer" >
-        <button  type="button" class=" btn botonprincipal " data-dismiss="modal" >
+      <button  type="button" class="bmodal_no " data-dismiss="modal" >
             <span>Cancelar</span>
         </button>
-        <button type="submit" class=" btn botonprincipal  "   >
+        <button type="submit" class=" bmodal_yes "   >
             <span>Agregar</span>
-        </button>   
+        </button>
       
       </div>
     </div>
