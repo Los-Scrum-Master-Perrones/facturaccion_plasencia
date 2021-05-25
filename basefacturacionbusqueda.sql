@@ -994,7 +994,7 @@ CREATE TABLE IF NOT EXISTS `detalle_factura` (
   `observaciones` tinytext,
   `facturado` char(1) DEFAULT NULL,
   PRIMARY KEY (`id_detalle`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
 
 -- Volcando datos para la tabla facturacion_plasencia.detalle_factura: ~5 rows (aproximadamente)
 DELETE FROM `detalle_factura`;
@@ -1004,7 +1004,8 @@ INSERT INTO `detalle_factura` (`id_detalle`, `id_pendiente`, `id_venta`, `cantid
 	(2, 15, 0, 10, 30.00, 23.00, 1, 100, NULL, 'N'),
 	(3, 16, 0, 10, 30.00, 23.00, 1, 500, NULL, 'N'),
 	(4, 229, 0, 20, 23.00, 18.00, 1, 100, 'Sin Facturar', 'N'),
-	(5, 272, 0, 20, 39.00, 35.00, 3, 200, 'Sin Facturar', 'N');
+	(5, 272, 0, 20, 39.00, 35.00, 3, 200, 'Sin Facturar', 'N'),
+	(6, 1, 0, 100, 12.00, 34.00, 1, 200, 'Sin Facturar', 'N');
 /*!40000 ALTER TABLE `detalle_factura` ENABLE KEYS */;
 
 -- Volcando estructura para tabla facturacion_plasencia.detalle_programacion
@@ -1018,14 +1019,15 @@ CREATE TABLE IF NOT EXISTS `detalle_programacion` (
   `id_pendiente` int(11) DEFAULT NULL,
   `cajas` decimal(10,2) DEFAULT NULL,
   PRIMARY KEY (`id_detalle_programacion`)
-) ENGINE=MyISAM AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
 
--- Volcando datos para la tabla facturacion_plasencia.detalle_programacion: 2 rows
+-- Volcando datos para la tabla facturacion_plasencia.detalle_programacion: 3 rows
 DELETE FROM `detalle_programacion`;
 /*!40000 ALTER TABLE `detalle_programacion` DISABLE KEYS */;
 INSERT INTO `detalle_programacion` (`id_detalle_programacion`, `numero_orden`, `orden`, `cod_producto`, `saldo`, `id_programacion`, `id_pendiente`, `cajas`) VALUES
-	(1, '', 'HON-3141-5-21', 'P-02098', 3000.00, 2, 162, -100.00),
-	(2, '', 'HON-3135-5-21', 'P-03205', 1270.00, 2, 185, NULL);
+	(1, '', 'HON-3141-5-21', 'P-02098', 2000.00, 1, 165, -20.00),
+	(2, '', 'HON-3135-5-21', 'P-03205', 25.00, 1, 188, NULL),
+	(3, '', 'HON-3141-5-21', 'P-02047', 1000.00, 2, 144, NULL);
 /*!40000 ALTER TABLE `detalle_programacion` ENABLE KEYS */;
 
 -- Volcando estructura para tabla facturacion_plasencia.detalle_programacion_temporal
@@ -1037,7 +1039,7 @@ CREATE TABLE IF NOT EXISTS `detalle_programacion_temporal` (
   `saldo` decimal(8,2) DEFAULT NULL,
   `id_pendiente` int(11) DEFAULT NULL,
   PRIMARY KEY (`id_detalle_programacion`) USING BTREE
-) ENGINE=MyISAM AUTO_INCREMENT=21 DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM AUTO_INCREMENT=24 DEFAULT CHARSET=latin1;
 
 -- Volcando datos para la tabla facturacion_plasencia.detalle_programacion_temporal: 0 rows
 DELETE FROM `detalle_programacion_temporal`;
@@ -5056,13 +5058,13 @@ CREATE TABLE IF NOT EXISTS `pendiente` (
   `serie_precio` varchar(50) DEFAULT NULL,
   `precio` decimal(10,2) DEFAULT NULL,
   PRIMARY KEY (`id_pendiente`)
-) ENGINE=InnoDB AUTO_INCREMENT=283 DEFAULT CHARSET=latin1 COMMENT='CATEGORIA	ITEM	ORDEN DEL SISTEMA	OBSERVACÓN	PRESENTACIÓN	MES	ORDEN	MARCA	VITOLA	NOMBRE	CAPA	TIPO DE EMPAQUE	ANILLO	CELLO	UPC	PENDIENTE	MARZO 2021 FACTURA #17976(Warehouse)	ENVIADO MES	SALDO';
+) ENGINE=InnoDB AUTO_INCREMENT=287 DEFAULT CHARSET=latin1 COMMENT='CATEGORIA	ITEM	ORDEN DEL SISTEMA	OBSERVACÓN	PRESENTACIÓN	MES	ORDEN	MARCA	VITOLA	NOMBRE	CAPA	TIPO DE EMPAQUE	ANILLO	CELLO	UPC	PENDIENTE	MARZO 2021 FACTURA #17976(Warehouse)	ENVIADO MES	SALDO';
 
--- Volcando datos para la tabla facturacion_plasencia.pendiente: ~282 rows (aproximadamente)
+-- Volcando datos para la tabla facturacion_plasencia.pendiente: ~283 rows (aproximadamente)
 DELETE FROM `pendiente`;
 /*!40000 ALTER TABLE `pendiente` DISABLE KEYS */;
 INSERT INTO `pendiente` (`id_pendiente`, `categoria`, `item`, `orden_del_sitema`, `observacion`, `presentacion`, `mes`, `orden`, `marca`, `vitola`, `nombre`, `capa`, `tipo_empaque`, `cello`, `pendiente`, `saldo`, `paquetes`, `unidades`, `serie_precio`, `precio`) VALUES
-	(1, 1, '00504006', 'hola', 'hola', 'Puros Tripa Larga', '2021-05-04', 'HON-3142', 51, 4, 2, 5, 18, 3, 10001, 10001, '100', '100', '4345', 100.00),
+	(1, 1, '00504006', NULL, NULL, 'Puros Tripa Larga', '2021-05-04', 'HON-3142', 51, 4, 2, 5, 18, 3, 10000, 10000, '100', '100', '4345', 100.00),
 	(2, 1, '00505006', '', '', 'Puros Tripa Larga', '2021-05-04', 'HON-3142', 51, 4, 14, 5, 18, 3, 4000, 4000, '100', '40', NULL, NULL),
 	(3, 1, '00504041', '', '', 'Puros Tripa Larga', '2021-05-04', 'HON-3135', 51, 9, 32, 5, 11, 1, 500, 500, '5', '100', NULL, NULL),
 	(4, 1, '00508000', '', '', 'Puros Tripa Larga', '2021-05-04', 'HON-3142', 51, 9, 32, 5, 7, 3, 4000, 4000, '20', '200', NULL, NULL),
@@ -5343,7 +5345,8 @@ INSERT INTO `pendiente` (`id_pendiente`, `categoria`, `item`, `orden_del_sitema`
 	(279, 4, '00504150', '', '', 'Puros Tripa Larga', '2021-05-04', 'INT-H-1235', 51, 4, 2, 15, 7, 1, 80, 80, '20', '4', NULL, NULL),
 	(280, 4, '00504150', '', '', 'Puros Tripa Larga', '2021-05-04', 'INT-H-1239', 51, 4, 2, 15, 7, 1, 40, 40, '20', '2', NULL, NULL),
 	(281, 4, '00110347', '', '', NULL, '2021-05-04', 'INT-H-1233', 226, 20, 30, 9, 7, 1, 400, 400, '20', '20', NULL, NULL),
-	(282, 4, '00110346', '', '', NULL, '2021-05-04', 'INT-H-1233', 226, 4, 2, 9, 7, 1, 600, 600, '20', '30', NULL, NULL);
+	(282, 4, '00110346', '', '', NULL, '2021-05-04', 'INT-H-1233', 226, 4, 2, 9, 7, 1, 600, 600, '20', '30', NULL, NULL),
+	(285, 1, '0000000', '00', NULL, 'Puros Tripa Larga', '2021-05-25', '9097', 2, 1, 1, 1, 1, 8, 1000, 1000, '90', '90', NULL, NULL);
 /*!40000 ALTER TABLE `pendiente` ENABLE KEYS */;
 
 -- Volcando estructura para tabla facturacion_plasencia.pendiente_empaque
@@ -5367,13 +5370,13 @@ CREATE TABLE IF NOT EXISTS `pendiente_empaque` (
   `paquetes` varchar(50) DEFAULT NULL,
   `unidades` varchar(50) DEFAULT NULL,
   PRIMARY KEY (`id_pendiente`)
-) ENGINE=MyISAM AUTO_INCREMENT=283 DEFAULT CHARSET=latin1 COMMENT='CATEGORIA	ITEM	ORDEN DEL SISTEMA	OBSERVACÓN	PRESENTACIÓN	MES	ORDEN	MARCA	VITOLA	NOMBRE	CAPA	TIPO DE EMPAQUE	ANILLO	CELLO	UPC	PENDIENTE	MARZO 2021 FACTURA #17976(Warehouse)	ENVIADO MES	SALDO';
+) ENGINE=MyISAM AUTO_INCREMENT=284 DEFAULT CHARSET=latin1 COMMENT='CATEGORIA	ITEM	ORDEN DEL SISTEMA	OBSERVACÓN	PRESENTACIÓN	MES	ORDEN	MARCA	VITOLA	NOMBRE	CAPA	TIPO DE EMPAQUE	ANILLO	CELLO	UPC	PENDIENTE	MARZO 2021 FACTURA #17976(Warehouse)	ENVIADO MES	SALDO';
 
 -- Volcando datos para la tabla facturacion_plasencia.pendiente_empaque: 282 rows
 DELETE FROM `pendiente_empaque`;
 /*!40000 ALTER TABLE `pendiente_empaque` DISABLE KEYS */;
 INSERT INTO `pendiente_empaque` (`id_pendiente`, `categoria`, `item`, `orden_del_sitema`, `observacion`, `presentacion`, `mes`, `orden`, `marca`, `vitola`, `nombre`, `capa`, `tipo_empaque`, `cello`, `pendiente`, `saldo`, `paquetes`, `unidades`) VALUES
-	(1, 1, '00504006', 'hola', 'hola', 'Puros Tripa Larga', '2021-05-04', 'HON-3142', 51, 4, 2, 5, 18, 3, 10001, 10001, '100', '100'),
+	(1, 1, '00504006', NULL, NULL, 'Puros Tripa Larga', '2021-05-04', 'HON-3142', 51, 4, 2, 5, 18, 3, 10000, 10000, '100', '100'),
 	(2, 1, '00505006', '', '', 'Puros Tripa Larga', '2021-05-04', 'HON-3142', 51, 4, 14, 5, 18, 3, 4000, 4000, '100', '40'),
 	(3, 1, '00504041', '', '', 'Puros Tripa Larga', '2021-05-04', 'HON-3135', 51, 9, 32, 5, 11, 1, 500, 500, '5', '100'),
 	(4, 1, '00508000', '', '', 'Puros Tripa Larga', '2021-05-04', 'HON-3142', 51, 9, 32, 5, 7, 3, 4000, 4000, '20', '200'),
@@ -5516,7 +5519,7 @@ INSERT INTO `pendiente_empaque` (`id_pendiente`, `categoria`, `item`, `orden_del
 	(141, 2, '00904111', '', '', 'Puros Tripa Larga', '2021-05-04', 'HON-3135', 186, 3, 3, 2, 9, 1, 500, 500, '10', '50'),
 	(142, 2, '01104000', '', '', 'Puros Tripa Larga', '2021-05-04', 'HON-3141', 59, 4, 3, 2, 13, 3, 1750, 1750, '25', '70'),
 	(143, 2, '01103006', '', '', 'Puros Tripa Larga', '2021-05-04', 'HON-3141', 59, 4, 3, 2, 11, 1, 2500, 2500, '5', '500'),
-	(144, 2, '01103010', '', '', 'Puros Tripa Larga', '2021-05-04', 'HON-3141', 59, 38, 68, 2, 11, 1, 1000, 1000, '5', '200'),
+	(144, 2, '01103010', '', '', 'Puros Tripa Larga', '2021-05-04', 'HON-3141', 59, 38, 68, 2, 11, 1, 1000, 0, '5', '200'),
 	(145, 2, '47801563', '', '', 'Puros Tripa Corta', '2021-05-04', 'FTT-1472', 166, 4, 2, 2, 10, 1, 60000, 60000, '20', '3000'),
 	(146, 2, '00404005', '', '', 'Puros Tripa Larga', '2021-05-04', 'HON-3138', 67, 3, 2, 3, 12, 1, 5000, 5000, '25', '200'),
 	(147, 2, '00408003', '', '', 'Puros Tripa Larga', '2021-05-04', 'HON-3138', 67, 9, 40, 3, 12, 1, 7500, 7500, '25', '300'),
@@ -5537,7 +5540,7 @@ INSERT INTO `pendiente_empaque` (`id_pendiente`, `categoria`, `item`, `orden_del
 	(162, 2, '40503021', '', '', NULL, '2021-05-04', 'HON-3127', 99, 18, 80, 6, 9, 1, 3000, 3000, '10', '300'),
 	(163, 2, '40503015', '', '', NULL, '2021-05-04', 'HON-3127', 99, 18, 80, 6, 11, 1, 2500, 2500, '5', '500'),
 	(164, 2, '00704004', '', '', 'Puros Tripa Larga', '2021-05-04', 'HON-3138', 99, 4, 2, 6, 12, 1, 20000, 20000, '25', '800'),
-	(165, 2, '47801004', '', '', 'Puros Tripa Larga', '2021-05-04', 'HON-3141', 168, 5, 4, 6, 7, 1, 2000, 2000, '20', '100'),
+	(165, 2, '47801004', '', '', 'Puros Tripa Larga', '2021-05-04', 'HON-3141', 168, 5, 4, 6, 7, 1, 2000, 0, '20', '100'),
 	(166, 2, '47801002', '', '', 'Puros Tripa Larga', '2021-05-04', 'HON-3141', 168, 3, 14, 6, 7, 1, 1200, 1200, '20', '60'),
 	(167, 2, '47705002', '', '', 'Puros Tripa Larga', '2021-05-04', 'HON-3141', 168, 3, 14, 6, 11, 1, 7500, 7500, '5', '1500'),
 	(168, 2, '01606872', '', '', 'Puros Tripa Larga', '2021-05-04', 'FTT-1472', 56, 4, 2, 6, 11, 1, 2500, 2500, '5', '500'),
@@ -5560,7 +5563,7 @@ INSERT INTO `pendiente_empaque` (`id_pendiente`, `categoria`, `item`, `orden_del
 	(185, 2, '47801890', '', '', 'Puros Tripa Larga', '2021-05-04', 'HON-3141', 57, 2, 1, 1, 9, 1, 1400, 1400, '10', '140'),
 	(186, 2, '47801892', '', '', 'Puros Tripa Larga', '2021-05-04', 'HON-3141', 57, 9, 16, 1, 9, 1, 1600, 1600, '10', '160'),
 	(187, 2, '10104775', '', '', 'Puros Tripa Larga', '2021-05-04', 'HON-3138', 101, 3, 35, 4, 12, 1, 2000, 2000, '25', '80'),
-	(188, 2, '10104772', '', '', 'Puros Tripa Larga', '2021-05-04', 'HON-3135', 101, 5, 38, 4, 12, 1, 1250, 1250, '25', '50'),
+	(188, 2, '10104772', '', '', 'Puros Tripa Larga', '2021-05-04', 'HON-3135', 101, 5, 38, 4, 12, 1, 1250, 1225, '25', '50'),
 	(189, 2, '10104778', '', '', 'Puros Tripa Larga', '2021-05-04', 'HON-3139', 101, 2, 5, 4, 11, 1, 700, 700, '5', '140'),
 	(190, 2, '10499060', '', '', 'Puros Tripa Larga', '2021-05-04', 'HON-3141', 197, 1, 6, 3, 11, 1, 1000, 1000, '1', '1000'),
 	(191, 2, '10499060', '', '', 'Puros Tripa Larga', '2021-05-04', 'HON-3141', 197, 1, 6, 3, 11, 1, 0, 0, '1', '0'),
@@ -5654,7 +5657,8 @@ INSERT INTO `pendiente_empaque` (`id_pendiente`, `categoria`, `item`, `orden_del
 	(279, 4, '00504150', '', '', 'Puros Tripa Larga', '2021-05-04', 'INT-H-1235', 51, 4, 2, 15, 7, 1, 80, 80, '20', '4'),
 	(280, 4, '00504150', '', '', 'Puros Tripa Larga', '2021-05-04', 'INT-H-1239', 51, 4, 2, 15, 7, 1, 40, 40, '20', '2'),
 	(281, 4, '00110347', '', '', NULL, '2021-05-04', 'INT-H-1233', 226, 20, 30, 9, 7, 1, 400, 400, '20', '20'),
-	(282, 4, '00110346', '', '', NULL, '2021-05-04', 'INT-H-1233', 226, 4, 2, 9, 7, 1, 600, 600, '20', '30');
+	(282, 4, '00110346', '', '', NULL, '2021-05-04', 'INT-H-1233', 226, 4, 2, 9, 7, 1, 600, 600, '20', '30'),
+	(283, 1, '0000000', '00', NULL, 'Puros Tripa Larga', '2021-05-25', '9097', 2, 1, 1, 1, 1, 8, 1000, 1000, '90', '90');
 /*!40000 ALTER TABLE `pendiente_empaque` ENABLE KEYS */;
 
 -- Volcando estructura para tabla facturacion_plasencia.prograamacion
@@ -5665,11 +5669,12 @@ CREATE TABLE IF NOT EXISTS `prograamacion` (
   PRIMARY KEY (`id`)
 ) ENGINE=MyISAM AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
 
--- Volcando datos para la tabla facturacion_plasencia.prograamacion: 1 rows
+-- Volcando datos para la tabla facturacion_plasencia.prograamacion: 2 rows
 DELETE FROM `prograamacion`;
 /*!40000 ALTER TABLE `prograamacion` DISABLE KEYS */;
 INSERT INTO `prograamacion` (`id`, `fecha`, `mes_contenedor`) VALUES
-	(2, '2021-05-20', 'tercer contenedor de mayo');
+	(1, '2021-05-24', 'primer contenedor de mayo'),
+	(2, '2021-05-24', 'segundo contenedor de junio');
 /*!40000 ALTER TABLE `prograamacion` ENABLE KEYS */;
 
 -- Volcando estructura para tabla facturacion_plasencia.sample_datas
@@ -7073,7 +7078,8 @@ CREATE PROCEDURE `actualizar_pendientes`(
 	IN `presentacion` VARCHAR(50),
 	IN `pendient` VARCHAR(50),
 	IN `seriep` VARCHAR(50),
-	IN `precio` VARCHAR(50)
+	IN `precio` VARCHAR(50),
+	IN `orden` VARCHAR(50)
 )
 BEGIN
 
@@ -7088,8 +7094,9 @@ pendiente_empaque.orden_del_sitema = orden_sistema,
 pendiente_empaque.observacion = observeacion,
  pendiente_empaque.presentacion = presentacion,
  pendiente_empaque.pendiente = pendient,
- 
- pendiente_empaque.saldo = pendient
+ pendiente_empaque.saldo = pendient,
+ pendiente.orden= orden,
+ pendiente_empaque.orden = orden
  WHERE pendiente.id_pendiente = id and pendiente_empaque.id_pendiente = id ;
  
  
@@ -7318,7 +7325,7 @@ CREATE PROCEDURE `buscar_lista_cajas`(
 	IN `pa_nombre` VARCHAR(50)
 )
 BEGIN
-SELECT lista_cajas.codigo,lista_cajas.productoServicio,lista_cajas.marca
+SELECT lista_cajas.codigo,lista_cajas.productoServicio,lista_cajas.marca, lista_cajas.id,lista_cajas.existencia
 FROM lista_cajas
 WHERE lista_cajas.codigo LIKE CONCAT("%",pa_nombre,"%") OR
 lista_cajas.productoServicio LIKE CONCAT("%",pa_nombre,"%") OR
@@ -7458,11 +7465,13 @@ SELECT pendiente.id_pendiente ,
       (SELECT tipo_empaques.tipo_empaque FROM  tipo_empaques WHERE tipo_empaques.id_tipo_empaque = pendiente.tipo_empaque	) AS tipo_empaque,
 		pendiente.paquetes AS paquetes,
 		pendiente.unidades AS unidades,
-		(select clase_productos.serie_precio FROM clase_productos WHERE clase_productos.item = pendiente.item) AS serie_precio,
+		(select clase_productos.codigo_precio FROM clase_productos WHERE clase_productos.item = pendiente.item) AS serie_precio,
 		(select clase_productos.precio FROM clase_productos WHERE clase_productos.item = pendiente.item) AS precio
 FROM  pendiente
 GROUP BY pendiente.id_pendiente;
 	
+	
+
 	
 ELSE  
 
@@ -7497,8 +7506,8 @@ SELECT pendiente.id_pendiente ,
       (SELECT tipo_empaques.tipo_empaque FROM  tipo_empaques WHERE tipo_empaques.id_tipo_empaque = pendiente.tipo_empaque	) AS tipo_empaque,
 		pendiente.paquetes AS paquetes,
 		pendiente.unidades AS unidades,
-		pendiente.serie_precio AS serie_precio,
-		pendiente.precio AS precio
+	(select clase_productos.codigo_precio FROM clase_productos WHERE clase_productos.item = pendiente.item) AS serie_precio,
+		(select clase_productos.precio FROM clase_productos WHERE clase_productos.item = pendiente.item) AS precio
 FROM  pendiente
 WHERE (SELECT nombre_productos.nombre FROM  nombre_productos WHERE nombre_productos.id_nombre = pendiente.nombre	) LIKE  CONCAT("%",pa_nombre, "%") OR  
 		(SELECT capa_productos.capa FROM  capa_productos WHERE capa_productos.id_capa = pendiente.capa	) LIKE  CONCAT("%",pa_nombre, "%") or 
@@ -7554,8 +7563,8 @@ SELECT pendiente.id_pendiente ,
       (SELECT tipo_empaques.tipo_empaque FROM  tipo_empaques WHERE tipo_empaques.id_tipo_empaque = pendiente.tipo_empaque	) AS tipo_empaque,
 		pendiente.paquetes AS paquetes,
 		pendiente.unidades AS unidades,
-		pendiente.serie_precio AS serie_precio,
-		pendiente.precio AS precio
+	(select clase_productos.codigo_precio FROM clase_productos WHERE clase_productos.item = pendiente.item) AS serie_precio,
+		(select clase_productos.precio FROM clase_productos WHERE clase_productos.item = pendiente.item) AS precio
 FROM  pendiente
 WHERE  pendiente.mes between  STR_TO_DATE( fechade,"%Y-%m-%d") AND STR_TO_DATE(  fechahasta, "%Y-%m-%d") 
   
@@ -7593,8 +7602,8 @@ SELECT pendiente.id_pendiente ,
       (SELECT tipo_empaques.tipo_empaque FROM  tipo_empaques WHERE tipo_empaques.id_tipo_empaque = pendiente.tipo_empaque	) AS tipo_empaque,
 		pendiente.paquetes AS paquetes,
 		pendiente.unidades AS unidades,
-		pendiente.serie_precio AS serie_precio,
-		pendiente.precio AS precio
+	(select clase_productos.codigo_precio FROM clase_productos WHERE clase_productos.item = pendiente.item) AS serie_precio,
+		(select clase_productos.precio FROM clase_productos WHERE clase_productos.item = pendiente.item) AS precio
 FROM  pendiente
 WHERE pendiente.mes = STR_TO_DATE( fechade,"%Y-%m-%d")
 GROUP BY pendiente.id_pendiente;
@@ -7633,8 +7642,8 @@ SELECT pendiente.id_pendiente ,
       (SELECT tipo_empaques.tipo_empaque FROM  tipo_empaques WHERE tipo_empaques.id_tipo_empaque = pendiente.tipo_empaque	) AS tipo_empaque,
 		pendiente.paquetes AS paquetes,
 		pendiente.unidades AS unidades,
-		pendiente.serie_precio AS serie_precio,
-		pendiente.precio AS precio
+		(select clase_productos.codigo_precio FROM clase_productos WHERE clase_productos.item = pendiente.item) AS serie_precio,
+		(select clase_productos.precio FROM clase_productos WHERE clase_productos.item = pendiente.item) AS precio
 FROM  pendiente
 WHERE pendiente.mes = STR_TO_DATE(  fechahasta, "%Y-%m-%d") 
 
@@ -8540,6 +8549,8 @@ CREATE PROCEDURE `insertar_nuevo_pendiente`(
 	IN `capa` VARCHAR(50),
 	IN `tipo_empaque` VARCHAR(50),
 	IN `cello` VARCHAR(50),
+	IN `anillo` VARCHAR(50),
+	IN `upc` VARCHAR(50),
 	IN `pendient` VARCHAR(50),
 	IN `saldo` VARCHAR(50),
 	IN `paquetes` VARCHAR(50),
@@ -8567,25 +8578,25 @@ SET icello = (SELECT cellos.id_cello FROM cellos WHERE cellos.cello = cello AND 
 SET itipo =  (SELECT tipo_empaques.id_tipo_empaque FROM tipo_empaques WHERE tipo_empaques.tipo_empaque = tipo_empaque);
 
 insert into pendiente( 
-	`categoria`, 
-	`item`,
-	`orden_del_sitema`,
-	`observacion`, 
-	`presentacion`, 
-	`mes`,
-	`orden`, 
-	`marca`,
-	`vitola`, 
-	`nombre`, 
-	`capa`, 
-	`tipo_empaque`,  
-	`cello`, 
-	`pendiente`, 
-	`saldo`, 
-	`paquetes`, 
-	`unidades`,
-    `serie_precio`,
-    `precio`)values (categori, 
+	pendiente.categoria, 
+	pendiente.item,
+	pendiente.orden_del_sitema,
+	pendiente.observacion, 
+	pendiente.presentacion, 
+	pendiente.mes,
+pendiente.orden, 
+pendiente.marca,
+pendiente.vitola, 
+pendiente.nombre, 
+pendiente.capa, 
+pendiente.tipo_empaque,  
+	pendiente.cello, 
+pendiente.pendiente, 
+	pendiente.saldo, 
+	pendiente.paquetes, 
+pendiente.unidades,
+    pendiente.serie_precio,
+    pendiente.precio)values (categori, 
 	item,
 	orden_del_sitema,
 	observacion, 
@@ -8605,6 +8616,45 @@ insert into pendiente(
    serie_precio,
    precio);
 
+
+insert into pendiente_empaque( 
+	pendiente_empaque.categoria, 
+	pendiente_empaque.item,
+	pendiente_empaque.orden_del_sitema,
+	pendiente_empaque.observacion, 
+	pendiente_empaque.presentacion, 
+	pendiente_empaque.mes,
+pendiente_empaque.orden, 
+pendiente_empaque.marca,
+pendiente_empaque.vitola, 
+pendiente_empaque.nombre, 
+pendiente_empaque.capa, 
+pendiente_empaque.tipo_empaque,  
+	pendiente_empaque.cello, 
+pendiente_empaque.pendiente, 
+	pendiente_empaque.saldo, 
+	pendiente_empaque.paquetes, 
+pendiente_empaque.unidades)values (categori, 
+	item,
+	orden_del_sitema,
+	observacion, 
+	presentacion, 
+	mes,
+	orden, 
+	imarca,
+	ivitola, 
+	inombre, 
+	icapa, 
+	itipo,  
+	icello, 
+	pendient, 
+	saldo, 
+	paquetes, 
+	unidades);
+
+
+UPDATE clase_productos SET clase_productos.codigo_precio = serie_precio, clase_productos.precio = precio
+WHERE clase_productos.item = item;
 
 
 END//
@@ -8842,6 +8892,16 @@ DELIMITER //
 CREATE PROCEDURE `mostrar_cajas`()
 BEGIN
  SELECT lista_cajas.id,lista_cajas.codigo,lista_cajas.productoServicio,lista_cajas.marca FROM lista_cajas;
+END//
+DELIMITER ;
+
+-- Volcando estructura para procedimiento facturacion_plasencia.mostrar_cajas_export
+DELIMITER //
+CREATE PROCEDURE `mostrar_cajas_export`()
+BEGIN
+SELECT lista_cajas.codigo,lista_cajas.productoServicio,lista_cajas.marca,lista_cajas.existencia
+FROM lista_cajas
+WHERE lista_cajas.existencia > 0;
 END//
 DELIMITER ;
 

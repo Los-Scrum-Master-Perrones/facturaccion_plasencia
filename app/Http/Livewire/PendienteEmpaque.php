@@ -66,6 +66,9 @@ class PendienteEmpaque extends Component
             'id_pendiente'=>isset($this->datos_pendiente_empaque[$i]->id_pendiente)?$this->datos_pendiente_empaque[$i]->id_pendiente:null]);
         }
 
+
+        
+
         return redirect()->route('detalles_programacion'); 
        
     }
