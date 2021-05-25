@@ -34,9 +34,19 @@ class FacturaTerminado extends Component
     public $peso_bruto;
     public $peso_neto;
 
+    public $editar_descripcion_producto;
+    public $editar_cantidad_bultos;
+    public $editar_unidades_bultos;
+    public $editar_unidades_cajon;
+    public $editar_peso_bruto;
+    public $editar_peso_neto;
+
     public $nom;
     public $fede;
     public $fecha;
+
+    public $id_eliminar;
+    public $id_editar;
 
    
 
@@ -71,6 +81,8 @@ class FacturaTerminado extends Component
         if( $this->nom != "" || $this->fede != "" || $this->fecha != ""){
             $this->dispatchBrowserEvent("pendiente");
         }
+
+        $this->num_factura_sistema = DB::select('call traer_num_factura()')[0]->factura_interna;
         
 
         for($i=0;$i<count($this->detalles_venta);$i++){
@@ -84,6 +96,29 @@ class FacturaTerminado extends Component
     }
 
 
+    public function editar_detalles($id){
+        $detalles_valores = DB::select('CALL `traer_detalles_editar_factura`(:id)', ['id'=>$id]);
+        $this->id_editar = $id;
+        $this->editar_descripcion_producto =  $detalles_valores[0]->producto;
+        $this->editar_cantidad_bultos =  $detalles_valores[0]->cantidad_puros;
+        $this->editar_unidades_bultos =  $detalles_valores[0]->   unidad;
+        $this->editar_unidades_cajon =  $detalles_valores[0]->cantidad_por_caja;
+        $this->editar_peso_bruto =  $detalles_valores[0]->total_bruto/$detalles_valores[0]->cantidad_puros;
+        $this->editar_peso_neto =  $detalles_valores[0]->total_neto/$detalles_valores[0]->cantidad_puros;
+
+        $this->dispatchBrowserEvent("editar_detalless");
+    }
+
+    public function borrar_detalles($id){
+        $this->id_eliminar = $id;
+        $this->dispatchBrowserEvent("borrar");
+    }
+
+    public function borrar_detalles_datos($id){
+        DB::delete('call eliminar_detalle_factura(:id)', ['id'=>$id]);
+        $this->dispatchBrowserEvent("cerrar_modal_borrar");
+        
+    }
 
     public function abrir_modal($id_pendiente){
 
@@ -124,6 +159,13 @@ class FacturaTerminado extends Component
         $this->total_total_puros = 0;
         $this->total_peso_bruto = 0;
         $this->total_peso_neto = 0;
+
+        $this->editar_descripcion_producto =  "";
+        $this->editar_cantidad_bultos = 0;
+        $this->editar_unidades_bultos =  0;
+        $this->editar_unidades_cajon =  0;
+        $this->editar_peso_bruto =  0;
+        $this->editar_peso_neto =  0;
              
           $this->fecha_factura = Carbon::now()->format("Y-m-d");       
     }
@@ -149,5 +191,61 @@ class FacturaTerminado extends Component
             ]);    
             
         return redirect()->route('f_terminado'); 
+    }
+
+    public function actualizar_detalle_factura(Request $request){
+        
+        DB::select('call actualizar_detalle_factura(
+                 :id_pendiente
+                ,:pa_cantidad_cajas
+                ,:pa_peso_bruto
+                ,:pa_peso_neto
+                ,:pa_cantidad_puros
+                ,:pa_unidad)', [
+
+                "id_pendiente" => $request->id_pendi
+                ,"pa_cantidad_cajas" => $request->unidades_cajon
+                ,"pa_peso_bruto" => $request->peso_bruto
+                ,"pa_peso_neto" => $request->peso_neto
+                ,"pa_cantidad_puros" => $request->cantidad_bultos
+                ,"pa_unidad" => $request->unidades_bultos            
+            ]);    
+            
+        return redirect()->route('f_terminado'); 
+    }
+
+
+    public function insertar_factura(){
+
+        if($this->contenedor=="" && $this->cliente==""){
+            
+        }else{
+
+            DB::select('call `insertar_factura_terminado`(
+                :orden_sufijo,
+                :pa_cliente,
+                :pa_numero_factura,
+                :pa_contenedor,
+                :pa_cantidad_bultos,
+                :pa_total_puros,
+                :pa_total_peso_bruto,
+                :pa_total_peso_neto,
+                :pa_fecha_factura)', [
+    
+               "orden_sufijo" =>  $this->tipo_factura
+               ,"pa_cliente" => $this->cliente
+               ,"pa_numero_factura" => $this->numero_factura
+               ,"pa_contenedor" => $this->contenedor
+               ,"pa_cantidad_bultos" => $this->total_cantidad_bultos
+               ,"pa_total_puros" => $this->total_total_puros
+               ,"pa_total_peso_bruto" => $this->total_peso_bruto
+               ,"pa_total_peso_neto" => $this->total_peso_bruto
+               ,"pa_fecha_factura" => $this->fecha_factura         
+           ]);              
+            
+        }
+
+      
+       
     }
 }

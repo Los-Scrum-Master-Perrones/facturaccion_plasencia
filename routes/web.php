@@ -263,6 +263,9 @@ Route::get('/productos_terminado', ProductosTerminados::class)->name('p_terminad
 Route::get('/factura_terminados', FacturaTerminado::class)->name('f_terminado');
 
 Route::post('/insertar_detalle_factura', [FacturaTerminado::class, 'insertar_detalle_factura'])->name('insertar_detalle_factura');
+Route::post('/actualizar_detalle_factura', [FacturaTerminado::class, 'actualizar_detalle_factura'])->name('actualizar_detalle_factura');
+
+
 
 
 
