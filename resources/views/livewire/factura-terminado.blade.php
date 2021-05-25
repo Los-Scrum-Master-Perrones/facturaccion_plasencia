@@ -23,7 +23,7 @@
         <div class="row" style="text-align:center;">
 
             <div class="col">
-                <form action="" >
+              
                 <div class="input-group mb-3">
 
 
@@ -69,7 +69,7 @@
                         <option style="overflow-y: scroll;">INT-H</option>
                     </select>
 
-                    <button id="btn_guardar" type="submit" class="botonprincipal"
+                    <button id="btn_guardar"  class="botonprincipal" wire:click="insertar_factura()"
                         style="width:120px;">
                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
                             class="bi bi-save2" viewBox="0 0 16 16">
@@ -93,7 +93,7 @@
                             placeholder="Nombre" wire:model="nom">
                     </div>
                 </div>
-            </form>
+           
             </div>
         </div>
 

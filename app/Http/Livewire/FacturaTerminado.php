@@ -7,6 +7,9 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 use Livewire\Component;
 
+use App\Exports\FacturaExport;
+use Maatwebsite\Excel\Facades\Excel;
+
 class FacturaTerminado extends Component
 {
     public $titulo_factura;
@@ -217,10 +220,6 @@ class FacturaTerminado extends Component
 
     public function insertar_factura(){
 
-        if($this->contenedor=="" && $this->cliente==""){
-            
-        }else{
-
             DB::select('call `insertar_factura_terminado`(
                 :orden_sufijo,
                 :pa_cliente,
@@ -234,18 +233,16 @@ class FacturaTerminado extends Component
     
                "orden_sufijo" =>  $this->tipo_factura
                ,"pa_cliente" => $this->cliente
-               ,"pa_numero_factura" => $this->numero_factura
+               ,"pa_numero_factura" => $this->num_factura_sistema
                ,"pa_contenedor" => $this->contenedor
-               ,"pa_cantidad_bultos" => $this->total_cantidad_bultos
+               ,"pa_cantidad_bultos" => $this->total_cantidad_bultos    
                ,"pa_total_puros" => $this->total_total_puros
                ,"pa_total_peso_bruto" => $this->total_peso_bruto
                ,"pa_total_peso_neto" => $this->total_peso_bruto
                ,"pa_fecha_factura" => $this->fecha_factura         
            ]);              
             
-        }
-
-      
+           return Excel::download(new FacturaExport($this->num_factura_sistema), 'Pendiente.xlsx');
        
     }
 }

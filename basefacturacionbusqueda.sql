@@ -1,6 +1,6 @@
 -- --------------------------------------------------------
 -- Host:                         127.0.0.1
--- Versión del servidor:         5.7.24 - MySQL Community Server (GPL)
+-- Versión del servidor:         10.5.8-MariaDB - mariadb.org binary distribution
 -- SO del servidor:              Win64
 -- HeidiSQL Versión:             11.0.0.5919
 -- --------------------------------------------------------
@@ -20,12 +20,12 @@ USE `facturacion_plasencia`;
 CREATE TABLE IF NOT EXISTS `anadir_inventario_cajas` (
   `id_cajas` int(11) NOT NULL AUTO_INCREMENT,
   `codigo` varchar(50) DEFAULT NULL,
-  `descripcion` longtext,
-  `lote_origen` longtext,
-  `lote_destino` longtext,
-  `cantidad` longtext,
-  `costo_u` longtext,
-  `subtotal` longtext,
+  `descripcion` longtext DEFAULT NULL,
+  `lote_origen` longtext DEFAULT NULL,
+  `lote_destino` longtext DEFAULT NULL,
+  `cantidad` longtext DEFAULT NULL,
+  `costo_u` longtext DEFAULT NULL,
+  `subtotal` longtext DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id_cajas`) USING BTREE
@@ -89,12 +89,12 @@ DELETE FROM `archivo_producto_terminados`;
 CREATE TABLE IF NOT EXISTS `cajas` (
   `id_cajas` int(11) NOT NULL AUTO_INCREMENT,
   `codigo` varchar(50) DEFAULT NULL,
-  `descripcion` longtext,
-  `lote_origen` longtext,
-  `lote_destino` longtext,
-  `cantidad` longtext,
-  `costo_u` longtext,
-  `subtotal` longtext,
+  `descripcion` longtext DEFAULT NULL,
+  `lote_origen` longtext DEFAULT NULL,
+  `lote_destino` longtext DEFAULT NULL,
+  `cantidad` longtext DEFAULT NULL,
+  `costo_u` longtext DEFAULT NULL,
+  `subtotal` longtext DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id_cajas`)
@@ -955,7 +955,7 @@ CREATE TABLE IF NOT EXISTS `detalle_clase_productos` (
   `id_marca` int(11) NOT NULL,
   `id_cello` int(11) NOT NULL,
   `id_tipo_empaque` int(11) NOT NULL,
-  `otra_descripcion` text COLLATE utf8mb4_unicode_ci,
+  `otra_descripcion` text COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id_producto`) USING BTREE
@@ -984,28 +984,28 @@ INSERT INTO `detalle_clase_productos` (`id_producto`, `item`, `id_capa`, `id_vit
 -- Volcando estructura para tabla facturacion_plasencia.detalle_factura
 CREATE TABLE IF NOT EXISTS `detalle_factura` (
   `id_detalle` bigint(20) NOT NULL AUTO_INCREMENT,
-  `id_pendiente` bigint(20) NOT NULL DEFAULT '0',
+  `id_pendiente` bigint(20) NOT NULL DEFAULT 0,
   `id_venta` int(11) NOT NULL,
   `cantidad_cajas` smallint(6) DEFAULT NULL,
   `peso_bruto` decimal(5,2) NOT NULL,
   `peso_neto` decimal(5,2) NOT NULL,
   `cantidad_puros` smallint(6) NOT NULL,
   `unidad` smallint(6) NOT NULL,
-  `observaciones` tinytext,
+  `observaciones` tinytext DEFAULT NULL,
   `facturado` char(1) DEFAULT NULL,
   PRIMARY KEY (`id_detalle`) USING BTREE
 ) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
 
--- Volcando datos para la tabla facturacion_plasencia.detalle_factura: ~5 rows (aproximadamente)
+-- Volcando datos para la tabla facturacion_plasencia.detalle_factura: ~6 rows (aproximadamente)
 DELETE FROM `detalle_factura`;
 /*!40000 ALTER TABLE `detalle_factura` DISABLE KEYS */;
 INSERT INTO `detalle_factura` (`id_detalle`, `id_pendiente`, `id_venta`, `cantidad_cajas`, `peso_bruto`, `peso_neto`, `cantidad_puros`, `unidad`, `observaciones`, `facturado`) VALUES
-	(1, 14, 0, 10, 30.00, 23.00, 2, 500, NULL, 'N'),
-	(2, 15, 0, 10, 30.00, 23.00, 1, 100, NULL, 'N'),
-	(3, 16, 0, 10, 30.00, 23.00, 1, 500, NULL, 'N'),
-	(4, 229, 0, 20, 23.00, 18.00, 1, 100, 'Sin Facturar', 'N'),
+	(1, 14, 3, 10, 30.00, 23.00, 2, 500, NULL, 'S'),
+	(2, 15, 4, 10, 30.00, 23.00, 1, 100, NULL, 'S'),
+	(3, 16, 4, 10, 30.00, 23.00, 1, 500, NULL, 'S'),
+	(4, 229, 3, 20, 23.00, 18.00, 1, 200, 'Sin Facturar', 'S'),
 	(5, 272, 0, 20, 39.00, 35.00, 3, 200, 'Sin Facturar', 'N'),
-	(6, 1, 0, 100, 12.00, 34.00, 1, 200, 'Sin Facturar', 'N');
+	(6, 1, 3, 100, 12.00, 34.00, 1, 200, 'Sin Facturar', 'S');
 /*!40000 ALTER TABLE `detalle_factura` ENABLE KEYS */;
 
 -- Volcando estructura para tabla facturacion_plasencia.detalle_programacion
@@ -1048,18 +1048,23 @@ CREATE TABLE IF NOT EXISTS `factura_terminados` (
   `cliente` varchar(100) NOT NULL DEFAULT '0',
   `numero_factura` varchar(30) DEFAULT '0',
   `contenedor` varchar(50) NOT NULL DEFAULT '0',
-  `cantidad_bultos` smallint(6) NOT NULL DEFAULT '0',
-  `total_puros` mediumint(9) NOT NULL DEFAULT '0',
-  `total_peso_bruto` mediumint(9) NOT NULL DEFAULT '0',
-  `total_peso_neto` mediumint(9) NOT NULL DEFAULT '0',
+  `cantidad_bultos` smallint(6) NOT NULL DEFAULT 0,
+  `total_puros` mediumint(9) NOT NULL DEFAULT 0,
+  `total_peso_bruto` mediumint(9) NOT NULL DEFAULT 0,
+  `total_peso_neto` mediumint(9) NOT NULL DEFAULT 0,
   `fecha_factura` date DEFAULT NULL,
   `facturado` char(1) DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
 
--- Volcando datos para la tabla facturacion_plasencia.factura_terminados: ~0 rows (aproximadamente)
+-- Volcando datos para la tabla facturacion_plasencia.factura_terminados: ~4 rows (aproximadamente)
 DELETE FROM `factura_terminados`;
 /*!40000 ALTER TABLE `factura_terminados` DISABLE KEYS */;
+INSERT INTO `factura_terminados` (`id`, `cliente`, `numero_factura`, `contenedor`, `cantidad_bultos`, `total_puros`, `total_peso_bruto`, `total_peso_neto`, `fecha_factura`, `facturado`) VALUES
+	(1, 'Rocky', NULL, 'Segundo con', 4, 1400, 95, 95, '2021-05-25', 'N'),
+	(2, 'Rocky', NULL, 'Segundo con', 4, 1400, 95, 95, '2021-05-25', 'N'),
+	(3, 'Rocky', 'FA-00-00000003', 'Segundo con', 4, 1400, 95, 95, '2021-05-25', 'N'),
+	(4, 'Rocky', 'FA-00-00000004', 'Segundo con', 2, 600, 60, 60, '2021-05-25', 'N');
 /*!40000 ALTER TABLE `factura_terminados` ENABLE KEYS */;
 
 -- Volcando estructura para tabla facturacion_plasencia.importar_existencias
@@ -7969,88 +7974,185 @@ BEGIN
 if nombre="" && fechade="" && fechahasta="" then
 
 
-SELECT pendiente_empaque.id_pendiente, categoria.categoria AS categoria, pendiente_empaque.item AS item,pendiente_empaque.orden_del_sitema AS orden_del_sitema,pendiente_empaque.observacion AS observacion,pendiente_empaque.presentacion AS presentacion ,pendiente_empaque.mes AS mes ,
-pendiente_empaque.orden AS orden, marca_productos.marca AS marca,vitola_productos.vitola AS vitola, 
-nombre_productos.nombre AS nombre, capa_productos.capa AS capa,
+SELECT pendiente_empaque.id_pendiente,
+(SELECT categoria.categoria FROM  categoria WHERE categoria.id_categoria = pendiente_empaque.categoria	) AS categoria,
+ pendiente_empaque.item AS item,
+ pendiente_empaque.orden_del_sitema AS orden_del_sitema,
+ pendiente_empaque.observacion AS observacion,
+ pendiente_empaque.presentacion AS presentacion ,
+ pendiente_empaque.mes AS mes ,
+pendiente_empaque.orden AS orden, 
 
+(SELECT 
+		
+		if( clase_productos.sampler = "si", (SELECT clase_productos.descripcion_sampler
+										FROM clase_productos WHERE clase_productos.item = pendiente_empaque.item), 
+										
+										(SELECT marca_productos.marca FROM marca_productos WHERE marca_productos.id_marca = pendiente_empaque.marca	)
+		
+		
+		 	) AS des FROM clase_productos WHERE clase_productos.item = pendiente_empaque.item) AS marca,
+		
+ (SELECT vitola_productos.vitola FROM  vitola_productos WHERE vitola_productos.id_vitola = pendiente_empaque.vitola	) AS vitola, 
+		 (SELECT nombre_productos.nombre FROM  nombre_productos WHERE nombre_productos.id_nombre = pendiente_empaque.nombre	) AS nombre,
+		  (SELECT capa_productos.capa FROM  capa_productos WHERE capa_productos.id_capa = pendiente_empaque.capa	) AS capa,
+		
 (SELECT cellos.anillo AS anillo FROM cellos WHERE cellos.id_cello = pendiente_empaque.cello) AS anillo,
 (SELECT cellos.cello AS cello FROM cellos WHERE cellos.id_cello = pendiente_empaque.cello) AS cello, 
 (SELECT cellos.upc AS upc FROM cellos WHERE cellos.id_cello = pendiente_empaque.cello) AS upc,  
- pendiente_empaque.pendiente as pendiente_empaque, pendiente_empaque.saldo AS saldo, tipo_empaques.tipo_empaque AS tipo_empaque,
- pendiente_empaque.paquetes
-FROM categoria, clase_productos, marca_productos, vitola_productos,nombre_productos, capa_productos,
-tipo_empaques, pendiente_empaque
-WHERE pendiente_empaque.vitola = vitola_productos.id_vitola AND pendiente_empaque.capa = capa_productos.id_capa AND 
- pendiente_empaque.nombre = nombre_productos.id_nombre AND  pendiente_empaque.marca = marca_productos.id_marca AND 
-   pendiente_empaque.tipo_empaque = tipo_empaques.id_tipo_empaque AND pendiente_empaque.categoria = categoria.id_categoria AND 
+ pendiente_empaque.pendiente as pendiente_empaque,
+pendiente_empaque.saldo AS saldo,
+(SELECT tipo_empaques.tipo_empaque FROM  tipo_empaques WHERE tipo_empaques.id_tipo_empaque = pendiente_empaque.tipo_empaque	) AS tipo_empaque,
+	
+ pendiente_empaque.unidades AS paquetes
+FROM pendiente_empaque
+WHERE 
    pendiente_empaque.saldo > 0
+
 	GROUP BY pendiente_empaque.id_pendiente;
 	
 ELSE  
 
 if fechade = ""   && fechahasta = ""  && nombre != "" then
-SELECT pendiente_empaque.id_pendiente, categoria.categoria AS categoria, pendiente_empaque.item AS item,pendiente_empaque.orden_del_sitema AS orden_del_sitema,pendiente_empaque.observacion AS observacion,pendiente_empaque.presentacion AS presentacion ,pendiente_empaque.mes AS mes ,
-pendiente_empaque.orden AS orden, marca_productos.marca AS marca,vitola_productos.vitola AS vitola, 
-nombre_productos.nombre AS nombre, capa_productos.capa AS capa,
 
+SELECT pendiente_empaque.id_pendiente,
+(SELECT categoria.categoria FROM  categoria WHERE categoria.id_categoria = pendiente_empaque.categoria	) AS categoria,
+ pendiente_empaque.item AS item,
+ pendiente_empaque.orden_del_sitema AS orden_del_sitema,
+ pendiente_empaque.observacion AS observacion,
+ pendiente_empaque.presentacion AS presentacion ,
+ pendiente_empaque.mes AS mes ,
+pendiente_empaque.orden AS orden, 
+
+(SELECT 
+		
+		if( clase_productos.sampler = "si", (SELECT clase_productos.descripcion_sampler
+										FROM clase_productos WHERE clase_productos.item = pendiente_empaque.item), 
+										
+										(SELECT marca_productos.marca FROM marca_productos WHERE marca_productos.id_marca = pendiente_empaque.marca	)
+		
+		
+		 	) AS des FROM clase_productos WHERE clase_productos.item = pendiente_empaque.item) AS marca,
+		
+ (SELECT vitola_productos.vitola FROM  vitola_productos WHERE vitola_productos.id_vitola = pendiente_empaque.vitola	) AS vitola, 
+		 (SELECT nombre_productos.nombre FROM  nombre_productos WHERE nombre_productos.id_nombre = pendiente_empaque.nombre	) AS nombre,
+		  (SELECT capa_productos.capa FROM  capa_productos WHERE capa_productos.id_capa = pendiente_empaque.capa	) AS capa,
+		
 (SELECT cellos.anillo AS anillo FROM cellos WHERE cellos.id_cello = pendiente_empaque.cello) AS anillo,
 (SELECT cellos.cello AS cello FROM cellos WHERE cellos.id_cello = pendiente_empaque.cello) AS cello, 
 (SELECT cellos.upc AS upc FROM cellos WHERE cellos.id_cello = pendiente_empaque.cello) AS upc,  
- pendiente_empaque.pendiente as pendiente_empaque, pendiente_empaque.saldo AS saldo, tipo_empaques.tipo_empaque AS tipo_empaque,
- pendiente_empaque.paquetes 
- FROM categoria, clase_productos, marca_productos, vitola_productos,nombre_productos, capa_productos,
-tipo_empaques, pendiente_empaque
-WHERE pendiente_empaque.vitola = vitola_productos.id_vitola AND pendiente_empaque.capa = capa_productos.id_capa AND 
- pendiente_empaque.nombre = nombre_productos.id_nombre AND  pendiente_empaque.marca = marca_productos.id_marca AND 
-   pendiente_empaque.tipo_empaque = tipo_empaques.id_tipo_empaque AND pendiente_empaque.categoria = categoria.id_categoria AND 
-   pendiente_empaque.saldo > 0 and
-  (nombre_productos.nombre LIKE  CONCAT("%",nombre, "%") or  capa_productos.capa LIKE  CONCAT("%",nombre, "%") or  marca_productos.marca LIKE  CONCAT("%",nombre, "%") )
+ pendiente_empaque.pendiente as pendiente_empaque,
+pendiente_empaque.saldo AS saldo,
+(SELECT tipo_empaques.tipo_empaque FROM  tipo_empaques WHERE tipo_empaques.id_tipo_empaque = pendiente_empaque.tipo_empaque	) AS tipo_empaque,
+	
+ pendiente_empaque.unidades AS paquetes
+FROM pendiente_empaque
 
-	GROUP BY pendiente_empaque.id_pendiente;
+	
+	
+WHERE 
+   pendiente_empaque.saldo > 0 and
+  ((SELECT nombre_productos.nombre FROM  nombre_productos WHERE nombre_productos.id_nombre = pendiente_empaque.nombre	) LIKE  CONCAT("%",nombre, "%") 
+  or   (SELECT capa_productos.capa FROM  capa_productos WHERE capa_productos.id_capa = pendiente_empaque.capa	) LIKE  CONCAT("%",nombre, "%") 
+  or (SELECT 
+		
+		if( clase_productos.sampler = "si", (SELECT clase_productos.descripcion_sampler
+										FROM clase_productos WHERE clase_productos.item = pendiente_empaque.item), 
+										
+										(SELECT marca_productos.marca FROM marca_productos WHERE marca_productos.id_marca = pendiente_empaque.marca	)
+		
+		
+		 	) AS des FROM clase_productos WHERE clase_productos.item = pendiente_empaque.item) LIKE  CONCAT("%",nombre, "%")
+			 OR (SELECT categoria.categoria FROM  categoria WHERE categoria.id_categoria = pendiente_empaque.categoria	) LIKE  CONCAT("%",nombre, "%")
+ )
+
+GROUP BY pendiente_empaque.id_pendiente;
 	
 	
 	else
 	if fechade != ""   && fechahasta != ""  && nombre = "" then
-	
-SELECT pendiente_empaque.id_pendiente, categoria.categoria AS categoria, pendiente_empaque.item AS item,pendiente_empaque.orden_del_sitema AS orden_del_sitema,pendiente_empaque.observacion AS observacion,pendiente_empaque.presentacion AS presentacion ,pendiente_empaque.mes AS mes ,
-pendiente_empaque.orden AS orden, marca_productos.marca AS marca,vitola_productos.vitola AS vitola, 
-nombre_productos.nombre AS nombre, capa_productos.capa AS capa,
+SELECT pendiente_empaque.id_pendiente,
+(SELECT categoria.categoria FROM  categoria WHERE categoria.id_categoria = pendiente_empaque.categoria	) AS categoria,
+ pendiente_empaque.item AS item,
+ pendiente_empaque.orden_del_sitema AS orden_del_sitema,
+ pendiente_empaque.observacion AS observacion,
+ pendiente_empaque.presentacion AS presentacion ,
+ pendiente_empaque.mes AS mes ,
+pendiente_empaque.orden AS orden, 
 
+(SELECT 
+		
+		if( clase_productos.sampler = "si", (SELECT clase_productos.descripcion_sampler
+										FROM clase_productos WHERE clase_productos.item = pendiente_empaque.item), 
+										
+										(SELECT marca_productos.marca FROM marca_productos WHERE marca_productos.id_marca = pendiente_empaque.marca	)
+		
+		
+		 	) AS des FROM clase_productos WHERE clase_productos.item = pendiente_empaque.item) AS marca,
+		
+ (SELECT vitola_productos.vitola FROM  vitola_productos WHERE vitola_productos.id_vitola = pendiente_empaque.vitola	) AS vitola, 
+		 (SELECT nombre_productos.nombre FROM  nombre_productos WHERE nombre_productos.id_nombre = pendiente_empaque.nombre	) AS nombre,
+		  (SELECT capa_productos.capa FROM  capa_productos WHERE capa_productos.id_capa = pendiente_empaque.capa	) AS capa,
+		
 (SELECT cellos.anillo AS anillo FROM cellos WHERE cellos.id_cello = pendiente_empaque.cello) AS anillo,
 (SELECT cellos.cello AS cello FROM cellos WHERE cellos.id_cello = pendiente_empaque.cello) AS cello, 
 (SELECT cellos.upc AS upc FROM cellos WHERE cellos.id_cello = pendiente_empaque.cello) AS upc,  
- pendiente_empaque.pendiente as pendiente_empaque, pendiente_empaque.saldo AS saldo, tipo_empaques.tipo_empaque AS tipo_empaque,
- pendiente_empaque.paquetes
- FROM categoria, clase_productos, marca_productos, vitola_productos,nombre_productos, capa_productos,
-tipo_empaques, pendiente_empaque
-WHERE pendiente_empaque.vitola = vitola_productos.id_vitola AND pendiente_empaque.capa = capa_productos.id_capa AND 
- pendiente_empaque.nombre = nombre_productos.id_nombre AND  pendiente_empaque.marca = marca_productos.id_marca AND 
-   pendiente_empaque.tipo_empaque = tipo_empaques.id_tipo_empaque AND pendiente_empaque.categoria = categoria.id_categoria AND 
-   pendiente_empaque.saldo > 0 
-	 AND  pendiente_empaque.mes between  STR_TO_DATE( fechade,"%Y-%m-%d") AND STR_TO_DATE(  fechahasta, "%Y-%m-%d") 
+ pendiente_empaque.pendiente as pendiente_empaque,
+pendiente_empaque.saldo AS saldo,
+(SELECT tipo_empaques.tipo_empaque FROM  tipo_empaques WHERE tipo_empaques.id_tipo_empaque = pendiente_empaque.tipo_empaque	) AS tipo_empaque,
+	
+ pendiente_empaque.unidades AS paquetes
+FROM pendiente_empaque
+
+	
+	
+WHERE 
+   pendiente_empaque.saldo > 0 and pendiente_empaque.mes between  STR_TO_DATE( fechade,"%Y-%m-%d") AND STR_TO_DATE(  fechahasta, "%Y-%m-%d") 
                       
 
 
-	GROUP BY pendiente_empaque.id_pendiente;	else
+	GROUP BY pendiente_empaque.id_pendiente;
+		else
 	
 	if fechade != ""   && fechahasta = ""  && nombre = "" then
 	
-	
-SELECT pendiente_empaque.id_pendiente, categoria.categoria AS categoria, pendiente_empaque.item AS item,pendiente_empaque.orden_del_sitema AS orden_del_sitema,pendiente_empaque.observacion AS observacion,pendiente_empaque.presentacion AS presentacion ,pendiente_empaque.mes AS mes ,
-pendiente_empaque.orden AS orden, marca_productos.marca AS marca,vitola_productos.vitola AS vitola, 
-nombre_productos.nombre AS nombre, capa_productos.capa AS capa,
+SELECT pendiente_empaque.id_pendiente,
+(SELECT categoria.categoria FROM  categoria WHERE categoria.id_categoria = pendiente_empaque.categoria	) AS categoria,
+ pendiente_empaque.item AS item,
+ pendiente_empaque.orden_del_sitema AS orden_del_sitema,
+ pendiente_empaque.observacion AS observacion,
+ pendiente_empaque.presentacion AS presentacion ,
+ pendiente_empaque.mes AS mes ,
+pendiente_empaque.orden AS orden, 
 
+(SELECT 
+		
+		if( clase_productos.sampler = "si", (SELECT clase_productos.descripcion_sampler
+										FROM clase_productos WHERE clase_productos.item = pendiente_empaque.item), 
+										
+										(SELECT marca_productos.marca FROM marca_productos WHERE marca_productos.id_marca = pendiente_empaque.marca	)
+		
+		
+		 	) AS des FROM clase_productos WHERE clase_productos.item = pendiente_empaque.item) AS marca,
+		
+ (SELECT vitola_productos.vitola FROM  vitola_productos WHERE vitola_productos.id_vitola = pendiente_empaque.vitola	) AS vitola, 
+		 (SELECT nombre_productos.nombre FROM  nombre_productos WHERE nombre_productos.id_nombre = pendiente_empaque.nombre	) AS nombre,
+		  (SELECT capa_productos.capa FROM  capa_productos WHERE capa_productos.id_capa = pendiente_empaque.capa	) AS capa,
+		
 (SELECT cellos.anillo AS anillo FROM cellos WHERE cellos.id_cello = pendiente_empaque.cello) AS anillo,
 (SELECT cellos.cello AS cello FROM cellos WHERE cellos.id_cello = pendiente_empaque.cello) AS cello, 
 (SELECT cellos.upc AS upc FROM cellos WHERE cellos.id_cello = pendiente_empaque.cello) AS upc,  
- pendiente_empaque.pendiente as pendiente_empaque, pendiente_empaque.saldo AS saldo, tipo_empaques.tipo_empaque AS tipo_empaque,
- pendiente_empaque.paquetes
- FROM categoria, clase_productos, marca_productos, vitola_productos,nombre_productos, capa_productos,
-tipo_empaques, pendiente_empaque
-WHERE pendiente_empaque.vitola = vitola_productos.id_vitola AND pendiente_empaque.capa = capa_productos.id_capa AND 
- pendiente_empaque.nombre = nombre_productos.id_nombre AND  pendiente_empaque.marca = marca_productos.id_marca AND 
-   pendiente_empaque.tipo_empaque = tipo_empaques.id_tipo_empaque AND pendiente_empaque.categoria = categoria.id_categoria AND 
-   pendiente_empaque.saldo > 0  AND  pendiente_empaque.mes = STR_TO_DATE( fechade,"%Y-%m-%d")
+ pendiente_empaque.pendiente as pendiente_empaque,
+pendiente_empaque.saldo AS saldo,
+(SELECT tipo_empaques.tipo_empaque FROM  tipo_empaques WHERE tipo_empaques.id_tipo_empaque = pendiente_empaque.tipo_empaque	) AS tipo_empaque,
+	
+ pendiente_empaque.unidades AS paquetes
+FROM pendiente_empaque
+
+	
+	
+WHERE 
+   pendiente_empaque.saldo > 0 and pendiente_empaque.mes = STR_TO_DATE( fechade,"%Y-%m-%d")
                  
 	GROUP BY pendiente_empaque.id_pendiente;	
 	
@@ -8058,23 +8160,43 @@ WHERE pendiente_empaque.vitola = vitola_productos.id_vitola AND pendiente_empaqu
 	
 	if fechade = ""   && fechahasta != ""  && nombre = "" then
 	
-	
-SELECT pendiente_empaque.id_pendiente, categoria.categoria AS categoria, pendiente_empaque.item AS item,pendiente_empaque.orden_del_sitema AS orden_del_sitema,pendiente_empaque.observacion AS observacion,pendiente_empaque.presentacion AS presentacion ,pendiente_empaque.mes AS mes ,
-pendiente_empaque.orden AS orden, marca_productos.marca AS marca,vitola_productos.vitola AS vitola, 
-nombre_productos.nombre AS nombre, capa_productos.capa AS capa,
+SELECT pendiente_empaque.id_pendiente,
+(SELECT categoria.categoria FROM  categoria WHERE categoria.id_categoria = pendiente_empaque.categoria	) AS categoria,
+ pendiente_empaque.item AS item,
+ pendiente_empaque.orden_del_sitema AS orden_del_sitema,
+ pendiente_empaque.observacion AS observacion,
+ pendiente_empaque.presentacion AS presentacion ,
+ pendiente_empaque.mes AS mes ,
+pendiente_empaque.orden AS orden, 
 
+(SELECT 
+		
+		if( clase_productos.sampler = "si", (SELECT clase_productos.descripcion_sampler
+										FROM clase_productos WHERE clase_productos.item = pendiente_empaque.item), 
+										
+										(SELECT marca_productos.marca FROM marca_productos WHERE marca_productos.id_marca = pendiente_empaque.marca	)
+		
+		
+		 	) AS des FROM clase_productos WHERE clase_productos.item = pendiente_empaque.item) AS marca,
+		
+ (SELECT vitola_productos.vitola FROM  vitola_productos WHERE vitola_productos.id_vitola = pendiente_empaque.vitola	) AS vitola, 
+		 (SELECT nombre_productos.nombre FROM  nombre_productos WHERE nombre_productos.id_nombre = pendiente_empaque.nombre	) AS nombre,
+		  (SELECT capa_productos.capa FROM  capa_productos WHERE capa_productos.id_capa = pendiente_empaque.capa	) AS capa,
+		
 (SELECT cellos.anillo AS anillo FROM cellos WHERE cellos.id_cello = pendiente_empaque.cello) AS anillo,
 (SELECT cellos.cello AS cello FROM cellos WHERE cellos.id_cello = pendiente_empaque.cello) AS cello, 
 (SELECT cellos.upc AS upc FROM cellos WHERE cellos.id_cello = pendiente_empaque.cello) AS upc,  
- pendiente_empaque.pendiente as pendiente_empaque, pendiente_empaque.saldo AS saldo, tipo_empaques.tipo_empaque AS tipo_empaque,
- pendiente_empaque.paquetes
- FROM categoria, clase_productos, marca_productos, vitola_productos,nombre_productos, capa_productos,
-tipo_empaques, pendiente_empaque
-WHERE pendiente_empaque.vitola = vitola_productos.id_vitola AND pendiente_empaque.capa = capa_productos.id_capa AND 
- pendiente_empaque.nombre = nombre_productos.id_nombre AND  pendiente_empaque.marca = marca_productos.id_marca AND 
-   pendiente_empaque.tipo_empaque = tipo_empaques.id_tipo_empaque AND pendiente_empaque.categoria = categoria.id_categoria AND 
-   pendiente_empaque.saldo > 0
-	AND  pendiente_empaque.mes = STR_TO_DATE(  fechahasta, "%Y-%m-%d") 
+ pendiente_empaque.pendiente as pendiente_empaque,
+pendiente_empaque.saldo AS saldo,
+(SELECT tipo_empaques.tipo_empaque FROM  tipo_empaques WHERE tipo_empaques.id_tipo_empaque = pendiente_empaque.tipo_empaque	) AS tipo_empaque,
+	
+ pendiente_empaque.unidades AS paquetes
+FROM pendiente_empaque
+
+	
+	
+WHERE 
+   pendiente_empaque.saldo > 0 and pendiente_empaque.mes = STR_TO_DATE(  fechahasta, "%Y-%m-%d") 
                       
  
 
@@ -8082,25 +8204,56 @@ WHERE pendiente_empaque.vitola = vitola_productos.id_vitola AND pendiente_empaqu
 	else
 	if fechade != "" && fechahasta != ""  && nombre != "" then 
 	
-		
-SELECT pendiente_empaque.id_pendiente, categoria.categoria AS categoria, pendiente_empaque.item AS item,pendiente_empaque.orden_del_sitema AS orden_del_sitema,pendiente_empaque.observacion AS observacion,pendiente_empaque.presentacion AS presentacion ,pendiente_empaque.mes AS mes ,
-pendiente_empaque.orden AS orden, marca_productos.marca AS marca,vitola_productos.vitola AS vitola, 
-nombre_productos.nombre AS nombre, capa_productos.capa AS capa,
+SELECT pendiente_empaque.id_pendiente,
+(SELECT categoria.categoria FROM  categoria WHERE categoria.id_categoria = pendiente_empaque.categoria	) AS categoria,
+ pendiente_empaque.item AS item,
+ pendiente_empaque.orden_del_sitema AS orden_del_sitema,
+ pendiente_empaque.observacion AS observacion,
+ pendiente_empaque.presentacion AS presentacion ,
+ pendiente_empaque.mes AS mes ,
+pendiente_empaque.orden AS orden, 
 
+(SELECT 
+		
+		if( clase_productos.sampler = "si", (SELECT clase_productos.descripcion_sampler
+										FROM clase_productos WHERE clase_productos.item = pendiente_empaque.item), 
+										
+										(SELECT marca_productos.marca FROM marca_productos WHERE marca_productos.id_marca = pendiente_empaque.marca	)
+		
+		
+		 	) AS des FROM clase_productos WHERE clase_productos.item = pendiente_empaque.item) AS marca,
+		
+ (SELECT vitola_productos.vitola FROM  vitola_productos WHERE vitola_productos.id_vitola = pendiente_empaque.vitola	) AS vitola, 
+		 (SELECT nombre_productos.nombre FROM  nombre_productos WHERE nombre_productos.id_nombre = pendiente_empaque.nombre	) AS nombre,
+		  (SELECT capa_productos.capa FROM  capa_productos WHERE capa_productos.id_capa = pendiente_empaque.capa	) AS capa,
+		
 (SELECT cellos.anillo AS anillo FROM cellos WHERE cellos.id_cello = pendiente_empaque.cello) AS anillo,
 (SELECT cellos.cello AS cello FROM cellos WHERE cellos.id_cello = pendiente_empaque.cello) AS cello, 
 (SELECT cellos.upc AS upc FROM cellos WHERE cellos.id_cello = pendiente_empaque.cello) AS upc,  
- pendiente_empaque.pendiente as pendiente_empaque, pendiente_empaque.saldo AS saldo, tipo_empaques.tipo_empaque AS tipo_empaque,
- pendiente_empaque.paquetes
- FROM categoria, clase_productos, marca_productos, vitola_productos,nombre_productos, capa_productos,
-tipo_empaques, pendiente_empaque
-WHERE pendiente_empaque.vitola = vitola_productos.id_vitola AND pendiente_empaque.capa = capa_productos.id_capa AND 
- pendiente_empaque.nombre = nombre_productos.id_nombre AND  pendiente_empaque.marca = marca_productos.id_marca AND 
-   pendiente_empaque.tipo_empaque = tipo_empaques.id_tipo_empaque AND pendiente_empaque.categoria = categoria.id_categoria AND 
-   pendiente_empaque.saldo > 0
-   AND pendiente_empaque.mes between  STR_TO_DATE( fechade,"%Y-%m-%d") AND STR_TO_DATE(  fechahasta, "%Y-%m-%d") AND 
-   (nombre_productos.nombre LIKE CONCAT("%",nombre, "%") or  capa_productos.capa LIKE  CONCAT("%",nombre, "%") or  marca_productos.marca LIKE  CONCAT("%",nombre, "%") )   
-   
+ pendiente_empaque.pendiente as pendiente_empaque,
+pendiente_empaque.saldo AS saldo,
+(SELECT tipo_empaques.tipo_empaque FROM  tipo_empaques WHERE tipo_empaques.id_tipo_empaque = pendiente_empaque.tipo_empaque	) AS tipo_empaque,
+	
+ pendiente_empaque.unidades AS paquetes
+FROM pendiente_empaque
+
+	
+	
+WHERE 
+   pendiente_empaque.saldo > 0 and pendiente_empaque.mes between  STR_TO_DATE( fechade,"%Y-%m-%d") AND STR_TO_DATE(  fechahasta, "%Y-%m-%d") AND 
+   ((SELECT nombre_productos.nombre FROM  nombre_productos WHERE nombre_productos.id_nombre = pendiente_empaque.nombre	) LIKE  CONCAT("%",nombre, "%") 
+  or   (SELECT capa_productos.capa FROM  capa_productos WHERE capa_productos.id_capa = pendiente_empaque.capa	) LIKE  CONCAT("%",nombre, "%") 
+  or (SELECT 
+		
+		if( clase_productos.sampler = "si", (SELECT clase_productos.descripcion_sampler
+										FROM clase_productos WHERE clase_productos.item = pendiente_empaque.item), 
+										
+										(SELECT marca_productos.marca FROM marca_productos WHERE marca_productos.id_marca = pendiente_empaque.marca	)
+		
+		
+		 	) AS des FROM clase_productos WHERE clase_productos.item = pendiente_empaque.item) LIKE  CONCAT("%",nombre, "%")
+			 OR (SELECT categoria.categoria FROM  categoria WHERE categoria.id_categoria = pendiente_empaque.categoria	) LIKE  CONCAT("%",nombre, "%")
+ )
 	GROUP BY pendiente_empaque.id_pendiente;	
 	else
 	
@@ -8114,7 +8267,6 @@ END if;
 END if;	
 END//
 DELIMITER ;
-
 
 -- Volcando estructura para procedimiento facturacion_plasencia.buscar_pendiente_factura
 DELIMITER //
@@ -8156,7 +8308,7 @@ SELECT pendiente.id_pendiente ,
       (SELECT tipo_empaques.tipo_empaque FROM  tipo_empaques WHERE tipo_empaques.id_tipo_empaque = pendiente.tipo_empaque	) AS tipo_empaque,
 		pendiente.paquetes AS paquetes,
 		pendiente.unidades AS unidades,
-		(select clase_productos.serie_precio FROM clase_productos WHERE clase_productos.item = pendiente.item) AS serie_precio,
+		(select clase_productos.codigo_precio FROM clase_productos WHERE clase_productos.item = pendiente.item) AS serie_precio,
 		(select clase_productos.precio FROM clase_productos WHERE clase_productos.item = pendiente.item) AS precio,
 		(select sum(inventario_productos_terminados.Existencia)
 						FROM inventario_productos_terminados 
@@ -8203,7 +8355,7 @@ SELECT pendiente.id_pendiente ,
       (SELECT tipo_empaques.tipo_empaque FROM  tipo_empaques WHERE tipo_empaques.id_tipo_empaque = pendiente.tipo_empaque	) AS tipo_empaque,
 		pendiente.paquetes AS paquetes,
 		pendiente.unidades AS unidades,
-		(select clase_productos.serie_precio FROM clase_productos WHERE clase_productos.item = pendiente.item) AS serie_precio,
+		(select clase_productos.codigo_precio FROM clase_productos WHERE clase_productos.item = pendiente.item) AS serie_precio,
 		(select sum(inventario_productos_terminados.Existencia)
 						FROM inventario_productos_terminados 
 						WHERE inventario_productos_terminados.Marca = pendiente.marca and
@@ -8268,7 +8420,7 @@ SELECT pendiente.id_pendiente ,
       (SELECT tipo_empaques.tipo_empaque FROM  tipo_empaques WHERE tipo_empaques.id_tipo_empaque = pendiente.tipo_empaque	) AS tipo_empaque,
 		pendiente.paquetes AS paquetes,
 		pendiente.unidades AS unidades,
-		(select clase_productos.serie_precio FROM clase_productos WHERE clase_productos.item = pendiente.item) AS serie_precio,
+		(select clase_productos.codigo_precio FROM clase_productos WHERE clase_productos.item = pendiente.item) AS serie_precio,
 		(select sum(inventario_productos_terminados.Existencia)
 						FROM inventario_productos_terminados 
 						WHERE inventario_productos_terminados.Marca = pendiente.marca and
@@ -8316,7 +8468,7 @@ SELECT pendiente.id_pendiente ,
       (SELECT tipo_empaques.tipo_empaque FROM  tipo_empaques WHERE tipo_empaques.id_tipo_empaque = pendiente.tipo_empaque	) AS tipo_empaque,
 		pendiente.paquetes AS paquetes,
 		pendiente.unidades AS unidades,
-		(select clase_productos.serie_precio FROM clase_productos WHERE clase_productos.item = pendiente.item) AS serie_precio,
+		(select clase_productos.codigo_precio FROM clase_productos WHERE clase_productos.item = pendiente.item) AS serie_precio,
 		(select sum(inventario_productos_terminados.Existencia)
 						FROM inventario_productos_terminados 
 						WHERE inventario_productos_terminados.Marca = pendiente.marca and
@@ -8364,7 +8516,7 @@ SELECT pendiente.id_pendiente ,
       (SELECT tipo_empaques.tipo_empaque FROM  tipo_empaques WHERE tipo_empaques.id_tipo_empaque = pendiente.tipo_empaque	) AS tipo_empaque,
 		pendiente.paquetes AS paquetes,
 		pendiente.unidades AS unidades,
-		(select clase_productos.serie_precio FROM clase_productos WHERE clase_productos.item = pendiente.item) AS serie_precio,
+		(select clase_productos.codigo_precio FROM clase_productos WHERE clase_productos.item = pendiente.item) AS serie_precio,
 		(select sum(inventario_productos_terminados.Existencia)
 						FROM inventario_productos_terminados 
 						WHERE inventario_productos_terminados.Marca = pendiente.marca and
@@ -8848,14 +9000,14 @@ DELIMITER ;
 DELIMITER //
 CREATE PROCEDURE `insertar_factura_terminado`(
 	IN `orden_sufijo` VARCHAR(10),
-	IN `pa_cliente` INT,
-	IN `pa_numero_factura` INT,
-	IN `pa_contenedor` INT,
+	IN `pa_cliente` VARCHAR(50),
+	IN `pa_numero_factura` VARCHAR(50),
+	IN `pa_contenedor` VARCHAR(50),
 	IN `pa_cantidad_bultos` INT,
 	IN `pa_total_puros` INT,
 	IN `pa_total_peso_bruto` INT,
 	IN `pa_total_peso_neto` INT,
-	IN `pa_fecha_factura` DATE
+	IN `pa_fecha_factura` DATETIME
 )
 BEGIN
   INSERT INTO factura_terminados(
@@ -8886,6 +9038,7 @@ BEGIN
 	   
 END//
 DELIMITER ;
+
 -- Volcando estructura para procedimiento facturacion_plasencia.insertar_lista_cajas
 DELIMITER //
 CREATE PROCEDURE `insertar_lista_cajas`(
@@ -9894,6 +10047,75 @@ WHERE `facturado` = "N" AND 	(SELECT CONCAT(pendiente.orden ,"-", MONTH(pendient
 END//
 DELIMITER ;
 
+-- Volcando estructura para procedimiento facturacion_plasencia.mostrar_detalle_factura_export
+DELIMITER //
+CREATE PROCEDURE `mostrar_detalle_factura_export`(
+	IN `fac` VARCHAR(50)
+)
+BEGIN
+SELECT 
+	`cantidad_puros`,
+	`unidad`,
+	`unidad`*`cantidad_puros` AS total,
+	
+	(CAST(((`cantidad_puros`*`unidad`)/cantidad_cajas) AS DECIMAL(9,0))) AS cantidad_cajas,
+	`cantidad_puros`*`unidad` AS total_tabacos,
+	
+	(SELECT (UPPER((SELECT capa_productos.capa FROM capa_productos WHERE capa_productos.id_capa = clase_productos.id_capa))) AS capa
+FROM clase_productos
+WHERE clase_productos.item = (SELECT pendiente.item FROM pendiente 
+											WHERE pendiente.id_pendiente =  detalle_factura.id_pendiente)) AS capas,
+	`cantidad_cajas` AS 'cantidad_por_caja'
+	
+	,(SELECT UPPER(CONCAT((SELECT tipo_empaques.tipo_empaque_ingles FROM tipo_empaques WHERE tipo_empaques.id_tipo_empaque = clase_productos.id_tipo_empaque)
+		 ," ",
+	    (SELECT vitola_productos.vitola FROM vitola_productos WHERE vitola_productos.id_vitola = clase_productos.id_vitola)
+		 ," ",
+		 (SELECT marca_productos.marca FROM marca_productos WHERE marca_productos.id_marca = clase_productos.id_marca)
+		 ," ",
+		 (SELECT nombre_productos.nombre FROM nombre_productos WHERE nombre_productos.id_nombre = clase_productos.id_nombre)
+		 ," ",
+		 (SELECT case cello
+			 	when cello != "SI"  then  "CELLO"
+			 	when cello != "NO"  then  ""
+		 	END AS celloss
+			FROM cellos 
+		   WHERE cellos.id_cello = clase_productos.id_cello)
+		 )) AS producto
+	FROM clase_productos
+	WHERE clase_productos.item = (SELECT pendiente.item FROM pendiente 
+											WHERE pendiente.id_pendiente = detalle_factura.id_pendiente)
+	) AS producto,
+	
+	(SELECT clase_productos.codigo_precio 
+		FROM clase_productos
+		WHERE clase_productos.item = (SELECT pendiente.item FROM pendiente 
+													WHERE pendiente.id_pendiente = detalle_factura.id_pendiente)) AS codigo
+	,
+	
+	(SELECT clase_productos.item 
+		FROM clase_productos
+		WHERE clase_productos.item = (SELECT pendiente.item FROM pendiente 
+													WHERE pendiente.id_pendiente = detalle_factura.id_pendiente)) AS codigo_item
+	,
+	(SELECT CONCAT(pendiente.orden ,"-", MONTH(pendiente.mes) , "-" , date_format(pendiente.mes,'%y')) AS oer
+	FROM pendiente WHERE pendiente.id_pendiente = detalle_factura.id_pendiente) AS orden,
+	
+		(SELECT  pendiente.pendiente
+	FROM pendiente WHERE pendiente.id_pendiente = detalle_factura.id_pendiente) AS orden_total,
+	
+		(SELECT pendiente.saldo - total_tabacos
+	FROM pendiente WHERE pendiente.id_pendiente = detalle_factura.id_pendiente) AS orden_restante,
+		
+	`peso_bruto`*`cantidad_puros` AS total_bruto,
+	`peso_neto`*`cantidad_puros`AS total_neto
+	
+	
+	
+FROM detalle_factura,factura_terminados
+WHERE detalle_factura.id_venta = factura_terminados.id AND factura_terminados.numero_factura = fac;
+END//
+DELIMITER ;
 
 -- Volcando estructura para procedimiento facturacion_plasencia.mostrar_existencia_bodega
 DELIMITER //
@@ -10156,6 +10378,7 @@ WHERE clase_productos.item = (SELECT pendiente.item FROM pendiente
 FROM detalle_factura WHERE detalle_factura.id_detalle= pa_id;
 END//
 DELIMITER ;
+
 -- Volcando estructura para procedimiento facturacion_plasencia.traer_maximo_registro_existencia
 DELIMITER //
 CREATE PROCEDURE `traer_maximo_registro_existencia`()
