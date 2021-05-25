@@ -231,6 +231,8 @@ Route::get('/index_importar_cajas', [App\Http\Controllers\CajasController::class
 Route::get('/index_bodega', [App\Http\Controllers\CajasController::class, 'index_bodega'])->name('index_bodega');
 Route::get('/index_lista_cajas', [App\Http\Controllers\CajasController::class, 'index_lista'])->name('index_lista_cajas');
 Route::post('/editaryeliminarlista', [App\Http\Controllers\CajasController::class, 'editaryeliminarlista'])->name('editaryeliminarlista');
+Route::get('/exportar_cajas', [App\Http\Controllers\CajasController::class, 'exportCajas'])->name('exportar_cajas');
+ 
 
 
 Route::post('/buscar_lista_cajas', [App\Http\Controllers\CajasController::class, 'buscar_lista_cajas'])->name('buscar_lista_cajas');

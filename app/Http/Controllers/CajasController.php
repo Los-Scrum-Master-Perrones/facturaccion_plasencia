@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Imports\CajasImport;
+use App\Exports\CajasExport;
 use App\Imports\InventarioCajasImport;
 use DB;
 use Maatwebsite\Excel\Facades\Excel;
@@ -47,6 +48,11 @@ class CajasController extends Controller
         );
 
         return view('lista_cajas')->with('listacajas', $listacajas)->with('mostrar_lista_cajas', $mostrar_lista_cajas);
+    }
+
+    function exportCajas()
+    {
+        return Excel::download(new CajasExport(), 'InventarioCajas.xlsx');
     }
 
 
