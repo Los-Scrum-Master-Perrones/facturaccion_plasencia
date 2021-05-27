@@ -125,6 +125,7 @@
                         <td>{{$datos->pendiente}}</td>
                         <td>{{$datos->saldo}}</td>
                         
+                        
                         <td  style="text-align:center;">
                         <a data-toggle="modal" data-target="#modal_eliminar_detalle"
                             onclick="datos_modal_eliminar({{$datos->id_pendiente}})" href="">

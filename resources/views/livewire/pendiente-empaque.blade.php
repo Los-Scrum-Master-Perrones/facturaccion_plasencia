@@ -94,6 +94,7 @@
                         <th>NOMBRE</th>
                         <th>CAPA</th>
                         <th>TIPO DE EMPAQUE</th>
+                        <th>CANT. CAJAS</th>
                         <th>ANILLO</th>
                         <th>CELLO</th>
                         <th>UPC</th>
@@ -116,6 +117,7 @@
                         <td>{{$datos->nombre}}</td>
                         <td>{{$datos->capa}}</td>
                         <td>{{$datos->tipo_empaque}}</td>
+                        <td>{{$datos->cant_cajas}}</td>
                         <td>{{$datos->anillo}}</td>
                         <td>{{$datos->cello}}</td>
                         <td>{{$datos->upc}}</td>

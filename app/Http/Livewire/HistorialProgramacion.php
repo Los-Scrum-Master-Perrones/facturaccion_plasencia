@@ -69,11 +69,26 @@ public $detallestodos;
 
     public function eliminar_detalles_pro(Request $request){
     
+        
+        $cant_tipo =\DB::select('call traer_cant_cajas(:id_pendiente)',
+        [ 'id_pendiente'=>$request->id_pendientee]);
+     
+        if($cant_tipo[0]->cajas_tipo != null){
+           
+            $cajas_vie = ($request->saldo_viejo/ $cant_tipo[0]->cajas_tipo);
+        
+            $actualizar_existencia =  ($cajas_vie + $request->cant_cajase);
+        }else{
+            $actualizar_existencia= 0;
+        }
+      
+     
 
-        $borrar=\DB::select('call eliminar_detalle_programacion(:id,:id_pendiente,:saldo)',
+        $borrar=\DB::select('call eliminar_detalle_programacion(:id,:id_pendiente,:saldo,:cant)',
         ['id'=>  $request->ide,
         'id_pendiente'=>$request->id_pendientee,
-        'saldo'=> $request->saldoe]);
+        'saldo'=> $request->saldoe,
+        'cant'=> $actualizar_existencia]);
         
 
 
@@ -89,14 +104,27 @@ public $detallestodos;
 
         $saldo_final = ($request->saldo_pen - $request->saldo);
 
+        $cant_tipo =\DB::select('call traer_cant_cajas(:id_pendiente)',
+        [ 'id_pendiente'=>$request->id_pendiente]);
         
+     
+       $cajas_utilizadas_actual= ($request->saldo / $cant_tipo[0]->cajas_tipo);//50
+      
+      $cajas_vie = ($request->saldo_pen/ $cant_tipo[0]->cajas_tipo);
+      
+       $cajas_utilizadas_viejas = $cajas_vie + $request->cant_cajas;//30
+     
 
 
-        $borrar=\DB::select('call actualizar_detalle_pendiente(:id,:id_pendiente,:saldo,:saldo_pen)',
+       $cajas_actualizar = ($cajas_utilizadas_viejas-$cajas_utilizadas_actual);//
+
+
+        $borrar=\DB::select('call actualizar_detalle_pendiente(:id,:id_pendiente,:saldo,:saldo_pen,:cant)',
         ['id'=>  $request->id_detalle,
         'id_pendiente'=>$request->id_pendiente,
         'saldo'=> $request->saldo,
-        'saldo_pen'=>$saldo_final]);
+        'saldo_pen'=>$saldo_final,
+        'cant'=>$cajas_actualizar]);
         
     
 

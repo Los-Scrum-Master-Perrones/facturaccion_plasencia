@@ -164,6 +164,13 @@
                 <div class="modal-content">
                     <div class="modal-header">
                         <input id="id_detalle" name="id_detalle" hidden>
+                        
+                        <input id="cant_cajas" name="cant_cajas" hidden>
+                        
+                        <input id="saldo_viejo" name="saldo_viejo" hidden>
+                        
+                        <input id="id_pendientea" name="id_pendientea" hidden>
+
                         <h5 class="modal-title" id="staticBackdropLabel"
                             style="width:450px; text-align:center; font-size:20px;">Actualizar saldo</h5>
                         <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close"></button>
@@ -172,8 +179,10 @@
                         <div class="mb-3 col">
                             <label for="txt_figuraytipo" class="form-label"
                                 style="width:440px; text-align:center; font-size:20px;">Nuevo saldo</label>
+
                             <input class="form-control" id="saldo" name="saldo" placeholder="Ingresar saldo"
                                 style="width: 440px" maxLength="30" autocomplete="off" type="number">
+                                
                         </div>
                     </div>
                     <div class="modal-footer">
@@ -205,7 +214,15 @@
             for (var i = 0; i < data.length; i++) {
                 if (data[i].id === id) {
                     document.form_saldo.saldo.value = data[i].saldo;
+                    
                     document.form_saldo.id_detalle.value = data[i].id;
+                    
+                    document.form_saldo.id_pendientea.value = data[i].id_pendiente;
+                    
+                    document.form_saldo.cant_cajas.value = data[i].cant_cajas;
+                    
+                    document.form_saldo.saldo_viejo.value = data[i].cant_cajas_necesarias;
+
 
 
                 }
@@ -224,6 +241,12 @@
             for (var i = 0; i < data.length; i++) {
                 if (data[i].id === id) {
                     document.formulario_mostrarE.id_usuarioE.value = data[i].id;
+
+                    document.formulario_mostrarE.saldo_viejoe.value = data[i].cant_cajas_necesarias;
+                    
+                    document.formulario_mostrarE.id_pendientee.value = data[i].id_pendiente;
+                    
+                    document.formulario_mostrarE.cant_cajase.value = data[i].cant_cajas;
 
                 }
             }
@@ -244,6 +267,11 @@
 
         <input name="id_usuarioE" id="id_usuarioE" value="" hidden />
 
+        <input id="cant_cajase" name="cant_cajase" hidden>
+                        
+                        <input id="saldo_viejoe" name="saldo_viejoe" hidden>
+                        
+                        <input id="id_pendientee" name="id_pendientee" hidden>
         <div class="modal fade" id="modal_eliminar_detalle" data-backdrop="static" data-keyboard="false" tabindex="-1"
             aria-labelledby="staticBackdropLabel" aria-hidden="true" style="opacity:.9;background:#212529;">
             <div class="modal-dialog modal-dialog-centered">

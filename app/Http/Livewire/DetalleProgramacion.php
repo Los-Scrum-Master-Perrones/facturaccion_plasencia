@@ -23,7 +23,8 @@ class DetalleProgramacion extends Component
 
     public function render()
     {
-        $this->detalles_provicionales= \DB::select('call mostrar_detalles_provicional(:buscar)',['buscar'=>$this->busqueda]);
+        $this->detalles_provicionales= \DB::select('call mostrar_detalles_provicional(:buscar)',['buscar'=>$this->busqueda
+        ]);
 
         return view('livewire.detalle-programacion')->extends('principal')->section('content');
     }
@@ -44,10 +45,19 @@ class DetalleProgramacion extends Component
 
     public function eliminar_detalles(Request $request){
 
+
         $this->detalles_provicionales=[];
     
-        $this->borrar=\DB::select('call eliminar_detalles(:buscar)',['buscar'=>$request->id_usuarioE]);
+       
+       $actualizar_existencia =  ($request->saldo_viejoe + $request->cant_cajase);
+        
+        $this->borrar=\DB::select('call eliminar_detalles(:buscar,:id_pendiente,:cant)',
+        ['buscar'=>$request->id_usuarioE,
+        'id_pendiente'=> $request->id_pendientee,
+        'cant'=>$actualizar_existencia
+        ]);
         ;
+
 
 
         return redirect()->route('detalles_programacion'); 
@@ -56,11 +66,29 @@ class DetalleProgramacion extends Component
 
         public function actualizar_saldo(Request $request){
 
-            $this->detalles_provicionales=[];
+           $detalles_provicionales= \DB::select('call mostrar_detalles_provicional(:buscar)',['buscar'=>$this->busqueda
+        ]);
         
-            $this->actualizar =\DB::select('call actualizar_saldo_programacion(:id, :saldo)',
+
+            $cant_tipo =\DB::select('call traer_cant_cajas(:id_pendiente)',
+            [ 'id_pendiente'=>$request->id_pendientea]);
+            
+          
+           $cajas_utilizadas_actual= ($request->saldo / $cant_tipo[0]->cajas_tipo);//50
+   
+           $cajas_utilizadas_viejas = $request->cant_cajas + $request->saldo_viejo;//30
+
+
+
+           $cajas_actualizar = ($cajas_utilizadas_viejas-$cajas_utilizadas_actual);//
+           
+                    
+              $this->actualizar =\DB::select('call actualizar_saldo_programacion(:id, :saldo,:cant,:id_pendiente)',
             ['id'=>$request->id_detalle,
-            'saldo'=>$request->saldo ]);
+            'saldo'=>$request->saldo ,
+           'cant'=>$cajas_actualizar,
+           'id_pendiente'=>$request->id_pendientea
+           ]);
            
             
     
@@ -87,14 +115,14 @@ class DetalleProgramacion extends Component
                
                     
                 for($i = 0 ; $this->tuplas > $i ; $i++){
-                $this->actualizar_insertar = \DB::select('call insertar_detalle_programacion(:numero_orden, :orden,:cod_producto,:saldo,:id_pendiente,:caja)',
+                $this->actualizar_insertar = \DB::select('call insertar_detalle_programacion(:numero_orden, :orden,:cod_producto,:saldo,:id_pendiente,:caja,:cant)',
                 ['numero_orden'=>isset($this->detalles_provicionales[$i]->numero_orden)?$this->detalles_provicionales[$i]->numero_orden:null,
                 'orden'=>isset($this->detalles_provicionales[$i]->orden)?$this->detalles_provicionales[$i]->orden:null,
                 'cod_producto'=>isset($this->detalles_provicionales[$i]->cod_producto)?$this->detalles_provicionales[$i]->cod_producto:null,
                 'saldo'=>isset($this->detalles_provicionales[$i]->saldo)?$this->detalles_provicionales[$i]->saldo:null,
                 'id_pendiente'=>isset($this->detalles_provicionales[$i]->id_pendiente)?$this->detalles_provicionales[$i]->id_pendiente:null,
-                'caja'=>isset($this->detalles_provicionales[$i]->existencia)?$this->detalles_provicionales[$i]->existencia:null
-
+                'caja'=>isset($this->detalles_provicionales[$i]->existencia)?$this->detalles_provicionales[$i]->existencia:null,
+                'cant'=>isset($this->detalles_provicionales[$i]->cant_cajas)?$this->detalles_provicionales[$i]->cant_cajas:null
                ]);
             }
                

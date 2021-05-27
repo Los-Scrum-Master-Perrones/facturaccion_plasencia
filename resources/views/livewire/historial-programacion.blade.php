@@ -245,14 +245,14 @@
             for (var i = 0; i < data.length; i++) {
                 if (data[i].id_detalle_programacion === id) {
 
-
-
                     document.form_saldo.id_detalle.value = data[i].id_detalle_programacion;
-
                     document.form_saldo.id_pendiente.value = data[i].id_pendiente;
                     document.form_saldo.saldo.value = data[i].saldo;
                     saldo_nuevo = data[i].saldo;
                     document.form_saldo.saldo_pen.value = saldo_nuevo;
+                    document.form_saldo.cajas_viejas.value = data[i].cant_cajas_necesarias;
+                    document.form_saldo.cant_cajas.value = data[i].cant_cajas;
+                    
 
                 }
             }
@@ -277,6 +277,10 @@
                     document.formulario_mostrarE.ide.value = data[i].id_detalle_programacion;
                     document.formulario_mostrarE.saldoe.value = data[i].saldo;
                     document.formulario_mostrarE.id_pendientee.value = data[i].id_pendiente;
+                    document.formulario_mostrarE.cant_cajase.value = data[i].cant_cajas;
+                    document.formulario_mostrarE.saldo_viejo.value = data[i].saldo;
+
+                   
                 }
             }
 
@@ -378,6 +382,10 @@
                         <input name="ide" id="ide" hidden />
                         <input name="saldoe" id="saldoe" hidden />
                         <input name="id_pendientee" id="id_pendientee" hidden />
+                        <input name="saldo_viejo" id="saldo_viejo" hidden />
+                        <input name="cant_cajase" id="cant_cajase" hidden />
+
+                      
                         <button style=" background: #b39f64; color: #ecedf1;" type="button" class=" btn-info-claro "
                             data-dismiss="modal">
                             <span>Cancelar</span>
@@ -496,7 +504,9 @@
                         <input id="id_pendiente" name="id_pendiente" hidden>
                         <input id="saldo_pendiente" name="saldo_pendiente" hidden>
                         <input id="saldo_pen" name="saldo_pen" hidden>
-
+                        <input id="cajas_viejas" name="cajas_viejas" hidden>
+                        
+                        <input id="cant_cajas" name="cant_cajas" hidden>
 
                         <h5 class="modal-title" id="staticBackdropLabel"
                             style="width:450px; text-align:center; font-size:20px;">Actualizar saldo</h5>
