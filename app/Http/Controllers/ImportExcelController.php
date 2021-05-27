@@ -36,9 +36,11 @@ class ImportExcelController extends Controller
     
     function editar_existencia_producto(Request $request){
 
-       $procedimiento = \DB::select('call editar_existencia_producto(:a,:b)', [
+       $procedimiento = \DB::select('call editar_existencia_producto(:a,:b,:c,:d)', [
             'a' => $request->id_productoE,
             'b' => $request->existencia_productoE,
+            'c' => $request->orden_pedido,
+            'd' => $request->orden_sistema,
             ]);
         
             $capas= \DB::select('call buscar_capa("")');
@@ -112,11 +114,14 @@ class ImportExcelController extends Controller
     }
 
     function importar_productos_terminado(){
+        
+        $capas= \DB::select('call buscar_capa("")');
         $productos = DB::table('archivo_producto_terminados')->get();
         $marcas=\DB::select('call buscar_marca("")');
         $nombres= \DB::select('call buscar_nombre("")');
         $vitolas= \DB::select('call buscar_vitola("")');
         $tipo_empaques= \DB::select('call buscar_tipo_empaque("")');
+
         $productos = DB::table('archivo_producto_terminados')->get();
         return view('importar_producto_terminado_mes')->with('productos', $productos)->with('capas', $capas)->with('marcas', $marcas)->with('nombres', $nombres)
         ->with('vitolas', $vitolas)->with('tipo_empaques', $tipo_empaques);
@@ -124,7 +129,6 @@ class ImportExcelController extends Controller
        }
 
        function reemplazar_productos_terminado(){
-
      
         $borrarinventario_producto_terminados = DB::table('inventario_productos_terminados')->delete();
       
@@ -137,8 +141,7 @@ class ImportExcelController extends Controller
            $pa_capa = $producto->Nombre_capa;
            $pa_existencia = $producto->Existencia_total;
            
-           $procedimiento = \DB::select('call insertar_productos_terminados(:a,:b,:c,:d,:e,:f)', [
-               'a' => $pa_lote,
+           $procedimiento = \DB::select('call insertar_productos_terminados(:b,:c,:d,:e,:f)', [               
                'b' => $pa_marca,
                'c' => $pa_nombre,
                'd' => $pa_vitola,

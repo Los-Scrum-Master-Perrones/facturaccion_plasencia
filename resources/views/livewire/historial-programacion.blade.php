@@ -472,8 +472,6 @@
 
                         <input name="id_p" id="id_p" hidden />
 
-
-
                         <button type="button" class=" btn_no "
                             data-dismiss="modal">
                             <span>Cancelar</span>

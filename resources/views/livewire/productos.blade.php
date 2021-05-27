@@ -51,6 +51,7 @@
             <table class="table table-light"  style="font-size:10px;">
                 <thead style=" position: static;">
                     <tr style="font-size:16px; text-align:center;">
+                    <th style=" text-align:center;">#</th>
                         <th style=" text-align:center;">Item</th>
                         <th style=" text-align:center;">Marca</th>
                         <th style=" text-align:center;">Nombre</th>
@@ -58,13 +59,13 @@
                         <th style=" text-align:center;">Capa</th>
                         <th style=" text-align:center;">Tipo de empaque</th>
                         <th style=" text-align:center;">Detalles</th>
-
                     </tr>
                 </thead>
                
                 <tbody >
                     @foreach($productos as $producto)
                     <tr>
+                    <td>{{$producto->id_producto}}</td>
                         <td>{{$producto->item}}</td>
                         <td>{{$producto->marca}}</td>
                         <td>{{$producto->nombre}}</td>

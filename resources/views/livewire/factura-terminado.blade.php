@@ -23,7 +23,6 @@
         <div class="row" style="text-align:center;">
 
             <div class="col">
-              
                 <div class="input-group mb-3">
 
 
@@ -69,7 +68,7 @@
                         <option style="overflow-y: scroll;">INT-H</option>
                     </select>
 
-                    <button id="btn_guardar"  class="botonprincipal" wire:click="insertar_factura()"
+                    <button id="btn_guardar" class="botonprincipal" wire:click="insertar_factura()"
                         style="width:120px;">
                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
                             class="bi bi-save2" viewBox="0 0 16 16">
@@ -93,7 +92,6 @@
                             placeholder="Nombre" wire:model="nom">
                     </div>
                 </div>
-           
             </div>
         </div>
 
@@ -375,7 +373,7 @@
             </script>
 
 
-            <!-- INICIO MODAL ACTUALIZAR DATO PENDIENTE -->
+            <!-- INICIO MODAL INSERTAR DATOS DETALLES FACTURA -->
 
             <form action="{{Route('insertar_detalle_factura')}}" method="POST" id="actualizar_pendiente"
                 name="actualizar_pendiente">
@@ -399,28 +397,28 @@
                                     <div class="mb-3 col">
                                         <label for="txt_bultos" class="form-label">Cantidad de Bultos:</label>
                                         <input id="cantidad_bultos" name="cantidad_bultos" class="form-control"
-                                            type="text" autocomplete="off">
+                                            type="number" min="1" autocomplete="off" required>
                                     </div>
                                     <div class="mb-3 col">
                                         <label for="txt_unidades" class="form-label">Unidades de Puros por
                                             Bulto:</label>
                                         <input id="unidades_bultos" name="unidades_bultos" class="form-control"
-                                            type="text" autocomplete="off">
+                                        type="number" min="1"  autocomplete="off" required>
                                     </div>
                                     <div class="mb-3 col">
                                         <label for="txt_unidad_cajon" class="form-label">Unidad por Cajon:</label>
                                         <input id="unidades_cajon" name="unidades_cajon" class="form-control"
-                                            type="text" autocomplete="off">
+                                        type="number" min="1" autocomplete="off" required>
                                     </div>
                                     <div class="mb-3 col">
                                         <label for="txt_peso_bruto" class="form-label">Preso Bruto (Lbs)</label>
-                                        <input id="peso_bruto" name="peso_bruto" class="form-control" type="text"
-                                            autocomplete="off">
+                                        <input id="peso_bruto" name="peso_bruto" class="form-control" type="number" min="1" 
+                                            autocomplete="off" required>
                                     </div>
                                     <div class="mb-3 col">
                                         <label for="txt_peso_neto" class="form-label">Preso Neto (Lbs)</label>
-                                        <input id="peso_neto" name="peso_neto" class="form-control" type="text"
-                                            autocomplete="off">
+                                        <input id="peso_neto" name="peso_neto" class="form-control" type="number" min="1"
+                                            autocomplete="off" required>
                                     </div>
 
                                 </div>
@@ -539,6 +537,29 @@
             </form>
 
 
+                <div class="modal fade" id="modal_advertencia" data-backdrop="static" data-keyboard="false"
+                    tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true"
+                    style="opacity:.9;background:#212529;">
+                    <div class="modal-dialog modal-dialog-centered">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="staticBackdropLabel">Advertencia</h5>
+                                <button type="button" class="btn-close" data-dismiss="modal"
+                                    aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                                Rellene los campos del Cliente y Contenedor
+                            </div>
+                            <div class="modal-footer">
+                                <button data-dismiss="modal" class=" btn-info ">
+                                    <span>OK</span>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
             <script>
                 window.addEventListener('abrir', event => {
                     $("#modal_actualizar").modal('show');
@@ -557,6 +578,11 @@
                 window.addEventListener('editar_detalless', event => {
                     $("#modal_editar_detalles").modal('show');
                 })
+
+                window.addEventListener('advertencia_mensaje', event => {
+                    $("#modal_advertencia").modal('show');
+                })
+                
 
                 window.addEventListener('cerrar_editar_detalles', event => {
                     $("#modal_editar_detalles").modal('hide');
