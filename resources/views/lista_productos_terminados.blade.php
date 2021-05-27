@@ -49,7 +49,8 @@
                             <thead>
                                 <tr>
                                     <th>#</th>
-                                    <th>Lote</th>
+                                    <th>Orden del pedido</th>
+                                    <th>Orden del sistema</th>
                                     <th>Marca</th>
                                     <th>Alias Vitola</th>
                                     <th>Vitola</th>
@@ -66,7 +67,9 @@
                             <tr>
 
                             <td> <?php $c = $c + 1;  echo $c ?>  </td>
-                            <td>{{$producto->lote}}</td>
+
+                            <td>{{$producto->orden_pedido}}</td>
+                            <td>{{$producto->orden_sistema}}</td>
                             <td>{{$producto->marca}}</td>
                             <td>{{$producto->nombre}}</td>
                             <td>{{$producto->vitola}}</td>
@@ -106,6 +109,8 @@ for (var i = 0; i < data.length; i++) {
   if(data[i].id === id){    
      document.formulario_mostrarEP.id_productoE.value = data[i].id;
      document.formulario_mostrarEP.existencia_productoE.value = data[i].Existencia;
+     document.formulario_mostrarEP.orden_pedido.value = data[i].orden_pedido;
+     document.formulario_mostrarEP.orden_sistema.value = data[i].orden_sistema;
   
     }
     }
@@ -245,8 +250,22 @@ for (var i = 0; i < data.length; i++) {
       
       <div class="modal-body">
         <input id="id_productoE" name = "id_productoE"   value ="" hidden />
+
+        <div class="row">
+        <div class="col">
         <label for="existencia_productoE" >Existencia</label>
         <input  class="form-control"id="existencia_productoE" name = "existencia_productoE" value =""  />
+        </div>
+        <div class="col">
+        <label for="existencia_productoE" >Orden del pedido</label>
+        <input  class="form-control" id="orden_pedido" name = "orden_pedido" value =""  />
+        </div>
+        <div class="col">
+        <label for="existencia_productoE" >Orden del sistema</label>
+        <input  class="form-control" id="orden_sistema" name = "orden_sistema" value =""  />
+        </div>
+        </div>
+      
       </div>
 
       <div class="modal-footer" >
