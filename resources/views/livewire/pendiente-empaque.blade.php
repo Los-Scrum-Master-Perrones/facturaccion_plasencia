@@ -42,12 +42,12 @@
 
 
             <span class="input-group-text form-control ">De</span>
-            <input type="date" name="fecha_de" id="fecha_de" wire:model="fechade" class="form-control botonprincipal" style="width:200px;" placeholder="Nombre">
+            <input type="date" name="fecha_de" id="fecha_de" wire:model="fechade" class="form-control " style="width:200px;" placeholder="Nombre">
             <span class="input-group-text form-control ">Hasta</span>
-            <input type="date" name="fecha_hasta" id="fecha_hasta" wire:model="fechahasta" class="form-control mr-sm-2 botonprincipal" style="width:200px;" placeholder="Nombre">
+            <input type="date" name="fecha_hasta" id="fecha_hasta" wire:model="fechahasta" class="form-control mr-sm-2 " style="width:200px;" placeholder="Nombre">
 
-                        <input name="nombre" id="nombre" class="form-control mr-sm-2 botonprincipal" style="width:200px;" placeholder="Nombre" wire:model="nombre">
-                  
+                        <input name="nombre" id="nombre" class="form-control mr-sm-2 " style="width:200px;" placeholder="Nombre" wire:model="nombre">
+
                 <form action="{{Route('exportar_pendiente')}}">
                     <input type="text" value="{{isset($nom)?$nom:null}}" name="nombre" id="nombre" hidden>
                     <input type="date" value="{{isset($fede)?$fede:null}}" name="fecha_de" id="fecha_de" hidden>

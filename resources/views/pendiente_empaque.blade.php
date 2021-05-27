@@ -47,7 +47,7 @@
                             <label>De</label>
                         </div>
                         <div class="col-sm">
-                            <input type="date" name="fecha_de" id="fecha_de" class="form-control mr-sm-2 botonprincipal"
+                            <input type="date" name="fecha_de" id="fecha_de" class="form-control mr-sm-2 "
                                 style="width:200px;" placeholder="Nombre">
                         </div>
                         <div class="col-sm">

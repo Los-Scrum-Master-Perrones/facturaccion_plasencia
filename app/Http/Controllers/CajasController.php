@@ -13,6 +13,15 @@ use Illuminate\Pagination\LengthAwarePaginator;
 class CajasController extends Controller
 {
 
+    function index_codigobarra(){
+        $cajas = DB::table('cajas')->get();
+        return view('codigobarra')->with('cajas', $cajas);
+    }
+
+
+
+
+
     function index_importar(){
         $cajas = DB::table('cajas')->get();
         return view('import_cajas')->with('cajas', $cajas);
