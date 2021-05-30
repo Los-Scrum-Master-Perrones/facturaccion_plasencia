@@ -1,24 +1,12 @@
 <div xmlns:wire="http://www.w3.org/1999/xhtml">
-    <title></title>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" />
 
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Hola</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" />
-
     @livewireStyles
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-wEmeIV1mKuiNpC+IOBjI7aAzPcEZeedi5yW5f2yOq55WWLwNGmvvx4Um1vskeMj0" crossorigin="anonymous">
 
-
-
-
-
-
-
-
     <div class="container" style="max-width:100%; ">
-        </br>
+        <br>
 
         <div class="row" style="text-align:center;">
 
@@ -156,11 +144,24 @@
                         </tr>
                     </thead>
                     <tbody>
+                        <?php  $bultos = 0;
+                                $val_anterioir=0;
+                               $val_actual=0 ?>
 
                         @foreach($detalles_venta as $detalles)
                         <tr style="font-size:10px;">
+                            <?php  
+                            $val_anterioir= $bultos+1;
+                            $bultos += $detalles->cantidad_puros;
+                            
+                           $val_actual=$bultos ?>
 
-                            <td style="width:100px; max-width: 400px;overflow-x:auto;">Bultos</td>
+                            @if ($val_actual == $val_anterioir)
+                               <td style="width:100px; max-width: 400px;overflow-x:auto;">{{$val_actual}}</td>
+                            @else
+                               <td style="width:100px; max-width: 400px;overflow-x:auto;">{{$val_anterioir}} al {{$val_actual}}</td>
+                            @endif
+                            
                             <td>{{$detalles->cantidad_puros}}</td>
                             <td>{{$detalles->unidad}}</td>
                             <td><b>{{$detalles->cantidad_cajas}}</b></td>
@@ -175,9 +176,10 @@
                             <td>{{$detalles->orden_restante}}</td>
                             <td>{{$detalles->total_bruto}}</td>
                             <td>{{$detalles->total_neto}}</td>
-                            <td>hola</td>
-                            <td>hola</td>
-                            <td>hola</td>
+                            <td>{{$detalles->precio_producto}}</td>
+                           
+                            <td>{{$detalles->costo}}</td>
+                            <td>{{$detalles->valor_total}}</td>
                             <td>
                                 <a data-toggle="modal" data-target="#borrar_detalles" href="" wire:click="borrar_detalles({{$detalles->id_detalle}})">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor"
@@ -187,7 +189,7 @@
                                     </svg></a>
 
 
-                                <a style=" width:10px; height:10px;" data-toggle="modal" href=""
+                                <a style=" width:10px; height:10px;      " data-toggle="modal" href=""
                                     wire:click="editar_detalles({{$detalles->id_detalle}})">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor"
                                         class="bi bi-pencil-square" viewBox="0 0 16 16">
@@ -257,7 +259,7 @@
                             <td>{{$datos->PT}}</td>
                             <td style="text-align:center;">
 
-                                @if ($datos->PT>0 || isset($datos->PT))
+                                {{-- @if ($datos->PT>0 || isset($datos->PT))
 
                                 <a data-toggle="modal" wire:click="abrir_modal({{$datos->id_pendiente}})" href="">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
@@ -266,7 +268,14 @@
                                             d="M10.5 3.5a2.5 2.5 0 0 0-5 0V4h5v-.5zm1 0V4H15v10a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V4h3.5v-.5a3.5 3.5 0 1 1 7 0zM8.5 8a.5.5 0 0 0-1 0v1.5H6a.5.5 0 0 0 0 1h1.5V12a.5.5 0 0 0 1 0v-1.5H10a.5.5 0 0 0 0-1H8.5V8z" />
                                     </svg>
                                 </a>
-                                @endif
+                                @endif --}}
+                                <a data-toggle="modal" wire:click="abrir_modal({{$datos->id_pendiente}})" href="">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                                        class="bi bi-bag-plus-fill" viewBox="0 0 16 16">
+                                        <path fill-rule="evenodd"
+                                            d="M10.5 3.5a2.5 2.5 0 0 0-5 0V4h5v-.5zm1 0V4H15v10a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V4h3.5v-.5a3.5 3.5 0 1 1 7 0zM8.5 8a.5.5 0 0 0-1 0v1.5H6a.5.5 0 0 0 0 1h1.5V12a.5.5 0 0 0 1 0v-1.5H10a.5.5 0 0 0 0-1H8.5V8z" />
+                                    </svg>
+                                </a>
 
 
                             </td>

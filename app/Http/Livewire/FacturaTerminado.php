@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use Livewire\Component;
 
 use App\Exports\FacturaExport;
+use App\Exports\FacturaExportView;
 use Maatwebsite\Excel\Facades\Excel;
 
 class FacturaTerminado extends Component
@@ -261,7 +262,9 @@ class FacturaTerminado extends Component
                 "pa_fecha_factura" => $this->fecha_factura
             ]);
 
-            return Excel::download(new FacturaExport($this->num_factura_sistema), 'Pendiente.xlsx');
+            //return Excel::download(new FacturaExport($this->num_factura_sistema), 'Pendiente.xlsx');
+            return Excel::download(new FacturaExportView($this->num_factura_sistema), 'Factura.xlsx');
+            
         }else{
             $this->dispatchBrowserEvent("advertencia_mensaje");
         }
