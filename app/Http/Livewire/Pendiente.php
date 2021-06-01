@@ -39,11 +39,10 @@ class Pendiente extends Component
         $this->nombres= \DB::select('call buscar_nombre("")');
         $this->vitolas= \DB::select('call buscar_vitola("")');
         $this->tipo_empaques= \DB::select('call buscar_tipo_empaque("")');
-        $this->datos_pendiente = DB::select('call buscar_pendiente(:nombre,:fechade,:fechahasta)',
+        $this->datos_pendiente = DB::select('call buscar_pendiente(:nombre,:fechade)',
             [
                 'nombre' =>  $this->nom,
-                'fechade' =>  $this->fede,
-                'fechahasta' => $this->fecha
+                'fechade' =>  $this->fede
             ]
         );
         
@@ -69,11 +68,10 @@ class Pendiente extends Component
         $this->tipo_empaques= \DB::select('call buscar_tipo_empaque("")');
 
         $this->datos_pendiente = DB::select(
-            'call buscar_pendiente(:nombre,:fechade,:fechahasta)',
+            'call buscar_pendiente(:nombre,:fechade)',
             [
                 'nombre' =>  $this->nom,
-                'fechade' =>  $this->fede,
-                'fechahasta' => $this->fecha
+                'fechade' =>  $this->fede
             ]
         );
 
@@ -97,11 +95,10 @@ class Pendiente extends Component
             );
     
             $this->datos_pendiente = DB::select(
-                'call buscar_pendiente(:nombre,:fechade,:fechahasta)',
+                'call buscar_pendiente(:nombre,:fechade)',
                 [
                     'nombre' =>  $this->nom,
-                    'fechade' =>  $this->fede,
-                    'fechahasta' => $this->fecha,
+                    'fechade' =>  $this->fede
                 ]
             );
 
@@ -157,11 +154,10 @@ class Pendiente extends Component
         $this->vitolas= \DB::select('call buscar_vitola("")');
         $this->tipo_empaques= \DB::select('call buscar_tipo_empaque("")');
         $this->datos_pendiente = DB::select(
-            'call buscar_pendiente(:nombre,:fechade,:fechahasta)',
+            'call buscar_pendiente(:nombre,:fechade)',
             [
                 'nombre' =>  $this->nom,
-                'fechade' =>  $this->fede,
-                'fechahasta' => $this->fecha,
+                'fechade' =>  $this->fede
             ]
         );
         
@@ -197,11 +193,10 @@ class Pendiente extends Component
     
             
         $this->datos_pendiente = DB::select(
-            'call buscar_pendiente(:nombre,:fechade,:fechahasta)',
+            'call buscar_pendiente(:nombre,:fechade)',
             [
                 'nombre' =>  $this->nom,
-                'fechade' =>  $this->fede,
-                'fechahasta' => $this->fecha,
+                'fechade' =>  $this->fede
             ]
         );
          

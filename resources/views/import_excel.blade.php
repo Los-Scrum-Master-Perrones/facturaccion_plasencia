@@ -20,6 +20,11 @@
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-wEmeIV1mKuiNpC+IOBjI7aAzPcEZeedi5yW5f2yOq55WWLwNGmvvx4Um1vskeMj0" crossorigin="anonymous">
 
 
+<form method="post" enctype="multipart/form-data" action="{{ url('/importar_pendiente') }}" class="form-inline">
+                    @csrf
+                    <input type="file" name="select_file" id="select_file" class="form-control   mr-sm-2 " style="width:350px;" required/>
+                      <input type="submit" name="upload" style="width:130px;" class=" botonprincipal mr-sm-2 " value="Importar">
+                  </form>
     
     <ul class="nav justify-content-center">
     <li class="nav-item">

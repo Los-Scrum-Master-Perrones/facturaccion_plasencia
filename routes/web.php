@@ -2,10 +2,12 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ImportExcelController;
+use App\Http\Controllers\importar_pendiente_empaque;
 use App\Http\Controllers\VehicleController;
 use App\Http\Controllers\PedidoController;
 use App\Http\Controllers\CapaProductoController;
 use App\Http\Controllers\clase_producto;
+use App\Http\Controllers\importar_pendiente_lic;
 use App\Http\Controllers\PendienteController;
 use App\Http\Controllers\programacion;
 use App\Http\Controllers\tabla_existencia;
@@ -38,7 +40,13 @@ use App\Http\Livewire\ListaCajas;
  Route::get('/import_excel', [ImportExcelController::class, 'index'])->name('import_excel');
 
 
+ Route::post('/importar_pendiente', [importar_pendiente_lic::class, 'import_pendiente'])->name('importar_pendiente');
+
+
 Route::post('/import', [VehicleController::class, 'import']);
+
+
+Route::post('/importar_pendiente_empaque', [importar_pendiente_empaque::class, 'import_pendiente'])->name('importar_pendiente_empaque');
 
 
 

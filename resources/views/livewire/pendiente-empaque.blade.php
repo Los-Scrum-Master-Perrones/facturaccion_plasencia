@@ -41,17 +41,14 @@
                    <div class="input-group mb-3">
 
 
-            <span class="input-group-text form-control ">De</span>
+            <span class="input-group-text form-control ">Fecha</span>
             <input type="date" name="fecha_de" id="fecha_de" wire:model="fechade" class="form-control " style="width:200px;" placeholder="Nombre">
-            <span class="input-group-text form-control ">Hasta</span>
-            <input type="date" name="fecha_hasta" id="fecha_hasta" wire:model="fechahasta" class="form-control mr-sm-2 " style="width:200px;" placeholder="Nombre">
 
                         <input name="nombre" id="nombre" class="form-control mr-sm-2 " style="width:200px;" placeholder="Nombre" wire:model="nombre">
 
                 <form action="{{Route('exportar_pendiente')}}">
                     <input type="text" value="{{isset($nom)?$nom:null}}" name="nombre" id="nombre" hidden>
                     <input type="date" value="{{isset($fede)?$fede:null}}" name="fecha_de" id="fecha_de" hidden>
-                    <input type="date" value="{{isset($feha)?$feha:null}}" name="fecha_hasta" id="fecha_hasta" hidden>
                 </form>
             
                 <form wire:submit.prevent="insertar_detalle_provicional()">
@@ -105,9 +102,9 @@
                 <tbody>
                     @foreach($datos_pendiente_empaque as $datos)      
                     <tr>
-                        <td style="width:100px; max-width: 400px;overflow-x:auto;">{{$datos->categoria}}</td>
-                        <td>{{$datos->item}}</td>
-                        <td>{{$datos->orden_del_sitema}}</td>
+                        <td style="width:100px; max-width: 400px;overflow-x:auto;">{{isset($datos->categoria)?($datos->categoria):"Sin categoria"}}</td>
+                        <td>{{isset($datos->item)?($datos->item):""}}</td>
+                        <td>{{isset($datos->orden_del_sitema)?($datos->orden_del_sitema):""}}</td>
                         <td>{{$datos->observacion}}</td>
                         <td>{{$datos->presentacion}}</td>
                         <td>{{$datos->mes}}</td>

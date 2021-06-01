@@ -36,7 +36,7 @@
                     <form  wire:submit.prevent="insertarDetalle_y_actualizarPendiente()"  style="width:auto; padding-left:50px; " >
                     @csrf
                     <input name="fecha_creacion" id="fecha_creacion" type="date" class="  form-control  mr-sm-2" placeholder="" style="width:200px;" wire:model="fecha">
-                    <input name="fecha_contenedor" id="fecha_contenedor" type="text" class="  form-control  mr-sm-2" placeholder="Número y fecha del contenedor" style="width:300px;" required wire:model="contenedor">
+                    <input name="fecha_contenedor" id="fecha_contenedor" type="text" class="  form-control  mr-sm-2" placeholder="Número y fecha del contenedor" style="width:300px;" required wire:model="contenedor" autocomplete="off">
                     <button type=" button" name="crear_programacion" id="crear_programacion" class=" botonprincipal " value="" style="width:auto;"> Crear programación</button>
                     </form> 
 

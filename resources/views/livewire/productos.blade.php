@@ -1,84 +1,89 @@
 <div xmlns:wire="http://www.w3.org/1999/xhtml">
-<title></title>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" />
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <title></title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" />
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Hola</title>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" />
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
-<script src="{{ URL::asset('css/tabla.js') }}"></script>
-@livewireStyles
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-wEmeIV1mKuiNpC+IOBjI7aAzPcEZeedi5yW5f2yOq55WWLwNGmvvx4Um1vskeMj0" crossorigin="anonymous">
-<script src= "{{ URL::asset('https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js') }}"></script>
-<link rel="stylesheet" href="{{ URL::asset('https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css') }}">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Hola</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" />
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+    <script src="{{ URL::asset('css/tabla.js') }}"></script>
+    @livewireStyles
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-wEmeIV1mKuiNpC+IOBjI7aAzPcEZeedi5yW5f2yOq55WWLwNGmvvx4Um1vskeMj0" crossorigin="anonymous">
+    <script src="{{ URL::asset('https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js') }}"></script>
+    <link rel="stylesheet"
+        href="{{ URL::asset('https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css') }}">
 
 
-    
+
     <ul class="nav justify-content-center">
-    <li class="nav-item">
+        <li class="nav-item">
             <a style="color:white; font-size:12px;" href="pendiente"><strong>Pendiente</strong></a>
-        </li>          
+        </li>
     </ul>
 
 
 
 
     <div class="container" style="max-width:100%; ">
-    
 
 
 
-    <div class="row" >
+
+        <div class="row">
             <div class="col">
-                   <div class="input-group mb-3">
-                     <input name="buscar" id="buscar"  style="width:350px;" class=" form-control  mr-sm-2 " wire:model="busqueda" placeholder="Búsqueda por Marca, Nombre y Vitola">
-                     <button class=" botonprincipal mr-sm-2 " style="width:200px;" >        <a  href="{{Route('datos_producto')}}"   >Datos adicionales</a></button>
-                         <button class=" botonprincipal mr-sm-2 " data-toggle="modal" data-target="#modal_nuevoproducto" style="width:200px;">Nuevo producto</button>
-   </div>
+                <div class="input-group mb-3">
+                    <input name="buscar" id="buscar" style="width:350px;" class=" form-control  mr-sm-2 "
+                        wire:model="busqueda" placeholder="Búsqueda por Marca, Nombre y Vitola">
+                    <button class=" botonprincipal mr-sm-2 " style="width:200px;"> <a
+                            href="{{Route('datos_producto')}}">Datos adicionales</a></button>
+                    <button class=" botonprincipal mr-sm-2 " data-toggle="modal" data-target="#modal_nuevoproducto"
+                        style="width:200px;">Nuevo producto</button>
+                </div>
             </div>
-    </div>
+        </div>
 
-    
 
-    <div class="panel-body" style="padding:0px;">
-    <div style="width:100%; padding-left:0px;   font-size:10px;   overflow-x: display; overflow-y: auto;
+
+        <div class="panel-body" style="padding:0px;">
+            <div style="width:100%; padding-left:0px;   font-size:10px;   overflow-x: display; overflow-y: auto;
      height:450px;">
-            @csrf
+                @csrf
 
-            <table class="table table-light"  style="font-size:10px;">
-                <thead style=" position: static;">
-                    <tr style="font-size:16px; text-align:center;">
-                    <th style=" text-align:center;">#</th>
-                        <th style=" text-align:center;">Item</th>
-                        <th style=" text-align:center;">Marca</th>
-                        <th style=" text-align:center;">Nombre</th>
-                        <th style=" text-align:center;">Vitola</th>
-                        <th style=" text-align:center;">Capa</th>
-                        <th style=" text-align:center;">Tipo de empaque</th>
-                        <th style=" text-align:center;">Detalles</th>
-                    </tr>
-                </thead>
-               
-                <tbody >
-                    @foreach($productos as $producto)
-                    <tr>
-                    <td>{{$producto->id_producto}}</td>
-                        <td>{{$producto->item}}</td>
-                        <td>{{$producto->marca}}</td>
-                        <td>{{$producto->nombre}}</td>
-                        <td>{{$producto->vitola}}</td>
-                        <td>{{$producto->capa}}</td>
-                        <td>{{$producto->tipo_empaque}}</td>
+                <table class="table table-light" style="font-size:10px;">
+                    <thead style=" position: static;">
+                        <tr style="font-size:16px; text-align:center;">
+                            <th style=" text-align:center;">#</th>
+                            <th style=" text-align:center;">Item</th>
+                            <th style=" text-align:center;">Marca</th>
+                            <th style=" text-align:center;">Nombre</th>
+                            <th style=" text-align:center;">Vitola</th>
+                            <th style=" text-align:center;">Capa</th>
+                            <th style=" text-align:center;">Tipo de empaque</th>
+                            <th style=" text-align:center;">Detalles</th>
+                        </tr>
+                    </thead>
 
-
-                        <td style=" text-align:center;">
+                    <tbody>
+                        @foreach($productos as $producto)
+                        <tr>
+                            <td>{{$producto->id_producto}}</td>
+                            <td>{{$producto->item}}</td>
+                            <td>{{$producto->marca}}</td>
+                            <td>{{$producto->nombre}}</td>
+                            <td>{{$producto->vitola}}</td>
+                            <td>{{$producto->capa}}</td>
+                            <td>{{$producto->tipo_empaque}}</td>
 
 
+                            <td style=" text-align:center;">
 
-                     <?php      if($producto->sampler==="si")    {     
+
+
+                                <?php      if($producto->sampler==="si")    {     
 
                            echo' <a style=" width:30px; height:30px;"  data-toggle="modal"  ';
                            echo'  data-target="#modal_agregarproducto" href="" ';
@@ -104,26 +109,26 @@
                            echo' </svg> ';
                            echo' </a> ';
                      }?>
-                            <a style=" width:10px; height:10px;" data-toggle="modal" href=""
-                                data-target="#modal_actualizarproducto" type="submit"
-                                onclick="cargar_datos_editar({{$producto->id_producto}})">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor"
-                                    class="bi bi-pencil-square" viewBox="0 0 16 16">
-                                    <path
-                                        d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z" />
-                                    <path fill-rule="evenodd"
-                                        d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z" />
-                                </svg>
-                            </a>
+                                <a style=" width:10px; height:10px;" data-toggle="modal" href=""
+                                    data-target="#modal_actualizarproducto" type="submit"
+                                    onclick="cargar_datos_editar({{$producto->id_producto}})">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor"
+                                        class="bi bi-pencil-square" viewBox="0 0 16 16">
+                                        <path
+                                            d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z" />
+                                        <path fill-rule="evenodd"
+                                            d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z" />
+                                    </svg>
+                                </a>
 
 
-                        </td>
-                    </tr>
-                    @endforeach
-                </tbody>
-            </table>
+                            </td>
+                        </tr>
+                        @endforeach
+                    </tbody>
+                </table>
+            </div>
         </div>
-    </div>
     </div>
 
 
@@ -158,11 +163,11 @@
 
             if (document.formulario_actualizar.sampler.checked) {
 
-document.formulario_actualizar.sampler.click();
+                document.formulario_actualizar.sampler.click();
 
-} else {
+            } else {
 
-}
+            }
 
 
 
@@ -212,8 +217,8 @@ document.formulario_actualizar.sampler.click();
 
                     if (producto[i].sampler === "si") {
 
-document.formulario_actualizar.sampler.click();
-} else {}
+                        document.formulario_actualizar.sampler.click();
+                    } else {}
 
 
                 }
@@ -365,7 +370,7 @@ document.formulario_actualizar.sampler.click();
 
     <!-- INICIO DEL MODAL NUEVO PRODUCTO -->
 
-    <form action="{{Route('nuevo_producto')}} " method="POST">
+    <form action="{{Route('nuevo_producto')}} " method="POST" name="theForm" id="theForm">
         <div class="modal fade" role="dialog" id="modal_nuevoproducto" data-backdrop="static" data-keyboard="false"
             tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true"
             style="opacity:.9;background:#212529;width=800px;">
@@ -396,7 +401,7 @@ document.formulario_actualizar.sampler.click();
 
                             <div class="row">
                                 <div class="mb-3 col">
-                                    <label  for="txt_figuraytipo" class="form-label">Item</label>
+                                    <label for="txt_figuraytipo" class="form-label">Item</label>
                                     <input name="item" id="item" style="font-size:16px" class="form-control" required
                                         type="text" autocomplete="off">
                                 </div>
@@ -453,8 +458,7 @@ document.formulario_actualizar.sampler.click();
                                 </div>
 
                                 <div class="mb-3 col">
-                                    <label  for="txt_malos"
-                                        class="form-label">Presentación</label>
+                                    <label for="txt_malos" class="form-label">Presentación</label>
 
                                     <select class="form-control" name="presentacion" id="presentacion"
                                         placeholder="Ingresa figura y tipo" style="overflow-y: scroll; height:30px;"
@@ -477,20 +481,20 @@ document.formulario_actualizar.sampler.click();
                                 <div class="mb-3 col">
                                     <label for="txt_total" class="form-label">Código del
                                         sistema</label>
-                                    <input name="cod_sistema" id="cod_sistema" 
-                                        class="form-control" required type="text" autocomplete="off">
+                                    <input name="cod_sistema" id="cod_sistema" class="form-control" required type="text"
+                                        autocomplete="off">
                                 </div>
                                 <div class="mb-3 col">
                                     <label for="txt_buenos" class="form-label">Código de
                                         precio</label>
-                                    <input name="cod_precio" id="cod_precio" class="form-control"
-                                        required type="text" autocomplete="off">
+                                    <input name="cod_precio" id="cod_precio" class="form-control" required type="text"
+                                        autocomplete="off">
                                 </div>
 
                                 <div class="mb-3 col">
-                                    <label for="txt_total" class="form-label">Código de la  cajita</label>
-                                    <input name="cod_caja" id="cod_caja"  class="form-control"
-                                        required type="text" autocomplete="off">
+                                    <label for="txt_total" class="form-label">Código de la cajita</label>
+                                    <input name="cod_caja" id="cod_caja" class="form-control" required type="text"
+                                        autocomplete="off">
                                 </div>
 
                             </div>
@@ -504,7 +508,7 @@ document.formulario_actualizar.sampler.click();
                                 <div class="mb-3 col">
 
                                     <input type="checkbox" name="anillo" id="anillo" style="font-size:20px" value="si">
-                                    <label  for="anillo" class="form-label">Anillo</label>
+                                    <label for="anillo" class="form-label">Anillo</label>
                                 </div>
                                 <div class="mb-3 col">
 
@@ -518,11 +522,11 @@ document.formulario_actualizar.sampler.click();
                     </div>
 
                     <div class="modal-footer">
-                        <button  type="button" class=" bmodal_no"
-                            data-dismiss="modal"><span >Cancelar</span>
+                        <button type="button" class=" bmodal_no" data-dismiss="modal"><span>Cancelar</span>
                             @csrf
                         </button>
-                        <button onclick="agregarproducto()"class=" bmodal_yes "> <span>Guardar</span> </button>
+                        <button onclick="agregarproducto()" class=" bmodal_yes " type="submit"> <span>Guardar</span>
+                        </button>
                     </div>
 
                 </div>
@@ -532,29 +536,33 @@ document.formulario_actualizar.sampler.click();
     <!-- FIN DEL MODAL NUEVO PRODUCTO -->
 
     <script type="text/javascript">
-        function agregarproducto(){ 
+        function agregarproducto() {
             var v_item = document.getElementById('item').value;
             var unico_item = 0;
 
             var datas = '<?php echo json_encode($productos);?>';
-        var data = JSON.parse(datas);
+            var data = JSON.parse(datas);
 
-        for (var i = 0; i < data.length; i++) {   
-        if(data[i].item.toLowerCase() === v_item.toLowerCase()){ 
-            unico_item++;
-        } 
+            for (var i = 0; i < data.length; i++) {
+                if (data[i].item.toLowerCase() === v_item.toLowerCase()) {
+                    unico_item++;
+                }
+            }
+
+            if (unico_item > 0) {
+                toastr.error('Este item ya existe', 'ERROR', {
+                    "progressBar": true,
+                    "closeButton": false,
+                    "preventDuplicates": true,
+                    "preventOpenDuplicates": true
+                });
+                event.preventDefault();
+            } else {
+                theForm.addEventListener('submit', function (event) {});
+
+            }
         }
-    
-        if(unico_item > 0){
-        toastr.error( 'Este item ya existe','ERROR',{"progressBar": true,"closeButton": false,"preventDuplicates": true
-        , "preventOpenDuplicates": true} );
-        event.preventDefault();
-        }else{
-        theForm.addEventListener('submit', function (event) {});
-        
-        }
-        }
-</script>
+    </script>
 
 
 
@@ -579,10 +587,12 @@ document.formulario_actualizar.sampler.click();
 
 
     <!-- INICIO MODAL ACTUALIZAR PRODUCTO-->
-    <form action="{{Route('actualizar_producto')}}" method="POST" name="formulario_actualizar" id="formulario_actualizar">
-    @csrf
-        <div class="modal fade"  id="modal_actualizarproducto" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true" style="opacity:.9;background:#212529;width=800px;">
-            <div class="modal-dialog modal-dialog-centered modal-lg" >
+    <form action="{{Route('actualizar_producto')}}" method="POST" name="formulario_actualizar"
+        id="formulario_actualizar">
+        @csrf
+        <div class="modal fade" id="modal_actualizarproducto" data-backdrop="static" data-keyboard="false" tabindex="-1"
+            aria-labelledby="staticBackdropLabel" aria-hidden="true" style="opacity:.9;background:#212529;width=800px;">
+            <div class="modal-dialog modal-dialog-centered modal-lg">
                 <div class="modal-content">
 
                     <div class="modal-header">
@@ -591,145 +601,159 @@ document.formulario_actualizar.sampler.click();
 
                     <div class="modal-body">
 
-                            <div class="row">
-                                <div class="mb-3 col">
-                                    <label for="txt_vitola" class="form-label">Marca</label>
-                                    <select class="form-control" name="marca_ac" id="marca_ac"
-                                        placeholder="Ingresa figura y tipo" style="overflow-y: scroll; height:30px;"
-                                        required>
-                                        @foreach($marcas as $marca)
-                                        <option style="overflow-y: scroll;"> {{$marca->marca}}</option>
-                                        @endforeach
-                                    </select>
-                                </div>      
-
-                                              
+                        <div class="row">
+                            <div class="mb-3 col">
+                                <label for="txt_vitola" class="form-label">Marca</label>
+                                <select class="form-control" name="marca_ac" id="marca_ac"
+                                    placeholder="Ingresa figura y tipo" style="overflow-y: scroll; height:30px;"
+                                    required>
+                                    @foreach($marcas as $marca)
+                                    <option style="overflow-y: scroll;"> {{$marca->marca}}</option>
+                                    @endforeach
+                                </select>
                             </div>
 
 
-                            <div class="row">
-                                <div class="mb-3 col">
-                                    <label for="txt_figuraytipo" class="form-label">Item</label>
-                                    <input name="item_ac" id="item_ac" class="form-control" required type="text" autocomplete="off" readOnly>
-                                </div>
+                        </div>
 
-                                <div class="mb-3 col">
-                                    <label  for="txt_figuraytipo" class="form-label">Capa</label>
-                                    <select class="form-control" name="capa_ac" id="capa_ac" placeholder="Ingresa figura y tipo" style="overflow-y: scroll; height:30px;"  required>
-                                        @foreach($capas as $capa)
-                                        <option style="overflow-y: scroll;"> {{$capa->capa}}</option>
-                                        @endforeach
-                                    </select>
-                                </div>
 
-                                <div class="mb-3 col">
-                                    <label for="txt_total" class="form-label">Nombre</label>
-                                    <select class="form-control" name="nombre_ac" id="nombre_ac" placeholder="Ingresa figura y tipo" style="overflow-y: scroll; height:30px;"  required>
-                                        @foreach($nombres as $nombre)
-                                        <option style="overflow-y: scroll;"> {{$nombre->nombre}}</option>
-                                        @endforeach
-                                    </select>
-                                </div>
+                        <div class="row">
+                            <div class="mb-3 col">
+                                <label for="txt_figuraytipo" class="form-label">Item</label>
+                                <input name="item_ac" id="item_ac" class="form-control" required type="text"
+                                    autocomplete="off" readOnly>
+                            </div>
+
+                            <div class="mb-3 col">
+                                <label for="txt_figuraytipo" class="form-label">Capa</label>
+                                <select class="form-control" name="capa_ac" id="capa_ac"
+                                    placeholder="Ingresa figura y tipo" style="overflow-y: scroll; height:30px;"
+                                    required>
+                                    @foreach($capas as $capa)
+                                    <option style="overflow-y: scroll;"> {{$capa->capa}}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+
+                            <div class="mb-3 col">
+                                <label for="txt_total" class="form-label">Nombre</label>
+                                <select class="form-control" name="nombre_ac" id="nombre_ac"
+                                    placeholder="Ingresa figura y tipo" style="overflow-y: scroll; height:30px;"
+                                    required>
+                                    @foreach($nombres as $nombre)
+                                    <option style="overflow-y: scroll;"> {{$nombre->nombre}}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                        </div>
+
+
+                        <div class="row">
+                            <div class="mb-3 col">
+                                <label for="txt_buenos" class="form-label">Vitola</label>
+                                <select class="form-control" name="vitola_ac" id="vitola_ac"
+                                    placeholder="Ingresa figura y tipo" style="overflow-y: scroll; height:30px;"
+                                    required>
+                                    @foreach($vitolas as $vitola)
+                                    <option style="overflow-y: scroll;"> {{$vitola->vitola}}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+
+                            <div class="mb-3 col">
+                                <label for="txt_malos" class="form-label">Tipo de empaque</label>
+                                <select class="form-control" name="tipo_ac" id="tipo_ac"
+                                    placeholder="Ingresa figura y tipo" style="overflow-y: scroll; height:30px;"
+                                    required>
+                                    @foreach($tipo_empaques as $tipo_empaque)
+                                    <option style="overflow-y: scroll;"> {{$tipo_empaque->tipo_empaque}}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+
+                            <div class="mb-3 col">
+                                <label for="txt_malos" class="form-label">Presentación</label>
+                                <select class="form-control" name="presentacion_ac" id="presentacion_ac"
+                                    placeholder="Ingresa figura y tipo" style="overflow-y: scroll; height:30px;"
+                                    required>
+                                    <option value="Puros Tripa Larga" style="overflow-y: scroll;">Puros Tripa Larga
+                                    </option>
+                                    <option value="Puros Tripa Corta" style="overflow-y: scroll;">Puros Tripa Corta
+                                    </option>
+                                </select>
+                            </div>
+
+                        </div>
+
+
+
+                        <div class="row">
+
+                            <div class="mb-3 col">
+                                <label for="txt_total" class="form-label">Código del sistema</label>
+                                <input name="cod_sistema_ac" id="cod_sistema_ac" class="form-control" type="text"
+                                    autocomplete="off">
+                            </div>
+                            <div class="mb-3 col">
+                                <label for="txt_buenos" class="form-label">Código de precio</label>
+                                <input name="cod_precio_ac" id="cod_precio_ac" class="form-control" type="text"
+                                    autocomplete="off">
+                            </div>
+
+                            <div class="mb-3 col">
+                                <label for="txt_total" class="form-label">Código de la cajita</label>
+                                <input name="cod_caja_ac" id="cod_caja_ac" class="form-control" type="text"
+                                    autocomplete="off">
+                            </div>
+
+                        </div>
+
+
+                        <div class="row">
+                            <div class="mb-3 col">
+                                <input type="checkbox" name="cello_ac" id="cello_ac" value="si">
+                                <label for="cello" class="form-label">Sello</label>
+                            </div>
+
+                            <div class="mb-3 col">
+                                <input type="checkbox" name="anillo_ac" id="anillo_ac" style="font-size:20px"
+                                    value="si">
+                                <label for="anillo" class="form-label">Anillo</label>
+                            </div>
+                            <div class="mb-3 col">
+                                <input type="checkbox" name="upc_ac" id="upc_ac" value="si">
+                                <label for="upc" class="form-label">UPC</label>
+                            </div>
+                            <input name="id_producto" id="id_producto" value="" hidden>
+                        </div>
+
+
+                        <div class="row">
+
+                            <div>
+                                <input type="checkbox" name="sampler" id="sampler" value="si" onclick="ocultar()">
+                                <label for="upc" class="form-label">SAMPLER</label>
+
+                                <input type="text" name="des" id="des" value="" style="display:none; width:60%;">
                             </div>
 
 
-                            <div class="row">
-                                <div class="mb-3 col">
-                                    <label  for="txt_buenos" class="form-label">Vitola</label>
-                                    <select class="form-control" name="vitola_ac" id="vitola_ac" placeholder="Ingresa figura y tipo" style="overflow-y: scroll; height:30px;" required>
-                                        @foreach($vitolas as $vitola)
-                                        <option style="overflow-y: scroll;"> {{$vitola->vitola}}</option>
-                                        @endforeach
-                                    </select>
-                                </div>
-
-                                <div class="mb-3 col">
-                                    <label  for="txt_malos" class="form-label">Tipo de empaque</label>
-                                    <select class="form-control" name="tipo_ac" id="tipo_ac" placeholder="Ingresa figura y tipo" style="overflow-y: scroll; height:30px;"   required>
-                                        @foreach($tipo_empaques as $tipo_empaque)
-                                        <option style="overflow-y: scroll;"> {{$tipo_empaque->tipo_empaque}}</option>
-                                        @endforeach
-                                    </select>
-                                </div>
-
-                                <div class="mb-3 col">
-                                    <label for="txt_malos" class="form-label">Presentación</label>
-                                    <select class="form-control" name="presentacion_ac" id="presentacion_ac" placeholder="Ingresa figura y tipo" style="overflow-y: scroll; height:30px;" required>
-                                        <option value="Puros Tripa Larga" style="overflow-y: scroll;">Puros Tripa Larga
-                                        </option>
-                                        <option value="Puros Tripa Corta" style="overflow-y: scroll;">Puros Tripa Corta
-                                        </option>
-                                    </select>
-                                </div>
-
-                            </div>
 
 
 
-                            <div class="row">
-
-                                <div class="mb-3 col">
-                                    <label for="txt_total"class="form-label">Código del sistema</label>
-                                    <input name="cod_sistema_ac" id="cod_sistema_ac" 
-                                        class="form-control" type="text" autocomplete="off">
-                                </div>
-                                <div class="mb-3 col">
-                                    <label  for="txt_buenos" class="form-label">Código de precio</label>
-                                    <input name="cod_precio_ac" id="cod_precio_ac"  class="form-control" type="text" autocomplete="off">
-                                </div>
-
-                                <div class="mb-3 col">
-                                    <label for="txt_total"class="form-label">Código de la cajita</label>
-                                    <input name="cod_caja_ac" id="cod_caja_ac" class="form-control" type="text" autocomplete="off">
-                                </div>
-
-                            </div>
 
 
-                            <div class="row">
-                                <div class="mb-3 col">
-                                    <input type="checkbox" name="cello_ac" id="cello_ac"  value="si">
-                                    <label  for="cello" class="form-label">Sello</label>
-                                </div>
+                        </div>
 
-                                <div class="mb-3 col">
-                                    <input type="checkbox" name="anillo_ac" id="anillo_ac" style="font-size:20px" value="si">
-                                    <label for="anillo" class="form-label">Anillo</label>
-                                </div>
-                                <div class="mb-3 col">
-                                    <input type="checkbox" name="upc_ac" id="upc_ac" value="si">
-                                    <label for="upc" class="form-label">UPC</label>
-                                </div>
-                                <input name="id_producto" id="id_producto" value="" hidden>
-                            </div>
-
-
-                            <div class="row">
-
-                           <div>
-                                    <input type="checkbox" name="sampler" id="sampler" value="si" onclick="ocultar()">
-                                    <label for="upc" class="form-label">SAMPLER</label>
-
-                                    <input type="text" name="des" id="des" value="" style="display:none; width:60%;">
-                                    </div>
-
- 
-                                
-
-                                
-
-
-                                 </div>
-                       
                     </div>
 
-                    <div class="modal-footer" >
-                    <button class="bmodal_no" data-dismiss="modal" >
-                    <span>Cancelar</span>
-                    </button>
-                    <button type="submit" class="bmodal_yes">
-                    <span>Guardar</span>
-                    </button>
+                    <div class="modal-footer">
+                        <button class="bmodal_no" data-dismiss="modal">
+                            <span>Cancelar</span>
+                        </button>
+                        <button type="submit" class="bmodal_yes">
+                            <span>Guardar</span>
+                        </button>
                     </div>
 
                 </div>
@@ -741,35 +765,32 @@ document.formulario_actualizar.sampler.click();
 
 
     <script type="text/javascript">
-function ocultar(){
-    if (document.formulario_actualizar.sampler.checked) {
+        function ocultar() {
+            if (document.formulario_actualizar.sampler.checked) {
 
-        document.getElementById('des').style.display = "block" ;
+                document.getElementById('des').style.display = "block";
 
-} else {
-
-
-    document.getElementById('des').style.display = "none" ;
-}
+            } else {
 
 
-
-}
+                document.getElementById('des').style.display = "none";
+            }
 
 
 
-
-</script>
+        }
+    </script>
 
 
 
 
     <!-- INICIO DEL MODAL AGREGAR DETALLE PRODUCTO -->
     <form action="{{Route('detalle')}}" method="POST" id="form_detalle" name="form_detalle">
-        <div class="modal fade" id="modal_agregarproducto" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true"  style="opacity:.9;background:#212529;width=800px;">
+        <div class="modal fade" id="modal_agregarproducto" data-backdrop="static" data-keyboard="false" tabindex="-1"
+            aria-labelledby="staticBackdropLabel" aria-hidden="true" style="opacity:.9;background:#212529;width=800px;">
             <div class="modal-dialog modal-dialog-centered 	modal-xl">
                 <div class="modal-content">
-                @csrf
+                    @csrf
                     <div class="modal-header">
                         <h5 class="modal-title" id="staticBackdropLabel">Agregar detalle del producto</h5>
                     </div>
@@ -777,116 +798,115 @@ function ocultar(){
                     <div class="modal-body">
 
 
-                            <div class="row">
-
-                   
+                        <div class="row">
 
 
 
 
-                                <div class="mb-3 col">
-                                    <label for="txt_figuraytipo" class="form-label">Item</label>
-                                    <input name="item_de" id="item_de"  class="form-control" required type="text" autocomplete="off" readonly>
-                                </div>
 
 
-                                <div class="mb-3 col">
-                                    <label for="txt_figuraytipo" class="form-label">Capa</label>
-                                    <select class="form-control" name="capa_de" id="capa_de"
-                                        placeholder="Ingresa figura y tipo" style="overflow-y: scroll; height:35px;"
-                                        required>
-                                        <option value="NINGUNA" style="overflow-y: scroll;">Ninguna</option>
-                                        @foreach($capas as $capa)
-                                        <option style="overflow-y: scroll;"> {{$capa->capa}}</option>
-                                        @endforeach
-                                    </select>
-                                </div>
-
-                                <div class="mb-3 col">
-                                    <label  for="txt_vitola" class="form-label">Marca</label>
-                                    <select class="form-control" name="marca_de" id="marca_de"
-                                        placeholder="Ingresa figura y tipo" style="overflow-y: scroll; height:35px;"
-                                        required>
-                                        <option value="NINGUNA" style="overflow-y: scroll;">Ninguna</option>
-                                        @foreach($marcas as $marca)
-                                        <option style="overflow-y: scroll;"> {{$marca->marca}}</option>
-                                        @endforeach
-                                    </select>
-
-                                </div>
-                            </div>
-
-                            <div class="row">
-                                <div class="mb-3 col">
-                                    <label for="txt_total" class="form-label">Nombre</label>
-
-                                    <select class="form-control" name="nombre_de" id="nombre_de"
-                                        placeholder="Ingresa figura y tipo" style="overflow-y: scroll; height:35px;"
-                                        required>
-                                        <option value="NINGUNA" style="overflow-y: scroll;">Ninguna</option>
-                                        @foreach($nombres as $nombre)
-                                        <option style="overflow-y: scroll;"> {{$nombre->nombre}}</option>
-                                        @endforeach
-                                    </select>
-                                </div>
-
-                                <div class="mb-3 col">
-                                    <label for="txt_buenos" class="form-label">Vitola</label>
-
-                                    <select class="form-control" name="vitola_de" id="vitola_de"
-                                        placeholder="Ingresa figura y tipo" style="overflow-y: scroll; height:35px;"
-                                        required>
-                                        <option value="NINGUNA" style="overflow-y: scroll;">Ninguna</option>
-                                        @foreach($vitolas as $vitola)
-                                        <option style="overflow-y: scroll;"> {{$vitola->vitola}}</option>
-                                        @endforeach
-                                    </select>
-                                </div>
-                                <div class="mb-3 col">
-                                    <label  for="txt_malos" class="form-label">Tipo de
-                                        empaque</label>
-                                    <select class="form-control" name="tipo_de" id="tipo_de"
-                                        placeholder="Ingresa figura y tipo" style="overflow-y: scroll; height:35px;"
-                                        required>
-                                        <option value="N/D" style="overflow-y: scroll;">Ninguna</option>
-                                        @foreach($tipo_empaques as $tipo_empaque)
-                                        <option style="overflow-y: scroll;"> {{$tipo_empaque->tipo_empaque}}
-                                        </option>
-                                        @endforeach
-                                    </select>
-                                </div>
+                            <div class="mb-3 col">
+                                <label for="txt_figuraytipo" class="form-label">Item</label>
+                                <input name="item_de" id="item_de" class="form-control" required type="text"
+                                    autocomplete="off" readonly>
                             </div>
 
 
-                            <div class="row">
-                                <div class="mb-3 col">
-                                    <input type="checkbox" name="cello_de" id="cello_de"
-                                        value="si">
-                                    <label for="cello" class="form-label">Sello</label>
-                                </div>
-                                <div class="mb-3 col">
-
-                                    <input type="checkbox" name="anillo_de" id="anillo_de" 
-                                        value="si">
-                                    <label  for="anillo" class="form-label">Anillo</label>
-                                </div>
-                                <div class="mb-3 col">
-
-                                    <input type="checkbox" name="upc_de" id="upc_de"  value="si">
-                                    <label  for="upc" class="form-label">UPC</label>
-                                </div>
+                            <div class="mb-3 col">
+                                <label for="txt_figuraytipo" class="form-label">Capa</label>
+                                <select class="form-control" name="capa_de" id="capa_de"
+                                    placeholder="Ingresa figura y tipo" style="overflow-y: scroll; height:35px;"
+                                    required>
+                                    <option value="NINGUNA" style="overflow-y: scroll;">Ninguna</option>
+                                    @foreach($capas as $capa)
+                                    <option style="overflow-y: scroll;"> {{$capa->capa}}</option>
+                                    @endforeach
+                                </select>
                             </div>
 
-                            <div class="row">
-                           
-                                <div class="mb-3 col">
+                            <div class="mb-3 col">
+                                <label for="txt_vitola" class="form-label">Marca</label>
+                                <select class="form-control" name="marca_de" id="marca_de"
+                                    placeholder="Ingresa figura y tipo" style="overflow-y: scroll; height:35px;"
+                                    required>
+                                    <option value="NINGUNA" style="overflow-y: scroll;">Ninguna</option>
+                                    @foreach($marcas as $marca)
+                                    <option style="overflow-y: scroll;"> {{$marca->marca}}</option>
+                                    @endforeach
+                                </select>
 
-                                    <label  for="txt_malos" class="form-label">Código de
-                                        precio</label>
-                                    <input name="precio_de" id="precio_de" style="font-size:16px" class="form-control"
-                                        required type="text" autocomplete="off">
-                                </div>
-                                <div class="mb-3 col">
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="mb-3 col">
+                                <label for="txt_total" class="form-label">Nombre</label>
+
+                                <select class="form-control" name="nombre_de" id="nombre_de"
+                                    placeholder="Ingresa figura y tipo" style="overflow-y: scroll; height:35px;"
+                                    required>
+                                    <option value="NINGUNA" style="overflow-y: scroll;">Ninguna</option>
+                                    @foreach($nombres as $nombre)
+                                    <option style="overflow-y: scroll;"> {{$nombre->nombre}}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+
+                            <div class="mb-3 col">
+                                <label for="txt_buenos" class="form-label">Vitola</label>
+
+                                <select class="form-control" name="vitola_de" id="vitola_de"
+                                    placeholder="Ingresa figura y tipo" style="overflow-y: scroll; height:35px;"
+                                    required>
+                                    <option value="NINGUNA" style="overflow-y: scroll;">Ninguna</option>
+                                    @foreach($vitolas as $vitola)
+                                    <option style="overflow-y: scroll;"> {{$vitola->vitola}}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                            <div class="mb-3 col">
+                                <label for="txt_malos" class="form-label">Tipo de
+                                    empaque</label>
+                                <select class="form-control" name="tipo_de" id="tipo_de"
+                                    placeholder="Ingresa figura y tipo" style="overflow-y: scroll; height:35px;"
+                                    required>
+                                    <option value="N/D" style="overflow-y: scroll;">Ninguna</option>
+                                    @foreach($tipo_empaques as $tipo_empaque)
+                                    <option style="overflow-y: scroll;"> {{$tipo_empaque->tipo_empaque}}
+                                    </option>
+                                    @endforeach
+                                </select>
+                            </div>
+                        </div>
+
+
+                        <div class="row">
+                            <div class="mb-3 col">
+                                <input type="checkbox" name="cello_de" id="cello_de" value="si">
+                                <label for="cello" class="form-label">Sello</label>
+                            </div>
+                            <div class="mb-3 col">
+
+                                <input type="checkbox" name="anillo_de" id="anillo_de" value="si">
+                                <label for="anillo" class="form-label">Anillo</label>
+                            </div>
+                            <div class="mb-3 col">
+
+                                <input type="checkbox" name="upc_de" id="upc_de" value="si">
+                                <label for="upc" class="form-label">UPC</label>
+                            </div>
+                        </div>
+
+                        <div class="row">
+
+                            <div class="mb-3 col">
+
+                                <label for="txt_malos" class="form-label">Código de
+                                    precio</label>
+                                <input name="precio_de" id="precio_de" style="font-size:16px" class="form-control"
+                                    required type="text" autocomplete="off">
+                            </div>
+                            <div class="mb-3 col">
                             </div>
                             <div class="mb-3 col">
                             </div>
@@ -897,14 +917,14 @@ function ocultar(){
 
 
 
-                    <div class="modal-footer" >
-                    <button class="bmodal_no" data-dismiss="modal" >
-                        <span>Cancelar</span>
-                    </button>
-                    <button type="submit" class="bmodal_yes">
-                        <span>Guardar</span>
-                    </button>
-                </div>
+                    <div class="modal-footer">
+                        <button class="bmodal_no" data-dismiss="modal">
+                            <span>Cancelar</span>
+                        </button>
+                        <button type="submit" class="bmodal_yes">
+                            <span>Guardar</span>
+                        </button>
+                    </div>
 
 
                 </div>
@@ -916,37 +936,41 @@ function ocultar(){
 
     <!-- INICIO DEL MODAL VER DETALLE PRODUCTO -->
     <form action="{{Route('detalle_producto')}} " method="POST" name="formde" id=" formde">
-        <div class="modal fade" id="modal_ver_detalle_producto" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true" style="opacity:.9;background:#212529;width=800px;">
+        <div class="modal fade" id="modal_ver_detalle_producto" data-backdrop="static" data-keyboard="false"
+            tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true"
+            style="opacity:.9;background:#212529;width=800px;">
             <div class="modal-dialog modal-dialog-centered modal-lg">
-                <div class="modal-content"  style="font-size:10px;">
+                <div class="modal-content" style="font-size:10px;">
 
                     <div class="modal-header">
-                        <h5 id="staticBackdropLabel">Detalles del producto <span  style="font-size:10px;" name="clase" id="clase"></span></h5> 
+                        <h5 id="staticBackdropLabel">Detalles del producto <span style="font-size:10px;" name="clase"
+                                id="clase"></span></h5>
                         <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close"></button>
                     </div>
 
-                    <div class="modal-body">                           
-                                <table id="detallestabla" name="detallestabla"  class="table table-bordered table-striped" style="font-size:10px;">
-                                    <thead>
-                                        <tr>
-                                            <th>Item</th>
-                                            <th>Marca</th>
-                                            <th>Nombre</th>
-                                            <th>Vitola</th>
-                                            <th>Tipo de empaque</th>
+                    <div class="modal-body">
+                        <table id="detallestabla" name="detallestabla" class="table table-bordered table-striped"
+                            style="font-size:10px;">
+                            <thead>
+                                <tr>
+                                    <th>Item</th>
+                                    <th>Marca</th>
+                                    <th>Nombre</th>
+                                    <th>Vitola</th>
+                                    <th>Tipo de empaque</th>
 
-                                        </tr>
-                                    </thead>
-                                    <tbody name="body" id="body">
+                                </tr>
+                            </thead>
+                            <tbody name="body" id="body">
 
-                                    </tbody>
-                                </table>
+                            </tbody>
+                        </table>
 
-                            </div>                   
+                    </div>
 
                     <input name="item_detalle" id="item_detalle" value+="" hidden>
 
-                  
+
                 </div>
             </div>
         </div>

@@ -49,12 +49,9 @@
 
             <div class="col">
                    <div class="input-group mb-3">
-                        <span class="input-group-text form-control ">De</span>
+                        <span class="input-group-text form-control ">Fecha</span>
                         <input type="date" name="fecha_de" id="fecha_de" class="form-control botonprincipal"
                                 style="width:200px;" placeholder="Nombre" wire:model= "fede">
-                        <span class="input-group-text form-control">Hasta</span>
-                        <input type="date" name="fecha_hasta" id="fecha_hasta" wire:model= "fecha"
-                                class="form-control mr-sm-2 botonprincipal" style="width:200px;" placeholder="Nombre">
                         
                        
                         <input name="nombre" id="nombre" class="form-control mr-sm-2 botonprincipal" style="width:200px;" placeholder="Nombre" wire:model= "nom">
@@ -62,7 +59,6 @@
                         <form wire:submit.prevent="exportPendiente()">
                         <input type="text" value= "{{isset($nom)?$nom:null}}" name="nombre" id="nombre" hidden wire:model= "nom" >
                         <input type="date" value= "{{isset($fede)?$fede:null}}" name="fecha_de" id="fecha_de" hidden wire:model= "fede">
-                        <input type="date" value= "{{isset($feha)?$feha:null}}" name="fecha_hasta" id="fecha_hasta" hidden wire:model= "fecha">
                         <button class="botonprincipal" type="submit" style="width:120px;">Exportar
                         </button>
 

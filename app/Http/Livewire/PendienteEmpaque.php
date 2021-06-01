@@ -22,10 +22,9 @@ class PendienteEmpaque extends Component
     public function render()
     {
         
-        $this->datos_pendiente_empaque = DB::select('call buscar_pendiente_empaque(:nombre,:fechade,:fechahasta)'
+        $this->datos_pendiente_empaque = DB::select('call buscar_pendiente_empaque(:nombre,:fechade)'
         ,['nombre'=>$this->nombre,
-        'fechade'=>$this->fechade,
-        'fechahasta'=>$this->fechahasta]);
+        'fechade'=>$this->fechade]);
     
 
         $this->tuplas=count($this->datos_pendiente_empaque);
@@ -35,10 +34,9 @@ class PendienteEmpaque extends Component
 
     public function mount(){
 
-        $this->datos_pendiente_empaque = DB::select('call buscar_pendiente_empaque(:nombre,:fechade,:fechahasta)'
+        $this->datos_pendiente_empaque = DB::select('call buscar_pendiente_empaque(:nombre,:fechade)'
         ,['nombre'=>$this->nombre,
-        'fechade'=>$this->fechade,
-        'fechahasta'=>$this->fechahasta]);
+        'fechade'=>$this->fechade]);
         
         $this->tuplas=count($this->datos_pendiente_empaque);
 
@@ -50,10 +48,9 @@ class PendienteEmpaque extends Component
 
     public function insertar_detalle_provicional(){
 
-        $this->datos_pendiente_empaque = DB::select('call buscar_pendiente_empaque(:nombre,:fechade,:fechahasta)'
+        $this->datos_pendiente_empaque = DB::select('call buscar_pendiente_empaque(:nombre,:fechade)'
         ,['nombre'=>$this->nombre,
-        'fechade'=>$this->fechade,
-        'fechahasta'=>$this->fechahasta]);
+        'fechade'=>$this->fechade]);
         
         $this->tuplas=count($this->datos_pendiente_empaque);
 
