@@ -93,11 +93,15 @@
                             style="font-size:15px;color:white;">{{$titulo_factura." ".$titulo_cliente." ". $contenedor." ".$titulo_mes}}
                         </label>
                     </div>
+                    
                     <div class="col" style="text-align:end;">
                         <label style="font-size:15px;color:white;">Factura N#: {{$num_factura_sistema}}</label>
                     </div>
-                </div>
-
+                    <div class="col" style="text-align:end;">
+                        <button style="width:120px;" class="botonprincipal" wire:click="historial()">Historial</button>
+                    </div>
+                </div>     
+<br>
 
 
                 <table class="table table-light" id="editable">

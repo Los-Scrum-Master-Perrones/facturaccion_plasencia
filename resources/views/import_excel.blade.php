@@ -34,7 +34,7 @@
             <a style="color:#E5B1E2; font-size:12px;"  href="import_excel"><strong>Importar pedido</strong></a>
         </li>
         <li class="nav-item">
-            <a style="color:white; font-size:12px;" href="index_bodega_proceso"><strong>Reporte</strong></a>
+            <a style="color:white; font-size:12px;" href="pendiente_salida"><strong>Reporte</strong></a>
         </li>
     </ul>
 

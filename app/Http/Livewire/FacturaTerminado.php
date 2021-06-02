@@ -269,4 +269,8 @@ class FacturaTerminado extends Component
             $this->dispatchBrowserEvent("advertencia_mensaje");
         }
     }
+
+    public function historial(){
+        return redirect()->route('historial_factura');
+    }
 }
