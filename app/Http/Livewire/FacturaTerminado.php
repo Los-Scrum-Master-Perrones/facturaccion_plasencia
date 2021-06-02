@@ -68,12 +68,11 @@ class FacturaTerminado extends Component
         $this->titulo_cliente = $this->cliente;
 
         $this->datos_pendiente = DB::select(
-            'call buscar_pendiente_factura(:orden,:nombre,:fechade,:fechahasta)',
+            'call buscar_pendiente_factura(:orden,:nombre,:fechade)',
             [
                 'orden' => $this->tipo_factura,
                 'nombre' =>  $this->nom,
-                'fechade' =>  $this->fede,
-                'fechahasta' => $this->fecha
+                'fechade' =>  $this->fede
             ]
         );
 

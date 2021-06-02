@@ -1,16 +1,14 @@
 <div xmlns:wire="http://www.w3.org/1999/xhtml">
+
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" />
     @livewireStyles
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-wEmeIV1mKuiNpC+IOBjI7aAzPcEZeedi5yW5f2yOq55WWLwNGmvvx4Um1vskeMj0" crossorigin="anonymous">
-
     <br>
     <ul class="nav justify-content-center">
         <li class="nav-item">
             <a style="color:white; font-size:12px;" href="pendiente"><strong>Pendiente</strong></a>
         </li>
-
-
 
         <li class="nav-item">
             <a style="color:white; font-size:12px;" href="import_excel"><strong>Importar pedido</strong></a>
@@ -21,28 +19,36 @@
     </ul>
     <br>
 
-
-    
-
     <div class="container" style="max-width:100%; ">
         <div class="row" style="text-align:center;">
 
             <div class="col">
                 <div class="input-group mb-3">
-                    <span class="input-group-text form-control ">Fecha</span>
-                    <input type="date" name="fecha_de" id="fecha_de" class="form-control botonprincipal"
-                        style="width:200px;" placeholder="Nombre" wire:model="fede">
 
+                    <input type="date" name="fecha" id="fecha" class="form-control botonprincipal"
+                        style="width:auto;" placeholder="Nombre" wire:model="fecha">
 
-                    <input name="nombre" id="nombre" class="form-control mr-sm-2 botonprincipal" style="width:200px;"
-                        placeholder="Nombre" wire:model="nom">
+                    <select class="form-control" wire:model="marca">
+                        <option value="">Todo</option>
+                        @foreach($marcas_p as $m)
+                            <option value="{{$m->marca}}">{{$m->marca}}</option>
+                        @endforeach
+                    </select>
+                    <select class="form-control" wire:model="nombre">
+                        <option value="">Todo</option>
+                        @foreach($nombre_p as $m)
+                            <option value="{{$m->nombre}}">{{$m->nombre}}</option>
+                        @endforeach
+                    </select>
+                    <select class="form-control" wire:model="capasss">
+                        <option value="">Todo</option>
+                        @foreach($capa_p as $m)
+                            <option value="{{$m->capas}}">{{$m->capas}}</option>
+                        @endforeach
+                    </select>
 
-                    <form wire:submit.prevent="exportPendiente()">
-                        <input type="text"  name="nombre" id="nombre" hidden
-                            wire:model="nom">
-                        <input type="date" name="fecha_de" id="fecha_de" hidden
-                            wire:model="fede">
-                    </form>
+                    <input name="nombre" id="nombre" class="form-control mr-sm-2 botonprincipal" style="width:auto;"
+                        placeholder="Numero Factura" wire:model="num_fac">
                 </div>
             </div>
         </div>
@@ -57,28 +63,42 @@
                     <thead>
                         <tr>
                             <th>ITEM</th>
-                            <th>MES</th>
-                            <th>ORDEN</th>
-                            <th style="width:100px;">MARCA</th>
-                            <th>VITOLA</th>
+                            <th>MARCA</th>
                             <th>NOMBRE</th>
-                            <th>CAPA</th>
-                            <th>TIPO DE EMPAQUE</th>
-                            <th>ANILLO</th>
-                            <th>CELLO</th>
-                            <th>UPC</th>
-                            <th>SALIDA</th>
-                            <th>MES FACTURA</th>
-                            <th>NUM. FACTURA</th>
+                            <th style="width:100px;">CAPA</th>
+                            <th>EMPAQUE</th>
+                            <th>ENVIADAS (CAJAS)</th>
+                            <th>ENVIADAS (TABACO)</th>
+                            <th>ORDEN</th>
+                            <th>FACTURA</th>
+                            <th>CONTENEDOR</th>
+                            <th>FECHA</th>
                         </tr>
                     </thead>
                     <tbody>
-                        
+
+                        @foreach($productos as $producto)
+                        <tr>
+                            <td>{{$producto->codigo_item}}</td>
+                            <td>{{$producto->marca}}</td>
+                            <td>{{$producto->nombre}}</td>
+                            <td>{{$producto->capas}}</td>
+                            <td>{{$producto->tipo_empaque}}</td>
+                            <td>{{$producto->cantidad_cajas}}</td>
+                            <td>{{$producto->total_tabacos}}</td>
+                            <td>{{$producto->orden}}</td>
+                            <td>{{$producto->num_factura}}</td>
+                            <td>{{$producto->contenedor}}</td>
+                            <td>{{$producto->fecha}}</td>
+                        </tr>
+                        @endforeach
+
                     </tbody>
                 </table>
             </div>
         </div>
     </div>
 
+    
 
 </div>

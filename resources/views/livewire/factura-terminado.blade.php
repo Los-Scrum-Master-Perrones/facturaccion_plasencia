@@ -71,8 +71,8 @@
                     <input type="date" name="fecha_de" id="fecha_de" class="form-control "
                         style="width:200px; display: none" placeholder="Nombre" wire:model="fede">
                     <span id="hasta" class="input-group-text form-control" style="display: none">Hasta</span>
-                    <input type="date" name="fecha_hasta" id="fecha_hasta" wire:model="fecha"
-                        style="width:200px; display: none" class="form-control mr-sm-2 " placeholder="Nombre">
+                    <!-- <input type="date" name="fecha_hasta" id="fecha_hasta" wire:model="fecha" 
+                        style="width:200px; display: none" class="form-control mr-sm-2 " placeholder="Nombre"> -->
 
 
                     <div style="display: none" id="busqueda_pendiente2" name="busqueda_pendiente2">
@@ -342,7 +342,6 @@
                     document.getElementById('de').style.display = 'block';
                     document.getElementById('hasta').style.display = 'block';
                     document.getElementById('fecha_de').style.display = 'block';
-                    document.getElementById('fecha_hasta').style.display = 'block';
                     document.getElementById('busqueda_pendiente2').style.display = 'block';
 
 
@@ -364,11 +363,9 @@
                     document.getElementById('de').style.display = 'none';
                     document.getElementById('hasta').style.display = 'none';
                     document.getElementById('fecha_de').style.display = 'none';
-                    document.getElementById('fecha_hasta').style.display = 'none';
                     document.getElementById('busqueda_pendiente2').style.display = 'none';
 
 
-                    document.getElementById('fecha_hasta').value = "";
                     document.getElementById('nombre').value = "";
                     document.getElementById('fecha_de').value = "";
 
