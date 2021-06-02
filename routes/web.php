@@ -11,6 +11,7 @@ use App\Http\Controllers\importar_pendiente_lic;
 use App\Http\Controllers\PendienteController;
 use App\Http\Controllers\programacion;
 use App\Http\Controllers\tabla_existencia;
+use App\Http\Livewire\BusquedaAvanzada;
 use App\Http\Livewire\DatosProductos;
 use App\Http\Livewire\FacturaTerminado;
 use App\Http\Livewire\Productos;
@@ -276,6 +277,7 @@ Route::post('/insertar_detalle_factura', [FacturaTerminado::class, 'insertar_det
 Route::post('/actualizar_detalle_factura', [FacturaTerminado::class, 'actualizar_detalle_factura'])->name('actualizar_detalle_factura');
 
 Route::get('/historial_ventas', HistorialVentas::class)->name('historial_factura');
+Route::get('/pendiente_salida', BusquedaAvanzada::class)->name('salida');
 
 Route::post('/actualizar_factura', [HistorialVentas::class, 'update_factura'])->name('editar_venta_factura');
 
