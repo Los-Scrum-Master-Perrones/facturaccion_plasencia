@@ -22,6 +22,7 @@ use App\Http\Livewire\ImportarProductoBodega;
 use App\Http\Livewire\InventarioCajas;
 use App\Http\Livewire\HistorialProgramacion;
 use App\Http\Livewire\DetalleProgramacion;
+use App\Http\Livewire\HistorialVentas;
 use App\Http\Livewire\ListaCajas;
 
 
@@ -273,6 +274,12 @@ Route::get('/factura_terminados', FacturaTerminado::class)->name('f_terminado');
 
 Route::post('/insertar_detalle_factura', [FacturaTerminado::class, 'insertar_detalle_factura'])->name('insertar_detalle_factura');
 Route::post('/actualizar_detalle_factura', [FacturaTerminado::class, 'actualizar_detalle_factura'])->name('actualizar_detalle_factura');
+
+Route::get('/historial_ventas', HistorialVentas::class)->name('historial_factura');
+
+Route::post('/actualizar_factura', [HistorialVentas::class, 'update_factura'])->name('editar_venta_factura');
+
+
 
 
 
