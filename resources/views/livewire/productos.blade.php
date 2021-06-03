@@ -40,7 +40,7 @@
                         wire:model="busqueda" placeholder="Búsqueda por Marca, Nombre y Vitola">
                     <button class=" botonprincipal mr-sm-2 " style="width:200px;"> <a
                             href="{{Route('datos_producto')}}">Datos adicionales</a></button>
-                    <button class=" botonprincipal mr-sm-2 " data-toggle="modal" data-target="#modal_nuevoproducto"
+                    <button class=" botonprincipal mr-sm-2 "  data-toggle="modal" data-target="#modal_nuevoproducto"
                         style="width:200px;">Nuevo producto</button>
                 </div>
             </div>
@@ -371,9 +371,9 @@
     <!-- INICIO DEL MODAL NUEVO PRODUCTO -->
 
     <form action="{{Route('nuevo_producto')}} " method="POST" name="theForm" id="theForm">
-        <div class="modal fade" role="dialog" id="modal_nuevoproducto" data-backdrop="static" data-keyboard="false"
+        <div class="modal fade" role="dialog" id="modal_nuevoproducto" name="modal_nuevoproducto" data-backdrop="static" data-keyboard="false"
             tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true"
-            style="opacity:.9;background:#212529;width=800px;">
+            style="opacity:.9;background:#212529;width=800px; position:absolute;">
             <div class="modal-dialog modal-dialog-centered modal-lg" style="opacity:.9;background:#212529;width=80%">
                 <div class="modal-content">
 
@@ -388,8 +388,9 @@
                             <div class="row">
                                 <div class="mb-3 col">
                                     <label for="txt_vitola" class="form-label">Marca</label>
-                                    <select class="form-control" name="marca" id="marca"
-                                        placeholder="Ingresa figura y tipo" style="overflow-y: scroll; height:30px;"
+                                    <select class="form-control mi-selector" name="marca" id="marca" 
+                                        placeholder="Ingresa figura y tipo" style="overflow-y: scroll; height:30px; width: 100px;"
+                                        name="states[]"
                                         required>
                                         @foreach($marcas as $marca)
                                         <option style="overflow-y: scroll;"> {{$marca->marca}}</option>
@@ -408,7 +409,7 @@
 
                                 <div class="mb-3 col">
                                     <label for="txt_figuraytipo" class="form-label">Capa</label>
-                                    <select class="form-control" name="capa" id="capa"
+                                    <select class="form-control mi-selector" name="capa" id="capa"
                                         placeholder="Ingresa figura y tipo" style="overflow-y: scroll; height:30px;"
                                         required>
                                         @foreach($capas as $capa)
@@ -420,7 +421,7 @@
                                 <div class="mb-3 col">
                                     <label for="txt_total" class="form-label">Nombre</label>
 
-                                    <select class="form-control" name="nombre" id="nombre"
+                                    <select class="form-control mi-selector" name="nombre" id="nombre"
                                         placeholder="Ingresa figura y tipo" style="overflow-y: scroll; height:30px;"
                                         required>
                                         @foreach($nombres as $nombre)
@@ -436,7 +437,7 @@
                                 <div class="mb-3 col">
                                     <label for="txt_buenos" class="form-label">Vitola</label>
 
-                                    <select class="form-control" name="vitola" id="vitola"
+                                    <select class="form-control mi-selector" name="vitola" id="vitola"
                                         placeholder="Ingresa figura y tipo" style="overflow-y: scroll; height:30px;"
                                         required>
                                         @foreach($vitolas as $vitola)
@@ -448,7 +449,7 @@
                                 <div class="mb-3 col">
                                     <label for="txt_malos" class="form-label">Tipo de
                                         empaque</label>
-                                    <select class="form-control" name="tipo" id="tipo"
+                                    <select class="form-control mi-selector" name="tipo" id="tipo"
                                         placeholder="Ingresa figura y tipo" style="overflow-y: scroll; height:30px;"
                                         required>
                                         @foreach($tipo_empaques as $tipo_empaque)

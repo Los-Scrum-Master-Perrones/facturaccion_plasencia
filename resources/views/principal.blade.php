@@ -19,6 +19,7 @@
     <!-- Libreria de las alertas -->
     <link rel="stylesheet"
         href="{{ URL::asset('https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.css') }}">
+        <link rel='stylesheet prefetch' href='https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.11.2/css/bootstrap-select.min.css'>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/css/select2.min.css" rel="stylesheet" />
 
 
@@ -357,11 +358,23 @@
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/js/select2.min.js"></script>
 
+
+
+
+    <script src="//cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.6.3/js/bootstrap-select.min.js"></script>
+
+
     <script>
-        $(document).ready(function () {
+        
+        $(document).ready(function() {
             $('.mi-selector').select2();
         });
+        
     </script>
+
+   
+
+
     @livewireScripts
 </body>
 
