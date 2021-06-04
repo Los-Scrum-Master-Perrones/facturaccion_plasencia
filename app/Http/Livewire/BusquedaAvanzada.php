@@ -59,5 +59,9 @@ class BusquedaAvanzada extends Component
         $this->fecha = Carbon::now()->format("Y-m-d");
     }
 
+    public function arreglar_sampler_pendiente(){
+        
+    }
+
 
 }
