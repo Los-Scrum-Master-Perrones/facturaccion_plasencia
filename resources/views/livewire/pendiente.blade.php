@@ -36,38 +36,49 @@
     <div class="container" style="max-width:100%; ">
 
 
-        <div class="row" style="max-width:100%; text-align:right;">
-            <div class="input-group mb-3" style="text-align:right;">
+        <div class="col" >
+            <div class="row"  style="margin-bottom:2px;">
 
-                <button class="botonprincipal" data-toggle="modal" data-target="#modal_crear_nuevo" onclick=""
-                    type="submit" style="width:20%; ">Agregar producto al pendiente
-                </button>
+                  <div class="col" >  <button class="botonprincipal" data-toggle="modal" data-target="#modal_crear_nuevo" onclick="" type="submit" style="width:100%; ">Agregar producto al pendiente</button> </div>
+
+                  <div class="col" >  <input type="date" name="fecha_de" id="fecha_de" class="form-control "  style="width:100%;" placeholder="Fecha" wire:model="fede"> </div>
+
+                  <div class="col" >  <input name="categoria" id="categoria" class="form-control mr-sm-2 " style="width:100%;"    placeholder="Categoria" wire:model="cat"> </div>
+
+                  <div class="col" >  <input name="item" id="item" class="form-control mr-sm-2 " style="width:100%;" placeholder="Item" wire:model="item"> </div>
+
+                  <div class="col" > <input name="presentacion" id="presentacion" class="form-control mr-sm-2 " style="width:100%;"   placeholder="Presentación" wire:model="pres"> </div>
+
+                  <div class="col" >  <input name="orden" id="orden" class="form-control mr-sm-2 " style="width:100%;"  placeholder="Orden" wire:model="orden"> </div>
+
             </div>
-        </div>
-        <div class="row" style="text-align:center;">
 
-            <div class="col">
-                <div class="input-group mb-3">
-                    <span class="input-group-text form-control ">Fecha</span>
-                    <input type="date" name="fecha_de" id="fecha_de" class="form-control botonprincipal"
-                        style="width:200px;" placeholder="Nombre" wire:model="fede">
+                    
+            <div class="row">                 
+                      
+            <div class="col" >      <input name="marca" id="marca" class="form-control mr-sm-2 " style="width:100%;"  placeholder="Marca" wire:model="marca"> </div>
+                        
+            <div class="col" ><input name="vitola" id="vitola" class="form-control mr-sm-2 " style="width:100%;"  placeholder="Vitola" wire:model="vito"> </div>
 
+            <div class="col" ><input name="nombre" id="nombre" class="form-control mr-sm-2 " style="width:100%;" placeholder="Nombre" wire:model="nom"> </div>
+                        
+            <div class="col" ><input name="capa" id="capa" class="form-control mr-sm-2 " style="width:100%;" placeholder="Capa" wire:model="capa"> </div>
 
-                    <input name="nombre" id="nombre" class="form-control mr-sm-2 botonprincipal" style="width:200px;"
-                        placeholder="Nombre" wire:model="nom">
+            <div class="col" ><input name="empaque" id="empaque" class="form-control mr-sm-2 " style="width:100%;"  placeholder="Ebmpaque" wire:model="empa"> </div>
 
-                    <form wire:submit.prevent="exportPendiente()">
+            <div class="col" >   <form wire:submit.prevent="exportPendiente()">
                         <input type="text" value="{{isset($nom)?$nom:null}}" name="nombre" id="nombre" hidden
                             wire:model="nom">
                         <input type="date" value="{{isset($fede)?$fede:null}}" name="fecha_de" id="fecha_de" hidden
                             wire:model="fede">
-                        <button class="botonprincipal" type="submit" style="width:120px;">Exportar
+                        <button class="botonprincipal" type="submit" style="100%;">Exportar
                         </button>
+                    </form> </div>
 
-                    </form>
+                </div>
+
                 </div>
             </div>
-        </div>
 
 
 
