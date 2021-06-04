@@ -34,13 +34,13 @@
                             <option value="{{$m->marca}}">{{$m->marca}}</option>
                         @endforeach
                     </select>
-                    <select class="form-control" wire:model="nombre">
+                    <select class="form-control mi-selector" wire:model="nombre">
                         <option value="">Todo</option>
                         @foreach($nombre_p as $m)
                             <option value="{{$m->nombre}}">{{$m->nombre}}</option>
                         @endforeach
                     </select>
-                    <select class="form-control" wire:model="capasss">
+                    <select class="form-control mi-selector" wire:model="capasss">
                         <option value="">Todo</option>
                         @foreach($capa_p as $m)
                             <option value="{{$m->capas}}">{{$m->capas}}</option>

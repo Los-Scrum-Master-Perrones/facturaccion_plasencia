@@ -24,9 +24,13 @@ class HistorialVentas extends Component
     public $contenedor_editar;
 
 
+
     
     public function render()
+
+
     {
+
         $this->factura_mes = DB::select('CALL `traer_ventas_historial`(:fecha,:busqueda)',
                         ["fecha"=> $this->fecha_mes, "busqueda"=> $this->busqueda]);
 
