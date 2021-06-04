@@ -150,8 +150,8 @@
             </div>
 
             
-            <div class="col-sm"  style="width:80%; padding-left:0px; ">
-                <table class="table table-light" id="editable" style="font-size:10px;">
+            <div class="col-sm"  style="width:100%; font-size:10px; height:450px;" >
+                <table class="table table-light" id="editable" style="font-size:10px; " >
                     <thead>
                         <tr style=" text-align:center;">
                             <th># ORDEN</th>

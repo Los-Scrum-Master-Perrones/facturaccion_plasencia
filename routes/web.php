@@ -79,6 +79,12 @@ Route::post('/pendiente_empaque', PendienteEmpaque::class)->name('pendiente_empa
 Route::get('/insertar_detalles', [PendienteEmpaque::class, 'insertar_detalle_provicional'])->name('insertar_detalles');
 Route::post('/insertar_detalles', [PendienteEmpaque::class, 'insertar_detalle_provicional'])->name('insertar_detalles');
 
+
+Route::get('/insertar_detalles_sin', [PendienteEmpaque::class, 'insertar_detalle_provicional_sin_existencia'])->name('insertar_detalles_sin');
+Route::post('/insertar_detalles_sin', [PendienteEmpaque::class, 'insertar_detalle_provicional_sin_existencia'])->name('insertar_detalles_sin');
+
+
+
 Route::get('/insertar_productos', [Productos::class, 'insertar_clase'])->name('nuevo_producto');
 Route::post('/insertar_productos', [Productos::class, 'insertar_clase'])->name('nuevo_producto');
 
