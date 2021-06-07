@@ -20,8 +20,13 @@ class PendienteEmpaque extends Component
     public $tuplas;
     public $datos_pendiente_empaque_nuevo;
 
+    public $total_pendiente = 0;
+    public $total_saldo = 0;
     public function render()
     {
+
+        $this->total_pendiente = 0;
+        $this->total_saldo = 0;
         
         $this->datos_pendiente_empaque = DB::select('call buscar_pendiente_empaque(:nombre,:fechade)'
         ,['nombre'=>$this->nombre,
@@ -30,6 +35,11 @@ class PendienteEmpaque extends Component
         $this->datos_pendiente_empaque_nuevo = DB::select('select pendiente_empaque.id_pendiente,pendiente_empaque.saldo from pendiente_empaque');
 
         $this->tuplas=count($this->datos_pendiente_empaque);
+
+        for($i = 0; $i < count($this->datos_pendiente_empaque) ;$i++){
+            $this->total_pendiente += $this->datos_pendiente_empaque[$i]->pendiente;
+            $this->total_saldo += $this->datos_pendiente_empaque[$i]->saldo;
+        }
        
         return view('livewire.pendiente-empaque')->extends('principal')->section('content');
     }
@@ -42,6 +52,8 @@ class PendienteEmpaque extends Component
         
         $this->tuplas=count($this->datos_pendiente_empaque);
 
+         $this->total_pendiente = 0;
+         $this->total_saldo = 0;
  
         $this->fechade= "";
         $this->fechahasta= "";

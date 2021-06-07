@@ -109,15 +109,18 @@ class Pendiente extends Component
 
     public function pendiente_indexi(Request $request)
     {
+
+        $insertar_pendiente = DB::select(
+            'call insertar_pendiente(:fecha)',
+            ['fecha' => (string)$request->fecha]
+        );
+        
             $insertar_pendiente_empaque =   \DB::select(
                 'call insertar_pendente_empaque(:fecha)',
                 ['fecha' => (string)$request->fecha]
             );
     
-            $insertar_pendiente = DB::select(
-                'call insertar_pendiente(:fecha)',
-                ['fecha' => (string)$request->fecha]
-            );
+         
     
             $this->datos_pendiente = DB::select(
                 'call buscar_pendiente(:nombre,:fechade)',

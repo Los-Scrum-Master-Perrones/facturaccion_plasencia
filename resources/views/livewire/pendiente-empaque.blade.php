@@ -124,7 +124,7 @@
                         <td>{{$datos->anillo}}</td>
                         <td>{{$datos->cello}}</td>
                         <td>{{$datos->upc}}</td>
-                        <td>{{$datos->pendiente_empaque}}</td>
+                        <td>{{$datos->pendiente}}</td>
                         <td>{{$datos->saldo}}</td>
                         <td style="text-align:center;">
 
@@ -147,7 +147,19 @@
                     @endforeach
             </table>
         </div>
-    </div>
+        <br>
+
+ <div class="input-group" style="width:30%;position: fixed;right: 0px;">
+   <span  class="form-control input-group-text">Total pendiente</span>
+        <input  type="text" class="form-control" wire:model="total_pendiente">
+   
+    <span class="form-control input-group-text">Total saldo</span>
+        <input  type="text" class="form-control" wire:model="total_saldo">
+   </div>
+
+  
+        
+   
 
 
 
