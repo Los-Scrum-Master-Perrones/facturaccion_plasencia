@@ -272,4 +272,26 @@ class FacturaTerminado extends Component
     public function historial(){
         return redirect()->route('historial_factura');
     }
+
+
+
+    public function actualizar_Datos_sampler(){
+
+        $datos_sampler_pendiente = DB::select('SELECT * FROM pendiente WHERE 
+        (SELECT clase_productos.sampler FROM clase_productos WHERE clase_productos.item = pendiente.item)= "si"
+        ORDER BY 1 asc');
+ 
+        $conteo_detallesc= 0; 
+        $secuencia_de_detalles=0;
+
+        for($i = 0 ;  $i < count($datos_sampler_pendiente);$i++){
+               
+            $conteo_detallesc = DB::select('SELECT * FROM detalle_clase_productos WHERE detalle_clase_productos.item = :item
+            ORDER BY 1 ASC
+            LIMIT :tupla, 1;', ['item' => $datos_sampler_pendiente[$i]->item, 'tupla'=> $conteo_detallesc]);
+                
+        }
+
+
+    }
 }

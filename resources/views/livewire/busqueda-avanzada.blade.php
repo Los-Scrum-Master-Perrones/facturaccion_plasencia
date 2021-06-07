@@ -28,13 +28,33 @@
                     <input type="date" name="fecha" id="fecha" class="form-control botonprincipal"
                         style="width:auto;" placeholder="Nombre" wire:model="fecha">
 
-                    <select class="form-control" wire:model="marca">
-                        <option value="">Todo</option>
-                        @foreach($marcas_p as $m)
-                            <option value="{{$m->marca}}">{{$m->marca}}</option>
-                        @endforeach
-                    </select>
-                    <select class="form-control mi-selector" wire:model="nombre">
+
+                    <div class="relative">
+                        <input type="text"
+                        class="form-input"
+                        placeholder="Buscar Marca"
+
+                        wire:model="marca"
+                        wire:keydown.escape="reset"
+                        wire:keydown.tab="reset"
+                        wire:keydown.ArrowUp="decrementHighlight"
+                        wire:keydown.ArrowDown="incrementHighlight">
+                        
+                        @if (!empty($marca))
+                            <div class="absolute z-10 list-group bg-white w-full rounded-t-none shadow-lg">
+                                @foreach($marcas_p as $m)
+                                    <a  href="">{{$m->marca}}</a>
+                                @endforeach
+                            </div>
+                        @else
+
+                            <div class="list-item">No Resultados</div>
+
+                        @endif
+                        
+                    </div>
+
+                    <select class="form-control" wire:model="nombre">
                         <option value="">Todo</option>
                         @foreach($nombre_p as $m)
                             <option value="{{$m->nombre}}">{{$m->nombre}}</option>

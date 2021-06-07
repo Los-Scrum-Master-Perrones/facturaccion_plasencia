@@ -49,7 +49,7 @@ class Pendiente extends Component
         $this->nombres= \DB::select('call buscar_nombre("")');
         $this->vitolas= \DB::select('call buscar_vitola("")');
         $this->tipo_empaques= \DB::select('call buscar_tipo_empaque("")');
-        $this->datos_pendiente = DB::select('call buscar_pendiente(:fede,:cat,:item,:pres,:orden,:marca,:vito,:nom,:capa,:empa,)',
+        $this->datos_pendiente = DB::select('call buscar_pendiente(:fede,:cat,:item,:pres,:orden,:marca,:vito,:nom,:capa,:empa)',
             [
                 'fede' =>  $this->fede,
                 'cat' =>  $this->cat,
@@ -85,13 +85,20 @@ class Pendiente extends Component
         $this->vitolas= \DB::select('call buscar_vitola("")');
         $this->tipo_empaques= \DB::select('call buscar_tipo_empaque("")');
 
-        $this->datos_pendiente = DB::select(
-            'call buscar_pendiente(:nombre,:fechade)',
-            [
-                'nombre' =>  $this->nom,
-                'fechade' =>  $this->fede
-            ]
-        );
+        $this->datos_pendiente = DB::select('call buscar_pendiente(:fede,:cat,:item,:pres,:orden,:marca,:vito,:nom,:capa,:empa)',
+        [
+            'fede' =>  $this->fede,
+            'cat' =>  $this->cat,
+            'item' =>  $this->item,
+            'pres' =>  $this->pres,
+            'orden' =>  $this->orden,
+            'marca' =>  $this->marca,
+            'vito' =>  $this->vito,
+            'nom' =>  $this->nom,
+            'capa' =>  $this->capa,
+            'empa' =>  $this->empa
+        ]
+    );
 
       
 
