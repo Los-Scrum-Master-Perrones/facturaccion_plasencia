@@ -18,6 +18,7 @@ class PendienteEmpaque extends Component
     public $fechahasta;
     public $nombre;
     public $tuplas;
+    public $datos_pendiente_empaque_nuevo;
 
     public function render()
     {
@@ -26,6 +27,7 @@ class PendienteEmpaque extends Component
         ,['nombre'=>$this->nombre,
         'fechade'=>$this->fechade]);
     
+        $this->datos_pendiente_empaque_nuevo = DB::select('select pendiente_empaque.id_pendiente,pendiente_empaque.saldo from pendiente_empaque');
 
         $this->tuplas=count($this->datos_pendiente_empaque);
        
@@ -92,6 +94,20 @@ class PendienteEmpaque extends Component
         return redirect()->route('detalles_programacion'); 
        
     }
+
+
+    
+    public function actualizar_pendiente_empaque(Request $request){         
+    
+        $this->actualizar=\DB::select('call actualizar_pendiente_empaque(:id,:saldo)',
+        ['id'=>$request->id_pendientea,
+        'saldo' =>$request->saldo
+        ]);
+
+
+        return redirect()->route('pendiente_empaque'); 
+    
+        }
 
 
     
