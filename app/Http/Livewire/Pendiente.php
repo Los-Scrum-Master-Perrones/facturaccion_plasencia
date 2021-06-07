@@ -11,10 +11,20 @@ use Maatwebsite\Excel\Facades\Excel;
 
 class Pendiente extends Component
 {
+    /* variables para la busqueda*/
+    public $fede;
+    public $cat;
+    public $item;
+    public $pres;
+    public $orden;
+    public $marca;
+    public $vito;
+    public $nom;
+    public $capa;
+    public $empa;
+
 
     public $datos_pendiente;
-    public $nom;
-    public $fede;
     public $fecha;
 
 
@@ -39,10 +49,18 @@ class Pendiente extends Component
         $this->nombres= \DB::select('call buscar_nombre("")');
         $this->vitolas= \DB::select('call buscar_vitola("")');
         $this->tipo_empaques= \DB::select('call buscar_tipo_empaque("")');
-        $this->datos_pendiente = DB::select('call buscar_pendiente(:nombre,:fechade)',
+        $this->datos_pendiente = DB::select('call buscar_pendiente(:fede,:cat,:item,:pres,:orden,:marca,:vito,:nom,:capa,:empa,)',
             [
-                'nombre' =>  $this->nom,
-                'fechade' =>  $this->fede
+                'fede' =>  $this->fede,
+                'cat' =>  $this->cat,
+                'item' =>  $this->item,
+                'pres' =>  $this->pres,
+                'orden' =>  $this->orden,
+                'marca' =>  $this->marca,
+                'vito' =>  $this->vito,
+                'nom' =>  $this->nom,
+                'capa' =>  $this->capa,
+                'empa' =>  $this->empa
             ]
         );
         

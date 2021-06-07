@@ -2,7 +2,7 @@
     "function" == typeof define && define.amd ? define(["jquery"], a) : "object" == typeof module && module.exports ? module.exports = function (b, c) {
         return void 0 === c && (c = "undefined" != typeof window ? require("jquery") : require("jquery")(b)), a(c), c
     } : a(jQuery)
-}(function (a) {
+}(function (a) { 
     var b = function () {
             if (a && a.fn && a.fn.select2 && a.fn.select2.amd) var b = a.fn.select2.amd;
             var b;
