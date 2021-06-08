@@ -39,7 +39,27 @@
         <div class="col" >
             <div class="row"  style="margin-bottom:2px;">
 
-                  <div class="col" >  <button class="botonprincipal" data-toggle="modal" data-target="#modal_crear_nuevo" onclick="" type="submit" style="width:100%; ">Agregar producto al pendiente</button> </div>
+                  <div class="col" > 
+                    <div class="row" > 
+                        <div class="col-md-9" > 
+                          <button class="botonprincipal" data-toggle="modal" data-target="#modal_crear_nuevo" onclick="" type="submit" >Agregar producto al pendiente</button>
+                        </div>
+
+                        <div class="col-md-3" > 
+                            <form wire:submit.prevent="exportPendiente()">
+                            <input type="text" value="{{isset($nom)?$nom:null}}" name="nombre" id="nombre" hidden
+                            wire:model="nom">
+                            <input type="date" value="{{isset($fede)?$fede:null}}" name="fecha_de" id="fecha_de" hidden
+                            wire:model="fede">
+                            <button class="botonprincipal" type="submit" >
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-file-earmark-spreadsheet" viewBox="0 0 16 16">
+                            <path d="M14 14V4.5L9.5 0H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2zM9.5 3A1.5 1.5 0 0 0 11 4.5h2V9H3V2a1 1 0 0 1 1-1h5.5v2zM3 12v-2h2v2H3zm0 1h2v2H4a1 1 0 0 1-1-1v-1zm3 2v-2h3v2H6zm4 0v-2h3v1a1 1 0 0 1-1 1h-2zm3-3h-3v-2h3v2zm-7 0v-2h3v2H6z"/>
+                            </svg>
+                            </button>
+                            </form>
+                        </div>     
+                    </div>            
+                  </div>
 
                   <div class="col" >  <input type="date" name="fecha_de" id="fecha_de" class="form-control "  style="width:100%;" placeholder="Fecha" wire:model="fede"> </div>
 
@@ -47,38 +67,58 @@
 
                   <div class="col" >  <input name="item" id="item" class="form-control mr-sm-2 " style="width:100%;" placeholder="Item" wire:model="item"> </div>
 
+                  <div class="col" >  <input name="orden" id="orden" class="form-control mr-sm-2 " style="width:100%;"  placeholder="Orden del sistema" wire:model="orden"> </div>
+
                   <div class="col" > <input name="presentacion" id="presentacion" class="form-control mr-sm-2 " style="width:100%;"   placeholder="Presentación" wire:model="pres"> </div>
 
-                  <div class="col" >  <input name="orden" id="orden" class="form-control mr-sm-2 " style="width:100%;"  placeholder="Orden" wire:model="orden"> </div>
 
             </div>
 
                     
-            <div class="row">                 
-                      
-            <div class="col" >      <input name="marca" id="marca" class="form-control mr-sm-2 " style="width:100%;"  placeholder="Marca" wire:model="marca"> </div>
+            <div class="row">   
+
+            <div class="col" ><input name="hon" id="hon" class="form-control mr-sm-2 " style="width:100%;"  placeholder="Orden" wire:model="hon"> </div>
                         
-            <div class="col" ><input name="vitola" id="vitola" class="form-control mr-sm-2 " style="width:100%;"  placeholder="Vitola" wire:model="vito"> </div>
+            <div class="col" ><input name="marca" id="marca" class="form-control mr-sm-2 " style="width:100%;"  placeholder="Marca" wire:model="marca"> </div>
+                        
+            <div class="col" >
+            <select class="form-control mi-selector" name="select_vitola" id="select_vitola"  wire:model="vito"
+                                        placeholder="Ingresa figura y tipo" style="overflow-y: scroll; width:100%;"
+                                        onChange="modifica();">
+                                        @foreach($vitolas as $vitola)
+                                        <option style="overflow-y: scroll;" value="{{$vitola->vitola}}"> {{$vitola->vitola}}</option>
+                                        @endforeach
+                                    </select>
+                                    
+        <input name="vitola" id="vitola" class="form-control mr-sm-2 " style="width:100%;"  placeholder="Vitola" value=""> </div>
 
             <div class="col" ><input name="nombre" id="nombre" class="form-control mr-sm-2 " style="width:100%;" placeholder="Nombre" wire:model="nom"> </div>
                         
             <div class="col" ><input name="capa" id="capa" class="form-control mr-sm-2 " style="width:100%;" placeholder="Capa" wire:model="capa"> </div>
 
-            <div class="col" ><input name="empaque" id="empaque" class="form-control mr-sm-2 " style="width:100%;"  placeholder="Ebmpaque" wire:model="empa"> </div>
+            <div class="col" ><input name="empaque" id="empaque" class="form-control mr-sm-2 " style="width:100%;"  placeholder="Empaque" wire:model="empa" value=""> </div>
 
-            <div class="col" >   <form wire:submit.prevent="exportPendiente()">
-                        <input type="text" value="{{isset($nom)?$nom:null}}" name="nombre" id="nombre" hidden
-                            wire:model="nom">
-                        <input type="date" value="{{isset($fede)?$fede:null}}" name="fecha_de" id="fecha_de" hidden
-                            wire:model="fede">
-                        <button class="botonprincipal" type="submit" style="100%;">Exportar
-                        </button>
-                    </form> </div>
+           
 
                 </div>
 
                 </div>
             </div>
+
+
+
+    <script type="text/javascript">
+    $(document).ready(function () {
+        $("#select_vitola").change(function () {
+            var value = $(this).val();
+            $("#vitola").val(value);
+        });
+    });
+    </script>
+
+
+
+
 
 
 

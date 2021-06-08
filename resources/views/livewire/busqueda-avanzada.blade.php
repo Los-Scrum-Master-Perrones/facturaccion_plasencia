@@ -25,47 +25,95 @@
             <div class="col">
                 <div class="input-group mb-3">
 
-                    <input type="date" name="fecha" id="fecha" class="form-control botonprincipal"
-                        style="width:auto;" placeholder="Nombre" wire:model="fecha">
+                    <input type="date" name="fecha" id="fecha" class="form-control botonprincipal" style="width:auto;"
+                        placeholder="Nombre" wire:model="fecha">
 
 
                     <div class="relative">
-                        <input type="text"
-                        class="form-input"
-                        placeholder="Buscar Marca"
-
-                        wire:model="marca"
-                        wire:keydown.escape="reset"
-                        wire:keydown.tab="reset"
-                        wire:keydown.ArrowUp="decrementHighlight"
-                        wire:keydown.ArrowDown="incrementHighlight">
                         
-                        @if (!empty($marca))
-                            <div class="absolute z-10 list-group bg-white w-full rounded-t-none shadow-lg">
-                                @foreach($marcas_p as $m)
-                                    <a  href="">{{$m->marca}}</a>
-                                @endforeach
-                            </div>
-                        @else
+                        <input type="text" class="form-input" placeholder="Buscar Marca" wire:model="marca"
+                            wire:keydown.escape="reset_marca"
+                            wire:keydown.delete="reset_marca"
+                            wire:keydown.ArrowUp="incrementaIluminadoMarca()" 
+                            wire:keydown.ArrowDown="decrementarIluminadoMarca()"
+                            wire:keydown.enter="seleccionarMarca()">
+                            
+                        @if ($oculto_marca == 0)
+                                    @if (!empty($marca))
+                                    <div class="absolute z-10 list-group bg-white w-full rounded-t-none shadow-lg">
+                                        @if (!empty($marcas_p))
 
-                            <div class="list-item">No Resultados</div>
+                                        @foreach($marcas_p as $i => $m)
+                                        <a href="" class="list-group-item  {{$iluminadoIndice === $i ? 'active' : ''}}">{{$m->marca}}</a>
+                                        @endforeach
 
+                                        @else
+
+                                        <div class="absolute z-10 list-group bg-white w-full rounded-t-none shadow-lg">No Resultados</div>
+
+                                        @endif
+                                    </div>
+                                    @endif
                         @endif
-                        
+                      
+
+
                     </div>
 
-                    <select class="form-control" wire:model="nombre">
-                        <option value="">Todo</option>
-                        @foreach($nombre_p as $m)
-                            <option value="{{$m->nombre}}">{{$m->nombre}}</option>
-                        @endforeach
-                    </select>
-                    <select class="form-control mi-selector" wire:model="capasss">
-                        <option value="">Todo</option>
-                        @foreach($capa_p as $m)
-                            <option value="{{$m->capas}}">{{$m->capas}}</option>
-                        @endforeach
-                    </select>
+
+                    <div class="relative">
+                        <input type="text" class="form-input" placeholder="Buscar Nombre" wire:model="nombre"
+                            wire:keydown.escape="reset_nombre"
+                            wire:keydown.delete="reset_nombre"
+                            wire:keydown.ArrowUp="incrementaIluminadoNombre()" 
+                            wire:keydown.ArrowDown="decrementarIluminadoNombre()"
+                            wire:keydown.enter="seleccionarNombre()">
+                            
+                        @if ($oculto_nombre == 0)
+                                    @if (!empty($nombre))
+                                    <div class="absolute z-10 list-group bg-white w-full rounded-t-none shadow-lg">
+                                        @if (!empty($nombre_p))
+
+                                        @foreach($nombre_p as $i => $m)
+                                        <a href="" class="list-group-item  {{$iluminadoIndiceNombre === $i ? 'active' : ''}}">{{$m->nombre}}</a>
+                                        @endforeach
+
+                                        @else
+
+                                        <div class="absolute z-10 list-group bg-white w-full rounded-t-none shadow-lg">No Resultados</div>
+
+                                        @endif
+                                    </div>
+                                    @endif
+                        @endif
+                    </div>
+
+                    <div class="relative">
+                        <input type="text" class="form-input" placeholder="Buscar Capa" wire:model="capasss"
+                            wire:keydown.escape="reset_capa"
+                            wire:keydown.delete="reset_capa"
+                            wire:keydown.ArrowUp="incrementaIluminadoCapa()" 
+                            wire:keydown.ArrowDown="decrementarIluminadoCapa()"
+                            wire:keydown.enter="seleccionarCapa()">
+                            
+                        @if ($oculto_capa == 0)
+                                    @if (!empty($capasss))
+                                    <div class="absolute z-10 list-group bg-white w-full rounded-t-none shadow-lg">
+                                        @if (!empty($capa_p))
+
+                                        @foreach($capa_p as $i => $m)
+                                        <a href="" class="list-group-item  {{$iluminadoIndiceCapa === $i ? 'active' : ''}}">{{$m->capas}}</a>
+                                        @endforeach
+
+                                        @else
+
+                                        <div class="absolute z-10 list-group bg-white w-full rounded-t-none shadow-lg">No Resultados</div>
+
+                                        @endif
+                                    </div>
+                                    @endif
+                        @endif
+                    </div>
 
                     <input name="nombre" id="nombre" class="form-control mr-sm-2 botonprincipal" style="width:auto;"
                         placeholder="Numero Factura" wire:model="num_fac">
@@ -119,6 +167,6 @@
         </div>
     </div>
 
-    
+
 
 </div>
