@@ -22,7 +22,7 @@ class Pendiente extends Component
     public $nom;
     public $capa;
     public $empa;
-
+public $hon;
 
     public $datos_pendiente;
     public $fecha;
@@ -44,12 +44,18 @@ class Pendiente extends Component
 
     public function render()
     {
+      
+
         $this->capas= \DB::select('call buscar_capa("")');
         $this->marcas=\DB::select('call buscar_marca("")');
         $this->nombres= \DB::select('call buscar_nombre("")');
         $this->vitolas= \DB::select('call buscar_vitola("")');
         $this->tipo_empaques= \DB::select('call buscar_tipo_empaque("")');
-        $this->datos_pendiente = DB::select('call buscar_pendiente(:fede,:cat,:item,:pres,:orden,:marca,:vito,:nom,:capa,:empa,)',
+
+       
+      
+
+        $this->datos_pendiente = DB::select('call buscar_pendiente(:fede,:cat,:item,:pres,:orden,:marca,:vito,:nom,:capa,:empa,:hon)',
             [
                 'fede' =>  $this->fede,
                 'cat' =>  $this->cat,
@@ -60,7 +66,8 @@ class Pendiente extends Component
                 'vito' =>  $this->vito,
                 'nom' =>  $this->nom,
                 'capa' =>  $this->capa,
-                'empa' =>  $this->empa
+                'empa' =>  $this->empa,
+                'hon' =>  $this->hon
             ]
         );
         
@@ -72,8 +79,18 @@ class Pendiente extends Component
  
 
         $this->datos_pendiente = [];
-        $this->nom = "";
         $this->fede = "";
+        $this->cat = "";
+        $this->item = "";
+        $this->pres = "";
+        $this->orden = "";
+        $this->marca = "";
+        $this->vito = "";
+        $this->nom = "";
+        $this->capa = "";
+        $this->empa = "";
+        $this->hon = "";
+
         $this->fecha = "";
         $this->borrar = [];
         $this->actualizar= [];
@@ -85,11 +102,19 @@ class Pendiente extends Component
         $this->vitolas= \DB::select('call buscar_vitola("")');
         $this->tipo_empaques= \DB::select('call buscar_tipo_empaque("")');
 
-        $this->datos_pendiente = DB::select(
-            'call buscar_pendiente(:nombre,:fechade)',
+        $this->datos_pendiente = DB::select('call buscar_pendiente(:fede,:cat,:item,:pres,:orden,:marca,:vito,:nom,:capa,:empa,:hon)',
             [
-                'nombre' =>  $this->nom,
-                'fechade' =>  $this->fede
+                'fede' =>  $this->fede,
+                'cat' =>  $this->cat,
+                'item' =>  $this->item,
+                'pres' =>  $this->pres,
+                'orden' =>  $this->orden,
+                'marca' =>  $this->marca,
+                'vito' =>  $this->vito,
+                'nom' =>  $this->nom,
+                'capa' =>  $this->capa,
+                'empa' =>  $this->empa,
+                'hon' =>  $this->hon
             ]
         );
 
@@ -112,13 +137,21 @@ class Pendiente extends Component
                 ['fecha' => (string)$request->fecha]
             );
     
-            $this->datos_pendiente = DB::select(
-                'call buscar_pendiente(:nombre,:fechade)',
-                [
-                    'nombre' =>  $this->nom,
-                    'fechade' =>  $this->fede
-                ]
-            );
+            $this->datos_pendiente = DB::select('call buscar_pendiente(:fede,:cat,:item,:pres,:orden,:marca,:vito,:nom,:capa,:empa,:hon)',
+            [
+                'fede' =>  $this->fede,
+                'cat' =>  $this->cat,
+                'item' =>  $this->item,
+                'pres' =>  $this->pres,
+                'orden' =>  $this->orden,
+                'marca' =>  $this->marca,
+                'vito' =>  $this->vito,
+                'nom' =>  $this->nom,
+                'capa' =>  $this->capa,
+                'empa' =>  $this->empa,
+                'hon' =>  $this->hon
+            ]
+        );
 
              
             return redirect()->route('pendiente')->with('insertar_pendiente', $insertar_pendiente);
@@ -210,11 +243,19 @@ class Pendiente extends Component
             ]);
     
             
-        $this->datos_pendiente = DB::select(
-            'call buscar_pendiente(:nombre,:fechade)',
+            $this->datos_pendiente = DB::select('call buscar_pendiente(:fede,:cat,:item,:pres,:orden,:marca,:vito,:nom,:capa,:empa,:hon)',
             [
-                'nombre' =>  $this->nom,
-                'fechade' =>  $this->fede
+                'fede' =>  $this->fede,
+                'cat' =>  $this->cat,
+                'item' =>  $this->item,
+                'pres' =>  $this->pres,
+                'orden' =>  $this->orden,
+                'marca' =>  $this->marca,
+                'vito' =>  $this->vito,
+                'nom' =>  $this->nom,
+                'capa' =>  $this->capa,
+                'empa' =>  $this->empa,
+                'hon' =>  $this->hon
             ]
         );
          
