@@ -25,8 +25,7 @@ use App\Http\Livewire\HistorialProgramacion;
 use App\Http\Livewire\DetalleProgramacion;
 use App\Http\Livewire\HistorialVentas;
 use App\Http\Livewire\ListaCajas;
-
-
+use App\Http\Livewire\Pedido;
 
 /*
 |--------------------------------------------------------------------------
@@ -39,7 +38,13 @@ use App\Http\Livewire\ListaCajas;
 |
 */
 
- Route::get('/import_excel', [ImportExcelController::class, 'index'])->name('import_excel');
+
+Auth::routes();
+
+
+Route::group(['middleware' => 'auth'], function () {
+
+ Route::get('/import_excel', Pedido::class)->name('import_excel');
 
 
  Route::post('/importar_pendiente', [importar_pendiente_lic::class, 'import_pendiente'])->name('importar_pendiente');
@@ -56,12 +61,6 @@ Route::post('/importar_pedido', [PedidoController::class, 'import']);
 Route::get('/importar_pedido', [PedidoController::class, 'import']);
 
 
-
-
-
-
-Route::post('/vaciar_import_excel', [PedidoController::class, 'vaciar_import_excel'])->name('vaciar_import_excel');
-Route::get('/vaciar_import_excel', [PedidoController::class, 'vaciar_import_excel'])->name('vaciar_import_excel');
 
 Route::post('/nuevo_pedido', [PedidoController::class, 'nuevo_pedido'])->name('nuevo_pedido');
 Route::get('/nuevo_pedido', [PedidoController::class, 'nuevo_pedido'])->name('nuevo_pedido');
@@ -117,6 +116,11 @@ Route::post('/borrarpendiente',[ Pendiente::class,'eliminar_pendiente'])->name('
 
 Route::get('/actualizar_pendiente',[ Pendiente::class,'actualizar_pendiente'])->name('actualizar_pendiente');
 Route::post('/actualizar_pendiente',[ Pendiente::class,'actualizar_pendiente'])->name('actualizar_pendiente');
+
+
+
+Route::get('/actualizar_pendiente_empaque',[ PendienteEmpaque::class,'actualizar_pendiente_empaque'])->name('actualizar_pendiente_empaque');
+Route::post('/actualizar_pendiente_empaque',[ PendienteEmpaque::class,'actualizar_pendiente_empaque'])->name('actualizar_pendiente_empaque');
 
 
 Route::get('/nuevo_pendiente',[ Pendiente::class,'insertar_nuevo_pendiente'])->name('nuevo_pendiente');
@@ -210,24 +214,17 @@ Route::post('/insertar_tipo', [DatosProductos::class, 'insertar_tipo'])->name('i
 Route::get('/insertar_capa', [DatosProductos::class, 'insertar_capa'])->name('insertar_capa');
 Route::post('/insertar_capa', [DatosProductos::class, 'insertar_capa'])->name('insertar_capa');
 
-
-
-
-
-
-
 Route::get('/welcome', function () {
     return view('welcome');
 });
 
 
-Auth::routes();
 Route::get('/logout', [App\Http\Controllers\LoginController::class, 'logout'])->name('logout');
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 //rutas melvin
-Route::get('/', [App\Http\Controllers\TableditController::class, 'index'])->name('tabla');
+Route::get('/', [App\Http\Controllers\Principal::class, 'index'])->name('tabla');
 
 Route::post('/', [App\Http\Controllers\TableditController::class, 'buscar'])->name('buscar');
 Route::post('tabledit/action', [App\Http\Controllers\TableditController::class, 'action'])->name('tabledit.action');
@@ -288,17 +285,6 @@ Route::get('/pendiente_salida', BusquedaAvanzada::class)->name('salida');
 Route::post('/actualizar_factura', [HistorialVentas::class, 'update_factura'])->name('editar_venta_factura');
 
 
-
-
-
-
-
-
-
-
-
-
-
 Route::get('/importar_productos_terminado', [ImportExcelController::class, 'importar_productos_terminado'])->name('importar_productos_terminado');
 Route::post('/importar_archivoproductos_terminados', [App\Http\Controllers\ImportExcelController::class, 'importar_archivoproductos_terminados'])->name('importar_archivoproductos_terminados');
 Route::get('/importar_archivoproductos_terminados', [App\Http\Controllers\ImportExcelController::class, 'importar_archivoproductos_terminados'])->name('importar_archivoproductos_terminados');
@@ -310,3 +296,5 @@ Route::get('/editar_existencia_producto', [App\Http\Controllers\ImportExcelContr
 
 Route::post('/insertar_pro', [App\Http\Controllers\ImportExcelController::class, 'nuevo_pro_terminado'])->name('insertar_pro');
 Route::get('/insertar_pro', [App\Http\Controllers\ImportExcelController::class, 'nuevo_pro_terminado'])->name('insertar_pro');
+
+});

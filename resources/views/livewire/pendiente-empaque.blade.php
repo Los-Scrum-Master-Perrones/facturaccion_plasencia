@@ -1,20 +1,21 @@
 <div xmlns:wire="http://www.w3.org/1999/xhtml">
-<title></title>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" />
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <title></title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" />
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Hola</title>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" />
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
-<script src="{{ URL::asset('css/tabla.js') }}"></script>
-@livewireStyles
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-wEmeIV1mKuiNpC+IOBjI7aAzPcEZeedi5yW5f2yOq55WWLwNGmvvx4Um1vskeMj0" crossorigin="anonymous">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Hola</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" />
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+    <script src="{{ URL::asset('css/tabla.js') }}"></script>
+    @livewireStyles
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-wEmeIV1mKuiNpC+IOBjI7aAzPcEZeedi5yW5f2yOq55WWLwNGmvvx4Um1vskeMj0" crossorigin="anonymous">
 
 
-    
+
 
     <ul class="nav justify-content-center">
         <li class="nav-item">
@@ -34,35 +35,38 @@
 
 
     <div class="container" style="max-width:100%; ">
-    
-    <div class="row" style="text-align:center;">
+
+        <div class="row" style="text-align:center;">
 
             <div class="col">
-                   <div class="input-group mb-3">
+                <div class="input-group mb-3">
 
 
-            <span class="input-group-text form-control ">Fecha</span>
-            <input type="date" name="fecha_de" id="fecha_de" wire:model="fechade" class="form-control " style="width:200px;" placeholder="Nombre">
+                    <span class="input-group-text form-control ">Fecha</span>
+                    <input type="date" name="fecha_de" id="fecha_de" wire:model="fechade" class="form-control "
+                        style="width:200px;" placeholder="Nombre">
 
-                        <input name="nombre" id="nombre" class="form-control mr-sm-2 " style="width:200px;" placeholder="Nombre" wire:model="nombre">
+                    <input name="nombre" id="nombre" class="form-control mr-sm-2 " style="width:200px;"
+                        placeholder="Nombre" wire:model="nombre">
 
-                <form action="{{Route('exportar_pendiente')}}">
-                    <input type="text" value="{{isset($nom)?$nom:null}}" name="nombre" id="nombre" hidden>
-                    <input type="date" value="{{isset($fede)?$fede:null}}" name="fecha_de" id="fecha_de" hidden>
-                </form>
-            
-                <form wire:submit.prevent="insertar_detalle_provicional()">
-                      @csrf
-                      <button class="mr-sm-2 botonprincipal" style="width:200px;">Agregar Programación </button>
-                   </form>
-         
-                   <a  href="/detalles_programacion"> <button class="mr-sm-2 botonprincipal" style="width:200px;"> Ver</button></a> 
-           
-   </div>
-</div>
-</div>
+                    <form action="{{Route('exportar_pendiente')}}">
+                        <input type="text" value="{{isset($nom)?$nom:null}}" name="nombre" id="nombre" hidden>
+                        <input type="date" value="{{isset($fede)?$fede:null}}" name="fecha_de" id="fecha_de" hidden>
+                    </form>
 
+                    <form wire:submit.prevent="insertar_detalle_provicional()">
+                        @csrf
+                        <button class="mr-sm-2 botonprincipal" style="width:200px;">Agregar Programación </button>
+                    </form>
 
+                    <a href="/detalles_programacion"> <button class="mr-sm-2 botonprincipal" style="width:200px;">
+                            Ver</button></a>
+
+                </div>
+            </div>
+        </div>
+
+    </div>
 
 
 
@@ -73,7 +77,7 @@
 
 
     <div class="panel-body" style="padding:0px;">
-            <div style="width:100%; padding-left:0px;   font-size:10px;   overflow-x: display; overflow-y: auto;
+        <div style="width:100%; padding-left:0px;   font-size:10px;   overflow-x: display; overflow-y: auto;
      height:450px;">
             @csrf
             <table class="table table-light" style="font-size:10px;">
@@ -101,9 +105,10 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach($datos_pendiente_empaque as $datos)      
+                    @foreach($datos_pendiente_empaque as $datos)
                     <tr>
-                        <td style="width:100px; max-width: 400px;overflow-x:auto;">{{isset($datos->categoria)?($datos->categoria):"Sin categoria"}}</td>
+                        <td style="width:100px; max-width: 400px;overflow-x:auto;">
+                            {{isset($datos->categoria)?($datos->categoria):"Sin categoria"}}</td>
                         <td>{{isset($datos->item)?($datos->item):""}}</td>
                         <td>{{isset($datos->orden_del_sitema)?($datos->orden_del_sitema):""}}</td>
                         <td>{{$datos->observacion}}</td>
@@ -123,7 +128,7 @@
                         <td>{{$datos->saldo}}</td>
                         <td style="text-align:center;">
 
-                        <?php if( str_contains(strtoupper((string)($datos->nombre)) , 'PRESS'))    {   
+                            <?php if( str_contains(strtoupper((string)($datos->nombre)) , 'PRESS'))    {   
                        echo' <a style=" width:10px; height:10px;" data-toggle="modal" href="" data-target="#modal_actualizar"';
                        echo'type="submit" wire:click.prevent= "insertar_detalle_provicional_sin_existencia('.$datos->id_pendiente.')">';
 
@@ -134,6 +139,8 @@
                        echo'</svg>';
                        echo'</a>';
                     }?>
+
+                         
                         </td>
                     </tr>
 
@@ -141,42 +148,80 @@
             </table>
         </div>
     </div>
-</div>
-</div>
 
 
 
-<script type="text/javascript">
-    $(document).ready(function () {
+    <script type="text/javascript">
+        function datos_modal_actualizar(id) {
+            var datas = '<?php echo json_encode($datos_pendiente_empaque_nuevo);?>';
 
-        $.ajaxSetup({
-            headers: {
-                'X-CSRF-Token': $("input[name=_token]").val()
-            }
-        });
+            var data = JSON.parse(datas);
 
-        $('#editable').Tabledit({
-            url: '{{ route("tabledit.action") }}',
-            method: 'POST',
-            dataType: "json",
-            columns: {
-                identifier: [0, 'id'],
-                editable: [
-                    [1, 'first_name'],
-                    [2, 'last_name'],
-                    [3, 'gender']
-                ]
-            },
-            restoreButton: false,
 
-            onSuccess: function (data, textStatus, jqXHR) {
-                if (data.action == 'delete') {
-                    $('#' + data.id).remove();
+
+            for (var i = 0; i < data.length; i++) {
+                if (data[i].id_pendiente === id) {
+
+                    document.actualizar_pendiente.id_pendientea.value = data[i].id_pendiente;
+
+                    document.actualizar_pendiente.saldo.value = data[i].saldo;
+
+
                 }
             }
 
-        });
+        }
+    </script>
 
-    });
-</script>
+
+    <form action="{{Route('actualizar_pendiente_empaque')}}" method="POST" id="actualizar_pendiente"
+        name="actualizar_pendiente">
+        <div class="modal fade" role="dialog" id="modal_actualizar" data-backdrop="static" data-keyboard="false"
+            tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true"
+            style="opacity:.9;background:#212529;width=800px;">
+            <div class="modal-dialog modal-dialog-centered modal-lg" style="opacity:.9;background:#212529;width=80%">
+                <div class="modal-content">
+                    @csrf
+                    <div class="modal-header">
+                        <h5 id="staticBackdropLabel"><strong>Descripción del producto: </strong><span id="titulo"
+                                name="titulo"></span></h5>
+                    </div>
+
+
+                    <div class="modal-body">
+                        <div class="row">
+
+                            <input name="id_pendientea" id="id_pendientea" value="" hidden />
+
+                            <div class="mb-3 col">
+                                <label for="txt_figuraytipo" class="form-label">SALDO</label>
+                                <input name="saldo" id="saldo" class="form-control" type="text" autocomplete="off">
+                            </div>
+
+                        </div>
+
+
+
+
+                    </div>
+
+                    <div class="modal-footer">
+                        <button class="bmodal_no" data-dismiss="modal">
+                            <span>Cancelar</span>
+                        </button>
+                        <button type="submit" class="bmodal_yes">
+                            <span>Actualizar</span>
+                        </button>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </form>
+
+
+
+    <!-- FIN MODAL ACTUALIZAR DATO PENDIENTE -->
+
+ 
 </div>
