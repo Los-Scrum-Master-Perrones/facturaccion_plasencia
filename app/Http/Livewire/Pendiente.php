@@ -538,7 +538,10 @@ class Pendiente extends Component
 
     function exportPendiente()
     {
-        return Excel::download(new PendienteExport($this->nom, $this->fede, $this->fecha), 'Pendiente.xlsx');
+        return Excel::download(new PendienteExport($this->nom, $this->fede, $this->fecha,
+        $this->cat, $this->item, $this->pres,
+        $this->orden, $this->marca, $this->vito,
+        $this->capa, $this->empa, $this->hon), 'Pendiente.xlsx');
     }
 	
 

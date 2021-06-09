@@ -43,10 +43,20 @@ class PendienteExport implements FromCollection,
 
 
     
-    function __construct($nom,$fede,$fecha) {
+    function __construct($nom,$fede,$fecha,$cat,$item,$pres,$orden,$marca,$vito,$capa,$empa,$hon) {
         $this->nom = $nom;
         $this->fede = $fede;
         $this->feha = $fecha;
+
+        $this->cat = $cat;
+        $this->item = $item;
+        $this->pres = $pres;
+        $this->orden = $orden;
+        $this->marca = $marca;
+        $this->vito = $vito;
+        $this->capa = $capa;
+        $this->empa = $empa;
+        $this->hon = $hon;
   
     }
 

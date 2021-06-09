@@ -35,10 +35,7 @@
 
 
 
-    <div class="container" style="max-width:100%;position:absolute;">
-
-
-
+    <div class="container" style="max-width:100%;">
 
         <div class="row">
             <div class="col">
@@ -58,7 +55,6 @@
         <div class="panel-body" style="padding:0px;">
             <div style="width:100%; padding-left:0px;   font-size:10px;   overflow-x: display; overflow-y: auto;  height:450px;">
                 @csrf
-
                 <table class="table table-light" style="font-size:10px;">
                     <thead style=" position: static;">
                         <tr style="font-size:16px; text-align:center;">
@@ -86,8 +82,6 @@
 
 
                             <td style=" text-align:center;">
-
-
 
                                 <?php      if($producto->sampler==="si")    {     
 
@@ -127,12 +121,12 @@
                                     </svg>
                                 </a>
 
-
                             </td>
                         </tr>
                         @endforeach
                     </tbody>
                 </table>
+
             </div>
         </div>
     </div>
@@ -285,8 +279,6 @@
                     var nombre_item = idproduct[i].item;
                     document.form_detalle.item_de.value = nombre_item;
                 }
-
-
             }
         }
     </script>
@@ -429,6 +421,48 @@
 
 
 
+ <!-- INICIO DEL MODAL VER DETALLE PRODUCTO -->
+ <form action="{{Route('detalle_producto')}} " method="POST" name="formde" id=" formde">
+ @csrf
+        <div class="modal fade" id="modal_ver_detalle_producto" data-backdrop="static" data-keyboard="false" tabindex="-1" 
+        aria-labelledby="staticBackdropLabel" aria-hidden="true"  style="opacity:.9;background:#212529;width=800px;">
+            <div class="modal-dialog modal-dialog-centered modal-lg">
+                <div class="modal-content" style="width:700px;">
+
+                    <div class="modal-header">
+                        <h5 id="staticBackdropLabel">Detalles del producto <span style="font-size:10px;" name="clase" id="clase"></span></h5>
+                        <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close"></button>
+                    </div>
+
+                    <div class="modal-body">
+                        <table id="detallestabla" name="detallestabla" class="table table-bordered table-striped"
+                            style="font-size:10px;">
+                            <thead>
+                                <tr>
+                                    <th>Item</th>
+                                    <th>Marca</th>
+                                    <th>Nombre</th>
+                                    <th>Vitola</th>
+                                    <th>Tipo de empaque</th>
+
+                                </tr>
+                            </thead>
+                            <tbody name="body" id="body">
+
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <input name="item_detalle" id="item_detalle" value+="" hidden>
+
+                </div>
+            </div>
+        </div>
+    </form>
+    <!-- FIN DEL MODAL VER DETALLE PRODUCTO -->
+
+
+
 
 
 
@@ -437,8 +471,7 @@
 
 
     <!-- INICIO MODAL ACTUALIZAR PRODUCTO-->
-    <form action="{{Route('actualizar_producto')}}" method="POST" name="formulario_actualizar"
-        id="formulario_actualizar">
+    <form action="{{Route('actualizar_producto')}}" method="POST" name="formulario_actualizar" id="formulario_actualizar">
         @csrf
         <div class="modal fade" id="modal_actualizarproducto" data-backdrop="static" data-keyboard="false" tabindex="-1"
             aria-labelledby="staticBackdropLabel" aria-hidden="true" style="opacity:.9;background:#212529;width=800px;">
@@ -586,14 +619,7 @@
 
                                 <input type="text" name="des" id="des" value="" style="display:none; width:60%;">
                             </div>
-
-
-
-
-
-
-
-                        </div>
+                         </div>
 
                     </div>
 
@@ -617,28 +643,21 @@
     <script type="text/javascript">
         function ocultar() {
             if (document.formulario_actualizar.sampler.checked) {
-
                 document.getElementById('des').style.display = "block";
-
             } else {
-
-
                 document.getElementById('des').style.display = "none";
             }
-
-
-
         }
     </script>
 
 
 
 
-<div style="  display: none;justify-content: center;align-items: center;height: 100%;" id="div_AddDetalleProducto"   >
+<div style="  display: none;justify-content: center;align-items: center; height:100%;position:fixed;top:0px;width:50%;left:25%;" id="div_AddDetalleProducto"   >
     <!-- INICIO DEL MODAL AGREGAR DETALLE PRODUCTO -->
     <form action="{{Route('detalle')}}" method="POST" id="form_detalle" name="form_detalle">
         <div data-backdrop="static" data-keyboard="false" tabindex="-1"
-            aria-labelledby="staticBackdropLabel" aria-hidden="true" style="opacity:.9;background:#212529;width=1600px;">
+            aria-labelledby="staticBackdropLabel" aria-hidden="true" style="background:#212529;width=1600px;">
             <div >
                 <div class="modal-content" style="width:700px;">
                     @csrf
@@ -761,69 +780,27 @@
     </form>
     <!-- FIN DEL MODAL AGREGAR DETALLE PRODUCTO -->
     </div>
-
-
-
-
-
-
-
-    <!-- INICIO DEL MODAL VER DETALLE PRODUCTO -->
-    <form action="{{Route('detalle_producto')}} " method="POST" name="formde" id=" formde">
-        <div class="modal fade" id="modal_ver_detalle_producto" data-backdrop="static" data-keyboard="false"
-            tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true"
-            style="opacity:.9;background:#212529;width=800px;">
-            <div>
-                <div class="modal-content" style="width:700px;">
-
-                    <div class="modal-header">
-                        <h5 id="staticBackdropLabel">Detalles del producto <span style="font-size:10px;" name="clase"
-                                id="clase"></span></h5>
-                        <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close"></button>
-                    </div>
-
-                    <div class="modal-body">
-                        <table id="detallestabla" name="detallestabla" class="table table-bordered table-striped"
-                            style="font-size:10px;">
-                            <thead>
-                                <tr>
-                                    <th>Item</th>
-                                    <th>Marca</th>
-                                    <th>Nombre</th>
-                                    <th>Vitola</th>
-                                    <th>Tipo de empaque</th>
-
-                                </tr>
-                            </thead>
-                            <tbody name="body" id="body">
-
-                            </tbody>
-                        </table>
-
-                    </div>
-
-                    <input name="item_detalle" id="item_detalle" value+="" hidden>
-
-
-                </div>
-            </div>
-        </div>
-    </form>
-    <!-- FIN DEL MODAL VER DETALLE PRODUCTO -->
+   
 </div>
-
 </body>
 
 
 
 
 
-<div style="  display: none;justify-content: center;align-items: center;height: 100%;" id="div_AddProducto"   >
+
+
+
+
+
+
+
+<div style="  display: none;justify-content: center;align-items: center;height: 100%;position:fixed;top:0px;width:50%;left:25%;" id="div_AddProducto"   >
     <!-- INICIO DEL MODAL NUEVO PRODUCTO -->
 
     <form action="{{Route('nuevo_producto')}} " method="POST" name="theForm" id="theForm">
     <div data-backdrop="static" data-keyboard="false" tabindex="-1"
-            aria-labelledby="staticBackdropLabel" aria-hidden="true" style="opacity:.9;background:#212529;width=1600px;">
+            aria-labelledby="staticBackdropLabel" aria-hidden="true" style="background:#212529;width=1600px;">
             <div >
                 <div class="modal-content" style="width:700px;">
 
@@ -923,11 +900,7 @@
                                 </div>
                             </div>
 
-
-
                             <div class="row">
-
-
                                 <div class="mb-3 col">
                                     <label for="txt_total" class="form-label">Código del
                                         sistema</label>
@@ -946,9 +919,7 @@
                                     <input name="cod_caja" id="cod_caja" class="form-control" required type="text"
                                         autocomplete="off">
                                 </div>
-
                             </div>
-
 
                             <div class="row">
                                 <div class="mb-3 col">
@@ -965,7 +936,6 @@
                                     <input type="checkbox" name="upc" id="upc" style="font-size:20px" value="si">
                                     <label for="upc" class="form-label">UPC</label>
                                 </div>
-
 
                             </div>
                         </div>
