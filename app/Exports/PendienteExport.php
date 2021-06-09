@@ -28,11 +28,26 @@ class PendienteExport implements FromCollection,
     public $nom;
     public $fede;
     public $feha;
+
+    public $cat;
+    public $item;
+    public $pres;
+    public $orden;
+    public $marca;
+    public $vito;
+    public $capa;
+    public $empa;
+    public $hon;
+
+
+
+
     
     function __construct($nom,$fede,$fecha) {
         $this->nom = $nom;
         $this->fede = $fede;
         $this->feha = $fecha;
+  
     }
 
     public function headings(): array
@@ -70,11 +85,21 @@ class PendienteExport implements FromCollection,
     
     public function collection()
     {
-        $datos_pendiente = \DB::select('call buscar_pendiente(:nombre,:fechade,:fechahasta)',
-        ['nombre'=>(String)$this->nom,
-        'fechade'=>(String)$this->fede,
-        'fechahasta'=>(String)$this->feha
-        ]);
+        $datos_pendiente = \DB::select('call buscar_pendiente(:fede,:cat,:item,:pres,:orden,:marca,:vito,:nom,:capa,:empa,:hon)',
+        [
+            'fede' =>  $this->fede,
+            'cat' =>  $this->cat,
+            'item' =>  $this->item,
+            'pres' =>  $this->pres,
+            'orden' =>  $this->orden,
+            'marca' =>  $this->marca,
+            'vito' =>  $this->vito,
+            'nom' =>  $this->nom,
+            'capa' =>  $this->capa,
+            'empa' =>  $this->empa,
+            'hon' =>  $this->hon
+        ]
+    );
 
         return collect($datos_pendiente);
     }
