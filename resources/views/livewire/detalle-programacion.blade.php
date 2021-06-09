@@ -38,7 +38,12 @@
 
                     <input name="buscar" id="buscar" class="  form-control  mr-sm-2" wire:model="busqueda"
                         placeholder="Búsqueda por Marca, Nombre y Vitola" style="width:350px;">
+                        <form action="{{Route('exportar_detallesprogramacion')}}" id="formver" name="formver">
+                   
 
+                   <button class="botonprincipal" type="submit" style="width:120px;">Exportar </button>
+               
+                      </form>
                     <form wire:submit.prevent="insertarDetalle_y_actualizarPendiente()"
                         style="width:auto; padding-left:50px; ">
                         @csrf
@@ -310,6 +315,8 @@
         </div>
     </form>
 
+
+   
 
     <!-- FIN MODAL ELMINAR DETALLE -->
     </div>

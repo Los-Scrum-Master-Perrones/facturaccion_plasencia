@@ -7,6 +7,9 @@ use Livewire\Component;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
 
+use Maatwebsite\Excel\Facades\Excel;
+
+use App\Exports\detallesExport;
 class DetalleProgramacion extends Component
 {
 
@@ -132,5 +135,16 @@ class DetalleProgramacion extends Component
             
                 }
                 
+
+                function exportProgramacion(Request $request)
+                {
+                   
+                
+                    
+                    
+                    return Excel::download(new detallesExport(), 'ProgramaciónPro.xlsx');
+                }
+               
+            
 
 }

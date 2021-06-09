@@ -36,23 +36,199 @@
 
     <div class="container" style="max-width:100%; ">
 
+
+        <div class="col" style="height:70px;">
+            <div class="row" style="margin-bottom:2px">
+
+                
+
+                <div class="col"> <input type="date" name="fecha_de" id="fecha_de" class="form-control "
+                        style="width:100%;" placeholder="Fecha" wire:model="fede"> </div>
+
+                <div class="col"> <input name="categoria" id="categoria" class="form-control mr-sm-2 "
+                        style="width:100%;" placeholder="Categoria" wire:model="cat"> </div>
+
+                <div class="col"> <input name="item" id="item" class="form-control mr-sm-2 " style="width:100%;"
+                        placeholder="Item" wire:model="item"> </div>
+
+                <div class="col"> <input name="orden" id="orden" class="form-control mr-sm-2 " style="width:100%;"
+                        placeholder="Orden del sistema" wire:model="orden"> </div>
+
+                <div class="col"><input name="hon" id="hon" class="form-control mr-sm-2 " style="width:100%;"
+                        placeholder="Orden" wire:model="hon"> </div>
+
+            </div>
+
+
+            <div class="row">
+
+                <div class="col">
+                    <input type="text" class="form-input " placeholder="Buscar Marca" wire:model="marca"
+                        style="width:100%;" wire:keydown.delete="reset_marca" wire:keydown.escape="reset_marca"
+                        wire:keydown.arrow-down="incrementaIluminadoMarca"
+                        wire:keydown.arrow-up="decrementarIluminadoMarca" wire:keydown.enter="seleccionarMarca()">
+
+                    @if ($oculto_marca == 0)
+                    @if (!empty($marca))
+                    <div style="overflow-y: scroll; height:200px;"
+                        class="absolute z-10 list-group bg-white w-full rounded-t-none shadow-lg">
+                        @if (!empty($marcas_p))
+
+                        @foreach($marcas_p as $i => $m)
+                        <a href="" wire:click.prevent="seleccionarMarca()"
+                            class="list-group-item  {{$iluminadoIndiceMarca === $i ? 'active' : ''}}">{{$m->marca}}</a>
+                        @endforeach
+
+                        @else
+
+                        <div class="absolute z-10 list-group bg-white w-full rounded-t-none shadow-lg">No Resultados
+                        </div>
+
+                        @endif
+                    </div>
+                    @endif
+                    @endif
+                </div>
+
+                <div class="col">
+                    <input type="text" class="form-input " placeholder="Buscar Vitola" wire:model="vito"
+                        style="width:100%;" wire:keydown.escape="reset_vitola" wire:keydown.delete="reset_vitola"
+                        wire:keydown.arrow-down="incrementaIluminadoVitola"
+                        wire:keydown.arrow-up="decrementarIluminadoVitola" wire:keydown.enter="seleccionarVitola()">
+
+                    @if ($oculto_vitola == 0)
+                    @if (!empty($vito))
+                    <div style="overflow-y: scroll; height:200px;"
+                        class="absolute z-10 list-group bg-white w-full rounded-t-none shadow-lg">
+                        @if (!empty($vitolas_p))
+
+                        @foreach($vitolas_p as $i => $m)
+                        <a href="" wire:click.prevent="seleccionarVitola()"
+                            class="list-group-item  {{$iluminadoIndiceVitola === $i ? 'active' : ''}}">{{$m->vitola}}</a>
+                        @endforeach
+
+                        @else
+
+                        <div class="absolute z-10 list-group bg-white w-full rounded-t-none shadow-lg">No Resultados
+                        </div>
+
+                        @endif
+                    </div>
+                    @endif
+                    @endif
+                </div>
+
+                <div class="col">
+                    <input type="text" class="form-input " placeholder="Buscar Nombre" wire:model="nom"
+                        style="width:100%;" wire:keydown.escape="reset_nombre" wire:keydown.delete="reset_nombre"
+                        wire:keydown.arrow-down="incrementaIluminadoNombre()"
+                        wire:keydown.arrow-up="decrementarIluminadoNombre()" wire:keydown.enter="seleccionarNombre()">
+
+                    @if ($oculto_nombre == 0)
+                    @if (!empty($nom))
+                    <div style="overflow-y: scroll; height:200px;"
+                        class="absolute z-10 list-group bg-white w-full rounded-t-none shadow-lg">
+                        @if (!empty($nombre_p))
+
+                        @foreach($nombre_p as $i => $m)
+                        <a href="" wire:click.prevent="seleccionarNombre()"
+                            class="list-group-item  {{$iluminadoIndiceNombre === $i ? 'active' : ''}}">{{$m->nombre}}</a>
+                        @endforeach
+
+                        @else
+
+                        <div class="absolute z-10 list-group bg-white w-full rounded-t-none shadow-lg">No Resultados
+                        </div>
+
+                        @endif
+                    </div>
+                    @endif
+                    @endif
+                </div>
+
+                <div class="col">
+                    <input type="text" class="form-input " placeholder="Buscar Capa" wire:model="capa"
+                        style="width:100%;" wire:keydown.escape="reset_capa" wire:keydown.delete="reset_capa"
+                        wire:keydown.arrow-down="incrementaIluminadoCapa()"
+                        wire:keydown.arrow-up="decrementarIluminadoCapa()" wire:keydown.enter="seleccionarCapa()">
+
+                    @if ($oculto_capa == 0)
+                    @if (!empty($capa))
+                    <div style="overflow-y: scroll; height:200px;"
+                        class="absolute z-10 list-group bg-white w-full rounded-t-none shadow-lg">
+                        @if (!empty($capas_p))
+
+                        @foreach($capas_p as $i => $m)
+                        <a href="" wire:click.prevent="seleccionarCapa()"
+                            class="list-group-item  {{$iluminadoIndiceCapa === $i ? 'active' : ''}}">{{$m->capa}}</a>
+                        @endforeach
+
+                        @else
+
+                        <div class="absolute z-10 list-group bg-white w-full rounded-t-none shadow-lg">No Resultados
+                        </div>
+
+                        @endif
+                    </div>
+                    @endif
+                    @endif
+                </div>
+
+                <div class="col">
+                    <input type="text" class="form-input " placeholder="Buscar Tipo Empaque" wire:model="empa"
+                        style="width:100%;" wire:keydown.escape="reset_empaque" wire:keydown.delete="reset_empaque"
+                        wire:keydown.arrow-down="incrementaIluminadoEmpaque()"
+                        wire:keydown.arrow-up="decrementarIluminadoEmpaque()" wire:keydown.enter="seleccionarEmpaque()">
+
+                    @if ($oculto_empaque == 0)
+                    @if (!empty($empa))
+                    <div style="overflow-y: scroll; height:200px;"
+                        class="absolute z-10 list-group bg-white w-full rounded-t-none shadow-lg">
+                        @if (!empty($empaques_p))
+
+                        @foreach($empaques_p as $i => $m)
+                        <a href="" wire:click.prevent="seleccionarEmpaque()"
+                            class="list-group-item  {{$iluminadoIndiceEmpaque === $i ? 'active' : ''}}">{{$m->empaque}}</a>
+                        @endforeach
+
+                        @else
+
+                        <div class="absolute z-10 list-group bg-white w-full rounded-t-none shadow-lg">No Resultados
+                        </div>
+
+                        @endif
+                    </div>
+                    @endif
+                    @endif
+                </div>
+
+                <div class="col">
+                    <form wire:submit.prevent="exportPendiente()">
+                        <input type="text" value="{{isset($nom)?$nom:null}}" name="nombre" id="nombre" hidden
+                            wire:model="nom">
+                        <input type="date" value="{{isset($fede)?$fede:null}}" name="fecha_de" id="fecha_de" hidden
+                            wire:model="fede">
+                        
+                    </form>
+                </div>
+
+
+
+            </div>
+
+        </div>
+    </div>
+
+
+    <div class="container" style="max-width:100%; ">
+
         <div class="row" style="text-align:center;">
 
             <div class="col">
                 <div class="input-group mb-3">
 
 
-                    <span class="input-group-text form-control ">Fecha</span>
-                    <input type="date" name="fecha_de" id="fecha_de" wire:model="fechade" class="form-control "
-                        style="width:200px;" placeholder="Nombre">
-
-                    <input name="nombre" id="nombre" class="form-control mr-sm-2 " style="width:200px;"
-                        placeholder="Nombre" wire:model="nombre">
-
-                    <form action="{{Route('exportar_pendiente')}}">
-                        <input type="text" value="{{isset($nom)?$nom:null}}" name="nombre" id="nombre" hidden>
-                        <input type="date" value="{{isset($fede)?$fede:null}}" name="fecha_de" id="fecha_de" hidden>
-                    </form>
+                  
 
                     <form wire:submit.prevent="insertar_detalle_provicional()">
                         @csrf

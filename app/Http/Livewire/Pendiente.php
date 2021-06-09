@@ -70,11 +70,11 @@ class Pendiente extends Component
         $this->tipo_empaques= \DB::select('call buscar_tipo_empaque("")');
 
         /*Procedimientos de busquedas de la tabla pendiente*/
-        $this->marcas_p=\DB::select('call buscar_marca_pendiente(?)',[$this->marca]);
-        $this->nombre_p=\DB::select('call buscar_nombre_pendiente(?)',[$this->nom]);
-        $this->vitolas_p=\DB::select('call buscar_vitola_pendiente(?)',[$this->vito]);
-        $this->capas_p=\DB::select('call buscar_capa_pendiente(?)',[$this->capa]);
-        $this->empaques_p=\DB::select('call buscar_tipo_empaque_pendiente(?)',[$this->empa]);
+        $this->marcas_p=\DB::select('call buscar_marca_empaque(?)',[$this->marca]);
+        $this->nombre_p=\DB::select('call buscar_nombre_empaque(?)',[$this->nom]);
+        $this->vitolas_p=\DB::select('call buscar_vitola_empaque(?)',[$this->vito]);
+        $this->capas_p=\DB::select('call buscar_capa_empaque(?)',[$this->capa]);
+        $this->empaques_p=\DB::select('call buscar_empaque_empaque(?)',[$this->empa]);
 
         if($this->marca == null){
             $this->marca="";
@@ -108,24 +108,47 @@ class Pendiente extends Component
                 'hon' =>  $this->hon
             ]
         );
+
+
+        $datos = [];
+        $cantidad_detalle_sampler = 0;   
+        $detalles = 0;  
+        $valores = [];  
+
+        for($i = 0; $i < count($this->datos_pendiente) ;$i++){
+           
+
+
+            $sampler = DB::select('SELECT clase_productos.sampler FROM clase_productos WHERE  clase_productos.item = ?;', [$this->datos_pendiente[$i]->item]);
+            if( $sampler[0]->sampler == "si"){
+                if($cantidad_detalle_sampler == 0 && $detalles == 0){
+                    $datos = DB::select('call traer_numero_detalles_productos(?)', [$this->datos_pendiente[$i]->item]);
+                    $cantidad_detalle_sampler = $datos[0]->tuplas;
+                }
+                $valores = DB::select('call traer_detalles_productos_actualizar(?,?)', [$this->datos_pendiente[$i]->item,$detalles]);
+
+               
+                $actualizar = DB::select('call actualizar_pendiente_sampler(:marca,:nombre,:vitola,:capa,:tipo,:item)',[
+                    'marca'=>$valores[0]->marca,
+                   'nombre'=>$valores[0]->nombre,
+                   'vitola'=>$valores[0]->vitola,
+                   'capa'=>$valores[0]->capa,
+                    'tipo'=>$valores[0]->tipo_empaque ,
+                   'item'=>$this->datos_pendiente[$i]->id_pendiente
+                ]);
+              
+                $detalles++;
+
+                if($detalles == $cantidad_detalle_sampler){
+                    $detalles = 0;
+                    $cantidad_detalle_sampler = 0;
+                }
+            }
+            
+        }
         
         return view('livewire.pendiente')->extends('principal')->section('content');
     }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
     public function mount(){
@@ -164,7 +187,11 @@ class Pendiente extends Component
         $this->reset_vitola();
         $this->reset_empaque();
 
-
+        $datos = [];
+        $cantidad_detalle_sampler = 0;   
+        $detalles = 0;  
+        $valores = [];  
+        
         $this->capas= \DB::select('call buscar_capa("")');
         $this->marcas=\DB::select('call buscar_marca("")');
         $this->nombres= \DB::select('call buscar_nombre("")');

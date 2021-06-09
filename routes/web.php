@@ -271,6 +271,9 @@ Route::get('/exportar_pendiente', [Pendiente::class, 'exportPendiente'])->name('
 Route::get('/exportar_programacion', [HistorialProgramacion::class, 'exportProgramacion'])->name('exportar_programacion');
 
 
+Route::get('/exportar_detallesprogramacion', [DetalleProgramacion::class, 'exportProgramacion'])->name('exportar_detallesprogramacion');
+
+
 //Produtco terminado y Facturacion
 Route::get('/productos_terminado', ProductosTerminados::class)->name('p_terminado');
 
