@@ -23,15 +23,15 @@
         <div class="row" style="text-align:center;">
 
             <div class="col">
-                <div class="input-group mb-3">
+                <div class="input-group mb-3" style="height: 30px;">
 
-                    <input type="date" name="fecha" id="fecha" class="form-control botonprincipal" style="width:auto;"
+                    <input type="date" name="fecha" id="fecha" class="form-control " style="width:auto;"
                         placeholder="Nombre" wire:model="fecha">
 
 
                     <div class="relative">
                         
-                        <input type="text" class="form-input" placeholder="Buscar Marca" wire:model="marca"
+                        <input type="text" class="form-input " placeholder="Buscar Marca" wire:model="marca"
                             wire:keydown.escape="reset_marca"
                             wire:keydown.delete="reset_marca"
                             wire:keydown.ArrowUp="incrementaIluminadoMarca()" 
@@ -115,7 +115,7 @@
                         @endif
                     </div>
 
-                    <input name="nombre" id="nombre" class="form-control mr-sm-2 botonprincipal" style="width:auto;"
+                    <input name="nombre" id="nombre" class="form-control mr-sm-2 " style="width:auto;"
                         placeholder="Numero Factura" wire:model="num_fac">
                 </div>
             </div>
