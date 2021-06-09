@@ -109,9 +109,7 @@
                            echo' </svg> ';
                            echo' </a> ';
                      }?>
-                                <a style=" width:10px; height:10px;" data-toggle="modal" href=""
-                                    data-target="#modal_actualizarproducto" type="submit"
-                                    onclick="cargar_datos_editar({{$producto->id_producto}})">
+                                <a style=" width:10px; height:10px;" onclick="cargar_datos_editar({{$producto->id_producto}})">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor"
                                         class="bi bi-pencil-square" viewBox="0 0 16 16">
                                         <path
@@ -138,6 +136,8 @@
 
     <script type="text/javascript">
         function cargar_datos_editar(id) {
+
+            document.getElementById('div_EditarProducto').style.display = "flex";
 
             if (document.formulario_actualizar.cello_ac.checked) {
 
@@ -471,27 +471,26 @@
 
 
 
-
+    <div style="  display: none;justify-content: center;align-items: center; height:100%;position:fixed;top:0px;width:50%;left:25%;" id="div_EditarProducto"   >
     <!-- INICIO MODAL ACTUALIZAR PRODUCTO-->
-    <form action="{{Route('actualizar_producto')}}" method="POST" name="formulario_actualizar" id="formulario_actualizar">
+    <form action="{{Route('actualizar_producto')}}" method="POST" name="formulario_actualizar" id="formulario_actualizar" style="width:100%;">
         @csrf
-        <div class="modal fade" id="modal_actualizarproducto" data-backdrop="static" data-keyboard="false" tabindex="-1"
-            aria-labelledby="staticBackdropLabel" aria-hidden="true" style="opacity:.9;background:#212529;width=800px;">
-            <div class="modal-dialog modal-dialog-centered modal-lg">
+        <div data-backdrop="static" data-keyboard="false" tabindex="-1"
+            aria-labelledby="staticBackdropLabel" aria-hidden="true" >
+            <div >
                 <div class="modal-content">
 
                     <div class="modal-header">
-                        <h5 class="modal-title" id="staticBackdropLabel">Editar producto</h5>
+                        <h5 id="staticBackdropLabel"><strong>Editar producto</strong></h5>
+                        <button type="button" class="btn-close"  aria-label="Close" onclick="ocultar_div_EditarProducto()" ></button>
                     </div>
 
                     <div class="modal-body">
 
                         <div class="row">
                             <div class="mb-3 col">
-                                <label for="txt_vitola" class="form-label">Marca</label>
-                                <select class="form-control" name="marca_ac" id="marca_ac"
-                                    placeholder="Ingresa figura y tipo" style="overflow-y: scroll; height:30px;"
-                                    required>
+                                <label for="marca_ac" class="form-label">Marca</label>
+                                <select class=" mi-selector"  style=" height:30px; width: 100%; " name="marca_ac" id="marca_ac" placeholder="Ingresa figura y tipo" required>
                                     @foreach($marcas as $marca)
                                     <option style="overflow-y: scroll;"> {{$marca->marca}}</option>
                                     @endforeach
@@ -511,9 +510,7 @@
 
                             <div class="mb-3 col">
                                 <label for="txt_figuraytipo" class="form-label">Capa</label>
-                                <select class="form-control" name="capa_ac" id="capa_ac"
-                                    placeholder="Ingresa figura y tipo" style="overflow-y: scroll; height:30px;"
-                                    required>
+                                <select class=" mi-selector"  style=" height:30px; width: 100%; " name="capa_ac" id="capa_ac" placeholder="Ingresa figura y tipo" required>
                                     @foreach($capas as $capa)
                                     <option style="overflow-y: scroll;"> {{$capa->capa}}</option>
                                     @endforeach
@@ -522,9 +519,7 @@
 
                             <div class="mb-3 col">
                                 <label for="txt_total" class="form-label">Nombre</label>
-                                <select class="form-control" name="nombre_ac" id="nombre_ac"
-                                    placeholder="Ingresa figura y tipo" style="overflow-y: scroll; height:30px;"
-                                    required>
+                                <select class=" mi-selector"  style=" height:30px; width: 100%; "  name="nombre_ac" id="nombre_ac" placeholder="Ingresa figura y tipo" required>
                                     @foreach($nombres as $nombre)
                                     <option style="overflow-y: scroll;"> {{$nombre->nombre}}</option>
                                     @endforeach
@@ -536,9 +531,7 @@
                         <div class="row">
                             <div class="mb-3 col">
                                 <label for="txt_buenos" class="form-label">Vitola</label>
-                                <select class="form-control" name="vitola_ac" id="vitola_ac"
-                                    placeholder="Ingresa figura y tipo" style="overflow-y: scroll; height:30px;"
-                                    required>
+                                <select class=" mi-selector"  style=" height:30px; width: 100%; "  name="vitola_ac" id="vitola_ac" placeholder="Ingresa figura y tipo" required>
                                     @foreach($vitolas as $vitola)
                                     <option style="overflow-y: scroll;"> {{$vitola->vitola}}</option>
                                     @endforeach
@@ -547,9 +540,7 @@
 
                             <div class="mb-3 col">
                                 <label for="txt_malos" class="form-label">Tipo de empaque</label>
-                                <select class="form-control" name="tipo_ac" id="tipo_ac"
-                                    placeholder="Ingresa figura y tipo" style="overflow-y: scroll; height:30px;"
-                                    required>
+                                <select class=" mi-selector"  style=" height:30px; width: 100%; "  name="tipo_ac" id="tipo_ac" placeholder="Ingresa figura y tipo"  required>
                                     @foreach($tipo_empaques as $tipo_empaque)
                                     <option style="overflow-y: scroll;"> {{$tipo_empaque->tipo_empaque}}</option>
                                     @endforeach
@@ -626,7 +617,7 @@
                     </div>
 
                     <div class="modal-footer">
-                        <button class="bmodal_no" data-dismiss="modal">
+                        <button class="bmodal_no" onclick="ocultar_div_EditarProducto()" >
                             <span>Cancelar</span>
                         </button>
                         <button type="submit" class="bmodal_yes">
@@ -639,6 +630,7 @@
         </div>
     </form>
     <!-- FIN  MODAL ACTUALIZAR PRODUCTO -->
+    </div>
 
 
 
@@ -659,9 +651,9 @@
     <!-- INICIO DEL MODAL AGREGAR DETALLE PRODUCTO -->
     <form action="{{Route('detalle')}}" method="POST" id="form_detalle" name="form_detalle">
         <div data-backdrop="static" data-keyboard="false" tabindex="-1"
-            aria-labelledby="staticBackdropLabel" aria-hidden="true" style="background:#212529;width=1600px;">
+            aria-labelledby="staticBackdropLabel" aria-hidden="true" style="background:#212529;">
             <div >
-                <div class="modal-content" style="width:700px;">
+                <div class="modal-content" >
                     @csrf
                     <div class="modal-header">
                         <h5 class="modal-title" id="staticBackdropLabel">Agregar detalle del producto</h5>
@@ -797,14 +789,14 @@
 
 
 
-<div style="  display: none;justify-content: center;align-items: center;height: 100%;position:fixed;top:0px;width:50%;left:25%;" id="div_AddProducto"   >
+<div style="  display: none;justify-content: center;align-items: center;height: 100%;position:fixed;top:0px;left:25%;width:50%;" id="div_AddProducto"   >
     <!-- INICIO DEL MODAL NUEVO PRODUCTO -->
 
-    <form action="{{Route('nuevo_producto')}} " method="POST" name="theForm" id="theForm">
+    <form action="{{Route('nuevo_producto')}} " method="POST" name="theForm" id="theForm" style="width:100%;">
     <div data-backdrop="static" data-keyboard="false" tabindex="-1"
-            aria-labelledby="staticBackdropLabel" aria-hidden="true" style="background:#212529;width=1600px;">
+            aria-labelledby="staticBackdropLabel" aria-hidden="true" >
             <div >
-                <div class="modal-content" style="width:700px;">
+                <div class="modal-content" >
 
                     <div class="modal-header">
                         <h5 id="staticBackdropLabel"><strong>Agregar producto</strong></h5>
@@ -970,6 +962,20 @@
         function mostrar_div_AddProducto() {               
             document.getElementById('div_AddProducto').style.display = "flex";
         }
+
+
+
+        function ocultar_div_EditarProducto() {              
+          
+          document.getElementById('div_EditarProducto').style.display = "none";
+      }     
+
+
+      function mostrar_div_EditarProducto() {               
+          document.getElementById('div_EditarProducto').style.display = "flex";
+      }
+
+        
 
         function ocultar_div_AddDetalleProducto() {               
           

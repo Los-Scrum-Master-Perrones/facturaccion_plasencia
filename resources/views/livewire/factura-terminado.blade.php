@@ -62,22 +62,30 @@
                             class="bi bi-save2" viewBox="0 0 16 16">
                             <path
                                 d="M2 1a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H9.5a1 1 0 0 0-1 1v4.5h2a.5.5 0 0 1 .354.854l-2.5 2.5a.5.5 0 0 1-.708 0l-2.5-2.5A.5.5 0 0 1 5.5 6.5h2V2a2 2 0 0 1 2-2H14a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V2a2 2 0 0 1 2-2h2.5a.5.5 0 0 1 0 1H2z" />
-                        </svg>
-                        Guardar </button>
+                        </svg>  Guardar </button>
                 
                     
 
-                    <span id="de" class="input-group-text form-control" style="display: none">De</span>
-                    <input type="date" name="fecha_de" id="fecha_de" class="form-control "
-                        style="width:200px; display: none" placeholder="Nombre" wire:model="fede">
-                    <span id="hasta" class="input-group-text form-control" style="display: none">Hasta</span>
-                    <!-- <input type="date" name="fecha_hasta" id="fecha_hasta" wire:model="fecha" 
-                        style="width:200px; display: none" class="form-control mr-sm-2 " placeholder="Nombre"> -->
+                        <input type="date" name="fecha_de" id="fecha_de" class="form-control mr-sm-2 "
+                        style="width:200px; display: none" placeholder="Fecha" wire:model="fede">
+
+                        <input name="itemb" id="itemb" class="form-control mr-sm-2 "
+                        style="width:200px; display: none" placeholder="Item" wire:model="item">
+
+                        <input  name="ordenb" id="ordenb" class="form-control mr-sm-2 "
+                        style="width:200px; display: none" placeholder="Orden del sistema" wire:model="orden">
+
+                        <input  name="honb" id="honb" class="form-control "
+                        style="width:200px; display: none" placeholder="Orden" wire:model="hon">
 
 
-                    <div style="display: none" id="busqueda_pendiente2" name="busqueda_pendiente2">
-                        <input name="nombre" id="nombre" class="form-control mr-sm-2 " style="width:300px;"
-                            placeholder="Nombre" wire:model="nom">
+
+
+
+
+
+
+                    <div style="display: none" id="busqueda_pendiente2" name="busqueda_pendiente2">                       
                     </div>
                 </div>
             </div>
@@ -339,9 +347,12 @@
 
                     document.getElementById('pendiente_factura').style.display = 'block';
                     document.getElementById('boton_regresar').style.display = 'block';
-                    document.getElementById('de').style.display = 'block';
-                    document.getElementById('hasta').style.display = 'block';
                     document.getElementById('fecha_de').style.display = 'block';
+                    document.getElementById('ordenb').style.display = 'block';
+                    document.getElementById('itemb').style.display = 'block';
+                    document.getElementById('honb').style.display = 'block';
+
+
                     document.getElementById('busqueda_pendiente2').style.display = 'block';
 
 
@@ -360,13 +371,13 @@
                 function mostrarDetalleFactura() {
                     document.getElementById('pendiente_factura').style.display = 'none';
                     document.getElementById('boton_regresar').style.display = 'none';
-                    document.getElementById('de').style.display = 'none';
-                    document.getElementById('hasta').style.display = 'none';
                     document.getElementById('fecha_de').style.display = 'none';
+                    document.getElementById('ordenb').style.display = 'none';
+                    document.getElementById('itemb').style.display = 'none';
+                    document.getElementById('honb').style.display = 'none';
                     document.getElementById('busqueda_pendiente2').style.display = 'none';
 
 
-                    document.getElementById('nombre').value = "";
                     document.getElementById('fecha_de').value = "";
 
                     document.getElementById('editable').style.display = 'block';

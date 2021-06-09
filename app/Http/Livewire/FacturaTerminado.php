@@ -49,6 +49,10 @@ class FacturaTerminado extends Component
     public $fede;
     public $fecha;
 
+    public $item;
+    public $orden;
+    public $hon;
+
     public $id_eliminar;
     public $id_editar;
 
@@ -68,11 +72,15 @@ class FacturaTerminado extends Component
         $this->titulo_cliente = $this->cliente;
 
         $this->datos_pendiente = DB::select(
-            'call buscar_pendiente_factura(:orden,:nombre,:fechade)',
+            'call buscar_pendiente_factura(:orden,:nombre,:fechade,:item,:ordensistema,:hon)',
             [
                 'orden' => $this->tipo_factura,
                 'nombre' =>  $this->nom,
-                'fechade' =>  $this->fede
+                'fechade' =>  $this->fede,
+
+                'item' =>  $this->item,
+                'ordensistema' =>  $this->orden,
+                'hon' =>  $this->hon
             ]
         );
 
@@ -84,7 +92,7 @@ class FacturaTerminado extends Component
             ]
         );
 
-        if ($this->nom != "" || $this->fede != "" || $this->fecha != "") {
+        if ($this->nom != "" || $this->fede != "" || $this->fecha != ""|| $this->item != "" || $this->orden != "" || $this->hon != "") {
             $this->dispatchBrowserEvent("pendiente");
         }
 
@@ -100,6 +108,18 @@ class FacturaTerminado extends Component
 
         return view('livewire.factura-terminado')->extends('principal')->section('content');
     }
+
+
+
+
+
+
+
+
+
+
+
+
 
 
     public function editar_detalles($id)
@@ -156,7 +176,10 @@ class FacturaTerminado extends Component
 
         $this->nom = "";
         $this->fede = "";
-        $this->fecha = "";
+        $this->fecha = ""; 
+        $this->item = "";
+        $this->orden = "";
+        $this->hon = "";
 
         $this->titulo_factura = "Factura";
         $this->num_factura_sistema = "FA-00-00000000";
