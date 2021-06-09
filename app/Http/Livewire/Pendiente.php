@@ -70,11 +70,11 @@ class Pendiente extends Component
         $this->tipo_empaques= \DB::select('call buscar_tipo_empaque("")');
 
         /*Procedimientos de busquedas de la tabla pendiente*/
-        $this->marcas_p=\DB::select('call buscar_marca_pendiente(?)',[$this->marca]);
-        $this->nombre_p=\DB::select('call buscar_nombre_pendiente(?)',[$this->nom]);
-        $this->vitolas_p=\DB::select('call buscar_vitola_pendiente(?)',[$this->vito]);
-        $this->capas_p=\DB::select('call buscar_capa_pendiente(?)',[$this->capa]);
-        $this->empaques_p=\DB::select('call buscar_tipo_empaque_pendiente(?)',[$this->empa]);
+        $this->marcas_p=\DB::select('call buscar_marca_empaque(?)',[$this->marca]);
+        $this->nombre_p=\DB::select('call buscar_nombre_empaque(?)',[$this->nom]);
+        $this->vitolas_p=\DB::select('call buscar_vitola_empaque(?)',[$this->vito]);
+        $this->capas_p=\DB::select('call buscar_capa_empaque(?)',[$this->capa]);
+        $this->empaques_p=\DB::select('call buscar_empaque_empaque(?)',[$this->empa]);
 
         if($this->marca == null){
             $this->marca="";
@@ -191,6 +191,7 @@ class Pendiente extends Component
         $cantidad_detalle_sampler = 0;   
         $detalles = 0;  
         $valores = [];  
+        
         $this->capas= \DB::select('call buscar_capa("")');
         $this->marcas=\DB::select('call buscar_marca("")');
         $this->nombres= \DB::select('call buscar_nombre("")');
