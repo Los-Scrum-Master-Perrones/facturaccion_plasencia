@@ -36,10 +36,48 @@ class PendienteEmpaque extends Component
 
         $this->tuplas=count($this->datos_pendiente_empaque);
 
-        for($i = 0; $i < count($this->datos_pendiente_empaque) ;$i++){
-            $this->total_pendiente += $this->datos_pendiente_empaque[$i]->pendiente;
-            $this->total_saldo += $this->datos_pendiente_empaque[$i]->saldo;
-        }
+
+        $datos = [];
+        $cantidad_detalle_sampler = 0;   
+        $detalles = 0;  
+        $valores = [];  
+
+        $datos_pendiente = DB::select('select * from pendiente_empaque ORDER BY mes,item,orden,id_pendiente asc');
+
+        // for($i = 0; $i < count($datos_pendiente) ;$i++){
+        //     // $this->total_pendiente += $this->datos_pendiente_empaque[$i]->pendiente;
+        //     // $this->total_saldo += $this->datos_pendiente_empaque[$i]->saldo;
+           
+
+
+        //     $sampler = DB::select('SELECT clase_productos.sampler FROM clase_productos WHERE  clase_productos.item = ?;', [$datos_pendiente[$i]->item]);
+        //    if(isset($sampler[0])) {
+        //        if( $sampler[0]->sampler == "si"){
+        //         if($cantidad_detalle_sampler == 0 && $detalles == 0){
+        //             $datos = DB::select('call traer_numero_detalles_productos(?)', [$datos_pendiente[$i]->item]);
+        //             $cantidad_detalle_sampler = $datos[0]->tuplas;
+        //         }
+        //         $valores = DB::select('call traer_detalles_productos_actualizar(?,?)', [$datos_pendiente[$i]->item,$detalles]);
+
+        //        echo $datos_pendiente[$i]->item." ".  $detalles.' '.$cantidad_detalle_sampler.' id: '.$datos_pendiente[$i]->id_pendiente.'<br>';
+        //         $actualizar = DB::select('call actualizar_pendiente_empaque_sampler(:marca,:nombre,:vitola,:capa,:tipo,:item)',[
+        //             'marca'=>$valores[0]->marca,
+        //            'nombre'=>$valores[0]->nombre,
+        //            'vitola'=>$valores[0]->vitola,
+        //            'capa'=>$valores[0]->capa,
+        //             'tipo'=>$valores[0]->tipo_empaque ,
+        //            'item'=>$datos_pendiente[$i]->id_pendiente
+        //         ]);
+              
+        //         $detalles++;
+
+        //         if($detalles == $cantidad_detalle_sampler){
+        //             $detalles = 0;
+        //             $cantidad_detalle_sampler = 0;
+        //         }
+        //     }}
+            
+        // }
        
         return view('livewire.pendiente-empaque')->extends('principal')->section('content');
     }

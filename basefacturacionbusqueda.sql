@@ -1,6 +1,6 @@
 -- --------------------------------------------------------
 -- Host:                         127.0.0.1
--- Versión del servidor:         10.5.8-MariaDB - mariadb.org binary distribution
+-- Versión del servidor:         5.7.24 - MySQL Community Server (GPL)
 -- SO del servidor:              Win64
 -- HeidiSQL Versión:             11.0.0.5919
 -- --------------------------------------------------------
@@ -20,12 +20,12 @@ USE `facturacion_plasencia`;
 CREATE TABLE IF NOT EXISTS `anadir_inventario_cajas` (
   `id_cajas` int(11) NOT NULL AUTO_INCREMENT,
   `codigo` varchar(50) DEFAULT NULL,
-  `descripcion` longtext DEFAULT NULL,
-  `lote_origen` longtext DEFAULT NULL,
-  `lote_destino` longtext DEFAULT NULL,
-  `cantidad` longtext DEFAULT NULL,
-  `costo_u` longtext DEFAULT NULL,
-  `subtotal` longtext DEFAULT NULL,
+  `descripcion` longtext,
+  `lote_origen` longtext,
+  `lote_destino` longtext,
+  `cantidad` longtext,
+  `costo_u` longtext,
+  `subtotal` longtext,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id_cajas`) USING BTREE
@@ -91,12 +91,12 @@ DELETE FROM `archivo_producto_terminados`;
 CREATE TABLE IF NOT EXISTS `cajas` (
   `id_cajas` int(11) NOT NULL AUTO_INCREMENT,
   `codigo` varchar(50) DEFAULT NULL,
-  `descripcion` longtext DEFAULT NULL,
-  `lote_origen` longtext DEFAULT NULL,
-  `lote_destino` longtext DEFAULT NULL,
-  `cantidad` longtext DEFAULT NULL,
-  `costo_u` longtext DEFAULT NULL,
-  `subtotal` longtext DEFAULT NULL,
+  `descripcion` longtext,
+  `lote_origen` longtext,
+  `lote_destino` longtext,
+  `cantidad` longtext,
+  `costo_u` longtext,
+  `subtotal` longtext,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id_cajas`)
@@ -585,7 +585,7 @@ INSERT INTO `clase_productos` (`id_producto`, `item`, `codigo_producto`, `codigo
 	(227, '01606678', 'P-23694', 'CM-07604', NULL, NULL, 5, 3, 2, 40, 1, 7, 'Puros Tripa Larga', NULL, NULL, '2021-05-04 20:10:09', '2021-05-04 20:10:09'),
 	(228, '00904020', 'P-23411', 'CM-06857', NULL, NULL, 5, 18, 6, 74, 3, 7, 'Puros Tripa Larga', NULL, NULL, '2021-05-04 20:10:09', '2021-05-04 20:10:09'),
 	(229, '00903051', 'P-23411', NULL, NULL, NULL, 5, 18, 6, 74, 1, 11, 'Puros Tripa Larga', NULL, NULL, '2021-05-04 20:10:09', '2021-05-04 20:10:09'),
-	(230, '13105265', 'P-23813', NULL, NULL, NULL, 6, 2, 1, 143, 1, 7, 'Puros Tripa Larga', NULL, NULL, '2021-05-04 20:10:10', '2021-05-04 20:10:10'),
+	(230, '13105265', 'P-23813', NULL, NULL, NULL, 6, 2, 1, 1462, 1, 7, 'Puros Tripa Larga', NULL, NULL, '2021-05-04 20:10:10', '2021-05-04 20:10:10'),
 	(231, '13105266', 'P-23814', NULL, NULL, NULL, 6, 3, 2, 143, 1, 7, 'Puros Tripa Larga', 'no', NULL, '2021-05-04 20:10:10', '2021-05-04 20:10:10'),
 	(232, '13105267', 'P-23815', NULL, NULL, NULL, 6, 5, 4, 143, 1, 7, 'Puros Tripa Larga', NULL, NULL, '2021-05-04 20:10:10', '2021-05-04 20:10:10'),
 	(233, '13105268', 'P-23816', NULL, NULL, NULL, 6, 9, 16, 143, 1, 7, 'Puros Tripa Larga', NULL, NULL, '2021-05-04 20:10:10', '2021-05-04 20:10:10'),
@@ -770,7 +770,7 @@ INSERT INTO `clase_productos` (`id_producto`, `item`, `codigo_producto`, `codigo
 	(412, '15212012', 'P-22673', NULL, NULL, NULL, 2, 28, 43, 117, 1, 11, 'Puros Tripa Larga', NULL, NULL, '2021-05-04 20:10:16', '2021-05-04 20:10:16'),
 	(413, '10499060', NULL, NULL, NULL, NULL, 3, 1, 6, 197, 1, 11, 'Puros Tripa Larga', 'si', 'Bundle of 5 RP/CI Rated 93 5-Star Sampler', '2021-05-04 20:10:16', '2021-05-04 20:10:16'),
 	(414, '20005006', 'P-02339', NULL, NULL, NULL, 3, 3, 3, 90, 1, 11, 'Puros Tripa Larga', NULL, NULL, '2021-05-04 20:10:17', '2021-05-04 20:10:17'),
-	(415, '10499015', NULL, NULL, NULL, NULL, 3, 3, 3, 204, 1, 11, NULL, NULL, NULL, '2021-05-04 20:10:17', '2021-05-04 20:10:17'),
+	(415, '10499015', NULL, NULL, NULL, NULL, 3, 3, 3, 204, 1, 11, 'Puros Tripa Larga', 'si', 'CI RP 5-Star Toro Sampler', '2021-05-04 20:10:17', '2021-05-04 20:10:17'),
 	(416, '20004000', NULL, NULL, NULL, NULL, 4, 1, 1, 207, 1, 7, NULL, NULL, NULL, '2021-05-04 20:10:17', '2021-05-04 20:10:17'),
 	(417, '20004001', NULL, NULL, NULL, NULL, 4, 3, 2, 207, 1, 7, NULL, NULL, NULL, '2021-05-04 20:10:17', '2021-05-04 20:10:17'),
 	(418, '20004002', NULL, NULL, NULL, NULL, 4, 3, 14, 207, 1, 7, NULL, NULL, NULL, '2021-05-04 20:10:17', '2021-05-04 20:10:17'),
@@ -1089,13 +1089,13 @@ CREATE TABLE IF NOT EXISTS `detalle_clase_productos` (
   `id_marca` int(11) NOT NULL,
   `id_cello` int(11) NOT NULL,
   `id_tipo_empaque` int(11) NOT NULL,
-  `otra_descripcion` text COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `otra_descripcion` text COLLATE utf8mb4_unicode_ci,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id_producto`) USING BTREE
-) ENGINE=MyISAM AUTO_INCREMENT=275 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=MyISAM AUTO_INCREMENT=280 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- Volcando datos para la tabla facturacion_plasencia.detalle_clase_productos: 53 rows
+-- Volcando datos para la tabla facturacion_plasencia.detalle_clase_productos: 57 rows
 DELETE FROM `detalle_clase_productos`;
 /*!40000 ALTER TABLE `detalle_clase_productos` DISABLE KEYS */;
 INSERT INTO `detalle_clase_productos` (`id_producto`, `item`, `id_capa`, `id_vitola`, `id_nombre`, `id_marca`, `id_cello`, `id_tipo_empaque`, `otra_descripcion`, `created_at`, `updated_at`) VALUES
@@ -1143,7 +1143,7 @@ INSERT INTO `detalle_clase_productos` (`id_producto`, `item`, `id_capa`, `id_vit
 	(263, '9900009186', 5, 2, 1, 51, 1, 10, NULL, NULL, NULL),
 	(264, '9900009189', 3, 3, 2, 229, 1, 11, NULL, NULL, NULL),
 	(265, '9900009187', 3, 3, 2, 229, 1, 11, NULL, NULL, NULL),
-	(266, '9900009187', 3, 3, 2, 229, 1, 11, NULL, NULL, NULL),
+	(275, '10499015', 19, 3, 2, 457, 1, 11, NULL, NULL, NULL),
 	(267, '9900009187', 2, 25, 2, 94, 1, 11, NULL, NULL, NULL),
 	(268, '9900009187', 1, 3, 2, 228, 1, 11, NULL, NULL, NULL),
 	(269, '9900009187', 1, 3, 2, 53, 1, 11, NULL, NULL, NULL),
@@ -1151,20 +1151,24 @@ INSERT INTO `detalle_clase_productos` (`id_producto`, `item`, `id_capa`, `id_vit
 	(271, '19902999', 2, 4, 2, 50, 1, 10, NULL, NULL, NULL),
 	(272, '19902999', 6, 4, 2, 149, 1, 10, NULL, NULL, NULL),
 	(273, '19902999', 2, 4, 2, 146, 1, 10, NULL, NULL, NULL),
-	(274, '19902999', 3, 4, 2, 112, 1, 10, NULL, NULL, NULL);
+	(274, '19902999', 3, 4, 2, 112, 1, 10, NULL, NULL, NULL),
+	(276, '10499015', 19, 3, 2, 754, 1, 11, NULL, NULL, NULL),
+	(277, '10499015', 3, 3, 3, 90, 1, 11, NULL, NULL, NULL),
+	(278, '10499015', 2, 3, 3, 15, 1, 11, NULL, NULL, NULL),
+	(279, '10499015', 3, 4, 2, 51, 1, 11, NULL, NULL, NULL);
 /*!40000 ALTER TABLE `detalle_clase_productos` ENABLE KEYS */;
 
 -- Volcando estructura para tabla facturacion_plasencia.detalle_factura
 CREATE TABLE IF NOT EXISTS `detalle_factura` (
   `id_detalle` bigint(20) NOT NULL AUTO_INCREMENT,
-  `id_pendiente` bigint(20) NOT NULL DEFAULT 0,
+  `id_pendiente` bigint(20) NOT NULL DEFAULT '0',
   `id_venta` int(11) NOT NULL,
   `cantidad_cajas` smallint(6) DEFAULT NULL,
   `peso_bruto` decimal(5,2) NOT NULL,
   `peso_neto` decimal(5,2) NOT NULL,
   `cantidad_puros` smallint(6) NOT NULL,
   `unidad` smallint(6) NOT NULL,
-  `observaciones` tinytext DEFAULT NULL,
+  `observaciones` tinytext,
   `facturado` char(1) DEFAULT NULL,
   PRIMARY KEY (`id_detalle`) USING BTREE
 ) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
@@ -1220,10 +1224,10 @@ CREATE TABLE IF NOT EXISTS `factura_terminados` (
   `cliente` varchar(100) NOT NULL DEFAULT '0',
   `numero_factura` varchar(30) DEFAULT '0',
   `contenedor` varchar(50) NOT NULL DEFAULT '0',
-  `cantidad_bultos` smallint(6) NOT NULL DEFAULT 0,
-  `total_puros` mediumint(9) NOT NULL DEFAULT 0,
-  `total_peso_bruto` mediumint(9) NOT NULL DEFAULT 0,
-  `total_peso_neto` mediumint(9) NOT NULL DEFAULT 0,
+  `cantidad_bultos` smallint(6) NOT NULL DEFAULT '0',
+  `total_puros` mediumint(9) NOT NULL DEFAULT '0',
+  `total_peso_bruto` mediumint(9) NOT NULL DEFAULT '0',
+  `total_peso_neto` mediumint(9) NOT NULL DEFAULT '0',
   `fecha_factura` date DEFAULT NULL,
   `facturado` char(1) DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
@@ -3539,9 +3543,9 @@ CREATE TABLE IF NOT EXISTS `marca_productos` (
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id_marca`),
   UNIQUE KEY `marca` (`marca`)
-) ENGINE=MyISAM AUTO_INCREMENT=1462 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=MyISAM AUTO_INCREMENT=1463 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- Volcando datos para la tabla facturacion_plasencia.marca_productos: 1,449 rows
+-- Volcando datos para la tabla facturacion_plasencia.marca_productos: 1,450 rows
 DELETE FROM `marca_productos`;
 /*!40000 ALTER TABLE `marca_productos` DISABLE KEYS */;
 INSERT INTO `marca_productos` (`id_marca`, `marca`, `created_at`, `updated_at`) VALUES
@@ -4993,7 +4997,8 @@ INSERT INTO `marca_productos` (`id_marca`, `marca`, `created_at`, `updated_at`) 
 	(1447, 'Stanley Papas', '2021-04-28 20:52:04', '2021-04-28 20:52:04'),
 	(1448, 'Graveyson', '2021-04-28 20:52:04', '2021-04-28 20:52:04'),
 	(1449, 'Tatiana Mocha', '2021-04-28 20:52:04', '2021-04-28 20:52:04'),
-	(1450, 'NINGUNA', '2021-04-28 20:52:04', '2021-04-28 20:52:04');
+	(1450, 'NINGUNA', '2021-04-28 20:52:04', '2021-04-28 20:52:04'),
+	(1462, 'Perfet Timing', NULL, NULL);
 /*!40000 ALTER TABLE `marca_productos` ENABLE KEYS */;
 
 -- Volcando estructura para tabla facturacion_plasencia.migrations
@@ -5605,7 +5610,7 @@ CREATE TABLE IF NOT EXISTS `pendiente` (
   `serie_precio` varchar(50) DEFAULT NULL,
   `precio` varchar(50) DEFAULT NULL,
   PRIMARY KEY (`id_pendiente`)
-) ENGINE=InnoDB AUTO_INCREMENT=1144 DEFAULT CHARSET=latin1 COMMENT='CATEGORIA	ITEM	ORDEN DEL SISTEMA	OBSERVACÓN	PRESENTACIÓN	MES	ORDEN	MARCA	VITOLA	NOMBRE	CAPA	TIPO DE EMPAQUE	ANILLO	CELLO	UPC	PENDIENTE	MARZO 2021 FACTURA #17976(Warehouse)	ENVIADO MES	SALDO';
+) ENGINE=InnoDB AUTO_INCREMENT=1134 DEFAULT CHARSET=latin1 COMMENT='CATEGORIA	ITEM	ORDEN DEL SISTEMA	OBSERVACÓN	PRESENTACIÓN	MES	ORDEN	MARCA	VITOLA	NOMBRE	CAPA	TIPO DE EMPAQUE	ANILLO	CELLO	UPC	PENDIENTE	MARZO 2021 FACTURA #17976(Warehouse)	ENVIADO MES	SALDO';
 
 -- Volcando datos para la tabla facturacion_plasencia.pendiente: ~1,132 rows (aproximadamente)
 DELETE FROM `pendiente`;
@@ -5631,11 +5636,11 @@ INSERT INTO `pendiente` (`id_pendiente`, `categoria`, `item`, `orden_del_sitema`
 	(19, 4, '01607602', '3187', NULL, NULL, 'OCTUBRE 2020', 'INT-H-1200', 95, 3, 2, 11, 7, 1, 800, 800, '0', '0', NULL, NULL),
 	(20, 4, '01607603', '3187', NULL, NULL, 'OCTUBRE 2020', 'INT-H-1209', 95, 9, 11, 11, 7, 1, 400, 400, '0', '0', NULL, NULL),
 	(21, 4, '01607600', '3187', NULL, NULL, 'OCTUBRE 2020', 'INT-H-1209', 95, 20, 30, 11, 7, 1, 800, 800, '0', '0', NULL, NULL),
-	(22, 2, '10499012', '3187', NULL, NULL, 'OCTUBRE 2020', 'HON-3027', 119, 4, 2, 5, 10, 1, 10000, 1000, '0', '0', NULL, NULL),
-	(23, 2, '10499012', '3187', NULL, NULL, 'OCTUBRE 2020', 'HON-3027', 119, 4, 2, 5, 10, 1, 10000, 1000, '0', '0', NULL, NULL),
-	(24, 2, '10499012', '3187', NULL, NULL, 'OCTUBRE 2020', 'HON-3027', 119, 4, 2, 5, 10, 1, 10000, 1000, '0', '0', NULL, NULL),
-	(25, 2, '10499012', '3187', NULL, NULL, 'OCTUBRE 2020', 'HON-3027', 119, 4, 2, 5, 10, 1, 10000, 1000, '0', '0', NULL, NULL),
-	(26, 2, '10499012', '3187', NULL, NULL, 'OCTUBRE 2020', 'HON-3027', 119, 4, 2, 5, 10, 1, 10000, 1000, '0', '0', NULL, NULL),
+	(22, 2, '10499012', '3187', NULL, NULL, 'OCTUBRE 2020', 'HON-3027', 51, 4, 2, 5, 10, 1, 10000, 1000, '0', '0', NULL, NULL),
+	(23, 2, '10499012', '3187', NULL, NULL, 'OCTUBRE 2020', 'HON-3027', 113, 4, 2, 1, 10, 1, 10000, 1000, '0', '0', NULL, NULL),
+	(24, 2, '10499012', '3187', NULL, NULL, 'OCTUBRE 2020', 'HON-3027', 152, 4, 2, 8, 10, 1, 10000, 1000, '0', '0', NULL, NULL),
+	(25, 2, '10499012', '3187', NULL, NULL, 'OCTUBRE 2020', 'HON-3027', 15, 4, 3, 2, 10, 1, 10000, 1000, '0', '0', NULL, NULL),
+	(26, 2, '10499012', '3187', NULL, NULL, 'OCTUBRE 2020', 'HON-3027', 147, 4, 3, 3, 10, 1, 10000, 1000, '0', '0', NULL, NULL),
 	(27, 3, '12005003', '3187', NULL, NULL, 'OCTUBRE 2020', 'HON-3022', 133, 9, 11, 2, 7, 1, 1500, 500, '0', '0', NULL, NULL),
 	(28, 1, '603004002', '3193', NULL, NULL, 'NOVIEMBRE 2020', 'HON-3063', 88, 4, 3, 1, 7, 1, 800, 800, '0', '0', NULL, NULL),
 	(29, 1, '603005751', '3193', NULL, NULL, 'NOVIEMBRE 2020', 'HON-3063', 92, 4, 2, 1, 4, 1, 2400, 2400, '0', '0', NULL, NULL),
@@ -5746,11 +5751,11 @@ INSERT INTO `pendiente` (`id_pendiente`, `categoria`, `item`, `orden_del_sitema`
 	(134, 1, '20005000', '3207', NULL, NULL, 'FEBRERO 2021', 'HON-3120', 90, 1, 6, 3, 7, 1, 20000, 20000, '0', '0', NULL, NULL),
 	(135, 1, '20005002', '3207', NULL, NULL, 'FEBRERO 2021', 'HON-3120', 90, 3, 21, 3, 7, 3, 23200, 18000, '0', '0', NULL, NULL),
 	(136, 1, '20005001', '3207', NULL, NULL, 'FEBRERO 2021', 'HON-3120', 90, 3, 3, 3, 7, 3, 52800, 32240, '0', '0', NULL, NULL),
-	(137, 2, '10499015', '3207', NULL, NULL, 'FEBRERO 2021', 'HON-3118', 204, 3, 3, 3, 11, 1, 0, 0, '0', '0', NULL, NULL),
-	(138, 2, '10499015', '3207', NULL, NULL, 'FEBRERO 2021', 'HON-3118', 204, 3, 3, 3, 11, 1, 0, 0, '0', '0', NULL, NULL),
-	(139, 2, '10499015', '3207', NULL, NULL, 'FEBRERO 2021', 'HON-3118', 204, 3, 3, 3, 11, 1, 700, 700, '0', '0', NULL, NULL),
-	(140, 2, '10499015', '3207', NULL, NULL, 'FEBRERO 2021', 'HON-3118', 204, 3, 3, 3, 11, 1, 700, 700, '0', '0', NULL, NULL),
-	(141, 2, '10499015', '3207', NULL, NULL, 'FEBRERO 2021', 'HON-3118', 204, 3, 3, 3, 11, 1, 700, 700, '0', '0', NULL, NULL),
+	(137, 2, '10499015', '3207', NULL, NULL, 'FEBRERO 2021', 'HON-3118', 457, 3, 2, 19, 11, 1, 0, 0, '0', '0', NULL, NULL),
+	(138, 2, '10499015', '3207', NULL, NULL, 'FEBRERO 2021', 'HON-3118', 754, 3, 2, 19, 11, 1, 0, 0, '0', '0', NULL, NULL),
+	(139, 2, '10499015', '3207', NULL, NULL, 'FEBRERO 2021', 'HON-3118', 90, 3, 3, 3, 11, 1, 700, 700, '0', '0', NULL, NULL),
+	(140, 2, '10499015', '3207', NULL, NULL, 'FEBRERO 2021', 'HON-3118', 15, 3, 3, 2, 11, 1, 700, 700, '0', '0', NULL, NULL),
+	(141, 2, '10499015', '3207', NULL, NULL, 'FEBRERO 2021', 'HON-3118', 51, 4, 2, 3, 11, 1, 700, 700, '0', '0', NULL, NULL),
 	(142, 1, '19904004', '3207', NULL, NULL, 'FEBRERO 2021', 'HON-3110', 107, 24, 1, 6, 7, 1, 200, 200, '0', '0', NULL, NULL),
 	(143, 1, '19904005', '3207', NULL, NULL, 'FEBRERO 2021', 'HON-3110', 107, 3, 2, 6, 7, 1, 320, 320, '0', '0', NULL, NULL),
 	(144, 1, '19904006', '3207', NULL, NULL, 'FEBRERO 2021', 'HON-3110', 107, 28, 14, 6, 7, 1, 200, 200, '0', '0', NULL, NULL),
@@ -5843,13 +5848,13 @@ INSERT INTO `pendiente` (`id_pendiente`, `categoria`, `item`, `orden_del_sitema`
 	(231, 1, '00504010', '3207', NULL, NULL, 'FEBRERO 2021', 'HON-3112', 51, 4, 2, 2, 12, 1, 10000, 400, '0', '0', NULL, NULL),
 	(232, 1, '10104816', '3207', 'Santa Clara Firts Version', NULL, 'FEBRERO 2021', 'HON-3111', 51, 4, 2, 2, 11, 1, 2500, 500, '0', '0', NULL, NULL),
 	(233, 1, '00904038', '3207', NULL, NULL, 'FEBRERO 2021', 'HON-3118', 51, 4, 2, 2, 14, 1, 1410, 1410, '0', '0', NULL, NULL),
-	(234, 1, '00904038', '3207', NULL, NULL, 'FEBRERO 2021', 'HON-3118', 51, 4, 2, 2, 14, 1, 1410, 1410, '0', '0', NULL, NULL),
-	(235, 1, '00904038', '3207', NULL, NULL, 'FEBRERO 2021', 'HON-3118', 51, 4, 2, 2, 14, 1, 1410, 1410, '0', '0', NULL, NULL),
-	(236, 1, '00904038', '3207', NULL, NULL, 'FEBRERO 2021', 'HON-3118', 51, 4, 2, 2, 14, 1, 1410, 1410, '0', '0', NULL, NULL),
+	(234, 1, '00904038', '3207', NULL, NULL, 'FEBRERO 2021', 'HON-3118', 51, 4, 2, 5, 14, 1, 1410, 1410, '0', '0', NULL, NULL),
+	(235, 1, '00904038', '3207', NULL, NULL, 'FEBRERO 2021', 'HON-3118', 51, 4, 2, 1, 14, 1, 1410, 1410, '0', '0', NULL, NULL),
+	(236, 1, '00904038', '3207', NULL, NULL, 'FEBRERO 2021', 'HON-3118', 51, 4, 2, 3, 14, 1, 1410, 1410, '0', '0', NULL, NULL),
 	(237, 1, '00904038', '3207', NULL, NULL, 'FEBRERO 2021', 'HON-3120', 51, 4, 2, 2, 14, 1, 59100, 45600, '0', '0', NULL, NULL),
-	(238, 1, '00904038', '3207', NULL, NULL, 'FEBRERO 2021', 'HON-3120', 51, 4, 2, 2, 14, 1, 59100, 45600, '0', '0', NULL, NULL),
-	(239, 1, '00904038', '3207', NULL, NULL, 'FEBRERO 2021', 'HON-3120', 51, 4, 2, 2, 14, 1, 59100, 45600, '0', '0', NULL, NULL),
-	(240, 1, '00904038', '3207', NULL, NULL, 'FEBRERO 2021', 'HON-3120', 51, 4, 2, 2, 14, 1, 59100, 45600, '0', '0', NULL, NULL),
+	(238, 1, '00904038', '3207', NULL, NULL, 'FEBRERO 2021', 'HON-3120', 51, 4, 2, 5, 14, 1, 59100, 45600, '0', '0', NULL, NULL),
+	(239, 1, '00904038', '3207', NULL, NULL, 'FEBRERO 2021', 'HON-3120', 51, 4, 2, 1, 14, 1, 59100, 45600, '0', '0', NULL, NULL),
+	(240, 1, '00904038', '3207', NULL, NULL, 'FEBRERO 2021', 'HON-3120', 51, 4, 2, 3, 14, 1, 59100, 45600, '0', '0', NULL, NULL),
 	(241, 1, '00505002', '3207', NULL, NULL, 'FEBRERO 2021', 'HON-3120', 51, 4, 14, 5, 7, 3, 17200, 400, '0', '0', NULL, NULL),
 	(242, 4, '00505003', '3207', NULL, NULL, 'FEBRERO 2021', 'INT-H-1229', 51, 4, 14, 2, 7, 3, 100, 100, '0', '0', NULL, NULL),
 	(243, 4, '00504100', '3207', NULL, NULL, 'FEBRERO 2021', 'INT-H-1231', 51, 2, 1, 5, 7, 1, 200, 200, '0', '0', NULL, NULL),
@@ -5920,19 +5925,19 @@ INSERT INTO `pendiente` (`id_pendiente`, `categoria`, `item`, `orden_del_sitema`
 	(308, 1, '20005000', '3217', NULL, NULL, 'MARZO 2021', 'HON-3142', 90, 1, 6, 3, 7, 1, 4000, 4000, '0', '0', NULL, NULL),
 	(309, 4, '20005000', '3217', NULL, NULL, 'MARZO 2021', 'INT-H-1235', 90, 1, 6, 3, 7, 1, 380, 380, '0', '0', NULL, NULL),
 	(310, 2, '20005016', '3217', NULL, NULL, 'MARZO 2021', 'HON-3141', 90, 1, 6, 3, 11, 1, 40000, 20000, '0', '0', NULL, NULL),
-	(311, 2, '10499060', '3217', NULL, NULL, 'MARZO 2021', 'HON-3141', 197, 1, 6, 3, 11, 1, 1000, 1000, '0', '0', NULL, NULL),
-	(312, 2, '10499060', '3217', NULL, NULL, 'MARZO 2021', 'HON-3141', 197, 1, 6, 3, 11, 1, 0, 0, '0', '0', NULL, NULL),
-	(313, 2, '10499060', '3217', NULL, NULL, 'MARZO 2021', 'HON-3141', 197, 1, 6, 3, 11, 1, 0, 0, '0', '0', NULL, NULL),
-	(314, 2, '10499060', '3217', NULL, NULL, 'MARZO 2021', 'HON-3141', 197, 1, 6, 3, 11, 1, 1000, 1000, '0', '0', NULL, NULL),
-	(315, 2, '10499060', '3217', NULL, NULL, 'MARZO 2021', 'HON-3141', 197, 1, 6, 3, 11, 1, 0, 0, '0', '0', NULL, NULL),
+	(311, 2, '10499060', '3217', NULL, NULL, 'MARZO 2021', 'HON-3141', 90, 45, 1, 19, 11, 1, 1000, 1000, '0', '0', NULL, NULL),
+	(312, 2, '10499060', '3217', NULL, NULL, 'MARZO 2021', 'HON-3141', 67, 45, 1, 2, 11, 1, 0, 0, '0', '0', NULL, NULL),
+	(313, 2, '10499060', '3217', NULL, NULL, 'MARZO 2021', 'HON-3141', 255, 45, 1, 19, 11, 1, 0, 0, '0', '0', NULL, NULL),
+	(314, 2, '10499060', '3217', NULL, NULL, 'MARZO 2021', 'HON-3141', 51, 2, 1, 1, 11, 1, 1000, 1000, '0', '0', NULL, NULL),
+	(315, 2, '10499060', '3217', NULL, NULL, 'MARZO 2021', 'HON-3141', 457, 45, 1, 19, 11, 1, 0, 0, '0', '0', NULL, NULL),
 	(316, 1, '20005002', '3217', NULL, NULL, 'MARZO 2021', 'HON-3142', 90, 3, 21, 3, 7, 3, 4800, 4800, '0', '0', NULL, NULL),
 	(317, 1, '20005001', '3217', NULL, NULL, 'MARZO 2021', 'HON-3142', 90, 3, 3, 3, 7, 3, 8000, 8000, '0', '0', NULL, NULL),
 	(318, 2, '20005006', '3217', NULL, NULL, 'MARZO 2021', 'HON-3138', 90, 3, 3, 3, 11, 1, 25000, 25000, '0', '0', NULL, NULL),
-	(319, 2, '10499015', '3217', NULL, NULL, 'MARZO 2021', 'HON-3141', 204, 3, 3, 3, 11, 1, 0, 0, '0', '0', NULL, NULL),
-	(320, 2, '10499015', '3217', NULL, NULL, 'MARZO 2021', 'HON-3141', 204, 3, 3, 3, 11, 1, 0, 0, '0', '0', NULL, NULL),
-	(321, 2, '10499015', '3217', NULL, NULL, 'MARZO 2021', 'HON-3141', 204, 3, 3, 3, 11, 1, 500, 500, '0', '0', NULL, NULL),
-	(322, 2, '10499015', '3217', NULL, NULL, 'MARZO 2021', 'HON-3141', 204, 3, 3, 3, 11, 1, 500, 500, '0', '0', NULL, NULL),
-	(323, 2, '10499015', '3217', NULL, NULL, 'MARZO 2021', 'HON-3141', 204, 3, 3, 3, 11, 1, 500, 500, '0', '0', NULL, NULL),
+	(319, 2, '10499015', '3217', NULL, NULL, 'MARZO 2021', 'HON-3141', 457, 3, 2, 19, 11, 1, 0, 0, '0', '0', NULL, NULL),
+	(320, 2, '10499015', '3217', NULL, NULL, 'MARZO 2021', 'HON-3141', 754, 3, 2, 19, 11, 1, 0, 0, '0', '0', NULL, NULL),
+	(321, 2, '10499015', '3217', NULL, NULL, 'MARZO 2021', 'HON-3141', 90, 3, 3, 3, 11, 1, 500, 500, '0', '0', NULL, NULL),
+	(322, 2, '10499015', '3217', NULL, NULL, 'MARZO 2021', 'HON-3141', 15, 3, 3, 2, 11, 1, 500, 500, '0', '0', NULL, NULL),
+	(323, 2, '10499015', '3217', NULL, NULL, 'MARZO 2021', 'HON-3141', 51, 4, 2, 3, 11, 1, 500, 500, '0', '0', NULL, NULL),
 	(324, 1, '20005005', '3217', NULL, NULL, 'MARZO 2021', 'HON-3142', 90, 34, 52, 3, 7, 1, 400, 400, '0', '0', NULL, NULL),
 	(325, 1, '20005007', '3217', NULL, NULL, 'MARZO 2021', 'HON-3142', 90, 9, 26, 3, 7, 1, 1200, 1200, '0', '0', NULL, NULL),
 	(326, 1, '00508020', '3217', NULL, NULL, 'MARZO 2021', 'HON-3142', 91, 4, 2, 10, 7, 1, 62800, 62800, '0', '0', NULL, NULL),
@@ -6023,9 +6028,9 @@ INSERT INTO `pendiente` (`id_pendiente`, `categoria`, `item`, `orden_del_sitema`
 	(411, 4, '00504003', '3217', NULL, NULL, 'MARZO 2021', 'INT-H-1235', 51, 4, 2, 2, 7, 3, 400, 400, '0', '0', NULL, NULL),
 	(412, 1, '10104816', '3217', NULL, NULL, 'MARZO 2021', 'HON-3138', 51, 4, 2, 2, 11, 1, 10000, 10000, '0', '0', NULL, NULL),
 	(413, 1, '00904038', '3217', NULL, NULL, 'MARZO 2021', 'HON-3142', 51, 4, 2, 2, 14, 1, 6300, 6300, '0', '0', NULL, NULL),
-	(414, 1, '00904038', '3217', NULL, NULL, 'MARZO 2021', 'HON-3142', 51, 4, 2, 2, 14, 1, 6300, 6300, '0', '0', NULL, NULL),
-	(415, 1, '00904038', '3217', NULL, NULL, 'MARZO 2021', 'HON-3142', 51, 4, 2, 2, 14, 1, 6300, 6300, '0', '0', NULL, NULL),
-	(416, 1, '00904038', '3217', NULL, NULL, 'MARZO 2021', 'HON-3142', 51, 4, 2, 2, 14, 1, 6300, 6300, '0', '0', NULL, NULL),
+	(414, 1, '00904038', '3217', NULL, NULL, 'MARZO 2021', 'HON-3142', 51, 4, 2, 5, 14, 1, 6300, 6300, '0', '0', NULL, NULL),
+	(415, 1, '00904038', '3217', NULL, NULL, 'MARZO 2021', 'HON-3142', 51, 4, 2, 1, 14, 1, 6300, 6300, '0', '0', NULL, NULL),
+	(416, 1, '00904038', '3217', NULL, NULL, 'MARZO 2021', 'HON-3142', 51, 4, 2, 3, 14, 1, 6300, 6300, '0', '0', NULL, NULL),
 	(417, 1, '00505002', '3217', NULL, NULL, 'MARZO 2021', 'HON-3142', 51, 4, 14, 5, 7, 3, 3600, 3600, '0', '0', NULL, NULL),
 	(418, 1, '00505007', '3217', NULL, NULL, 'MARZO 2021', 'HON-3142', 51, 4, 14, 2, 18, 3, 2000, 2000, '0', '0', NULL, NULL),
 	(419, 1, '00505003', '3217', NULL, NULL, 'MARZO 2021', 'HON-3142', 51, 4, 14, 2, 7, 3, 3200, 3200, '0', '0', NULL, NULL),
@@ -6117,9 +6122,9 @@ INSERT INTO `pendiente` (`id_pendiente`, `categoria`, `item`, `orden_del_sitema`
 	(505, 1, '00504010', '3222', NULL, NULL, 'ABRIL 2021', 'HON-3147', 51, 4, 2, 2, 12, 1, 17500, 17500, '0', '0', NULL, NULL),
 	(506, 2, '00504027', '3222', NULL, NULL, 'ABRIL 2021', 'HON-3166', 51, 4, 2, 2, 11, 1, 8000, 8000, '0', '0', NULL, NULL),
 	(507, 1, '00904038', '3222', NULL, NULL, 'ABRIL 2021', 'HON-3167', 51, 4, 2, 2, 14, 1, 6000, 6000, '0', '0', NULL, NULL),
-	(508, 1, '00904038', '3222', NULL, NULL, 'ABRIL 2021', 'HON-3167', 51, 4, 2, 2, 14, 1, 6000, 6000, '0', '0', NULL, NULL),
-	(509, 1, '00904038', '3222', NULL, NULL, 'ABRIL 2021', 'HON-3167', 51, 4, 2, 2, 14, 1, 6000, 6000, '0', '0', NULL, NULL),
-	(510, 1, '00904038', '3222', NULL, NULL, 'ABRIL 2021', 'HON-3167', 51, 4, 2, 2, 14, 1, 6000, 6000, '0', '0', NULL, NULL),
+	(508, 1, '00904038', '3222', NULL, NULL, 'ABRIL 2021', 'HON-3167', 51, 4, 2, 5, 14, 1, 6000, 6000, '0', '0', NULL, NULL),
+	(509, 1, '00904038', '3222', NULL, NULL, 'ABRIL 2021', 'HON-3167', 51, 4, 2, 1, 14, 1, 6000, 6000, '0', '0', NULL, NULL),
+	(510, 1, '00904038', '3222', NULL, NULL, 'ABRIL 2021', 'HON-3167', 51, 4, 2, 3, 14, 1, 6000, 6000, '0', '0', NULL, NULL),
 	(511, 1, '00505006', '3222', NULL, NULL, 'ABRIL 2021', 'HON-3167', 51, 4, 14, 5, 18, 3, 6000, 6000, '0', '0', NULL, NULL),
 	(512, 1, '00505008', '3222', NULL, NULL, 'ABRIL 2021', 'HON-3147', 51, 4, 14, 5, 12, 1, 12500, 12500, '0', '0', NULL, NULL),
 	(513, 1, '00505007', '3222', NULL, NULL, 'ABRIL 2021', 'HON-3167', 51, 4, 14, 2, 18, 3, 2000, 2000, '0', '0', NULL, NULL),
@@ -6166,10 +6171,10 @@ INSERT INTO `pendiente` (`id_pendiente`, `categoria`, `item`, `orden_del_sitema`
 	(554, 1, '00404005', '3222', NULL, NULL, 'ABRIL 2021', 'HON-3156', 67, 3, 2, 3, 12, 1, 12500, 12500, '0', '0', NULL, NULL),
 	(555, 1, '00408000', '3222', NULL, NULL, 'ABRIL 2021', 'HON-3167', 67, 9, 40, 3, 7, 3, 800, 800, '0', '0', NULL, NULL),
 	(556, 2, '01103000', '3222', NULL, NULL, 'ABRIL 2021', 'HON-3164', 59, 1, 6, 18, 13, 3, 375, 375, '0', '0', NULL, NULL),
-	(557, 2, '11199000', '3222', NULL, NULL, 'ABRIL 2021', 'HON-3164', 1450, 45, 153, 19, 10, 1, 250, 250, '0', '0', NULL, NULL),
-	(558, 2, '11199000', '3222', NULL, NULL, 'ABRIL 2021', 'HON-3164', 1450, 45, 153, 19, 10, 1, 250, 250, '0', '0', NULL, NULL),
-	(559, 2, '11199000', '3222', NULL, NULL, 'ABRIL 2021', 'HON-3164', 1450, 45, 153, 19, 10, 1, 250, 250, '0', '0', NULL, NULL),
-	(560, 2, '11199000', '3222', NULL, NULL, 'ABRIL 2021', 'HON-3164', 1450, 45, 153, 19, 10, 1, 250, 250, '0', '0', NULL, NULL),
+	(557, 2, '11199000', '3222', NULL, NULL, 'ABRIL 2021', 'HON-3164', 59, 1, 6, 18, 10, 1, 250, 250, '0', '0', NULL, NULL),
+	(558, 2, '11199000', '3222', NULL, NULL, 'ABRIL 2021', 'HON-3164', 59, 4, 3, 2, 10, 1, 250, 250, '0', '0', NULL, NULL),
+	(559, 2, '11199000', '3222', NULL, NULL, 'ABRIL 2021', 'HON-3164', 59, 43, 73, 18, 10, 1, 250, 250, '0', '0', NULL, NULL),
+	(560, 2, '11199000', '3222', NULL, NULL, 'ABRIL 2021', 'HON-3164', 59, 24, 14, 1, 10, 1, 250, 250, '0', '0', NULL, NULL),
 	(561, 2, '01103004', '3222', NULL, NULL, 'ABRIL 2021', 'HON-3164', 59, 1, 6, 18, 11, 1, 150, 150, '0', '0', NULL, NULL),
 	(562, 2, '41112001', '3222', NULL, NULL, 'ABRIL 2021', 'HON-3164', 59, 22, 74, 1, 11, 1, 200, 200, '0', '0', NULL, NULL),
 	(563, 2, '41112001', '3222', NULL, NULL, 'ABRIL 2021', 'HON-3159', 59, 22, 74, 1, 11, 1, 300, 300, '0', '0', NULL, NULL),
@@ -6190,36 +6195,36 @@ INSERT INTO `pendiente` (`id_pendiente`, `categoria`, `item`, `orden_del_sitema`
 	(578, 3, '12004000', '3222', NULL, NULL, 'ABRIL 2021', 'HON-3149', 133, 4, 2, 2, 7, 1, 2000, 2000, '0', '0', NULL, NULL),
 	(579, 1, '20005000', '3222', NULL, NULL, 'ABRIL 2021', 'HON-3167', 90, 1, 6, 3, 7, 1, 11600, 11600, '0', '0', NULL, NULL),
 	(580, 4, '20005000', '3222', NULL, NULL, 'ABRIL 2021', 'INT-H-1242', 90, 1, 6, 3, 7, 1, 280, 280, '0', '0', NULL, NULL),
-	(581, 2, '19903027', '3222', NULL, NULL, 'ABRIL 2021', 'HON-3161', 1450, 45, 153, 19, 9, 1, 3000, 3000, '0', '0', NULL, NULL),
-	(582, 2, '19903027', '3222', NULL, NULL, 'ABRIL 2021', 'HON-3161', 1450, 45, 153, 19, 9, 1, 3000, 3000, '0', '0', NULL, NULL),
-	(583, 2, '19903027', '3222', NULL, NULL, 'ABRIL 2021', 'HON-3161', 1450, 45, 153, 19, 9, 1, 3000, 3000, '0', '0', NULL, NULL),
-	(584, 2, '19903027', '3222', NULL, NULL, 'ABRIL 2021', 'HON-3161', 1450, 45, 153, 19, 9, 1, 3000, 3000, '0', '0', NULL, NULL),
-	(585, 2, '19903027', '3222', NULL, NULL, 'ABRIL 2021', 'HON-3161', 1450, 45, 153, 19, 9, 1, 3000, 3000, '0', '0', NULL, NULL),
-	(586, 2, '19903027', '3222', NULL, NULL, 'ABRIL 2021', 'HON-3161', 1450, 45, 153, 19, 9, 1, 3000, 3000, '0', '0', NULL, NULL),
-	(587, 2, '19903027', '3222', NULL, NULL, 'ABRIL 2021', 'HON-3161', 1450, 45, 153, 19, 9, 1, 3000, 3000, '0', '0', NULL, NULL),
-	(588, 2, '19903027', '3222', NULL, NULL, 'ABRIL 2021', 'HON-3161', 1450, 45, 153, 19, 9, 1, 0, 0, '0', '0', NULL, NULL),
-	(589, 2, '19903027', '3222', NULL, NULL, 'ABRIL 2021', 'HON-3161', 1450, 45, 153, 19, 9, 1, 0, 0, '0', '0', NULL, NULL),
-	(590, 2, '19903027', '3222', NULL, NULL, 'ABRIL 2021', 'HON-3161', 1450, 45, 153, 19, 9, 1, 0, 0, '0', '0', NULL, NULL),
-	(591, 2, '19903027', '3222', NULL, NULL, 'ABRIL 2021', 'HON-3164', 1450, 45, 153, 19, 9, 1, 100, 100, '0', '0', NULL, NULL),
-	(592, 2, '19903027', '3222', NULL, NULL, 'ABRIL 2021', 'HON-3164', 1450, 45, 153, 19, 9, 1, 100, 100, '0', '0', NULL, NULL),
-	(593, 2, '19903027', '3222', NULL, NULL, 'ABRIL 2021', 'HON-3164', 1450, 45, 153, 19, 9, 1, 100, 100, '0', '0', NULL, NULL),
-	(594, 2, '19903027', '3222', NULL, NULL, 'ABRIL 2021', 'HON-3164', 1450, 45, 153, 19, 9, 1, 100, 100, '0', '0', NULL, NULL),
-	(595, 2, '19903027', '3222', NULL, NULL, 'ABRIL 2021', 'HON-3164', 1450, 45, 153, 19, 9, 1, 100, 100, '0', '0', NULL, NULL),
-	(596, 2, '19903027', '3222', NULL, NULL, 'ABRIL 2021', 'HON-3164', 1450, 45, 153, 19, 9, 1, 100, 100, '0', '0', NULL, NULL),
-	(597, 2, '19903027', '3222', NULL, NULL, 'ABRIL 2021', 'HON-3164', 1450, 45, 153, 19, 9, 1, 100, 100, '0', '0', NULL, NULL),
-	(598, 2, '19903027', '3222', NULL, NULL, 'ABRIL 2021', 'HON-3164', 1450, 45, 153, 19, 9, 1, 0, 0, '0', '0', NULL, NULL),
-	(599, 2, '19903027', '3222', NULL, NULL, 'ABRIL 2021', 'HON-3164', 1450, 45, 153, 19, 9, 1, 0, 0, '0', '0', NULL, NULL),
-	(600, 2, '19903027', '3222', NULL, NULL, 'ABRIL 2021', 'HON-3164', 1450, 45, 153, 19, 9, 1, 0, 0, '0', '0', NULL, NULL),
-	(601, 1, '10104940', '3222', 'PRIORIDAD', NULL, 'ABRIL 2021', 'HON-3179', 1450, 45, 153, 19, 9, 1, 10000, 9000, '0', '0', NULL, NULL),
-	(602, 1, '10104940', '3222', 'PRIORIDAD', NULL, 'ABRIL 2021', 'HON-3179', 1450, 45, 153, 19, 9, 1, 10000, 9000, '0', '0', NULL, NULL),
-	(603, 1, '10104940', '3222', 'PRIORIDAD', NULL, 'ABRIL 2021', 'HON-3179', 1450, 45, 153, 19, 9, 1, 10000, 9000, '0', '0', NULL, NULL),
-	(604, 1, '10104940', '3222', 'PRIORIDAD', NULL, 'ABRIL 2021', 'HON-3179', 1450, 45, 153, 19, 9, 1, 10000, 9000, '0', '0', NULL, NULL),
-	(605, 1, '10104940', '3222', 'PRIORIDAD', NULL, 'ABRIL 2021', 'HON-3179', 1450, 45, 153, 19, 9, 1, 10000, 9000, '0', '0', NULL, NULL),
-	(606, 1, '10104940', '3222', 'PRIORIDAD', NULL, 'ABRIL 2021', 'HON-3179', 1450, 45, 153, 19, 9, 1, 10000, 9000, '0', '0', NULL, NULL),
-	(607, 1, '10104940', '3222', 'PRIORIDAD', NULL, 'ABRIL 2021', 'HON-3179', 1450, 45, 153, 19, 9, 1, 0, 0, '0', '0', NULL, NULL),
-	(608, 1, '10104940', '3222', 'PRIORIDAD', NULL, 'ABRIL 2021', 'HON-3179', 1450, 45, 153, 19, 9, 1, 0, 0, '0', '0', NULL, NULL),
-	(609, 1, '10104940', '3222', 'PRIORIDAD', NULL, 'ABRIL 2021', 'HON-3179', 1450, 45, 153, 19, 9, 1, 0, 0, '0', '0', NULL, NULL),
-	(610, 1, '10104940', '3222', 'PRIORIDAD', NULL, 'ABRIL 2021', 'HON-3179', 1450, 45, 153, 19, 9, 1, 10000, 9000, '0', '0', NULL, NULL),
+	(581, 2, '19903027', '3222', NULL, NULL, 'ABRIL 2021', 'HON-3161', 90, 1, 6, 3, 9, 1, 3000, 3000, '0', '0', NULL, NULL),
+	(582, 2, '19903027', '3222', NULL, NULL, 'ABRIL 2021', 'HON-3161', 113, 1, 1, 1, 9, 1, 3000, 3000, '0', '0', NULL, NULL),
+	(583, 2, '19903027', '3222', NULL, NULL, 'ABRIL 2021', 'HON-3161', 88, 17, 23, 1, 9, 1, 3000, 3000, '0', '0', NULL, NULL),
+	(584, 2, '19903027', '3222', NULL, NULL, 'ABRIL 2021', 'HON-3161', 51, 2, 1, 5, 9, 1, 3000, 3000, '0', '0', NULL, NULL),
+	(585, 2, '19903027', '3222', NULL, NULL, 'ABRIL 2021', 'HON-3161', 191, 17, 1, 4, 9, 1, 3000, 3000, '0', '0', NULL, NULL),
+	(586, 2, '19903027', '3222', NULL, NULL, 'ABRIL 2021', 'HON-3161', 167, 17, 1, 2, 9, 1, 3000, 3000, '0', '0', NULL, NULL),
+	(587, 2, '19903027', '3222', NULL, NULL, 'ABRIL 2021', 'HON-3161', 211, 1, 1, 6, 9, 1, 3000, 3000, '0', '0', NULL, NULL),
+	(588, 2, '19903027', '3222', NULL, NULL, 'ABRIL 2021', 'HON-3161', 15, 2, 1, 2, 9, 1, 0, 0, '0', '0', NULL, NULL),
+	(589, 2, '19903027', '3222', NULL, NULL, 'ABRIL 2021', 'HON-3161', 14, 2, 1, 3, 4, 1, 0, 0, '0', '0', NULL, NULL),
+	(590, 2, '19903027', '3222', NULL, NULL, 'ABRIL 2021', 'HON-3161', 86, 2, 1, 6, 9, 1, 0, 0, '0', '0', NULL, NULL),
+	(591, 2, '19903027', '3222', NULL, NULL, 'ABRIL 2021', 'HON-3164', 90, 1, 6, 3, 9, 1, 100, 100, '0', '0', NULL, NULL),
+	(592, 2, '19903027', '3222', NULL, NULL, 'ABRIL 2021', 'HON-3164', 113, 1, 1, 1, 9, 1, 100, 100, '0', '0', NULL, NULL),
+	(593, 2, '19903027', '3222', NULL, NULL, 'ABRIL 2021', 'HON-3164', 88, 17, 23, 1, 9, 1, 100, 100, '0', '0', NULL, NULL),
+	(594, 2, '19903027', '3222', NULL, NULL, 'ABRIL 2021', 'HON-3164', 51, 2, 1, 5, 9, 1, 100, 100, '0', '0', NULL, NULL),
+	(595, 2, '19903027', '3222', NULL, NULL, 'ABRIL 2021', 'HON-3164', 191, 17, 1, 4, 9, 1, 100, 100, '0', '0', NULL, NULL),
+	(596, 2, '19903027', '3222', NULL, NULL, 'ABRIL 2021', 'HON-3164', 167, 17, 1, 2, 9, 1, 100, 100, '0', '0', NULL, NULL),
+	(597, 2, '19903027', '3222', NULL, NULL, 'ABRIL 2021', 'HON-3164', 211, 1, 1, 6, 9, 1, 100, 100, '0', '0', NULL, NULL),
+	(598, 2, '19903027', '3222', NULL, NULL, 'ABRIL 2021', 'HON-3164', 15, 2, 1, 2, 9, 1, 0, 0, '0', '0', NULL, NULL),
+	(599, 2, '19903027', '3222', NULL, NULL, 'ABRIL 2021', 'HON-3164', 14, 2, 1, 3, 4, 1, 0, 0, '0', '0', NULL, NULL),
+	(600, 2, '19903027', '3222', NULL, NULL, 'ABRIL 2021', 'HON-3164', 86, 2, 1, 6, 9, 1, 0, 0, '0', '0', NULL, NULL),
+	(601, 1, '10104940', '3222', 'PRIORIDAD', NULL, 'ABRIL 2021', 'HON-3179', 90, 1, 6, 3, 9, 1, 10000, 9000, '0', '0', NULL, NULL),
+	(602, 1, '10104940', '3222', 'PRIORIDAD', NULL, 'ABRIL 2021', 'HON-3179', 99, 2, 1, 6, 9, 1, 10000, 9000, '0', '0', NULL, NULL),
+	(603, 1, '10104940', '3222', 'PRIORIDAD', NULL, 'ABRIL 2021', 'HON-3179', 61, 2, 1, 1, 9, 1, 10000, 9000, '0', '0', NULL, NULL),
+	(604, 1, '10104940', '3222', 'PRIORIDAD', NULL, 'ABRIL 2021', 'HON-3179', 51, 2, 1, 2, 9, 1, 10000, 9000, '0', '0', NULL, NULL),
+	(605, 1, '10104940', '3222', 'PRIORIDAD', NULL, 'ABRIL 2021', 'HON-3179', 51, 2, 1, 3, 9, 1, 10000, 9000, '0', '0', NULL, NULL),
+	(606, 1, '10104940', '3222', 'PRIORIDAD', NULL, 'ABRIL 2021', 'HON-3179', 67, 2, 1, 3, 9, 1, 10000, 9000, '0', '0', NULL, NULL),
+	(607, 1, '10104940', '3222', 'PRIORIDAD', NULL, 'ABRIL 2021', 'HON-3179', 15, 2, 1, 2, 9, 1, 0, 0, '0', '0', NULL, NULL),
+	(608, 1, '10104940', '3222', 'PRIORIDAD', NULL, 'ABRIL 2021', 'HON-3179', 14, 2, 1, 3, 9, 1, 0, 0, '0', '0', NULL, NULL),
+	(609, 1, '10104940', '3222', 'PRIORIDAD', NULL, 'ABRIL 2021', 'HON-3179', 86, 2, 1, 6, 9, 1, 0, 0, '0', '0', NULL, NULL),
+	(610, 1, '10104940', '3222', 'PRIORIDAD', NULL, 'ABRIL 2021', 'HON-3179', 101, 2, 5, 4, 9, 1, 10000, 9000, '0', '0', NULL, NULL),
 	(611, 2, '20005016', '3222', NULL, NULL, 'ABRIL 2021', 'HON-3164', 90, 1, 6, 3, 11, 1, 20000, 20000, '0', '0', NULL, NULL),
 	(612, 2, '20005016', '3222', NULL, NULL, 'ABRIL 2021', 'HON-3159', 90, 1, 6, 3, 11, 1, 12500, 12500, '0', '0', NULL, NULL),
 	(613, 1, '20005002', '3222', NULL, NULL, 'ABRIL 2021', 'HON-3167', 90, 3, 21, 3, 7, 3, 5200, 5200, '0', '0', NULL, NULL),
@@ -6323,10 +6328,10 @@ INSERT INTO `pendiente` (`id_pendiente`, `categoria`, `item`, `orden_del_sitema`
 	(711, 2, '08503500', '3222', NULL, NULL, 'ABRIL 2021', 'FTT-1493', 779, 4, 2, 6, 10, 1, 12000, 12000, '0', '0', NULL, NULL),
 	(712, 2, '08503501', '3222', NULL, NULL, 'ABRIL 2021', 'FTT-1490', 165, 4, 2, 5, 10, 1, 5000, 5000, '0', '0', NULL, NULL),
 	(713, 2, '08503503', '3222', NULL, NULL, 'ABRIL 2021', 'FTT-1493', 780, 4, 2, 2, 10, 1, 20000, 20000, '0', '0', NULL, NULL),
-	(714, 1, '9900009186', '3222', NULL, NULL, 'ABRIL 2021', 'HON-3172', 1450, 45, 153, 19, 10, 1, 12500, 12500, '0', '0', NULL, NULL),
-	(715, 1, '9900009186', '3222', NULL, NULL, 'ABRIL 2021', 'HON-3172', 1450, 45, 153, 19, 10, 1, 12500, 12500, '0', '0', NULL, NULL),
-	(716, 1, '9900009186', '3222', NULL, NULL, 'ABRIL 2021', 'HON-3172', 1450, 45, 153, 19, 10, 1, 12500, 12500, '0', '0', NULL, NULL),
-	(717, 1, '9900009186', '3222', NULL, NULL, 'ABRIL 2021', 'HON-3172', 1450, 45, 153, 19, 10, 1, 12500, 12500, '0', '0', NULL, NULL),
+	(714, 1, '9900009186', '3222', NULL, NULL, 'ABRIL 2021', 'HON-3172', 53, 2, 1, 1, 10, 1, 12500, 12500, '0', '0', NULL, NULL),
+	(715, 1, '9900009186', '3222', NULL, NULL, 'ABRIL 2021', 'HON-3172', 229, 2, 1, 3, 10, 1, 12500, 12500, '0', '0', NULL, NULL),
+	(716, 1, '9900009186', '3222', NULL, NULL, 'ABRIL 2021', 'HON-3172', 90, 1, 6, 3, 10, 1, 12500, 12500, '0', '0', NULL, NULL),
+	(717, 1, '9900009186', '3222', NULL, NULL, 'ABRIL 2021', 'HON-3172', 51, 2, 1, 5, 10, 1, 12500, 12500, '0', '0', NULL, NULL),
 	(718, 2, '603006600', '3222', NULL, NULL, 'ABRIL 2021', 'FTT-1494', 56, 2, 1, 3, 7, 1, 10000, 10000, '0', '0', NULL, NULL),
 	(719, 2, '47801211', '3222', NULL, NULL, 'ABRIL 2021', 'FTT-1489', 152, 4, 2, 8, 11, 1, 2500, 2500, '0', '0', NULL, NULL),
 	(720, 1, '9900004023', '3222', NULL, NULL, 'ABRIL 2021', 'HON-3158', 53, 3, 2, 1, 10, 1, 2000, 2000, '0', '0', NULL, NULL),
@@ -6397,32 +6402,32 @@ INSERT INTO `pendiente` (`id_pendiente`, `categoria`, `item`, `orden_del_sitema`
 	(785, 1, '00303023', '3235', NULL, NULL, 'MAYO 2021', 'HON-3186', 90, 3, 35, 3, 21, 2, 5000, 5000, '0', '0', NULL, NULL),
 	(786, 1, '20005000', '3235', NULL, NULL, 'MAYO 2021', 'HON-3196', 90, 1, 6, 3, 7, 1, 9200, 9200, '0', '0', NULL, NULL),
 	(787, 4, '20005000', '3235', NULL, NULL, 'MAYO 2021', 'INT-H-1244-W', 90, 1, 6, 3, 7, 1, 4600, 4600, '0', '0', NULL, NULL),
-	(788, 1, '10104940', '3235', NULL, NULL, 'MAYO 2021', 'HON-3196', 1450, 45, 153, 19, 9, 1, 2300, 2300, '0', '0', NULL, NULL),
-	(789, 1, '10104940', '3235', NULL, NULL, 'MAYO 2021', 'HON-3196', 1450, 45, 153, 19, 9, 1, 2300, 2300, '0', '0', NULL, NULL),
-	(790, 1, '10104940', '3235', NULL, NULL, 'MAYO 2021', 'HON-3196', 1450, 45, 153, 19, 9, 1, 2300, 2300, '0', '0', NULL, NULL),
-	(791, 1, '10104940', '3235', NULL, NULL, 'MAYO 2021', 'HON-3196', 1450, 45, 153, 19, 9, 1, 2300, 2300, '0', '0', NULL, NULL),
-	(792, 1, '10104940', '3235', NULL, NULL, 'MAYO 2021', 'HON-3196', 1450, 45, 153, 19, 9, 1, 2300, 2300, '0', '0', NULL, NULL),
-	(793, 1, '10104940', '3235', NULL, NULL, 'MAYO 2021', 'HON-3196', 1450, 45, 153, 19, 9, 1, 2300, 2300, '0', '0', NULL, NULL),
-	(794, 1, '10104940', '3235', NULL, NULL, 'MAYO 2021', 'HON-3196', 1450, 45, 153, 19, 9, 1, 0, 0, '0', '0', NULL, NULL),
-	(795, 1, '10104940', '3235', NULL, NULL, 'MAYO 2021', 'HON-3196', 1450, 45, 153, 19, 9, 1, 0, 0, '0', '0', NULL, NULL),
-	(796, 1, '10104940', '3235', NULL, NULL, 'MAYO 2021', 'HON-3196', 1450, 45, 153, 19, 9, 1, 0, 0, '0', '0', NULL, NULL),
-	(797, 1, '10104940', '3235', NULL, NULL, 'MAYO 2021', 'HON-3196', 1450, 45, 153, 19, 9, 1, 2300, 2300, '0', '0', NULL, NULL),
-	(798, 1, '10104940', '3235', NULL, NULL, 'MAYO 2021', 'HON-3179', 1450, 45, 153, 19, 9, 1, 10000, 10000, '0', '0', NULL, NULL),
-	(799, 1, '10104940', '3235', NULL, NULL, 'MAYO 2021', 'HON-3179', 1450, 45, 153, 19, 9, 1, 10000, 10000, '0', '0', NULL, NULL),
-	(800, 1, '10104940', '3235', NULL, NULL, 'MAYO 2021', 'HON-3179', 1450, 45, 153, 19, 9, 1, 10000, 10000, '0', '0', NULL, NULL),
-	(801, 1, '10104940', '3235', NULL, NULL, 'MAYO 2021', 'HON-3179', 1450, 45, 153, 19, 9, 1, 10000, 10000, '0', '0', NULL, NULL),
-	(802, 1, '10104940', '3235', NULL, NULL, 'MAYO 2021', 'HON-3179', 1450, 45, 153, 19, 9, 1, 10000, 10000, '0', '0', NULL, NULL),
-	(803, 1, '10104940', '3235', NULL, NULL, 'MAYO 2021', 'HON-3179', 1450, 45, 153, 19, 9, 1, 10000, 10000, '0', '0', NULL, NULL),
-	(804, 1, '10104940', '3235', NULL, NULL, 'MAYO 2021', 'HON-3179', 1450, 45, 153, 19, 9, 1, 0, 0, '0', '0', NULL, NULL),
-	(805, 1, '10104940', '3235', NULL, NULL, 'MAYO 2021', 'HON-3179', 1450, 45, 153, 19, 9, 1, 0, 0, '0', '0', NULL, NULL),
-	(806, 1, '10104940', '3235', NULL, NULL, 'MAYO 2021', 'HON-3179', 1450, 45, 153, 19, 9, 1, 0, 0, '0', '0', NULL, NULL),
-	(807, 1, '10104940', '3235', NULL, NULL, 'MAYO 2021', 'HON-3179', 1450, 45, 153, 19, 9, 1, 10000, 10000, '0', '0', NULL, NULL),
+	(788, 1, '10104940', '3235', NULL, NULL, 'MAYO 2021', 'HON-3196', 90, 1, 6, 3, 9, 1, 2300, 2300, '0', '0', NULL, NULL),
+	(789, 1, '10104940', '3235', NULL, NULL, 'MAYO 2021', 'HON-3196', 99, 2, 1, 6, 9, 1, 2300, 2300, '0', '0', NULL, NULL),
+	(790, 1, '10104940', '3235', NULL, NULL, 'MAYO 2021', 'HON-3196', 61, 2, 1, 1, 9, 1, 2300, 2300, '0', '0', NULL, NULL),
+	(791, 1, '10104940', '3235', NULL, NULL, 'MAYO 2021', 'HON-3196', 51, 2, 1, 2, 9, 1, 2300, 2300, '0', '0', NULL, NULL),
+	(792, 1, '10104940', '3235', NULL, NULL, 'MAYO 2021', 'HON-3196', 51, 2, 1, 3, 9, 1, 2300, 2300, '0', '0', NULL, NULL),
+	(793, 1, '10104940', '3235', NULL, NULL, 'MAYO 2021', 'HON-3196', 67, 2, 1, 3, 9, 1, 2300, 2300, '0', '0', NULL, NULL),
+	(794, 1, '10104940', '3235', NULL, NULL, 'MAYO 2021', 'HON-3196', 15, 2, 1, 2, 9, 1, 0, 0, '0', '0', NULL, NULL),
+	(795, 1, '10104940', '3235', NULL, NULL, 'MAYO 2021', 'HON-3196', 14, 2, 1, 3, 9, 1, 0, 0, '0', '0', NULL, NULL),
+	(796, 1, '10104940', '3235', NULL, NULL, 'MAYO 2021', 'HON-3196', 86, 2, 1, 6, 9, 1, 0, 0, '0', '0', NULL, NULL),
+	(797, 1, '10104940', '3235', NULL, NULL, 'MAYO 2021', 'HON-3196', 101, 2, 5, 4, 9, 1, 2300, 2300, '0', '0', NULL, NULL),
+	(798, 1, '10104940', '3235', NULL, NULL, 'MAYO 2021', 'HON-3179', 90, 1, 6, 3, 9, 1, 10000, 10000, '0', '0', NULL, NULL),
+	(799, 1, '10104940', '3235', NULL, NULL, 'MAYO 2021', 'HON-3179', 99, 2, 1, 6, 9, 1, 10000, 10000, '0', '0', NULL, NULL),
+	(800, 1, '10104940', '3235', NULL, NULL, 'MAYO 2021', 'HON-3179', 61, 2, 1, 1, 9, 1, 10000, 10000, '0', '0', NULL, NULL),
+	(801, 1, '10104940', '3235', NULL, NULL, 'MAYO 2021', 'HON-3179', 51, 2, 1, 2, 9, 1, 10000, 10000, '0', '0', NULL, NULL),
+	(802, 1, '10104940', '3235', NULL, NULL, 'MAYO 2021', 'HON-3179', 51, 2, 1, 3, 9, 1, 10000, 10000, '0', '0', NULL, NULL),
+	(803, 1, '10104940', '3235', NULL, NULL, 'MAYO 2021', 'HON-3179', 67, 2, 1, 3, 9, 1, 10000, 10000, '0', '0', NULL, NULL),
+	(804, 1, '10104940', '3235', NULL, NULL, 'MAYO 2021', 'HON-3179', 15, 2, 1, 2, 9, 1, 0, 0, '0', '0', NULL, NULL),
+	(805, 1, '10104940', '3235', NULL, NULL, 'MAYO 2021', 'HON-3179', 14, 2, 1, 3, 9, 1, 0, 0, '0', '0', NULL, NULL),
+	(806, 1, '10104940', '3235', NULL, NULL, 'MAYO 2021', 'HON-3179', 86, 2, 1, 6, 9, 1, 0, 0, '0', '0', NULL, NULL),
+	(807, 1, '10104940', '3235', NULL, NULL, 'MAYO 2021', 'HON-3179', 101, 2, 5, 4, 9, 1, 10000, 10000, '0', '0', NULL, NULL),
 	(808, 2, '20005016', '3235', NULL, NULL, 'MAYO 2021', 'HON-3198', 90, 1, 6, 3, 11, 1, 500, 500, '0', '0', NULL, NULL),
-	(809, 2, '10499060', '3235', NULL, NULL, 'MAYO 2021', 'HON-3182', 197, 1, 6, 3, 11, 1, 400, 400, '0', '0', NULL, NULL),
-	(810, 2, '10499060', '3235', NULL, NULL, 'MAYO 2021', 'HON-3182', 197, 1, 6, 3, 11, 1, 0, 0, '0', '0', NULL, NULL),
-	(811, 2, '10499060', '3235', NULL, NULL, 'MAYO 2021', 'HON-3182', 197, 1, 6, 3, 11, 1, 0, 0, '0', '0', NULL, NULL),
-	(812, 2, '10499060', '3235', NULL, NULL, 'MAYO 2021', 'HON-3182', 197, 1, 6, 3, 11, 1, 400, 400, '0', '0', NULL, NULL),
-	(813, 2, '10499060', '3235', NULL, NULL, 'MAYO 2021', 'HON-3182', 197, 1, 6, 3, 11, 1, 0, 0, '0', '0', NULL, NULL),
+	(809, 2, '10499060', '3235', NULL, NULL, 'MAYO 2021', 'HON-3182', 90, 45, 1, 19, 11, 1, 400, 400, '0', '0', NULL, NULL),
+	(810, 2, '10499060', '3235', NULL, NULL, 'MAYO 2021', 'HON-3182', 67, 45, 1, 2, 11, 1, 0, 0, '0', '0', NULL, NULL),
+	(811, 2, '10499060', '3235', NULL, NULL, 'MAYO 2021', 'HON-3182', 255, 45, 1, 19, 11, 1, 0, 0, '0', '0', NULL, NULL),
+	(812, 2, '10499060', '3235', NULL, NULL, 'MAYO 2021', 'HON-3182', 51, 2, 1, 1, 11, 1, 400, 400, '0', '0', NULL, NULL),
+	(813, 2, '10499060', '3235', NULL, NULL, 'MAYO 2021', 'HON-3182', 457, 45, 1, 19, 11, 1, 0, 0, '0', '0', NULL, NULL),
 	(814, 1, '20005002', '3235', NULL, NULL, 'MAYO 2021', 'HON-3196', 90, 3, 21, 3, 7, 3, 8800, 8800, '0', '0', NULL, NULL),
 	(815, 4, '20005002', '3235', NULL, NULL, 'MAYO 2021', 'INT-H-1244-W', 90, 3, 21, 3, 7, 3, 2000, 2000, '0', '0', NULL, NULL),
 	(816, 2, '01004013', '3235', NULL, NULL, 'MAYO 2021', 'HON-3198', 90, 3, 21, 3, 12, 1, 250, 250, '0', '0', NULL, NULL),
@@ -6495,13 +6500,13 @@ INSERT INTO `pendiente` (`id_pendiente`, `categoria`, `item`, `orden_del_sitema`
 	(883, 1, '9900004039', '3235', NULL, NULL, 'MAYO 2021', 'HON-3204', 229, 2, 1, 3, 10, 1, 1000, 1000, '0', '0', NULL, NULL),
 	(884, 1, '9900004038', '3235', NULL, NULL, 'MAYO 2021', 'HON-3184', 229, 3, 2, 3, 7, 1, 4000, 4000, '0', '0', NULL, NULL),
 	(885, 1, '9900004040', '3235', NULL, NULL, 'MAYO 2021', 'HON-3204', 229, 3, 2, 3, 10, 1, 5000, 5000, '0', '0', NULL, NULL),
-	(886, 1, '9900009189', '3235', NULL, NULL, 'MAYO 2021', 'HON-3201', 1450, 45, 153, 19, 10, 1, 3000, 3000, '0', '0', NULL, NULL),
+	(886, 1, '9900009189', '3235', NULL, NULL, 'MAYO 2021', 'HON-3201', 229, 3, 2, 3, 11, 1, 3000, 3000, '0', '0', NULL, NULL),
 	(887, 1, '9900004040', '3235', NULL, NULL, 'MAYO 2021', 'HON-3187', 229, 3, 2, 3, 10, 1, 2000, 2000, '0', '0', NULL, NULL),
-	(888, 1, '9900009187', '3235', NULL, NULL, 'MAYO 2021', 'HON-3202', 1450, 45, 153, 19, 11, 1, 2000, 2000, '0', '0', NULL, NULL),
-	(889, 1, '9900009187', '3235', NULL, NULL, 'MAYO 2021', 'HON-3202', 1450, 45, 153, 19, 11, 1, 2000, 2000, '0', '0', NULL, NULL),
-	(890, 1, '9900009187', '3235', NULL, NULL, 'MAYO 2021', 'HON-3202', 1450, 45, 153, 19, 11, 1, 2000, 2000, '0', '0', NULL, NULL),
-	(891, 1, '9900009187', '3235', NULL, NULL, 'MAYO 2021', 'HON-3202', 1450, 45, 153, 19, 11, 1, 2000, 2000, '0', '0', NULL, NULL),
-	(892, 1, '9900009187', '3235', NULL, NULL, 'MAYO 2021', 'HON-3202', 1450, 45, 153, 19, 11, 1, 2000, 2000, '0', '0', NULL, NULL),
+	(888, 1, '9900009187', '3235', NULL, NULL, 'MAYO 2021', 'HON-3202', 229, 3, 2, 3, 11, 1, 2000, 2000, '0', '0', NULL, NULL),
+	(889, 1, '9900009187', '3235', NULL, NULL, 'MAYO 2021', 'HON-3202', 94, 25, 2, 2, 11, 1, 2000, 2000, '0', '0', NULL, NULL),
+	(890, 1, '9900009187', '3235', NULL, NULL, 'MAYO 2021', 'HON-3202', 228, 3, 2, 1, 11, 1, 2000, 2000, '0', '0', NULL, NULL),
+	(891, 1, '9900009187', '3235', NULL, NULL, 'MAYO 2021', 'HON-3202', 53, 3, 2, 1, 11, 1, 2000, 2000, '0', '0', NULL, NULL),
+	(892, 1, '9900009187', '3235', NULL, NULL, 'MAYO 2021', 'HON-3202', 230, 3, 2, 1, 11, 1, 2000, 2000, '0', '0', NULL, NULL),
 	(893, 1, '9900004028', '3235', NULL, NULL, 'MAYO 2021', 'HON-3184', 230, 3, 2, 1, 7, 1, 3000, 3000, '0', '0', NULL, NULL),
 	(894, 1, '9900004031', '3235', NULL, NULL, 'MAYO 2021', 'HON-3204', 230, 3, 2, 1, 10, 1, 500, 500, '0', '0', NULL, NULL),
 	(895, 1, '9900004031', '3235', NULL, NULL, 'MAYO 2021', 'HON-3187', 230, 3, 2, 1, 10, 1, 2000, 2000, '0', '0', NULL, NULL),
@@ -6603,9 +6608,9 @@ INSERT INTO `pendiente` (`id_pendiente`, `categoria`, `item`, `orden_del_sitema`
 	(991, 1, '00504010', '3235', NULL, NULL, 'MAYO 2021', 'HON-3194', 51, 4, 2, 2, 12, 1, 1250, 1250, '0', '0', NULL, NULL),
 	(992, 2, '00504010', '3235', NULL, NULL, 'MAYO 2021', 'HON-3193', 51, 4, 2, 2, 12, 1, 1875, 1875, '0', '0', NULL, NULL),
 	(993, 1, '00904038', '3235', NULL, NULL, 'MAYO 2021', 'HON-3196', 51, 4, 2, 2, 14, 1, 13200, 13200, '0', '0', NULL, NULL),
-	(994, 1, '00904038', '3235', NULL, NULL, 'MAYO 2021', 'HON-3196', 51, 4, 2, 2, 14, 1, 13200, 13200, '0', '0', NULL, NULL),
-	(995, 1, '00904038', '3235', NULL, NULL, 'MAYO 2021', 'HON-3196', 51, 4, 2, 2, 14, 1, 13200, 13200, '0', '0', NULL, NULL),
-	(996, 1, '00904038', '3235', NULL, NULL, 'MAYO 2021', 'HON-3196', 51, 4, 2, 2, 14, 1, 13200, 13200, '0', '0', NULL, NULL),
+	(994, 1, '00904038', '3235', NULL, NULL, 'MAYO 2021', 'HON-3196', 51, 4, 2, 5, 14, 1, 13200, 13200, '0', '0', NULL, NULL),
+	(995, 1, '00904038', '3235', NULL, NULL, 'MAYO 2021', 'HON-3196', 51, 4, 2, 1, 14, 1, 13200, 13200, '0', '0', NULL, NULL),
+	(996, 1, '00904038', '3235', NULL, NULL, 'MAYO 2021', 'HON-3196', 51, 4, 2, 3, 14, 1, 13200, 13200, '0', '0', NULL, NULL),
 	(997, 1, '00505002', '3235', NULL, NULL, 'MAYO 2021', 'HON-3196', 51, 4, 14, 5, 7, 3, 3600, 3600, '0', '0', NULL, NULL),
 	(998, 1, '00505007', '3235', NULL, NULL, 'MAYO 2021', 'HON-3196', 51, 4, 14, 2, 18, 3, 6000, 6000, '0', '0', NULL, NULL),
 	(999, 1, '00505003', '3235', NULL, NULL, 'MAYO 2021', 'HON-3196', 51, 4, 14, 2, 7, 3, 1200, 1200, '0', '0', NULL, NULL),
@@ -7050,8 +7055,8 @@ INSERT INTO `pendiente_empaque` (`id_pendiente`, `categoria`, `item`, `orden_del
 	(275, 2, '10704020', '3187', '', '', 'OCTUBRE 2020', 'HON-3029', 99, 2, 1, 6, 11, 1, '0', '0', '0', '0', NULL),
 	(276, 2, '00704004', '3187', '', '', 'OCTUBRE 2020', 'HON-3024', 99, 4, 2, 6, 12, 1, '0', '0', '0', '0', NULL),
 	(277, 2, '12506010', '3187', '', '', 'OCTUBRE 2020', 'HON-3024', 61, 4, 2, 1, 12, 1, '0', '0', '0', '0', NULL),
-	(278, 2, '10499012', '3187', '', '', 'OCTUBRE 2020', 'HON-3027', 119, 4, 2, 5, 10, 1, '0', '0', '0', '0', NULL),
-	(279, 2, '10499060', '3187', '', '', 'OCTUBRE 2020', 'HON-3027', 197, 1, 6, 3, 11, 1, '0', '0', '0', '0', NULL),
+	(278, 2, '10499012', '3187', '', '', 'OCTUBRE 2020', 'HON-3027', 51, 4, 2, 5, 10, 1, '0', '0', '0', '0', NULL),
+	(279, 2, '10499060', '3187', '', '', 'OCTUBRE 2020', 'HON-3027', 67, 45, 1, 2, 11, 1, '0', '0', '0', '0', NULL),
 	(280, 2, '', '3187', '', '', 'OCTUBRE 2020', 'HON-3027', 200, 2, 1, 1, 11, 1, '0', '0', '0', '0', NULL),
 	(281, 2, '10499062', '3187', '', '', 'OCTUBRE 2020', 'HON-3027', 127, 2, 1, 4, 11, 1, '0', '0', '0', '0', NULL),
 	(282, 3, '11803000', '3187', '', '', 'OCTUBRE 2020', 'HON-3021', 132, 2, 1, 6, 7, 1, '0', '0', '0', '0', NULL),
@@ -7083,10 +7088,10 @@ INSERT INTO `pendiente_empaque` (`id_pendiente`, `categoria`, `item`, `orden_del
 	(308, 2, '', '3187', '', '', 'OCTUBRE 2020', 'FTT-1441', NULL, 5, 4, 8, 10, 1, '0', '0', '0', '0', NULL),
 	(309, 2, '', '3187', '', '', 'OCTUBRE 2020', 'FTT-1441', NULL, 16, 14, 8, 10, 1, '0', '0', '0', '0', NULL),
 	(310, 2, '', '3187', '', '', 'OCTUBRE 2020', 'FTT-1441', NULL, 4, 2, 8, 10, 1, '0', '0', '0', '0', NULL),
-	(311, 2, '', '3187', '', '', 'OCTUBRE 2020', 'HON-3027', 120, 4, 2, 1, 10, 1, '0', '0', '0', '0', NULL),
-	(312, 2, '', '3187', '', '', 'OCTUBRE 2020', 'HON-3027', 121, 4, 2, 8, 10, 1, '0', '0', '0', '0', NULL),
-	(313, 2, '', '3187', '', '', 'OCTUBRE 2020', 'HON-3027', 122, 4, 3, 2, 10, 1, '0', '0', '0', '0', NULL),
-	(314, 2, '', '3187', '', '', 'OCTUBRE 2020', 'HON-3027', 123, 4, 3, 3, 10, 1, '0', '0', '0', '0', NULL),
+	(311, 2, '10499012', '3187', '', '', 'OCTUBRE 2020', 'HON-3027', 120, 4, 2, 1, 10, 1, '0', '0', '0', '0', NULL),
+	(312, 2, '10499012', '3187', '', '', 'OCTUBRE 2020', 'HON-3027', 121, 4, 2, 8, 10, 1, '0', '0', '0', '0', NULL),
+	(313, 2, '10499012', '3187', '', '', 'OCTUBRE 2020', 'HON-3027', 122, 4, 3, 2, 10, 1, '0', '0', '0', '0', NULL),
+	(314, 2, '10499012', '3187', '', '', 'OCTUBRE 2020', 'HON-3027', 123, 4, 3, 3, 10, 1, '0', '0', '0', '0', NULL),
 	(315, 3, '', '3187', '', '', 'OCTUBRE 2020', 'HON-3022', 133, 4, 14, 2, 7, 1, '0', '0', '0', '0', NULL),
 	(316, 3, '12003002', '3187', '', '', 'OCTUBRE 2020', 'HON-3022', 133, 2, 1, 2, 7, 1, '0', '0', '0', '0', NULL),
 	(317, 3, '', '3187', '', '', 'OCTUBRE 2020', 'HON-3022', 133, 2, 1, 2, 9, 1, '0', '0', '0', '0', NULL),
@@ -7295,10 +7300,10 @@ INSERT INTO `pendiente_empaque` (`id_pendiente`, `categoria`, `item`, `orden_del
 	(520, 1, '00903051', '3193', '', '', 'NOVIEMBRE 2020', 'HON-3062', 74, 18, 6, 5, 11, 1, '0', '0', '0', '0', NULL),
 	(521, 1, '', '3193', '', '', 'NOVIEMBRE 2020', 'HON-3063', 74, 3, 3, 5, 7, 1, '0', '0', '0', '0', NULL),
 	(522, 1, '', '3193', '', '', 'NOVIEMBRE 2020', 'HON-3063', 74, 9, 29, 5, 7, 1, '0', '0', '0', '0', NULL),
-	(523, 1, '13105265\r\n', '3193', '', '', 'NOVIEMBRE 2020', 'HON-3057', NULL, 2, 1, 6, 7, 1, '500', '500', '0', '0', NULL),
-	(524, 1, '13105265\r\n', '3193', '', '', 'NOVIEMBRE 2020', 'HON-3057', NULL, 3, 2, 6, 7, 1, '500', '500', '0', '0', NULL),
-	(525, 1, '13105265\r\n', '3193', '', '', 'NOVIEMBRE 2020', 'HON-3057', NULL, 5, 4, 6, 7, 1, '500', '500', '0', '0', NULL),
-	(526, 1, '13105265\r\n', '3193', '', '', 'NOVIEMBRE 2020', 'HON-3057', NULL, 9, 16, 6, 7, 1, '500', '500', '0', '0', NULL),
+	(523, 1, '13105265\r\n', '3193', '', '', 'NOVIEMBRE 2020', 'HON-3057', 1462, 2, 1, 6, 7, 1, '500', '500', '0', '0', NULL),
+	(524, 1, '13105266\r\n', '3193', '', '', 'NOVIEMBRE 2020', 'HON-3057', 1462, 3, 2, 6, 7, 1, '500', '500', '0', '0', NULL),
+	(525, 1, '13105267\r\n', '3193', '', '', 'NOVIEMBRE 2020', 'HON-3057', 1462, 5, 4, 6, 7, 1, '500', '500', '0', '0', NULL),
+	(526, 1, '13105268\r\n', '3193', '', '', 'NOVIEMBRE 2020', 'HON-3057', 1462, 9, 16, 6, 7, 1, '500', '500', '0', '0', NULL),
 	(527, 1, '01607601', '3193', '', '', 'NOVIEMBRE 2020', 'HON-3063', 95, 2, 1, 11, 7, 1, '100', '0', '0', '0', NULL),
 	(528, 1, '01607602', '3193', '', '', 'NOVIEMBRE 2020', 'HON-3063', 95, 3, 2, 11, 7, 1, '0', '0', '0', '0', NULL),
 	(529, 1, '01607603', '3193', '', '', 'NOVIEMBRE 2020', 'HON-3063', 95, 9, 11, 11, 7, 1, '0', '0', '0', '0', NULL),
@@ -7784,12 +7789,12 @@ INSERT INTO `pendiente_empaque` (`id_pendiente`, `categoria`, `item`, `orden_del
 	(1009, 1, '', '3207', '', '', 'FEBRERO 2021', 'HON-3106', 90, 3, NULL, 3, 11, 7, '18500', '18500', '0', '0', NULL),
 	(1010, 1, '', '3207', '', '', 'FEBRERO 2021', 'HON-3120', 90, 1, 6, 3, 7, 3, '20000', '20000', '0', '0', NULL),
 	(1011, 2, '20005016', '3207', '', '', 'FEBRERO 2021', 'HON-3118', 90, 1, 6, 3, 11, 1, '0', '0', '0', '0', NULL),
-	(1012, 2, '10499060', '3207', '', '', 'FEBRERO 2021', 'HON-3101', 197, 1, 6, 3, 11, 1, '0', '0', '0', '0', NULL),
+	(1012, 2, '10499060', '3207', '', '', 'FEBRERO 2021', 'HON-3101', 51, 2, 1, 1, 11, 1, '0', '0', '0', '0', NULL),
 	(1013, 2, '', '3207', '', '', 'FEBRERO 2021', 'HON-3101', 198, NULL, 1, 3, 11, 1, '0', '0', '0', '0', NULL),
 	(1014, 2, '', '3207', '', '', 'FEBRERO 2021', 'HON-3101', 199, NULL, 1, NULL, 11, 1, '0', '0', '0', '0', NULL),
 	(1015, 2, '', '3207', '', '', 'FEBRERO 2021', 'HON-3101', 200, 2, 1, 1, 11, 1, '0', '0', '0', '0', NULL),
 	(1016, 2, '', '3207', '', '', 'FEBRERO 2021', 'HON-3101', 201, NULL, 1, NULL, 11, 1, '0', '0', '0', '0', NULL),
-	(1017, 2, '10499060', '3207', '', '', 'FEBRERO 2021', 'HON-3118', 197, 1, 6, 3, 11, 1, '0', '0', '0', '0', NULL),
+	(1017, 2, '10499060', '3207', '', '', 'FEBRERO 2021', 'HON-3118', 457, 45, 1, 19, 11, 1, '0', '0', '0', '0', NULL),
 	(1018, 2, '', '3207', '', '', 'FEBRERO 2021', 'HON-3118', 198, NULL, 1, 3, 11, 1, '0', '0', '0', '0', NULL),
 	(1019, 2, '', '3207', '', '', 'FEBRERO 2021', 'HON-3118', 199, NULL, 1, NULL, 11, 1, '0', '0', '0', '0', NULL),
 	(1020, 2, '', '3207', '', '', 'FEBRERO 2021', 'HON-3118', 200, 2, 1, 1, 11, 1, '0', '0', '0', '0', NULL),
@@ -7801,7 +7806,7 @@ INSERT INTO `pendiente_empaque` (`id_pendiente`, `categoria`, `item`, `orden_del
 	(1026, 1, '20005006', '3207', '', '', 'FEBRERO 2021', 'HON-3111', 90, 3, 3, 3, 11, 1, '0', '0', '0', '0', NULL),
 	(1027, 2, '', '3207', '', '', 'FEBRERO 2021', 'HON-3118', 202, 3, 2, NULL, 11, 1, '0', '0', '0', '0', NULL),
 	(1028, 2, '', '3207', '', '', 'FEBRERO 2021', 'HON-3118', 203, 3, 2, NULL, 11, 1, '0', '0', '0', '0', NULL),
-	(1029, 2, '10499015', '3207', '', '', 'FEBRERO 2021', 'HON-3118', 204, 3, 3, 3, 11, 1, '0', '0', '0', '0', NULL),
+	(1029, 2, '10499015', '3207', '', '', 'FEBRERO 2021', 'HON-3118', 90, 3, 3, 3, 11, 1, '0', '0', '0', '0', NULL),
 	(1030, 2, '', '3207', '', '', 'FEBRERO 2021', 'HON-3118', 205, 3, 3, 2, 11, 1, '0', '0', '0', '0', NULL),
 	(1031, 2, '', '3207', '', '', 'FEBRERO 2021', 'HON-3118', 206, 4, 2, 3, 11, 1, '0', '0', '0', '0', NULL),
 	(1032, 1, '20005007', '3207', '', '', 'FEBRERO 2021', 'HON-3120', 90, 9, 26, 3, 7, 1, '0', '0', '0', '0', NULL),
@@ -7983,7 +7988,7 @@ INSERT INTO `pendiente_empaque` (`id_pendiente`, `categoria`, `item`, `orden_del
 	(1208, 1, '00904038\r\n', '3207', '', '', 'FEBRERO 2021', 'HON-3118', 96, 4, 2, 5, 14, 1, '1410', '1410', '0', '0', NULL),
 	(1209, 1, '00904038\r\n', '3207', '', '', 'FEBRERO 2021', 'HON-3118', 114, 4, 2, 1, 14, 1, '1410', '1410', '0', '0', NULL),
 	(1210, 1, '00904038\r\n', '3207', '', '', 'FEBRERO 2021', 'HON-3118', 96, 4, 2, 3, 14, 1, '1410', '1410', '0', '0', NULL),
-	(1211, 1, '00904038', '3207', '', '', 'FEBRERO 2021', 'HON-3120', 96, 4, 2, 2, 14, 1, '45600', '45600', '0', '0', NULL),
+	(1211, 1, '00904038', '3207', '', '', 'FEBRERO 2021', 'HON-3120', 51, 4, 2, 5, 14, 1, '45600', '45600', '0', '0', NULL),
 	(1212, 1, '00904038\r\n', '3207', '', '', 'FEBRERO 2021', 'HON-3120', 96, 4, 2, 5, 14, 1, '45600', '45600', '0', '0', NULL),
 	(1213, 1, '00904038\r\n', '3207', '', '', 'FEBRERO 2021', 'HON-3120', 114, 4, 2, 1, 14, 1, '45600', '45600', '0', '0', NULL),
 	(1214, 1, '00904038\r\n', '3207', '', '', 'FEBRERO 2021', 'HON-3120', 96, 4, 2, 3, 14, 1, '45600', '45600', '0', '0', NULL),
@@ -8113,17 +8118,17 @@ INSERT INTO `pendiente_empaque` (`id_pendiente`, `categoria`, `item`, `orden_del
 	(1338, 2, '47705002', '3217', '', '', 'MARZO 2021', 'HON-3141', 168, 3, 14, 6, 11, 1, '7500', '2500', '0', '0', NULL),
 	(1339, 2, '47801004', '3217', '', '', 'MARZO 2021', 'HON-3141', 168, 5, 4, 6, 7, 1, '0', '0', '0', '0', NULL),
 	(1340, 2, '20005016', '3217', '', '', 'MARZO 2021', 'HON-3141', 90, 1, 6, 3, 11, 1, '0', '0', '0', '0', NULL),
-	(1341, 2, '10499060', '3217', '', '', 'MARZO 2021', 'HON-3141', 197, 1, 6, 3, 11, 1, '1000', '1000', '0', '0', NULL),
+	(1341, 2, '10499060', '3217', '', '', 'MARZO 2021', 'HON-3141', 67, 45, 1, 2, 11, 1, '1000', '1000', '0', '0', NULL),
 	(1342, 2, '', '3217', '', '', 'MARZO 2021', 'HON-3141', 221, 2, 1, 2, 11, 1, '0', '0', '0', '0', NULL),
 	(1343, 2, '', '3217', '', '', 'MARZO 2021', 'HON-3141', 222, 2, 1, NULL, 11, 1, '0', '0', '0', '0', NULL),
-	(1344, 2, '10499060', '3217', '', '', 'MARZO 2021', 'HON-3141', 223, 2, 1, 1, 11, 1, '1000', '1000', '0', '0', NULL),
+	(1344, 2, '10499060', '3217', '', '', 'MARZO 2021', 'HON-3141', 255, 45, 1, 19, 11, 1, '1000', '1000', '0', '0', NULL),
 	(1345, 2, '', '3217', '', '', 'MARZO 2021', 'HON-3141', 200, 2, 1, NULL, 11, 1, '0', '0', '0', '0', NULL),
 	(1346, 2, '20005006', '3217', '', '', 'MARZO 2021', 'HON-3138', 90, 3, 3, 3, 11, 1, '25000', '0', '0', '0', NULL),
 	(1347, 2, '', '3217', '', '', 'MARZO 2021', 'HON-3141', 224, 3, 2, NULL, 11, 1, '0', '0', '0', '0', NULL),
 	(1348, 2, '', '3217', '', '', 'MARZO 2021', 'HON-3141', 225, 3, 2, 3, 11, 1, '0', '0', '0', '0', NULL),
-	(1349, 2, '10499015', '3217', '', '', 'MARZO 2021', 'HON-3141', 204, 3, 3, 3, 11, 1, '500', '500', '0', '0', NULL),
-	(1350, 2, '10499015', '3217', '', '', 'MARZO 2021', 'HON-3141', 205, 3, 3, 2, 11, 1, '500', '500', '0', '0', NULL),
-	(1351, 2, '10499015', '3217', '', '', 'MARZO 2021', 'HON-3141', 206, 4, 2, 3, 11, 1, '500', '500', '0', '0', NULL),
+	(1349, 2, '10499015', '3217', '', '', 'MARZO 2021', 'HON-3141', 15, 3, 3, 2, 11, 1, '500', '500', '0', '0', NULL),
+	(1350, 2, '10499015', '3217', '', '', 'MARZO 2021', 'HON-3141', 457, 3, 2, 19, 11, 1, '500', '500', '0', '0', NULL),
+	(1351, 2, '10499015', '3217', '', '', 'MARZO 2021', 'HON-3141', 754, 3, 2, 19, 11, 1, '500', '500', '0', '0', NULL),
 	(1352, 2, '00804065', '3217', '', '', 'MARZO 2021', 'HON-3139', 209, 18, 6, 2, 7, 1, '400', '0', '0', '0', NULL),
 	(1353, 2, '00904111', '3217', '', '', 'MARZO 2021', 'HON-3135', 186, 3, 3, 2, 9, 1, '500', '500', '0', '0', NULL),
 	(1354, 2, '14399006', '3217', '', '', 'MARZO 2021', 'HON-3141', 147, 3, 3, 3, 11, 1, '4000', '4000', '0', '0', NULL),
@@ -8427,16 +8432,16 @@ INSERT INTO `pendiente_empaque` (`id_pendiente`, `categoria`, `item`, `orden_del
 	(1652, 2, '19903027\r\n', '3222', '', '', 'ABRIL 2021', 'HON-3161', NULL, 2, 1, 2, 9, 1, '0', '0', '0', '0', NULL),
 	(1653, 2, '19903027\r\n', '3222', '', '', 'ABRIL 2021', 'HON-3161', NULL, 2, 1, 3, 9, 1, '0', '0', '0', '0', NULL),
 	(1654, 2, '19903027\r\n', '3222', '', '', 'ABRIL 2021', 'HON-3161', NULL, 2, 1, 6, 9, 1, '0', '0', '0', '0', NULL),
-	(1655, 2, '19903027', '3222', '', '', 'ABRIL 2021', 'HON-3164', NULL, 1, 6, 3, 9, 1, '100', '100', '0', '0', NULL),
+	(1655, 2, '19903027', '3222', '', '', 'ABRIL 2021', 'HON-3164', 90, 1, 6, 3, 9, 1, '100', '100', '0', '0', NULL),
 	(1656, 2, '19903027\r\n', '3222', '', '', 'ABRIL 2021', 'HON-3164', NULL, 1, 1, 1, 9, 1, '100', '100', '0', '0', NULL),
 	(1657, 2, '19903027\r\n', '3222', '', '', 'ABRIL 2021', 'HON-3164', NULL, 17, 23, 1, 9, 1, '100', '100', '0', '0', NULL),
 	(1658, 2, '19903027\r\n', '3222', '', '', 'ABRIL 2021', 'HON-3164', NULL, 2, 1, 5, 9, 1, '100', '100', '0', '0', NULL),
 	(1659, 2, '19903027\r\n', '3222', '', '', 'ABRIL 2021', 'HON-3164', NULL, 17, 1, 4, 9, 1, '100', '100', '0', '0', NULL),
 	(1660, 2, '19903027\r\n', '3222', '', '', 'ABRIL 2021', 'HON-3164', NULL, 17, 1, 2, 9, 1, '100', '100', '0', '0', NULL),
-	(1661, 2, '19903027\r\n', '3222', '', '', 'ABRIL 2021', 'HON-3164', NULL, 1, 1, 6, 9, 1, '100', '100', '0', '0', NULL),
-	(1662, 2, '19903027\r\n', '3222', '', '', 'ABRIL 2021', 'HON-3164', NULL, 2, 1, 2, 9, 1, '0', '0', '0', '0', NULL),
-	(1663, 2, '19903027\r\n', '3222', '', '', 'ABRIL 2021', 'HON-3164', NULL, 2, 1, 3, 9, 1, '0', '0', '0', '0', NULL),
-	(1664, 2, '19903027\r\n', '3222', '', '', 'ABRIL 2021', 'HON-3164', NULL, 2, 1, 6, 9, 1, '0', '0', '0', '0', NULL),
+	(1661, 2, '19903027\r\n', '3222', '', '', 'ABRIL 2021', 'HON-3164', 90, 1, 1, 6, 9, 1, '100', '100', '0', '0', NULL),
+	(1662, 2, '19903027\r\n', '3222', '', '', 'ABRIL 2021', 'HON-3164', 90, 2, 1, 2, 9, 1, '0', '0', '0', '0', NULL),
+	(1663, 2, '19903027\r\n', '3222', '', '', 'ABRIL 2021', 'HON-3164', 90, 2, 1, 3, 9, 1, '0', '0', '0', '0', NULL),
+	(1664, 2, '19903027\r\n', '3222', '', '', 'ABRIL 2021', 'HON-3164', 90, 2, 1, 6, 9, 1, '0', '0', '0', '0', NULL),
 	(1665, 2, '20005016', '3222', '', '', 'ABRIL 2021', 'HON-3164', 90, 1, 6, 3, 11, 1, '20000', '20000', '0', '0', NULL),
 	(1666, 2, '20005016', '3222', '', '', 'ABRIL 2021', 'HON-3159', 90, 1, 6, 3, 11, 1, '12500', '12500', '0', '0', NULL),
 	(1667, 2, '15406023', '3222', '', '', 'ABRIL 2021', 'HON-3164', 167, 4, 2, 2, 11, 1, '400', '400', '0', '0', NULL),
@@ -8682,7 +8687,7 @@ INSERT INTO `pendiente_empaque` (`id_pendiente`, `categoria`, `item`, `orden_del
 	(1907, 2, '603004031', '3235', '', '', 'MAYO 2021', 'HON-3182', 88, 4, 3, 1, 11, 1, '1250', '1250', '0', '0', NULL),
 	(1908, 2, '47801000', '3235', '', '', 'MAYO 2021', 'HON-3183', 168, 2, 1, 6, 7, 1, '2000', '2000', '0', '0', NULL),
 	(1909, 2, '20005016', '3235', '', '', 'MAYO 2021', 'HON-3198', 90, 1, 6, 3, 11, 1, '500', '500', '0', '0', NULL),
-	(1910, 2, '10499060', '3235', '', '', 'MAYO 2021', 'HON-3182', 197, 1, 6, 3, 11, 1, '400', '400', '0', '0', NULL),
+	(1910, 2, '10499060', '3235', '', '', 'MAYO 2021', 'HON-3182', 51, 2, 1, 1, 11, 1, '400', '400', '0', '0', NULL),
 	(1911, 2, '10499060\r\n', '3235', '', '', 'MAYO 2021', 'HON-3182', NULL, 2, 1, 2, 11, 1, '0', '0', '0', '0', NULL),
 	(1912, 2, '10499060\r\n', '3235', '', '', 'MAYO 2021', 'HON-3182', NULL, NULL, 1, NULL, 11, 1, '0', '0', '0', '0', NULL),
 	(1913, 2, '10499060\r\n', '3235', '', '', 'MAYO 2021', 'HON-3182', 200, 2, 1, 1, 11, 1, '400', '400', '0', '0', NULL),
@@ -10537,6 +10542,27 @@ WHERE pendiente_empaque.id_pendiente = id;
 END//
 DELIMITER ;
 
+-- Volcando estructura para procedimiento facturacion_plasencia.actualizar_pendiente_empaque_sampler
+DELIMITER //
+CREATE PROCEDURE `actualizar_pendiente_empaque_sampler`(
+	IN `marca` INT,
+	IN `nombre` INT,
+	IN `vitola` INT,
+	IN `capa` INT,
+	IN `tipo_empaque` INT,
+	IN `item` INT
+)
+BEGIN
+ UPDATE pendiente_empaque SET
+  pendiente_empaque.marca= marca,
+  pendiente_empaque.nombre = nombre ,
+ pendiente_empaque.capa = capa,
+ pendiente_empaque.vitola = vitola,
+ pendiente_empaque.tipo_empaque = tipo_empaque
+ WHERE pendiente_empaque.id_pendiente = item;
+END//
+DELIMITER ;
+
 -- Volcando estructura para procedimiento facturacion_plasencia.actualizar_pendiente_saldo_factura
 DELIMITER //
 CREATE PROCEDURE `actualizar_pendiente_saldo_factura`(
@@ -10545,6 +10571,27 @@ CREATE PROCEDURE `actualizar_pendiente_saldo_factura`(
 )
 BEGIN
    UPDATE pendiente SET pendiente.saldo =  pendiente.saldo - pa_saldo  WHERE pendiente.id_pendiente = id;
+END//
+DELIMITER ;
+
+-- Volcando estructura para procedimiento facturacion_plasencia.actualizar_pendiente_sampler
+DELIMITER //
+CREATE PROCEDURE `actualizar_pendiente_sampler`(
+	IN `marca` INT,
+	IN `nombre` INT,
+	IN `vitola` INT,
+	IN `capa` INT,
+	IN `tipo_empaque` INT,
+	IN `item` INT
+)
+BEGIN
+ UPDATE pendiente SET
+  pendiente.marca= marca,
+  pendiente.nombre = nombre ,
+ pendiente.capa = capa,
+ pendiente.vitola = vitola,
+ pendiente.tipo_empaque = tipo_empaque
+ WHERE pendiente.id_pendiente = item;
 END//
 DELIMITER ;
 
@@ -10730,6 +10777,19 @@ END if;
 END//
 DELIMITER ;
 
+-- Volcando estructura para procedimiento facturacion_plasencia.buscar_capa_pendiente
+DELIMITER //
+CREATE PROCEDURE `buscar_capa_pendiente`(
+	IN `pa_capa` VARCHAR(50)
+)
+BEGIN
+SELECT DISTINCT (SELECT (UPPER(((SELECT capa_productos.capa FROM capa_productos WHERE capa_productos.id_capa = pendiente.capa))))) AS capa
+FROM pendiente 
+where (SELECT (UPPER(((SELECT capa_productos.capa FROM capa_productos WHERE capa_productos.id_capa = pendiente.capa))))) 
+LIKE CONCAT("%",pa_capa,"%"); 
+END//
+DELIMITER ;
+
 -- Volcando estructura para procedimiento facturacion_plasencia.buscar_existencia
 DELIMITER //
 CREATE PROCEDURE `buscar_existencia`(
@@ -10806,6 +10866,19 @@ END if;
 END//
 DELIMITER ;
 
+-- Volcando estructura para procedimiento facturacion_plasencia.buscar_marca_pendiente
+DELIMITER //
+CREATE PROCEDURE `buscar_marca_pendiente`(
+	IN `pa_marca` VARCHAR(50)
+)
+BEGIN
+SELECT DISTINCT (SELECT (UPPER(((SELECT marca_productos.marca FROM marca_productos WHERE marca_productos.id_marca = pendiente.marca))))) AS marca
+FROM pendiente 
+where  (SELECT (UPPER(((SELECT marca_productos.marca FROM marca_productos WHERE marca_productos.id_marca = pendiente.marca)))))
+LIKE CONCAT("%",pa_marca,"%"); 
+END//
+DELIMITER ;
+
 -- Volcando estructura para procedimiento facturacion_plasencia.buscar_nombre
 DELIMITER //
 CREATE PROCEDURE `buscar_nombre`(
@@ -10819,6 +10892,19 @@ ELSE
 
 SELECT * FROM nombre_productos WHERE nombre_productos.nombre  like CONCAT("%",nombre,"%");
 END if;
+END//
+DELIMITER ;
+
+-- Volcando estructura para procedimiento facturacion_plasencia.buscar_nombre_pendiente
+DELIMITER //
+CREATE PROCEDURE `buscar_nombre_pendiente`(
+	IN `pa_nombre` VARCHAR(50)
+)
+BEGIN
+SELECT DISTINCT (SELECT (UPPER(((SELECT nombre_productos.nombre FROM nombre_productos WHERE nombre_productos.id_nombre = pendiente.nombre))))) AS nombre
+FROM pendiente 
+where  (SELECT (UPPER(((SELECT nombre_productos.nombre FROM nombre_productos WHERE nombre_productos.id_nombre = pendiente.nombre)))))
+LIKE CONCAT("%",pa_nombre,"%"); 
 END//
 DELIMITER ;
 
@@ -10896,10 +10982,10 @@ SELECT pendiente.id_pendiente ,
 		 pendiente.orden AS orden,
 	(SELECT 
 		
-		if( clase_productos.sampler = "si", (SELECT clase_productos.descripcion_sampler FROM clase_productos WHERE clase_productos.item = pendiente.item), 
-														(SELECT marca_productos.marca               FROM marca_productos WHERE marca_productos.id_marca = pendiente.marca	)
+		if( clase_productos.sampler = "si", CONCAT((SELECT clase_productos.descripcion_sampler FROM clase_productos WHERE clase_productos.item = pendiente.item)," ",(SELECT marca_productos.marca  FROM marca_productos WHERE marca_productos.id_marca = pendiente.marca)), 
+														(SELECT marca_productos.marca  FROM marca_productos WHERE marca_productos.id_marca = pendiente.marca)
 						                     	) AS des
-																	 FROM clase_productos WHERE clase_productos.item = pendiente.item)
+																	 FROM clase_productos WHERE clase_productos.item = pendiente.item) 
 																	 																						 AS marca,
 		 	
 		 	
@@ -10917,6 +11003,7 @@ SELECT pendiente.id_pendiente ,
 		pendiente.unidades AS unidades,
 	(select clase_productos.codigo_precio FROM clase_productos WHERE clase_productos.item = pendiente.item) AS serie_precio,
 		(select clase_productos.precio FROM clase_productos WHERE clase_productos.item = pendiente.item) AS precio
+		
 FROM  pendiente
 WHERE 
 	
@@ -10926,8 +11013,8 @@ WHERE
 		(SELECT capa_productos.capa FROM  capa_productos WHERE capa_productos.id_capa = pendiente.capa	) LIKE  CONCAT("%",pa_capa, "%") and
 		(SELECT 
 		
-		if( clase_productos.sampler = "si", (SELECT clase_productos.descripcion_sampler
-										FROM clase_productos WHERE clase_productos.item = pendiente.item), 
+		if( clase_productos.sampler = "si",  CONCAT((SELECT clase_productos.descripcion_sampler FROM clase_productos WHERE clase_productos.item = pendiente.item)," ",
+		(SELECT marca_productos.marca  FROM marca_productos WHERE marca_productos.id_marca = pendiente.marca)), 
 										
 										(SELECT marca_productos.marca FROM marca_productos WHERE marca_productos.id_marca = pendiente.marca	)
 		
@@ -10938,7 +11025,8 @@ WHERE
       (SELECT vitola_productos.vitola FROM  vitola_productos WHERE vitola_productos.id_vitola = pendiente.vitola	) LIKE  CONCAT("%",pa_vito, "%") and
 		( orden_del_sitema ) LIKE  CONCAT("%",pa_orden, "%") and
 		( pendiente.orden) LIKE  CONCAT("%",hon, "%") 
-		);
+		)
+		ORDER BY pendiente.id_pendiente;
 
 
 
@@ -10966,8 +11054,9 @@ SELECT pendiente.id_pendiente ,
 		 pendiente.orden AS orden,
 	(SELECT 
 		
-		if( clase_productos.sampler = "si", (SELECT clase_productos.descripcion_sampler FROM clase_productos WHERE clase_productos.item = pendiente.item), 
-														(SELECT marca_productos.marca               FROM marca_productos WHERE marca_productos.id_marca = pendiente.marca	)
+		if( clase_productos.sampler = "si",  CONCAT((SELECT clase_productos.descripcion_sampler FROM clase_productos WHERE clase_productos.item = pendiente.item)," ",(SELECT marca_productos.marca  FROM marca_productos WHERE marca_productos.id_marca = pendiente.marca)), 
+													
+		(SELECT marca_productos.marca  FROM marca_productos WHERE marca_productos.id_marca = pendiente.marca)
 						                     	) AS des
 																	 FROM clase_productos WHERE clase_productos.item = pendiente.item)
 																	 																						 AS marca,
@@ -11007,7 +11096,8 @@ WHERE
       (SELECT vitola_productos.vitola FROM  vitola_productos WHERE vitola_productos.id_vitola = pendiente.vitola	) LIKE  CONCAT("%",pa_vito, "%") and
 		( orden_del_sitema ) LIKE  CONCAT("%",pa_orden, "%") and
 		( pendiente.orden) LIKE  CONCAT("%",hon, "%") 
-		);
+		)
+			ORDER BY pendiente.id_pendiente;
 	
 	
 	
@@ -11046,15 +11136,16 @@ SELECT pendiente_empaque.id_pendiente,
  pendiente_empaque.mes AS mes ,
 pendiente_empaque.orden AS orden, 
 
-(SELECT 
+	(SELECT 
 		
-		if( clase_productos.sampler = "si", (SELECT clase_productos.descripcion_sampler
-										FROM clase_productos WHERE clase_productos.item = pendiente_empaque.item), 
-										
-										(SELECT marca_productos.marca FROM marca_productos WHERE marca_productos.id_marca = pendiente_empaque.marca	)
+		if( clase_productos.sampler = "si", CONCAT((SELECT clase_productos.descripcion_sampler FROM clase_productos WHERE clase_productos.item = pendiente_empaque.item)," ",(SELECT marca_productos.marca  FROM marca_productos WHERE marca_productos.id_marca = pendiente_empaque.marca)), 
+														(SELECT marca_productos.marca  FROM marca_productos WHERE marca_productos.id_marca = pendiente_empaque.marca)
+						                     	) AS des
+																	 FROM clase_productos WHERE clase_productos.item = pendiente_empaque.item) 
+																	 																						 AS marca,
+		 	
+		 	
 		
-		
-		 	) AS des FROM clase_productos WHERE clase_productos.item = pendiente_empaque.item) AS marca,
 		
  (SELECT vitola_productos.vitola FROM  vitola_productos WHERE vitola_productos.id_vitola = pendiente_empaque.vitola	) AS vitola, 
 		 (SELECT nombre_productos.nombre FROM  nombre_productos WHERE nombre_productos.id_nombre = pendiente_empaque.nombre	) AS nombre,
@@ -11063,7 +11154,7 @@ pendiente_empaque.orden AS orden,
 (SELECT cellos.anillo AS anillo FROM cellos WHERE cellos.id_cello = pendiente_empaque.cello) AS anillo,
 (SELECT cellos.cello AS cello FROM cellos WHERE cellos.id_cello = pendiente_empaque.cello) AS cello, 
 (SELECT cellos.upc AS upc FROM cellos WHERE cellos.id_cello = pendiente_empaque.cello) AS upc,  
- pendiente_empaque.pendiente as pendiente_empaque,
+ pendiente_empaque.pendiente as pendiente,
 pendiente_empaque.saldo AS saldo,
 (SELECT tipo_empaques.tipo_empaque FROM  tipo_empaques WHERE tipo_empaques.id_tipo_empaque = pendiente_empaque.tipo_empaque	) AS tipo_empaque,
 	
@@ -11075,7 +11166,7 @@ FROM pendiente_empaque
 WHERE 
    pendiente_empaque.saldo > 0
 
-	GROUP BY pendiente_empaque.id_pendiente;
+	ORDER BY pendiente_empaque.id_pendiente;
 	
 ELSE  
 
@@ -11090,15 +11181,15 @@ SELECT pendiente_empaque.id_pendiente,
  pendiente_empaque.mes AS mes ,
 pendiente_empaque.orden AS orden, 
 
-(SELECT 
+	(SELECT 
 		
-		if( clase_productos.sampler = "si", (SELECT clase_productos.descripcion_sampler
-										FROM clase_productos WHERE clase_productos.item = pendiente_empaque.item), 
-										
-										(SELECT marca_productos.marca FROM marca_productos WHERE marca_productos.id_marca = pendiente_empaque.marca	)
-		
-		
-		 	) AS des FROM clase_productos WHERE clase_productos.item = pendiente_empaque.item) AS marca,
+		if( clase_productos.sampler = "si", CONCAT((SELECT clase_productos.descripcion_sampler FROM clase_productos WHERE clase_productos.item = pendiente_empaque.item)," ",(SELECT marca_productos.marca  FROM marca_productos WHERE marca_productos.id_marca = pendiente_empaque.marca)), 
+														(SELECT marca_productos.marca  FROM marca_productos WHERE marca_productos.id_marca = pendiente_empaque.marca)
+						                     	) AS des
+																	 FROM clase_productos WHERE clase_productos.item = pendiente_empaque.item) 
+																	 																						 AS marca,
+		 	
+		 	
 		
  (SELECT vitola_productos.vitola FROM  vitola_productos WHERE vitola_productos.id_vitola = pendiente_empaque.vitola	) AS vitola, 
 		 (SELECT nombre_productos.nombre FROM  nombre_productos WHERE nombre_productos.id_nombre = pendiente_empaque.nombre	) AS nombre,
@@ -11107,7 +11198,7 @@ pendiente_empaque.orden AS orden,
 (SELECT cellos.anillo AS anillo FROM cellos WHERE cellos.id_cello = pendiente_empaque.cello) AS anillo,
 (SELECT cellos.cello AS cello FROM cellos WHERE cellos.id_cello = pendiente_empaque.cello) AS cello, 
 (SELECT cellos.upc AS upc FROM cellos WHERE cellos.id_cello = pendiente_empaque.cello) AS upc,  
- pendiente_empaque.pendiente as pendiente_empaque,
+ pendiente_empaque.pendiente as pendiente,
 pendiente_empaque.saldo AS saldo,
 (SELECT tipo_empaques.tipo_empaque FROM  tipo_empaques WHERE tipo_empaques.id_tipo_empaque = pendiente_empaque.tipo_empaque	) AS tipo_empaque,
 	
@@ -11134,7 +11225,7 @@ WHERE
 			 OR (SELECT categoria.categoria FROM  categoria WHERE categoria.id_categoria = pendiente_empaque.categoria	) LIKE  CONCAT("%",nombre, "%")
  )
 
-GROUP BY pendiente_empaque.id_pendiente;
+ORDER BY pendiente_empaque.id_pendiente;
 	
 	
 	else
@@ -11148,15 +11239,15 @@ SELECT pendiente_empaque.id_pendiente,
  pendiente_empaque.mes AS mes ,
 pendiente_empaque.orden AS orden, 
 
-(SELECT 
+	(SELECT 
 		
-		if( clase_productos.sampler = "si", (SELECT clase_productos.descripcion_sampler
-										FROM clase_productos WHERE clase_productos.item = pendiente_empaque.item), 
-										
-										(SELECT marca_productos.marca FROM marca_productos WHERE marca_productos.id_marca = pendiente_empaque.marca	)
-		
-		
-		 	) AS des FROM clase_productos WHERE clase_productos.item = pendiente_empaque.item) AS marca,
+		if( clase_productos.sampler = "si", CONCAT((SELECT clase_productos.descripcion_sampler FROM clase_productos WHERE clase_productos.item = pendiente_empaque.item)," ",(SELECT marca_productos.marca  FROM marca_productos WHERE marca_productos.id_marca = pendiente_empaque.marca)), 
+														(SELECT marca_productos.marca  FROM marca_productos WHERE marca_productos.id_marca = pendiente_empaque.marca)
+						                     	) AS des
+																	 FROM clase_productos WHERE clase_productos.item = pendiente_empaque.item) 
+																	 																						 AS marca,
+		 	
+		 	
 		
  (SELECT vitola_productos.vitola FROM  vitola_productos WHERE vitola_productos.id_vitola = pendiente_empaque.vitola	) AS vitola, 
 		 (SELECT nombre_productos.nombre FROM  nombre_productos WHERE nombre_productos.id_nombre = pendiente_empaque.nombre	) AS nombre,
@@ -11165,7 +11256,7 @@ pendiente_empaque.orden AS orden,
 (SELECT cellos.anillo AS anillo FROM cellos WHERE cellos.id_cello = pendiente_empaque.cello) AS anillo,
 (SELECT cellos.cello AS cello FROM cellos WHERE cellos.id_cello = pendiente_empaque.cello) AS cello, 
 (SELECT cellos.upc AS upc FROM cellos WHERE cellos.id_cello = pendiente_empaque.cello) AS upc,  
- pendiente_empaque.pendiente as pendiente_empaque,
+ pendiente_empaque.pendiente as pendiente,
 pendiente_empaque.saldo AS saldo,
 (SELECT tipo_empaques.tipo_empaque FROM  tipo_empaques WHERE tipo_empaques.id_tipo_empaque = pendiente_empaque.tipo_empaque	) AS tipo_empaque,
 	
@@ -11181,7 +11272,7 @@ WHERE
                       
 
 
-	GROUP BY pendiente_empaque.id_pendiente;
+	order BY pendiente_empaque.id_pendiente;
 		
 	else
 	if fechade != ""   && nombre != "" then 
@@ -11194,16 +11285,15 @@ SELECT pendiente_empaque.id_pendiente,
  pendiente_empaque.presentacion AS presentacion ,
  pendiente_empaque.mes AS mes ,
 pendiente_empaque.orden AS orden, 
-
-(SELECT 
+	(SELECT 
 		
-		if( clase_productos.sampler = "si", (SELECT clase_productos.descripcion_sampler
-										FROM clase_productos WHERE clase_productos.item = pendiente_empaque.item), 
-										
-										(SELECT marca_productos.marca FROM marca_productos WHERE marca_productos.id_marca = pendiente_empaque.marca	)
-		
-		
-		 	) AS des FROM clase_productos WHERE clase_productos.item = pendiente_empaque.item) AS marca,
+		if( clase_productos.sampler = "si", CONCAT((SELECT clase_productos.descripcion_sampler FROM clase_productos WHERE clase_productos.item = pendiente_empaque.item)," ",(SELECT marca_productos.marca  FROM marca_productos WHERE marca_productos.id_marca = pendiente_empaque.marca)), 
+														(SELECT marca_productos.marca  FROM marca_productos WHERE marca_productos.id_marca = pendiente_empaque.marca)
+						                     	) AS des
+																	 FROM clase_productos WHERE clase_productos.item = pendiente_empaque.item) 
+																	 																						 AS marca,
+		 	
+		 	
 		
  (SELECT vitola_productos.vitola FROM  vitola_productos WHERE vitola_productos.id_vitola = pendiente_empaque.vitola	) AS vitola, 
 		 (SELECT nombre_productos.nombre FROM  nombre_productos WHERE nombre_productos.id_nombre = pendiente_empaque.nombre	) AS nombre,
@@ -11212,7 +11302,7 @@ pendiente_empaque.orden AS orden,
 (SELECT cellos.anillo AS anillo FROM cellos WHERE cellos.id_cello = pendiente_empaque.cello) AS anillo,
 (SELECT cellos.cello AS cello FROM cellos WHERE cellos.id_cello = pendiente_empaque.cello) AS cello, 
 (SELECT cellos.upc AS upc FROM cellos WHERE cellos.id_cello = pendiente_empaque.cello) AS upc,  
- pendiente_empaque.pendiente as pendiente_empaque,
+ pendiente_empaque.pendiente as pendiente,
 pendiente_empaque.saldo AS saldo,
 (SELECT tipo_empaques.tipo_empaque FROM  tipo_empaques WHERE tipo_empaques.id_tipo_empaque = pendiente_empaque.tipo_empaque	) AS tipo_empaque,
 	
@@ -11238,7 +11328,7 @@ WHERE
 		 	) AS des FROM clase_productos WHERE clase_productos.item = pendiente_empaque.item) LIKE  CONCAT("%",nombre, "%")
 			 OR (SELECT categoria.categoria FROM  categoria WHERE categoria.id_categoria = pendiente_empaque.categoria	) LIKE  CONCAT("%",nombre, "%")
  )
-	GROUP BY pendiente_empaque.id_pendiente;	
+	order BY pendiente_empaque.id_pendiente;	
 	else
 	
 	SELECT "";
@@ -11556,6 +11646,19 @@ END if;
 END//
 DELIMITER ;
 
+-- Volcando estructura para procedimiento facturacion_plasencia.buscar_tipo_empaque_pendiente
+DELIMITER //
+CREATE PROCEDURE `buscar_tipo_empaque_pendiente`(
+	IN `pa_empaque` VARCHAR(50)
+)
+BEGIN
+SELECT DISTINCT (SELECT (UPPER(((SELECT tipo_empaques.tipo_empaque FROM tipo_empaques WHERE tipo_empaques.id_tipo_empaque = pendiente.tipo_empaque))))) AS empaque
+FROM pendiente 
+where (SELECT (UPPER(((SELECT tipo_empaques.tipo_empaque FROM tipo_empaques WHERE tipo_empaques.id_tipo_empaque = pendiente.tipo_empaque))))) 
+LIKE CONCAT("%",pa_empaque,"%"); 
+END//
+DELIMITER ;
+
 -- Volcando estructura para procedimiento facturacion_plasencia.buscar_vitola
 DELIMITER //
 CREATE PROCEDURE `buscar_vitola`(
@@ -11568,6 +11671,19 @@ SELECT * FROM vitola_productos;
 ELSE 
 SELECT * FROM vitola_productos WHERE vitola_productos.vitola   like CONCAT("%",vitola,"%");
 END if;
+END//
+DELIMITER ;
+
+-- Volcando estructura para procedimiento facturacion_plasencia.buscar_vitola_pendiente
+DELIMITER //
+CREATE PROCEDURE `buscar_vitola_pendiente`(
+	IN `pa_vitola` VARCHAR(50)
+)
+BEGIN
+SELECT DISTINCT (SELECT (UPPER(((SELECT vitola_productos.vitola FROM vitola_productos WHERE vitola_productos.id_vitola = pendiente.vitola))))) AS vitola
+FROM pendiente 
+where (SELECT (UPPER(((SELECT vitola_productos.vitola FROM vitola_productos WHERE vitola_productos.id_vitola = pendiente.vitola))))) 
+LIKE CONCAT("%",pa_vitola,"%"); 
 END//
 DELIMITER ;
 
@@ -12653,6 +12769,71 @@ WHERE  clase_productos.id_vitola = vitola_productos.id_vitola AND capa_productos
 END//
 DELIMITER ;
 
+-- Volcando estructura para procedimiento facturacion_plasencia.mostrar_detallesprovicional_exportar
+DELIMITER //
+CREATE PROCEDURE `mostrar_detallesprovicional_exportar`()
+BEGIN
+SELECT  detalle_programacion_temporal.id_detalle_programacion AS id,
+detalle_programacion_temporal.numero_orden, 
+						(SELECT concat(detalle_programacion_temporal.orden ,"-",
+	
+        ( case SUBSTRING(pendiente_empaque.mes, 1, (LENGTH(pendiente_empaque.mes)-4))
+			 	when "ENERO"  then  "01"
+			 	when  "FEBRERO"  then  "02"
+			 	when  "MARZO"  then  "03"
+			 	when "ABRIL" then  "04"
+			 	when "MAYO" then  "05"
+			 	when  "JUNIO"  then  "06"
+			 	when "JULIO" then  "07"
+			 	when  "AGOSTO" then  "08"
+			 	when "SEPTIEMBRE"then  "09"
+			 	when "OCTUBRE" then  "10"
+			 	when "NOVIEMBRE"  then  "11"
+			 	when  "DICIEMBRE"  then  "12"
+			 	
+		 	END )
+		 	 ,"-",(SUBSTRING(pendiente_empaque.mes,(LENGTH(pendiente_empaque.mes)-4) , 5 ))) FROM pendiente_empaque
+			  
+			  WHERE pendiente_empaque.id_pendiente = detalle_programacion_temporal.id_pendiente  ) AS orden,
+			(select marca_productos.marca FROM marca_productos WHERE (select pendiente_empaque.marca FROM pendiente_empaque
+			 WHERE pendiente_empaque.id_pendiente = detalle_programacion_temporal.id_pendiente) = marca_productos.id_marca) AS marca,
+			 
+				(select vitola_productos.vitola FROM vitola_productos WHERE (select pendiente_empaque.vitola FROM pendiente_empaque
+			 WHERE pendiente_empaque.id_pendiente = detalle_programacion_temporal.id_pendiente) = vitola_productos.id_vitola) AS vitola,
+			 
+		(select nombre_productos.nombre FROM nombre_productos WHERE (select pendiente_empaque.nombre FROM pendiente_empaque
+			 WHERE pendiente_empaque.id_pendiente = detalle_programacion_temporal.id_pendiente) = nombre_productos.id_nombre) AS nombre,
+			              
+		(select capa_productos.capa FROM capa_productos WHERE (select pendiente_empaque.capa FROM pendiente_empaque
+			 WHERE pendiente_empaque.id_pendiente = detalle_programacion_temporal.id_pendiente) = capa_productos.id_capa) AS capa,
+			              
+ 			(select tipo_empaques.tipo_empaque FROM tipo_empaques WHERE (select pendiente_empaque.tipo_empaque FROM pendiente_empaque
+			 WHERE pendiente_empaque.id_pendiente = detalle_programacion_temporal.id_pendiente) = tipo_empaques.id_tipo_empaque) AS tipo_empaque,
+			 
+ 				(select cellos.anillo FROM cellos WHERE (select pendiente_empaque.cello FROM pendiente_empaque
+			 WHERE pendiente_empaque.id_pendiente = detalle_programacion_temporal.id_pendiente) = cellos.id_cello) AS anillo,
+			 
+ 			(select cellos.cello FROM cellos WHERE (select pendiente_empaque.cello FROM pendiente_empaque
+			 WHERE pendiente_empaque.id_pendiente = detalle_programacion_temporal.id_pendiente) = cellos.id_cello) AS cello,
+			 
+		(select cellos.upc FROM cellos WHERE (select pendiente_empaque.cello FROM pendiente_empaque
+			 WHERE pendiente_empaque.id_pendiente = detalle_programacion_temporal.id_pendiente) = cellos.id_cello) AS upc,
+			 
+			detalle_programacion_temporal.saldo
+		
+	
+ FROM  detalle_programacion_temporal, 
+		 importar_existencias
+ WHERE   
+       
+ 		  
+ 		  detalle_programacion_temporal.cod_producto = importar_existencias.codigo_producto 
+ 		
+			
+GROUP BY 1;
+END//
+DELIMITER ;
+
 -- Volcando estructura para procedimiento facturacion_plasencia.mostrar_detalles_exportar
 DELIMITER //
 CREATE PROCEDURE `mostrar_detalles_exportar`(
@@ -12801,9 +12982,9 @@ CREATE PROCEDURE `mostrar_detalles_productos`()
 BEGIN
 
 
- SELECT detalle_clase_productos.id_producto,detalle_clase_productos.item,marca_productos.marca, nombre_productos.nombre, vitola_productos.vitola,tipo_empaques.tipo_empaque
-FROM detalle_clase_productos ,marca_productos,vitola_productos,tipo_empaques,nombre_productos
-WHERE  detalle_clase_productos.id_vitola = vitola_productos.id_vitola AND 
+ SELECT detalle_clase_productos.id_producto,detalle_clase_productos.item,marca_productos.marca, nombre_productos.nombre, vitola_productos.vitola,tipo_empaques.tipo_empaque, capa_productos.capa
+FROM detalle_clase_productos ,marca_productos,vitola_productos,tipo_empaques,nombre_productos, capa_productos
+WHERE  detalle_clase_productos.id_vitola = vitola_productos.id_vitola AND detalle_clase_productos.id_capa = capa_productos.id_capa and
  detalle_clase_productos.id_nombre = nombre_productos.id_nombre AND  detalle_clase_productos.id_marca = marca_productos.id_marca  AND  detalle_clase_productos.id_tipo_empaque = tipo_empaques.id_tipo_empaque
 ;
 
@@ -13062,8 +13243,31 @@ if busqueda = "" then
 SELECT  detalle_programacion_temporal.id_detalle_programacion AS id,
 detalle_programacion_temporal.numero_orden, 
 			detalle_programacion_temporal.cod_producto , 
-			(SELECT concat(detalle_programacion_temporal.orden ,"-", MONTH(pendiente_empaque.mes) , "-" , date_format(pendiente_empaque.mes,'%y')) 
-		   FROM pendiente_empaque WHERE pendiente_empaque.id_pendiente = detalle_programacion_temporal.id_pendiente) AS orden,
+			(SELECT concat(detalle_programacion_temporal.orden ,"-",
+	
+        ( case SUBSTRING(pendiente_empaque.mes, 1, (LENGTH(pendiente_empaque.mes)-4))
+			 	when "ENERO"  then  "01"
+			 	when  "FEBRERO"  then  "02"
+			 	when  "MARZO"  then  "03"
+			 	when "ABRIL" then  "04"
+			 	when "MAYO" then  "05"
+			 	when  "JUNIO"  then  "06"
+			 	when "JULIO" then  "07"
+			 	when  "AGOSTO" then  "08"
+			 	when "SEPTIEMBRE"then  "09"
+			 	when "OCTUBRE" then  "10"
+			 	when "NOVIEMBRE"  then  "11"
+			 	when  "DICIEMBRE"  then  "12"
+			 	
+		 	END )
+		 	 ,"-",(SUBSTRING(pendiente_empaque.mes,(LENGTH(pendiente_empaque.mes)-4) , 5 ))) FROM pendiente_empaque
+			  
+			  WHERE pendiente_empaque.id_pendiente = detalle_programacion_temporal.id_pendiente  ) AS orden,
+		 	
+		 	
+		 	
+		 	
+		 	
 		   
 			(select marca_productos.marca FROM marca_productos WHERE (select pendiente_empaque.marca FROM pendiente_empaque
 			 WHERE pendiente_empaque.id_pendiente = detalle_programacion_temporal.id_pendiente) = marca_productos.id_marca) AS marca,
@@ -13128,8 +13332,32 @@ ELSE
 SELECT  detalle_programacion_temporal.id_detalle_programacion AS id,
 detalle_programacion_temporal.numero_orden, 
 			detalle_programacion_temporal.cod_producto , 
-			(SELECT concat(detalle_programacion_temporal.orden ,"-", MONTH(pendiente_empaque.mes) , "-" , date_format(pendiente_empaque.mes,'%y')) 
-		   FROM pendiente_empaque WHERE pendiente_empaque.id_pendiente = detalle_programacion_temporal.id_pendiente) AS orden,
+			(SELECT concat(detalle_programacion_temporal.orden ,"-",
+	
+        ( case SUBSTRING(pendiente_empaque.mes, 1, (LENGTH(pendiente_empaque.mes)-4))
+			 	when "ENERO"  then  "01"
+			 	when  "FEBRERO"  then  "02"
+			 	when  "MARZO"  then  "03"
+			 	when "ABRIL" then  "04"
+			 	when "MAYO" then  "05"
+			 	when  "JUNIO"  then  "06"
+			 	when "JULIO" then  "07"
+			 	when  "AGOSTO" then  "08"
+			 	when "SEPTIEMBRE"then  "09"
+			 	when "OCTUBRE" then  "10"
+			 	when "NOVIEMBRE"  then  "11"
+			 	when  "DICIEMBRE"  then  "12"
+			 	
+		 	END )
+		 	 ,"-",(SUBSTRING(pendiente_empaque.mes,(LENGTH(pendiente_empaque.mes)-4) , 5 ))) FROM pendiente_empaque
+			  
+			  WHERE pendiente_empaque.id_pendiente = detalle_programacion_temporal.id_pendiente  ) AS orden,
+		 	
+		 	
+		 	
+		 	
+		 	
+		   
 		   
 			(select marca_productos.marca FROM marca_productos WHERE (select pendiente_empaque.marca FROM pendiente_empaque
 			 WHERE pendiente_empaque.id_pendiente = detalle_programacion_temporal.id_pendiente) = marca_productos.id_marca) AS marca,
@@ -13912,6 +14140,30 @@ WHERE clase_productos.item = (SELECT pendiente.item FROM pendiente
 FROM detalle_factura 
 WHERE detalle_factura.id_venta = pa_id_factura;
 
+END//
+DELIMITER ;
+
+-- Volcando estructura para procedimiento facturacion_plasencia.traer_detalles_productos_actualizar
+DELIMITER //
+CREATE PROCEDURE `traer_detalles_productos_actualizar`(
+	IN `pa_item` VARCHAR(50),
+	IN `pa_limite` MEDIUMINT
+)
+BEGIN
+    SELECT  detalle_clase_productos.id_marca AS marca,
+			    detalle_clase_productos.id_vitola	 AS vitola, 
+					 detalle_clase_productos.id_nombre	 AS nombre,
+					  detalle_clase_productos.id_capa	 AS capa,
+					   detalle_clase_productos.id_tipo_empaque	 AS tipo_empaque,
+					  detalle_clase_productos.item
+	 FROM detalle_clase_productos 
+	 WHERE detalle_clase_productos.item = pa_item
+	 ORDER BY id_producto
+	 LIMIT pa_limite,1;
+	 
+	 
+	 
+	 	 
 END//
 DELIMITER ;
 

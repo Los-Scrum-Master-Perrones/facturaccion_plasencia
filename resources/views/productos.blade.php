@@ -54,8 +54,6 @@
                 </div>
 
                 <div class="col-sm">
-
-                <a class="btn botonprincipal form-control" href="{{Route('datos_producto')}}"  style="width:150px;">Datos adicionales</a>
                 </div>
                 <div class="col-sm">
                 <form action="{{Route('exportar_pendiente')}}">
@@ -126,44 +124,6 @@
 </div>
 
 
-
-<script type="text/javascript">
-    $(document).ready(function () {
-
-        $.ajaxSetup({
-            headers: {
-                'X-CSRF-Token': $("input[name=_token]").val()
-            }
-        });
-
-        $('#editable').Tabledit({
-            url: '{{ route("tabledit.action") }}',
-            method: 'POST',
-            dataType: "json",
-            columns: {
-                identifier: [0, 'id'],
-                editable: [
-                    [1, 'Marca'],
-                    [2, 'Nombre'],
-                    [3, 'Vitola'],
-                    [4, 'Orden'],
-                    [5, 'Tipo de empaque']
-                ]
-            },
-            restoreButton: false,
-
-            onSuccess: function (data, textStatus, jqXHR) {
-                if (data.action == 'delete') {
-                    $('#' + data.id).remove();
-                }
-            }
-
-        });
-
-    });
-
-</script>
-<!-- <script src="{{ asset('js/app.js') }}" ></script> -->
 
 
 <script type="text/javascript">

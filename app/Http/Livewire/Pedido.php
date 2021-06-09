@@ -46,8 +46,6 @@ class Pedido extends Component
                     $cantidad_detalle_sampler = $datos[0]->tuplas;
                 }
                 $valores = DB::select('call traer_numero_detalles_productos_datos(?,?)', [$this->pedido_completo[$i]->item,$detalles]);
-                   
-                
 
                 $descripcion_sampler = DB::select('SELECT clase_productos.descripcion_sampler FROM clase_productos WHERE  clase_productos.item = ?;', [$this->pedido_completo[$i]->item]);
 
@@ -63,8 +61,6 @@ class Pedido extends Component
             }
             
         }
-
-       
         
         return view('livewire.pedido')->extends('principal')->section('content');
     }

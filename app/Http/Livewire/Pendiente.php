@@ -42,6 +42,7 @@ public $hon;
     public $borrar;
     public $actualizar;
 
+
     public function render()
     {
       
@@ -70,6 +71,44 @@ public $hon;
                 'hon' =>  $this->hon
             ]
         );
+
+
+        $datos = [];
+        $cantidad_detalle_sampler = 0;   
+        $detalles = 0;  
+        $valores = [];  
+
+        for($i = 0; $i < count($this->datos_pendiente) ;$i++){
+           
+
+
+            $sampler = DB::select('SELECT clase_productos.sampler FROM clase_productos WHERE  clase_productos.item = ?;', [$this->datos_pendiente[$i]->item]);
+            if( $sampler[0]->sampler == "si"){
+                if($cantidad_detalle_sampler == 0 && $detalles == 0){
+                    $datos = DB::select('call traer_numero_detalles_productos(?)', [$this->datos_pendiente[$i]->item]);
+                    $cantidad_detalle_sampler = $datos[0]->tuplas;
+                }
+                $valores = DB::select('call traer_detalles_productos_actualizar(?,?)', [$this->datos_pendiente[$i]->item,$detalles]);
+
+               
+                $actualizar = DB::select('call actualizar_pendiente_sampler(:marca,:nombre,:vitola,:capa,:tipo,:item)',[
+                    'marca'=>$valores[0]->marca,
+                   'nombre'=>$valores[0]->nombre,
+                   'vitola'=>$valores[0]->vitola,
+                   'capa'=>$valores[0]->capa,
+                    'tipo'=>$valores[0]->tipo_empaque ,
+                   'item'=>$this->datos_pendiente[$i]->id_pendiente
+                ]);
+              
+                $detalles++;
+
+                if($detalles == $cantidad_detalle_sampler){
+                    $detalles = 0;
+                    $cantidad_detalle_sampler = 0;
+                }
+            }
+            
+        }
         
         return view('livewire.pendiente')->extends('principal')->section('content');
     }
@@ -95,7 +134,10 @@ public $hon;
         $this->borrar = [];
         $this->actualizar= [];
 
-
+        $datos = [];
+        $cantidad_detalle_sampler = 0;   
+        $detalles = 0;  
+        $valores = [];  
         $this->capas= \DB::select('call buscar_capa("")');
         $this->marcas=\DB::select('call buscar_marca("")');
         $this->nombres= \DB::select('call buscar_nombre("")');
