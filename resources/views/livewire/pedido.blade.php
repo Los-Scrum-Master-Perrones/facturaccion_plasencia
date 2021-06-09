@@ -165,63 +165,61 @@
 
 
 
-
-
-        <div class="panel-body" style="padding:0px;">
-            <div style="width:100%; padding-left:0px;   font-size:10px;   overflow-x: display; overflow-y: auto;
+<div class="panel-body" style="padding:0px;">
+    <div style="width:100%; padding-left:0px;   font-size:10px;   overflow-x: display; overflow-y: auto;
      height:70%;">
-                @csrf
-                <table class="table table-light" style="font-size:10px; ">
-                    <thead>
-                        <tr style="font-size:16px; text-align:center;">
-                            <th style=" text-align:center;">N#</th>
-                            <th style=" text-align:center;">Categoria</th>
-                            <th style=" text-align:center;">RP Item#</th>
-                            <th style=" text-align:center;">Paquetes</th>
-                            <th style=" text-align:center;">Item Description</th>
-                            <th style=" text-align:center;">Sticks</th>
-                            <th style=" text-align:center;">Units</th>
-                            <th style=" text-align:center;">PO#</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <?php $count = 1; ?>
+        @csrf
+        <table class="table table-light" style="font-size:10px; ">
+            <thead>
+                <tr style="font-size:16px; text-align:center;">
+                    <th style=" text-align:center;">N#</th>
+                    <th style=" text-align:center;">Categoria</th>
+                    <th style=" text-align:center;">RP Item#</th>
+                    <th style=" text-align:center;">Paquetes</th>
+                    <th style=" text-align:center;">Item Description</th>
+                    <th style=" text-align:center;">Sticks</th>
+                    <th style=" text-align:center;">Units</th>
+                    <th style=" text-align:center;">PO#</th>
+                </tr>
+            </thead>
+            <tbody>
+                <?php $count = 1; ?>
 
-                        @foreach($pedido_completo as $pedido)
-                        <tr>
-                            <td>{{$count}}</td>
-                            <td>{{$pedido->categorias}}</td>
-                            <td>{{$pedido->item}}</td>
-                            <td>{{$pedido->cant_paquetes}}</td>
-                            <td>{{$pedido->descripcion}}</td>
-                            <td>{{$pedido->unidades*$pedido->cant_paquetes}}</td>
-                            <td>{{$pedido->unidades}}</td>
-                            <td>{{$pedido->numero_orden}}</td>
+                @foreach($pedido_completo as $pedido)
+                <tr>
+                    <td>{{$count}}</td>
+                    <td>{{$pedido->categorias}}</td>
+                    <td>{{$pedido->item}}</td>
+                    <td>{{$pedido->cant_paquetes}}</td>
+                    <td>{{$pedido->descripcion}}</td>
+                    <td>{{$pedido->unidades*$pedido->cant_paquetes}}</td>
+                    <td>{{$pedido->unidades}}</td>
+                    <td>{{$pedido->numero_orden}}</td>
 
-                        </tr>
-                        <?php $count++; ?>
-                        @endforeach
-                    </tbody>
-                </table>
-
-
-            </div>
-
-            <br>
-            <div class="col-sm-9">
-            </div>
-            <div class="col-sm-1">
-                <span style="width:50px;" class="form-control input-group-text">Total</span>
-            </div>
-            <div class="col-sm-2">
-                <input style="width:150px;" type="text" class="form-control" wire:model="total_puros">
-            </div>
-        </div>
-
-
+                </tr>
+                <?php $count++; ?>
+                @endforeach
+            </tbody>
+        </table>
 
 
     </div>
+
+    <br>
+    <div class="col-sm-9">
+    </div>
+    <div class="col-sm-1">
+        <span style="width:50px;" class="form-control input-group-text">Total</span>
+    </div>
+    <div class="col-sm-2">
+        <input style="width:150px;" type="text" class="form-control" wire:model="total_puros">
+    </div>
+</div>
+
+
+
+
+</div>
 
 
 
