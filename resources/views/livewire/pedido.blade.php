@@ -40,23 +40,28 @@
 
 
 
-                    <form action="{{Route('pendiente_insertar')}}" method="POST">
-                        @csrf
-                        <input type="date" value="" name="fecha" id="fecha"
-                            style="width: 160px; color:black ;text-align:center;"
-                            class=" form-control  botonprincipal mr-sm-2 " required>
-                        <button onclick="agregarpendiente()" style="width:160px;"
-                            class="botonprincipal mr-sm-2 ">Agregar a pendiente</button>
-                    </form>
-                    <button data-toggle="modal" style="width:30px;" class=" botonprincipal mr-sm-2 "
-                        data-target="#modal_actualizar">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor"
-                            class="bi bi-plus-circle" viewBox="0 0 16 16">
-                            <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z" />
-                            <path
-                                d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z" />
-                        </svg>
-                    </button>
+                    @if (count($nuevos) == 0){
+                        <form action="{{Route('pendiente_insertar')}}" method="POST">
+                            @csrf
+                            <input type="date" value="" name="fecha" id="fecha"
+                                style="width: 160px; color:black ;text-align:center;"
+                                class=" form-control  botonprincipal mr-sm-2 " required>
+                            <button onclick="agregarpendiente()" style="width:160px;"
+                                class="botonprincipal mr-sm-2 ">Agregar a pendiente</button>
+                        </form>
+                    }
+                    @endif
+                    
+
+                        <button data-toggle="modal" style="width:30px;" class=" botonprincipal mr-sm-2 "
+                            data-target="#modal_actualizar">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor"
+                                class="bi bi-plus-circle" viewBox="0 0 16 16">
+                                <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z" />
+                                <path
+                                    d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z" />
+                            </svg>
+                        </button>
 
                     <button wire:click="vaciar_import_excel()" style="width:30px;" class=" botonprincipal mr-sm-2 ">
                         <abbr title="Vacia la tabla">
@@ -69,6 +74,20 @@
                             </svg>
                         </abbr>
                     </button>
+
+                    @if (count($nuevos) > 0){
+                    <button wire:click="modal_productos_nuevos()" style="width:30px;" class=" botonprincipal mr-sm-2 ">
+                        <abbr title="Nuevos Productos">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                                class="bi bi-lightning-charge" viewBox="0 0 16 16">
+                                <path
+                                    d="M11.251.068a.5.5 0 0 1 .227.58L9.677 6.5H13a.5.5 0 0 1 .364.843l-8 8.5a.5.5 0 0 1-.842-.49L6.323 9.5H3a.5.5 0 0 1-.364-.843l8-8.5a.5.5 0 0 1 .615-.09zM4.157 8.5H7a.5.5 0 0 1 .478.647L6.11 13.59l5.732-6.09H9a.5.5 0 0 1-.478-.647L9.89 2.41 4.157 8.5z" />
+                            </svg>
+                        </abbr>
+                    </button>
+                    }
+
+                    @endif
                 </div>
             </div>
             <div class="row">
@@ -165,61 +184,61 @@
 
 
 
-<div class="panel-body" style="padding:0px;">
-    <div style="width:100%; padding-left:0px;   font-size:10px;   overflow-x: display; overflow-y: auto;
+        <div class="panel-body" style="padding:0px;">
+            <div style="width:100%; padding-left:0px;   font-size:10px;   overflow-x: display; overflow-y: auto;
      height:70%;">
-        @csrf
-        <table class="table table-light" style="font-size:10px; ">
-            <thead>
-                <tr style="font-size:16px; text-align:center;">
-                    <th style=" text-align:center;">N#</th>
-                    <th style=" text-align:center;">Categoria</th>
-                    <th style=" text-align:center;">RP Item#</th>
-                    <th style=" text-align:center;">Paquetes</th>
-                    <th style=" text-align:center;">Item Description</th>
-                    <th style=" text-align:center;">Sticks</th>
-                    <th style=" text-align:center;">Units</th>
-                    <th style=" text-align:center;">PO#</th>
-                </tr>
-            </thead>
-            <tbody>
-                <?php $count = 1; ?>
+                @csrf
+                <table class="table table-light" style="font-size:10px; ">
+                    <thead>
+                        <tr style="font-size:16px; text-align:center;">
+                            <th style=" text-align:center;">N#</th>
+                            <th style=" text-align:center;">Categoria</th>
+                            <th style=" text-align:center;">RP Item#</th>
+                            <th style=" text-align:center;">Paquetes</th>
+                            <th style=" text-align:center;">Item Description</th>
+                            <th style=" text-align:center;">Sticks</th>
+                            <th style=" text-align:center;">Units</th>
+                            <th style=" text-align:center;">PO#</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <?php $count = 1; ?>
 
-                @foreach($pedido_completo as $pedido)
-                <tr>
-                    <td>{{$count}}</td>
-                    <td>{{$pedido->categorias}}</td>
-                    <td>{{$pedido->item}}</td>
-                    <td>{{$pedido->cant_paquetes}}</td>
-                    <td>{{$pedido->descripcion}}</td>
-                    <td>{{$pedido->unidades*$pedido->cant_paquetes}}</td>
-                    <td>{{$pedido->unidades}}</td>
-                    <td>{{$pedido->numero_orden}}</td>
+                        @foreach($pedido_completo as $pedido)
+                        <tr>
+                            <td>{{$count}}</td>
+                            <td>{{$pedido->categorias}}</td>
+                            <td>{{$pedido->item}}</td>
+                            <td>{{$pedido->cant_paquetes}}</td>
+                            <td>{{$pedido->descripcion}}</td>
+                            <td>{{$pedido->unidades*$pedido->cant_paquetes}}</td>
+                            <td>{{$pedido->unidades}}</td>
+                            <td>{{$pedido->numero_orden}}</td>
 
-                </tr>
-                <?php $count++; ?>
-                @endforeach
-            </tbody>
-        </table>
+                        </tr>
+                        <?php $count++; ?>
+                        @endforeach
+                    </tbody>
+                </table>
+
+
+            </div>
+
+            <br>
+            <div class="col-sm-9">
+            </div>
+            <div class="col-sm-1">
+                <span style="width:50px;" class="form-control input-group-text">Total</span>
+            </div>
+            <div class="col-sm-2">
+                <input style="width:150px;" type="text" class="form-control" wire:model="total_puros">
+            </div>
+        </div>
+
+
 
 
     </div>
-
-    <br>
-    <div class="col-sm-9">
-    </div>
-    <div class="col-sm-1">
-        <span style="width:50px;" class="form-control input-group-text">Total</span>
-    </div>
-    <div class="col-sm-2">
-        <input style="width:150px;" type="text" class="form-control" wire:model="total_puros">
-    </div>
-</div>
-
-
-
-
-</div>
 
 
 
@@ -328,5 +347,39 @@
     </script>
 
 
+
+    <div class="modal fade" id="productos_faltantes" data-backdrop="static" data-keyboard="false" tabindex="-1"
+        aria-labelledby="staticBackdropLabel" aria-hidden="true" style="opacity:.9;background:#212529;">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+
+                <div class="modal-header">
+                    <h6>Estos productos sampler no existen en la base de datos: </h6>
+                </div>
+
+                <div class="modal-body">
+
+                    <ul>
+                        @foreach ($nuevos as $n)
+                        <li>{{$n->categoria." ".$n->item." ".$n->detalles}}</li>
+                        @endforeach
+
+                    </ul>
+
+
+                </div>
+
+                <div class="modal-footer">
+                    <button class="bmodal_no" wire:click="agregar_productos()">
+                        <span>Agregar Productos</span>
+                    </button>
+                    <button wire:click="agregar_productos_exporta()" class="bmodal_yes">
+                        <span>Exportar</span>
+                    </button>
+                </div>
+
+            </div>
+        </div>
+    </div>
 
 </div>

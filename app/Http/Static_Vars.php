@@ -2,12 +2,25 @@
 
 namespace App\Http;
 
+use Illuminate\Support\Arr;
+
 class Static_Vars{
       
     public static $item = "";
     public static $orden = "";
     public static $conteo = 0;
     public static $paquete = "";
+
+    public static $items_inexistentes = [];
+
+   public static function agregar_arreglo($item){
+      self::$items_inexistentes = Arr::add(self::$items_inexistentes, 'item', $item);
+   }
+
+   public static function traer_arreglo(){
+      return  self::$items_inexistentes;
+   }
+   
       
     public static function Setitems($item) {
        self::$item = $item;

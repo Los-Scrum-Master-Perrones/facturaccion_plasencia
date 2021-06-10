@@ -11,12 +11,15 @@ class PedidoController extends Controller
 {
     public function import(Request $request)
     {
+        $borrar = DB::table('item_faltantes')->delete();
         (new pedidoImport)->import($request->select_file);
+
         return redirect()->route('import_excel');
     }
 
     function vaciar_import_excel()
     {
+       
         $borrar = DB::table('pedidos')->delete();
         $pedido_completo =  DB::select('call mostrar_pedido');
         $verificar = DB::select('call verificar_item_clase');

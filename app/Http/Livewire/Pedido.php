@@ -2,8 +2,11 @@
 
 namespace App\Http\Livewire;
 
+use App\Exports\SamplerFaltantes;
+use Carbon\Carbon;
 use Illuminate\Support\Facades\DB;
 use Livewire\Component;
+use Maatwebsite\Excel\Facades\Excel;
 
 class Pedido extends Component
 {
@@ -18,10 +21,13 @@ class Pedido extends Component
     public $b_item;
     public $b_orden;
 
+    public $nuevos;
+
     public function render()
     {
-        $this->total_puros = 0;
+        $this->nuevos = DB::select('select * from item_faltantes');
 
+        $this->total_puros = 0;
         $this->data = compact(DB::table('vitola_productos')->get()); 
         $this->verificar = DB::select('call verificar_item_clase');
         $this->pedido_completo = DB::select('call buscar_pedidos(:item,:categoria,:orden)',[
@@ -61,11 +67,28 @@ class Pedido extends Component
             }
             
         }
+
+       
         
         return view('livewire.pedido')->extends('principal')->section('content');
     }
 
+    public function modal_productos_nuevos(){
+        $this->dispatchBrowserEvent('abrir');
+    }
+
+    public function agregar_productos(){
+        return redirect()->route('productos');
+    }
+
+    public function agregar_productos_exporta(){
+        $this->dispatchBrowserEvent('cerrar');
+        return Excel::download(new SamplerFaltantes(),"Faltantes-".Carbon::now()->format("Ymdgis").".xls");
+      
+    }
+
     public function mount(){
+        
         $this->b_categoria= "";
         $this->b_item = "";
         $this->b_orden = "";
@@ -77,8 +100,10 @@ class Pedido extends Component
 
     function vaciar_import_excel()
     {
-    
-        DB::table('pedidos')->delete();        
+        DB::table('item_faltantes')->delete();  
+        DB::statement('alter table item_faltantes AUTO_INCREMENT=1;');
+        DB::table('pedidos')->delete(); 
+        DB::statement('alter table pedidos AUTO_INCREMENT=1;');       
         $this->data = compact(DB::table('vitola_productos')->get()); 
         $this->verificar = DB::select('call verificar_item_clase');
         $this->pedido_completo = DB::select('call mostrar_pedido');

@@ -372,6 +372,16 @@
         });
     </script>
 
+    <script>
+        window.addEventListener('abrir', event => {
+            $("#productos_faltantes").modal('show');
+        })
+
+        window.addEventListener('cerrar', event => {
+            $("#productos_faltantes").modal('hide');
+        })
+    </script>
+
 
 
 

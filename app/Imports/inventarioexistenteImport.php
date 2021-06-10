@@ -31,6 +31,13 @@ class inventarioexistenteImport implements ToModel
                     Static_Vars::Setitems($row[0]);
                     Static_Vars::Setconteos(DB::select('call contar_detalles_productos(:item)', ['item'=> Static_Vars::getitems()])[0]->detalles);
                     Static_Vars::Setpaquetes($row[4]);
+                    if( Static_Vars::getconteos() == 0){
+                        if(count(DB::select('select * from item_faltantes where item = ? and categoria = ?', [$row[0], 'INVENTARIO EXISTENTE']))==0){
+                         DB::insert('insert into item_faltantes(categoria, item, detalles) values (?,?,?)', [ 'INVENTARIO EXISTENTE', $row[0] , $row[2]]);
+                        }
+                    }
+                   
+                   
                     $pedio = null;
                    
                 } else{ 
