@@ -200,19 +200,29 @@ Route::get('/datos_producto', DatosProductos::class)->name('datos_producto');
 
 Route::get('/insertar_marca', [DatosProductos::class, 'insertar_marca'])->name('insertar_marca');
 Route::post('/insertar_marca', [DatosProductos::class, 'insertar_marca'])->name('insertar_marca');
+Route::get('/editar_marca', [DatosProductos::class, 'editar_marca'])->name('editar_marca');
+Route::post('/editar_marca', [DatosProductos::class, 'editar_marca'])->name('editar_marca');
 
 
 Route::get('/insertar_nombre', [DatosProductos::class, 'insertar_nombre'])->name('insertar_nombre');
 Route::post('/insertar_nombre', [DatosProductos::class, 'insertar_nombre'])->name('insertar_nombre');
+Route::get('/editar_nombre', [DatosProductos::class, 'editar_nombre'])->name('editar_nombre');
+Route::post('/editar_nombre', [DatosProductos::class, 'editar_nombre'])->name('editar_nombre');
 
-Route::get('/insertar_vitola', [DatosProductos::class, 'insertar_vitola'])->name('insertar_vitola');
+Route::get('/insert_vitola', [DatosProductos::class, 'insertar_vitola'])->name('insertar_vitola');
 Route::post('/insertar_vitola', [DatosProductos::class, 'insertar_vitola'])->name('insertar_vitola');
+Route::get('/editar_vitola', [DatosProductos::class, 'editar_vitola'])->name('editar_vitola');
+Route::post('/editar_vitola', [DatosProductos::class, 'editar_vitola'])->name('editar_vitola');
 
 Route::get('/insertar_tipo', [DatosProductos::class, 'insertar_tipo'])->name('insertar_tipo');
 Route::post('/insertar_tipo', [DatosProductos::class, 'insertar_tipo'])->name('insertar_tipo');
+Route::get('/editar_tipo', [DatosProductos::class, 'editar_tipo'])->name('editar_tipo');
+Route::post('/editar_tipo', [DatosProductos::class, 'editar_tipo'])->name('editar_tipo');
 
 Route::get('/insertar_capa', [DatosProductos::class, 'insertar_capa'])->name('insertar_capa');
 Route::post('/insertar_capa', [DatosProductos::class, 'insertar_capa'])->name('insertar_capa');
+Route::get('/editar_capa', [DatosProductos::class, 'editar_capa'])->name('editar_capa');
+Route::post('/editar_capa', [DatosProductos::class, 'editar_capa'])->name('editar_capa');
 
 Route::get('/welcome', function () {
     return view('welcome');

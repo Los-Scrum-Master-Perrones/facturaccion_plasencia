@@ -113,15 +113,6 @@ class FacturaTerminado extends Component
 
 
 
-
-
-
-
-
-
-
-
-
     public function editar_detalles($id)
     {
         $detalles_valores = DB::select('CALL `traer_detalles_editar_factura`(:id)', ['id' => $id]);
