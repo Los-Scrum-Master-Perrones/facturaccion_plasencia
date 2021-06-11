@@ -516,7 +516,18 @@
                 </table>
             </div>
         </div>
+        
+        <div class="input-group" style="width:30%;position: fixed;right: 0px;bottom:0px; height:30px;">
+   <span  class="form-control input-group-text">Total pendiente</span>
+        <input  type="text" class="form-control" wire:model="total_pendiente">
+   
+    <span class="form-control input-group-text">Total saldo</span>
+        <input  type="text" class="form-control" wire:model="total_saldo">
+   </div>
+
     </div>
+
+
 
 
 
