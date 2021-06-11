@@ -40,10 +40,12 @@
         <div class="col" style="height:66px;">
             <div class="row" style="margin-bottom:2px">
 
-            <div class="col"><form wire:submit.prevent="insertar_detalle_provicional()">
+                <div class="col">
+                    <form wire:submit.prevent="insertar_detalle_provicional()">
                         @csrf
                         <button class="mr-sm-2 botonprincipal" style="width:200px;">Agregar Programación </button>
-                    </form></div>
+                    </form>
+                </div>
 
                 <div class="col"> <input type="date" name="fecha_de" id="fecha_de" class="form-control "
                         style="width:100%;" placeholder="Fecha" wire:model="fede"> </div>
@@ -65,15 +67,15 @@
 
             <div class="row">
 
-            <div class="col">
+                <div class="col">
                     <a href="/detalles_programacion"> <button class="mr-sm-2 botonprincipal" style="width:200px;">
                             Ver</button></a>
                 </div>
 
                 <div class="col">
                     <input type="text" class="form-input " placeholder="Buscar Marca" wire:model="marca"
-                        style="width:100%;height:32px;" wire:keydown.delete="reset_marca" wire:keydown.escape="reset_marca"
-                        wire:keydown.arrow-down="incrementaIluminadoMarca"
+                        style="width:100%;height:32px;" wire:keydown.delete="reset_marca"
+                        wire:keydown.escape="reset_marca" wire:keydown.arrow-down="incrementaIluminadoMarca"
                         wire:keydown.arrow-up="decrementarIluminadoMarca" wire:keydown.enter="seleccionarMarca()">
 
                     @if ($oculto_marca == 0)
@@ -100,8 +102,8 @@
 
                 <div class="col">
                     <input type="text" class="form-input " placeholder="Buscar Vitola" wire:model="vito"
-                        style="width:100%;height:32px;" wire:keydown.escape="reset_vitola" wire:keydown.delete="reset_vitola"
-                        wire:keydown.arrow-down="incrementaIluminadoVitola"
+                        style="width:100%;height:32px;" wire:keydown.escape="reset_vitola"
+                        wire:keydown.delete="reset_vitola" wire:keydown.arrow-down="incrementaIluminadoVitola"
                         wire:keydown.arrow-up="decrementarIluminadoVitola" wire:keydown.enter="seleccionarVitola()">
 
                     @if ($oculto_vitola == 0)
@@ -128,8 +130,8 @@
 
                 <div class="col">
                     <input type="text" class="form-input " placeholder="Buscar Nombre" wire:model="nom"
-                        style="width:100%;height:32px;" wire:keydown.escape="reset_nombre" wire:keydown.delete="reset_nombre"
-                        wire:keydown.arrow-down="incrementaIluminadoNombre()"
+                        style="width:100%;height:32px;" wire:keydown.escape="reset_nombre"
+                        wire:keydown.delete="reset_nombre" wire:keydown.arrow-down="incrementaIluminadoNombre()"
                         wire:keydown.arrow-up="decrementarIluminadoNombre()" wire:keydown.enter="seleccionarNombre()">
 
                     @if ($oculto_nombre == 0)
@@ -156,8 +158,8 @@
 
                 <div class="col">
                     <input type="text" class="form-input " placeholder="Buscar Capa" wire:model="capa"
-                        style="width:100%;height:32px;" wire:keydown.escape="reset_capa" wire:keydown.delete="reset_capa"
-                        wire:keydown.arrow-down="incrementaIluminadoCapa()"
+                        style="width:100%;height:32px;" wire:keydown.escape="reset_capa"
+                        wire:keydown.delete="reset_capa" wire:keydown.arrow-down="incrementaIluminadoCapa()"
                         wire:keydown.arrow-up="decrementarIluminadoCapa()" wire:keydown.enter="seleccionarCapa()">
 
                     @if ($oculto_capa == 0)
@@ -184,8 +186,8 @@
 
                 <div class="col">
                     <input type="text" class="form-input " placeholder="Buscar Tipo Empaque" wire:model="empa"
-                        style="width:100%;height:32px;" wire:keydown.escape="reset_empaque" wire:keydown.delete="reset_empaque"
-                        wire:keydown.arrow-down="incrementaIluminadoEmpaque()"
+                        style="width:100%;height:32px;" wire:keydown.escape="reset_empaque"
+                        wire:keydown.delete="reset_empaque" wire:keydown.arrow-down="incrementaIluminadoEmpaque()"
                         wire:keydown.arrow-up="decrementarIluminadoEmpaque()" wire:keydown.enter="seleccionarEmpaque()">
 
                     @if ($oculto_empaque == 0)
@@ -209,42 +211,16 @@
                     @endif
                     @endif
                 </div>
-
-               
-
-               
-
-
-
             </div>
 
         </div>
     </div>
 
-   <form wire:submit.prevent="exportPendiente()">
-                        <input type="text" value="{{isset($nom)?$nom:null}}" name="nombre" id="nombre" hidden
-                            wire:model="nom">
-                        <input type="date" value="{{isset($fede)?$fede:null}}" name="fecha_de" id="fecha_de" hidden
-                            wire:model="fede">
-                        
-                    </form>
+    <form wire:submit.prevent="exportPendiente()">
+        <input type="text" value="{{isset($nom)?$nom:null}}" name="nombre" id="nombre" hidden wire:model="nom">
+        <input type="date" value="{{isset($fede)?$fede:null}}" name="fecha_de" id="fecha_de" hidden wire:model="fede">
 
-    
-
-                  
-
-                  
-
-               
-
-            
-
-
-
-
-
-
-
+    </form>
 
 
 
@@ -312,7 +288,7 @@
                        echo'</a>';
                     }?>
 
-                         
+
                         </td>
                     </tr>
 
@@ -321,91 +297,93 @@
         </div>
         <br>
 
- <div class="input-group" style="width:30%;position: fixed;right: 0px;bottom:0px; height:30px;">
-   <span  class="form-control input-group-text">Total pendiente</span>
-        <input  type="text" class="form-control" wire:model="total_pendiente">
-   
-    <span class="form-control input-group-text">Total saldo</span>
-        <input  type="text" class="form-control" wire:model="total_saldo">
-   </div>
+        <div class="input-group" style="width:30%;position: fixed;right: 0px;bottom:0px; height:30px;">
+            <span class="form-control input-group-text">Total pendiente</span>
+            <input type="text" class="form-control" wire:model="total_pendiente">
 
-  
-        
-   
+            <span class="form-control input-group-text">Total saldo</span>
+            <input type="text" class="form-control" wire:model="total_saldo">
+        </div>
 
 
 
-    <script type="text/javascript">
-        function datos_modal_actualizar(id) {
-            var datas = '<?php echo json_encode($datos_pendiente_empaque_nuevo);?>';
-
-            var data = JSON.parse(datas);
 
 
 
-            for (var i = 0; i < data.length; i++) {
-                if (data[i].id_pendiente === id) {
 
-                    document.actualizar_pendiente.id_pendientea.value = data[i].id_pendiente;
+        <script type="text/javascript">
+            function datos_modal_actualizar(id) {
+                var datas = '<?php echo json_encode($datos_pendiente_empaque_nuevo);?>';
 
-                    document.actualizar_pendiente.saldo.value = data[i].saldo;
+                var data = JSON.parse(datas);
 
 
+
+                for (var i = 0; i < data.length; i++) {
+                    if (data[i].id_pendiente === id) {
+
+                        document.actualizar_pendiente.id_pendientea.value = data[i].id_pendiente;
+
+                        document.actualizar_pendiente.saldo.value = data[i].saldo;
+
+
+                    }
                 }
+
             }
-
-        }
-    </script>
+        </script>
 
 
-    <form action="{{Route('actualizar_pendiente_empaque')}}" method="POST" id="actualizar_pendiente"
-        name="actualizar_pendiente">
-        <div class="modal fade" role="dialog" id="modal_actualizar" data-backdrop="static" data-keyboard="false"
-            tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true"
-            style="opacity:.9;background:#212529;width=800px;">
-            <div class="modal-dialog modal-dialog-centered modal-lg" style="opacity:.9;background:#212529;width=80%">
-                <div class="modal-content">
-                    @csrf
-                    <div class="modal-header">
-                        <h5 id="staticBackdropLabel"><strong>Descripción del producto: </strong><span id="titulo"
-                                name="titulo"></span></h5>
-                    </div>
-
-
-                    <div class="modal-body">
-                        <div class="row">
-
-                            <input name="id_pendientea" id="id_pendientea" value="" hidden />
-
-                            <div class="mb-3 col">
-                                <label for="txt_figuraytipo" class="form-label">SALDO</label>
-                                <input name="saldo" id="saldo" class="form-control" type="text" autocomplete="off">
-                            </div>
-
+        <form action="{{Route('actualizar_pendiente_empaque')}}" method="POST" id="actualizar_pendiente"
+            name="actualizar_pendiente">
+            <div class="modal fade" role="dialog" id="modal_actualizar" data-backdrop="static" data-keyboard="false"
+                tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true"
+                style="opacity:.9;background:#212529;width=800px;">
+                <div class="modal-dialog modal-dialog-centered modal-lg"
+                    style="opacity:.9;background:#212529;width=80%">
+                    <div class="modal-content">
+                        @csrf
+                        <div class="modal-header">
+                            <h5 id="staticBackdropLabel"><strong>Descripción del producto: </strong><span id="titulo"
+                                    name="titulo"></span></h5>
                         </div>
 
 
+                        <div class="modal-body">
+                            <div class="row">
 
+                                <input name="id_pendientea" id="id_pendientea" value="" hidden />
+
+                                <div class="mb-3 col">
+                                    <label for="txt_figuraytipo" class="form-label">SALDO</label>
+                                    <input name="saldo" id="saldo" class="form-control" type="text" autocomplete="off">
+                                </div>
+
+                            </div>
+
+
+
+
+                        </div>
+
+                        <div class="modal-footer">
+                            <button class="bmodal_no" data-dismiss="modal">
+                                <span>Cancelar</span>
+                            </button>
+                            <button type="submit" class="bmodal_yes">
+                                <span>Actualizar</span>
+                            </button>
+                        </div>
 
                     </div>
-
-                    <div class="modal-footer">
-                        <button class="bmodal_no" data-dismiss="modal">
-                            <span>Cancelar</span>
-                        </button>
-                        <button type="submit" class="bmodal_yes">
-                            <span>Actualizar</span>
-                        </button>
-                    </div>
-
                 </div>
             </div>
-        </div>
-    </form>
+        </form>
 
 
 
-    <!-- FIN MODAL ACTUALIZAR DATO PENDIENTE -->
+        <!-- FIN MODAL ACTUALIZAR DATO PENDIENTE -->
 
- 
+
+    </div>
 </div>

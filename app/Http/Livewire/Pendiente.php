@@ -60,6 +60,9 @@ class Pendiente extends Component
     public $iluminadoIndiceVitola;
     public $iluminadoIndiceEmpaque;
 
+    public $total_pendiente;
+    public $total_saldo;
+
 
     public function render()
     {
@@ -92,6 +95,9 @@ class Pendiente extends Component
             $this->empa="";
         }
 
+        $this->total_pendiente = 0;
+        $this->total_saldo = 0;
+
        
        $this->datos_pendiente = DB::select('call buscar_pendiente(:fede,:cat,:item,:pres,:orden,:marca,:vito,:nom,:capa,:empa,:hon)',
             [
@@ -109,23 +115,29 @@ class Pendiente extends Component
             ]
         );
 
+        for($i = 0; $i < count($this->datos_pendiente) ;$i++){
+            $this->total_pendiente += $this->datos_pendiente[$i]->pendiente;
+            $this->total_saldo += $this->datos_pendiente[$i]->saldo;
+        }
+
+
+
 
         $datos = [];
         $cantidad_detalle_sampler = 0;   
         $detalles = 0;  
         $valores = [];  
 
-        for($i = 0; $i < count($this->datos_pendiente) ;$i++){
-           
+        $datos_pe = DB::select('call buscar_pendiente("","","","","","","","","","","")');
+        for($i = 0; $i < count( $datos_pe) ;$i++){
 
-
-            $sampler = DB::select('SELECT clase_productos.sampler FROM clase_productos WHERE  clase_productos.item = ?;', [$this->datos_pendiente[$i]->item]);
+            $sampler = DB::select('SELECT clase_productos.sampler FROM clase_productos WHERE  clase_productos.item = ?;', [ $datos_pe[$i]->item]);
             if( $sampler[0]->sampler == "si"){
                 if($cantidad_detalle_sampler == 0 && $detalles == 0){
-                    $datos = DB::select('call traer_numero_detalles_productos(?)', [$this->datos_pendiente[$i]->item]);
+                    $datos = DB::select('call traer_numero_detalles_productos(?)', [ $datos_pe[$i]->item]);
                     $cantidad_detalle_sampler = $datos[0]->tuplas;
                 }
-                $valores = DB::select('call traer_detalles_productos_actualizar(?,?)', [$this->datos_pendiente[$i]->item,$detalles]);
+                $valores = DB::select('call traer_detalles_productos_actualizar(?,?)', [ $datos_pe[$i]->item,$detalles]);
 
                
                 $actualizar = DB::select('call actualizar_pendiente_sampler(:marca,:nombre,:vitola,:capa,:tipo,:item)',[
@@ -134,7 +146,7 @@ class Pendiente extends Component
                    'vitola'=>$valores[0]->vitola,
                    'capa'=>$valores[0]->capa,
                     'tipo'=>$valores[0]->tipo_empaque ,
-                   'item'=>$this->datos_pendiente[$i]->id_pendiente
+                   'item'=> $datos_pe[$i]->id_pendiente
                 ]);
               
                 $detalles++;
@@ -191,6 +203,9 @@ class Pendiente extends Component
         $cantidad_detalle_sampler = 0;   
         $detalles = 0;  
         $valores = [];  
+
+        $this->total_pendiente = 0;
+        $this->total_saldo = 0;
         
         $this->capas= \DB::select('call buscar_capa("")');
         $this->marcas=\DB::select('call buscar_marca("")');

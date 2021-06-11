@@ -108,16 +108,16 @@ public $hon;
         $this->tuplas=count($this->datos_pendiente_empaque);
 
 
-        $datos = [];
-        $cantidad_detalle_sampler = 0;   
-        $detalles = 0;  
-        $valores = [];  
+       // $datos = [];
+       // $cantidad_detalle_sampler = 0;   
+        //$detalles = 0;  
+        //$valores = [];  
 
-        $datos_pendiente = DB::select('select * from pendiente_empaque ORDER BY mes,item,orden,id_pendiente asc');
+        //$datos_pendiente = DB::select('select * from pendiente_empaque ORDER BY mes,item,orden,id_pendiente asc');
 
-        // for($i = 0; $i < count($datos_pendiente) ;$i++){
-        //     // $this->total_pendiente += $this->datos_pendiente_empaque[$i]->pendiente;
-        //     // $this->total_saldo += $this->datos_pendiente_empaque[$i]->saldo;
+        for($i = 0; $i < count($this->datos_pendiente_empaque) ;$i++){
+               $this->total_pendiente += $this->datos_pendiente_empaque[$i]->pendiente;
+               $this->total_saldo += $this->datos_pendiente_empaque[$i]->saldo;
            
 
 
@@ -148,7 +148,7 @@ public $hon;
         //         }
         //     }}
             
-        // }
+         }
        
         return view('livewire.pendiente-empaque')->extends('principal')->section('content');
     }
