@@ -42,8 +42,9 @@
                 <div class="input-group mb-3">
                     <input name="buscar" id="buscar" style="width:350px;" class=" form-control  mr-sm-2 "
                         wire:model="busqueda" placeholder="Búsqueda por Marca, Nombre y Vitola">
-                    <button class=" botonprincipal mr-sm-2 " style="width:200px;"> <a
-                            href="{{Route('datos_producto')}}">Datos adicionales</a></button>
+                        <form action="{{Route('datos_producto')}} " >
+                            <button class=" botonprincipal mr-sm-2 " style="width:200px;">Datos adicionales</button>
+                        </form>
                     <button class=" botonprincipal mr-sm-2 " onclick="mostrar_div_AddProducto();"
                         style="width:200px;">Nuevo producto</button>
                 </div>
@@ -89,7 +90,7 @@
                            echo'  data-target="#modal_agregarproducto" href="" ';
                            echo'  data-target="#modal_agregarproducto" href="" ';
                            echo'  onclick="agregar_item('.$producto->id_producto.','. strlen($producto->item).')"> ';
-                           echo'  <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" ';
+                           echo'  <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="black" ';
                            echo'    class="bi bi-file-earmark-plus" viewBox="0 0 16 16"> ';
                            echo'    <path ';
                            echo'        d="M8 6.5a.5.5 0 0 1 .5.5v1.5H10a.5.5 0 0 1 0 1H8.5V11a.5.5 0 0 1-1 0V9.5H6a.5.5 0 0 1 0-1h1.5V7a.5.5 0 0 1 .5-.5z" /> ';
@@ -102,7 +103,7 @@
                            echo'     data-target="#modal_ver_detalle_producto" ';
                            echo'  onclick="item_detalle(parseInt('.$producto->item.',10),'. strlen($producto->item).')"> ';
                            
-                           echo'      <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" ';
+                           echo'      <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="black" ';
                            echo'    class="bi bi-arrow-up-right-square" viewBox="0 0 16 16"> ';
                            echo'    <path fill-rule="evenodd" ';
                            echo'        d="M15 2a1 1 0 0 0-1-1H2a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V2zM0 2a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V2zm5.854 8.803a.5.5 0 1 1-.708-.707L9.243 6H6.475a.5.5 0 1 1 0-1h3.975a.5.5 0 0 1 .5.5v3.975a.5.5 0 1 1-1 0V6.707l-4.096 4.096z" /> ';
@@ -110,7 +111,7 @@
                            echo' </a> ';
                      }?>
                                 <a style=" width:10px; height:10px;" onclick="cargar_datos_editar({{$producto->id_producto}})">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor"
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="black"
                                         class="bi bi-pencil-square" viewBox="0 0 16 16">
                                         <path
                                             d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z" />
@@ -649,7 +650,7 @@
 
 <div style="  display: none;justify-content: center;align-items: center; height:100%;position:fixed;top:0px;width:50%;left:25%;" id="div_AddDetalleProducto"   >
     <!-- INICIO DEL MODAL AGREGAR DETALLE PRODUCTO -->
-    <form action="{{Route('detalle')}}" method="POST" id="form_detalle" name="form_detalle">
+    <form action="{{Route('detalle')}}" method="POST" id="form_detalle" name="form_detalle" style="width:100%;">
         <div data-backdrop="static" data-keyboard="false" tabindex="-1"
             aria-labelledby="staticBackdropLabel" aria-hidden="true" style="background:#212529;">
             <div >
