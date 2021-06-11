@@ -37,10 +37,13 @@
     <div class="container" style="max-width:100%; ">
 
 
-        <div class="col" style="height:70px;">
+        <div class="col" style="height:66px;">
             <div class="row" style="margin-bottom:2px">
 
-                
+            <div class="col"><form wire:submit.prevent="insertar_detalle_provicional()">
+                        @csrf
+                        <button class="mr-sm-2 botonprincipal" style="width:200px;">Agregar Programación </button>
+                    </form></div>
 
                 <div class="col"> <input type="date" name="fecha_de" id="fecha_de" class="form-control "
                         style="width:100%;" placeholder="Fecha" wire:model="fede"> </div>
@@ -62,9 +65,14 @@
 
             <div class="row">
 
+            <div class="col">
+                    <a href="/detalles_programacion"> <button class="mr-sm-2 botonprincipal" style="width:200px;">
+                            Ver</button></a>
+                </div>
+
                 <div class="col">
                     <input type="text" class="form-input " placeholder="Buscar Marca" wire:model="marca"
-                        style="width:100%;" wire:keydown.delete="reset_marca" wire:keydown.escape="reset_marca"
+                        style="width:100%;height:32px;" wire:keydown.delete="reset_marca" wire:keydown.escape="reset_marca"
                         wire:keydown.arrow-down="incrementaIluminadoMarca"
                         wire:keydown.arrow-up="decrementarIluminadoMarca" wire:keydown.enter="seleccionarMarca()">
 
@@ -92,7 +100,7 @@
 
                 <div class="col">
                     <input type="text" class="form-input " placeholder="Buscar Vitola" wire:model="vito"
-                        style="width:100%;" wire:keydown.escape="reset_vitola" wire:keydown.delete="reset_vitola"
+                        style="width:100%;height:32px;" wire:keydown.escape="reset_vitola" wire:keydown.delete="reset_vitola"
                         wire:keydown.arrow-down="incrementaIluminadoVitola"
                         wire:keydown.arrow-up="decrementarIluminadoVitola" wire:keydown.enter="seleccionarVitola()">
 
@@ -120,7 +128,7 @@
 
                 <div class="col">
                     <input type="text" class="form-input " placeholder="Buscar Nombre" wire:model="nom"
-                        style="width:100%;" wire:keydown.escape="reset_nombre" wire:keydown.delete="reset_nombre"
+                        style="width:100%;height:32px;" wire:keydown.escape="reset_nombre" wire:keydown.delete="reset_nombre"
                         wire:keydown.arrow-down="incrementaIluminadoNombre()"
                         wire:keydown.arrow-up="decrementarIluminadoNombre()" wire:keydown.enter="seleccionarNombre()">
 
@@ -148,7 +156,7 @@
 
                 <div class="col">
                     <input type="text" class="form-input " placeholder="Buscar Capa" wire:model="capa"
-                        style="width:100%;" wire:keydown.escape="reset_capa" wire:keydown.delete="reset_capa"
+                        style="width:100%;height:32px;" wire:keydown.escape="reset_capa" wire:keydown.delete="reset_capa"
                         wire:keydown.arrow-down="incrementaIluminadoCapa()"
                         wire:keydown.arrow-up="decrementarIluminadoCapa()" wire:keydown.enter="seleccionarCapa()">
 
@@ -176,7 +184,7 @@
 
                 <div class="col">
                     <input type="text" class="form-input " placeholder="Buscar Tipo Empaque" wire:model="empa"
-                        style="width:100%;" wire:keydown.escape="reset_empaque" wire:keydown.delete="reset_empaque"
+                        style="width:100%;height:32px;" wire:keydown.escape="reset_empaque" wire:keydown.delete="reset_empaque"
                         wire:keydown.arrow-down="incrementaIluminadoEmpaque()"
                         wire:keydown.arrow-up="decrementarIluminadoEmpaque()" wire:keydown.enter="seleccionarEmpaque()">
 
@@ -202,47 +210,35 @@
                     @endif
                 </div>
 
-                <div class="col">
-                    <form wire:submit.prevent="exportPendiente()">
+               
+
+               
+
+
+
+            </div>
+
+        </div>
+    </div>
+
+   <form wire:submit.prevent="exportPendiente()">
                         <input type="text" value="{{isset($nom)?$nom:null}}" name="nombre" id="nombre" hidden
                             wire:model="nom">
                         <input type="date" value="{{isset($fede)?$fede:null}}" name="fecha_de" id="fecha_de" hidden
                             wire:model="fede">
                         
                     </form>
-                </div>
 
-
-
-            </div>
-
-        </div>
-    </div>
-
-
-    <div class="container" style="max-width:100%; ">
-
-        <div class="row" style="text-align:center;">
-
-            <div class="col">
-                <div class="input-group mb-3">
-
+    
 
                   
 
-                    <form wire:submit.prevent="insertar_detalle_provicional()">
-                        @csrf
-                        <button class="mr-sm-2 botonprincipal" style="width:200px;">Agregar Programación </button>
-                    </form>
+                  
 
-                    <a href="/detalles_programacion"> <button class="mr-sm-2 botonprincipal" style="width:200px;">
-                            Ver</button></a>
+               
 
-                </div>
-            </div>
-        </div>
+            
 
-    </div>
 
 
 
@@ -325,7 +321,7 @@
         </div>
         <br>
 
- <div class="input-group" style="width:30%;position: fixed;right: 0px;">
+ <div class="input-group" style="width:30%;position: fixed;right: 0px;bottom:0px; height:30px;">
    <span  class="form-control input-group-text">Total pendiente</span>
         <input  type="text" class="form-control" wire:model="total_pendiente">
    

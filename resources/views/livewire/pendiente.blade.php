@@ -36,7 +36,7 @@
     <div class="container" style="max-width:100%;">
 
 
-        <div class="col" style="height:70px;" >
+        <div class="col" style="height:74px;" >
             <div class="row"  style="margin-bottom:2px">
 
                   <div class="col" > <button class="botonprincipal"  onclick="mostrar_div_AddProductoP()" type="submit" >
@@ -61,7 +61,7 @@
             <div class="row">   
                         
             <div class="col" >
-            <input type="text" class="form-input " placeholder="Buscar Marca" wire:model="marca"  style="width:100%;"
+            <input type="text" class="form-input " placeholder="Buscar Marca" wire:model="marca"  style="width:100%;height:34px;"
                             wire:keydown.delete="reset_marca"
                             wire:keydown.escape="reset_marca"
                             wire:keydown.arrow-down="incrementaIluminadoMarca" 
@@ -88,7 +88,7 @@
             </div>
                         
             <div class="col" >
-            <input type="text" class="form-input " placeholder="Buscar Vitola" wire:model="vito" style="width:100%;"
+            <input type="text" class="form-input " placeholder="Buscar Vitola" wire:model="vito" style="width:100%;height:34px;"
                             wire:keydown.escape="reset_vitola"
                             wire:keydown.delete="reset_vitola"
                             wire:keydown.arrow-down="incrementaIluminadoVitola" 
@@ -115,7 +115,7 @@
              </div>
 
             <div class="col" >
-            <input type="text" class="form-input " placeholder="Buscar Nombre" wire:model="nom" style="width:100%;"
+            <input type="text" class="form-input " placeholder="Buscar Nombre" wire:model="nom" style="width:100%;height:34px;"
                             wire:keydown.escape="reset_nombre"
                             wire:keydown.delete="reset_nombre"
                             wire:keydown.arrow-down="incrementaIluminadoNombre()" 
@@ -142,7 +142,7 @@
             </div>
                         
             <div class="col" >
-            <input type="text" class="form-input " placeholder="Buscar Capa" wire:model="capa" style="width:100%;"
+            <input type="text" class="form-input " placeholder="Buscar Capa" wire:model="capa" style="width:100%;height:34px;"
                             wire:keydown.escape="reset_capa"
                             wire:keydown.delete="reset_capa"
                             wire:keydown.arrow-down="incrementaIluminadoCapa()" 
@@ -169,7 +169,7 @@
              </div>
 
             <div class="col" >
-            <input type="text" class="form-input " placeholder="Buscar Tipo Empaque" wire:model="empa" style="width:100%;"
+            <input type="text" class="form-input " placeholder="Buscar Tipo Empaque" wire:model="empa" style="width:100%;height:34px;"
                             wire:keydown.escape="reset_empaque"
                             wire:keydown.delete="reset_empaque"
                             wire:keydown.arrow-down="incrementaIluminadoEmpaque()" 

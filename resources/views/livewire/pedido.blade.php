@@ -33,7 +33,7 @@
                         class="form-inline">
                         @csrf
                         <input type="file" name="select_file" id="select_file" class="form-control   mr-sm-2 "
-                            style="width:350px;" required />
+                            style="width:300px;" required />
                         <input type="submit" name="upload" style="width:130px;" class=" botonprincipal mr-sm-2 "
                             value="Importar">
                     </form>
@@ -45,7 +45,7 @@
                             @csrf
                             <input type="date" value="" name="fecha" id="fecha"
                                 style="width: 160px; color:black ;text-align:center;"
-                                class=" form-control  botonprincipal mr-sm-2 " required>
+                                class=" form-control   mr-sm-2 " required>
                             <button onclick="agregarpendiente()" style="width:160px;"
                                 class="botonprincipal mr-sm-2 ">Agregar a pendiente</button>
                         </form>
@@ -55,12 +55,14 @@
 
                         <button data-toggle="modal" style="width:30px;" class=" botonprincipal mr-sm-2 "
                             data-target="#modal_actualizar">
+                            <abbr title="Agregar nuevo pedido">
                             <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor"
                                 class="bi bi-plus-circle" viewBox="0 0 16 16">
                                 <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z" />
                                 <path
                                     d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z" />
                             </svg>
+                            </abbr>
                         </button>
 
                     <button wire:click="vaciar_import_excel()" style="width:30px;" class=" botonprincipal mr-sm-2 ">
@@ -74,6 +76,10 @@
                             </svg>
                         </abbr>
                     </button>
+                    
+                     <input class=" form-control  mr-sm-2" placeholder="Búsqueda por Item" wire:model="b_item">
+                    <input class=" form-control  mr-sm-2" placeholder="Búsqueda por Categoria" wire:model="b_categoria">
+                    <input class=" form-control  mr-sm-2" placeholder="Búsqueda por Orden" wire:model="b_orden">
 
                     @if (count($nuevos) > 0){
                     <button wire:click="modal_productos_nuevos()" style="width:30px;" class=" botonprincipal mr-sm-2 ">
@@ -90,17 +96,9 @@
                     @endif
                 </div>
             </div>
-            <div class="row">
-                <div class="input-group mb-3">
 
-                    <input class=" form-control  mr-sm-2" placeholder="Búsqueda por Item" wire:model="b_item"
-                        style="width:250px;">
-                    <input class=" form-control  mr-sm-2" placeholder="Búsqueda por Categoria" wire:model="b_categoria"
-                        style="width:250px;">
-                    <input class=" form-control  mr-sm-2" placeholder="Búsqueda por Orden" wire:model="b_orden"
-                        style="width:250px;">
-                </div>
-            </div>
+                   
+              
         </div>
 
 
