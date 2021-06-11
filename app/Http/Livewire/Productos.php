@@ -204,6 +204,8 @@ class Productos extends Component
                     }
 
     public function insertar_detalle_clase(Request $request)  {
+
+  
        
         if(isset($request->cello_de)){
            
