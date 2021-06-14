@@ -352,7 +352,7 @@
             <div class="modal-content">
 
                 <div class="modal-header">
-                    <h6>Estos productos sampler no existen en la base de datos: </h6>
+                    <h6>Estos productos no existen en la base de datos: </h6>
                 </div>
 
                 <div class="modal-body">

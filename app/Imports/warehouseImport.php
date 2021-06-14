@@ -33,8 +33,8 @@ class warehouseImport implements ToModel
                     Static_Vars::Setconteos(DB::select('call contar_detalles_productos(:item)', ['item'=> Static_Vars::getitems()])[0]->detalles);
                     Static_Vars::Setpaquetes($row[4]);
                     if( Static_Vars::getconteos() == 0){
-                        if(count(DB::select('select * from item_faltantes where item = ? and categoria = ?', [$row[0], 'WAREHAUSE']))==0){
-                         DB::insert('insert into item_faltantes(categoria, item, detalles) values (?,?,?)', [ 'WAREHAUSE', $row[0] , $row[2]]);
+                        if(count(DB::select('select * from item_faltantes where item = ? and categoria = ?', [$row[0], 'WAREHOUSE']))==0){
+                         DB::insert('insert into item_faltantes(categoria, item, detalles) values (?,?,?)', [ 'WAREHOUSE', $row[0] , $row[2]]);
                         }
                     }
                    
@@ -82,6 +82,13 @@ class warehouseImport implements ToModel
                                                     'numero_orden' => $row[5],
                                                     'categoria' => "4",
                                                 ]);
+                                                        }
+
+
+                                                        if(!isset(DB::select('select * from clase_productos where item = ?', [$row[0]])[0])){
+                                                            if(count(DB::select('select * from item_faltantes where item = ? and categoria = ?', [$row[0], 'WAREHOUSE']))==0){
+                                                                DB::insert('insert into item_faltantes(categoria, item, detalles) values (?,?,?)', [ 'WAREHOUSE', $row[0] , $row[2]]);
+                                                               }
                                                         }
                                     }
                                 
