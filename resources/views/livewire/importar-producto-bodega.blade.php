@@ -14,7 +14,7 @@
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-wEmeIV1mKuiNpC+IOBjI7aAzPcEZeedi5yW5f2yOq55WWLwNGmvvx4Um1vskeMj0" crossorigin="anonymous">
 
 
-    
+
 
 
     <ul class="nav justify-content-center">
@@ -34,7 +34,7 @@
 
 
     <div class="container" style="max-width:100%; ">
-    
+
             <div class="row" style="text-align:center;">
 
                 <div class="col">
@@ -47,7 +47,7 @@
                     </form>
 
                     <form wire:submit.prevent="vaciar" >
-                    @csrf 
+                    @csrf
                     <input type="submit" style="width:130px;" class=" botonprincipal mr-sm-2 "  value="Vaciar tabla">
                     </form>
 
@@ -56,10 +56,10 @@
 
                 </div>
             </div>
-               
-     
 
- 
+
+
+
             <div class="panel-body" style="padding:0px;">
             <div style="width:100%; padding-left:0px;    overflow-x: display; overflow-y: auto;
      height:450px;">
@@ -72,7 +72,6 @@
                         <th >Alias vitola</th>
                         <th >Vitola</th>
                         <th >Capa</th>
-                        <th >Ubicación</th>
                         <th >Existencia</th>
                     </tr>
                 </thead>
@@ -84,7 +83,6 @@
                         <td>{{$existencia->nombre}}</td>
                         <td>{{$existencia->vitola}}</td>
                         <td>{{$existencia->capa}}</td>
-                        <td>{{$existencia->ubicacion}}</td>
                         <td>{{$existencia->total}}</td>
                     </tr>
                     @endforeach

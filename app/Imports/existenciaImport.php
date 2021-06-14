@@ -19,7 +19,7 @@ class existenciaImport implements toModel
             $existencia = null;
         } else{
 
-        
+
                 if ($row[0] == null && $row[1] == null && $row[2] == null && $row[3] == null && $row[4] == null) {
                     $registro_maximo = DB::select('call traer_maximo_registro_existencia');
                     $cod = $registro_maximo[0]->codigo_producto;
@@ -28,10 +28,9 @@ class existenciaImport implements toModel
                     $vit = $registro_maximo[0]->vitola;
                     $capa = $registro_maximo[0]->capa;
 
-                    
 
-                    $existencia = DB::select('call insertar_actualizar_existencias(:ubicacion,:codigo_producto,:marca,:nombre,:vitola,:capa,:total)',[
-                        'ubicacion' => $row[5],
+
+                    $existencia = DB::select('call insertar_actualizar_existencias(:codigo_producto,:marca,:nombre,:vitola,:capa,:total)',[
                         'codigo_producto' => $cod,
                         'marca' => $mar,
                         'nombre' => $nom,
@@ -40,8 +39,7 @@ class existenciaImport implements toModel
                         'total' => $row[6],
                     ]);
                 } else {
-                    $existencia = DB::select('call insertar_actualizar_existencias(:ubicacion,:codigo_producto,:marca,:nombre,:vitola,:capa,:total)',[
-                        'ubicacion' => $row[5],
+                    $existencia = DB::select('call insertar_actualizar_existencias(:codigo_producto,:marca,:nombre,:vitola,:capa,:total)',[
                         'codigo_producto' => $row[0],
                         'marca' => $row[1],
                         'nombre' => $row[2],
@@ -52,6 +50,6 @@ class existenciaImport implements toModel
                 }
             }
             return null;
-        
+
     }
 }

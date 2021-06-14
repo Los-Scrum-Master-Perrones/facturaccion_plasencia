@@ -38,12 +38,13 @@
 
                     <input name="buscar" id="buscar" class="  form-control  mr-sm-2" wire:model="busqueda"
                         placeholder="Búsqueda por Marca, Nombre y Vitola" style="width:350px;">
-                        <form action="{{Route('exportar_detallesprogramacion')}}" id="formver" name="formver">
-                   
+                    <form action="{{Route('exportar_detallesprogramacion')}}" id="formver" name="formver">
 
-                   <button class="botonprincipal" type="submit" style="width:120px;">Exportar </button>
-               
-                      </form>
+                        <button class="botonprincipal" type="submit" style="width:120px;">Exportar</button>
+                    </form>
+                    <form wire:submit.prevent="modal_limpiar()">
+                        <button class="botonprincipal" type="submit" style="width:120px;">Vaciar</button>
+                    </form>
                     <form wire:submit.prevent="insertarDetalle_y_actualizarPendiente()"
                         style="width:auto; padding-left:50px; ">
                         @csrf
@@ -121,9 +122,9 @@
                             <?php   if($detalle_provicional->diferencia < 0){
 
                         echo '<td style="color:red;">'.$detalle_provicional->diferencia.'</td>' ;
-                        
+
                         }else{
-                       
+
                         echo '<td>' .$detalle_provicional->diferencia. '</td>' ;
                         }
                         ?>
@@ -299,7 +300,7 @@
                         <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
-                        ¿Estás seguro que quieres eliminar este usuario?
+                        ¿Estás seguro que quieres eliminar este registro?
                     </div>
                     <div class="modal-footer">
                         <button style=" background: #b39f64; color: #ecedf1;" type="button" class=" btn-info-claro "
@@ -316,7 +317,32 @@
     </form>
 
 
-   
+
 
     <!-- FIN MODAL ELMINAR DETALLE -->
+
+    <div class="modal fade" id="modal_eliminar_tabla_progra" data-backdrop="static" data-keyboard="false" tabindex="-1"
+        aria-labelledby="staticBackdropLabel" aria-hidden="true" style="opacity:.9;background:#212529;">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="staticBackdropLabel">Advertencia</h5>
+                    <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    ¿Estás seguro que quieres limpiar estos registros?
+                </div>
+                <div class="modal-footer">
+                    <button style=" background: #b39f64; color: #ecedf1;" type="button" class="btn-info-claro "
+                        data-dismiss="modal">
+                        <span>Cancelar</span>
+                    </button>
+                    <button wire:click="eliminar_datos()" class=" btn-info ">
+                        <span>Eliminar</span>
+                    </button>
+                </div>
+            </div>
+        </div>
     </div>
+    modal_limpiar()
+</div>
