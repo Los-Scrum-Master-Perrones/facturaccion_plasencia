@@ -341,7 +341,7 @@
                             <div>
                                 @csrf
                                 <input name="id" id="id"  type="text" style="display:none" value="`+ detalle[i].id_producto + `">
-                                <input type="submit">
+                                <input type="submit" value="Eliminar">
                             </div>
                         </form>
                     </td>
