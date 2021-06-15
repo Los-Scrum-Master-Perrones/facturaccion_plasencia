@@ -194,6 +194,7 @@ Route::post('/producto', [tabla_existencia::class, 'import'])->name('codigo');
 
 Route::get('/datos_producto', DatosProductos::class)->name('datos_producto');
 
+Route::post('/eliminar_detalles_productos', [Productos::class, 'eliminar_detalle']);
 
 
 // INSERTAR DATOS ADICIONALES DE LOS PRODUCTOS
@@ -256,7 +257,7 @@ Route::get('/index_lista_cajas', [App\Http\Controllers\CajasController::class, '
 Route::post('/editaryeliminarlista', [App\Http\Controllers\CajasController::class, 'editaryeliminarlista'])->name('editaryeliminarlista');
 Route::get('/exportar_cajas', [App\Http\Controllers\CajasController::class, 'exportCajas'])->name('exportar_cajas');
 Route::get('/index_codigobarra', [App\Http\Controllers\CajasController::class, 'index_codigobarra'])->name('index_codigobarra');
- 
+
 
 
 Route::post('/buscar_lista_cajas', [App\Http\Controllers\CajasController::class, 'buscar_lista_cajas'])->name('buscar_lista_cajas');

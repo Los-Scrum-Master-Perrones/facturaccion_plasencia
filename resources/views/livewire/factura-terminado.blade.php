@@ -34,8 +34,8 @@
                         </svg>
                         Regresar </button>
 
-                    
-                        
+
+
                     <span id="lbl_cliente" name="lbl_cliente" class="form-control input-group-text ">Cliente</span>
                     <input style="width:150px;" id="txt_cliente" name="txt_cliente" type="text"
                         class="form-control mr-sm-2 " wire:model="cliente" placeholder="Rocky,  Hatsa" required>
@@ -63,8 +63,8 @@
                             <path
                                 d="M2 1a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H9.5a1 1 0 0 0-1 1v4.5h2a.5.5 0 0 1 .354.854l-2.5 2.5a.5.5 0 0 1-.708 0l-2.5-2.5A.5.5 0 0 1 5.5 6.5h2V2a2 2 0 0 1 2-2H14a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V2a2 2 0 0 1 2-2h2.5a.5.5 0 0 1 0 1H2z" />
                         </svg>  Guardar </button>
-                
-                    
+
+
 
                         <input type="date" name="fecha_de" id="fecha_de" class="form-control mr-sm-2 "
                         style="width:200px; display: none" placeholder="Fecha" wire:model="fede">
@@ -85,7 +85,7 @@
 
 
 
-                    <div style="display: none" id="busqueda_pendiente2" name="busqueda_pendiente2">                       
+                    <div style="display: none" id="busqueda_pendiente2" name="busqueda_pendiente2">
                     </div>
                 </div>
             </div>
@@ -101,14 +101,14 @@
                             style="font-size:15px;color:white;">{{$titulo_factura." ".$titulo_cliente." ". $contenedor." ".$titulo_mes}}
                         </label>
                     </div>
-                    
+
                     <div class="col" style="text-align:end;">
                         <label style="font-size:15px;color:white;">Factura N#: {{$num_factura_sistema}}</label>
                     </div>
                     <div class="col" style="text-align:end;">
                         <button style="width:120px;" class="botonprincipal" wire:click="historial()">Historial</button>
                     </div>
-                </div>     
+                </div>
 <br>
 
 
@@ -162,10 +162,10 @@
 
                         @foreach($detalles_venta as $detalles)
                         <tr style="font-size:10px;">
-                            <?php  
+                            <?php
                             $val_anterioir= $bultos+1;
                             $bultos += $detalles->cantidad_puros;
-                            
+
                            $val_actual=$bultos ?>
 
                             @if ($val_actual == $val_anterioir)
@@ -173,7 +173,7 @@
                             @else
                                <td style="width:100px; max-width: 400px;overflow-x:auto;">{{$val_anterioir}} al {{$val_actual}}</td>
                             @endif
-                            
+
                             <td>{{$detalles->cantidad_puros}}</td>
                             <td>{{$detalles->unidad}}</td>
                             <td><b>{{$detalles->cantidad_cajas}}</b></td>
@@ -189,7 +189,7 @@
                             <td>{{$detalles->total_bruto}}</td>
                             <td>{{$detalles->total_neto}}</td>
                             <td>{{$detalles->precio_producto}}</td>
-                           
+
                             <td>{{$detalles->costo}}</td>
                             <td>{{$detalles->valor_total}}</td>
                             <td>
@@ -201,7 +201,7 @@
                                     </svg></a>
 
 
-                                <a style=" width:10px; height:10px;      " data-toggle="modal" href=""
+                                <a style=" width:10px; height:10px;" data-toggle="modal" href=""
                                     wire:click="editar_detalles({{$detalles->id_detalle}})">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor"
                                         class="bi bi-pencil-square" viewBox="0 0 16 16">
@@ -433,7 +433,7 @@
                                     </div>
                                     <div class="mb-3 col">
                                         <label for="txt_peso_bruto" class="form-label">Preso Bruto (Lbs)</label>
-                                        <input id="peso_bruto" name="peso_bruto" class="form-control" type="number" min="1" 
+                                        <input id="peso_bruto" name="peso_bruto" class="form-control" type="number" min="1"
                                             autocomplete="off" required>
                                     </div>
                                     <div class="mb-3 col">
@@ -476,8 +476,8 @@
                             </div>
 
                             <div class="modal-body">
-                                <div class="row">   
-                                    
+                                <div class="row">
+
                                     <input type="text" name="id_pendi" id="id_pendi" value="{{$id_editar}}" hidden />
 
                                     <div class="mb-3 col">
@@ -603,7 +603,7 @@
                 window.addEventListener('advertencia_mensaje', event => {
                     $("#modal_advertencia").modal('show');
                 })
-                
+
 
                 window.addEventListener('cerrar_editar_detalles', event => {
                     $("#modal_editar_detalles").modal('hide');

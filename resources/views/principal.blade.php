@@ -389,6 +389,10 @@
             $("#modal_eliminar_tabla_progra").modal('hide');
         })
 
+        window.addEventListener('cerrar_eliminar_datelles_clase', event => {
+            $("#modal_ver_detalle_producto").modal('hide');
+        })
+
 
     </script>
 

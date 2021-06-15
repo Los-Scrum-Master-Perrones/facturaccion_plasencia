@@ -81,7 +81,7 @@
 
                             <td style=" text-align:center;">
 
-                                <?php      if($producto->sampler==="si")    {     
+                                <?php      if($producto->sampler==="si")    {
 
                            echo' <a style=" width:30px; height:30px;"  data-toggle="modal"  ';
                            echo'  data-target="#modal_agregarproducto" href="" ';
@@ -99,7 +99,7 @@
                            echo' <a style=" width:10px; height:10px;" data-toggle="modal" href="" ';
                            echo'     data-target="#modal_ver_detalle_producto" ';
                            echo'  onclick="item_detalle(parseInt(`'.$producto->item.'`,10),'. strlen($producto->item).')"> ';
-                           
+
                            echo'      <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="black" ';
                            echo'    class="bi bi-arrow-up-right-square" viewBox="0 0 16 16"> ';
                            echo'    <path fill-rule="evenodd" ';
@@ -194,8 +194,8 @@
                     document.formulario_actualizar.presentacion_ac.value = producto[i].presentacion;
                     document.formulario_actualizar.cod_sistema_ac.value = producto[i].codigo_producto;
                     document.formulario_actualizar.cod_precio_ac.value = producto[i].codigo_precio;
+                    document.formulario_actualizar.precio_ac.value = producto[i].precio;
                     document.formulario_actualizar.cod_caja_ac.value = producto[i].codigo_caja;
-
                     document.formulario_actualizar.id_producto.value = producto[i].id_producto;
 
                     document.formulario_actualizar.des.value = producto[i].des;
@@ -335,7 +335,16 @@
                     <td>` + detalle[i].vitola + `</td>
                     <td>` + detalle[i].capa + `</td>
                     <td>` + detalle[i].tipo_empaque + `</td>
+                    <td>
 
+                        <form action="/eliminar_detalles_productos" method="post">
+                            <div>
+                                @csrf
+                                <input name="id" id="id"  type="text" style="display:none" value="`+ detalle[i].id_producto + `">
+                                <input type="submit">
+                            </div>
+                        </form>
+                    </td>
                   </tr>
 
                   `;
@@ -343,6 +352,7 @@
                 }
 
             }
+
 
 
 
@@ -359,7 +369,7 @@
                     ` + producto[i].vitola + `
                     ` + producto[i].marca + `
                     ` + producto[i].nombre + `
-    
+
 
                     </strong></h3>
 
@@ -412,61 +422,40 @@
     </script>
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
     <!-- INICIO DEL MODAL VER DETALLE PRODUCTO -->
-    <form action="{{Route('detalle_producto')}} " method="POST" name="formde" id=" formde">
-        @csrf
-        <div class="modal fade" id="modal_ver_detalle_producto" data-backdrop="static" data-keyboard="false"
-            tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true"
-            style="opacity:.9;background:#212529;width=800px;">
-            <div class="modal-dialog modal-dialog-centered modal-lg">
-                <div class="modal-content" style="width:700px;">
+    <div class="modal fade" id="modal_ver_detalle_producto" data-backdrop="static" data-keyboard="false" tabindex="-1"
+        aria-labelledby="staticBackdropLabel" aria-hidden="true" style="opacity:.9;background:#212529;width=800px;">
+        <div class="modal-dialog modal-dialog-centered modal-lg">
+            <div class="modal-content" style="width:700px;">
 
-                    <div class="modal-header">
-                        <h5 id="staticBackdropLabel">Detalles del producto <span style="font-size:10px;" name="clase"
-                                id="clase"></span></h5>
-                        <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close"></button>
-                    </div>
+                <div class="modal-header">
+                    <h5 id="staticBackdropLabel">Detalles del producto <span style="font-size:10px;" name="clase"
+                            id="clase"></span></h5>
+                    <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close"></button>
+                </div>
 
-                    <div class="modal-body">
-                        <table id="detallestabla" name="detallestabla" class="table table-bordered table-striped"
-                            style="font-size:10px;">
-                            <thead>
-                                <tr>
-                                    <th>Item</th>
-                                    <th>Marca</th>
-                                    <th>Nombre</th>
-                                    <th>Vitola</th>
-                                    <th>Capa</th>
-                                    <th>Tipo de empaque</th>
+                <div class="modal-body">
+                    <table id="detallestabla" name="detallestabla" class="table table-bordered table-striped"
+                        style="font-size:10px;">
+                        <thead>
+                            <tr>
+                                <th>Item</th>
+                                <th>Marca</th>
+                                <th>Nombre</th>
+                                <th>Vitola</th>
+                                <th>Capa</th>
+                                <th>Tipo de empaque</th>
+                                <th>Eliminar</th>
+                            </tr>
+                        </thead>
+                        <tbody name="body" id="body">
 
-                                </tr>
-                            </thead>
-                            <tbody name="body" id="body">
-
-                            </tbody>
-                        </table>
-                    </div>
-
-                    <input name="item_detalle" id="item_detalle" value+="" hidden>
-
+                        </tbody>
+                    </table>
                 </div>
             </div>
         </div>
-    </form>
+    </div>
     <!-- FIN DEL MODAL VER DETALLE PRODUCTO -->
 
 
@@ -592,6 +581,13 @@
                                     <input name="cod_precio_ac" id="cod_precio_ac" class="form-control" type="text"
                                         autocomplete="off">
                                 </div>
+
+                                <div class="mb-3 col">
+                                    <label for="txt_buenos" class="form-label">Precio</label>
+                                    <input name="precio" id="precio_ac" class="form-control" required type="text"
+                                        autocomplete="off">
+                                </div>
+
 
                                 <div class="mb-3 col">
                                     <label for="txt_total" class="form-label">Código de la cajita</label>
@@ -777,6 +773,11 @@
                                         required type="text" autocomplete="off">
                                 </div>
                                 <div class="mb-3 col">
+
+                                    <label for="txt_buenos" class="form-label">Precio</label>
+                                    <input name="precio" id="precio" class="form-control" required type="text"
+                                        autocomplete="off">
+
                                 </div>
                                 <div class="mb-3 col">
                                 </div>
@@ -934,6 +935,11 @@
                                             precio</label>
                                         <input name="cod_precio" id="cod_precio" class="form-control" required
                                             type="text" autocomplete="off">
+                                    </div>
+                                    <div class="mb-3 col">
+                                        <label for="txt_buenos" class="form-label">Precio</label>
+                                        <input name="precio" id="precio" class="form-control" required type="text"
+                                            autocomplete="off">
                                     </div>
 
                                     <div class="mb-3 col">
