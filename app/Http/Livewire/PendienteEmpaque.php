@@ -35,7 +35,7 @@ public $nom;
 public $capa;
 public $empa;
 public $hon;
-    
+
     /* procedimientos almacanedos busquedas pendiente*/
     public $marcas_p;
     public $nombre_p;
@@ -66,7 +66,7 @@ public $hon;
           $this->vitolas_p=\DB::select('call buscar_vitola_pendiente(?)',[$this->vito]);
           $this->capas_p=\DB::select('call buscar_capa_pendiente(?)',[$this->capa]);
           $this->empaques_p=\DB::select('call buscar_tipo_empaque_pendiente(?)',[$this->empa]);
-  
+
           if($this->marca == null){
               $this->marca="";
           }
@@ -75,10 +75,10 @@ public $hon;
           }
           if($this->capa == null){
               $this->capa="";
-          }  
+          }
           if($this->vito == null){
               $this->vito="";
-          }  
+          }
           if($this->empa == null){
               $this->empa="";
           }
@@ -86,7 +86,7 @@ public $hon;
 
         $this->total_pendiente = 0;
         $this->total_saldo = 0;
-        
+
         $this->datos_pendiente_empaque = DB::select('call buscar_pendiente_empaque(:fede,:cat,:item,:pres,:orden,:marca,:vito,:nom,:capa,:empa,:hon)',
         [
             'fede' =>  $this->fede,
@@ -102,23 +102,23 @@ public $hon;
             'hon' =>  $this->hon
         ]
     );
-    
+
         $this->datos_pendiente_empaque_nuevo = DB::select('select pendiente_empaque.id_pendiente,pendiente_empaque.saldo from pendiente_empaque');
 
         $this->tuplas=count($this->datos_pendiente_empaque);
 
 
        // $datos = [];
-       // $cantidad_detalle_sampler = 0;   
-        //$detalles = 0;  
-        //$valores = [];  
+       // $cantidad_detalle_sampler = 0;
+        //$detalles = 0;
+        //$valores = [];
 
         //$datos_pendiente = DB::select('select * from pendiente_empaque ORDER BY mes,item,orden,id_pendiente asc');
 
         for($i = 0; $i < count($this->datos_pendiente_empaque) ;$i++){
                $this->total_pendiente += $this->datos_pendiente_empaque[$i]->pendiente;
                $this->total_saldo += $this->datos_pendiente_empaque[$i]->saldo;
-           
+
 
 
         //     $sampler = DB::select('SELECT clase_productos.sampler FROM clase_productos WHERE  clase_productos.item = ?;', [$datos_pendiente[$i]->item]);
@@ -139,7 +139,7 @@ public $hon;
         //             'tipo'=>$valores[0]->tipo_empaque ,
         //            'item'=>$datos_pendiente[$i]->id_pendiente
         //         ]);
-              
+
         //         $detalles++;
 
         //         if($detalles == $cantidad_detalle_sampler){
@@ -147,9 +147,9 @@ public $hon;
         //             $cantidad_detalle_sampler = 0;
         //         }
         //     }}
-            
+
          }
-       
+
         return view('livewire.pendiente-empaque')->extends('principal')->section('content');
     }
 
@@ -205,12 +205,12 @@ public $hon;
             'hon' =>  $this->hon
         ]
     );
-        
+
         $this->tuplas=count($this->datos_pendiente_empaque);
 
          $this->total_pendiente = 0;
          $this->total_saldo = 0;
- 
+
         $this->fechade= "";
         $this->fechahasta= "";
         $this->nombre= "";
@@ -218,13 +218,13 @@ public $hon;
 
 
 
-    
+
      //Busqueda de Marca
 
      public function reset_marca(){
         $this->marca = "";
         $this->oculto_marca = 0;
-    }    
+    }
 
     public function incrementaIluminadoMarca(){
         if($this->iluminadoIndiceMarca === count($this->marcas_p)-1){
@@ -236,7 +236,7 @@ public $hon;
     }
 
     public function decrementarIluminadoMarca(){
-        
+
         if($this->iluminadoIndiceMarca === 0){
             $this->iluminadoIndiceMarca = count($this->marcas_p)-1;
             return;
@@ -246,17 +246,13 @@ public $hon;
     }
 
     public function seleccionarMarca(){
-        $mascc = $this->marcas_p[$this->iluminadoIndiceMarca] ?? null; 
-           
+        $mascc = $this->marcas_p[$this->iluminadoIndiceMarca] ?? null;
+
         if( $mascc ){
             $this->marca =  $mascc['marca'];
             $this->oculto_marca = 1;
-        }      
+        }
     }
-
-
-
-
 
     //Busqueda de Nombre
     public function reset_nombre(){
@@ -274,7 +270,7 @@ public $hon;
     }
 
     public function decrementarIluminadoNombre(){
-        
+
         if($this->iluminadoIndiceNombre === 0){
             $this->iluminadoIndiceNombre = count($this->nombre_p)-1;
             return;
@@ -284,12 +280,12 @@ public $hon;
     }
 
     public function seleccionarNombre(){
-        $mascc = $this->nombre_p[$this->iluminadoIndiceNombre] ?? null; 
-           
+        $mascc = $this->nombre_p[$this->iluminadoIndiceNombre] ?? null;
+
         if( $mascc ){
             $this->nom =  $mascc['nombre'];
             $this->oculto_nombre = 1;
-        }         
+        }
     }
 
 
@@ -310,7 +306,7 @@ public $hon;
     }
 
     public function decrementarIluminadoCapa(){
-        
+
         if($this->iluminadoIndiceCapa === 0){
             $this->iluminadoIndiceCapa = count($this->capas_p)-1;
             return;
@@ -320,12 +316,12 @@ public $hon;
     }
 
     public function seleccionarCapa(){
-        $mascc = $this->capas_p[$this->iluminadoIndiceCapa] ?? null; 
-           
+        $mascc = $this->capas_p[$this->iluminadoIndiceCapa] ?? null;
+
         if( $mascc ){
             $this->capas =  $mascc['capa'];
             $this->oculto_capa = 1;
-        }             
+        }
     }
 
 
@@ -346,7 +342,7 @@ public $hon;
     }
 
     public function decrementarIluminadoVitola(){
-        
+
         if($this->iluminadoIndiceVitola === 0){
             $this->iluminadoIndiceVitola = count($this->vitolas_p)-1;
             return;
@@ -356,12 +352,12 @@ public $hon;
     }
 
     public function seleccionarVitola(){
-        $mascc = $this->vitolas_p[$this->iluminadoIndiceVitola] ?? null; 
-           
+        $mascc = $this->vitolas_p[$this->iluminadoIndiceVitola] ?? null;
+
         if( $mascc ){
             $this->vito =  $mascc['vitola'];
             $this->oculto_vitola = 1;
-        }              
+        }
     }
 
 
@@ -382,7 +378,7 @@ public $hon;
     }
 
     public function decrementarIluminadoEmpaque(){
-        
+
         if($this->iluminadoIndiceEmpaque === 0){
             $this->iluminadoIndiceEmpaque = count($this->empaques_p)-1;
             return;
@@ -392,15 +388,15 @@ public $hon;
     }
 
     public function seleccionarEmpaque(){
-        $mascc = $this->empaques_p[$this->iluminadoIndiceEmpaque] ?? null; 
-           
+        $mascc = $this->empaques_p[$this->iluminadoIndiceEmpaque] ?? null;
+
         if( $mascc ){
             $this->empa =  $mascc['empaque'];
             $this->oculto_empaque = 1;
-        }      
-        
+        }
+
     }
-   
+
 
 /* fin de las funciones de busquedas avanzadas*/
 
@@ -422,7 +418,7 @@ public $hon;
             'hon' =>  $this->hon
         ]
     );
-        
+
         $this->tuplas=count($this->datos_pendiente_empaque);
 
         for($i = 0 ; $this->tuplas > $i ; $i++){
@@ -435,11 +431,8 @@ public $hon;
             'cant'=>isset($this->datos_pendiente_empaque[$i]->cant_cajas)?$this->datos_pendiente_empaque[$i]->cant_cajas:null]);
         }
 
+        return redirect()->route('detalles_programacion');
 
-        
-
-        return redirect()->route('detalles_programacion'); 
-       
     }
 
 
@@ -447,10 +440,10 @@ public $hon;
 
         $datos_pendiente = DB::select('call datos_pendiente_programar(:id)'
         ,['id'=>$id]);
-        
+
         $this->tuplas=count($this->datos_pendiente_empaque);
 
-       
+
             $detalles = DB::select('call insertar_detallePro_temporalSinExistencia(:numero_orden,:orden,:cod_producto,:saldo,:id_pendiente,:cant)'
             ,['numero_orden'=>isset($datos_pendiente[0]->orden_del_sitema)?$datos_pendiente[0]->orden_del_sitema:null,
             'orden'=>isset($datos_pendiente[0]->orden)?$datos_pendiente[0]->orden:null,
@@ -458,28 +451,28 @@ public $hon;
             'saldo'=>isset($datos_pendiente[0]->saldo)?$datos_pendiente[0]->saldo:null,
             'id_pendiente'=>isset($datos_pendiente[0]->id_pendiente)?$datos_pendiente[0]->id_pendiente:null,
             'cant'=>isset($datos_pendiente[0]->cant_cajas)?$datos_pendiente[0]->cant_cajas:null]);
-        
 
-        return redirect()->route('detalles_programacion'); 
-       
+
+        return redirect()->route('detalles_programacion');
+
     }
 
 
-    
-    public function actualizar_pendiente_empaque(Request $request){         
-    
+
+    public function actualizar_pendiente_empaque(Request $request){
+
         $this->actualizar=\DB::select('call actualizar_pendiente_empaque(:id,:saldo)',
         ['id'=>$request->id_pendientea,
         'saldo' =>$request->saldo
         ]);
 
 
-        return redirect()->route('pendiente_empaque'); 
-    
+        return redirect()->route('pendiente_empaque');
+
         }
 
 
-    
+
 
 
 }

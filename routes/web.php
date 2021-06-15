@@ -26,6 +26,7 @@ use App\Http\Livewire\DetalleProgramacion;
 use App\Http\Livewire\HistorialVentas;
 use App\Http\Livewire\ListaCajas;
 use App\Http\Livewire\Pedido;
+use Illuminate\Support\Facades\View;
 
 /*
 |--------------------------------------------------------------------------

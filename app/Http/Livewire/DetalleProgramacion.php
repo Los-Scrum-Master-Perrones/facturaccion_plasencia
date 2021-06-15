@@ -101,14 +101,18 @@ class DetalleProgramacion extends Component
             ['id_pendiente' => $request->id_pendientea]
         );
 
+        if( $cant_tipo == null){
+            $cajas_utilizadas_actual = ($request->saldo / $cant_tipo[0]->cajas_tipo); //50
 
-        $cajas_utilizadas_actual = ($request->saldo / $cant_tipo[0]->cajas_tipo); //50
-
-        $cajas_utilizadas_viejas = $request->cant_cajas + $request->saldo_viejo; //30
+            $cajas_utilizadas_viejas = $request->cant_cajas + $request->saldo_viejo; //30
 
 
 
-        $cajas_actualizar = ($cajas_utilizadas_viejas - $cajas_utilizadas_actual); //
+            $cajas_actualizar = ($cajas_utilizadas_viejas - $cajas_utilizadas_actual); //
+
+        }else{
+            $cajas_actualizar = 0;
+        }
 
 
         $this->actualizar = DB::select(
