@@ -32,7 +32,6 @@ WithColumnFormatting
 public function headings(): array
 {
     return [
-        'ID_PROGRAMACION',
         '# ORDEN',
         'ORDEN',
         'MARCA',

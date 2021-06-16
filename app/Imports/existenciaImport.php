@@ -15,7 +15,7 @@ class existenciaImport implements toModel
     public function model(array $row)
     {
 
-        if ($row[0] == null && $row[1] == null && $row[2] == null && $row[3] == null && $row[5] == null) {
+        if ($row[0] == null && $row[1] == null && $row[2] == null && $row[3] == null && $row[5] == null || $row[4] == "Nombre Capa") {
             $existencia = null;
         } else{
 
@@ -36,7 +36,7 @@ class existenciaImport implements toModel
                         'nombre' => $nom,
                         'vitola' => $vit,
                         'capa' => $capa,
-                        'total' => $row[6],
+                        'total' => $row[5],
                     ]);
                 } else {
                     $existencia = DB::select('call insertar_actualizar_existencias(:codigo_producto,:marca,:nombre,:vitola,:capa,:total)',[
@@ -45,7 +45,7 @@ class existenciaImport implements toModel
                         'nombre' => $row[2],
                         'vitola' => $row[3],
                         'capa' => $row[4],
-                        'total' => $row[6],
+                        'total' => $row[5],
                     ]);
                 }
             }
