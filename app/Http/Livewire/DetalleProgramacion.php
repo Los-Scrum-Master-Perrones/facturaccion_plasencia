@@ -25,19 +25,27 @@ class DetalleProgramacion extends Component
     public $contenedor;
     public $insertar_programacion;
     public $fecha_actual;
+    public $total_saldo;
 
     public function render()
     {
+        $this->total_saldo = 0;
         $this->detalles_provicionales = DB::select('call mostrar_detalles_provicional(:buscar)', [
             'buscar' => $this->busqueda
         ]);
+
+        for($i = 0; $i < count($this->detalles_provicionales) ;$i++){
+            $this->total_saldo += $this->detalles_provicionales[$i]->saldo;
+        }
+
+
 
         return view('livewire.detalle-programacion')->extends('principal')->section('content');
     }
 
     public function mount()
     {
-
+        $this->total_saldo = 0;
         $this->detalles_provicionales = [];
         $this->borrar = [];
         $this->busqueda = "";

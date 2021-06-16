@@ -179,6 +179,8 @@
 
                 if (producto[i].id_producto === id) {
 
+
+
                     $('#marca_ac').val(producto[i].marca).trigger('change.select2');
                     $('#capa_ac').val(producto[i].capa).trigger('change.select2');
                     $('#nombre_ac').val(producto[i].nombre).trigger('change.select2');

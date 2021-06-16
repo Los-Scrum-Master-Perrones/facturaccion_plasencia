@@ -565,8 +565,6 @@ class Pendiente extends Component
     public function actualizar_pendiente(Request $request)
     {
 
-        
-
         $this->actualizar = \DB::select(
             'call actualizar_pendientes(:id,:item,:orden,:observacion,:presentacion,:pendiente,:cprecio,:precio,:orden1)',
             [

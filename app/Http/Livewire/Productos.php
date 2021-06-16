@@ -185,7 +185,7 @@ class Productos extends Component
                 'cod_producto' => $request->cod_sistema_ac,
                 'cod_caja' => $request->cod_caja_ac,
                 'cod_precio' => $request->cod_precio_ac,
-                'precio' => $request->precio_ac,
+                'precio' => $request->precio,
                 'capa' =>  $request->capa_ac,
                 'vitola' => $request->vitola_ac,
                 'nombre' => $request->nombre_ac,
