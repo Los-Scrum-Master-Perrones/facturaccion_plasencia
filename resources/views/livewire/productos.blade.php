@@ -506,7 +506,7 @@
                                 <div class="mb-3 col">
                                     <label for="txt_figuraytipo" class="form-label">Item</label>
                                     <input name="item_ac" id="item_ac" class="form-control" required type="text"
-                                        autocomplete="off" readOnly>
+                                        autocomplete="off">
                                 </div>
 
                                 <div class="mb-3 col">
