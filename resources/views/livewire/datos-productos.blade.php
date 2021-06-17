@@ -299,7 +299,7 @@
                             <label for="txt_vitola" class="form-label">Marca</label>
                             <input class="form-control" id="marcae" type="text" name="marcae" required
                                 placeholder="Editar marca" style="width: 440px"  autocomplete="off" value="{{$editar_nombre_marca}}" >
-                        <input id="id_marcaE" name="id_marcaE"  value="{{$id_editar_marca}}"  />
+                        <input id="id_marcaE" name="id_marcaE"  value="{{$id_editar_marca}}" hidden />
                         </div>
                     </div>
                     <div class="modal-footer">
@@ -437,7 +437,7 @@
                             <label for="txt_vitola" class="form-label">Editar capa</label>
                             <input class="form-control" id="capamE" type="text" name="capamE" placeholder="Editar capa" required
                                 style="width: 440px" maxLength="30" autocomplete="off" value="{{$editar_nombre_capa}}" >
-                            <input id="id_capaE" name="id_capaE"  value="{{$id_editar_capa}}"  />
+                            <input id="id_capaE" name="id_capaE"  value="{{$id_editar_capa}}" hidden />
                         </div>
                     </div>
                     <div class="modal-footer">
@@ -547,7 +547,7 @@
                             <label for="txt_vitola" class="form-label">Editar nombre</label>
                             <input class="form-control" id="nombremE" type="text" name="nombremE" required
                                 placeholder="Editar nombre" style="width: 440px" maxLength="100" autocomplete="off" value="{{$editar_nombre_nombre}}" >
-                            <input id="id_nombreE" name="id_nombreE"  value="{{$id_editar_nombre}}"  />
+                            <input id="id_nombreE" name="id_nombreE"  value="{{$id_editar_nombre}}"  hidden/>
                         </div>
                     </div>
                     <div class="modal-footer">
@@ -660,7 +660,7 @@
                             <label for="txt_vitola" class="form-label">Editar tipo de empaque</label>
                             <input class="form-control" id="tipomE" type="text" name="tipomE" required
                                 placeholder="Editar tipo de empaque" style="width: 440px" maxLength="100"  autocomplete="off" value="{{$editar_nombre_empaque}}" >
-                            <input id="id_tipoE" name="id_tipoE"  value="{{$id_editar_empaque}}"  />
+                            <input id="id_tipoE" name="id_tipoE"  value="{{$id_editar_empaque}}" hidden  />
                         </div>
                     </div>
                     <div class="modal-footer">
@@ -763,7 +763,7 @@
                             <label for="txt_vitola" class="form-label">Editar vitola</label>
                             <input class="form-control" id="vitolamE" type="text" name="vitolamE" required
                                 placeholder="Editar vitola" style="width: 440px" maxLength="30"  autocomplete="off" value="{{$editar_nombre_vitola}}" >
-                                <input id="id_vitolaE" name="id_vitolaE"  value="{{$id_editar_vitola}}"  />
+                                <input id="id_vitolaE" name="id_vitolaE"  value="{{$id_editar_vitola}}" hidden />
                         </div>
                     </div>
                     <div class="modal-footer">

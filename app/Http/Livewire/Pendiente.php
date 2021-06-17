@@ -3,38 +3,33 @@
 namespace App\Http\Livewire;
 
 use Livewire\Component;
+
 use App\Exports\PendienteExport;
 use Illuminate\Http\Request;
 use DB;
 use Maatwebsite\Excel\Facades\Excel;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\View;
 
 
 class Pendiente extends Component
 {
-    /* variables wire model*/
-    public $fede;
-    public $cat;
-    public $item;
-    public $pres;
-    public $orden;
-    public $marca;
-    public $vito;
-    public $nom;
-    public $capa;
-    public $empa;
-    public $hon;
-
     public $datos_pendiente;
     public $fecha;
+
+    // variables del wire  model para la busqueda
+    public $r_uno;
+    public $r_dos;
+    public $r_tres;
+    public $r_cuatro;
 
  /* procedimientos almacanedos cargar select de nuevo pendiente*/
     public $marcas;
     public $capas;
     public $nombres;
     public $vitolas;
-    public $tipo_empaques;
-    
+    public $tipo_empaques;   
+
     public $busqueda;
     public $borrar;
     public $actualizar;
@@ -45,20 +40,15 @@ class Pendiente extends Component
     public $nombre_p;
     public $vitolas_p;
     public $capas_p;
-    public $empaques_p;
+    public $empaques_p;    
+    public $mes_p;
+    public $items_p;
+    public $ordenes_p;
+    public $hons_p;
 
-   /* varaibles de metodos para la busqueda*/
-    public $oculto_marca;
-    public $oculto_nombre;
-    public $oculto_capa;
-    public $oculto_vitola;
-    public $oculto_empaque;
+ 
 
-    public $iluminadoIndiceMarca;
-    public $iluminadoIndiceNombre;
-    public $iluminadoIndiceCapa;
-    public $iluminadoIndiceVitola;
-    public $iluminadoIndiceEmpaque;
+ 
 
 
     public function render()
@@ -70,42 +60,92 @@ class Pendiente extends Component
         $this->tipo_empaques= \DB::select('call buscar_tipo_empaque("")');
 
         /*Procedimientos de busquedas de la tabla pendiente*/
-        $this->marcas_p=\DB::select('call buscar_marca_empaque(?)',[$this->marca]);
-        $this->nombre_p=\DB::select('call buscar_nombre_empaque(?)',[$this->nom]);
-        $this->vitolas_p=\DB::select('call buscar_vitola_empaque(?)',[$this->vito]);
-        $this->capas_p=\DB::select('call buscar_capa_empaque(?)',[$this->capa]);
-        $this->empaques_p=\DB::select('call buscar_empaque_empaque(?)',[$this->empa]);
+        $this->marcas_p=\DB::select('call buscar_marca_pendiente(:uno,:dos,:tres,:cuatro)',
+        [
+            'uno' =>  $this->r_uno,
+            'dos' =>  $this->r_dos,
+            'tres' =>  $this->r_tres,
+            'cuatro' =>  $this->r_cuatro
+        ]
+    );
+        $this->nombre_p=\DB::select('call buscar_nombre_pendiente(:uno,:dos,:tres,:cuatro)',
+        [
+            'uno' =>  $this->r_uno,
+            'dos' =>  $this->r_dos,
+            'tres' =>  $this->r_tres,
+            'cuatro' =>  $this->r_cuatro
+        ]
+    );
+        $this->vitolas_p=\DB::select('call buscar_vitola_pendiente(:uno,:dos,:tres,:cuatro)',
+        [
+            'uno' =>  $this->r_uno,
+            'dos' =>  $this->r_dos,
+            'tres' =>  $this->r_tres,
+            'cuatro' =>  $this->r_cuatro
+        ]
+    );
+        $this->capas_p=\DB::select('call buscar_capa_pendiente(:uno,:dos,:tres,:cuatro)',
+        [
+            'uno' =>  $this->r_uno,
+            'dos' =>  $this->r_dos,
+            'tres' =>  $this->r_tres,
+            'cuatro' =>  $this->r_cuatro
+        ]
+    );
+        $this->empaques_p=\DB::select('call buscar_tipo_empaque_pendiente(:uno,:dos,:tres,:cuatro)',
+        [
+            'uno' =>  $this->r_uno,
+            'dos' =>  $this->r_dos,
+            'tres' =>  $this->r_tres,
+            'cuatro' =>  $this->r_cuatro
+        ]
+    );
 
-        if($this->marca == null){
-            $this->marca="";
-        }
-        if($this->nom == null){
-            $this->nom="";
-        }
-        if($this->capa == null){
-            $this->capa="";
-        }  
-        if($this->vito == null){
-            $this->vito="";
-        }  
-        if($this->empa == null){
-            $this->empa="";
-        }
+      
+
+        
+        $this->mes_p=\DB::select('call buscar_fechas_pendiente(:uno,:dos,:tres,:cuatro)',
+        [
+            'uno' =>  $this->r_uno,
+            'dos' =>  $this->r_dos,
+            'tres' =>  $this->r_tres,
+            'cuatro' =>  $this->r_cuatro
+        ]
+    );
+        $this->items_p=\DB::select('call buscar_item_pendiente(:uno,:dos,:tres,:cuatro)',
+        [
+            'uno' =>  $this->r_uno,
+            'dos' =>  $this->r_dos,
+            'tres' =>  $this->r_tres,
+            'cuatro' =>  $this->r_cuatro
+        ]
+    );
+        $this->ordenes_p=\DB::select('call buscar_ordenes_pendiente(:uno,:dos,:tres,:cuatro)',
+        [
+            'uno' =>  $this->r_uno,
+            'dos' =>  $this->r_dos,
+            'tres' =>  $this->r_tres,
+            'cuatro' =>  $this->r_cuatro
+        ]
+    );
+        $this->hons_p=\DB::select('call buscar_hons_pendiente(:uno,:dos,:tres,:cuatro)',
+        [
+            'uno' =>  $this->r_uno,
+            'dos' =>  $this->r_dos,
+            'tres' =>  $this->r_tres,
+            'cuatro' =>  $this->r_cuatro
+        ]
+    );
+
+     
 
        
-       $this->datos_pendiente = DB::select('call buscar_pendiente(:fede,:cat,:item,:pres,:orden,:marca,:vito,:nom,:capa,:empa,:hon)',
+       $this->datos_pendiente = DB::select('call buscar_pendiente(:uno,:dos,:tres,:cuatro)',
             [
-                'fede' =>  $this->fede,
-                'cat' =>  $this->cat,
-                'item' =>  $this->item,
-                'pres' =>  $this->pres,
-                'orden' =>  $this->orden,
-                'marca' =>  $this->marca,
-                'vito' =>  $this->vito,
-                'nom' =>  $this->nom,
-                'capa' =>  $this->capa,
-                'empa' =>  $this->empa,
-                'hon' =>  $this->hon
+                'uno' =>  $this->r_uno,
+                'dos' =>  $this->r_dos,
+                'tres' =>  $this->r_tres,
+                'cuatro' =>  $this->r_cuatro
             ]
         );
 
@@ -151,41 +191,16 @@ class Pendiente extends Component
     }
 
 
-    public function mount(){
 
-        $this->oculto_marca = 0;
-        $this->oculto_nombre = 0;
-        $this->oculto_capa = 0;
-        $this->oculto_vitola = 0;
-        $this->oculto_empaque= 0;
 
-        $this->iluminadoIndiceMarca = 0;
-        $this->iluminadoIndiceNombre = 0;
-        $this->iluminadoIndiceCapa = 0;
-        $this->iluminadoIndiceVitola = 0;
-        $this->iluminadoIndiceEmpaque = 0;
+
+    public function mount(){    
  
         $this->datos_pendiente = [];
-        $this->fede = "";
-        $this->cat = "";
-        $this->item = "";
-        $this->pres = "";
-        $this->orden = "";
-        $this->marca = "";
-        $this->vito = "";
-        $this->nom = "";
-        $this->capa = "";
-        $this->empa = "";
-        $this->hon = "";
 
         $this->fecha = "";
         $this->borrar = [];
-        $this->actualizar= [];
-        $this->reset_marca();
-        $this->reset_nombre();
-        $this->reset_capa();
-        $this->reset_vitola();
-        $this->reset_empaque();
+        $this->actualizar= [];     
 
         $datos = [];
         $cantidad_detalle_sampler = 0;   
@@ -198,210 +213,21 @@ class Pendiente extends Component
         $this->vitolas= \DB::select('call buscar_vitola("")');
         $this->tipo_empaques= \DB::select('call buscar_tipo_empaque("")');
 
-        $this->datos_pendiente = DB::select('call buscar_pendiente(:fede,:cat,:item,:pres,:orden,:marca,:vito,:nom,:capa,:empa,:hon)',
+        
+
+   $this->datos_pendiente = DB::select('call buscar_pendiente(:uno,:dos,:tres,:cuatro)',
             [
-                'fede' =>  $this->fede,
-                'cat' =>  $this->cat,
-                'item' =>  $this->item,
-                'pres' =>  $this->pres,
-                'orden' =>  $this->orden,
-                'marca' =>  $this->marca,
-                'vito' =>  $this->vito,
-                'nom' =>  $this->nom,
-                'capa' =>  $this->capa,
-                'empa' =>  $this->empa,
-                'hon' =>  $this->hon
+                'uno' =>  $this->r_uno,
+                'dos' =>  $this->r_dos,
+                'tres' =>  $this->r_tres,
+                'cuatro' =>  $this->r_cuatro
             ]
         );
     }
 
 
 
-     //Busqueda de Marca
-
-     public function reset_marca(){
-        $this->marca = "";
-        $this->oculto_marca = 0;
-    }    
-
-    public function incrementaIluminadoMarca(){
-        if($this->iluminadoIndiceMarca === count($this->marcas_p)-1){
-            $this->iluminadoIndiceMarca = 0;
-            return $this->iluminadoIndiceMarca;
-        }
-
-        $this->iluminadoIndiceMarca++;
-    }
-
-    public function decrementarIluminadoMarca(){
-        
-        if($this->iluminadoIndiceMarca === 0){
-            $this->iluminadoIndiceMarca = count($this->marcas_p)-1;
-            return;
-        }
-
-        $this->iluminadoIndiceMarca--;
-    }
-
-    public function seleccionarMarca(){
-        $mascc = $this->marcas_p[$this->iluminadoIndiceMarca] ?? null; 
-           
-        if( $mascc ){
-            $this->marca =  $mascc['marca'];
-            $this->oculto_marca = 1;
-        }      
-    }
-
-
-
-
-
-    //Busqueda de Nombre
-    public function reset_nombre(){
-        $this->nom = "";
-        $this->oculto_nombre = 0;
-    }
-
-    public function incrementaIluminadoNombre(){
-        if($this->iluminadoIndiceNombre === count($this->nombre_p)-1){
-            $this->iluminadoIndiceNombre = 0;
-            return;
-        }
-
-        $this->iluminadoIndiceNombre++;
-    }
-
-    public function decrementarIluminadoNombre(){
-        
-        if($this->iluminadoIndiceNombre === 0){
-            $this->iluminadoIndiceNombre = count($this->nombre_p)-1;
-            return;
-        }
-
-        $this->iluminadoIndiceNombre--;
-    }
-
-    public function seleccionarNombre(){
-        $mascc = $this->nombre_p[$this->iluminadoIndiceNombre] ?? null; 
-           
-        if( $mascc ){
-            $this->nom =  $mascc['nombre'];
-            $this->oculto_nombre = 1;
-        }         
-    }
-
-
-
-    //Busqueda de Capa
-    public function reset_capa(){
-        $this->capa = "";
-        $this->oculto_capa = 0;
-    }
-
-    public function incrementaIluminadoCapa(){
-        if($this->iluminadoIndiceCapa === count($this->capas_p)-1){
-            $this->iluminadoIndiceCapa = 0;
-            return;
-        }
-
-        $this->iluminadoIndiceCapa++;
-    }
-
-    public function decrementarIluminadoCapa(){
-        
-        if($this->iluminadoIndiceCapa === 0){
-            $this->iluminadoIndiceCapa = count($this->capas_p)-1;
-            return;
-        }
-
-        $this->iluminadoIndiceCapa--;
-    }
-
-    public function seleccionarCapa(){
-        $mascc = $this->capas_p[$this->iluminadoIndiceCapa] ?? null; 
-           
-        if( $mascc ){
-            $this->capas =  $mascc['capa'];
-            $this->oculto_capa = 1;
-        }             
-    }
-
-
-
-       //Busqueda de Vitola
-       public function reset_vitola(){
-        $this->vito = "";
-        $this->oculto_vitola = 0;
-    }
-
-    public function incrementaIluminadoVitola(){
-        if($this->iluminadoIndiceVitola === count($this->vitolas_p)-1){
-            $this->iluminadoIndiceVitola = 0;
-            return;
-        }
-
-        $this->iluminadoIndiceVitola++;
-    }
-
-    public function decrementarIluminadoVitola(){
-        
-        if($this->iluminadoIndiceVitola === 0){
-            $this->iluminadoIndiceVitola = count($this->vitolas_p)-1;
-            return;
-        }
-
-        $this->iluminadoIndiceVitola--;
-    }
-
-    public function seleccionarVitola(){
-        $mascc = $this->vitolas_p[$this->iluminadoIndiceVitola] ?? null; 
-           
-        if( $mascc ){
-            $this->vito =  $mascc['vitola'];
-            $this->oculto_vitola = 1;
-        }              
-    }
-
-
-
-
-       //Busqueda de Empaque
-       public function reset_empaque(){
-        $this->empa = "";
-        $this->oculto_empaque= 0;
-    }
-
-    public function incrementaIluminadoEmpaque(){
-        if($this->iluminadoIndiceEmpaque === count($this->empaques_p)-1){
-            $this->iluminadoIndiceEmpaque = 0;
-            return;
-        }
-        $this->iluminadoIndiceEmpaque++;
-    }
-
-    public function decrementarIluminadoEmpaque(){
-        
-        if($this->iluminadoIndiceEmpaque === 0){
-            $this->iluminadoIndiceEmpaque = count($this->empaques_p)-1;
-            return;
-        }
-
-        $this->iluminadoIndiceEmpaque--;
-    }
-
-    public function seleccionarEmpaque(){
-        $mascc = $this->empaques_p[$this->iluminadoIndiceEmpaque] ?? null; 
-           
-        if( $mascc ){
-            $this->empa =  $mascc['empaque'];
-            $this->oculto_empaque = 1;
-        }      
-        
-    }
    
-
-/* fin de las funciones de busquedas avanzadas*/
-
 
 
 
@@ -425,19 +251,12 @@ class Pendiente extends Component
     
          
     
-            $this->datos_pendiente = DB::select('call buscar_pendiente(:fede,:cat,:item,:pres,:orden,:marca,:vito,:nom,:capa,:empa,:hon)',
+            $this->datos_pendiente = DB::select('call buscar_pendiente(:uno,:dos,:tres,:cuatro)',
             [
-                'fede' =>  $this->fede,
-                'cat' =>  $this->cat,
-                'item' =>  $this->item,
-                'pres' =>  $this->pres,
-                'orden' =>  $this->orden,
-                'marca' =>  $this->marca,
-                'vito' =>  $this->vito,
-                'nom' =>  $this->nom,
-                'capa' =>  $this->capa,
-                'empa' =>  $this->empa,
-                'hon' =>  $this->hon
+                'uno' =>  $this->r_uno,
+                'dos' =>  $this->r_dos,
+                'tres' =>  $this->r_tres,
+                'cuatro' =>  $this->r_cuatro
             ]
         );
 
@@ -493,19 +312,12 @@ class Pendiente extends Component
         $this->vitolas= \DB::select('call buscar_vitola("")');
         $this->tipo_empaques= \DB::select('call buscar_tipo_empaque("")');
       
-        $this->datos_pendiente = DB::select('call buscar_pendiente(:fede,:cat,:item,:pres,:orden,:marca,:vito,:nom,:capa,:empa,:hon)',
+        $this->datos_pendiente = DB::select('call buscar_pendiente(:uno,:dos,:tres,:cuatro)',
         [
-            'fede' =>  $this->fede,
-            'cat' =>  $this->cat,
-            'item' =>  $this->item,
-            'pres' =>  $this->pres,
-            'orden' =>  $this->orden,
-            'marca' =>  $this->marca,
-            'vito' =>  $this->vito,
-            'nom' =>  $this->nom,
-            'capa' =>  $this->capa,
-            'empa' =>  $this->empa,
-            'hon' =>  $this->hon
+            'uno' =>  $this->r_uno,
+            'dos' =>  $this->r_dos,
+            'tres' =>  $this->r_tres,
+            'cuatro' =>  $this->r_cuatro
         ]
     );
         
@@ -540,19 +352,12 @@ class Pendiente extends Component
             ]);
     
             
-            $this->datos_pendiente = DB::select('call buscar_pendiente(:fede,:cat,:item,:pres,:orden,:marca,:vito,:nom,:capa,:empa,:hon)',
+            $this->datos_pendiente = DB::select('call buscar_pendiente(:uno,:dos,:tres,:cuatro)',
             [
-                'fede' =>  $this->fede,
-                'cat' =>  $this->cat,
-                'item' =>  $this->item,
-                'pres' =>  $this->pres,
-                'orden' =>  $this->orden,
-                'marca' =>  $this->marca,
-                'vito' =>  $this->vito,
-                'nom' =>  $this->nom,
-                'capa' =>  $this->capa,
-                'empa' =>  $this->empa,
-                'hon' =>  $this->hon
+                'uno' =>  $this->r_uno,
+                'dos' =>  $this->r_dos,
+                'tres' =>  $this->r_tres,
+                'cuatro' =>  $this->r_cuatro
             ]
         );
          
@@ -565,10 +370,7 @@ class Pendiente extends Component
 
     function exportPendiente()
     {
-        return Excel::download(new PendienteExport($this->nom, $this->fede, $this->fecha,
-        $this->cat, $this->item, $this->pres,
-        $this->orden, $this->marca, $this->vito,
-        $this->capa, $this->empa, $this->hon), 'Pendiente.xlsx');
+        return Excel::download(new PendienteExport($this->fecha,$this->r_uno, $this->r_dos, $this->r_tres,$this->r_cuatro), 'Pendiente.xlsx');
     }
 	
 
@@ -623,5 +425,6 @@ class Pendiente extends Component
                 
         return redirect()->route('pendiente'); 
     }
+
 
 }

@@ -15,7 +15,7 @@ use PhpOffice\PhpSpreadsheet\Style\NumberFormat;
 use Maatwebsite\Excel\Concerns\WithHeadings;
 use Maatwebsite\Excel\Concerns\WithStrictNullComparison;
 use Maatwebsite\Excel\Concerns\WithColumnFormatting;
-
+use DB;
 
 
 class PendienteExport implements FromCollection,
@@ -25,38 +25,23 @@ class PendienteExport implements FromCollection,
                                 WithColumnFormatting
 {
 
-    public $nom;
-    public $fede;
-    public $feha;
 
-    public $cat;
-    public $item;
-    public $pres;
-    public $orden;
-    public $marca;
-    public $vito;
-    public $capa;
-    public $empa;
-    public $hon;
+    public $feha;
+    public $r_uno;
+    public $r_dos;
+    public $r_tres;
+    public $r_cuatro;
 
 
 
 
     
-    function __construct($nom,$fede,$fecha,$cat,$item,$pres,$orden,$marca,$vito,$capa,$empa,$hon) {
-        $this->nom = $nom;
-        $this->fede = $fede;
+    function __construct($fecha,$r_uno  ,$r_dos  ,$r_tres   ,$r_cuatro  ) {
         $this->feha = $fecha;
-
-        $this->cat = $cat;
-        $this->item = $item;
-        $this->pres = $pres;
-        $this->orden = $orden;
-        $this->marca = $marca;
-        $this->vito = $vito;
-        $this->capa = $capa;
-        $this->empa = $empa;
-        $this->hon = $hon;
+        $this->r_uno = $r_uno;
+        $this->r_dos = $r_dos;
+        $this->r_tres = $r_tres;
+        $this->r_cuatro = $r_cuatro;
   
     }
 
@@ -95,19 +80,13 @@ class PendienteExport implements FromCollection,
     
     public function collection()
     {
-        $datos_pendiente = \DB::select('call buscar_pendiente(:fede,:cat,:item,:pres,:orden,:marca,:vito,:nom,:capa,:empa,:hon)',
+
+        $datos_pendiente = DB::select('call buscar_pendiente(:uno,:dos,:tres,:cuatro)',
         [
-            'fede' =>  $this->fede,
-            'cat' =>  $this->cat,
-            'item' =>  $this->item,
-            'pres' =>  $this->pres,
-            'orden' =>  $this->orden,
-            'marca' =>  $this->marca,
-            'vito' =>  $this->vito,
-            'nom' =>  $this->nom,
-            'capa' =>  $this->capa,
-            'empa' =>  $this->empa,
-            'hon' =>  $this->hon
+            'uno' =>  $this->r_uno,
+            'dos' =>  $this->r_dos,
+            'tres' =>  $this->r_tres,
+            'cuatro' =>  $this->r_cuatro
         ]
     );
 

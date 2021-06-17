@@ -118,7 +118,6 @@ Route::get('/actualizar_pendiente',[ Pendiente::class,'actualizar_pendiente'])->
 Route::post('/actualizar_pendiente',[ Pendiente::class,'actualizar_pendiente'])->name('actualizar_pendiente');
 
 
-
 Route::get('/actualizar_pendiente_empaque',[ PendienteEmpaque::class,'actualizar_pendiente_empaque'])->name('actualizar_pendiente_empaque');
 Route::post('/actualizar_pendiente_empaque',[ PendienteEmpaque::class,'actualizar_pendiente_empaque'])->name('actualizar_pendiente_empaque');
 

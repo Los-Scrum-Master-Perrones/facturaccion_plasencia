@@ -288,6 +288,15 @@
     </script>
 
 
+
+
+
+
+
+
+
+
+
     <script type="text/javascript">
         function item_detalle(item, tamano) {
             var table = document.getElementById("detallestabla");

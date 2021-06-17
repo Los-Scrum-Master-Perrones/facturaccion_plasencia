@@ -40,181 +40,131 @@
         <div class="col" style="height:66px;">
             <div class="row" style="margin-bottom:2px">
 
-            <div class="col"><form wire:submit.prevent="insertar_detalle_provicional()">
-                        @csrf
-                        <button class="mr-sm-2 botonprincipal" style="width:200px;">Agregar Programación </button>
-                    </form></div>
+                    <div class="col"><form wire:submit.prevent="insertar_detalle_provicional()">
+                                @csrf
+                                <button class="mr-sm-2 botonprincipal" style="width:200px;">Agregar Programación </button>
+                            </form>
+                    </div>     
 
-                <div class="col"> <input type="date" name="fecha_de" id="fecha_de" class="form-control "
-                        style="width:100%;" placeholder="Fecha" wire:model="fede"> </div>
+                     <div class="col" > 
+                    <div class="dropdown">
+                    <button class="btn btn-secondary dropdown-toggle form-control" type="button" id="dropdownMenuButton1" data-toggle="dropdown" >
+                    Categorias
+                    </button>
+                    <ul class="dropdown-menu " aria-labelledby="dropdownMenuButton1"> 
+                    <div class="form-check ">
+                    <input class="form-check-input form-control" type="checkbox" value="1" wire:model="r_uno" id="checkbox1E">
+                    <label class="form-check-label " for="flexCheckDefault"> NEW ROLL </label>
+                    </div>
 
-                <div class="col"> <input name="categoria" id="categoria" class="form-control mr-sm-2 "
-                        style="width:100%;" placeholder="Categoria" wire:model="cat"> </div>
+                    <div class="form-check " >
+                    <input class="form-check-input form-control" type="checkbox" value="2"  wire:model="r_dos" id="checkbox2E">
+                    <label class="form-check-label " for="flexCheckChecked">   CATALOGO  </label>
+                    </div>
 
-                <div class="col"> <input name="item" id="item" class="form-control mr-sm-2 " style="width:100%;"
-                        placeholder="Item" wire:model="item"> </div>
+                    <div class="form-check ">
+                    <input class="form-check-input form-control" type="checkbox" value="3" wire:model="r_tres" id="checkbox3E"> 
+                    <label class="form-check-label " for="flexCheckDefault"> INVENTARIO EXISTENTE </label>
+                    </div>
 
-                <div class="col"> <input name="orden" id="orden" class="form-control mr-sm-2 " style="width:100%;"
-                        placeholder="Orden del sistema" wire:model="orden"> </div>
+                    <div class="form-check " >
+                    <input class="form-check-input form-control" type="checkbox" value="4" wire:model="r_cuatro" id="checkbox4E">
+                    <label class="form-check-label " for="flexCheckChecked">   WAREHOUSE  </label>
+                    </div>
+                    </ul>
+                    </div>
+                    </div>
 
-                <div class="col"><input name="hon" id="hon" class="form-control mr-sm-2 " style="width:100%;"
-                        placeholder="Orden" wire:model="hon"> </div>
+
+                  <div class="col" > 
+                  <select onchange="buscar_tablaE()" onclick="funcion1()"  name="b_mesE" id="b_mesE" class=" mi-selector form-control"  style="width:100%;height:34px;" >
+                    <option value="" style="overflow-y: scroll;">Todos los meses</option>
+                    @foreach($mes_p as $mes)
+                    <option style="overflow-y: scroll;"> {{$mes->mes}}</option>
+                    @endforeach
+                    </select>
+                   </div>                  
+
+                  <div class="col" >
+                  <select onchange="buscar_tablaE()" onclick="funcion1()"  name="b_itemE" id="b_itemE" class=" mi-selector form-control"  style="width:100%;height:34px;" name="states[]" required >
+                    <option value="" style="overflow-y: scroll;">Todos Items</option>
+                    @foreach($items_p as $item)
+                    <option style="overflow-y: scroll;"> {{$item->item}}</option>
+                    @endforeach
+                    </select>
+                     </div>
+
+                  <div class="col" >
+                  <select onchange="buscar_tablaE()" onclick="funcion1()" name="b_ordenE" id="b_ordenE" class=" mi-selector form-control"  style="width:100%;height:34px;" name="states[]" required >
+                    <option value="" style="overflow-y: scroll;">Todas las ordenes del sistema</option>
+                    @foreach($ordenes_p as $orden)
+                    <option style="overflow-y: scroll;"> {{$orden->orden_del_sitema}}</option>
+                    @endforeach
+                    </select>
+                </div>
+
+                  <div class="col" >
+                  <select onchange="buscar_tablaE()" onclick="funcion1()" name="b_honE" id="b_honE" class=" mi-selector form-control"  style="width:100%;height:34px;" name="states[]" required >
+                    <option value="" style="overflow-y: scroll;">Todas las ordenes</option>
+                    @foreach($hons_p as $hon)
+                        <option style="overflow-y: scroll;"> {{$hon->orden}}</option>
+                    @endforeach
+                    </select>
+                  </div>          
 
             </div>
 
 
             <div class="row">
 
-            <div class="col">
-                    <a href="/detalles_programacion"> <button class="mr-sm-2 botonprincipal" style="width:200px;">
-                            Ver</button></a>
-                </div>
-
                 <div class="col">
-                    <input type="text" class="form-input " placeholder="Buscar Marca" wire:model="marca"
-                        style="width:100%;height:32px;" wire:keydown.delete="reset_marca" wire:keydown.escape="reset_marca"
-                        wire:keydown.arrow-down="incrementaIluminadoMarca"
-                        wire:keydown.arrow-up="decrementarIluminadoMarca" wire:keydown.enter="seleccionarMarca()">
-
-                    @if ($oculto_marca == 0)
-                    @if (!empty($marca))
-                    <div style="overflow-y: scroll; height:200px;"
-                        class="absolute z-10 list-group bg-white w-full rounded-t-none shadow-lg">
-                        @if (!empty($marcas_p))
-
-                        @foreach($marcas_p as $i => $m)
-                        <a href="" wire:click.prevent="seleccionarMarca()"
-                            class="list-group-item  {{$iluminadoIndiceMarca === $i ? 'active' : ''}}">{{$m->marca}}</a>
-                        @endforeach
-
-                        @else
-
-                        <div class="absolute z-10 list-group bg-white w-full rounded-t-none shadow-lg">No Resultados
-                        </div>
-
-                        @endif
-                    </div>
-                    @endif
-                    @endif
+                    <a href="/detalles_programacion"> <button class="mr-sm-2 botonprincipal" style="width:200px;"> Ver</button></a> 
                 </div>
 
-                <div class="col">
-                    <input type="text" class="form-input " placeholder="Buscar Vitola" wire:model="vito"
-                        style="width:100%;height:32px;" wire:keydown.escape="reset_vitola" wire:keydown.delete="reset_vitola"
-                        wire:keydown.arrow-down="incrementaIluminadoVitola"
-                        wire:keydown.arrow-up="decrementarIluminadoVitola" wire:keydown.enter="seleccionarVitola()">
-
-                    @if ($oculto_vitola == 0)
-                    @if (!empty($vito))
-                    <div style="overflow-y: scroll; height:200px;"
-                        class="absolute z-10 list-group bg-white w-full rounded-t-none shadow-lg">
-                        @if (!empty($vitolas_p))
-
-                        @foreach($vitolas_p as $i => $m)
-                        <a href="" wire:click.prevent="seleccionarVitola()"
-                            class="list-group-item  {{$iluminadoIndiceVitola === $i ? 'active' : ''}}">{{$m->vitola}}</a>
-                        @endforeach
-
-                        @else
-
-                        <div class="absolute z-10 list-group bg-white w-full rounded-t-none shadow-lg">No Resultados
-                        </div>
-
-                        @endif
-                    </div>
-                    @endif
-                    @endif
+                <div class="col" >
+                <select onchange="buscar_tablaE()" onclick="funcion1()" name="b_marcaE" id="b_marcaE"class=" mi-selector form-control"  style="width:100%;height:34px;" name="states[]" required >
+                    <option value="" style="overflow-y: scroll;">Todas las marcas</option>
+                    @foreach($marcas_p as $marca)
+                        <option style="overflow-y: scroll;"> {{$marca->marca}}</option>
+                    @endforeach
+                    </select>
                 </div>
 
-                <div class="col">
-                    <input type="text" class="form-input " placeholder="Buscar Nombre" wire:model="nom"
-                        style="width:100%;height:32px;" wire:keydown.escape="reset_nombre" wire:keydown.delete="reset_nombre"
-                        wire:keydown.arrow-down="incrementaIluminadoNombre()"
-                        wire:keydown.arrow-up="decrementarIluminadoNombre()" wire:keydown.enter="seleccionarNombre()">
-
-                    @if ($oculto_nombre == 0)
-                    @if (!empty($nom))
-                    <div style="overflow-y: scroll; height:200px;"
-                        class="absolute z-10 list-group bg-white w-full rounded-t-none shadow-lg">
-                        @if (!empty($nombre_p))
-
-                        @foreach($nombre_p as $i => $m)
-                        <a href="" wire:click.prevent="seleccionarNombre()"
-                            class="list-group-item  {{$iluminadoIndiceNombre === $i ? 'active' : ''}}">{{$m->nombre}}</a>
-                        @endforeach
-
-                        @else
-
-                        <div class="absolute z-10 list-group bg-white w-full rounded-t-none shadow-lg">No Resultados
-                        </div>
-
-                        @endif
-                    </div>
-                    @endif
-                    @endif
+                <div class="col" >
+                    <select onchange="buscar_tablaE()" onclick="funcion1()" name="b_vitolaE" id="b_vitolaE" class=" mi-selector form-control"  style="width:100%;height:34px;" name="states[]" required >
+                    <option value="" style="overflow-y: scroll;">Todas las vitolas</option>
+                    @foreach($vitolas_p as $vitola)
+                        <option style="overflow-y: scroll;"> {{$vitola->vitola}}</option>
+                    @endforeach
+                    </select>  
                 </div>
 
-                <div class="col">
-                    <input type="text" class="form-input " placeholder="Buscar Capa" wire:model="capa"
-                        style="width:100%;height:32px;" wire:keydown.escape="reset_capa" wire:keydown.delete="reset_capa"
-                        wire:keydown.arrow-down="incrementaIluminadoCapa()"
-                        wire:keydown.arrow-up="decrementarIluminadoCapa()" wire:keydown.enter="seleccionarCapa()">
-
-                    @if ($oculto_capa == 0)
-                    @if (!empty($capa))
-                    <div style="overflow-y: scroll; height:200px;"
-                        class="absolute z-10 list-group bg-white w-full rounded-t-none shadow-lg">
-                        @if (!empty($capas_p))
-
-                        @foreach($capas_p as $i => $m)
-                        <a href="" wire:click.prevent="seleccionarCapa()"
-                            class="list-group-item  {{$iluminadoIndiceCapa === $i ? 'active' : ''}}">{{$m->capa}}</a>
-                        @endforeach
-
-                        @else
-
-                        <div class="absolute z-10 list-group bg-white w-full rounded-t-none shadow-lg">No Resultados
-                        </div>
-
-                        @endif
-                    </div>
-                    @endif
-                    @endif
+                <div class="col" >
+                    <select onchange="buscar_tablaE()" onclick="funcion1()" name="b_nombreE" id="b_nombreE" class=" mi-selector form-control"  style="width:100%;height:34px;" name="states[]" required >
+                    <option value="" style="overflow-y: scroll;">Todos los nombres</option>
+                    @foreach($nombre_p as $nombre)
+                        <option style="overflow-y: scroll;"> {{$nombre->nombre}}</option>
+                    @endforeach
+                    </select>
                 </div>
 
-                <div class="col">
-                    <input type="text" class="form-input " placeholder="Buscar Tipo Empaque" wire:model="empa"
-                        style="width:100%;height:32px;" wire:keydown.escape="reset_empaque" wire:keydown.delete="reset_empaque"
-                        wire:keydown.arrow-down="incrementaIluminadoEmpaque()"
-                        wire:keydown.arrow-up="decrementarIluminadoEmpaque()" wire:keydown.enter="seleccionarEmpaque()">
-
-                    @if ($oculto_empaque == 0)
-                    @if (!empty($empa))
-                    <div style="overflow-y: scroll; height:200px;"
-                        class="absolute z-10 list-group bg-white w-full rounded-t-none shadow-lg">
-                        @if (!empty($empaques_p))
-
-                        @foreach($empaques_p as $i => $m)
-                        <a href="" wire:click.prevent="seleccionarEmpaque()"
-                            class="list-group-item  {{$iluminadoIndiceEmpaque === $i ? 'active' : ''}}">{{$m->empaque}}</a>
-                        @endforeach
-
-                        @else
-
-                        <div class="absolute z-10 list-group bg-white w-full rounded-t-none shadow-lg">No Resultados
-                        </div>
-
-                        @endif
-                    </div>
-                    @endif
-                    @endif
+                <div class="col" >
+                    <select onchange="buscar_tablaE()" onclick="funcion1()" name="b_capaE" id="b_capaE" class=" mi-selector form-control"  style="width:100%;height:34px;" name="states[]" required >
+                    <option value="" style="overflow-y: scroll;">Todas las capas</option>
+                    @foreach($capas_p as $capa)
+                        <option style="overflow-y: scroll;"> {{$capa->capa}}</option>
+                    @endforeach
+                    </select>
                 </div>
 
-               
-
-               
-
-
+                <div class="col" >
+                    <select onchange="buscar_tablaE()" onclick="funcion1()" name="b_empaqueE" id="b_empaqueE" class=" mi-selector form-control"  style="width:100%;height:34px;" name="states[]" required >
+                    <option value="" style="overflow-y: scroll;">Todos los empaques</option>
+                    @foreach($empaques_p as $empaque)
+                        <option style="overflow-y: scroll;"> {{$empaque->empaque}}</option>
+                    @endforeach
+                    </select>
+                </div>
 
             </div>
 
@@ -229,30 +179,16 @@
                         
                     </form>
 
+                   
     
 
-                  
-
-                  
-
-               
-
-            
-
-
-
-
-
-
-
-
-
+        
 
     <div class="panel-body" style="padding:0px;">
         <div style="width:100%; padding-left:0px;   font-size:10px;   overflow-x: display; overflow-y: auto;
      height:450px;">
             @csrf
-            <table class="table table-light" style="font-size:10px;">
+            <table class="table table-light" style="font-size:10px;" id="tabla_pendiente_empaque">
                 <thead>
                     <tr>
                         <th style="width:100px;">CATEGORIA</th>
@@ -276,31 +212,38 @@
                         <th>OPERACIONES</th>
                     </tr>
                 </thead>
-                <tbody>
+                <?php $sumase = 0 ; $sumape = 0; ?>  
+                <tbody name="bodyE" id="bodyE" >
                     @foreach($datos_pendiente_empaque as $datos)
                     <tr>
                         <td style="width:100px; max-width: 400px;overflow-x:auto;">
                             {{isset($datos->categoria)?($datos->categoria):"Sin categoria"}}</td>
                         <td>{{isset($datos->item)?($datos->item):""}}</td>
                         <td>{{isset($datos->orden_del_sitema)?($datos->orden_del_sitema):""}}</td>
+
                         <td>{{$datos->observacion}}</td>
                         <td>{{$datos->presentacion}}</td>
                         <td>{{$datos->mes}}</td>
+
                         <td>{{$datos->orden}}</td>
                         <td>{{$datos->marca}}</td>
                         <td>{{$datos->vitola}}</td>
+
                         <td>{{$datos->nombre}}</td>
                         <td>{{$datos->capa}}</td>
                         <td>{{$datos->tipo_empaque}}</td>
+
                         <td>{{$datos->cant_cajas}}</td>
                         <td>{{$datos->anillo}}</td>
                         <td>{{$datos->cello}}</td>
+
                         <td>{{$datos->upc}}</td>
                         <td>{{$datos->pendiente}}</td>
                         <td>{{$datos->saldo}}</td>
+
                         <td style="text-align:center;">
 
-                            <?php if( str_contains(strtoupper((string)($datos->nombre)) , 'PRESS'))    {   
+                            <?php if( str_contains(strtoupper((string)($datos->nombre)) , 'PRESS')) {
                        echo' <a style=" width:10px; height:10px;" data-toggle="modal" href="" data-target="#modal_actualizar"';
                        echo'type="submit" wire:click.prevent= "insertar_detalle_provicional_sin_existencia('.$datos->id_pendiente.')">';
 
@@ -316,6 +259,9 @@
                         </td>
                     </tr>
 
+                    <?php $sumase = $sumase + $datos->saldo;
+                             $sumape = $sumape + $datos->pendiente; ?>  
+
                     @endforeach
             </table>
         </div>
@@ -323,11 +269,153 @@
 
  <div class="input-group" style="width:30%;position: fixed;right: 0px;bottom:0px; height:30px;">
    <span  class="form-control input-group-text">Total pendiente</span>
-        <input  type="text" class="form-control" wire:model="total_pendiente">
+        <input  type="text" class="form-control" id="sumape" value="{{$sumape}}">
    
     <span class="form-control input-group-text">Total saldo</span>
-        <input  type="text" class="form-control" wire:model="total_saldo">
+        <input  type="text" class="form-control" id="sumase" value="{{$sumase}}" >
    </div>
+
+
+
+
+    
+   <script type="text/javascript">
+        function buscar_tablaE() {      
+$('.mi-selector').select2();     
+           
+            var table = document.getElementById("tabla_pendiente_empaque");
+            var rowCount = table.rows.length;
+            var tableRows = table.getElementsByTagName('tr');
+            //console.log(rowCount)
+
+            if (rowCount <= 1) {} else {
+                for (var x = rowCount - 1; x > 0; x--) {
+                    document.getElementById("bodyE").innerHTML = "";
+                }
+            }
+
+
+        var b_orden = document.getElementById('b_ordenE').value;   
+        var b_item = document.getElementById('b_itemE').value;   
+        var b_hon = document.getElementById('b_honE').value;
+        var b_mes = document.getElementById('b_mesE').value;
+
+        var b_marca = document.getElementById('b_marcaE').value;         
+        var b_vitola = document.getElementById('b_vitolaE').value;     
+        var b_capa = document.getElementById('b_capaE').value;     
+        var b_nombre = document.getElementById('b_nombreE').value;     
+        var b_empaque = document.getElementById('b_empaqueE').value;   
+
+        var checkbox1 = document.getElementById('checkbox1E').value;   
+        var checkbox2 = document.getElementById('checkbox2E').value;   
+        var checkbox3 = document.getElementById('checkbox3E').value;   
+        var checkbox4 = document.getElementById('checkbox4E').value; 
+   
+
+     
+        var data = @json($datos_pendiente_empaque);       
+
+
+        
+        if(b_orden == "" && b_item == "" && b_hon == "" && b_mes == "" && b_marca == "" &&
+        b_vitola == "" && b_capa == "" && b_nombre == "" && b_empaque == ""  ){
+
+
+
+                document.getElementById('checkbox1E').value = checkbox1;   
+                document.getElementById('checkbox2E').value = checkbox2;    
+                document.getElementById('checkbox3E').value = checkbox3;    
+                document.getElementById('checkbox4E').value = checkbox4;  
+}else{
+    var sumase = 0; var sumape = 0;
+        for (var i = 0; i < data.length; i++) {  
+            try {
+
+
+console.log(data[i].marca);
+
+        if (data[i].marca.toLowerCase().match( b_marca.toLowerCase()) &&
+            data[i].vitola.toLowerCase().match( b_vitola.toLowerCase()) && 
+            data[i].nombre.toLowerCase().match( b_nombre.toLowerCase()) && 
+            data[i].capa.toLowerCase().match( b_capa.toLowerCase()) &&         
+            data[i].tipo_empaque.toLowerCase().match( b_empaque.toLowerCase()) && 
+
+            data[i].item.toLowerCase().match( b_item.toLowerCase()) &&  
+            data[i].orden_del_sitema.toLowerCase().match( b_orden.toLowerCase()) && 
+            data[i].mes.toLowerCase().match( b_mes.toLowerCase()) && 
+            data[i].orden.toLowerCase().match( b_hon.toLowerCase()) ) {
+
+                
+        sumase = sumase + data[i].saldo;
+        sumape = sumape + data[i].pendiente; 
+
+
+
+          if(data[i].observacion == null){ data[i].observacion =""; } 
+            if(data[i].presentacion == null){ data[i].presentacion =""; } 
+            if(data[i].anillo == null){ data[i].anillo =""; } 
+            if(data[i].cello == null){ data[i].cello =""; } 
+            if(data[i].upc == null){ data[i].upc =""; } 
+
+            var tabla_nuevaE = `
+                  <tr>
+                    <td>` + data[i].categoria + `</td>
+                    <td>` + data[i].item + `</td>
+                    <td>` + data[i].orden_del_sitema + `</td>
+
+                    <td>` + data[i].observacion + `</td>
+                    <td>` + data[i].presentacion + `</td>
+                    <td>` + data[i].mes + `</td>
+
+                    <td>` + data[i].orden + `</td>
+                    <td>` + data[i].marca + `</td>
+                    <td>` + data[i].vitola + `</td>
+
+                    <td>` + data[i].nombre + `</td>
+                    <td>` + data[i].capa + `</td>
+                    <td>` + data[i].tipo_empaque + `</td>
+
+                    <td>` + data[i].cant_cajas + `</td>
+                    <td>` + data[i].anillo + `</td>
+                    <td>` + data[i].cello + `</td>
+
+                    <td>` + data[i].upc + `</td>
+                    <td>` + data[i].pendiente + `</td>
+                    <td>` + data[i].saldo + `</td>
+
+                    <td style="text-align:center;"> 
+<?php            if( str_contains(strtoupper((string)(` + data[i].nombre + `)) , 'PRESS')) {
+                    echo' <a style=" width:10px; height:10px;" data-toggle="modal" href="" data-target="#modal_actualizar"';
+                    echo'type="submit" wire:click.prevent= "insertar_detalle_provicional_sin_existencia( data[i].id_pendiente)">';
+
+                    echo'<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"';
+                    echo'    class="bi bi-arrow-up-right-square-fill" viewBox="0 0 16 16">';
+                    echo'    <path';
+                    echo'        d="M14 0a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V2a2 2 0 0 1 2-2h12zM5.904 10.803 10 6.707v2.768a.5.5 0 0 0 1 0V5.5a.5.5 0 0 0-.5-.5H6.525a.5.5 0 1 0 0 1h2.768l-4.096 4.096a.5.5 0 0 0 .707.707z" />';
+                    echo'</svg>';
+                    echo'</a>';
+                    }
+                    ?>
+
+                     </td>
+
+                  </tr> `
+
+                  ;   
+       
+                    document.getElementById("bodyE").innerHTML += tabla_nuevaE.toString();
+        }
+    } catch (error) {
+  console.error(error);
+}
+document.getElementById("sumase").value = sumase.toString();
+document.getElementById("sumape").value = sumape.toString();
+    }
+}
+// fin del else
+}     
+</script>
+
 
   
         
@@ -338,24 +426,23 @@
     <script type="text/javascript">
         function datos_modal_actualizar(id) {
             var datas = '<?php echo json_encode($datos_pendiente_empaque_nuevo);?>';
-
             var data = JSON.parse(datas);
-
-
-
             for (var i = 0; i < data.length; i++) {
                 if (data[i].id_pendiente === id) {
-
                     document.actualizar_pendiente.id_pendientea.value = data[i].id_pendiente;
-
                     document.actualizar_pendiente.saldo.value = data[i].saldo;
-
-
                 }
             }
-
         }
     </script>
+
+<script type="text/javascript">
+        function funcion1() {
+            $('.mi-selector').select2();
+        }
+ </script>
+
+
 
 
     <form action="{{Route('actualizar_pendiente_empaque')}}" method="POST" id="actualizar_pendiente"
