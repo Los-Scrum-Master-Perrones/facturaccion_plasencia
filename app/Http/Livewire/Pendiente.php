@@ -59,6 +59,7 @@ class Pendiente extends Component
         $this->marcas= \DB::select('call buscar_marca("")');
         $this->tipo_empaques= \DB::select('call buscar_tipo_empaque("")');
 
+
         /*Procedimientos de busquedas de la tabla pendiente*/
         $this->marcas_p=\DB::select('call buscar_marca_pendiente(:uno,:dos,:tres,:cuatro)',
         [
@@ -186,8 +187,10 @@ class Pendiente extends Component
             }
 
         }
-
+        
         return view('livewire.pendiente')->extends('principal')->section('content');
+
+
     }
 
 
@@ -337,24 +340,12 @@ class Pendiente extends Component
         }
 
         public function actualizar_pendiente(Request $request){
-           // 603004000
+           
 
 
-           if($request->pendiente == null ){
-            $pendientes = " ";
-           }else{
-            $pendientes = $request->pendiente;
-           }
-
-           if($request->orden_sistema == null ){
-            $orden_sistema = " ";
-           }else{
-             $orden_sistema = $request->orden_sistema;
-           }
-
-           if($request->observacion == null ){
+           if($request->observacion  == null ){
             $observacions = " ";
-           }else{
+           }  else{
              $observacions = $request->observacion;
            }
 
@@ -407,8 +398,12 @@ class Pendiente extends Component
                 'cuatro' =>  $this->r_cuatro
             ]
         );
+         
+        return redirect()->route('pendiente')->with('b_mesA', $b_mesA)->with('b_itemA', $b_itemA)->with('b_ordenA', $b_ordenA)
+                                    ->with('b_honA', $b_honA)->with('b_marcaA', $b_marcaA)->with('b_vitolaA', $b_vitolaA)
+                                    ->with('b_nombreA', $b_nombreA)->with('b_capaA', $b_capaA)->with('b_empaqueA', $b_empaqueA);
+        }
 
-            return redirect()->route('pendiente');
 
             }
 
@@ -474,4 +469,3 @@ class Pendiente extends Component
     }
 
 
-}

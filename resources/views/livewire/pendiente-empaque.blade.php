@@ -243,8 +243,8 @@
 
                         <td style="text-align:center;">
 
-                            <?php if( str_contains(strtoupper((string)($datos->nombre)) , 'PRESS')) {
-                       echo' <a style=" width:10px; height:10px;" data-toggle="modal" href="" data-target="#modal_actualizar"';
+                            <?php 
+                       echo' <a style=" width:10px; height:10px;" ';
                        echo'type="submit" wire:click.prevent= "insertar_detalle_provicional_sin_existencia('.$datos->id_pendiente.')">';
 
                        echo'<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"';
@@ -253,7 +253,7 @@
                        echo'        d="M14 0a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V2a2 2 0 0 1 2-2h12zM5.904 10.803 10 6.707v2.768a.5.5 0 0 0 1 0V5.5a.5.5 0 0 0-.5-.5H6.525a.5.5 0 1 0 0 1h2.768l-4.096 4.096a.5.5 0 0 0 .707.707z" />';
                        echo'</svg>';
                        echo'</a>';
-                    }?>
+                    ?>
 
                          
                         </td>
@@ -357,8 +357,8 @@ console.log(data[i].marca);
             if(data[i].cello == null){ data[i].cello =""; } 
             if(data[i].upc == null){ data[i].upc =""; } 
 
-            var tabla_nuevaE = `
-                  <tr>
+            var tabla_nuevaE = 
+            `<tr>
                     <td>` + data[i].categoria + `</td>
                     <td>` + data[i].item + `</td>
                     <td>` + data[i].orden_del_sitema + `</td>
@@ -383,25 +383,28 @@ console.log(data[i].marca);
                     <td>` + data[i].pendiente + `</td>
                     <td>` + data[i].saldo + `</td>
 
+                    
+
                     <td style="text-align:center;"> 
-<?php            if( str_contains(strtoupper((string)(` + data[i].nombre + `)) , 'PRESS')) {
-                    echo' <a style=" width:10px; height:10px;" data-toggle="modal" href="" data-target="#modal_actualizar"';
-                    echo'type="submit" wire:click.prevent= "insertar_detalle_provicional_sin_existencia( data[i].id_pendiente)">';
+                    <form  action =  "insertar_detalle_provicional_sin_existencia/` + data[i].id_pendiente+ `"  method="post">
+                            @csrf
+                                <button style="border:none;" type="submit">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                                class="bi bi-arrow-up-right-square-fill" viewBox="0 0 16 16">
+                                <path
+                                d="M14 0a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V2a2 2 0 0 1 2-2h12zM5.904 10.803 10 6.707v2.768a.5.5 0 0 0 1 0V5.5a.5.5 0 0 0-.5-.5H6.525a.5.5 0 1 0 0 1h2.768l-4.096 4.096a.5.5 0 0 0 .707.707z" />
+                                </svg>
+                                </button>
 
-                    echo'<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"';
-                    echo'    class="bi bi-arrow-up-right-square-fill" viewBox="0 0 16 16">';
-                    echo'    <path';
-                    echo'        d="M14 0a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V2a2 2 0 0 1 2-2h12zM5.904 10.803 10 6.707v2.768a.5.5 0 0 0 1 0V5.5a.5.5 0 0 0-.5-.5H6.525a.5.5 0 1 0 0 1h2.768l-4.096 4.096a.5.5 0 0 0 .707.707z" />';
-                    echo'</svg>';
-                    echo'</a>';
-                    }
-                    ?>
+                            </form>
+                  
+                 
+                 
 
-                     </td>
-
+            </td>
                   </tr> `
 
-                  ;   
+                  
        
                     document.getElementById("bodyE").innerHTML += tabla_nuevaE.toString();
         }
@@ -445,50 +448,7 @@ document.getElementById("sumape").value = sumape.toString();
 
 
 
-    <form action="{{Route('actualizar_pendiente_empaque')}}" method="POST" id="actualizar_pendiente"
-        name="actualizar_pendiente">
-        <div class="modal fade" role="dialog" id="modal_actualizar" data-backdrop="static" data-keyboard="false"
-            tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true"
-            style="opacity:.9;background:#212529;width=800px;">
-            <div class="modal-dialog modal-dialog-centered modal-lg" style="opacity:.9;background:#212529;width=80%">
-                <div class="modal-content">
-                    @csrf
-                    <div class="modal-header">
-                        <h5 id="staticBackdropLabel"><strong>Descripción del producto: </strong><span id="titulo"
-                                name="titulo"></span></h5>
-                    </div>
-
-
-                    <div class="modal-body">
-                        <div class="row">
-
-                            <input name="id_pendientea" id="id_pendientea" value="" hidden />
-
-                            <div class="mb-3 col">
-                                <label for="txt_figuraytipo" class="form-label">SALDO</label>
-                                <input name="saldo" id="saldo" class="form-control" type="text" autocomplete="off">
-                            </div>
-
-                        </div>
-
-
-
-
-                    </div>
-
-                    <div class="modal-footer">
-                        <button class="bmodal_no" data-dismiss="modal">
-                            <span>Cancelar</span>
-                        </button>
-                        <button type="submit" class="bmodal_yes">
-                            <span>Actualizar</span>
-                        </button>
-                    </div>
-
-                </div>
-            </div>
-        </div>
-    </form>
+   
 
 
 

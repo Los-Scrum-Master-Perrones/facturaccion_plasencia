@@ -199,10 +199,7 @@ class PendienteEmpaque extends Component
 
         $datos_pendiente = DB::select('call datos_pendiente_programar(:id)'
         ,['id'=>$id]);
-        
-        $this->tuplas=count($this->datos_pendiente_empaque);
-
-       
+               
             $detalles = DB::select('call insertar_detallePro_temporalSinExistencia(:numero_orden,:orden,:cod_producto,:saldo,:id_pendiente,:cant)'
             ,['numero_orden'=>isset($datos_pendiente[0]->orden_del_sitema)?$datos_pendiente[0]->orden_del_sitema:null,
             'orden'=>isset($datos_pendiente[0]->orden)?$datos_pendiente[0]->orden:null,

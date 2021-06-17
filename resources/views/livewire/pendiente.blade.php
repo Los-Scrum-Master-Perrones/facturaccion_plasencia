@@ -89,7 +89,7 @@
                    </div>
 
                   <div class="col" >
-                  <select onchange="buscar_tabla()" onclick="funcion1()"  name="b_item" id="b_item" class=" mi-selector form-control"  style="width:100%;height:34px;" name="states[]" required >
+                  <select  onchange="buscar_tabla()" onclick="funcion1()"  name="b_item" id="b_item" class=" mi-selector form-control"  style="width:100%;height:34px;" name="states[]" required >
                     <option value="" style="overflow-y: scroll;">Todos Items</option>
                     @foreach($items_p as $item)
                     <option style="overflow-y: scroll;"> {{$item->item}}</option>
@@ -107,7 +107,7 @@
                 </div>
 
                   <div class="col" >
-                  <select onchange="buscar_tabla()" onclick="funcion1()" name="b_hon" id="b_hon" class=" mi-selector form-control"  style="width:100%;height:34px;" name="states[]" required >
+                  <select  onchange="buscar_tabla()" onclick="funcion1()" name="b_hon" id="b_hon" class=" mi-selector form-control"  style="width:100%;height:34px;" name="states[]" required >
                     <option value="" style="overflow-y: scroll;">Todas las ordenes</option>
                     @foreach($hons_p as $hon)
                         <option style="overflow-y: scroll;"> {{$hon->orden}}</option>
@@ -122,7 +122,7 @@
 
                 <div class="col" >
 
-                    <select onchange="buscar_tabla()" onclick="funcion1()" name="b_marca" id="b_marca"class=" mi-selector form-control"  style="width:100%;height:34px;" name="states[]" required >
+                    <select  onchange="buscar_tabla()" onclick="funcion1()" name="b_marca" id="b_marca"class=" mi-selector form-control"  style="width:100%;height:34px;" name="states[]" required >
                     <option value="" style="overflow-y: scroll;">Todas las marcas</option>
                     @foreach($marcas_p as $marca)
                         <option style="overflow-y: scroll;"> {{$marca->marca}}</option>
@@ -131,7 +131,7 @@
                 </div>
 
                 <div class="col" >
-                    <select onchange="buscar_tabla()" onclick="funcion1()" name="b_vitola" id="b_vitola" class=" mi-selector form-control"  style="width:100%;height:34px;" name="states[]" required >
+                    <select  onchange="buscar_tabla()" onclick="funcion1()" name="b_vitola" id="b_vitola" class=" mi-selector form-control"  style="width:100%;height:34px;" name="states[]" required >
                     <option value="" style="overflow-y: scroll;">Todas las vitolas</option>
                     @foreach($vitolas_p as $vitola)
                         <option style="overflow-y: scroll;"> {{$vitola->vitola}}</option>
@@ -149,7 +149,7 @@
                 </div>
 
                 <div class="col" >
-                    <select onchange="buscar_tabla()" onclick="funcion1()" name="b_capa" id="b_capa" class=" mi-selector form-control"  style="width:100%;height:34px;" name="states[]" required >
+                    <select  onchange="buscar_tabla()" onclick="funcion1()" name="b_capa" id="b_capa" class=" mi-selector form-control"  style="width:100%;height:34px;" name="states[]" required >
                     <option value="" style="overflow-y: scroll;">Todas las capas</option>
                     @foreach($capas_p as $capa)
                         <option style="overflow-y: scroll;"> {{$capa->capa}}</option>
@@ -158,7 +158,7 @@
                 </div>
 
                 <div class="col" >
-                    <select onchange="buscar_tabla()" onclick="funcion1()" name="b_empaque" id="b_empaque" class=" mi-selector form-control"  style="width:100%;height:34px;" name="states[]" required >
+                    <select   onchange="buscar_tabla()" onclick="funcion1()" name="b_empaque" id="b_empaque" class=" mi-selector form-control"  style="width:100%;height:34px;" name="states[]" required >
                     <option value="" style="overflow-y: scroll;">Todos los empaques</option>
                     @foreach($empaques_p as $empaque)
                         <option style="overflow-y: scroll;"> {{$empaque->empaque}}</option>
@@ -742,32 +742,34 @@ document.getElementById("sumap").value = sumap.toString();
                                 <label for="txt_figuraytipo" class="form-label">Pendiente</label>
                                 <input name="pendiente" id="pendiente" class="form-control" type="text"
                                     autocomplete="off">
-
-
                             </div>
 
                             <div class="mb-3 col">
                                 <label for="txt_figuraytipo" class="form-label">Código precio</label>
                                 <input name="cprecio" id="cprecio" class="form-control" type="text" autocomplete="off">
-
-
                             </div>
 
                             <div class="mb-3 col">
                                 <label for="txt_figuraytipo" class="form-label">Precio</label>
                                 <input name="precio" id="precio" class="form-control" type="text" autocomplete="off">
-
-
                             </div>
+                         </div>
 
-
-
-                    </div>
                         <div class="row">
                             <div class="mb-3 col">
                                 <label for="txt_figuraytipo" class="form-label">Observación</label>
                                 <input name="observacion" id="observacion" class="form-control" type="text"
                                     autocomplete="off">
+
+                                    <input name="b_mesA" id="b_mesA" hidden>
+                                    <input name="b_itemA" id="b_itemA" hidden>
+                                    <input name="b_ordenA" id="b_ordenS" hidden>
+                                    <input name="b_honA" id="b_honA" hidden> 
+                                    <input name="b_marcaA" id="b_marcaA" hidden>
+                                    <input name="b_vitolaA" id="b_vitolaA" hidden>
+                                    <input name="b_nombreA" id="b_nombreA" hidden>
+                                    <input name="b_capaA" id="b_capaA" hidden>
+                                    <input name="b_empaqueA" id="b_empaqueA" hidden>
                             </div>
                         </div>
                     </div>
@@ -785,9 +787,6 @@ document.getElementById("sumap").value = sumap.toString();
             </div>
         </div>
     </form>
-
-
-
     <!-- FIN MODAL ACTUALIZAR DATO PENDIENTE -->
 
 
@@ -827,6 +826,20 @@ document.getElementById("sumap").value = sumap.toString();
 
     <script type="text/javascript">
         function datos_modal_actualizar(id, item) {
+
+
+            document.actualizar_pendiente.b_mesA.value = document.getElementById('b_mes').value;  
+            document.actualizar_pendiente.b_itemA.value = document.getElementById('b_item').value;  
+            document.actualizar_pendiente.b_ordenA.value =  document.getElementById('b_orden').value; 
+
+            document.actualizar_pendiente.b_honA.value =  document.getElementById('b_hon').value; 
+            document.actualizar_pendiente.b_marcaA.value =  document.getElementById('b_marca').value; 
+            document.actualizar_pendiente.b_vitolaA.value =  document.getElementById('b_vitola').value; 
+
+            document.actualizar_pendiente.b_nombreA.value =  document.getElementById('b_nombre').value; 
+            document.actualizar_pendiente.b_capaA.value =  document.getElementById('b_capa').value; 
+            document.actualizar_pendiente.b_empaqueA.value =  document.getElementById('b_empaque').value; 
+
             var datas = '<?php echo json_encode($datos_pendiente);?>';
 
             var datasss = JSON.parse(datas);
@@ -864,47 +877,168 @@ document.getElementById("sumap").value = sumap.toString();
 
 
 
+<script>
+    $('#b_mes').val($b_mesA).trigger('change.select2');
+    $('#b_item').val($b_itemA).trigger('change.select2');
+    $('#b_orden').val($b_ordenA).trigger('change.select2');
+    $('#b_hon').val($b_honA).trigger('change.select2');
+    $('#b_marca').val($b_marcaA).trigger('change.select2');
+    $('#b_vitola').val($b_vitolaA).trigger('change.select2');
+    $('#b_nombre').val($b_nombreA).trigger('change.select2');
+    $('#b_capa').val($b_capaA).trigger('change.select2');
+    $('#b_empaque').val($b_empaqueA).trigger('change.select2');
+ </script>
 
+    
 <script type="text/javascript">
         function funcion1() {
             $('.mi-selector').select2();
         }
  </script>
 
+<script type="text/javascript">
+        function buscar_tabla() {
+$('.mi-selector').select2();
+           
+            var table = document.getElementById("tabla_pendiente");
+            var rowCount = table.rows.length;
+            var tableRows = table.getElementsByTagName('tr');
+            //console.log(rowCount)
 
-    <script type="text/javascript">
-        $(document).ready(function () {
-
-            $.ajaxSetup({
-                headers: {
-                    'X-CSRF-Token': $("input[name=_token]").val()
+            if (rowCount <= 1) {} else {
+                for (var x = rowCount - 1; x > 0; x--) {
+                    document.getElementById("body").innerHTML = "";
                 }
-            });
+            }
 
-            $('#editable').Tabledit({
-                url: '{{ route("tabledit.action") }}',
-                method: 'POST',
-                dataType: "json",
-                columns: {
-                    identifier: [0, 'id'],
-                    editable: [
-                        [1, 'first_name'],
-                        [2, 'last_name'],
-                        [3, 'gender']
-                    ]
-                },
-                restoreButton: false,
 
-                onSuccess: function (data, textStatus, jqXHR) {
-                    if (data.action == 'delete') {
-                        $('#' + data.id).remove();
-                    }
-                }
+        var b_orden = document.getElementById('b_orden').value;   
+        var b_item = document.getElementById('b_item').value;   
+        var b_hon = document.getElementById('b_hon').value;
+        var b_mes = document.getElementById('b_mes').value;
 
-            });
+        var b_marca = document.getElementById('b_marca').value;         
+        var b_vitola = document.getElementById('b_vitola').value;     
+        var b_capa = document.getElementById('b_capa').value;     
+        var b_nombre = document.getElementById('b_nombre').value;     
+        var b_empaque = document.getElementById('b_empaque').value;   
 
-        });
-    </script>
+        var checkbox1 = document.getElementById('checkbox1').value;   
+        var checkbox2 = document.getElementById('checkbox2').value;   
+        var checkbox3 = document.getElementById('checkbox3').value;   
+        var checkbox4 = document.getElementById('checkbox4').value; 
+   
+
+        var datas = '<?php echo json_encode($datos_pendiente);?>';
+        var data = JSON.parse(datas);
+
+        if(b_orden == "" && b_item == "" && b_hon == "" && b_mes == "" && b_marca == "" &&
+        b_vitola == "" &&b_capa == "" &&b_nombre == "" &&b_empaque == ""  ){
+                document.getElementById('checkbox1').value = checkbox1;   
+                document.getElementById('checkbox2').value = checkbox2;    
+                document.getElementById('checkbox3').value = checkbox3;    
+                document.getElementById('checkbox4').value = checkbox4;  
+}else{
+    var sumas = 0; var sumap = 0;
+        for (var i = 0; i < data.length; i++) {  
+            try {
+
+
+
+        if (data[i].marca.toLowerCase().match( b_marca.toLowerCase()) &&
+            data[i].vitola.toLowerCase().match( b_vitola.toLowerCase()) && 
+            data[i].nombre.toLowerCase().match( b_nombre.toLowerCase()) && 
+            data[i].capa.toLowerCase().match( b_capa.toLowerCase()) &&         
+            data[i].tipo_empaque.toLowerCase().match( b_empaque.toLowerCase()) &&   
+
+            data[i].item.toLowerCase().match( b_item.toLowerCase()) &&  
+            data[i].orden_del_sitema.toLowerCase().match( b_orden.toLowerCase()) && 
+            data[i].mes.toLowerCase().match( b_mes.toLowerCase()) && 
+            data[i].orden.toLowerCase().match( b_hon.toLowerCase()) ) {
+
+                
+        sumas = sumas + data[i].saldo;
+        sumap = sumap + data[i].pendiente; 
+
+
+
+            if(data[i].observacion == null){ data[i].observacion =""; } 
+            if(data[i].presentacion == null){ data[i].presentacion =""; } 
+            if(data[i].anillo == null){ data[i].anillo =""; } 
+            if(data[i].cello == null){ data[i].cello =""; } 
+            if(data[i].upc == null){ data[i].upc =""; } 
+            if(data[i].serie_precio == null){ data[i].serie_precio =""; } 
+            if(data[i].precio == null){ data[i].precio =""; } 
+
+            var tabla_nueva = `
+                  <tr>
+                    <td>` + data[i].categoria + `</td>
+                    <td>` + data[i].item + `</td>
+                    <td>` + data[i].orden_del_sitema + `</td>
+                    <td>` + data[i].observacion + `</td>
+
+                    <td>` + data[i].presentacion + `</td>
+                    <td>` + data[i].mes + `</td>
+                    <td>` + data[i].orden + `</td>
+                    <td>` + data[i].marca + `</td>
+                    <td>` + data[i].vitola + `</td>
+
+                    <td>` + data[i].nombre + `</td>
+                    <td>` + data[i].capa + `</td>
+                    <td>` + data[i].tipo_empaque + `</td>
+                    <td>` + data[i].anillo + `</td>
+                    <td>` + data[i].cello + `</td>
+                    <td>` + data[i].upc + `</td>
+                    <td>` + data[i].serie_precio + `</td>
+                    <td>` + data[i].precio + `</td>
+                    <td>` + data[i].pendiente + `</td>
+                    <td>` + data[i].saldo + `</td>
+
+                    <td style="text-align:center;">
+                                <a data-toggle="modal" data-target="#modal_eliminar_detalle"
+                                    onclick="datos_modal_eliminar(` +data[i].id_pendiente+ `)" href="">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor"
+                                        class="bi bi-trash-fill" viewBox="0 0 16 16">
+                                        <path
+                                            d="M2.5 1a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1H3v9a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V4h.5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1H2.5zm3 4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5zM8 5a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7A.5.5 0 0 1 8 5zm3 .5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 1 0z" />
+                                    </svg></a>
+
+
+                                <a style=" width:10px; height:10px;" data-toggle="modal" href=""
+                                    data-target="#modal_actualizar" type="submit"
+                                    onclick="datos_modal_actualizar(` +data[i].id_pendiente+ `,` +data[i].item+ `)">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor"
+                                        class="bi bi-pencil-square" viewBox="0 0 16 16">
+                                        <path
+                                            d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z" />
+                                        <path fill-rule="evenodd"
+                                            d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z" />
+                                    </svg>
+                                </a>
+
+                            </td>
+
+                  </tr>
+
+                  `;   
+       
+
+                    document.getElementById("body").innerHTML += tabla_nueva.toString();
+        }
+    } catch (error) {
+  console.error(error);
+}
+document.getElementById("sumas").value = sumas.toString();
+document.getElementById("sumap").value = sumap.toString();
+
+
+        }
+}
+// fin del else
+}     
+</script>
+
+
 
 
 
