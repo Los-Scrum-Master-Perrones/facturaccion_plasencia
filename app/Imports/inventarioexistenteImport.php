@@ -83,6 +83,12 @@ class inventarioexistenteImport implements ToModel
                                                     'categoria' => "3",
                                                 ]);
                                                         }
+
+                                                        if(!isset(DB::select('select * from clase_productos where item = ?', [$row[0]])[0])){
+                                                            if(count(DB::select('select * from item_faltantes where item = ? and categoria = ?', [$row[0], 'INVENTARIO EXISTENTE']))==0){
+                                                                DB::insert('insert into item_faltantes(categoria, item, detalles) values (?,?,?)', [ 'INVENTARIO EXISTENTE', $row[0] , $row[2]]);
+                                                               }
+                                                        }
                                     }
                                 
                          }

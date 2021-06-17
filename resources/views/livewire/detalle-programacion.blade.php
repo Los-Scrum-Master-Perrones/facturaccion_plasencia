@@ -38,12 +38,13 @@
 
                     <input name="buscar" id="buscar" class="  form-control  mr-sm-2" wire:model="busqueda"
                         placeholder="Búsqueda por Marca, Nombre y Vitola" style="width:350px;">
-                        <form action="{{Route('exportar_detallesprogramacion')}}" id="formver" name="formver">
-                   
+                    <form action="{{Route('exportar_detallesprogramacion')}}" id="formver" name="formver">
 
-                   <button class="botonprincipal" type="submit" style="width:120px;">Exportar </button>
-               
-                      </form>
+                        <button class="botonprincipal" type="submit" style="width:120px;">Exportar</button>
+                    </form>
+                    <form wire:submit.prevent="modal_limpiar()">
+                        <button class="botonprincipal" type="submit" style="width:120px;">Vaciar</button>
+                    </form>
                     <form wire:submit.prevent="insertarDetalle_y_actualizarPendiente()"
                         style="width:auto; padding-left:50px; ">
                         @csrf
@@ -86,6 +87,7 @@
                         <tr style="text-align:center;">
                             <th># ORDEN</th>
                             <th style=" text-align:center;">ORDEN</th>
+                            <th style=" text-align:center;">CODIGO</th>
                             <th style=" text-align:center;">MARCA</th>
                             <th style=" text-align:center;">VITOLA</th>
                             <th style=" text-align:center;">NOMBRE</th>
@@ -108,6 +110,7 @@
                         <tr>
                             <td>{{$detalle_provicional->numero_orden}}</td>
                             <td>{{$detalle_provicional->orden}}</td>
+                            <td>{{$detalle_provicional->cod_producto}}</td>
                             <td>{{$detalle_provicional->marca}}</td>
                             <td>{{$detalle_provicional->vitola}}</td>
                             <td>{{$detalle_provicional->nombre}}</td>
@@ -118,12 +121,12 @@
                             <td>{{$detalle_provicional->upc}}</td>
                             <td>{{$detalle_provicional->saldo}}</td>
                             <td>{{$detalle_provicional->total_existencia}}</td>
-                            <?php   if($detalle_provicional->diferencia < 0){
+                            <?php  if($detalle_provicional->diferencia < 0){
 
                         echo '<td style="color:red;">'.$detalle_provicional->diferencia.'</td>' ;
-                        
+
                         }else{
-                       
+
                         echo '<td>' .$detalle_provicional->diferencia. '</td>' ;
                         }
                         ?>
@@ -147,7 +150,8 @@
                                         class="bi bi-trash-fill" viewBox="0 0 16 16">
                                         <path
                                             d="M2.5 1a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1H3v9a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V4h.5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1H2.5zm3 4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5zM8 5a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7A.5.5 0 0 1 8 5zm3 .5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 1 0z" />
-                                    </svg></a>
+                                    </svg>
+                                </a>
 
                                 <a style=" width:10px; height:10px;" data-toggle="modal" href=""
                                     data-target="#modal_actualizar_saldo" type="submit"
@@ -168,6 +172,11 @@
                 </table>
 
             </div>
+        </div>
+        <br>
+        <div class="input-group" style="width:30%;position: fixed;right: 0px;bottom:0px; height:30px;">
+            <span class="form-control input-group-text">Total Programacion</span>
+            <input type="text" class="form-control" wire:model="total_saldo">
         </div>
     </div>
 
@@ -299,7 +308,7 @@
                         <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
-                        ¿Estás seguro que quieres eliminar este usuario?
+                        ¿Estás seguro que quieres eliminar este registro?
                     </div>
                     <div class="modal-footer">
                         <button style=" background: #b39f64; color: #ecedf1;" type="button" class=" btn-info-claro "
@@ -316,7 +325,31 @@
     </form>
 
 
-   
+
 
     <!-- FIN MODAL ELMINAR DETALLE -->
+
+    <div class="modal fade" id="modal_eliminar_tabla_progra" data-backdrop="static" data-keyboard="false" tabindex="-1"
+        aria-labelledby="staticBackdropLabel" aria-hidden="true" style="opacity:.9;background:#212529;">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="staticBackdropLabel">Advertencia</h5>
+                    <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    ¿Estás seguro que quieres limpiar estos registros?
+                </div>
+                <div class="modal-footer">
+                    <button style=" background: #b39f64; color: #ecedf1;" type="button" class="btn-info-claro "
+                        data-dismiss="modal">
+                        <span>Cancelar</span>
+                    </button>
+                    <button wire:click="eliminar_datos()" class=" btn-info ">
+                        <span>Eliminar</span>
+                    </button>
+                </div>
+            </div>
+        </div>
     </div>
+</div>

@@ -41,29 +41,29 @@
 
 
                     @if (count($nuevos) == 0){
-                        <form action="{{Route('pendiente_insertar')}}" method="POST">
-                            @csrf
-                            <input type="date" value="" name="fecha" id="fecha"
-                                style="width: 160px; color:black ;text-align:center;"
-                                class=" form-control   mr-sm-2 " required>
-                            <button onclick="agregarpendiente()" style="width:160px;"
-                                class="botonprincipal mr-sm-2 ">Agregar a pendiente</button>
-                        </form>
+                    <form action="{{Route('pendiente_insertar')}}" method="POST">
+                        @csrf
+                        <input type="date" value="" name="fecha" id="fecha"
+                            style="width: 160px; color:black ;text-align:center;" class=" form-control   mr-sm-2 "
+                            required>
+                        <button onclick="agregarpendiente()" style="width:160px;"
+                            class="botonprincipal mr-sm-2 ">Agregar a pendiente</button>
+                    </form>
                     }
                     @endif
-                    
 
-                        <button data-toggle="modal" style="width:30px;" class=" botonprincipal mr-sm-2 "
-                            data-target="#modal_actualizar">
-                            <abbr title="Agregar nuevo pedido">
+
+                    <button data-toggle="modal" style="width:30px;" class=" botonprincipal mr-sm-2 "
+                        data-target="#modal_actualizar">
+                        <abbr title="Agregar nuevo pedido">
                             <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor"
                                 class="bi bi-plus-circle" viewBox="0 0 16 16">
                                 <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z" />
                                 <path
                                     d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z" />
                             </svg>
-                            </abbr>
-                        </button>
+                        </abbr>
+                    </button>
 
                     <button wire:click="vaciar_import_excel()" style="width:30px;" class=" botonprincipal mr-sm-2 ">
                         <abbr title="Vacia la tabla">
@@ -76,8 +76,8 @@
                             </svg>
                         </abbr>
                     </button>
-                    
-                     <input class=" form-control  mr-sm-2" placeholder="Búsqueda por Item" wire:model="b_item">
+
+                    <input class=" form-control  mr-sm-2" placeholder="Búsqueda por Item" wire:model="b_item">
                     <input class=" form-control  mr-sm-2" placeholder="Búsqueda por Categoria" wire:model="b_categoria">
                     <input class=" form-control  mr-sm-2" placeholder="Búsqueda por Orden" wire:model="b_orden">
 
@@ -97,8 +97,8 @@
                 </div>
             </div>
 
-                   
-              
+
+
         </div>
 
 
@@ -352,7 +352,7 @@
             <div class="modal-content">
 
                 <div class="modal-header">
-                    <h6>Estos productos sampler no existen en la base de datos: </h6>
+                    <h6>Estos productos no existen en la base de datos: </h6>
                 </div>
 
                 <div class="modal-body">

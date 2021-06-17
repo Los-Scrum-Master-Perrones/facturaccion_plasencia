@@ -41,20 +41,27 @@ class Pedido extends Component
         $detalles = 0;  
         $valores = [];  
 
+
         for($i = 0; $i < count($this->pedido_completo) ;$i++){
             $this->total_puros += $this->pedido_completo[$i]->unidades*$this->pedido_completo[$i]->cant_paquetes;
 
+            
 
             $sampler = DB::select('SELECT clase_productos.sampler FROM clase_productos WHERE  clase_productos.item = ?;', [$this->pedido_completo[$i]->item]);
+           if(isset($sampler[0])){
             if( $sampler[0]->sampler == "si"){
                 if($cantidad_detalle_sampler == 0 && $detalles == 0){
                     $datos = DB::select('call traer_numero_detalles_productos(?)', [$this->pedido_completo[$i]->item]);
                     $cantidad_detalle_sampler = $datos[0]->tuplas;
                 }
+
+               // echo $this->pedido_completo[$i]->item.'  '.$detalles.' '. $cantidad_detalle_sampler.' '.$this->pedido_completo[$i]->unidades.'<br>';
+
+                
                 $valores = DB::select('call traer_numero_detalles_productos_datos(?,?)', [$this->pedido_completo[$i]->item,$detalles]);
 
                 $descripcion_sampler = DB::select('SELECT clase_productos.descripcion_sampler FROM clase_productos WHERE  clase_productos.item = ?;', [$this->pedido_completo[$i]->item]);
-
+                
 
                 $this->pedido_completo[$i]->descripcion = $descripcion_sampler[0]->descripcion_sampler." ".$valores[0]->marca." ".$valores[0]->nombre." ".$valores[0]->capa." ".$valores[0]->vitola;
 
@@ -65,6 +72,8 @@ class Pedido extends Component
                     $cantidad_detalle_sampler = 0;
                 }
             }
+           }
+            
             
         }
 

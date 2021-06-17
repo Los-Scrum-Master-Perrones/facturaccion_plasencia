@@ -38,9 +38,9 @@
                 <div class="input-group mb-3">
                     <input name="buscar" id="buscar" style="width:350px;" class=" form-control  mr-sm-2 "
                         wire:model="busqueda" placeholder="Búsqueda por Marca, Nombre y Vitola">
-                        <form action="{{Route('datos_producto')}} " >
-                            <button class=" botonprincipal mr-sm-2 " style="width:200px;">Datos adicionales</button>
-                        </form>
+                    <form action="{{Route('datos_producto')}} ">
+                        <button class=" botonprincipal mr-sm-2 " style="width:200px;">Datos adicionales</button>
+                    </form>
                     <button class=" botonprincipal mr-sm-2 " onclick="mostrar_div_AddProducto();"
                         style="width:200px;">Nuevo producto</button>
                 </div>
@@ -81,7 +81,7 @@
 
                             <td style=" text-align:center;">
 
-                                <?php      if($producto->sampler==="si")    {     
+                                <?php      if($producto->sampler==="si")    {
 
                            echo' <a style=" width:30px; height:30px;"  data-toggle="modal"  ';
                            echo'  data-target="#modal_agregarproducto" href="" ';
@@ -98,8 +98,8 @@
 
                            echo' <a style=" width:10px; height:10px;" data-toggle="modal" href="" ';
                            echo'     data-target="#modal_ver_detalle_producto" ';
-                           echo'  onclick="item_detalle(parseInt('.$producto->item.',10),'. strlen($producto->item).')"> ';
-                           
+                           echo'  onclick="item_detalle(parseInt(`'.$producto->item.'`,10),'. strlen($producto->item).')"> ';
+
                            echo'      <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="black" ';
                            echo'    class="bi bi-arrow-up-right-square" viewBox="0 0 16 16"> ';
                            echo'    <path fill-rule="evenodd" ';
@@ -107,7 +107,8 @@
                            echo' </svg> ';
                            echo' </a> ';
                      }?>
-                                <a style=" width:10px; height:10px;" onclick="cargar_datos_editar({{$producto->id_producto}})">
+                                <a style=" width:10px; height:10px;"
+                                    onclick="cargar_datos_editar({{$producto->id_producto}})">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="black"
                                         class="bi bi-pencil-square" viewBox="0 0 16 16">
                                         <path
@@ -116,7 +117,7 @@
                                             d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z" />
                                     </svg>
                                 </a>
-                                
+
                             </td>
                         </tr>
                         @endforeach
@@ -178,6 +179,8 @@
 
                 if (producto[i].id_producto === id) {
 
+
+
                     $('#marca_ac').val(producto[i].marca).trigger('change.select2');
                     $('#capa_ac').val(producto[i].capa).trigger('change.select2');
                     $('#nombre_ac').val(producto[i].nombre).trigger('change.select2');
@@ -193,8 +196,8 @@
                     document.formulario_actualizar.presentacion_ac.value = producto[i].presentacion;
                     document.formulario_actualizar.cod_sistema_ac.value = producto[i].codigo_producto;
                     document.formulario_actualizar.cod_precio_ac.value = producto[i].codigo_precio;
+                    document.formulario_actualizar.precio_ac.value = producto[i].precio;
                     document.formulario_actualizar.cod_caja_ac.value = producto[i].codigo_caja;
-
                     document.formulario_actualizar.id_producto.value = producto[i].id_producto;
 
                     document.formulario_actualizar.des.value = producto[i].des;
@@ -329,7 +332,6 @@
             }
 
 
-
             var detalles = '<?php echo json_encode($detalle_productos);?>';
             var detalle = JSON.parse(detalles);
             for (var i = 0; i < detalle.length; i++) {
@@ -344,7 +346,16 @@
                     <td>` + detalle[i].vitola + `</td>
                     <td>` + detalle[i].capa + `</td>
                     <td>` + detalle[i].tipo_empaque + `</td>
+                    <td>
 
+                        <form action="/eliminar_detalles_productos" method="post">
+                            <div>
+                                @csrf
+                                <input name="id" id="id"  type="text" style="display:none" value="`+ detalle[i].id_producto + `">
+                                <input type="submit" value="Eliminar">
+                            </div>
+                        </form>
+                    </td>
                   </tr>
 
                   `;
@@ -352,6 +363,7 @@
                 }
 
             }
+
 
 
 
@@ -368,7 +380,7 @@
                     ` + producto[i].vitola + `
                     ` + producto[i].marca + `
                     ` + producto[i].nombre + `
-                    
+
 
                     </strong></h3>
 
@@ -421,61 +433,40 @@
     </script>
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
     <!-- INICIO DEL MODAL VER DETALLE PRODUCTO -->
-    <form action="{{Route('detalle_producto')}} " method="POST" name="formde" id=" formde">
-        @csrf
-        <div class="modal fade" id="modal_ver_detalle_producto" data-backdrop="static" data-keyboard="false"
-            tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true"
-            style="opacity:.9;background:#212529;width=800px;">
-            <div class="modal-dialog modal-dialog-centered modal-lg">
-                <div class="modal-content" style="width:700px;">
+    <div class="modal fade" id="modal_ver_detalle_producto" data-backdrop="static" data-keyboard="false" tabindex="-1"
+        aria-labelledby="staticBackdropLabel" aria-hidden="true" style="opacity:.9;background:#212529;width=800px;">
+        <div class="modal-dialog modal-dialog-centered modal-lg">
+            <div class="modal-content" style="width:700px;">
 
-                    <div class="modal-header">
-                        <h5 id="staticBackdropLabel">Detalles del producto <span style="font-size:10px;" name="clase"
-                                id="clase"></span></h5>
-                        <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close"></button>
-                    </div>
+                <div class="modal-header">
+                    <h5 id="staticBackdropLabel">Detalles del producto <span style="font-size:10px;" name="clase"
+                            id="clase"></span></h5>
+                    <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close"></button>
+                </div>
 
-                    <div class="modal-body">
-                        <table id="detallestabla" name="detallestabla" class="table table-bordered table-striped"
-                            style="font-size:10px;">
-                            <thead>
-                                <tr>
-                                    <th>Item</th>
-                                    <th>Marca</th>
-                                    <th>Nombre</th>
-                                    <th>Vitola</th>
-                                    <th>Capa</th>
-                                    <th>Tipo de empaque</th>
+                <div class="modal-body">
+                    <table id="detallestabla" name="detallestabla" class="table table-bordered table-striped"
+                        style="font-size:10px;">
+                        <thead>
+                            <tr>
+                                <th>Item</th>
+                                <th>Marca</th>
+                                <th>Nombre</th>
+                                <th>Vitola</th>
+                                <th>Capa</th>
+                                <th>Tipo de empaque</th>
+                                <th>Eliminar</th>
+                            </tr>
+                        </thead>
+                        <tbody name="body" id="body">
 
-                                </tr>
-                            </thead>
-                            <tbody name="body" id="body">
-
-                            </tbody>
-                        </table>
-                    </div>
-
-                    <input name="item_detalle" id="item_detalle" value+="" hidden>
-
+                        </tbody>
+                    </table>
                 </div>
             </div>
         </div>
-    </form>
+    </div>
     <!-- FIN DEL MODAL VER DETALLE PRODUCTO -->
 
 
@@ -524,7 +515,7 @@
                                 <div class="mb-3 col">
                                     <label for="txt_figuraytipo" class="form-label">Item</label>
                                     <input name="item_ac" id="item_ac" class="form-control" required type="text"
-                                        autocomplete="off" readOnly>
+                                        autocomplete="off">
                                 </div>
 
                                 <div class="mb-3 col">
@@ -603,6 +594,13 @@
                                 </div>
 
                                 <div class="mb-3 col">
+                                    <label for="txt_buenos" class="form-label">Precio</label>
+                                    <input name="precio" id="precio_ac" class="form-control" required type="text"
+                                        autocomplete="off">
+                                </div>
+
+
+                                <div class="mb-3 col">
                                     <label for="txt_total" class="form-label">Código de la cajita</label>
                                     <input name="cod_caja_ac" id="cod_caja_ac" class="form-control" type="text"
                                         autocomplete="off">
@@ -673,102 +671,21 @@
 
 
 
-<div style="  display: none;justify-content: center;align-items: center; height:100%;position:fixed;top:0px;width:50%;left:25%;" id="div_AddDetalleProducto"   >
-    <!-- INICIO DEL MODAL AGREGAR DETALLE PRODUCTO -->
-    <form action="{{Route('detalle')}}" method="POST" id="form_detalle" name="form_detalle" style="width:100%;">
-        <div data-backdrop="static" data-keyboard="false" tabindex="-1"
-            aria-labelledby="staticBackdropLabel" aria-hidden="true" style="background:#212529;">
-            <div >
-                <div class="modal-content" >
-                    @csrf
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="staticBackdropLabel">Agregar detalle del producto</h5>
-                    </div>
-
-                    <div class="modal-body">
-                         <div class="row">
-                              <div class="mb-3 col">
-                                <label for="item_de" class="form-label" style="width:100%;">Item</label>
-                                <input name="item_de" id="item_de" class="form-control" required type="text"
-                                    autocomplete="off" readonly>
-                            </div>
-
-
-                            <div class="mb-3 col">
-                                <label for="capa_de" class="form-label" style="width:100%;">Capa</label>
-                                <select  name="capa_de" id="capa_de" class="mi-selector form-control "  style="width:100%;" name="states[]" required >
-                                    <option value="NINGUNA" style="overflow-y: scroll;">Ninguna</option>
-                                    @foreach($capas as $capa)
-                                    <option style="overflow-y: scroll;"> {{$capa->capa}}</option>
-                                    @endforeach
-                                </select>
-                            </div>
-
-                            <div class="mb-3 col">
-                                <label for="marca_de" class="form-label" style="width:100%;">Marca</label>
-                                <select  name="marca_de" id="marca_de" class=" mi-selector form-control"  style="width:100%;" name="states[]" required >
-                                    <option value="NINGUNA" style="overflow-y: scroll;">Ninguna</option>
-                                    @foreach($marcas as $marca)
-                                    <option style="overflow-y: scroll;"> {{$marca->marca}}</option>
-                                    @endforeach
-                                </select>
-                            </div>
-                        </div>
-                    
-
-                        <div class="row">
-                            <div class="mb-3 col">
-                                <label for="nombre_de" class="form-label" style="width:100%;">Nombre</label>
-
-                                <select name="nombre_de" id="nombre_de"class=" mi-selector form-control" style="width:100%;" name="states[]" required >
-                                    <option value="NINGUNA" style="overflow-y: scroll;">Ninguna</option>
-                                    @foreach($nombres as $nombre)
-                                    <option style="overflow-y: scroll;"> {{$nombre->nombre}}</option>
-                                    @endforeach
-                                </select>
-                            </div>
-
-                            <div class="mb-3 col">
-                                <label for="vitola_de" class="form-label" style="width:100%;">Vitola</label>
-
-                                <select name="vitola_de" id="vitola_de"class=" mi-selector form-control"  style="width:100%;" name="states[]" required >
-                                    <option value="NINGUNA" style="overflow-y: scroll;">Ninguna</option>
-                                    @foreach($vitolas as $vitola)
-                                    <option style="overflow-y: scroll;"> {{$vitola->vitola}}</option>
-                                    @endforeach
-                                </select>
-                            </div>
-                            <div class="mb-3 col">
-                                <label for="tipo_de" class="form-label" style="width:100%;">Tipo de empaque</label>
-                                <select name="tipo_de" id="tipo_de" class=" mi-selector form-control"  style="width:100%;" name="states[]" required >
-                                    <option value="N/D" style="overflow-y: scroll;">Ninguna</option>
-                                    @foreach($tipo_empaques as $tipo_empaque)
-                                    <option style="overflow-y: scroll;"> {{$tipo_empaque->tipo_empaque}}
-                                    </option>
-                                    @endforeach
-                                </select>
-                            </div>
-                        </div>
-
-
-                        <div class="row">
-                            <div class="mb-3 col">
-                                <input type="checkbox" name="cello_de" id="cello_de" value="si">
-                                <label for="cello" class="form-label">Sello</label>
-                            </div>
-                            <div class="mb-3 col">
-
-                                <input type="checkbox" name="anillo_de" id="anillo_de" value="si">
-                                <label for="anillo" class="form-label">Anillo</label>
-                            </div>
-                            <div class="mb-3 col">
-
-                                <input type="checkbox" name="upc_de" id="upc_de" value="si">
-                                <label for="upc" class="form-label">UPC</label>
-                            </div>
+    <div style="  display: none;justify-content: center;align-items: center; height:100%;position:fixed;top:0px;width:50%;left:25%;"
+        id="div_AddDetalleProducto">
+        <!-- INICIO DEL MODAL AGREGAR DETALLE PRODUCTO -->
+        <form action="{{Route('detalle')}}" method="POST" id="form_detalle" name="form_detalle" style="width:100%;">
+            <div data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel"
+                aria-hidden="true" style="background:#212529;">
+                <div>
+                    <div class="modal-content">
+                        @csrf
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="staticBackdropLabel">Agregar detalle del producto</h5>
                         </div>
 
                         <div class="modal-body">
+
                             <div class="row">
                                 <div class="mb-3 col">
                                     <label for="item_de" class="form-label" style="width:100%;">Item</label>
@@ -867,6 +784,11 @@
                                         required type="text" autocomplete="off">
                                 </div>
                                 <div class="mb-3 col">
+
+                                    <label for="txt_buenos" class="form-label">Precio</label>
+                                    <input name="precio" id="precio" class="form-control" required type="text"
+                                        autocomplete="off">
+
                                 </div>
                                 <div class="mb-3 col">
                                 </div>
@@ -902,7 +824,7 @@
 
 
 
-    <div style="  display: none;justify-content: center;align-items: center;height: 100%;position:fixed;top:0px;left:25%;width:50%;"
+    <div style="display: none; justify-content: center;align-items: center;height: 100%;position:fixed;top:0px;left:25%;width:50%;"
         id="div_AddProducto">
         <!-- INICIO DEL MODAL NUEVO PRODUCTO -->
 
@@ -1008,7 +930,6 @@
                                             <option value="Puros Tripa Corta" style="overflow-y: scroll;">Puros Tripa
                                                 Corta
                                             </option>
-
                                         </select>
                                     </div>
                                 </div>
@@ -1025,6 +946,11 @@
                                             precio</label>
                                         <input name="cod_precio" id="cod_precio" class="form-control" required
                                             type="text" autocomplete="off">
+                                    </div>
+                                    <div class="mb-3 col">
+                                        <label for="txt_buenos" class="form-label">Precio</label>
+                                        <input name="precio" id="precio" class="form-control" required type="text"
+                                            autocomplete="off">
                                     </div>
 
                                     <div class="mb-3 col">
@@ -1047,7 +973,6 @@
                                         <label for="anillo" class="form-label">Anillo</label>
                                     </div>
                                     <div class="mb-3 col">
-
                                         <input type="checkbox" name="upc" id="upc" style="font-size:20px" value="si">
                                         <label for="upc" class="form-label">UPC</label>
                                     </div>
@@ -1064,7 +989,6 @@
                             <button onclick="agregarproducto()" class=" bmodal_yes " type="submit"> <span>Guardar</span>
                             </button>
                         </div>
-
                     </div>
                 </div>
             </div>
@@ -1104,10 +1028,7 @@
 
             document.getElementById('div_AddDetalleProducto').style.display = "none";
         }
-
-
-        
     </script>
 
-    
+
 </div>
