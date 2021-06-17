@@ -123,6 +123,8 @@ Route::post('/actualizar_pendiente',[ Pendiente::class,'actualizar_pendiente'])-
 Route::get('/actualizar_pendiente_empaque',[ PendienteEmpaque::class,'actualizar_pendiente_empaque'])->name('actualizar_pendiente_empaque');
 Route::post('/actualizar_pendiente_empaque',[ PendienteEmpaque::class,'actualizar_pendiente_empaque'])->name('actualizar_pendiente_empaque');
 
+Route::post('/insertar_detalle_provicional_sin_existencia/{id}',[ PendienteEmpaque::class,'insertar_detalle_provicional_sin_existencia']);
+
 
 Route::get('/nuevo_pendiente',[ Pendiente::class,'insertar_nuevo_pendiente'])->name('nuevo_pendiente');
 Route::post('/nuevo_pendiente',[ Pendiente::class,'insertar_nuevo_pendiente'])->name('nuevo_pendiente');
