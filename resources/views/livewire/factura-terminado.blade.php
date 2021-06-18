@@ -190,8 +190,9 @@
                             <td>{{$detalles->total_neto}}</td>
                             <td>{{$detalles->precio_producto}}</td>
 
-                            <td>{{$detalles->costo}}</td>
-                            <td>{{$detalles->valor_total}}</td>
+
+                            <td>{{number_format($detalles->costo,4)}}</td>
+                            <td>{{number_format($detalles->valor_total,4)}}</td>
                             <td>
                                 <a data-toggle="modal" data-target="#borrar_detalles" href="" wire:click="borrar_detalles({{$detalles->id_detalle}})">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor"
