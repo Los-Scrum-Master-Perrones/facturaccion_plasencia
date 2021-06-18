@@ -25,7 +25,7 @@ class PendienteEmpaque extends Component
     public $r_dos;
     public $r_tres;
     public $r_cuatro;
-    
+
     /* procedimientos almacanedos busquedas pendiente*/
     public $marcas_p;
     public $nombre_p;
@@ -40,7 +40,7 @@ class PendienteEmpaque extends Component
 
     public function render()
     {
-          /*Procedimientos de busquedas de la tabla pendiente Empaque*/  
+          /*Procedimientos de busquedas de la tabla pendiente Empaque*/
           $this->marcas_p=\DB::select('call buscar_marca_empaque(:uno,:dos,:tres,:cuatro)',
         [
             'uno' =>  $this->r_uno,
@@ -115,7 +115,7 @@ class PendienteEmpaque extends Component
     ]
 );
 
-        
+
         $this->datos_pendiente_empaque = DB::select('call buscar_pendiente_empaque(:uno,:dos,:tres,:cuatro)',
         [
             'uno' =>  $this->r_uno,
@@ -124,20 +124,20 @@ class PendienteEmpaque extends Component
             'cuatro' =>  $this->r_cuatro
         ]
     );
-    
+
         $this->datos_pendiente_empaque_nuevo = DB::select('select pendiente_empaque.id_pendiente,pendiente_empaque.saldo from pendiente_empaque');
 
         $this->tuplas=count($this->datos_pendiente_empaque);
 
 
         $datos = [];
-        $cantidad_detalle_sampler = 0;   
-        $detalles = 0;  
-        $valores = [];  
+        $cantidad_detalle_sampler = 0;
+        $detalles = 0;
+        $valores = [];
 
         $datos_pendiente = DB::select('select * from pendiente_empaque ORDER BY mes,item,orden,id_pendiente asc');
 
-      
+
         return view('livewire.pendiente-empaque')->extends('principal')->section('content');
     }
 
@@ -153,15 +153,15 @@ class PendienteEmpaque extends Component
             'tres' =>  $this->r_tres,
             'cuatro' =>  $this->r_cuatro
         ]
-    );  
-   
-       
+    );
+
+
     }
 
 
 
-    
-     
+
+
 
 
     public function insertar_detalle_provicional(){
@@ -174,7 +174,7 @@ class PendienteEmpaque extends Component
             'cuatro' =>  $this->r_cuatro
         ]
     );
-        
+
         $this->tuplas=count($this->datos_pendiente_empaque);
 
         for($i = 0 ; $this->tuplas > $i ; $i++){
@@ -188,10 +188,10 @@ class PendienteEmpaque extends Component
         }
 
 
-        
 
-        return redirect()->route('detalles_programacion'); 
-       
+
+        return redirect()->route('detalles_programacion');
+
     }
 
 
@@ -199,7 +199,7 @@ class PendienteEmpaque extends Component
 
         $datos_pendiente = DB::select('call datos_pendiente_programar(:id)'
         ,['id'=>$id]);
-               
+
             $detalles = DB::select('call insertar_detallePro_temporalSinExistencia(:numero_orden,:orden,:cod_producto,:saldo,:id_pendiente,:cant)'
             ,['numero_orden'=>isset($datos_pendiente[0]->orden_del_sitema)?$datos_pendiente[0]->orden_del_sitema:null,
             'orden'=>isset($datos_pendiente[0]->orden)?$datos_pendiente[0]->orden:null,
@@ -207,27 +207,27 @@ class PendienteEmpaque extends Component
             'saldo'=>isset($datos_pendiente[0]->saldo)?$datos_pendiente[0]->saldo:null,
             'id_pendiente'=>isset($datos_pendiente[0]->id_pendiente)?$datos_pendiente[0]->id_pendiente:null,
             'cant'=>isset($datos_pendiente[0]->cant_cajas)?$datos_pendiente[0]->cant_cajas:null]);
-        
 
-        return redirect()->route('detalles_programacion'); 
-       
+
+        return redirect()->route('detalles_programacion');
+
     }
 
 
-    
-    public function actualizar_pendiente_empaque(Request $request){         
-    
+
+    public function actualizar_pendiente_empaque(Request $request){
+
         $this->actualizar=\DB::select('call actualizar_pendiente_empaque(:id,:saldo)',
         ['id'=>$request->id_pendientea,
         'saldo' =>$request->saldo
         ]);
 
-        return redirect()->route('pendiente_empaque'); 
-    
+        return redirect()->route('pendiente_empaque');
+
         }
 
 
-    
+
 
 
 }
