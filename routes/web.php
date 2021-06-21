@@ -114,6 +114,9 @@ Route::post('/pendiente_insertar', [Pendiente::class,'pendiente_indexi'])->name(
 Route::get('/borrarpendiente',[ Pendiente::class,'eliminar_pendiente'])->name('borrarpendiente');
 Route::post('/borrarpendiente',[ Pendiente::class,'eliminar_pendiente'])->name('borrarpendiente');
 
+Route::get('/borrarpendiente_empaque',[ PendienteEmpaque::class,'eliminar_pendiente'])->name('borrarpendienteEmpaque');
+Route::post('/borrarpendiente_empaque',[ PendienteEmpaque::class,'eliminar_pendiente'])->name('borrarpendienteEmpaque');
+
 
 Route::get('/actualizar_pendiente',[ Pendiente::class,'actualizar_pendiente'])->name('actualizar_pendiente');
 Route::post('/actualizar_pendiente',[ Pendiente::class,'actualizar_pendiente'])->name('actualizar_pendiente');

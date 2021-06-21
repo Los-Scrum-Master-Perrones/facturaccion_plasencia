@@ -258,6 +258,8 @@ class PendienteEmpaque extends Component
             $observacions = $request->observacion;
         }
 
+      
+
         $this->actualizar=\DB::select('call actualizar_pendiente_empaque(:id,:observacions,:pendiente,:saldo)',
         ['id'=>$request->id_pendientea,
         'observacions' =>$observacions,
@@ -268,6 +270,19 @@ class PendienteEmpaque extends Component
         return redirect()->route('pendiente_empaque');
 
         }
+
+
+
+
+    public function eliminar_pendiente(Request $request)
+    {
+
+        $this->datos_pendiente = [];
+        $this->borrar = \DB::select('call borrar_pendiente_empaque(:eliminar)', ['eliminar' => $request->id_pendiente]);
+
+        return redirect()->route('pendiente_empaque');
+    }
+
 
 
 
