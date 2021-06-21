@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1:3306
--- Tiempo de generación: 21-06-2021 a las 20:48:54
+-- Tiempo de generación: 21-06-2021 a las 20:55:58
 -- Versión del servidor: 5.7.24
 -- Versión de PHP: 7.3.1
 
@@ -151,7 +151,7 @@ CREATE DEFINER=`root`@`localhost` PROCEDURE `actualizar_pendiente_empaque` (IN `
  pendiente_empaque.observacion = observeacion,
  pendiente_empaque.pendiente = pendient,
  pendiente_empaque.saldo = saldo
- WHERE pendiente_empaque.id_pendiente_pedido = id ;
+ WHERE pendiente_empaque.id_pendiente = id ;
 END$$
 
 DROP PROCEDURE IF EXISTS `actualizar_pendiente_empaque_sampler`$$
@@ -298,6 +298,13 @@ CREATE DEFINER=`root`@`localhost` PROCEDURE `borrar_pendientes` (IN `id` INT)  B
 
 DELETE FROM pendiente WHERE pendiente.id_pendiente = id;
 DELETE FROM pendiente_empaque WHERE pendiente_empaque.id_pendiente_pedido = id;
+
+END$$
+
+DROP PROCEDURE IF EXISTS `borrar_pendiente_empaque`$$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `borrar_pendiente_empaque` (IN `id` INT)  BEGIN
+
+DELETE FROM pendiente_empaque WHERE pendiente_empaque.id_pendiente = id;
 
 END$$
 
