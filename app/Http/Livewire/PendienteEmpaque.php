@@ -138,6 +138,41 @@ class PendienteEmpaque extends Component
         $datos_pendiente = DB::select('select * from pendiente_empaque ORDER BY mes,item,orden,id_pendiente asc');
 
 
+        for ($i = 0; $i < count($this->datos_pendiente_empaque); $i++) {
+
+
+
+            $sampler = DB::select('SELECT clase_productos.sampler FROM clase_productos WHERE  clase_productos.item = ?;', [$this->datos_pendiente_empaque[$i]->item]);
+
+            if (isset($sampler[0])) {
+                if ($sampler[0]->sampler == "si") {
+                    if ($cantidad_detalle_sampler == 0 && $detalles == 0) {
+                        $datos = DB::select('call traer_numero_detalles_productos(?)', [$this->datos_pendiente_empaque[$i]->item]);
+                        $cantidad_detalle_sampler = $datos[0]->tuplas;
+                    }
+                    $valores = DB::select('call traer_detalles_productos_actualizar(?,?)', [$this->datos_pendiente_empaque[$i]->item, $detalles]);
+
+
+                    //echo  $this->datos_pendiente_empaque[$i]->id_pendiente." ".$this->datos_pendiente_empaque[$i]->item." "."(". $cantidad_detalle_sampler.")"."<br>";
+                    $actualizar = DB::select('call actualizar_pendiente_empaque_sampler(:marca,:nombre,:vitola,:capa,:tipo,:item)', [
+                        'marca' => $valores[0]->marca,
+                        'nombre' => $valores[0]->nombre,
+                        'vitola' => $valores[0]->vitola,
+                        'capa' => $valores[0]->capa,
+                        'tipo' => $valores[0]->tipo_empaque,
+                        'item' => $this->datos_pendiente_empaque[$i]->id_pendiente
+                    ]);
+
+                    $detalles++;
+
+                    if ($detalles == $cantidad_detalle_sampler) {
+                        $detalles = 0;
+                        $cantidad_detalle_sampler = 0;
+                    }
+                }
+            }
+        }
+
         return view('livewire.pendiente-empaque')->extends('principal')->section('content');
     }
 
