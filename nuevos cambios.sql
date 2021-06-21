@@ -1,4 +1,24 @@
-CREATE DEFINER=`root`@`localhost` PROCEDURE `actualizar_pendientes`(
+-- --------------------------------------------------------
+-- Host:                         127.0.0.1
+-- Versión del servidor:         5.7.24 - MySQL Community Server (GPL)
+-- SO del servidor:              Win64
+-- HeidiSQL Versión:             11.0.0.5919
+-- --------------------------------------------------------
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET NAMES utf8 */;
+/*!50503 SET NAMES utf8mb4 */;
+/*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
+/*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
+
+
+-- Volcando estructura de base de datos para facturacion_plasencia
+CREATE DATABASE IF NOT EXISTS `facturacion_plasencia` /*!40100 DEFAULT CHARACTER SET latin1 */;
+USE `facturacion_plasencia`;
+
+-- Volcando estructura para procedimiento facturacion_plasencia.actualizar_pendientes
+DELIMITER //
+CREATE PROCEDURE `actualizar_pendientes`(
 	IN `id` INT,
 	IN `item` VARCHAR(50),
 	IN `orden_sistema` VARCHAR(50),
@@ -10,11 +30,6 @@ CREATE DEFINER=`root`@`localhost` PROCEDURE `actualizar_pendientes`(
 	IN `precio` VARCHAR(50),
 	IN `orden` VARCHAR(50)
 )
-LANGUAGE SQL
-NOT DETERMINISTIC
-CONTAINS SQL
-SQL SECURITY DEFINER
-COMMENT ''
 BEGIN
 
 UPDATE pendiente set pendiente.orden_del_sitema = orden_sistema,
@@ -41,48 +56,34 @@ pendiente.observacion = observeacion, pendiente.presentacion = presentacion,
  clase_productos.precio = precio
  WHERE clase_productos.item = item;
 
- end
+ end//
+DELIMITER ;
 
-
-
-
-
-
-
-CREATE DEFINER=`root`@`localhost` PROCEDURE `actualizar_pendiente_empaque`(
+-- Volcando estructura para procedimiento facturacion_plasencia.actualizar_pendiente_empaque
+DELIMITER //
+CREATE PROCEDURE `actualizar_pendiente_empaque`(
 	IN `id` INT,
 	IN `observeacion` VARCHAR(50),
 	IN `pendient` VARCHAR(50),
 	IN `saldo` VARCHAR(50)
 )
-LANGUAGE SQL
-NOT DETERMINISTIC
-CONTAINS SQL
-SQL SECURITY DEFINER
-COMMENT ''
 BEGIN
  UPDATE pendiente_empaque SET
  pendiente_empaque.observacion = observeacion,
  pendiente_empaque.pendiente = pendient,
  pendiente_empaque.saldo = saldo
  WHERE pendiente_empaque.id_pendiente_pedido = id ;
-END
+END//
+DELIMITER ;
 
-
-
-
-
-CREATE DEFINER=`root`@`localhost` PROCEDURE `buscar_pendiente`(
+-- Volcando estructura para procedimiento facturacion_plasencia.buscar_pendiente
+DELIMITER //
+CREATE PROCEDURE `buscar_pendiente`(
 	IN `pa_uno` VARCHAR(50),
 	IN `pa_dos` VARCHAR(50),
 	IN `pa_tres` VARCHAR(50),
 	IN `pa_cuatro` VARCHAR(50)
 )
-LANGUAGE SQL
-NOT DETERMINISTIC
-CONTAINS SQL
-SQL SECURITY DEFINER
-COMMENT ''
 BEGIN
 
 if pa_uno != "" || pa_dos != "" || pa_tres  != "" || pa_cuatro != ""
@@ -162,19 +163,14 @@ ORDER BY pendiente.id_pendiente;
 END if;
 
 
-END
+END//
+DELIMITER ;
 
-
-
-
-CREATE DEFINER=`root`@`localhost` PROCEDURE `mostrar_detalle_factura`(
+-- Volcando estructura para procedimiento facturacion_plasencia.mostrar_detalle_factura
+DELIMITER //
+CREATE PROCEDURE `mostrar_detalle_factura`(
 	IN `pa_tipo_factura` VARCHAR(10)
 )
-LANGUAGE SQL
-NOT DETERMINISTIC
-CONTAINS SQL
-SQL SECURITY DEFINER
-COMMENT ''
 BEGIN
 SELECT `id_detalle`,
 	`id_venta`,
@@ -268,5 +264,9 @@ ORDER BY (SELECT CONCAT(pendiente.orden) AS oer
 
 
 
-END
+END//
+DELIMITER ;
 
+/*!40101 SET SQL_MODE=IFNULL(@OLD_SQL_MODE, '') */;
+/*!40014 SET FOREIGN_KEY_CHECKS=IF(@OLD_FOREIGN_KEY_CHECKS IS NULL, 1, @OLD_FOREIGN_KEY_CHECKS) */;
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
