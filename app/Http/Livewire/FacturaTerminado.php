@@ -57,6 +57,9 @@ class FacturaTerminado extends Component
     public $id_editar;
 
 
+    public $detalles_produtos;
+
+
 
     public function render()
     {
@@ -95,6 +98,9 @@ class FacturaTerminado extends Component
         }
 
         $this->num_factura_sistema = DB::select('call traer_num_factura()')[0]->factura_interna;
+
+        $this->detalles_produtos = DB::select('CALL `mostrar_detalles_productos`()');
+
 
 
         for ($i = 0; $i < count($this->detalles_venta); $i++) {
@@ -165,7 +171,7 @@ class FacturaTerminado extends Component
 
         $this->nom = "";
         $this->fede = "";
-        $this->fecha = ""; 
+        $this->fecha = "";
         $this->item = "";
         $this->orden = "";
         $this->hon = "";
@@ -275,7 +281,7 @@ class FacturaTerminado extends Component
 
             //return Excel::download(new FacturaExport($this->num_factura_sistema), 'Pendiente.xlsx');
             return Excel::download(new FacturaExportView($this->num_factura_sistema), 'Factura.xlsx');
-            
+
         }else{
             $this->dispatchBrowserEvent("advertencia_mensaje");
         }
@@ -289,19 +295,19 @@ class FacturaTerminado extends Component
 
     public function actualizar_Datos_sampler(){
 
-        $datos_sampler_pendiente = DB::select('SELECT * FROM pendiente WHERE 
+        $datos_sampler_pendiente = DB::select('SELECT * FROM pendiente WHERE
         (SELECT clase_productos.sampler FROM clase_productos WHERE clase_productos.item = pendiente.item)= "si"
         ORDER BY 1 asc');
- 
-        $conteo_detallesc= 0; 
+
+        $conteo_detallesc= 0;
         $secuencia_de_detalles=0;
 
         for($i = 0 ;  $i < count($datos_sampler_pendiente);$i++){
-               
+
             $conteo_detallesc = DB::select('SELECT * FROM detalle_clase_productos WHERE detalle_clase_productos.item = :item
             ORDER BY 1 ASC
             LIMIT :tupla, 1;', ['item' => $datos_sampler_pendiente[$i]->item, 'tupla'=> $conteo_detallesc]);
-                
+
         }
 
 

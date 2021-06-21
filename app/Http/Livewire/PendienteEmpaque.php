@@ -217,8 +217,16 @@ class PendienteEmpaque extends Component
 
     public function actualizar_pendiente_empaque(Request $request){
 
-        $this->actualizar=\DB::select('call actualizar_pendiente_empaque(:id,:saldo)',
+        if ($request->observacion  == null) {
+            $observacions = " ";
+        } else {
+            $observacions = $request->observacion;
+        }
+
+        $this->actualizar=\DB::select('call actualizar_pendiente_empaque(:id,:observacions,:pendiente,:saldo)',
         ['id'=>$request->id_pendientea,
+        'observacions' =>$observacions,
+        'pendiente' =>$request->pendiente,
         'saldo' =>$request->saldo
         ]);
 

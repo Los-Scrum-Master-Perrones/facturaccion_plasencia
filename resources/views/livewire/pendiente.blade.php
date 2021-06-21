@@ -794,6 +794,12 @@
                             </div>
 
                             <div class="mb-3 col">
+                                <label for="txt_figuraytipo" class="form-label">Saldo</label>
+                                <input name="saldo" id="saldo" class="form-control" type="text"
+                                    autocomplete="off">
+                            </div>
+
+                            <div class="mb-3 col">
                                 <label for="txt_figuraytipo" class="form-label">Código precio</label>
                                 <input name="cprecio" id="cprecio" class="form-control" type="text" autocomplete="off">
                             </div>
@@ -915,6 +921,9 @@
                     document.actualizar_pendiente.orden_sistema.value = datasss[i].orden_del_sitema;
 
                     document.actualizar_pendiente.pendiente.value = datasss[i].pendiente;
+
+                    document.actualizar_pendiente.saldo.value = datasss[i].saldo;
+
                     document.actualizar_pendiente.cprecio.value = datasss[i].serie_precio;
 
                     document.actualizar_pendiente.precio.value = datasss[i].precio;

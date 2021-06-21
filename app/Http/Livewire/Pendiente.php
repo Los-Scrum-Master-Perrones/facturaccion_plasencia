@@ -373,7 +373,7 @@ class Pendiente extends Component
         }
 
         if ($request->precio == null) {
-            $precios = " ";
+            $precios = "0";
         } else {
             $precios = $request->precio;
         }
@@ -397,13 +397,8 @@ class Pendiente extends Component
             $pendientes = $request->pendiente;
         }
 
-
-
-
-
-
         $this->actualizar = \DB::select(
-            'call actualizar_pendientes(:id,:item,:orden,:observacion,:presentacion,:pendiente,:cprecio,:precio,:orden1)',
+            'call actualizar_pendientes(:id,:item,:orden,:observacion,:presentacion,:pendiente,:saldo,:cprecio,:precio,:orden1)',
             [
                 'id' => $request->id_pendientea,
                 'item' => $request->itema,
@@ -411,6 +406,7 @@ class Pendiente extends Component
                 'observacion' => $observacions,
                 'presentacion' => $presentacions,
                 'pendiente' => $pendientes,
+                'saldo' => $request->saldo,
                 'cprecio' => $cprecios,
                 'precio' => $precios,
                 'orden1' => $oredn1s

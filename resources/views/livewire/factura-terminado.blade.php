@@ -156,11 +156,46 @@
                         </tr>
                     </thead>
                     <tbody>
+
+
+                        @php
+                        $orden = "";
+                        $orden_actua = "";
+                    @endphp
+
+
+
                         <?php  $bultos = 0;
                                 $val_anterioir=0;
                                $val_actual=0 ?>
 
                         @foreach($detalles_venta as $detalles)
+
+
+
+
+                            @if ( $orden == "" && $orden_actua == "")
+                            @php
+                                $orden_actua = $detalles->orden;
+                                $orden_actua = $detalles->orden;
+                            @endphp
+                            @endif
+
+                            @php
+                            $orden = $detalles->orden;
+                            @endphp
+
+                            @if ($orden_actua == $orden)
+
+                            @else
+                            <tr>
+                                <td colspan="19" style="background-color: gray"></td>
+                            </tr>
+                            @php
+                                $orden_actua = $detalles->orden;
+                            @endphp
+                            @endif
+
                         <tr style="font-size:10px;">
                             <?php
                             $val_anterioir= $bultos+1;
@@ -250,7 +285,12 @@
                         </tr>
                     </thead>
                     <tbody>
+
+
                         @foreach($datos_pendiente as $datos)
+
+
+
                         <tr>
                             <td style="width:100px; max-width: 400px;overflow-x:auto;">{{$datos->categoria}}</td>
                             <td>{{$datos->item}}</td>
@@ -294,16 +334,17 @@
                             </td>
                         </tr>
 
+
+
+
                         @endforeach
                     </tbody>
                 </table>
 
-
-
             </div>
 
 
-            </br>
+            <br>
             <div class="row">
                 <div class="col-sm-3 input-group mb-3">
                     <span id="de" class="input-group-text form-control "
@@ -327,18 +368,6 @@
                     <input type="number" class="form-control " placeholder="0.00" wire:model="total_peso_neto" readonly>
                 </div>
             </div>
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
