@@ -25,7 +25,7 @@ class Pendiente extends Component
     public $pres;
     
 
- /* procedimientos almacanedos cargar select de nuevo pendiente*/
+    /* procedimientos almacanedos cargar select de nuevo pendiente*/
     public $marcas;
     public $capas;
     public $nombres;
@@ -55,90 +55,99 @@ class Pendiente extends Component
 
     public function render()
     {
-        $this->capas= \DB::select('call buscar_capa("")');
-        $this->nombres= \DB::select('call buscar_nombre("")');
-        $this->vitolas= \DB::select('call buscar_vitola("")');
-        $this->marcas= \DB::select('call buscar_marca("")');
-        $this->tipo_empaques= \DB::select('call buscar_tipo_empaque("")');
+        $this->capas = \DB::select('call buscar_capa("")');
+        $this->nombres = \DB::select('call buscar_nombre("")');
+        $this->vitolas = \DB::select('call buscar_vitola("")');
+        $this->marcas = \DB::select('call buscar_marca("")');
+        $this->tipo_empaques = \DB::select('call buscar_tipo_empaque("")');
 
 
         /*Procedimientos de busquedas de la tabla pendiente*/
-        $this->marcas_p=\DB::select('call buscar_marca_pendiente(:uno,:dos,:tres,:cuatro)',
-        [
-            'uno' =>  $this->r_uno,
-            'dos' =>  $this->r_dos,
-            'tres' =>  $this->r_tres,
-            'cuatro' =>  $this->r_cuatro
-        ]
-    );
-        $this->nombre_p=\DB::select('call buscar_nombre_pendiente(:uno,:dos,:tres,:cuatro)',
-        [
-            'uno' =>  $this->r_uno,
-            'dos' =>  $this->r_dos,
-            'tres' =>  $this->r_tres,
-            'cuatro' =>  $this->r_cuatro
-        ]
-    );
-        $this->vitolas_p=\DB::select('call buscar_vitola_pendiente(:uno,:dos,:tres,:cuatro)',
-        [
-            'uno' =>  $this->r_uno,
-            'dos' =>  $this->r_dos,
-            'tres' =>  $this->r_tres,
-            'cuatro' =>  $this->r_cuatro
-        ]
-    );
-        $this->capas_p=\DB::select('call buscar_capa_pendiente(:uno,:dos,:tres,:cuatro)',
-        [
-            'uno' =>  $this->r_uno,
-            'dos' =>  $this->r_dos,
-            'tres' =>  $this->r_tres,
-            'cuatro' =>  $this->r_cuatro
-        ]
-    );
-        $this->empaques_p=\DB::select('call buscar_tipo_empaque_pendiente(:uno,:dos,:tres,:cuatro)',
-        [
-            'uno' =>  $this->r_uno,
-            'dos' =>  $this->r_dos,
-            'tres' =>  $this->r_tres,
-            'cuatro' =>  $this->r_cuatro
-        ]
-    );
+        $this->marcas_p = \DB::select(
+            'call buscar_marca_pendiente(:uno,:dos,:tres,:cuatro)',
+            [
+                'uno' =>  $this->r_uno,
+                'dos' =>  $this->r_dos,
+                'tres' =>  $this->r_tres,
+                'cuatro' =>  $this->r_cuatro
+            ]
+        );
+        $this->nombre_p = \DB::select(
+            'call buscar_nombre_pendiente(:uno,:dos,:tres,:cuatro)',
+            [
+                'uno' =>  $this->r_uno,
+                'dos' =>  $this->r_dos,
+                'tres' =>  $this->r_tres,
+                'cuatro' =>  $this->r_cuatro
+            ]
+        );
+        $this->vitolas_p = \DB::select(
+            'call buscar_vitola_pendiente(:uno,:dos,:tres,:cuatro)',
+            [
+                'uno' =>  $this->r_uno,
+                'dos' =>  $this->r_dos,
+                'tres' =>  $this->r_tres,
+                'cuatro' =>  $this->r_cuatro
+            ]
+        );
+        $this->capas_p = \DB::select(
+            'call buscar_capa_pendiente(:uno,:dos,:tres,:cuatro)',
+            [
+                'uno' =>  $this->r_uno,
+                'dos' =>  $this->r_dos,
+                'tres' =>  $this->r_tres,
+                'cuatro' =>  $this->r_cuatro
+            ]
+        );
+        $this->empaques_p = \DB::select(
+            'call buscar_tipo_empaque_pendiente(:uno,:dos,:tres,:cuatro)',
+            [
+                'uno' =>  $this->r_uno,
+                'dos' =>  $this->r_dos,
+                'tres' =>  $this->r_tres,
+                'cuatro' =>  $this->r_cuatro
+            ]
+        );
 
 
 
 
-        $this->mes_p=\DB::select('call buscar_fechas_pendiente(:uno,:dos,:tres,:cuatro)',
-        [
-            'uno' =>  $this->r_uno,
-            'dos' =>  $this->r_dos,
-            'tres' =>  $this->r_tres,
-            'cuatro' =>  $this->r_cuatro
-        ]
-    );
-        $this->items_p=\DB::select('call buscar_item_pendiente(:uno,:dos,:tres,:cuatro)',
-        [
-            'uno' =>  $this->r_uno,
-            'dos' =>  $this->r_dos,
-            'tres' =>  $this->r_tres,
-            'cuatro' =>  $this->r_cuatro
-        ]
-    );
-        $this->ordenes_p=\DB::select('call buscar_ordenes_pendiente(:uno,:dos,:tres,:cuatro)',
-        [
-            'uno' =>  $this->r_uno,
-            'dos' =>  $this->r_dos,
-            'tres' =>  $this->r_tres,
-            'cuatro' =>  $this->r_cuatro
-        ]
-    );
-        $this->hons_p=\DB::select('call buscar_hons_pendiente(:uno,:dos,:tres,:cuatro)',
-        [
-            'uno' =>  $this->r_uno,
-            'dos' =>  $this->r_dos,
-            'tres' =>  $this->r_tres,
-            'cuatro' =>  $this->r_cuatro
-        ]
-    );
+        $this->mes_p = \DB::select(
+            'call buscar_fechas_pendiente(:uno,:dos,:tres,:cuatro)',
+            [
+                'uno' =>  $this->r_uno,
+                'dos' =>  $this->r_dos,
+                'tres' =>  $this->r_tres,
+                'cuatro' =>  $this->r_cuatro
+            ]
+        );
+        $this->items_p = \DB::select(
+            'call buscar_item_pendiente(:uno,:dos,:tres,:cuatro)',
+            [
+                'uno' =>  $this->r_uno,
+                'dos' =>  $this->r_dos,
+                'tres' =>  $this->r_tres,
+                'cuatro' =>  $this->r_cuatro
+            ]
+        );
+        $this->ordenes_p = \DB::select(
+            'call buscar_ordenes_pendiente(:uno,:dos,:tres,:cuatro)',
+            [
+                'uno' =>  $this->r_uno,
+                'dos' =>  $this->r_dos,
+                'tres' =>  $this->r_tres,
+                'cuatro' =>  $this->r_cuatro
+            ]
+        );
+        $this->hons_p = \DB::select(
+            'call buscar_hons_pendiente(:uno,:dos,:tres,:cuatro)',
+            [
+                'uno' =>  $this->r_uno,
+                'dos' =>  $this->r_dos,
+                'tres' =>  $this->r_tres,
+                'cuatro' =>  $this->r_cuatro
+            ]
+        );
 
 
 
@@ -160,65 +169,66 @@ class Pendiente extends Component
         $detalles = 0;
         $valores = [];
 
-        for($i = 0; $i < count($this->datos_pendiente) ;$i++){
+        for ($i = 0; $i < count($this->datos_pendiente); $i++) {
 
 
 
             $sampler = DB::select('SELECT clase_productos.sampler FROM clase_productos WHERE  clase_productos.item = ?;', [$this->datos_pendiente[$i]->item]);
-            if( $sampler[0]->sampler == "si"){
-                if($cantidad_detalle_sampler == 0 && $detalles == 0){
-                    $datos = DB::select('call traer_numero_detalles_productos(?)', [$this->datos_pendiente[$i]->item]);
-                    $cantidad_detalle_sampler = $datos[0]->tuplas;
-                }
-                $valores = DB::select('call traer_detalles_productos_actualizar(?,?)', [$this->datos_pendiente[$i]->item,$detalles]);
+
+            if (isset($sampler[0])) {
+                if ($sampler[0]->sampler == "si") {
+                    if ($cantidad_detalle_sampler == 0 && $detalles == 0) {
+                        $datos = DB::select('call traer_numero_detalles_productos(?)', [$this->datos_pendiente[$i]->item]);
+                        $cantidad_detalle_sampler = $datos[0]->tuplas;
+                    }
+                    $valores = DB::select('call traer_detalles_productos_actualizar(?,?)', [$this->datos_pendiente[$i]->item, $detalles]);
 
 
-                $actualizar = DB::select('call actualizar_pendiente_sampler(:marca,:nombre,:vitola,:capa,:tipo,:item)',[
-                    'marca'=>$valores[0]->marca,
-                   'nombre'=>$valores[0]->nombre,
-                   'vitola'=>$valores[0]->vitola,
-                   'capa'=>$valores[0]->capa,
-                    'tipo'=>$valores[0]->tipo_empaque ,
-                   'item'=>$this->datos_pendiente[$i]->id_pendiente
-                ]);
+                    $actualizar = DB::select('call actualizar_pendiente_sampler(:marca,:nombre,:vitola,:capa,:tipo,:item)', [
+                        'marca' => $valores[0]->marca,
+                        'nombre' => $valores[0]->nombre,
+                        'vitola' => $valores[0]->vitola,
+                        'capa' => $valores[0]->capa,
+                        'tipo' => $valores[0]->tipo_empaque,
+                        'item' => $this->datos_pendiente[$i]->id_pendiente
+                    ]);
 
-                $detalles++;
+                    $detalles++;
 
-                if($detalles == $cantidad_detalle_sampler){
-                    $detalles = 0;
-                    $cantidad_detalle_sampler = 0;
+                    if ($detalles == $cantidad_detalle_sampler) {
+                        $detalles = 0;
+                        $cantidad_detalle_sampler = 0;
+                    }
                 }
             }
-
         }
-        
+
         return view('livewire.pendiente')->extends('principal')->section('content');
-
-
     }
 
 
 
 
 
-    public function mount(){
+    public function mount()
+    {
 
         $this->datos_pendiente = [];
 
         $this->fecha = "";
         $this->borrar = [];
-        $this->actualizar= [];
+        $this->actualizar = [];
 
         $datos = [];
         $cantidad_detalle_sampler = 0;
         $detalles = 0;
         $valores = [];
 
-        $this->capas= \DB::select('call buscar_capa("")');
-        $this->marcas=\DB::select('call buscar_marca("")');
-        $this->nombres= \DB::select('call buscar_nombre("")');
-        $this->vitolas= \DB::select('call buscar_vitola("")');
-        $this->tipo_empaques= \DB::select('call buscar_tipo_empaque("")');
+        $this->capas = \DB::select('call buscar_capa("")');
+        $this->marcas = \DB::select('call buscar_marca("")');
+        $this->nombres = \DB::select('call buscar_nombre("")');
+        $this->vitolas = \DB::select('call buscar_vitola("")');
+        $this->tipo_empaques = \DB::select('call buscar_tipo_empaque("")');
 
 
 
@@ -241,10 +251,6 @@ class Pendiente extends Component
 
 
 
-
-
-
-
     public function pendiente_indexi(Request $request)
     {
 
@@ -253,10 +259,10 @@ class Pendiente extends Component
             ['fecha' => (string)$request->fecha]
         );
 
-            $insertar_pendiente_empaque =   \DB::select(
-                'call insertar_pendente_empaque(:fecha)',
-                ['fecha' => (string)$request->fecha]
-            );
+        $insertar_pendiente_empaque =   \DB::select(
+            'call insertar_pendente_empaque(:fecha)',
+            ['fecha' => (string)$request->fecha]
+        );
 
 
 
@@ -272,8 +278,8 @@ class Pendiente extends Component
         );
 
 
-            return redirect()->route('pendiente')->with('insertar_pendiente', $insertar_pendiente);
-         }
+        return redirect()->route('pendiente')->with('insertar_pendiente', $insertar_pendiente);
+    }
 
 
 
@@ -287,7 +293,7 @@ class Pendiente extends Component
     public function pendiente_index(Request $request)
     {
 
-        $this->datos_pendiente=  \DB::select('call mostrar_pendiente');
+        $this->datos_pendiente =  \DB::select('call mostrar_pendiente');
 
         return redirect()->route('pendiente');
     }
@@ -339,66 +345,78 @@ class Pendiente extends Component
 
 
 
-    public function eliminar_pendiente(Request $request){
+    public function eliminar_pendiente(Request $request)
+    {
 
-        $this->datos_pendiente =[];
-        $this->borrar=\DB::select('call borrar_pendientes(:eliminar)',['eliminar'=>$request->id_pendiente]);
+        $this->datos_pendiente = [];
+        $this->borrar = \DB::select('call borrar_pendientes(:eliminar)', ['eliminar' => $request->id_pendiente]);
 
         return redirect()->route('pendiente');
+    }
 
+    public function actualizar_pendiente(Request $request)
+    {
+
+
+
+        if ($request->observacion  == null) {
+            $observacions = " ";
+        } else {
+            $observacions = $request->observacion;
+        }
+
+        if ($request->presentacion == null) {
+            $presentacions = " ";
+        } else {
+            $presentacions = $request->presentacion;
+        }
+
+        if ($request->cprecio == null) {
+            $cprecios = " ";
+        } else {
+            $cprecios = $request->cprecio;
+        }
+
+        if ($request->precio == null) {
+            $precios = "0";
+        } else {
+            $precios = $request->precio;
+        }
+
+        if ($request->orden == null) {
+            $oredn1s = " ";
+        } else {
+            $oredn1s = $request->orden;
         }
 
 
+        if ($request->orden_sistema == null) {
+            $orden_sistemas = " ";
+        } else {
+            $orden_sistemas = $request->orden_sistema;
+        }
 
+        if ($request->pendiente == null) {
+            $pendientes = " ";
+        } else {
+            $pendientes = $request->pendiente;
+        }
 
-        public function actualizar_pendiente(Request $request){
-            
-            if($request->observacion  == null ){
-            $observacions = " ";
-           }  else{
-             $observacions = $request->observacion;
-           }
-
-           if($request->presentacion == null ){
-            $presentacions = " ";
-           }else{
-            $presentacions = $request->presentacion;
-           }
-
-           if($request->cprecio == null ){
-            $cprecios = " ";
-           }else{
-            $cprecios = $request->cprecio;
-           }
-
-           if($request->precio == null ){
-            $precios = " ";
-           }else{
-            $precios = $request->precio;
-           }
-
-           if($request->orden == null ){
-            $oredn1s = " ";
-           }else{
-            $oredn1s = $request->orden;
-           }
-
-
-
-
-
-
-            $this->actualizar=\DB::select('call actualizar_pendientes(:id,:item,:orden,:observacion,:presentacion,:pendiente,:cprecio,:precio,:orden1)',
-            ['id'=>$request->id_pendientea,
-            'item'=>$request->itema,
-            'orden'=>$orden_sistema,
-            'observacion'=>$observacions,
-            'presentacion'=>$presentacions,
-            'pendiente'=>$pendientes,
-            'cprecio'=>$cprecios,
-            'precio'=>$precios,
-            'orden1'=>$oredn1s
-            ]);
+        $this->actualizar = \DB::select(
+            'call actualizar_pendientes(:id,:item,:orden,:observacion,:presentacion,:pendiente,:saldo,:cprecio,:precio,:orden1)',
+            [
+                'id' => $request->id_pendientea,
+                'item' => $request->itema,
+                'orden' => $orden_sistemas,
+                'observacion' => $observacions,
+                'presentacion' => $presentacions,
+                'pendiente' => $pendientes,
+                'saldo' => $request->saldo,
+                'cprecio' => $cprecios,
+                'precio' => $precios,
+                'orden1' => $oredn1s
+            ]
+        );
 
             $this->datos_pendiente = DB::select('call buscar_pendiente(:uno,:dos,:tres,:cuatro,:pres)',
             [
@@ -410,12 +428,9 @@ class Pendiente extends Component
 
             ]
         );
-         
-        return redirect()->route('pendiente')->with('b_mesA', $b_mesA)->with('b_itemA', $b_itemA)->with('b_ordenA', $b_ordenA)
-                                    ->with('b_honA', $b_honA)->with('b_marcaA', $b_marcaA)->with('b_vitolaA', $b_vitolaA)
-                                    ->with('b_nombreA', $b_nombreA)->with('b_capaA', $b_capaA)->with('b_empaqueA', $b_empaqueA);
-        }
 
+        return redirect()->route('pendiente');
+    }
 
             
 
@@ -445,56 +460,59 @@ class Pendiente extends Component
 
 
 
-    function insertar_nuevo_pendiente(Request $request){
-        if(isset($request->cello)){
+    function insertar_nuevo_pendiente(Request $request)
+    {
+        if (isset($request->cello)) {
 
             $cello = $request->cello;
-        }else{
+        } else {
             $cello = "no";
         }
 
-        if(isset($request->anillo)){
+        if (isset($request->anillo)) {
             $anillo = $request->anillo;
-
-        }else{
+        } else {
             $anillo = "no";
         }
 
-        if(isset($request->upc)){
+        if (isset($request->upc)) {
             $upc = $request->upc;
-
-        }else{
+        } else {
             $upc = "no";
         }
 
-        $insertar_nuevo_pendiente=\DB::select('call insertar_nuevo_pendiente(:categoria,:item,:orden,:observacion,:presentacion,:mes,:orden1,:marca,
+        $insertar_nuevo_pendiente = \DB::select(
+            'call insertar_nuevo_pendiente(:categoria,:item,:orden,:observacion,:presentacion,:mes,:orden1,:marca,
         :vitola,:nombre,:capa,:tipo_empaque,:cello,:anillo,:upc,:pendiente,:saldo,:paquetes,:unidades,:cprecio,:precio)',
 
-        ['categoria'=>$request->categoria,
-        'item'=>$request->itemn,
-        'orden'=>$request->ordensis,
-        'observacion'=>$request->observacionn,
-        'presentacion'=>$request->presentacionn,
-        'mes'=>$request->fechan,
-        'orden1'=>$request->ordenn,
-        'marca'=>$request->marca,
-        'vitola'=>$request->vitola,
-        'nombre'=>$request->nombre,
-        'capa'=>$request->capa,
-        'tipo_empaque'=>$request->tipo,
-        'cello'=>$cello,
-        'anillo'=>$anillo,
-        'upc'=>$upc,
-        'pendiente'=>$request->pendienten,
-        'saldo'=>$request->saldon,
-        'paquetes'=>$request->paquetes,
-        'unidades'=>$request->unidades,
-        'cprecio'=>$request->c_precion,
-        'precio'=>$request->precion
-        ]);
+            [
+                'categoria' => $request->categoria,
+                'item' => $request->itemn,
+                'orden' => $request->ordensis,
+                'observacion' => $request->observacionn,
+                'presentacion' => $request->presentacionn,
+                'mes' => $request->fechan,
+                'orden1' => $request->ordenn,
+                'marca' => $request->marca,
+                'vitola' => $request->vitola,
+                'nombre' => $request->nombre,
+                'capa' => $request->capa,
+                'tipo_empaque' => $request->tipo,
+                'cello' => $cello,
+                'anillo' => $anillo,
+                'upc' => $upc,
+                'pendiente' => $request->pendienten,
+                'saldo' => $request->saldon,
+                'paquetes' => $request->paquetes,
+                'unidades' => $request->unidades,
+                'cprecio' => $request->c_precion,
+                'precio' => $request->precion
+            ]
+        );
 
         return redirect()->route('pendiente');
     }
+
 
 
 }

@@ -156,11 +156,46 @@
                         </tr>
                     </thead>
                     <tbody>
+
+
+                        @php
+                        $orden = "";
+                        $orden_actua = "";
+                    @endphp
+
+
+
                         <?php  $bultos = 0;
                                 $val_anterioir=0;
                                $val_actual=0 ?>
 
                         @foreach($detalles_venta as $detalles)
+
+
+
+
+                            @if ( $orden == "" && $orden_actua == "")
+                            @php
+                                $orden_actua = $detalles->orden;
+                                $orden_actua = $detalles->orden;
+                            @endphp
+                            @endif
+
+                            @php
+                            $orden = $detalles->orden;
+                            @endphp
+
+                            @if ($orden_actua == $orden)
+
+                            @else
+                            <tr>
+                                <td colspan="19" style="background-color: gray"></td>
+                            </tr>
+                            @php
+                                $orden_actua = $detalles->orden;
+                            @endphp
+                            @endif
+
                         <tr style="font-size:10px;">
                             <?php
                             $val_anterioir= $bultos+1;
@@ -190,8 +225,9 @@
                             <td>{{$detalles->total_neto}}</td>
                             <td>{{$detalles->precio_producto}}</td>
 
-                            <td>{{$detalles->costo}}</td>
-                            <td>{{$detalles->valor_total}}</td>
+
+                            <td>{{number_format($detalles->costo,4)}}</td>
+                            <td>{{number_format($detalles->valor_total,4)}}</td>
                             <td>
                                 <a data-toggle="modal" data-target="#borrar_detalles" href="" wire:click="borrar_detalles({{$detalles->id_detalle}})">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor"
@@ -249,7 +285,12 @@
                         </tr>
                     </thead>
                     <tbody>
+
+
                         @foreach($datos_pendiente as $datos)
+
+
+
                         <tr>
                             <td style="width:100px; max-width: 400px;overflow-x:auto;">{{$datos->categoria}}</td>
                             <td>{{$datos->item}}</td>
@@ -293,16 +334,17 @@
                             </td>
                         </tr>
 
+
+
+
                         @endforeach
                     </tbody>
                 </table>
 
-
-
             </div>
 
 
-            </br>
+            <br>
             <div class="row">
                 <div class="col-sm-3 input-group mb-3">
                     <span id="de" class="input-group-text form-control "
@@ -326,18 +368,6 @@
                     <input type="number" class="form-control " placeholder="0.00" wire:model="total_peso_neto" readonly>
                 </div>
             </div>
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
