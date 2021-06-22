@@ -109,6 +109,7 @@ Route::get('/pendiente', Pendiente::class)->name('pendiente');
 Route::post('/pendiente', Pendiente::class)->name('pendiente');
 
 Route::post('/pendiente_insertar', [Pendiente::class,'pendiente_indexi'])->name('pendiente_insertar');
+Route::post('/exportPendiente', [Pendiente::class,'exportPendiente'])->name('exportPendiente');
 
 
 Route::get('/borrarpendiente',[ Pendiente::class,'eliminar_pendiente'])->name('borrarpendiente');

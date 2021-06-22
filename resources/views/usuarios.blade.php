@@ -14,6 +14,10 @@
 <script src="{{ URL::asset('css/tabla.js') }}"></script>
 <link rel="stylesheet" href="{{ asset('css/principal.css') }}" />
 
+<!-- Libreria de las alertas -->
+<script src="{{ URL::asset('https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js') }}"></script>
+<link rel="stylesheet" href="{{ URL::asset('https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css') }}">
+
 
 
 
