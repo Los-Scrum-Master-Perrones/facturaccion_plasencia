@@ -49,18 +49,18 @@
                    <button class=" botonprincipal" onclick="addexportar(1)" > <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-plus-circle" viewBox="0 0 16 16">
                         <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
                         <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z"/>
-                        </svg> Programación </button>  
+                        </svg> Programación </button>
                     </abbr>
                      </div>
 
                      <div class="col" >
-                   <abbr title="Importar a excel">                     
-                     <a href="/detalles_programacion"> <button onclick="addexportar(2)" class="botonprincipal"> Ver</button></a>  
+                   <abbr title="Importar a excel">
+                     <a href="/detalles_programacion"> <button onclick="addexportar(2)" class="botonprincipal"> Ver</button></a>
                     </abbr>
                     </div>
                     </div>
-                      </div>                        
-                          
+                      </div>
+
                  <div class="col">
                     <div class="dropdown">
                         <button class="btn btn-secondary dropdown-toggle form-control" type="button"
@@ -149,20 +149,20 @@
                    <button class=" botonprincipal" onclick="addexportar(3)" > <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-plus-circle" viewBox="0 0 16 16">
                         <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
                         <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z"/>
-                        </svg> Nuevo </button>  
+                        </svg> Nuevo </button>
                     </abbr>
                      </div>
 
                      <div class="col" >
-                   <abbr title="Importar a excel">                     
+                   <abbr title="Importar a excel">
                      <button class=" botonprincipal"  onclick="addexportar(4)"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-file-earmark-spreadsheet" viewBox="0 0 16 16">
                         <path d="M14 14V4.5L9.5 0H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2zM9.5 3A1.5 1.5 0 0 0 11 4.5h2V9H3V2a1 1 0 0 1 1-1h5.5v2zM3 12v-2h2v2H3zm0 1h2v2H4a1 1 0 0 1-1-1v-1zm3 2v-2h3v2H6zm4 0v-2h3v1a1 1 0 0 1-1 1h-2zm3-3h-3v-2h3v2zm-7 0v-2h3v2H6z"/>
-                        </svg> Exportar </button> 
+                        </svg> Exportar </button>
                     </abbr>
                     </div>
                     </div>
-                      </div>  
-               
+                      </div>
+
 
                 <div class="col">
                     <select onchange="buscar_tablaE()" onclick="funcion1()" name="b_marcaE" id="b_marcaE"
@@ -340,9 +340,9 @@
 
 
         <script type="text/javascript">
-            function addexportar(id) {                
+            function addexportar(id) {
                 event.preventDefault();
-             
+
             }
         </script>
 
@@ -543,10 +543,9 @@
 
 
     <!-- INICIO MODAL ELMINAR DATO PENDIENTE -->
-    <form action="{{Route('borrarpendiente')}}" id="formulario_mostrarE" name="formulario_mostrarE" method="POST">
+    <form action="{{Route('borrarpendienteEmpaque')}}" id="formulario_mostrarE" name="formulario_mostrarE" method="POST">
 
         @csrf
-        <?php use App\Http\Controllers\UserController; ?>
 
         <input name="id_pendiente" id="id_pendiente" value="" hidden />
 
@@ -566,7 +565,7 @@
                         <button type="button" class="bmodal_no " data-dismiss="modal">
                             <span>Cancelar</span>
                         </button>
-                        <button type="submit" class=" bmodal_yes ">
+                        <button type="submit" class="bmodal_yes ">
                             <span>Eliminar</span>
                         </button>
                     </div>
