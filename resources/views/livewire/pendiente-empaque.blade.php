@@ -70,25 +70,25 @@
                         <ul class="dropdown-menu " aria-labelledby="dropdownMenuButton1">
                             <div class="form-check ">
                                 <input class="form-check-input form-control" type="checkbox" value="1"
-                                    wire:model="r_uno" id="checkbox1E">
+                                    wire:model="r_uno" id="checkbox1E"  name="checkbox1E" checked>
                                 <label class="form-check-label " for="flexCheckDefault"> NEW ROLL </label>
                             </div>
 
                             <div class="form-check ">
                                 <input class="form-check-input form-control" type="checkbox" value="2"
-                                    wire:model="r_dos" id="checkbox2E">
+                                    wire:model="r_dos" id="checkbox2E" name="checkbox2E" checked>
                                 <label class="form-check-label " for="flexCheckChecked"> CATALOGO </label>
                             </div>
 
                             <div class="form-check ">
                                 <input class="form-check-input form-control" type="checkbox" value="3"
-                                    wire:model="r_tres" id="checkbox3E">
+                                    wire:model="r_tres" id="checkbox3E" name="checkbox3E" checked>
                                 <label class="form-check-label " for="flexCheckDefault"> INVENTARIO EXISTENTE </label>
                             </div>
 
                             <div class="form-check ">
                                 <input class="form-check-input form-control" type="checkbox" value="4"
-                                    wire:model="r_cuatro" id="checkbox4E">
+                                    wire:model="r_cuatro" id="checkbox4E" name="checkbox4E" checked>
                                 <label class="form-check-label " for="flexCheckChecked"> WAREHOUSE </label>
                             </div>
                         </ul>
@@ -219,7 +219,7 @@
         </div>
     </div>
 
-    <input name="funcion" id="funcion">
+    <input name="funcion" id="funcion" hidden>
 
     </form>
 
@@ -353,8 +353,7 @@
                     document.getElementById("funcion").value = '2';
                     theForm.addEventListener('submit', function (event) {});
                 }else  if(id == 3 ){
-                    document.getElementById("funcion").value = '3';
-                    theForm.addEventListener('submit', function (event) {});
+                    event.preventDefault();
                 }else  if(id == 4 ){
                     document.getElementById("funcion").value = '4';
                     theForm.addEventListener('submit', function (event) {});
@@ -450,6 +449,9 @@
                                 }
                                 if (data[i].upc == null) {
                                     data[i].upc = "";
+                                }  
+                                if (data[i].cant_cajas == null) {
+                                    data[i].cant_cajas = "";
                                 }
 
                                 var tabla_nuevaE =

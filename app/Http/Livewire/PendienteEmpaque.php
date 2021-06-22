@@ -21,10 +21,10 @@ class PendienteEmpaque extends Component
     public $datos_pendiente_empaque_nuevo;
 
     // variables del wire model
-    public $r_uno;
-    public $r_dos;
-    public $r_tres;
-    public $r_cuatro;
+    public $r_uno = "1";
+    public $r_dos= "2";
+    public $r_tres= "3";
+    public $r_cuatro= "4";
 
     /* procedimientos almacanedos busquedas pendiente*/
     public $marcas_p;
@@ -201,31 +201,71 @@ class PendienteEmpaque extends Component
 
     public function insertar_detalle_provicional(Request $request){
 
-       $funcion = $request->funcion;
+       $funcion = $request->funcion;     
 
-        $this->datos_pendiente_empaque = DB::select('call buscar_pendiente_empaque(:uno,:dos,:tres,:cuatro)',
-        [
-            'uno' =>  $this->r_uno,
-            'dos' =>  $this->r_dos,
-            'tres' =>  $this->r_tres,
-            'cuatro' =>  $this->r_cuatro
-        ]
-    );
+ if ($request->checkbox1E == null) {  $checkbox1E = ""; } else { $checkbox1E = $request->checkbox1E;}
+ if ($request->checkbox2E == null) {  $checkbox2E = ""; } else { $checkbox2E = $request->checkbox2E;}
+ if ($request->checkbox3E == null) {  $checkbox3E = ""; } else { $checkbox3E = $request->checkbox3E;}
+ if ($request->checkbox4E == null) {  $checkbox4E = ""; } else { $checkbox4E = $request->checkbox4E;}
+ 
+ if ($request->b_itemE == null) {  $b_itemE = ""; } else { $b_itemE = $request->b_itemE;}
+ if ($request->b_ordenE == null) {  $b_ordenE = ""; } else { $b_ordenE = $request->b_ordenE;}
+ if ($request->b_honE == null) {  $b_honE = ""; } else { $b_honE = $request->b_honE;}
+ if ($request->b_marcaE == null) {  $b_marcaE = ""; } else { $b_marcaE = $request->b_marcaE;}
+ 
+ if ($request->b_vitolaE == null) {  $b_vitolaE = ""; } else { $b_vitolaE = $request->b_vitolaE;}
+ if ($request->b_nombreE == null) {  $b_nombreE = ""; } else { $b_nombreE = $request->b_nombreE;}
+ if ($request->b_capaE == null) {  $b_capaE = ""; } else { $b_capaE = $request->b_capaE;}
+ if ($request->b_empaqueE == null) {  $b_empaqueE = ""; } else { $b_empaqueE = $request->b_empaqueE;}
+ if ($request->b_mesE == null) {  $b_mesE = ""; } else { $b_mesE = $request->b_mesE;}
 
-        $this->tuplas=count($this->datos_pendiente_empaque);
 
-        for($i = 0 ; $this->tuplas > $i ; $i++){
+
+
+       if( $funcion == 1){  
+           
+        $datos_pendiente_empaque = DB::select('call buscar_pendiente_empaque_excel(:v1,  :v2,  :v3,  :v4,  :v5,  :v6,  :v7,  :v8,  :v9,  :v10,  :v11,  :v12,  :v13)',   
+            [
+                'v1' =>  $checkbox1E,
+                'v2' =>  $checkbox2E,
+                'v3' =>  $checkbox3E,
+                'v4' =>  $checkbox4E,
+
+                'v5' =>  $b_itemE,
+                'v6' =>  $b_ordenE,
+                'v7' =>  $b_honE,
+                'v8' =>  $b_marcaE,
+
+                'v9' =>  $b_vitolaE,
+                'v10' =>  $b_nombreE,
+                'v11' =>  $b_capaE,
+                'v12' =>  $b_empaqueE,
+                'v13' =>  $b_mesE
+            ]
+            );
+
+        $tuplas=count($datos_pendiente_empaque);
+
+        for($i = 0 ; $tuplas > $i ; $i++){
             $detalles = DB::select('call insertar_detalle_temporal(:numero_orden,:orden,:cod_producto,:saldo,:id_pendiente,:cant)'
-            ,['numero_orden'=>isset($this->datos_pendiente_empaque[$i]->orden_del_sitema)?$this->datos_pendiente_empaque[$i]->orden_del_sitema:null,
-            'orden'=>isset($this->datos_pendiente_empaque[$i]->orden)?$this->datos_pendiente_empaque[$i]->orden:null,
-            'cod_producto'=>isset($this->datos_pendiente_empaque[$i]->item)?$this->datos_pendiente_empaque[$i]->item:null,
-            'saldo'=>isset($this->datos_pendiente_empaque[$i]->saldo)?$this->datos_pendiente_empaque[$i]->saldo:null,
-            'id_pendiente'=>isset($this->datos_pendiente_empaque[$i]->id_pendiente)?$this->datos_pendiente_empaque[$i]->id_pendiente:null,
-            'cant'=>isset($this->datos_pendiente_empaque[$i]->cant_cajas)?$this->datos_pendiente_empaque[$i]->cant_cajas:null]);
-        }
+            ,['numero_orden'=>isset($datos_pendiente_empaque[$i]->orden_del_sitema)?$datos_pendiente_empaque[$i]->orden_del_sitema:null,
+            'orden'=>isset($datos_pendiente_empaque[$i]->orden)?$datos_pendiente_empaque[$i]->orden:null,
+            'cod_producto'=>isset($datos_pendiente_empaque[$i]->item)?$datos_pendiente_empaque[$i]->item:null,
+            'saldo'=>isset($datos_pendiente_empaque[$i]->saldo)?$datos_pendiente_empaque[$i]->saldo:null,
+            'id_pendiente'=>isset($datos_pendiente_empaque[$i]->id_pendiente)?$datos_pendiente_empaque[$i]->id_pendiente:null,
+            'cant'=>isset($datos_pendiente_empaque[$i]->cant_cajas)?$datos_pendiente_empaque[$i]->cant_cajas:null]);
+        }    
+        return redirect()->route('detalles_programacion');
+
+       } else if( $funcion == 2){
+        return redirect()->route('detalles_programacion');
+
+       }else if( $funcion == 4){
+
         
-        // return redirect()->route('detalles_programacion');
-        return $funcion;
+        return    ;
+       }        
+        
     }
 
 
