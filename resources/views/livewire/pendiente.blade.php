@@ -37,16 +37,41 @@
 
     <div class="container" style="max-width:100%;">
 
-
+<form action =  "{{Route('exportPendiente')}}" method= "POST" >
+@csrf
         <div class="col" style="height:74px;" >
             <div class="row"  style="margin-bottom:2px">
 
                   <div class="col" >
-                   <button class="botonprincipal"  onclick="mostrar_div_AddProductoP()" type="submit" >
-                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-plus-circle" viewBox="0 0 16 16">
-                    <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
-                    <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z"/>
-                     </svg> Agregar producto al pendiente</button>
+                  <div class="row" >
+                  <div class="col" >
+
+                   <abbr title="Agregar nuevo producto">
+                        <button class="botonprincipal"  onclick="mostrar_div_AddProductoP()">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-plus-circle" viewBox="0 0 16 16">
+                        <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
+                        <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z"/>
+                        </svg> Producto
+                        </button> 
+                    </abbr>
+                     </div>
+
+
+
+                     <div class="col" >
+                        
+                    
+                     <abbr title="Importar a excel">                     
+                        <button class="botonprincipal"  type="submit">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-file-earmark-spreadsheet" viewBox="0 0 16 16">
+                        <path d="M14 14V4.5L9.5 0H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2zM9.5 3A1.5 1.5 0 0 0 11 4.5h2V9H3V2a1 1 0 0 1 1-1h5.5v2zM3 12v-2h2v2H3zm0 1h2v2H4a1 1 0 0 1-1-1v-1zm3 2v-2h3v2H6zm4 0v-2h3v1a1 1 0 0 1-1 1h-2zm3-3h-3v-2h3v2zm-7 0v-2h3v2H6z"/>
+                        </svg> 
+                        </button>
+                    </abbr>
+
+                    </div>
+                    </div>
+
                       </div>
 
                     <div class="col" >
@@ -56,22 +81,22 @@
                     </button>
                     <ul class="dropdown-menu " aria-labelledby="dropdownMenuButton1">
                     <div class="form-check ">
-                    <input class="form-check-input form-control" type="checkbox" value="1" wire:model="r_uno" id="checkbox1">
+                    <input class="form-check-input" type="checkbox" value="1"  id="checkbox1" checked name="checkbox1" wire:model="r_uno">
                     <label class="form-check-label " for="flexCheckDefault"> NEW ROLL </label>
-                    </div>
+                    </div>          
 
                     <div class="form-check " >
-                    <input class="form-check-input form-control" type="checkbox" value="2"  wire:model="r_dos" id="checkbox2">
+                    <input class="form-check-input" type="checkbox" value="2"  id="checkbox2" checked name="checkbox2" wire:model="r_dos" >
                     <label class="form-check-label " for="flexCheckChecked">   CATALOGO  </label>
                     </div>
 
                     <div class="form-check ">
-                    <input class="form-check-input form-control" type="checkbox" value="3" wire:model="r_tres" id="checkbox3">
+                    <input class="form-check-input " type="checkbox" value="3" id="checkbox3" checked name="checkbox3" wire:model="r_tres" >
                     <label class="form-check-label " for="flexCheckDefault"> INVENTARIO EXISTENTE </label>
                     </div>
 
                     <div class="form-check " >
-                    <input class="form-check-input form-control" type="checkbox" value="4" wire:model="r_cuatro" id="checkbox4">
+                    <input class="form-check-input " type="checkbox" value="4"  id="checkbox4" checked name="checkbox4" wire:model="r_cuatro">
                     <label class="form-check-label " for="flexCheckChecked">   WAREHOUSE  </label>
                     </div>
                     </ul>
@@ -80,16 +105,23 @@
 
 
                   <div class="col" >
-                  <select onchange="buscar_tabla()" onclick="funcion1()"  name="b_mes" id="b_mes" class=" mi-selector form-control"  style="width:100%;height:34px;" name="states[]" required >
-                    <option value="" style="overflow-y: scroll;">Todos los meses</option>
-                    @foreach($mes_p as $mes)
-                    <option style="overflow-y: scroll;"> {{$mes->mes}}</option>
-                    @endforeach
+                  <select class="  form-control" style="overflow-y: scroll; height:34px;" name="pres"  wire:model="pres" >
+                        <option value="" style="overflow-y: scroll;">Todas presentaciones  </option>
+                        <option value="Puros Tripa Larga" style="overflow-y: scroll;">Puros Tripa Larga  </option>
+                        <option value="Puros Tripa Corta" style="overflow-y: scroll;">Puros Tripa Corta  </option>
+                        <option value="Puros Sandwich" style="overflow-y: scroll;">Puros Sandwich  </option>
                     </select>
                    </div>
 
+
+
+
+
+
+                    
+
                   <div class="col" >
-                  <select  onchange="buscar_tabla()" onclick="funcion1()"  name="b_item" id="b_item" class=" mi-selector form-control"  style="width:100%;height:34px;" name="states[]" required >
+                  <select  onchange="buscar_tabla()" onclick="funcion1()"  name="b_item" id="b_item" class=" mi-selector form-control"  style="width:100%;height:34px;" name="states[]"  >
                     <option value="" style="overflow-y: scroll;">Todos Items</option>
                     @foreach($items_p as $item)
                     <option style="overflow-y: scroll;"> {{$item->item}}</option>
@@ -98,7 +130,7 @@
                      </div>
 
                   <div class="col" >
-                  <select onchange="buscar_tabla()" onclick="funcion1()" name="b_orden" id="b_orden" class=" mi-selector form-control"  style="width:100%;height:34px;" name="states[]" required >
+                  <select onchange="buscar_tabla()" onclick="funcion1()" name="b_orden" id="b_orden" class=" mi-selector form-control"  style="width:100%;height:34px;" name="states[]"  >
                     <option value="" style="overflow-y: scroll;">Todas las ordenes del sistema</option>
                     @foreach($ordenes_p as $orden)
                     <option style="overflow-y: scroll;"> {{$orden->orden_del_sitema}}</option>
@@ -107,7 +139,7 @@
                 </div>
 
                   <div class="col" >
-                  <select  onchange="buscar_tabla()" onclick="funcion1()" name="b_hon" id="b_hon" class=" mi-selector form-control"  style="width:100%;height:34px;" name="states[]" required >
+                  <select  onchange="buscar_tabla()" onclick="funcion1()" name="b_hon" id="b_hon" class=" mi-selector form-control"  style="width:100%;height:34px;" name="states[]"  >
                     <option value="" style="overflow-y: scroll;">Todas las ordenes</option>
                     @foreach($hons_p as $hon)
                         <option style="overflow-y: scroll;"> {{$hon->orden}}</option>
@@ -122,7 +154,7 @@
 
                 <div class="col" >
 
-                    <select  onchange="buscar_tabla()" onclick="funcion1()" name="b_marca" id="b_marca"class=" mi-selector form-control"  style="width:100%;height:34px;" name="states[]" required >
+                    <select  onchange="buscar_tabla()" onclick="funcion1()" name="b_marca" id="b_marca"class=" mi-selector form-control"  style="width:100%;height:34px;" name="states[]"  >
                     <option value="" style="overflow-y: scroll;">Todas las marcas</option>
                     @foreach($marcas_p as $marca)
                         <option style="overflow-y: scroll;"> {{$marca->marca}}</option>
@@ -131,7 +163,7 @@
                 </div>
 
                 <div class="col" >
-                    <select  onchange="buscar_tabla()" onclick="funcion1()" name="b_vitola" id="b_vitola" class=" mi-selector form-control"  style="width:100%;height:34px;" name="states[]" required >
+                    <select  onchange="buscar_tabla()" onclick="funcion1()" name="b_vitola" id="b_vitola" class=" mi-selector form-control"  style="width:100%;height:34px;" name="states[]"  >
                     <option value="" style="overflow-y: scroll;">Todas las vitolas</option>
                     @foreach($vitolas_p as $vitola)
                         <option style="overflow-y: scroll;"> {{$vitola->vitola}}</option>
@@ -140,7 +172,7 @@
                 </div>
 
                 <div class="col" >
-                    <select onchange="buscar_tabla()" onclick="funcion1()" name="b_nombre" id="b_nombre" class=" mi-selector form-control"  style="width:100%;height:34px;" name="states[]" required >
+                    <select onchange="buscar_tabla()" onclick="funcion1()" name="b_nombre" id="b_nombre" class=" mi-selector form-control"  style="width:100%;height:34px;" name="states[]"  >
                     <option value="" style="overflow-y: scroll;">Todos los nombres</option>
                     @foreach($nombre_p as $nombre)
                         <option style="overflow-y: scroll;"> {{$nombre->nombre}}</option>
@@ -149,7 +181,7 @@
                 </div>
 
                 <div class="col" >
-                    <select  onchange="buscar_tabla()" onclick="funcion1()" name="b_capa" id="b_capa" class=" mi-selector form-control"  style="width:100%;height:34px;" name="states[]" required >
+                    <select  onchange="buscar_tabla()" onclick="funcion1()" name="b_capa" id="b_capa" class=" mi-selector form-control"  style="width:100%;height:34px;" name="states[]"  >
                     <option value="" style="overflow-y: scroll;">Todas las capas</option>
                     @foreach($capas_p as $capa)
                         <option style="overflow-y: scroll;"> {{$capa->capa}}</option>
@@ -158,7 +190,7 @@
                 </div>
 
                 <div class="col" >
-                    <select   onchange="buscar_tabla()" onclick="funcion1()" name="b_empaque" id="b_empaque" class=" mi-selector form-control"  style="width:100%;height:34px;" name="states[]" required >
+                    <select   onchange="buscar_tabla()" onclick="funcion1()" name="b_empaque" id="b_empaque" class=" mi-selector form-control"  style="width:100%;height:34px;" name="states[]"  >
                     <option value="" style="overflow-y: scroll;">Todos los empaques</option>
                     @foreach($empaques_p as $empaque)
                         <option style="overflow-y: scroll;"> {{$empaque->empaque}}</option>
@@ -166,22 +198,18 @@
                     </select>
                 </div>
 
-
                 <div class="col" >
-                    <form wire:submit.prevent="exportPendiente()">
-                        <input type="text" value="{{isset($nom)?$nom:null}}" name="nombre" id="nombre" hidden
-                        wire:model="nom">
-                        <input type="date" value="{{isset($fede)?$fede:null}}" name="fecha_de" id="fecha_de" hidden
-                        wire:model="fede">
-                        <button class="botonprincipal" type="submit" >
-                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-file-earmark-spreadsheet" viewBox="0 0 16 16">
-                        <path d="M14 14V4.5L9.5 0H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2zM9.5 3A1.5 1.5 0 0 0 11 4.5h2V9H3V2a1 1 0 0 1 1-1h5.5v2zM3 12v-2h2v2H3zm0 1h2v2H4a1 1 0 0 1-1-1v-1zm3 2v-2h3v2H6zm4 0v-2h3v1a1 1 0 0 1-1 1h-2zm3-3h-3v-2h3v2zm-7 0v-2h3v2H6z"/>
-                        </svg> Exportar
-                        </button>
-                    </form>
+                <select onchange="buscar_tabla()" onclick="funcion1()"  name="b_mes" id="b_mes" class=" mi-selector form-control"  style="width:100%;height:34px;" name="states[]"  >
+                    <option value="" style="overflow-y: scroll;">Todos los meses</option>
+                    @foreach($mes_p as $mes)
+                    <option style="overflow-y: scroll;"> {{$mes->mes}}</option>
+                    @endforeach
+                    </select>
                 </div>
             </div>
+
             </div>
+            </form>
             </div>
 
 
@@ -269,8 +297,8 @@ $('.mi-selector').select2();
 
                     <td>` + data[i].presentacion + `</td>
                     <td>` + data[i].mes + `</td>
-                    <td>` + data[i].orden + `</td>
-                    <td>` + data[i].marca + `</td>
+                    <td style="width:100px;font-size:8px;">` + data[i].orden + `</td>
+                    <td style="width:100px;font-size:8px;">` + data[i].marca + `</td>
                     <td>` + data[i].vitola + `</td>
 
                     <td>` + data[i].nombre + `</td>
@@ -284,10 +312,10 @@ $('.mi-selector').select2();
                     <td>` + data[i].pendiente + `</td>
                     <td>` + data[i].saldo + `</td>
 
-                    <td style="text-align:center;">
+                    <td style="width:100px;">
                                 <a data-toggle="modal" data-target="#modal_eliminar_detalle"
                                     onclick="datos_modal_eliminar(` +data[i].id_pendiente+ `)" href="">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor"
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" fill="currentColor"
                                         class="bi bi-trash-fill" viewBox="0 0 16 16">
                                         <path
                                             d="M2.5 1a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1H3v9a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V4h.5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1H2.5zm3 4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5zM8 5a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7A.5.5 0 0 1 8 5zm3 .5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 1 0z" />
@@ -297,7 +325,7 @@ $('.mi-selector').select2();
                                 <a style=" width:10px; height:10px;" data-toggle="modal" href=""
                                     data-target="#modal_actualizar" type="submit"
                                     onclick="datos_modal_actualizar(` +data[i].id_pendiente+ `,` +data[i].item+ `)">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor"
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" fill="currentColor"
                                         class="bi bi-pencil-square" viewBox="0 0 16 16">
                                         <path
                                             d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z" />
@@ -335,12 +363,12 @@ document.getElementById("sumap").value = sumap.toString();
 
 
 
-    <div style="  display: none;justify-content: center;align-items: center;height: 100%;position:fixed;top:0px;width:50%;left:25%;" id="div_AddProductoPendiente"   >
+    <div style="  display: none;justify-content: center;align-items: center;  position:fixed;bottom:20%;width:100%;" id="div_AddProductoPendiente"   >
     <!-- INICIO DEL MODAL NUEVO PRODUCTO -->
 
     <form action="{{Route('nuevo_pendiente')}} " method="POST">
         <div  data-backdrop="static" data-keyboard="false" tabindex="-1"
-        aria-labelledby="staticBackdropLabel" aria-hidden="true"  style="background:#212529;width=800px;">
+        aria-labelledby="staticBackdropLabel" aria-hidden="true"  >
             <div >
                 <div class="modal-content" >
 
@@ -355,68 +383,34 @@ document.getElementById("sumap").value = sumap.toString();
                         <div class="card-body">
                             <div class="row">
 
-                                <label for="txt_figuraytipo" class="form-label">Categoria</label>
+                            <div class="mb-3 col">
+                                    <label for="txt_figuraytipo" class="form-label">Item</label>
+                                    <input name="itemn" id="itemn" style="font-size:16px" class="form-control" required
+                                        type="text" autocomplete="off">
+                                </div>
 
-                                <select class="form-control" name="categoria" id="categoria"
-                                    placeholder="Ingresa figura y tipo" style="overflow-y: scroll; height:30px;"
+                            <div class="mb-3 col">
+                                <label for="txt_figuraytipo" class="form-label">Categoria</label>
+                                <select class="form-control" name="categoria" id="categoria"style="overflow-y: scroll; height:30px;"
                                     required>
                                     <option value="1">NEW ROLL</option>
                                     <option value="2">CATALOGO</option>
                                     <option value="3">TAKE FROM EXISTING INVENT</option>
                                     <option value="4">INTERNATIONAL SALES</option>
                                 </select>
-                            </div>
-
-                            <div class="row">
-                                <div class="mb-3 col">
-                                    <label for="txt_figuraytipo" class="form-label">Item</label>
-                                    <input name="itemn" id="itemn" style="font-size:16px" class="form-control" required
-                                        type="text" autocomplete="off">
+                                
                                 </div>
-
-                                <div class="mb-3 col">
-                                    <label for="txt_figuraytipo" class="form-label">Orden del sistema</label>
-                                    <input name="ordensis" id="ordensis" style="font-size:16px" class="form-control"
-                                        type="text" autocomplete="off">
-                                </div>
-
-                                <div class="mb-3 col">
-                                    <label for="txt_figuraytipo" class="form-label">Observacion</label>
-                                    <input name="observacionn" id="observacionn" style="font-size:16px"
-                                        class="form-control" type="text" autocomplete="off">
-                                </div>
-                            </div>
-
-
-                            <div class="row">
-                                <div class="mb-3 col">
+                                
+                                   <div class="mb-3 col">
                                     <label for="txt_malos" class="form-label">Presentación</label>
-
                                     <select class="form-control" name="presentacionn" id="presentacionn"
                                         placeholder="Ingresa figura y tipo" style="overflow-y: scroll; height:30px;"
                                         required>
-                                        <option value="Puros Tripa Larga" style="overflow-y: scroll;">Puros Tripa Larga
-                                        </option>
-                                        <option value="Puros Tripa Corta" style="overflow-y: scroll;">Puros Tripa Corta
-                                        </option>
+                                        <option value="Puros Tripa Larga" style="overflow-y: scroll;">Puros Tripa Larga  </option>
+                                        <option value="Puros Tripa Corta" style="overflow-y: scroll;">Puros Tripa Corta  </option>
+                                        <option value="Puros Sandwich" style="overflow-y: scroll;">Puros Sandwich  </option>
                                     </select>
                                 </div>
-
-                                <div class="mb-3 col">
-                                    <label for="txt_figuraytipo" class="form-label">Fecha</label>
-                                    <input name="fechan" id="fechan" style="font-size:12px" class="form-control"
-                                        required type="date" autocomplete="off">
-                                </div>
-
-                                <div class="mb-3 col">
-                                    <label for="txt_figuraytipo" class="form-label">Orden</label>
-                                    <input name="ordenn" id="ordenn" style="font-size:16px" class="form-control"
-                                        required type="text" autocomplete="off">
-                                </div>
-                            </div>
-
-
-                            <div class="row">
                                 <div class="mb-3 col">
                                     <label for="txt_vitola" class="form-label">Marca</label>
                                     <select class=" mi-selector"  style=" height:30px; width: 100%; " name="marca" id="marca" placeholder="Ingresa figura y tipo" required>
@@ -424,33 +418,17 @@ document.getElementById("sumap").value = sumap.toString();
                                         <option style="overflow-y: scroll;"> {{$mar->marca}}</option>
                                         @endforeach
                                     </select>
-                                </div>
+                                </div>                            
 
-                                <div class="mb-3 col">
-                                    <label for="vitola" class="form-label">Vitola</label>
-                                    <select class=" mi-selector"  style=" height:30px; width: 100%; "  name="vitola" id="vitola" placeholder="Ingresa figura y tipo"  required>
-                                        @foreach($vitolas as $vitola)
-                                        <option style="overflow-y: scroll;"> {{$vitola->vitola}}</option>
-                                        @endforeach
-                                    </select>
-                                </div>
-
-                                <div class="mb-3 col">
-                                    <label for="txt_total" class="form-label">Nombre</label>
-
-                                    <select class=" mi-selector"  style=" height:30px; width: 100%; " name="nombre" id="nombre" placeholder="Ingresa figura y tipo" required>
-                                        @foreach($nombres as $nombre)
-                                        <option style="overflow-y: scroll;"> {{$nombre->nombre}}</option>
-                                        @endforeach
-                                    </select>
-                                </div>
                             </div>
 
 
 
-                            <div class="row">
 
-                                <div class="mb-3 col">
+
+                            <div class="row">
+                             
+                            <div class="mb-3 col">
                                     <label for="txt_figuraytipo" class="form-label">Capa</label>
                                     <select class=" mi-selector"  style=" height:30px; width: 100%; " name="capa" id="capa"placeholder="Ingresa figura y tipo" required>
                                         @foreach($capas as $capa)
@@ -468,9 +446,78 @@ document.getElementById("sumap").value = sumap.toString();
                                         @endforeach
                                     </select>
                                 </div>
-
+                               
 
                                 <div class="mb-3 col">
+                                    <label for="vitola" class="form-label">Vitola</label>
+                                    <select class=" mi-selector"  style=" height:30px; width: 100%; "  name="vitola" id="vitola" placeholder="Ingresa figura y tipo"  required>
+                                        @foreach($vitolas as $vitola)
+                                        <option style="overflow-y: scroll;"> {{$vitola->vitola}}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+
+                                <div class="mb-3 col">
+                                    <label for="txt_total" class="form-label">Nombre</label>
+                                    <select class=" mi-selector"  style=" height:30px; width: 100%; " name="nombre" id="nombre" placeholder="Ingresa figura y tipo" required>
+                                        @foreach($nombres as $nombre)
+                                        <option style="overflow-y: scroll;"> {{$nombre->nombre}}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                             </div>
+
+
+
+
+
+                            <div class="row">
+
+                            <div class="mb-3 col">
+                                    <label for="txt_figuraytipo" class="form-label">Orden del sistema</label>
+                                    <input name="ordensis" id="ordensis" style="font-size:16px" class="form-control"
+                                        type="text" autocomplete="off">
+                                </div>
+                                
+                                 <div class="mb-3 col">
+                                    <label for="txt_figuraytipo" class="form-label">Orden</label>
+                                    <input name="ordenn" id="ordenn" style="font-size:16px" class="form-control"
+                                        required type="text" autocomplete="off">
+                                </div>
+                             
+
+                                <div class="mb-3 col">
+                                    <label for="txt_figuraytipo" class="form-label">Fecha</label>
+                                    <input name="fechan" id="fechan" style="font-size:12px" class="form-control"
+                                        required type="date" autocomplete="off">
+                                </div>
+
+                                <div class="mb-3 col">
+                                    <label for="txt_figuraytipo" class="form-label">Observacion</label>
+                                    <input name="observacionn" id="observacionn" style="font-size:16px"
+                                        class="form-control" type="text" autocomplete="off">
+                                </div>
+
+                               
+                            </div>
+
+
+                        
+
+
+
+                           
+
+                           
+
+
+                             
+                          
+
+
+                            <div class="row">
+
+                            <div class="mb-3 col">
                                 <div class="row">
                                      <div class="col">
                                     <input type="checkbox" name="cello" id="cello" style="font-size:20px" value="si">
@@ -488,10 +535,7 @@ document.getElementById("sumap").value = sumap.toString();
                                     </div>
                                 </div>
                                 </div>
-                            </div>
 
-
-                            <div class="row">
                                 <div class="mb-3 col">
                                     <label for="txt_total" class="form-label">Pendiente</label>
                                     <input name="pendienten" id="pendienten" class="form-control" required type="number"
@@ -504,15 +548,17 @@ document.getElementById("sumap").value = sumap.toString();
                                         autocomplete="off">
                                 </div>
 
-                                <div class="mb-3 col">
-                                    <label for="txt_total" class="form-label">Paquetes</label>
-                                    <input name="paquetes" id="paquetes" class="form-control" required type="number"
-                                        autocomplete="off">
-                                </div>
+                             
                             </div>
 
 
                             <div class="row">
+                            
+                               <div class="mb-3 col">
+                                    <label for="txt_total" class="form-label">Paquetes</label>
+                                    <input name="paquetes" id="paquetes" class="form-control" required type="number"
+                                        autocomplete="off">
+                                </div>
                                 <div class="mb-3 col">
                                     <label for="txt_total" class="form-label">Unidades</label>
                                     <input name="unidades" id="unidades" class="form-control" required type="number"
@@ -555,10 +601,10 @@ document.getElementById("sumap").value = sumap.toString();
 
 
         <div class="panel-body" style="padding:0px;">
-            <div style="width:100%; padding-left:0px;   font-size:10px;   overflow-x: display; overflow-y: auto;
+            <div style="width:100%; padding-left:0px;   font-size:9px;   overflow-x: display; overflow-y: auto;
      height:450px;">
                 @csrf
-                <table class="table table-light" style="font-size:10px;" id="tabla_pendiente">
+                <table class="table table-light" style="font-size:9px;" id="tabla_pendiente">
                     <thead>
                         <tr>
                             <th style="width:100px;">CATEGORIA</th>
@@ -567,7 +613,7 @@ document.getElementById("sumap").value = sumap.toString();
                             <th>OBSERVACÓN</th>
                             <th>PRESENTACIÓN</th>
                             <th>MES</th>
-                            <th>ORDEN</th>
+                            <th style="width:100px;">ORDEN</th>
                             <th style="width:100px;">MARCA</th>
                             <th>VITOLA</th>
                             <th>NOMBRE</th>
@@ -580,7 +626,7 @@ document.getElementById("sumap").value = sumap.toString();
                             <th>PRECIO</th>
                             <th>PENDIENTE</th>
                             <th>SALDO</th>
-                            <th>OPERACIONES</th>
+                            <th></th>
                         </tr>
                     </thead>
                     <tbody name="body" id="body">
@@ -595,8 +641,8 @@ document.getElementById("sumap").value = sumap.toString();
                             <td>{{$datos->observacion}}</td>
                             <td>{{$datos->presentacion}}</td>
                             <td>{{$datos->mes}}</td>
-                            <td>{{$datos->orden}}</td>
-                            <td>{{$datos->marca}}</td>
+                            <td style="width:100px;font-size:8px;">{{$datos->orden}}</td>
+                            <td style="width:100px;font-size:8px;">{{$datos->marca}}</td>
                             <td>{{$datos->vitola}}</td>
                             <td>{{$datos->nombre}}</td>
                             <td>{{$datos->capa}}</td>
@@ -610,20 +656,19 @@ document.getElementById("sumap").value = sumap.toString();
                             <td>{{$datos->saldo}}</td>
 
 
-                            <td style="text-align:center;">
-                                <a data-toggle="modal" data-target="#modal_eliminar_detalle"
+                            <td style="width:120px;">
+                           <a data-toggle="modal" data-target="#modal_eliminar_detalle"
                                     onclick="datos_modal_eliminar({{$datos->id_pendiente}})" href="">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor"
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" fill="currentColor"
                                         class="bi bi-trash-fill" viewBox="0 0 16 16">
                                         <path
                                             d="M2.5 1a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1H3v9a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V4h.5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1H2.5zm3 4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5zM8 5a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7A.5.5 0 0 1 8 5zm3 .5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 1 0z" />
                                     </svg></a>
 
-
-                                <a style=" width:10px; height:10px;" data-toggle="modal" href=""
+                              <a style=" width:10px; height:10px;" data-toggle="modal" href=""
                                     data-target="#modal_actualizar" type="submit"
                                     onclick="datos_modal_actualizar({{$datos->id_pendiente}},{{$datos->item}})">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor"
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" fill="currentColor"
                                         class="bi bi-pencil-square" viewBox="0 0 16 16">
                                         <path
                                             d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z" />
@@ -631,6 +676,7 @@ document.getElementById("sumap").value = sumap.toString();
                                             d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z" />
                                     </svg>
                                 </a>
+                                                      
 
                                </td>
                             </tr>
@@ -729,8 +775,11 @@ document.getElementById("sumap").value = sumap.toString();
 
                             <div class="mb-3 col">
                                 <label for="txt_figuraytipo" class="form-label">Presentación</label>
-                                <input name="presentacion" id="presentacion" class="form-control" type="text"
-                                    autocomplete="off">
+                                <select class="  form-control" style="overflow-y: scroll; height:34px;"  name="presentacion" id="presentacion"required>
+                        <option value="Puros Tripa Larga" style="overflow-y: scroll;">Puros Tripa Larga  </option>
+                        <option value="Puros Tripa Corta" style="overflow-y: scroll;">Puros Tripa Corta  </option>
+                        <option value="Puros Sandwich" style="overflow-y: scroll;">Puros Sandwich  </option>
+                    </select>                               
                             </div>
                         </div>
 
@@ -796,6 +845,7 @@ document.getElementById("sumap").value = sumap.toString();
            document.getElementById('div_AddProductoPendiente').style.display = "none";
         }
         function mostrar_div_AddProductoP() {
+            event.preventDefault();
             document.getElementById('div_AddProductoPendiente').style.display = "flex";
         }
 
@@ -933,11 +983,8 @@ $('.mi-selector').select2();
         var data = JSON.parse(datas);
 
         if(b_orden == "" && b_item == "" && b_hon == "" && b_mes == "" && b_marca == "" &&
-        b_vitola == "" &&b_capa == "" &&b_nombre == "" &&b_empaque == ""  ){
-                document.getElementById('checkbox1').value = checkbox1;   
-                document.getElementById('checkbox2').value = checkbox2;    
-                document.getElementById('checkbox3').value = checkbox3;    
-                document.getElementById('checkbox4').value = checkbox4;  
+        b_vitola == "" &&b_capa == "" &&b_nombre == "" && b_empaque == ""  ){
+               location.reload(true);
 }else{
     var sumas = 0; var sumap = 0;
         for (var i = 0; i < data.length; i++) {  
@@ -969,6 +1016,8 @@ $('.mi-selector').select2();
             if(data[i].upc == null){ data[i].upc =""; } 
             if(data[i].serie_precio == null){ data[i].serie_precio =""; } 
             if(data[i].precio == null){ data[i].precio =""; } 
+            if(data[i].pendiente == null){ data[i].pendiente =""; } 
+            if(data[i].saldo == null){ data[i].saldo =""; } 
 
             var tabla_nueva = `
                   <tr>
@@ -979,8 +1028,8 @@ $('.mi-selector').select2();
 
                     <td>` + data[i].presentacion + `</td>
                     <td>` + data[i].mes + `</td>
-                    <td>` + data[i].orden + `</td>
-                    <td>` + data[i].marca + `</td>
+                    <td style="width:100px;font-size:8px;">` + data[i].orden + `</td>
+                    <td style="width:100px;font-size:8px;">` + data[i].marca + `</td>
                     <td>` + data[i].vitola + `</td>
 
                     <td>` + data[i].nombre + `</td>
@@ -994,10 +1043,10 @@ $('.mi-selector').select2();
                     <td>` + data[i].pendiente + `</td>
                     <td>` + data[i].saldo + `</td>
 
-                    <td style="text-align:center;">
+                    <td style="width:100px;">
                                 <a data-toggle="modal" data-target="#modal_eliminar_detalle"
                                     onclick="datos_modal_eliminar(` +data[i].id_pendiente+ `)" href="">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor"
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" fill="currentColor"
                                         class="bi bi-trash-fill" viewBox="0 0 16 16">
                                         <path
                                             d="M2.5 1a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1H3v9a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V4h.5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1H2.5zm3 4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5zM8 5a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7A.5.5 0 0 1 8 5zm3 .5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 1 0z" />
@@ -1007,7 +1056,7 @@ $('.mi-selector').select2();
                                 <a style=" width:10px; height:10px;" data-toggle="modal" href=""
                                     data-target="#modal_actualizar" type="submit"
                                     onclick="datos_modal_actualizar(` +data[i].id_pendiente+ `,` +data[i].item+ `)">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor"
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" fill="currentColor"
                                         class="bi bi-pencil-square" viewBox="0 0 16 16">
                                         <path
                                             d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z" />
