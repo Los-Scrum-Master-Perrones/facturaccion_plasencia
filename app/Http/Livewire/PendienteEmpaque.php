@@ -9,7 +9,10 @@ use Livewire\Component;
 use Illuminate\Http\Request;
 use Livewire\WithPagination;
 use DB;
+use Maatwebsite\Excel\Facades\Excel;
 use Illuminate\Support\Facades\View;
+use App\Http\Static_Vars_PendienteEmpaque;
+use App\Exports\PendienteEmpaqueExport;
 
 
 class PendienteEmpaque extends Component
@@ -262,8 +265,23 @@ class PendienteEmpaque extends Component
 
        }else if( $funcion == 4){
 
+        Static_Vars_PendienteEmpaque::Sete_cat1s($request->checkbox1E);
+        Static_Vars_PendienteEmpaque::Sete_cat2s($request->checkbox2E);
+        Static_Vars_PendienteEmpaque::Sete_cat3s($request->checkbox3E);
+        Static_Vars_PendienteEmpaque::Sete_cat4s($request->checkbox4E);
         
-        return    ;
+        Static_Vars_PendienteEmpaque::Sete_items($request->b_itemE);
+        Static_Vars_PendienteEmpaque::Sete_ordenes($request->b_ordenE);
+        Static_Vars_PendienteEmpaque::Sete_hons($request->b_honE);
+        Static_Vars_PendienteEmpaque::Sete_marcas($request->b_marcaE);
+        
+        Static_Vars_PendienteEmpaque::Sete_vitolas($request->b_vitolaE);
+        Static_Vars_PendienteEmpaque::Sete_nombres($request->b_nombreE);
+        Static_Vars_PendienteEmpaque::Sete_capas($request->b_capaE);
+        Static_Vars_PendienteEmpaque::Sete_empaques($request->b_empaqueE);
+        Static_Vars_PendienteEmpaque::Sete_meses($request->b_mesE);
+
+        return  Excel::download(new PendienteEmpaqueExport(), 'Pendiente Empaque.xlsx');
        }        
         
     }
