@@ -53,7 +53,7 @@
                 <button class="botonprincipal" type="submit" style="width:120px;">Exportar </button>
             </div>
             </form>
-            
+
         </div>
     </div>
 
@@ -65,7 +65,7 @@
     <div style="width:100%; padding-left:25px; padding-right:10px;">
 
         <div class="row">
-            <div class="col-sm" style="width:20%; padding-left:0px; ">
+            <div class="col-sm-3">
 
                 <table class="table table-light" id="editable" style="font-size:10px;">
                     <thead>
@@ -73,8 +73,6 @@
                             <th style=" text-align:center;">#-No.</th>
                             <th style=" text-align:center;">FECHA</th>
                             <th style=" text-align:center;">CONTENEDOR</th>
-
-
                         </tr>
                     </thead>
                     <tbody>
@@ -149,9 +147,10 @@
                 </table>
             </div>
 
-            
-            <div class="col-sm"  style="width:100%; font-size:10px; height:450px;" >
-                <table class="table table-light" id="editable" style="font-size:10px; " >
+
+            <div class="col-sm-9" style="width:75%; padding-left:0px;   font-size:10px;   overflow-x: display; overflow-y: auto;
+            height:450px;">
+                <table class="table table-light" id="editable" style="font-size:10px;" >
                     <thead>
                         <tr style=" text-align:center;">
                             <th># ORDEN</th>
@@ -173,6 +172,9 @@
                     </thead>
                     <tbody>
 
+                        @php
+                            $suma_total = 0;
+                        @endphp
                         @foreach($detalles_programaciones as $detalles_programacione)
                         <tr>
                             <td> {{$detalles_programacione->numero_orden}}</td>
@@ -186,6 +188,9 @@
                             <td> {{$detalles_programacione->cello}}</td>
                             <td> {{$detalles_programacione->upc}}</td>
                             <td> {{$detalles_programacione->saldo}}</td>
+                            @php
+                                $suma_total+=$detalles_programacione->saldo;
+                            @endphp
                             <td> {{$detalles_programacione->cajas}}</td>
 
                             <td style="text-align:center">
@@ -227,6 +232,10 @@
             </div>
 
         </div>
+        <div class="input-group" style="width:30%;position: fixed;right: 0px;bottom:0px; height:30px;">
+            <span class="form-control input-group-text">Total saldo</span>
+            <input type="text" class="form-control" id="sumase" value="{{$suma_total}}">
+        </div>
 
     </div>
 
@@ -235,12 +244,10 @@
 
     <script type="text/javascript">
         function datos_modal_actualizar(id) {
-            var datas = '<?php echo json_encode($detallestodos);?>';
 
-            var data = JSON.parse(datas);
+            var data = @json($detallestodos);
 
             var saldo_nuevo = 0;
-
 
             for (var i = 0; i < data.length; i++) {
                 if (data[i].id_detalle_programacion === id) {
@@ -252,7 +259,6 @@
                     document.form_saldo.saldo_pen.value = saldo_nuevo;
                     document.form_saldo.cajas_viejas.value = data[i].cant_cajas_necesarias;
                     document.form_saldo.cant_cajas.value = data[i].cant_cajas;
-                    
 
                 }
             }
@@ -264,9 +270,9 @@
 
     <script type="text/javascript">
         function datos_modal_eliminar(id) {
-            var datas = '<?php echo json_encode($detallestodos);?>';
 
-            var data = JSON.parse(datas);
+
+            var data = @json($detallestodos);
 
 
 
@@ -280,7 +286,7 @@
                     document.formulario_mostrarE.cant_cajase.value = data[i].cant_cajas;
                     document.formulario_mostrarE.saldo_viejo.value = data[i].saldo;
 
-                   
+
                 }
             }
 
@@ -309,9 +315,9 @@
 
     <script type="text/javascript">
         function datos_modal_actualizar_programacion(id) {
-            var datas = '<?php echo json_encode($programaciones);?>';
 
-            var data = JSON.parse(datas);
+
+            var data = @json($programaciones);
 
             var saldo_nuevo = 0;
 
@@ -331,10 +337,8 @@
     <script type="text/javascript">
         function verpro(id) {
 
+            var data = @json($programaciones);
 
-            var datas = '<?php echo json_encode($programaciones);?>';
-
-            var data = JSON.parse(datas);
             for (var i = 0; i < data.length; i++) {
                 if (data[i].id === id) {
 
@@ -385,7 +389,7 @@
                         <input name="saldo_viejo" id="saldo_viejo" hidden />
                         <input name="cant_cajase" id="cant_cajase" hidden />
 
-                      
+
                         <button style=" background: #b39f64; color: #ecedf1;" type="button" class=" btn-info-claro "
                             data-dismiss="modal">
                             <span>Cancelar</span>
@@ -503,7 +507,7 @@
                         <input id="saldo_pendiente" name="saldo_pendiente" hidden>
                         <input id="saldo_pen" name="saldo_pen" hidden>
                         <input id="cajas_viejas" name="cajas_viejas" hidden>
-                        
+
                         <input id="cant_cajas" name="cant_cajas" hidden>
 
                         <h5 class="modal-title" id="staticBackdropLabel"

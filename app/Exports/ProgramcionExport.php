@@ -17,16 +17,16 @@ use Maatwebsite\Excel\Concerns\WithHeadings;
 use Maatwebsite\Excel\Concerns\WithStrictNullComparison;
 use Maatwebsite\Excel\Concerns\WithColumnFormatting;
 
-class ProgramcionExport implements FromCollection, 
+class ProgramcionExport implements FromCollection,
 ShouldAutoSize,
 WithHeadings,
 WithStrictNullComparison,
 WithColumnFormatting
 {
-  
+
     public $busqueda;
     public $id_tov;
-    
+
     function __construct($busqueda,$id_tov) {
         $this->busqueda = $busqueda;
         $this->id_tov = $id_tov;
@@ -35,7 +35,6 @@ WithColumnFormatting
     public function headings(): array
     {
         return [
-            'ID_PROGRAMACION',
             '# ORDEN',
             'ORDEN',
             'MARCA',
@@ -47,7 +46,6 @@ WithColumnFormatting
             'CELLO',
             'UPC',
             'SALDO',
-           
         ];
     }
 
@@ -58,10 +56,10 @@ WithColumnFormatting
             'O' => NumberFormat::FORMAT_NUMBER,
         ];
     }
-    
+
     public function collection()
     {
-      
+
         $detalles_programaciones=\DB::select('call mostrar_detalles_exportar(:buscar,:id)',
         ['buscar'=>  $this->busqueda,
         'id'=>$this->id_tov]);
