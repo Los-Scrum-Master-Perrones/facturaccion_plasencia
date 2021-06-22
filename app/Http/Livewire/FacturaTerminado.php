@@ -75,23 +75,17 @@ class FacturaTerminado extends Component
         $this->titulo_cliente = $this->cliente;
 
         $this->datos_pendiente = DB::select(
-            'call buscar_pendiente_factura(:orden,:fechade,:item,:ordensistema,:hon)',
+            'call buscar_pendiente_factura(:orden,:fechade,:item,:ordensistema)',
             [
                 'orden' => $this->tipo_factura,
                 'fechade' =>  $this->fede,
                 'item' =>  $this->item,
-                'ordensistema' => $this->orden,
-                'hon' =>  $this->hon
+                'ordensistema' => $this->orden
             ]
         );
 
 
-        $this->detalles_venta = DB::select(
-            'call mostrar_detalle_factura(:ordenes)',
-            [
-                'ordenes' => $this->tipo_factura
-            ]
-        );
+        $this->detalles_venta = DB::select('call mostrar_detalle_factura()');
 
         if ($this->nom != "" || $this->fede != "" || $this->fecha != ""|| $this->item != "" || $this->orden != "" || $this->hon != "") {
             $this->dispatchBrowserEvent("pendiente");
