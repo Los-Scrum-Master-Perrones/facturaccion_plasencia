@@ -346,8 +346,6 @@
                     document.formver.buscar.value = "";
                     document.formverid.id_tov_imprimir.value = data[i].id;
 
-
-
                 }
             }
 
