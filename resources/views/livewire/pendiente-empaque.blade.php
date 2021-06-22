@@ -35,19 +35,33 @@
 
 
     <div class="container" style="max-width:100%; ">
-
+    <form action =  "{{Route('insertar_detalle_provicional')}}" method= "POST" >
+@csrf
 
         <div class="col" style="height:66px;">
             <div class="row" style="margin-bottom:2px">
 
-                <div class="col">
-                    <form wire:submit.prevent="insertar_detalle_provicional()">
-                        @csrf
-                        <button class="mr-sm-2 botonprincipal" style="width:200px;">Agregar Programación </button>
-                    </form>
-                </div>
+            <div class="col" >
+                  <div class="row" >
+                  <div class="col" >
 
-                <div class="col">
+                   <abbr title="Agregar Programación">
+                   <button class=" botonprincipal" onclick="addexportar(1)" > <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-plus-circle" viewBox="0 0 16 16">
+                        <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
+                        <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z"/>
+                        </svg> Programación </button>  
+                    </abbr>
+                     </div>
+
+                     <div class="col" >
+                   <abbr title="Importar a excel">                     
+                     <a href="/detalles_programacion"> <button onclick="addexportar(2)" class="botonprincipal"> Ver</button></a>  
+                    </abbr>
+                    </div>
+                    </div>
+                      </div>                        
+                          
+                 <div class="col">
                     <div class="dropdown">
                         <button class="btn btn-secondary dropdown-toggle form-control" type="button"
                             id="dropdownMenuButton1" data-toggle="dropdown">
@@ -94,7 +108,7 @@
 
                 <div class="col">
                     <select onchange="buscar_tablaE()" onclick="funcion1()" name="b_itemE" id="b_itemE"
-                        class=" mi-selector form-control" style="width:100%;height:34px;" name="states[]" required>
+                        class=" mi-selector form-control" style="width:100%;height:34px;" name="states[]" >
                         <option value="" style="overflow-y: scroll;">Todos Items</option>
                         @foreach($items_p as $item)
                         <option style="overflow-y: scroll;"> {{$item->item}}</option>
@@ -104,7 +118,7 @@
 
                 <div class="col">
                     <select onchange="buscar_tablaE()" onclick="funcion1()" name="b_ordenE" id="b_ordenE"
-                        class=" mi-selector form-control" style="width:100%;height:34px;" name="states[]" required>
+                        class=" mi-selector form-control" style="width:100%;height:34px;" name="states[]" >
                         <option value="" style="overflow-y: scroll;">Todas las ordenes del sistema</option>
                         @foreach($ordenes_p as $orden)
                         <option style="overflow-y: scroll;"> {{$orden->orden_del_sitema}}</option>
@@ -114,7 +128,7 @@
 
                 <div class="col">
                     <select onchange="buscar_tablaE()" onclick="funcion1()" name="b_honE" id="b_honE"
-                        class=" mi-selector form-control" style="width:100%;height:34px;" name="states[]" required>
+                        class=" mi-selector form-control" style="width:100%;height:34px;" name="states[]" >
                         <option value="" style="overflow-y: scroll;">Todas las ordenes</option>
                         @foreach($hons_p as $hon)
                         <option style="overflow-y: scroll;"> {{$hon->orden}}</option>
@@ -127,14 +141,32 @@
 
             <div class="row">
 
-                <div class="col">
-                    <a href="/detalles_programacion"> <button class="mr-sm-2 botonprincipal" style="width:200px;">
-                            Ver</button></a>
-                </div>
+            <div class="col" >
+                  <div class="row" >
+                  <div class="col" >
+
+                   <abbr title="Agregar Programación">
+                   <button class=" botonprincipal" onclick="addexportar(3)" > <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-plus-circle" viewBox="0 0 16 16">
+                        <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
+                        <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z"/>
+                        </svg> Nuevo </button>  
+                    </abbr>
+                     </div>
+
+                     <div class="col" >
+                   <abbr title="Importar a excel">                     
+                     <button class=" botonprincipal"  onclick="addexportar(4)"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-file-earmark-spreadsheet" viewBox="0 0 16 16">
+                        <path d="M14 14V4.5L9.5 0H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2zM9.5 3A1.5 1.5 0 0 0 11 4.5h2V9H3V2a1 1 0 0 1 1-1h5.5v2zM3 12v-2h2v2H3zm0 1h2v2H4a1 1 0 0 1-1-1v-1zm3 2v-2h3v2H6zm4 0v-2h3v1a1 1 0 0 1-1 1h-2zm3-3h-3v-2h3v2zm-7 0v-2h3v2H6z"/>
+                        </svg> Exportar </button> 
+                    </abbr>
+                    </div>
+                    </div>
+                      </div>  
+               
 
                 <div class="col">
                     <select onchange="buscar_tablaE()" onclick="funcion1()" name="b_marcaE" id="b_marcaE"
-                        class=" mi-selector form-control" style="width:100%;height:34px;" name="states[]" required>
+                        class=" mi-selector form-control" style="width:100%;height:34px;" name="states[]" >
                         <option value="" style="overflow-y: scroll;">Todas las marcas</option>
                         @foreach($marcas_p as $marca)
                         <option style="overflow-y: scroll;"> {{$marca->marca}}</option>
@@ -144,7 +176,7 @@
 
                 <div class="col">
                     <select onchange="buscar_tablaE()" onclick="funcion1()" name="b_vitolaE" id="b_vitolaE"
-                        class=" mi-selector form-control" style="width:100%;height:34px;" name="states[]" required>
+                        class=" mi-selector form-control" style="width:100%;height:34px;" name="states[]" >
                         <option value="" style="overflow-y: scroll;">Todas las vitolas</option>
                         @foreach($vitolas_p as $vitola)
                         <option style="overflow-y: scroll;"> {{$vitola->vitola}}</option>
@@ -154,7 +186,7 @@
 
                 <div class="col">
                     <select onchange="buscar_tablaE()" onclick="funcion1()" name="b_nombreE" id="b_nombreE"
-                        class=" mi-selector form-control" style="width:100%;height:34px;" name="states[]" required>
+                        class=" mi-selector form-control" style="width:100%;height:34px;" name="states[]" >
                         <option value="" style="overflow-y: scroll;">Todos los nombres</option>
                         @foreach($nombre_p as $nombre)
                         <option style="overflow-y: scroll;"> {{$nombre->nombre}}</option>
@@ -164,7 +196,7 @@
 
                 <div class="col">
                     <select onchange="buscar_tablaE()" onclick="funcion1()" name="b_capaE" id="b_capaE"
-                        class=" mi-selector form-control" style="width:100%;height:34px;" name="states[]" required>
+                        class=" mi-selector form-control" style="width:100%;height:34px;" name="states[]" >
                         <option value="" style="overflow-y: scroll;">Todas las capas</option>
                         @foreach($capas_p as $capa)
                         <option style="overflow-y: scroll;"> {{$capa->capa}}</option>
@@ -174,7 +206,7 @@
 
                 <div class="col">
                     <select onchange="buscar_tablaE()" onclick="funcion1()" name="b_empaqueE" id="b_empaqueE"
-                        class=" mi-selector form-control" style="width:100%;height:34px;" name="states[]" required>
+                        class=" mi-selector form-control" style="width:100%;height:34px;" name="states[]" >
                         <option value="" style="overflow-y: scroll;">Todos los empaques</option>
                         @foreach($empaques_p as $empaque)
                         <option style="overflow-y: scroll;"> {{$empaque->empaque}}</option>
@@ -186,10 +218,6 @@
 
         </div>
     </div>
-
-    <form wire:submit.prevent="exportPendiente()">
-        <input type="text" value="{{isset($nom)?$nom:null}}" name="nombre" id="nombre" hidden wire:model="nom">
-        <input type="date" value="{{isset($fede)?$fede:null}}" name="fecha_de" id="fecha_de" hidden wire:model="fede">
 
     </form>
 
@@ -311,7 +339,12 @@
 
 
 
-
+        <script type="text/javascript">
+            function addexportar(id) {                
+                event.preventDefault();
+             
+            }
+        </script>
 
         <script type="text/javascript">
             function buscar_tablaE() {
@@ -619,4 +652,4 @@
     </div>
 </form>
 
-    </div>
+</div>
