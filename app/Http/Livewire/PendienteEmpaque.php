@@ -199,7 +199,9 @@ class PendienteEmpaque extends Component
 
 
 
-    public function insertar_detalle_provicional(){
+    public function insertar_detalle_provicional(Request $request){
+
+       $funcion = $request->funcion;
 
         $this->datos_pendiente_empaque = DB::select('call buscar_pendiente_empaque(:uno,:dos,:tres,:cuatro)',
         [
@@ -222,7 +224,8 @@ class PendienteEmpaque extends Component
             'cant'=>isset($this->datos_pendiente_empaque[$i]->cant_cajas)?$this->datos_pendiente_empaque[$i]->cant_cajas:null]);
         }
         
-        return redirect()->route('detalles_programacion');
+        // return redirect()->route('detalles_programacion');
+        return $funcion;
     }
 
 

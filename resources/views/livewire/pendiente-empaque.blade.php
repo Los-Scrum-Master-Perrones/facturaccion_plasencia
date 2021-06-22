@@ -219,6 +219,8 @@
         </div>
     </div>
 
+    <input name="funcion" id="funcion">
+
     </form>
 
 
@@ -340,8 +342,23 @@
 
 
         <script type="text/javascript">
-            function addexportar(id) {                
-                event.preventDefault();
+            function addexportar(id) {          
+            var theForm = document.forms['insertar_detalle_provicional'];
+                if(id == 0 ){
+                   event.preventDefault();
+                }else if(id == 1 ){
+                    document.getElementById("funcion").value = '1';
+                    theForm.addEventListener('submit', function (event) {});
+                }else   if(id == 2 ){
+                    document.getElementById("funcion").value = '2';
+                    theForm.addEventListener('submit', function (event) {});
+                }else  if(id == 3 ){
+                    document.getElementById("funcion").value = '3';
+                    theForm.addEventListener('submit', function (event) {});
+                }else  if(id == 4 ){
+                    document.getElementById("funcion").value = '4';
+                    theForm.addEventListener('submit', function (event) {});
+                }
              
             }
         </script>
