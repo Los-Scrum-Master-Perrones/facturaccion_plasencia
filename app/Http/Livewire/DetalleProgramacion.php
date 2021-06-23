@@ -172,42 +172,42 @@ class DetalleProgramacion extends Component
                 ]
             );
 
-            $sampler = 0;
-            $detalles = 0;
-            $detalle = DB::select('CALL `traer_ultimo_detalle_programacion`()');
-            $cantidad_detalle_sampler = 0;
+            // $sampler = 0;
+            // $detalles = 0;
+            // $detalle = DB::select('CALL `traer_ultimo_detalle_programacion`()');
+            // $cantidad_detalle_sampler = 0;
 
 
 
-            if ($detalle[0]->sampler == "si") {
+            // if ($detalle[0]->sampler == "si") {
 
 
-                    if ($sampler == 0 && $detalles == 0) {
-                        $datos = DB::select('call traer_numero_detalles_productos(?)', [$detalle[0]->item]);
-                        $cantidad_detalle_sampler = $datos[0]->tuplas;
-                    }
+            //         if ($sampler == 0 && $detalles == 0) {
+            //             $datos = DB::select('call traer_numero_detalles_productos(?)', [$detalle[0]->item]);
+            //             $cantidad_detalle_sampler = $datos[0]->tuplas;
+            //         }
 
-                   $detalles++;
+            //        $detalles++;
 
-                    if ($detalles == $cantidad_detalle_sampler) {
-                           $sampler_total = DB::select('call traer_suma_sampler_pendiente_empaque(?,?)', [ $detalle[0]->orden,$detalle[0]->item]);
+            //         if ($detalles == $cantidad_detalle_sampler) {
+            //                $sampler_total = DB::select('call traer_suma_sampler_pendiente_empaque(?,?)', [ $detalle[0]->orden,$detalle[0]->item]);
 
-                            return  $sampler_total;
-                           if($sampler_total[0]->total <= 0){
-                            DB::update('update pendiente_empaque set procesado = ? where item = ? and orden = ?', ['s',$detalle[0]->item,$detalle[0]->orden]);
+            //                 return  $sampler_total;
+            //                if($sampler_total[0]->total <= 0){
+            //                 DB::update('update pendiente_empaque set procesado = ? where item = ? and orden = ?', ['s',$detalle[0]->item,$detalle[0]->orden]);
 
-                           }
+            //                }
 
-                        $detalles = 0;
-                        $cantidad_detalle_sampler = 0;
-                    }
+            //             $detalles = 0;
+            //             $cantidad_detalle_sampler = 0;
+            //         }
 
 
-            }else{
-                if($detalle[0]->saldo == 0){
-                    DB::update('update pendiente_empaque set procesado = ? where id_pendiente = ?', ['s',$detalle[0]->id_pendiente]);
-                }
-            }
+            // }else{
+            //     if($detalle[0]->saldo == 0){
+            //         DB::update('update pendiente_empaque set procesado = ? where id_pendiente = ?', ['s',$detalle[0]->id_pendiente]);
+            //     }
+            // }
 
 
 

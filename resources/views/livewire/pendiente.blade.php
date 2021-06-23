@@ -950,9 +950,7 @@
         document.actualizar_pendiente.b_capaA.value = document.getElementById('b_capa').value;
         document.actualizar_pendiente.b_empaqueA.value = document.getElementById('b_empaque').value;
 
-        var datas = '<?php echo json_encode($datos_pendiente);?>';
-
-        var datasss = JSON.parse(datas);
+        var datasss = @json($datos_pendiente);
 
         var producto = "";
 
@@ -968,18 +966,21 @@
                         datasss[i].capa, " ", datasss[i].vitola);;
 
 
-                document.actualizar_pendiente.presentacion.value = datasss[i].presentacion;
+                        document.actualizar_pendiente.presentacion.value = datasss[i].presentacion;
 
-                document.actualizar_pendiente.observacion.value = datasss[i].observacion;
+                        document.actualizar_pendiente.observacion.value = datasss[i].observacion;
 
-                document.actualizar_pendiente.orden_sistema.value = datasss[i].orden_del_sitema;
+                        document.actualizar_pendiente.orden_sistema.value = datasss[i].orden_del_sitema;
 
-                document.actualizar_pendiente.pendiente.value = datasss[i].pendiente;
-                document.actualizar_pendiente.cprecio.value = datasss[i].serie_precio;
+                        document.actualizar_pendiente.pendiente.value = datasss[i].pendiente;
 
-                document.actualizar_pendiente.precio.value = datasss[i].precio;
+                        document.actualizar_pendiente.saldo.value = datasss[i].saldo;
 
-                document.actualizar_pendiente.orden.value = datasss[i].orden;
+                        document.actualizar_pendiente.cprecio.value = datasss[i].serie_precio;
+
+                        document.actualizar_pendiente.precio.value = datasss[i].precio;
+
+                        document.actualizar_pendiente.orden.value = datasss[i].orden;
             }
         }
 
