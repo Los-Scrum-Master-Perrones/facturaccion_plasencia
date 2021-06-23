@@ -23,7 +23,7 @@ class Pendiente extends Component
     public $r_tres="3";
     public $r_cuatro="4";
     public $pres;
-    
+
 
     /* procedimientos almacanedos cargar select de nuevo pendiente*/
     public $marcas;
@@ -432,7 +432,7 @@ class Pendiente extends Component
         return redirect()->route('pendiente');
     }
 
-            
+
 
 
 
@@ -443,13 +443,13 @@ class Pendiente extends Component
         Static_Vars_Pendiente::Setcat2s($request->checkbox2);
         Static_Vars_Pendiente::Setcat3s($request->checkbox3);
         Static_Vars_Pendiente::Setcat4s($request->checkbox4);
-        
+
         Static_Vars_Pendiente::Setpresentacions($request->pres);
         Static_Vars_Pendiente::Setitems($request->b_item);
         Static_Vars_Pendiente::Setordenes($request->b_orden);
         Static_Vars_Pendiente::Sethons($request->b_hon);
         Static_Vars_Pendiente::Setmarcas($request->b_marca);
-        
+
         Static_Vars_Pendiente::Setvitolas($request->b_vitola);
         Static_Vars_Pendiente::Setnombres($request->b_nombre);
         Static_Vars_Pendiente::Setcapas($request->b_capa);
