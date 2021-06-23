@@ -6560,7 +6560,6 @@ INSERT INTO `pendiente` (`id_pendiente`, `categoria`, `item`, `orden_del_sitema`
 	(1839, 2, '01104500', '', '', 'Puros Tripa Larga', 'JUNIO 2021', 'HON-3221', 151, 4, 2, 15, 7, 1, 1200, 1200, '20', '60', '', '', NULL),
 	(1840, 2, '12506010', '', '', 'Puros Tripa Larga', 'JUNIO 2021', 'HON-2940', 61, 4, 2, 1, 12, 1, 2500, 2500, '25', '100', '', '', NULL),
 	(1841, 2, '12506012', '', '', 'Puros Tripa Larga', 'JUNIO 2021', 'HON-2964', 61, 4, 2, 1, 11, 1, 1500, 1500, '5', '300', '', '', NULL),
-	(1842, 2, '12506012', '', '', 'Puros Tripa Larga', 'JUNIO 2021', 'HON-3219', 61, 4, 2, 1, 11, 1, 7500, 7500, '5', '1500', '', '', NULL),
 	(1843, 2, '12506013', '', '', 'Puros Tripa Larga', 'JUNIO 2021', 'HON-3207', 61, 4, 2, 1, 68, 1, 2400, 2400, '3', '800', '', '', NULL),
 	(1844, 2, '12506014', '', '', 'Puros Tripa Larga', 'JUNIO 2021', 'HON-2940', 61, 2, 1, 1, 12, 1, 5000, 5000, '25', '200', '', '', NULL),
 	(1845, 2, '12506015', '', '', 'Puros Tripa Larga', 'JUNIO 2021', 'HON-2964', 61, 4, 14, 1, 11, 1, 1500, 1500, '5', '300', '', '', NULL),
@@ -6750,7 +6749,8 @@ INSERT INTO `pendiente` (`id_pendiente`, `categoria`, `item`, `orden_del_sitema`
 	(2037, 1, '9900009189', '3238', ' ', 'Puros Tripa Larga', 'JUNIO 2021', 'HON-3201 revised', 1018, 45, 2, 19, 27, 1, 0, 0, '1', '0', ' ', '0.00', NULL),
 	(2038, 1, '9900009189', '3238', ' ', 'Puros Tripa Larga', 'JUNIO 2021', 'HON-3201 revised', 1465, 45, 2, 19, 27, 1, 0, 0, '1', '0', ' ', '0.00', NULL),
 	(2039, 1, '9900009189', '3238', ' ', 'Puros Tripa Larga', 'JUNIO 2021', 'HON-3201 revised', 1467, 45, 2, 19, 27, 1, 0, 0, '1', '0', ' ', '0.00', NULL),
-	(2040, 1, '9900009189', '3238', ' ', 'Puros Tripa Larga', 'JUNIO 2021', 'HON-3201 revised', 1468, 45, 2, 19, 27, 1, 0, 0, '1', '0', ' ', '0.00', NULL);
+	(2040, 1, '9900009189', '3238', ' ', 'Puros Tripa Larga', 'JUNIO 2021', 'HON-3201 revised', 1468, 45, 2, 19, 27, 1, 0, 0, '1', '0', ' ', '0.00', NULL),
+	(2041, 2, '12506012', '3238', ' ', 'Puros Tripa Larga', 'JUNIO 2021', 'HON-3207', 61, 4, 2, 1, 11, 1, 4000, 4000, '5', '800', ' ', '0', NULL);
 /*!40000 ALTER TABLE `pendiente` ENABLE KEYS */;
 
 -- Volcando estructura para tabla facturacion_plasencia.pendiente_empaque
@@ -8103,7 +8103,9 @@ INSERT INTO `pendiente_empaque` (`id_pendiente`, `categoria`, `item`, `orden_del
 	(3188, 1, '9900009189', '3238', ' ', 'Puros Tripa Larga', 'JUNIO 2021', 'HON-3201 revised', 1018, 45, 2, 19, 27, 1, 0, 0, '1', '0', 2037, NULL),
 	(3189, 1, '9900009189', '3238', ' ', 'Puros Tripa Larga', 'JUNIO 2021', 'HON-3201 revised', 1465, 45, 2, 19, 27, 1, 0, 0, '1', '0', 2038, NULL),
 	(3190, 1, '9900009189', '3238', ' ', 'Puros Tripa Larga', 'JUNIO 2021', 'HON-3201 revised', 1467, 45, 2, 19, 27, 1, 0, 0, '1', '0', 2039, NULL),
-	(3191, 1, '9900009189', '3238', ' ', 'Puros Tripa Larga', 'JUNIO 2021', 'HON-3201 revised', 1468, 45, 2, 19, 27, 1, 0, 0, '1', '0', 2040, NULL);
+	(3191, 1, '9900009189', '3238', ' ', 'Puros Tripa Larga', 'JUNIO 2021', 'HON-3201 revised', 1468, 45, 2, 19, 27, 1, 0, 0, '1', '0', 2040, NULL),
+(3192, 2, '12506012', '3238', ' ', 'Puros Tripa Larga', 'JUNIO 2021', 'HON-3207', 61, 4, 2, 1, 11, 1, 4000, 4000, '5', '800', 2041, NULL);
+
 /*!40000 ALTER TABLE `pendiente_empaque` ENABLE KEYS */;
 
 -- Volcando estructura para tabla facturacion_plasencia.prograamacion
