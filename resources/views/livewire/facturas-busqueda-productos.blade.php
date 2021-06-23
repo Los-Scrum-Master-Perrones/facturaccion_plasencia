@@ -19,7 +19,7 @@
             </div>
             <div class="col-sm-4" style="text-align:right;">
                 <input name="buscar" id="buscar" class="  form-control" wire:model="busqueda"
-                    placeholder="Búsqueda numero factura" style="width:400px; padding:right;">
+                    placeholder="Búsqueda número factura" style="width:400px; padding:right;">
             </div>
             <div class="col-sm-3" style="text-align:right;">
                 <button class="botonprincipal" style="width:120px;" wire:click="exportar_factura()">Exportar  </button>
@@ -39,14 +39,14 @@
                 <div class="col-sm"
                     style="width:20%; padding-left:0px; height: 200px;  overflow-x: display; overflow-y: auto;">
 
-                    <table class="table table-light" id="editable" style="font-size:10px;height: 200px">
+                    <table class="table table-light" id="editable" style="font-size:8px;max-height: 200px">
                         <thead>
-                            <tr style="text-align:center;">
-                                <th style=" text-align:center;">#-No. Factura</th>
-                                <th style=" text-align:center;">Cliente</th>
-                                <th style=" text-align:center;">Contenedor</th>
-                                <th style=" text-align:center;">Bultos</th>
-                                <th style=" text-align:center;">Puros</th>
+                            <tr >
+                                <th >#-No. Factura</th>
+                                <th >Cliente</th>
+                                <th >Contenedor</th>
+                                <th >Bultos</th>
+                                <th >Puros</th>
                                 <th></th>
                             </tr>
                         </thead>
@@ -58,7 +58,7 @@
                                 <td>{{$factur->contenedor}}</td>
                                 <td>{{$factur->cantidad_bultos}}</td>
                                 <td>{{$factur->total_puros}}</td>
-                                <td style="width:100">
+                                <td >
                                     <a  wire:click.prevent="editar_factura({{$factur->id}})" href=""
                                         style="text-decoration:none">
                                         <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20"

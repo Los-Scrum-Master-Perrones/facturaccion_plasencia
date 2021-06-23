@@ -25,6 +25,9 @@ class FacturaTerminado extends Component
     public $total_total_puros;
     public $total_peso_bruto;
     public $total_peso_neto;
+    public $total_valor;
+    public $total_saldo;
+    public $total_pendiente;
     public $fecha_factura;
     public $detalles_venta;
     public $datos_pendiente;
@@ -67,6 +70,10 @@ class FacturaTerminado extends Component
         $this->total_total_puros = 0;
         $this->total_peso_bruto = 0;
         $this->total_peso_neto = 0;
+        $this->total_valor = 0;
+        $this->total_saldo = 0;
+        $this->total_pendiente = 0;
+        
 
         setlocale(LC_TIME, "spanish");
         $Nueva_Fecha = date("d-m-Y", strtotime($this->fecha_factura));
@@ -95,6 +102,10 @@ class FacturaTerminado extends Component
 
         $this->detalles_produtos = DB::select('CALL `mostrar_detalles_productos`()');
 
+        for ($i = 0; $i < count($this->datos_pendiente); $i++) {
+            $this->total_saldo += $this->datos_pendiente[$i]->saldo;
+            $this->total_pendiente += $this->datos_pendiente[$i]->pendiente;
+        }
 
 
         for ($i = 0; $i < count($this->detalles_venta); $i++) {
@@ -102,6 +113,7 @@ class FacturaTerminado extends Component
             $this->total_total_puros += $this->detalles_venta[$i]->total_tabacos;
             $this->total_peso_bruto += $this->detalles_venta[$i]->total_bruto;
             $this->total_peso_neto += $this->detalles_venta[$i]->total_neto;
+            $this->total_valor += $this->detalles_venta[$i]->valor_total;
         }
 
         return view('livewire.factura-terminado')->extends('principal')->section('content');
@@ -184,6 +196,10 @@ class FacturaTerminado extends Component
         $this->total_total_puros = 0;
         $this->total_peso_bruto = 0;
         $this->total_peso_neto = 0;
+        $this->total_valor = 0;
+        
+        $this->total_saldo = 0;
+        $this->total_pendiente = 0;
 
         $this->editar_descripcion_producto =  "";
         $this->editar_cantidad_bultos = 0;
