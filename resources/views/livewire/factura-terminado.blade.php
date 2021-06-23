@@ -594,7 +594,7 @@
                         Rellene los campos del Cliente y Contenedor
                     </div>
                     <div class="modal-footer">
-                        <button data-dismiss="modal" class=" btn-info ">
+                        <button data-dismiss="modal" class=" bmodal_yes ">
                             <span>OK</span>
                         </button>
                     </div>

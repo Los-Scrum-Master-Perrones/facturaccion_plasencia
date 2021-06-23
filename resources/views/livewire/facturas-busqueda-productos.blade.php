@@ -9,25 +9,27 @@
 
     <div class="" style="width:100%; ">
 
-        <div class="row" style="width:100%;">
-
-
-            <div class="col-sm-5" style="text-align:right;">
-
-                <input type="date" class="form-control" wire:model="fecha_mes" style="width:400px; padding:right;">
-
+    <div class="col" >
+                <div class="row" style="margin-bottom:2px">
+            <div class="col">  
+                <input type="date" class="form-control" wire:model="fecha_mes" style="width:100%; padding:right;">
             </div>
-            <div class="col-sm-4" style="text-align:right;">
-                <input name="buscar" id="buscar" class="  form-control" wire:model="busqueda"
-                    placeholder="Búsqueda número factura" style="width:400px; padding:right;">
-            </div>
-            <div class="col-sm-3" style="text-align:right;">
-                <button class="botonprincipal" style="width:120px;" wire:click="exportar_factura()">Exportar  </button>
-            </div>
+            <div class="col">
+            <input name="buscar" id="buscar" class="  form-control" wire:model="busqueda" placeholder="Búsqueda número factura" style="width: 100%; padding:right;">
+                </div>
+                <div class="col">
+                <button class="botonprincipal" style="width:100%;" wire:click="exportar_factura()">Exportar  </button>
+                </div>
+                  <div class="col"></div>
+                    <div class="col"></div>         
+           
+            
+</div>
+</div>
 
-        </div>
+<br>
 
-        <br>
+
 
 
 
@@ -95,44 +97,46 @@
                 <div class="col-sm" style="width:80%; padding-left:0px; ">
                     <table class="table table-light" id="editable">
                         <thead style="position: static;">
-                            <tr style="font-size:10px; text-align:center">
-                                <th style="text-align:center;">Bulto<br>Package<br>No.
+                            <tr style="font-size:8px; text-align:center">
+                                <th rowspan="2">Bulto<br>Package<br>No.
                                 </th>
-                                <th style="text-align:center;">Cant.<br>Quant.
+                                <th rowspan="2">Cant.<br>Quant.
                                 </th>
-                                <th style="text-align:center;">Unidad<br>Unit.
+                                <th rowspan="2">Unidad<br>Unit.
                                 </th>
-                                <th style="text-align:center;">Units<br>
+                                <th rowspan="2" style="background:#ddd;">Units<br>
                                 </th>
-                                <th style="text-align:center;">Total<br>Tabacos<br>Cigars
+                                <th rowspan="2">Total<br>Tabacos<br>Cigars
                                 </th>
-                                <th style="text-align:center;">Capa<br>Wrappar
+                                <th rowspan="2">Capa<br>Wrappar
                                 </th>
-                                <th style="text-align:center;">#
+                                <th rowspan="2">#
                                 </th>
-                                <th style="text-align:center; width: 300px">Clase<br>Class
+                                <th rowspan="2" >Clase<br>Class
                                 </th>
-                                <th style="text-align:center;">CODIGO #<br>ITEM #
+                                <th rowspan="2">CODIGO #<br>ITEM #
                                 </th>
-                                <th style="text-align:center;">YOUR<br>ITEM #
+                                <th rowspan="2">YOUR<br>ITEM #
                                 </th>
-                                <th style="text-align:center;">YOUR<br>ORDER #
+                                <th rowspan="2" style="background:#ddd;">YOUR<br>ORDER #
                                 </th>
-                                <th style="text-align:center;">ORDER<br>AMOUNT
+                                <th rowspan="2">ORDER<br>AMOUNT
                                 </th>
-                                <th style="text-align:center;">BACK<br>ORDER<br>AMOUNT
+                                <th rowspan="2">BACK<br>ORDER<br>AMOUNT
                                 </th>
-                                <th style="text-align:center;">Bruto<br>Gross
+                                <th  colspan="2" > Peso en Libras<br>Weigth in Pounds </th>
+
+                                <th rowspan="2">Precio FOB<br>per 1000
                                 </th>
-                                <th style="text-align:center;">Neto<br>Net
+                                <th rowspan="2" style="background:#ddd;">Cost
                                 </th>
-                                <th style="text-align:center;">Precio FOB<br>per 1000
+                                <th rowspan="2">Valor<br>Value
                                 </th>
-                                <th style="text-align:center;">Cost
-                                </th>
-                                <th style="text-align:center;">Valor<br>Value
-                                </th>
-                            </tr>
+                            </tr> 
+                             <tr style="font-size:8px; ">
+                        <th >Bruto Gross</th>
+                        <th >Neto Net</th>                        
+                    </tr>
                         </thead>
                         <tbody>
                             <?php  $bultos = 0;
@@ -148,9 +152,9 @@
                                $val_actual=$bultos ?>
 
                                 @if ($val_actual == $val_anterioir)
-                                <td style="width:100px; max-width: 400px;overflow-x:auto;">{{$val_actual}}</td>
+                                <td style="overflow-x:auto;">{{$val_actual}}</td>
                                 @else
-                                <td style="width:100px; max-width: 400px;overflow-x:auto;">{{$val_anterioir}} al
+                                <td style=" max-width: 400px;overflow-x:auto;">{{$val_anterioir}} al
                                     {{$val_actual}}</td>
                                 @endif
 

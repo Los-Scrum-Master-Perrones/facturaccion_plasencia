@@ -1,43 +1,33 @@
                 <table class="table table-light" id="editable">
                     <thead style="position: static;">
                         <tr style="font-size:10px; text-align:center">
-                            <th style="text-align:center;">Bulto<br>Package<br>No.
-                            </th>
-                            <th style="text-align:center;">Cant.<br>Quant.
-                            </th>
-                            <th style="text-align:center;">Unidad<br>Unit.
-                            </th>
-                            <th style="text-align:center;">Units<br>
-                            </th>
-                            <th style="text-align:center;">Total<br>Tabacos<br>Cigars
-                            </th>
-                            <th style="text-align:center;">Capa<br>Wrappar
-                            </th>
-                            <th style="text-align:center;">#
-                            </th>
-                            <th style="text-align:center;">Clase<br>Class
-                            </th>
-                            <th style="text-align:center;">CODIGO #<br>ITEM #
-                            </th>
-                            <th style="text-align:center;">YOUR<br>ITEM #
-                            </th>
-                            <th style="text-align:center;">YOUR<br>ORDER #
-                            </th>
-                            <th style="text-align:center;">ORDER<br>AMOUNT
-                            </th>
-                            <th style="text-align:center;">BACK<br>ORDER<br>AMOUNT
-                            </th>
-                            <th style="text-align:center;">Bruto<br>Gross
-                            </th>
-                            <th style="text-align:center;">Neto<br>Net
-                            </th>
-                            <th style="text-align:center;">Precio FOB<br>per 1000
-                            </th>
-                            <th style="text-align:center;">Cost
-                            </th>
-                            <th style="text-align:center;">Valor<br>Value
-                            </th>
+
+                            <th rowspan="2">Bulto<br>Package<br>No. </th>
+                            <th rowspan="2">Cant.<br>Quant.  </th>
+                            <th rowspan="2">Unidad<br>Unit. </th>
+                            <th rowspan="2" style="background:#ddd;">Units<br> </th>
+                            <th rowspan="2">Total<br>Tabacos<br>Cigars </th>
+                            <th rowspan="2">Capa<br>Wrappar  </th>
+                            <th rowspan="2">#</th>
+                            <th rowspan="2">Clase<br>Class </th>
+                            <th rowspan="2">CODIGO #<br>ITEM #  </th>
+                            <th rowspan="2">YOUR<br>ITEM #   </th>
+                            <th rowspan="2" style="background:#ddd;">YOUR<br>ORDER # </th>
+                            <th rowspan="2">ORDER<br>AMOUNT </th>
+                            <th rowspan="2">BACK<br>ORDER<br>AMOUNT </th>
+
+                            <th  colspan="2" > Peso en Libras<br>Weigth in Pounds </th>
+
+                            <th rowspan="2">Precio FOB<br>per 1000 ($) </th>
+                            <th rowspan="2" style="background:#ddd;">Cost</th>
+                            <th rowspan="2">Valor<br>Value ($)</th>
                         </tr>
+
+                        <tr style="font-size:8px; ">
+                        <th >Bruto Gross</th>
+                        <th >Neto Net</th>                        
+                        </tr>
+
                     </thead>
                     <tbody>
                         <?php  $bultos = 0;
