@@ -204,18 +204,18 @@ class PendienteEmpaque extends Component
 
     public function insertar_detalle_provicional(Request $request){
 
-       $funcion = $request->funcion;     
+       $funcion = $request->funcion;
 
  if ($request->checkbox1E == null) {  $checkbox1E = ""; } else { $checkbox1E = $request->checkbox1E;}
  if ($request->checkbox2E == null) {  $checkbox2E = ""; } else { $checkbox2E = $request->checkbox2E;}
  if ($request->checkbox3E == null) {  $checkbox3E = ""; } else { $checkbox3E = $request->checkbox3E;}
  if ($request->checkbox4E == null) {  $checkbox4E = ""; } else { $checkbox4E = $request->checkbox4E;}
- 
+
  if ($request->b_itemE == null) {  $b_itemE = ""; } else { $b_itemE = $request->b_itemE;}
  if ($request->b_ordenE == null) {  $b_ordenE = ""; } else { $b_ordenE = $request->b_ordenE;}
  if ($request->b_honE == null) {  $b_honE = ""; } else { $b_honE = $request->b_honE;}
  if ($request->b_marcaE == null) {  $b_marcaE = ""; } else { $b_marcaE = $request->b_marcaE;}
- 
+
  if ($request->b_vitolaE == null) {  $b_vitolaE = ""; } else { $b_vitolaE = $request->b_vitolaE;}
  if ($request->b_nombreE == null) {  $b_nombreE = ""; } else { $b_nombreE = $request->b_nombreE;}
  if ($request->b_capaE == null) {  $b_capaE = ""; } else { $b_capaE = $request->b_capaE;}
@@ -225,9 +225,9 @@ class PendienteEmpaque extends Component
 
 
 
-       if( $funcion == 1){  
-           
-        $datos_pendiente_empaque = DB::select('call buscar_pendiente_empaque_excel(:v1,  :v2,  :v3,  :v4,  :v5,  :v6,  :v7,  :v8,  :v9,  :v10,  :v11,  :v12,  :v13)',   
+       if( $funcion == 1){
+
+        $datos_pendiente_empaque = DB::select('call buscar_pendiente_empaque_excel(:v1,  :v2,  :v3,  :v4,  :v5,  :v6,  :v7,  :v8,  :v9,  :v10,  :v11,  :v12,  :v13)',
             [
                 'v1' =>  $checkbox1E,
                 'v2' =>  $checkbox2E,
@@ -257,7 +257,7 @@ class PendienteEmpaque extends Component
             'saldo'=>isset($datos_pendiente_empaque[$i]->saldo)?$datos_pendiente_empaque[$i]->saldo:null,
             'id_pendiente'=>isset($datos_pendiente_empaque[$i]->id_pendiente)?$datos_pendiente_empaque[$i]->id_pendiente:null,
             'cant'=>isset($datos_pendiente_empaque[$i]->cant_cajas)?$datos_pendiente_empaque[$i]->cant_cajas:null]);
-        }    
+        }
         return redirect()->route('detalles_programacion');
 
        } else if( $funcion == 2){
@@ -269,12 +269,12 @@ class PendienteEmpaque extends Component
         Static_Vars_PendienteEmpaque::Sete_cat2s($request->checkbox2E);
         Static_Vars_PendienteEmpaque::Sete_cat3s($request->checkbox3E);
         Static_Vars_PendienteEmpaque::Sete_cat4s($request->checkbox4E);
-        
+
         Static_Vars_PendienteEmpaque::Sete_items($request->b_itemE);
         Static_Vars_PendienteEmpaque::Sete_ordenes($request->b_ordenE);
         Static_Vars_PendienteEmpaque::Sete_hons($request->b_honE);
         Static_Vars_PendienteEmpaque::Sete_marcas($request->b_marcaE);
-        
+
         Static_Vars_PendienteEmpaque::Sete_vitolas($request->b_vitolaE);
         Static_Vars_PendienteEmpaque::Sete_nombres($request->b_nombreE);
         Static_Vars_PendienteEmpaque::Sete_capas($request->b_capaE);
@@ -282,8 +282,8 @@ class PendienteEmpaque extends Component
         Static_Vars_PendienteEmpaque::Sete_meses($request->b_mesE);
 
         return  Excel::download(new PendienteEmpaqueExport(), 'Pendiente Empaque.xlsx');
-       }        
-        
+       }
+
     }
 
 
@@ -315,7 +315,7 @@ class PendienteEmpaque extends Component
             $observacions = $request->observacion;
         }
 
-      
+
 
         $this->actualizar=\DB::select('call actualizar_pendiente_empaque(:id,:observacions,:pendiente,:saldo)',
         ['id'=>$request->id_pendientea,
@@ -333,7 +333,6 @@ class PendienteEmpaque extends Component
 
     public function eliminar_pendiente(Request $request)
     {
-
         $this->datos_pendiente = [];
         $this->borrar = \DB::select('call borrar_pendiente_empaque(:eliminar)', ['eliminar' => $request->id_pendiente]);
 

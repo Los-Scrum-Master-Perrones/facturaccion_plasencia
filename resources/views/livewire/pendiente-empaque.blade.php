@@ -311,7 +311,7 @@
 
 
                        echo'<a data-toggle="modal" data-target="#modal_eliminar_detalle"';
-                       echo'    onclick="datos_modal_eliminar(' .$datos->id_pendiente. '})" href="">';
+                       echo'    onclick="datos_modal_eliminar(' .$datos->id_pendiente. ')" href="">';
                        echo'    <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" fill="currentColor"';
                        echo'        class="bi bi-trash-fill" viewBox="0 0 16 16">';
                        echo'        <path';
@@ -342,7 +342,7 @@
 
 
         <script type="text/javascript">
-            function addexportar(id) {          
+            function addexportar(id) {
             var theForm = document.forms['insertar_detalle_provicional'];
                 if(id == 0 ){
                    event.preventDefault();
@@ -358,7 +358,7 @@
                     document.getElementById("funcion").value = '4';
                     theForm.addEventListener('submit', function (event) {});
                 }
-             
+
             }
         </script>
 
@@ -449,7 +449,7 @@
                                 }
                                 if (data[i].upc == null) {
                                     data[i].upc = "";
-                                }  
+                                }
                                 if (data[i].cant_cajas == null) {
                                     data[i].cant_cajas = "";
                                 }
@@ -508,7 +508,7 @@
                                 </a>
 
                                 <a data-toggle="modal" data-target="#modal_eliminar_detalle"
-                                onclick="datos_modal_eliminar({{$datos->id_pendiente}})" href="">
+                                onclick="datos_modal_eliminar(` + data[i].id_pendiente + `)" href="">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" fill="currentColor"
                                     class="bi bi-trash-fill" viewBox="0 0 16 16">
                                     <path
