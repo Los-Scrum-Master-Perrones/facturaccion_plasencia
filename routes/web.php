@@ -42,10 +42,16 @@ use Illuminate\Support\Facades\View;
 
 Auth::routes();
 
+Route::get('/holis',function () {
+    return view('holis');
+});
+
 
 Route::group(['middleware' => 'auth'], function () {
 
  Route::get('/import_excel', Pedido::class)->name('import_excel');
+
+ 
 
 
  Route::post('/importar_pendiente', [importar_pendiente_lic::class, 'import_pendiente'])->name('importar_pendiente');
