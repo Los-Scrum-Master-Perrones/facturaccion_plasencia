@@ -155,11 +155,10 @@ class DetalleProgramacion extends Component
             ]
         );
 
-
         $this->tuplas = count($this->detalles_provicionales);
 
-
         for ($i = 0; $this->tuplas > $i; $i++) {
+
             $this->actualizar_insertar = DB::select(
                 'call insertar_detalle_programacion(:numero_orden, :orden,:cod_producto,:saldo,:id_pendiente,:caja,:cant)',
                 [
@@ -172,9 +171,49 @@ class DetalleProgramacion extends Component
                     'cant' => isset($this->detalles_provicionales[$i]->cant_cajas) ? $this->detalles_provicionales[$i]->cant_cajas : null
                 ]
             );
+
+            $sampler = 0;
+            $detalles = 0;
+            $detalle = DB::select('CALL `traer_ultimo_detalle_programacion`()');
+            $cantidad_detalle_sampler = 0;
+
+
+
+            if ($detalle[0]->sampler == "si") {
+
+
+                    if ($sampler == 0 && $detalles == 0) {
+                        $datos = DB::select('call traer_numero_detalles_productos(?)', [$detalle[0]->item]);
+                        $cantidad_detalle_sampler = $datos[0]->tuplas;
+                    }
+
+                   $detalles++;
+
+                    if ($detalles == $cantidad_detalle_sampler) {
+                           $sampler_total = DB::select('call traer_suma_sampler_pendiente_empaque(?,?)', [ $detalle[0]->orden,$detalle[0]->item]);
+
+                            return  $sampler_total;
+                           if($sampler_total[0]->total <= 0){
+                            DB::update('update pendiente_empaque set procesado = ? where item = ? and orden = ?', ['s',$detalle[0]->item,$detalle[0]->orden]);
+
+                           }
+
+                        $detalles = 0;
+                        $cantidad_detalle_sampler = 0;
+                    }
+
+
+            }else{
+                if($detalle[0]->saldo == 0){
+                    DB::update('update pendiente_empaque set procesado = ? where id_pendiente = ?', ['s',$detalle[0]->id_pendiente]);
+                }
+            }
+
+
+
+
+
         }
-
-
 
         return redirect()->route('historial_programacion');
     }
