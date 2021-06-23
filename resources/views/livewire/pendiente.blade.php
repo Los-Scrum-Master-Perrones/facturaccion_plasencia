@@ -59,7 +59,7 @@
                                         </svg>Producto
                                     </button>
                                 </abbr>
-                                
+
                             </div>
 
 
@@ -796,103 +796,107 @@
 <!-- FIN MODAL ELMINAR DATO PENDIENTE -->
 
 
-<!-- INICIO MODAL ACTUALIZAR DATO PENDIENTE -->
+    <!-- INICIO MODAL ACTUALIZAR DATO PENDIENTE -->
 
-<form action="{{Route('actualizar_pendiente')}}" method="POST" id="actualizar_pendiente" name="actualizar_pendiente">
-    <div class="modal fade" role="dialog" id="modal_actualizar" data-backdrop="static" data-keyboard="false"
-        tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true"
-        style="opacity:.9;background:#212529;width=800px;">
-        <div class="modal-dialog modal-dialog-centered modal-lg" style="opacity:.9;background:#212529;width=80%">
-            <div class="modal-content">
-                @csrf
-                <div class="modal-header">
-                    <h5 id="staticBackdropLabel"><strong>Descripción del producto: </strong><span id="titulo"
-                            name="titulo"></span></h5>
-                </div>
-
-
-                <div class="modal-body">
-                    <div class="row">
-
-                        <input name="id_pendientea" id="id_pendientea" value="" hidden />
-
-                        <input name="itema" id="itema" value="" hidden />
-                        <div class="mb-3 col">
-                            <label for="txt_figuraytipo" class="form-label">Orden del sistema</label>
-                            <input name="orden_sistema" id="orden_sistema" class="form-control" \ type="text"
-                                autocomplete="off">
-                        </div>
-                        <div class="mb-3 col">
-                            <label for="txt_figuraytipo" class="form-label">Orden</label>
-                            <input name="orden" id="orden" class="form-control" type="text" autocomplete="off">
-                        </div>
-
-                        <div class="mb-3 col">
-                            <label for="txt_figuraytipo" class="form-label">Presentación</label>
-                            <select class="  form-control" style="overflow-y: scroll; height:34px;" name="presentacion"
-                                id="presentacion" required>
-                                <option value="Puros Tripa Larga" style="overflow-y: scroll;">Puros Tripa Larga
-                                </option>
-                                <option value="Puros Tripa Corta" style="overflow-y: scroll;">Puros Tripa Corta
-                                </option>
-                                <option value="Puros Sandwich" style="overflow-y: scroll;">Puros Sandwich </option>
-                            </select>
-                        </div>
+    <form action="{{Route('actualizar_pendiente')}}" method="POST" id="actualizar_pendiente"
+        name="actualizar_pendiente">
+        <div class="modal fade" role="dialog" id="modal_actualizar" data-backdrop="static" data-keyboard="false"
+            tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true"
+            style="opacity:.9;background:#212529;width=800px;">
+            <div class="modal-dialog modal-dialog-centered modal-lg" style="opacity:.9;background:#212529;width=80%">
+                <div class="modal-content">
+                    @csrf
+                    <div class="modal-header">
+                        <h5 id="staticBackdropLabel"><strong>Descripción del producto: </strong><span id="titulo"
+                                name="titulo"></span></h5>
                     </div>
 
 
-                    <div class="row">
+                    <div class="modal-body">
+                        <div class="row">
 
+                            <input name="id_pendientea" id="id_pendientea" value="" hidden />
 
-                        <div class="mb-3 col">
-                            <label for="txt_figuraytipo" class="form-label">Pendiente</label>
-                            <input name="pendiente" id="pendiente" class="form-control" type="text" autocomplete="off">
+                            <input name="itema" id="itema" value="" hidden />
+                            <div class="mb-3 col">
+                                <label for="txt_figuraytipo" class="form-label">Orden del sistema</label>
+                                <input name="orden_sistema" id="orden_sistema" class="form-control" \ type="text"
+                                    autocomplete="off">
+                            </div>
+                            <div class="mb-3 col">
+                                <label for="txt_figuraytipo" class="form-label">Orden</label>
+                                <input name="orden" id="orden" class="form-control" type="text" autocomplete="off">
+                            </div>
+
+                            <div class="mb-3 col">
+                                <label for="txt_figuraytipo" class="form-label">Presentación</label>
+                                <input name="presentacion" id="presentacion" class="form-control" type="text"
+                                    autocomplete="off">
+                            </div>
                         </div>
 
-                        <div class="mb-3 col">
-                            <label for="txt_figuraytipo" class="form-label">Código precio</label>
-                            <input name="cprecio" id="cprecio" class="form-control" type="text" autocomplete="off">
+
+                        <div class="row">
+
+
+                            <div class="mb-3 col">
+                                <label for="txt_figuraytipo" class="form-label">Pendiente</label>
+                                <input name="pendiente" id="pendiente" class="form-control" type="text"
+                                    autocomplete="off">
+                            </div>
+
+                            <div class="mb-3 col">
+                                <label for="txt_figuraytipo" class="form-label">Saldo</label>
+                                <input name="saldo" id="saldo" class="form-control" type="text"
+                                    autocomplete="off">
+                            </div>
+
+                            <div class="mb-3 col">
+                                <label for="txt_figuraytipo" class="form-label">Código precio</label>
+                                <input name="cprecio" id="cprecio" class="form-control" type="text" autocomplete="off">
+                            </div>
+
+                            <div class="mb-3 col">
+                                <label for="txt_figuraytipo" class="form-label">Precio</label>
+                                <input name="precio" id="precio" class="form-control" type="text" autocomplete="off">
+                            </div>
                         </div>
 
-                        <div class="mb-3 col">
-                            <label for="txt_figuraytipo" class="form-label">Precio</label>
-                            <input name="precio" id="precio" class="form-control" type="text" autocomplete="off">
+                        <div class="row">
+                            <div class="mb-3 col">
+                                <label for="txt_figuraytipo" class="form-label">Observación</label>
+                                <input name="observacion" id="observacion" class="form-control" type="text"
+                                    autocomplete="off">
+
+                                <input name="b_mesA" id="b_mesA" hidden>
+                                <input name="b_itemA" id="b_itemA" hidden>
+                                <input name="b_ordenA" id="b_ordenS" hidden>
+                                <input name="b_honA" id="b_honA" hidden>
+                                <input name="b_marcaA" id="b_marcaA" hidden>
+                                <input name="b_vitolaA" id="b_vitolaA" hidden>
+                                <input name="b_nombreA" id="b_nombreA" hidden>
+                                <input name="b_capaA" id="b_capaA" hidden>
+                                <input name="b_empaqueA" id="b_empaqueA" hidden>
+                            </div>
                         </div>
                     </div>
 
-                    <div class="row">
-                        <div class="mb-3 col">
-                            <label for="txt_figuraytipo" class="form-label">Observación</label>
-                            <input name="observacion" id="observacion" class="form-control" type="text"
-                                autocomplete="off">
-
-                            <input name="b_mesA" id="b_mesA" hidden>
-                            <input name="b_itemA" id="b_itemA" hidden>
-                            <input name="b_ordenA" id="b_ordenS" hidden>
-                            <input name="b_honA" id="b_honA" hidden>
-                            <input name="b_marcaA" id="b_marcaA" hidden>
-                            <input name="b_vitolaA" id="b_vitolaA" hidden>
-                            <input name="b_nombreA" id="b_nombreA" hidden>
-                            <input name="b_capaA" id="b_capaA" hidden>
-                            <input name="b_empaqueA" id="b_empaqueA" hidden>
-                        </div>
+                    <div class="modal-footer">
+                        <button class="bmodal_no" data-dismiss="modal">
+                            <span>Cancelar</span>
+                        </button>
+                        <button type="submit" class="bmodal_yes">
+                            <span>Actualizar</span>
+                        </button>
                     </div>
-                </div>
 
-                <div class="modal-footer">
-                    <button class="bmodal_no" data-dismiss="modal">
-                        <span>Cancelar</span>
-                    </button>
-                    <button type="submit" class="bmodal_yes">
-                        <span>Actualizar</span>
-                    </button>
                 </div>
-
             </div>
         </div>
-    </div>
-</form>
-<!-- FIN MODAL ACTUALIZAR DATO PENDIENTE -->
+    </form>
+    <!-- FIN MODAL ACTUALIZAR DATO PENDIENTE -->
+
+
 
 
 
