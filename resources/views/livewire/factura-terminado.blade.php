@@ -82,11 +82,8 @@
         </div>
     </div>
 
-    <div class="panel-body" style="padding:0px;">
-        <div style="width:100%; padding-left:0px;   font-size:10px;   overflow-x: display; overflow-y: auto;
-            height:450px;">
 
-            <div class="row">
+<div class="row">
                 <div class="col">
                     <label wire:model="titulo_cliente"
                         style="font-size:15px;color:white;">{{$titulo_factura." ".$titulo_cliente." ". $contenedor." ".$titulo_mes}}
@@ -103,47 +100,42 @@
             <br>
 
 
-            <table class="table table-light" id="editable">
-                <thead style="position: static;">
-                    <tr style="font-size:10px; text-align:center">
-                        <th style="text-align:center;">Bulto<br>Package<br>No.
-                        </th>
-                        <th style="text-align:center;">Cant.<br>Quant.
-                        </th>
-                        <th style="text-align:center;">Unidad<br>Unit.
-                        </th>
-                        <th style="text-align:center;">Units<br>
-                        </th>
-                        <th style="text-align:center;">Total<br>Tabacos<br>Cigars
-                        </th>
-                        <th style="text-align:center;">Capa<br>Wrappar
-                        </th>
-                        <th style="text-align:center;">#
-                        </th>
-                        <th style="text-align:center; width: 300px">Clase<br>Class
-                        </th>
-                        <th style="text-align:center;">CODIGO #<br>ITEM #
-                        </th>
-                        <th style="text-align:center;">YOUR<br>ITEM #
-                        </th>
-                        <th style="text-align:center;">YOUR<br>ORDER #
-                        </th>
-                        <th style="text-align:center;">ORDER<br>AMOUNT
-                        </th>
-                        <th style="text-align:center;">BACK<br>ORDER<br>AMOUNT
-                        </th>
-                        <th style="text-align:center;">Bruto<br>Gross
-                        </th>
-                        <th style="text-align:center;">Neto<br>Net
-                        </th>
-                        <th style="text-align:center;">Precio FOB<br>per 1000
-                        </th>
-                        <th style="text-align:center;">Cost
-                        </th>
-                        <th style="text-align:center;">Valor<br>Value
-                        </th>
-                        <th style="text-align:center;">
-                        </th>
+    <div class="panel-body" style="padding:0px;">
+        <div style="width:100%; padding-left:0px;   font-size:10px;   overflow-x: display; overflow-y: auto;
+            height:70%;">
+
+            
+
+
+            <table class="table table-light" id="editable" >
+                <thead style="font-size:8px;" >
+                    <tr style="font-size:8px; ">
+                        <th rowspan="2">Bulto<br>Package<br>No.</th>
+                        <th rowspan="2">Cant.<br>Quant.</th>
+                        <th rowspan="2">Unidad<br>Unit. </th>
+                        <th rowspan="2" style="background:#ddd;">Units</th>
+                        <th rowspan="2">Total<br>Tabacos<br>Cigars </th>
+                        <th rowspan="2">Capa<br>Wrappar </th>
+                        <th rowspan="2">#  </th>
+                        <th rowspan="2">Clase<br>Class </th>
+                        <th rowspan="2">CODIGO #<br>ITEM # </th>
+                        <th rowspan="2">YOUR<br>ITEM # </th>
+                        <th rowspan="2" style="background:#ddd;">YOUR<br>ORDER #</th>
+                        <th rowspan="2">ORDER<br>AMOUNT </th>
+                        <th rowspan="2">BACK<br>ORDER<br>AMOUNT </th>
+
+
+
+                        <th  colspan="2" > Peso en Libras<br>Weigth in Pounds </th>
+
+                        <th rowspan="2">Precio FOB<br>per 1000 ($)</th>
+                        <th rowspan="2" style="background:#ddd;">Cost </th>
+                        <th rowspan="2">Valor<br>Value ($)</th>
+                        <th rowspan="2"></th>
+                    </tr>
+                    <tr style="font-size:8px; ">
+                        <th >Bruto Gross</th>
+                        <th >Neto Net</th>                        
                     </tr>
                 </thead>
                 <tbody>
@@ -195,9 +187,9 @@
                            $val_actual=$bultos ?>
 
                         @if ($val_actual == $val_anterioir)
-                        <td style="width:100px; max-width: 400px;overflow-x:auto;">{{$val_actual}}</td>
+                        <td style="overflow-x:auto;">{{$val_actual}}</td>
                         @else
-                        <td style="width:100px; max-width: 400px;overflow-x:auto;">{{$val_anterioir}} al {{$val_actual}}
+                        <td style="overflow-x:auto;">{{$val_anterioir}} al {{$val_actual}}
                         </td>
                         @endif
 
@@ -207,23 +199,23 @@
                         <td>{{$detalles->total_tabacos}}</td>
                         <td>{{$detalles->capas}}</td>
                         <td>{{$detalles->cantidad_por_caja}}</td>
-                        <td style="width: 300px">{{$detalles->producto}}</td>
+                        <td style="width: 250px">{{$detalles->producto}}</td>
                         <td>{{$detalles->codigo}}</td>
                         <td>{{$detalles->codigo_item}}</td>
                         <td>{{$detalles->orden}}</td>
                         <td>{{$detalles->orden_total}}</td>
                         <td>{{$detalles->orden_restante}}</td>
-                        <td>{{$detalles->total_bruto}}</td>
-                        <td>{{$detalles->total_neto}}</td>
+                        <td style="width: 65px">{{$detalles->total_bruto}}</td>
+                        <td style="width: 60px">{{$detalles->total_neto}}</td>
                         <td>{{$detalles->precio_producto}}</td>
 
 
                         <td>{{number_format($detalles->costo,4)}}</td>
                         <td>{{number_format($detalles->valor_total,4)}}</td>
-                        <td>
+                        <td style="width: 60px">
                             <a data-toggle="modal" data-target="#borrar_detalles" href=""
                                 wire:click="borrar_detalles({{$detalles->id_detalle}})">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor"
+                                <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" fill="currentColor"
                                     class="bi bi-trash-fill" viewBox="0 0 16 16">
                                     <path
                                         d="M2.5 1a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1H3v9a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V4h.5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1H2.5zm3 4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5zM8 5a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7A.5.5 0 0 1 8 5zm3 .5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 1 0z" />
@@ -232,7 +224,7 @@
 
                             <a style=" width:10px; height:10px;" data-toggle="modal" href=""
                                 wire:click="editar_detalles({{$detalles->id_detalle}})">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor"
+                                <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" fill="currentColor"
                                     class="bi bi-pencil-square" viewBox="0 0 16 16">
                                     <path
                                         d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z" />
@@ -253,17 +245,17 @@
 
 
 
-            <table class="table table-light" style="font-size:10px;display:none;" id="pendiente_factura">
+            <table class="table table-light" style="font-size:8px;display:none;" id="pendiente_factura">
                 <thead>
                     <tr>
-                        <th style="width:100px;">CATEGORIA</th>
+                        <th >CATEGORIA</th>
                         <th>ITEM</th>
                         <th>ORDEN DEL SISTEMA</th>
                         <th>OBSERVACÓN</th>
                         <th>PRESENTACIÓN</th>
                         <th>MES</th>
                         <th>ORDEN</th>
-                        <th style="width:100px;">MARCA</th>
+                        <th>MARCA</th>
                         <th>VITOLA</th>
                         <th>NOMBRE</th>
                         <th>CAPA</th>
@@ -335,30 +327,35 @@
         </div>
 
 
-        <br>
-        <div class="row">
-            <div class="col-sm-3 input-group mb-3">
-                <span id="de" class="input-group-text form-control "
-                    style="background:rgba(174, 0, 255, 0.432);color:white;">Total Bultos</span>
-                <input type="number" class="form-control  mr-sm-4" placeholder="0" wire:model="total_cantidad_bultos"
-                    readonly>
+        <div class="input-group" style="width:30%;position: fixed;left: 0px;bottom:0px; height:30px;display:flex;" id="sumas1">
+                <span id="de" class="input-group-text form-control " style="background:rgba(174, 0, 255, 0.432);color:white;">Total Bultos</span>
+                <input type="number" class="form-control  mr-sm-4" placeholder="0" wire:model="total_cantidad_bultos" readonly>
 
-                <span id="de" class="input-group-text form-control"
-                    style="background:rgba(174, 0, 255, 0.432);color:white;">Total Puros</span>
-                <input type="number" class="form-control  mr-sm-4" placeholder="0" wire:model="total_total_puros"
-                    readonly>
-
-
-                <span id="de" class="input-group-text form-control"
-                    style="background:rgba(174, 0, 255, 0.432);color:white;">Peso Bruto Total</span>
-                <input type="number" class="form-control  mr-sm-4" placeholder="0.00" wire:model="total_peso_bruto"
-                    readonly>
-
-                <span id="de" class="input-group-text form-control"
-                    style="background:rgba(174, 0, 255, 0.432);color:white;">Peso Neto Total</span>
-                <input type="number" class="form-control " placeholder="0.00" wire:model="total_peso_neto" readonly>
-            </div>
+                <span id="de" class="input-group-text form-control" style="background:rgba(174, 0, 255, 0.432);color:white;">Total Puros</span>
+                <input type="number" class="form-control  mr-sm-4" placeholder="0" wire:model="total_total_puros" readonly>
         </div>
+
+
+        <div class="input-group" style="width:45%;position: fixed;right: 0px;bottom:0px; height:30px;display:flex;" id="sumas2">               
+
+                <span id="de" class="input-group-text form-control" style="background:rgba(174, 0, 255, 0.432);color:white;">Peso Bruto Total</span>
+                <input type="number" class="form-control  mr-sm-4" placeholder="0.00" wire:model="total_peso_bruto" readonly>
+
+                <span id="de" class="input-group-text form-control" style="background:rgba(174, 0, 255, 0.432);color:white;">Peso Neto Total</span>
+                <input type="number" class="form-control " placeholder="0.00" wire:model="total_peso_neto" readonly>
+
+                <span id="de" class="input-group-text form-control" style="background:rgba(174, 0, 255, 0.432);color:white;">Valor Total</span>
+                <input type="number" class="form-control " placeholder="0.00" wire:model="total_valor" readonly>
+     </div>
+
+     <div class="input-group" style="width:30%;position: fixed;right: 0px;bottom:0px; height:30px;display:none;" id="sumas3">
+                <span id="de" class="input-group-text form-control " style="background:rgba(174, 0, 255, 0.432);color:white;">Total Pendiente</span>
+                <input type="number" class="form-control  mr-sm-4" placeholder="0" wire:model="total_pendiente" readonly>
+
+                <span id="de" class="input-group-text form-control" style="background:rgba(174, 0, 255, 0.432);color:white;">Total Saldo</span>
+                <input type="number" class="form-control  mr-sm-4" placeholder="0" wire:model="total_saldo" readonly>
+        </div>
+     
 
 
 
@@ -372,6 +369,7 @@
                 document.getElementById('ordenb').style.display = 'block';
                 document.getElementById('itemb').style.display = 'block';
                 document.getElementById('honb').style.display = 'block';
+                document.getElementById('sumas3').style.display = 'flex';
 
 
                 document.getElementById('busqueda_pendiente2').style.display = 'block';
@@ -386,6 +384,8 @@
                 document.getElementById('txt_cliente').style.display = 'none';
                 document.getElementById('txt_fecha').style.display = 'none';
                 document.getElementById('txt_contenedor').style.display = 'none';
+                document.getElementById('sumas1').style.display = 'none';
+                document.getElementById('sumas2').style.display = 'none';
             }
 
             function mostrarDetalleFactura() {
@@ -394,7 +394,10 @@
                 document.getElementById('fecha_de').style.display = 'none';
                 document.getElementById('ordenb').style.display = 'none';
                 document.getElementById('itemb').style.display = 'none';
-                document.getElementById('honb').style.display = 'none';
+                document.getElementById('honb').style.display = 'none'; 
+                document.getElementById('sumas3').style.display = 'none'; 
+
+
                 document.getElementById('busqueda_pendiente2').style.display = 'none';
 
 
@@ -408,7 +411,9 @@
                 document.getElementById('lbl_contenedor').style.display = 'block';
                 document.getElementById('txt_cliente').style.display = 'block';
                 document.getElementById('txt_fecha').style.display = 'block';
-                document.getElementById('txt_contenedor').style.display = 'block';
+                document.getElementById('txt_contenedor').style.display = 'block';              
+                document.getElementById('sumas1').style.display = 'flex';
+                document.getElementById('sumas2').style.display = 'flex';
             }
         </script>
 
@@ -556,19 +561,18 @@
                 <div class="modal-dialog modal-dialog-centered">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h5 class="modal-title" id="staticBackdropLabel">Eliminar a <strong><input value=""
-                                        id="txt_usuarioE" name="txt_usuarioE" style="border:none;"></strong> </h5>
+                            <h5 class="modal-title" id="staticBackdropLabel">Eliminar </h5>
                             <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close"></button>
                         </div>
                         <div class="modal-body">
                             ¿Estás seguro que quieres eliminar este producto de la factura?
                         </div>
                         <div class="modal-footer">
-                            <button style=" background: #b39f64; color: #ecedf1;" type="button" class=" btn-info-claro "
+                            <button type="button" class="bmodal_no"
                                 data-dismiss="modal">
                                 <span>Cancelar</span>
                             </button>
-                            <button type="submit" class=" btn-info ">
+                            <button type="submit" class="bmodal_yes">
                                 <span>Eliminar</span>
                             </button>
                         </div>

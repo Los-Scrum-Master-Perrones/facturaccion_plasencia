@@ -19,7 +19,7 @@
             </div>
             <div class="col-sm-4" style="text-align:right;">
                 <input name="buscar" id="buscar" class="  form-control" wire:model="busqueda"
-                    placeholder="Búsqueda numero factura" style="width:400px; padding:right;">
+                    placeholder="Búsqueda número factura" style="width:400px; padding:right;">
             </div>
             <div class="col-sm-3" style="text-align:right;">
                 <button class="botonprincipal" style="width:120px;" wire:click="exportar_factura()">Exportar  </button>
