@@ -73,7 +73,7 @@ class FacturaTerminado extends Component
         $this->total_valor = 0;
         $this->total_saldo = 0;
         $this->total_pendiente = 0;
-        
+
 
         setlocale(LC_TIME, "spanish");
         $Nueva_Fecha = date("d-m-Y", strtotime($this->fecha_factura));
@@ -82,19 +82,20 @@ class FacturaTerminado extends Component
         $this->titulo_cliente = $this->cliente;
 
         $this->datos_pendiente = DB::select(
-            'call buscar_pendiente_factura(:orden,:fechade,:item,:ordensistema)',
+            'call buscar_pendiente_factura(:orden_sistema,:fechade,:item,:orden)',
             [
-                'orden' => $this->tipo_factura,
+                'orden' => $this->hon,
                 'fechade' =>  $this->fede,
                 'item' =>  $this->item,
-                'ordensistema' => $this->orden
+                'orden_sistema' =>  $this->orden,
             ]
         );
 
 
+
         $this->detalles_venta = DB::select('call mostrar_detalle_factura()');
 
-        if ($this->nom != "" || $this->fede != "" || $this->fecha != ""|| $this->item != "" || $this->orden != "" || $this->hon != "") {
+        if ($this->nom != "" || $this->fede != "" || $this->fecha != "" || $this->item != "" || $this->orden != "" || $this->hon != "") {
             $this->dispatchBrowserEvent("pendiente");
         }
 
@@ -139,33 +140,80 @@ class FacturaTerminado extends Component
 
     public function borrar_detalles($id)
     {
+
+
         $this->id_eliminar = $id;
         $this->dispatchBrowserEvent("borrar");
     }
 
     public function borrar_detalles_datos($id)
     {
-        DB::delete('call eliminar_detalle_factura(:id)', ['id' => $id]);
+
+
+        $sampler = DB::select('SELECT sampler,descripcion_sampler
+        FROM clase_productos
+        WHERE  clase_productos.item = (select item from pendiente where id_pendiente =
+                                            (select id_pendiente from detalle_factura where id_detalle = ?)
+
+
+                                        );', [$id]);
+
+        if ($sampler[0]->sampler == "si") {
+
+            $detalles_item = DB::select('select id_pendiente from detalle_factura  where id_detalle = ?',[$id]);
+
+            $detalles = DB::select('select item, orden from pendiente where id_pendiente = ?',[$detalles_item[0]->id_pendiente]);
+
+
+            $valores_extras = DB::select('select id_pendiente, (select id_detalle from detalle_factura  where detalle_factura.id_pendiente = pendiente.id_pendiente) as id_detalle from pendiente where item = ? and orden = ?',[$detalles[0]->item, $detalles[0]->orden]);
+
+            DB::delete('call eliminar_detalle_factura(:id)', ['id' => $id]);
+
+            for($i = 1; $i < count($valores_extras);$i++){
+                DB::delete('call eliminar_detalle_factura(:id)', ['id' => $valores_extras[$i]->id_detalle]);
+
+            }
+
+
+        } else {
+            DB::delete('call eliminar_detalle_factura(:id)', ['id' => $id]);
+        }
+
+
+
         $this->dispatchBrowserEvent("cerrar_modal_borrar");
     }
 
     public function abrir_modal($id_pendiente)
     {
 
-        $pendiente = DB::select(
-            ' CALL `traer_descripcion_factura`(:id)',
-            [
-                'id' => $id_pendiente
-            ]
-        );
+        $sampler = DB::select('SELECT sampler,descripcion_sampler,(select tipo_empaque_ingles from tipo_empaques where id_tipo_empaque =  (select tipo_empaque from pendiente where id_pendiente = ?)) as empaque
+                                FROM clase_productos
+                                WHERE  clase_productos.item = (select item from pendiente where id_pendiente = ?);', [$id_pendiente, $id_pendiente]);
+
+        if ($sampler[0]->descripcion_sampler != null) {
+
+            $this->descripcion_producto = strtoupper($sampler[0]->empaque . " " . $sampler[0]->descripcion_sampler);
+        } else {
+            $pendiente = DB::select(
+                ' CALL `traer_descripcion_factura`(:id)',
+                [
+                    'id' => $id_pendiente
+                ]
+            );
+
+            $this->descripcion_producto = $pendiente[0]->producto;
+        }
+
+
 
         $this->id_pendiente =  $id_pendiente;
-        $this->descripcion_producto = $pendiente[0]->producto;
         $this->dispatchBrowserEvent("abrir");
     }
 
     public function cerrar_modal()
     {
+
 
         $this->dispatchBrowserEvent("cerrar");
     }
@@ -197,7 +245,7 @@ class FacturaTerminado extends Component
         $this->total_peso_bruto = 0;
         $this->total_peso_neto = 0;
         $this->total_valor = 0;
-        
+
         $this->total_saldo = 0;
         $this->total_pendiente = 0;
 
@@ -214,26 +262,72 @@ class FacturaTerminado extends Component
     public function insertar_detalle_factura(Request $request)
     {
 
-        DB::select('call insertar_detalle_factura(
-                 :id_pendiente
-                ,:pa_cantidad_cajas
-                ,:pa_peso_bruto
-                ,:pa_peso_neto
-                ,:pa_cantidad_puros
-                ,:pa_unidad
-                ,:pa_observaciones)', [
+        $sampler = DB::select('SELECT sampler,descripcion_sampler
+                                FROM clase_productos
+                                WHERE  clase_productos.item = (select item from pendiente where id_pendiente = ?);', [$request->id_pendi]);
 
-            "id_pendiente" => $request->id_pendi, "pa_cantidad_cajas" => $request->unidades_cajon, "pa_peso_bruto" => $request->peso_bruto, "pa_peso_neto" => $request->peso_neto, "pa_cantidad_puros" => $request->cantidad_bultos, "pa_unidad" => $request->unidades_bultos, "pa_observaciones" => "Sin Facturar"
-        ]);
+
+        if ($sampler[0]->sampler == "si") {
+
+            $datos_pendiente = DB::select('SELECT item, orden FROM pendiente WHERE id_pendiente = ?', [$request->id_pendi]);
+
+            $conteo = DB::select('SELECT * FROM pendiente WHERE orden = ? AND item = ?', [$datos_pendiente[0]->orden,  $datos_pendiente[0]->item]);
+
+            for ($i = 0; $i < count($conteo); $i++) {
+                DB::select('call insertar_detalle_factura(
+                    :id_pendiente
+                   ,:pa_cantidad_cajas
+                   ,:pa_peso_bruto
+                   ,:pa_peso_neto
+                   ,:pa_cantidad_puros
+                   ,:pa_unidad
+                   ,:pa_observaciones)', [
+
+                    "id_pendiente" => $conteo[$i]->id_pendiente, "pa_cantidad_cajas" => $request->unidades_cajon, "pa_peso_bruto" => $request->peso_bruto, "pa_peso_neto" => $request->peso_neto, "pa_cantidad_puros" => $request->cantidad_bultos, "pa_unidad" => $request->unidades_bultos, "pa_observaciones" => "Sin Facturar"
+                ]);
+            }
+
+        } else {
+            DB::select('call insertar_detalle_factura(
+                :id_pendiente
+               ,:pa_cantidad_cajas
+               ,:pa_peso_bruto
+               ,:pa_peso_neto
+               ,:pa_cantidad_puros
+               ,:pa_unidad
+               ,:pa_observaciones)', [
+
+                "id_pendiente" => $request->id_pendi, "pa_cantidad_cajas" => $request->unidades_cajon, "pa_peso_bruto" => $request->peso_bruto, "pa_peso_neto" => $request->peso_neto, "pa_cantidad_puros" => $request->cantidad_bultos, "pa_unidad" => $request->unidades_bultos, "pa_observaciones" => "Sin Facturar"
+            ]);
+        }
+
+
+
 
         return redirect()->route('f_terminado');
     }
 
     public function actualizar_detalle_factura(Request $request)
     {
+        $sampler = DB::select('SELECT sampler,descripcion_sampler
+        FROM clase_productos
+        WHERE  clase_productos.item = (select item from pendiente where id_pendiente =
+                                            (select id_pendiente from detalle_factura where id_detalle = ?)
 
-        DB::select('call actualizar_detalle_factura(
-                 :id_pendiente
+
+                                        );', [$request->id_pendi]);
+
+        if ($sampler[0]->sampler == "si") {
+
+            $detalles_item = DB::select('select id_pendiente from detalle_factura  where id_detalle = ?',[$request->id_pendi]);
+
+            $detalles = DB::select('select item, orden from pendiente where id_pendiente = ?',[$detalles_item[0]->id_pendiente]);
+
+
+            $valores_extras = DB::select('select id_pendiente, (select id_detalle from detalle_factura  where detalle_factura.id_pendiente = pendiente.id_pendiente) as id_detalle from pendiente where item = ? and orden = ?',[$detalles[0]->item, $detalles[0]->orden]);
+
+            DB::select('call actualizar_detalle_factura(
+                :id_pendiente
                 ,:pa_cantidad_cajas
                 ,:pa_peso_bruto
                 ,:pa_peso_neto
@@ -241,7 +335,34 @@ class FacturaTerminado extends Component
                 ,:pa_unidad)', [
 
             "id_pendiente" => $request->id_pendi, "pa_cantidad_cajas" => $request->unidades_cajon, "pa_peso_bruto" => $request->peso_bruto, "pa_peso_neto" => $request->peso_neto, "pa_cantidad_puros" => $request->cantidad_bultos, "pa_unidad" => $request->unidades_bultos
-        ]);
+            ]);
+
+            for($i = 1; $i < count($valores_extras);$i++){
+                DB::select('call actualizar_detalle_factura(
+                    :id_pendiente
+                    ,:pa_cantidad_cajas
+                    ,:pa_peso_bruto
+                    ,:pa_peso_neto
+                    ,:pa_cantidad_puros
+                    ,:pa_unidad)', [
+
+                "id_pendiente" =>  $valores_extras[$i]->id_detalle , "pa_cantidad_cajas" => $request->unidades_cajon, "pa_peso_bruto" => 0, "pa_peso_neto" => 0, "pa_cantidad_puros" => $request->cantidad_bultos, "pa_unidad" => $request->unidades_bultos
+            ]);
+            }
+
+
+        } else {
+            DB::select('call actualizar_detalle_factura(
+                    :id_pendiente
+                    ,:pa_cantidad_cajas
+                    ,:pa_peso_bruto
+                    ,:pa_peso_neto
+                    ,:pa_cantidad_puros
+                    ,:pa_unidad)', [
+
+                "id_pendiente" => $request->id_pendi, "pa_cantidad_cajas" => $request->unidades_cajon, "pa_peso_bruto" => $request->peso_bruto, "pa_peso_neto" => $request->peso_neto, "pa_cantidad_puros" => $request->cantidad_bultos, "pa_unidad" => $request->unidades_bultos
+            ]);
+        }
 
         return redirect()->route('f_terminado');
     }
@@ -291,35 +412,33 @@ class FacturaTerminado extends Component
 
             //return Excel::download(new FacturaExport($this->num_factura_sistema), 'Pendiente.xlsx');
             return Excel::download(new FacturaExportView($this->num_factura_sistema), 'Factura.xlsx');
-
-        }else{
+        } else {
             $this->dispatchBrowserEvent("advertencia_mensaje");
         }
     }
 
-    public function historial(){
+    public function historial()
+    {
         return redirect()->route('historial_factura');
     }
 
 
 
-    public function actualizar_Datos_sampler(){
+    public function actualizar_Datos_sampler()
+    {
 
         $datos_sampler_pendiente = DB::select('SELECT * FROM pendiente WHERE
         (SELECT clase_productos.sampler FROM clase_productos WHERE clase_productos.item = pendiente.item)= "si"
         ORDER BY 1 asc');
 
-        $conteo_detallesc= 0;
-        $secuencia_de_detalles=0;
+        $conteo_detallesc = 0;
+        $secuencia_de_detalles = 0;
 
-        for($i = 0 ;  $i < count($datos_sampler_pendiente);$i++){
+        for ($i = 0; $i < count($datos_sampler_pendiente); $i++) {
 
             $conteo_detallesc = DB::select('SELECT * FROM detalle_clase_productos WHERE detalle_clase_productos.item = :item
             ORDER BY 1 ASC
-            LIMIT :tupla, 1;', ['item' => $datos_sampler_pendiente[$i]->item, 'tupla'=> $conteo_detallesc]);
-
+            LIMIT :tupla, 1;', ['item' => $datos_sampler_pendiente[$i]->item, 'tupla' => $conteo_detallesc]);
         }
-
-
     }
 }
