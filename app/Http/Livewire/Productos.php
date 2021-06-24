@@ -15,7 +15,7 @@ class Productos extends Component
 
 
     public $productos;
-    public $busqueda;
+    public $busqueda ;
     public $detalle_productos;
     public $marcas;
     public $capas;

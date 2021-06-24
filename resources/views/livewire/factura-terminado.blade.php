@@ -124,8 +124,6 @@
                         <th rowspan="2">ORDER<br>AMOUNT </th>
                         <th rowspan="2">BACK<br>ORDER<br>AMOUNT </th>
 
-
-
                         <th  colspan="2" > Peso en Libras<br>Weigth in Pounds </th>
 
                         <th rowspan="2">Precio FOB<br>per 1000 ($)</th>

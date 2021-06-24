@@ -26,6 +26,7 @@ use App\Http\Livewire\DetalleProgramacion;
 use App\Http\Livewire\HistorialVentas;
 use App\Http\Livewire\ListaCajas;
 use App\Http\Livewire\Pedido;
+use App\Http\Livewire\EditarDetalles;
 use Illuminate\Support\Facades\View;
 
 /*
@@ -45,7 +46,9 @@ Auth::routes();
 Route::get('/holis',function () {
     return view('holis');
 });
-
+Route::get('/holisa',function () {
+    return view('codigobarra');
+});
 
 Route::group(['middleware' => 'auth'], function () {
 
@@ -75,6 +78,11 @@ Route::get('/nuevo_pedido', [PedidoController::class, 'nuevo_pedido'])->name('nu
 
 Route::get('/productos', Productos::class)->name('productos');
 Route::post('/productos', Productos::class)->name('productos');
+
+Route::post('/editarDetalles', EditarDetalles::class)->name('editarDetalles');
+Route::get('/editarDetalles', EditarDetalles::class)->name('editarDetalles');
+Route::get('/actualizar_detalle_producto', [EditarDetalles::class, 'actualizar_detalle_producto'])->name('actualizar_detalle_producto');
+Route::post('/actualizar_detalle_producto', [EditarDetalles::class, 'actualizar_detalle_producto'])->name('actualizar_detalle_producto');
 
 
 
@@ -142,6 +150,10 @@ Route::get('/nuevo_pendiente',[ Pendiente::class,'insertar_nuevo_pendiente'])->n
 Route::post('/nuevo_pendiente',[ Pendiente::class,'insertar_nuevo_pendiente'])->name('nuevo_pendiente');
 
 
+Route::get('/nuevo_pendiente_empaque',[ PendienteEmpaque::class,'insertar_nuevo_pendiente_empaque'])->name('nuevo_pendiente_empaque');
+Route::post('/nuevo_pendiente_empaque',[ PendienteEmpaque::class,'insertar_nuevo_pendiente_empaque'])->name('nuevo_pendiente_empaque');
+
+
 
 Route::get('/inventario_cajas', InventarioCajas::class)->name('inventario_cajas');
 Route::post('/inventario_cajas', InventarioCajas::class)->name('inventario_cajas');
@@ -207,7 +219,7 @@ Route::get('/producto', [tabla_existencia::class, 'import'])->name('codigo');
 Route::post('/producto', [tabla_existencia::class, 'import'])->name('codigo');
 
 
-Route::get('/datos_producto', DatosProductos::class)->name('datos_producto');
+Route::post('/datos_producto', DatosProductos::class)->name('datos_producto');
 
 Route::post('/eliminar_detalles_productos', [Productos::class, 'eliminar_detalle']);
 

@@ -2,24 +2,11 @@
 
 
 @section('content')
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" />
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" />
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
-<script src="https://markcell.github.io/jquery-tabledit/assets/js/tabledit.min.js"></script>
-<script src="{{ URL::asset('css/tabla.js') }}"></script>
-<link rel="stylesheet" href="{{ asset('css/principal.css') }}" />
 
 <!-- Libreria de las alertas -->
 <script src="{{ URL::asset('https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js') }}"></script>
 <link rel="stylesheet" href="{{ URL::asset('https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css') }}">
-
-
-
 
 
 <div class="container" style="width:100%;max-width:100%;margin-left:0px;">
@@ -29,7 +16,6 @@
         <div class="col-md-2">
             <button class=" botonprincipal" data-toggle="modal" data-target="#modal_agregar_usuarios">
                 <span> Agregar Usuarios</span>
-
             </button>
         </div>
     </div>
@@ -103,19 +89,12 @@
 
                     </td>
                 </tr>
-
                 @endforeach
-
             <tbody>
         </table>
     </div>
 </div>
-
 <!-- FIN DEL TABLA USUARIOS -->
-
-
-
-
 
 
 
@@ -157,22 +136,6 @@
 </form>
 
 
-<!-- FIN MODAL ELMINAR USUARIO -->
-<script type="text/javascript">
-    function eliminar_usuario() {
-        var theFormE = document.forms['formulario_mostrarE'];
-        toastr.success('El usuario se eliminó correctamente', 'BIEN', {
-            "progressBar": true,
-            "closeButton": false
-        });
-        theFormE.addEventListener('submit', function (event) {});
-    }
-</script>
-
-
-
-
-
 <!-- INICIO DEL MODAL AGREGAR USUARIO -->
 <form method="POST" action="{{ route('register') }}" id="FormRegistroUsuario" name="FormRegistroUsuario">
     @csrf
@@ -187,9 +150,7 @@
 
                 <div class="modal-body">
                     <div class="card-body">
-
-
-                        <div class="row">
+                            <div class="row">
                             <div class="mb-3 col">
                                 <label for="name" class="form-label">Nombre Completo</label>
                                 <input id="name" type="text" class="form-control @error('name') is-invalid @enderror"
@@ -248,7 +209,7 @@
                             <div class="mb-3 col">
                                 <label for="password" class="form-label">Contraseña</label>
                                 <input id="password" type="password"
-                                    class="form-control @error('password') is-invalid @enderror" name="password"
+                                    class="form-control @error('password') is-invalid @enderror" name="password" minlength="8"
                                     required autocomplete="new-password">
 
                                 @error('password')
@@ -276,14 +237,10 @@
                                 </a>
                             </div>
 
-
-
-
-
                             <div class="mb-3 col">
                                 <label for="password-confirm" class="form-label">Confirmación contraseña</label>
                                 <input id="password-confirm" type="password" class="form-control"
-                                    name="password_confirmation" required autocomplete="new-password">
+                                    name="password_confirmation" required autocomplete="new-password" minlength="5">
 
                                 <a type="button" onclick="mostrarConfirmacion()"
                                     style="margin-top: -30px;position: absolute;right: 20px;">
@@ -303,12 +260,7 @@
                                     </svg>
                                 </a>
                             </div>
-
                         </div>
-
-
-
-
                     </div>
                 </div>
 
@@ -316,11 +268,11 @@
                     <button class="bmodal_no " data-dismiss="modal">
                         <span>Cancelar</span>
                     </button>
-                    <button class="bmodal_yes " onclick="v_agregarusuario()">
+                    <button onclick="v_agregarusuario()" class="bmodal_yes " >
                         <span>Guardar</span>
                     </button>
-
                 </div>
+
             </div>
         </div>
     </div>
@@ -328,157 +280,6 @@
 </form>
 <!-- FIN DEL MODAL AGREGAR MOLDE-->
 
-<script>
-    function mostrarContrasena() {
-        var tipo = document.getElementById("password");
-        var iconovisible = document.getElementById("iconovisible");
-        var icononovisible = document.getElementById("icononovisible");
-
-
-
-        if (tipo.type == "password") {
-            tipo.type = "text";
-            icononovisible.style.visibility = "hidden";
-            iconovisible.style.visibility = "inherit";
-        } else {
-            tipo.type = "password";
-            icononovisible.style.visibility = "inherit ";
-            iconovisible.style.visibility = "hidden";
-        }
-
-    }
-
-
-
-    function mostrarConfirmacion() {
-        var tipo = document.getElementById("password-confirm");
-        var iconovisible = document.getElementById("iconovisibleC");
-        var icononovisible = document.getElementById("icononovisibleC");
-        if (tipo.type == "password") {
-            tipo.type = "text";
-            icononovisible.style.visibility = "hidden";
-            iconovisible.style.visibility = "inherit";
-        } else {
-            tipo.type = "password";
-            icononovisible.style.visibility = "inherit ";
-            iconovisible.style.visibility = "hidden";
-        }
-    }
-
-    function nueva_contrasena() {
-        var tipo = document.getElementById("contraseniaA");
-        var iconovisible = document.getElementById("iconovisiblen");
-        var icononovisible = document.getElementById("icononovisiblen");
-        if (tipo.type == "password") {
-            tipo.type = "text";
-            icononovisible.style.visibility = "hidden";
-            iconovisible.style.visibility = "inherit";
-        } else {
-            tipo.type = "password";
-            icononovisible.style.visibility = "inherit ";
-            iconovisible.style.visibility = "hidden";
-
-
-        }
-    }
-
-
-    function c_nueva_contrasena() {
-        var tipo = document.getElementById("confirmacion_contraseniaA");
-        var iconovisible = document.getElementById("iconovisiblecn");
-        var icononovisible = document.getElementById("icononovisiblecn");
-        if (tipo.type == "password") {
-            tipo.type = "text";
-            icononovisible.style.visibility = "hidden";
-            iconovisible.style.visibility = "inherit";
-        } else {
-            tipo.type = "password";
-            icononovisible.style.visibility = "inherit ";
-            iconovisible.style.visibility = "hidden";
-
-
-        }
-
-
-
-
-    }
-</script>
-
-<script type="text/javascript">
-    function v_agregarusuario() {
-        var v_contrasenia = document.getElementById('password').value;
-        var v_confirmacion_contrasenia = document.getElementById('password-confirm').value;
-        var v_codigo = document.getElementById('codigo').value;
-        var v_nombre = document.getElementById('name').value;
-        var v_correo = document.getElementById('email').value;
-
-
-        var usuario = '<?php echo json_encode($users);?>';
-        var usuarios = JSON.parse(usuario);
-        var unico_codigo = 0;
-        var unico_nombre = 0;
-        var unico_correo = 0;
-
-        for (var i = 0; i < usuarios.length; i++) {
-            if (usuarios[i].codigo.toLowerCase() === v_codigo.toLowerCase()) {
-                unico_codigo++;
-            }
-            if (usuarios[i].name.toLowerCase() === v_nombre.toLowerCase()) {
-                unico_nombre++;
-            }
-            if (usuarios[i].email.toLowerCase() === v_correo.toLowerCase()) {
-                unico_correo++;
-            }
-        }
-
-        if (v_confirmacion_contrasenia != v_contrasenia) {
-            toastr.error('Las contraseñas no coinciden ', 'ERROR', {
-                "progressBar": true,
-                "closeButton": false
-            });
-            event.preventDefault();
-        } else if (unico_codigo > 0) {
-            toastr.error('Este código ya existe', 'ERROR', {
-                "progressBar": true,
-                "closeButton": false,
-                "preventDuplicates": true,
-                "preventOpenDuplicates": true
-            });
-            event.preventDefault();
-
-        } else if (unico_nombre > 0) {
-            toastr.error('Este nombre ya existe', 'ERROR', {
-                "progressBar": true,
-                "closeButton": false,
-                "preventDuplicates": true,
-                "preventOpenDuplicates": true
-            });
-            event.preventDefault();
-
-        } else if (unico_correo > 0) {
-            toastr.error('Este correo ya existe', 'ERROR', {
-                "progressBar": true,
-                "closeButton": false,
-                "preventDuplicates": true,
-                "preventOpenDuplicates": true
-            });
-            event.preventDefault();
-
-        } else {
-            toastr.success('El usuario se registró correctamente', 'BIEN', {
-                "progressBar": true,
-                "closeButton": false
-            });
-            theForm.addEventListener('submit', function (event) {});
-            document.getElementById('password').value = " ";
-            document.getElementById('password-confirm').value = " ";
-            document.getElementById('codigo').value = " ";
-            document.getElementById('name').value = " ";
-            document.getElementById('email').value = " ";
-        }
-    }
-</script>
 
 
 <!-- INICIO MODAL CAMBIAR CONTRASENIA -->
@@ -589,40 +390,7 @@
 <!-- FIN MODAL CAMBIAR CONTRASENIA -->
 
 
-<script type="text/javascript">
-    function validar_actualizar_contrasenia() {
-        var contraseniaA = document.getElementById('contraseniaA').value;
-        var confirmacion_contraseniaA = document.getElementById('confirmacion_contraseniaA').value;
-        var correo = document.getElementById('emailcontra').value;
-        var theForm = document.forms['formulario_mostrar_email'];
 
-        var usuario = '<?php echo json_encode($users);?>';
-        var usuarios = JSON.parse(usuario);
-        var unico_correo = 0;
-
-        for (var i = 0; i < usuarios.length; i++) {
-            if (usuarios[i].email.toLowerCase() === correo.toLowerCase()) {
-                unico_correo++;
-            }
-        }
-
-        if (contraseniaA != confirmacion_contraseniaA) {
-            toastr.error('Las contrasenias no coinciden', 'ERROR', {
-                "progressBar": true,
-                "closeButton": false,
-                "preventDuplicates": true,
-                "preventOpenDuplicates": true
-            });
-            event.preventDefault();
-        } else if (theForm.valid()) {
-            toastr.success('Las credenciales se actualizaron correctamente', 'BIEN', {
-                "progressBar": true,
-                "closeButton": false
-            });
-            theForm.addEventListener('submit', function (event) {});
-        }
-    }
-</script>
 
 
 
@@ -708,6 +476,214 @@
 
 </form>
 <!-- FIN DEL MODAL EDITAR USUARIO -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- FIN MODAL ELMINAR USUARIO -->
+<script type="text/javascript">
+    function eliminar_usuario() {
+        var theFormE = document.forms['formulario_mostrarE'];
+        toastr.success('El usuario se eliminó correctamente', 'BIEN', {
+            "progressBar": true,
+            "closeButton": false
+        });
+        theFormE.addEventListener('submit', function (event) {});
+    }
+</script>
+
+
+
+
+<script>
+    function mostrarContrasena() {
+        var tipo = document.getElementById("password");
+        var iconovisible = document.getElementById("iconovisible");
+        var icononovisible = document.getElementById("icononovisible");
+
+
+
+        if (tipo.type == "password") {
+            tipo.type = "text";
+            icononovisible.style.visibility = "hidden";
+            iconovisible.style.visibility = "inherit";
+        } else {
+            tipo.type = "password";
+            icononovisible.style.visibility = "inherit ";
+            iconovisible.style.visibility = "hidden";
+        }
+
+    }
+
+
+
+    function mostrarConfirmacion() {
+        var tipo = document.getElementById("password-confirm");
+        var iconovisible = document.getElementById("iconovisibleC");
+        var icononovisible = document.getElementById("icononovisibleC");
+        if (tipo.type == "password") {
+            tipo.type = "text";
+            icononovisible.style.visibility = "hidden";
+            iconovisible.style.visibility = "inherit";
+        } else {
+            tipo.type = "password";
+            icononovisible.style.visibility = "inherit ";
+            iconovisible.style.visibility = "hidden";
+        }
+    }
+
+    function nueva_contrasena() {
+        var tipo = document.getElementById("contraseniaA");
+        var iconovisible = document.getElementById("iconovisiblen");
+        var icononovisible = document.getElementById("icononovisiblen");
+        if (tipo.type == "password") {
+            tipo.type = "text";
+            icononovisible.style.visibility = "hidden";
+            iconovisible.style.visibility = "inherit";
+        } else {
+            tipo.type = "password";
+            icononovisible.style.visibility = "inherit ";
+            iconovisible.style.visibility = "hidden";
+        }
+    }
+
+
+    function c_nueva_contrasena() {
+        var tipo = document.getElementById("confirmacion_contraseniaA");
+        var iconovisible = document.getElementById("iconovisiblecn");
+        var icononovisible = document.getElementById("icononovisiblecn");
+        if (tipo.type == "password") {
+            tipo.type = "text";
+            icononovisible.style.visibility = "hidden";
+            iconovisible.style.visibility = "inherit";
+        } else {
+            tipo.type = "password";
+            icononovisible.style.visibility = "inherit ";
+            iconovisible.style.visibility = "hidden";
+        }
+    }
+</script>
+
+<script >
+    function v_agregarusuario() {
+        var v_contrasenia = document.getElementById('password').value;
+        var v_confirmacion_contrasenia = document.getElementById('password-confirm').value;
+        var v_codigo = document.getElementById('codigo').value;
+        var v_nombre = document.getElementById('name').value;
+        var v_correo = document.getElementById('email').value;
+
+
+      
+
+                var usuario = @json($users);
+        var unico_codigo = 0;
+        var unico_nombre = 0;
+        var unico_correo = 0;
+
+        console.log(v_correo);
+
+        for (var i = 0; i < usuarios.length; i++) {
+            if (usuarios[i].codigo.toLowerCase() === v_codigo.toLowerCase()) {
+                unico_codigo++;
+            }
+            if (usuarios[i].name.toLowerCase() === v_nombre.toLowerCase()) {
+                unico_nombre++;
+            }
+            if (usuarios[i].email.toLowerCase() === v_correo.toLowerCase()) {
+                unico_correo++;
+            }
+        }
+
+
+
+        if (v_confirmacion_contrasenia != v_contrasenia) {           
+            event.preventDefault();
+           alert('no da');
+        } else if (unico_codigo > 0) {
+            event.preventDefault();
+            toastr.error('Este código ya existe', 'ERROR', {
+                "progressBar": true,
+                "closeButton": false,
+                "preventDuplicates": true,
+                "preventOpenDuplicates": true
+            });
+
+        } else if (unico_nombre > 0) {
+            event.preventDefault();
+            toastr.error('Este nombre ya existe', 'ERROR', {
+                "progressBar": true,
+                "closeButton": false,
+                "preventDuplicates": true,
+                "preventOpenDuplicates": true
+            });
+
+        } else if (unico_correo > 0) {
+            event.preventDefault();
+            toastr.error('Este correo ya existe', 'ERROR', {
+                "progressBar": true,
+                "closeButton": false,
+                "preventDuplicates": true,
+                "preventOpenDuplicates": true
+            });
+
+        } else {
+            toastr.success('El usuario se registró correctamente', 'BIEN', {
+                "progressBar": true,
+                "closeButton": false
+            });
+            theForm.addEventListener('submit', function (event) {});
+      
+        }
+    }
+</script>
+
+
+<script type="text/javascript">
+    function validar_actualizar_contrasenia() {
+        var contraseniaA = document.getElementById('contraseniaA').value;
+        var confirmacion_contraseniaA = document.getElementById('confirmacion_contraseniaA').value;
+        var correo = document.getElementById('emailcontra').value;
+        var theForm = document.forms['formulario_mostrar_email'];
+
+        var usuario = '<?php echo json_encode($users);?>';
+        var usuarios = JSON.parse(usuario);
+        var unico_correo = 0;
+
+        for (var i = 0; i < usuarios.length; i++) {
+            if (usuarios[i].email.toLowerCase() === correo.toLowerCase()) {
+                unico_correo++;
+            }
+        }
+
+        if (contraseniaA != confirmacion_contraseniaA) {
+            toastr.error('Las contrasenias no coinciden', 'ERROR', {
+                "progressBar": true,
+                "closeButton": false,
+                "preventDuplicates": true,
+                "preventOpenDuplicates": true
+            });
+            event.preventDefault();
+        } else if (theForm.valid()) {
+            toastr.success('Las credenciales se actualizaron correctamente', 'BIEN', {
+                "progressBar": true,
+                "closeButton": false
+            });
+            theForm.addEventListener('submit', function (event) {});
+        }
+    }
+</script>
 
 <script type="text/javascript">
     function validar_actualizar_usuario() {
@@ -797,9 +773,6 @@
     }
 </script>
 
-
-
-
 <script type="text/javascript">
     function datos_modal_eliminar(id) {
         var datas = '<?php echo json_encode($users);?>';
@@ -811,19 +784,9 @@
             if (data[i].id === id) {
                 document.formulario_mostrarE.id_usuarioE.value = data[i].id;
                 document.formulario_mostrarE.txt_usuarioE.value = data[i].name;
-
-
             }
         }
-
     }
 </script>
-
-
-
-
-
-
-
 
 @endsection

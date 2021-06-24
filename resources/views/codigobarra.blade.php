@@ -31,8 +31,6 @@ JsBarcode("#pharmacode", "12345", {format: "pharmacode"});
 <svg id="pharmacode"></svg>
 
 
-
-
 <table class="table table-light"
 style="font-size:10px;">
 <thead>
@@ -69,8 +67,4 @@ style="font-size:10px;">
         </tr>
         @endforeach
         </tbody>
-        </table>
-
-
-
-   
+        </table>  

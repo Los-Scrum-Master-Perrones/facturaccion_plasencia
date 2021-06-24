@@ -341,6 +341,276 @@
 
 
 
+
+
+
+
+
+
+        <div style="  display: none;justify-content: center;align-items: center;  position:fixed;bottom:20%;width:100%;"
+        id="div_AddProductoPendiente">
+        <!-- INICIO DEL MODAL NUEVO PRODUCTO -->
+
+        <form action="{{Route('nuevo_pendiente_empaque')}} " method="POST">
+            <div data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel"
+                aria-hidden="true">
+                <div>
+                    <div class="modal-content">
+
+                        <div class="modal-header">
+                            <h5 id="staticBackdropLabel"><strong>Agregar producto</strong></h5>
+                            <button type="button" class="btn-close" aria-label="Close"
+                                onclick="ocultar_div_AddProductoP()"></button>
+                        </div>
+
+                        <div class="modal-body">
+
+
+                            <div class="card-body">
+                                <div class="row">
+
+                                    <div class="mb-3 col">
+                                        <label for="txt_figuraytipo" class="form-label">Item</label>
+                                        <input name="itemn" id="itemn" style="font-size:16px" class="form-control"
+                                            required type="text" autocomplete="off">
+                                    </div>
+
+                                    <div class="mb-3 col">
+                                        <label for="txt_figuraytipo" class="form-label">Categoria</label>
+                                        <select class="form-control" name="categoria" id="categoria"
+                                            style="overflow-y: scroll; height:30px;" required>
+                                            <option value="1">NEW ROLL</option>
+                                            <option value="2">CATALOGO</option>
+                                            <option value="3">TAKE FROM EXISTING INVENT</option>
+                                            <option value="4">INTERNATIONAL SALES</option>
+                                        </select>
+
+                                    </div>
+
+                                    <div class="mb-3 col">
+                                        <label for="txt_malos" class="form-label">Presentación</label>
+                                        <select class="form-control" name="presentacionn" id="presentacionn"
+                                            placeholder="Ingresa figura y tipo" style="overflow-y: scroll; height:30px;"
+                                            required>
+                                            <option value="Puros Tripa Larga" style="overflow-y: scroll;">Puros Tripa
+                                                Larga </option>
+                                            <option value="Puros Tripa Corta" style="overflow-y: scroll;">Puros Tripa
+                                                Corta </option>
+                                            <option value="Puros Sandwich" style="overflow-y: scroll;">Puros Sandwich
+                                            </option>
+                                        </select>
+                                    </div>
+                                    <div class="mb-3 col">
+                                        <label for="txt_vitola" class="form-label">Marca</label>
+                                        <select class=" mi-selector" style=" height:30px; width: 100%; " name="marca"
+                                            id="marca" placeholder="Ingresa figura y tipo" required>
+                                            @foreach($marcas as $mar)
+                                            <option style="overflow-y: scroll;"> {{$mar->marca}}</option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+
+                                </div>
+
+
+
+
+
+                                <div class="row">
+
+                                    <div class="mb-3 col">
+                                        <label for="txt_figuraytipo" class="form-label">Capa</label>
+                                        <select class=" mi-selector" style=" height:30px; width: 100%; " name="capa"
+                                            id="capa" placeholder="Ingresa figura y tipo" required>
+                                            @foreach($capas as $capa)
+                                            <option style="overflow-y: scroll;"> {{$capa->capa}}</option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+
+                                    <div class="mb-3 col">
+                                        <label for="txt_malos" class="form-label">Tipo de
+                                            empaque</label>
+                                        <select class=" mi-selector" style=" height:30px; width: 100%; " name="tipo"
+                                            id="tipo" placeholder="Ingresa figura y tipo" required>
+                                            @foreach($tipo_empaques as $tipo_empaque)
+                                            <option style="overflow-y: scroll;"> {{$tipo_empaque->tipo_empaque}}
+                                            </option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+
+
+                                    <div class="mb-3 col">
+                                        <label for="vitola" class="form-label">Vitola</label>
+                                        <select class=" mi-selector" style=" height:30px; width: 100%; " name="vitola"
+                                            id="vitola" placeholder="Ingresa figura y tipo" required>
+                                            @foreach($vitolas as $vitola)
+                                            <option style="overflow-y: scroll;"> {{$vitola->vitola}}</option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+
+                                    <div class="mb-3 col">
+                                        <label for="txt_total" class="form-label">Nombre</label>
+                                        <select class=" mi-selector" style=" height:30px; width: 100%; " name="nombre"
+                                            id="nombre" placeholder="Ingresa figura y tipo" required>
+                                            @foreach($nombres as $nombre)
+                                            <option style="overflow-y: scroll;"> {{$nombre->nombre}}</option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+                                </div>
+
+
+
+
+
+                                <div class="row">
+
+                                    <div class="mb-3 col">
+                                        <label for="txt_figuraytipo" class="form-label">Orden del sistema</label>
+                                        <input name="ordensis" id="ordensis" style="font-size:16px" class="form-control"
+                                            type="text" autocomplete="off">
+                                    </div>
+
+                                    <div class="mb-3 col">
+                                        <label for="txt_figuraytipo" class="form-label">Orden</label>
+                                        <input name="ordenn" id="ordenn" style="font-size:16px" class="form-control"
+                                            required type="text" autocomplete="off">
+                                    </div>
+
+
+                                    <div class="mb-3 col">
+                                        <label for="txt_figuraytipo" class="form-label">Fecha</label>
+                                        <input name="fechan" id="fechan" style="font-size:12px" class="form-control"
+                                            required type="date" autocomplete="off">
+                                    </div>
+
+                                    <div class="mb-3 col">
+                                        <label for="txt_figuraytipo" class="form-label">Observacion</label>
+                                        <input name="observacionn" id="observacionn" style="font-size:16px"
+                                            class="form-control" type="text" autocomplete="off">
+                                    </div>
+
+
+                                </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                                <div class="row">
+
+                                    <div class="mb-3 col">
+                                        <div class="row">
+                                            <div class="col">
+                                                <input type="checkbox" name="cello" id="cello" style="font-size:20px"
+                                                    value="si">
+                                                <label for="cello" class="form-label">Cello</label>
+                                            </div>
+
+                                            <div class="col">
+                                                <input type="checkbox" name="anillo" id="anillo" style="font-size:20px"
+                                                    value="si">
+                                                <label for="anillo" class="form-label">Anillo</label>
+                                            </div>
+
+                                            <div class="col">
+                                                <input type="checkbox" name="upc" id="upc" style="font-size:20px"
+                                                    value="si">
+                                                <label for="upc" class="form-label">UPC</label>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="mb-3 col">
+                                        <label for="txt_total" class="form-label">Pendiente</label>
+                                        <input name="pendienten" id="pendienten" class="form-control" required
+                                            type="number" autocomplete="off">
+                                    </div>
+
+                                    <div class="mb-3 col">
+                                        <label for="txt_buenos" class="form-label">Saldo</label>
+                                        <input name="saldon" id="saldon" class="form-control" required type="number"
+                                            autocomplete="off">
+                                    </div>
+
+
+                                </div>
+
+
+                                <div class="row">
+
+                                    <div class="mb-3 col">
+                                        <label for="txt_total" class="form-label">Paquetes</label>
+                                        <input name="paquetes" id="paquetes" class="form-control" required type="number"
+                                            autocomplete="off">
+                                    </div>
+                                    <div class="mb-3 col">
+                                        <label for="txt_total" class="form-label">Unidades</label>
+                                        <input name="unidades" id="unidades" class="form-control" required type="number"
+                                            autocomplete="off">
+                                    </div>
+
+                                    <div class="mb-3 col">
+                                        <label for="txt_buenos" class="form-label">Codigo precio</label>
+                                        <input name="c_precion" id="c_precion" class="form-control" type="text"
+                                            autocomplete="off">
+                                    </div>
+
+                                    <div class="mb-3 col">
+                                        <label for="txt_total" class="form-label">precio</label>
+                                        <input name="precion" id="precion" class="form-control" type="number"
+                                            autocomplete="off">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="modal-footer">
+                            <button type="button" class=" bmodal_no"
+                                onclick="ocultar_div_AddProductoP()"><span>Cancelar</span>
+                                @csrf
+                            </button>
+                            <button onclick="agregarproducto()" class=" bmodal_yes "> <span>Guardar</span> </button>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </form>
+        <!-- FIN DEL MODAL NUEVO PRODUCTO -->
+    </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
         <script type="text/javascript">
             function addexportar(id) {
             var theForm = document.forms['insertar_detalle_provicional'];
@@ -354,12 +624,16 @@
                     theForm.addEventListener('submit', function (event) {});
                 }else  if(id == 3 ){
                     event.preventDefault();
+                    document.getElementById('div_AddProductoPendiente').style.display = "flex";
                 }else  if(id == 4 ){
                     document.getElementById("funcion").value = '4';
                     theForm.addEventListener('submit', function (event) {});
                 }
-
-            }
+            }  
+            
+            function ocultar_div_AddProductoP() {
+                     document.getElementById('div_AddProductoPendiente').style.display = "none";
+                }
         </script>
 
         <script type="text/javascript">
@@ -402,13 +676,7 @@
 
                 if (b_orden == "" && b_item == "" && b_hon == "" && b_mes == "" && b_marca == "" &&
                     b_vitola == "" && b_capa == "" && b_nombre == "" && b_empaque == "") {
-
-
-
-                    document.getElementById('checkbox1E').value = checkbox1;
-                    document.getElementById('checkbox2E').value = checkbox2;
-                    document.getElementById('checkbox3E').value = checkbox3;
-                    document.getElementById('checkbox4E').value = checkbox4;
+            location.reload(true);
                 } else {
                     var sumase = 0;
                     var sumape = 0;

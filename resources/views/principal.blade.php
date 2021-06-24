@@ -125,7 +125,7 @@
         <div class="left">
             <form action="{{Route('pendiente')}}" method="GET">
                 @csrf
-                <?php if (  auth()->user()->rol == 0): ?>
+                <?php if (  auth()->user()->rol == 0 || auth()->user()->rol == 2): ?>
                 <button type="submit" class="buttonsubmit">
                     <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="white" class="bi bi-archive"
                         viewBox="0 0 16 16">

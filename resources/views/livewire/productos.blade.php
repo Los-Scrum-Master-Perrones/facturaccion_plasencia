@@ -43,6 +43,10 @@
                     </form>
                     <button class=" botonprincipal mr-sm-2 " onclick="mostrar_div_AddProducto();"
                         style="width:200px;">Nuevo producto</button>
+                        <form action="{{Route('editarDetalles')}} " method="post">
+                        @csrf
+                        <button class=" botonprincipal mr-sm-2 " style="width:200px;">Editar detalles producto</button>
+                    </form>
                 </div>
             </div>
         </div>

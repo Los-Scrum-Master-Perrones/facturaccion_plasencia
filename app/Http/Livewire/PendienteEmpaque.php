@@ -4,8 +4,6 @@ namespace App\Http\Livewire;
 
 use Livewire\Component;
 
-
-
 use Illuminate\Http\Request;
 use Livewire\WithPagination;
 use DB;
@@ -14,7 +12,6 @@ use Illuminate\Support\Facades\View;
 use App\Http\Static_Vars_PendienteEmpaque;
 use App\Exports\PendienteEmpaqueExport;
 
-
 class PendienteEmpaque extends Component
 {
 
@@ -22,6 +19,13 @@ class PendienteEmpaque extends Component
     public $nombre;
     public $tuplas;
     public $datos_pendiente_empaque_nuevo;
+
+    // procedimientos para cargar select
+    public $marcas;
+    public $nombres;
+    public $vitolas;
+    public $capas;
+    public $tipo_empaques;
 
     // variables del wire model
     public $r_uno = "1";
@@ -35,6 +39,7 @@ class PendienteEmpaque extends Component
     public $vitolas_p;
     public $capas_p;
     public $empaques_p;
+
     public $mes_p;
     public $items_p;
     public $ordenes_p;
@@ -175,6 +180,12 @@ class PendienteEmpaque extends Component
                 }
             }
         }
+
+        $this->capas = \DB::select('call buscar_capa("")');
+        $this->nombres = \DB::select('call buscar_nombre("")');
+        $this->vitolas = \DB::select('call buscar_vitola("")');
+        $this->marcas = \DB::select('call buscar_marca("")');
+        $this->tipo_empaques = \DB::select('call buscar_tipo_empaque("")');
 
         return view('livewire.pendiente-empaque')->extends('principal')->section('content');
     }
@@ -335,6 +346,61 @@ class PendienteEmpaque extends Component
     {
         $this->datos_pendiente = [];
         $this->borrar = \DB::select('call borrar_pendiente_empaque(:eliminar)', ['eliminar' => $request->id_pendiente]);
+
+        return redirect()->route('pendiente_empaque');
+    }
+
+
+    function insertar_nuevo_pendiente_empaque(Request $request)
+    {
+        if (isset($request->cello)) {
+
+            $cello = $request->cello;
+        } else {
+            $cello = "no";
+        }
+
+        if (isset($request->anillo)) {
+            $anillo = $request->anillo;
+        } else {
+            $anillo = "no";
+        }
+
+        if (isset($request->upc)) {
+            $upc = $request->upc;
+        } else {
+            $upc = "no";
+        }
+
+        $insertar_nuevo_pendiente = \DB::select(
+            'call insertar_nuevo_pendiente_empaque(:categoria,:item,:orden,:observacion,:presentacion,:mes,:orden1,:marca,
+        :vitola,:nombre,:capa,:tipo_empaque,:cello,:anillo,:upc,:pendiente,:saldo,:paquetes,:unidades)',
+
+            [
+                'categoria' => $request->categoria,                
+                'item' => $request->itemn,                
+                'orden' => $request->ordensis,
+                'observacion' => $request->observacionn,
+                'presentacion' => $request->presentacionn,
+
+                'mes' => $request->fechan,               
+                'orden1' => $request->ordenn,
+                'marca' => $request->marca,
+                'vitola' => $request->vitola,
+                'nombre' => $request->nombre,
+
+                'capa' => $request->capa,               
+                'tipo_empaque' => $request->tipo,
+                'cello' => $cello,
+                'anillo' => $anillo,
+                'upc' => $upc,
+
+                'pendiente' => $request->pendienten,               
+                'saldo' => $request->saldon,
+                'paquetes' => $request->paquetes,
+                'unidades' => $request->unidades,
+            ]
+        );
 
         return redirect()->route('pendiente_empaque');
     }

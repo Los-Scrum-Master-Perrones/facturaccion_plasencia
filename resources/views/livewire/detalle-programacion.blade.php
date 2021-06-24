@@ -341,11 +341,11 @@
                     ¿Estás seguro que quieres limpiar estos registros?
                 </div>
                 <div class="modal-footer">
-                    <button style=" background: #b39f64; color: #ecedf1;" type="button" class="btn-info-claro "
+                    <button  type="button" class="bmodal_no"
                         data-dismiss="modal">
                         <span>Cancelar</span>
                     </button>
-                    <button wire:click="eliminar_datos()" class=" btn-info ">
+                    <button wire:click="eliminar_datos()" class=" bmodal_yes ">
                         <span>Eliminar</span>
                     </button>
                 </div>
