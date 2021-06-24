@@ -104,7 +104,7 @@
         <div style="width:100%; padding-left:0px;   font-size:10px;   overflow-x: display; overflow-y: auto;
             height:70%;">
 
-            
+
 
 
             <table class="table table-light" id="editable" >
@@ -135,22 +135,22 @@
                     </tr>
                     <tr style="font-size:8px; ">
                         <th >Bruto Gross</th>
-                        <th >Neto Net</th>                        
+                        <th >Neto Net</th>
                     </tr>
                 </thead>
                 <tbody>
 
 
                     @php
-                    $orden = "";
-                    $orden_actua = "";
+                        $orden = "";
+                        $orden_actua = "";
                     @endphp
 
 
 
-                    <?php  $bultos = 0;
-                                $val_anterioir=0;
-                               $val_actual=0 ?>
+                    <?php   $bultos = 0;
+                            $val_anterioir=0;
+                            $val_actual=0 ?>
 
                     @foreach($detalles_venta as $detalles)
 
@@ -159,13 +159,13 @@
 
                     @if ( $orden == "" && $orden_actua == "")
                     @php
-                    $orden_actua = $detalles->orden;
-                    $orden_actua = $detalles->orden;
+                        $orden_actua = $detalles->orden;
+                        $orden_actua = $detalles->orden;
                     @endphp
                     @endif
 
                     @php
-                    $orden = $detalles->orden;
+                        $orden = $detalles->orden;
                     @endphp
 
                     @if ($orden_actua == $orden)
@@ -175,9 +175,167 @@
                         <td colspan="19" style="background-color: gray"></td>
                     </tr>
                     @php
-                    $orden_actua = $detalles->orden;
+                        $orden_actua = $detalles->orden;
                     @endphp
                     @endif
+
+                    @php
+
+                      $sampler  =  DB::select('SELECT sampler FROM clase_productos WHERE item = ?',[$detalles->codigo_item]);
+
+                      $pendiente  =  DB::select('SELECT orden FROM pendiente WHERE id_pendiente = ?',[$detalles->id_pendiente]);
+
+                      $conteo_sampler  =  DB::select('SELECT COUNT(*) AS tuplas FROM pendiente WHERE item = ? AND orden = ?',[$detalles->codigo_item,$pendiente[0]->orden]);
+
+                      $item_primero  =  DB::select('SELECT id_pendiente FROM pendiente WHERE item = ? AND orden LIKE CONCAT("%",?,"%") limit 0,1',[$detalles->codigo_item,$pendiente[0]->orden]);
+
+                      if( $sampler[0]->sampler == "si"){
+                        $repartir = $detalles->total_tabacos/$conteo_sampler[0]->tuplas;
+                      }
+
+                   @endphp
+
+                   @if ( $sampler[0]->sampler == "si" && $item_primero[0]->id_pendiente ==  $detalles->id_pendiente)
+
+                   @php
+                        $sampler_nombre  =  DB::select('SELECT concat((SELECT tipo_empaque_ingles FROM  tipo_empaques WHERE tipo_empaques.id_tipo_empaque = clase_productos.id_tipo_empaque)," ",descripcion_sampler) as nom
+                                            FROM clase_productos WHERE item = ?',[$detalles->codigo_item]);
+
+                        //$total_pendiente = DB::select('SELECT COUNT(pendiente.saldo) AS total_saldo,COUNT(pendiente.pendiento) AS total_pendiente FROM pendiente');
+
+                   @endphp
+
+
+
+
+                   <tr style="font-size:10px;">
+                    <?php
+                        $val_anterioir= $bultos+1;
+                        $bultos += $detalles->cantidad_puros;
+
+                       $val_actual=$bultos ?>
+
+                    @if ($val_actual == $val_anterioir)
+                    <td style="overflow-x:auto;">{{$val_actual}}</td>
+                    @else
+                    <td style="overflow-x:auto;">{{$val_anterioir}} al {{$val_actual}}
+                    </td>
+                    @endif
+
+                    <td>{{$detalles->cantidad_puros}}</td>
+                    <td>{{$detalles->unidad}}</td>
+                    <td><b>{{$detalles->cantidad_cajas}}</b></td>
+                    <td></td>
+                    <td>SEVERAL</td>
+                    <td>{{$detalles->cantidad_por_caja}}</td>
+                    <td style="width: 250px">{{strtoupper($sampler_nombre[0]->nom)}}</td>
+                    <td>{{$detalles->codigo}}</td>
+                    <td>{{$detalles->codigo_item}}</td>
+                    <td>{{$detalles->orden}}</td>
+                    <td></td>
+                    <td>{{$detalles->orden_restante}}</td>
+                    <td style="width: 65px">{{$detalles->total_bruto}}</td>
+                    <td style="width: 60px">{{$detalles->total_neto}}</td>
+                    <td>{{$detalles->precio_producto}}</td>
+
+
+                    <td>{{number_format($detalles->costo,4)}}</td>
+                    <td>{{number_format($detalles->valor_total,4)}}</td>
+                    <td style="width: 60px">
+                        <a data-toggle="modal" data-target="#borrar_detalles" href=""
+                            wire:click="borrar_detalles({{$detalles->id_detalle}})">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" fill="currentColor"
+                                class="bi bi-trash-fill" viewBox="0 0 16 16">
+                                <path
+                                    d="M2.5 1a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1H3v9a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V4h.5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1H2.5zm3 4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5zM8 5a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7A.5.5 0 0 1 8 5zm3 .5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 1 0z" />
+                            </svg></a>
+
+
+                        <a style=" width:10px; height:10px;" data-toggle="modal" href=""
+                            wire:click="editar_detalles({{$detalles->id_detalle}})">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" fill="currentColor"
+                                class="bi bi-pencil-square" viewBox="0 0 16 16">
+                                <path
+                                    d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z" />
+                                <path fill-rule="evenodd"
+                                    d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z" />
+                            </svg>
+                        </a>
+
+                    </td>
+
+
+                </tr>
+                <tr style="font-size:10px;">
+
+                    <td style="overflow-x:auto;"></td>
+
+
+                    <td></td>
+                    <td></td>
+                    <td><b></b></td>
+                    <td>{{$repartir}}</td>
+                    <td>{{$detalles->capas}}</td>
+                    <td></td>
+                    <td style="width: 250px">{{$detalles->producto}}</td>
+                    <td>{{$detalles->codigo}}</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td ></td>
+                    <td>{{$detalles->precio_producto}}</td>
+
+
+                    <td></td>
+                    <td>{{number_format($detalles->valor_total,4)}}</td>
+                    <td style="width: 60px">
+
+
+                    </td>
+
+
+                </tr>
+
+                   @elseif ($sampler[0]->sampler == "si")
+
+
+                   <tr style="font-size:10px;">
+
+                    <td style="overflow-x:auto;"></td>
+
+
+                    <td></td>
+                    <td></td>
+                    <td><b></b></td>
+                    <td>{{$repartir}}</td>
+                    <td>{{$detalles->capas}}</td>
+                    <td></td>
+                    <td style="width: 250px">{{$detalles->producto}}</td>
+                    <td>{{$detalles->codigo}}</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td ></td>
+                    <td>{{$detalles->precio_producto}}</td>
+
+
+                    <td></td>
+                    <td>{{number_format($detalles->valor_total,4)}}</td>
+                    <td style="width: 60px">
+
+
+                    </td>
+
+
+                </tr>
+
+
+                   @else
+
 
                     <tr style="font-size:10px;">
                         <?php
@@ -237,6 +395,8 @@
 
 
                     </tr>
+
+                    @endif
 
                     @endforeach
                 </tbody>
@@ -336,7 +496,7 @@
         </div>
 
 
-        <div class="input-group" style="width:45%;position: fixed;right: 0px;bottom:0px; height:30px;display:flex;" id="sumas2">               
+        <div class="input-group" style="width:45%;position: fixed;right: 0px;bottom:0px; height:30px;display:flex;" id="sumas2">
 
                 <span id="de" class="input-group-text form-control" style="background:rgba(174, 0, 255, 0.432);color:white;">Peso Bruto Total</span>
                 <input type="number" class="form-control  mr-sm-4" placeholder="0.00" wire:model="total_peso_bruto" readonly>
@@ -355,7 +515,7 @@
                 <span id="de" class="input-group-text form-control" style="background:rgba(174, 0, 255, 0.432);color:white;">Total Saldo</span>
                 <input type="number" class="form-control  mr-sm-4" placeholder="0" wire:model="total_saldo" readonly>
         </div>
-     
+
 
 
 
@@ -394,8 +554,8 @@
                 document.getElementById('fecha_de').style.display = 'none';
                 document.getElementById('ordenb').style.display = 'none';
                 document.getElementById('itemb').style.display = 'none';
-                document.getElementById('honb').style.display = 'none'; 
-                document.getElementById('sumas3').style.display = 'none'; 
+                document.getElementById('honb').style.display = 'none';
+                document.getElementById('sumas3').style.display = 'none';
 
 
                 document.getElementById('busqueda_pendiente2').style.display = 'none';
@@ -411,7 +571,7 @@
                 document.getElementById('lbl_contenedor').style.display = 'block';
                 document.getElementById('txt_cliente').style.display = 'block';
                 document.getElementById('txt_fecha').style.display = 'block';
-                document.getElementById('txt_contenedor').style.display = 'block';              
+                document.getElementById('txt_contenedor').style.display = 'block';
                 document.getElementById('sumas1').style.display = 'flex';
                 document.getElementById('sumas2').style.display = 'flex';
             }
