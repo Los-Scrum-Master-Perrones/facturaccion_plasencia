@@ -61,6 +61,8 @@ class FacturaTerminado extends Component
 
 
     public $detalles_produtos;
+    public $aereo;
+
 
 
 
@@ -93,7 +95,7 @@ class FacturaTerminado extends Component
 
 
 
-        $this->detalles_venta = DB::select('call mostrar_detalle_factura()');
+        $this->detalles_venta = DB::select('call mostrar_detalle_factura(?)',[$this->aereo]);
 
         if ($this->nom != "" || $this->fede != "" || $this->fecha != "" || $this->item != "" || $this->orden != "" || $this->hon != "") {
             $this->dispatchBrowserEvent("pendiente");
@@ -257,21 +259,26 @@ class FacturaTerminado extends Component
         $this->editar_peso_neto =  0;
 
         $this->fecha_factura = Carbon::now()->format("Y-m-d");
+
+        $this->aereo =  "RP";
     }
 
     public function insertar_detalle_factura(Request $request)
     {
+
 
         $sampler = DB::select('SELECT sampler,descripcion_sampler
                                 FROM clase_productos
                                 WHERE  clase_productos.item = (select item from pendiente where id_pendiente = ?);', [$request->id_pendi]);
 
 
-        if ($sampler[0]->sampler == "si") {
 
-            $datos_pendiente = DB::select('SELECT item, orden FROM pendiente WHERE id_pendiente = ?', [$request->id_pendi]);
+            $datos_pendiente = DB::select('SELECT item, orden, saldo FROM pendiente WHERE id_pendiente = ?', [$request->id_pendi]);
 
             $conteo = DB::select('SELECT * FROM pendiente WHERE orden = ? AND item = ?', [$datos_pendiente[0]->orden,  $datos_pendiente[0]->item]);
+
+        if ($sampler[0]->sampler == "si") {
+
 
             for ($i = 0; $i < count($conteo); $i++) {
                 DB::select('call insertar_detalle_factura(
@@ -281,9 +288,14 @@ class FacturaTerminado extends Component
                    ,:pa_peso_neto
                    ,:pa_cantidad_puros
                    ,:pa_unidad
-                   ,:pa_observaciones)', [
+                   ,:pa_observaciones,
+                   :para,
+                   :anterior)', [
 
-                    "id_pendiente" => $conteo[$i]->id_pendiente, "pa_cantidad_cajas" => $request->unidades_cajon, "pa_peso_bruto" => $request->peso_bruto, "pa_peso_neto" => $request->peso_neto, "pa_cantidad_puros" => $request->cantidad_bultos, "pa_unidad" => $request->unidades_bultos, "pa_observaciones" => "Sin Facturar"
+                    "id_pendiente" => $conteo[$i]->id_pendiente, "pa_cantidad_cajas" => $request->unidades_cajon, "pa_peso_bruto" => $request->peso_bruto,
+                     "pa_peso_neto" => $request->peso_neto, "pa_cantidad_puros" => $request->cantidad_bultos,
+                     "pa_unidad" => $request->unidades_bultos, "pa_observaciones" => "Sin Facturar"
+                    ,"para" =>  $request->para, "anterior" => ($datos_pendiente[0]->saldo - ($request->unidades_bultos*$request->cantidad_bultos))
                 ]);
             }
 
@@ -295,9 +307,12 @@ class FacturaTerminado extends Component
                ,:pa_peso_neto
                ,:pa_cantidad_puros
                ,:pa_unidad
-               ,:pa_observaciones)', [
+               ,:pa_observaciones,
+               :para,
+               :anterior)', [
 
-                "id_pendiente" => $request->id_pendi, "pa_cantidad_cajas" => $request->unidades_cajon, "pa_peso_bruto" => $request->peso_bruto, "pa_peso_neto" => $request->peso_neto, "pa_cantidad_puros" => $request->cantidad_bultos, "pa_unidad" => $request->unidades_bultos, "pa_observaciones" => "Sin Facturar"
+                "id_pendiente" => $request->id_pendi, "pa_cantidad_cajas" => $request->unidades_cajon, "pa_peso_bruto" => $request->peso_bruto, "pa_peso_neto" => $request->peso_neto, "pa_cantidad_puros" => $request->cantidad_bultos, "pa_unidad" => $request->unidades_bultos, "pa_observaciones" => "Sin Facturar",
+                "para" =>  $request->para, "anterior" =>  ($datos_pendiente[0]->saldo - ($request->unidades_bultos*$request->cantidad_bultos))
             ]);
         }
 
@@ -317,6 +332,13 @@ class FacturaTerminado extends Component
 
                                         );', [$request->id_pendi]);
 
+
+
+
+            $datos_pendiente = DB::select('SELECT item, orden, saldo FROM pendiente WHERE id_pendiente =
+                                        (select id_pendiente from detalle_factura where id_detalle = ?)', [$request->id_pendi]);
+
+
         if ($sampler[0]->sampler == "si") {
 
             $detalles_item = DB::select('select id_pendiente from detalle_factura  where id_detalle = ?',[$request->id_pendi]);
@@ -324,30 +346,39 @@ class FacturaTerminado extends Component
             $detalles = DB::select('select item, orden from pendiente where id_pendiente = ?',[$detalles_item[0]->id_pendiente]);
 
 
-            $valores_extras = DB::select('select id_pendiente, (select id_detalle from detalle_factura  where detalle_factura.id_pendiente = pendiente.id_pendiente) as id_detalle from pendiente where item = ? and orden = ?',[$detalles[0]->item, $detalles[0]->orden]);
-
             DB::select('call actualizar_detalle_factura(
                 :id_pendiente
                 ,:pa_cantidad_cajas
                 ,:pa_peso_bruto
                 ,:pa_peso_neto
                 ,:pa_cantidad_puros
-                ,:pa_unidad)', [
+                ,:pa_unidad,
+                :anterior)', [
 
-            "id_pendiente" => $request->id_pendi, "pa_cantidad_cajas" => $request->unidades_cajon, "pa_peso_bruto" => $request->peso_bruto, "pa_peso_neto" => $request->peso_neto, "pa_cantidad_puros" => $request->cantidad_bultos, "pa_unidad" => $request->unidades_bultos
+             "id_pendiente" => $request->id_pendi, "pa_cantidad_cajas" => $request->unidades_cajon, "pa_peso_bruto" => $request->peso_bruto,
+             "pa_peso_neto" => $request->peso_neto, "pa_cantidad_puros" => $request->cantidad_bultos, "pa_unidad" => $request->unidades_bultos,
+             "anterior" =>  ($datos_pendiente[0]->saldo - ($request->unidades_bultos*$request->cantidad_bultos))
             ]);
 
-            for($i = 1; $i < count($valores_extras);$i++){
+            $conteo = count(DB::select('select * from detalle_clase_productos where item = ?', [$detalles[0]->item]));
+
+            $id_detalle_fa = $request->id_pendi + 1;
+
+            for($i = 1 ; $i < $conteo ; $i++){
                 DB::select('call actualizar_detalle_factura(
                     :id_pendiente
                     ,:pa_cantidad_cajas
                     ,:pa_peso_bruto
                     ,:pa_peso_neto
                     ,:pa_cantidad_puros
-                    ,:pa_unidad)', [
+                    ,:pa_unidad,
+                    :anterior)', [
 
-                "id_pendiente" =>  $valores_extras[$i]->id_detalle , "pa_cantidad_cajas" => $request->unidades_cajon, "pa_peso_bruto" => 0, "pa_peso_neto" => 0, "pa_cantidad_puros" => $request->cantidad_bultos, "pa_unidad" => $request->unidades_bultos
+                "id_pendiente" =>   $id_detalle_fa , "pa_cantidad_cajas" => $request->unidades_cajon, "pa_peso_bruto" => 0,
+                 "pa_peso_neto" => 0, "pa_cantidad_puros" => $request->cantidad_bultos, "pa_unidad" => $request->unidades_bultos,
+                 "anterior" =>  ($datos_pendiente[0]->saldo - ($request->unidades_bultos*$request->cantidad_bultos))
             ]);
+            $id_detalle_fa++;
             }
 
 
@@ -375,7 +406,7 @@ class FacturaTerminado extends Component
             $this->detalles_venta = DB::select(
                 'call mostrar_detalle_factura(:ordenes)',
                 [
-                    'ordenes' => $this->tipo_factura
+                    'ordenes' => $this->aereo
                 ]
             );
 
@@ -399,7 +430,7 @@ class FacturaTerminado extends Component
                 :pa_total_peso_neto,
                 :pa_fecha_factura)', [
 
-                "orden_sufijo" =>  $this->tipo_factura,
+                "orden_sufijo" =>  $this->aereo,
                 "pa_cliente" => $this->cliente,
                 "pa_numero_factura" => $this->num_factura_sistema,
                 "pa_contenedor" => $this->contenedor,

@@ -34,7 +34,7 @@ class DatosProductos extends Component
    public $select_file;
 
 
-   
+
    public $id_editar_marca;
    public $id_editar_capa;
    public $id_editar_vitola;
@@ -92,16 +92,11 @@ class DatosProductos extends Component
    public function insertar_marca(Request $request)
    {
       $marcas_in =  \DB::SELECT('call insertar_marca(:marca)', ['marca' => $request->marcam]);
-      $this->capas = \DB::SELECT('call buscar_capa(:capa)', ['capa' => $this->busqueda]);
-      $this->marcas = \DB::SELECT('call buscar_marca(:marca)', ['marca' => $this->busqueda]);
-      $this->nombres = \DB::SELECT('call buscar_nombre(:nombre)', ['nombre' => $this->busqueda]);
-      $this->vitolas = \DB::SELECT('call buscar_vitola(:vitola)', ['vitola' => $this->busqueda]);
-      $this->tipos = \DB::SELECT('call buscar_tipo_empaque(:tipo)', ['tipo' => $this->busqueda]);
       return redirect()->route('datos_producto');
    }
 
    public function cargar_marca_editar($id)
-   {   
+   {
        $detalles_marca = DB::select('CALL `traer_detalles_editar_marca`(:id)', ['id' => $id]);
        $this->id_editar_marca = $id;
        $this->editar_nombre_marca =  $detalles_marca[0]->marca;
@@ -137,7 +132,7 @@ class DatosProductos extends Component
       return redirect()->route('datos_producto');
    }
    public function cargar_capa_editar($id)
-   {   
+   {
        $detalles_capa = DB::select('CALL `traer_detalles_editar_capa`(:id)', ['id' => $id]);
        $this->id_editar_capa = $id;
        $this->editar_nombre_capa =  $detalles_capa[0]->capa;
@@ -174,7 +169,7 @@ class DatosProductos extends Component
       return redirect()->route('datos_producto');
    }
    public function cargar_nombre_editar($id)
-   {   
+   {
        $detalles_nombre = DB::select('CALL `traer_detalles_editar_nombre`(:id)', ['id' => $id]);
        $this->id_editar_nombre = $id;
        $this->editar_nombre_nombre =  $detalles_nombre[0]->nombre;
@@ -210,7 +205,7 @@ class DatosProductos extends Component
       return redirect()->route('datos_producto');
    }
    public function cargar_empaque_editar($id)
-   {   
+   {
        $detalles_tipo = DB::select('CALL `traer_detalles_editar_tipo`(:id)', ['id' => $id]);
        $this->id_editar_empaque = $id;
        $this->editar_nombre_empaque =  $detalles_tipo[0]->tipo_empaque;
@@ -247,7 +242,7 @@ class DatosProductos extends Component
    }
 
    public function cargar_vitola_editar($id)
-   {   
+   {
        $detalles_vitola = DB::select('CALL `traer_detalles_editar_vitola`(:id)', ['id' => $id]);
        $this->id_editar_vitola = $id;
        $this->editar_nombre_vitola =  $detalles_vitola[0]->vitola;

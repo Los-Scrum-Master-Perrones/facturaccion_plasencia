@@ -50,6 +50,12 @@
                     <input style="width:150px;" id="txt_contenedor" name="txt_contenedor" type="text"
                         class="form-control mr-sm-2 " wire:model="contenedor" placeholder="Primer Contenedor" required>
 
+                    <select name="para" id="para" wire:model="aereo">
+                        <option value="RP">Rocky Patel</option>
+                        <option value="FM">Family</option>
+                        <option value="WH">Warehouse</option>
+                        <option value="Aerea">Aerea</option>
+                    </select>
 
                     <button id="btn_guardar" class="botonprincipal" wire:click="insertar_factura()"
                         style="width:120px;">
@@ -75,733 +81,771 @@
                         placeholder="Orden" wire:model="hon">
 
 
-                        <div style="display: none" id="busqueda_pendiente2" name="busqueda_pendiente2">
-                </div>
+                    <div style="display: none" id="busqueda_pendiente2" name="busqueda_pendiente2">
+                    </div>
 
+                </div>
             </div>
         </div>
-    </div>
 
 
-<div class="row">
-                <div class="col">
-                    <label wire:model="titulo_cliente"
-                        style="font-size:15px;color:white;">{{$titulo_factura." ".$titulo_cliente." ". $contenedor." ".$titulo_mes}}
-                    </label>
-                </div>
-
-                <div class="col" style="text-align:end;">
-                    <label style="font-size:15px;color:white;">Factura N#: {{$num_factura_sistema}}</label>
-                </div>
-                <div class="col" style="text-align:end;">
-                    <button style="width:120px;" class="botonprincipal" wire:click="historial()">Historial</button>
-                </div>
+        <div class="row">
+            <div class="col">
+                <label wire:model="titulo_cliente"
+                    style="font-size:15px;color:white;">{{$titulo_factura." ".$titulo_cliente." ". $contenedor." ".$titulo_mes}}
+                </label>
             </div>
-            <br>
+
+            <div class="col" style="text-align:end;">
+                <label style="font-size:15px;color:white;">Factura N#: {{$num_factura_sistema}}</label>
+            </div>
+            <div class="col" style="text-align:end;">
+                <button style="width:120px;" class="botonprincipal" wire:click="historial()">Historial</button>
+            </div>
+        </div>
+        <br>
 
 
-    <div class="panel-body" style="padding:0px;">
-        <div style="width:100%; padding-left:0px;   font-size:10px;   overflow-x: display; overflow-y: auto;
+        <div class="panel-body" style="padding:0px;">
+            <div style="width:100%; padding-left:0px;   font-size:10px;   overflow-x: display; overflow-y: auto;
             height:70%;">
 
 
 
 
-            <table class="table table-light" id="editable" >
-                <thead style="font-size:8px;" >
-                    <tr style="font-size:8px; ">
-                        <th rowspan="2">Bulto<br>Package<br>No.</th>
-                        <th rowspan="2">Cant.<br>Quant.</th>
-                        <th rowspan="2">Unidad<br>Unit. </th>
-                        <th rowspan="2" style="background:#ddd;">Units</th>
-                        <th rowspan="2">Total<br>Tabacos<br>Cigars </th>
-                        <th rowspan="2">Capa<br>Wrappar </th>
-                        <th rowspan="2">#  </th>
-                        <th rowspan="2">Clase<br>Class </th>
-                        <th rowspan="2">CODIGO #<br>ITEM # </th>
-                        <th rowspan="2">YOUR<br>ITEM # </th>
-                        <th rowspan="2" style="background:#ddd;">YOUR<br>ORDER #</th>
-                        <th rowspan="2">ORDER<br>AMOUNT </th>
-                        <th rowspan="2">BACK<br>ORDER<br>AMOUNT </th>
+                <table class="table table-light" id="editable">
+                    <thead style="font-size:8px;">
+                        <tr style="font-size:8px; ">
+                            <th rowspan="2">Bulto<br>Package<br>No.</th>
+                            <th rowspan="2">Cant.<br>Quant.</th>
+                            <th rowspan="2">Unidad<br>Unit. </th>
+                            <th rowspan="2" style="background:#ddd;">Units</th>
+                            <th rowspan="2">Total<br>Tabacos<br>Cigars </th>
+                            <th rowspan="2">Capa<br>Wrappar </th>
+                            <th rowspan="2"># </th>
+                            <th rowspan="2">Clase<br>Class </th>
+                            <th rowspan="2">CODIGO #<br>ITEM # </th>
+                            <th rowspan="2">YOUR<br>ITEM # </th>
+                            <th rowspan="2" style="background:#ddd;">YOUR<br>ORDER #</th>
+                            <th rowspan="2">ORDER<br>AMOUNT </th>
+                            <th rowspan="2">BACK<br>ORDER<br>AMOUNT </th>
 
-                        <th  colspan="2" > Peso en Libras<br>Weigth in Pounds </th>
+                            <th colspan="2"> Peso en Libras<br>Weigth in Pounds </th>
 
-                        <th rowspan="2">Precio FOB<br>per 1000 ($)</th>
-                        <th rowspan="2" style="background:#ddd;">Cost </th>
-                        <th rowspan="2">Valor<br>Value ($)</th>
-                        <th rowspan="2"></th>
-                    </tr>
-                    <tr style="font-size:8px; ">
-                        <th >Bruto Gross</th>
-                        <th >Neto Net</th>
-                    </tr>
-                </thead>
-                <tbody>
+                            <th rowspan="2">Precio FOB<br>per 1000 ($)</th>
+                            <th rowspan="2" style="background:#ddd;">Cost </th>
+                            <th rowspan="2">Valor<br>Value ($)</th>
+                            <th rowspan="2"></th>
+                        </tr>
+                        <tr style="font-size:8px; ">
+                            <th>Bruto Gross</th>
+                            <th>Neto Net</th>
+                        </tr>
+                    </thead>
+                    <tbody>
 
 
-                    @php
+                        @php
                         $orden = "";
                         $orden_actua = "";
-                    @endphp
+                        $total_puros_tabla = 0;
+                        @endphp
 
 
 
-                    <?php   $bultos = 0;
+                        <?php   $bultos = 0;
                             $val_anterioir=0;
                             $val_actual=0 ?>
 
-                    @foreach($detalles_venta as $detalles)
+                        @foreach($detalles_venta as $detalles)
 
 
 
 
-                    @if ( $orden == "" && $orden_actua == "")
-                    @php
+                        @if ( $orden == "" && $orden_actua == "")
+                        @php
                         $orden_actua = $detalles->orden;
                         $orden_actua = $detalles->orden;
-                    @endphp
-                    @endif
+                        @endphp
+                        @endif
 
-                    @php
+                        @php
                         $orden = $detalles->orden;
-                    @endphp
+                        @endphp
 
-                    @if ($orden_actua == $orden)
+                        @if ($orden_actua == $orden)
 
-                    @else
-                    <tr>
-                        <td colspan="19" style="background-color: gray"></td>
-                    </tr>
-                    @php
+                        @else
+                        <tr>
+                            <td colspan="19" style="background-color: gray"></td>
+                        </tr>
+                        @php
                         $orden_actua = $detalles->orden;
-                    @endphp
-                    @endif
+                        @endphp
+                        @endif
 
-                    @php
+                        @php
 
-                      $sampler  =  DB::select('SELECT sampler FROM clase_productos WHERE item = ?',[$detalles->codigo_item]);
+                        $sampler = DB::select('SELECT sampler FROM clase_productos WHERE item =
+                        ?',[$detalles->codigo_item]);
 
-                      $pendiente  =  DB::select('SELECT orden FROM pendiente WHERE id_pendiente = ?',[$detalles->id_pendiente]);
+                        $pendiente = DB::select('SELECT orden FROM pendiente WHERE id_pendiente =
+                        ?',[$detalles->id_pendiente]);
 
-                      $conteo_sampler  =  DB::select('SELECT COUNT(*) AS tuplas FROM pendiente WHERE item = ? AND orden = ?',[$detalles->codigo_item,$pendiente[0]->orden]);
+                        $conteo_sampler = DB::select('SELECT COUNT(*) AS tuplas FROM pendiente WHERE item = ? AND orden
+                        = ?',[$detalles->codigo_item,$pendiente[0]->orden]);
 
-                      $item_primero  =  DB::select('SELECT id_pendiente FROM pendiente WHERE item = ? AND orden LIKE CONCAT("%",?,"%") limit 0,1',[$detalles->codigo_item,$pendiente[0]->orden]);
+                        $item_primero = DB::select('SELECT id_pendiente FROM pendiente WHERE item = ? AND orden LIKE
+                        CONCAT("%",?,"%") limit 0,1',[$detalles->codigo_item,$pendiente[0]->orden]);
 
-                      if( $sampler[0]->sampler == "si"){
+
+                        $total_pendiente = DB::select('SELECT sum(pendiente.saldo) AS
+                        total_saldo,sum(pendiente.pendiente) AS total_pendiente FROM pendiente WHERE item = ? AND orden
+                        = ?',[$detalles->codigo_item,$pendiente[0]->orden]);
+
+                        if( $sampler[0]->sampler == "si"){
                         $repartir = $detalles->total_tabacos/$conteo_sampler[0]->tuplas;
-                      }
+                        }
 
-                   @endphp
+                        @endphp
 
-                   @if ( $sampler[0]->sampler == "si" && $item_primero[0]->id_pendiente ==  $detalles->id_pendiente)
+                        @if ( $sampler[0]->sampler == "si" && $item_primero[0]->id_pendiente == $detalles->id_pendiente)
 
-                   @php
-                        $sampler_nombre  =  DB::select('SELECT concat((SELECT tipo_empaque_ingles FROM  tipo_empaques WHERE tipo_empaques.id_tipo_empaque = clase_productos.id_tipo_empaque)," ",descripcion_sampler) as nom
-                                            FROM clase_productos WHERE item = ?',[$detalles->codigo_item]);
+                        @php
+                        $sampler_nombre = DB::select('SELECT concat((SELECT tipo_empaque_ingles FROM tipo_empaques WHERE
+                        tipo_empaques.id_tipo_empaque = clase_productos.id_tipo_empaque)," ",descripcion_sampler) as nom
+                        FROM clase_productos WHERE item = ?',[$detalles->codigo_item]);
 
-                        //$total_pendiente = DB::select('SELECT COUNT(pendiente.saldo) AS total_saldo,COUNT(pendiente.pendiento) AS total_pendiente FROM pendiente');
-
-                   @endphp
-
-
+                        $promedio = DB::select('SELECT AVG(precio) AS promedio FROM detalle_clase_productos WHERE item = ?',[$detalles->codigo_item]);
+                        @endphp
 
 
-                   <tr style="font-size:10px;">
-                    <?php
-                        $val_anterioir= $bultos+1;
-                        $bultos += $detalles->cantidad_puros;
-
-                       $val_actual=$bultos ?>
-
-                    @if ($val_actual == $val_anterioir)
-                    <td style="overflow-x:auto;">{{$val_actual}}</td>
-                    @else
-                    <td style="overflow-x:auto;">{{$val_anterioir}} al {{$val_actual}}
-                    </td>
-                    @endif
-
-                    <td>{{$detalles->cantidad_puros}}</td>
-                    <td>{{$detalles->unidad}}</td>
-                    <td><b>{{$detalles->cantidad_cajas}}</b></td>
-                    <td></td>
-                    <td>SEVERAL</td>
-                    <td>{{$detalles->cantidad_por_caja}}</td>
-                    <td style="width: 250px">{{strtoupper($sampler_nombre[0]->nom)}}</td>
-                    <td>{{$detalles->codigo}}</td>
-                    <td>{{$detalles->codigo_item}}</td>
-                    <td>{{$detalles->orden}}</td>
-                    <td></td>
-                    <td>{{$detalles->orden_restante}}</td>
-                    <td style="width: 65px">{{$detalles->total_bruto}}</td>
-                    <td style="width: 60px">{{$detalles->total_neto}}</td>
-                    <td>{{$detalles->precio_producto}}</td>
 
 
-                    <td>{{number_format($detalles->costo,4)}}</td>
-                    <td>{{number_format($detalles->valor_total,4)}}</td>
-                    <td style="width: 60px">
-                        <a data-toggle="modal" data-target="#borrar_detalles" href=""
-                            wire:click="borrar_detalles({{$detalles->id_detalle}})">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" fill="currentColor"
-                                class="bi bi-trash-fill" viewBox="0 0 16 16">
-                                <path
-                                    d="M2.5 1a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1H3v9a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V4h.5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1H2.5zm3 4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5zM8 5a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7A.5.5 0 0 1 8 5zm3 .5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 1 0z" />
-                            </svg></a>
-
-
-                        <a style=" width:10px; height:10px;" data-toggle="modal" href=""
-                            wire:click="editar_detalles({{$detalles->id_detalle}})">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" fill="currentColor"
-                                class="bi bi-pencil-square" viewBox="0 0 16 16">
-                                <path
-                                    d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z" />
-                                <path fill-rule="evenodd"
-                                    d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z" />
-                            </svg>
-                        </a>
-
-                    </td>
-
-
-                </tr>
-                <tr style="font-size:10px;">
-
-                    <td style="overflow-x:auto;"></td>
-
-
-                    <td></td>
-                    <td></td>
-                    <td><b></b></td>
-                    <td>{{$repartir}}</td>
-                    <td>{{$detalles->capas}}</td>
-                    <td></td>
-                    <td style="width: 250px">{{$detalles->producto}}</td>
-                    <td>{{$detalles->codigo}}</td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td ></td>
-                    <td>{{$detalles->precio_producto}}</td>
-
-
-                    <td></td>
-                    <td>{{number_format($detalles->valor_total,4)}}</td>
-                    <td style="width: 60px">
-
-
-                    </td>
-
-
-                </tr>
-
-                   @elseif ($sampler[0]->sampler == "si")
-
-
-                   <tr style="font-size:10px;">
-
-                    <td style="overflow-x:auto;"></td>
-
-
-                    <td></td>
-                    <td></td>
-                    <td><b></b></td>
-                    <td>{{$repartir}}</td>
-                    <td>{{$detalles->capas}}</td>
-                    <td></td>
-                    <td style="width: 250px">{{$detalles->producto}}</td>
-                    <td>{{$detalles->codigo}}</td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td ></td>
-                    <td>{{$detalles->precio_producto}}</td>
-
-
-                    <td></td>
-                    <td>{{number_format($detalles->valor_total,4)}}</td>
-                    <td style="width: 60px">
-
-
-                    </td>
-
-
-                </tr>
-
-
-                   @else
-
-
-                    <tr style="font-size:10px;">
-                        <?php
+                        <tr style="font-size:10px;">
+                            @php
                             $val_anterioir= $bultos+1;
                             $bultos += $detalles->cantidad_puros;
 
-                           $val_actual=$bultos ?>
+                            $val_actual=$bultos
+                            @endphp
 
-                        @if ($val_actual == $val_anterioir)
-                        <td style="overflow-x:auto;">{{$val_actual}}</td>
+                            @if ($val_actual == $val_anterioir)
+                            <td style="overflow-x:auto;">{{$val_actual}}</td>
+                            @else
+                            <td style="overflow-x:auto;">{{$val_anterioir}} al {{$val_actual}}
+                            </td>
+                            @endif
+
+                            <td>{{$detalles->cantidad_puros}}</td>
+                            <td>{{$detalles->unidad}}</td>
+                            <td><b>{{$detalles->cantidad_cajas}}</b></td>
+                            <td></td>
+                            <td>SEVERAL</td>
+                            <td>{{$detalles->cantidad_por_caja}}</td>
+                            <td style="width: 250px"><b>{{strtoupper($sampler_nombre[0]->nom)}}</b> </td>
+                            <td>{{$detalles->codigo}}</td>
+                            <td>{{$detalles->codigo_item}}</td>
+                            <td>{{$detalles->orden}}</td>
+                            <td>{{$total_pendiente[0]->total_pendiente}}</td>
+                            <td>{{$detalles->orden_restante}}</td>
+                            <td style="width: 65px">{{$detalles->total_bruto}}</td>
+                            <td style="width: 60px">{{$detalles->total_neto}}</td>
+                            <td>{{$detalles->precio_producto}}</td>
+
+
+                            <td><b>{{number_format(($promedio[0]->promedio*$detalles->cantidad_por_caja)/1000,4)}}</b></td>
+                            <td style="text-align: center">-</td>
+                            <td style="width: 60px">
+                                <a data-toggle="modal" data-target="#borrar_detalles" href=""
+                                    wire:click="borrar_detalles({{$detalles->id_detalle}})">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" fill="currentColor"
+                                        class="bi bi-trash-fill" viewBox="0 0 16 16">
+                                        <path
+                                            d="M2.5 1a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1H3v9a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V4h.5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1H2.5zm3 4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5zM8 5a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7A.5.5 0 0 1 8 5zm3 .5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 1 0z" />
+                                    </svg></a>
+
+
+                                <a style=" width:10px; height:10px;" data-toggle="modal" href=""
+                                    wire:click="editar_detalles({{$detalles->id_detalle}})">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" fill="currentColor"
+                                        class="bi bi-pencil-square" viewBox="0 0 16 16">
+                                        <path
+                                            d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z" />
+                                        <path fill-rule="evenodd"
+                                            d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z" />
+                                    </svg>
+                                </a>
+
+                            </td>
+
+
+                        </tr>
+
+                        @php
+                            $sampler_s = 0;
+                            $arreglo_detalles = DB::select('CALL `traer_detalles_productos_factura`(?, ?)', [$detalles->codigo_item, $sampler_s]);
+                        @endphp
+
+
+
+                        <tr style="font-size:10px;">
+
+                            <td style="overflow-x:auto;"></td>
+
+
+                            <td></td>
+                            <td></td>
+                            <td><b></b></td>
+                            <td>{{$repartir}}</td>
+                            <td>{{$arreglo_detalles[0]->capa}}</td>
+                            <td></td>
+                            <td style="width: 250px">{{strtoupper($arreglo_detalles[0]->sampler)}}</td>
+                            <td>{{$arreglo_detalles[0]->otra_descripcion}}</td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td style="text-align: right">{{number_format($arreglo_detalles[0]->precio,4)}}</td>
+
+
+                            <td></td>
+                            <td style="text-align: right">{{number_format(($repartir*$arreglo_detalles[0]->precio)/1000,2)}}</td>
+                            <td style="width: 60px">
+
+
+                            </td>
+
+
+                        </tr>
+
+
+                        @php
+                        $total_puros_tabla += $repartir;
+                        $sampler_s++;
+                        @endphp
+
+                        @elseif ($sampler[0]->sampler == "si")
+
+                        @php
+                            $arreglo_detalles = DB::select('CALL `traer_detalles_productos_factura`(?, ?)', [$detalles->codigo_item, $sampler_s]);
+                        @endphp
+
+                        <tr style="font-size:10px;">
+                            <td style="overflow-x:auto;"></td>
+                            <td></td>
+                            <td></td>
+                            <td><b></b></td>
+                            <td>{{$repartir}}</td>
+                            <td>{{$arreglo_detalles[0]->capa}}</td>
+                            <td></td>
+                            <td style="width: 250px">{{strtoupper($arreglo_detalles[0]->sampler)}}</td>
+                            <td>{{$arreglo_detalles[0]->otra_descripcion}}</td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td style="text-align: right">{{number_format($arreglo_detalles[0]->precio,4)}}</td>
+
+
+                            <td style="text-align: right"></td>
+                            <td style="text-align: right">{{number_format(($repartir*$arreglo_detalles[0]->precio)/1000,2)}}</td>
+                            <td style="width: 60px">
+                        </tr>
+
+                        @php
+                         $total_puros_tabla += $repartir;
+                        $sampler_s++;
+                        @endphp
+
+
                         @else
-                        <td style="overflow-x:auto;">{{$val_anterioir}} al {{$val_actual}}
-                        </td>
+
+                        @php
+                         $total_puros_tabla += $detalles->total_tabacos;
+                        $sampler_s = 0;
+                        @endphp
+                        <tr style="font-size:10px;">
+                            <?php
+                                $val_anterioir= $bultos+1;
+                                $bultos += $detalles->cantidad_puros;
+                                $val_actual=$bultos;
+                            ?>
+
+                            @if ($val_actual == $val_anterioir)
+                            <td style="overflow-x:auto;">{{$val_actual}}</td>
+                            @else
+                            <td style="overflow-x:auto;">{{$val_anterioir}} al {{$val_actual}}
+                            </td>
+                            @endif
+
+                            <td>{{$detalles->cantidad_puros}}</td>
+                            <td>{{$detalles->unidad}}</td>
+                            <td><b>{{$detalles->cantidad_cajas}}</b></td>
+                            <td>{{$detalles->total_tabacos}}</td>
+                            <td>{{$detalles->capas}}</td>
+                            <td>{{$detalles->cantidad_por_caja}}</td>
+                            <td style="width: 250px">{{$detalles->producto}}</td>
+                            <td>{{$detalles->codigo}}</td>
+                            <td>{{$detalles->codigo_item}}</td>
+                            <td>{{$detalles->orden}}</td>
+                            <td>{{$detalles->orden_total}}</td>
+                            <td>{{$detalles->orden_restante}}</td>
+                            <td style="width: 65px">{{$detalles->total_bruto}}</td>
+                            <td style="width: 60px">{{$detalles->total_neto}}</td>
+                            <td style="text-align: right">{{$detalles->precio_producto}}</td>
+
+
+                            <td style="text-align: right"><b>{{number_format($detalles->costo,4)}}</b></td>
+                            <td style="text-align: right">{{number_format($detalles->valor_total,2)}}</td>
+                            <td style="width: 60px">
+                                <a data-toggle="modal" data-target="#borrar_detalles" href=""
+                                    wire:click="borrar_detalles({{$detalles->id_detalle}})">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" fill="currentColor"
+                                        class="bi bi-trash-fill" viewBox="0 0 16 16">
+                                        <path
+                                            d="M2.5 1a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1H3v9a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V4h.5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1H2.5zm3 4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5zM8 5a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7A.5.5 0 0 1 8 5zm3 .5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 1 0z" />
+                                    </svg></a>
+
+
+                                <a style=" width:10px; height:10px;" data-toggle="modal" href=""
+                                    wire:click="editar_detalles({{$detalles->id_detalle}})">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" fill="currentColor"
+                                        class="bi bi-pencil-square" viewBox="0 0 16 16">
+                                        <path
+                                            d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z" />
+                                        <path fill-rule="evenodd"
+                                            d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z" />
+                                    </svg>
+                                </a>
+
+                            </td>
+
+
+                        </tr>
+
+
+
                         @endif
 
-                        <td>{{$detalles->cantidad_puros}}</td>
-                        <td>{{$detalles->unidad}}</td>
-                        <td><b>{{$detalles->cantidad_cajas}}</b></td>
-                        <td>{{$detalles->total_tabacos}}</td>
-                        <td>{{$detalles->capas}}</td>
-                        <td>{{$detalles->cantidad_por_caja}}</td>
-                        <td style="width: 250px">{{$detalles->producto}}</td>
-                        <td>{{$detalles->codigo}}</td>
-                        <td>{{$detalles->codigo_item}}</td>
-                        <td>{{$detalles->orden}}</td>
-                        <td>{{$detalles->orden_total}}</td>
-                        <td>{{$detalles->orden_restante}}</td>
-                        <td style="width: 65px">{{$detalles->total_bruto}}</td>
-                        <td style="width: 60px">{{$detalles->total_neto}}</td>
-                        <td>{{$detalles->precio_producto}}</td>
-
-
-                        <td>{{number_format($detalles->costo,4)}}</td>
-                        <td>{{number_format($detalles->valor_total,4)}}</td>
-                        <td style="width: 60px">
-                            <a data-toggle="modal" data-target="#borrar_detalles" href=""
-                                wire:click="borrar_detalles({{$detalles->id_detalle}})">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" fill="currentColor"
-                                    class="bi bi-trash-fill" viewBox="0 0 16 16">
-                                    <path
-                                        d="M2.5 1a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1H3v9a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V4h.5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1H2.5zm3 4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5zM8 5a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7A.5.5 0 0 1 8 5zm3 .5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 1 0z" />
-                                </svg></a>
-
-
-                            <a style=" width:10px; height:10px;" data-toggle="modal" href=""
-                                wire:click="editar_detalles({{$detalles->id_detalle}})">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" fill="currentColor"
-                                    class="bi bi-pencil-square" viewBox="0 0 16 16">
-                                    <path
-                                        d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z" />
-                                    <path fill-rule="evenodd"
-                                        d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z" />
-                                </svg>
-                            </a>
-
-                        </td>
-
-
-                    </tr>
-
-                    @endif
-
-                    @endforeach
-                </tbody>
-            </table>
+                        @endforeach
+                    </tbody>
+                </table>
 
 
 
 
-            <table class="table table-light" style="font-size:8px;display:none;" id="pendiente_factura">
-                <thead>
-                    <tr>
-                        <th >CATEGORIA</th>
-                        <th>ITEM</th>
-                        <th>ORDEN DEL SISTEMA</th>
-                        <th>OBSERVACÓN</th>
-                        <th>PRESENTACIÓN</th>
-                        <th>MES</th>
-                        <th>ORDEN</th>
-                        <th>MARCA</th>
-                        <th>VITOLA</th>
-                        <th>NOMBRE</th>
-                        <th>CAPA</th>
-                        <th>TIPO DE EMPAQUE</th>
-                        <th>ANILLO</th>
-                        <th>CELLO</th>
-                        <th>UPC</th>
-                        <th>PENDIENTE</th>
-                        <th>SALDO</th>
-                        <th>PT</th>
-                        <th></th>
-                    </tr>
-                </thead>
-                <tbody>
+                <table class="table table-light" style="font-size:8px;display:none;" id="pendiente_factura">
+                    <thead>
+                        <tr>
+                            <th>CATEGORIA</th>
+                            <th>ITEM</th>
+                            <th>ORDEN DEL SISTEMA</th>
+                            <th>OBSERVACÓN</th>
+                            <th>PRESENTACIÓN</th>
+                            <th>MES</th>
+                            <th>ORDEN</th>
+                            <th>MARCA</th>
+                            <th>VITOLA</th>
+                            <th>NOMBRE</th>
+                            <th>CAPA</th>
+                            <th>TIPO DE EMPAQUE</th>
+                            <th>ANILLO</th>
+                            <th>CELLO</th>
+                            <th>UPC</th>
+                            <th>PENDIENTE</th>
+                            <th>SALDO</th>
+                            <th>PT</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
 
 
-                    @foreach($datos_pendiente as $datos)
+                        @foreach($datos_pendiente as $datos)
 
-                    <tr>
-                        <td style="width:100px; max-width: 400px;overflow-x:auto;">{{$datos->categoria}}</td>
-                        <td>{{$datos->item}}</td>
-                        <td>{{$datos->orden_del_sitema}}</td>
-                        <td>{{$datos->observacion}}</td>
-                        <td>{{$datos->presentacion}}</td>
-                        <td>{{$datos->mes}}</td>
-                        <td>{{$datos->orden}}</td>
-                        <td>{{$datos->marca}}</td>
-                        <td>{{$datos->vitola}}</td>
-                        <td>{{$datos->nombre}}</td>
-                        <td>{{$datos->capa}}</td>
-                        <td>{{$datos->tipo_empaque}}</td>
-                        <td>{{$datos->anillo}}</td>
-                        <td>{{$datos->cello}}</td>
-                        <td>{{$datos->upc}}</td>
-                        <td>{{$datos->pendiente}}</td>
-                        <td>{{$datos->saldo}}</td>
-                        <td>{{$datos->PT}}</td>
-                        <td style="text-align:center;">
+                        <tr>
+                            <td style="width:100px; max-width: 400px;overflow-x:auto;">{{$datos->categoria}}</td>
+                            <td>{{$datos->item}}</td>
+                            <td>{{$datos->orden_del_sitema}}</td>
+                            <td>{{$datos->observacion}}</td>
+                            <td>{{$datos->presentacion}}</td>
+                            <td>{{$datos->mes}}</td>
+                            <td>{{$datos->orden}}</td>
+                            <td>{{$datos->marca}}</td>
+                            <td>{{$datos->vitola}}</td>
+                            <td>{{$datos->nombre}}</td>
+                            <td>{{$datos->capa}}</td>
+                            <td>{{$datos->tipo_empaque}}</td>
+                            <td>{{$datos->anillo}}</td>
+                            <td>{{$datos->cello}}</td>
+                            <td>{{$datos->upc}}</td>
+                            <td>{{$datos->pendiente}}</td>
+                            <td>{{$datos->saldo}}</td>
+                            <td>{{$datos->PT}}</td>
+                            <td style="text-align:center;">
 
-                            {{-- @if ($datos->PT>0 || isset($datos->PT))
+                                {{-- @if ($datos->PT>0 || isset($datos->PT))
 
                                 <a data-toggle="modal" wire:click="abrir_modal({{$datos->id_pendiente}})" href="">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
-                                class="bi bi-bag-plus-fill" viewBox="0 0 16 16">
-                                <path fill-rule="evenodd"
-                                    d="M10.5 3.5a2.5 2.5 0 0 0-5 0V4h5v-.5zm1 0V4H15v10a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V4h3.5v-.5a3.5 3.5 0 1 1 7 0zM8.5 8a.5.5 0 0 0-1 0v1.5H6a.5.5 0 0 0 0 1h1.5V12a.5.5 0 0 0 1 0v-1.5H10a.5.5 0 0 0 0-1H8.5V8z" />
-                            </svg>
-                            </a>
-                            @endif --}}
-                            <a data-toggle="modal" wire:click="abrir_modal({{$datos->id_pendiente}})" href="">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
                                     class="bi bi-bag-plus-fill" viewBox="0 0 16 16">
                                     <path fill-rule="evenodd"
                                         d="M10.5 3.5a2.5 2.5 0 0 0-5 0V4h5v-.5zm1 0V4H15v10a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V4h3.5v-.5a3.5 3.5 0 1 1 7 0zM8.5 8a.5.5 0 0 0-1 0v1.5H6a.5.5 0 0 0 0 1h1.5V12a.5.5 0 0 0 1 0v-1.5H10a.5.5 0 0 0 0-1H8.5V8z" />
                                 </svg>
-                            </a>
+                                </a>
+                                @endif --}}
+                                <a data-toggle="modal" wire:click="abrir_modal({{$datos->id_pendiente}})" href="">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                                        class="bi bi-bag-plus-fill" viewBox="0 0 16 16">
+                                        <path fill-rule="evenodd"
+                                            d="M10.5 3.5a2.5 2.5 0 0 0-5 0V4h5v-.5zm1 0V4H15v10a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V4h3.5v-.5a3.5 3.5 0 1 1 7 0zM8.5 8a.5.5 0 0 0-1 0v1.5H6a.5.5 0 0 0 0 1h1.5V12a.5.5 0 0 0 1 0v-1.5H10a.5.5 0 0 0 0-1H8.5V8z" />
+                                    </svg>
+                                </a>
 
 
-                        </td>
-                    </tr>
+                            </td>
+                        </tr>
 
 
 
 
-                    @endforeach
-                </tbody>
-            </table>
+                        @endforeach
+                    </tbody>
+                </table>
 
-        </div>
-
-
-        <div class="input-group" style="width:30%;position: fixed;left: 0px;bottom:0px; height:30px;display:flex;" id="sumas1">
-                <span id="de" class="input-group-text form-control " style="background:rgba(174, 0, 255, 0.432);color:white;">Total Bultos</span>
-                <input type="number" class="form-control  mr-sm-4" placeholder="0" wire:model="total_cantidad_bultos" readonly>
-
-                <span id="de" class="input-group-text form-control" style="background:rgba(174, 0, 255, 0.432);color:white;">Total Puros</span>
-                <input type="number" class="form-control  mr-sm-4" placeholder="0" wire:model="total_total_puros" readonly>
-        </div>
+            </div>
 
 
-        <div class="input-group" style="width:45%;position: fixed;right: 0px;bottom:0px; height:30px;display:flex;" id="sumas2">
+            <div class="input-group" style="width:30%;position: fixed;left: 0px;bottom:0px; height:30px;display:flex;"
+                id="sumas1">
+                <span id="de" class="input-group-text form-control "
+                    style="background:rgba(174, 0, 255, 0.432);color:white;">Total Bultos</span>
+                <input type="number" class="form-control  mr-sm-4" placeholder="0"  value="{{$val_actual}}"
+                    readonly>
 
-                <span id="de" class="input-group-text form-control" style="background:rgba(174, 0, 255, 0.432);color:white;">Peso Bruto Total</span>
-                <input type="number" class="form-control  mr-sm-4" placeholder="0.00" wire:model="total_peso_bruto" readonly>
+                <span id="de" class="input-group-text form-control"
+                    style="background:rgba(174, 0, 255, 0.432);color:white;">Total Puros</span>
+                <input type="number" class="form-control  mr-sm-4" placeholder="0" value="{{$total_puros_tabla}}"
+                    readonly>
+            </div>
 
-                <span id="de" class="input-group-text form-control" style="background:rgba(174, 0, 255, 0.432);color:white;">Peso Neto Total</span>
+
+            <div class="input-group" style="width:45%;position: fixed;right: 0px;bottom:0px; height:30px;display:flex;"
+                id="sumas2">
+
+                <span id="de" class="input-group-text form-control"
+                    style="background:rgba(174, 0, 255, 0.432);color:white;">Peso Bruto Total</span>
+                <input type="number" class="form-control  mr-sm-4" placeholder="0.00" wire:model="total_peso_bruto"
+                    readonly>
+
+                <span id="de" class="input-group-text form-control"
+                    style="background:rgba(174, 0, 255, 0.432);color:white;">Peso Neto Total</span>
                 <input type="number" class="form-control " placeholder="0.00" wire:model="total_peso_neto" readonly>
 
-                <span id="de" class="input-group-text form-control" style="background:rgba(174, 0, 255, 0.432);color:white;">Valor Total</span>
+                <span id="de" class="input-group-text form-control"
+                    style="background:rgba(174, 0, 255, 0.432);color:white;">Valor Total</span>
                 <input type="number" class="form-control " placeholder="0.00" wire:model="total_valor" readonly>
-     </div>
+            </div>
 
-     <div class="input-group" style="width:30%;position: fixed;right: 0px;bottom:0px; height:30px;display:none;" id="sumas3">
-                <span id="de" class="input-group-text form-control " style="background:rgba(174, 0, 255, 0.432);color:white;">Total Pendiente</span>
-                <input type="number" class="form-control  mr-sm-4" placeholder="0" wire:model="total_pendiente" readonly>
+            <div class="input-group" style="width:30%;position: fixed;right: 0px;bottom:0px; height:30px;display:none;"
+                id="sumas3">
+                <span id="de" class="input-group-text form-control "
+                    style="background:rgba(174, 0, 255, 0.432);color:white;">Total Pendiente</span>
+                <input type="number" class="form-control  mr-sm-4" placeholder="0" wire:model="total_pendiente"
+                    readonly>
 
-                <span id="de" class="input-group-text form-control" style="background:rgba(174, 0, 255, 0.432);color:white;">Total Saldo</span>
+                <span id="de" class="input-group-text form-control"
+                    style="background:rgba(174, 0, 255, 0.432);color:white;">Total Saldo</span>
                 <input type="number" class="form-control  mr-sm-4" placeholder="0" wire:model="total_saldo" readonly>
-        </div>
+            </div>
 
 
 
 
 
-        <script type="text/javascript">
-            function mostrarPendiente() {
+            <script type="text/javascript">
+                function mostrarPendiente() {
 
-                document.getElementById('pendiente_factura').style.display = 'block';
-                document.getElementById('boton_regresar').style.display = 'block';
-                document.getElementById('fecha_de').style.display = 'block';
-                document.getElementById('ordenb').style.display = 'block';
-                document.getElementById('itemb').style.display = 'block';
-                document.getElementById('honb').style.display = 'block';
-                document.getElementById('sumas3').style.display = 'flex';
-
-
-                document.getElementById('busqueda_pendiente2').style.display = 'block';
+                    document.getElementById('pendiente_factura').style.display = 'block';
+                    document.getElementById('boton_regresar').style.display = 'block';
+                    document.getElementById('fecha_de').style.display = 'block';
+                    document.getElementById('ordenb').style.display = 'block';
+                    document.getElementById('itemb').style.display = 'block';
+                    document.getElementById('honb').style.display = 'block';
+                    document.getElementById('sumas3').style.display = 'flex';
 
 
-                document.getElementById('editable').style.display = 'none';
-                document.getElementById('btn_guardar').style.display = 'none';
-                document.getElementById('boton_agregar').style.display = 'none';
-                document.getElementById('lbl_cliente').style.display = 'none';
-                document.getElementById('lbl_fecha').style.display = 'none';
-                document.getElementById('lbl_contenedor').style.display = 'none';
-                document.getElementById('txt_cliente').style.display = 'none';
-                document.getElementById('txt_fecha').style.display = 'none';
-                document.getElementById('txt_contenedor').style.display = 'none';
-                document.getElementById('sumas1').style.display = 'none';
-                document.getElementById('sumas2').style.display = 'none';
-            }
-
-            function mostrarDetalleFactura() {
-                document.getElementById('pendiente_factura').style.display = 'none';
-                document.getElementById('boton_regresar').style.display = 'none';
-                document.getElementById('fecha_de').style.display = 'none';
-                document.getElementById('ordenb').style.display = 'none';
-                document.getElementById('itemb').style.display = 'none';
-                document.getElementById('honb').style.display = 'none';
-                document.getElementById('sumas3').style.display = 'none';
+                    document.getElementById('busqueda_pendiente2').style.display = 'block';
 
 
-                document.getElementById('busqueda_pendiente2').style.display = 'none';
+                    document.getElementById('editable').style.display = 'none';
+                    document.getElementById('btn_guardar').style.display = 'none';
+                    document.getElementById('boton_agregar').style.display = 'none';
+                    document.getElementById('lbl_cliente').style.display = 'none';
+                    document.getElementById('lbl_fecha').style.display = 'none';
+                    document.getElementById('lbl_contenedor').style.display = 'none';
+                    document.getElementById('txt_cliente').style.display = 'none';
+                    document.getElementById('txt_fecha').style.display = 'none';
+                    document.getElementById('txt_contenedor').style.display = 'none';
+                    document.getElementById('sumas1').style.display = 'none';
+                    document.getElementById('sumas2').style.display = 'none';
+                }
+
+                function mostrarDetalleFactura() {
+                    document.getElementById('pendiente_factura').style.display = 'none';
+                    document.getElementById('boton_regresar').style.display = 'none';
+                    document.getElementById('fecha_de').style.display = 'none';
+                    document.getElementById('ordenb').style.display = 'none';
+                    document.getElementById('itemb').style.display = 'none';
+                    document.getElementById('honb').style.display = 'none';
+                    document.getElementById('sumas3').style.display = 'none';
 
 
-                document.getElementById('fecha_de').value = "";
-
-                document.getElementById('editable').style.display = 'block';
-                document.getElementById('btn_guardar').style.display = 'block';
-                document.getElementById('boton_agregar').style.display = 'block';
-                document.getElementById('lbl_cliente').style.display = 'block';
-                document.getElementById('lbl_fecha').style.display = 'block';
-                document.getElementById('lbl_contenedor').style.display = 'block';
-                document.getElementById('txt_cliente').style.display = 'block';
-                document.getElementById('txt_fecha').style.display = 'block';
-                document.getElementById('txt_contenedor').style.display = 'block';
-                document.getElementById('sumas1').style.display = 'flex';
-                document.getElementById('sumas2').style.display = 'flex';
-            }
-        </script>
+                    document.getElementById('busqueda_pendiente2').style.display = 'none';
 
 
-        <!-- INICIO MODAL INSERTAR DATOS DETALLES FACTURA -->
+                    document.getElementById('fecha_de').value = "";
 
-        <form action="{{Route('insertar_detalle_factura')}}" method="POST" id="actualizar_pendiente"
-            name="actualizar_pendiente">
-            <div class="modal fade" role="dialog" id="modal_actualizar" data-backdrop="static" data-keyboard="false"
-                tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true"
-                style="opacity:.9;background:#212529;width=900px;">
-                <div class="modal-dialog modal-dialog-centered modal-lg"
-                    style="opacity:.9;background:#212529;width=40%">
-                    <div class="modal-content">
-                        @csrf
-                        <div class="modal-header">
-                            <h5 id="staticBackdropLabel"><strong>Descripción del producto: </strong><span id="titulo"
-                                    name="titulo">{{$descripcion_producto}}</span></h5>
-                        </div>
+                    document.getElementById('editable').style.display = 'block';
+                    document.getElementById('btn_guardar').style.display = 'block';
+                    document.getElementById('boton_agregar').style.display = 'block';
+                    document.getElementById('lbl_cliente').style.display = 'block';
+                    document.getElementById('lbl_fecha').style.display = 'block';
+                    document.getElementById('lbl_contenedor').style.display = 'block';
+                    document.getElementById('txt_cliente').style.display = 'block';
+                    document.getElementById('txt_fecha').style.display = 'block';
+                    document.getElementById('txt_contenedor').style.display = 'block';
+                    document.getElementById('sumas1').style.display = 'flex';
+                    document.getElementById('sumas2').style.display = 'flex';
+                }
+            </script>
 
-                        <div class="modal-body">
-                            <div class="row">
 
-                                <input name="id_pendi" id="id_pendi" wire:model="id_pendiente" hidden />
+            <!-- INICIO MODAL INSERTAR DATOS DETALLES FACTURA -->
 
-                                <div class="mb-3 col">
-                                    <label for="txt_bultos" class="form-label">Cantidad de Bultos:</label>
-                                    <input id="cantidad_bultos" name="cantidad_bultos" class="form-control"
-                                        type="number" min="1" autocomplete="off" required>
-                                </div>
-                                <div class="mb-3 col">
-                                    <label for="txt_unidades" class="form-label">Unidades de Puros por
-                                        Bulto:</label>
-                                    <input id="unidades_bultos" name="unidades_bultos" class="form-control"
-                                        type="number" min="1" autocomplete="off" required>
-                                </div>
-                                <div class="mb-3 col">
-                                    <label for="txt_unidad_cajon" class="form-label">Unidad por Cajon:</label>
-                                    <input id="unidades_cajon" name="unidades_cajon" class="form-control" type="number"
-                                        min="1" autocomplete="off" required>
-                                </div>
-                                <div class="mb-3 col">
-                                    <label for="txt_peso_bruto" class="form-label">Preso Bruto (Lbs)</label>
-                                    <input id="peso_bruto" name="peso_bruto" class="form-control" type="number" min="1"
-                                        autocomplete="off" required>
-                                </div>
-                                <div class="mb-3 col">
-                                    <label for="txt_peso_neto" class="form-label">Preso Neto (Lbs)</label>
-                                    <input id="peso_neto" name="peso_neto" class="form-control" type="number" min="1"
-                                        autocomplete="off" required>
-                                </div>
-
+            <form action="{{Route('insertar_detalle_factura')}}" method="POST" id="actualizar_pendiente"
+                name="actualizar_pendiente">
+                <div class="modal fade" role="dialog" id="modal_actualizar" data-backdrop="static" data-keyboard="false"
+                    tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true"
+                    style="opacity:.9;background:#212529;width=900px;">
+                    <div class="modal-dialog modal-dialog-centered modal-lg"
+                        style="opacity:.9;background:#212529;width=40%">
+                        <div class="modal-content">
+                            @csrf
+                            <div class="modal-header">
+                                <h5 id="staticBackdropLabel"><strong>Descripción del producto: </strong><span
+                                        id="titulo" name="titulo">{{$descripcion_producto}}</span></h5>
                             </div>
-                        </div>
 
-                        <div class="modal-footer">
-                            <button class="bmodal_no" data-dismiss="modal">
-                                <span>Cancelar</span>
-                            </button>
-                            <button type="submit" class="bmodal_yes">
-                                <span>Agregar</span>
-                            </button>
-                        </div>
+                            <div class="modal-body">
+                                <div class="row">
 
+                                    <input name="id_pendi" id="id_pendi" wire:model="id_pendiente" hidden />
+                                    <input name="para" id="para" wire:model="aereo" hidden />
+
+                                    <div class="mb-3 col">
+                                        <label for="txt_bultos" class="form-label">Cantidad de Bultos:</label>
+                                        <input id="cantidad_bultos" name="cantidad_bultos" class="form-control"
+                                            type="number" min="1" autocomplete="off" required>
+                                    </div>
+                                    <div class="mb-3 col">
+                                        <label for="txt_unidades" class="form-label">Unidades de Puros por
+                                            Bulto:</label>
+                                        <input id="unidades_bultos" name="unidades_bultos" class="form-control"
+                                            type="number" min="1" autocomplete="off" required>
+                                    </div>
+                                    <div class="mb-3 col">
+                                        <label for="txt_unidad_cajon" class="form-label">Unidad por Cajon:</label>
+                                        <input id="unidades_cajon" name="unidades_cajon" class="form-control"
+                                            type="number" min="1" autocomplete="off" required>
+                                    </div>
+                                    <div class="mb-3 col">
+                                        <label for="txt_peso_bruto" class="form-label">Preso Bruto (Lbs)</label>
+                                        <input id="peso_bruto" name="peso_bruto" class="form-control" type="number"
+                                            min="1" autocomplete="off" required>
+                                    </div>
+                                    <div class="mb-3 col">
+                                        <label for="txt_peso_neto" class="form-label">Preso Neto (Lbs)</label>
+                                        <input id="peso_neto" name="peso_neto" class="form-control" type="number"
+                                            min="1" autocomplete="off" required>
+                                    </div>
+
+                                </div>
+                            </div>
+
+                            <div class="modal-footer">
+                                <button class="bmodal_no" data-dismiss="modal">
+                                    <span>Cancelar</span>
+                                </button>
+                                <button type="submit" class="bmodal_yes">
+                                    <span>Agregar</span>
+                                </button>
+                            </div>
+
+                        </div>
                     </div>
                 </div>
-            </div>
-        </form>
+            </form>
 
+            <!-- INICIO MODAL ACTUALIZAR DATO PENDIENTE -->
 
-        <!-- INICIO MODAL ACTUALIZAR DATO PENDIENTE -->
-
-        <form action="{{Route('actualizar_detalle_factura')}}" method="POST">
-            <div class="modal fade" role="dialog" id="modal_editar_detalles" data-backdrop="static"
-                data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true"
-                style="opacity:.9;background:#212529;width=900px;">
-                <div class="modal-dialog modal-dialog-centered modal-lg"
-                    style="opacity:.9;background:#212529;width=40%">
-                    <div class="modal-content">
-                        @csrf
-                        <div class="modal-header">
-                            <h5 id="staticBackdropLabel"><strong>Descripción del producto: </strong><span id="titulo"
-                                    name="titulo">{{$id_editar." ".$editar_descripcion_producto}}</span></h5>
-                        </div>
-
-                        <div class="modal-body">
-                            <div class="row">
-
-                                <input type="text" name="id_pendi" id="id_pendi" value="{{$id_editar}}" hidden />
-
-                                <div class="mb-3 col">
-                                    <label for="txt_bultos" class="form-label">Cantidad de Bultos:</label>
-                                    <input id="cantidad_bultos" name="cantidad_bultos"
-                                        value="{{$editar_cantidad_bultos}}" class="form-control" type="text"
-                                        autocomplete="off">
-                                </div>
-                                <div class="mb-3 col">
-                                    <label for="txt_unidades" class="form-label">Unidades de Puros por
-                                        Bulto:</label>
-                                    <input id="unidades_bultos" name="unidades_bultos"
-                                        value="{{$editar_unidades_bultos}}" class="form-control" type="text"
-                                        autocomplete="off">
-                                </div>
-                                <div class="mb-3 col">
-                                    <label for="txt_unidad_cajon" class="form-label">Unidad por Cajon:</label>
-                                    <input id="unidades_cajon" name="unidades_cajon" value="{{$editar_unidades_cajon}}"
-                                        class="form-control" type="text" autocomplete="off">
-                                </div>
-                                <div class="mb-3 col">
-                                    <label for="txt_peso_bruto" class="form-label">Preso Bruto (Lbs)</label>
-                                    <input id="peso_bruto" name="peso_bruto" value="{{$editar_peso_bruto}}"
-                                        class="form-control" type="text" autocomplete="off">
-                                </div>
-                                <div class="mb-3 col">
-                                    <label for="txt_peso_neto" class="form-label">Preso Neto (Lbs)</label>
-                                    <input id="peso_neto" name="peso_neto" value="{{$editar_peso_neto}}"
-                                        class="form-control" type="text" autocomplete="off">
-                                </div>
-
+            <form action="{{Route('actualizar_detalle_factura')}}" method="POST">
+                <div class="modal fade" role="dialog" id="modal_editar_detalles" data-backdrop="static"
+                    data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true"
+                    style="opacity:.9;background:#212529;width=900px;">
+                    <div class="modal-dialog modal-dialog-centered modal-lg"
+                        style="opacity:.9;background:#212529;width=40%">
+                        <div class="modal-content">
+                            @csrf
+                            <div class="modal-header">
+                                <h5 id="staticBackdropLabel"><strong>Descripción del producto: </strong><span
+                                        id="titulo" name="titulo">{{$id_editar." ".$editar_descripcion_producto}}</span>
+                                </h5>
                             </div>
-                        </div>
 
-                        <div class="modal-footer">
-                            <button class="bmodal_no" data-dismiss="modal">
-                                <span>Cancelar</span>
-                            </button>
-                            <button type="submit" class="bmodal_yes">
-                                <span>Agregar</span>
-                            </button>
-                        </div>
+                            <div class="modal-body">
+                                <div class="row">
 
+                                    <input type="text" name="id_pendi" id="id_pendi" value="{{$id_editar}}" hidden />
+
+                                    <div class="mb-3 col">
+                                        <label for="txt_bultos" class="form-label">Cantidad de Bultos:</label>
+                                        <input id="cantidad_bultos" name="cantidad_bultos"
+                                            value="{{$editar_cantidad_bultos}}" class="form-control" type="text"
+                                            autocomplete="off">
+                                    </div>
+                                    <div class="mb-3 col">
+                                        <label for="txt_unidades" class="form-label">Unidades de Puros por
+                                            Bulto:</label>
+                                        <input id="unidades_bultos" name="unidades_bultos"
+                                            value="{{$editar_unidades_bultos}}" class="form-control" type="text"
+                                            autocomplete="off">
+                                    </div>
+                                    <div class="mb-3 col">
+                                        <label for="txt_unidad_cajon" class="form-label">Unidad por Cajon:</label>
+                                        <input id="unidades_cajon" name="unidades_cajon"
+                                            value="{{$editar_unidades_cajon}}" class="form-control" type="text"
+                                            autocomplete="off">
+                                    </div>
+                                    <div class="mb-3 col">
+                                        <label for="txt_peso_bruto" class="form-label">Preso Bruto (Lbs)</label>
+                                        <input id="peso_bruto" name="peso_bruto" value="{{$editar_peso_bruto}}"
+                                            class="form-control" type="text" autocomplete="off">
+                                    </div>
+                                    <div class="mb-3 col">
+                                        <label for="txt_peso_neto" class="form-label">Preso Neto (Lbs)</label>
+                                        <input id="peso_neto" name="peso_neto" value="{{$editar_peso_neto}}"
+                                            class="form-control" type="text" autocomplete="off">
+                                    </div>
+
+                                </div>
+                            </div>
+
+                            <div class="modal-footer">
+                                <button class="bmodal_no" data-dismiss="modal">
+                                    <span>Cancelar</span>
+                                </button>
+                                <button type="submit" class="bmodal_yes">
+                                    <span>Agregar</span>
+                                </button>
+                            </div>
+
+                        </div>
                     </div>
                 </div>
-            </div>
-        </form>
+            </form>
 
+            <!-- INICIO MODAL ELMINAR DETALLE -->
+            <form wire:submit.prevent="borrar_detalles_datos({{$id_eliminar}})">
 
-        <!-- INICIO MODAL ELMINAR DETALLE -->
-        <form wire:submit.prevent="borrar_detalles_datos({{$id_eliminar}})">
+                <div class="modal fade" id="modal_eliminar_detalle" data-backdrop="static" data-keyboard="false"
+                    tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true"
+                    style="opacity:.9;background:#212529;">
+                    <div class="modal-dialog modal-dialog-centered">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="staticBackdropLabel">Eliminar </h5>
+                                <button type="button" class="btn-close" data-dismiss="modal"
+                                    aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                                ¿Estás seguro que quieres eliminar este producto de la factura?
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="bmodal_no" data-dismiss="modal">
+                                    <span>Cancelar</span>
+                                </button>
+                                <button type="submit" class="bmodal_yes">
+                                    <span>Eliminar</span>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
 
-
-            <div class="modal fade" id="modal_eliminar_detalle" data-backdrop="static" data-keyboard="false"
-                tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true"
-                style="opacity:.9;background:#212529;">
+            <div class="modal fade" id="modal_advertencia" data-backdrop="static" data-keyboard="false" tabindex="-1"
+                aria-labelledby="staticBackdropLabel" aria-hidden="true" style="opacity:.9;background:#212529;">
                 <div class="modal-dialog modal-dialog-centered">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h5 class="modal-title" id="staticBackdropLabel">Eliminar </h5>
+                            <h5 class="modal-title" id="staticBackdropLabel">Advertencia</h5>
                             <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close"></button>
                         </div>
                         <div class="modal-body">
-                            ¿Estás seguro que quieres eliminar este producto de la factura?
+                            Rellene los campos del Cliente y Contenedor
                         </div>
                         <div class="modal-footer">
-                            <button type="button" class="bmodal_no"
-                                data-dismiss="modal">
-                                <span>Cancelar</span>
-                            </button>
-                            <button type="submit" class="bmodal_yes">
-                                <span>Eliminar</span>
+                            <button data-dismiss="modal" class=" bmodal_yes ">
+                                <span>OK</span>
                             </button>
                         </div>
                     </div>
                 </div>
             </div>
-        </form>
 
+            <script>
+                window.addEventListener('abrir', event => {
+                    $("#modal_actualizar").modal('show');
+                    mostrarPendiente();
+                })
 
-        <div class="modal fade" id="modal_advertencia" data-backdrop="static" data-keyboard="false" tabindex="-1"
-            aria-labelledby="staticBackdropLabel" aria-hidden="true" style="opacity:.9;background:#212529;">
-            <div class="modal-dialog modal-dialog-centered">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="staticBackdropLabel">Advertencia</h5>
-                        <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close"></button>
-                    </div>
-                    <div class="modal-body">
-                        Rellene los campos del Cliente y Contenedor
-                    </div>
-                    <div class="modal-footer">
-                        <button data-dismiss="modal" class=" bmodal_yes ">
-                            <span>OK</span>
-                        </button>
-                    </div>
-                </div>
-            </div>
+                window.addEventListener('pendiente', event => {
+                    mostrarPendiente();
+                })
+
+                window.addEventListener('cerrar', event => {
+                    $("#modal_actualizar").modal('hide');
+                })
+
+                window.addEventListener('editar_detalless', event => {
+                    $("#modal_editar_detalles").modal('show');
+                })
+
+                window.addEventListener('advertencia_mensaje', event => {
+                    $("#modal_advertencia").modal('show');
+                })
+
+                window.addEventListener('cerrar_editar_detalles', event => {
+                    $("#modal_editar_detalles").modal('hide');
+                })
+
+                window.addEventListener('borrar', event => {
+                    $("#modal_eliminar_detalle").modal('show');
+                })
+
+                window.addEventListener('cerrar_modal_borrar', event => {
+                    $("#modal_eliminar_detalle").modal('hide');
+                })
+            </script>
+
+            <!-- FIN MODAL ACTUALIZAR DATO PENDIENTE -->
+
         </div>
-
-
-        <script>
-            window.addEventListener('abrir', event => {
-                $("#modal_actualizar").modal('show');
-                mostrarPendiente();
-            })
-
-            window.addEventListener('pendiente', event => {
-                mostrarPendiente();
-            })
-
-            window.addEventListener('cerrar', event => {
-                $("#modal_actualizar").modal('hide');
-            })
-
-
-            window.addEventListener('editar_detalless', event => {
-                $("#modal_editar_detalles").modal('show');
-            })
-
-            window.addEventListener('advertencia_mensaje', event => {
-                $("#modal_advertencia").modal('show');
-            })
-
-
-            window.addEventListener('cerrar_editar_detalles', event => {
-                $("#modal_editar_detalles").modal('hide');
-            })
-
-            window.addEventListener('borrar', event => {
-                $("#modal_eliminar_detalle").modal('show');
-            })
-
-            window.addEventListener('cerrar_modal_borrar', event => {
-                $("#modal_eliminar_detalle").modal('hide');
-            })
-        </script>
-
-        <!-- FIN MODAL ACTUALIZAR DATO PENDIENTE -->
-
-
     </div>
-
-</div>
 </div>
