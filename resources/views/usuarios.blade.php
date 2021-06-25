@@ -584,10 +584,7 @@
         var v_nombre = document.getElementById('name').value;
         var v_correo = document.getElementById('email').value;
 
-
-      
-
-                var usuario = @json($users);
+        var usuario = @json($users);
         var unico_codigo = 0;
         var unico_nombre = 0;
         var unico_correo = 0;
@@ -729,16 +726,6 @@
         }
     }
 </script>
-
-
-
-
-
-
-
-
-
-
 
 
 

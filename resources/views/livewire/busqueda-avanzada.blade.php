@@ -115,6 +115,33 @@
                         @endif
                     </div>
 
+                    <div class="relative">
+                        <input type="text" class="form-input" placeholder="Buscar Vitola" wire:model="vitolasss"
+                            wire:keydown.escape="reset_vitola"
+                            wire:keydown.delete="reset_vitola"
+                            wire:keydown.ArrowUp="incrementaIluminadoVitola()" 
+                            wire:keydown.ArrowDown="decrementarIluminadoVitola()"
+                            wire:keydown.enter="seleccionarVitola()">
+                            
+                        @if ($oculto_vitola == 0)
+                                    @if (!empty($vitolasss))
+                                    <div class="absolute z-10 list-group bg-white w-full rounded-t-none shadow-lg">
+                                        @if (!empty($vitola_p))
+
+                                        @foreach($vitola_p as $i => $m)
+                                        <a href="" class="list-group-item  {{$iluminadoIndiceVitola === $i ? 'active' : ''}}">{{$m->vitolas}}</a>
+                                        @endforeach
+
+                                        @else
+
+                                        <div class="absolute z-10 list-group bg-white w-full rounded-t-none shadow-lg">No Resultados</div>
+
+                                        @endif
+                                    </div>
+                                    @endif
+                        @endif
+                    </div>
+
                     <input name="nombre" id="nombre" class="form-control mr-sm-2 " style="width:auto;"
                         placeholder="Numero Factura" wire:model="num_fac">
                 </div>
@@ -134,6 +161,7 @@
                             <th>MARCA</th>
                             <th>NOMBRE</th>
                             <th style="width:100px;">CAPA</th>
+                            <th >VITOLA</th>
                             <th>EMPAQUE</th>
                             <th>ENVIADAS (CAJAS)</th>
                             <th>ENVIADAS (TABACO)</th>
@@ -151,6 +179,7 @@
                             <td>{{$producto->marca}}</td>
                             <td>{{$producto->nombre}}</td>
                             <td>{{$producto->capas}}</td>
+                            <td>{{$producto->vitola}}</td>
                             <td>{{$producto->tipo_empaque}}</td>
                             <td>{{$producto->cantidad_cajas}}</td>
                             <td>{{$producto->total_tabacos}}</td>
