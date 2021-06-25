@@ -25,13 +25,13 @@
             <div class="col">
                 <div class="input-group mb-3" style="height: 30px;">
 
-                    <input type="date" name="fecha" id="fecha" class="form-control " style="width:auto;"
+                    <input type="date" name="fecha" id="fecha" class="form-control  mr-sm-2 " style="width:auto;"
                         placeholder="Nombre" wire:model="fecha">
 
 
                     <div class="relative">
                         
-                        <input type="text" class="form-input " placeholder="Buscar Marca" wire:model="marca"
+                        <input type="text" class="form-input  mr-sm-2 " placeholder="Buscar Marca" wire:model="marca" style="height:34px"
                             wire:keydown.escape="reset_marca"
                             wire:keydown.delete="reset_marca"
                             wire:keydown.ArrowUp="incrementaIluminadoMarca()" 
@@ -62,7 +62,7 @@
 
 
                     <div class="relative">
-                        <input type="text" class="form-input" placeholder="Buscar Nombre" wire:model="nombre"
+                        <input type="text" class="form-input  mr-sm-2 " placeholder="Buscar Nombre" wire:model="nombre" style="height:34px"
                             wire:keydown.escape="reset_nombre"
                             wire:keydown.delete="reset_nombre"
                             wire:keydown.ArrowUp="incrementaIluminadoNombre()" 
@@ -89,7 +89,7 @@
                     </div>
 
                     <div class="relative">
-                        <input type="text" class="form-input" placeholder="Buscar Capa" wire:model="capasss"
+                        <input type="text" class="form-input  mr-sm-2 " placeholder="Buscar Capa" wire:model="capasss" style="height:34px"
                             wire:keydown.escape="reset_capa"
                             wire:keydown.delete="reset_capa"
                             wire:keydown.ArrowUp="incrementaIluminadoCapa()" 
@@ -116,7 +116,7 @@
                     </div>
 
                     <div class="relative">
-                        <input type="text" class="form-input" placeholder="Buscar Vitola" wire:model="vitolasss"
+                        <input type="text" class="form-input  mr-sm-2 " placeholder="Buscar Vitola" wire:model="vitolasss" style="height:34px"
                             wire:keydown.escape="reset_vitola"
                             wire:keydown.delete="reset_vitola"
                             wire:keydown.ArrowUp="incrementaIluminadoVitola()" 
