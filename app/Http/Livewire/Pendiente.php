@@ -171,26 +171,27 @@ class Pendiente extends Component
 
         for ($i = 0; $i < count($this->datos_pendiente); $i++) {
 
-
-
             $sampler = DB::select('SELECT clase_productos.sampler FROM clase_productos WHERE  clase_productos.item = ?;', [$this->datos_pendiente[$i]->item]);
 
             if (isset($sampler[0])) {
                 if ($sampler[0]->sampler == "si") {
+
                     if ($cantidad_detalle_sampler == 0 && $detalles == 0) {
                         $datos = DB::select('call traer_numero_detalles_productos(?)', [$this->datos_pendiente[$i]->item]);
                         $cantidad_detalle_sampler = $datos[0]->tuplas;
                     }
+
                     $valores = DB::select('call traer_detalles_productos_actualizar(?,?)', [$this->datos_pendiente[$i]->item, $detalles]);
 
-
-                    $actualizar = DB::select('call actualizar_pendiente_sampler(:marca,:nombre,:vitola,:capa,:tipo,:item)', [
+                    $actualizar = DB::select('call actualizar_pendiente_sampler(:marca,:nombre,:vitola,:capa,:tipo,:item,:codigo ,:precio)', [
                         'marca' => $valores[0]->marca,
                         'nombre' => $valores[0]->nombre,
                         'vitola' => $valores[0]->vitola,
                         'capa' => $valores[0]->capa,
                         'tipo' => $valores[0]->tipo_empaque,
-                        'item' => $this->datos_pendiente[$i]->id_pendiente
+                        'item' => $this->datos_pendiente[$i]->id_pendiente,
+                        'codigo' => $valores[0]->otra_descripcion,
+                        'precio' => $valores[0]->precio,
                     ]);
 
                     $detalles++;
