@@ -129,13 +129,6 @@
                         </select>
                     </div>
 
-
-
-
-
-
-
-
                     <div class="col">
                         <select onchange="buscar_tabla()" onclick="funcion1()" name="b_item" id="b_item"
                             class=" mi-selector form-control" style="width:100%;height:34px;" name="states[]">

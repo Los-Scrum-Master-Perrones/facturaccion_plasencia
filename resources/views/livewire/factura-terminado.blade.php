@@ -154,6 +154,7 @@
                             $total_ac = 0;
                             $total_neto = 0;
                             $total_bruto = 0;
+                            $valor_factura = 0;
                         @endphp
 
 
@@ -210,7 +211,7 @@
 
 
                             if( $sampler[0]->sampler == "si"){
-                            $repartir = $detalles->total_tabacos/$conteo_sampler[0]->tuplas;
+                                $repartir = $detalles->total_tabacos/$conteo_sampler[0]->tuplas;
                             }
 
                             @endphp
@@ -232,14 +233,26 @@
 
                             <tr style="font-size:10px;">
                                 @php
-                                $val_anterioir= $bultos+1;
-                                $bultos += $detalles->cantidad_puros;
+                                    $val_anterioir= $bultos+1;
+                                    $bultos += $detalles->cantidad_puros;
 
-                                $val_actual=$bultos;
+                                    $val_actual=$bultos;
 
-                                $total_ac = intval($total_pendiente[0]->total_saldo)-intval($detalles->total_tabacos);
+                                    $total_sampler_detalles =  DB::select('SELECT SUM(cantidad_puros*unidad) AS salida FROM detalle_factura WHERE facturado = "N" and id_pendiente = ?', [$detalles->id_pendiente])[0]->salida;
 
-                                $total_saldo_pendiente = DB::update('UPDATE detalle_factura SET anterior = ? WHERE id_detalle = ?', [ $total_ac,$detalles->id_detalle]);
+
+                                    $cantidad_sampler_empresa =  DB::select('SELECT COUNT(pendiente.saldo) AS sampler_empresa
+                                                                             FROM pendiente WHERE item = ? AND orden
+                                    = ?',[$detalles->codigo_item,$pendiente[0]->orden])[0]->sampler_empresa;
+
+
+                                    $cantidad_total_sampler_factura = DB::select('SELECT COUNT(pendiente.saldo) AS sampler_factura
+                                                                                FROM pendiente WHERE item = ? AND orden
+                                    = ? AND pendiente != 0 AND saldo != 0',[$detalles->codigo_item,$pendiente[0]->orden])[0]->sampler_factura;
+
+                                    $total_ac = intval($total_pendiente[0]->total_saldo) - ((intval( $total_sampler_detalles) * intval($cantidad_total_sampler_factura))/intval($cantidad_sampler_empresa));
+
+                                    $total_saldo_pendiente = DB::update('UPDATE detalle_factura SET anterior = ? WHERE id_detalle = ?', [ $total_ac,$detalles->id_detalle]);
                                 @endphp
 
                                 @if ($val_actual == $val_anterioir)
@@ -268,6 +281,7 @@
 
 
                                 <td><b>{{number_format(($promedio[0]->promedio*$detalles->cantidad_por_caja)/1000,4)}}</b></td>
+
                                 <td style="text-align: center">-</td>
                                 <td style="width: 60px">
                                     <a data-toggle="modal" data-target="#borrar_detalles" href=""
@@ -330,6 +344,9 @@
 
                                 <td></td>
                                 <td style="text-align: right">{{number_format(($repartir*$arreglo_detalles[0]->precio)/1000,2)}}</td>
+                                @php
+                                    $valor_factura += ($repartir*$arreglo_detalles[0]->precio)/1000;
+                                @endphp
                                 <td style="width: 60px">
 
 
@@ -376,6 +393,9 @@
 
                                 <td style="text-align: right"></td>
                                 <td style="text-align: right">{{number_format(($repartir*$arreglo_detalles[0]->precio)/1000,2)}}</td>
+                                @php
+                                    $valor_factura += ($repartir*$arreglo_detalles[0]->precio)/1000;
+                                @endphp
                                 <td style="width: 60px">
                             </tr>
 
@@ -437,6 +457,9 @@
 
                                 <td style="text-align: right"><b>{{number_format($detalles->costo,4)}}</b></td>
                                 <td style="text-align: right">{{number_format($detalles->valor_total,2)}}</td>
+                                @php
+                                    $valor_factura += $detalles->valor_total;
+                                @endphp
                                 <td style="width: 60px">
                                     <a data-toggle="modal" data-target="#borrar_detalles" href=""
                                         wire:click="borrar_detalles({{$detalles->id_detalle}})">
@@ -584,7 +607,8 @@
 
                 <span id="de" class="input-group-text form-control"
                     style="background:rgba(174, 0, 255, 0.432);color:white;">Valor Total</span>
-                <input type="number" class="form-control " placeholder="0.00" wire:model="total_valor" readonly>
+
+                <input type="number" class="form-control " placeholder="0.00" value="{{$valor_factura}}" readonly>
             </div>
 
             <div class="input-group" style="width:30%;position: fixed;right: 0px;bottom:0px; height:30px;display:none;"
