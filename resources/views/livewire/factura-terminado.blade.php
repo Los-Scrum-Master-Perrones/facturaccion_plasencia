@@ -152,6 +152,8 @@
                             $item = "";
                             $total_puros_tabla = 0;
                             $total_ac = 0;
+                            $total_neto = 0;
+                            $total_bruto = 0;
                         @endphp
 
 
@@ -294,6 +296,10 @@
                             </tr>
 
                             @php
+
+                                $total_neto += $detalles->total_neto;
+                                $total_bruto += $detalles->total_bruto;
+
                                 $sampler_s = 0;
                                 $arreglo_detalles = DB::select('CALL `traer_detalles_productos_factura`(?, ?)', [$detalles->codigo_item, $sampler_s]);
                             @endphp
@@ -400,6 +406,9 @@
 
                                     $total_saldo_pendiente = DB::update('UPDATE detalle_factura SET anterior = ? WHERE id_detalle = ?', [$total_restante,$detalles->id_detalle]);
 
+
+                                    $total_neto += $detalles->total_neto;
+                                    $total_bruto += $detalles->total_bruto;
                                 ?>
 
                                 @if ($val_actual == $val_anterioir)
@@ -566,12 +575,12 @@
 
                 <span id="de" class="input-group-text form-control"
                     style="background:rgba(174, 0, 255, 0.432);color:white;">Peso Bruto Total</span>
-                <input type="number" class="form-control  mr-sm-4" placeholder="0.00" wire:model="total_peso_bruto"
+                <input type="number" class="form-control  mr-sm-4" placeholder="0.00" value="{{$total_bruto}}"
                     readonly>
 
                 <span id="de" class="input-group-text form-control"
                     style="background:rgba(174, 0, 255, 0.432);color:white;">Peso Neto Total</span>
-                <input type="number" class="form-control " placeholder="0.00" wire:model="total_peso_neto" readonly>
+                <input type="number" class="form-control " placeholder="0.00" value="{{$total_neto}}" readonly>
 
                 <span id="de" class="input-group-text form-control"
                     style="background:rgba(174, 0, 255, 0.432);color:white;">Valor Total</span>

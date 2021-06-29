@@ -217,21 +217,21 @@ class PendienteEmpaque extends Component
 
        $funcion = $request->funcion;
 
- if ($request->checkbox1E == null) {  $checkbox1E = ""; } else { $checkbox1E = $request->checkbox1E;}
- if ($request->checkbox2E == null) {  $checkbox2E = ""; } else { $checkbox2E = $request->checkbox2E;}
- if ($request->checkbox3E == null) {  $checkbox3E = ""; } else { $checkbox3E = $request->checkbox3E;}
- if ($request->checkbox4E == null) {  $checkbox4E = ""; } else { $checkbox4E = $request->checkbox4E;}
+            if ($request->checkbox1E == null) {  $checkbox1E = ""; } else { $checkbox1E = $request->checkbox1E;}
+            if ($request->checkbox2E == null) {  $checkbox2E = ""; } else { $checkbox2E = $request->checkbox2E;}
+            if ($request->checkbox3E == null) {  $checkbox3E = ""; } else { $checkbox3E = $request->checkbox3E;}
+            if ($request->checkbox4E == null) {  $checkbox4E = ""; } else { $checkbox4E = $request->checkbox4E;}
 
- if ($request->b_itemE == null) {  $b_itemE = ""; } else { $b_itemE = $request->b_itemE;}
- if ($request->b_ordenE == null) {  $b_ordenE = ""; } else { $b_ordenE = $request->b_ordenE;}
- if ($request->b_honE == null) {  $b_honE = ""; } else { $b_honE = $request->b_honE;}
- if ($request->b_marcaE == null) {  $b_marcaE = ""; } else { $b_marcaE = $request->b_marcaE;}
+            if ($request->b_itemE == null) {  $b_itemE = ""; } else { $b_itemE = $request->b_itemE;}
+            if ($request->b_ordenE == null) {  $b_ordenE = ""; } else { $b_ordenE = $request->b_ordenE;}
+            if ($request->b_honE == null) {  $b_honE = ""; } else { $b_honE = $request->b_honE;}
+            if ($request->b_marcaE == null) {  $b_marcaE = ""; } else { $b_marcaE = $request->b_marcaE;}
 
- if ($request->b_vitolaE == null) {  $b_vitolaE = ""; } else { $b_vitolaE = $request->b_vitolaE;}
- if ($request->b_nombreE == null) {  $b_nombreE = ""; } else { $b_nombreE = $request->b_nombreE;}
- if ($request->b_capaE == null) {  $b_capaE = ""; } else { $b_capaE = $request->b_capaE;}
- if ($request->b_empaqueE == null) {  $b_empaqueE = ""; } else { $b_empaqueE = $request->b_empaqueE;}
- if ($request->b_mesE == null) {  $b_mesE = ""; } else { $b_mesE = $request->b_mesE;}
+            if ($request->b_vitolaE == null) {  $b_vitolaE = ""; } else { $b_vitolaE = $request->b_vitolaE;}
+            if ($request->b_nombreE == null) {  $b_nombreE = ""; } else { $b_nombreE = $request->b_nombreE;}
+            if ($request->b_capaE == null) {  $b_capaE = ""; } else { $b_capaE = $request->b_capaE;}
+            if ($request->b_empaqueE == null) {  $b_empaqueE = ""; } else { $b_empaqueE = $request->b_empaqueE;}
+            if ($request->b_mesE == null) {  $b_mesE = ""; } else { $b_mesE = $request->b_mesE;}
 
 
 
@@ -256,7 +256,7 @@ class PendienteEmpaque extends Component
                 'v12' =>  $b_empaqueE,
                 'v13' =>  $b_mesE
             ]
-            );
+        );
 
         $tuplas=count($datos_pendiente_empaque);
 
@@ -377,25 +377,25 @@ class PendienteEmpaque extends Component
         :vitola,:nombre,:capa,:tipo_empaque,:cello,:anillo,:upc,:pendiente,:saldo,:paquetes,:unidades)',
 
             [
-                'categoria' => $request->categoria,                
-                'item' => $request->itemn,                
+                'categoria' => $request->categoria,
+                'item' => $request->itemn,
                 'orden' => $request->ordensis,
                 'observacion' => $request->observacionn,
                 'presentacion' => $request->presentacionn,
 
-                'mes' => $request->fechan,               
+                'mes' => $request->fechan,
                 'orden1' => $request->ordenn,
                 'marca' => $request->marca,
                 'vitola' => $request->vitola,
                 'nombre' => $request->nombre,
 
-                'capa' => $request->capa,               
+                'capa' => $request->capa,
                 'tipo_empaque' => $request->tipo,
                 'cello' => $cello,
                 'anillo' => $anillo,
                 'upc' => $upc,
 
-                'pendiente' => $request->pendienten,               
+                'pendiente' => $request->pendienten,
                 'saldo' => $request->saldon,
                 'paquetes' => $request->paquetes,
                 'unidades' => $request->unidades,

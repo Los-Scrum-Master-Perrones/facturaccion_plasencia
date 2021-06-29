@@ -43,7 +43,7 @@
                     </form>
                     <button class=" botonprincipal mr-sm-2 " onclick="mostrar_div_AddProducto();"
                         style="width:200px;">Nuevo producto</button>
-                        <form action="{{Route('editarDetalles')}} " method="post">
+                    <form action="{{Route('editarDetalles')}} " method="post">
                         @csrf
                         <button class=" botonprincipal mr-sm-2 " style="width:200px;">Editar detalles producto</button>
                     </form>
@@ -346,7 +346,8 @@
                         <form action="/eliminar_detalles_productos" method="post">
                             <div>
                                 @csrf
-                                <input name="id" id="id"  type="text" style="display:none" value="`+ detalle[i].id_producto + `">
+                                <input name="id" id="id"  type="text" style="display:none" value="` + detalle[i]
+                        .id_producto + `">
                                 <input type="submit" value="Eliminar">
                             </div>
                         </form>

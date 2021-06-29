@@ -284,6 +284,7 @@
             } else {
                 var sumas = 0;
                 var sumap = 0;
+                var incremen = 0;
                 for (var i = 0; i < data.length; i++) {
                     try {
 
@@ -327,9 +328,11 @@
                             if (data[i].precio == null) {
                                 data[i].precio = "";
                             }
+                            incremen++;
 
                             var tabla_nueva = `
                   <tr>
+                    <td>` + incremen + `</td>
                     <td>` + data[i].categoria + `</td>
                     <td>` + data[i].item + `</td>
                     <td>` + data[i].orden_del_sitema + `</td>
@@ -662,6 +665,7 @@
             <table class="table table-light" style="font-size:9px;" id="tabla_pendiente">
                 <thead>
                     <tr>
+                        <th>N#</th>
                         <th style="width:100px;">CATEGORIA</th>
                         <th>ITEM</th>
                         <th>ORDEN DEL SISTEMA</th>
@@ -688,8 +692,9 @@
                     <?php $sumas = 0 ;
                     $sumap=0;
                     ?>
-                    @foreach($datos_pendiente as $datos)
+                    @foreach($datos_pendiente as $i => $datos)
                     <tr>
+                        <td>{{++$i}}</td>
                         <td style="width:100px; max-width: 400px;overflow-x:auto;">{{$datos->categoria}}</td>
                         <td>{{$datos->item}}</td>
                         <td>{{$datos->orden_del_sitema}}</td>

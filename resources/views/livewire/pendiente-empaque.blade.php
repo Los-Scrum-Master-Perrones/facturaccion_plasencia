@@ -234,6 +234,7 @@
             <table class="table table-light" style="font-size:10px;" id="tabla_pendiente_empaque">
                 <thead>
                     <tr>
+                        <th>N#</th>
                         <th style="width:100px;">CATEGORIA</th>
                         <th>ITEM</th>
                         <th>ORDEN DEL SISTEMA</th>
@@ -257,8 +258,9 @@
                 </thead>
                 <?php $sumase = 0 ; $sumape = 0; ?>
                 <tbody name="bodyE" id="bodyE">
-                    @foreach($datos_pendiente_empaque as $datos)
+                    @foreach($datos_pendiente_empaque as $i => $datos)
                     <tr>
+                        <td>{{++$i}}</td>
                         <td style="width:100px; max-width: 400px;overflow-x:auto;">
                             {{isset($datos->categoria)?($datos->categoria):"Sin categoria"}}</td>
                         <td>{{isset($datos->item)?($datos->item):""}}</td>
@@ -629,8 +631,8 @@
                     document.getElementById("funcion").value = '4';
                     theForm.addEventListener('submit', function (event) {});
                 }
-            }  
-            
+            }
+
             function ocultar_div_AddProductoP() {
                      document.getElementById('div_AddProductoPendiente').style.display = "none";
                 }
@@ -680,6 +682,7 @@
                 } else {
                     var sumase = 0;
                     var sumape = 0;
+                    var incrmenta = 0;
                     for (var i = 0; i < data.length; i++) {
                         try {
 
@@ -721,9 +724,11 @@
                                 if (data[i].cant_cajas == null) {
                                     data[i].cant_cajas = "";
                                 }
+                                incrmenta++;
 
                                 var tabla_nuevaE =
                                     `<tr>
+                     <td>` + incrmenta + `</td>
                     <td>` + data[i].categoria + `</td>
                     <td>` + data[i].item + `</td>
                     <td>` + data[i].orden_del_sitema + `</td>

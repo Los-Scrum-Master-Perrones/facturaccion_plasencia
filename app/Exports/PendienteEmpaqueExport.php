@@ -21,7 +21,7 @@ class PendienteEmpaqueExport implements FromCollection,
                                 WithColumnFormatting
 {
 
- 
+
 
     public function headings(): array
     {
@@ -44,9 +44,7 @@ class PendienteEmpaqueExport implements FromCollection,
             'SALDO',
             'TIPO DE EMPAQUE',
             'PAQUETES',
-            'UNIDADES',
-            'CODIGO PRECIO',
-            'PRECIO',
+            'UNIDADES'
         ];
     }
 
@@ -94,19 +92,19 @@ if($v13 == null){ $v13 = "";}else{$v13 =  Static_Vars_PendienteEmpaque::gete_mes
 
 
         $datos_pendienteExcel = DB::select('call buscar_pendiente_empaque_excel2(:v1,:v2,:v3,:v4,:v5, :v6,:v7,:v8,:v9,:v10, :v11,:v12,:v13)',
-        [            
+        [
             'v1' => $v1,
             'v2' => $v2,
             'v3' => $v3,
             'v4' => $v4,
 
-            'v5' => $v5,            
+            'v5' => $v5,
             'v6' => $v6,
             'v7' => $v7,
             'v8' => $v8,
 
             'v9' => $v9,
-            'v10' => $v10,            
+            'v10' => $v10,
             'v11' => $v11,
             'v12' => $v12,
             'v13' => $v13,
