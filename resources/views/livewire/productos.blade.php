@@ -38,7 +38,8 @@
                 <div class="input-group mb-3">
                     <input name="buscar" id="buscar" style="width:350px;" class=" form-control  mr-sm-2 "
                         wire:model="busqueda" placeholder="Búsqueda por Marca, Nombre y Vitola">
-                    <form action="{{Route('datos_producto')}} ">
+                    <form action="{{Route('datos_producto')}} " method="post">
+                        @csrf
                         <button class=" botonprincipal mr-sm-2 " style="width:200px;">Datos adicionales</button>
                     </form>
                     <button class=" botonprincipal mr-sm-2 " onclick="mostrar_div_AddProducto();"
