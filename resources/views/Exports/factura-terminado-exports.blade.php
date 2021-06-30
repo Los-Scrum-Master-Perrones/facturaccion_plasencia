@@ -374,7 +374,7 @@
                             <td><b>{{number_format($total_neto,2)}}</b></td>
                             <td></td>
                             <td></td>
-                            <td><b>{{number_format($valor_factura,2)}}</b></td>
+                            <td style="text-align: right"><b>{{number_format($valor_factura,2)}}</b></td>
                         </tr>
                         <tr style="font-size:10px;">
                             <td></td>
