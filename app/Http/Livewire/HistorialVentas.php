@@ -25,7 +25,7 @@ class HistorialVentas extends Component
 
 
 
-    
+
     public function render()
 
 
@@ -62,11 +62,19 @@ class HistorialVentas extends Component
     }
 
     public function exportar_factura(){
-        return Excel::download(new FacturaExportView($this->num_factura_sistema), 'Factura.xlsx');
+
+        $datos = DB::select('call mostrar_detalle_factura_export(:nombre)',
+                            ['nombre'=>$this->num_factura_sistema]);
+                            
+        $vista =  view('Exports.factura-terminado-exports', [
+            'detalles_venta' => $datos
+        ]);
+
+        return Excel::download(new FacturaExportView($vista), 'Factura2.xlsx');
     }
 
     public function editar_factura($id){
-        
+
         $pendiente = DB::select(
             ' CALL `traer_factura_datos`(:id)',
             [
@@ -96,5 +104,5 @@ class HistorialVentas extends Component
 
         return redirect()->route('historial_factura');
     }
-       
+
 }

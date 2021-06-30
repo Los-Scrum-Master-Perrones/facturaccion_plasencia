@@ -95,7 +95,7 @@ class FacturaTerminado extends Component
 
 
 
-        $this->detalles_venta = DB::select('call mostrar_detalle_factura(?)',[$this->aereo]);
+        $this->detalles_venta = DB::select('call mostrar_detalle_factura(?)', [$this->aereo]);
 
         if ($this->nom != "" || $this->fede != "" || $this->fecha != "" || $this->item != "" || $this->orden != "" || $this->hon != "") {
             $this->dispatchBrowserEvent("pendiente");
@@ -162,21 +162,18 @@ class FacturaTerminado extends Component
 
         if ($sampler[0]->sampler == "si") {
 
-            $detalles_item = DB::select('select id_pendiente from detalle_factura  where id_detalle = ?',[$id]);
+            $detalles_item = DB::select('select id_pendiente from detalle_factura  where id_detalle = ?', [$id]);
 
-            $detalles = DB::select('select item, orden from pendiente where id_pendiente = ?',[$detalles_item[0]->id_pendiente]);
+            $detalles = DB::select('select item, orden from pendiente where id_pendiente = ?', [$detalles_item[0]->id_pendiente]);
 
 
-            $valores_extras = DB::select('select id_pendiente, (select id_detalle from detalle_factura  where detalle_factura.id_pendiente = pendiente.id_pendiente) as id_detalle from pendiente where item = ? and orden = ?',[$detalles[0]->item, $detalles[0]->orden]);
+            $valores_extras = DB::select('select id_pendiente, (select id_detalle from detalle_factura  where detalle_factura.id_pendiente = pendiente.id_pendiente) as id_detalle from pendiente where item = ? and orden = ?', [$detalles[0]->item, $detalles[0]->orden]);
 
             DB::delete('call eliminar_detalle_factura(:id)', ['id' => $id]);
 
-            for($i = 1; $i < count($valores_extras);$i++){
+            for ($i = 1; $i < count($valores_extras); $i++) {
                 DB::delete('call eliminar_detalle_factura(:id)', ['id' => $valores_extras[$i]->id_detalle]);
-
             }
-
-
         } else {
             DB::delete('call eliminar_detalle_factura(:id)', ['id' => $id]);
         }
@@ -273,9 +270,9 @@ class FacturaTerminado extends Component
 
 
 
-            $datos_pendiente = DB::select('SELECT item, orden, saldo FROM pendiente WHERE id_pendiente = ?', [$request->id_pendi]);
+        $datos_pendiente = DB::select('SELECT item, orden, saldo FROM pendiente WHERE id_pendiente = ?', [$request->id_pendi]);
 
-            $conteo = DB::select('SELECT * FROM pendiente WHERE orden = ? AND item = ?', [$datos_pendiente[0]->orden,  $datos_pendiente[0]->item]);
+        $conteo = DB::select('SELECT * FROM pendiente WHERE orden = ? AND item = ?', [$datos_pendiente[0]->orden,  $datos_pendiente[0]->item]);
 
         if ($sampler[0]->sampler == "si") {
 
@@ -293,12 +290,10 @@ class FacturaTerminado extends Component
                    :anterior)', [
 
                     "id_pendiente" => $conteo[$i]->id_pendiente, "pa_cantidad_cajas" => $request->unidades_cajon, "pa_peso_bruto" => $request->peso_bruto,
-                     "pa_peso_neto" => $request->peso_neto, "pa_cantidad_puros" => $request->cantidad_bultos,
-                     "pa_unidad" => $request->unidades_bultos, "pa_observaciones" => "Sin Facturar"
-                    ,"para" =>  $request->para, "anterior" => ($datos_pendiente[0]->saldo - ($request->unidades_bultos*$request->cantidad_bultos))
+                    "pa_peso_neto" => $request->peso_neto, "pa_cantidad_puros" => $request->cantidad_bultos,
+                    "pa_unidad" => $request->unidades_bultos, "pa_observaciones" => "Sin Facturar", "para" =>  $request->para, "anterior" => ($datos_pendiente[0]->saldo - ($request->unidades_bultos * $request->cantidad_bultos))
                 ]);
             }
-
         } else {
             DB::select('call insertar_detalle_factura(
                 :id_pendiente
@@ -312,7 +307,7 @@ class FacturaTerminado extends Component
                :anterior)', [
 
                 "id_pendiente" => $request->id_pendi, "pa_cantidad_cajas" => $request->unidades_cajon, "pa_peso_bruto" => $request->peso_bruto, "pa_peso_neto" => $request->peso_neto, "pa_cantidad_puros" => $request->cantidad_bultos, "pa_unidad" => $request->unidades_bultos, "pa_observaciones" => "Sin Facturar",
-                "para" =>  $request->para, "anterior" =>  ($datos_pendiente[0]->saldo - ($request->unidades_bultos*$request->cantidad_bultos))
+                "para" =>  $request->para, "anterior" => ($datos_pendiente[0]->saldo - ($request->unidades_bultos * $request->cantidad_bultos))
             ]);
         }
 
@@ -335,15 +330,15 @@ class FacturaTerminado extends Component
 
 
 
-            $datos_pendiente = DB::select('SELECT item, orden, saldo FROM pendiente WHERE id_pendiente =
+        $datos_pendiente = DB::select('SELECT item, orden, saldo FROM pendiente WHERE id_pendiente =
                                         (select id_pendiente from detalle_factura where id_detalle = ?)', [$request->id_pendi]);
 
 
         if ($sampler[0]->sampler == "si") {
 
-            $detalles_item = DB::select('select id_pendiente from detalle_factura  where id_detalle = ?',[$request->id_pendi]);
+            $detalles_item = DB::select('select id_pendiente from detalle_factura  where id_detalle = ?', [$request->id_pendi]);
 
-            $detalles = DB::select('select item, orden from pendiente where id_pendiente = ?',[$detalles_item[0]->id_pendiente]);
+            $detalles = DB::select('select item, orden from pendiente where id_pendiente = ?', [$detalles_item[0]->id_pendiente]);
 
 
             DB::select('call actualizar_detalle_factura(
@@ -355,16 +350,16 @@ class FacturaTerminado extends Component
                 ,:pa_unidad,
                 :anterior)', [
 
-             "id_pendiente" => $request->id_pendi, "pa_cantidad_cajas" => $request->unidades_cajon, "pa_peso_bruto" => $request->peso_bruto,
-             "pa_peso_neto" => $request->peso_neto, "pa_cantidad_puros" => $request->cantidad_bultos, "pa_unidad" => $request->unidades_bultos,
-             "anterior" =>  ($datos_pendiente[0]->saldo - ($request->unidades_bultos*$request->cantidad_bultos))
+                "id_pendiente" => $request->id_pendi, "pa_cantidad_cajas" => $request->unidades_cajon, "pa_peso_bruto" => $request->peso_bruto,
+                "pa_peso_neto" => $request->peso_neto, "pa_cantidad_puros" => $request->cantidad_bultos, "pa_unidad" => $request->unidades_bultos,
+                "anterior" => ($datos_pendiente[0]->saldo - ($request->unidades_bultos * $request->cantidad_bultos))
             ]);
 
             $conteo = count(DB::select('select * from detalle_clase_productos where item = ?', [$detalles[0]->item]));
 
             $id_detalle_fa = $request->id_pendi + 1;
 
-            for($i = 1 ; $i < $conteo ; $i++){
+            for ($i = 1; $i < $conteo; $i++) {
                 DB::select('call actualizar_detalle_factura(
                     :id_pendiente
                     ,:pa_cantidad_cajas
@@ -374,14 +369,12 @@ class FacturaTerminado extends Component
                     ,:pa_unidad,
                     :anterior)', [
 
-                "id_pendiente" =>   $id_detalle_fa , "pa_cantidad_cajas" => $request->unidades_cajon, "pa_peso_bruto" => 0,
-                 "pa_peso_neto" => 0, "pa_cantidad_puros" => $request->cantidad_bultos, "pa_unidad" => $request->unidades_bultos,
-                 "anterior" =>  ($datos_pendiente[0]->saldo - ($request->unidades_bultos*$request->cantidad_bultos))
-            ]);
-            $id_detalle_fa++;
+                    "id_pendiente" =>   $id_detalle_fa, "pa_cantidad_cajas" => $request->unidades_cajon, "pa_peso_bruto" => 0,
+                    "pa_peso_neto" => 0, "pa_cantidad_puros" => $request->cantidad_bultos, "pa_unidad" => $request->unidades_bultos,
+                    "anterior" => ($datos_pendiente[0]->saldo - ($request->unidades_bultos * $request->cantidad_bultos))
+                ]);
+                $id_detalle_fa++;
             }
-
-
         } else {
             DB::select('call actualizar_detalle_factura(
                     :id_pendiente
@@ -403,20 +396,27 @@ class FacturaTerminado extends Component
     {
         if ($this->cliente != null && $this->contenedor != null) {
 
-            $this->detalles_venta = DB::select(
-                'call mostrar_detalle_factura(:ordenes)',
-                [
-                    'ordenes' => $this->aereo
-                ]
-            );
+
 
             for ($i = 0; $i < count($this->detalles_venta); $i++) {
+
+                $sampler = DB::select('SELECT sampler FROM clase_productos where item = (SELECT item FROM pendiente WHERE id_pendiente = ? )', [$this->detalles_venta[$i]->id_pendiente]);
+                $cantidad_sampler = DB::select('SELECT COUNT(*) as conteo FROM detalle_clase_productos where item = (SELECT item FROM pendiente WHERE id_pendiente = ? )', [$this->detalles_venta[$i]->id_pendiente]);
+
+                $total_pendiete = $this->detalles_venta[$i]->total_tabacos;
+
+
+                if($sampler[0]->sampler == "si"){
+                    $total_pendiete  = ($this->detalles_venta[$i]->total_tabacos)/ $cantidad_sampler[0]->conteo;
+                }
+
                 DB::select('call `actualizar_pendiente_saldo_factura`(
-                :id_pendiente,
-                :pa_saldo)', [
-                    "id_pendiente" => $this->detalles_venta[$i]->id_pendiente,
-                    "pa_saldo" => $this->detalles_venta[$i]->total_tabacos
-                ]);
+                    :id_pendiente,
+                    :pa_saldo)', [
+                        "id_pendiente" => $this->detalles_venta[$i]->id_pendiente,
+                        "pa_saldo" =>  $total_pendiete
+                    ]);
+
             }
 
             DB::select('call `insertar_factura_terminado`(
@@ -441,8 +441,21 @@ class FacturaTerminado extends Component
                 "pa_fecha_factura" => $this->fecha_factura
             ]);
 
-            //return Excel::download(new FacturaExport($this->num_factura_sistema), 'Pendiente.xlsx');
-            return Excel::download(new FacturaExportView($this->num_factura_sistema), 'Factura.xlsx');
+            $this->detalles_venta = DB::select(
+                'call mostrar_detalle_factura(:ordenes)',
+                [
+                    'ordenes' => $this->aereo
+                ]
+            );
+
+                $datos = DB::select('call mostrar_detalle_factura_export(:nombre)',
+                                    ['nombre'=>$this->num_factura_sistema]);
+
+                $vista =  view('Exports.factura-terminado-exports', [
+                    'detalles_venta' => $datos
+                ]);
+
+                return Excel::download(new FacturaExportView($vista), 'Factura.xlsx');
         } else {
             $this->dispatchBrowserEvent("advertencia_mensaje");
         }

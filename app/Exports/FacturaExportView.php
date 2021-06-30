@@ -18,18 +18,14 @@ class FacturaExportView implements  FromView,ShouldAutoSize,
                                 WithColumnFormatting{
 
     public $nom;
-    
+
     function __construct($nom) {
         $this->nom = $nom;
     }
 
     public function view(): View
     {
-        return view('Exports.factura-terminado-exports', [
-            'detalles_venta' => DB::select('call mostrar_detalle_factura_export(:nombre)',
-            ['nombre'=>(String)$this->nom
-            ])
-        ]);
+        return  $this->nom;
     }
 
     public function columnFormats(): array
