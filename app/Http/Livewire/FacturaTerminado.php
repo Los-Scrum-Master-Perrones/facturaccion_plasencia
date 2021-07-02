@@ -391,6 +391,17 @@ class FacturaTerminado extends Component
         return redirect()->route('f_terminado');
     }
 
+    public function imprimir(){
+
+        $this->detalles_venta = DB::select('call mostrar_detalle_factura(?)', [$this->aereo]);
+        
+        $vista =  view('Exports.factura-terminado-exports', [
+            'detalles_venta' => $this->detalles_venta
+        ]);
+
+        return Excel::download(new FacturaExportView($vista), 'Factura.xlsx');
+    }
+
 
     public function insertar_factura()
     {

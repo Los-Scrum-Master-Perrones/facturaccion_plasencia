@@ -90,16 +90,21 @@
 
 
         <div class="row">
-            <div class="col">
+            <div class="col-sm-2">
                 <label wire:model="titulo_cliente"
                     style="font-size:15px;color:white;">{{$titulo_factura." ".$titulo_cliente." ". $contenedor." ".$titulo_mes}}
                 </label>
             </div>
 
-            <div class="col" style="text-align:end;">
+            <div class="col-sm-2" style="text-align:end;">
                 <label style="font-size:15px;color:white;">Factura N#: {{$num_factura_sistema}}</label>
             </div>
-            <div class="col" style="text-align:end;">
+
+            <div class="col-sm-6" style="text-align:end;">
+                <button style="width:120px;" class="botonprincipal" wire:click="imprimir()">Imprimir</button>
+            </div>
+
+            <div class="col-sm-2" style="text-align:end;">
                 <button style="width:120px;" class="botonprincipal" wire:click="historial()">Historial</button>
             </div>
         </div>
@@ -186,7 +191,7 @@
                                 <td colspan="19" style="background-color: gray"></td>
                             </tr>
                             @php
-                            $orden_actua = $detalles->orden;
+                              $orden_actua = $detalles->orden;
                             @endphp
                             @endif
 
