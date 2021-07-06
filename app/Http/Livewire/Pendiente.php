@@ -256,13 +256,15 @@ class Pendiente extends Component
     {
 
         $insertar_pendiente = DB::select(
-            'call insertar_pendiente(:fecha)',
-            ['fecha' => (string)$request->fecha]
+            'call insertar_pendiente(:fecha,:sistema)',
+            ['fecha' => (string)$request->fecha,
+            'sistema' => $request->sistema]
         );
 
         $insertar_pendiente_empaque =   \DB::select(
-            'call insertar_pendente_empaque(:fecha)',
-            ['fecha' => (string)$request->fecha]
+            'call insertar_pendente_empaque(:fecha,:sistema)',
+            ['fecha' => (string)$request->fecha,
+            'sistema' => $request->sistema]
         );
 
 

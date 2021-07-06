@@ -39,6 +39,8 @@
                             $total_neto = 0;
                             $total_bruto = 0;
                             $valor_factura = 0;
+                            $sampler_s = 0;
+
                         @endphp
 
 

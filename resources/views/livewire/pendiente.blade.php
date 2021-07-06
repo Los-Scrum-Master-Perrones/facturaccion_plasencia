@@ -139,6 +139,7 @@
                         </select>
                     </div>
 
+
                     <div class="col">
                         <select onchange="buscar_tabla()" onclick="funcion1()" name="b_orden" id="b_orden"
                             class=" mi-selector form-control" style="width:100%;height:34px;" name="states[]">
@@ -653,7 +654,7 @@
 
     <div class="panel-body" style="padding:0px;">
         <div style="width:100%; padding-left:0px;   font-size:9px;   overflow-x: display; overflow-y: auto;
-     height:450px;">
+     height:75%;">
             @csrf
             <table class="table table-light" style="font-size:9px;" id="tabla_pendiente">
                 <thead>
@@ -1021,7 +1022,6 @@
             }
         }
 
-
         var b_orden = document.getElementById('b_orden').value;
         var b_item = document.getElementById('b_item').value;
         var b_hon = document.getElementById('b_hon').value;
@@ -1038,7 +1038,6 @@
         var checkbox3 = document.getElementById('checkbox3').value;
         var checkbox4 = document.getElementById('checkbox4').value;
 
-
         var datas = '<?php echo json_encode($datos_pendiente);?>';
         var data = JSON.parse(datas);
 
@@ -1048,12 +1047,11 @@
         } else {
             var sumas = 0;
             var sumap = 0;
+            var incre = 0
             for (var i = 0; i < data.length; i++) {
                 try {
 
-
-
-                    if (data[i].marca.toLowerCase().match(b_marca.toLowerCase()) &&
+                    if (data[i].marca.toLowerCase().replace(/\((\w+)\)/g,'').match(b_marca.toLowerCase().replace(/\((\w+)\)/g,'')) &&
                         data[i].vitola.toLowerCase().match(b_vitola.toLowerCase()) &&
                         data[i].nombre.toLowerCase().match(b_nombre.toLowerCase()) &&
                         data[i].capa.toLowerCase().match(b_capa.toLowerCase()) &&
@@ -1068,9 +1066,7 @@
                         sumas = sumas + data[i].saldo;
                         sumap = sumap + data[i].pendiente;
 
-
-
-                        if (data[i].observacion == null) {
+                       if (data[i].observacion == null) {
                             data[i].observacion = "";
                         }
                         if (data[i].presentacion == null) {
@@ -1099,7 +1095,8 @@
                         }
 
                         var tabla_nueva = `
-                  <tr>
+                  <tr> 
+                  <td>` + (++incre) + `</td>
                     <td>` + data[i].categoria + `</td>
                     <td>` + data[i].item + `</td>
                     <td>` + data[i].orden_del_sitema + `</td>

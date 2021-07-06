@@ -175,16 +175,12 @@
 
 
 
-            var productos = '<?php echo json_encode($productos);?>';
-
-            var producto = JSON.parse(productos);
+            var producto = @json($productos) ;
 
 
             for (var i = 0; i < producto.length; i++) {
 
                 if (producto[i].id_producto === id) {
-
-
 
                     $('#marca_ac').val(producto[i].marca).trigger('change.select2');
                     $('#capa_ac').val(producto[i].capa).trigger('change.select2');
@@ -192,12 +188,7 @@
                     $('#vitola_ac').val(producto[i].vitola).trigger('change.select2');
                     $('#tipo_ac').val(producto[i].tipo_empaque).trigger('change.select2');
 
-                    // document.formulario_actualizar.marca_ac.value =;
                     document.formulario_actualizar.item_ac.value = producto[i].item;
-                    //document.formulario_actualizar.capa_ac.value = producto[i].capa;
-                    //document.formulario_actualizar.nombre_ac.value = producto[i].nombre;
-                    //document.formulario_actualizar.vitola_ac.value = producto[i].vitola;
-                    //document.formulario_actualizar.tipo_ac.value = producto[i].tipo_empaque;
                     document.formulario_actualizar.presentacion_ac.value = producto[i].presentacion;
                     document.formulario_actualizar.cod_sistema_ac.value = producto[i].codigo_producto;
                     document.formulario_actualizar.cod_precio_ac.value = producto[i].codigo_precio;

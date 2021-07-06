@@ -63,33 +63,64 @@ class FacturaTerminado extends Component
     public $detalles_produtos;
     public $aereo;
 
-
-
+    //TODO Busqueda pendiente factura 
+    public $items;
+    public $orden_sistemas;
+    public $orden_pedidos;
+    public $marcas_busqueda;
+    public $busqueda_vitolas;
+    public $busqueda_nombre;
+    public $busqueda_capas;
+    public $busqueda_tipo_empaques;
+    public $busqueda_meses;
+    //TODO Busqueda pendiente factura 
 
     public function render()
     {
-        $this->total_cantidad_bultos = 0;
-        $this->total_total_puros = 0;
-        $this->total_peso_bruto = 0;
-        $this->total_peso_neto = 0;
-        $this->total_valor = 0;
-        $this->total_saldo = 0;
-        $this->total_pendiente = 0;
-
-
+    
         setlocale(LC_TIME, "spanish");
         $Nueva_Fecha = date("d-m-Y", strtotime($this->fecha_factura));
+
+        
+        $this->items = DB::select(
+            'call buscar_pendiente_item()'
+        );
+        $this->orden_sistemas= DB::select(
+            'call buscar_pendiente_orden_sistema()'
+        );
+        $this->orden_pedidos= DB::select(
+            'call buscar_pendiente_orden_pedido()'
+        );
+        $this->marcas_busqueda= DB::select(
+            'call buscar_pendiente_marca()'
+        );
+        $this->busqueda_vitolas= DB::select(
+            'call buscar_pendiente_vitola()'
+        );
+        $this->busqueda_nombre= DB::select(
+            'call buscar_pendiente_nombre()'
+        );
+        $this->busqueda_capas= DB::select(
+            'call buscar_pendiente_capa()'
+        );
+        $this->busqueda_tipo_empaques= DB::select(
+            'call buscar_pendiente_tipo_empaque()'
+        );
+        $this->busqueda_meses= DB::select(
+            'call buscar_pendiente_meses()'
+        );
 
         $this->titulo_mes = strftime("%B", strtotime($Nueva_Fecha));
         $this->titulo_cliente = $this->cliente;
 
         $this->datos_pendiente = DB::select(
-            'call buscar_pendiente_factura(:orden_sistema,:fechade,:item,:orden)',
+            'call buscar_pendiente_factura(:orden_sistema,:fechade,:item,:orden,:tipo_factura)',
             [
                 'orden' => $this->hon,
                 'fechade' =>  $this->fede,
                 'item' =>  $this->item,
-                'orden_sistema' =>  $this->orden,
+                'orden_sistema' =>  $this->orden,     
+                'tipo_factura' =>  $this->aereo,  
             ]
         );
 
@@ -110,19 +141,8 @@ class FacturaTerminado extends Component
             $this->total_pendiente += $this->datos_pendiente[$i]->pendiente;
         }
 
-
-        for ($i = 0; $i < count($this->detalles_venta); $i++) {
-            $this->total_cantidad_bultos += $this->detalles_venta[$i]->cantidad_puros;
-            $this->total_total_puros += $this->detalles_venta[$i]->total_tabacos;
-            $this->total_peso_bruto += $this->detalles_venta[$i]->total_bruto;
-            $this->total_peso_neto += $this->detalles_venta[$i]->total_neto;
-            $this->total_valor += $this->detalles_venta[$i]->valor_total;
-        }
-
         return view('livewire.factura-terminado')->extends('principal')->section('content');
     }
-
-
 
 
 
@@ -183,32 +203,6 @@ class FacturaTerminado extends Component
         $this->dispatchBrowserEvent("cerrar_modal_borrar");
     }
 
-    public function abrir_modal($id_pendiente)
-    {
-
-        $sampler = DB::select('SELECT sampler,descripcion_sampler,(select tipo_empaque_ingles from tipo_empaques where id_tipo_empaque =  (select tipo_empaque from pendiente where id_pendiente = ?)) as empaque
-                                FROM clase_productos
-                                WHERE  clase_productos.item = (select item from pendiente where id_pendiente = ?);', [$id_pendiente, $id_pendiente]);
-
-        if ($sampler[0]->descripcion_sampler != null) {
-
-            $this->descripcion_producto = strtoupper($sampler[0]->empaque . " " . $sampler[0]->descripcion_sampler);
-        } else {
-            $pendiente = DB::select(
-                ' CALL `traer_descripcion_factura`(:id)',
-                [
-                    'id' => $id_pendiente
-                ]
-            );
-
-            $this->descripcion_producto = $pendiente[0]->producto;
-        }
-
-
-
-        $this->id_pendiente =  $id_pendiente;
-        $this->dispatchBrowserEvent("abrir");
-    }
 
     public function cerrar_modal()
     {
@@ -255,6 +249,17 @@ class FacturaTerminado extends Component
         $this->editar_peso_bruto =  0;
         $this->editar_peso_neto =  0;
 
+
+        $this->items = [];
+        $this->orden_sistemas = [];
+        $this->orden_pedidos = [];
+        $this->marcas_busqueda = [];
+        $this->busqueda_vitolas = [];
+        $this->busqueda_nombres = [];
+        $this->busqueda_capas = [];
+        $this->busqueda_tipo_empaques = [];
+        $this->busqueda_meses = [];
+
         $this->fecha_factura = Carbon::now()->format("Y-m-d");
 
         $this->aereo =  "RP";
@@ -262,7 +267,6 @@ class FacturaTerminado extends Component
 
     public function insertar_detalle_factura(Request $request)
     {
-
 
         $sampler = DB::select('SELECT sampler,descripcion_sampler
                                 FROM clase_productos
@@ -407,24 +411,26 @@ class FacturaTerminado extends Component
     {
         if ($this->cliente != null && $this->contenedor != null) {
 
+            
+        $detalles = DB::select('call mostrar_detalle_factura(?)', [$this->aereo]);
 
 
-            for ($i = 0; $i < count($this->detalles_venta); $i++) {
+            for ($i = 0; $i < count( $detalles); $i++) {
 
-                $sampler = DB::select('SELECT sampler FROM clase_productos where item = (SELECT item FROM pendiente WHERE id_pendiente = ? )', [$this->detalles_venta[$i]->id_pendiente]);
-                $cantidad_sampler = DB::select('SELECT COUNT(*) as conteo FROM detalle_clase_productos where item = (SELECT item FROM pendiente WHERE id_pendiente = ? )', [$this->detalles_venta[$i]->id_pendiente]);
+                $sampler = DB::select('SELECT sampler FROM clase_productos where item = (SELECT item FROM pendiente WHERE id_pendiente = ? )', [ $detalles[$i]->id_pendiente]);
+                $cantidad_sampler = DB::select('SELECT COUNT(*) as conteo FROM detalle_clase_productos where item = (SELECT item FROM pendiente WHERE id_pendiente = ? )', [$detalles[$i]->id_pendiente]);
 
-                $total_pendiete = $this->detalles_venta[$i]->total_tabacos;
+                $total_pendiete = $detalles[$i]->total_tabacos;
 
 
                 if($sampler[0]->sampler == "si"){
-                    $total_pendiete  = ($this->detalles_venta[$i]->total_tabacos)/ $cantidad_sampler[0]->conteo;
+                    $total_pendiete  = ($detalles[$i]->total_tabacos)/ $cantidad_sampler[0]->conteo;
                 }
 
                 DB::select('call `actualizar_pendiente_saldo_factura`(
                     :id_pendiente,
                     :pa_saldo)', [
-                        "id_pendiente" => $this->detalles_venta[$i]->id_pendiente,
+                        "id_pendiente" => $detalles[$i]->id_pendiente,
                         "pa_saldo" =>  $total_pendiete
                     ]);
 
@@ -466,6 +472,9 @@ class FacturaTerminado extends Component
                     'detalles_venta' => $datos
                 ]);
 
+                redirect()->route('historial_factura');
+
+                
                 return Excel::download(new FacturaExportView($vista), 'Factura.xlsx');
         } else {
             $this->dispatchBrowserEvent("advertencia_mensaje");

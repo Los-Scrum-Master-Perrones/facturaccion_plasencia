@@ -362,7 +362,6 @@
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.14/dist/js/bootstrap-select.min.js"></script>
 
-
     <script>
         $(document).ready(function () {
             $('.mi-selector').select2();
@@ -370,9 +369,6 @@
     </script>
 
     <script>
-        window.addEventListener('abrir', event => {
-            $("#productos_faltantes").modal('show');
-        })
 
         window.addEventListener('cerrar', event => {
             $("#productos_faltantes").modal('hide');
@@ -390,11 +386,7 @@
             $("#modal_ver_detalle_producto").modal('hide');
         })
 
-
     </script>
-
-
-
 
 
 

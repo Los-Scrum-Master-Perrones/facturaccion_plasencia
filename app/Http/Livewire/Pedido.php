@@ -75,9 +75,7 @@ class Pedido extends Component
            }
             
             
-        }
-
-       
+        }   
         
         return view('livewire.pedido')->extends('principal')->section('content');
     }

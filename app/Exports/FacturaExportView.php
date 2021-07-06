@@ -13,7 +13,7 @@ use Maatwebsite\Excel\Concerns\WithColumnFormatting;
 
 
 
-class FacturaExportView implements  FromView,ShouldAutoSize,
+class FacturaExportView implements  FromView, ShouldAutoSize,
                                 WithStrictNullComparison,
                                 WithColumnFormatting{
 

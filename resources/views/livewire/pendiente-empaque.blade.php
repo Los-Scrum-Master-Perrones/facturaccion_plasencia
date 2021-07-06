@@ -689,7 +689,7 @@
 
                             console.log(data[i].marca);
 
-                            if (data[i].marca.toLowerCase().match(b_marca.toLowerCase()) &&
+                            if (data[i].marca.toLowerCase().replace(/\((\w+)\)/g,'').match(b_marca.toLowerCase().replace(/\((\w+)\)/g,'')) &&
                                 data[i].vitola.toLowerCase().match(b_vitola.toLowerCase()) &&
                                 data[i].nombre.toLowerCase().match(b_nombre.toLowerCase()) &&
                                 data[i].capa.toLowerCase().match(b_capa.toLowerCase()) &&

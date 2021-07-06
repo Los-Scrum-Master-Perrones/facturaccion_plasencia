@@ -104,8 +104,16 @@ class CajasController extends Controller
     function import(Request $request){
         (new CajasImport)->import($request->select_file);
         $cajas = DB::table('cajas')->get();
+        
+        
         return view('import_cajas')->with('cajas', $cajas);
     }
+
+
+
+
+
+    
     function vaciar_import_tabla(){
         $borrar = DB::table('cajas')->delete();
         $cajas = DB::table('cajas')->get();
