@@ -163,15 +163,15 @@ $promedio = DB::select('SELECT AVG(precio) AS promedio FROM detalle_clase_produc
     <td></td>
     <td>SEVERAL</td>
     <td>{{$detalles->cantidad_por_caja}}</td>
-    <td style="width: 250px"><b>{{strtoupper($sampler_nombre[0]->nom)}}</b> </td>
+    <td><b>{{strtoupper($sampler_nombre[0]->nom)}}</b> </td>
     <td>{{$detalles->codigo}}</td>
     <td>{{$detalles->codigo_item}}</td>
     <td>{{$detalles->orden}}</td>
     <td>{{$total_pendiente[0]->total_pendiente}}</td>
     <td>{{$total_ac}}</td>
 
-    <td style="width: 65px">{{$detalles->total_bruto}}</td>
-    <td style="width: 60px">{{$detalles->total_neto}}</td>
+    <td>{{$detalles->total_bruto}}</td>
+    <td>{{$detalles->total_neto}}</td>
     <td>{{$detalles->precio_producto}}</td>
 
 
@@ -207,7 +207,7 @@ $arreglo_detalles = DB::select('CALL `traer_detalles_productos_factura`(?, ?)',
     <td>{{$repartir}}</td>
     <td>{{$arreglo_detalles[0]->capa}}</td>
     <td></td>
-    <td style="width: 250px">{{strtoupper($arreglo_detalles[0]->sampler)}}</td>
+    <td>{{strtoupper($arreglo_detalles[0]->sampler)}}</td>
     <td>{{$arreglo_detalles[0]->otra_descripcion}}</td>
     <td></td>
     <td></td>
@@ -258,7 +258,7 @@ $total_saldo_pendiente = DB::update('UPDATE detalle_factura SET anterior = ? WHE
     <td>{{$repartir}}</td>
     <td>{{$arreglo_detalles[0]->capa}}</td>
     <td></td>
-    <td style="width: 250px">{{strtoupper($arreglo_detalles[0]->sampler)}}</td>
+    <td>{{strtoupper($arreglo_detalles[0]->sampler)}}</td>
     <td>{{$arreglo_detalles[0]->otra_descripcion}}</td>
     <td></td>
     <td></td>
@@ -324,14 +324,14 @@ $sampler_s = 0;
     <td>{{$detalles->total_tabacos}}</td>
     <td>{{$detalles->capas}}</td>
     <td>{{$detalles->cantidad_por_caja}}</td>
-    <td style="width: 250px">{{$detalles->producto}}</td>
+    <td>{{$detalles->producto}}</td>
     <td>{{$detalles->codigo}}</td>
     <td>{{$detalles->codigo_item}}</td>
     <td>{{$detalles->orden}}</td>
     <td>{{$detalles->orden_total}}</td>
     <td>{{$total_restante}}</td>
-    <td style="width: 65px">{{$detalles->total_bruto}}</td>
-    <td style="width: 60px">{{$detalles->total_neto}}</td>
+    <td>{{$detalles->total_bruto}}</td>
+    <td>{{$detalles->total_neto}}</td>
     <td style="text-align: right">{{$detalles->precio_producto}}</td>
 
 
