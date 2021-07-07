@@ -607,6 +607,14 @@
                         @endif
 
                         @endforeach
+
+                        @php
+                       
+                            $this->total_cantidad_bultos = $val_actual;
+                            $this->total_total_puros =  $total_puros_tabla;
+                            $this->total_peso_bruto=$total_bruto;
+                            $this->total_peso_neto =$total_neto;
+                        @endphp
                     </tbody>
                 </table>
 
