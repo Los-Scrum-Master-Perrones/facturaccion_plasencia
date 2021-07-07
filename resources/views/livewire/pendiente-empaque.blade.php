@@ -1,22 +1,5 @@
 <div xmlns:wire="http://www.w3.org/1999/xhtml">
-    <title></title>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" />
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Hola</title>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" />
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
-    <script src="{{ URL::asset('css/tabla.js') }}"></script>
-    @livewireStyles
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-wEmeIV1mKuiNpC+IOBjI7aAzPcEZeedi5yW5f2yOq55WWLwNGmvvx4Um1vskeMj0" crossorigin="anonymous">
-
-
-
-
+    
     <ul class="nav justify-content-center">
         <li class="nav-item">
             <a style="color:#E5B1E2; font-size:12px;" href="pendiente_empaque"><strong>Pendiente</strong></a>
@@ -32,8 +15,6 @@
         </li>
     </ul>
 
-
-
     <div class="container" style="max-width:100%; ">
     <form action =  "{{Route('insertar_detalle_provicional')}}" method= "POST" >
 @csrf
@@ -45,7 +26,7 @@
                   <div class="row" >
                   <div class="col" >
 
-                   <abbr title="Agregar Programación">
+                   <abbr title="Agregar a Programación">
                    <button class=" botonprincipal" onclick="addexportar(1)" > <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-plus-circle" viewBox="0 0 16 16">
                         <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
                         <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z"/>
@@ -54,7 +35,7 @@
                      </div>
 
                      <div class="col" >
-                   <abbr title="Importar a excel">
+                   <abbr title="Revisar Programacion actual">
                      <a href="/detalles_programacion"> <button onclick="addexportar(2)" class="botonprincipal"> Ver</button></a>
                     </abbr>
                     </div>
@@ -145,7 +126,7 @@
                   <div class="row" >
                   <div class="col" >
 
-                   <abbr title="Agregar Programación">
+                   <abbr title="Agregar a Pendiente Empaque">
                    <button class=" botonprincipal" onclick="addexportar(3)" > <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-plus-circle" viewBox="0 0 16 16">
                         <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
                         <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z"/>
@@ -154,7 +135,7 @@
                      </div>
 
                      <div class="col" >
-                   <abbr title="Importar a excel">
+                   <abbr title="Exportar a excel">
                      <button class=" botonprincipal"  onclick="addexportar(4)"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-file-earmark-spreadsheet" viewBox="0 0 16 16">
                         <path d="M14 14V4.5L9.5 0H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2zM9.5 3A1.5 1.5 0 0 0 11 4.5h2V9H3V2a1 1 0 0 1 1-1h5.5v2zM3 12v-2h2v2H3zm0 1h2v2H4a1 1 0 0 1-1-1v-1zm3 2v-2h3v2H6zm4 0v-2h3v1a1 1 0 0 1-1 1h-2zm3-3h-3v-2h3v2zm-7 0v-2h3v2H6z"/>
                         </svg> Exportar </button>
@@ -229,20 +210,21 @@
 
 
     <div class="panel-body" style="padding:0px;">
-        <div style="width:100%; padding-left:0px;   font-size:10px;   overflow-x: display; overflow-y: auto;
+        <div style="width:100%; padding-left:0px;   font-size:10px;   display: block;
+        overflow-x: auto;
      height:450px;">
             <table class="table table-light" style="font-size:10px;" id="tabla_pendiente_empaque">
-                <thead>
+                <thead style="width:100px;">
                     <tr>
                         <th>N#</th>
-                        <th style="width:100px;">CATEGORIA</th>
+                        <th>CATEGORIA</th>
                         <th>ITEM</th>
                         <th>ORDEN DEL SISTEMA</th>
-                        <th>OBSERVACÓN</th>
+                        <th >OBSERVACÓN</th>
                         <th>PRESENTACIÓN</th>
                         <th>MES</th>
                         <th>ORDEN</th>
-                        <th style="width:100px;">MARCA</th>
+                        <th>MARCA</th>
                         <th>VITOLA</th>
                         <th>NOMBRE</th>
                         <th>CAPA</th>
@@ -266,12 +248,12 @@
                         <td>{{isset($datos->item)?($datos->item):""}}</td>
                         <td>{{isset($datos->orden_del_sitema)?($datos->orden_del_sitema):""}}</td>
 
-                        <td>{{$datos->observacion}}</td>
-                        <td>{{$datos->presentacion}}</td>
+                        <td style="width:100px;">{{$datos->observacion}}</td>
+                        <td style="width:100px;">{{$datos->presentacion}}</td>
                         <td>{{$datos->mes}}</td>
 
-                        <td>{{$datos->orden}}</td>
-                        <td>{{$datos->marca}}</td>
+                        <td style="width:100px;">{{$datos->orden}}</td>
+                        <td style="width:100px;">{{$datos->marca}}</td>
                         <td>{{$datos->vitola}}</td>
 
                         <td>{{$datos->nombre}}</td>
