@@ -220,6 +220,7 @@ Route::post('/producto', [tabla_existencia::class, 'import'])->name('codigo');
 
 
 Route::post('/datos_producto', DatosProductos::class)->name('datos_producto');
+Route::get('/datos_producto', DatosProductos::class)->name('datos_producto');
 
 Route::post('/eliminar_detalles_productos', [Productos::class, 'eliminar_detalle']);
 

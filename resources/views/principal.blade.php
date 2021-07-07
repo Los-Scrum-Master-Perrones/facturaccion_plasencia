@@ -42,9 +42,6 @@
 
     @yield('content')
 
-
-
-
     <div class="all" style="padding-bottom: 10px">
 
 
@@ -376,7 +373,10 @@
 
     <script>
 
-        window.addEventListener('cerrar', event => {
+        window.addEventListener('abrir_faltalte', event => {
+            $("#productos_faltantes").modal('show');
+        })
+        window.addEventListener('cerrar_faltalte', event => {
             $("#productos_faltantes").modal('hide');
         })
 

@@ -236,10 +236,7 @@
                             <th rowspan="2"></th>
                         </tr>
                         <tr style="font-size:8px; ">
-                            @php
-                            $date = Carbon\Carbon::now()->format("Y-m-d");
-                            @endphp
-                            <th>{{strftime( $date )}}</th>
+                            <th>Bruto Net</th>
                             <th>Neto Net</th>
                         </tr>
                     </thead>
@@ -297,19 +294,19 @@
                         $sampler = DB::select('SELECT sampler FROM clase_productos WHERE item =
                         ?',[$detalles->codigo_item]);
 
-                        $pendiente = DB::select('SELECT orden FROM pendiente WHERE id_pendiente =
+                        $pendiente = DB::select('SELECT orden,mes FROM pendiente WHERE id_pendiente =
                         ?',[$detalles->id_pendiente]);
 
                         $conteo_sampler = DB::select('SELECT COUNT(*) AS tuplas FROM pendiente WHERE item = ? AND orden
-                        = ?',[$detalles->codigo_item,$pendiente[0]->orden]);
+                        = ? and mes = ?',[$detalles->codigo_item,$pendiente[0]->orden,$pendiente[0]->mes]);
 
-                        $item_primero = DB::select('SELECT id_pendiente FROM pendiente WHERE item = ? AND orden LIKE
-                        CONCAT("%",?,"%") limit 0,1',[$detalles->codigo_item,$pendiente[0]->orden]);
+                        $item_primero = DB::select('SELECT id_pendiente FROM pendiente WHERE item = ? AND mes = ? AND orden LIKE
+                        CONCAT("%",?,"%") limit 0,1',[$detalles->codigo_item,$pendiente[0]->mes,$pendiente[0]->orden]);
 
 
                         $total_pendiente = DB::select('SELECT sum(pendiente.saldo) AS
                         total_saldo,sum(pendiente.pendiente) AS total_pendiente FROM pendiente WHERE item = ? AND orden
-                        = ?',[$detalles->codigo_item,$pendiente[0]->orden]);
+                        = ? and mes = ?',[$detalles->codigo_item,$pendiente[0]->orden,$pendiente[0]->mes]);
 
 
                         if( $sampler[0]->sampler == "si"){
@@ -348,14 +345,14 @@
 
                             $cantidad_sampler_empresa = DB::select('SELECT COUNT(pendiente.saldo) AS sampler_empresa
                             FROM pendiente WHERE item = ? AND orden
-                            = ?',[$detalles->codigo_item,$pendiente[0]->orden])[0]->sampler_empresa;
+                            = ? and mes = ?',[$detalles->codigo_item,$pendiente[0]->orden,$pendiente[0]->mes ])[0]->sampler_empresa;
 
 
                             $cantidad_total_sampler_factura = DB::select('SELECT COUNT(pendiente.saldo) AS
                             sampler_factura
                             FROM pendiente WHERE item = ? AND orden
-                            = ? AND pendiente != 0 AND saldo !=
-                            0',[$detalles->codigo_item,$pendiente[0]->orden])[0]->sampler_factura;
+                            = ? and mes = ? AND pendiente != 0 AND saldo !=
+                            0',[$detalles->codigo_item,$pendiente[0]->orden,$pendiente[0]->mes])[0]->sampler_factura;
 
                             $total_ac = intval($total_pendiente[0]->total_saldo) - ((intval( $total_sampler_detalles) *
                             intval($cantidad_total_sampler_factura))/intval($cantidad_sampler_empresa));

@@ -81,7 +81,7 @@ class Pedido extends Component
     }
 
     public function modal_productos_nuevos(){
-        $this->dispatchBrowserEvent('abrir');
+        $this->dispatchBrowserEvent('abrir_faltalte');
     }
 
     public function agregar_productos(){
@@ -89,7 +89,7 @@ class Pedido extends Component
     }
 
     public function agregar_productos_exporta(){
-        $this->dispatchBrowserEvent('cerrar');
+        $this->dispatchBrowserEvent('cerrar_faltalte');
         return Excel::download(new SamplerFaltantes(),"Faltantes-".Carbon::now()->format("Ymdgis").".xls");
       
     }

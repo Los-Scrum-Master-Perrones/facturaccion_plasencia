@@ -274,9 +274,9 @@ class FacturaTerminado extends Component
 
 
 
-        $datos_pendiente = DB::select('SELECT item, orden, saldo FROM pendiente WHERE id_pendiente = ?', [$request->id_pendi]);
+        $datos_pendiente = DB::select('SELECT item, orden, saldo,mes FROM pendiente WHERE id_pendiente = ?', [$request->id_pendi]);
 
-        $conteo = DB::select('SELECT * FROM pendiente WHERE orden = ? AND item = ?', [$datos_pendiente[0]->orden,  $datos_pendiente[0]->item]);
+        $conteo = DB::select('SELECT * FROM pendiente WHERE orden = ? AND item = ? AND mes = ?', [$datos_pendiente[0]->orden,  $datos_pendiente[0]->item,$datos_pendiente[0]->mes]);
 
         if ($sampler[0]->sampler == "si") {
 
@@ -334,7 +334,7 @@ class FacturaTerminado extends Component
 
 
 
-        $datos_pendiente = DB::select('SELECT item, orden, saldo FROM pendiente WHERE id_pendiente =
+        $datos_pendiente = DB::select('SELECT item, orden, saldo, mes FROM pendiente WHERE id_pendiente =
                                         (select id_pendiente from detalle_factura where id_detalle = ?)', [$request->id_pendi]);
 
 
