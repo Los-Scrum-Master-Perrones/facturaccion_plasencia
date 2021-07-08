@@ -846,12 +846,12 @@
                                             type="number" min="1" autocomplete="off" required>
                                     </div>
                                     <div class="mb-3 col">
-                                        <label for="txt_peso_bruto" class="form-label">Preso Bruto (Lbs)</label>
+                                        <label for="txt_peso_bruto" class="form-label">Peso Bruto (Lbs)</label>
                                         <input id="peso_bruto" name="peso_bruto" class="form-control" type="number"
                                             min="1" autocomplete="off" required>
                                     </div>
                                     <div class="mb-3 col">
-                                        <label for="txt_peso_neto" class="form-label">Preso Neto (Lbs)</label>
+                                        <label for="txt_peso_neto" class="form-label">Peso Neto (Lbs)</label>
                                         <input id="peso_neto" name="peso_neto" class="form-control" type="number"
                                             min="1" autocomplete="off" required>
                                     </div>
@@ -914,12 +914,12 @@
                                             autocomplete="off">
                                     </div>
                                     <div class="mb-3 col">
-                                        <label for="txt_peso_bruto" class="form-label">Preso Bruto (Lbs)</label>
+                                        <label for="txt_peso_bruto" class="form-label">Peso Bruto (Lbs)</label>
                                         <input id="peso_bruto" name="peso_bruto" value="{{$editar_peso_bruto}}"
                                             class="form-control" type="text" autocomplete="off">
                                     </div>
                                     <div class="mb-3 col">
-                                        <label for="txt_peso_neto" class="form-label">Preso Neto (Lbs)</label>
+                                        <label for="txt_peso_neto" class="form-label">Peso Neto (Lbs)</label>
                                         <input id="peso_neto" name="peso_neto" value="{{$editar_peso_neto}}"
                                             class="form-control" type="text" autocomplete="off">
                                     </div>
