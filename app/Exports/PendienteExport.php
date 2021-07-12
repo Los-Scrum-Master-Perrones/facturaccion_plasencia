@@ -21,7 +21,7 @@ class PendienteExport implements FromCollection,
                                 WithColumnFormatting
 {
 
- 
+
 
     public function headings(): array
     {
@@ -40,13 +40,14 @@ class PendienteExport implements FromCollection,
             'ANILLO',
             'CELLO',
             'UPC',
-            'PENDIENTE',
-            'SALDO',
             'TIPO DE EMPAQUE',
             'PAQUETES',
             'UNIDADES',
             'CODIGO PRECIO',
             'PRECIO',
+            'PENDIENTE',
+            'SALDO',
+            'SALDO ($)',
         ];
     }
 
@@ -54,7 +55,9 @@ class PendienteExport implements FromCollection,
     {
         return [
             'B' => NumberFormat::FORMAT_TEXT,
+            'R' => NumberFormat::FORMAT_TEXT,
             'O' => NumberFormat::FORMAT_NUMBER,
+            'V' => NumberFormat::FORMAT_CURRENCY_USD_SIMPLE,
         ];
     }
 
@@ -96,19 +99,19 @@ if($v14 == null){ $v14 = "";}else{$v14 =  Static_Vars_Pendiente::getmeses();}
 
 
         $datos_pendienteExcel = DB::select('call buscar_pendiente_excel(:v1,:v2,:v3,:v4,:v5, :v6,:v7,:v8,:v9,:v10, :v11,:v12,:v13,:v14)',
-        [            
+        [
             'v1' => $v1,
             'v2' => $v2,
             'v3' => $v3,
             'v4' => $v4,
             'v5' => $v5,
-            
+
             'v6' => $v6,
             'v7' => $v7,
             'v8' => $v8,
             'v9' => $v9,
             'v10' => $v10,
-            
+
             'v11' => $v11,
             'v12' => $v12,
             'v13' => $v13,

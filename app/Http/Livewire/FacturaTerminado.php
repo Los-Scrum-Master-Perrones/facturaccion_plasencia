@@ -63,7 +63,7 @@ class FacturaTerminado extends Component
     public $detalles_produtos;
     public $aereo;
 
-    //TODO Busqueda pendiente factura 
+    //TODO Busqueda pendiente factura
     public $items;
     public $orden_sistemas;
     public $orden_pedidos;
@@ -73,15 +73,15 @@ class FacturaTerminado extends Component
     public $busqueda_capas;
     public $busqueda_tipo_empaques;
     public $busqueda_meses;
-    //TODO Busqueda pendiente factura 
+    //TODO Busqueda pendiente factura
 
     public function render()
     {
-    
+
         setlocale(LC_TIME, "spanish");
         $Nueva_Fecha = date("d-m-Y", strtotime($this->fecha_factura));
 
-        
+
         $this->items = DB::select(
             'call buscar_pendiente_item()'
         );
@@ -119,8 +119,8 @@ class FacturaTerminado extends Component
                 'orden' => $this->hon,
                 'fechade' =>  $this->fede,
                 'item' =>  $this->item,
-                'orden_sistema' =>  $this->orden,     
-                'tipo_factura' =>  $this->aereo,  
+                'orden_sistema' =>  $this->orden,
+                'tipo_factura' =>  $this->aereo,
             ]
         );
 
@@ -162,22 +162,16 @@ class FacturaTerminado extends Component
 
     public function borrar_detalles($id)
     {
-
-
         $this->id_eliminar = $id;
         $this->dispatchBrowserEvent("borrar");
     }
 
     public function borrar_detalles_datos($id)
     {
-
-
         $sampler = DB::select('SELECT sampler,descripcion_sampler
         FROM clase_productos
         WHERE  clase_productos.item = (select item from pendiente where id_pendiente =
                                             (select id_pendiente from detalle_factura where id_detalle = ?)
-
-
                                         );', [$id]);
 
         if ($sampler[0]->sampler == "si") {
@@ -185,7 +179,6 @@ class FacturaTerminado extends Component
             $detalles_item = DB::select('select id_pendiente from detalle_factura  where id_detalle = ?', [$id]);
 
             $detalles = DB::select('select item, orden from pendiente where id_pendiente = ?', [$detalles_item[0]->id_pendiente]);
-
 
             $valores_extras = DB::select('select id_pendiente, (select id_detalle from detalle_factura  where detalle_factura.id_pendiente = pendiente.id_pendiente) as id_detalle from pendiente where item = ? and orden = ?', [$detalles[0]->item, $detalles[0]->orden]);
 
@@ -198,16 +191,12 @@ class FacturaTerminado extends Component
             DB::delete('call eliminar_detalle_factura(:id)', ['id' => $id]);
         }
 
-
-
         $this->dispatchBrowserEvent("cerrar_modal_borrar");
     }
 
 
     public function cerrar_modal()
     {
-
-
         $this->dispatchBrowserEvent("cerrar");
     }
 
@@ -249,7 +238,6 @@ class FacturaTerminado extends Component
         $this->editar_peso_bruto =  0;
         $this->editar_peso_neto =  0;
 
-
         $this->items = [];
         $this->orden_sistemas = [];
         $this->orden_pedidos = [];
@@ -273,13 +261,11 @@ class FacturaTerminado extends Component
                                 WHERE  clase_productos.item = (select item from pendiente where id_pendiente = ?);', [$request->id_pendi]);
 
 
-
         $datos_pendiente = DB::select('SELECT item, orden, saldo,mes FROM pendiente WHERE id_pendiente = ?', [$request->id_pendi]);
 
         $conteo = DB::select('SELECT * FROM pendiente WHERE orden = ? AND item = ? AND mes = ?', [$datos_pendiente[0]->orden,  $datos_pendiente[0]->item,$datos_pendiente[0]->mes]);
 
         if ($sampler[0]->sampler == "si") {
-
 
             for ($i = 0; $i < count($conteo); $i++) {
                 DB::select('call insertar_detalle_factura(
@@ -314,10 +300,6 @@ class FacturaTerminado extends Component
                 "para" =>  $request->para, "anterior" => ($datos_pendiente[0]->saldo - ($request->unidades_bultos * $request->cantidad_bultos))
             ]);
         }
-
-
-
-
         return redirect()->route('f_terminado');
     }
 
@@ -351,12 +333,11 @@ class FacturaTerminado extends Component
                 ,:pa_peso_bruto
                 ,:pa_peso_neto
                 ,:pa_cantidad_puros
-                ,:pa_unidad,
-                :anterior)', [
+                ,:pa_unidad)', [
 
                 "id_pendiente" => $request->id_pendi, "pa_cantidad_cajas" => $request->unidades_cajon, "pa_peso_bruto" => $request->peso_bruto,
                 "pa_peso_neto" => $request->peso_neto, "pa_cantidad_puros" => $request->cantidad_bultos, "pa_unidad" => $request->unidades_bultos,
-                "anterior" => ($datos_pendiente[0]->saldo - ($request->unidades_bultos * $request->cantidad_bultos))
+
             ]);
 
             $conteo = count(DB::select('select * from detalle_clase_productos where item = ?', [$detalles[0]->item]));
@@ -370,12 +351,12 @@ class FacturaTerminado extends Component
                     ,:pa_peso_bruto
                     ,:pa_peso_neto
                     ,:pa_cantidad_puros
-                    ,:pa_unidad,
-                    :anterior)', [
+                    ,:pa_unidad
+                    )', [
 
                     "id_pendiente" =>   $id_detalle_fa, "pa_cantidad_cajas" => $request->unidades_cajon, "pa_peso_bruto" => 0,
                     "pa_peso_neto" => 0, "pa_cantidad_puros" => $request->cantidad_bultos, "pa_unidad" => $request->unidades_bultos,
-                    "anterior" => ($datos_pendiente[0]->saldo - ($request->unidades_bultos * $request->cantidad_bultos))
+
                 ]);
                 $id_detalle_fa++;
             }
@@ -398,7 +379,7 @@ class FacturaTerminado extends Component
     public function imprimir(){
 
         $this->detalles_venta = DB::select('call mostrar_detalle_factura(?)', [$this->aereo]);
-        
+
         $vista =  view('Exports.factura-terminado-exports', [
             'detalles_venta' => $this->detalles_venta
         ]);
@@ -411,7 +392,7 @@ class FacturaTerminado extends Component
     {
         if ($this->cliente != null && $this->contenedor != null) {
 
-            
+
         $detalles = DB::select('call mostrar_detalle_factura(?)', [$this->aereo]);
 
 
@@ -474,7 +455,7 @@ class FacturaTerminado extends Component
 
                 redirect()->route('historial_factura');
 
-                
+
                 return Excel::download(new FacturaExportView($vista), 'Factura.xlsx');
         } else {
             $this->dispatchBrowserEvent("advertencia_mensaje");

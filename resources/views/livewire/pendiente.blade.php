@@ -679,12 +679,14 @@
                         <th>PRECIO</th>
                         <th>PENDIENTE</th>
                         <th>SALDO</th>
+                        <th>SALDO ($)</th>
                         <th></th>
                     </tr>
                 </thead>
                 <tbody name="body" id="body">
                     <?php $sumas = 0 ;
                     $sumap=0;
+                    $sumaprecio_dolar=0;
                     ?>
                     @foreach($datos_pendiente as $i => $datos)
                     <tr>
@@ -705,9 +707,11 @@
                         <td>{{$datos->cello}}</td>
                         <td>{{$datos->upc}}</td>
                         <td>{{$datos->serie_precio}}</td>
-                        <td>{{$datos->precio}}</td>
+                        <td style="text-align:right;">{{$datos->precio}}</td>
                         <td>{{$datos->pendiente}}</td>
                         <td>{{$datos->saldo}}</td>
+                        <td style="text-align:right;">{{number_format($datos->precio_dolares,2)}}</td>
+
 
 
                         <td style="width:120px;">
@@ -735,8 +739,11 @@
                         </td>
                     </tr>
 
-                    <?php $sumas = $sumas + $datos->saldo;
-                             $sumap = $sumap + $datos->pendiente; ?>
+                    <?php
+                        $sumas = $sumas + $datos->saldo;
+                        $sumap = $sumap + $datos->pendiente;
+                        $sumaprecio_dolar += $datos->precio_dolares;
+                    ?>
 
                     @endforeach
                 </tbody>
@@ -744,12 +751,15 @@
         </div>
     </div>
 
-    <div class="input-group" style="width:30%;position: fixed;right: 0px;bottom:0px; height:30px;">
+    <div class="input-group" style="width:40%; position: fixed;right: 0px;bottom:0px; height:30px;">
         <span class="form-control input-group-text">Total pendiente</span>
         <input type="text" class="form-control" id="sumap" value="{{$sumap}}">
 
         <span class="form-control input-group-text">Total saldo</span>
         <input type="text" class="form-control" id="sumas" value="{{$sumas}}">
+
+        <span class="form-control input-group-text">Total saldo ($)</span>
+        <input type="text" class="form-control" id="sumaprecio" value="{{number_format($sumaprecio_dolar,2)}}">
     </div>
 
 </div>
@@ -1047,6 +1057,7 @@
         } else {
             var sumas = 0;
             var sumap = 0;
+            var sumapprecio_dolar = 0;
             var incre = 0
             for (var i = 0; i < data.length; i++) {
                 try {
@@ -1065,6 +1076,7 @@
 
                         sumas = sumas + data[i].saldo;
                         sumap = sumap + data[i].pendiente;
+
 
                        if (data[i].observacion == null) {
                             data[i].observacion = "";
@@ -1094,8 +1106,14 @@
                             data[i].saldo = "";
                         }
 
+                        if (data[i].precio_dolares == null) {
+                            data[i].precio_dolares = 0.00;
+                        }
+
+                        sumapprecio_dolar += data[i].precio_dolares;
+
                         var tabla_nueva = `
-                  <tr> 
+                  <tr>
                   <td>` + (++incre) + `</td>
                     <td>` + data[i].categoria + `</td>
                     <td>` + data[i].item + `</td>
@@ -1115,9 +1133,12 @@
                     <td>` + data[i].cello + `</td>
                     <td>` + data[i].upc + `</td>
                     <td>` + data[i].serie_precio + `</td>
-                    <td>` + data[i].precio + `</td>
+                    <td style="text-align:right;">` + data[i].precio + `</td>
                     <td>` + data[i].pendiente + `</td>
                     <td>` + data[i].saldo + `</td>
+                    <td style="text-align:right;">` + data[i].precio_dolares.toFixed(2) + `</td>
+
+
 
                     <td style="width:100px;">
                                 <a data-toggle="modal" data-target="#modal_eliminar_detalle"
@@ -1155,8 +1176,7 @@
                 }
                 document.getElementById("sumas").value = sumas.toString();
                 document.getElementById("sumap").value = sumap.toString();
-
-
+                document.getElementById("sumaprecio").value =  sumapprecio_dolar.toFixed(2).toString();
             }
         }
         // fin del else
