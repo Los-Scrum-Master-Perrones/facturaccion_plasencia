@@ -1,18 +1,4 @@
 <div xmlns:wire="http://www.w3.org/1999/xhtml">
-    <title></title>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" />
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Hola</title>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" />
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
-    <script src="{{ URL::asset('css/tabla.js') }}"></script>
-    <script>
-        $('.mi-selector').select2();
-    </script>
 
     @livewireStyles
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/css/bootstrap.min.css" rel="stylesheet"
@@ -120,16 +106,35 @@
 
 
                     <div class="col">
-                        <select class="  form-control" style="overflow-y: scroll; height:34px;" name="pres"
-                            wire:model="pres">
-                            <option value="" style="overflow-y: scroll;">Todas presentaciones </option>
-                            <option value="Puros Tripa Larga" style="overflow-y: scroll;">Puros Tripa Larga </option>
-                            <option value="Puros Tripa Corta" style="overflow-y: scroll;">Puros Tripa Corta </option>
-                            <option value="Puros Sandwich" style="overflow-y: scroll;">Puros Sandwich </option>
-                        </select>
+                        <div class="dropdown">
+                            <button class="btn btn-secondary dropdown-toggle form-control" type="button"
+                                id="dropdownMenuButton1" data-toggle="dropdown">
+                                Presentacion
+                            </button>
+                            <ul class="dropdown-menu " aria-labelledby="dropdownMenuButton1">
+                                <div class="form-check ">
+                                    <input class="form-check-input" type="checkbox" value="Puros Tripa Larga" id="checkbox5" checked
+                                        name="checkbox5" wire:model="r_cinco">
+                                    <label class="form-check-label " for="flexCheckDefault"> Puros Tripa Larga </label>
+                                </div>
+
+                                <div class="form-check ">
+                                    <input class="form-check-input" type="checkbox" value="Puros Tripa Corta" id="checkbox6" checked
+                                        name="checkbox6" wire:model="r_seis">
+                                    <label class="form-check-label " for="flexCheckChecked"> Puros Tripa Corta </label>
+                                </div>
+
+                                <div class="form-check ">
+                                    <input class="form-check-input " type="checkbox" value="Puros Sandwich" id="checkbox7" checked
+                                        name="checkbox7" wire:model="r_siete">
+                                    <label class="form-check-label " for="flexCheckDefault"> Puros Sandwich
+                                    </label>
+                                </div>
+                            </ul>
+                        </div>
                     </div>
 
-                    <div class="col">
+                    <div class="col" wire:ignore>
                         <select onchange="buscar_tabla()" onclick="funcion1()" name="b_item" id="b_item"
                             class=" mi-selector form-control" style="width:100%;height:34px;" name="states[]">
                             <option value="" style="overflow-y: scroll;">Todos Items</option>
@@ -140,7 +145,7 @@
                     </div>
 
 
-                    <div class="col">
+                    <div class="col" wire:ignore>
                         <select onchange="buscar_tabla()" onclick="funcion1()" name="b_orden" id="b_orden"
                             class=" mi-selector form-control" style="width:100%;height:34px;" name="states[]">
                             <option value="" style="overflow-y: scroll;">Todas las ordenes del sistema</option>
@@ -150,7 +155,7 @@
                         </select>
                     </div>
 
-                    <div class="col">
+                    <div class="col" wire:ignore>
                         <select onchange="buscar_tabla()" onclick="funcion1()" name="b_hon" id="b_hon"
                             class=" mi-selector form-control" style="width:100%;height:34px;" name="states[]">
                             <option value="" style="overflow-y: scroll;">Todas las ordenes</option>
@@ -165,7 +170,7 @@
 
                 <div class="row">
 
-                    <div class="col">
+                    <div class="col" wire:ignore>
 
                         <select onchange="buscar_tabla()" onclick="funcion1()" name="b_marca" id="b_marca"
                             class=" mi-selector form-control" style="width:100%;height:34px;" name="states[]">
@@ -176,7 +181,7 @@
                         </select>
                     </div>
 
-                    <div class="col">
+                    <div class="col" wire:ignore>
                         <select onchange="buscar_tabla()" onclick="funcion1()" name="b_vitola" id="b_vitola"
                             class=" mi-selector form-control" style="width:100%;height:34px;" name="states[]">
                             <option value="" style="overflow-y: scroll;">Todas las vitolas</option>
@@ -186,7 +191,7 @@
                         </select>
                     </div>
 
-                    <div class="col">
+                    <div class="col" wire:ignore>
                         <select onchange="buscar_tabla()" onclick="funcion1()" name="b_nombre" id="b_nombre"
                             class=" mi-selector form-control" style="width:100%;height:34px;" name="states[]">
                             <option value="" style="overflow-y: scroll;">Todos los nombres</option>
@@ -196,7 +201,7 @@
                         </select>
                     </div>
 
-                    <div class="col">
+                    <div class="col" wire:ignore>
                         <select onchange="buscar_tabla()" onclick="funcion1()" name="b_capa" id="b_capa"
                             class=" mi-selector form-control" style="width:100%;height:34px;" name="states[]">
                             <option value="" style="overflow-y: scroll;">Todas las capas</option>
@@ -206,7 +211,7 @@
                         </select>
                     </div>
 
-                    <div class="col">
+                    <div class="col" wire:ignore>
                         <select onchange="buscar_tabla()" onclick="funcion1()" name="b_empaque" id="b_empaque"
                             class=" mi-selector form-control" style="width:100%;height:34px;" name="states[]">
                             <option value="" style="overflow-y: scroll;">Todos los empaques</option>
@@ -216,7 +221,7 @@
                         </select>
                     </div>
 
-                    <div class="col">
+                    <div class="col" wire:ignore>
                         <select onchange="buscar_tabla()" onclick="funcion1()" name="b_mes" id="b_mes"
                             class=" mi-selector form-control" style="width:100%;height:34px;" name="states[]">
                             <option value="" style="overflow-y: scroll;">Todos los meses</option>
@@ -1048,8 +1053,8 @@
         var checkbox3 = document.getElementById('checkbox3').value;
         var checkbox4 = document.getElementById('checkbox4').value;
 
-        var datas = '<?php echo json_encode($datos_pendiente);?>';
-        var data = JSON.parse(datas);
+
+        var data = @this.datos_pendiente;
 
         if (b_orden == "" && b_item == "" && b_hon == "" && b_mes == "" && b_marca == "" &&
             b_vitola == "" && b_capa == "" && b_nombre == "" && b_empaque == "") {

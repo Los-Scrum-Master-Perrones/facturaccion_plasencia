@@ -1,5 +1,5 @@
 <div xmlns:wire="http://www.w3.org/1999/xhtml">
-    
+
     <ul class="nav justify-content-center">
         <li class="nav-item">
             <a style="color:#E5B1E2; font-size:12px;" href="pendiente_empaque"><strong>Pendiente</strong></a>
@@ -76,8 +76,35 @@
                     </div>
                 </div>
 
-
                 <div class="col">
+                    <div class="dropdown">
+                        <button class="btn btn-secondary dropdown-toggle form-control" type="button"
+                            id="dropdownMenuButton1" data-toggle="dropdown">
+                            Presentacion
+                        </button>
+                        <ul class="dropdown-menu " aria-labelledby="dropdownMenuButton1">
+                            <div class="form-check ">
+                                <input class="form-check-input" type="checkbox" value="Puros Tripa Larga" id="checkbox5" checked
+                                    name="checkbox5" wire:model="r_cinco">
+                                <label class="form-check-label " for="flexCheckDefault"> Puros Tripa Larga </label>
+                            </div>
+
+                            <div class="form-check ">
+                                <input class="form-check-input" type="checkbox" value="Puros Tripa Corta" id="checkbox6" checked
+                                    name="checkbox6" wire:model="r_seis">
+                                <label class="form-check-label " for="flexCheckChecked"> Puros Tripa Corta </label>
+                            </div>
+
+                            <div class="form-check ">
+                                <input class="form-check-input " type="checkbox" value="Puros Sandwich" id="checkbox7" checked
+                                    name="checkbox7" wire:model="r_siete">
+                                <label class="form-check-label " for="flexCheckDefault"> Puros Sandwich
+                                </label>
+                            </div>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col" wire:ignore>
                     <select onchange="buscar_tablaE()" onclick="funcion1()" name="b_mesE" id="b_mesE"
                         class=" mi-selector form-control" style="width:100%;height:34px;">
                         <option value="" style="overflow-y: scroll;">Todos los meses</option>
@@ -87,7 +114,7 @@
                     </select>
                 </div>
 
-                <div class="col">
+                <div class="col" wire:ignore>
                     <select onchange="buscar_tablaE()" onclick="funcion1()" name="b_itemE" id="b_itemE"
                         class=" mi-selector form-control" style="width:100%;height:34px;" name="states[]" >
                         <option value="" style="overflow-y: scroll;">Todos Items</option>
@@ -97,7 +124,7 @@
                     </select>
                 </div>
 
-                <div class="col">
+                <div class="col" wire:ignore>
                     <select onchange="buscar_tablaE()" onclick="funcion1()" name="b_ordenE" id="b_ordenE"
                         class=" mi-selector form-control" style="width:100%;height:34px;" name="states[]" >
                         <option value="" style="overflow-y: scroll;">Todas las ordenes del sistema</option>
@@ -107,7 +134,7 @@
                     </select>
                 </div>
 
-                <div class="col">
+                <div class="col" wire:ignore>
                     <select onchange="buscar_tablaE()" onclick="funcion1()" name="b_honE" id="b_honE"
                         class=" mi-selector form-control" style="width:100%;height:34px;" name="states[]" >
                         <option value="" style="overflow-y: scroll;">Todas las ordenes</option>
@@ -124,7 +151,7 @@
 
             <div class="col" >
                   <div class="row" >
-                  <div class="col" >
+                  <div class="col" wire:ignore>
 
                    <abbr title="Agregar a Pendiente Empaque">
                    <button class=" botonprincipal" onclick="addexportar(3)" > <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-plus-circle" viewBox="0 0 16 16">
@@ -145,7 +172,7 @@
                       </div>
 
 
-                <div class="col">
+                <div class="col" wire:ignore>
                     <select onchange="buscar_tablaE()" onclick="funcion1()" name="b_marcaE" id="b_marcaE"
                         class=" mi-selector form-control" style="width:100%;height:34px;" name="states[]" >
                         <option value="" style="overflow-y: scroll;">Todas las marcas</option>
@@ -155,7 +182,7 @@
                     </select>
                 </div>
 
-                <div class="col">
+                <div class="col" wire:ignore>
                     <select onchange="buscar_tablaE()" onclick="funcion1()" name="b_vitolaE" id="b_vitolaE"
                         class=" mi-selector form-control" style="width:100%;height:34px;" name="states[]" >
                         <option value="" style="overflow-y: scroll;">Todas las vitolas</option>
@@ -165,7 +192,7 @@
                     </select>
                 </div>
 
-                <div class="col">
+                <div class="col" wire:ignore>
                     <select onchange="buscar_tablaE()" onclick="funcion1()" name="b_nombreE" id="b_nombreE"
                         class=" mi-selector form-control" style="width:100%;height:34px;" name="states[]" >
                         <option value="" style="overflow-y: scroll;">Todos los nombres</option>
@@ -175,7 +202,7 @@
                     </select>
                 </div>
 
-                <div class="col">
+                <div class="col" wire:ignore>
                     <select onchange="buscar_tablaE()" onclick="funcion1()" name="b_capaE" id="b_capaE"
                         class=" mi-selector form-control" style="width:100%;height:34px;" name="states[]" >
                         <option value="" style="overflow-y: scroll;">Todas las capas</option>
@@ -185,7 +212,7 @@
                     </select>
                 </div>
 
-                <div class="col">
+                <div class="col" wire:ignore>
                     <select onchange="buscar_tablaE()" onclick="funcion1()" name="b_empaqueE" id="b_empaqueE"
                         class=" mi-selector form-control" style="width:100%;height:34px;" name="states[]" >
                         <option value="" style="overflow-y: scroll;">Todos los empaques</option>
@@ -620,9 +647,9 @@
                 }
         </script>
 
+
         <script type="text/javascript">
             function buscar_tablaE() {
-                $('.mi-selector').select2();
 
                 var table = document.getElementById("tabla_pendiente_empaque");
                 var rowCount = table.rows.length;
@@ -654,7 +681,7 @@
 
 
 
-                var data = @json($datos_pendiente_empaque);
+                var data = @this.datos_pendiente_empaque;
 
 
 

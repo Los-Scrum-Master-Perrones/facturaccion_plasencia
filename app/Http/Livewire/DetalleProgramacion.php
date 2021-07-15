@@ -14,8 +14,7 @@ use Illuminate\Support\Facades\DB;
 
 class DetalleProgramacion extends Component
 {
-
-
+    
     public $detalles_provicionales;
     public $busqueda;
     public $borrar;

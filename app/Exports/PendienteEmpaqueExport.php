@@ -62,6 +62,9 @@ $v1 =  Static_Vars_PendienteEmpaque::gete_cat1s();
 $v2 =  Static_Vars_PendienteEmpaque::gete_cat2s();
 $v3 =  Static_Vars_PendienteEmpaque::gete_cat3s();
 $v4 =  Static_Vars_PendienteEmpaque::gete_cat4s();
+$v45 =  Static_Vars_PendienteEmpaque::gete_cat5s();
+$v46 =  Static_Vars_PendienteEmpaque::gete_cat6s();
+$v47 =  Static_Vars_PendienteEmpaque::gete_cat7s();
 
 $v5 =  Static_Vars_PendienteEmpaque::gete_items();
 $v6 =  Static_Vars_PendienteEmpaque::gete_ordenes();
@@ -79,6 +82,10 @@ if($v2 == null){ $v2 = "";}else{$v2 = Static_Vars_PendienteEmpaque::gete_cat2s()
 if($v3 == null){ $v3 = "";}else{$v3 = Static_Vars_PendienteEmpaque::gete_cat3s();}
 if($v4 == null){ $v4 = "";}else{$v4 = Static_Vars_PendienteEmpaque::gete_cat4s();}
 
+if($v45 == null){ $v45 = "";}else{$v45 = Static_Vars_PendienteEmpaque::gete_cat5s();}
+if($v46 == null){ $v46 = "";}else{$v46 = Static_Vars_PendienteEmpaque::gete_cat6s();}
+if($v47 == null){ $v47 = "";}else{$v47 = Static_Vars_PendienteEmpaque::gete_cat7s();}
+
 if($v5 == null){ $v5 = "";}else{$v5 = Static_Vars_PendienteEmpaque::gete_items();}
 if($v6 == null){ $v6 = "";}else{$v6 = Static_Vars_PendienteEmpaque::gete_ordenes();}
 if($v7 == null){ $v7 = "";}else{$v7 = Static_Vars_PendienteEmpaque::gete_hons();}
@@ -91,12 +98,16 @@ if($v12 == null){ $v12 = "";}else{$v12 = Static_Vars_PendienteEmpaque::gete_empa
 if($v13 == null){ $v13 = "";}else{$v13 =  Static_Vars_PendienteEmpaque::gete_meses();}
 
 
-        $datos_pendienteExcel = DB::select('call buscar_pendiente_empaque_excel2(:v1,:v2,:v3,:v4,:v5, :v6,:v7,:v8,:v9,:v10, :v11,:v12,:v13)',
+        $datos_pendienteExcel = DB::select('call buscar_pendiente_empaque_excel2(:v1,:v2,:v3,:v4,:v45,:v46,:v47,:v5, :v6,:v7,:v8,:v9,:v10, :v11,:v12,:v13)',
         [
             'v1' => $v1,
             'v2' => $v2,
             'v3' => $v3,
             'v4' => $v4,
+
+            'v45' => $v45,
+            'v46' => $v46,
+            'v47' => $v47,
 
             'v5' => $v5,
             'v6' => $v6,

@@ -6,12 +6,12 @@ use Livewire\Component;
 
 use App\Exports\PendienteExport;
 use Illuminate\Http\Request;
-use DB;
+
 use Maatwebsite\Excel\Facades\Excel;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\View;
 use App\Http\Static_Vars_Pendiente;
-
+use Illuminate\Support\Facades\DB;
 
 class Pendiente extends Component
 {
@@ -22,7 +22,9 @@ class Pendiente extends Component
     public $r_dos="2";
     public $r_tres="3";
     public $r_cuatro="4";
-    public $pres;
+    public $r_cinco="Puros Tripa Larga";
+    public $r_seis="Puros Tripa Corta";
+    public $r_siete="Puros Sandwich";
 
 
     /* procedimientos almacanedos cargar select de nuevo pendiente*/
@@ -152,14 +154,15 @@ class Pendiente extends Component
 
 
 
-       $this->datos_pendiente = DB::select('call buscar_pendiente(:uno,:dos,:tres,:cuatro,:pres)',
+       $this->datos_pendiente = DB::select('call buscar_pendiente(:uno,:dos,:tres,:cuatro,:pres,:seis,:siete)',
             [
                 'uno' =>  $this->r_uno,
                 'dos' =>  $this->r_dos,
                 'tres' =>  $this->r_tres,
                 'cuatro' =>  $this->r_cuatro,
-                'pres' =>  $this->pres
-
+                'pres' =>  $this->r_cinco,
+                'seis' =>  $this->r_seis,
+                'siete' =>  $this->r_siete,
             ]
         );
 
@@ -233,23 +236,8 @@ class Pendiente extends Component
 
 
 
-        $this->datos_pendiente = DB::select('call buscar_pendiente(:uno,:dos,:tres,:cuatro,:pres)',
-        [
-            'uno' =>  $this->r_uno,
-            'dos' =>  $this->r_dos,
-            'tres' =>  $this->r_tres,
-            'cuatro' =>  $this->r_cuatro,
-            'pres' =>  $this->pres
 
-        ]
-    );
     }
-
-
-
-
-
-
 
 
     public function pendiente_indexi(Request $request)
@@ -269,16 +257,6 @@ class Pendiente extends Component
 
 
 
-            $this->datos_pendiente = DB::select('call buscar_pendiente(:uno,:dos,:tres,:cuatro,:pres)',
-            [
-                'uno' =>  $this->r_uno,
-                'dos' =>  $this->r_dos,
-                'tres' =>  $this->r_tres,
-                'cuatro' =>  $this->r_cuatro,
-                'pres' =>  $this->pres
-
-            ]
-        );
 
 
         return redirect()->route('pendiente')->with('insertar_pendiente', $insertar_pendiente);
@@ -332,15 +310,7 @@ class Pendiente extends Component
         $this->vitolas= \DB::select('call buscar_vitola("")');
         $this->tipo_empaques= \DB::select('call buscar_tipo_empaque("")');
 
-        $this->datos_pendiente = DB::select('call buscar_pendiente(:uno,:dos,:tres,:cuatro,:pres)',
-        [
-            'uno' =>  $this->r_uno,
-            'dos' =>  $this->r_dos,
-            'tres' =>  $this->r_tres,
-            'cuatro' =>  $this->r_cuatro,
-            'pres' =>  $this->pres
-        ]
-    );
+
 
         return redirect()->route('pendiente');
     }
@@ -421,16 +391,7 @@ class Pendiente extends Component
             ]
         );
 
-            $this->datos_pendiente = DB::select('call buscar_pendiente(:uno,:dos,:tres,:cuatro,:pres)',
-            [
-                'uno' =>  $this->r_uno,
-                'dos' =>  $this->r_dos,
-                'tres' =>  $this->r_tres,
-                'cuatro' =>  $this->r_cuatro,
-                'pres' =>  $this->pres
 
-            ]
-        );
 
         return redirect()->route('pendiente');
     }
@@ -447,7 +408,10 @@ class Pendiente extends Component
         Static_Vars_Pendiente::Setcat3s($request->checkbox3);
         Static_Vars_Pendiente::Setcat4s($request->checkbox4);
 
-        Static_Vars_Pendiente::Setpresentacions($request->pres);
+        Static_Vars_Pendiente::Setpresentacions($request->checkbox5);
+        Static_Vars_Pendiente::Setpresentacions2($request->checkbox6);
+        Static_Vars_Pendiente::Setpresentacions3($request->checkbox7);
+
         Static_Vars_Pendiente::Setitems($request->b_item);
         Static_Vars_Pendiente::Setordenes($request->b_orden);
         Static_Vars_Pendiente::Sethons($request->b_hon);
@@ -458,6 +422,9 @@ class Pendiente extends Component
         Static_Vars_Pendiente::Setcapas($request->b_capa);
         Static_Vars_Pendiente::Setempaques($request->b_empaque);
         Static_Vars_Pendiente::Setmeses($request->b_mes);
+
+
+
         return Excel::download(new PendienteExport(), 'Pendiente.xlsx');
     }
 

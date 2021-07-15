@@ -29,13 +29,22 @@
                 </select>
             </div>
             <div class="col-sm" wire:ignore>
-                <select name="todas_marcas" id="todas_marcas" class="form-control" onchange="busqueda_orden()">
-                    <option value="">Todas las marcas</option>
-                    @foreach ($marcas_p as $v)
-                        <option value="{{$v->marca}}">{{$v->marca}}</option>
+                <select name="todas_ordenes_sistema" id="todas_ordenes_sistema" class="form-control" onchange="busqueda_orden()">
+                    <option value="" >Todas las ordenes del  sistema</option>
+                    @foreach ($ordenes_sis_p as $v)
+                        <option value="{{$v->orden_del_sitema}}">{{$v->orden_del_sitema}}</option>
                     @endforeach
                 </select>
             </div>
+            <div class="col-sm" wire:ignore>
+                <select  name="todas_capas" id="todas_capas" class="form-control" onchange="busqueda_orden()">
+                    <option value="">Todas las capas</option>
+                    @foreach ($capa_p as $v)
+                        <option value="{{$v->capa}}">{{$v->capa}}</option>
+                    @endforeach
+                </select>
+            </div>
+
             <div class="col-sm" wire:ignore>
                 <select name="todas_nombres" id="todas_nombres" class="form-control" onchange="busqueda_orden()">
                     <option value="">Todos los nombres</option>
@@ -48,10 +57,10 @@
         <br>
         <div class="row g-3">
             <div class="col-sm" wire:ignore>
-                <select  name="todas_capas" id="todas_capas" class="form-control" onchange="busqueda_orden()">
-                    <option value="">Todas las capas</option>
-                    @foreach ($capa_p as $v)
-                        <option value="{{$v->capa}}">{{$v->capa}}</option>
+                <select name="todas_marcas" id="todas_marcas" class="form-control" onchange="busqueda_orden()">
+                    <option value="">Todas las marcas</option>
+                    @foreach ($marcas_p as $v)
+                        <option value="{{$v->marca}}">{{$v->marca}}</option>
                     @endforeach
                 </select>
             </div>
@@ -96,6 +105,7 @@
                                 <th>ENVIADAS (CAJAS)</th>
                                 <th>ENVIADAS (TABACO)</th>
                                 <th>ORDEN</th>
+                                <th>ORDEN (SISTEMA)</th>
                                 <th>FACTURA</th>
                                 <th>CONTENEDOR</th>
                                 <th>FECHA</th>
@@ -120,6 +130,7 @@
                                 <td>{{$producto->cantidad_cajas}}</td>
                                 <td>{{$producto->total_tabacos}}</td>
                                 <td>{{$producto->orden}}</td>
+                                <td>{{$producto->orden_sistema}}</td>
                                 <td>{{$producto->num_factura}}</td>
                                 <td>{{$producto->contenedor}}</td>
                                 <td>{{$producto->fecha}}</td>
@@ -158,6 +169,7 @@
 
         function busqueda_orden(){
             @this.orden = $("#todas_ordenes").select2('val');
+            @this.orden_sistema = $("#todas_ordenes_sistema").select2('val');
             @this.marca = $("#todas_marcas").select2('val');
             @this.nombre = $("#todas_nombres").select2('val');
             @this.capasss = $("#todas_capas").select2('val');

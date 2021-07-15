@@ -363,6 +363,12 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.14/dist/js/bootstrap-select.min.js"></script>
 
     <script>
+          $(document).ready(function () {
+            $('.mi-selector').select2();
+          });
+    </script>
+
+    <script>
         $(document).ready(function () {
             $('#todas_ordenes').select2();
             $('#todas_marcas').select2();
@@ -371,6 +377,8 @@
             $('#todas_vitolas').select2();
             $('#todas_tipo_empaque').select2();
             $('#todas_tipo_empaques').select2();
+            $('#todas_ordenes_sistema').select2();
+            $('.mi-selector').select2();
 
         });
     </script>

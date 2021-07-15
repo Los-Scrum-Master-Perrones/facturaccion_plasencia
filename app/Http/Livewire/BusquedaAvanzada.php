@@ -17,6 +17,7 @@ class BusquedaAvanzada extends Component
     public $num_fac;
     public $tipo_empaque;
     public $orden;
+    public $orden_sistema;
     public $contenedor;
 
     public $marcas_p;
@@ -25,6 +26,8 @@ class BusquedaAvanzada extends Component
     public $vitola_p;
     public $tipo_empaque_p;
     public $ordenes_p;
+    public $ordenes_sis_p;
+
 
     public function render()
     {
@@ -34,6 +37,7 @@ class BusquedaAvanzada extends Component
         $this->vitola_p = DB::select('select vitola from vitola_productos');
         $this->tipo_empaque_p = DB::select('select tipo_empaque from tipo_empaques');
         $this->ordenes_p = DB::select('select distinct orden from pendiente');
+        $this->ordenes_sis_p = DB::select('select distinct orden_del_sitema from pendiente');
 
         if($this->marca == null){
             $this->marca="";
@@ -53,10 +57,14 @@ class BusquedaAvanzada extends Component
         if($this->orden == null){
             $this->orden="";
         }
+
+        if($this->orden_sistema == null){
+            $this->orden_sistema="";
+        }
         $this->dispatchBrowserEvent('activarCombo');
 
 
-        $this->productos = DB::select("call reporte_facura_pendiente(:fecha,:marca,:nombre,:capa,:vitola,:factura,:tipo_empaque,:orden)",[
+        $this->productos = DB::select("call reporte_facura_pendiente(:fecha,:marca,:nombre,:capa,:vitola,:factura,:tipo_empaque,:orden,:orden_sistema)",[
             "fecha" => $this->fecha,
             "marca" => $this->marca,
             "nombre" => $this->nombre,
@@ -64,7 +72,8 @@ class BusquedaAvanzada extends Component
             "vitola" => $this->vitolasss,
             "factura" => $this->num_fac,
             "tipo_empaque" => $this->tipo_empaque,
-            "orden" => $this->orden
+            "orden" => $this->orden,
+            "orden_sistema" => $this->orden_sistema
         ]);
 
         return view('livewire.busqueda-avanzada')->extends('principal')->section('content');
@@ -81,6 +90,7 @@ class BusquedaAvanzada extends Component
         $this->capasss = "";
         $this->tipo_empaque = "";
         $this->orden = "";
+        $this->orden_sistema = "";
         $this->fecha = Carbon::now()->format("Y-m-d");
     }
 
