@@ -879,7 +879,7 @@
     <script type="text/javascript">
         function datos_modal_eliminar(id) {
 
-            var datastiles = @json($datos_pendiente_empaque_nuevo);
+            var datastiles = @json($datos_pendiente_empaque);
 
             for (var i = 0; i < datastiles.length; i++) {
                 if (datastiles[i].id_pendiente === id) {

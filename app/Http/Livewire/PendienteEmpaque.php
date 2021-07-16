@@ -433,6 +433,7 @@ class PendienteEmpaque extends Component
 
     public function eliminar_pendiente(Request $request)
     {
+
         $this->datos_pendiente = [];
         $this->borrar = \DB::select('call borrar_pendiente_empaque(:eliminar)', ['eliminar' => $request->id_pendiente]);
 
