@@ -407,10 +407,6 @@ class FacturaTerminado extends Component
         return Excel::download(new FacturaExportView($vista), 'FacturaDetallada.xlsx');
     }
 
-
-
-
-
     public function insertar_factura()
     {
         if ($this->cliente != null && $this->contenedor != null) {
@@ -448,8 +444,7 @@ class FacturaTerminado extends Component
                 :pa_total_puros,
                 :pa_total_peso_bruto,
                 :pa_total_peso_neto,
-                :pa_fecha_factura,
-                :pa_total_precio)', [
+                :pa_fecha_factura)', [
 
                 "orden_sufijo" =>  $this->aereo,
                 "pa_cliente" => $this->cliente,
@@ -459,9 +454,28 @@ class FacturaTerminado extends Component
                 "pa_total_puros" => $this->total_total_puros,
                 "pa_total_peso_bruto" => $this->total_peso_bruto,
                 "pa_total_peso_neto" => $this->total_peso_bruto,
-                "pa_fecha_factura" => $this->fecha_factura,
-                "pa_total_precio" => $this->total_factura_precio
+                "pa_fecha_factura" => $this->fecha_factura
             ]);
+
+
+            DB::select('
+
+            insert into precios_historial(id_detalle_factura,precio) (SELECT detalle_factura.id_detalle AS id_detalle_factura,
+
+            ( if((SELECT clase_productos.sampler FROM clase_productos WHERE clase_productos.item = (SELECT pendiente.item FROM pendiente WHERE pendiente.id_pendiente = detalle_factura.id_pendiente)) = "si",
+
+            (SELECT pendiente.precio FROM pendiente WHERE pendiente.id_pendiente = detalle_factura.id_pendiente)
+            ,
+            (SELECT clase_productos.precio FROM clase_productos WHERE clase_productos.item =
+
+            (SELECT pendiente.item FROM pendiente WHERE pendiente.id_pendiente = detalle_factura.id_pendiente))
+            )
+            )
+             AS precio
+            FROM detalle_factura,factura_terminados
+            WHERE factura_terminados.id = detalle_factura.id_venta and factura_terminados.numero_factura = ?)
+
+            ', [$this->num_factura_sistema]);
 
             $this->titulo_cliente = "";
             $this->titulo_factura = "";
