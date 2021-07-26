@@ -19,24 +19,23 @@ class HistorialProgramacion extends Component
     public $titulo;
     public $borrar;
     public $busqueda;
-public $detallestodos; 
+    public $detallestodos;
     public $idp;
     public $saldo;
     public $id_pen;
     public $id_tov_imprimir;
-    
+
     public function render()
     {
+
         $this->programaciones= \DB::select('call mostrar_programacion()');
-       
-        
-      
+
         $this->detalles_programaciones=\DB::select('call mostrar_detalles_programacion(:buscar,:id)',
         ['buscar'=>  $this->busqueda,
         'id'=>$this->id_tov]);
 
         $this->titulo = \DB::select('call max_programacion(:id)',[
-            'id'=>$this->id_tov 
+            'id'=>$this->id_tov
         ]);
 
         $this->detallestodos =  \DB::select('select * from detalle_programacion');
@@ -46,7 +45,7 @@ public $detallestodos;
 
     public function mount()
     {
-        $this->id_tov = 0; 
+        $this->id_tov = 0;
         $this->borrar=[];
          $this->programaciones= [];
          $this->detalles_programaciones=[];
@@ -68,52 +67,52 @@ public $detallestodos;
 
 
     public function eliminar_detalles_pro(Request $request){
-    
-        
+
+
         $cant_tipo =\DB::select('call traer_cant_cajas(:id_pendiente)',
         [ 'id_pendiente'=>$request->id_pendientee]);
-     
+
         if($cant_tipo[0]->cajas_tipo != null){
-           
+
             $cajas_vie = ($request->saldo_viejo/ $cant_tipo[0]->cajas_tipo);
-        
+
             $actualizar_existencia =  ($cajas_vie + $request->cant_cajase);
         }else{
             $actualizar_existencia= 0;
         }
-      
-     
+
+
 
         $borrar=\DB::select('call eliminar_detalle_programacion(:id,:id_pendiente,:saldo,:cant)',
         ['id'=>  $request->ide,
         'id_pendiente'=>$request->id_pendientee,
         'saldo'=> $request->saldoe,
         'cant'=> $actualizar_existencia]);
-        
 
 
-       return redirect()->route('historial_programacion'); 
-    
+
+       return redirect()->route('historial_programacion');
+
         }
 
 
-       
-        
+
+
     public function actualizar_detalles_pro(Request $request){
-   
+
 
         $saldo_final = ($request->saldo_pen - $request->saldo);
 
         $cant_tipo =\DB::select('call traer_cant_cajas(:id_pendiente)',
         [ 'id_pendiente'=>$request->id_pendiente]);
-        
-     
+
+
        $cajas_utilizadas_actual= ($request->saldo / $cant_tipo[0]->cajas_tipo);//50
-      
+
       $cajas_vie = ($request->saldo_pen/ $cant_tipo[0]->cajas_tipo);
-      
+
        $cajas_utilizadas_viejas = $cajas_vie + $request->cant_cajas;//30
-     
+
 
 
        $cajas_actualizar = ($cajas_utilizadas_viejas-$cajas_utilizadas_actual);//
@@ -125,44 +124,44 @@ public $detallestodos;
         'saldo'=> $request->saldo,
         'saldo_pen'=>$saldo_final,
         'cant'=>$cajas_actualizar]);
-        
-    
 
-       return redirect()->route('historial_programacion'); 
-    
+
+
+       return redirect()->route('historial_programacion');
+
         }
 
         public function eliminar_programacion(Request $request){
-    
+
 
             $borrar=\DB::select('call eliminar_programacion(:id)',
             ['id'=>  $request->id_pro]);
-            
-    
-    
-           return redirect()->route('historial_programacion'); 
-        
+
+
+
+           return redirect()->route('historial_programacion');
+
             }
 
             public function actualizar_programacion(Request $request){
-   
 
-        
+
+
                 $borrar=\DB::select('call actualizar_programacion(:id,:con)',
                 ['id'=>  $request->id_p,
                 'con'=>$request->saldo_p]);
-                
-            
-        
-               return redirect()->route('historial_programacion'); 
-            
+
+
+
+               return redirect()->route('historial_programacion');
+
                 }
 
-                
+
     function exportProgramacion(Request $request)
     {
-       
-        
+
+
 
         if ($request->buscar===null){
             $bus = "";
@@ -171,34 +170,34 @@ public $detallestodos;
             $bus =  $request->buscar;
         }
 
-        
-        
+
+
         return Excel::download(new ProgramcionExport($bus, $request->id_tov), 'Programación.xlsx');
     }
-   
 
-    
+
+
     public function imprimir_programacion(){
-                
+
         $fecha =Carbon::now();
         $fecha = $fecha->format('d-m-Y');
-    
-    
-           
+
+
+
         $ffecha =Carbon::now();
         $fecha_imp = $ffecha->format('d-m-Y/h:i');
-   
-    
+
+
        $depros = \DB::select('call mostrar_detalles_programacion(:buscar,:id)',
        ['buscar'=> $this->busqueda,
        'id'=> $this->id_tov_imprimir]);
-    
 
-       return redirect()->route('imprimir_detalles',['fecha'=>$fecha,'depros'=> $depros]); 
-      
-       
-    
+
+       return redirect()->route('imprimir_detalles',['fecha'=>$fecha,'depros'=> $depros]);
+
+
+
     }
 
-       
+
 }

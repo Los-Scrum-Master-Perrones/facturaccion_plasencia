@@ -2,9 +2,11 @@
 
 namespace App\Http\Livewire;
 
+use App\Exports\PendienteReporte;
 use Livewire\Component;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\DB;
+use Maatwebsite\Excel\Facades\Excel;
 
 class BusquedaAvanzada extends Component
 {
@@ -94,7 +96,25 @@ class BusquedaAvanzada extends Component
         $this->fecha = Carbon::now()->format("Y-m-d");
     }
 
+    public function exportar_reporte(){
+        $this->productos = DB::select("call reporte_facura_pendiente(:fecha,:marca,:nombre,:capa,:vitola,:factura,:tipo_empaque,:orden,:orden_sistema)",[
+            "fecha" => $this->fecha,
+            "marca" => $this->marca,
+            "nombre" => $this->nombre,
+            "capa" => $this->capasss,
+            "vitola" => $this->vitolasss,
+            "factura" => $this->num_fac,
+            "tipo_empaque" => $this->tipo_empaque,
+            "orden" => $this->orden,
+            "orden_sistema" => $this->orden_sistema
+        ]);
 
 
+        $vista =  view('Exports.pendiente_reporte', [
+            'productos' =>  $this->productos
+        ]);
+
+        return Excel::download(new PendienteReporte($vista), 'ReportePendiente-'.Carbon::now()->format("Y-m-d").'.xlsx');
+    }
 
 }

@@ -8,7 +8,6 @@
     <br>
 
     <div class="" style="width:100%; ">
-
         <div class="col">
             <div class="row" style="margin-bottom:2px">
                 <div class="col">
@@ -23,19 +22,14 @@
                     </button>
                 </div>
                 <div class="col"></div>
-                <div class="col"></div>
+                <div class="col">
 
-
+                </div>
             </div>
+
+
         </div>
-
         <br>
-
-
-
-
-
-
 
         <div style="width:100%; padding-left:25px; padding-right:10px;">
 
@@ -51,10 +45,15 @@
                                 <th>Contenedor</th>
                                 <th>Bultos</th>
                                 <th>Puros</th>
+                                <th>Total($)</th>
                                 <th></th>
                             </tr>
                         </thead>
                         <tbody>
+                            @php
+                                $total_mes= 0.00;
+                            @endphp
+
                             @foreach ($factura_mes as $factur)
                             <tr>
                                 <td>{{$factur->numero_factura}}</td>
@@ -62,6 +61,11 @@
                                 <td>{{$factur->contenedor}}</td>
                                 <td>{{$factur->cantidad_bultos}}</td>
                                 <td>{{$factur->total_puros}}</td>
+                                <td style="text-align: end">{{number_format($factur->total,2)}}</td>
+
+                                @php
+                                    $total_mes += $factur->total;
+                                @endphp
                                 <td>
                                     <a wire:click.prevent="editar_factura({{$factur->id}})" href=""
                                         style="text-decoration:none">
@@ -91,9 +95,17 @@
                     </table>
                 </div>
             </div>
+            <div class="input-group"
+                        style="width:30%;position: fixed;left: 0px;bottom:0px; height:30px;display:flex;" id="sumas1">
+                        <span id="de" class="input-group-text form-control "
+                            style="background:rgba(174, 0, 255, 0.432);color:white;">Total ($)</span>
+                        <input type="number" class="form-control  mr-sm-4" placeholder="0" value="{{($total_mes)}}" readonly>
+
+
+                    </div>
 
             <br>
-            
+
             <div class="row">
                 <div class="col-sm" style="width:80%; padding-left:0px; ">
                     <table class="table table-light" id="editable">
@@ -139,255 +151,267 @@
 
 
 
-                            <?php   $bultos = 0;
-                            $val_anterioir=0;
-                            $val_actual=0
+                            <?php
+                                $bultos = 0;
+                                $val_anterioir=0;
+                                $val_actual=0
                             ?>
 
-@foreach($detalles_venta as $detalles)
+                            @foreach($detalles_venta as $detalles)
 
 
 
-                        @if ( $orden == "" && $orden_actua == "")
-                        @php
-                        $orden_actua = $detalles->orden;
-                        $orden_actua = $detalles->orden;
-                        @endphp
-                        @endif
-
-                        @php
-                        $orden = $detalles->orden;
-                        @endphp
-
-                        @if ($orden_actua == $orden)
-
-                        @else
-                        <tr>
-                            <td colspan="19" style="background-color: gray"></td>
-                        </tr>
-                        @php
-                        $orden_actua = $detalles->orden;
-                        @endphp
-                        @endif
-
-                        @php
-
-                        $sampler = DB::select('SELECT sampler FROM clase_productos WHERE item =
-                        ?',[$detalles->codigo_item]);
-
-                        $pendiente = DB::select('SELECT orden,mes FROM pendiente WHERE id_pendiente =
-                        ?',[$detalles->id_pendiente]);
-
-                        $conteo_sampler = DB::select('SELECT COUNT(*) AS tuplas FROM pendiente WHERE item = ? AND orden
-                        = ? and mes = ?',[$detalles->codigo_item,$pendiente[0]->orden,$pendiente[0]->mes]);
-
-                        $item_primero = DB::select('SELECT id_pendiente FROM pendiente WHERE item = ? AND mes = ? AND orden LIKE
-                        CONCAT("%",?,"%") limit 0,1',[$detalles->codigo_item,$pendiente[0]->mes,$pendiente[0]->orden]);
-
-
-                        $total_pendiente = DB::select('SELECT sum(pendiente.saldo) AS
-                        total_saldo,sum(pendiente.pendiente) AS total_pendiente FROM pendiente WHERE item = ? AND orden
-                        = ? and mes = ?',[$detalles->codigo_item,$pendiente[0]->orden,$pendiente[0]->mes]);
-
-
-                        if( $sampler[0]->sampler == "si"){
-                        $repartir = $detalles->total_tabacos/$conteo_sampler[0]->tuplas;
-                        }
-
-                        @endphp
-
-                        @if ( $sampler[0]->sampler == "si" && $item_primero[0]->id_pendiente == $detalles->id_pendiente)
-
-                        @php
-                        $sampler_nombre = DB::select('SELECT concat((SELECT tipo_empaque_ingles FROM tipo_empaques WHERE
-                        tipo_empaques.id_tipo_empaque = clase_productos.id_tipo_empaque)," ",descripcion_sampler) as nom
-                        FROM clase_productos WHERE item = ?',[$detalles->codigo_item]);
-
-                        $promedio = DB::select('SELECT AVG(precio) AS promedio FROM detalle_clase_productos WHERE item =
-                        ?',[$detalles->codigo_item]);
-                        @endphp
-
-
-
-
-
-
-                        <tr style="font-size:10px;">
+                            @if ( $orden == "" && $orden_actua == "")
                             @php
-                            $val_anterioir= $bultos+1;
-                            $bultos += $detalles->cantidad_puros;
+                            $orden_actua = $detalles->orden;
+                            $orden_actua = $detalles->orden;
+                            @endphp
+                            @endif
 
-                            $val_actual=$bultos;
+                            @php
+                            $orden = $detalles->orden;
+                            @endphp
 
-                            $total_sampler_detalles = DB::select('SELECT SUM(cantidad_puros*unidad) AS salida FROM
-                            detalle_factura WHERE facturado = "N" and id_pendiente = ?',
-                            [$detalles->id_pendiente])[0]->salida;
+                            @if ($orden_actua == $orden)
+
+                            @else
+                            <tr>
+                                <td colspan="19" style="background-color: gray"></td>
+                            </tr>
+                            @php
+                            $orden_actua = $detalles->orden;
+                            @endphp
+                            @endif
+
+                            @php
+
+                            $sampler = DB::select('SELECT sampler FROM clase_productos WHERE item =
+                            ?',[$detalles->codigo_item]);
+
+                            $pendiente = DB::select('SELECT orden,mes FROM pendiente WHERE id_pendiente =
+                            ?',[$detalles->id_pendiente]);
+
+                            $conteo_sampler = DB::select('SELECT COUNT(*) AS tuplas FROM pendiente WHERE item = ? AND
+                            orden
+                            = ? and mes = ?',[$detalles->codigo_item,$pendiente[0]->orden,$pendiente[0]->mes]);
+
+                            $item_primero = DB::select('SELECT id_pendiente FROM pendiente WHERE item = ? AND mes = ?
+                            AND orden LIKE
+                            CONCAT("%",?,"%") limit
+                            0,1',[$detalles->codigo_item,$pendiente[0]->mes,$pendiente[0]->orden]);
 
 
-                            $cantidad_sampler_empresa = DB::select('SELECT COUNT(pendiente.saldo) AS sampler_empresa
-                            FROM pendiente WHERE item = ? AND orden
-                            = ? and mes = ?',[$detalles->codigo_item,$pendiente[0]->orden,$pendiente[0]->mes ])[0]->sampler_empresa;
+                            $total_pendiente = DB::select('SELECT sum(pendiente.saldo) AS
+                            total_saldo,sum(pendiente.pendiente) AS total_pendiente FROM pendiente WHERE item = ? AND
+                            orden
+                            = ? and mes = ?',[$detalles->codigo_item,$pendiente[0]->orden,$pendiente[0]->mes]);
 
 
-                            $cantidad_total_sampler_factura = DB::select('SELECT COUNT(pendiente.saldo) AS
-                            sampler_factura
-                            FROM pendiente WHERE item = ? AND orden
-                            = ? and mes = ? AND pendiente != 0 AND saldo !=
-                            0',[$detalles->codigo_item,$pendiente[0]->orden,$pendiente[0]->mes])[0]->sampler_factura;
+                            if( $sampler[0]->sampler == "si"){
+                            $repartir = $detalles->total_tabacos/$conteo_sampler[0]->tuplas;
+                            }
 
-                            $total_ac = intval($total_pendiente[0]->total_saldo) - ((intval( $total_sampler_detalles) *
-                            intval($cantidad_total_sampler_factura))/intval($cantidad_sampler_empresa));
+                            @endphp
+
+                            @if ( $sampler[0]->sampler == "si" && $item_primero[0]->id_pendiente ==
+                            $detalles->id_pendiente)
+
+                            @php
+                            $sampler_nombre = DB::select('SELECT concat((SELECT tipo_empaque_ingles FROM tipo_empaques
+                            WHERE
+                            tipo_empaques.id_tipo_empaque = clase_productos.id_tipo_empaque)," ",descripcion_sampler) as
+                            nom
+                            FROM clase_productos WHERE item = ?',[$detalles->codigo_item]);
+
+                            $promedio = DB::select('SELECT AVG(precio) AS promedio FROM detalle_clase_productos WHERE
+                            item =
+                            ?',[$detalles->codigo_item]);
+                            @endphp
+
+
+
+
+
+
+                            <tr style="font-size:10px;">
+                                @php
+                                $val_anterioir= $bultos+1;
+                                $bultos += $detalles->cantidad_puros;
+
+                                $val_actual=$bultos;
+
+                                $total_sampler_detalles = DB::select('SELECT SUM(cantidad_puros*unidad) AS salida FROM
+                                detalle_factura WHERE facturado = "N" and id_pendiente = ?',
+                                [$detalles->id_pendiente])[0]->salida;
+
+
+                                $cantidad_sampler_empresa = DB::select('SELECT COUNT(pendiente.saldo) AS sampler_empresa
+                                FROM pendiente WHERE item = ? AND orden
+                                = ? and mes = ?',[$detalles->codigo_item,$pendiente[0]->orden,$pendiente[0]->mes
+                                ])[0]->sampler_empresa;
+
+
+                                $cantidad_total_sampler_factura = DB::select('SELECT COUNT(pendiente.saldo) AS
+                                sampler_factura
+                                FROM pendiente WHERE item = ? AND orden
+                                = ? and mes = ? AND pendiente != 0 AND saldo !=
+                                0',[$detalles->codigo_item,$pendiente[0]->orden,$pendiente[0]->mes])[0]->sampler_factura;
+
+                                $total_ac = intval($total_pendiente[0]->total_saldo) - ((intval(
+                                $total_sampler_detalles) *
+                                intval($cantidad_total_sampler_factura))/intval($cantidad_sampler_empresa));
+
+                                $total_saldo_pendiente = DB::update('UPDATE detalle_factura SET anterior = ? WHERE
+                                id_detalle =
+                                ?', [ $total_ac,$detalles->id_detalle]);
+                                @endphp
+
+                                @if ($val_actual == $val_anterioir)
+                                <td style="overflow-x:auto;">{{$val_actual}}</td>
+                                @else
+                                <td style="overflow-x:auto;">{{$val_anterioir}} al {{$val_actual}}
+                                </td>
+                                @endif
+
+                                <td>{{$detalles->cantidad_puros}}</td>
+                                <td>{{$detalles->unidad}}</td>
+                                <td><b>{{$detalles->cantidad_cajas}}</b></td>
+                                <td></td>
+                                <td>SEVERAL</td>
+                                <td>{{$detalles->cantidad_por_caja}}</td>
+                                <td style="width: 250px"><b>{{strtoupper($sampler_nombre[0]->nom)}}</b> </td>
+                                <td>{{$detalles->codigo}}</td>
+                                <td>{{$detalles->codigo_item}}</td>
+                                <td>{{$detalles->orden}}</td>
+                                <td>{{$total_pendiente[0]->total_pendiente}}</td>
+                                <td>{{$total_ac}}</td>
+
+                                <td style="width: 65px">{{$detalles->total_bruto}}</td>
+                                <td style="width: 60px">{{$detalles->total_neto}}</td>
+                                <td>{{$detalles->precio_producto}}</td>
+
+
+                                <td><b>{{number_format(($promedio[0]->promedio*$detalles->cantidad_por_caja)/1000,4)}}</b>
+                                </td>
+
+                                <td style="text-align: center">-</td>
+
+
+
+                            </tr>
+
+                            @php
+
+                            $total_neto += $detalles->total_neto;
+                            $total_bruto += $detalles->total_bruto;
+
+                            $sampler_s = 0;
+                            $arreglo_detalles = DB::select('CALL `traer_detalles_productos_factura`(?, ?)',
+                            [$detalles->codigo_item, $sampler_s]);
+                            @endphp
+
+
+
+                            <tr style="font-size:10px;">
+
+                                <td style="overflow-x:auto;"></td>
+
+
+                                <td></td>
+                                <td></td>
+                                <td><b></b></td>
+                                <td>{{$repartir}}</td>
+                                <td>{{$arreglo_detalles[0]->capa}}</td>
+                                <td></td>
+                                <td>{{strtoupper($arreglo_detalles[0]->sampler)}}</td>
+                                <td>{{$arreglo_detalles[0]->otra_descripcion}}</td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td style="text-align: right">{{number_format($arreglo_detalles[0]->precio,4)}}</td>
+
+
+                                <td></td>
+                                <td style="text-align: right">
+                                    {{number_format(($repartir*$arreglo_detalles[0]->precio)/1000,2)}}
+                                </td>
+                                @php
+                                $valor_factura += ($repartir*$arreglo_detalles[0]->precio)/1000;
+                                @endphp
+
+
+
+                            </tr>
+
+
+                            @php
+                            $total_puros_tabla += $repartir;
+                            $sampler_s++;
+                            @endphp
+
+                            @elseif ($sampler[0]->sampler == "si")
+
+                            @php
+                            $arreglo_detalles = DB::select('CALL `traer_detalles_productos_factura`(?, ?)',
+                            [$detalles->codigo_item, $sampler_s]);
+
+
+                            $total_ac = intval($total_pendiente[0]->total_saldo)-intval($detalles->total_tabacos);
 
                             $total_saldo_pendiente = DB::update('UPDATE detalle_factura SET anterior = ? WHERE
                             id_detalle =
-                            ?', [ $total_ac,$detalles->id_detalle]);
+                            ?',
+                            [ $total_ac,$detalles->id_detalle]);
                             @endphp
 
-                            @if ($val_actual == $val_anterioir)
-                            <td style="overflow-x:auto;">{{$val_actual}}</td>
+                            <tr style="font-size:10px;">
+                                <td style="overflow-x:auto;"></td>
+                                <td></td>
+                                <td></td>
+                                <td><b></b></td>
+                                <td>{{$repartir}}</td>
+                                <td>{{$arreglo_detalles[0]->capa}}</td>
+                                <td></td>
+                                <td>{{strtoupper($arreglo_detalles[0]->sampler)}}</td>
+                                <td>{{$arreglo_detalles[0]->otra_descripcion}}</td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td style="text-align: right">{{number_format($arreglo_detalles[0]->precio,4)}}</td>
+
+
+                                <td style="text-align: right"></td>
+                                <td style="text-align: right">
+                                    {{number_format(($repartir*$arreglo_detalles[0]->precio)/1000,2)}}
+                                </td>
+                                @php
+                                $valor_factura += ($repartir*$arreglo_detalles[0]->precio)/1000;
+                                @endphp
+
+                            </tr>
+
+                            @php
+                            $total_puros_tabla += $repartir;
+                            $sampler_s++;
+                            @endphp
+
+
                             @else
-                            <td style="overflow-x:auto;">{{$val_anterioir}} al {{$val_actual}}
-                            </td>
-                            @endif
 
-                            <td>{{$detalles->cantidad_puros}}</td>
-                            <td>{{$detalles->unidad}}</td>
-                            <td><b>{{$detalles->cantidad_cajas}}</b></td>
-                            <td></td>
-                            <td>SEVERAL</td>
-                            <td>{{$detalles->cantidad_por_caja}}</td>
-                            <td style="width: 250px"><b>{{strtoupper($sampler_nombre[0]->nom)}}</b> </td>
-                            <td>{{$detalles->codigo}}</td>
-                            <td>{{$detalles->codigo_item}}</td>
-                            <td>{{$detalles->orden}}</td>
-                            <td>{{$total_pendiente[0]->total_pendiente}}</td>
-                            <td>{{$total_ac}}</td>
-
-                            <td style="width: 65px">{{$detalles->total_bruto}}</td>
-                            <td style="width: 60px">{{$detalles->total_neto}}</td>
-                            <td>{{$detalles->precio_producto}}</td>
-
-
-                            <td><b>{{number_format(($promedio[0]->promedio*$detalles->cantidad_por_caja)/1000,4)}}</b>
-                            </td>
-
-                            <td style="text-align: center">-</td>
-                         
-
-
-                        </tr>
-
-                        @php
-
-                        $total_neto += $detalles->total_neto;
-                        $total_bruto += $detalles->total_bruto;
-
-                        $sampler_s = 0;
-                        $arreglo_detalles = DB::select('CALL `traer_detalles_productos_factura`(?, ?)',
-                        [$detalles->codigo_item, $sampler_s]);
-                        @endphp
-
-
-
-                        <tr style="font-size:10px;">
-
-                            <td style="overflow-x:auto;"></td>
-
-
-                            <td></td>
-                            <td></td>
-                            <td><b></b></td>
-                            <td>{{$repartir}}</td>
-                            <td>{{$arreglo_detalles[0]->capa}}</td>
-                            <td></td>
-                            <td>{{strtoupper($arreglo_detalles[0]->sampler)}}</td>
-                            <td>{{$arreglo_detalles[0]->otra_descripcion}}</td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td style="text-align: right">{{number_format($arreglo_detalles[0]->precio,4)}}</td>
-
-
-                            <td></td>
-                            <td style="text-align: right">
-                                {{number_format(($repartir*$arreglo_detalles[0]->precio)/1000,2)}}
-                            </td>
                             @php
-                            $valor_factura += ($repartir*$arreglo_detalles[0]->precio)/1000;
+                            $total_puros_tabla += $detalles->total_tabacos;
+                            $sampler_s = 0;
                             @endphp
-                           
+                            <tr style="font-size:10px;">
 
 
-                        </tr>
-
-
-                        @php
-                        $total_puros_tabla += $repartir;
-                        $sampler_s++;
-                        @endphp
-
-                        @elseif ($sampler[0]->sampler == "si")
-
-                        @php
-                        $arreglo_detalles = DB::select('CALL `traer_detalles_productos_factura`(?, ?)',
-                        [$detalles->codigo_item, $sampler_s]);
-
-
-                        $total_ac = intval($total_pendiente[0]->total_saldo)-intval($detalles->total_tabacos);
-
-                        $total_saldo_pendiente = DB::update('UPDATE detalle_factura SET anterior = ? WHERE id_detalle =
-                        ?',
-                        [ $total_ac,$detalles->id_detalle]);
-                        @endphp
-
-                        <tr style="font-size:10px;">
-                            <td style="overflow-x:auto;"></td>
-                            <td></td>
-                            <td></td>
-                            <td><b></b></td>
-                            <td>{{$repartir}}</td>
-                            <td>{{$arreglo_detalles[0]->capa}}</td>
-                            <td></td>
-                            <td>{{strtoupper($arreglo_detalles[0]->sampler)}}</td>
-                            <td>{{$arreglo_detalles[0]->otra_descripcion}}</td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td style="text-align: right">{{number_format($arreglo_detalles[0]->precio,4)}}</td>
-
-
-                            <td style="text-align: right"></td>
-                            <td style="text-align: right">
-                                {{number_format(($repartir*$arreglo_detalles[0]->precio)/1000,2)}}
-                            </td>
-                            @php
-                            $valor_factura += ($repartir*$arreglo_detalles[0]->precio)/1000;
-                            @endphp
-                        
-                        </tr>
-
-                        @php
-                        $total_puros_tabla += $repartir;
-                        $sampler_s++;
-                        @endphp
-
-
-                        @else
-
-                        @php
-                        $total_puros_tabla += $detalles->total_tabacos;
-                        $sampler_s = 0;
-                        @endphp
-                        <tr style="font-size:10px;">
-
-
-                            <?php
+                                <?php
                                     $val_anterioir= $bultos+1;
                                     $bultos += $detalles->cantidad_puros;
                                     $val_actual=$bultos;
@@ -404,45 +428,45 @@
                                     $total_bruto += $detalles->total_bruto;
                                 ?>
 
-                            @if ($val_actual == $val_anterioir)
-                            <td style="overflow-x:auto;">{{$val_actual}}</td>
-                            @else
-                            <td style="overflow-x:auto;">{{$val_anterioir}} al {{$val_actual}}
-                            </td>
+                                @if ($val_actual == $val_anterioir)
+                                <td style="overflow-x:auto;">{{$val_actual}}</td>
+                                @else
+                                <td style="overflow-x:auto;">{{$val_anterioir}} al {{$val_actual}}
+                                </td>
+                                @endif
+
+                                <td>{{$detalles->cantidad_puros}}</td>
+                                <td>{{$detalles->unidad}}</td>
+                                <td><b>{{$detalles->cantidad_cajas}}</b></td>
+                                <td>{{$detalles->total_tabacos}}</td>
+                                <td>{{$detalles->capas}}</td>
+                                <td>{{$detalles->cantidad_por_caja}}</td>
+                                <td>{{$detalles->producto}}</td>
+                                <td>{{$detalles->codigo}}</td>
+                                <td>{{$detalles->codigo_item}}</td>
+                                <td>{{$detalles->orden}}</td>
+                                <td>{{$detalles->orden_total}}</td>
+                                <td>{{$total_restante}}</td>
+                                <td>{{$detalles->total_bruto}}</td>
+                                <td>{{$detalles->total_neto}}</td>
+                                <td style="text-align: right">{{$detalles->precio_producto}}</td>
+
+
+                                <td style="text-align: right"><b>{{number_format($detalles->costo,4)}}</b></td>
+                                <td style="text-align: right">{{number_format($detalles->valor_total,2)}}</td>
+                                @php
+                                $valor_factura += $detalles->valor_total;
+                                @endphp
+
+
+                            </tr>
+
+
+
                             @endif
 
-                            <td>{{$detalles->cantidad_puros}}</td>
-                            <td>{{$detalles->unidad}}</td>
-                            <td><b>{{$detalles->cantidad_cajas}}</b></td>
-                            <td>{{$detalles->total_tabacos}}</td>
-                            <td>{{$detalles->capas}}</td>
-                            <td>{{$detalles->cantidad_por_caja}}</td>
-                            <td>{{$detalles->producto}}</td>
-                            <td>{{$detalles->codigo}}</td>
-                            <td>{{$detalles->codigo_item}}</td>
-                            <td>{{$detalles->orden}}</td>
-                            <td>{{$detalles->orden_total}}</td>
-                            <td>{{$total_restante}}</td>
-                            <td>{{$detalles->total_bruto}}</td>
-                            <td>{{$detalles->total_neto}}</td>
-                            <td style="text-align: right">{{$detalles->precio_producto}}</td>
+                            @endforeach
 
-
-                            <td style="text-align: right"><b>{{number_format($detalles->costo,4)}}</b></td>
-                            <td style="text-align: right">{{number_format($detalles->valor_total,2)}}</td>
-                            @php
-                            $valor_factura += $detalles->valor_total;
-                            @endphp
-
-
-                        </tr>
-
-
-
-                        @endif
-
-                        @endforeach
-                          
                             <tr style="font-size:10px;">
                                 <td></td>
                                 <td><b>{{$val_actual}}</b></td>

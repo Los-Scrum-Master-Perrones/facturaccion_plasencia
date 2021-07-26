@@ -22,25 +22,26 @@
             </div>
             <div class="col-sm" wire:ignore>
                 <select name="todas_ordenes" id="todas_ordenes" class="form-control" onchange="busqueda_orden()">
-                    <option value="" >Todas las ordenes</option>
+                    <option value="">Todas las ordenes</option>
                     @foreach ($ordenes_p as $v)
-                        <option value="{{$v->orden}}">{{$v->orden}}</option>
+                    <option value="{{$v->orden}}">{{$v->orden}}</option>
                     @endforeach
                 </select>
             </div>
             <div class="col-sm" wire:ignore>
-                <select name="todas_ordenes_sistema" id="todas_ordenes_sistema" class="form-control" onchange="busqueda_orden()">
-                    <option value="" >Todas las ordenes del  sistema</option>
+                <select name="todas_ordenes_sistema" id="todas_ordenes_sistema" class="form-control"
+                    onchange="busqueda_orden()">
+                    <option value="">Todas las ordenes del sistema</option>
                     @foreach ($ordenes_sis_p as $v)
-                        <option value="{{$v->orden_del_sitema}}">{{$v->orden_del_sitema}}</option>
+                    <option value="{{$v->orden_del_sitema}}">{{$v->orden_del_sitema}}</option>
                     @endforeach
                 </select>
             </div>
             <div class="col-sm" wire:ignore>
-                <select  name="todas_capas" id="todas_capas" class="form-control" onchange="busqueda_orden()">
+                <select name="todas_capas" id="todas_capas" class="form-control" onchange="busqueda_orden()">
                     <option value="">Todas las capas</option>
                     @foreach ($capa_p as $v)
-                        <option value="{{$v->capa}}">{{$v->capa}}</option>
+                    <option value="{{$v->capa}}">{{$v->capa}}</option>
                     @endforeach
                 </select>
             </div>
@@ -49,7 +50,7 @@
                 <select name="todas_nombres" id="todas_nombres" class="form-control" onchange="busqueda_orden()">
                     <option value="">Todos los nombres</option>
                     @foreach ($nombre_p as $v)
-                        <option value="{{$v->nombre}}">{{$v->nombre}}</option>
+                    <option value="{{$v->nombre}}">{{$v->nombre}}</option>
                     @endforeach
                 </select>
             </div>
@@ -60,28 +61,32 @@
                 <select name="todas_marcas" id="todas_marcas" class="form-control" onchange="busqueda_orden()">
                     <option value="">Todas las marcas</option>
                     @foreach ($marcas_p as $v)
-                        <option value="{{$v->marca}}">{{$v->marca}}</option>
+                    <option value="{{$v->marca}}">{{$v->marca}}</option>
                     @endforeach
                 </select>
             </div>
             <div class="col-sm" wire:ignore>
-                <select  name="todas_vitolas" id="todas_vitolas" class="form-control" onchange="busqueda_orden()">
+                <select name="todas_vitolas" id="todas_vitolas" class="form-control" onchange="busqueda_orden()">
                     <option value="">Todas las vitolas</option>
                     @foreach ($vitola_p as $v)
-                        <option value="{{$v->vitola}}">{{$v->vitola}}</option>
+                    <option value="{{$v->vitola}}">{{$v->vitola}}</option>
                     @endforeach
                 </select>
             </div>
             <div class="col-sm" wire:ignore>
-                <select name="todas_tipo_empaques" id="todas_tipo_empaques" class="form-control" onchange="busqueda_orden()">
+                <select name="todas_tipo_empaques" id="todas_tipo_empaques" class="form-control"
+                    onchange="busqueda_orden()">
                     <option value="">Todos los Tipos de Empaque</option>
                     @foreach ($tipo_empaque_p as $v)
-                        <option value="{{$v->tipo_empaque}}">{{$v->tipo_empaque}}</option>
+                    <option value="{{$v->tipo_empaque}}">{{$v->tipo_empaque}}</option>
                     @endforeach
                 </select>
             </div>
             <div class="col-sm" wire:ignore>
                 <input name="nombre" id="nombre" class="form-control" placeholder="Numero Factura" wire:model="num_fac">
+            </div>
+            <div class="col-sm">
+                <button  wire:click="exportar_reporte()" class=" botonprincipal">Exportar</button>
             </div>
         </div>
 
@@ -104,6 +109,7 @@
                                 <th>EMPAQUE</th>
                                 <th>ENVIADAS (CAJAS)</th>
                                 <th>ENVIADAS (TABACO)</th>
+                                <th>PRECIO ($)</th>
                                 <th>ORDEN</th>
                                 <th>ORDEN (SISTEMA)</th>
                                 <th>FACTURA</th>
@@ -113,9 +119,9 @@
                         </thead>
                         <tbody>
                             @php
-                                $total_puros_tabla = 0;
-
-                                $total_cajas_tabla = 0;
+                            $total_puros_tabla = 0;
+                            $total_puros_dinero = 0;
+                            $total_cajas_tabla = 0;
 
                             @endphp
 
@@ -127,18 +133,19 @@
                                 <td>{{$producto->capas}}</td>
                                 <td>{{$producto->vitola}}</td>
                                 <td>{{$producto->tipo_empaque}}</td>
-                                <td>{{$producto->cantidad_cajas}}</td>
-                                <td>{{$producto->total_tabacos}}</td>
+                                <td style="text-align: center">{{$producto->cantidad_cajas}}</td>
+                                <td style="text-align: center">{{(int)$producto->total_tabacos}}</td>
+                                <td style="text-align: end">{{number_format($producto->total_precio_tabacos,2)}}</td>
                                 <td>{{$producto->orden}}</td>
-                                <td>{{$producto->orden_sistema}}</td>
+                                <td style="text-align: center">{{$producto->orden_sistema}}</td>
                                 <td>{{$producto->num_factura}}</td>
                                 <td>{{$producto->contenedor}}</td>
                                 <td>{{$producto->fecha}}</td>
                             </tr>
                             @php
-                                $total_puros_tabla += $producto->total_tabacos;
-
-                                $total_cajas_tabla += $producto->cantidad_cajas;
+                            $total_puros_tabla += $producto->total_tabacos;
+                            $total_puros_dinero += $producto->total_precio_tabacos;
+                            $total_cajas_tabla += $producto->cantidad_cajas;
                             @endphp
                             @endforeach
 
@@ -150,24 +157,25 @@
         </div>
 
         <div class="input-group" style="width:45%;position: fixed;right: 0px;bottom:0px; height:30px;display:flex;"
-        id="sumas1">
-        <span id="de" class="input-group-text form-control "
-            style="background:rgba(174, 0, 255, 0.432);color:white;">Total Cajas</span>
-        <input type="number" class="form-control  mr-sm-4" placeholder="0" value="{{$total_cajas_tabla}}" readonly>
+            id="sumas1">
+            <span id="de" class="input-group-text form-control "
+                style="background:rgba(174, 0, 255, 0.432);color:white;">Total Cajas</span>
+            <input type="number" class="form-control  mr-sm-4" placeholder="0" value="{{$total_cajas_tabla}}" readonly>
 
-        <span id="de" class="input-group-text form-control"
-            style="background:rgba(174, 0, 255, 0.432);color:white;">Total Puros</span>
-        <input type="number" class="form-control  mr-sm-4" placeholder="0" value="{{$total_puros_tabla}}"
-            readonly>
-    </div>
+            <span id="de" class="input-group-text form-control"
+                style="background:rgba(174, 0, 255, 0.432);color:white;">Total Puros</span>
+            <input type="number" class="form-control  mr-sm-4" placeholder="0" value="{{$total_puros_tabla}}" readonly>
+
+            <span id="de" class="input-group-text form-control"
+                style="background:rgba(174, 0, 255, 0.432);color:white;">Total ($)</span>
+            <input type="number" class="form-control  mr-sm-4" placeholder="0" value="{{$total_puros_dinero}}" readonly>
+        </div>
 
 
     </div>
 
     <script>
-
-
-        function busqueda_orden(){
+        function busqueda_orden() {
             @this.orden = $("#todas_ordenes").select2('val');
             @this.orden_sistema = $("#todas_ordenes_sistema").select2('val');
             @this.marca = $("#todas_marcas").select2('val');

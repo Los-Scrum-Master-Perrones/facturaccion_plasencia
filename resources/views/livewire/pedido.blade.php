@@ -20,11 +20,11 @@
 
     <br>
 
-    <div class="container" style="max-width:100%; ">
+    <div class="container" style="max-width:100%;">
 
-        <div class="row" style="text-align:center;">
+        <div class="row" style="text-align:center; padding-left: 15px">
             <div class="col">
-                <div class="input-group mb-3">
+                <div class="input-group" style="max-width:100%;">
 
                     <form method="post" enctype="multipart/form-data" action="{{ url('/importar_pedido') }}"
                         class="form-inline">
@@ -77,10 +77,6 @@
                         </abbr>
                     </button>
 
-                    <input class=" form-control  mr-sm-2" placeholder="Búsqueda por Item" wire:model="b_item">
-                    <input class=" form-control  mr-sm-2" placeholder="Búsqueda por Categoria" wire:model="b_categoria">
-                    <input class=" form-control  mr-sm-2" placeholder="Búsqueda por Orden" wire:model="b_orden">
-
                     @if (count($nuevos) > 0){
                     <button wire:click="modal_productos_nuevos()" style="width:30px;" class=" botonprincipal mr-sm-2 ">
                         <abbr title="Nuevos Productos">
@@ -99,8 +95,17 @@
 
 
 
-        </div>
 
+        </div>
+        <div class="col">
+            <div class="input-group mb-3">
+                <input class=" form-control  mr-sm-2" placeholder="Búsqueda por Item" wire:model="b_item">
+                <input class=" form-control  mr-sm-2" placeholder="Búsqueda por Categoria" wire:model="b_categoria">
+                <input class=" form-control  mr-sm-2" placeholder="Búsqueda por Orden" wire:model="b_orden">
+
+            </div>
+
+        </div>
 
         <form action="{{Route('nuevo_pedido')}}" method="POST" id="nuevo_pedido" name="nuevo_pedido">
             <div class="modal fade" role="dialog" id="modal_actualizar" data-backdrop="static" data-keyboard="false"

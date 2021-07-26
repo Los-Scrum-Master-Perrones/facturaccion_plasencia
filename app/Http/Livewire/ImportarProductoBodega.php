@@ -11,7 +11,7 @@ use Livewire\WithFileUploads;
 
 class ImportarProductoBodega extends Component
 {
-  
+
     use WithFileUploads;
 
     public $existencias;
@@ -27,7 +27,7 @@ class ImportarProductoBodega extends Component
         if(isset($this->select_file)){
             $this->select_file->store('select_file');
         }
-        
+
         return view('livewire.importar-producto-bodega')->extends('principal')->section('content');
     }
 
@@ -35,22 +35,23 @@ class ImportarProductoBodega extends Component
     public function mount(){
 
         $this->existencias = [];
-        $this->busqueda =""; 
+        $this->busqueda ="";
         $this->existencias  =  DB::select('call mostrar_existencia_bodega');
 
 
     }
 
-      public  function import()  {  
+      public  function import()  {
         $this->borrar =  DB::select('call borrar_datos_existencia');
+        DB::select('ALTER TABLE importar_existencias AUTO_INCREMENT = 1');
         $this->validate([
             'select_file' => 'max:1024', // 1MB Max
         ]);
         (new existenciaImport)->import($this->select_file);
     }
 
-    public  function vaciar()  {  
-        $this->borrar =  DB::select('call borrar_datos_existencia');    
+    public  function vaciar()  {
+        $this->borrar =  DB::select('call borrar_datos_existencia');
     }
 
 

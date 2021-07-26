@@ -4,19 +4,15 @@
                             <th rowspan="2">Bulto<br>Package<br>No. </th>
                             <th rowspan="2">Cant.<br>Quant.  </th>
                             <th rowspan="2">Unidad<br>Unit. </th>
-                            <th rowspan="2" style="background:#ddd;">Units<br> </th>
                             <th rowspan="2">Total<br>Tabacos<br>Cigars </th>
                             <th rowspan="2">Capa<br>Wrappar  </th>
-                            <th rowspan="2">#</th>
                             <th rowspan="2">Clase<br>Class </th>
                             <th rowspan="2">CODIGO #<br>ITEM #  </th>
-                            <th rowspan="2">YOUR<br>ITEM #   </th>
                             <th rowspan="2" style="background:#ddd;">YOUR<br>ORDER # </th>
                             <th rowspan="2">ORDER<br>AMOUNT </th>
                             <th rowspan="2">BACK<br>ORDER<br>AMOUNT </th>
                             <th colspan="2" > Peso en Libras<br>Weigth in Pounds </th>
                             <th rowspan="2">Precio FOB<br>per 1000 ($) </th>
-                            <th rowspan="2" style="background:#ddd;">Cost</th>
                             <th rowspan="2">Valor<br>Value ($)</th>
                         </tr>
 
@@ -63,18 +59,7 @@
 
                         @php
                             $orden = $detalles->orden;
-                        @endphp
-
-                        @if ($orden_actua == $orden)
-
-                        @else
-                        <tr>
-                            <td colspan="18" style="background-color: gray"></td>
-                        </tr>
-                        @php
-                            $orden_actua = $detalles->orden;
-                        @endphp
-                        @endif
+                        @endphp      
 
                         @php
 
@@ -163,13 +148,10 @@
 
                             <td style="overflow-x:auto; text-align: center">{{$detalles->cantidad_puros}}</td>
                             <td>{{$detalles->unidad}}</td>
-                            <td><b>{{$detalles->cantidad_cajas}}</b></td>
                             <td></td>
                             <td style="overflow-x:auto; text-align: center">SEVERAL</td>
-                            <td style="overflow-x:auto; text-align: center">{{$detalles->cantidad_por_caja}}</td>
                             <td><b>{{strtoupper($sampler_nombre[0]->nom)}}</b> </td>
                             <td style="overflow-x:auto; text-align: center">{{$detalles->codigo}}</td>
-                            <td style="overflow-x:auto; text-align: center">{{$detalles->codigo_item}}</td>
                             <td>{{$detalles->orden}}</td>
                             <td style="overflow-x:auto; text-align: center">{{$total_pendiente[0]->total_pendiente}}</td>
                             <td style="overflow-x:auto; text-align: center">{{$detalles->orden_restante}}</td>
@@ -177,10 +159,6 @@
                             <td style="text-align: right">{{$detalles->total_bruto}}</td>
                             <td style="text-align: right">{{$detalles->total_neto}}</td>
                             <td>{{$detalles->precio_producto}}</td>
-
-
-                            <td><b>{{number_format(($promedio[0]->promedio*$detalles->cantidad_por_caja)/1000,4)}}</b>
-                            </td>
 
                             <td style="text-align: center">-</td>
 
@@ -204,10 +182,8 @@
 
                             <td></td>
                             <td></td>
-                            <td><b></b></td>
                             <td style="text-align: right">{{$repartir}}</td>
                             <td style="overflow-x:auto; text-align: center">{{$arreglo_detalles[0]->capa}}</td>
-                            <td></td>
                             <td>{{strtoupper($arreglo_detalles[0]->sampler)}}</td>
                             <td style="overflow-x:auto; text-align: center">{{$arreglo_detalles[0]->otra_descripcion}}</td>
                             <td></td>
@@ -218,18 +194,11 @@
                             <td></td>
                             <td style="text-align: right">{{number_format($arreglo_detalles[0]->precio,4)}}</td>
 
-
-                            <td></td>
                             <td style="text-align: right">
                                 {{number_format(($repartir*$arreglo_detalles[0]->precio)/1000,2)}}</td>
                             @php
                             $valor_factura += ($repartir*$arreglo_detalles[0]->precio)/1000;
                             @endphp
-                            <td>
-
-
-                            </td>
-
 
                         </tr>
 
@@ -256,13 +225,10 @@
                             <td style="overflow-x:auto;"></td>
                             <td></td>
                             <td></td>
-                            <td><b></b></td>
                             <td style="text-align: right">{{$repartir}}</td>
                             <td  style="overflow-x:auto; text-align: center">{{$arreglo_detalles[0]->capa}}</td>
-                            <td></td>
                             <td>{{strtoupper($arreglo_detalles[0]->sampler)}}</td>
                             <td style="overflow-x:auto; text-align: center">{{$arreglo_detalles[0]->otra_descripcion}}</td>
-                            <td></td>
                             <td></td>
                             <td></td>
                             <td></td>
@@ -271,7 +237,6 @@
                             <td style="text-align: right">{{number_format($arreglo_detalles[0]->precio,4)}}</td>
 
 
-                            <td style="text-align: right"></td>
                             <td style="text-align: right">
                                 {{number_format(($repartir*$arreglo_detalles[0]->precio)/1000,2)}}</td>
                             @php
@@ -324,22 +289,16 @@
 
                             <td style="overflow-x:auto; text-align: center">{{$detalles->cantidad_puros}}</td>
                             <td>{{$detalles->unidad}}</td>
-                            <td><b>{{$detalles->cantidad_cajas}}</b></td>
                             <td style="text-align: right">{{$detalles->total_tabacos}}</td>
                             <td style="overflow-x:auto; text-align: center">{{$detalles->capas}}</td>
-                            <td style="overflow-x:auto; text-align: center">{{$detalles->cantidad_por_caja}}</td>
                             <td>{{$detalles->producto}}</td>
                             <td style="overflow-x:auto; text-align: center">{{$detalles->codigo}}</td>
-                            <td style="overflow-x:auto; text-align: center">{{$detalles->codigo_item}}</td>
                             <td>{{$detalles->orden}}</td>
                             <td style="overflow-x:auto; text-align: center">{{$detalles->orden_total}}</td>
                             <td style="overflow-x:auto; text-align: center">{{$detalles->orden_restante}}</td>
                             <td style="text-align: right">{{$detalles->total_bruto}}</td>
                             <td style="text-align: right">{{$detalles->total_neto}}</td>
                             <td style="text-align: right">{{$detalles->precio_producto}}</td>
-
-
-                            <td style="text-align: right"><b>{{number_format($detalles->costo,4)}}</b></td>
                             <td style="text-align: right">{{number_format($detalles->valor_total,2)}}</td>
                             @php
                             $valor_factura += $detalles->valor_total;
@@ -359,11 +318,8 @@
                             <td></td>
                             <td><b>{{$val_actual}}</b></td>
                             <td></td>
-                            <td></td>
                             <td><b>{{$total_puros_tabla}}</b></td>
 
-                            <td></td>
-                            <td></td>
                             <td></td>
                             <td></td>
                             <td></td>
@@ -373,7 +329,6 @@
 
                             <td><b>{{number_format($total_bruto,2)}}</b></td>
                             <td><b>{{number_format($total_neto,2)}}</b></td>
-                            <td></td>
                             <td></td>
                             <td style="text-align: right"><b>{{number_format($valor_factura,2)}}</b></td>
                         </tr>
@@ -392,10 +347,7 @@
                             <td></td>
                             <td></td>
                             <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
+
                         </tr>
                         <tr style="font-size:10px;">
                             <td></td>
@@ -412,10 +364,7 @@
                             <td></td>
                             <td></td>
                             <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
+
                         </tr>
                         <tr style="font-size:10px;">
                             <td></td>
@@ -432,10 +381,7 @@
                             <td></td>
                             <td></td>
                             <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
+
                         </tr>
                         <tr style="font-size:9px;">
                             <td></td>
@@ -443,11 +389,7 @@
                             <td></td>
                             <td></td>
                             <td></td>
-                            <td></td>
-                            <td></td>
                             <td>CARIBBEAN CIGAR COMPANY</td>
-                            <td></td>
-                            <td></td>
                             <td></td>
                             <td></td>
                             <td></td>

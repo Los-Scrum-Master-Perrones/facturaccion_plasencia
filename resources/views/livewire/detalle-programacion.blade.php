@@ -120,14 +120,27 @@
                             <td>{{$detalle_provicional->cello}}</td>
                             <td>{{$detalle_provicional->upc}}</td>
                             <td>{{$detalle_provicional->saldo}}</td>
-                            <td>{{$detalle_provicional->total_existencia}}</td>
-                            <?php  if($detalle_provicional->diferencia < 0){
 
-                        echo '<td style="color:red;">'.$detalle_provicional->diferencia.'</td>' ;
+
+                            @php
+                                $pendiente_restante = 0;
+
+
+                                $existencia = DB::select('select total from importar_existencias where codigo_producto = ?', [$detalle_provicional->cod_producto]);
+                                $programado_salir = DB::select('select sum(saldo) as total from detalle_programacion_temporal where cod_producto = ?', [$detalle_provicional->cod_producto]);
+                                if($detalle_provicional->cod_producto != '' && isset($existencia[0]->total) && isset($programado_salir[0]->total)){
+                                $pendiente_restante =  $existencia[0]->total - $programado_salir[0]->total;
+                                }
+                           @endphp
+
+                            <td>{{$detalle_provicional->total_existencia}}</td>
+                            <?php  if($pendiente_restante < 0){
+
+                        echo '<td style="color:red;">'.$pendiente_restante.'</td>' ;
 
                         }else{
 
-                        echo '<td>' .$detalle_provicional->diferencia. '</td>' ;
+                        echo '<td>' .$pendiente_restante. '</td>' ;
                         }
                         ?>
 

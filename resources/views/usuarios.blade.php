@@ -6,7 +6,8 @@
 
 <!-- Libreria de las alertas -->
 <script src="{{ URL::asset('https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js') }}"></script>
-<link rel="stylesheet" href="{{ URL::asset('https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css') }}">
+<link rel="stylesheet"
+    href="{{ URL::asset('https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css') }}">
 
 
 <div class="container" style="width:100%;max-width:100%;margin-left:0px;">
@@ -53,8 +54,8 @@
                     <td>Facturador</td>
                     <?php endif; ?>
 
-
-                    <td style="padding:0px;     vertical-align: inherit;">
+                    <td style="padding:0px;   vertical-align: inherit;">
+                        @if ( $usuario->name != 'admin' &&  $usuario->email != 'admin@privado.com')
                         <a data-toggle="modal" data-target="#modal_editar_usuario"
                             onclick="datos_modal({{ $id_usuario_basico = $usuario->id }})">
                             <svg xmlns="http://www.w3.org/2000/svg" width=20 height="20" fill="currentColor"
@@ -86,6 +87,8 @@
                                 <path d="M4 8a1 1 0 1 1-2 0 1 1 0 0 1 2 0z" />
                             </svg>
                         </a>
+                        @endif
+
 
                     </td>
                 </tr>
@@ -150,7 +153,7 @@
 
                 <div class="modal-body">
                     <div class="card-body">
-                            <div class="row">
+                        <div class="row">
                             <div class="mb-3 col">
                                 <label for="name" class="form-label">Nombre Completo</label>
                                 <input id="name" type="text" class="form-control @error('name') is-invalid @enderror"
@@ -209,8 +212,8 @@
                             <div class="mb-3 col">
                                 <label for="password" class="form-label">Contraseña</label>
                                 <input id="password" type="password"
-                                    class="form-control @error('password') is-invalid @enderror" name="password" minlength="8"
-                                    required autocomplete="new-password">
+                                    class="form-control @error('password') is-invalid @enderror" name="password"
+                                    minlength="8" required autocomplete="new-password">
 
                                 @error('password')
                                 <span class="invalid-feedback" role="alert">
@@ -268,7 +271,7 @@
                     <button class="bmodal_no " data-dismiss="modal">
                         <span>Cancelar</span>
                     </button>
-                    <button onclick="v_agregarusuario()" class="bmodal_yes " >
+                    <button onclick="v_agregarusuario()" class="bmodal_yes ">
                         <span>Guardar</span>
                     </button>
                 </div>
@@ -576,7 +579,7 @@
     }
 </script>
 
-<script >
+<script>
     function v_agregarusuario() {
         var v_contrasenia = document.getElementById('password').value;
         var v_confirmacion_contrasenia = document.getElementById('password-confirm').value;
@@ -605,9 +608,9 @@
 
 
 
-        if (v_confirmacion_contrasenia != v_contrasenia) {           
+        if (v_confirmacion_contrasenia != v_contrasenia) {
             event.preventDefault();
-           alert('no da');
+            alert('no da');
         } else if (unico_codigo > 0) {
             event.preventDefault();
             toastr.error('Este código ya existe', 'ERROR', {
@@ -641,7 +644,7 @@
                 "closeButton": false
             });
             theForm.addEventListener('submit', function (event) {});
-      
+
         }
     }
 </script>

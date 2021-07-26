@@ -95,7 +95,7 @@
         <div class="lefter">
             <form action="{{Route('productos')}}" method="GET">
                 @csrf
-                <?php if (  auth()->user()->rol == 0): ?>
+                <?php if (  auth()->user()->rol == 0 || auth()->user()->rol == 2 || auth()->user()->rol == 1): ?>
                 <button type="submit" class="buttonsubmit" aria-placeholder="Hola">
                     <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="white" class="bi bi-card-list"
                         viewBox="0 0 16 16">
@@ -127,7 +127,7 @@
         <div class="left">
             <form action="{{Route('pendiente')}}" method="GET">
                 @csrf
-                <?php if (  auth()->user()->rol == 0 || auth()->user()->rol == 2): ?>
+                <?php if (  auth()->user()->rol == 0 || auth()->user()->rol == 2 || auth()->user()->rol == 1): ?>
                 <button type="submit" class="buttonsubmit">
                     <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="white" class="bi bi-archive"
                         viewBox="0 0 16 16">
@@ -379,35 +379,26 @@
             $('#todas_tipo_empaques').select2();
             $('#todas_ordenes_sistema').select2();
             $('.mi-selector').select2();
-
         });
     </script>
 
-
     <script>
-
         window.addEventListener('abrir_faltalte', event => {
             $("#productos_faltantes").modal('show');
         })
         window.addEventListener('cerrar_faltalte', event => {
             $("#productos_faltantes").modal('hide');
         })
-
         window.addEventListener('abrir_modal_eliminar', event => {
             $("#modal_eliminar_tabla_progra").modal('show');
         })
-
         window.addEventListener('cerrar_modal_eliminar', event => {
             $("#modal_eliminar_tabla_progra").modal('hide');
         })
-
         window.addEventListener('cerrar_eliminar_datelles_clase', event => {
             $("#modal_ver_detalle_producto").modal('hide');
         })
-
     </script>
-
-
 
     @livewireScripts
 </body>

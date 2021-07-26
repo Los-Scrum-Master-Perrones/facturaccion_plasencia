@@ -210,15 +210,15 @@
 
             if (producto[i].item === nombre_item) {
                 var h3 = `
-                  <h3><strong>
-                    ` + producto[i].item + `
-                    ` + producto[i].tipo_empaque + `
-                    ` + producto[i].vitola + `
-                    ` + producto[i].marca + `
-                    ` + producto[i].nombre + `
-                    
-
-                    </strong></h3>
+                  <h3>
+                    <strong>
+                        ` + producto[i].item + `
+                        ` + producto[i].tipo_empaque + `
+                        ` + producto[i].vitola + `
+                        ` + producto[i].marca + `
+                        ` + producto[i].nombre + `
+                    </strong>
+                  </h3>
 
                   `;
                 document.getElementById("clase").innerHTML += h3.toString();
