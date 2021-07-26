@@ -1,0 +1,14 @@
+insert into precios_historial(id_detalle_factura,precio) (SELECT detalle_factura.id_detalle AS id_detalle_factura, 
+
+( if((SELECT clase_productos.sampler FROM clase_productos WHERE clase_productos.item = (SELECT pendiente.item FROM pendiente WHERE pendiente.id_pendiente = detalle_factura.id_pendiente)) = 'si',
+
+(SELECT pendiente.precio FROM pendiente WHERE pendiente.id_pendiente = detalle_factura.id_pendiente)
+,
+(SELECT clase_productos.precio FROM clase_productos WHERE clase_productos.item =
+
+(SELECT pendiente.item FROM pendiente WHERE pendiente.id_pendiente = detalle_factura.id_pendiente))
+)
+)
+ AS precio
+FROM detalle_factura
+WHERE detalle_factura.id_venta != 0)
