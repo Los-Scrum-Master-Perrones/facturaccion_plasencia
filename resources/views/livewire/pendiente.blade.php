@@ -113,20 +113,20 @@
                             </button>
                             <ul class="dropdown-menu " aria-labelledby="dropdownMenuButton1">
                                 <div class="form-check ">
-                                    <input class="form-check-input" type="checkbox" value="Puros Tripa Larga" id="checkbox5" checked
-                                        name="checkbox5" wire:model="r_cinco">
+                                    <input class="form-check-input" type="checkbox" value="Puros Tripa Larga"
+                                        id="checkbox5" checked name="checkbox5" wire:model="r_cinco">
                                     <label class="form-check-label " for="flexCheckDefault"> Puros Tripa Larga </label>
                                 </div>
 
                                 <div class="form-check ">
-                                    <input class="form-check-input" type="checkbox" value="Puros Tripa Corta" id="checkbox6" checked
-                                        name="checkbox6" wire:model="r_seis">
+                                    <input class="form-check-input" type="checkbox" value="Puros Tripa Corta"
+                                        id="checkbox6" checked name="checkbox6" wire:model="r_seis">
                                     <label class="form-check-label " for="flexCheckChecked"> Puros Tripa Corta </label>
                                 </div>
 
                                 <div class="form-check ">
-                                    <input class="form-check-input " type="checkbox" value="Puros Sandwich" id="checkbox7" checked
-                                        name="checkbox7" wire:model="r_siete">
+                                    <input class="form-check-input " type="checkbox" value="Puros Sandwich"
+                                        id="checkbox7" checked name="checkbox7" wire:model="r_siete">
                                     <label class="form-check-label " for="flexCheckDefault"> Puros Sandwich
                                     </label>
                                 </div>
@@ -231,7 +231,6 @@
                         </select>
                     </div>
                 </div>
-
             </div>
         </form>
     </div>
@@ -521,9 +520,6 @@
                                 </div>
 
 
-
-
-
                                 <div class="row">
 
                                     <div class="mb-3 col">
@@ -550,21 +546,7 @@
                                         <input name="observacionn" id="observacionn" style="font-size:16px"
                                             class="form-control" type="text" autocomplete="off">
                                     </div>
-
-
                                 </div>
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -643,7 +625,6 @@
                             </button>
                             <button onclick="agregarproducto()" class=" bmodal_yes "> <span>Guardar</span> </button>
                         </div>
-
                     </div>
                 </div>
             </div>
@@ -810,105 +791,102 @@
 <!-- FIN MODAL ELMINAR DATO PENDIENTE -->
 
 
-    <!-- INICIO MODAL ACTUALIZAR DATO PENDIENTE -->
+<!-- INICIO MODAL ACTUALIZAR DATO PENDIENTE -->
 
-    <form action="{{Route('actualizar_pendiente')}}" method="POST" id="actualizar_pendiente"
-        name="actualizar_pendiente">
-        <div class="modal fade" role="dialog" id="modal_actualizar" data-backdrop="static" data-keyboard="false"
-            tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true"
-            style="opacity:.9;background:#212529;width=800px;">
-            <div class="modal-dialog modal-dialog-centered modal-lg" style="opacity:.9;background:#212529;width=80%">
-                <div class="modal-content">
-                    @csrf
-                    <div class="modal-header">
-                        <h5 id="staticBackdropLabel"><strong>Descripción del producto: </strong><span id="titulo"
-                                name="titulo"></span></h5>
-                    </div>
-
-
-                    <div class="modal-body">
-                        <div class="row">
-
-                            <input name="id_pendientea" id="id_pendientea" value="" hidden />
-
-                            <input name="itema" id="itema" value="" hidden />
-                            <div class="mb-3 col">
-                                <label for="txt_figuraytipo" class="form-label">Orden del sistema</label>
-                                <input name="orden_sistema" id="orden_sistema" class="form-control" \ type="text"
-                                    autocomplete="off">
-                            </div>
-                            <div class="mb-3 col">
-                                <label for="txt_figuraytipo" class="form-label">Orden</label>
-                                <input name="orden" id="orden" class="form-control" type="text" autocomplete="off">
-                            </div>
-
-                            <div class="mb-3 col">
-                                <label for="txt_figuraytipo" class="form-label">Presentación</label>
-                                <input name="presentacion" id="presentacion" class="form-control" type="text"
-                                    autocomplete="off">
-                            </div>
-                        </div>
-
-
-                        <div class="row">
-
-
-                            <div class="mb-3 col">
-                                <label for="txt_figuraytipo" class="form-label">Pendiente</label>
-                                <input name="pendiente" id="pendiente" class="form-control" type="text"
-                                    autocomplete="off">
-                            </div>
-
-                            <div class="mb-3 col">
-                                <label for="txt_figuraytipo" class="form-label">Saldo</label>
-                                <input name="saldo" id="saldo" class="form-control" type="text"
-                                    autocomplete="off">
-                            </div>
-
-                            <div class="mb-3 col">
-                                <label for="txt_figuraytipo" class="form-label">Código precio</label>
-                                <input name="cprecio" id="cprecio" class="form-control" type="text" autocomplete="off">
-                            </div>
-
-                            <div class="mb-3 col">
-                                <label for="txt_figuraytipo" class="form-label">Precio</label>
-                                <input name="precio" id="precio" class="form-control" type="text" autocomplete="off">
-                            </div>
-                        </div>
-
-                        <div class="row">
-                            <div class="mb-3 col">
-                                <label for="txt_figuraytipo" class="form-label">Observación</label>
-                                <input name="observacion" id="observacion" class="form-control" type="text"
-                                    autocomplete="off">
-
-                                <input name="b_mesA" id="b_mesA" hidden>
-                                <input name="b_itemA" id="b_itemA" hidden>
-                                <input name="b_ordenA" id="b_ordenS" hidden>
-                                <input name="b_honA" id="b_honA" hidden>
-                                <input name="b_marcaA" id="b_marcaA" hidden>
-                                <input name="b_vitolaA" id="b_vitolaA" hidden>
-                                <input name="b_nombreA" id="b_nombreA" hidden>
-                                <input name="b_capaA" id="b_capaA" hidden>
-                                <input name="b_empaqueA" id="b_empaqueA" hidden>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="modal-footer">
-                        <button class="bmodal_no" data-dismiss="modal">
-                            <span>Cancelar</span>
-                        </button>
-                        <button type="submit" class="bmodal_yes">
-                            <span>Actualizar</span>
-                        </button>
-                    </div>
-
+<form action="{{Route('actualizar_pendiente')}}" method="POST" id="actualizar_pendiente" name="actualizar_pendiente">
+    <div class="modal fade" role="dialog" id="modal_actualizar" data-backdrop="static" data-keyboard="false"
+        tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true"
+        style="opacity:.9;background:#212529;width=800px;">
+        <div class="modal-dialog modal-dialog-centered modal-lg" style="opacity:.9;background:#212529;width=80%">
+            <div class="modal-content">
+                @csrf
+                <div class="modal-header">
+                    <h5 id="staticBackdropLabel"><strong>Descripción del producto: </strong><span id="titulo"
+                            name="titulo"></span></h5>
                 </div>
+
+
+                <div class="modal-body">
+                    <div class="row">
+
+                        <input name="id_pendientea" id="id_pendientea" value="" hidden />
+
+                        <input name="itema" id="itema" value="" hidden />
+                        <div class="mb-3 col">
+                            <label for="txt_figuraytipo" class="form-label">Orden del sistema</label>
+                            <input name="orden_sistema" id="orden_sistema" class="form-control" \ type="text"
+                                autocomplete="off">
+                        </div>
+                        <div class="mb-3 col">
+                            <label for="txt_figuraytipo" class="form-label">Orden</label>
+                            <input name="orden" id="orden" class="form-control" type="text" autocomplete="off">
+                        </div>
+
+                        <div class="mb-3 col">
+                            <label for="txt_figuraytipo" class="form-label">Presentación</label>
+                            <input name="presentacion" id="presentacion" class="form-control" type="text"
+                                autocomplete="off">
+                        </div>
+                    </div>
+
+
+                    <div class="row">
+
+
+                        <div class="mb-3 col">
+                            <label for="txt_figuraytipo" class="form-label">Pendiente</label>
+                            <input name="pendiente" id="pendiente" class="form-control" type="text" autocomplete="off">
+                        </div>
+
+                        <div class="mb-3 col">
+                            <label for="txt_figuraytipo" class="form-label">Saldo</label>
+                            <input name="saldo" id="saldo" class="form-control" type="text" autocomplete="off">
+                        </div>
+
+                        <div class="mb-3 col">
+                            <label for="txt_figuraytipo" class="form-label">Código precio</label>
+                            <input name="cprecio" id="cprecio" class="form-control" type="text" autocomplete="off">
+                        </div>
+
+                        <div class="mb-3 col">
+                            <label for="txt_figuraytipo" class="form-label">Precio</label>
+                            <input name="precio" id="precio" class="form-control" type="text" autocomplete="off">
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="mb-3 col">
+                            <label for="txt_figuraytipo" class="form-label">Observación</label>
+                            <input name="observacion" id="observacion" class="form-control" type="text"
+                                autocomplete="off">
+
+                            <input name="b_mesA" id="b_mesA" hidden>
+                            <input name="b_itemA" id="b_itemA" hidden>
+                            <input name="b_ordenA" id="b_ordenS" hidden>
+                            <input name="b_honA" id="b_honA" hidden>
+                            <input name="b_marcaA" id="b_marcaA" hidden>
+                            <input name="b_vitolaA" id="b_vitolaA" hidden>
+                            <input name="b_nombreA" id="b_nombreA" hidden>
+                            <input name="b_capaA" id="b_capaA" hidden>
+                            <input name="b_empaqueA" id="b_empaqueA" hidden>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="modal-footer">
+                    <button class="bmodal_no" data-dismiss="modal">
+                        <span>Cancelar</span>
+                    </button>
+                    <button type="submit" class="bmodal_yes">
+                        <span>Actualizar</span>
+                    </button>
+                </div>
+
             </div>
         </div>
-    </form>
-    <!-- FIN MODAL ACTUALIZAR DATO PENDIENTE -->
+    </div>
+</form>
+<!-- FIN MODAL ACTUALIZAR DATO PENDIENTE -->
 
 
 
@@ -980,21 +958,21 @@
                         datasss[i].capa, " ", datasss[i].vitola);;
 
 
-                        document.actualizar_pendiente.presentacion.value = datasss[i].presentacion;
+                document.actualizar_pendiente.presentacion.value = datasss[i].presentacion;
 
-                        document.actualizar_pendiente.observacion.value = datasss[i].observacion;
+                document.actualizar_pendiente.observacion.value = datasss[i].observacion;
 
-                        document.actualizar_pendiente.orden_sistema.value = datasss[i].orden_del_sitema;
+                document.actualizar_pendiente.orden_sistema.value = datasss[i].orden_del_sitema;
 
-                        document.actualizar_pendiente.pendiente.value = datasss[i].pendiente;
+                document.actualizar_pendiente.pendiente.value = datasss[i].pendiente;
 
-                        document.actualizar_pendiente.saldo.value = datasss[i].saldo;
+                document.actualizar_pendiente.saldo.value = datasss[i].saldo;
 
-                        document.actualizar_pendiente.cprecio.value = datasss[i].serie_precio;
+                document.actualizar_pendiente.cprecio.value = datasss[i].serie_precio;
 
-                        document.actualizar_pendiente.precio.value = datasss[i].precio;
+                document.actualizar_pendiente.precio.value = datasss[i].precio;
 
-                        document.actualizar_pendiente.orden.value = datasss[i].orden;
+                document.actualizar_pendiente.orden.value = datasss[i].orden;
             }
         }
 
@@ -1067,7 +1045,8 @@
             for (var i = 0; i < data.length; i++) {
                 try {
 
-                    if (data[i].marca.toLowerCase().replace(/\((\w+)\)/g,'').match(b_marca.toLowerCase().replace(/\((\w+)\)/g,'')) &&
+                    if (data[i].marca.toLowerCase().replace(/\((\w+)\)/g, '').match(b_marca.toLowerCase().replace(
+                            /\((\w+)\)/g, '')) &&
                         data[i].vitola.toLowerCase().match(b_vitola.toLowerCase()) &&
                         data[i].nombre.toLowerCase().match(b_nombre.toLowerCase()) &&
                         data[i].capa.toLowerCase().match(b_capa.toLowerCase()) &&
@@ -1083,7 +1062,7 @@
                         sumap = sumap + data[i].pendiente;
 
 
-                       if (data[i].observacion == null) {
+                        if (data[i].observacion == null) {
                             data[i].observacion = "";
                         }
                         if (data[i].presentacion == null) {
@@ -1181,7 +1160,7 @@
                 }
                 document.getElementById("sumas").value = sumas.toString();
                 document.getElementById("sumap").value = sumap.toString();
-                document.getElementById("sumaprecio").value =  sumapprecio_dolar.toFixed(2).toString();
+                document.getElementById("sumaprecio").value = sumapprecio_dolar.toFixed(2).toString();
             }
         }
         // fin del else

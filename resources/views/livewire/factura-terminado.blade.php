@@ -155,7 +155,7 @@
 
                         @else
                         <tr>
-                            <td colspan="19" style="background-color: gray"></td>
+                            <td colspan="18" style="background-color: gray"></td>
                         </tr>
                         @php
                         $orden_actua = $detalles->orden;
@@ -251,7 +251,7 @@
                             <td>SEVERAL</td>
                             <td>{{$detalles->cantidad_por_caja}}</td>
                             <td style="width: 250px"><b>{{strtoupper($sampler_nombre[0]->nom)}}</b> </td>
-                            <td>{{$detalles->codigo}}</td>
+                            <td></td>
                             <td>{{$detalles->codigo_item}}</td>
                             <td>{{$detalles->orden}}</td>
                             <td>{{$total_pendiente[0]->total_pendiente}}</td>

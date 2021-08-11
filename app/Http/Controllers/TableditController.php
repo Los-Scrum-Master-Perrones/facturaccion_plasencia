@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use DB;
+use Illuminate\Support\Facades\DB;
 
 class TableditController extends Controller
 {
@@ -19,7 +19,7 @@ class TableditController extends Controller
 			$request->txt_name = "";
 		}
 
-    	$data = \DB::select('call buscar(:name)',
+    	$data = DB::select('call buscar(:name)',
 		[ 'name' => $request->txt_name]);
 
     	return view('table_edit', compact('data'));
@@ -36,15 +36,11 @@ class TableditController extends Controller
     				'last_name'		=>	$request->last_name,
     				'gender'		=>	$request->gender
     			);
-				
+
     			DB::table('sample_datas')
     				->where('id', $request->id)
     				->update($data);
     		}
-
-
-
-
 
     		if($request->action == 'delete')
     		{
@@ -53,8 +49,6 @@ class TableditController extends Controller
     				->delete();
     		}
 
-
-			
     		return response()->json($request);
     	}
     }

@@ -19,30 +19,29 @@
 
 
 <div class="container" style="max-width:100%; ">
-    
+
     <div class="row" style="text-align:center;">
 
             <div class="col">
                    <div class="input-group mb-3">
 
                 <button class="mr-sm-2 botonprincipal " data-toggle="modal" data-target="#modal_marca"style="width:150px;">Agregar Marca</button>
-         
+
                 <button class="mr-sm-2 botonprincipal " data-toggle="modal" data-target="#modal_capa" style="width:150px;">Agregar Capa</button>
-      
+
                 <button class=" mr-sm-2 botonprincipal " data-toggle="modal" data-target="#modal_nombre"  style="width:150px;">Agregar Nombre</button>
 
                 <button class="mr-sm-2 botonprincipal " data-toggle="modal" data-target="#modal_tipo" style="width:150px;">Agregar Tipo empaque</button>
-      
+
                 <button class="mr-sm-2 botonprincipal " data-toggle="modal" data-target="#modal_vitola" style="width:150px;">Agregar Vitola</button>
-       
+
                     <input name="buscar" type="text" id="buscar" wire:model="busqueda"  class="  form-control  mr-sm-2  " placeholder="Búsqueda por item, nombre y capa" style="width:350px;">
-         
+
 
                 <form wire:submit.prevent="importar_excel"  hidden>
                     <div class="col-sm">
                         <input type="file" wire:model="select_file" id="select_file" class="btn  form-control"
                             style="width:350px;" />
-
                     </div>
                     <div class="col-sm">
                         <button type="submit" name="upload" style="width:130px;" class="btn botonprincipal form-control"
@@ -50,18 +49,9 @@
                     </div>
                 </form>
 
-        </div> 
+        </div>
          </div>
     </div>
-
-
-
-  
-
-
-
-
-
 
     <div style="width:100%;">
         <div class="">
@@ -194,7 +184,7 @@
                                     </svg>
                                 </a>
                                 </td>
-                               
+
                             </tr>
                             @endforeach
                         </tbody>
@@ -240,11 +230,6 @@
             </div>
         </div>
     </div>
-
-
-
- 
-
 
 
 
@@ -309,7 +294,7 @@
                         <button onclick="validar_marca()" class="bmodal_yes">
                             <span>Actualizar</span>
                         </button>
-                      
+
                     </div>
                 </div>
             </div>
@@ -329,10 +314,10 @@
 
             for (var i = 0; i < data.length; i++) {
                 if (data[i].marca.toLowerCase() === marca_mo.toLowerCase()) {
-                   
+
                     mar++;
                 }
-                }            
+                }
 
           if (mar > 0) {
                 toastr.error('Esta Marca ya existe, favor ingrese una nueva', 'ERROR', {
@@ -359,15 +344,15 @@
                 window.addEventListener('editar_capascript', event => {
                     $("#modal_capaE").modal('show');
                 })
-                
+
                 window.addEventListener('editar_nombrescript', event => {
                     $("#modal_nombreE").modal('show');
                 })
-                
+
                 window.addEventListener('editar_tiposcript', event => {
                     $("#modal_tipoE").modal('show');
                 })
-                
+
                 window.addEventListener('editar_vitolascript', event => {
                     $("#modal_vitolaE").modal('show');
                 })
@@ -624,7 +609,7 @@
                     <div class="modal-body">
                         <div class="mb-3 col">
                             <label for="txt_vitola" class="form-label">Nuevo tipo de empaque</label>
-                            <input class="form-control" id="tipom" type="text" name="tipom" required 
+                            <input class="form-control" id="tipom" type="text" name="tipom" required
                                 placeholder="Agregar tipo de empaque" style="width: 440px" maxLength="100" autocomplete="off">
                         </div>
                     </div>
@@ -730,7 +715,7 @@
                             <label for="txt_vitola" class="form-label">Nueva vitola</label>
                             <input class="form-control" id="vitolam" type="text" name="vitolam" required
                                 placeholder="Agregar nueva vitola" style="width: 440px" maxLength="30" autocomplete="off">
-                                
+
                         </div>
                     </div>
                     <div class="modal-footer">
@@ -809,8 +794,8 @@
                 });
                 event.preventDefault();
 
-            } else{                  
-            theForm.addEventListener('submit', function (event) {});             
+            } else{
+            theForm.addEventListener('submit', function (event) {});
             }
         }
     </script>

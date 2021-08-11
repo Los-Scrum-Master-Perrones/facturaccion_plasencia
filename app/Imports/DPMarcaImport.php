@@ -14,22 +14,20 @@ class DPMarcaImport implements ToModel
     use Importable;
     public function model(array $row)
     {
-    if($row[1] == null || $row[1] == "Marca"){
-        $marca = null;
-    }else{
-        $marca_existe = marca_producto::where('marca',$row[1])->count();
-      if($marca_existe>0){
-        $marca = null;
-      }else{
-        
-        $marca =  new marca_producto([
-            'MARCA' => $row[1],
-        ]);
-     }
-      }
+        if ($row[1] == null || $row[1] == "Marca") {
+            $marca = null;
+        } else {
+            $marca_existe = marca_producto::where('marca', $row[1])->count();
+            if ($marca_existe > 0) {
+                $marca = null;
+            } else {
 
-      return $marca;
+                $marca =  new marca_producto([
+                    'MARCA' => $row[1],
+                ]);
+            }
+        }
+
+        return $marca;
     }
-
-
 }

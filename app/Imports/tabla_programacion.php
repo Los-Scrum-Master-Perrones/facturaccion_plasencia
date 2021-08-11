@@ -2,20 +2,13 @@
 
 namespace App\Imports;
 
-
-
 use Maatwebsite\Excel\Concerns\Importable;
 use App\Models\tabla_codigo_programacion;
 use Maatwebsite\Excel\Concerns\ToModel;
-use Maatwebsite\Excel\Concerns\ToCollection;
 use App\Models\capa_producto;
 use App\Models\marca_producto;
 use App\Models\nombre_producto;
 use App\Models\vitola_producto;
-use App\Imports\CapaImport;
-use App\Imports\NombreImport;
-use App\Imports\VitolaImport;
-use App\Imports\MarcaImport;
 
 class tabla_programacion implements ToModel
 {
@@ -26,7 +19,7 @@ class tabla_programacion implements ToModel
         $vitola = vitola_producto::where('vitola',$row[7])->get('id_vitola');
         $nombre = nombre_producto::where('nombre',$row[6])->get('id_nombre');
         $marca = marca_producto::where('marca',$row[5])->get('id_marca');
-        
+
         if($row[3]==null&& $row[4]==null&&$row[5]==null&&$row[6]==null &&$row[7]==null){
             $codigo = null;
         }else{
@@ -39,7 +32,7 @@ class tabla_programacion implements ToModel
                     $codigo = null;
                   }else{
 
-        
+
         $codigo =  new tabla_codigo_programacion([
             'codigo' => $row[3],
             'presentacion' => $row[4],
@@ -49,7 +42,7 @@ class tabla_programacion implements ToModel
             'capa' => isset($capa[0]->id_capa)?$capa[0]->id_capa:0,
         ]);
         }}}
-        
+
         return $codigo;
     }
 }

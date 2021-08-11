@@ -33,8 +33,6 @@ class DatosProductos extends Component
    public $cc = 1;
    public $select_file;
 
-
-
    public $id_editar_marca;
    public $id_editar_capa;
    public $id_editar_vitola;
@@ -86,12 +84,9 @@ class DatosProductos extends Component
    }
 
 
-
-
-
    public function insertar_marca(Request $request)
    {
-      $marcas_in =  \DB::SELECT('call insertar_marca(:marca)', ['marca' => $request->marcam]);
+      DB::SELECT('call insertar_marca(:marca)', ['marca' => $request->marcam]);
       return redirect()->route('datos_producto');
    }
 

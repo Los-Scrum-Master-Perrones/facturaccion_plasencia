@@ -8,7 +8,6 @@ use App\Http\Controllers\PedidoController;
 use App\Http\Controllers\CapaProductoController;
 use App\Http\Controllers\clase_producto;
 use App\Http\Controllers\importar_pendiente_lic;
-use App\Http\Controllers\PendienteController;
 use App\Http\Controllers\programacion;
 use App\Http\Controllers\tabla_existencia;
 use App\Http\Livewire\BusquedaAvanzada;
@@ -24,10 +23,8 @@ use App\Http\Livewire\InventarioCajas;
 use App\Http\Livewire\HistorialProgramacion;
 use App\Http\Livewire\DetalleProgramacion;
 use App\Http\Livewire\HistorialVentas;
-use App\Http\Livewire\ListaCajas;
 use App\Http\Livewire\Pedido;
 use App\Http\Livewire\EditarDetalles;
-use Illuminate\Support\Facades\View;
 
 /*
 |--------------------------------------------------------------------------
@@ -39,7 +36,6 @@ use Illuminate\Support\Facades\View;
 | contains the "web" middleware group. Now create something great!
 |
 */
-
 
 Auth::routes();
 
@@ -54,7 +50,7 @@ Route::group(['middleware' => 'auth'], function () {
 
  Route::get('/import_excel', Pedido::class)->name('import_excel');
 
- 
+
 
 
  Route::post('/importar_pendiente', [importar_pendiente_lic::class, 'import_pendiente'])->name('importar_pendiente');
@@ -69,8 +65,6 @@ Route::post('/importar_pendiente_empaque', [importar_pendiente_empaque::class, '
 
 Route::post('/importar_pedido', [PedidoController::class, 'import']);
 Route::get('/importar_pedido', [PedidoController::class, 'import']);
-
-
 
 Route::post('/nuevo_pedido', [PedidoController::class, 'nuevo_pedido'])->name('nuevo_pedido');
 Route::get('/nuevo_pedido', [PedidoController::class, 'nuevo_pedido'])->name('nuevo_pedido');
@@ -219,10 +213,11 @@ Route::get('/producto', [tabla_existencia::class, 'import'])->name('codigo');
 Route::post('/producto', [tabla_existencia::class, 'import'])->name('codigo');
 
 
+Route::post('/eliminar_detalles_productos', [Productos::class, 'eliminar_detalle']);
+
+
 Route::post('/datos_producto', DatosProductos::class)->name('datos_producto');
 Route::get('/datos_producto', DatosProductos::class)->name('datos_producto');
-
-Route::post('/eliminar_detalles_productos', [Productos::class, 'eliminar_detalle']);
 
 
 // INSERTAR DATOS ADICIONALES DE LOS PRODUCTOS
