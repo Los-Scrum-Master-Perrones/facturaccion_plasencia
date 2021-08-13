@@ -22,8 +22,6 @@ class catalogoImport implements ToModel
 
     public function model(array $row)
     {
-
-
         if ($row[4] == null && $row[5] == null || $row[0] == null && $row[1] == null || $row[0] == "RP Item#") {
 
             $pedio = null;
@@ -72,8 +70,6 @@ class catalogoImport implements ToModel
                         if ($pro_existe > 0 && $orden_existe > 0) {
                             $pedio = null;
                         } else {
-
-
 
                             $pedio =  new pedido([
                                 'item' => $row[0],
@@ -137,7 +133,7 @@ class catalogoImport implements ToModel
         //     $this->item =$row[0];
         //     $this->contar = DB::select('call contar_detalles_productos(:item)', ['item'=> $this->item]);
         //     $pedio = null;
-        // }else{ 
+        // }else{
         //     if($this->contar>0){
 
         //         $pedio = new pedido([

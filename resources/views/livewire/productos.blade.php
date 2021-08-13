@@ -457,14 +457,6 @@
     </div>
     <!-- FIN DEL MODAL VER DETALLE PRODUCTO -->
 
-
-
-
-
-
-
-
-
     <div style="  display: none;justify-content: center;align-items: center; height:100%;position:fixed;top:0px;width:50%;left:25%;"
         id="div_EditarProducto">
         <!-- INICIO MODAL ACTUALIZAR PRODUCTO-->
