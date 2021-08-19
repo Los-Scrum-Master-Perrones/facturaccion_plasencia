@@ -5,7 +5,19 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-wEmeIV1mKuiNpC+IOBjI7aAzPcEZeedi5yW5f2yOq55WWLwNGmvvx4Um1vskeMj0" crossorigin="anonymous">
 
+<div wire:loading>
+            <div style="display: flex; justify-content: center;
+            align-items: center; background-color: black;
+            position: fixed; top: 0px; left: 0px; z-index: 9999; width: 100%; height: 100%; opacity: 0.5;">
+                <div style="color: #a0cadb" class="la-ball-atom la-3x">
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                </div>
 
+            </div>
+        </div>
     <div class="container" style="max-width:100%;" id="div_factura" name="div_factura">
         <br>
         <div class="row" style="text-align:center;">

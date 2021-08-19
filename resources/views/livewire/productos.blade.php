@@ -1,15 +1,11 @@
 <div xmlns:wire="http://www.w3.org/1999/xhtml">
-    <title></title>
+
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" />
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Hola</title>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" />
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
-    <script src="{{ URL::asset('css/tabla.js') }}"></script>
     @livewireStyles
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-wEmeIV1mKuiNpC+IOBjI7aAzPcEZeedi5yW5f2yOq55WWLwNGmvvx4Um1vskeMj0" crossorigin="anonymous">
@@ -32,10 +28,23 @@
 
 
     <div class="container" style="max-width:100%;">
+        <div wire:loading>
+            <div style="display: flex; justify-content: center;
+            align-items: center; background-color: black;
+            position: fixed; top: 0px; left: 0px; z-index: 9999; width: 100%; height: 100%; opacity: 0.5;">
+                <div style="color: #a0cadb" class="la-ball-atom la-3x">
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                </div>
+
+            </div>
+        </div>
 
         <div class="row">
             <div class="col">
-                <div class="input-group mb-3">
+                <div class="input-group mb-3" wire:ignore>
                     <input name="buscar" id="buscar" style="width:350px;" class=" form-control  mr-sm-2 "
                         wire:model="busqueda" placeholder="Búsqueda por Marca, Nombre y Vitola">
                     <form action="{{Route('datos_producto')}} " method="post">
@@ -175,7 +184,7 @@
 
 
 
-            var producto = @json($productos) ;
+            var producto = @json($productos);
 
 
             for (var i = 0; i < producto.length; i++) {
@@ -419,7 +428,6 @@
             }
         }
     </script>
-
 
     <!-- INICIO DEL MODAL VER DETALLE PRODUCTO -->
     <div class="modal fade" id="modal_ver_detalle_producto" data-backdrop="static" data-keyboard="false" tabindex="-1"

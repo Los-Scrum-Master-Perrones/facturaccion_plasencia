@@ -1,18 +1,10 @@
 <div xmlns:wire="http://www.w3.org/1999/xhtml">
 
-    @livewireStyles
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-wEmeIV1mKuiNpC+IOBjI7aAzPcEZeedi5yW5f2yOq55WWLwNGmvvx4Um1vskeMj0" crossorigin="anonymous">
-
-
-
-
 
     <ul class="nav justify-content-center">
         <li class="nav-item">
             <a style="color:#E5B1E2; font-size:12px;" href="pendiente"><strong>Pendiente</strong></a>
         </li>
-
         <li class="nav-item">
             <a style="color:white; font-size:12px;" href="import_excel"><strong>Importar pedido</strong></a>
         </li>
@@ -22,222 +14,249 @@
     </ul>
 
 
-
     <div class="container" style="max-width:100%;">
+        <div wire:loading>
+            <div class="centro_carga">
 
-        <form action="{{Route('exportPendiente')}}" method="POST">
-            @csrf
-            <div class="col" style="height:74px;">
-                <div class="row" style="margin-bottom:2px">
-
-                    <div class="col">
-                        <div class="row">
-                            <div class="col">
-
-                                <abbr title="Agregar nuevo producto">
-                                    <button class="botonprincipal" onclick="mostrar_div_AddProductoP()">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
-                                            fill="currentColor" class="bi bi-plus-circle" viewBox="0 0 16 16">
-                                            <path
-                                                d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z" />
-                                            <path
-                                                d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z" />
-                                        </svg>Producto
-                                    </button>
-                                </abbr>
-
-                            </div>
-
-
-
-                            <div class="col">
-
-
-                                <abbr title="Importar a excel">
-                                    <button class="botonprincipal" type="submit">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
-                                            fill="currentColor" class="bi bi-file-earmark-spreadsheet"
-                                            viewBox="0 0 16 16">
-                                            <path
-                                                d="M14 14V4.5L9.5 0H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2zM9.5 3A1.5 1.5 0 0 0 11 4.5h2V9H3V2a1 1 0 0 1 1-1h5.5v2zM3 12v-2h2v2H3zm0 1h2v2H4a1 1 0 0 1-1-1v-1zm3 2v-2h3v2H6zm4 0v-2h3v1a1 1 0 0 1-1 1h-2zm3-3h-3v-2h3v2zm-7 0v-2h3v2H6z" />
-                                        </svg>
-                                    </button>
-                                </abbr>
-
-                            </div>
-                        </div>
-
-                    </div>
-
-                    <div class="col">
-                        <div class="dropdown">
-                            <button class="btn btn-secondary dropdown-toggle form-control" type="button"
-                                id="dropdownMenuButton1" data-toggle="dropdown">
-                                Categorias
-                            </button>
-                            <ul class="dropdown-menu " aria-labelledby="dropdownMenuButton1">
-                                <div class="form-check ">
-                                    <input class="form-check-input" type="checkbox" value="1" id="checkbox1" checked
-                                        name="checkbox1" wire:model="r_uno">
-                                    <label class="form-check-label " for="flexCheckDefault"> NEW ROLL </label>
-                                </div>
-
-                                <div class="form-check ">
-                                    <input class="form-check-input" type="checkbox" value="2" id="checkbox2" checked
-                                        name="checkbox2" wire:model="r_dos">
-                                    <label class="form-check-label " for="flexCheckChecked"> CATALOGO </label>
-                                </div>
-
-                                <div class="form-check ">
-                                    <input class="form-check-input " type="checkbox" value="3" id="checkbox3" checked
-                                        name="checkbox3" wire:model="r_tres">
-                                    <label class="form-check-label " for="flexCheckDefault"> INVENTARIO EXISTENTE
-                                    </label>
-                                </div>
-
-                                <div class="form-check ">
-                                    <input class="form-check-input " type="checkbox" value="4" id="checkbox4" checked
-                                        name="checkbox4" wire:model="r_cuatro">
-                                    <label class="form-check-label " for="flexCheckChecked"> WAREHOUSE </label>
-                                </div>
-                            </ul>
-                        </div>
-                    </div>
-
-
-                    <div class="col">
-                        <div class="dropdown">
-                            <button class="btn btn-secondary dropdown-toggle form-control" type="button"
-                                id="dropdownMenuButton1" data-toggle="dropdown">
-                                Presentacion
-                            </button>
-                            <ul class="dropdown-menu " aria-labelledby="dropdownMenuButton1">
-                                <div class="form-check ">
-                                    <input class="form-check-input" type="checkbox" value="Puros Tripa Larga"
-                                        id="checkbox5" checked name="checkbox5" wire:model="r_cinco">
-                                    <label class="form-check-label " for="flexCheckDefault"> Puros Tripa Larga </label>
-                                </div>
-
-                                <div class="form-check ">
-                                    <input class="form-check-input" type="checkbox" value="Puros Tripa Corta"
-                                        id="checkbox6" checked name="checkbox6" wire:model="r_seis">
-                                    <label class="form-check-label " for="flexCheckChecked"> Puros Tripa Corta </label>
-                                </div>
-
-                                <div class="form-check ">
-                                    <input class="form-check-input " type="checkbox" value="Puros Sandwich"
-                                        id="checkbox7" checked name="checkbox7" wire:model="r_siete">
-                                    <label class="form-check-label " for="flexCheckDefault"> Puros Sandwich
-                                    </label>
-                                </div>
-                            </ul>
-                        </div>
-                    </div>
-
-                    <div class="col" wire:ignore>
-                        <select onchange="buscar_tabla()" onclick="funcion1()" name="b_item" id="b_item"
-                            class=" mi-selector form-control" style="width:100%;height:34px;" name="states[]">
-                            <option value="" style="overflow-y: scroll;">Todos Items</option>
-                            @foreach($items_p as $item)
-                            <option style="overflow-y: scroll;"> {{$item->item}}</option>
-                            @endforeach
-                        </select>
-                    </div>
-
-
-                    <div class="col" wire:ignore>
-                        <select onchange="buscar_tabla()" onclick="funcion1()" name="b_orden" id="b_orden"
-                            class=" mi-selector form-control" style="width:100%;height:34px;" name="states[]">
-                            <option value="" style="overflow-y: scroll;">Todas las ordenes del sistema</option>
-                            @foreach($ordenes_p as $orden)
-                            <option style="overflow-y: scroll;"> {{$orden->orden_del_sitema}}</option>
-                            @endforeach
-                        </select>
-                    </div>
-
-                    <div class="col" wire:ignore>
-                        <select onchange="buscar_tabla()" onclick="funcion1()" name="b_hon" id="b_hon"
-                            class=" mi-selector form-control" style="width:100%;height:34px;" name="states[]">
-                            <option value="" style="overflow-y: scroll;">Todas las ordenes</option>
-                            @foreach($hons_p as $hon)
-                            <option style="overflow-y: scroll;"> {{$hon->orden}}</option>
-                            @endforeach
-                        </select>
-                    </div>
-
+                <div style="color: #a0cadb" class="la-ball-atom la-3x">
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
                 </div>
 
+            </div>
+        </div>
 
+
+
+        <div class="row" wire:ignore style="margin-bottom:2px">
+
+            <div class="col">
                 <div class="row">
-
-                    <div class="col" wire:ignore>
-
-                        <select onchange="buscar_tabla()" onclick="funcion1()" name="b_marca" id="b_marca"
-                            class=" mi-selector form-control" style="width:100%;height:34px;" name="states[]">
-                            <option value="" style="overflow-y: scroll;">Todas las marcas</option>
-                            @foreach($marcas_p as $marca)
-                            <option style="overflow-y: scroll;"> {{$marca->marca}}</option>
-                            @endforeach
-                        </select>
+                    <div class="col">
+                        <abbr title="Agregar nuevo producto">
+                            <button class="botonprincipal" onclick="mostrar_div_AddProductoP()">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                                    class="bi bi-plus-circle" viewBox="0 0 16 16">
+                                    <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z" />
+                                    <path
+                                        d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z" />
+                                </svg>Producto
+                            </button>
+                        </abbr>
                     </div>
 
-                    <div class="col" wire:ignore>
-                        <select onchange="buscar_tabla()" onclick="funcion1()" name="b_vitola" id="b_vitola"
-                            class=" mi-selector form-control" style="width:100%;height:34px;" name="states[]">
-                            <option value="" style="overflow-y: scroll;">Todas las vitolas</option>
-                            @foreach($vitolas_p as $vitola)
-                            <option style="overflow-y: scroll;"> {{$vitola->vitola}}</option>
-                            @endforeach
-                        </select>
-                    </div>
 
-                    <div class="col" wire:ignore>
-                        <select onchange="buscar_tabla()" onclick="funcion1()" name="b_nombre" id="b_nombre"
-                            class=" mi-selector form-control" style="width:100%;height:34px;" name="states[]">
-                            <option value="" style="overflow-y: scroll;">Todos los nombres</option>
-                            @foreach($nombre_p as $nombre)
-                            <option style="overflow-y: scroll;"> {{$nombre->nombre}}</option>
-                            @endforeach
-                        </select>
-                    </div>
+                    <div class="col">
+                        <abbr title="Importar a excel">
+                            <button class="botonprincipal" wire:click="exportPendiente()">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                                    class="bi bi-file-earmark-spreadsheet" viewBox="0 0 16 16">
+                                    <path
+                                        d="M14 14V4.5L9.5 0H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2zM9.5 3A1.5 1.5 0 0 0 11 4.5h2V9H3V2a1 1 0 0 1 1-1h5.5v2zM3 12v-2h2v2H3zm0 1h2v2H4a1 1 0 0 1-1-1v-1zm3 2v-2h3v2H6zm4 0v-2h3v1a1 1 0 0 1-1 1h-2zm3-3h-3v-2h3v2zm-7 0v-2h3v2H6z" />
+                                </svg>
+                            </button>
+                        </abbr>
 
-                    <div class="col" wire:ignore>
-                        <select onchange="buscar_tabla()" onclick="funcion1()" name="b_capa" id="b_capa"
-                            class=" mi-selector form-control" style="width:100%;height:34px;" name="states[]">
-                            <option value="" style="overflow-y: scroll;">Todas las capas</option>
-                            @foreach($capas_p as $capa)
-                            <option style="overflow-y: scroll;"> {{$capa->capa}}</option>
-                            @endforeach
-                        </select>
-                    </div>
-
-                    <div class="col" wire:ignore>
-                        <select onchange="buscar_tabla()" onclick="funcion1()" name="b_empaque" id="b_empaque"
-                            class=" mi-selector form-control" style="width:100%;height:34px;" name="states[]">
-                            <option value="" style="overflow-y: scroll;">Todos los empaques</option>
-                            @foreach($empaques_p as $empaque)
-                            <option style="overflow-y: scroll;"> {{$empaque->empaque}}</option>
-                            @endforeach
-                        </select>
-                    </div>
-
-                    <div class="col" wire:ignore>
-                        <select onchange="buscar_tabla()" onclick="funcion1()" name="b_mes" id="b_mes"
-                            class=" mi-selector form-control" style="width:100%;height:34px;" name="states[]">
-                            <option value="" style="overflow-y: scroll;">Todos los meses</option>
-                            @foreach($mes_p as $mes)
-                            <option style="overflow-y: scroll;"> {{$mes->mes}}</option>
-                            @endforeach
-                        </select>
                     </div>
                 </div>
             </div>
-        </form>
+
+            <div class="col">
+                <div class="dropdown">
+                    <button class="btn btn-secondary dropdown-toggle form-control" type="button"
+                        id="dropdownMenuButton1" data-toggle="dropdown">
+                        Categorias
+                    </button>
+                    <ul class="dropdown-menu " aria-labelledby="dropdownMenuButton1">
+                        <div class="form-check ">
+                            <input class="form-check-input" type="checkbox" value="1" id="checkbox1" checked
+                                name="checkbox1" wire:model="r_uno">
+                            <label class="form-check-label " for="flexCheckDefault"> NEW ROLL </label>
+                        </div>
+
+                        <div class="form-check ">
+                            <input class="form-check-input" type="checkbox" value="2" id="checkbox2" checked
+                                name="checkbox2" wire:model="r_dos">
+                            <label class="form-check-label " for="flexCheckChecked"> CATALOGO </label>
+                        </div>
+
+                        <div class="form-check ">
+                            <input class="form-check-input " type="checkbox" value="3" id="checkbox3" checked
+                                name="checkbox3" wire:model="r_tres">
+                            <label class="form-check-label " for="flexCheckDefault"> INVENTARIO EXISTENTE
+                            </label>
+                        </div>
+
+                        <div class="form-check ">
+                            <input class="form-check-input " type="checkbox" value="4" id="checkbox4" checked
+                                name="checkbox4" wire:model="r_cuatro">
+                            <label class="form-check-label " for="flexCheckChecked"> WAREHOUSE </label>
+                        </div>
+                    </ul>
+                </div>
+            </div>
+
+
+            <div class="col">
+                <div class="dropdown">
+                    <button class="btn btn-secondary dropdown-toggle form-control" type="button"
+                        id="dropdownMenuButton1" data-toggle="dropdown">
+                        Presentacion
+                    </button>
+                    <ul class="dropdown-menu " aria-labelledby="dropdownMenuButton1">
+                        <div class="form-check ">
+                            <input class="form-check-input" type="checkbox" value="Puros Tripa Larga" id="checkbox5"
+                                checked name="checkbox5" wire:model="r_cinco">
+                            <label class="form-check-label " for="flexCheckDefault"> Puros Tripa Larga </label>
+                        </div>
+
+                        <div class="form-check ">
+                            <input class="form-check-input" type="checkbox" value="Puros Tripa Corta" id="checkbox6"
+                                checked name="checkbox6" wire:model="r_seis">
+                            <label class="form-check-label " for="flexCheckChecked"> Puros Tripa Corta </label>
+                        </div>
+
+                        <div class="form-check ">
+                            <input class="form-check-input " type="checkbox" value="Puros Sandwich" id="checkbox7"
+                                checked name="checkbox7" wire:model="r_siete">
+                            <label class="form-check-label " for="flexCheckDefault"> Puros Sandwich
+                            </label>
+                        </div>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="col">
+                <select onchange="buscar_tabla()" onclick="funcion1()" name="b_item" id="b_item"
+                    class=" mi-selector form-control" style="width:100%;height:34px;" name="states[]">
+                    <option value="" style="overflow-y: scroll;">Todos Items</option>
+                    @foreach($items_p as $item)
+                    <option style="overflow-y: scroll;"> {{$item->item}}</option>
+                    @endforeach
+                </select>
+            </div>
+
+
+            <div class="col" wire:ignore>
+                <select onchange="buscar_tabla()" onclick="funcion1()" name="b_orden" id="b_orden"
+                    class=" mi-selector form-control" style="width:100%;height:34px;" name="states[]">
+                    <option value="" style="overflow-y: scroll;">Todas las ordenes del sistema</option>
+                    @foreach($ordenes_p as $orden)
+                    <option style="overflow-y: scroll;"> {{$orden->orden_del_sitema}}</option>
+                    @endforeach
+                </select>
+            </div>
+
+            <div class="col" wire:ignore>
+                <select onchange="buscar_tabla()" onclick="funcion1()" name="b_hon" id="b_hon"
+                    class=" mi-selector form-control" style="width:100%;height:34px;" name="states[]">
+                    <option value="" style="overflow-y: scroll;">Todas las ordenes</option>
+                    @foreach($hons_p as $hon)
+                    <option style="overflow-y: scroll;"> {{$hon->orden}}</option>
+                    @endforeach
+                </select>
+            </div>
+
+        </div>
+        <div class="row" wire:ignore>
+
+            <div class="col" wire:ignore>
+
+                <select onchange="buscar_tabla()" onclick="funcion1()" name="b_marca" id="b_marca"
+                    class=" mi-selector form-control" style="width:100%;height:34px;" name="states[]">
+                    <option value="" style="overflow-y: scroll;">Todas las marcas</option>
+                    @foreach($marcas_p as $marca)
+                    <option style="overflow-y: scroll;"> {{$marca->marca}}</option>
+                    @endforeach
+                </select>
+            </div>
+
+            <div class="col" wire:ignore>
+                <select onchange="buscar_tabla()" onclick="funcion1()" name="b_vitola" id="b_vitola"
+                    class=" mi-selector form-control" style="width:100%;height:34px;" name="states[]">
+                    <option value="" style="overflow-y: scroll;">Todas las vitolas</option>
+                    @foreach($vitolas_p as $vitola)
+                    <option style="overflow-y: scroll;"> {{$vitola->vitola}}</option>
+                    @endforeach
+                </select>
+            </div>
+
+            <div class="col" wire:ignore>
+                <select onchange="buscar_tabla()" onclick="funcion1()" name="b_nombre" id="b_nombre"
+                    class=" mi-selector form-control" style="width:100%;height:34px;" name="states[]">
+                    <option value="" style="overflow-y: scroll;">Todos los nombres</option>
+                    @foreach($nombre_p as $nombre)
+                    <option style="overflow-y: scroll;"> {{$nombre->nombre}}</option>
+                    @endforeach
+                </select>
+            </div>
+
+            <div class="col" wire:ignore>
+                <select onchange="buscar_tabla()" onclick="funcion1()" name="b_capa" id="b_capa"
+                    class=" mi-selector form-control" style="width:100%;height:34px;" name="states[]">
+                    <option value="" style="overflow-y: scroll;">Todas las capas</option>
+                    @foreach($capas_p as $capa)
+                    <option style="overflow-y: scroll;"> {{$capa->capa}}</option>
+                    @endforeach
+                </select>
+            </div>
+
+            <div class="col" wire:ignore>
+                <select onchange="buscar_tabla()" onclick="funcion1()" name="b_empaque" id="b_empaque"
+                    class=" mi-selector form-control" style="width:100%;height:34px;" name="states[]">
+                    <option value="" style="overflow-y: scroll;">Todos los empaques</option>
+                    @foreach($empaques_p as $empaque)
+                    <option style="overflow-y: scroll;"> {{$empaque->empaque}}</option>
+                    @endforeach
+                </select>
+            </div>
+
+            <div class="col" wire:ignore>
+                <select onchange="buscar_tabla()" onclick="funcion1()" name="b_mes" id="b_mes"
+                    class=" mi-selector form-control" style="width:100%;height:34px;" name="states[]">
+                    <option value="" style="overflow-y: scroll;">Todos los meses</option>
+                    @foreach($mes_p as $mes)
+                    <option style="overflow-y: scroll;"> {{$mes->mes}}</option>
+                    @endforeach
+                </select>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <nav>
+                    <ul class="pagination justify-content-center">
+
+                        <li class="page-item">
+                            <a class="page-link" href="#" tabindex="-1" wire:click="mostrar_todo(0)">Dividir</a>
+                        </li>
+                        @php
+                        $cantida = 1;
+                        @endphp
+                        @for ($i = 0; $i < $tuplas_conteo ; $i+=100) <li class="page-item"><a class="page-link" href="#"
+                                wire:click="paginacion_numerica({{$i}})">{{$cantida}}</a></li>
+                            @php
+                            $cantida++;
+                            @endphp
+
+                            @endfor
+                            @php
+                            $cantida = 1;
+                            @endphp
+                            <li class="page-item">
+                                <a class="page-link" href="#" wire:click="mostrar_todo(1)">Mostrar Todo</a>
+                            </li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+
     </div>
 
 
 
-    <script type="text/javascript">
+    {{-- <script type="text/javascript">
         function buscar_tabla() {
             $('.mi-selector').select2();
 
@@ -285,8 +304,6 @@
                 var incremen = 0;
                 for (var i = 0; i < data.length; i++) {
                     try {
-
-
 
                         if (data[i].marca.toLowerCase().match(b_marca.toLowerCase()) &&
                             data[i].vitola.toLowerCase().match(b_vitola.toLowerCase()) &&
@@ -393,7 +410,7 @@
             }
             // fin del else
         }
-    </script>
+    </script> --}}
 
 
 
@@ -633,15 +650,9 @@
     </div>
 
 
-
-
-
-
-
     <div class="panel-body" style="padding:0px;">
-        <div style="width:100%; padding-left:0px;   font-size:9px;   overflow-x: display; overflow-y: auto;
+        <div style="width:100%; padding-left:0px;  font-size:9px;   overflow-x: display; overflow-y: auto;
      height:75%;">
-            @csrf
             <table class="table table-light" style="font-size:9px;" id="tabla_pendiente">
                 <thead>
                     <tr>
@@ -747,12 +758,7 @@
         <span class="form-control input-group-text">Total saldo ($)</span>
         <input type="text" class="form-control" id="sumaprecio" value="{{number_format($sumaprecio_dolar,2)}}">
     </div>
-
 </div>
-
-
-
-
 
 <!-- INICIO MODAL ELMINAR DATO PENDIENTE -->
 <form action="{{Route('borrarpendiente')}}" id="formulario_mostrarE" name="formulario_mostrarE" method="POST">
@@ -786,13 +792,10 @@
         </div>
     </div>
 </form>
-
-
 <!-- FIN MODAL ELMINAR DATO PENDIENTE -->
 
 
 <!-- INICIO MODAL ACTUALIZAR DATO PENDIENTE -->
-
 <form action="{{Route('actualizar_pendiente')}}" method="POST" id="actualizar_pendiente" name="actualizar_pendiente">
     <div class="modal fade" role="dialog" id="modal_actualizar" data-backdrop="static" data-keyboard="false"
         tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true"
@@ -888,10 +891,6 @@
 </form>
 <!-- FIN MODAL ACTUALIZAR DATO PENDIENTE -->
 
-
-
-
-
 <script type="text/javascript">
     function ocultar_div_AddProductoP() {
         document.getElementById('div_AddProductoPendiente').style.display = "none";
@@ -909,8 +908,6 @@
         var datass = '<?php echo json_encode($datos_pendiente);?>';
 
         var datastiles = JSON.parse(datass);
-
-
 
         for (var i = 0; i < datastiles.length; i++) {
             if (datastiles[i].id_pendiente === id) {
@@ -981,192 +978,28 @@
 
 
 
-<script>
-    $('#b_mes').val($b_mesA).trigger('change.select2');
-    $('#b_item').val($b_itemA).trigger('change.select2');
-    $('#b_orden').val($b_ordenA).trigger('change.select2');
-    $('#b_hon').val($b_honA).trigger('change.select2');
-    $('#b_marca').val($b_marcaA).trigger('change.select2');
-    $('#b_vitola').val($b_vitolaA).trigger('change.select2');
-    $('#b_nombre').val($b_nombreA).trigger('change.select2');
-    $('#b_capa').val($b_capaA).trigger('change.select2');
-    $('#b_empaque').val($b_empaqueA).trigger('change.select2');
-</script>
-
-
 <script type="text/javascript">
     function funcion1() {
         $('.mi-selector').select2();
     }
 </script>
 
-<script type="text/javascript">
+<script>
     function buscar_tabla() {
-        $('.mi-selector').select2();
 
-        var table = document.getElementById("tabla_pendiente");
-        var rowCount = table.rows.length;
-        var tableRows = table.getElementsByTagName('tr');
-        //console.log(rowCount)
-
-        if (rowCount <= 1) {} else {
-            for (var x = rowCount - 1; x > 0; x--) {
-                document.getElementById("body").innerHTML = "";
-            }
-        }
-
-        var b_orden = document.getElementById('b_orden').value;
-        var b_item = document.getElementById('b_item').value;
-        var b_hon = document.getElementById('b_hon').value;
-        var b_mes = document.getElementById('b_mes').value;
-
-        var b_marca = document.getElementById('b_marca').value;
-        var b_vitola = document.getElementById('b_vitola').value;
-        var b_capa = document.getElementById('b_capa').value;
-        var b_nombre = document.getElementById('b_nombre').value;
-        var b_empaque = document.getElementById('b_empaque').value;
-
-        var checkbox1 = document.getElementById('checkbox1').value;
-        var checkbox2 = document.getElementById('checkbox2').value;
-        var checkbox3 = document.getElementById('checkbox3').value;
-        var checkbox4 = document.getElementById('checkbox4').value;
-
-
-        var data = @this.datos_pendiente;
-
-        if (b_orden == "" && b_item == "" && b_hon == "" && b_mes == "" && b_marca == "" &&
-            b_vitola == "" && b_capa == "" && b_nombre == "" && b_empaque == "") {
-            location.reload(true);
-        } else {
-            var sumas = 0;
-            var sumap = 0;
-            var sumapprecio_dolar = 0;
-            var incre = 0
-            for (var i = 0; i < data.length; i++) {
-                try {
-
-                    if (data[i].marca.toLowerCase().replace(/\((\w+)\)/g, '').match(b_marca.toLowerCase().replace(
-                            /\((\w+)\)/g, '')) &&
-                        data[i].vitola.toLowerCase().match(b_vitola.toLowerCase()) &&
-                        data[i].nombre.toLowerCase().match(b_nombre.toLowerCase()) &&
-                        data[i].capa.toLowerCase().match(b_capa.toLowerCase()) &&
-                        data[i].tipo_empaque.toLowerCase().match(b_empaque.toLowerCase()) &&
-
-                        data[i].item.toLowerCase().match(b_item.toLowerCase()) &&
-                        data[i].orden_del_sitema.toLowerCase().match(b_orden.toLowerCase()) &&
-                        data[i].mes.toLowerCase().match(b_mes.toLowerCase()) &&
-                        data[i].orden.toLowerCase().match(b_hon.toLowerCase())) {
-
-
-                        sumas = sumas + data[i].saldo;
-                        sumap = sumap + data[i].pendiente;
-
-
-                        if (data[i].observacion == null) {
-                            data[i].observacion = "";
-                        }
-                        if (data[i].presentacion == null) {
-                            data[i].presentacion = "";
-                        }
-                        if (data[i].anillo == null) {
-                            data[i].anillo = "";
-                        }
-                        if (data[i].cello == null) {
-                            data[i].cello = "";
-                        }
-                        if (data[i].upc == null) {
-                            data[i].upc = "";
-                        }
-                        if (data[i].serie_precio == null) {
-                            data[i].serie_precio = "";
-                        }
-                        if (data[i].precio == null) {
-                            data[i].precio = "";
-                        }
-                        if (data[i].pendiente == null) {
-                            data[i].pendiente = "";
-                        }
-                        if (data[i].saldo == null) {
-                            data[i].saldo = "";
-                        }
-
-                        if (data[i].precio_dolares == null) {
-                            data[i].precio_dolares = 0.00;
-                        }
-
-                        sumapprecio_dolar += data[i].precio_dolares;
-
-                        var tabla_nueva = `
-                  <tr>
-                  <td>` + (++incre) + `</td>
-                    <td>` + data[i].categoria + `</td>
-                    <td>` + data[i].item + `</td>
-                    <td>` + data[i].orden_del_sitema + `</td>
-                    <td>` + data[i].observacion + `</td>
-
-                    <td>` + data[i].presentacion + `</td>
-                    <td>` + data[i].mes + `</td>
-                    <td style="width:100px;font-size:8px;">` + data[i].orden + `</td>
-                    <td style="width:100px;font-size:8px;">` + data[i].marca + `</td>
-                    <td>` + data[i].vitola + `</td>
-
-                    <td>` + data[i].nombre + `</td>
-                    <td>` + data[i].capa + `</td>
-                    <td>` + data[i].tipo_empaque + `</td>
-                    <td>` + data[i].anillo + `</td>
-                    <td>` + data[i].cello + `</td>
-                    <td>` + data[i].upc + `</td>
-                    <td>` + data[i].serie_precio + `</td>
-                    <td style="text-align:right;">` + data[i].precio + `</td>
-                    <td>` + data[i].pendiente + `</td>
-                    <td>` + data[i].saldo + `</td>
-                    <td style="text-align:right;">` + data[i].precio_dolares.toFixed(2) + `</td>
-
-
-
-                    <td style="width:100px;">
-                                <a data-toggle="modal" data-target="#modal_eliminar_detalle"
-                                    onclick="datos_modal_eliminar(` + data[i].id_pendiente + `)" href="">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" fill="currentColor"
-                                        class="bi bi-trash-fill" viewBox="0 0 16 16">
-                                        <path
-                                            d="M2.5 1a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1H3v9a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V4h.5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1H2.5zm3 4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5zM8 5a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7A.5.5 0 0 1 8 5zm3 .5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 1 0z" />
-                                    </svg></a>
-
-
-                                <a style=" width:10px; height:10px;" data-toggle="modal" href=""
-                                    data-target="#modal_actualizar" type="submit"
-                                    onclick="datos_modal_actualizar(` + data[i].id_pendiente + `,` + data[i].item + `)">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" fill="currentColor"
-                                        class="bi bi-pencil-square" viewBox="0 0 16 16">
-                                        <path
-                                            d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z" />
-                                        <path fill-rule="evenodd"
-                                            d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z" />
-                                    </svg>
-                                </a>
-
-                            </td>
-
-                  </tr>
-
-                  `;
-
-
-                        document.getElementById("body").innerHTML += tabla_nueva.toString();
-                    }
-                } catch (error) {
-                    console.error(error);
-                }
-                document.getElementById("sumas").value = sumas.toString();
-                document.getElementById("sumap").value = sumap.toString();
-                document.getElementById("sumaprecio").value = sumapprecio_dolar.toFixed(2).toString();
-            }
-        }
-        // fin del else
+        @this.busqueda_items_p = $('#b_item').val();
+        @this.busqueda_marcas_p = $('#b_marca').val();
+        @this.busqueda_nombre_p = $('#b_nombre').val();
+        @this.busqueda_vitolas_p = $('#b_vitola').val();
+        @this.busqueda_capas_p = $('#b_capa').val();
+        @this.busqueda_empaques_p = $('#b_empaque').val();
+        @this.busqueda_mes_p = $('#b_mes').val();
+        @this.busqueda_items_p = $('#b_item').val();
+        @this.busqueda_ordenes_p = $('#b_orden').val();
+        @this.busqueda_hons_p = $('#b_hon').val();
+        @this.paginacion = 0;
     }
 </script>
-
 
 
 
