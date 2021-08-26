@@ -5,10 +5,8 @@ namespace App\Http\Livewire;
 use Livewire\Component;
 
 use Illuminate\Http\Request;
-use Livewire\WithPagination;
 
 use Maatwebsite\Excel\Facades\Excel;
-use Illuminate\Support\Facades\View;
 use App\Http\Static_Vars_PendienteEmpaque;
 use App\Exports\PendienteEmpaqueExport;
 use Illuminate\Support\Facades\DB;
@@ -185,9 +183,8 @@ class PendienteEmpaque extends Component
                     }
                     $valores = DB::select('call traer_detalles_productos_actualizar(?,?)', [ $datos_empaque [$i]->item, $detalles]);
 
-
                     //echo  $this->datos_pendiente_empaque[$i]->id_pendiente." ".$this->datos_pendiente_empaque[$i]->item." "."(". $cantidad_detalle_sampler.")"."<br>";
-                    $actualizar = DB::select('call actualizar_pendiente_empaque_sampler(:marca,:nombre,:vitola,:capa,:tipo,:item)', [
+                    DB::select('call actualizar_pendiente_empaque_sampler(:marca,:nombre,:vitola,:capa,:tipo,:item)', [
                         'marca' => $valores[0]->marca,
                         'nombre' => $valores[0]->nombre,
                         'vitola' => $valores[0]->vitola,
@@ -209,11 +206,6 @@ class PendienteEmpaque extends Component
 
 
     }
-
-
-
-
-
 
 
     public function insertar_detalle_provicional(Request $request)
@@ -241,7 +233,6 @@ class PendienteEmpaque extends Component
         } else {
             $checkbox4E = $request->checkbox4E;
         }
-
         if ($request->checkbox5 == null) {
             $checkbox5 = "";
         } else {
@@ -257,7 +248,6 @@ class PendienteEmpaque extends Component
         } else {
             $checkbox7 = $request->checkbox7;
         }
-
         if ($request->b_itemE == null) {
             $b_itemE = "";
         } else {
@@ -278,7 +268,6 @@ class PendienteEmpaque extends Component
         } else {
             $b_marcaE = $request->b_marcaE;
         }
-
         if ($request->b_vitolaE == null) {
             $b_vitolaE = "";
         } else {
@@ -306,7 +295,6 @@ class PendienteEmpaque extends Component
         }
 
         if ($funcion == 1) {
-
             $datos_pendiente_empaque = DB::select(
                 'call buscar_pendiente_empaque_excel(:v1,  :v2,  :v3,  :v4,  :v45,  :v46,  :v47,  :v5,  :v6,  :v7,  :v8,  :v9,  :v10,  :v11,  :v12,  :v13)',
                 [
@@ -348,9 +336,13 @@ class PendienteEmpaque extends Component
                     ]
                 );
             }
+
             return redirect()->route('detalles_programacion');
+
         } else if ($funcion == 2) {
+
             return redirect()->route('detalles_programacion');
+
         } else if ($funcion == 4) {
 
             Static_Vars_PendienteEmpaque::Sete_cat1s($request->checkbox1E);
@@ -402,8 +394,6 @@ class PendienteEmpaque extends Component
         return redirect()->route('detalles_programacion');
     }
 
-
-
     public function actualizar_pendiente_empaque(Request $request)
     {
 
@@ -412,8 +402,6 @@ class PendienteEmpaque extends Component
         } else {
             $observacions = $request->observacion;
         }
-
-
 
         $this->actualizar = \DB::select(
             'call actualizar_pendiente_empaque(:id,:observacions,:pendiente,:saldo)',
@@ -427,8 +415,6 @@ class PendienteEmpaque extends Component
 
         return redirect()->route('pendiente_empaque');
     }
-
-
 
 
     public function eliminar_pendiente(Request $request)

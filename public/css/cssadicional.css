@@ -274,6 +274,7 @@
 @-o-keyframes ball-atom-shrink {
     50% {
         -o-transform: translate(-50%, -50%) scale(.8, .8);
+        
         transform: translate(-50%, -50%) scale(.8, .8);
     }
 }

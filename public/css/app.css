@@ -13463,15 +13463,3 @@ a.text-dark:focus {
 
 }
 
-/* admite una sola linea en una fila */
-tr{
-  width: 1% !important;
-  white-space: nowrap !important;
-}
-/* Quita  subrayado con puntos en estas etiquetas */
-abbr[title]{
-  border-bottom: none !important;
-  cursor: inherit !important;
-  text-decoration: none !important;
-}
-

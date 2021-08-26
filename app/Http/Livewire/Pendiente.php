@@ -13,12 +13,15 @@ use Illuminate\Support\Facades\View;
 use App\Http\Static_Vars_Pendiente;
 use Exception;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Validator;
 
 class Pendiente extends Component
 {
     public $datos_pendiente;
     public $tuplas_conteo;
     public $paginacion;
+
+    public $codigo_item;
 
     // variables del wire  model para la busqueda
     public $r_uno = "1";
@@ -39,7 +42,6 @@ class Pendiente extends Component
 
     public $busqueda;
     public $borrar;
-    public $actualizar;
 
 
     /* procedimientos almacanedos busquedas pendiente*/
@@ -65,8 +67,18 @@ class Pendiente extends Component
     public $todos;
 
 
+    public $capas_nuevo;
+    public $marcas_nuevo;
+    public $nombres_nuevo;
+    public $vitolas_nuevo;
+    public $tipo_empaques_nuevo;
+    public $presentacion;
+    public $codigo_precio_nuevo;
+    public $precio_precio;
+
     public function render()
     {
+        $this->items_p = DB::select('call buscar_pendiente_item()');
         /*Procedimientos de busquedas de la tabla pendiente*/
         $this->marcas_p = \DB::select(
             'call buscar_marca_pendiente(:uno,:dos,:tres,:cuatro)',
@@ -245,8 +257,6 @@ class Pendiente extends Component
         return view('livewire.pendiente')->extends('principal')->section('content');
     }
 
-
-
     public function mount()
     {
 
@@ -255,7 +265,6 @@ class Pendiente extends Component
         $this->paginacion = 0;
         $this->fecha = "";
         $this->borrar = [];
-        $this->actualizar = [];
         $this->busqueda_marcas_p = "";
         $this->busqueda_nombre_p = "";
         $this->busqueda_vitolas_p = "";
@@ -330,7 +339,6 @@ class Pendiente extends Component
         $this->todos = $todo;
     }
 
-
     public function pendiente_indexi(Request $request)
     {
 
@@ -353,7 +361,6 @@ class Pendiente extends Component
         return redirect()->route('pendiente')->with('insertar_pendiente', $insertar_pendiente);
     }
 
-
     public function pendiente_index(Request $request)
     {
 
@@ -362,118 +369,55 @@ class Pendiente extends Component
         return redirect()->route('pendiente');
     }
 
-
-
-
-
-    public function buscar(Request $request)
+    public function eliminar_pendiente($request)
     {
-        if ($request->fecha_de == null) {
-            $fede = "0";
-        } else {
-            $fede = $request->fecha_de;
-        }
+        DB::select('call borrar_pendientes(:eliminar)', ['eliminar' => $request['id_pendiente3']]);
 
-        if ($request->fecha_hasta === null) {
-            $feha = "0";
-        } else {
-            $feha = $request->fecha_hasta;
-        }
-
-
-        if ($request->nombre == null) {
-            $nom = "0";
-        } else {
-            $nom = $request->nombre;
-        }
-
-        $this->capas = \DB::select('call buscar_capa("")');
-        $this->marcas = \DB::select('call buscar_marca("")');
-        $this->nombres = \DB::select('call buscar_nombre("")');
-        $this->vitolas = \DB::select('call buscar_vitola("")');
-        $this->tipo_empaques = \DB::select('call buscar_tipo_empaque("")');
-
-
-
-        return redirect()->route('pendiente');
+        $this->dispatchBrowserEvent('notificacionConfirmacionDelete');
     }
 
-
-
-
-    public function eliminar_pendiente(Request $request)
+    public function actualizar_pendiente($request)
     {
-
-        $this->datos_pendiente = [];
-        $this->borrar = \DB::select('call borrar_pendientes(:eliminar)', ['eliminar' => $request->id_pendiente]);
-
-        return redirect()->route('pendiente');
-    }
-
-    public function actualizar_pendiente(Request $request)
-    {
-        if ($request->observacion  == null) {
-            $observacions = " ";
-        } else {
-            $observacions = $request->observacion;
-        }
-
-        if ($request->presentacion == null) {
-            $presentacions = " ";
-        } else {
-            $presentacions = $request->presentacion;
-        }
-
-        if ($request->cprecio == null) {
-            $cprecios = " ";
-        } else {
-            $cprecios = $request->cprecio;
-        }
-
-        if ($request->precio == null) {
-            $precios = "0";
-        } else {
-            $precios = $request->precio;
-        }
-
-        if ($request->orden == null) {
-            $oredn1s = " ";
-        } else {
-            $oredn1s = $request->orden;
-        }
-
-
-        if ($request->orden_sistema == null) {
-            $orden_sistemas = " ";
-        } else {
-            $orden_sistemas = $request->orden_sistema;
-        }
-
-        if ($request->pendiente == null) {
-            $pendientes = " ";
-        } else {
-            $pendientes = $request->pendiente;
-        }
-
-        $this->actualizar = \DB::select(
-            'call actualizar_pendientes(:id,:item,:orden,:observacion,:presentacion,:pendiente,:saldo,:cprecio,:precio,:orden1)',
+        $validator = Validator::make(
             [
-                'id' => $request->id_pendientea,
-                'item' => $request->itema,
-                'orden' => $orden_sistemas,
-                'observacion' => $observacions,
-                'presentacion' => $presentacions,
-                'pendiente' => $pendientes,
-                'saldo' => $request->saldo,
-                'cprecio' => $cprecios,
-                'precio' => $precios,
-                'orden1' => $oredn1s
+                'orden_sistema2' => $request['orden_sistema2'],
+                'orden2' => $request['orden2'],
+                'pendiente2' => $request['pendiente2'],
+                'saldo2' => $request['saldo2']
+            ],
+            [
+                'orden_sistema2' => "required",
+                'orden2' => "required",
+                'pendiente2' => "required|integer",
+                'saldo2' => "required|integer"
+            ],
+            [
+                'orden_sistema2.required' => "La orden del sistema es necesaria.",
+                'orden2.required' => "La orden es necesaria.",
+                'pendiente2.required' => "El pendiente solicitado es necesaria.",
+                'saldo2.required' => "El saldo solicitado es necesaria.",
+                'pendiente2.integer' => "El pendiente solicitado debe ser un numero entero.",
+                'saldo2.integer' => "El saldo solicitado debe ser un numero entero.",
             ]
         );
 
+        if (!$validator->fails()) {
 
-
-        return redirect()->route('pendiente');
+           DB::select(
+                'call actualizar_pendientes(:id_pendientea2,:orden_sistema2,:orden2,:pendiente2,:saldo2,:observacion2)',
+                [
+                    'id_pendientea2' => $request['id_pendientea2'],
+                    'orden_sistema2' => $request['orden_sistema2'],
+                    'orden2' => $request['orden2'],
+                    'pendiente2' => $request['pendiente2'],
+                    'saldo2' => $request['saldo2'],
+                    'observacion2' => $request['observacion2'],
+                ]
+            );
+            $this->dispatchBrowserEvent('notificacionconfirmacionUpdate');
+        } else {
+            $this->dispatchBrowserEvent('notificacionErrorUpdate', ['mensaje' => $validator->errors()->all()]);
+        }
     }
 
     function exportPendiente()
@@ -508,33 +452,12 @@ class Pendiente extends Component
         return Excel::download(new PendienteExport($pendiente_export), 'Pendiente.xlsx');
     }
 
-
-
-    function insertar_nuevo_pendiente(Request $request)
+    public function insertar_nuevo_pendiente($request)
     {
-        if (isset($request->cello)) {
 
-            $cello = $request->cello;
-        } else {
-            $cello = "no";
-        }
-
-        if (isset($request->anillo)) {
-            $anillo = $request->anillo;
-        } else {
-            $anillo = "no";
-        }
-
-        if (isset($request->upc)) {
-            $upc = $request->upc;
-        } else {
-            $upc = "no";
-        }
-
-        $insertar_nuevo_pendiente = \DB::select(
+      DB::select(
             'call insertar_nuevo_pendiente(:categoria,:item,:orden,:observacion,:presentacion,:mes,:orden1,:marca,
         :vitola,:nombre,:capa,:tipo_empaque,:cello,:anillo,:upc,:pendiente,:saldo,:paquetes,:unidades,:cprecio,:precio)',
-
             [
                 'categoria' => $request->categoria,
                 'item' => $request->itemn,
@@ -548,9 +471,9 @@ class Pendiente extends Component
                 'nombre' => $request->nombre,
                 'capa' => $request->capa,
                 'tipo_empaque' => $request->tipo,
-                'cello' => $cello,
-                'anillo' => $anillo,
-                'upc' => $upc,
+                'cello' =>"",
+                'anillo' =>"",
+                'upc' => "",
                 'pendiente' => $request->pendienten,
                 'saldo' => $request->saldon,
                 'paquetes' => $request->paquetes,
@@ -560,6 +483,19 @@ class Pendiente extends Component
             ]
         );
 
-        return redirect()->route('pendiente');
+    }
+
+    public function agregar_productos()
+    {
+        $puro = DB::select('CALL `pendiente_producto_seleccion`(?)',[$this->codigo_item]);
+        $this->capas_nuevo = $puro[0]->capa;
+        $this->marcas_nuevo = $puro[0]->marca;
+        $this->nombres_nuevo = $puro[0]->nombre;
+        $this->vitolas_nuevo = $puro[0]->vitola;
+        $this->tipo_empaques_nuevo = $puro[0]->tipo_empaque;
+        $this->presentacion =  $puro[0]->presentacion;
+        $this->codigo_precio_nuevo =  $puro[0]->codigo_precio;
+        $this->precio_precio =  $puro[0]->precio;
+
     }
 }

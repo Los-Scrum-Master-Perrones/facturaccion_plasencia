@@ -662,7 +662,6 @@
                     }
                 }
 
-
                 var b_orden = document.getElementById('b_ordenE').value;
                 var b_item = document.getElementById('b_itemE').value;
                 var b_hon = document.getElementById('b_honE').value;
@@ -679,10 +678,7 @@
                 var checkbox3 = document.getElementById('checkbox3E').value;
                 var checkbox4 = document.getElementById('checkbox4E').value;
 
-
-
                 var data = @this.datos_pendiente_empaque;
-
 
 
                 if (b_orden == "" && b_item == "" && b_hon == "" && b_mes == "" && b_marca == "" &&
@@ -694,7 +690,6 @@
                     var incrmenta = 0;
                     for (var i = 0; i < data.length; i++) {
                         try {
-
 
                             console.log(data[i].marca);
 
