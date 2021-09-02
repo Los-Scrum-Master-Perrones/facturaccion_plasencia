@@ -286,10 +286,6 @@
             var datas = '<?php echo json_encode($verificar);?>';
             var data = JSON.parse(datas);
 
-
-
-
-
             if (data.length > 0) {
                 var bool = confirm(
                     'Necesitas agregar los productos correspondientes a los siguientes item: \n @foreach($verificar as $v) \n{{$v->item}} @endforeach '
@@ -305,6 +301,10 @@
             }
         }
     </script>
+
+
+
+
 
 
 

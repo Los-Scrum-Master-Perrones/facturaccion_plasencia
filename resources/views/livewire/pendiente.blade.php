@@ -26,8 +26,6 @@
             </div>
         </div>
 
-
-
         <div class="row" wire:ignore style="margin-bottom:2px">
 
             <div class="col">
@@ -127,8 +125,8 @@
             </div>
 
             <div class="col">
-                <select onchange="buscar_tabla()" onclick="funcion1()" name="b_item" id="b_item"
-                    class=" mi-selector form-control" style="width:100%;height:34px;" name="states[]">
+                <select onchange="buscar_tabla()" name="b_item" id="b_item"
+                    class="mi-selector form-control" style="width:100%;height:34px;" name="states[]">
                     <option value="" style="overflow-y: scroll;">Todos Items</option>
                     @foreach($items_p as $item)
                     <option style="overflow-y: scroll;"> {{$item->item}}</option>
@@ -138,7 +136,7 @@
 
 
             <div class="col" wire:ignore>
-                <select onchange="buscar_tabla()" onclick="funcion1()" name="b_orden" id="b_orden"
+                <select onchange="buscar_tabla()" name="b_orden" id="b_orden"
                     class=" mi-selector form-control" style="width:100%;height:34px;" name="states[]">
                     <option value="" style="overflow-y: scroll;">Todas las ordenes del sistema</option>
                     @foreach($ordenes_p as $orden)
@@ -148,7 +146,7 @@
             </div>
 
             <div class="col" wire:ignore>
-                <select onchange="buscar_tabla()" onclick="funcion1()" name="b_hon" id="b_hon"
+                <select onchange="buscar_tabla()" name="b_hon" id="b_hon"
                     class=" mi-selector form-control" style="width:100%;height:34px;" name="states[]">
                     <option value="" style="overflow-y: scroll;">Todas las ordenes</option>
                     @foreach($hons_p as $hon)
@@ -162,7 +160,7 @@
 
             <div class="col" wire:ignore>
 
-                <select onchange="buscar_tabla()" onclick="funcion1()" name="b_marca" id="b_marca"
+                <select onchange="buscar_tabla()"  name="b_marca" id="b_marca"
                     class=" mi-selector form-control" style="width:100%;height:34px;" name="states[]">
                     <option value="" style="overflow-y: scroll;">Todas las marcas</option>
                     @foreach($marcas_p as $marca)
@@ -172,7 +170,7 @@
             </div>
 
             <div class="col" wire:ignore>
-                <select onchange="buscar_tabla()" onclick="funcion1()" name="b_vitola" id="b_vitola"
+                <select onchange="buscar_tabla()"  name="b_vitola" id="b_vitola"
                     class=" mi-selector form-control" style="width:100%;height:34px;" name="states[]">
                     <option value="" style="overflow-y: scroll;">Todas las vitolas</option>
                     @foreach($vitolas_p as $vitola)
@@ -182,7 +180,7 @@
             </div>
 
             <div class="col" wire:ignore>
-                <select onchange="buscar_tabla()" onclick="funcion1()" name="b_nombre" id="b_nombre"
+                <select onchange="buscar_tabla()" name="b_nombre" id="b_nombre"
                     class=" mi-selector form-control" style="width:100%;height:34px;" name="states[]">
                     <option value="" style="overflow-y: scroll;">Todos los nombres</option>
                     @foreach($nombre_p as $nombre)
@@ -192,7 +190,7 @@
             </div>
 
             <div class="col" wire:ignore>
-                <select onchange="buscar_tabla()" onclick="funcion1()" name="b_capa" id="b_capa"
+                <select onchange="buscar_tabla()"name="b_capa" id="b_capa"
                     class=" mi-selector form-control" style="width:100%;height:34px;" name="states[]">
                     <option value="" style="overflow-y: scroll;">Todas las capas</option>
                     @foreach($capas_p as $capa)
@@ -202,7 +200,7 @@
             </div>
 
             <div class="col" wire:ignore>
-                <select onchange="buscar_tabla()" onclick="funcion1()" name="b_empaque" id="b_empaque"
+                <select onchange="buscar_tabla()"  name="b_empaque" id="b_empaque"
                     class=" mi-selector form-control" style="width:100%;height:34px;" name="states[]">
                     <option value="" style="overflow-y: scroll;">Todos los empaques</option>
                     @foreach($empaques_p as $empaque)
@@ -212,7 +210,7 @@
             </div>
 
             <div class="col" wire:ignore>
-                <select onchange="buscar_tabla()" onclick="funcion1()" name="b_mes" id="b_mes"
+                <select onchange="buscar_tabla()" name="b_mes" id="b_mes"
                     class=" mi-selector form-control" style="width:100%;height:34px;" name="states[]">
                     <option value="" style="overflow-y: scroll;">Todos los meses</option>
                     @foreach($mes_p as $mes)
@@ -437,7 +435,7 @@
                     <button type="button" class=" bmodal_no" data-dismiss="modal"><span>Cancelar</span>
                         @csrf
                     </button>
-                    <button onclick="guardar_producto()" class=" bmodal_yes "> <span>Guardar</span> </button>
+                    <button onclick="insertar_nuevo_pendiente()" class=" bmodal_yes "> <span>Guardar</span> </button>
                 </div>
             </div>
 
@@ -647,18 +645,6 @@
 
     @push('scripts')
     <script type="text/javascript">
-        function ocultar_div_AddProductoP() {
-            document.getElementById('div_AddProductoPendiente').style.display = "none";
-        }
-
-        function mostrar_div_AddProductoP() {
-            event.preventDefault();
-            document.getElementById('div_AddProductoPendiente').style.display = "flex";
-        }
-    </script>
-
-
-    <script type="text/javascript">
         function datos_modal_eliminar(id) {
             var datastiles = @this.datos_pendiente;
             for (var i = 0; i < datastiles.length; i++) {
@@ -666,12 +652,6 @@
                     document.getElementById('id_pendiente3').value = datastiles[i].id_pendiente;
                 }
             }
-        }
-    </script>
-
-    <script type="text/javascript">
-        function funcion1() {
-            $('.mi-selector').select2();
         }
     </script>
 
@@ -698,9 +678,7 @@
 
         window.addEventListener('notificacionconfirmacion', event => {
             toastr.success('La inserción realizada con exito.', 'Completado!');
-            $("#productos_crear").removeClass("in");
-            $(".modal-backdrop").remove();
-            $("#productos_crear").hide();
+            $("#productos_crear").modal("hide");
         })
 
         window.addEventListener('notificacionconfirmacionUpdate', event => {
@@ -755,9 +733,10 @@
 
         function insertar_nuevo_pendiente() {
 
-            if ($('#cliente').val() == "" || $('#referencia').val() == "" || $('#ordensis').val() == "" ||
-                $('#codigo_item_pendiente').val() == "" ||
-                $('#fechan').val() == "" || $('#cantSoli').val() == "" || $('#cantEnv').val() == "") {
+            if ($('#categoria').val() == "" || $('#itemn').val() == "" ||
+                $('#ordensis').val() == "" ||
+                $('#fechan').val() == "" || $('#ordenn').val() == "" ||
+                $('#pendienten').val() == "" || $('#saldon').val() == "") {
                 toastr.info('Hay compos requeridos vacios.', 'Advertencia!');
             } else {
 
@@ -766,25 +745,22 @@
                         'itemn': $('#itemn').val(),
                         'ordensis': $('#ordensis').val(),
                         'observacionn': $('#observacionn').val(),
-                        'presentacionn': "",
                         'fechan': $('#fechan').val(),
                         'ordenn': $('#ordenn').val(),
-                        'marca': "",
-                        'vitola': "",
-                        'nombre': "",
-                        'capa': "",
-                        'tipo': "",
-                        'cello': "",
-                        'anillo': "",
-                        'upc': "",
                         'pendienten': $('#pendienten').val(),
-                        'saldon': $('#saldon').val(),
-                        'paquetes': $('#paquetes').val(),
-                        'unidades': $('#unidades').val(),
-                        'c_precion': "",
-                        'precion': ""
+                        'saldon': $('#saldon').val()
 
                 });
+
+                $('#categoria').val(""),
+                $('#itemn').val(""),
+                $('#ordensis').val(""),
+                $('#observacionn').val(""),
+                $('#fechan').val(""),
+                $('#ordenn').val(""),
+                $('#pendienten').val(""),
+                $('#saldon').val(""),
+                
                 event.preventDefault();
             }
         }

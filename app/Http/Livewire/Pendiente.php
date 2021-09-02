@@ -8,9 +8,6 @@ use App\Exports\PendienteExport;
 use Illuminate\Http\Request;
 
 use Maatwebsite\Excel\Facades\Excel;
-use Carbon\Carbon;
-use Illuminate\Support\Facades\View;
-use App\Http\Static_Vars_Pendiente;
 use Exception;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
@@ -80,7 +77,7 @@ class Pendiente extends Component
     {
         $this->items_p = DB::select('call buscar_pendiente_item()');
         /*Procedimientos de busquedas de la tabla pendiente*/
-        $this->marcas_p = \DB::select(
+        $this->marcas_p = DB::select(
             'call buscar_marca_pendiente(:uno,:dos,:tres,:cuatro)',
             [
                 'uno' =>  $this->r_uno,
@@ -276,13 +273,6 @@ class Pendiente extends Component
         $this->busqueda_hons_p = "";
 
 
-        $datos = [];
-        $cantidad_detalle_sampler = 0;
-        $detalles = 0;
-        $valores = [];
-
-
-
         try {
             $datos = [];
             $cantidad_detalle_sampler = 0;
@@ -455,33 +445,60 @@ class Pendiente extends Component
     public function insertar_nuevo_pendiente($request)
     {
 
-      DB::select(
-            'call insertar_nuevo_pendiente(:categoria,:item,:orden,:observacion,:presentacion,:mes,:orden1,:marca,
-        :vitola,:nombre,:capa,:tipo_empaque,:cello,:anillo,:upc,:pendiente,:saldo,:paquetes,:unidades,:cprecio,:precio)',
+        $validator = Validator::make(
             [
-                'categoria' => $request->categoria,
-                'item' => $request->itemn,
-                'orden' => $request->ordensis,
-                'observacion' => $request->observacionn,
-                'presentacion' => $request->presentacionn,
-                'mes' => $request->fechan,
-                'orden1' => $request->ordenn,
-                'marca' => $request->marca,
-                'vitola' => $request->vitola,
-                'nombre' => $request->nombre,
-                'capa' => $request->capa,
-                'tipo_empaque' => $request->tipo,
-                'cello' =>"",
-                'anillo' =>"",
-                'upc' => "",
-                'pendiente' => $request->pendienten,
-                'saldo' => $request->saldon,
-                'paquetes' => $request->paquetes,
-                'unidades' => $request->unidades,
-                'cprecio' => $request->c_precion,
-                'precio' => $request->precion
+                'categoria' => $request['categoria'],
+                'item' => $request['itemn'],
+                'orden' =>  $request['ordensis'],
+                'mes' => $request['fechan'],
+                'orden1' => $request['ordenn'],
+                'pendiente' => $request['pendienten'],
+                'saldo' => $request['saldon']
+            ],
+            [
+                'categoria' => 'required',
+                'item' => 'required',
+                'orden' => 'required',
+                'mes' => 'required|date',
+                'orden1' => 'required',
+                'pendiente' => 'required|integer',
+                'saldo' => 'required|integer',
+            ],
+            [
+                'categoria.required' => 'Debe seleccionar una categoria.',
+                'item.required' => 'Debe ingresar el producto.',
+                'orden.required' => 'Debe ingresar la Orden del Sistema.',
+                'mes.required' => 'Debe ingresar la fecha del pedido.',
+                'mes.date' => 'El valor de la fecha es incorrecta.',
+                'orden1.required' => 'Debe ingresar la orden del cliente.',
+                'pendiente.required' => 'Debe ingresar el pendiente.',
+                'saldo.required' => 'Debe ingresar el saldo.',
+                'pendiente.integer' => 'El pendiente debe ser un numero entero.',
+                'saldo.integer' => 'El saldo debe ser un numero entero.',
             ]
         );
+
+        if (!$validator->fails()) {
+            DB::select(
+                'call insertar_nuevo_pendiente(:categoria,:item,:orden,:observacion,:mes,:orden1,:pendiente,:saldo)',
+                [
+                    'categoria' => $request['categoria'],
+                    'item' => $request['itemn'],
+                    'orden' =>  $request['ordensis'],
+                    'observacion' => $request['observacionn'],
+                    'mes' => $request['fechan'],
+                    'orden1' => $request['ordenn'],
+                    'pendiente' => $request['pendienten'],
+                    'saldo' => $request['saldon']
+                ]
+            );
+
+            $this->dispatchBrowserEvent('notificacionconfirmacion');
+        } else {
+            $this->dispatchBrowserEvent('notificacionErrorInsert', ['mensaje' => $validator->errors()->all()]);
+        }
+
+
 
     }
 

@@ -62,7 +62,6 @@ Route::post('/import', [VehicleController::class, 'import']);
 Route::post('/importar_pendiente_empaque', [importar_pendiente_empaque::class, 'import_pendiente'])->name('importar_pendiente_empaque');
 
 
-
 Route::post('/importar_pedido', [PedidoController::class, 'import']);
 Route::get('/importar_pedido', [PedidoController::class, 'import']);
 

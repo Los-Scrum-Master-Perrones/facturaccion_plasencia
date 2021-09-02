@@ -2,9 +2,6 @@
 
 namespace App\Imports;
 
-use Illuminate\Support\Collection;
-use Maatwebsite\Excel\Concerns\ToCollection;
-
 use App\Http\Static_Vars;
 use App\Models\pedido;
 use DB;
@@ -25,7 +22,7 @@ class newrollImport implements ToModel
         if ($row[4] == null && $row[5] ==null || $row[0] == null && $row[1] ==null ||$row[0] == "RP Item#") {
 
             $pedio = null;
-            
+
         } else {
             if ($row[4] != null && $row[0] != null && $row[2] != null && $row[1] == null && $row[3] == null) {
                 Static_Vars::Setordenes($row[5]);
@@ -37,7 +34,7 @@ class newrollImport implements ToModel
                      DB::insert('insert into item_faltantes(categoria, item, detalles) values (?,?,?)', [ 'ROLL NEW', $row[0] , $row[2]]);
                     }
                 }
-               
+
                 $pedio = null;
             } else {
 

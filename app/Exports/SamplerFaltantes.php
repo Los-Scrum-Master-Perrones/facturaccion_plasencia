@@ -13,16 +13,13 @@ ShouldAutoSize,
 WithHeadings,
 WithStrictNullComparison
 {
-
-
     public function headings(): array
     {
         return [
-            'N#', 
-            'Categoria',  
+            'N#',
+            'Categoria',
             'Item',
             'Descripción',
-                    
         ];
     }
 
