@@ -142,8 +142,6 @@ class FacturaTerminado extends Component
         return view('livewire.factura-terminado')->extends('principal')->section('content');
     }
 
-    
-
     public function cambiar_vista()
     {
         $this->actual_ventan = !($this->actual_ventan);
