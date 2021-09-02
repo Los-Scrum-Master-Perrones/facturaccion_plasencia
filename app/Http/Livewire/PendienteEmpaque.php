@@ -7,11 +7,9 @@ use Livewire\Component;
 use Illuminate\Http\Request;
 
 use Maatwebsite\Excel\Facades\Excel;
-use App\Http\Static_Vars_PendienteEmpaque;
 use App\Exports\PendienteEmpaqueExport;
 use Exception;
 use Illuminate\Support\Facades\DB;
-use Throwable;
 use Illuminate\Support\Facades\Validator;
 
 class PendienteEmpaque extends Component
@@ -363,7 +361,7 @@ class PendienteEmpaque extends Component
 
             );
 
-            
+
             $tuplas = count( DB::select(
                 'call buscar_pendiente_empaque(:uno,:dos,:tres,:cuatro,:pres,:seis,:siete,:paginacion,
                 :pa_items,:pa_orden_sist,:pa_ordenes,

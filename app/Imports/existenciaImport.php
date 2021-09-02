@@ -36,7 +36,7 @@ class existenciaImport implements toModel
                         'nombre' => $nom,
                         'vitola' => $vit,
                         'capa' => $capa,
-                        'total' => $row[5],
+                        'total' => intval($row[5]),
                     ]);
                 } else {
                     $existencia = DB::select('call insertar_actualizar_existencias(:codigo_producto,:marca,:nombre,:vitola,:capa,:total)',[
