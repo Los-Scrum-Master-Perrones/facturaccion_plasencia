@@ -14,7 +14,13 @@
         href="{{ URL::asset('https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css') }}">
 
 
-            <br>
+           <ul class="nav justify-content-center">
+                <li class="nav-item">
+                    <a class="nav-link active" style="color:#E5B1E2; font-size:12px;"
+                        href="{{ route('datos_producto') }}"><strong>Datos Adicionales</strong></a>
+                </li>
+
+            </ul>
 
             <br>
 
