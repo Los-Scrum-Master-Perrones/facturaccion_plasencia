@@ -45,7 +45,7 @@
 <body style="background: url('fondologin.jpg') center center no-repeat;    background-size:100% 100%;">
 
     @yield('content')
-
+<br><br><br><br><br>
     <div class="all" style="padding-bottom: 10px">
         <div class="lefter3">
             <button type="submit" class="buttonsubmit" data-toggle="modal" data-target="#modal_cerrarsesion">
