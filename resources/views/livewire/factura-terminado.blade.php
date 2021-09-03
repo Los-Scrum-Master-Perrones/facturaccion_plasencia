@@ -1177,7 +1177,7 @@
 
                 document.getElementById("pendiente").value = sumap;
                 document.getElementById("saldo").value = sumas;
-                @this.item = "099090";
+              
             }
             // fin del else
         }
