@@ -673,7 +673,7 @@
     <script type="text/javascript">
         $(document).ready(function () {
             $('.itema_nuevo').select2({
-                dropdownParent: $('#productos_crear_empaque')
+                dropdownParent: $('#productos_crear')
             });
         });
     </script>

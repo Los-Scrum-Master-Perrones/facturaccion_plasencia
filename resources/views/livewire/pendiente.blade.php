@@ -267,7 +267,7 @@
                             <div class="mb-3 col">
                                 <label for="txt_figuraytipo" class="form-label">Item</label>
                                 <select name="itemn" id="itemn" style="height:30px; width: 100%;"
-                                    class="form-control itema_nuevo" required type="text" autocomplete="off">
+                                    class="form-control mi-selector200" required type="text" autocomplete="off">
                                     <option value="">Todos los items</option>
                                     @foreach ($items_p as $items)
                                     <option value="{{$items->item}}">{{$items->item}}</option>
@@ -653,6 +653,15 @@
                 }
             }
         }
+
+
+
+	$(document).ready(function () {
+            $('.mi-selector200').select2({
+		 dropdownParent: $('#productos_crear')
+		});
+
+        });
     </script>
 
     <script>

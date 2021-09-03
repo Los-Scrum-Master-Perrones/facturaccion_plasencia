@@ -254,34 +254,37 @@ class PendienteEmpaque extends Component
             );
         }
 
-
-        return view('livewire.pendiente-empaque')->extends('principal')->section('content');
-    }
-
-    public function mount()
-    {
-        $this->datos_pendiente_empaque = [];
-
-        $this->paginacion = 0;
-        $this->fecha = "";
-        $this->borrar = [];
-        $this->busqueda_marcas_p = "";
-        $this->busqueda_nombre_p = "";
-        $this->busqueda_vitolas_p = "";
-        $this->busqueda_capas_p = "";
-        $this->busqueda_empaques_p = "";
-        $this->busqueda_mes_p = "";
-        $this->busqueda_items_p = "";
-        $this->busqueda_ordenes_p = "";
-        $this->busqueda_hons_p = "";
-
-        try {
+     try {
             $datos = [];
             $cantidad_detalle_sampler = 0;
             $detalles = 0;
             $valores = [];
 
-            $datos_empaque = DB::select('call `buscar_pendiente_empaque`("", "", "", "", "", "", "")');
+            $datos_empaque =  DB::select(
+                'call buscar_pendiente_empaque(:uno,:dos,:tres,:cuatro,:pres,:seis,:siete,:paginacion,
+                :pa_items,:pa_orden_sist,:pa_ordenes,
+                :pa_marcas,:pa_vitolas,:pa_nombre,:pa_capas,
+                :pa_empaques,:pa_meses)',
+                    [
+                        'uno' =>  $this->r_uno,
+                        'dos' =>  $this->r_dos,
+                        'tres' =>  $this->r_tres,
+                        'cuatro' =>  $this->r_cuatro,
+                        'pres' =>  $this->r_cinco,
+                        'seis' =>  $this->r_seis,
+                        'siete' =>  $this->r_siete,
+                        'paginacion' =>  -1,
+                        'pa_marcas' =>  $this->busqueda_marcas_p,
+                        'pa_nombre' =>  $this->busqueda_nombre_p,
+                        'pa_vitolas' =>  $this->busqueda_vitolas_p,
+                        'pa_capas' =>  $this->busqueda_capas_p,
+                        'pa_empaques' =>  $this->busqueda_empaques_p,
+                        'pa_meses' =>  $this->busqueda_mes_p,
+                        'pa_items' =>  $this->busqueda_items_p,
+                        'pa_orden_sist' =>  $this->busqueda_ordenes_p,
+                        'pa_ordenes' =>  $this->busqueda_hons_p
+                    ]
+            );
 
 
             for ($i = 0; $i < count($datos_empaque); $i++) {
@@ -317,7 +320,28 @@ class PendienteEmpaque extends Component
             }
         } catch (Exception $t) {
         }
+
+        return view('livewire.pendiente-empaque')->extends('principal')->section('content');
     }
+
+    public function mount()
+    {
+        $this->datos_pendiente_empaque = [];
+
+        $this->paginacion = 0;
+        $this->fecha = "";
+        $this->borrar = [];
+        $this->busqueda_marcas_p = "";
+        $this->busqueda_nombre_p = "";
+        $this->busqueda_vitolas_p = "";
+        $this->busqueda_capas_p = "";
+        $this->busqueda_empaques_p = "";
+        $this->busqueda_mes_p = "";
+        $this->busqueda_items_p = "";
+        $this->busqueda_ordenes_p = "";
+        $this->busqueda_hons_p = "";
+
+       }
 
     public function paginacion_numerica($numero)
     {

@@ -45,7 +45,7 @@ class existenciaImport implements toModel
                         'nombre' => $row[2],
                         'vitola' => $row[3],
                         'capa' => $row[4],
-                        'total' => $row[5],
+                        'total' => intval($row[5]),
                     ]);
                 }
             }
