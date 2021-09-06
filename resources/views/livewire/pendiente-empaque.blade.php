@@ -1,15 +1,19 @@
 <div xmlns:wire="http://www.w3.org/1999/xhtml">
 
     <ul class="nav justify-content-center">
-        <li class="nav-item">
-            <a style="color:#E5B1E2; font-size:12px;" href="pendiente_empaque"><strong>Pendiente</strong></a>
-        </li>
-        <li class="nav-item">
-            <a style="color:white; font-size:12px;" href="importar_c"><strong>Existencia en bodega</strong></a>
-        </li>
-        <li class="nav-item">
-            <a style="color:white; font-size:12px;" href="inventario_cajas"><strong>Existencia de cajas</strong></a>
-        </li>
+        @if(auth()->user()->rol == -1)
+
+        @else
+            <li class="nav-item">
+                <a style="color:#E5B1E2; font-size:12px;" href="pendiente_empaque"><strong>Pendiente</strong></a>
+            </li>
+            <li class="nav-item">
+                <a style="color:white; font-size:12px;" href="importar_c"><strong>Existencia en bodega</strong></a>
+            </li>
+            <li class="nav-item">
+                <a style="color:white; font-size:12px;" href="inventario_cajas"><strong>Existencia de cajas</strong></a>
+            </li>
+        @endif
         <li class="nav-item">
             <a style="color:white; font-size:12px; " href="historial_programacion"><strong>Programaciones</strong></a>
         </li>
@@ -30,7 +34,9 @@
         </div>
 
         <div class="row" style="margin-bottom:2px">
+            @if(auth()->user()->rol == -1)
 
+            @else
             <div class="col">
                 <div class="row">
                     <div class="col">
@@ -54,7 +60,7 @@
                     </div>
                 </div>
             </div>
-
+            @endif
             <div class="col">
                 <div class="dropdown">
                     <button class="btn btn-secondary dropdown-toggle form-control" type="button"
@@ -162,7 +168,9 @@
 
 
         <div class="row">
+            @if(auth()->user()->rol == -1)
 
+            @else
             <div class="col">
                 <div class="row">
                     <div class="col" wire:ignore>
@@ -190,7 +198,7 @@
                     </div>
                 </div>
             </div>
-
+            @endif
 
             <div class="col" wire:ignore>
                 <select onchange="buscar_tabla()" onclick="funcion1()" name="b_marca" id="b_marca"
@@ -300,7 +308,11 @@
                         <th>UPC</th>
                         <th>PENDIENTE</th>
                         <th>SALDO</th>
+                        @if(auth()->user()->rol == -1)
+
+                        @else
                         <th>OPERACIONES</th>
+                        @endif
                     </tr>
                 </thead>
                 <?php $sumase = 0 ; $sumape = 0; ?>
@@ -332,44 +344,47 @@
                         <td>{{$datos->upc}}</td>
                         <td>{{$datos->pendiente}}</td>
                         <td>{{$datos->saldo}}</td>
+                        @if(auth()->user()->rol == -1)
 
+                        @else
                         <td style="text-align:center;">
 
                             <?php
-                       echo' <a style=" width:20px; height:20px;" ';
-                       echo'type="submit" wire:click.prevent= "insertar_detalle_provicional_sin_existencia('.$datos->id_pendiente.')">';
+                                echo' <a style=" width:20px; height:20px;" ';
+                                echo'type="submit" wire:click.prevent= "insertar_detalle_provicional_sin_existencia('.$datos->id_pendiente.')">';
 
-                       echo'<svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" fill="currentColor"';
-                       echo'    class="bi bi-arrow-up-right-square-fill" viewBox="0 0 16 16">';
-                       echo'    <path';
-                       echo'        d="M14 0a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V2a2 2 0 0 1 2-2h12zM5.904 10.803 10 6.707v2.768a.5.5 0 0 0 1 0V5.5a.5.5 0 0 0-.5-.5H6.525a.5.5 0 1 0 0 1h2.768l-4.096 4.096a.5.5 0 0 0 .707.707z" />';
-                       echo'</svg>';
-                       echo'</a>';
+                                echo'<svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" fill="currentColor"';
+                                echo'    class="bi bi-arrow-up-right-square-fill" viewBox="0 0 16 16">';
+                                echo'    <path';
+                                echo'        d="M14 0a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V2a2 2 0 0 1 2-2h12zM5.904 10.803 10 6.707v2.768a.5.5 0 0 0 1 0V5.5a.5.5 0 0 0-.5-.5H6.525a.5.5 0 1 0 0 1h2.768l-4.096 4.096a.5.5 0 0 0 .707.707z" />';
+                                echo'</svg>';
+                                echo'</a>';
 
-                       echo'<a style=" width:20px; height:20px;" data-toggle="modal" href=""';
-                       echo'             data-target="#modal_actualizar" type="submit"';
-                       echo'        onclick="datos_modal_actualizar(' .$datos->id_pendiente. ')">';
-                       echo'        <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" fill="currentColor"';
-                       echo'            class="bi bi-pencil-square" viewBox="0 0 16 16">';
-                       echo'            <path';
-                       echo'                d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z" />';
-                       echo'            <path fill-rule="evenodd"';
-                       echo'                d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z" />';
-                       echo'        </svg>';
-                       echo'    </a>';
+                                echo'<a style=" width:20px; height:20px;" data-toggle="modal" href=""';
+                                echo'             data-target="#modal_actualizar" type="submit"';
+                                echo'        onclick="datos_modal_actualizar(' .$datos->id_pendiente. ')">';
+                                echo'        <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" fill="currentColor"';
+                                echo'            class="bi bi-pencil-square" viewBox="0 0 16 16">';
+                                echo'            <path';
+                                echo'                d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z" />';
+                                echo'            <path fill-rule="evenodd"';
+                                echo'                d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z" />';
+                                echo'        </svg>';
+                                echo'    </a>';
 
 
-                       echo'<a data-toggle="modal" data-target="#modal_eliminar_detalle"';
-                       echo'    onclick="datos_modal_eliminar(' .$datos->id_pendiente. ')" href="">';
-                       echo'    <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" fill="currentColor"';
-                       echo'        class="bi bi-trash-fill" viewBox="0 0 16 16">';
-                       echo'        <path';
-                       echo'            d="M2.5 1a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1H3v9a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V4h.5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1H2.5zm3 4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5zM8 5a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7A.5.5 0 0 1 8 5zm3 .5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 1 0z" />';
-                       echo'    </svg></a>';
-                    ?>
+                                echo'<a data-toggle="modal" data-target="#modal_eliminar_detalle"';
+                                echo'    onclick="datos_modal_eliminar(' .$datos->id_pendiente. ')" href="">';
+                                echo'    <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" fill="currentColor"';
+                                echo'        class="bi bi-trash-fill" viewBox="0 0 16 16">';
+                                echo'        <path';
+                                echo'            d="M2.5 1a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1H3v9a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V4h.5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1H2.5zm3 4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5zM8 5a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7A.5.5 0 0 1 8 5zm3 .5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 1 0z" />';
+                                echo'    </svg></a>';
+                            ?>
 
 
                         </td>
+                        @endif
                     </tr>
 
                     <?php $sumase = $sumase + $datos->saldo;

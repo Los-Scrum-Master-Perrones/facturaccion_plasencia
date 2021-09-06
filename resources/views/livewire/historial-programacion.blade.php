@@ -1,20 +1,24 @@
 <div xmlns:wire="http://www.w3.org/1999/xhtml">
-<title></title>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" />
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <title></title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" />
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Hola</title>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" />
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
-<script src="{{ URL::asset('css/tabla.js') }}"></script>
-@livewireStyles
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-wEmeIV1mKuiNpC+IOBjI7aAzPcEZeedi5yW5f2yOq55WWLwNGmvvx4Um1vskeMj0" crossorigin="anonymous">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Hola</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" />
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+    <script src="{{ URL::asset('css/tabla.js') }}"></script>
+    @livewireStyles
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-wEmeIV1mKuiNpC+IOBjI7aAzPcEZeedi5yW5f2yOq55WWLwNGmvvx4Um1vskeMj0" crossorigin="anonymous">
 
     </br>
     <ul class="nav justify-content-center">
+        @if(auth()->user()->rol == -1)
+
+         @else
         <li class="nav-item">
             <a style="color:white; font-size:12px;" href="pendiente_empaque"><strong>Pendiente</strong></a>
         </li>
@@ -24,6 +28,7 @@
         <li class="nav-item">
             <a style="color:white; font-size:12px;" href="inventario_cajas"><strong>Existencia de cajas</strong></a>
         </li>
+        @endif
         <li class="nav-item">
             <a style="color:#E5B1E2; font-size:12px;" href=""><strong>Programaciones</strong></a>
         </li>
@@ -44,7 +49,9 @@
             </div>
             <div class="col-sm-4" style="text-align:right;">
                 <form action="{{Route('exportar_programacion')}}" id="formver" name="formver">
-                    <input name="buscar" id="buscar" value="{{isset($busqueda)?$busqueda:null}}" onKeyDown="copiar('buscar','b');" class="  form-control" wire:model="busqueda"  placeholder="Búsqueda por Marca, Nombre y Vitola" style="width:400px; padding:right;">
+                    <input name="buscar" id="buscar" value="{{isset($busqueda)?$busqueda:null}}"
+                        onKeyDown="copiar('buscar','b');" class="  form-control" wire:model="busqueda"
+                        placeholder="Búsqueda por Marca, Nombre y Vitola" style="width:400px; padding:right;">
             </div>
             <div class="col-sm-3" style="text-align:right;">
 
@@ -65,92 +72,95 @@
     <div style="width:100%; padding-left:25px; padding-right:10px;">
 
         <div class="row">
-            <div class="col-sm-3">
+            <div class="col-sm-3" style="height:450px; padding-left:0px;   font-size:10px;  ">
+                <div class="table-responsive" style="height:450px; padding-left:0px;   font-size:10px;  ">
+                    <table class="table table-light" id="editable" style="font-size:10px;">
+                        <thead>
+                            <tr style="text-align:center;">
+                                <th style=" text-align:center;">#-No.</th>
+                                <th style=" text-align:center;">FECHA</th>
+                                <th style=" text-align:center;">CONTENEDOR</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <?php $c = 0;?>
+                            @foreach($programaciones as $programacion)
+                            <tr>
+                                <td> <?php $c = $c + 1;  echo $c ?></td>
+                                <td> {{$programacion ->fecha}}</td>
+                                <td> {{$programacion ->mes_contenedor}}
 
-                <table class="table table-light" id="editable" style="font-size:10px;">
-                    <thead>
-                        <tr style="text-align:center;">
-                            <th style=" text-align:center;">#-No.</th>
-                            <th style=" text-align:center;">FECHA</th>
-                            <th style=" text-align:center;">CONTENEDOR</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <?php $c = 0;?>
-                        @foreach($programaciones as $programacion)
-                        <tr>
-                            <td> <?php $c = $c + 1;  echo $c ?></td>
-                            <td> {{$programacion ->fecha}}</td>
-                            <td>
-                                <div class="row">
-                                    <div class="col-sm-6" style="text-align:left;"> {{$programacion ->mes_contenedor}}
-                                    </div>
-                                    <div class="col-sm-1" style="text-align:right;">
-                                        <a data-toggle="modal" data-target="#modal_eliminar_programacion"
-                                            onclick="datos_modal_eliminar_pro({{ $programacion->id}})" href="">
-                                            <abbr title="Eliminar programación"><svg xmlns="http://www.w3.org/2000/svg"
-                                                    width="16" height="16" fill="currentColor" class="bi bi-trash-fill"
-                                                    viewBox="0 0 16 16" style="color:black;">
-                                                    <path
-                                                        d="M2.5 1a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1H3v9a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V4h.5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1H2.5zm3 4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5zM8 5a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7A.5.5 0 0 1 8 5zm3 .5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 1 0z" />
-                                                </svg>
-                                            </abbr>
-                                        </a>
-                                    </div>
-                                    <div class="col-sm-1" style="text-align:right;">
-                                        <a style=" width:10px; height:10px;" data-toggle="modal" href=""
-                                            data-target="#modal_actualizar_programacion" type="submit"
-                                            onclick="datos_modal_actualizar_programacion({{$programacion->id}})">
-                                            <abbr title="Editar programacion"> <svg xmlns="http://www.w3.org/2000/svg"
-                                                    width="20" height="20" fill="currentColor"
-                                                    class="bi bi-pencil-square" viewBox="0 0 16 16"
-                                                    style="color:black;">
-                                                    <path
-                                                        d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z" />
-                                                    <path fill-rule="evenodd"
-                                                        d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z" />
-                                                </svg>
-                                            </abbr>
-                                        </a>
+                                    <div class="row">
+                                        @if(auth()->user()->rol == -1)
 
-                                    </div>
-                                    <div class="col-sm-1" style="text-align:right;">
-
-
-                                        <form wire:submit.prevent="ver({{$programacion->id}})">
-                                            <a style=" width:10px; height:10px;" type="submit"
-                                                onclick="verpro({{$programacion->id}})">
-                                                <button data-toggle="modal" data-target="" href="" style="background: none; color: inherit;   border: none;  padding: 0;
+                                        @else
+                                        <div class="col-sm-1" style="text-align:right;">
+                                            <a data-toggle="modal" data-target="#modal_eliminar_programacion"
+                                                onclick="datos_modal_eliminar_pro({{ $programacion->id}})" href="">
+                                                <abbr title="Eliminar programación"><svg
+                                                        xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                                        fill="currentColor" class="bi bi-trash-fill" viewBox="0 0 16 16"
+                                                        style="color:black;">
+                                                        <path
+                                                            d="M2.5 1a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1H3v9a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V4h.5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1H2.5zm3 4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5zM8 5a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7A.5.5 0 0 1 8 5zm3 .5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 1 0z" />
+                                                    </svg>
+                                                </abbr>
+                                            </a>
+                                        </div>
+                                        <div class="col-sm-1" style="text-align:right;">
+                                            <a style=" width:10px; height:10px;" data-toggle="modal" href=""
+                                                data-target="#modal_actualizar_programacion" type="submit"
+                                                onclick="datos_modal_actualizar_programacion({{$programacion->id}})">
+                                                <abbr title="Editar programacion">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20"
+                                                        fill="currentColor" class="bi bi-pencil-square"
+                                                        viewBox="0 0 16 16" style="color:black;">
+                                                        <path
+                                                            d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z" />
+                                                        <path fill-rule="evenodd"
+                                                            d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z" />
+                                                    </svg>
+                                                </abbr>
+                                            </a>
+                                        </div>
+                                        @endif
+                                        <div class="col-sm-1" style="text-align:right;">
+                                            <form wire:submit.prevent="ver({{$programacion->id}})">
+                                                <a style=" width:10px; height:10px;" type="submit"
+                                                    onclick="verpro({{$programacion->id}})">
+                                                    <button data-toggle="modal" data-target="" href="" style="background: none; color: inherit;   border: none;  padding: 0;
                                                 font: inherit;  cursor: pointer; outline: inherit;">
 
-                                                    <abbr title="Mostrar detalles de la programación"><svg
-                                                            xmlns="http://www.w3.org/2000/svg" width="20" height="20"
-                                                            fill="currentColor" class="bi bi-eye-fill"
-                                                            viewBox="0 0 16 16" style="color:black;">
-                                                            <path d="M10.5 8a2.5 2.5 0 1 1-5 0 2.5 2.5 0 0 1 5 0z" />
-                                                            <path
-                                                                d="M0 8s3-5.5 8-5.5S16 8 16 8s-3 5.5-8 5.5S0 8 0 8zm8 3.5a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7z" />
-                                                        </svg>
-                                                    </abbr>
+                                                        <abbr title="Mostrar detalles de la programación"><svg
+                                                                xmlns="http://www.w3.org/2000/svg" width="20"
+                                                                height="20" fill="currentColor" class="bi bi-eye-fill"
+                                                                viewBox="0 0 16 16" style="color:black;">
+                                                                <path
+                                                                    d="M10.5 8a2.5 2.5 0 1 1-5 0 2.5 2.5 0 0 1 5 0z" />
+                                                                <path
+                                                                    d="M0 8s3-5.5 8-5.5S16 8 16 8s-3 5.5-8 5.5S0 8 0 8zm8 3.5a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7z" />
+                                                            </svg>
+                                                        </abbr>
 
-                                                </button>
-                                            </a>
-                                        </form>
+                                                    </button>
+                                                </a>
+                                            </form>
 
 
+                                        </div>
                                     </div>
-                                </div>
-                            </td>
-                        </tr>
-                        @endforeach
-                    </tbody>
-                </table>
+                                </td>
+                            </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
+                </div>
             </div>
 
 
             <div class="col-sm-9" style="width:75%; padding-left:0px;   font-size:10px;   overflow-x: display; overflow-y: auto;
             height:450px;">
-                <table class="table table-light" id="editable" style="font-size:10px;" >
+                <table class="table table-light" id="editable" style="font-size:10px;">
                     <thead>
                         <tr style=" text-align:center;">
                             <th># ORDEN</th>
@@ -173,7 +183,7 @@
                     <tbody>
 
                         @php
-                            $suma_total = 0;
+                        $suma_total = 0;
                         @endphp
                         @foreach($detalles_programaciones as $detalles_programacione)
                         <tr>
@@ -189,7 +199,7 @@
                             <td> {{$detalles_programacione->upc}}</td>
                             <td> {{$detalles_programacione->saldo}}</td>
                             @php
-                                $suma_total+=$detalles_programacione->saldo;
+                            $suma_total+=$detalles_programacione->saldo;
                             @endphp
                             <td> {{$detalles_programacione->cajas}}</td>
 
@@ -421,14 +431,13 @@
                         <h5 class="modal-title" id="staticBackdropLabel">Eliminar</h5>
                     </div>
                     <div class="modal-body">
-                    ¿Estás seguro que quieres eliminar esta programación?
+                        ¿Estás seguro que quieres eliminar esta programación?
                     </div>
                     <div class="modal-footer">
 
 
                         <input name="id_pro" id="id_pro" hidden />
-                        <button  type="button" class=" btn_no "
-                            data-dismiss="modal">
+                        <button type="button" class=" btn_no " data-dismiss="modal">
                             <span>Cancelar</span>
                         </button>
                         <button type="submit" class=" btn_yes ">
@@ -474,8 +483,7 @@
 
                         <input name="id_p" id="id_p" hidden />
 
-                        <button type="button" class=" btn_no "
-                            data-dismiss="modal">
+                        <button type="button" class=" btn_no " data-dismiss="modal">
                             <span>Cancelar</span>
                         </button>
                         <button type="submit" class="btn_yes">

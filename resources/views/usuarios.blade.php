@@ -43,15 +43,19 @@
                     <td>{{$usuario->name}}</td>
                     <td>{{$usuario->email}}</td>
                     <?php if($usuario->rol == 0): ?>
-                    <td>Administrador</td>
+                        <td>Administrador</td>
                     <?php endif; ?>
 
                     <?php if($usuario->rol == 1): ?>
-                    <td>Operador de datos</td>
+                        <td>Operador de datos</td>
                     <?php endif; ?>
 
                     <?php if($usuario->rol == 2): ?>
-                    <td>Facturador</td>
+                        <td>Facturador</td>
+                    <?php endif; ?>
+
+                    <?php if($usuario->rol == -1): ?>
+                    `   <td>Observador</td  >
                     <?php endif; ?>
 
                     <td style="padding:0px;   vertical-align: inherit;">

@@ -46,8 +46,12 @@
 
     @yield('content')
 <br><br><br><br><br>
-    <div class="all" style="padding-bottom: 10px">
-        <div class="lefter3">
+    <div class="all"  style="padding-bottom: 10px">
+        <div @if (auth()->user()->rol  == -1)
+            class="lefter"
+        @else
+        class="lefter3"
+        @endif>
             <button type="submit" class="buttonsubmit" data-toggle="modal" data-target="#modal_cerrarsesion">
                 <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="white" class="bi bi-power"
                     viewBox="0 0 16 16">
@@ -58,6 +62,9 @@
             </button>
             <div class="text">CERRAR</div>
         </div>
+
+        @if (auth()->user()->rol != -1)
+
 
         <div class="lefter2">
             <form action="{{Route('usuarios')}}" method="GET">
@@ -88,6 +95,7 @@
             </form>
         </div>
 
+
         <div class="lefter">
             <form action="{{Route('productos')}}" method="GET">
                 @csrf
@@ -116,11 +124,11 @@
                 <?php endif; ?>
             </form>
         </div>
-
+        @endif
         <div class="left">
             <form action="{{Route('pendiente')}}" method="GET">
                 @csrf
-                <?php if (  auth()->user()->rol == 0 || auth()->user()->rol == 2 || auth()->user()->rol == 1): ?>
+                @if(auth()->user()->rol == 0 || auth()->user()->rol == 2 || auth()->user()->rol == 1)
                 <button type="submit" class="buttonsubmit">
                     <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="white" class="bi bi-archive"
                         viewBox="0 0 16 16">
@@ -129,7 +137,19 @@
                     </svg>
                 </button>
                 <div class="text">PENDIENTE</div>
-                <?php else: ?>
+                @elseif (auth()->user()->rol == -1)
+
+                <button type="submit" class="buttonsubmit">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="white" class="bi bi-archive"
+                        viewBox="0 0 16 16">
+                        <path
+                            d="M0 2a1 1 0 0 1 1-1h14a1 1 0 0 1 1 1v2a1 1 0 0 1-1 1v7.5a2.5 2.5 0 0 1-2.5 2.5h-9A2.5 2.5 0 0 1 1 12.5V5a1 1 0 0 1-1-1V2zm2 3v7.5A1.5 1.5 0 0 0 3.5 14h9a1.5 1.5 0 0 0 1.5-1.5V5H2zm13-3H1v2h14V2zM5 7.5a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5z" />
+                    </svg>
+                </button>
+                <div class="text">PENDIENTE</div>
+
+                @else
+
                 <button type="submit" class="buttonsubmit" disabled>
                     <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="gray" class="bi bi-archive"
                         viewBox="0 0 16 16">
@@ -138,7 +158,7 @@
                     </svg>
                 </button>
                 <div class="text" style="color:gray;">PENDIENTE</div>
-                <?php endif; ?>
+                @endif
             </form>
         </div>
 
@@ -161,7 +181,7 @@
         <div class="right">
             <form action="{{Route('pendiente_empaque')}}" method="GET">
                 @csrf
-                <?php if (  auth()->user()->rol == 0 || auth()->user()->rol == 1  ): ?>
+                @if (  auth()->user()->rol == 0 || auth()->user()->rol == 1  )
                 <button type="submit" class="buttonsubmit">
                     <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="white"
                         class="bi bi-card-checklist" viewBox="0 0 16 16">
@@ -172,7 +192,19 @@
                     </svg>
                 </button>
                 <div class="text">PENDIENTE EMPAQUE</div>
-                <?php else: ?>
+                @elseif ( auth()->user()->rol == -1)
+                <button type="submit" class="buttonsubmit">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="white"
+                        class="bi bi-card-checklist" viewBox="0 0 16 16">
+                        <path
+                            d="M14.5 3a.5.5 0 0 1 .5.5v9a.5.5 0 0 1-.5.5h-13a.5.5 0 0 1-.5-.5v-9a.5.5 0 0 1 .5-.5h13zm-13-1A1.5 1.5 0 0 0 0 3.5v9A1.5 1.5 0 0 0 1.5 14h13a1.5 1.5 0 0 0 1.5-1.5v-9A1.5 1.5 0 0 0 14.5 2h-13z" />
+                        <path
+                            d="M7 5.5a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5zm-1.496-.854a.5.5 0 0 1 0 .708l-1.5 1.5a.5.5 0 0 1-.708 0l-.5-.5a.5.5 0 1 1 .708-.708l.146.147 1.146-1.147a.5.5 0 0 1 .708 0zM7 9.5a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5zm-1.496-.854a.5.5 0 0 1 0 .708l-1.5 1.5a.5.5 0 0 1-.708 0l-.5-.5a.5.5 0 0 1 .708-.708l.146.147 1.146-1.147a.5.5 0 0 1 .708 0z" />
+                    </svg>
+                </button>
+                <div class="text">PENDIENTE EMPAQUE</div>
+                @else
+
                 <button type="submit" class="buttonsubmit" disabled>
                     <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="gray"
                         class="bi bi-card-checklist" viewBox="0 0 16 16">
@@ -183,14 +215,19 @@
                     </svg>
                 </button>
                 <div class="text" style="color:gray;">PENDIENTE EMPAQUE</div>
-                <?php endif; ?>
+
+
+                @endif
             </form>
         </div>
+
+
+        @if (auth()->user()->rol != -1)
 
         <div class="righter">
             <form action="{{Route('index_lista_cajas')}}" method="GET">
                 @csrf
-                <?php if (  auth()->user()->rol == 0 || auth()->user()->rol == 1  ): ?>
+                @if (auth()->user()->rol == 0 || auth()->user()->rol == 1  )
                 <button type="submit" class="buttonsubmit">
                     <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="white" class="bi bi-box"
                         viewBox="0 0 16 16">
@@ -199,7 +236,7 @@
                     </svg>
                 </button>
                 <div class="text">CAJAS</div>
-                <?php else: ?>
+                @else
                 <button type="submit" class="buttonsubmit" disabled>
                     <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="gray" class="bi bi-box"
                         viewBox="0 0 16 16">
@@ -208,7 +245,7 @@
                     </svg>
                 </button>
                 <div class="text" style="color:gray;">CAJAS</div>
-                <?php endif; ?>
+                @endif
             </form>
         </div>
 
@@ -236,11 +273,22 @@
                 <?php endif; ?>
             </form>
         </div>
+        @endif
+        <div @if (auth()->user()->rol  == -1)
+            class="righter"
+        @else
+        class="righter3"
+        @endif>
+            <form
+            @if ( auth()->user()->rol == -1)
+            action="{{Route('historial_factura')}}"
+            @else
+            action="{{Route('f_terminado')}}"
+            @endif
 
-        <div class="righter3">
-            <form action="{{Route('f_terminado')}}" method="GET">
+             method="GET">
                 @csrf
-                <?php if (  auth()->user()->rol == 0 || auth()->user()->rol == 2  ): ?>
+                @if (  auth()->user()->rol == 0 || auth()->user()->rol == 2  )
                 <button type="submit" class="buttonsubmit">
                     <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="white"
                         class="bi bi-card-checklist" viewBox="0 0 16 16">
@@ -251,7 +299,18 @@
                     </svg>
                 </button>
                 <div class="text">FACTURACION</div>
-                <?php else: ?>
+                @elseif ( auth()->user()->rol == -1)
+                <button type="submit" class="buttonsubmit">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="white"
+                        class="bi bi-card-checklist" viewBox="0 0 16 16">
+                        <path
+                            d="M14.5 3a.5.5 0 0 1 .5.5v9a.5.5 0 0 1-.5.5h-13a.5.5 0 0 1-.5-.5v-9a.5.5 0 0 1 .5-.5h13zm-13-1A1.5 1.5 0 0 0 0 3.5v9A1.5 1.5 0 0 0 1.5 14h13a1.5 1.5 0 0 0 1.5-1.5v-9A1.5 1.5 0 0 0 14.5 2h-13z" />
+                        <path
+                            d="M7 5.5a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5zm-1.496-.854a.5.5 0 0 1 0 .708l-1.5 1.5a.5.5 0 0 1-.708 0l-.5-.5a.5.5 0 1 1 .708-.708l.146.147 1.146-1.147a.5.5 0 0 1 .708 0zM7 9.5a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5zm-1.496-.854a.5.5 0 0 1 0 .708l-1.5 1.5a.5.5 0 0 1-.708 0l-.5-.5a.5.5 0 0 1 .708-.708l.146.147 1.146-1.147a.5.5 0 0 1 .708 0z" />
+                    </svg>
+                </button>
+                <div class="text">FACTURACION</div>
+                @else
                 <button type="submit" class="buttonsubmit" disabled>
                     <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="gray"
                         class="bi bi-card-checklist" viewBox="0 0 16 16">
@@ -262,7 +321,7 @@
                     </svg>
                 </button>
                 <div class="text" style="color:gray;">FACTURACION</div>
-                <?php endif; ?>
+                @endif
             </form>
         </div>
 
@@ -334,7 +393,7 @@
             $('#todas_tipo_empaques').select2();
             $('#todas_ordenes_sistema').select2();
             $('.mi-selector').select2();
-            
+
         });
     </script>
 

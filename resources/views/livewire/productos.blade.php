@@ -34,7 +34,7 @@
 
                             <button class=" botonprincipal mr-sm-2 " data-toggle="modal" data-target="#productos_crear"
                                 style="width:200px;height:35px;">Nuevo producto</button>
-                            <form action="" method="post">
+                            <form action="{{Route('editarDetalles')}} " method="post">
                                 @csrf
                                 <button class=" botonprincipal mr-sm-2" style="width:200px; height:35px;">Editar detalles
                                     producto</button>

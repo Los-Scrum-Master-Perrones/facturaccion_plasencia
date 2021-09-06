@@ -5,13 +5,16 @@
         <li class="nav-item">
             <a style="color:white; font-size:12px;" href="pendiente"><strong>Pendiente</strong></a>
         </li>
+        @if(auth()->user()->rol == -1)
 
+        @else
         <li class="nav-item">
             <a style="color:white; font-size:12px;" href="import_excel"><strong>Importar pedido</strong></a>
         </li>
         <li class="nav-item">
             <a style="color:#E5B1E2; font-size:12px;" href="pendiente_salida"><strong>Reporte</strong></a>
         </li>
+        @endif
     </ul>
     <br>
     <div class="container" style="max-width:100%; ">

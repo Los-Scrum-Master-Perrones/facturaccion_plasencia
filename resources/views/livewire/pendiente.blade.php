@@ -1,11 +1,16 @@
 <div xmlns:wire="http://www.w3.org/1999/xhtml">
     <ul class="nav justify-content-center">
+        @if(auth()->user()->rol == -1)
+
+        @else
         <li class="nav-item">
             <a style="color:#E5B1E2; font-size:12px;" href="pendiente"><strong>Pendiente</strong></a>
         </li>
         <li class="nav-item">
             <a style="color:white; font-size:12px;" href="import_excel"><strong>Importar pedido</strong></a>
         </li>
+        @endif
+
         <li class="nav-item">
             <a style="color:white; font-size:12px;" href="pendiente_salida"><strong>Reporte</strong></a>
         </li>
@@ -28,8 +33,12 @@
 
         <div class="row" wire:ignore style="margin-bottom:2px">
 
+            @if(auth()->user()->rol == -1)
+
+            @else
             <div class="col">
                 <div class="row">
+
                     <div class="col">
                         <abbr title="Agregar nuevo producto">
                             <button class="botonprincipal" data-toggle="modal" data-target="#productos_crear">
@@ -58,6 +67,7 @@
                     </div>
                 </div>
             </div>
+            @endif
 
             <div class="col">
                 <div class="dropdown">
@@ -249,199 +259,203 @@
         </div>
     </div>
 
+    @if(auth()->user()->rol == -1)
 
+    @else
     <div wire:ignore class="modal fade" id="productos_crear" data-backdrop="static" data-keyboard="false" tabindex="-1"
-        aria-labelledby="productos_crear" aria-hidden="true" style="opacity:.9;background:#212529;">
-        <div class="modal-dialog modal-lg">
-            <!-- INICIO DEL MODAL NUEVO PRODUCTO -->
-            <div class="modal-content">
+    aria-labelledby="productos_crear" aria-hidden="true" style="opacity:.9;background:#212529;">
+    <div class="modal-dialog modal-lg">
+        <!-- INICIO DEL MODAL NUEVO PRODUCTO -->
+        <div class="modal-content">
 
-                <div class="modal-header">
-                    <h5 id="staticBackdropLabel"><strong>Agregar producto</strong></h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                </div>
+            <div class="modal-header">
+                <h5 id="staticBackdropLabel"><strong>Agregar producto</strong></h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            </div>
 
-                <div class="modal-body">
-                    <div class="card-body">
-                        <div class="row">
-                            <div class="mb-3 col">
-                                <label for="txt_figuraytipo" class="form-label">Item</label>
-                                <select name="itemn" id="itemn" style="height:30px; width: 100%;"
-                                    class="form-control mi-selector200" required type="text" autocomplete="off">
-                                    <option value="">Todos los items</option>
-                                    @foreach ($items_p as $items)
-                                    <option value="{{$items->item}}">{{$items->item}}</option>
-                                    @endforeach
-                                </select>
-                            </div>
-
-                            <div class="mb-3 col">
-                                <label for="txt_figuraytipo" class="form-label">Categoria</label>
-                                <select class="form-control" name="categoria" id="categoria"
-                                    style="overflow-y: scroll; height:30px;" required>
-                                    <option value="1">NEW ROLL</option>
-                                    <option value="2">CATALOGO</option>
-                                    <option value="3">TAKE FROM EXISTING INVENT</option>
-                                    <option value="4">INTERNATIONAL SALES</option>
-                                </select>
-                            </div>
-
-                            <div class="mb-3 col">
-                                <label for="txt_malos" class="form-label">Presentación</label>
-                                <input class="form-control" name="presentacionn" id="presentacionn"
-                                    wire:model='presentacion' placeholder="Ingresa figura y tipo"
-                                    style="overflow-y: scroll; height:30px;" disabled>
-                            </div>
-
-                            <div class="mb-3 col">
-                                <label for="txt_vitola" class="form-label">Marca</label>
-                                <input style=" height:30px; width: 100%;" name="marcan" id="marcan"
-                                    wire:model='marcas_nuevo' placeholder="Ingresa figura y tipo" disabled>
-
-                            </div>
+            <div class="modal-body">
+                <div class="card-body">
+                    <div class="row">
+                        <div class="mb-3 col">
+                            <label for="txt_figuraytipo" class="form-label">Item</label>
+                            <select name="itemn" id="itemn" style="height:30px; width: 100%;"
+                                class="form-control mi-selector200" required type="text" autocomplete="off">
+                                <option value="">Todos los items</option>
+                                @foreach ($items_p as $items)
+                                <option value="{{$items->item}}">{{$items->item}}</option>
+                                @endforeach
+                            </select>
                         </div>
 
-
-                        <div class="row">
-                            <div class="mb-3 col">
-                                <label for="txt_figuraytipo" class="form-label">Capa</label>
-                                <input style=" height:30px; width: 100%;" name="capan" id="capan"
-                                    wire:model='capas_nuevo' placeholder="Ingresa figura y tipo" disabled>
-                            </div>
-
-
-                            <div class="mb-3 col">
-                                <label for="txt_malos" class="form-label">Tipo de
-                                    empaque</label>
-                                <input style=" height:30px; width: 100%;" name="tipon" id="tipon"
-                                    wire:model='tipo_empaques_nuevo' placeholder="Ingresa figura y tipo" disabled>
-                            </div>
-
-
-                            <div class="mb-3 col">
-                                <label for="vitola" class="form-label">Vitola</label>
-                                <input style=" height:30px; width: 100%;" name="vitolan" wire:model='vitolas_nuevo'
-                                    id="vitolan" placeholder="Ingresa figura y tipo" disabled>
-                            </div>
-
-                            <div class="mb-3 col">
-                                <label for="txt_total" class="form-label">Nombre</label>
-                                <input style=" height:30px; width: 100%;" name="nombren" wire:model='nombres_nuevo'
-                                    id="nombren" placeholder="Ingresa figura y tipo" disabled>
-
-                            </div>
+                        <div class="mb-3 col">
+                            <label for="txt_figuraytipo" class="form-label">Categoria</label>
+                            <select class="form-control" name="categoria" id="categoria"
+                                style="overflow-y: scroll; height:30px;" required>
+                                <option value="1">NEW ROLL</option>
+                                <option value="2">CATALOGO</option>
+                                <option value="3">TAKE FROM EXISTING INVENT</option>
+                                <option value="4">INTERNATIONAL SALES</option>
+                            </select>
                         </div>
 
-
-                        <div class="row">
-
-                            <div class="mb-3 col">
-                                <label for="txt_figuraytipo" class="form-label">Orden del sistema</label>
-                                <input name="ordensis" id="ordensis" style="font-size:16px" class="form-control"
-                                    type="text" autocomplete="off">
-                            </div>
-
-                            <div class="mb-3 col">
-                                <label for="txt_figuraytipo" class="form-label">Orden</label>
-                                <input name="ordenn" id="ordenn" style="font-size:16px" class="form-control" required
-                                    type="text" autocomplete="off">
-                            </div>
-
-
-                            <div class="mb-3 col">
-                                <label for="txt_figuraytipo" class="form-label">Fecha</label>
-                                <input value="{{Carbon\Carbon::now()->format('Y-m-d')}}" name=" fechan" id="fechan"
-                                    style="font-size:12px" class="form-control" required type="date" autocomplete="off">
-                            </div>
-
-                            <div class="mb-3 col">
-                                <label for="txt_figuraytipo" class="form-label">Observacion</label>
-                                <input name="observacionn" id="observacionn" style="font-size:16px" class="form-control"
-                                    type="text" autocomplete="off">
-                            </div>
+                        <div class="mb-3 col">
+                            <label for="txt_malos" class="form-label">Presentación</label>
+                            <input class="form-control" name="presentacionn" id="presentacionn"
+                                wire:model='presentacion' placeholder="Ingresa figura y tipo"
+                                style="overflow-y: scroll; height:30px;" disabled>
                         </div>
 
-
-
-                        <div class="row">
-
-                            <div class="mb-3 col" hidden>
-                                <div class="row">
-                                    <div class="col">
-                                        <input type="checkbox" name="cello" id="cello" style="font-size:20px"
-                                            value="si">
-                                        <label for="cello" class="form-label">Cello</label>
-                                    </div>
-
-                                    <div class="col">
-                                        <input type="checkbox" name="anillo" id="anillo" style="font-size:20px"
-                                            value="si">
-                                        <label for="anillo" class="form-label">Anillo</label>
-                                    </div>
-
-                                    <div class="col">
-                                        <input type="checkbox" name="upc" id="upc" style="font-size:20px" value="si">
-                                        <label for="upc" class="form-label">UPC</label>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="mb-3 col">
-                                <label for="txt_total" class="form-label">Pendiente</label>
-                                <input name="pendienten" id="pendienten" class="form-control" required type="number"
-                                    autocomplete="off">
-                            </div>
-
-                            <div class="mb-3 col">
-                                <label for="txt_buenos" class="form-label">Saldo</label>
-                                <input name="saldon" id="saldon" class="form-control" required type="number"
-                                    autocomplete="off">
-                            </div>
-
-                            <div class="mb-3 col">
-                                <label for="txt_buenos" class="form-label">Codigo precio</label>
-                                <input disabled name="c_precion" id="c_precion" class="form-control" type="text"
-                                    wire:model='codigo_precio_nuevo' autocomplete="off">
-                            </div>
-
-                            <div class="mb-3 col">
-                                <label for="txt_total" class="form-label">precio</label>
-                                <input disabled name="precion" id="precion" class="form-control" type="number"
-                                    wire:model='precio_precio' autocomplete="off">
-                            </div>
-
-                        </div>
-
-
-                        <div class="row">
-
-                            <div class="mb-3 col" hidden>
-                                <label for="txt_total" class="form-label">Paquetes</label>
-                                <input name="paquetes" id="paquetes" class="form-control" required type="number"
-                                    autocomplete="off">
-                            </div>
-                            <div class="mb-3 col" hidden>
-                                <label for="txt_total" class="form-label">Unidades</label>
-                                <input name="unidades" id="unidades" class="form-control" required type="number"
-                                    autocomplete="off">
-                            </div>
-
+                        <div class="mb-3 col">
+                            <label for="txt_vitola" class="form-label">Marca</label>
+                            <input style=" height:30px; width: 100%;" name="marcan" id="marcan"
+                                wire:model='marcas_nuevo' placeholder="Ingresa figura y tipo" disabled>
 
                         </div>
                     </div>
-                </div>
 
-                <div class="modal-footer">
-                    <button type="button" class=" bmodal_no" data-dismiss="modal"><span>Cancelar</span>
-                        @csrf
-                    </button>
-                    <button onclick="insertar_nuevo_pendiente()" class=" bmodal_yes "> <span>Guardar</span> </button>
+
+                    <div class="row">
+                        <div class="mb-3 col">
+                            <label for="txt_figuraytipo" class="form-label">Capa</label>
+                            <input style=" height:30px; width: 100%;" name="capan" id="capan"
+                                wire:model='capas_nuevo' placeholder="Ingresa figura y tipo" disabled>
+                        </div>
+
+
+                        <div class="mb-3 col">
+                            <label for="txt_malos" class="form-label">Tipo de
+                                empaque</label>
+                            <input style=" height:30px; width: 100%;" name="tipon" id="tipon"
+                                wire:model='tipo_empaques_nuevo' placeholder="Ingresa figura y tipo" disabled>
+                        </div>
+
+
+                        <div class="mb-3 col">
+                            <label for="vitola" class="form-label">Vitola</label>
+                            <input style=" height:30px; width: 100%;" name="vitolan" wire:model='vitolas_nuevo'
+                                id="vitolan" placeholder="Ingresa figura y tipo" disabled>
+                        </div>
+
+                        <div class="mb-3 col">
+                            <label for="txt_total" class="form-label">Nombre</label>
+                            <input style=" height:30px; width: 100%;" name="nombren" wire:model='nombres_nuevo'
+                                id="nombren" placeholder="Ingresa figura y tipo" disabled>
+
+                        </div>
+                    </div>
+
+
+                    <div class="row">
+
+                        <div class="mb-3 col">
+                            <label for="txt_figuraytipo" class="form-label">Orden del sistema</label>
+                            <input name="ordensis" id="ordensis" style="font-size:16px" class="form-control"
+                                type="text" autocomplete="off">
+                        </div>
+
+                        <div class="mb-3 col">
+                            <label for="txt_figuraytipo" class="form-label">Orden</label>
+                            <input name="ordenn" id="ordenn" style="font-size:16px" class="form-control" required
+                                type="text" autocomplete="off">
+                        </div>
+
+
+                        <div class="mb-3 col">
+                            <label for="txt_figuraytipo" class="form-label">Fecha</label>
+                            <input value="{{Carbon\Carbon::now()->format('Y-m-d')}}" name=" fechan" id="fechan"
+                                style="font-size:12px" class="form-control" required type="date" autocomplete="off">
+                        </div>
+
+                        <div class="mb-3 col">
+                            <label for="txt_figuraytipo" class="form-label">Observacion</label>
+                            <input name="observacionn" id="observacionn" style="font-size:16px" class="form-control"
+                                type="text" autocomplete="off">
+                        </div>
+                    </div>
+
+
+
+                    <div class="row">
+
+                        <div class="mb-3 col" hidden>
+                            <div class="row">
+                                <div class="col">
+                                    <input type="checkbox" name="cello" id="cello" style="font-size:20px"
+                                        value="si">
+                                    <label for="cello" class="form-label">Cello</label>
+                                </div>
+
+                                <div class="col">
+                                    <input type="checkbox" name="anillo" id="anillo" style="font-size:20px"
+                                        value="si">
+                                    <label for="anillo" class="form-label">Anillo</label>
+                                </div>
+
+                                <div class="col">
+                                    <input type="checkbox" name="upc" id="upc" style="font-size:20px" value="si">
+                                    <label for="upc" class="form-label">UPC</label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="mb-3 col">
+                            <label for="txt_total" class="form-label">Pendiente</label>
+                            <input name="pendienten" id="pendienten" class="form-control" required type="number"
+                                autocomplete="off">
+                        </div>
+
+                        <div class="mb-3 col">
+                            <label for="txt_buenos" class="form-label">Saldo</label>
+                            <input name="saldon" id="saldon" class="form-control" required type="number"
+                                autocomplete="off">
+                        </div>
+
+                        <div class="mb-3 col">
+                            <label for="txt_buenos" class="form-label">Codigo precio</label>
+                            <input disabled name="c_precion" id="c_precion" class="form-control" type="text"
+                                wire:model='codigo_precio_nuevo' autocomplete="off">
+                        </div>
+
+                        <div class="mb-3 col">
+                            <label for="txt_total" class="form-label">precio</label>
+                            <input disabled name="precion" id="precion" class="form-control" type="number"
+                                wire:model='precio_precio' autocomplete="off">
+                        </div>
+
+                    </div>
+
+
+                    <div class="row">
+
+                        <div class="mb-3 col" hidden>
+                            <label for="txt_total" class="form-label">Paquetes</label>
+                            <input name="paquetes" id="paquetes" class="form-control" required type="number"
+                                autocomplete="off">
+                        </div>
+                        <div class="mb-3 col" hidden>
+                            <label for="txt_total" class="form-label">Unidades</label>
+                            <input name="unidades" id="unidades" class="form-control" required type="number"
+                                autocomplete="off">
+                        </div>
+
+
+                    </div>
                 </div>
             </div>
 
+            <div class="modal-footer">
+                <button type="button" class=" bmodal_no" data-dismiss="modal"><span>Cancelar</span>
+                    @csrf
+                </button>
+                <button onclick="insertar_nuevo_pendiente()" class=" bmodal_yes "> <span>Guardar</span> </button>
+            </div>
         </div>
-        <!-- FIN DEL MODAL NUEVO PRODUCTO -->
+
     </div>
+    <!-- FIN DEL MODAL NUEVO PRODUCTO -->
+</div>
+    @endif
+
 
 
     <div class="panel-body" style="padding:0px;">
@@ -471,7 +485,11 @@
                         <th>PENDIENTE</th>
                         <th>SALDO</th>
                         <th>SALDO ($)</th>
+                        @if(auth()->user()->rol == -1)
+
+                        @else
                         <th></th>
+                        @endif
                     </tr>
                 </thead>
                 <tbody name="body" id="body">
@@ -504,7 +522,9 @@
                         <td style="text-align:right;">{{number_format($datos->precio_dolares,2)}}</td>
 
 
+                        @if(auth()->user()->rol == -1)
 
+                        @else
                         <td style="width:120px;">
                             <a data-toggle="modal" data-target="#modal_eliminar_detalle"
                                 onclick="datos_modal_eliminar({{$datos->id_pendiente}})" href="">
@@ -528,6 +548,7 @@
 
 
                         </td>
+                        @endif
                     </tr>
 
                     <?php
@@ -769,7 +790,7 @@
                 $('#ordenn').val(""),
                 $('#pendienten').val(""),
                 $('#saldon').val(""),
-                
+
                 event.preventDefault();
             }
         }
