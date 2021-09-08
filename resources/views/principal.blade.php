@@ -27,15 +27,16 @@
 
     <style>
         /* admite una sola linea en una fila */
-        tr{
-        width: 1% !important;
-        white-space: nowrap !important;
+        tr {
+            width: 1% !important;
+            white-space: nowrap !important;
         }
+
         /* Quita  subrayado con puntos en estas etiquetas */
-        abbr[title]{
-        border-bottom: none !important;
-        cursor: inherit !important;
-        text-decoration: none !important;
+        abbr[title] {
+            border-bottom: none !important;
+            cursor: inherit !important;
+            text-decoration: none !important;
         }
     </style>
 </head>
@@ -45,13 +46,13 @@
 <body style="background: url('fondologin.jpg') center center no-repeat;    background-size:100% 100%;">
 
     @yield('content')
-<br><br><br><br><br>
-    <div class="all"  style="padding-bottom: 10px">
-        <div @if (auth()->user()->rol  == -1)
+    <br><br><br><br><br>
+    <div class="all" style="padding-bottom: 10px">
+        <div @if (auth()->user()->rol == -1)
             class="lefter"
-        @else
-        class="lefter3"
-        @endif>
+            @else
+            class="lefter3"
+            @endif>
             <button type="submit" class="buttonsubmit" data-toggle="modal" data-target="#modal_cerrarsesion">
                 <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="white" class="bi bi-power"
                     viewBox="0 0 16 16">
@@ -181,7 +182,7 @@
         <div class="right">
             <form action="{{Route('pendiente_empaque')}}" method="GET">
                 @csrf
-                @if (  auth()->user()->rol == 0 || auth()->user()->rol == 1  )
+                @if ( auth()->user()->rol == 0 || auth()->user()->rol == 1 )
                 <button type="submit" class="buttonsubmit">
                     <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="white"
                         class="bi bi-card-checklist" viewBox="0 0 16 16">
@@ -227,7 +228,7 @@
         <div class="righter">
             <form action="{{Route('index_lista_cajas')}}" method="GET">
                 @csrf
-                @if (auth()->user()->rol == 0 || auth()->user()->rol == 1  )
+                @if (auth()->user()->rol == 0 || auth()->user()->rol == 1 )
                 <button type="submit" class="buttonsubmit">
                     <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="white" class="bi bi-box"
                         viewBox="0 0 16 16">
@@ -274,21 +275,14 @@
             </form>
         </div>
         @endif
-        <div @if (auth()->user()->rol  == -1)
+        <div @if (auth()->user()->rol == -1)
             class="righter"
-        @else
-        class="righter3"
-        @endif>
-            <form
-            @if ( auth()->user()->rol == -1)
-            action="{{Route('historial_factura')}}"
             @else
-            action="{{Route('f_terminado')}}"
-            @endif
-
-             method="GET">
+            class="righter3"
+            @endif>
+            <form action="{{Route('f_terminado')}}" method="GET">
                 @csrf
-                @if (  auth()->user()->rol == 0 || auth()->user()->rol == 2  )
+                @if ( auth()->user()->rol == 0 || auth()->user()->rol == 2 )
                 <button type="submit" class="buttonsubmit">
                     <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="white"
                         class="bi bi-card-checklist" viewBox="0 0 16 16">
@@ -417,7 +411,8 @@
 
     @livewireScripts
 
-    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.25/js/jquery.dataTables.js"></script>
+    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.25/js/jquery.dataTables.js">
+    </script>
 
     @toastr_js
     @toastr_render

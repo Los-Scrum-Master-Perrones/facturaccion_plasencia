@@ -8,6 +8,10 @@
 
     <div class="container" style="max-width:100%;" id="div_factura" name="div_factura">
         <br>
+        @if(auth()->user()->rol == -1)
+        <br>
+        <br>
+        @else
         <div class="row" style="text-align:center;">
 
             <div class="col">
@@ -55,7 +59,7 @@
                 </div>
             </div>
         </div>
-
+        @endif
 
         <div class="row" id="op_factura" name="op_factura">
             <div class="col-sm-2">
@@ -1177,7 +1181,7 @@
 
                 document.getElementById("pendiente").value = sumap;
                 document.getElementById("saldo").value = sumas;
-              
+
             }
             // fin del else
         }
