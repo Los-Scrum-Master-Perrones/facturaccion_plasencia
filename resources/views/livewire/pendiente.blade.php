@@ -33,11 +33,12 @@
 
         <div class="row" wire:ignore style="margin-bottom:2px">
 
-            @if(auth()->user()->rol == -1)
 
-            @else
             <div class="col">
                 <div class="row">
+                    @if(auth()->user()->rol == -1)
+
+                    @else
 
                     <div class="col">
                         <abbr title="Agregar nuevo producto">
@@ -51,7 +52,7 @@
                             </button>
                         </abbr>
                     </div>
-
+                    @endif 
 
                     <div class="col">
                         <abbr title="Importar a excel">
@@ -65,9 +66,10 @@
                         </abbr>
 
                     </div>
+
+
                 </div>
             </div>
-            @endif
 
             <div class="col">
                 <div class="dropdown">

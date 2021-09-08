@@ -168,11 +168,12 @@
 
 
         <div class="row">
-            @if(auth()->user()->rol == -1)
 
-            @else
             <div class="col">
                 <div class="row">
+                    @if(auth()->user()->rol == -1)
+
+            @else
                     <div class="col" wire:ignore>
 
                         <abbr title="Agregar a Pendiente Empaque">
@@ -186,6 +187,7 @@
                         </abbr>
                     </div>
 
+                    @endif
                     <div class="col">
                         <abbr title="Exportar a excel">
                             <button class=" botonprincipal" wire:click="exportPendiente()"><svg
@@ -198,7 +200,6 @@
                     </div>
                 </div>
             </div>
-            @endif
 
             <div class="col" wire:ignore>
                 <select onchange="buscar_tabla()" onclick="funcion1()" name="b_marca" id="b_marca"
