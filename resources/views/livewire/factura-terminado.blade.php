@@ -61,6 +61,9 @@
         </div>
         @endif
 
+
+
+
         <div class="row" id="op_factura" name="op_factura">
             <div class="col-sm-2">
                 <label wire:model="titulo_cliente"
@@ -111,7 +114,11 @@
                             <th rowspan="2">Precio FOB<br>per 1000 ($)</th>
                             <th rowspan="2" style="background:#ddd;">Cost </th>
                             <th rowspan="2">Valor<br>Value ($)</th>
+                            @if(auth()->user()->rol == -1)
+
+                            @else
                             <th rowspan="2"></th>
+                            @endif
                         </tr>
                         <tr style="font-size:8px; ">
                             <th>Bruto Net</th>
@@ -270,6 +277,9 @@
                             </td>
 
                             <td style="text-align: center">-</td>
+                            @if(auth()->user()->rol == -1)
+
+                            @else
                             <td style="width: 60px">
                                 <a data-toggle="modal" data-target="#borrar_detalles" href=""
                                     wire:click="borrar_detalles({{$detalles->id_detalle}})">
@@ -292,6 +302,7 @@
                                 </a>
 
                             </td>
+                            @endif
 
 
                         </tr>
@@ -337,10 +348,13 @@
                             @php
                             $valor_factura += ($repartir*$arreglo_detalles[0]->precio)/1000;
                             @endphp
+
+                            @if(auth()->user()->rol == -1)
+
+                            @else
                             <td style="width: 60px">
-
-
                             </td>
+                            @endif
 
 
                         </tr>
@@ -391,7 +405,11 @@
                             @php
                             $valor_factura += ($repartir*$arreglo_detalles[0]->precio)/1000;
                             @endphp
-                            <td style="width: 60px">
+                            @if(auth()->user()->rol == -1)
+
+                            @else
+                            <td style="width: 60px"></td>
+                            @endif
                         </tr>
 
                         @php
@@ -455,6 +473,10 @@
                             @php
                             $valor_factura += $detalles->valor_total;
                             @endphp
+
+                            @if(auth()->user()->rol == -1)
+
+                            @else
                             <td style="width: 60px">
                                 <a data-toggle="modal" data-target="#borrar_detalles" href=""
                                     wire:click="borrar_detalles({{$detalles->id_detalle}})">
@@ -477,7 +499,7 @@
                                 </a>
 
                             </td>
-
+                            @endif
 
                         </tr>
 
