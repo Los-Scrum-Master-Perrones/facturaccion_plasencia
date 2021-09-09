@@ -776,6 +776,9 @@
 
 
                             @endforeach
+                           @php
+                               $this->total_factura_precio =$tota_saldo_factura;
+                           @endphp
                         </tbody>
                     </table>
 
