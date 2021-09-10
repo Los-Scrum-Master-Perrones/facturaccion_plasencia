@@ -75,6 +75,8 @@ class Pendiente extends Component
 
     public function render()
     {
+        $item_sampler_mensaje="item";
+
         $this->items_p = DB::select('call buscar_pendiente_item()');
         /*Procedimientos de busquedas de la tabla pendiente*/
         $this->marcas_p = DB::select(
@@ -251,8 +253,86 @@ class Pendiente extends Component
 
 
 
+        try {
+            $datos = [];
+            $cantidad_detalle_sampler = 0;
+            $detalles = 0;
+            $valores = [];
+
+            $pendiente = DB::select(
+                'call buscar_pendiente(:uno,:dos,:tres,:cuatro,:pres,:seis,:siete,:paginacion,
+            :pa_items,:pa_orden_sist,:pa_ordenes,
+            :pa_marcas,:pa_vitolas,:pa_nombre,:pa_capas,
+            :pa_empaques,:pa_meses)',
+                [
+                    'uno' =>  $this->r_uno,
+                    'dos' =>  $this->r_dos,
+                    'tres' =>  $this->r_tres,
+                    'cuatro' =>  $this->r_cuatro,
+                    'pres' =>  $this->r_cinco,
+                    'seis' =>  $this->r_seis,
+                    'siete' =>  $this->r_siete,
+                    'paginacion' =>  -1,
+                    'pa_marcas' =>  $this->busqueda_marcas_p,
+                    'pa_nombre' =>  $this->busqueda_nombre_p,
+                    'pa_vitolas' =>  $this->busqueda_vitolas_p,
+                    'pa_capas' =>  $this->busqueda_capas_p,
+                    'pa_empaques' =>  $this->busqueda_empaques_p,
+                    'pa_meses' =>  $this->busqueda_mes_p,
+                    'pa_items' =>  $this->busqueda_items_p,
+                    'pa_orden_sist' =>  $this->busqueda_ordenes_p,
+                    'pa_ordenes' =>  $this->busqueda_hons_p
+                ]
+            );
+
+            for ($i = 0; $i < count($pendiente); $i++) {
+                $item_sampler_mensaje="".$pendiente[$i]->item;
+
+
+
+                $sampler = DB::select('SELECT clase_productos.sampler FROM clase_productos WHERE  clase_productos.item = ?;', [$pendiente[$i]->item]);
+
+                if (isset($sampler[0])) {
+                    if ($sampler[0]->sampler == "si") {
+
+                        if ($cantidad_detalle_sampler == 0 && $detalles == 0) {
+                            $datos = DB::select('call traer_numero_detalles_productos(?)', [$pendiente[$i]->item]);
+                            $cantidad_detalle_sampler = $datos[0]->tuplas;
+                        }
+
+                        $valores = DB::select('call traer_detalles_productos_actualizar(?,?)', [$pendiente[$i]->item, $detalles]);
+
+                         $variable = DB::select('call actualizar_pendiente_sampler(:marca,:nombre,:vitola,:capa,:tipo,:item,:codigo ,:precio)', [
+                            'marca' => $valores[0]->marca,
+                            'nombre' => $valores[0]->nombre,
+                            'vitola' => $valores[0]->vitola,
+                            'capa' => $valores[0]->capa,
+                            'tipo' => $valores[0]->tipo_empaque,
+                            'item' =>  $pendiente[$i]->id_pendiente,
+                            'codigo' => $valores[0]->otra_descripcion,
+                            'precio' => $valores[0]->precio,
+                        ]);
+                       
+
+                        $detalles++;
+
+                        if ($detalles == $cantidad_detalle_sampler) {
+                            $detalles = 0;
+                            $cantidad_detalle_sampler = 0;
+                        }
+                    }
+                }
+            }
+        } catch (Exception $e) {
+            $this->dispatchBrowserEvent('notificacionErrorEjecucion', ['error' => $e->getMessage(), 'mensaje'=> $item_sampler_mensaje ]);
+
+        }
+
+
         return view('livewire.pendiente')->extends('principal')->section('content');
     }
+
+
 
     public function mount()
     {
@@ -272,51 +352,6 @@ class Pendiente extends Component
         $this->busqueda_ordenes_p = "";
         $this->busqueda_hons_p = "";
 
-
-        try {
-            $datos = [];
-            $cantidad_detalle_sampler = 0;
-            $detalles = 0;
-            $valores = [];
-
-            $pendiente = DB::select('call buscar_pendiente("","","","","","","",0)');
-
-            for ($i = 0; $i < count($pendiente); $i++) {
-
-                $sampler = DB::select('SELECT clase_productos.sampler FROM clase_productos WHERE  clase_productos.item = ?;', [$pendiente[$i]->item]);
-
-                if (isset($sampler[0])) {
-                    if ($sampler[0]->sampler == "si") {
-
-                        if ($cantidad_detalle_sampler == 0 && $detalles == 0) {
-                            $datos = DB::select('call traer_numero_detalles_productos(?)', [$pendiente[$i]->item]);
-                            $cantidad_detalle_sampler = $datos[0]->tuplas;
-                        }
-
-                        $valores = DB::select('call traer_detalles_productos_actualizar(?,?)', [$pendiente[$i]->item, $detalles]);
-
-                        $actualizar = DB::select('call actualizar_pendiente_sampler(:marca,:nombre,:vitola,:capa,:tipo,:item,:codigo ,:precio)', [
-                            'marca' => $valores[0]->marca,
-                            'nombre' => $valores[0]->nombre,
-                            'vitola' => $valores[0]->vitola,
-                            'capa' => $valores[0]->capa,
-                            'tipo' => $valores[0]->tipo_empaque,
-                            'item' =>  $pendiente[$i]->id_pendiente,
-                            'codigo' => $valores[0]->otra_descripcion,
-                            'precio' => $valores[0]->precio,
-                        ]);
-
-                        $detalles++;
-
-                        if ($detalles == $cantidad_detalle_sampler) {
-                            $detalles = 0;
-                            $cantidad_detalle_sampler = 0;
-                        }
-                    }
-                }
-            }
-        } catch (Exception $e) {
-        }
     }
 
     public function paginacion_numerica($numero)

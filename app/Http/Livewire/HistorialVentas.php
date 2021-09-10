@@ -26,10 +26,7 @@ class HistorialVentas extends Component
 
 
 
-    public function render()
-
-
-    {
+    public function render(){
 
         $this->factura_mes = DB::select('CALL `traer_ventas_historial`(:fecha,:busqueda)',
                         ["fecha"=> $this->fecha_mes, "busqueda"=> $this->busqueda]);
@@ -65,7 +62,7 @@ class HistorialVentas extends Component
 
         $datos = DB::select('call mostrar_detalle_factura_export(:nombre)',
                             ['nombre'=>$this->num_factura_sistema]);
-                            
+
         $vista =  view('Exports.factura-terminado-exports', [
             'detalles_venta' => $datos
         ]);

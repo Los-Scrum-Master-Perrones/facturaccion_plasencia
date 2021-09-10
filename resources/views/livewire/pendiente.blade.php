@@ -52,7 +52,7 @@
                             </button>
                         </abbr>
                     </div>
-                    @endif 
+                    @endif
 
                     <div class="col">
                         <abbr title="Importar a excel">
@@ -733,6 +733,10 @@
             $("#modal_eliminar_detalle").removeClass("in");
             $(".modal-backdrop").remove();
             $("#modal_eliminar_detalle").hide();
+        })
+
+        window.addEventListener('notificacionErrorEjecucion', event => {
+            toastr.error('Excepción: \n'+event.detail.error+"            Item: "+event.detail.mensaje, 'Error!');
         })
 
     </script>
