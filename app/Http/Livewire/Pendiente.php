@@ -88,7 +88,7 @@ class Pendiente extends Component
                 'cuatro' =>  $this->r_cuatro
             ]
         );
-        $this->nombre_p = \DB::select(
+        $this->nombre_p = DB::select(
             'call buscar_nombre_pendiente(:uno,:dos,:tres,:cuatro)',
             [
                 'uno' =>  $this->r_uno,
@@ -97,7 +97,7 @@ class Pendiente extends Component
                 'cuatro' =>  $this->r_cuatro
             ]
         );
-        $this->vitolas_p = \DB::select(
+        $this->vitolas_p = DB::select(
             'call buscar_vitola_pendiente(:uno,:dos,:tres,:cuatro)',
             [
                 'uno' =>  $this->r_uno,
@@ -106,7 +106,7 @@ class Pendiente extends Component
                 'cuatro' =>  $this->r_cuatro
             ]
         );
-        $this->capas_p = \DB::select(
+        $this->capas_p = DB::select(
             'call buscar_capa_pendiente(:uno,:dos,:tres,:cuatro)',
             [
                 'uno' =>  $this->r_uno,
@@ -115,7 +115,7 @@ class Pendiente extends Component
                 'cuatro' =>  $this->r_cuatro
             ]
         );
-        $this->empaques_p = \DB::select(
+        $this->empaques_p = DB::select(
             'call buscar_tipo_empaque_pendiente(:uno,:dos,:tres,:cuatro)',
             [
                 'uno' =>  $this->r_uno,
@@ -126,7 +126,7 @@ class Pendiente extends Component
         );
 
 
-        $this->mes_p = \DB::select(
+        $this->mes_p = DB::select(
             'call buscar_fechas_pendiente(:uno,:dos,:tres,:cuatro)',
             [
                 'uno' =>  $this->r_uno,
@@ -135,7 +135,7 @@ class Pendiente extends Component
                 'cuatro' =>  $this->r_cuatro
             ]
         );
-        $this->items_p = \DB::select(
+        $this->items_p = DB::select(
             'call buscar_item_pendiente(:uno,:dos,:tres,:cuatro)',
             [
                 'uno' =>  $this->r_uno,
@@ -144,7 +144,7 @@ class Pendiente extends Component
                 'cuatro' =>  $this->r_cuatro
             ]
         );
-        $this->ordenes_p = \DB::select(
+        $this->ordenes_p = DB::select(
             'call buscar_ordenes_pendiente(:uno,:dos,:tres,:cuatro)',
             [
                 'uno' =>  $this->r_uno,
@@ -153,7 +153,7 @@ class Pendiente extends Component
                 'cuatro' =>  $this->r_cuatro
             ]
         );
-        $this->hons_p = \DB::select(
+        $this->hons_p = DB::select(
             'call buscar_hons_pendiente(:uno,:dos,:tres,:cuatro)',
             [
                 'uno' =>  $this->r_uno,
@@ -312,7 +312,7 @@ class Pendiente extends Component
                             'codigo' => $valores[0]->otra_descripcion,
                             'precio' => $valores[0]->precio,
                         ]);
-                       
+
 
                         $detalles++;
 
@@ -479,6 +479,8 @@ class Pendiente extends Component
 
     public function insertar_nuevo_pendiente($request)
     {
+
+
 
         $validator = Validator::make(
             [

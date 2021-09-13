@@ -171,6 +171,9 @@ class FacturaTerminado extends Component
 
     public function borrar_detalles_datos($id)
     {
+        DB::transaction(function () use ($id) {
+
+
         $sampler = DB::select('SELECT sampler,descripcion_sampler
         FROM clase_productos
         WHERE  clase_productos.item = (select item from pendiente where id_pendiente =
@@ -195,6 +198,8 @@ class FacturaTerminado extends Component
         }
 
         $this->dispatchBrowserEvent("cerrar_modal_borrar");
+
+        });
     }
 
 
@@ -254,12 +259,13 @@ class FacturaTerminado extends Component
         $this->aereo =  "RP";
     }
 
-    public function insertar_detalle_factura($insertar_unidades_cajon,
-    $insertar_peso_bruto,
-    $insertar_peso_neto,
-    $insertar_cantidad_bultos,
-    $insertar_unidades_bultos)
-    {
+    public function insertar_detalle_factura(
+        $insertar_unidades_cajon,
+        $insertar_peso_bruto,
+        $insertar_peso_neto,
+        $insertar_cantidad_bultos,
+        $insertar_unidades_bultos
+    ) {
 
         $sampler = DB::select('SELECT sampler,descripcion_sampler
                                 FROM clase_productos
@@ -289,8 +295,6 @@ class FacturaTerminado extends Component
                     "pa_unidad" => $insertar_unidades_bultos, "pa_observaciones" => "Sin Facturar", "para" =>  $this->aereo, "anterior" => ($datos_pendiente[0]->saldo - ($insertar_unidades_bultos * $insertar_cantidad_bultos))
                 ]);
             }
-
-
         } else {
             DB::select('call insertar_detalle_factura(
                 :id_pendiente
@@ -307,12 +311,13 @@ class FacturaTerminado extends Component
                 "para" =>  $this->aereo, "anterior" => ($datos_pendiente[0]->saldo - ($insertar_unidades_bultos * $insertar_cantidad_bultos))
             ]);
         }
-
-
     }
 
     public function actualizar_detalle_factura(Request $request)
     {
+        DB::transaction(function () use ($request) {
+
+
         $sampler = DB::select('SELECT sampler,descripcion_sampler
         FROM clase_productos
         WHERE  clase_productos.item = (select item from pendiente where id_pendiente =
@@ -381,7 +386,11 @@ class FacturaTerminado extends Component
             ]);
         }
 
+
+
+        });
         return redirect()->route('f_terminado');
+
     }
 
     public function imprimir()
@@ -413,33 +422,36 @@ class FacturaTerminado extends Component
 
     public function insertar_factura()
     {
-        if ($this->cliente != null && $this->contenedor != null) {
+        DB::transaction(function () {
 
 
-            $detalles = DB::select('call mostrar_detalle_factura(?)', [$this->aereo]);
+            if ($this->cliente != null && $this->contenedor != null) {
 
 
-            for ($i = 0; $i < count($detalles); $i++) {
-
-                $sampler = DB::select('SELECT sampler FROM clase_productos where item = (SELECT item FROM pendiente WHERE id_pendiente = ? )', [$detalles[$i]->id_pendiente]);
-                $cantidad_sampler = DB::select('SELECT COUNT(*) as conteo FROM detalle_clase_productos where item = (SELECT item FROM pendiente WHERE id_pendiente = ? )', [$detalles[$i]->id_pendiente]);
-
-                $total_pendiete = $detalles[$i]->total_tabacos;
+                $detalles = DB::select('call mostrar_detalle_factura(?)', [$this->aereo]);
 
 
-                if ($sampler[0]->sampler == "si") {
-                    $total_pendiete  = ($detalles[$i]->total_tabacos) / $cantidad_sampler[0]->conteo;
-                }
+                for ($i = 0; $i < count($detalles); $i++) {
 
-                DB::select('call `actualizar_pendiente_saldo_factura`(
+                    $sampler = DB::select('SELECT sampler FROM clase_productos where item = (SELECT item FROM pendiente WHERE id_pendiente = ? )', [$detalles[$i]->id_pendiente]);
+                    $cantidad_sampler = DB::select('SELECT COUNT(*) as conteo FROM detalle_clase_productos where item = (SELECT item FROM pendiente WHERE id_pendiente = ? )', [$detalles[$i]->id_pendiente]);
+
+                    $total_pendiete = $detalles[$i]->total_tabacos;
+
+
+                    if ($sampler[0]->sampler == "si") {
+                        $total_pendiete  = ($detalles[$i]->total_tabacos) / $cantidad_sampler[0]->conteo;
+                    }
+
+                    DB::select('call `actualizar_pendiente_saldo_factura`(
                     :id_pendiente,
                     :pa_saldo)', [
-                    "id_pendiente" => $detalles[$i]->id_pendiente,
-                    "pa_saldo" =>  $total_pendiete
-                ]);
-            }
+                        "id_pendiente" => $detalles[$i]->id_pendiente,
+                        "pa_saldo" =>  $total_pendiete
+                    ]);
+                }
 
-            DB::select('call `insertar_factura_terminado`(
+                DB::select('call `insertar_factura_terminado`(
                 :orden_sufijo,
                 :pa_cliente,
                 :pa_numero_factura,
@@ -451,19 +463,19 @@ class FacturaTerminado extends Component
                 :pa_fecha_factura,
                 :pa_total_precio)', [
 
-                "orden_sufijo" =>  $this->aereo,
-                "pa_cliente" => $this->cliente,
-                "pa_numero_factura" => $this->num_factura_sistema,
-                "pa_contenedor" => $this->contenedor,
-                "pa_cantidad_bultos" => $this->total_cantidad_bultos,
-                "pa_total_puros" => $this->total_total_puros,
-                "pa_total_peso_bruto" => $this->total_peso_bruto,
-                "pa_total_peso_neto" => $this->total_peso_bruto,
-                "pa_fecha_factura" => $this->fecha_factura,
-                "pa_total_precio" => $this->total_factura_precio
-            ]);
+                    "orden_sufijo" =>  $this->aereo,
+                    "pa_cliente" => $this->cliente,
+                    "pa_numero_factura" => $this->num_factura_sistema,
+                    "pa_contenedor" => $this->contenedor,
+                    "pa_cantidad_bultos" => $this->total_cantidad_bultos,
+                    "pa_total_puros" => $this->total_total_puros,
+                    "pa_total_peso_bruto" => $this->total_peso_bruto,
+                    "pa_total_peso_neto" => $this->total_peso_bruto,
+                    "pa_fecha_factura" => $this->fecha_factura,
+                    "pa_total_precio" => $this->total_factura_precio
+                ]);
 
-            DB::select('
+                DB::select('
             insert into precios_historial(id_detalle_factura,precio) (SELECT detalle_factura.id_detalle AS id_detalle_factura,
             ( if((SELECT clase_productos.sampler FROM clase_productos WHERE clase_productos.item = (SELECT pendiente.item FROM pendiente WHERE pendiente.id_pendiente = detalle_factura.id_pendiente)) = "si",
             (SELECT pendiente.precio FROM pendiente WHERE pendiente.id_pendiente = detalle_factura.id_pendiente)
@@ -477,13 +489,12 @@ class FacturaTerminado extends Component
             WHERE factura_terminados.id = detalle_factura.id_venta and factura_terminados.numero_factura = ?)
             ', [$this->num_factura_sistema]);
 
-            $this->titulo_cliente = "";
-            $this->titulo_factura = "";
-
-
-        } else {
-            $this->dispatchBrowserEvent("advertencia_mensaje");
-        }
+                $this->titulo_cliente = "";
+                $this->titulo_factura = "";
+            } else {
+                $this->dispatchBrowserEvent("advertencia_mensaje");
+            }
+        });
     }
 
     public function historial()

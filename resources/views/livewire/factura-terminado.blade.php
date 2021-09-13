@@ -149,6 +149,8 @@
 
                         @foreach($detalles_venta as $detalles)
 
+                        <?php try{ ?>
+
 
 
                         @if ( $orden == "" && $orden_actua == "")
@@ -507,6 +509,8 @@
 
                         @endif
 
+                        <?php }catch(\Exception $e){ ?>
+                            <?php } ?>
                         @endforeach
 
                         @php
