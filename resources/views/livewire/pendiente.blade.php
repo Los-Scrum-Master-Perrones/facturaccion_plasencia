@@ -16,7 +16,6 @@
         </li>
     </ul>
 
-
     <div class="container" style="max-width:100%;">
         <div wire:loading>
             <div class="centro_carga">

@@ -2,6 +2,7 @@
 
 namespace App\Http\Livewire;
 
+use App\Exports\detallesExport;
 use Livewire\Component;
 
 use Illuminate\Http\Request;
@@ -78,10 +79,393 @@ class PendienteEmpaque extends Component
     public $precio_precio;
 
 
+    //detalle programacion*****************************************************************
+    public $detalles_provicionales;
+    public $busqueda_programacion;
+    public $borrar_programacion;
+    public $actualizar;
+    public $actualizar_insertar;
+    public $fecha;
+    public $contenedor;
+    public $insertar_programacion;
+    public $fecha_actual;
+    public $total_saldo;
+
+    public $ventanas = 1;
+
+    public function cambio($num){
+        $this->ventanas = $num;
+    }
 
     public function render()
     {
+            //pendient empaque*****************************************************************
+            $this->cargaPendiente();
+            $this->cargaDetalleProgramacion();
+            return view('livewire.pendiente-empaque')->extends('principal')->section('content');
 
+    }
+
+    public function mount()
+    {
+        $this->datos_pendiente_empaque = [];
+
+        $this->busqueda_programacion="";
+
+        $this->paginacion = 0;
+        $this->fecha = "";
+        $this->borrar = [];
+        $this->busqueda_marcas_p = "";
+        $this->busqueda_nombre_p = "";
+        $this->busqueda_vitolas_p = "";
+        $this->busqueda_capas_p = "";
+        $this->busqueda_empaques_p = "";
+        $this->busqueda_mes_p = "";
+        $this->busqueda_items_p = "";
+        $this->busqueda_ordenes_p = "";
+        $this->busqueda_hons_p = "";
+    }
+
+    public function paginacion_numerica($numero)
+    {
+        $this->paginacion = $numero;
+    }
+
+    public function mostrar_todo($todo)
+    {
+        $this->todos = $todo;
+    }
+
+    public function insertar_detalle_provicional()
+    {
+        $datos_pendiente_empaque = DB::select(
+            'call buscar_pendiente_empaque(:uno,:dos,:tres,:cuatro,:pres,:seis,:siete,:paginacion,
+            :pa_items,:pa_orden_sist,:pa_ordenes,
+            :pa_marcas,:pa_vitolas,:pa_nombre,:pa_capas,
+            :pa_empaques,:pa_meses)',
+            [
+                'uno' =>  $this->r_uno,
+                'dos' =>  $this->r_dos,
+                'tres' =>  $this->r_tres,
+                'cuatro' =>  $this->r_cuatro,
+                'pres' =>  $this->r_cinco,
+                'seis' =>  $this->r_seis,
+                'siete' =>  $this->r_siete,
+                'paginacion' =>  -1,
+                'pa_marcas' =>  $this->busqueda_marcas_p,
+                'pa_nombre' =>  $this->busqueda_nombre_p,
+                'pa_vitolas' =>  $this->busqueda_vitolas_p,
+                'pa_capas' =>  $this->busqueda_capas_p,
+                'pa_empaques' =>  $this->busqueda_empaques_p,
+                'pa_meses' =>  $this->busqueda_mes_p,
+                'pa_items' =>  $this->busqueda_items_p,
+                'pa_orden_sist' =>  $this->busqueda_ordenes_p,
+                'pa_ordenes' =>  $this->busqueda_hons_p
+            ]
+        );
+
+
+        $datos = [];
+        $cantidad_detalle_sampler = 0;
+        $detalles = 0;
+        $valores = [];
+
+        $tuplas = count($datos_pendiente_empaque);
+
+        for ($i = 0; $i <  $tuplas; $i++) {
+
+            $sampler = DB::select('SELECT clase_productos.sampler FROM clase_productos WHERE  clase_productos.item = ?;', [$datos_pendiente_empaque[$i]->item]);
+
+            if (isset($sampler[0])) {
+                if ($sampler[0]->sampler == "si") {
+                    if ($cantidad_detalle_sampler == 0 && $detalles == 0) {
+                        $datos = DB::select('call traer_numero_detalles_productos(?)', [$datos_pendiente_empaque[$i]->item]);
+                        $cantidad_detalle_sampler = $datos[0]->tuplas;
+                    }
+                    $valores = DB::select('call traer_detalles_productos_actualizar(?,?)', [$datos_pendiente_empaque[$i]->item, $detalles]);
+
+                    $datos_pendiente_empaque[$i]->cod_producto = $valores[0]->codigo_producto;
+
+                    $detalles++;
+
+                    if ($detalles == $cantidad_detalle_sampler) {
+                        $detalles = 0;
+                        $cantidad_detalle_sampler = 0;
+                    }
+                }
+            }else{
+                $valores = DB::select('SELECT codigo_producto FROM clase_productos WHERE item = ?', [$datos_pendiente_empaque[$i]->item]);
+
+                $datos_pendiente_empaque[$i]->cod_producto = $valores[0]->codigo_producto;
+            }
+        }
+
+
+        for ($i = 0; $tuplas > $i; $i++) {
+            $detalles = DB::select(
+                'call insertar_detalle_temporal(:numero_orden,:orden,:cod_producto,:saldo,:id_pendiente,:cant)',
+                [
+                    'numero_orden' => isset($datos_pendiente_empaque[$i]->orden_del_sitema) ?  $datos_pendiente_empaque[$i]->orden_del_sitema : null,
+                    'orden' => isset($datos_pendiente_empaque[$i]->orden) ?  $datos_pendiente_empaque[$i]->orden : null,
+                    'cod_producto' => isset($datos_pendiente_empaque[$i]->cod_producto) ?  $datos_pendiente_empaque[$i]->cod_producto : null,
+                    'saldo' => isset($datos_pendiente_empaque[$i]->saldo) ?  $datos_pendiente_empaque[$i]->saldo : null,
+                    'id_pendiente' => isset($datos_pendiente_empaque[$i]->id_pendiente) ?  $datos_pendiente_empaque[$i]->id_pendiente : null,
+                    'cant' => isset($datos_pendiente_empaque[$i]->cant_cajas) ?  $datos_pendiente_empaque[$i]->cant_cajas : null
+                ]
+            );
+        }
+
+        $this->cambio(2);
+    }
+
+    public function insertar_detalle_provicional_sin_existencia($id)
+    {
+
+        $datos_pendiente = DB::select(
+            'call datos_pendiente_programar(:id)',
+            ['id' => $id]
+        );
+
+        $detalles = DB::select(
+            'call insertar_detallePro_temporalSinExistencia(:numero_orden,:orden,:cod_producto,:saldo,:id_pendiente,:cant)',
+            [
+                'numero_orden' => isset($datos_pendiente[0]->orden_del_sitema) ? $datos_pendiente[0]->orden_del_sitema : null,
+                'orden' => isset($datos_pendiente[0]->orden) ? $datos_pendiente[0]->orden : null,
+                'cod_producto' => isset($datos_pendiente[0]->item) ? $datos_pendiente[0]->item : null,
+                'saldo' => isset($datos_pendiente[0]->saldo) ? $datos_pendiente[0]->saldo : null,
+                'id_pendiente' => isset($datos_pendiente[0]->id_pendiente) ? $datos_pendiente[0]->id_pendiente : null,
+                'cant' => isset($datos_pendiente[0]->cant_cajas) ? $datos_pendiente[0]->cant_cajas : null
+            ]
+        );
+
+
+        $this->cambio(2);
+    }
+
+    public function actualizar_pendiente($request)
+    {
+        $validator = Validator::make(
+            [
+                'orden_sistema2' => $request['orden_sistema2'],
+                'orden2' => $request['orden2'],
+                'pendiente2' => $request['pendiente2'],
+                'saldo2' => $request['saldo2']
+            ],
+            [
+                'orden_sistema2' => "required",
+                'orden2' => "required",
+                'pendiente2' => "required|integer",
+                'saldo2' => "required|integer"
+            ],
+            [
+                'orden_sistema2.required' => "La orden del sistema es necesaria.",
+                'orden2.required' => "La orden es necesaria.",
+                'pendiente2.required' => "El pendiente solicitado es necesaria.",
+                'saldo2.required' => "El saldo solicitado es necesaria.",
+                'pendiente2.integer' => "El pendiente solicitado debe ser un numero entero.",
+                'saldo2.integer' => "El saldo solicitado debe ser un numero entero.",
+            ]
+        );
+
+        if (!$validator->fails()) {
+
+            DB::select(
+                'call actualizar_pendiente_empaque(:id_pendientea2,:observacion2,:pendiente2,:saldo2,:orden_sistema2,:orden2)',
+                [
+                    'id_pendientea2' => $request['id_pendientea2'],
+                    'orden_sistema2' => $request['orden_sistema2'],
+                    'orden2' => $request['orden2'],
+                    'pendiente2' => $request['pendiente2'],
+                    'saldo2' => $request['saldo2'],
+                    'observacion2' => $request['observacion2'],
+                ]
+            );
+
+
+            $this->dispatchBrowserEvent('notificacionconfirmacionUpdate');
+        } else {
+            $this->dispatchBrowserEvent('notificacionErrorUpdate', ['mensaje' => $validator->errors()->all()]);
+        }
+    }
+
+    public function eliminar_pendiente($request)
+    {
+        DB::select('call borrar_pendiente_empaque(:eliminar)', ['eliminar' => $request['id_pendiente3']]);
+
+        $this->dispatchBrowserEvent('notificacionConfirmacionDelete');
+    }
+
+    public function insertar_nuevo_pendiente($request)
+    {
+
+        $validator = Validator::make(
+            [
+                'categoria' => $request['categoria'],
+                'item' => $request['itemn'],
+                'orden' =>  $request['ordensis'],
+                'mes' => $request['fechan'],
+                'orden1' => $request['ordenn'],
+                'pendiente' => $request['pendienten'],
+                'saldo' => $request['saldon']
+            ],
+            [
+                'categoria' => 'required',
+                'item' => 'required',
+                'orden' => 'required',
+                'mes' => 'required|date',
+                'orden1' => 'required',
+                'pendiente' => 'required|integer',
+                'saldo' => 'required|integer',
+            ],
+            [
+                'categoria.required' => 'Debe seleccionar una categoria.',
+                'item.required' => 'Debe ingresar el producto.',
+                'orden.required' => 'Debe ingresar la Orden del Sistema.',
+                'mes.required' => 'Debe ingresar la fecha del pedido.',
+                'mes.date' => 'El valor de la fecha es incorrecta.',
+                'orden1.required' => 'Debe ingresar la orden del cliente.',
+                'pendiente.required' => 'Debe ingresar el pendiente.',
+                'saldo.required' => 'Debe ingresar el saldo.',
+                'pendiente.integer' => 'El pendiente debe ser un numero entero.',
+                'saldo.integer' => 'El saldo debe ser un numero entero.',
+            ]
+        );
+
+        if (!$validator->fails()) {
+            DB::select(
+                'call insertar_nuevo_pendiente_empaque(:categoria,:item,:orden,:observacion,:mes,:orden1,:pendiente,:saldo)',
+                [
+                    'categoria' => $request['categoria'],
+                    'item' => $request['itemn'],
+                    'orden' =>  $request['ordensis'],
+                    'observacion' => $request['observacionn'],
+                    'mes' => $request['fechan'],
+                    'orden1' => $request['ordenn'],
+                    'pendiente' => $request['pendienten'],
+                    'saldo' => $request['saldon']
+                ]
+            );
+
+            $this->dispatchBrowserEvent('notificacionconfirmacion');
+        } else {
+            $this->dispatchBrowserEvent('notificacionErrorInsert', ['mensaje' => $validator->errors()->all()]);
+        }
+    }
+
+    public function agregar_productos()
+    {
+        $puro = DB::select('CALL `pendiente_producto_seleccion`(?)', [$this->codigo_item]);
+        $this->capas_nuevo = $puro[0]->capa;
+        $this->marcas_nuevo = $puro[0]->marca;
+        $this->nombres_nuevo = $puro[0]->nombre;
+        $this->vitolas_nuevo = $puro[0]->vitola;
+        $this->tipo_empaques_nuevo = $puro[0]->tipo_empaque;
+        $this->presentacion =  $puro[0]->presentacion;
+        $this->codigo_precio_nuevo =  $puro[0]->codigo_precio;
+        $this->precio_precio =  $puro[0]->precio;
+    }
+
+    public function exportPendiente()
+    {
+
+        $pendiente_export = DB::select(
+            'call buscar_pendiente_empaque_excel(:uno,:dos,:tres,:cuatro,:pres,:seis,:siete,
+        :pa_items,:pa_orden_sist,:pa_ordenes,
+        :pa_marcas,:pa_vitolas,:pa_nombre,:pa_capas,
+        :pa_empaques,:pa_meses)',
+            [
+                'uno' => $this->r_uno,
+                'dos' => $this->r_dos,
+                'tres' => $this->r_tres,
+                'cuatro' =>  $this->r_cuatro,
+                'pres' =>  $this->r_cinco,
+                'seis' =>  $this->r_seis,
+                'siete' =>  $this->r_siete,
+                'pa_marcas' =>  $this->busqueda_marcas_p,
+                'pa_nombre' =>  $this->busqueda_nombre_p,
+                'pa_vitolas' =>  $this->busqueda_vitolas_p,
+                'pa_capas' =>  $this->busqueda_capas_p,
+                'pa_empaques' =>  $this->busqueda_empaques_p,
+                'pa_meses' =>  $this->busqueda_mes_p,
+                'pa_items' =>  $this->busqueda_items_p,
+                'pa_orden_sist' =>  $this->busqueda_ordenes_p,
+                'pa_ordenes' =>  $this->busqueda_hons_p
+            ]
+        );
+
+        return Excel::download(new PendienteEmpaqueExport($pendiente_export), 'Pendiente.xlsx');
+    }
+
+    public function cargaPendiente()
+    {
+
+
+        try {
+            $datos = [];
+            $cantidad_detalle_sampler = 0;
+            $detalles = 0;
+            $valores = [];
+
+            $datos_empaque =  DB::select(
+                'call buscar_pendiente_empaque(:uno,:dos,:tres,:cuatro,:pres,:seis,:siete,:paginacion,
+                :pa_items,:pa_orden_sist,:pa_ordenes,
+                :pa_marcas,:pa_vitolas,:pa_nombre,:pa_capas,
+                :pa_empaques,:pa_meses)',
+                [
+                    'uno' =>  $this->r_uno,
+                    'dos' =>  $this->r_dos,
+                    'tres' =>  $this->r_tres,
+                    'cuatro' =>  $this->r_cuatro,
+                    'pres' =>  $this->r_cinco,
+                    'seis' =>  $this->r_seis,
+                    'siete' =>  $this->r_siete,
+                    'paginacion' =>  -1,
+                    'pa_marcas' =>  $this->busqueda_marcas_p,
+                    'pa_nombre' =>  $this->busqueda_nombre_p,
+                    'pa_vitolas' =>  $this->busqueda_vitolas_p,
+                    'pa_capas' =>  $this->busqueda_capas_p,
+                    'pa_empaques' =>  $this->busqueda_empaques_p,
+                    'pa_meses' =>  $this->busqueda_mes_p,
+                    'pa_items' =>  $this->busqueda_items_p,
+                    'pa_orden_sist' =>  $this->busqueda_ordenes_p,
+                    'pa_ordenes' =>  $this->busqueda_hons_p
+                ]
+            );
+
+
+            for ($i = 0; $i < count($datos_empaque); $i++) {
+
+                $sampler = DB::select('SELECT clase_productos.sampler FROM clase_productos WHERE  clase_productos.item = ?;', [$datos_empaque[$i]->item]);
+
+                if (isset($sampler[0])) {
+                    if ($sampler[0]->sampler == "si") {
+                        if ($cantidad_detalle_sampler == 0 && $detalles == 0) {
+                            $datos = DB::select('call traer_numero_detalles_productos(?)', [$datos_empaque[$i]->item]);
+                            $cantidad_detalle_sampler = $datos[0]->tuplas;
+                        }
+                        $valores = DB::select('call traer_detalles_productos_actualizar(?,?)', [$datos_empaque[$i]->item, $detalles]);
+
+                        //echo  $this->datos_pendiente_empaque[$i]->id_pendiente." ".$this->datos_pendiente_empaque[$i]->item." "."(". $cantidad_detalle_sampler.")"."<br>";
+                        DB::select('call actualizar_pendiente_empaque_sampler(:marca,:nombre,:vitola,:capa,:tipo,:item)', [
+                            'marca' => $valores[0]->marca,
+                            'nombre' => $valores[0]->nombre,
+                            'vitola' => $valores[0]->vitola,
+                            'capa' => $valores[0]->capa,
+                            'tipo' => $valores[0]->tipo_empaque,
+                            'item' =>  $datos_empaque[$i]->id_pendiente
+                        ]);
+
+                        $detalles++;
+
+                        if ($detalles == $cantidad_detalle_sampler) {
+                            $detalles = 0;
+                            $cantidad_detalle_sampler = 0;
+                        }
+                    }
+                }
+            }
+        } catch (Exception $t) {
+        }
         /*Procedimientos de busquedas de la tabla pendiente Empaque*/
         $this->marcas_p = DB::select(
             'call buscar_marca_empaque(:uno,:dos,:tres,:cuatro)',
@@ -178,8 +562,8 @@ class PendienteEmpaque extends Component
             :pa_items,:pa_orden_sist,:pa_ordenes,
             :pa_marcas,:pa_vitolas,:pa_nombre,:pa_capas,
             :pa_empaques,:pa_meses)',
-        [
-            'uno' =>  $this->r_uno,
+            [
+                'uno' =>  $this->r_uno,
                 'dos' =>  $this->r_dos,
                 'tres' =>  $this->r_tres,
                 'cuatro' =>  $this->r_cuatro,
@@ -196,7 +580,7 @@ class PendienteEmpaque extends Component
                 'pa_items' =>  $this->busqueda_items_p,
                 'pa_orden_sist' =>  $this->busqueda_ordenes_p,
                 'pa_ordenes' =>  $this->busqueda_hons_p
-        ]
+            ]
         ));
 
         if ($this->todos == 1) {
@@ -205,25 +589,25 @@ class PendienteEmpaque extends Component
                 :pa_items,:pa_orden_sist,:pa_ordenes,
                 :pa_marcas,:pa_vitolas,:pa_nombre,:pa_capas,
                 :pa_empaques,:pa_meses)',
-                    [
-                        'uno' =>  $this->r_uno,
-                        'dos' =>  $this->r_dos,
-                        'tres' =>  $this->r_tres,
-                        'cuatro' =>  $this->r_cuatro,
-                        'pres' =>  $this->r_cinco,
-                        'seis' =>  $this->r_seis,
-                        'siete' =>  $this->r_siete,
-                        'paginacion' =>  -1,
-                        'pa_marcas' =>  $this->busqueda_marcas_p,
-                        'pa_nombre' =>  $this->busqueda_nombre_p,
-                        'pa_vitolas' =>  $this->busqueda_vitolas_p,
-                        'pa_capas' =>  $this->busqueda_capas_p,
-                        'pa_empaques' =>  $this->busqueda_empaques_p,
-                        'pa_meses' =>  $this->busqueda_mes_p,
-                        'pa_items' =>  $this->busqueda_items_p,
-                        'pa_orden_sist' =>  $this->busqueda_ordenes_p,
-                        'pa_ordenes' =>  $this->busqueda_hons_p
-                    ]
+                [
+                    'uno' =>  $this->r_uno,
+                    'dos' =>  $this->r_dos,
+                    'tres' =>  $this->r_tres,
+                    'cuatro' =>  $this->r_cuatro,
+                    'pres' =>  $this->r_cinco,
+                    'seis' =>  $this->r_seis,
+                    'siete' =>  $this->r_siete,
+                    'paginacion' =>  -1,
+                    'pa_marcas' =>  $this->busqueda_marcas_p,
+                    'pa_nombre' =>  $this->busqueda_nombre_p,
+                    'pa_vitolas' =>  $this->busqueda_vitolas_p,
+                    'pa_capas' =>  $this->busqueda_capas_p,
+                    'pa_empaques' =>  $this->busqueda_empaques_p,
+                    'pa_meses' =>  $this->busqueda_mes_p,
+                    'pa_items' =>  $this->busqueda_items_p,
+                    'pa_orden_sist' =>  $this->busqueda_ordenes_p,
+                    'pa_ordenes' =>  $this->busqueda_hons_p
+                ]
             );
         } else {
             $this->datos_pendiente_empaque = DB::select(
@@ -254,364 +638,120 @@ class PendienteEmpaque extends Component
             );
         }
 
-     try {
-            $datos = [];
-            $cantidad_detalle_sampler = 0;
-            $detalles = 0;
-            $valores = [];
+    }
 
-            $datos_empaque =  DB::select(
-                'call buscar_pendiente_empaque(:uno,:dos,:tres,:cuatro,:pres,:seis,:siete,:paginacion,
-                :pa_items,:pa_orden_sist,:pa_ordenes,
-                :pa_marcas,:pa_vitolas,:pa_nombre,:pa_capas,
-                :pa_empaques,:pa_meses)',
-                    [
-                        'uno' =>  $this->r_uno,
-                        'dos' =>  $this->r_dos,
-                        'tres' =>  $this->r_tres,
-                        'cuatro' =>  $this->r_cuatro,
-                        'pres' =>  $this->r_cinco,
-                        'seis' =>  $this->r_seis,
-                        'siete' =>  $this->r_siete,
-                        'paginacion' =>  -1,
-                        'pa_marcas' =>  $this->busqueda_marcas_p,
-                        'pa_nombre' =>  $this->busqueda_nombre_p,
-                        'pa_vitolas' =>  $this->busqueda_vitolas_p,
-                        'pa_capas' =>  $this->busqueda_capas_p,
-                        'pa_empaques' =>  $this->busqueda_empaques_p,
-                        'pa_meses' =>  $this->busqueda_mes_p,
-                        'pa_items' =>  $this->busqueda_items_p,
-                        'pa_orden_sist' =>  $this->busqueda_ordenes_p,
-                        'pa_ordenes' =>  $this->busqueda_hons_p
-                    ]
-            );
+    /***************** TODO funciones de detalle programacion*********************/
+    public function cargaDetalleProgramacion()
+    {
+        $this->total_saldo = 0;
+        $this->detalles_provicionales = DB::select('call mostrar_detalles_provicional(:buscar)', [
+            'buscar' => $this->busqueda_programacion
+        ]);
+
+        for ($i = 0; $i < count($this->detalles_provicionales); $i++) {
+            $this->total_saldo += $this->detalles_provicionales[$i]->saldo;
+        }
+    }
+
+    public function modal_limpiar()
+    {
+        $this->dispatchBrowserEvent('abrir_modal_eliminar');
+    }
+
+    public function eliminar_datos()
+    {
+        DB::table('detalle_programacion_temporal')->delete();
+        DB::update("ALTER TABLE detalle_programacion_temporal AUTO_INCREMENT = 1");
+        $this->dispatchBrowserEvent('cerrar_modal_eliminar');
+    }
 
 
-            for ($i = 0; $i < count($datos_empaque); $i++) {
 
-                $sampler = DB::select('SELECT clase_productos.sampler FROM clase_productos WHERE  clase_productos.item = ?;', [$datos_empaque[$i]->item]);
+    public function actualizar_saldo(Request $request)
+    {
 
-                if (isset($sampler[0])) {
-                    if ($sampler[0]->sampler == "si") {
-                        if ($cantidad_detalle_sampler == 0 && $detalles == 0) {
-                            $datos = DB::select('call traer_numero_detalles_productos(?)', [$datos_empaque[$i]->item]);
-                            $cantidad_detalle_sampler = $datos[0]->tuplas;
-                        }
-                        $valores = DB::select('call traer_detalles_productos_actualizar(?,?)', [$datos_empaque[$i]->item, $detalles]);
+        $detalles_provicionales = DB::select('call mostrar_detalles_provicional(:buscar)', [
+            'buscar' => $this->busqueda
+        ]);
 
-                        //echo  $this->datos_pendiente_empaque[$i]->id_pendiente." ".$this->datos_pendiente_empaque[$i]->item." "."(". $cantidad_detalle_sampler.")"."<br>";
-                        DB::select('call actualizar_pendiente_empaque_sampler(:marca,:nombre,:vitola,:capa,:tipo,:item)', [
-                            'marca' => $valores[0]->marca,
-                            'nombre' => $valores[0]->nombre,
-                            'vitola' => $valores[0]->vitola,
-                            'capa' => $valores[0]->capa,
-                            'tipo' => $valores[0]->tipo_empaque,
-                            'item' =>  $datos_empaque[$i]->id_pendiente
-                        ]);
 
-                        $detalles++;
+        $cant_tipo = DB::select(
+            'call traer_cant_cajas(:id_pendiente)',
+            ['id_pendiente' => $request->id_pendientea]
+        );
 
-                        if ($detalles == $cantidad_detalle_sampler) {
-                            $detalles = 0;
-                            $cantidad_detalle_sampler = 0;
-                        }
-                    }
-                }
-            }
-        } catch (Exception $t) {
+        if( $cant_tipo == null){
+            $cajas_utilizadas_actual = ($request->saldo / $cant_tipo[0]->cajas_tipo); //50
+
+            $cajas_utilizadas_viejas = $request->cant_cajas + $request->saldo_viejo; //30
+
+
+
+            $cajas_actualizar = ($cajas_utilizadas_viejas - $cajas_utilizadas_actual); //
+
+        }else{
+            $cajas_actualizar = 0;
         }
 
-        return view('livewire.pendiente-empaque')->extends('principal')->section('content');
-    }
 
-    public function mount()
-    {
-        $this->datos_pendiente_empaque = [];
-
-        $this->paginacion = 0;
-        $this->fecha = "";
-        $this->borrar = [];
-        $this->busqueda_marcas_p = "";
-        $this->busqueda_nombre_p = "";
-        $this->busqueda_vitolas_p = "";
-        $this->busqueda_capas_p = "";
-        $this->busqueda_empaques_p = "";
-        $this->busqueda_mes_p = "";
-        $this->busqueda_items_p = "";
-        $this->busqueda_ordenes_p = "";
-        $this->busqueda_hons_p = "";
-
-       }
-
-    public function paginacion_numerica($numero)
-    {
-        $this->paginacion = $numero;
-    }
-
-    public function mostrar_todo($todo)
-    {
-        $this->todos = $todo;
-    }
-
-
-
-    public function insertar_detalle_provicional()
-    {
-        $datos_pendiente_empaque = DB::select(
-            'call buscar_pendiente_empaque(:uno,:dos,:tres,:cuatro,:pres,:seis,:siete,:paginacion,
-            :pa_items,:pa_orden_sist,:pa_ordenes,
-            :pa_marcas,:pa_vitolas,:pa_nombre,:pa_capas,
-            :pa_empaques,:pa_meses)',
+        $this->actualizar = DB::select(
+            'call actualizar_saldo_programacion(:id, :saldo,:cant,:id_pendiente)',
             [
-                'uno' =>  $this->r_uno,
-                'dos' =>  $this->r_dos,
-                'tres' =>  $this->r_tres,
-                'cuatro' =>  $this->r_cuatro,
-                'pres' =>  $this->r_cinco,
-                'seis' =>  $this->r_seis,
-                'siete' =>  $this->r_siete,
-                'paginacion' =>  -1,
-                'pa_marcas' =>  $this->busqueda_marcas_p,
-                'pa_nombre' =>  $this->busqueda_nombre_p,
-                'pa_vitolas' =>  $this->busqueda_vitolas_p,
-                'pa_capas' =>  $this->busqueda_capas_p,
-                'pa_empaques' =>  $this->busqueda_empaques_p,
-                'pa_meses' =>  $this->busqueda_mes_p,
-                'pa_items' =>  $this->busqueda_items_p,
-                'pa_orden_sist' =>  $this->busqueda_ordenes_p,
-                'pa_ordenes' =>  $this->busqueda_hons_p
-            ]
-
-
-            );
-
-
-            $tuplas = count( DB::select(
-                'call buscar_pendiente_empaque(:uno,:dos,:tres,:cuatro,:pres,:seis,:siete,:paginacion,
-                :pa_items,:pa_orden_sist,:pa_ordenes,
-                :pa_marcas,:pa_vitolas,:pa_nombre,:pa_capas,
-                :pa_empaques,:pa_meses)',
-                [
-                    'uno' =>  $this->r_uno,
-                    'dos' =>  $this->r_dos,
-                    'tres' =>  $this->r_tres,
-                    'cuatro' =>  $this->r_cuatro,
-                    'pres' =>  $this->r_cinco,
-                    'seis' =>  $this->r_seis,
-                    'siete' =>  $this->r_siete,
-                    'paginacion' =>  -1,
-                    'pa_marcas' =>  $this->busqueda_marcas_p,
-                    'pa_nombre' =>  $this->busqueda_nombre_p,
-                    'pa_vitolas' =>  $this->busqueda_vitolas_p,
-                    'pa_capas' =>  $this->busqueda_capas_p,
-                    'pa_empaques' =>  $this->busqueda_empaques_p,
-                    'pa_meses' =>  $this->busqueda_mes_p,
-                    'pa_items' =>  $this->busqueda_items_p,
-                    'pa_orden_sist' =>  $this->busqueda_ordenes_p,
-                    'pa_ordenes' =>  $this->busqueda_hons_p
-                ]
-
-            ));
-
-
-
-            for ($i = 0; $tuplas > $i; $i++) {
-                $detalles = DB::select(
-                    'call insertar_detalle_temporal(:numero_orden,:orden,:cod_producto,:saldo,:id_pendiente,:cant)',
-                    [
-                        'numero_orden' => isset($datos_pendiente_empaque[$i]->orden_del_sitema) ?  $datos_pendiente_empaque[$i]->orden_del_sitema : null,
-                        'orden' => isset( $datos_pendiente_empaque[$i]->orden) ?  $datos_pendiente_empaque[$i]->orden : null,
-                        'cod_producto' => isset( $datos_pendiente_empaque[$i]->item) ?  $datos_pendiente_empaque[$i]->item : null,
-                        'saldo' => isset( $datos_pendiente_empaque[$i]->saldo) ?  $datos_pendiente_empaque[$i]->saldo : null,
-                        'id_pendiente' => isset( $datos_pendiente_empaque[$i]->id_pendiente) ?  $datos_pendiente_empaque[$i]->id_pendiente : null,
-                        'cant' => isset( $datos_pendiente_empaque[$i]->cant_cajas) ?  $datos_pendiente_empaque[$i]->cant_cajas : null
-                    ]
-                );
-            }
-
-            return redirect()->route('detalles_programacion');
-
-    }
-
-
-    public function insertar_detalle_provicional_sin_existencia($id)
-    {
-
-        $datos_pendiente = DB::select(
-            'call datos_pendiente_programar(:id)',
-            ['id' => $id]
-        );
-
-        $detalles = DB::select(
-            'call insertar_detallePro_temporalSinExistencia(:numero_orden,:orden,:cod_producto,:saldo,:id_pendiente,:cant)',
-            [
-                'numero_orden' => isset($datos_pendiente[0]->orden_del_sitema) ? $datos_pendiente[0]->orden_del_sitema : null,
-                'orden' => isset($datos_pendiente[0]->orden) ? $datos_pendiente[0]->orden : null,
-                'cod_producto' => isset($datos_pendiente[0]->item) ? $datos_pendiente[0]->item : null,
-                'saldo' => isset($datos_pendiente[0]->saldo) ? $datos_pendiente[0]->saldo : null,
-                'id_pendiente' => isset($datos_pendiente[0]->id_pendiente) ? $datos_pendiente[0]->id_pendiente : null,
-                'cant' => isset($datos_pendiente[0]->cant_cajas) ? $datos_pendiente[0]->cant_cajas : null
+                'id' => $request->id_detalle,
+                'saldo' => $request->saldo,
+                'cant' => $cajas_actualizar,
+                'id_pendiente' => $request->id_pendientea
             ]
         );
+
+
 
 
         return redirect()->route('detalles_programacion');
     }
 
-    public function actualizar_pendiente($request)
+    public function insertarDetalle_y_actualizarPendiente()
     {
-        $validator = Validator::make(
+
+
+
+        $this->detalles_provicionales = DB::select('call mostrar_detalles_provicional(:buscar)', ['buscar' => $this->busqueda]);
+
+
+        $this->insertar_programacion = DB::select(
+            'call insertar_programacion(:fecha,:contenedor)',
             [
-                'orden_sistema2' => $request['orden_sistema2'],
-                'orden2' => $request['orden2'],
-                'pendiente2' => $request['pendiente2'],
-                'saldo2' => $request['saldo2']
-            ],
-            [
-                'orden_sistema2' => "required",
-                'orden2' => "required",
-                'pendiente2' => "required|integer",
-                'saldo2' => "required|integer"
-            ],
-            [
-                'orden_sistema2.required' => "La orden del sistema es necesaria.",
-                'orden2.required' => "La orden es necesaria.",
-                'pendiente2.required' => "El pendiente solicitado es necesaria.",
-                'saldo2.required' => "El saldo solicitado es necesaria.",
-                'pendiente2.integer' => "El pendiente solicitado debe ser un numero entero.",
-                'saldo2.integer' => "El saldo solicitado debe ser un numero entero.",
+                'fecha' => $this->fecha,
+                'contenedor' => $this->contenedor
             ]
         );
 
-        if (!$validator->fails()) {
+        $this->tuplas = count($this->detalles_provicionales);
 
-           DB::select(
-                'call actualizar_pendiente_empaque(:id_pendientea2,:observacion2,:pendiente2,:saldo2,:orden_sistema2,:orden2)',
+        for ($i = 0; $this->tuplas > $i; $i++) {
+
+            $this->actualizar_insertar = DB::select(
+                'call insertar_detalle_programacion(:numero_orden, :orden,:cod_producto,:saldo,:id_pendiente,:caja,:cant)',
                 [
-                    'id_pendientea2' => $request['id_pendientea2'],
-                    'orden_sistema2' => $request['orden_sistema2'],
-                    'orden2' => $request['orden2'],
-                    'pendiente2' => $request['pendiente2'],
-                    'saldo2' => $request['saldo2'],
-                    'observacion2' => $request['observacion2'],
+                    'numero_orden' => isset($this->detalles_provicionales[$i]->numero_orden) ? $this->detalles_provicionales[$i]->numero_orden : null,
+                    'orden' => isset($this->detalles_provicionales[$i]->orden) ? $this->detalles_provicionales[$i]->orden : null,
+                    'cod_producto' => isset($this->detalles_provicionales[$i]->cod_producto) ? $this->detalles_provicionales[$i]->cod_producto : null,
+                    'saldo' => isset($this->detalles_provicionales[$i]->saldo) ? $this->detalles_provicionales[$i]->saldo : null,
+                    'id_pendiente' => isset($this->detalles_provicionales[$i]->id_pendiente) ? $this->detalles_provicionales[$i]->id_pendiente : null,
+                    'caja' => isset($this->detalles_provicionales[$i]->existencia) ? $this->detalles_provicionales[$i]->existencia : null,
+                    'cant' => isset($this->detalles_provicionales[$i]->cant_cajas) ? $this->detalles_provicionales[$i]->cant_cajas : null
                 ]
             );
 
 
-            $this->dispatchBrowserEvent('notificacionconfirmacionUpdate');
-        } else {
-            $this->dispatchBrowserEvent('notificacionErrorUpdate', ['mensaje' => $validator->errors()->all()]);
         }
+
+        return redirect()->route('historial_programacion');
     }
 
 
-    public function eliminar_pendiente($request)
+    function exportProgramacion(Request $request)
     {
-        DB::select('call borrar_pendiente_empaque(:eliminar)', ['eliminar' => $request['id_pendiente3']]);
-
-        $this->dispatchBrowserEvent('notificacionConfirmacionDelete');
-    }
-
-
-    public function insertar_nuevo_pendiente($request)
-    {
-
-        $validator = Validator::make(
-            [
-                'categoria' => $request['categoria'],
-                'item' => $request['itemn'],
-                'orden' =>  $request['ordensis'],
-                'mes' => $request['fechan'],
-                'orden1' => $request['ordenn'],
-                'pendiente' => $request['pendienten'],
-                'saldo' => $request['saldon']
-            ],
-            [
-                'categoria' => 'required',
-                'item' => 'required',
-                'orden' => 'required',
-                'mes' => 'required|date',
-                'orden1' => 'required',
-                'pendiente' => 'required|integer',
-                'saldo' => 'required|integer',
-            ],
-            [
-                'categoria.required' => 'Debe seleccionar una categoria.',
-                'item.required' => 'Debe ingresar el producto.',
-                'orden.required' => 'Debe ingresar la Orden del Sistema.',
-                'mes.required' => 'Debe ingresar la fecha del pedido.',
-                'mes.date' => 'El valor de la fecha es incorrecta.',
-                'orden1.required' => 'Debe ingresar la orden del cliente.',
-                'pendiente.required' => 'Debe ingresar el pendiente.',
-                'saldo.required' => 'Debe ingresar el saldo.',
-                'pendiente.integer' => 'El pendiente debe ser un numero entero.',
-                'saldo.integer' => 'El saldo debe ser un numero entero.',
-            ]
-        );
-
-        if (!$validator->fails()) {
-            DB::select(
-                'call insertar_nuevo_pendiente_empaque(:categoria,:item,:orden,:observacion,:mes,:orden1,:pendiente,:saldo)',
-                [
-                    'categoria' => $request['categoria'],
-                    'item' => $request['itemn'],
-                    'orden' =>  $request['ordensis'],
-                    'observacion' => $request['observacionn'],
-                    'mes' => $request['fechan'],
-                    'orden1' => $request['ordenn'],
-                    'pendiente' => $request['pendienten'],
-                    'saldo' => $request['saldon']
-                ]
-            );
-
-            $this->dispatchBrowserEvent('notificacionconfirmacion');
-        } else {
-            $this->dispatchBrowserEvent('notificacionErrorInsert', ['mensaje' => $validator->errors()->all()]);
-        }
-    }
-
-    public function agregar_productos()
-    {
-        $puro = DB::select('CALL `pendiente_producto_seleccion`(?)',[$this->codigo_item]);
-        $this->capas_nuevo = $puro[0]->capa;
-        $this->marcas_nuevo = $puro[0]->marca;
-        $this->nombres_nuevo = $puro[0]->nombre;
-        $this->vitolas_nuevo = $puro[0]->vitola;
-        $this->tipo_empaques_nuevo = $puro[0]->tipo_empaque;
-        $this->presentacion =  $puro[0]->presentacion;
-        $this->codigo_precio_nuevo =  $puro[0]->codigo_precio;
-        $this->precio_precio =  $puro[0]->precio;
-
-    }
-
-    public function exportPendiente()
-    {
-
-        $pendiente_export = DB::select(
-            'call buscar_pendiente_empaque_excel(:uno,:dos,:tres,:cuatro,:pres,:seis,:siete,
-        :pa_items,:pa_orden_sist,:pa_ordenes,
-        :pa_marcas,:pa_vitolas,:pa_nombre,:pa_capas,
-        :pa_empaques,:pa_meses)',
-            [
-                'uno' => $this->r_uno,
-                'dos' => $this->r_dos,
-                'tres' => $this->r_tres,
-                'cuatro' =>  $this->r_cuatro,
-                'pres' =>  $this->r_cinco,
-                'seis' =>  $this->r_seis,
-                'siete' =>  $this->r_siete,
-                'pa_marcas' =>  $this->busqueda_marcas_p,
-                'pa_nombre' =>  $this->busqueda_nombre_p,
-                'pa_vitolas' =>  $this->busqueda_vitolas_p,
-                'pa_capas' =>  $this->busqueda_capas_p,
-                'pa_empaques' =>  $this->busqueda_empaques_p,
-                'pa_meses' =>  $this->busqueda_mes_p,
-                'pa_items' =>  $this->busqueda_items_p,
-                'pa_orden_sist' =>  $this->busqueda_ordenes_p,
-                'pa_ordenes' =>  $this->busqueda_hons_p
-            ]
-        );
-
-        return Excel::download(new PendienteEmpaqueExport($pendiente_export), 'Pendiente.xlsx');
+        return Excel::download(new detallesExport(), 'ProgramaciónPro.xlsx');
     }
 }

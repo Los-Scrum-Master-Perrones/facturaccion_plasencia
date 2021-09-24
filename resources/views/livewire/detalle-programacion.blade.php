@@ -1,32 +1,25 @@
 <div xmlns:wire="http://www.w3.org/1999/xhtml">
-    <title></title>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" />
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Hola</title>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" />
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
-    <script src="{{ URL::asset('css/tabla.js') }}"></script>
-    @livewireStyles
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-wEmeIV1mKuiNpC+IOBjI7aAzPcEZeedi5yW5f2yOq55WWLwNGmvvx4Um1vskeMj0" crossorigin="anonymous">
-
-    </br>
-
-
-
     <div class="container" style="max-width:100%; ">
+        <div wire:loading>
+            <div class="centro_carga">
+
+                <div style="color: #a0cadb" class="la-ball-atom la-3x">
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                </div>
+
+            </div>
+        </div>
 
         <div class="row" style="text-align:center;">
 
             <div class="col">
                 <div class="input-group mb-3">
 
-                    <a type="button" name="crear_programacion" id="crear_programacion" href="pendiente_empaque"
-                        class=" botonprincipal   mr-sm-2" value="" style="width:70px; ">
+                    <a type="button" name="crear_programacion" id="crear_programacion" wire:click.prevent="cambio()"
+                        class=" botonprincipal   mr-sm-2" value="" style="width:70px; " href="">
                         <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor"
                             class="bi bi-reply-all-fill" viewBox="0 0 16 16">
                             <path
@@ -74,7 +67,7 @@
                 mes = '0' + mes //agrega cero si el menor de 10
             document.getElementById('fecha_creacion').value = ano + "-" + mes + "-" + dia;
         }
-    </script> -->
+        </script> -->
 
 
 
@@ -123,15 +116,19 @@
 
 
                             @php
-                                $pendiente_restante = 0;
+                            $pendiente_restante = 0;
 
 
-                                $existencia = DB::select('select total from importar_existencias where codigo_producto = ?', [$detalle_provicional->cod_producto]);
-                                $programado_salir = DB::select('select sum(saldo) as total from detalle_programacion_temporal where cod_producto = ?', [$detalle_provicional->cod_producto]);
-                                if($detalle_provicional->cod_producto != '' && isset($existencia[0]->total) && isset($programado_salir[0]->total)){
-                                $pendiente_restante =  $existencia[0]->total - $programado_salir[0]->total;
-                                }
-                           @endphp
+                            $existencia = DB::select('select total from importar_existencias where codigo_producto = ?',
+                            [$detalle_provicional->cod_producto]);
+                            $programado_salir = DB::select('select sum(saldo) as total from
+                            detalle_programacion_temporal where cod_producto = ?',
+                            [$detalle_provicional->cod_producto]);
+                            if($detalle_provicional->cod_producto != '' && isset($existencia[0]->total) &&
+                            isset($programado_salir[0]->total)){
+                            $pendiente_restante = $existencia[0]->total - $programado_salir[0]->total;
+                            }
+                            @endphp
 
                             <td>{{$detalle_provicional->total_existencia}}</td>
                             <?php  if($pendiente_restante < 0){
@@ -193,8 +190,6 @@
         </div>
     </div>
 
-
-
     <!-- INICIO MODAL ACTUALIZAR SALDO-->
     <form action="{{Route('actualizar_rdetalles_programacion')}}" method="POST" id="form_saldo" name="form_saldo">
         <div class="modal fade" id="modal_actualizar_saldo" data-backdrop="static" data-keyboard="false" tabindex="-1"
@@ -241,7 +236,6 @@
         </div>
     </form>
     <!-- FIN MODAL  ACTUALIZAR SALDO -->
-
 
     <script type="text/javascript">
         function datos_modal_actualizar(id) {
@@ -292,10 +286,6 @@
         }
     </script>
 
-
-
-
-
     <!-- INICIO MODAL ELMINAR DETALLE -->
     <form action="{{Route('borrardetalles_programacion')}}" method="POST" id="formulario_mostrarE"
         name="formulario_mostrarE" action="" method="POST">
@@ -336,10 +326,6 @@
             </div>
         </div>
     </form>
-
-
-
-
     <!-- FIN MODAL ELMINAR DETALLE -->
 
     <div class="modal fade" id="modal_eliminar_tabla_progra" data-backdrop="static" data-keyboard="false" tabindex="-1"
@@ -354,8 +340,7 @@
                     ¿Estás seguro que quieres limpiar estos registros?
                 </div>
                 <div class="modal-footer">
-                    <button  type="button" class="bmodal_no"
-                        data-dismiss="modal">
+                    <button type="button" class="bmodal_no" data-dismiss="modal">
                         <span>Cancelar</span>
                     </button>
                     <button wire:click="eliminar_datos()" class=" bmodal_yes ">

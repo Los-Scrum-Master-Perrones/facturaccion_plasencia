@@ -5,8 +5,9 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-wEmeIV1mKuiNpC+IOBjI7aAzPcEZeedi5yW5f2yOq55WWLwNGmvvx4Um1vskeMj0" crossorigin="anonymous">
 
+    <br>
 
-    <div class="container" style="max-width:100%;" id="div_factura" name="div_factura">
+    <div class="container" style="max-width:100%;" @if($ventanas==2) hidden @endif>
         <br>
         @if(auth()->user()->rol == -1)
         <br>
@@ -16,7 +17,7 @@
 
             <div class="col">
                 <div class="input-group mb-3">
-                    <button id="boton_agregar" name="boton_agregar" onclick="mostrarPendiente()"
+                    <button id="boton_agregar" name="boton_agregar" wire:click.prevent="cambio(2)"
                         class=" mr-sm-2 botonprincipal" style="width:120px;">
                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
                             class="bi bi-plus-circle" viewBox="0 0 16 16">
@@ -24,9 +25,8 @@
                             <path
                                 d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z" />
                         </svg>
-                        Producto
+                        Productos
                     </button>
-
 
                     <span id="lbl_cliente" name="lbl_cliente" class="form-control input-group-text ">Cliente</span>
                     <input style="width:150px;" id="txt_cliente" name="txt_cliente" type="text"
@@ -48,14 +48,23 @@
                         <option value="Aerea">Aerea</option>
                     </select>
 
-                    <button id="btn_guardar" class="botonprincipal" wire:click="insertar_factura()"
-                        style="width:120px;">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
-                            class="bi bi-save2" viewBox="0 0 16 16">
-                            <path
-                                d="M2 1a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H9.5a1 1 0 0 0-1 1v4.5h2a.5.5 0 0 1 .354.854l-2.5 2.5a.5.5 0 0 1-.708 0l-2.5-2.5A.5.5 0 0 1 5.5 6.5h2V2a2 2 0 0 1 2-2H14a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V2a2 2 0 0 1 2-2h2.5a.5.5 0 0 1 0 1H2z" />
-                        </svg> Guardar
-                    </button>
+                    <div wire:loading>
+                        <button id="btn_guardar" class="mr-sm-2 botonprincipal" style="width:120px; height: 35px;"
+                            disabled>
+                            <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                            Loading...
+                        </button>
+                    </div>
+                    <div wire:loading.attr="hidden" style="width:120px;">
+                        <button id="btn_guardar" class=" mr-sm-2 botonprincipal" wire:click="insertar_factura()"
+                            style="width:120px; height: 35px;">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                                class="bi bi-save2" viewBox="0 0 16 16">
+                                <path
+                                    d="M2 1a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H9.5a1 1 0 0 0-1 1v4.5h2a.5.5 0 0 1 .354.854l-2.5 2.5a.5.5 0 0 1-.708 0l-2.5-2.5A.5.5 0 0 1 5.5 6.5h2V2a2 2 0 0 1 2-2H14a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V2a2 2 0 0 1 2-2h2.5a.5.5 0 0 1 0 1H2z" />
+                            </svg> Guardar
+                        </button>
+                    </div>
                 </div>
             </div>
         </div>
@@ -79,7 +88,8 @@
                 <button style="width:120px;" class="botonprincipal" wire:click="imprimir()">Imprimir</button>
             </div>
             <div class="col-sm-3" style="text-align:end;">
-                <button style="width:120px;" class="botonprincipal" wire:click="imprimir_formato_largo()">Imprimir(factura Larga)</button>
+                <button style="width:120px;" class="botonprincipal"
+                    wire:click="imprimir_formato_largo()">Imprimir(factura Larga)</button>
             </div>
             <div class="col-sm-2" style="text-align:end;">
                 <button style="width:120px;" class="botonprincipal" wire:click="historial()">Historial</button>
@@ -510,7 +520,7 @@
                         @endif
 
                         <?php }catch(\Exception $e){ ?>
-                            <?php } ?>
+                        <?php } ?>
                         @endforeach
 
                         @php
@@ -561,252 +571,312 @@
         </div>
     </div>
 
-    <div class="container" style="max-width:100%;  display:none" id="div_pendiente" name="div_pendiente">
-        <br>
-
-        <div class="row" style="text-align:center;">
-
+    <div class="container" style="max-width:100%; font-size:10px;" @if($ventanas !=2) hidden @endif>
+        <div class="row" wire:ignore style="margin-bottom:2px">
             <div class="col">
-
-                <div class="col" id="pendiente_asuntos_1" name="pendiente_asuntos_1">
-                    <div class="row" style="margin-bottom:2px">
-                        <div class="col-2">
-                            <button style="width:100%;" id="boton_regresar" onclick="mostrarDetalleFactura()"
-                                class=" mr-sm-2 botonprincipal">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
-                                    class="bi bi-arrow-left-circle" viewBox="0 0 16 16">
-                                    <path fill-rule="evenodd"
-                                        d="M1 8a7 7 0 1 0 14 0A7 7 0 0 0 1 8zm15 0A8 8 0 1 1 0 8a8 8 0 0 1 16 0zm-4.5-.5a.5.5 0 0 1 0 1H5.707l2.147 2.146a.5.5 0 0 1-.708.708l-3-3a.5.5 0 0 1 0-.708l3-3a.5.5 0 1 1 .708.708L5.707 7.5H11.5z" />
-                                </svg>
-                                Regresar
+                <div class="row">
+                    <div class="col">
+                        <div wire:loading  style="width:100%;height:34px;">
+                            <button id="btn_guardar" class="mr-sm-2 botonprincipal" style="width:100%;height:34px;"
+                                disabled>
+                                <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                                Loading...
                             </button>
                         </div>
-
-                        <div class="col-1">
-                            <select name="para2" id="para2" wire:model="aereo" style="width:100%;height:28px;">
-                                <option value="RP">Rocky Patel</option>
-                                <option value="FM">Family</option>
-                                <option value="WH">Warehouse</option>
-                                <option value="Aerea">Aerea</option>
-                            </select>
-                        </div>
-                        <div class="col-3">
-                            <select onchange="buscar_tabla()" onclick="funcion1()" name="b_item" id="b_item"
-                                class=" mi-selector form-control " style="width:100%;height:34px;" name="states[]">
-                                <option value="" style="overflow-y: scroll;">Todos Items</option>
-                                @foreach ($items as $item)
-                                <option style="overflow-y: scroll;">{{$item->item}}</option>
-                                @endforeach
-                            </select>
-                        </div>
-
-                        <div class="col-3">
-                            <select onchange="buscar_tabla()" onclick="funcion1()" name="b_orden" id="b_orden"
-                                class=" mi-selector form-control" style="width:100%;height:34px;" name="states[]">
-                                <option value="" style="overflow-y: scroll;">Todas las ordenes del sistema</option>
-                                @foreach ($orden_sistemas as $orden_sistema)
-                                <option style="overflow-y: scroll;">{{$orden_sistema->orden_del_sitema}}</option>
-                                @endforeach
-                            </select>
-                        </div>
-
-                        <div class="col-3">
-                            <select onchange="buscar_tabla()" onclick="funcion1()" name="b_hon" id="b_hon"
-                                class=" mi-selector form-control" style="width:100%;height:34px;" name="states[]">
-                                <option value="" style="overflow-y: scroll;">Todas las ordenes</option>
-                                @foreach ($orden_pedidos as $orden_pedido)
-                                <option style="overflow-y: scroll;">{{$orden_pedido->orden}}</option>
-                                @endforeach
-                            </select>
-                        </div>
-
-                    </div>
-                </div>
-
-
-
-                <div class="container" style="max-width:100%; margin-top: 4px;" id="pendiente_asuntos_2"
-                    name="pendiente_asuntos_2">
-                    <div class="row">
-
-
-                        <div class="col-sm-2">
-                            <select onchange="buscar_tabla()" onclick="funcion1()" name="b_marca" id="b_marca"
-                                class=" mi-selector form-control" style="width:100%;height:34px;" name="states[]">
-                                <option value="" style="overflow-y: scroll;">Todas las marcas</option>
-                                @foreach ($marcas_busqueda as $marcas_busquedas)
-                                <option style="overflow-y: scroll;">{{$marcas_busquedas->marca}}</option>
-                                @endforeach
-                            </select>
-                        </div>
-
-                        <div class="col-sm-2">
-                            <select onchange="buscar_tabla()" onclick="funcion1()" name="b_vitola" id="b_vitola"
-                                class=" mi-selector form-control" style="width:100%;height:34px;" name="states[]">
-                                <option value="" style="overflow-y: scroll;">Todas las vitolas</option>
-                                @foreach ($busqueda_vitolas as $busqueda_vitola)
-                                <option style="overflow-y: scroll;">{{$busqueda_vitola->vitola}}</option>
-                                @endforeach
-                            </select>
-                        </div>
-                        <div class="col-sm-2">
-                            <select onchange="buscar_tabla()" onclick="funcion1()" name="b_nombre" id="b_nombre"
-                                class=" mi-selector form-control" style="width:100%;height:34px;" name="states[]">
-                                <option value="" style="overflow-y: scroll;">Todos los nombres</option>
-                                @foreach ($busqueda_nombre as $busqueda_nombres)
-                                <option style="overflow-y: scroll;">{{$busqueda_nombres->nombre}}</option>
-                                @endforeach
-                            </select>
-                        </div>
-
-                        <div class="col-sm-2">
-                            <select onchange="buscar_tabla()" onclick="funcion1()" name="b_capa" id="b_capa"
-                                class=" mi-selector form-control" style="width:100%;height:34px;" name="states[]">
-                                <option value="" style="overflow-y: scroll;">Todas las capas</option>
-                                @foreach ($busqueda_capas as $busqueda_capa)
-                                <option style="overflow-y: scroll;">{{$busqueda_capa->capa}}</option>
-                                @endforeach
-                            </select>
-                        </div>
-
-                        <div class="col-sm-2">
-                            <select onchange="buscar_tabla()" onclick="funcion1()" name="b_empaque" id="b_empaque"
-                                class=" mi-selector form-control" style="width:100%;height:34px;" name="states[]">
-                                <option value="" style="overflow-y: scroll;">Todas los empaques</option>
-                                @foreach ($busqueda_tipo_empaques as $busqueda_tipo_empaque)
-                                <option style="overflow-y: scroll;">{{$busqueda_tipo_empaque->tipo_empaque}}
-                                </option>
-                                @endforeach
-                            </select>
-                        </div>
-
-                        <div class="col-sm-2">
-                            <select onchange="buscar_tabla()" onclick="funcion1()" name="b_mes" id="b_mes"
-                                class=" mi-selector form-control" style="width:100%;height:34px;" name="states[]">
-                                <option value="" style="overflow-y: scroll;">Todos los meses</option>
-                                @foreach ($busqueda_meses as $busqueda_mese)
-                                <option style="overflow-y: scroll;">{{$busqueda_mese->mes}}</option>
-                                @endforeach
-                            </select>
+                        <div wire:loading.attr="hidden" style="width:100%;height:34px;">
+                            <abbr title="Agregar nuevo producto">
+                                <button id="boton_agregar" name="boton_agregar" wire:click.prevent="cambio(1)"
+                                class=" mr-sm-2 botonprincipal" style="width:100%;height:34px;">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                                        class="bi bi-arrow-left-circle" viewBox="0 0 16 16">
+                                        <path fill-rule="evenodd"
+                                            d="M1 8a7 7 0 1 0 14 0A7 7 0 0 0 1 8zm15 0A8 8 0 1 1 0 8a8 8 0 0 1 16 0zm-4.5-.5a.5.5 0 0 1 0 1H5.707l2.147 2.146a.5.5 0 0 1-.708.708l-3-3a.5.5 0 0 1 0-.708l3-3a.5.5 0 1 1 .708.708L5.707 7.5H11.5z" />
+                                    </svg>
+                                    Factura
+                                </button>
+                            </abbr>
                         </div>
                     </div>
                 </div>
+            </div>
 
+            <div class="col">
+                <div class="dropdown">
+                    <button class="btn btn-secondary dropdown-toggle form-control" type="button"
+                        id="dropdownMenuButton1" data-toggle="dropdown">
+                        Categorias
+                    </button>
+                    <ul class="dropdown-menu " aria-labelledby="dropdownMenuButton1">
+                        <div class="form-check ">
+                            <input class="form-check-input" type="checkbox" value="1" id="checkbox1" checked
+                                name="checkbox1" wire:model="r_uno">
+                            <label class="form-check-label " for="flexCheckDefault"> NEW ROLL </label>
+                        </div>
+
+                        <div class="form-check ">
+                            <input class="form-check-input" type="checkbox" value="2" id="checkbox2" checked
+                                name="checkbox2" wire:model="r_dos">
+                            <label class="form-check-label " for="flexCheckChecked"> CATALOGO </label>
+                        </div>
+
+                        <div class="form-check ">
+                            <input class="form-check-input " type="checkbox" value="3" id="checkbox3" checked
+                                name="checkbox3" wire:model="r_tres">
+                            <label class="form-check-label " for="flexCheckDefault"> INVENTARIO EXISTENTE
+                            </label>
+                        </div>
+
+                        <div class="form-check ">
+                            <input class="form-check-input " type="checkbox" value="4" id="checkbox4" checked
+                                name="checkbox4" wire:model="r_cuatro">
+                            <label class="form-check-label " for="flexCheckChecked"> WAREHOUSE </label>
+                        </div>
+                    </ul>
+                </div>
+            </div>
+
+
+            <div class="col">
+                <div class="dropdown">
+                    <button class="btn btn-secondary dropdown-toggle form-control" type="button"
+                        id="dropdownMenuButton1" data-toggle="dropdown">
+                        Presentacion
+                    </button>
+                    <ul class="dropdown-menu " aria-labelledby="dropdownMenuButton1">
+                        <div class="form-check ">
+                            <input class="form-check-input" type="checkbox" value="Puros Tripa Larga" id="checkbox5"
+                                checked name="checkbox5" wire:model="r_cinco">
+                            <label class="form-check-label " for="flexCheckDefault"> Puros Tripa Larga </label>
+                        </div>
+
+                        <div class="form-check ">
+                            <input class="form-check-input" type="checkbox" value="Puros Tripa Corta" id="checkbox6"
+                                checked name="checkbox6" wire:model="r_seis">
+                            <label class="form-check-label " for="flexCheckChecked"> Puros Tripa Corta </label>
+                        </div>
+
+                        <div class="form-check ">
+                            <input class="form-check-input " type="checkbox" value="Puros Sandwich" id="checkbox7"
+                                checked name="checkbox7" wire:model="r_siete">
+                            <label class="form-check-label " for="flexCheckDefault"> Puros Sandwich
+                            </label>
+                        </div>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="col">
+                <select onchange="buscar_tabla()" name="b_item" id="b_item" class="mi-selector form-control"
+                    style="width:100%;height:34px;" name="states[]">
+                    <option value="" style="overflow-y: scroll;">Todos Items</option>
+                    @foreach($items_p as $item)
+                    <option style="overflow-y: scroll;"> {{$item->item}}</option>
+                    @endforeach
+                </select>
+            </div>
+
+
+            <div class="col" wire:ignore>
+                <select onchange="buscar_tabla()" name="b_orden" id="b_orden" class=" mi-selector form-control"
+                    style="width:100%;height:34px;" name="states[]">
+                    <option value="" style="overflow-y: scroll;">Todas las ordenes del sistema</option>
+                    @foreach($ordenes_p as $orden)
+                    <option style="overflow-y: scroll;"> {{$orden->orden_del_sitema}}</option>
+                    @endforeach
+                </select>
+            </div>
+
+            <div class="col" wire:ignore>
+                <select onchange="buscar_tabla()" name="b_hon" id="b_hon" class=" mi-selector form-control"
+                    style="width:100%;height:34px;" name="states[]">
+                    <option value="" style="overflow-y: scroll;">Todas las ordenes</option>
+                    @foreach($hons_p as $hon)
+                    <option style="overflow-y: scroll;"> {{$hon->orden}}</option>
+                    @endforeach
+                </select>
+            </div>
+
+        </div>
+        <div class="row" wire:ignore>
+            <div class="col" wire:ignore>
+                <select onchange="buscar_tabla()" name="b_marca" id="b_marca" class=" mi-selector form-control"
+                    style="width:100%;height:34px;" name="states[]">
+                    <option value="" style="overflow-y: scroll;">Todas las marcas</option>
+                    @foreach($marcas_p as $marca)
+                    <option style="overflow-y: scroll;"> {{$marca->marca}}</option>
+                    @endforeach
+                </select>
+            </div>
+
+            <div class="col" wire:ignore>
+                <select onchange="buscar_tabla()" name="b_vitola" id="b_vitola" class=" mi-selector form-control"
+                    style="width:100%;height:34px;" name="states[]">
+                    <option value="" style="overflow-y: scroll;">Todas las vitolas</option>
+                    @foreach($vitolas_p as $vitola)
+                    <option style="overflow-y: scroll;"> {{$vitola->vitola}}</option>
+                    @endforeach
+                </select>
+            </div>
+
+            <div class="col" wire:ignore>
+                <select onchange="buscar_tabla()" name="b_nombre" id="b_nombre" class=" mi-selector form-control"
+                    style="width:100%;height:34px;" name="states[]">
+                    <option value="" style="overflow-y: scroll;">Todos los nombres</option>
+                    @foreach($nombre_p as $nombre)
+                    <option style="overflow-y: scroll;"> {{$nombre->nombre}}</option>
+                    @endforeach
+                </select>
+            </div>
+
+            <div class="col" wire:ignore>
+                <select onchange="buscar_tabla()" name="b_capa" id="b_capa" class=" mi-selector form-control"
+                    style="width:100%;height:34px;" name="states[]">
+                    <option value="" style="overflow-y: scroll;">Todas las capas</option>
+                    @foreach($capas_p as $capa)
+                    <option style="overflow-y: scroll;"> {{$capa->capa}}</option>
+                    @endforeach
+                </select>
+            </div>
+
+            <div class="col" wire:ignore>
+                <select onchange="buscar_tabla()" name="b_empaque" id="b_empaque" class=" mi-selector form-control"
+                    style="width:100%;height:34px;" name="states[]">
+                    <option value="" style="overflow-y: scroll;">Todos los empaques</option>
+                    @foreach($empaques_p as $empaque)
+                    <option style="overflow-y: scroll;"> {{$empaque->empaque}}</option>
+                    @endforeach
+                </select>
+            </div>
+
+            <div class="col" wire:ignore>
+                <select onchange="buscar_tabla()" name="b_mes" id="b_mes" class=" mi-selector form-control"
+                    style="width:100%;height:34px;" name="states[]">
+                    <option value="" style="overflow-y: scroll;">Todos los meses</option>
+                    @foreach($mes_p as $mes)
+                    <option style="overflow-y: scroll;"> {{$mes->mes}}</option>
+                    @endforeach
+                </select>
             </div>
         </div>
+        <div class="row">
+            <div class="col">
+                <nav>
+                    <ul class="pagination justify-content-center">
 
+                        <li class="page-item">
+                            <a class="page-link" href="#" tabindex="-1" wire:click="mostrar_todo(0)">Dividir</a>
+                        </li>
+                        @php
+                        $cantida = 1;
+                        @endphp
+                        @for ($i = 0; $i < $tuplas_conteo ; $i+=100) <li class="page-item"><a class="page-link" href="#"
+                                wire:click="paginacion_numerica({{$i}})">{{$cantida}}</a></li>
+                            @php
+                            $cantida++;
+                            @endphp
 
-        <br>
-        <br>
+                            @endfor
+                            @php
+                            $cantida = 1;
+                            @endphp
+                            <li class="page-item">
+                                <a class="page-link" href="#" wire:click="mostrar_todo(1)">Mostrar Todo</a>
+                            </li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
 
         <div class="panel-body" style="padding:0px;">
-            <div style="width:100%; padding-left:0px;   font-size:10px;   overflow-x: display; overflow-y: auto;
-                height:70%;">
+            <div style="width:100%; padding-left:0px;  font-size:9px;   overflow-x: display; overflow-y: auto;
+         height:75%;">
+                <table class="table table-light" style="font-size:9px;" id="tabla_pendiente">
+                    <thead>
+                        <tr>
+                            <th>CATEGORIA</th>
+                            <th>ITEM</th>
+                            <th>ORDEN DEL SISTEMA</th>
+                            <th>OBSERVACÓN</th>
+                            <th>PRESENTACIÓN</th>
+                            <th>MES</th>
+                            <th>ORDEN</th>
+                            <th>MARCA</th>
+                            <th>VITOLA</th>
+                            <th>NOMBRE</th>
+                            <th>CAPA</th>
+                            <th>TIPO DE EMPAQUE</th>
+                            <th>ANILLO</th>
+                            <th>CELLO</th>
+                            <th>UPC</th>
+                            <th>PENDIENTE</th>
+                            <th>SALDO</th>
+                            @if(auth()->user()->rol == -1)
 
-                <div id="tabla_pendiente_factura" name="tabla_pendiente_factura">
+                            @else
+                            <th></th>
+                            @endif
+                        </tr>
+                    </thead>
+                    <tbody name="body" id="body">
+                        <?php $sumas = 0 ;
+                        $sumap=0;
+                        ?>
+                        @foreach($datos_pendiente as $i => $datos)
+                        <tr>
+                            <td>{{++$i}}</td>
+                            <td style="width:100px; max-width: 400px;overflow-x:auto;">{{$datos->categoria}}</td>
+                            <td>{{$datos->item}}</td>
+                            <td>{{$datos->orden_del_sitema}}</td>
+                            <td>{{$datos->observacion}}</td>
+                            <td>{{$datos->presentacion}}</td>
+                            <td>{{$datos->mes}}</td>
+                            <td>{{$datos->orden}}</td>
+                            <td>{{$datos->marca}}</td>
+                            <td>{{$datos->vitola}}</td>
+                            <td>{{$datos->nombre}}</td>
+                            <td>{{$datos->capa}}</td>
+                            <td>{{$datos->tipo_empaque}}</td>
+                            <td>{{$datos->anillo}}</td>
+                            <td>{{$datos->cello}}</td>
+                            <td>{{$datos->upc}}</td>
+                            <td>{{$datos->pendiente}}</td>
+                            <td>{{$datos->saldo}}</td>
+                            @if(auth()->user()->rol == -1)
 
+                            @else
+                            <td style="text-align:center;">
+                                <a data-toggle="modal" data-target="#modal_actualizar"
+                                    onclick="asignar({{$datos->id_pendiente}});  document.getElementById('titulo1').innerHTML = '{{$datos->descripcion_produto}}';"
+                                    href="">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                                        class="bi bi-bag-plus-fill" viewBox="0 0 16 16">
+                                        <path fill-rule="evenodd"
+                                            d="M10.5 3.5a2.5 2.5 0 0 0-5 0V4h5v-.5zm1 0V4H15v10a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V4h3.5v-.5a3.5 3.5 0 1 1 7 0zM8.5 8a.5.5 0 0 0-1 0v1.5H6a.5.5 0 0 0 0 1h1.5V12a.5.5 0 0 0 1 0v-1.5H10a.5.5 0 0 0 0-1H8.5V8z" />
+                                    </svg>
+                                </a>
+                            </td>
+                            @endif
+                        </tr>
 
-                    <table class="table table-light" style="font-size:8px;" id="pendiente_factura">
-                        <thead>
-                            <tr>
-                                <th>CATEGORIA</th>
-                                <th>ITEM</th>
-                                <th>ORDEN DEL SISTEMA</th>
-                                <th>OBSERVACÓN</th>
-                                <th>PRESENTACIÓN</th>
-                                <th>MES</th>
-                                <th>ORDEN</th>
-                                <th>MARCA</th>
-                                <th>VITOLA</th>
-                                <th>NOMBRE</th>
-                                <th>CAPA</th>
-                                <th>TIPO DE EMPAQUE</th>
-                                <th>ANILLO</th>
-                                <th>CELLO</th>
-                                <th>UPC</th>
-                                <th>PENDIENTE</th>
-                                <th>SALDO</th>
-                                <th>PT</th>
-                                <th></th>
-                            </tr>
-                        </thead>
-                        <tbody id="body_pendiente_factura">
-                            @php
-                            $tota_penidiente_factura= 0;
-                            $tota_saldo_factura= 0;
-                            @endphp
+                        <?php
+                            $sumas = $sumas + $datos->saldo;
+                            $sumap = $sumap + $datos->pendiente;
+                        ?>
 
-                            @foreach($datos_pendiente as $datos)
-
-                            <tr>
-                                <td style="width:100px; max-width: 400px; overflow-x:auto;">{{$datos->categoria}}</td>
-                                <td>{{$datos->item}}</td>
-                                <td>{{$datos->orden_del_sitema}}</td>
-                                <td>{{$datos->observacion}}</td>
-                                <td>{{$datos->presentacion}}</td>
-                                <td>{{$datos->mes}}</td>
-                                <td>{{$datos->orden}}</td>
-                                <td>{{$datos->marca}}</td>
-                                <td>{{$datos->vitola}}</td>
-                                <td>{{$datos->nombre}}</td>
-                                <td>{{$datos->capa}}</td>
-                                <td>{{$datos->tipo_empaque}}</td>
-                                <td>{{$datos->anillo}}</td>
-                                <td>{{$datos->cello}}</td>
-                                <td>{{$datos->upc}}</td>
-                                <td>{{$datos->pendiente}}</td>
-                                <td>{{$datos->saldo}}</td>
-                                <td>{{$datos->PT}}</td>
-                                <td style="text-align:center;">
-
-                                    <a data-toggle="modal" data-target="#modal_actualizar"
-                                        onclick="asignar({{$datos->id_pendiente}});  document.getElementById('titulo1').innerHTML = '{{$datos->descripcion_produto}}';"
-                                        href="">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
-                                            fill="currentColor" class="bi bi-bag-plus-fill" viewBox="0 0 16 16">
-                                            <path fill-rule="evenodd"
-                                                d="M10.5 3.5a2.5 2.5 0 0 0-5 0V4h5v-.5zm1 0V4H15v10a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V4h3.5v-.5a3.5 3.5 0 1 1 7 0zM8.5 8a.5.5 0 0 0-1 0v1.5H6a.5.5 0 0 0 0 1h1.5V12a.5.5 0 0 0 1 0v-1.5H10a.5.5 0 0 0 0-1H8.5V8z" />
-                                        </svg>
-                                    </a>
-
-
-                                </td>
-                            </tr>
-
-                            @php
-                            $tota_penidiente_factura+= $datos->pendiente;
-                            $tota_saldo_factura+= $datos->saldo;
-                            @endphp
-
-
-                            @endforeach
-                           @php
-                               $this->total_factura_precio =$tota_saldo_factura;
-                           @endphp
-                        </tbody>
-                    </table>
-
-                </div>
-
-            </div>
-
-            <div class="input-group" style="width:30%;position: fixed;right: 0px;bottom:0px; height:30px;" id="sumas3">
-                <span id="de" class="input-group-text form-control "
-                    style="background:rgba(174, 0, 255, 0.432);color:white;">Total Pendiente</span>
-                <input type="number" id="pendiente" class="form-control  mr-sm-4" placeholder="0"
-                    value='{{$tota_penidiente_factura}}' readonly>
-
-                <span id="de" class="input-group-text form-control"
-                    style="background:rgba(174, 0, 255, 0.432);color:white;">Total Saldo</span>
-                <input type="number" id="saldo" class="form-control  mr-sm-4" placeholder="0"
-                    value='{{$tota_saldo_factura}}' readonly>
+                        @endforeach
+                    </tbody>
+                </table>
             </div>
         </div>
+
+        <div class="input-group" style="width:40%; position: fixed;right: 0px;bottom:0px; height:30px;">
+            <span class="form-control input-group-text">Total pendiente</span>
+            <input type="text" class="form-control" id="sumap" value="{{$sumap}}">
+
+            <span class="form-control input-group-text">Total saldo</span>
+            <input type="text" class="form-control" id="sumas" value="{{$sumas}}">
+        </div>
     </div>
-
-
-
-
 
 
 
@@ -990,11 +1060,7 @@
 
     <script>
         function asignar(id) {
-            var table_div = document.getElementById("tabla_pendiente_factura");
-            table_div.setAttribute('wire:ignore', '');
-            @this.item = "0909";
             @this.id_pendiente_detalle = id;
-
         }
 
         function guardar_detalle() {
@@ -1007,11 +1073,9 @@
                 document.getElementById("intunidades_bultos").value
             );
 
-
             @this.item = "";
 
             mostrarDetalleFactura();
-
         }
     </script>
     <script>
@@ -1077,142 +1141,17 @@
 
     <script type="text/javascript">
         function buscar_tabla() {
-
-            var data = null;
-            var table = document.getElementById("pendiente_factura");
-            var rowCount = table.rows.length;
-            var tableRows = table.getElementsByTagName('tr');
-            //console.log(rowCount)
-
-            if (rowCount <= 1) {} else {
-                for (var x = rowCount - 1; x > 0; x--) {
-                    document.getElementById("body_pendiente_factura").innerHTML = "";
-                }
-            }
-
-            var table_div = document.getElementById("tabla_pendiente_factura");
-            table_div.setAttribute('wire:ignore', '');
-
-
-            var b_orden = document.getElementById('b_orden').value;
-            var b_item = document.getElementById('b_item').value;
-            var b_hon = document.getElementById('b_hon').value;
-            var b_mes = document.getElementById('b_mes').value;
-
-            var b_marca = document.getElementById('b_marca').value;
-            var b_vitola = document.getElementById('b_vitola').value;
-            var b_capa = document.getElementById('b_capa').value;
-            var b_nombre = document.getElementById('b_nombre').value;
-            var b_empaque = document.getElementById('b_empaque').value;
-
-            data = @json($datos_pendiente);
-
-
-            if (b_orden == "" && b_item == "" && b_hon == "" && b_mes == "" && b_marca == "" &&
-                b_vitola == "" && b_capa == "" && b_nombre == "" && b_empaque == "") {
-                location.reload(true);
-            } else {
-
-                var sumas = 0;
-                var sumap = 0;
-                for (var i = 0; i < data.length; i++) {
-                    try {
-
-                        if (data[i].marca.toLowerCase().replace(/\((\w+)\)/g, '').match(b_marca.toLowerCase().replace(
-                                /\((\w+)\)/g, '')) &&
-                            data[i].vitola.toLowerCase().match(b_vitola.toLowerCase()) &&
-                            data[i].nombre.toLowerCase().match(b_nombre.toLowerCase()) &&
-                            data[i].capa.toLowerCase().match(b_capa.toLowerCase()) &&
-                            data[i].tipo_empaque.toLowerCase().match(b_empaque.toLowerCase()) &&
-
-                            data[i].item.toLowerCase().match(b_item.toLowerCase()) &&
-                            data[i].orden_del_sitema.toLowerCase().match(b_orden.toLowerCase()) &&
-                            data[i].mes.toLowerCase().match(b_mes.toLowerCase()) &&
-                            data[i].orden.toLowerCase().match(b_hon.toLowerCase())) {
-
-                            sumas = sumas + data[i].saldo;
-                            sumap = sumap + data[i].pendiente;
-
-                            if (data[i].observacion == null) {
-                                data[i].observacion = "";
-                            }
-                            if (data[i].presentacion == null) {
-                                data[i].presentacion = "";
-                            }
-                            if (data[i].anillo == null) {
-                                data[i].anillo = "";
-                            }
-                            if (data[i].cello == null) {
-                                data[i].cello = "";
-                            }
-                            if (data[i].upc == null) {
-                                data[i].upc = "";
-                            }
-                            if (data[i].serie_precio == null) {
-                                data[i].serie_precio = "";
-                            }
-                            if (data[i].precio == null) {
-                                data[i].precio = "";
-                            }
-                            if (data[i].pendiente == null) {
-                                data[i].pendiente = "";
-                            }
-                            if (data[i].saldo == null) {
-                                data[i].saldo = "";
-                            }
-
-                            var tabla_nueva = `
-                        <tr>
-                        <td>` + data[i].categoria + `</td>
-                        <td>` + data[i].item + `</td>
-                        <td>` + data[i].orden_del_sitema + `</td>
-                        <td>` + data[i].observacion + `</td>
-
-                        <td>` + data[i].presentacion + `</td>
-                        <td>` + data[i].mes + `</td>
-                        <td style="width:100px;font-size:8px;">` + data[i].orden + `</td>
-                        <td style="width:100px;font-size:8px;">` + data[i].marca + `</td>
-                        <td>` + data[i].vitola + `</td>
-
-                        <td>` + data[i].nombre + `</td>
-                        <td>` + data[i].capa + `</td>
-                        <td>` + data[i].tipo_empaque + `</td>
-                        <td>` + data[i].anillo + `</td>
-                        <td>` + data[i].cello + `</td>
-                        <td>` + data[i].upc + `</td>
-                        <td>` + data[i].pendiente + `</td>
-                        <td>` + data[i].saldo + `</td>
-                        <td>` + data[i].PT + `</td>
-                        <td>
-                            <a data-toggle="modal"  data-target="#modal_actualizar" onclick="asignar(` + data[i]
-                                .id_pendiente + `);  document.getElementById('titulo1').innerHTML = '` + data[i]
-                                .descripcion_produto + `';" href="">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
-                                            class="bi bi-bag-plus-fill" viewBox="0 0 16 16">
-                                            <path fill-rule="evenodd"
-                                                d="M10.5 3.5a2.5 2.5 0 0 0-5 0V4h5v-.5zm1 0V4H15v10a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V4h3.5v-.5a3.5 3.5 0 1 1 7 0zM8.5 8a.5.5 0 0 0-1 0v1.5H6a.5.5 0 0 0 0 1h1.5V12a.5.5 0 0 0 1 0v-1.5H10a.5.5 0 0 0 0-1H8.5V8z" />
-                                        </svg>
-                            </a>
-                        </td>
-                    </tr>
-
-                    `;
-
-
-                            document.getElementById("body_pendiente_factura").innerHTML += tabla_nueva.toString();
-                        }
-                    } catch (error) {
-                        console.error(error);
-                    }
-
-
-                }
-
-                document.getElementById("pendiente").value = sumap;
-                document.getElementById("saldo").value = sumas;
-
-            }
-            // fin del else
+            @this.busqueda_items_p = $('#b_item').val();
+            @this.busqueda_marcas_p = $('#b_marca').val();
+            @this.busqueda_nombre_p = $('#b_nombre').val();
+            @this.busqueda_vitolas_p = $('#b_vitola').val();
+            @this.busqueda_capas_p = $('#b_capa').val();
+            @this.busqueda_empaques_p = $('#b_empaque').val();
+            @this.busqueda_mes_p = $('#b_mes').val();
+            @this.busqueda_items_p = $('#b_item').val();
+            @this.busqueda_ordenes_p = $('#b_orden').val();
+            @this.busqueda_hons_p = $('#b_hon').val();
+            @this.paginacion = 0;
         }
     </script>
 </div>
