@@ -1,12 +1,5 @@
 <div xmlns:wire="http://www.w3.org/1999/xhtml">
 
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" />
-    @livewireStyles
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-wEmeIV1mKuiNpC+IOBjI7aAzPcEZeedi5yW5f2yOq55WWLwNGmvvx4Um1vskeMj0" crossorigin="anonymous">
-
-    <br>
-
     <div class="container" style="max-width:100%;" @if($ventanas==2) hidden @endif>
         <br>
         @if(auth()->user()->rol == -1)
@@ -69,8 +62,6 @@
             </div>
         </div>
         @endif
-
-
 
 
         <div class="row" id="op_factura" name="op_factura">
@@ -336,10 +327,27 @@
                             <td style="overflow-x:auto;"></td>
 
 
+                            @php
+                            $unidades = DB::select('SELECT item,orden,mes,paquetes FROM pendiente WHERE id_pendiente =
+                            ?',[$detalles->id_pendiente]);
+                            $total_unidades = 0;
+
+                            $total_paqutes = DB::select('SELECT sum(paquetes) AS total_pendiente FROM pendiente
+                            WHERE item = ? AND orden = ? and mes = ?',
+                            [$unidades[0]->item,$unidades[0]->orden,$unidades[0]->mes]);
+
+
+
+
+                            @endphp
+
+
+
                             <td></td>
                             <td></td>
                             <td><b></b></td>
-                            <td>{{$repartir}}</td>
+                            <td>{{$detalles->total_tabacos*(intval($unidades[0]->paquetes)/$total_paqutes[0]->total_pendiente)}}
+                            </td>
                             <td>{{$arreglo_detalles[0]->capa}}</td>
                             <td></td>
                             <td style="width: 250px">{{strtoupper($arreglo_detalles[0]->sampler)}}</td>
@@ -355,10 +363,11 @@
 
                             <td></td>
                             <td style="text-align: right">
-                                {{number_format(($repartir*$arreglo_detalles[0]->precio)/1000,2)}}
+                                {{number_format((($detalles->total_tabacos*(intval($unidades[0]->paquetes)/$total_paqutes[0]->total_pendiente))*$arreglo_detalles[0]->precio)/1000,2)}}
                             </td>
                             @php
-                            $valor_factura += ($repartir*$arreglo_detalles[0]->precio)/1000;
+                            $valor_factura +=
+                            (($detalles->total_tabacos*(intval($unidades[0]->paquetes)/$total_paqutes[0]->total_pendiente))*$arreglo_detalles[0]->precio)/1000;
                             @endphp
 
                             @if(auth()->user()->rol == -1)
@@ -373,7 +382,8 @@
 
 
                         @php
-                        $total_puros_tabla += $repartir;
+                        $total_puros_tabla +=
+                        $detalles->total_tabacos*(intval($unidades[0]->paquetes)/$total_paqutes[0]->total_pendiente);
                         $sampler_s++;
                         @endphp
 
@@ -391,12 +401,28 @@
                         [ $total_ac,$detalles->id_detalle]);
                         @endphp
 
+                        @php
+                        $unidades = DB::select('SELECT item,orden,mes,paquetes FROM pendiente WHERE id_pendiente =
+                        ?',[$detalles->id_pendiente]);
+                        $total_unidades = 0;
+
+                        $total_paqutes = DB::select('SELECT sum(paquetes) AS total_pendiente FROM pendiente
+                        WHERE item = ? AND orden = ? and mes = ?',
+                        [$unidades[0]->item,$unidades[0]->orden,$unidades[0]->mes]);
+
+
+
+
+                        @endphp
+
                         <tr style="font-size:10px;">
                             <td style="overflow-x:auto;"></td>
                             <td></td>
                             <td></td>
                             <td><b></b></td>
-                            <td>{{$repartir}}</td>
+                            <td>{{$detalles->total_tabacos*(intval($unidades[0]->paquetes)/$total_paqutes[0]->total_pendiente)}}
+                            </td>
+
                             <td>{{$arreglo_detalles[0]->capa}}</td>
                             <td></td>
                             <td style="width: 250px">{{strtoupper($arreglo_detalles[0]->sampler)}}</td>
@@ -412,10 +438,11 @@
 
                             <td style="text-align: right"></td>
                             <td style="text-align: right">
-                                {{number_format(($repartir*$arreglo_detalles[0]->precio)/1000,2)}}
+                                {{number_format((($detalles->total_tabacos*(intval($unidades[0]->paquetes)/$total_paqutes[0]->total_pendiente))*$arreglo_detalles[0]->precio)/1000,2)}}
                             </td>
                             @php
-                            $valor_factura += ($repartir*$arreglo_detalles[0]->precio)/1000;
+                            $valor_factura +=
+                            (($detalles->total_tabacos*(intval($unidades[0]->paquetes)/$total_paqutes[0]->total_pendiente))*$arreglo_detalles[0]->precio)/1000;
                             @endphp
                             @if(auth()->user()->rol == -1)
 
@@ -425,7 +452,8 @@
                         </tr>
 
                         @php
-                        $total_puros_tabla += $repartir;
+                        $total_puros_tabla +=
+                        $detalles->total_tabacos*(intval($unidades[0]->paquetes)/$total_paqutes[0]->total_pendiente);
                         $sampler_s++;
                         @endphp
 
@@ -576,7 +604,7 @@
             <div class="col">
                 <div class="row">
                     <div class="col">
-                        <div wire:loading  style="width:100%;height:34px;">
+                        <div wire:loading style="width:100%;height:34px;">
                             <button id="btn_guardar" class="mr-sm-2 botonprincipal" style="width:100%;height:34px;"
                                 disabled>
                                 <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
@@ -586,7 +614,7 @@
                         <div wire:loading.attr="hidden" style="width:100%;height:34px;">
                             <abbr title="Agregar nuevo producto">
                                 <button id="boton_agregar" name="boton_agregar" wire:click.prevent="cambio(1)"
-                                class=" mr-sm-2 botonprincipal" style="width:100%;height:34px;">
+                                    class=" mr-sm-2 botonprincipal" style="width:100%;height:34px;">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
                                         class="bi bi-arrow-left-circle" viewBox="0 0 16 16">
                                         <path fill-rule="evenodd"
@@ -669,8 +697,8 @@
                 <select onchange="buscar_tabla()" name="b_item" id="b_item" class="mi-selector form-control"
                     style="width:100%;height:34px;" name="states[]">
                     <option value="" style="overflow-y: scroll;">Todos Items</option>
-                    @foreach($items_p as $item)
-                    <option style="overflow-y: scroll;"> {{$item->item}}</option>
+                    @foreach($items_p as $itemss)
+                    <option style="overflow-y: scroll;"> {{$itemss->item}}</option>
                     @endforeach
                 </select>
             </div>
@@ -793,6 +821,7 @@
                 <table class="table table-light" style="font-size:9px;" id="tabla_pendiente">
                     <thead>
                         <tr>
+                            <th>N#</th>
                             <th>CATEGORIA</th>
                             <th>ITEM</th>
                             <th>ORDEN DEL SISTEMA</th>
@@ -1064,7 +1093,6 @@
         }
 
         function guardar_detalle() {
-
             @this.insertar_detalle_factura(
                 document.getElementById("intunidades_cajon").value,
                 document.getElementById("intpeso_bruto").value,
@@ -1072,10 +1100,7 @@
                 document.getElementById("intcantidad_bultos").value,
                 document.getElementById("intunidades_bultos").value
             );
-
             @this.item = "";
-
-            mostrarDetalleFactura();
         }
     </script>
     <script>
@@ -1111,20 +1136,6 @@
         window.addEventListener('cerrar_modal_borrar', event => {
             $("#modal_eliminar_detalle").modal('hide');
         })
-    </script>
-
-
-    <script type="text/javascript">
-        function mostrarPendiente() {
-            document.getElementById('div_pendiente').style.display = 'block';
-            document.getElementById('div_factura').style.display = 'none';
-        }
-
-        function mostrarDetalleFactura() {
-            document.getElementById('div_pendiente').style.display = 'none';
-            document.getElementById('div_factura').style.display = 'block';
-
-        }
     </script>
 
     <script>

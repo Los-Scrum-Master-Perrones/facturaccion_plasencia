@@ -266,9 +266,8 @@
 
     <script type="text/javascript">
         function datos_modal_eliminar(id) {
-            var datas = '<?php echo json_encode($detalles_provicionales);?>';
 
-            var data = JSON.parse(datas);
+            var data = @json($detalles_provicionales);
 
 
             for (var i = 0; i < data.length; i++) {

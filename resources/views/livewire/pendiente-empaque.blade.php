@@ -56,7 +56,7 @@
 
                         <button class="botonprincipal" type="submit" style="width:120px;">Exportar</button>
                     </form>
-                    <form wire:submit.prevent="modal_limpiar()">
+                    <form hidden wire:submit.prevent="modal_limpiar()">
                         <button class="botonprincipal" type="submit" style="width:120px;">Vaciar</button>
                     </form>
                     <form wire:submit.prevent="insertarDetalle_y_actualizarPendiente()"
@@ -96,7 +96,8 @@
                             <th style=" text-align:center;">SALDO</th>
                             <th style=" text-align:center;">EXISTENCIA</th>
                             <th style=" text-align:center;">SOB/FAL</th>
-                            <th style=" text-align:center;">SOLICITAR(CAJAS)</th>
+                            <th style=" text-align:center;">EN EXISTENCIA</th>
+                            <th style=" text-align:center;">CAJAS</th>
                             <th style=" text-align:center;">OPERACIONES</th>
 
 
@@ -145,31 +146,46 @@
                         }
                         ?>
 
-                            <?php   if($detalle_provicional->existencia < 0){
+                        <?php
+                            $cajas_totales_en_progrmacion = DB::select('CALL `01_programacion_provisional_cajas`(?)', [$detalle_provicional->codigo_caja]);
+                            $existencia_cajas = DB::select('SELECT codigo,existencia FROM lista_cajas WHERE lista_cajas.codigo = ?', [$detalle_provicional->codigo_caja]);
 
-                        echo '<td style="color:red;">'.$detalle_provicional->existencia.'</td>' ;
+                            if(isset($cajas_totales_en_progrmacion[0]->total_cajas)){
+                                if(isset($existencia_cajas[0]->existencia) ){
 
-                        }else{
+                                    if($existencia_cajas[0]->existencia > 0){
 
-                        echo '<td>' .$detalle_provicional->existencia. '</td>' ;
-                        }
+                                    echo '<td>Sobran '.($existencia_cajas[0]->existencia).' cajas</td>' ;
+
+                                    }else{
+
+                                    echo '<td style="color:red;">Faltan '.($existencia_cajas[0]->existencia).' cajas</td>' ;
+
+                                    }
+
+                                }else{
+                                    echo '<td>No existe</td>' ;
+                                }
+                            }else{
+                                echo '<td>N/A</td>' ;
+                            }
+
                         ?>
-
+                            <td style="text-align:center">
+                                {{$detalle_provicional->cant_cajas_necesarias}}
+                            </td>
                             <td style="text-align:center">
 
-                                <a data-toggle="modal" data-target="#modal_eliminar_detalle"
-                                    onclick="datos_modal_eliminar({{ $detalle_provicional->id }})"
-                                    href="{{$ids = $detalle_provicional->id}}">
+                                <a  onclick="eliminar_detalle_prgramacion({{$detalle_provicional->id}})" href="#">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
-                                        class="bi bi-trash-fill" viewBox="0 0 16 16">
+                                        clcass="bi bi-trash-fill" viewBox="0 0 16 16">
                                         <path
                                             d="M2.5 1a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1H3v9a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V4h.5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1H2.5zm3 4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5zM8 5a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7A.5.5 0 0 1 8 5zm3 .5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 1 0z" />
                                     </svg>
                                 </a>
 
-                                <a style=" width:10px; height:10px;" data-toggle="modal" href=""
-                                    data-target="#modal_actualizar_saldo" type="submit"
-                                    onclick="datos_modal_actualizar({{$detalle_provicional->id}})">
+                                <a style=" width:10px; height:10px;" href="#"
+                                    onclick="editar_saldo({{$detalle_provicional->id}})">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor"
                                         class="bi bi-pencil-square" viewBox="0 0 16 16">
                                         <path
@@ -181,6 +197,7 @@
                             </td>
 
                         </tr>
+
                         @endforeach
                     </tbody>
                 </table>
@@ -218,7 +235,7 @@
                         <div class="col">
 
                                 <abbr title="Agregar a Programación">
-                                    <button class=" botonprincipal" wire:click="insertar_detalle_provicional()"> <svg xmlns="http://www.w3.org/2000/svg" width="16"
+                                    <button class=" botonprincipal" onclick="agregar_a_programacion()" > <svg xmlns="http://www.w3.org/2000/svg" width="16"
                                             height="16" fill="currentColor" class="bi bi-plus-circle" viewBox="0 0 16 16">
                                             <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z" />
                                             <path
@@ -469,6 +486,7 @@
                             <th>N#</th>
                             <th>CATEGORIA</th>
                             <th>ITEM</th>
+                            <th>CODIGO CAJA</th>
                             <th>ORDEN DEL SISTEMA</th>
                             <th>OBSERVACÓN</th>
                             <th>PRESENTACIÓN</th>
@@ -501,6 +519,12 @@
                             <td style="width:100px; max-width: 400px;overflow-x:auto;">
                                 {{isset($datos->categoria)?($datos->categoria):"Sin categoria"}}</td>
                             <td>{{isset($datos->item)?($datos->item):""}}</td>
+                            <td>
+                                @php
+                                    $codigo_de_caja = DB::select('select codigo_caja from clase_productos where item = ?', [(isset($datos->item)?($datos->item):"")]);
+                                @endphp
+                                {{$codigo_de_caja[0]->codigo_caja}}
+                            </td>
                             <td>{{isset($datos->orden_del_sitema)?($datos->orden_del_sitema):""}}</td>
 
                             <td style="width:100px;">{{$datos->observacion}}</td>
@@ -825,94 +849,6 @@
     <!-- FIN MODAL ELMINAR DATO PENDIENTE -->
 
 
-        <!-- INICIO MODAL ACTUALIZAR SALDO DETALLE PROGRAMACION-->
-        <form action="{{Route('actualizar_rdetalles_programacion')}}" method="POST" id="form_saldo" name="form_saldo">
-            <div class="modal fade" id="modal_actualizar_saldo" data-backdrop="static" data-keyboard="false" tabindex="-1"
-                aria-labelledby="staticBackdropLabel" aria-hidden="true" style="opacity:.9;background:#212529;">
-                <div class="modal-dialog modal-dialog-centered">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <input id="id_detalle" name="id_detalle" hidden>
-
-                            <input id="cant_cajas" name="cant_cajas" hidden>
-
-                            <input id="saldo_viejo" name="saldo_viejo" hidden>
-
-                            <input id="id_pendientea" name="id_pendientea" hidden>
-
-                            <h5 class="modal-title" id="staticBackdropLabel"
-                                style="width:450px; text-align:center; font-size:20px;">Actualizar saldo</h5>
-                            <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close"></button>
-                        </div>
-                        <div class="modal-body">
-                            <div class="mb-3 col">
-                                <label for="txt_figuraytipo" class="form-label"
-                                    style="width:440px; text-align:center; font-size:20px;">Nuevo saldo</label>
-
-                                <input class="form-control" id="saldo" name="saldo" placeholder="Ingresar saldo"
-                                    style="width: 440px" maxLength="30" autocomplete="off" type="number">
-
-                            </div>
-                        </div>
-                        <div class="modal-footer">
-                            <button style=" background: #b39f64; color: #ecedf1;" type="button" class=" btn-info-claro "
-                                data-dismiss="modal">
-                                <span>Cancelar</span>
-                            </button>
-                            <button class=" btn-info float-right" style="margin-right: 10px">
-                                <span>Actualizar</span>
-                            </button>
-
-                            @csrf
-                            <input name="id_planta" value='1' hidden />
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </form>
-        <!-- FIN MODAL  ACTUALIZAR SALDO DETALLE PROGRAMACION -->
-
-        <!-- INICIO MODAL ELMINAR DETALLE DETALLE PROGRAMACION -->
-        <form action="{{Route('borrardetalles_programacion')}}" method="POST" id="formulario_mostrarE"
-            name="formulario_mostrarE" action="" method="POST">
-
-            @csrf
-            <?php use App\Http\Controllers\UserController; ?>
-            <div hidden>{{$id_usuario_basicoE=0}}</div>
-
-            <input name="id_usuarioE" id="id_usuarioE" value="" hidden />
-
-            <input id="cant_cajase" name="cant_cajase" hidden>
-
-            <input id="saldo_viejoe" name="saldo_viejoe" hidden>
-
-            <input id="id_pendientee" name="id_pendientee" hidden>
-            <div class="modal fade" id="modal_eliminar_detalle" data-backdrop="static" data-keyboard="false" tabindex="-1"
-                aria-labelledby="staticBackdropLabel" aria-hidden="true" style="opacity:.9;background:#212529;">
-                <div class="modal-dialog modal-dialog-centered">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h5 class="modal-title" id="staticBackdropLabel">Eliminar a <strong><input value=""
-                                        id="txt_usuarioE" name="txt_usuarioE" style="border:none;"></strong> </h5>
-                            <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close"></button>
-                        </div>
-                        <div class="modal-body">
-                            ¿Estás seguro que quieres eliminar este registro?
-                        </div>
-                        <div class="modal-footer">
-                            <button style=" background: #b39f64; color: #ecedf1;" type="button" class=" btn-info-claro "
-                                data-dismiss="modal">
-                                <span>Cancelar</span>
-                            </button>
-                            <button type="submit" class=" btn-info ">
-                                <span>Eliminar</span>
-                            </button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </form>
-        <!-- FIN MODAL ELMINAR DETALLE DETALLE PROGRAMACION -->
 
         <!-- INICIO MODAL ELMINAR TODO DETALLE PROGRAMACION -->
         <div class="modal fade" id="modal_eliminar_tabla_progra" data-backdrop="static" data-keyboard="false" tabindex="-1"
@@ -1069,33 +1005,7 @@
             }
         }
 
-        function datos_modal_actualizar(id) {
 
-            var datasss = @this.datos_pendiente_empaque;
-
-            for (var i = 0; i < datasss.length; i++) {
-                if (datasss[i].id_pendiente === id) {
-
-                    document.getElementById('id_pendientea2').value = id;
-
-
-                    document.getElementById("tituloupdate").innerHTML = "".concat(datasss[i].marca, " ", datasss[i]
-                        .nombre,
-                        " ",
-                        datasss[i].capa, " ", datasss[i].vitola);
-
-                    document.getElementById('orden_sistema2').value = datasss[i].orden_del_sitema;
-
-                    document.getElementById('orden2').value = datasss[i].orden;
-
-                    document.getElementById('pendiente2').value = datasss[i].pendiente;
-
-                    document.getElementById('saldo2').value = datasss[i].saldo;
-
-                    document.getElementById('observacion2').value = datasss[i].observacion;
-                }
-            }
-        }
     </script>
     <script type="text/javascript">
         function datos_modal_actualizar(id) {
@@ -1120,8 +1030,6 @@
             for (var i = 0; i < datastiles.length; i++) {
                 if (datastiles[i].id_pendiente === id) {
                     document.formulario_mostrarE.id_pendiente.value = datastiles[i].id_pendiente;
-
-
                 }
             }
 
@@ -1156,27 +1064,34 @@
         }
     </script>
 
-
     <script type="text/javascript">
-        function datos_modal_eliminar(id) {
-            var datas = '<?php echo json_encode($detalles_provicionales);?>';
+        function eliminar_detalle_prgramacion(id){
+            var mensaje = confirm("¿Estás seguro que quieres eliminar este registro?");
+            if (mensaje) {
+                @this.eliminar_Detalles(id);
+            } else {
 
-            var data = JSON.parse(datas);
-
-
-            for (var i = 0; i < data.length; i++) {
-                if (data[i].id === id) {
-                    document.formulario_mostrarE.id_usuarioE.value = data[i].id;
-
-                    document.formulario_mostrarE.saldo_viejoe.value = data[i].cant_cajas_necesarias;
-
-                    document.formulario_mostrarE.id_pendientee.value = data[i].id_pendiente;
-
-                    document.formulario_mostrarE.cant_cajase.value = data[i].cant_cajas;
-
-                }
             }
         }
+
+        function agregar_a_programacion(){
+            var mensaje = confirm("¿Estás seguro que deseas agregar todos estos registros a la programación?");
+            if (mensaje) {
+                @this.insertar_detalle_provicional();
+            } else {
+
+            }
+        }
+
+        function editar_saldo(id){
+            var saldo = prompt("Actualizar saldo", "Nuevo saldo");
+                if (saldo != null) {
+                    @this.actualizar_saldo(id,saldo);
+                }
+        }
+
+
+
     </script>
 
 </div>

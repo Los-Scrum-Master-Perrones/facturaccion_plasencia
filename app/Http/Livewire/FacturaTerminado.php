@@ -490,7 +490,7 @@ class FacturaTerminado extends Component
 
 
         $datos_pendiente = DB::select('SELECT item, orden, saldo,mes FROM pendiente WHERE id_pendiente = ?', [$this->id_pendiente_detalle]);
-
+       
         $conteo = DB::select('SELECT * FROM pendiente WHERE orden = ? AND item = ? AND mes = ?', [$datos_pendiente[0]->orden,  $datos_pendiente[0]->item, $datos_pendiente[0]->mes]);
 
         if ($sampler[0]->sampler == "si") {
@@ -528,6 +528,7 @@ class FacturaTerminado extends Component
                 "para" =>  $this->aereo, "anterior" => ($datos_pendiente[0]->saldo - ($insertar_unidades_bultos * $insertar_cantidad_bultos))
             ]);
         }
+        $this->ventanas = 1;
     }
 
     public function actualizar_detalle_factura(Request $request)
