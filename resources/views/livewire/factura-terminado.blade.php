@@ -689,6 +689,12 @@
                             <label class="form-check-label " for="flexCheckDefault"> Puros Sandwich
                             </label>
                         </div>
+			<div class="form-check ">
+                            <input class="form-check-input " type="checkbox" value="Puros Brocha" id="checkbox7"
+                                checked name="checkbox7" wire:model="r_mill">
+                            <label class="form-check-label " for="flexCheckDefault"> Puros Brocha
+                            </label>
+                        </div>
                     </ul>
                 </div>
             </div>

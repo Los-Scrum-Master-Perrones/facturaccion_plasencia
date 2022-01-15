@@ -28,6 +28,7 @@ class Pendiente extends Component
     public $r_cinco = "Puros Tripa Larga";
     public $r_seis = "Puros Tripa Corta";
     public $r_siete = "Puros Sandwich";
+    public $r_mill = "Puros Brocha";
 
 
     /* procedimientos almacanedos cargar select de nuevo pendiente*/
@@ -175,7 +176,7 @@ class Pendiente extends Component
             'call buscar_pendiente(:uno,:dos,:tres,:cuatro,:pres,:seis,:siete,:paginacion,
         :pa_items,:pa_orden_sist,:pa_ordenes,
         :pa_marcas,:pa_vitolas,:pa_nombre,:pa_capas,
-        :pa_empaques,:pa_meses)',
+        :pa_empaques,:pa_meses,:r_mill)',
             [
                 'uno' =>  $this->r_uno,
                 'dos' =>  $this->r_dos,
@@ -193,7 +194,9 @@ class Pendiente extends Component
                 'pa_meses' =>  $this->busqueda_mes_p,
                 'pa_items' =>  $this->busqueda_items_p,
                 'pa_orden_sist' =>  $this->busqueda_ordenes_p,
-                'pa_ordenes' =>  $this->busqueda_hons_p
+                'pa_ordenes' =>  $this->busqueda_hons_p,
+                'r_mill' =>  $this->r_mill,
+
             ]
         ));
 
@@ -202,7 +205,7 @@ class Pendiente extends Component
                 'call buscar_pendiente(:uno,:dos,:tres,:cuatro,:pres,:seis,:siete,:paginacion,
             :pa_items,:pa_orden_sist,:pa_ordenes,
             :pa_marcas,:pa_vitolas,:pa_nombre,:pa_capas,
-            :pa_empaques,:pa_meses)',
+            :pa_empaques,:pa_meses,:r_mill)',
                 [
                     'uno' =>  $this->r_uno,
                     'dos' =>  $this->r_dos,
@@ -220,7 +223,8 @@ class Pendiente extends Component
                     'pa_meses' =>  $this->busqueda_mes_p,
                     'pa_items' =>  $this->busqueda_items_p,
                     'pa_orden_sist' =>  $this->busqueda_ordenes_p,
-                    'pa_ordenes' =>  $this->busqueda_hons_p
+                    'pa_ordenes' =>  $this->busqueda_hons_p,
+                    'r_mill' =>  $this->r_mill,
                 ]
             );
         } else {
@@ -228,7 +232,7 @@ class Pendiente extends Component
                 'call buscar_pendiente(:uno,:dos,:tres,:cuatro,:pres,:seis,:siete,:paginacion,
                 :pa_items,:pa_orden_sist,:pa_ordenes,
                 :pa_marcas,:pa_vitolas,:pa_nombre,:pa_capas,
-                :pa_empaques,:pa_meses)',
+                :pa_empaques,:pa_meses,:r_mill)',
                 [
                     'uno' =>  $this->r_uno,
                     'dos' =>  $this->r_dos,
@@ -246,7 +250,9 @@ class Pendiente extends Component
                     'pa_meses' =>  $this->busqueda_mes_p,
                     'pa_items' =>  $this->busqueda_items_p,
                     'pa_orden_sist' =>  $this->busqueda_ordenes_p,
-                    'pa_ordenes' =>  $this->busqueda_hons_p
+                    'pa_ordenes' =>  $this->busqueda_hons_p,
+                    'r_mill' =>  $this->r_mill,
+
                 ]
             );
         }
@@ -263,7 +269,7 @@ class Pendiente extends Component
                 'call buscar_pendiente(:uno,:dos,:tres,:cuatro,:pres,:seis,:siete,:paginacion,
             :pa_items,:pa_orden_sist,:pa_ordenes,
             :pa_marcas,:pa_vitolas,:pa_nombre,:pa_capas,
-            :pa_empaques,:pa_meses)',
+            :pa_empaques,:pa_meses,:r_mill)',
                 [
                     'uno' =>  $this->r_uno,
                     'dos' =>  $this->r_dos,
@@ -281,7 +287,9 @@ class Pendiente extends Component
                     'pa_meses' =>  $this->busqueda_mes_p,
                     'pa_items' =>  $this->busqueda_items_p,
                     'pa_orden_sist' =>  $this->busqueda_ordenes_p,
-                    'pa_ordenes' =>  $this->busqueda_hons_p
+                    'pa_ordenes' =>  $this->busqueda_hons_p,
+                    'r_mill' =>  $this->r_mill,
+
                 ]
             );
 
@@ -375,7 +383,7 @@ class Pendiente extends Component
             ]
         );
 
-        $insertar_pendiente_empaque =   \DB::select(
+        $insertar_pendiente_empaque =  DB::select(
             'call insertar_pendente_empaque(:fecha,:sistema)',
             [
                 'fecha' => (string)$request->fecha,
@@ -389,7 +397,7 @@ class Pendiente extends Component
     public function pendiente_index(Request $request)
     {
 
-        $this->datos_pendiente =  \DB::select('call mostrar_pendiente');
+        $this->datos_pendiente =  DB::select('call mostrar_pendiente');
 
         return redirect()->route('pendiente');
     }
@@ -451,7 +459,7 @@ class Pendiente extends Component
             'call buscar_pendiente_excel(:uno,:dos,:tres,:cuatro,:pres,:seis,:siete,
         :pa_items,:pa_orden_sist,:pa_ordenes,
         :pa_marcas,:pa_vitolas,:pa_nombre,:pa_capas,
-        :pa_empaques,:pa_meses)',
+        :pa_empaques,:pa_meses,:r_mill)',
             [
                 'uno' =>  $this->r_uno,
                 'dos' =>  $this->r_dos,
@@ -468,7 +476,9 @@ class Pendiente extends Component
                 'pa_meses' =>  $this->busqueda_mes_p,
                 'pa_items' =>  $this->busqueda_items_p,
                 'pa_orden_sist' =>  $this->busqueda_ordenes_p,
-                'pa_ordenes' =>  $this->busqueda_hons_p
+                'pa_ordenes' =>  $this->busqueda_hons_p,
+                'r_mill' =>  $this->r_mill,
+
             ]
         );
 

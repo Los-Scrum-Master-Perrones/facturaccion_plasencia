@@ -38,6 +38,8 @@ class PendienteEmpaque extends Component
     public $r_cinco = "Puros Tripa Larga";
     public $r_seis = "Puros Tripa Corta";
     public $r_siete = "Puros Sandwich";
+    public $r_mill = "Puros Brocha";
+
 
     /* procedimientos almacanedos cargar select de nuevo pendiente*/
     public $marcas;
@@ -375,7 +377,7 @@ class PendienteEmpaque extends Component
             'call buscar_pendiente_empaque_excel(:uno,:dos,:tres,:cuatro,:pres,:seis,:siete,
         :pa_items,:pa_orden_sist,:pa_ordenes,
         :pa_marcas,:pa_vitolas,:pa_nombre,:pa_capas,
-        :pa_empaques,:pa_meses)',
+        :pa_empaques,:pa_meses,:r_mill)',
             [
                 'uno' => $this->r_uno,
                 'dos' => $this->r_dos,
@@ -392,7 +394,9 @@ class PendienteEmpaque extends Component
                 'pa_meses' =>  $this->busqueda_mes_p,
                 'pa_items' =>  $this->busqueda_items_p,
                 'pa_orden_sist' =>  $this->busqueda_ordenes_p,
-                'pa_ordenes' =>  $this->busqueda_hons_p
+                'pa_ordenes' =>  $this->busqueda_hons_p,
+                'r_mill' =>  $this->r_mill,
+
             ]
         );
 
@@ -413,7 +417,7 @@ class PendienteEmpaque extends Component
                 'call buscar_pendiente_empaque(:uno,:dos,:tres,:cuatro,:pres,:seis,:siete,:paginacion,
                 :pa_items,:pa_orden_sist,:pa_ordenes,
                 :pa_marcas,:pa_vitolas,:pa_nombre,:pa_capas,
-                :pa_empaques,:pa_meses)',
+                :pa_empaques,:pa_meses,:r_mill )',
                 [
                     'uno' =>  $this->r_uno,
                     'dos' =>  $this->r_dos,
@@ -431,7 +435,8 @@ class PendienteEmpaque extends Component
                     'pa_meses' =>  $this->busqueda_mes_p,
                     'pa_items' =>  $this->busqueda_items_p,
                     'pa_orden_sist' =>  $this->busqueda_ordenes_p,
-                    'pa_ordenes' =>  $this->busqueda_hons_p
+                    'pa_ordenes' =>  $this->busqueda_hons_p,
+                    'r_mill' =>  $this->r_mill
                 ]
             );
 
@@ -564,7 +569,7 @@ class PendienteEmpaque extends Component
             'call buscar_pendiente_empaque(:uno,:dos,:tres,:cuatro,:pres,:seis,:siete,:paginacion,
             :pa_items,:pa_orden_sist,:pa_ordenes,
             :pa_marcas,:pa_vitolas,:pa_nombre,:pa_capas,
-            :pa_empaques,:pa_meses)',
+            :pa_empaques,:pa_meses,:r_mill)',
             [
                 'uno' =>  $this->r_uno,
                 'dos' =>  $this->r_dos,
@@ -582,7 +587,10 @@ class PendienteEmpaque extends Component
                 'pa_meses' =>  $this->busqueda_mes_p,
                 'pa_items' =>  $this->busqueda_items_p,
                 'pa_orden_sist' =>  $this->busqueda_ordenes_p,
-                'pa_ordenes' =>  $this->busqueda_hons_p
+                'pa_ordenes' =>  $this->busqueda_hons_p,
+                'r_mill' =>  $this->r_mill,
+
+
             ]
         ));
 
@@ -591,7 +599,7 @@ class PendienteEmpaque extends Component
                 'call buscar_pendiente_empaque(:uno,:dos,:tres,:cuatro,:pres,:seis,:siete,:paginacion,
                 :pa_items,:pa_orden_sist,:pa_ordenes,
                 :pa_marcas,:pa_vitolas,:pa_nombre,:pa_capas,
-                :pa_empaques,:pa_meses)',
+                :pa_empaques,:pa_meses,:r_mill)',
                 [
                     'uno' =>  $this->r_uno,
                     'dos' =>  $this->r_dos,
@@ -609,7 +617,9 @@ class PendienteEmpaque extends Component
                     'pa_meses' =>  $this->busqueda_mes_p,
                     'pa_items' =>  $this->busqueda_items_p,
                     'pa_orden_sist' =>  $this->busqueda_ordenes_p,
-                    'pa_ordenes' =>  $this->busqueda_hons_p
+                    'pa_ordenes' =>  $this->busqueda_hons_p,
+                    'r_mill' =>  $this->r_mill
+
                 ]
             );
         } else {
@@ -617,7 +627,7 @@ class PendienteEmpaque extends Component
                 'call buscar_pendiente_empaque(:uno,:dos,:tres,:cuatro,:pres,:seis,:siete,:paginacion,
                 :pa_items,:pa_orden_sist,:pa_ordenes,
                 :pa_marcas,:pa_vitolas,:pa_nombre,:pa_capas,
-                :pa_empaques,:pa_meses)',
+                :pa_empaques,:pa_meses,:r_mill)',
                 [
                     'uno' =>  $this->r_uno,
                     'dos' =>  $this->r_dos,
@@ -635,7 +645,9 @@ class PendienteEmpaque extends Component
                     'pa_meses' =>  $this->busqueda_mes_p,
                     'pa_items' =>  $this->busqueda_items_p,
                     'pa_orden_sist' =>  $this->busqueda_ordenes_p,
-                    'pa_ordenes' =>  $this->busqueda_hons_p
+                    'pa_ordenes' =>  $this->busqueda_hons_p,
+                    'r_mill' =>  $this->r_mill,
+
                 ]
 
             );
@@ -665,9 +677,18 @@ class PendienteEmpaque extends Component
             'buscar' => $this->busqueda_programacion
         ]);
 
-        for ($i = 0; $i < count($this->detalles_provicionales); $i++) {
-            $this->total_saldo += $this->detalles_provicionales[$i]->saldo;
+
+
+        foreach ($this->detalles_provicionales as $key => $value) {
+
+            $this->total_saldo += $value->saldo;
+
+            if($value->sampler == 'si'){
+                $value->marca = $value->descripcion_sampler.' '. $value->marca;
+            }
+
         }
+
     }
 
     public function modal_limpiar()
@@ -686,13 +707,14 @@ class PendienteEmpaque extends Component
 
     public function actualizar_saldo($id, $saldo)
     {
-        $detalles_provicionales = DB::select('SELECT *
+        $detalles_provicionales = DB::select('SELECT *,
+                                                    (SELECT lista_cajas.id
+                                                        FROM lista_cajas
+                                                        WHERE lista_cajas.codigo = clase_productos.codigo_caja) AS id_de_caja
                                     FROM detalle_programacion_temporal,
                                         pendiente_empaque,
-                                        clase_productos,
-                                        lista_cajas
+                                        clase_productos
                                     WHERE pendiente_empaque.id_pendiente = detalle_programacion_temporal.id_pendiente
-                                            AND  lista_cajas.codigo = clase_productos.codigo_caja
                                             AND clase_productos.item = pendiente_empaque.item
                                             AND  id_detalle_programacion = :id', [
             'id' => $id
@@ -700,11 +722,11 @@ class PendienteEmpaque extends Component
 
 
 
-        if (!is_null($detalles_provicionales[0]->codigo_caja)) {
+        if (isset($detalles_provicionales[0]->codigo_caja)) {
 
             DB::update('UPDATE lista_cajas SET existencia = (existencia + ?)
                         WHERE id = ?', [$detalles_provicionales[0]->cant_cajas,
-                                        $detalles_provicionales[0]->id]);
+                                        $detalles_provicionales[0]->id_de_caja]);
 
             $can_cajas_nueva = $saldo/(intval($detalles_provicionales[0]->saldo)/intval($detalles_provicionales[0]->cant_cajas));
 
@@ -721,7 +743,7 @@ class PendienteEmpaque extends Component
                 'saldo' => $saldo,
                 'cant' => $can_cajas_nueva,
                 'id_pendiente' => $detalles_provicionales[0]->id_pendiente,
-                'codigo_caja' => $detalles_provicionales[0]->codigo_caja
+                'codigo_caja' => isset($detalles_provicionales[0]->codigo_caja)?$detalles_provicionales[0]->codigo_caja:''
             ]
         );
     }
@@ -779,12 +801,6 @@ class PendienteEmpaque extends Component
                 ]
             );
         }
-
-
-        for ($i = 0; $this->tuplas > $i; $i++) {
-            DB::update('update lista_cajas set existencia = existencia - ? where codigo = ?', [$this->detalles_provicionales[$i]->cant_cajas_necesarias, $this->detalles_provicionales[$i]->codigo_caja]);
-        }
-
 
         DB::delete('delete from detalle_programacion_temporal');
 

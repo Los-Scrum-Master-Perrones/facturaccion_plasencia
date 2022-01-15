@@ -133,12 +133,13 @@ class FacturaTerminado extends Component
     public $r_cinco = "Puros Tripa Larga";
     public $r_seis = "Puros Tripa Corta";
     public $r_siete = "Puros Sandwich";
-
+    public $r_mill = "Puros Brocha";
 
     public $ventanas = 1;
 
-    public function cambio($num){
-          $this->ventanas = $num;
+    public function cambio($num)
+    {
+        $this->ventanas = $num;
     }
 
     public function render()
@@ -248,7 +249,7 @@ class FacturaTerminado extends Component
             'call buscar_pendiente(:uno,:dos,:tres,:cuatro,:pres,:seis,:siete,:paginacion,
         :pa_items,:pa_orden_sist,:pa_ordenes,
         :pa_marcas,:pa_vitolas,:pa_nombre,:pa_capas,
-        :pa_empaques,:pa_meses)',
+        :pa_empaques,:pa_meses,:r_mill )',
             [
                 'uno' =>  $this->r_uno,
                 'dos' =>  $this->r_dos,
@@ -266,7 +267,9 @@ class FacturaTerminado extends Component
                 'pa_meses' =>  $this->busqueda_mes_p,
                 'pa_items' =>  $this->busqueda_items_p,
                 'pa_orden_sist' =>  $this->busqueda_ordenes_p,
-                'pa_ordenes' =>  $this->busqueda_hons_p
+                'pa_ordenes' =>  $this->busqueda_hons_p,
+                'r_mill' =>  $this->r_mill
+
             ]
         ));
 
@@ -275,7 +278,7 @@ class FacturaTerminado extends Component
                 'call buscar_pendiente(:uno,:dos,:tres,:cuatro,:pres,:seis,:siete,:paginacion,
             :pa_items,:pa_orden_sist,:pa_ordenes,
             :pa_marcas,:pa_vitolas,:pa_nombre,:pa_capas,
-            :pa_empaques,:pa_meses)',
+            :pa_empaques,:pa_meses,:r_mill)',
                 [
                     'uno' =>  $this->r_uno,
                     'dos' =>  $this->r_dos,
@@ -293,7 +296,8 @@ class FacturaTerminado extends Component
                     'pa_meses' =>  $this->busqueda_mes_p,
                     'pa_items' =>  $this->busqueda_items_p,
                     'pa_orden_sist' =>  $this->busqueda_ordenes_p,
-                    'pa_ordenes' =>  $this->busqueda_hons_p
+                    'pa_ordenes' =>  $this->busqueda_hons_p,
+                    'r_mill' =>  $this->r_mill
                 ]
             );
         } else {
@@ -301,7 +305,7 @@ class FacturaTerminado extends Component
                 'call buscar_pendiente(:uno,:dos,:tres,:cuatro,:pres,:seis,:siete,:paginacion,
                 :pa_items,:pa_orden_sist,:pa_ordenes,
                 :pa_marcas,:pa_vitolas,:pa_nombre,:pa_capas,
-                :pa_empaques,:pa_meses)',
+                :pa_empaques,:pa_meses,:r_mill)',
                 [
                     'uno' =>  $this->r_uno,
                     'dos' =>  $this->r_dos,
@@ -319,7 +323,8 @@ class FacturaTerminado extends Component
                     'pa_meses' =>  $this->busqueda_mes_p,
                     'pa_items' =>  $this->busqueda_items_p,
                     'pa_orden_sist' =>  $this->busqueda_ordenes_p,
-                    'pa_ordenes' =>  $this->busqueda_hons_p
+                    'pa_ordenes' =>  $this->busqueda_hons_p,
+                    'r_mill' =>  $this->r_mill
                 ]
             );
         }
@@ -490,7 +495,7 @@ class FacturaTerminado extends Component
 
 
         $datos_pendiente = DB::select('SELECT item, orden, saldo,mes FROM pendiente WHERE id_pendiente = ?', [$this->id_pendiente_detalle]);
-       
+
         $conteo = DB::select('SELECT * FROM pendiente WHERE orden = ? AND item = ? AND mes = ?', [$datos_pendiente[0]->orden,  $datos_pendiente[0]->item, $datos_pendiente[0]->mes]);
 
         if ($sampler[0]->sampler == "si") {

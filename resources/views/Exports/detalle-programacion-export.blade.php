@@ -14,6 +14,7 @@
                             <th style=" text-align:center;">UPC</th>
                             <th style=" text-align:center;">SALDO</th>
                             <th style=" text-align:center;">SOLICITAR(CAJAS)</th>
+                            <th style=" text-align:center;">CAJAS NECESARIAS</th>
 
                         </tr>
                     </thead>
@@ -34,7 +35,7 @@
                             <td>{{$detalle_provicional->saldo}}</td>
 
 
-                      
+
 
                         <?php
                             $cajas_totales_en_progrmacion = DB::select('CALL `01_programacion_provisional_cajas`(?)', [$detalle_provicional->codigo_caja]);
@@ -43,13 +44,13 @@
                             if(isset($cajas_totales_en_progrmacion[0]->total_cajas)){
                                 if(isset($existencia_cajas[0]->existencia) ){
 
-                                    if($existencia_cajas[0]->existencia< 0){
+                                    if($existencia_cajas[0]->existencia > 0){
 
-                                    echo '<td>Sobran '.($existencia_cajas[0]->existencia-$cajas_totales_en_progrmacion[0]->total_cajas).' cajas</td>' ;
+                                    echo '<td>Sobran '.($existencia_cajas[0]->existencia).' cajas</td>' ;
 
                                     }else{
 
-                                    echo '<td style="color:red;">Faltan '.($existencia_cajas[0]->existencia-$cajas_totales_en_progrmacion[0]->total_cajas).' cajas</td>' ;
+                                    echo '<td style="color:red;">Faltan '.($existencia_cajas[0]->existencia).' cajas</td>' ;
 
                                     }
 
@@ -61,8 +62,9 @@
                             }
 
                         ?>
-                       
-                        </tr>
+                         <td style="text-align:center">
+                            {{$detalle_provicional->cant_cajas_necesarias}}
+                        </td>
 
                         @endforeach
                     </tbody>

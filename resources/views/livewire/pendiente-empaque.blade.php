@@ -314,6 +314,13 @@
                                 <label class="form-check-label " for="flexCheckDefault"> Puros Sandwich
                                 </label>
                             </div>
+
+                            <div class="form-check ">
+                                <input class="form-check-input " type="checkbox" value="Puros Brocha" id="checkbox7"
+                                    checked name="checkbox7" wire:model="r_mill">
+                                <label class="form-check-label " for="flexCheckDefault"> Puros Brocha
+                                </label>
+                            </div>
                         </ul>
                     </div>
                 </div>
@@ -569,7 +576,7 @@
 
                                     echo'<a style=" width:20px; height:20px;" data-toggle="modal" href=""';
                                     echo'             data-target="#modal_actualizar" type="submit"';
-                                    echo'        onclick="datos_modal_actualizar(' .$datos->id_pendiente. ')">';
+                                    echo'        onclick="datos_modal_actualizar_p(' .$datos->id_pendiente. ')">';
                                     echo'        <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" fill="currentColor"';
                                     echo'            class="bi bi-pencil-square" viewBox="0 0 16 16">';
                                     echo'            <path';
@@ -1008,16 +1015,19 @@
 
     </script>
     <script type="text/javascript">
-        function datos_modal_actualizar(id) {
+        function datos_modal_actualizar_p(id) {
 
-            var data = @json($datos_pendiente_empaque);
+            var data =@this.datos_pendiente_empaque;
 
             for (var i = 0; i < data.length; i++) {
                 if (data[i].id_pendiente === id) {
-                    document.actualizar_pendiente.id_pendientea.value = data[i].id_pendiente;
-                    document.actualizar_pendiente.saldo.value = data[i].saldo;
-                    document.actualizar_pendiente.pendiente.value = data[i].pendiente;
-                    document.actualizar_pendiente.observacion.value = data[i].observacion;
+                    $('#id_pendientea2').val(data[i].id_pendiente);
+                    $('#orden2').val(data[i].orden);
+                    $('#orden_sistema2').val(data[i].orden_del_sitema);
+                    $('#pendiente2').val(data[i].pendiente);
+                    $('#saldo2').val(data[i].saldo);
+                    $('#observacion2').val(data[i].observacion);
+
                 }
             }
         }
@@ -1025,7 +1035,7 @@
     <script type="text/javascript">
         function datos_modal_eliminar(id) {
 
-            var datastiles = @json($datos_pendiente_empaque);
+            var datastiles = @this.datos_pendiente_empaque;
 
             for (var i = 0; i < datastiles.length; i++) {
                 if (datastiles[i].id_pendiente === id) {

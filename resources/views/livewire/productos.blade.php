@@ -54,11 +54,15 @@
                                 <tr style="font-size:16px; text-align:center;">
                                     <th style=" text-align:center;">#</th>
                                     <th style=" text-align:center;">Item</th>
+                                    <th style=" text-align:center;">Cod. Producto</th>
+                                    <th style=" text-align:center;">Cod. Caja</th>
                                     <th style=" text-align:center;">Marca</th>
                                     <th style=" text-align:center;">Nombre</th>
                                     <th style=" text-align:center;">Vitola</th>
                                     <th style=" text-align:center;">Capa</th>
                                     <th style=" text-align:center;">Tipo de empaque</th>
+                                    <th style=" text-align:center;">Cod. Precio</th>
+                                    <th style=" text-align:center;">Precio</th>
                                     <th style=" text-align:center;">Detalles</th>
                                 </tr>
                             </thead>
@@ -68,12 +72,19 @@
                                 <tr>
                                     <td>{{$producto->id_producto}}</td>
                                     <td>{{$producto->item}}</td>
-                                    <td>{{$producto->marca}}</td>
-                                    <td>{{$producto->nombre}}</td>
-                                    <td>{{$producto->vitola}}</td>
-                                    <td>{{$producto->capa}}</td>
+                                    <td>{{$producto->codigo_producto}}</td>
+                                    <td>{{$producto->codigo_caja}}</td>
+                                    @if ($producto->sampler == 'no' || is_null($producto->sampler) )
+                                        <td>{{$producto->marca}}</td>
+                                        <td>{{$producto->nombre}}</td>
+                                        <td>{{$producto->vitola}}</td>
+                                        <td>{{$producto->capa}}</td>
+                                    @else
+                                        <td colspan="4">{{$producto->des}}</td>
+                                    @endif
                                     <td>{{$producto->tipo_empaque}}</td>
-
+                                    <td>{{$producto->codigo_precio}}</td>
+                                    <td>{{$producto->precio}}</td>
 
                                     <td style=" text-align:center;">
 
@@ -476,6 +487,11 @@
                                                 <option value="Puros Tripa Corta" style="overflow-y: scroll;">Puros Tripa
                                                     Corta
                                                 </option>
+                                                <option value="Puros Sandwich" style="overflow-y: scroll;">Puros Sandwich
+                                                </option>
+                                                <option value="Puros Brocha" style="overflow-y: scroll;">Puros Brocha
+                                                </option>
+
                                             </select>
                                         </div>
 
@@ -815,6 +831,10 @@
                                                     </option>
                                                     <option value="Puros Tripa Corta" style="overflow-y: scroll;">Puros Tripa
                                                         Corta
+                                                    </option>
+                                                    <option value="Puros Sandwich" style="overflow-y: scroll;">Puros Sandwich
+                                                    </option>
+                                                    <option value="Puros Brocha" style="overflow-y: scroll;">Puros Brocha
                                                     </option>
                                                 </select>
                                             </div>

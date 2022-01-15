@@ -29,6 +29,13 @@ class detallesExport implements
     public function view(): View
     {
         $detalles_provicionales = DB::select('call mostrar_detalles_provicional("")');
+        foreach ($detalles_provicionales as $key => $value) {
+
+            if($value->sampler == 'si'){
+                $value->marca = $value->descripcion_sampler.' '. $value->marca;
+            }
+
+        }
         return view('Exports.detalle-programacion-export',['detalles_provicionales'=>$detalles_provicionales]) ;
     }
 
