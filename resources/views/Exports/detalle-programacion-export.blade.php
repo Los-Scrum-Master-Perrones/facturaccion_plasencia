@@ -19,6 +19,10 @@
                         </tr>
                     </thead>
                     <tbody>
+                        @php
+                            $codigo_anterioir = '';
+                            $existencia_actual = 0;
+                        @endphp
                         @foreach($detalles_provicionales as $detalle_provicional)
                         <tr>
                             <td>{{$detalle_provicional->numero_orden}}</td>
@@ -34,34 +38,33 @@
                             <td>{{$detalle_provicional->upc}}</td>
                             <td>{{$detalle_provicional->saldo}}</td>
 
+                            @php
+                            $pendiente_restante = 0;
+                            $codigo_cajas = $detalle_provicional->codigo_caja;
 
 
-
-                        <?php
-                            $cajas_totales_en_progrmacion = DB::select('CALL `01_programacion_provisional_cajas`(?)', [$detalle_provicional->codigo_caja]);
-                            $existencia_cajas = DB::select('SELECT codigo,existencia FROM lista_cajas WHERE lista_cajas.codigo = ?', [$detalle_provicional->codigo_caja]);
-
-                            if(isset($cajas_totales_en_progrmacion[0]->total_cajas)){
-                                if(isset($existencia_cajas[0]->existencia) ){
-
-                                    if($existencia_cajas[0]->existencia > 0){
-
-                                    echo '<td>Sobran '.($existencia_cajas[0]->existencia).' cajas</td>' ;
-
-                                    }else{
-
-                                    echo '<td style="color:red;">Faltan '.($existencia_cajas[0]->existencia).' cajas</td>' ;
-
-                                    }
-
-                                }else{
-                                    echo '<td>No existe</td>' ;
-                                }
-                            }else{
-                                echo '<td>N/A</td>' ;
+                            if($codigo_cajas != $codigo_anterioir && $detalle_provicional->codigo_caja != ''){
+                                $codigo_anterioir = $codigo_cajas;
+                                $existencia_actual = DB::select('SELECT * FROM lista_cajas WHERE codigo = ?', [$codigo_anterioir])[0]->existencia;
                             }
 
-                        ?>
+                            @endphp
+
+                        @php
+                            $existencia_actual = $existencia_actual - $detalle_provicional->cant_cajas;
+                        @endphp
+                            @if ($existencia_actual < 0)
+                                <td style="color: red">{{'Faltan '.$existencia_actual}}</td>
+                            @endif
+                            @if ($existencia_actual > 0)
+                                <td style="color: rgb(119, 0, 255)">{{'Sobran '.$existencia_actual}}</td>
+                            @endif
+                            @if ($existencia_actual == 0)
+                                <td>{{$existencia_actual}}</td>
+                            @endif
+                        @php
+
+                        @endphp
                          <td style="text-align:center">
                             {{$detalle_provicional->cant_cajas_necesarias}}
                         </td>

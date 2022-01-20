@@ -175,6 +175,7 @@
                             <th style=" text-align:center;">UPC</th>
                             <th style=" text-align:center;">SALDO</th>
                             <th style=" text-align:center;">SOLICITUD(CAJAS)</th>
+                            <th style=" text-align:center;">TOTAL CAJAS</th>
                             <th style=" text-align:center;">OPERACIONES</th>
 
 
@@ -202,6 +203,7 @@
                             $suma_total+=$detalles_programacione->saldo;
                             @endphp
                             <td> {{$detalles_programacione->cajas}}</td>
+                            <td> {{$detalles_programacione->cant_cajas}}</td>
 
                             <td style="text-align:center">
 

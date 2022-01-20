@@ -147,7 +147,7 @@ class PendienteEmpaque extends Component
             'call buscar_pendiente_empaque(:uno,:dos,:tres,:cuatro,:pres,:seis,:siete,:paginacion,
             :pa_items,:pa_orden_sist,:pa_ordenes,
             :pa_marcas,:pa_vitolas,:pa_nombre,:pa_capas,
-            :pa_empaques,:pa_meses)',
+            :pa_empaques,:pa_meses,:r_mill)',
             [
                 'uno' =>  $this->r_uno,
                 'dos' =>  $this->r_dos,
@@ -165,7 +165,8 @@ class PendienteEmpaque extends Component
                 'pa_meses' =>  $this->busqueda_mes_p,
                 'pa_items' =>  $this->busqueda_items_p,
                 'pa_orden_sist' =>  $this->busqueda_ordenes_p,
-                'pa_ordenes' =>  $this->busqueda_hons_p
+                'pa_ordenes' =>  $this->busqueda_hons_p,
+                'r_mill' =>  $this->r_mill,
             ]
         );
 
@@ -205,10 +206,9 @@ class PendienteEmpaque extends Component
             }
         }
 
-
         for ($i = 0; $tuplas > $i; $i++) {
             $detalles = DB::select(
-                'call insertar_detalle_temporal(:numero_orden,:orden,:cod_producto,:saldo,:id_pendiente,:cant)',
+                'call insertar_detallePro_temporalSinExistencia(:numero_orden,:orden,:cod_producto,:saldo,:id_pendiente,:cant)',
                 [
                     'numero_orden' => isset($datos_pendiente_empaque[$i]->orden_del_sitema) ?  $datos_pendiente_empaque[$i]->orden_del_sitema : null,
                     'orden' => isset($datos_pendiente_empaque[$i]->orden) ?  $datos_pendiente_empaque[$i]->orden : null,
@@ -231,7 +231,7 @@ class PendienteEmpaque extends Component
             ['id' => $id]
         );
 
-        $detalles = DB::select(
+        DB::select(
             'call insertar_detallePro_temporalSinExistencia(:numero_orden,:orden,:cod_producto,:saldo,:id_pendiente,:cant)',
             [
                 'numero_orden' => isset($datos_pendiente[0]->orden_del_sitema) ? $datos_pendiente[0]->orden_del_sitema : null,
@@ -242,6 +242,7 @@ class PendienteEmpaque extends Component
                 'cant' => isset($datos_pendiente[0]->cant_cajas) ? $datos_pendiente[0]->cant_cajas : null
             ]
         );
+
 
 
         $this->cambio(2);
@@ -724,9 +725,6 @@ class PendienteEmpaque extends Component
 
         if (isset($detalles_provicionales[0]->codigo_caja)) {
 
-            DB::update('UPDATE lista_cajas SET existencia = (existencia + ?)
-                        WHERE id = ?', [$detalles_provicionales[0]->cant_cajas,
-                                        $detalles_provicionales[0]->id_de_caja]);
 
             $can_cajas_nueva = $saldo/(intval($detalles_provicionales[0]->saldo)/intval($detalles_provicionales[0]->cant_cajas));
 
@@ -766,26 +764,10 @@ class PendienteEmpaque extends Component
 
         for ($i = 0; $this->tuplas > $i; $i++) {
 
-            $cajas_totales_en_progrmacion = DB::select('CALL `01_programacion_provisional_cajas`(?)', [$this->detalles_provicionales[$i]->codigo_caja]);
-            $existencia_cajas = DB::select('SELECT codigo,existencia FROM lista_cajas WHERE lista_cajas.codigo = ?', [$this->detalles_provicionales[$i]->codigo_caja]);
+            $cajas_sobrantes = DB::select('SELECT *
+                                            FROM detalle_programacion_temporal
+                                            WHERE detalle_programacion_temporal.id_detalle_programacion = ?', [$this->detalles_provicionales[$i]->id]);
 
-            $cajas_sobrantes = "";
-            if (isset($cajas_totales_en_progrmacion[0]->total_cajas)) {
-                if (isset($existencia_cajas[0]->existencia)) {
-
-                    if ($existencia_cajas[0]->existencia > 0) {
-
-                        $cajas_sobrantes =  'Sobran ' . ($existencia_cajas[0]->existencia - $cajas_totales_en_progrmacion[0]->total_cajas) . ' cajas';
-                    } else {
-
-                        $cajas_sobrantes =  'Faltan ' . ($existencia_cajas[0]->existencia - $cajas_totales_en_progrmacion[0]->total_cajas) . ' cajas</td>';
-                    }
-                } else {
-                    $cajas_sobrantes =  'No existe';
-                }
-            } else {
-                $cajas_sobrantes = 'N/A';
-            }
 
 
             $this->actualizar_insertar = DB::select(
@@ -796,10 +778,17 @@ class PendienteEmpaque extends Component
                     'cod_producto' => isset($this->detalles_provicionales[$i]->cod_producto) ? $this->detalles_provicionales[$i]->cod_producto : null,
                     'saldo' => isset($this->detalles_provicionales[$i]->saldo) ? $this->detalles_provicionales[$i]->saldo : null,
                     'id_pendiente' => isset($this->detalles_provicionales[$i]->id_pendiente) ? $this->detalles_provicionales[$i]->id_pendiente : null,
-                    'caja' => isset($cajas_sobrantes) ? $cajas_sobrantes : null,
+                    'caja' => isset($cajas_sobrantes[0]->cantida_sobrante) ? $cajas_sobrantes[0]->cantida_sobrante : null,
                     'cant' => isset($this->detalles_provicionales[$i]->cant_cajas) ? $this->detalles_provicionales[$i]->cant_cajas : null
                 ]
             );
+
+            DB::update('UPDATE lista_cajas
+                        SET lista_cajas.existencia = lista_cajas.existencia-?
+                        WHERE lista_cajas.codigo = ?;',
+                            [$this->detalles_provicionales[$i]->cant_cajas,
+                            $this->detalles_provicionales[$i]->codigo_caja
+                            ]);
         }
 
         DB::delete('delete from detalle_programacion_temporal');
