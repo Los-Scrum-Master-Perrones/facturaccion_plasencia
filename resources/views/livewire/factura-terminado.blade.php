@@ -368,12 +368,20 @@
                             @php
                             $valor_factura +=
                             (($detalles->total_tabacos*(intval($unidades[0]->paquetes)/$total_paqutes[0]->total_pendiente))*$arreglo_detalles[0]->precio)/1000;
+
                             @endphp
 
                             @if(auth()->user()->rol == -1)
 
                             @else
                             <td style="width: 60px">
+ 				<a href="#" onclick="eliminar_detalle_olvidado({{$detalles->id_detalle}})" >
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" fill="currentColor"
+                                        class="bi bi-trash-fill" viewBox="0 0 16 16">
+                                        <path
+                                            d="M2.5 1a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1H3v9a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V4h.5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1H2.5zm3 4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5zM8 5a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7A.5.5 0 0 1 8 5zm3 .5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 1 0z" />
+                                    </svg>
+                                </a>
                             </td>
                             @endif
 
@@ -447,7 +455,15 @@
                             @if(auth()->user()->rol == -1)
 
                             @else
-                            <td style="width: 60px"></td>
+                            <td style="width: 60px">
+ 				<a href="#" onclick="eliminar_detalle_olvidado({{$detalles->id_detalle}})" >
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" fill="currentColor"
+                                        class="bi bi-trash-fill" viewBox="0 0 16 16">
+                                        <path
+                                            d="M2.5 1a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1H3v9a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V4h.5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1H2.5zm3 4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5zM8 5a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7A.5.5 0 0 1 8 5zm3 .5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 1 0z" />
+                                    </svg>
+                                </a>
+					</td>
                             @endif
                         </tr>
 
@@ -548,7 +564,15 @@
                         @endif
 
                         <?php }catch(\Exception $e){ ?>
+ 				<a href="#" onclick="eliminar_detalle_olvidado({{$detalles->id_detalle}})" >
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" fill="currentColor"
+                                        class="bi bi-trash-fill" viewBox="0 0 16 16">
+                                        <path
+                                            d="M2.5 1a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1H3v9a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V4h.5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1H2.5zm3 4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5zM8 5a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7A.5.5 0 0 1 8 5zm3 .5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 1 0z" />
+                                    </svg>
+                                </a>
                         <?php } ?>
+
                         @endforeach
 
                         @php
@@ -558,6 +582,7 @@
                         $this->total_peso_bruto=$total_bruto;
                         $this->total_peso_neto =$total_neto;
                         $this->total_precio= $valor_factura;
+                        $this->total_factura_precio =$valor_factura;
                         @endphp
                     </tbody>
                 </table>
@@ -1169,6 +1194,15 @@
             @this.busqueda_ordenes_p = $('#b_orden').val();
             @this.busqueda_hons_p = $('#b_hon').val();
             @this.paginacion = 0;
+        }
+
+  function eliminar_detalle_olvidado(id) {
+            var mensaje = confirm("¿Estás seguro que desea eliminar este detalle?");
+            if (mensaje) {
+                @this.eliminar_detalle_olvidado(id);
+            } else {
+
+            }
         }
     </script>
 </div>

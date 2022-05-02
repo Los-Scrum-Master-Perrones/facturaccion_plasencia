@@ -214,7 +214,11 @@
                             <td>{{$pedido->item}}</td>
                             <td>{{$pedido->cant_paquetes}}</td>
                             <td>{{$pedido->descripcion}}</td>
-                            <td>{{$pedido->unidades*$pedido->cant_paquetes}}</td>
+				@if(is_numeric($pedido->unidades) && is_numeric($pedido->cant_paquetes))
+                            		<td>{{$pedido->unidades*$pedido->cant_paquetes}}</td>
+				@else
+					<td>{{0}}</td>
+				@endif
                             <td>{{$pedido->unidades}}</td>
                             <td>{{$pedido->numero_orden}}</td>
 
