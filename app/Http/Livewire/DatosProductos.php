@@ -182,39 +182,27 @@ class DatosProductos extends Component
       return redirect()->route('datos_producto');
    }
 
-
-
-
-
-
-
-
    public function insertar_tipo(Request $request)
    {
-      $marcas_in =  DB::SELECT('call insertar_tipo(:tipo)', ['tipo' => $request->tipom]);
-      $this->capas = DB::SELECT('call buscar_capa(:capa)', ['capa' => $this->busqueda]);
-      $this->marcas = DB::SELECT('call buscar_marca(:marca)', ['marca' => $this->busqueda]);
-      $this->nombres = DB::SELECT('call buscar_nombre(:nombre)', ['nombre' => $this->busqueda]);
-      $this->vitolas = DB::SELECT('call buscar_vitola(:vitola)', ['vitola' => $this->busqueda]);
-      $this->tipos = DB::SELECT('call buscar_tipo_empaque(:tipo)', ['tipo' => $this->busqueda]);
+      DB::SELECT('call insertar_tipo(:tipo,:ingles_tipo,:cantidad)', ['tipo' => $request->tipom,
+                                                                      'ingles_tipo' => $request->ingles_tipom,
+                                                                      'cantidad' => $request->cantidadm]);
       return redirect()->route('datos_producto');
    }
    public function cargar_empaque_editar($id)
    {
        $detalles_tipo = DB::select('CALL `traer_detalles_editar_tipo`(:id)', ['id' => $id]);
        $this->id_editar_empaque = $id;
-       $this->editar_nombre_empaque =  $detalles_tipo[0]->tipo_empaque;
+       $this->editar_nombre_empaque = $detalles_tipo[0]->tipo_empaque;
        $this->dispatchBrowserEvent("editar_tiposcript");
    }
 
    public function editar_tipo(Request $request)
    {
-      $tipos_ac =  DB::SELECT('call actualizar_tipo(:id,:tipo)', ['id' => $request->id_tipoE,'tipo' => $request->tipomE]);
-      $this->capas = DB::SELECT('call buscar_capa(:capa)', ['capa' => $this->busqueda]);
-      $this->marcas = DB::SELECT('call buscar_marca(:marca)', ['marca' => $this->busqueda]);
-      $this->nombres = DB::SELECT('call buscar_nombre(:nombre)', ['nombre' => $this->busqueda]);
-      $this->vitolas = DB::SELECT('call buscar_vitola(:vitola)', ['vitola' => $this->busqueda]);
-      $this->tipos = DB::SELECT('call buscar_tipo_empaque(:tipo)', ['tipo' => $this->busqueda]);
+      DB::SELECT('call actualizar_tipo(:id,:tipo,:ingles_tipo,:cantidad)', ['id' => $request->id_tipoE,
+                                                                                 'tipo' => $request->tipomE,
+                                                                                 'ingles_tipo' => $request->ingles_tipomE,
+                                                                                 'cantidad' => $request->cantidadmE]);
       return redirect()->route('datos_producto');
    }
 

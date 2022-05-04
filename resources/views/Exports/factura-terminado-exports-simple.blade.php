@@ -162,6 +162,19 @@
                 <tr style="font-size:10px;">
 
                     <td style="overflow-x:auto;"></td>
+                    @php
+                    $unidades = DB::select('SELECT item,orden,mes,paquetes FROM pendiente WHERE id_pendiente =
+                    ?',[$detalles->id_pendiente]);
+                    $total_unidades = 0;
+
+                    $total_paqutes = DB::select('SELECT sum(paquetes) AS total_pendiente FROM pendiente
+                    WHERE item = ? AND orden = ? and mes = ?',
+                    [$unidades[0]->item,$unidades[0]->orden,$unidades[0]->mes]);
+
+
+
+
+                    @endphp
 
 
                     <td></td>
@@ -205,6 +218,14 @@
                     $total_saldo_pendiente = DB::update('UPDATE detalle_factura SET anterior = ? WHERE id_detalle =
                     ?',
                     [ $total_ac,$detalles->id_detalle]);
+
+                    $unidades = DB::select('SELECT item,orden,mes,paquetes FROM pendiente WHERE id_pendiente =
+                    ?',[$detalles->id_pendiente]);
+                    $total_unidades = 0;
+
+                    $total_paqutes = DB::select('SELECT sum(paquetes) AS total_pendiente FROM pendiente
+                    WHERE item = ? AND orden = ? and mes = ?',
+                    [$unidades[0]->item,$unidades[0]->orden,$unidades[0]->mes]);
                 @endphp
 
                 <tr style="font-size:10px;">
