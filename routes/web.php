@@ -25,6 +25,8 @@ use App\Http\Livewire\DetalleProgramacion;
 use App\Http\Livewire\HistorialVentas;
 use App\Http\Livewire\Pedido;
 use App\Http\Livewire\EditarDetalles;
+use App\Http\Livewire\Materiales;
+use App\Http\Livewire\MaterialesProductos;
 
 /*
 |--------------------------------------------------------------------------
@@ -332,5 +334,12 @@ Route::get('/editar_existencia_producto', [App\Http\Controllers\ImportExcelContr
 
 Route::post('/insertar_pro', [App\Http\Controllers\ImportExcelController::class, 'nuevo_pro_terminado'])->name('insertar_pro');
 Route::get('/insertar_pro', [App\Http\Controllers\ImportExcelController::class, 'nuevo_pro_terminado'])->name('insertar_pro');
+
+
+// Materiales
+
+Route::get('materiales/index', Materiales::class)->name('materiales.index');
+Route::get('materiales/agregar', MaterialesProductos::class)->name('materiales.relacionar');
+
 
 });
