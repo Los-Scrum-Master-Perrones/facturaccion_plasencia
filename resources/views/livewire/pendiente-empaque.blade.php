@@ -555,7 +555,7 @@
                             <td>{{$datos->capa}}</td>
                             <td>{{$datos->tipo_empaque}}</td>
 
-                            <td>{{$datos->cant_cajas}}</td>
+                            <td>{{intval($datos->cant_cajas)}}</td>
                             <td>{{$datos->anillo}}</td>
                             <td>{{$datos->cello}}</td>
 

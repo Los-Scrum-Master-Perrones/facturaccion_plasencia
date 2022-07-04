@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Imports\CatalogoMaterialesImport;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 use App\Imports\pedidoImport;
@@ -12,7 +13,7 @@ class PedidoController extends Controller
     public function import(Request $request)
     {
         $borrar = DB::table('item_faltantes')->delete();
-        (new pedidoImport)->import($request->select_file);
+        (new CatalogoMaterialesImport)->import($request->select_file);
 
         return redirect()->route('import_excel');
     }
