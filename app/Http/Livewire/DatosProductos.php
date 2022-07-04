@@ -13,7 +13,6 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Livewire\WithPagination;
 use Livewire\WithFileUploads;
-use Illuminate\Support\Facades\Validator;
 
 
 
@@ -183,51 +182,40 @@ class DatosProductos extends Component
       return redirect()->route('datos_producto');
    }
 
+
+
+
+
+
+
+
    public function insertar_tipo(Request $request)
    {
-      DB::SELECT('call insertar_tipo(:tipo,:ingles_tipo,:cantidad)', ['tipo' => $request->tipom,
-                                                                      'ingles_tipo' => $request->ingles_tipom,
-                                                                      'cantidad' => $request->cantidadm]);
+      $marcas_in =  DB::SELECT('call insertar_tipo(:tipo)', ['tipo' => $request->tipom]);
+      $this->capas = DB::SELECT('call buscar_capa(:capa)', ['capa' => $this->busqueda]);
+      $this->marcas = DB::SELECT('call buscar_marca(:marca)', ['marca' => $this->busqueda]);
+      $this->nombres = DB::SELECT('call buscar_nombre(:nombre)', ['nombre' => $this->busqueda]);
+      $this->vitolas = DB::SELECT('call buscar_vitola(:vitola)', ['vitola' => $this->busqueda]);
+      $this->tipos = DB::SELECT('call buscar_tipo_empaque(:tipo)', ['tipo' => $this->busqueda]);
       return redirect()->route('datos_producto');
    }
-
-
-   public function editar_tipo($request)
+   public function cargar_empaque_editar($id)
    {
-    $validator = Validator::make(
-        [
-            'id' => $request['id'],
-            'tipomE' => $request['tipomE'],
-            'ingles_tipomE' => $request['ingles_tipomE'],
-            'cantidadmE' => $request['cantidadmE']
-        ],
-        [
-            'id' => "required|integer",
-            'tipomE' => "required",
-            'ingles_tipomE' => "required",
-            'cantidadmE' => "required|integer"
-        ],
-        [
-            'id.required' => "La id es necesaria.",
-            'id.integer' => "La id tiene que se entero.",
-            'tipomE.required' => "Debe escribir el tipo de empaque.",
-            'ingles_tipomE.required' => "Tipo de empaque en ingles necesario para la factura.",
-            'cantidadmE.required' => "Ingrese la cantidad de puros por empaque.",
-            'cantidadmE.integer' => "La cantidad debe ser un entero.",
-        ]
-    );
+       $detalles_tipo = DB::select('CALL `traer_detalles_editar_tipo`(:id)', ['id' => $id]);
+       $this->id_editar_empaque = $id;
+       $this->editar_nombre_empaque =  $detalles_tipo[0]->tipo_empaque;
+       $this->dispatchBrowserEvent("editar_tiposcript");
+   }
 
-    if (!$validator->fails()) {
-        DB::SELECT('call actualizar_tipo(:id,:tipo,:ingles_tipo,:cantidad)', ['id' => $request['id'],
-                                                                            'tipo' => $request['tipomE'],
-                                                                            'ingles_tipo' => $request['ingles_tipomE'],
-                                                                            'cantidad' => $request['cantidadmE']]);
-        return redirect()->route('datos_producto');
-    } else {
-        $this->dispatchBrowserEvent('noti_error_update', ['mensaje' => $validator->errors()->all()]);
-    }
-
-
+   public function editar_tipo(Request $request)
+   {
+      $tipos_ac =  DB::SELECT('call actualizar_tipo(:id,:tipo)', ['id' => $request->id_tipoE,'tipo' => $request->tipomE]);
+      $this->capas = DB::SELECT('call buscar_capa(:capa)', ['capa' => $this->busqueda]);
+      $this->marcas = DB::SELECT('call buscar_marca(:marca)', ['marca' => $this->busqueda]);
+      $this->nombres = DB::SELECT('call buscar_nombre(:nombre)', ['nombre' => $this->busqueda]);
+      $this->vitolas = DB::SELECT('call buscar_vitola(:vitola)', ['vitola' => $this->busqueda]);
+      $this->tipos = DB::SELECT('call buscar_tipo_empaque(:tipo)', ['tipo' => $this->busqueda]);
+      return redirect()->route('datos_producto');
    }
 
 
@@ -239,7 +227,12 @@ class DatosProductos extends Component
 
    public function insertar_vitola(Request $request)
    {
-      DB::SELECT('call insertar_vitola(:vitola)', ['vitola' => $request->vitolam]);
+      $marcas_in =  DB::SELECT('call insertar_vitola(:vitola)', ['vitola' => $request->vitolam]);
+      $this->capas = DB::SELECT('call buscar_capa(:capa)', ['capa' => $this->busqueda]);
+      $this->marcas = DB::SELECT('call buscar_marca(:marca)', ['marca' => $this->busqueda]);
+      $this->nombres = DB::SELECT('call buscar_nombre(:nombre)', ['nombre' => $this->busqueda]);
+      $this->vitolas = DB::SELECT('call buscar_vitola(:vitola)', ['vitola' => $this->busqueda]);
+      $this->tipos = DB::SELECT('call buscar_tipo_empaque(:tipo)', ['tipo' => $this->busqueda]);
       return redirect()->route('datos_producto');
    }
 
@@ -253,7 +246,12 @@ class DatosProductos extends Component
 
    public function editar_vitola(Request $request)
    {
-      DB::SELECT('call actualizar_vitola(:id,:vitola)', ['id' => $request->id_vitolaE,'vitola' => $request->vitolamE]);
+      $vitolas_ac =  DB::SELECT('call actualizar_vitola(:id,:vitola)', ['id' => $request->id_vitolaE,'vitola' => $request->vitolamE]);
+      $this->capas = DB::SELECT('call buscar_capa(:capa)', ['capa' => $this->busqueda]);
+      $this->marcas = DB::SELECT('call buscar_marca(:marca)', ['marca' => $this->busqueda]);
+      $this->nombres = DB::SELECT('call buscar_nombre(:nombre)', ['nombre' => $this->busqueda]);
+      $this->vitolas = DB::SELECT('call buscar_vitola(:vitola)', ['vitola' => $this->busqueda]);
+      $this->tipos = DB::SELECT('call buscar_tipo_empaque(:tipo)', ['tipo' => $this->busqueda]);
       return redirect()->route('datos_producto');
    }
 

@@ -19,8 +19,6 @@ class warehouseImport implements ToModel
     {
 
 
-
-
         if($row[4] == null && $row[5] ==null || $row[0] == null && $row[1] ==null  || $row[0] == "RP ITEM#"){
                    
             $pedio = null;
@@ -48,7 +46,7 @@ class warehouseImport implements ToModel
                             $pedio = new pedido([
                                 'item' =>  Static_Vars::getitems(),
                                 'cant_paquetes' => $row[1],
-                                'unidades' => (int)(Static_Vars::getpaquetes() * $row[1]),
+                                'unidades' => (int)(Static_Vars::getpaquetes()),
                                 'numero_orden' =>Static_Vars::getordenes(),
                                 'categoria' => "4",
                                 ]);
@@ -85,7 +83,7 @@ class warehouseImport implements ToModel
                                                         }
 
 
-                                                        if(!isset(DB::select('select * from clase_productos where item = ?', [$row[0]])[0])){
+                                                        if(!isset(DB::select("select * from clase_productos where item like concat('%',?,'%')", [strval($row[0])])[0])){
                                                             if(count(DB::select('select * from item_faltantes where item = ? and categoria = ?', [$row[0], 'WAREHOUSE']))==0){
                                                                 DB::insert('insert into item_faltantes(categoria, item, detalles) values (?,?,?)', [ 'WAREHOUSE', $row[0] , $row[2]]);
                                                                }
@@ -101,7 +99,7 @@ class warehouseImport implements ToModel
                     $pedio = new pedido([
                         'item' =>  Static_Vars::getitems(),
                         'cant_paquetes' => $row[1],
-                        'unidades' =>$row[3]==null? 0 : ((intval(Static_Vars::getpaquetes()) )* (intval($row[1]))),
+                        'unidades' =>$row[3]==null? 0 : ((intval(Static_Vars::getpaquetes()) )),
                        
                         'numero_orden' =>Static_Vars::getordenes(),
                         'categoria' => "4",

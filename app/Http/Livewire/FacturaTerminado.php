@@ -137,9 +137,8 @@ class FacturaTerminado extends Component
 
     public $ventanas = 1;
 
-    public function cambio($num)
-    {
-        $this->ventanas = $num;
+    public function cambio($num){
+          $this->ventanas = $num;
     }
 
     public function render()
@@ -268,7 +267,7 @@ class FacturaTerminado extends Component
                 'pa_items' =>  $this->busqueda_items_p,
                 'pa_orden_sist' =>  $this->busqueda_ordenes_p,
                 'pa_ordenes' =>  $this->busqueda_hons_p,
-                'r_mill' =>  $this->r_mill
+		'r_mill' =>  $this->r_mill
 
             ]
         ));
@@ -297,7 +296,7 @@ class FacturaTerminado extends Component
                     'pa_items' =>  $this->busqueda_items_p,
                     'pa_orden_sist' =>  $this->busqueda_ordenes_p,
                     'pa_ordenes' =>  $this->busqueda_hons_p,
-                    'r_mill' =>  $this->r_mill
+		'r_mill' =>  $this->r_mill
                 ]
             );
         } else {
@@ -324,7 +323,7 @@ class FacturaTerminado extends Component
                     'pa_items' =>  $this->busqueda_items_p,
                     'pa_orden_sist' =>  $this->busqueda_ordenes_p,
                     'pa_ordenes' =>  $this->busqueda_hons_p,
-                    'r_mill' =>  $this->r_mill
+		'r_mill' =>  $this->r_mill
                 ]
             );
         }
@@ -495,7 +494,7 @@ class FacturaTerminado extends Component
 
 
         $datos_pendiente = DB::select('SELECT item, orden, saldo,mes FROM pendiente WHERE id_pendiente = ?', [$this->id_pendiente_detalle]);
-
+       
         $conteo = DB::select('SELECT * FROM pendiente WHERE orden = ? AND item = ? AND mes = ?', [$datos_pendiente[0]->orden,  $datos_pendiente[0]->item, $datos_pendiente[0]->mes]);
 
         if ($sampler[0]->sampler == "si") {
@@ -769,4 +768,11 @@ class FacturaTerminado extends Component
             LIMIT :tupla, 1;', ['item' => $datos_sampler_pendiente[$i]->item, 'tupla' => $conteo_detallesc]);
         }
     }
+
+    public function eliminar_detalle_olvidado($id)
+    {
+        DB::delete('delete from detalle_factura where id_detalle = ?', [$id]);
+        $this->da = "hola";
+    }
+
 }

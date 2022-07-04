@@ -81,7 +81,7 @@ class newrollImport implements ToModel
                             ]);
 
 
-                            if(!isset(DB::select('select * from clase_productos where item = ?', [$row[0]])[0])){
+                            if(!isset(DB::select('select * from clase_productos where item like concat("%",?,"%")', [$row[0]])[0])){
                                 if(count(DB::select('select * from item_faltantes where item = ? and categoria = ?', [$row[0], 'ROLL NEW']))==0){
                                     DB::insert('insert into item_faltantes(categoria, item, detalles) values (?,?,?)', [ 'ROLL NEW', $row[0] , $row[2]]);
                                 }

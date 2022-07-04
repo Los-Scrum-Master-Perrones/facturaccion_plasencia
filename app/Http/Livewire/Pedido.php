@@ -41,8 +41,11 @@ class Pedido extends Component
 
 
         for($i = 0; $i < count($this->pedido_completo) ;$i++){
+		if(is_numeric($this->pedido_completo[$i]->unidades) && is_numeric($this->pedido_completo[$i]->cant_paquetes)){
             $this->total_puros += $this->pedido_completo[$i]->unidades*$this->pedido_completo[$i]->cant_paquetes;
-
+		    }else{
+	    $this->total_puros += 0;
+		    }
 
             $sampler = DB::select('SELECT clase_productos.sampler FROM clase_productos WHERE  clase_productos.item = ?;', [$this->pedido_completo[$i]->item]);
            if(isset($sampler[0])){

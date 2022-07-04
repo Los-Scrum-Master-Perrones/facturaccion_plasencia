@@ -206,6 +206,7 @@ class PendienteEmpaque extends Component
             }
         }
 
+
         for ($i = 0; $tuplas > $i; $i++) {
             $detalles = DB::select(
                 'call insertar_detallePro_temporalSinExistencia(:numero_orden,:orden,:cod_producto,:saldo,:id_pendiente,:cant)',

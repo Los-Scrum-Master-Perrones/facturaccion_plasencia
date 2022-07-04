@@ -45,7 +45,8 @@
 
                             if($codigo_cajas != $codigo_anterioir && $detalle_provicional->codigo_caja != ''){
                                 $codigo_anterioir = $codigo_cajas;
-                                $existencia_actual = DB::select('SELECT * FROM lista_cajas WHERE codigo = ?', [$codigo_anterioir])[0]->existencia;
+                                 $existencia_actual = isset(DB::select('SELECT * FROM lista_cajas WHERE codigo = ?', [$codigo_anterioir])[0]->existencia)?
+								DB::select('SELECT * FROM lista_cajas WHERE codigo = ?', [$codigo_anterioir])[0]->existencia : 0;
                             }
 
                             @endphp
