@@ -10,8 +10,9 @@
         integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
     <!-- Our Custom CSS -->
     <link rel="stylesheet" href="{{ asset('css/app.css') }}">
-    <link rel="stylesheet" href="{{ asset('css/bootstrap.min.css') }}">
     <link rel="stylesheet" href="{{ asset('css/principal.css') }}" />
+    <link rel="stylesheet" href="{{ asset('css/btn_flotante.css') }}" />
+
 
     <link rel="stylesheet"
         href="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.14/dist/css/bootstrap-select.min.css">
@@ -24,7 +25,7 @@
     <link rel="stylesheet" href="{{ asset('css/cssadicional.css') }}">
 
     <link rel="stylesheet" type="text/css" href="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.css">
-
+    <link href="https://cdn.jsdelivr.net/npm/tom-select@2.0.3/dist/css/tom-select.css" rel="stylesheet">
     <style>
         /* admite una sola linea en una fila */
         tr {
@@ -43,7 +44,9 @@
 
 <!-- <body    style="background: linear-gradient(0deg, rgba(9,14,7,1) 6%, rgba(25,31,21,1) 28%, rgba(85,64,59,1) 51%, rgba(139,87,101,1) 75%,rgba(231,139,188,1) 100%);"> -->
 
-<body style="background: url('fondologin.jpg') center center no-repeat;    background-size:100% 100%;">
+<body id="bos" style="background: url({{ "http://" . $_SERVER["HTTP_HOST"] . "/fondologin.jpg"}}) center center no-repeat;    background-size:100% 100%;">
+
+
 
     @yield('content')
     <br><br><br><br><br>
@@ -168,11 +171,15 @@
                 <form action="{{Route('principal')}}" method="GET">
                     @csrf
                     <button type="submit" class="buttonsubmit" style="margin-bottom: -10px;">
-                        <span><svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="white"
+                        <span>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="white"
                                 class="bi bi-list" viewBox="0 0 16 16">
                                 <path fill-rule="evenodd"
                                     d="M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5z" />
-                            </svg></span>
+                            </svg>
+
+                        </span>
+
                     </button>
                 </form>
             </div>
@@ -236,7 +243,7 @@
                             d="M8.186 1.113a.5.5 0 0 0-.372 0L1.846 3.5 8 5.961 14.154 3.5 8.186 1.113zM15 4.239l-6.5 2.6v7.922l6.5-2.6V4.24zM7.5 14.762V6.838L1 4.239v7.923l6.5 2.6zM7.443.184a1.5 1.5 0 0 1 1.114 0l7.129 2.852A.5.5 0 0 1 16 3.5v8.662a1 1 0 0 1-.629.928l-7.185 2.874a.5.5 0 0 1-.372 0L.63 13.09a1 1 0 0 1-.63-.928V3.5a.5.5 0 0 1 .314-.464L7.443.184z" />
                     </svg>
                 </button>
-                <div class="text">CAJAS</div>
+                <div class="text">MATERIALES</div>
                 @else
                 <button type="submit" class="buttonsubmit" disabled>
                     <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="gray" class="bi bi-box"
@@ -245,7 +252,7 @@
                             d="M8.186 1.113a.5.5 0 0 0-.372 0L1.846 3.5 8 5.961 14.154 3.5 8.186 1.113zM15 4.239l-6.5 2.6v7.922l6.5-2.6V4.24zM7.5 14.762V6.838L1 4.239v7.923l6.5 2.6zM7.443.184a1.5 1.5 0 0 1 1.114 0l7.129 2.852A.5.5 0 0 1 16 3.5v8.662a1 1 0 0 1-.629.928l-7.185 2.874a.5.5 0 0 1-.372 0L.63 13.09a1 1 0 0 1-.63-.928V3.5a.5.5 0 0 1 .314-.464L7.443.184z" />
                     </svg>
                 </button>
-                <div class="text" style="color:gray;">CAJAS</div>
+                <div class="text" style="color:gray;">MATERIALES</div>
                 @endif
             </form>
         </div>
@@ -416,7 +423,11 @@
 
     @toastr_js
     @toastr_render
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="https://cdn.jsdelivr.net/npm/tom-select@2.0.3/dist/js/tom-select.complete.min.js"></script>
     @stack('scripts')
+
+ 
 
 </body>
 
