@@ -104,6 +104,13 @@ class Materiales extends Component
         $this->todos = $todo;
     }
 
+    public function eliminar_material($id)
+    {
+        DB::delete('delete from materiales_catalogo where id = ?', [$id]);
+
+        $this->dispatchBrowserEvent('eliminacion_exitoso');
+    }
+
 
 
 public function insertar_material($request)

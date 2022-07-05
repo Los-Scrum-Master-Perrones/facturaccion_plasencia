@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Livewire\MaterialesProductos;
 use App\Imports\CatalogoMaterialesImport;
+use App\Imports\MaterialesProductosImport;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 use App\Imports\pedidoImport;
@@ -13,7 +15,7 @@ class PedidoController extends Controller
     public function import(Request $request)
     {
         $borrar = DB::table('item_faltantes')->delete();
-        (new CatalogoMaterialesImport)->import($request->select_file);
+        (new pedidoImport)->import($request->select_file);
 
         return redirect()->route('import_excel');
     }

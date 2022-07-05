@@ -120,6 +120,13 @@
                                     <path fill-rule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z" />
                                 </svg>
                             </a>
+                            <a onclick="eliminar_material({{$material->id}})" href="#">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                                    clcass="bi bi-trash-fill" viewBox="0 0 16 16">
+                                    <path
+                                        d="M2.5 1a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1H3v9a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V4h.5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1H2.5zm3 4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5zM8 5a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7A.5.5 0 0 1 8 5zm3 .5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 1 0z" />
+                                </svg>
+                            </a>
                         </td>
                         <td style=" text-align:center;">{{ $material->factory_item }}</td>
                         <td style=" text-align:center;">{{ $material->navision_item }}</td>
@@ -414,6 +421,29 @@
             @this.descrip = $('#todas_Des').val();
             @this.paginacion = 0;
         }
+
+
+        function eliminar_material(id){
+            Swal.fire({
+                title: 'Esta seguro?',
+                text: "No se puede revertir este cambio!",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Si, eliminar!'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    @this.eliminar_material(id);
+                }
+            })
+        }
+
+        window.addEventListener('eliminacion_exitoso', event => {
+            Swal.fire('Eliminado con exito!', '', 'success');
+
+            $('#tabla_materiales').css('height', ($('#bos').height() - 180));
+        })
 
 
 
