@@ -1,20 +1,5 @@
 <div xmlns:wire="http://www.w3.org/1999/xhtml">
-    <title></title>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" />
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Hola</title>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" />
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
-    <script src="{{ URL::asset('css/tabla.js') }}"></script>
-    @livewireStyles
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-wEmeIV1mKuiNpC+IOBjI7aAzPcEZeedi5yW5f2yOq55WWLwNGmvvx4Um1vskeMj0" crossorigin="anonymous">
-
-    </br>
     <ul class="nav justify-content-center">
         @if(auth()->user()->rol == -1)
 
@@ -125,10 +110,8 @@
                                         </div>
                                         @endif
                                         <div class="col-sm-1" style="text-align:right;">
-                                            <form wire:submit.prevent="ver({{$programacion->id}})">
-                                                <a style=" width:10px; height:10px;" type="submit"
-                                                    onclick="verpro({{$programacion->id}})">
-                                                    <button data-toggle="modal" data-target="" href="" style="background: none; color: inherit;   border: none;  padding: 0;
+                                                <a style=" width:10px; height:10px;" wire:click='ver({{$programacion->id}})' >
+                                                    <button style="background: none; color: inherit;   border: none;  padding: 0;
                                                 font: inherit;  cursor: pointer; outline: inherit;">
 
                                                         <abbr title="Mostrar detalles de la programación"><svg
@@ -144,9 +127,6 @@
 
                                                     </button>
                                                 </a>
-                                            </form>
-
-
                                         </div>
                                     </div>
                                 </td>

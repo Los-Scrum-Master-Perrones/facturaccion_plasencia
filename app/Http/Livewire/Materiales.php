@@ -85,6 +85,7 @@ class Materiales extends Component
             $this->brand = array_unique($this->brand);
         }
 
+        $this->dispatchBrowserEvent('tamanio_tabla');
 
         return view('livewire.Materiales.materiales')->extends('principal')->section('content');
     }

@@ -235,7 +235,7 @@
         <div class="righter">
             <form action="{{Route('index_lista_cajas')}}" method="GET">
                 @csrf
-                @if (auth()->user()->rol == 0 || auth()->user()->rol == 1 )
+                @if (auth()->user()->rol == 0 || auth()->user()->rol == 1 || auth()->user()->rol == 2 )
                 <button type="submit" class="buttonsubmit">
                     <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="white" class="bi bi-box"
                         viewBox="0 0 16 16">
@@ -427,7 +427,7 @@
     <script src="https://cdn.jsdelivr.net/npm/tom-select@2.0.3/dist/js/tom-select.complete.min.js"></script>
     @stack('scripts')
 
- 
+
 
 </body>
 

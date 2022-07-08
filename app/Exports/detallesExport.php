@@ -26,6 +26,12 @@ class detallesExport implements
     WithStrictNullComparison
 {
 
+    public $nom;
+
+    function __construct($nom) {
+        $this->nom = $nom;
+    }
+
     public function view(): View
     {
         $detalles_provicionales = DB::select('call mostrar_detalles_provicional("")');
@@ -36,7 +42,9 @@ class detallesExport implements
             }
 
         }
-        return view('Exports.detalle-programacion-export',['detalles_provicionales'=>$detalles_provicionales]) ;
+        return view('Exports.detalle-programacion-export',
+                        ['detalles_provicionales'=>$detalles_provicionales,
+                          'existencia'=>$this->nom]) ;
     }
 
 }

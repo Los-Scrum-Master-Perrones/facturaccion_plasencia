@@ -51,6 +51,10 @@ class Productos extends Component
 
         $this->detalle_productos = \DB::select('call mostrar_detalles_productos');
 
+        foreach ($this->productos as $key => $value) {
+            $value->materiales = DB::select('call traer_materiales_clase_producto(?)',[$value->item]);
+        }
+
 
         return view('livewire.productos')->extends('principal')->section('content');
     }

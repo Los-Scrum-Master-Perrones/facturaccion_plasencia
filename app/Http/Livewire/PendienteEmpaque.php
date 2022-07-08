@@ -41,6 +41,9 @@ class PendienteEmpaque extends Component
     public $r_mill = "Puros Brocha";
 
 
+    public $materiales = false;
+
+
     /* procedimientos almacanedos cargar select de nuevo pendiente*/
     public $marcas;
     public $capas;
@@ -48,7 +51,7 @@ class PendienteEmpaque extends Component
     public $vitolas;
     public $tipo_empaques;
 
-    public $busqueda;
+    public $busqueda = '';
     public $borrar;
 
     /* procedimientos almacanedos busquedas pendiente*/
@@ -191,13 +194,18 @@ class PendienteEmpaque extends Component
                     $valores = DB::select('call traer_detalles_productos_actualizar(?,?)', [$datos_pendiente_empaque[$i]->item, $detalles]);
 
                     $datos_pendiente_empaque[$i]->cod_producto = isset($valores[0]->codigo_producto) ? $valores[0]->codigo_producto : "";
-
+                    DB::update('UPDATE pendiente_empaque SET codigo_poducto= ? WHERE  id_pendiente= ?;',
+                                     [isset($valores[0]->codigo_producto) ? $valores[0]->codigo_producto : "",$datos_pendiente_empaque[$i]->id_pendiente ]);
                     $detalles++;
 
                     if ($detalles == $cantidad_detalle_sampler) {
                         $detalles = 0;
                         $cantidad_detalle_sampler = 0;
                     }
+                }else {
+                    $valores = DB::select('SELECT codigo_producto FROM clase_productos WHERE item = ?', [$datos_pendiente_empaque[$i]->item]);
+
+                    $datos_pendiente_empaque[$i]->cod_producto = isset($valores[0]->codigo_producto) ? $valores[0]->codigo_producto : "";
                 }
             } else {
                 $valores = DB::select('SELECT codigo_producto FROM clase_productos WHERE item = ?', [$datos_pendiente_empaque[$i]->item]);
@@ -237,7 +245,7 @@ class PendienteEmpaque extends Component
             [
                 'numero_orden' => isset($datos_pendiente[0]->orden_del_sitema) ? $datos_pendiente[0]->orden_del_sitema : null,
                 'orden' => isset($datos_pendiente[0]->orden) ? $datos_pendiente[0]->orden : null,
-                'cod_producto' => isset($datos_pendiente[0]->item) ? $datos_pendiente[0]->item : null,
+                'cod_producto' => isset($datos_pendiente[0]->codigo_producto) ? $datos_pendiente[0]->codigo_producto : null,
                 'saldo' => isset($datos_pendiente[0]->saldo) ? $datos_pendiente[0]->saldo : null,
                 'id_pendiente' => isset($datos_pendiente[0]->id_pendiente) ? $datos_pendiente[0]->id_pendiente : null,
                 'cant' => isset($datos_pendiente[0]->cant_cajas) ? $datos_pendiente[0]->cant_cajas : null
@@ -299,6 +307,73 @@ class PendienteEmpaque extends Component
     {
         DB::select('call borrar_pendiente_empaque(:eliminar)', ['eliminar' => $request['id_pendiente3']]);
 
+        try {
+            $datos = [];
+            $cantidad_detalle_sampler = 0;
+            $detalles = 0;
+            $valores = [];
+
+            $datos_empaque =  DB::select(
+                'call buscar_pendiente_empaque(:uno,:dos,:tres,:cuatro,:pres,:seis,:siete,:paginacion,
+                :pa_items,:pa_orden_sist,:pa_ordenes,
+                :pa_marcas,:pa_vitolas,:pa_nombre,:pa_capas,
+                :pa_empaques,:pa_meses,:r_mill )',
+                [
+                    'uno' =>  $this->r_uno,
+                    'dos' =>  $this->r_dos,
+                    'tres' =>  $this->r_tres,
+                    'cuatro' =>  $this->r_cuatro,
+                    'pres' =>  $this->r_cinco,
+                    'seis' =>  $this->r_seis,
+                    'siete' =>  $this->r_siete,
+                    'paginacion' =>  -1,
+                    'pa_marcas' =>  $this->busqueda_marcas_p,
+                    'pa_nombre' =>  $this->busqueda_nombre_p,
+                    'pa_vitolas' =>  $this->busqueda_vitolas_p,
+                    'pa_capas' =>  $this->busqueda_capas_p,
+                    'pa_empaques' =>  $this->busqueda_empaques_p,
+                    'pa_meses' =>  $this->busqueda_mes_p,
+                    'pa_items' =>  $this->busqueda_items_p,
+                    'pa_orden_sist' =>  $this->busqueda_ordenes_p,
+                    'pa_ordenes' =>  $this->busqueda_hons_p,
+                    'r_mill' =>  $this->r_mill
+                ]
+            );
+
+
+            for ($i = 0; $i < count($datos_empaque); $i++) {
+
+                $sampler = DB::select('SELECT clase_productos.sampler FROM clase_productos WHERE  clase_productos.item = ?;', [$datos_empaque[$i]->item]);
+
+                if (isset($sampler[0])) {
+                    if ($sampler[0]->sampler == "si") {
+                        if ($cantidad_detalle_sampler == 0 && $detalles == 0) {
+                            $datos = DB::select('call traer_numero_detalles_productos(?)', [$datos_empaque[$i]->item]);
+                            $cantidad_detalle_sampler = $datos[0]->tuplas;
+                        }
+                        $valores = DB::select('call traer_detalles_productos_actualizar(?,?)', [$datos_empaque[$i]->item, $detalles]);
+
+                        //echo  $this->datos_pendiente_empaque[$i]->id_pendiente." ".$this->datos_pendiente_empaque[$i]->item." "."(". $cantidad_detalle_sampler.")"."<br>";
+                        DB::select('call actualizar_pendiente_empaque_sampler(:marca,:nombre,:vitola,:capa,:tipo,:item)', [
+                            'marca' => $valores[0]->marca,
+                            'nombre' => $valores[0]->nombre,
+                            'vitola' => $valores[0]->vitola,
+                            'capa' => $valores[0]->capa,
+                            'tipo' => $valores[0]->tipo_empaque,
+                            'item' =>  $datos_empaque[$i]->id_pendiente
+                        ]);
+
+                        $detalles++;
+
+                        if ($detalles == $cantidad_detalle_sampler) {
+                            $detalles = 0;
+                            $cantidad_detalle_sampler = 0;
+                        }
+                    }
+                }
+            }
+        } catch (Exception $t) {
+        }
         $this->dispatchBrowserEvent('notificacionConfirmacionDelete');
     }
 
@@ -374,41 +449,6 @@ class PendienteEmpaque extends Component
 
     public function exportPendiente()
     {
-
-        $pendiente_export = DB::select(
-            'call buscar_pendiente_empaque_excel(:uno,:dos,:tres,:cuatro,:pres,:seis,:siete,
-        :pa_items,:pa_orden_sist,:pa_ordenes,
-        :pa_marcas,:pa_vitolas,:pa_nombre,:pa_capas,
-        :pa_empaques,:pa_meses,:r_mill)',
-            [
-                'uno' => $this->r_uno,
-                'dos' => $this->r_dos,
-                'tres' => $this->r_tres,
-                'cuatro' =>  $this->r_cuatro,
-                'pres' =>  $this->r_cinco,
-                'seis' =>  $this->r_seis,
-                'siete' =>  $this->r_siete,
-                'pa_marcas' =>  $this->busqueda_marcas_p,
-                'pa_nombre' =>  $this->busqueda_nombre_p,
-                'pa_vitolas' =>  $this->busqueda_vitolas_p,
-                'pa_capas' =>  $this->busqueda_capas_p,
-                'pa_empaques' =>  $this->busqueda_empaques_p,
-                'pa_meses' =>  $this->busqueda_mes_p,
-                'pa_items' =>  $this->busqueda_items_p,
-                'pa_orden_sist' =>  $this->busqueda_ordenes_p,
-                'pa_ordenes' =>  $this->busqueda_hons_p,
-                'r_mill' =>  $this->r_mill,
-
-            ]
-        );
-
-        return Excel::download(new PendienteEmpaqueExport($pendiente_export), 'Pendiente.xlsx');
-    }
-
-    public function cargaPendiente()
-    {
-
-
         try {
             $datos = [];
             $cantidad_detalle_sampler = 0;
@@ -476,6 +516,39 @@ class PendienteEmpaque extends Component
             }
         } catch (Exception $t) {
         }
+        $pendiente_export = DB::select(
+            'call buscar_pendiente_empaque_excel(:uno,:dos,:tres,:cuatro,:pres,:seis,:siete,
+        :pa_items,:pa_orden_sist,:pa_ordenes,
+        :pa_marcas,:pa_vitolas,:pa_nombre,:pa_capas,
+        :pa_empaques,:pa_meses,:r_mill)',
+            [
+                'uno' => $this->r_uno,
+                'dos' => $this->r_dos,
+                'tres' => $this->r_tres,
+                'cuatro' =>  $this->r_cuatro,
+                'pres' =>  $this->r_cinco,
+                'seis' =>  $this->r_seis,
+                'siete' =>  $this->r_siete,
+                'pa_marcas' =>  $this->busqueda_marcas_p,
+                'pa_nombre' =>  $this->busqueda_nombre_p,
+                'pa_vitolas' =>  $this->busqueda_vitolas_p,
+                'pa_capas' =>  $this->busqueda_capas_p,
+                'pa_empaques' =>  $this->busqueda_empaques_p,
+                'pa_meses' =>  $this->busqueda_mes_p,
+                'pa_items' =>  $this->busqueda_items_p,
+                'pa_orden_sist' =>  $this->busqueda_ordenes_p,
+                'pa_ordenes' =>  $this->busqueda_hons_p,
+                'r_mill' =>  $this->r_mill,
+
+            ]
+        );
+
+        return Excel::download(new PendienteEmpaqueExport($pendiente_export), 'Pendiente.xlsx');
+    }
+
+    public function cargaPendiente()
+    {
+
         /*Procedimientos de busquedas de la tabla pendiente Empaque*/
         $this->marcas_p = DB::select(
             'call buscar_marca_empaque(:uno,:dos,:tres,:cuatro)',
@@ -676,7 +749,7 @@ class PendienteEmpaque extends Component
     {
         $this->total_saldo = 0;
         $this->detalles_provicionales = DB::select('call mostrar_detalles_provicional(:buscar)', [
-            'buscar' => $this->busqueda_programacion
+            'buscar' => $this->busqueda
         ]);
 
 
@@ -709,98 +782,136 @@ class PendienteEmpaque extends Component
 
     public function actualizar_saldo($id, $saldo)
     {
-        $detalles_provicionales = DB::select('SELECT *,
-                                                    (SELECT lista_cajas.id
-                                                        FROM lista_cajas
-                                                        WHERE lista_cajas.codigo = clase_productos.codigo_caja) AS id_de_caja
-                                    FROM detalle_programacion_temporal,
-                                        pendiente_empaque,
-                                        clase_productos
-                                    WHERE pendiente_empaque.id_pendiente = detalle_programacion_temporal.id_pendiente
-                                            AND clase_productos.item = pendiente_empaque.item
-                                            AND  id_detalle_programacion = :id', [
-            'id' => $id
-        ]);
-
-
-
-        if (isset($detalles_provicionales[0]->codigo_caja)) {
-
-
-            $can_cajas_nueva = $saldo/(intval($detalles_provicionales[0]->saldo)/intval($detalles_provicionales[0]->cant_cajas));
-
-        } else {
-
-            $can_cajas_nueva = 0;
-        }
-
 
         $this->actualizar = DB::select(
-            'call actualizar_saldo_programacion(:id, :saldo,:cant,:id_pendiente,:codigo_caja)',
+            'call actualizar_saldo_programacion(:id, :saldo)',
             [
                 'id' => $id,
-                'saldo' => $saldo,
-                'cant' => $can_cajas_nueva,
-                'id_pendiente' => $detalles_provicionales[0]->id_pendiente,
-                'codigo_caja' => isset($detalles_provicionales[0]->codigo_caja)?$detalles_provicionales[0]->codigo_caja:''
+                'saldo' => $saldo
             ]
         );
     }
 
-    public function insertarDetalle_y_actualizarPendiente()
+    public function insertarDetalle_y_actualizarPendiente($resquest)
     {
 
-        $this->detalles_provicionales = DB::select('call mostrar_detalles_provicional("")');
-
+        $provicionales = DB::select('SELECT * FROM detalle_programacion_temporal');
 
         $this->insertar_programacion = DB::select(
             'call insertar_programacion(:fecha,:contenedor)',
             [
-                'fecha' => $this->fecha,
-                'contenedor' => $this->contenedor
+                'fecha' => $resquest['fecha'],
+                'contenedor' => $resquest['contenedor']
             ]
         );
 
-        $this->tuplas = count($this->detalles_provicionales);
-
-        for ($i = 0; $this->tuplas > $i; $i++) {
-
-            $cajas_sobrantes = DB::select('SELECT *
-                                            FROM detalle_programacion_temporal
-                                            WHERE detalle_programacion_temporal.id_detalle_programacion = ?', [$this->detalles_provicionales[$i]->id]);
+        foreach ($provicionales as $key => $value) {
 
 
-
-            $this->actualizar_insertar = DB::select(
-                'call insertar_detalle_programacion(:numero_orden, :orden,:cod_producto,:saldo,:id_pendiente,:caja,:cant)',
+            DB::insert(
+                'call insertar_detalle_programacion(:pa_id_detalle_temporal,
+                                                    :pa_numero_orden,
+                                                    :pa_orden,
+                                                    :pa_cod_producto,
+                                                    :pa_saldo,
+                                                    :pa_id_pendiente,
+                                                    :pa_caja_sobrantes,
+                                                    :pa_cant_cajas,
+                                                    :pa_codigo_caja,
+                                                    :pa_cantidad_sobrante_puros)',
                 [
-                    'numero_orden' => isset($this->detalles_provicionales[$i]->numero_orden) ? $this->detalles_provicionales[$i]->numero_orden : null,
-                    'orden' => isset($this->detalles_provicionales[$i]->orden) ? $this->detalles_provicionales[$i]->orden : null,
-                    'cod_producto' => isset($this->detalles_provicionales[$i]->cod_producto) ? $this->detalles_provicionales[$i]->cod_producto : null,
-                    'saldo' => isset($this->detalles_provicionales[$i]->saldo) ? $this->detalles_provicionales[$i]->saldo : null,
-                    'id_pendiente' => isset($this->detalles_provicionales[$i]->id_pendiente) ? $this->detalles_provicionales[$i]->id_pendiente : null,
-                    'caja' => isset($cajas_sobrantes[0]->cantida_sobrante) ? $cajas_sobrantes[0]->cantida_sobrante : null,
-                    'cant' => isset($this->detalles_provicionales[$i]->cant_cajas) ? $this->detalles_provicionales[$i]->cant_cajas : null
+                    'pa_id_detalle_temporal' => $value->id_detalle_programacion,
+                    'pa_numero_orden' => $value->numero_orden,
+                    'pa_orden' => $value->orden,
+                    'pa_cod_producto' => $value->cod_producto,
+                    'pa_saldo' => $value->saldo,
+                    'pa_id_pendiente' => $value->id_pendiente,
+                    'pa_caja_sobrantes' => $value->cantida_sobrante,
+                    'pa_cant_cajas' => $value->cant_cajas,
+                    'pa_codigo_caja' => $value->codigo_caja,
+                    'pa_cantidad_sobrante_puros' => $value->cantidad_sobrante_puros
                 ]
             );
-
-            DB::update('UPDATE lista_cajas
-                        SET lista_cajas.existencia = lista_cajas.existencia-?
-                        WHERE lista_cajas.codigo = ?;',
-                            [$this->detalles_provicionales[$i]->cant_cajas,
-                            $this->detalles_provicionales[$i]->codigo_caja
-                            ]);
         }
 
         DB::delete('delete from detalle_programacion_temporal');
+        DB::delete('delete from detalles_temporal_materiales');
+        
+        try {
+            $datos = [];
+            $cantidad_detalle_sampler = 0;
+            $detalles = 0;
+            $valores = [];
 
+            $datos_empaque =  DB::select(
+                'call buscar_pendiente_empaque(:uno,:dos,:tres,:cuatro,:pres,:seis,:siete,:paginacion,
+                :pa_items,:pa_orden_sist,:pa_ordenes,
+                :pa_marcas,:pa_vitolas,:pa_nombre,:pa_capas,
+                :pa_empaques,:pa_meses,:r_mill )',
+                [
+                    'uno' =>  $this->r_uno,
+                    'dos' =>  $this->r_dos,
+                    'tres' =>  $this->r_tres,
+                    'cuatro' =>  $this->r_cuatro,
+                    'pres' =>  $this->r_cinco,
+                    'seis' =>  $this->r_seis,
+                    'siete' =>  $this->r_siete,
+                    'paginacion' =>  -1,
+                    'pa_marcas' =>  $this->busqueda_marcas_p,
+                    'pa_nombre' =>  $this->busqueda_nombre_p,
+                    'pa_vitolas' =>  $this->busqueda_vitolas_p,
+                    'pa_capas' =>  $this->busqueda_capas_p,
+                    'pa_empaques' =>  $this->busqueda_empaques_p,
+                    'pa_meses' =>  $this->busqueda_mes_p,
+                    'pa_items' =>  $this->busqueda_items_p,
+                    'pa_orden_sist' =>  $this->busqueda_ordenes_p,
+                    'pa_ordenes' =>  $this->busqueda_hons_p,
+                    'r_mill' =>  $this->r_mill
+                ]
+            );
+
+
+            for ($i = 0; $i < count($datos_empaque); $i++) {
+
+                $sampler = DB::select('SELECT clase_productos.sampler FROM clase_productos WHERE  clase_productos.item = ?;', [$datos_empaque[$i]->item]);
+
+                if (isset($sampler[0])) {
+                    if ($sampler[0]->sampler == "si") {
+                        if ($cantidad_detalle_sampler == 0 && $detalles == 0) {
+                            $datos = DB::select('call traer_numero_detalles_productos(?)', [$datos_empaque[$i]->item]);
+                            $cantidad_detalle_sampler = $datos[0]->tuplas;
+                        }
+                        $valores = DB::select('call traer_detalles_productos_actualizar(?,?)', [$datos_empaque[$i]->item, $detalles]);
+
+                        //echo  $this->datos_pendiente_empaque[$i]->id_pendiente." ".$this->datos_pendiente_empaque[$i]->item." "."(". $cantidad_detalle_sampler.")"."<br>";
+                        DB::select('call actualizar_pendiente_empaque_sampler(:marca,:nombre,:vitola,:capa,:tipo,:item)', [
+                            'marca' => $valores[0]->marca,
+                            'nombre' => $valores[0]->nombre,
+                            'vitola' => $valores[0]->vitola,
+                            'capa' => $valores[0]->capa,
+                            'tipo' => $valores[0]->tipo_empaque,
+                            'item' =>  $datos_empaque[$i]->id_pendiente
+                        ]);
+
+                        $detalles++;
+
+                        if ($detalles == $cantidad_detalle_sampler) {
+                            $detalles = 0;
+                            $cantidad_detalle_sampler = 0;
+                        }
+                    }
+                }
+            }
+        } catch (Exception $t) {
+        }
 
         return redirect()->route('historial_programacion');
     }
 
 
-    function exportProgramacion(Request $request)
+
+    public function exportProgramacion()
     {
-        return Excel::download(new detallesExport(), 'ProgramaciónPro.xlsx');
+        return Excel::download(new detallesExport($this->materiales), 'ProgramaciónPro.xlsx');
     }
 }

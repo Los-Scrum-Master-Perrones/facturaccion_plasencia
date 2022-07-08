@@ -16,6 +16,18 @@
                     materials</strong></a>
         </li>
     </ul>
+
+    <div class="row">
+        <div class="col-sm-3">
+
+        </div>
+        <div class="col-sm-6">
+            <input class="form-control" type="text" wire:model='descrip' placeholder="Buscar por descripción">
+        </div>
+        <div class="col-sm-3">
+
+        </div>
+    </div>
     <div class="row">
         <div class="col">
             <nav>
@@ -76,12 +88,7 @@
                             </select>
                         </th>
                         <th wire:ignore>
-                            <select name="todas_Des" id="todas_Des" onchange="buscar_io()">
-                                <option value="">Descripción</option>
-                                @foreach ($descripcion as $v)
-                                <option value="{{$v}}">{{$v}}</option>
-                                @endforeach
-                            </select>
+                            Descripción
                         </th>
                         <th wire:ignore>
                             <select name="todas_Brand" id="todas_Brand" onchange="buscar_io()">
@@ -377,7 +384,7 @@
 
         $(document).ready(function() {
             $('#tabla_materiales').css('height', ($('#bos').height() - 180));
-            var seletscc = ["todas_Brand", "todas_Des", "todas_cmaterial", "todas_nitem", "todas_fitem"];
+            var seletscc = ["todas_Brand", "todas_cmaterial", "todas_nitem", "todas_fitem"];
             seletscc.forEach(element => {
                 selects(element);
             });

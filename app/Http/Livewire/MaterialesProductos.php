@@ -15,6 +15,7 @@ class MaterialesProductos extends Component
     public $codigo_materials = [];
     public $des_materials = [];
     public $tipo_empaques = [];
+    public $empaques = [];
 
     public $item = "";
     public $codigo_producto = "";
@@ -43,7 +44,7 @@ class MaterialesProductos extends Component
         );
 
         $this->tuplas_conteo = count($da);
-
+        $this->empaques = DB::select('SELECT tipo_empaques.id_tipo_empaque,tipo_empaques.tipo_empaque FROM tipo_empaques');
         $this->codigo_materials_existentes = DB::select('SELECT DISTINCT item FROM clase_productos');
 
         if ($this->todos == 1) {
@@ -112,67 +113,70 @@ class MaterialesProductos extends Component
         $this->todos = $todo;
     }
 
+    public function eliminar_ficha($id)
+    {
+        DB::delete('delete from materiales_productos where id = ?', [$id]);
+
+        $this->dispatchBrowserEvent('eliminacion_exitoso');
+    }
+
+
 
     public function nuevo_material($request)
     {
 
-
         $validator = Validator::make(
             [
-                'factoryed' => $request['factoryed'],
-                'navisored' => $request['navisored'],
-                'desed' => $request['desed'],
-                'branded' => $request['branded'],
-                'saldo_med' => $request['saldo_med'],
-                'saldo_ed' => $request['saldo_ed'],
-                'codigoed' => $request['codigoed'],
-                'lineaed' => $request['lineaed']
+                'item' => $request['item'],
+                'codigo_producto' => $request['codigo_producto'],
+                'tipo_empaque' => $request['tipo_empaque'],
+                'codigo_material' => $request['codigo_material'],
+                'des_material' => $request['des_material'],
+                'cantidad' => $request['cantidad'],
+                'uxe' => $request['uxe']
             ],
             [
-                'factoryed' => "required",
-                'navisored' => "required",
-                'desed' => "required",
-                'branded' => "required",
-                'saldo_med' => "required|integer",
-                'saldo_ed' => "required|integer"
+                'codigo_producto' => "required",
+                'tipo_empaque' => "required",
+                'codigo_material' => "required",
+                'des_material' => "required",
+                'cantidad' => "required|integer",
+                'uxe' => "required"
             ],
             [
-                'factoryed.required' => "La orden del sistema es necesaria.",
-                'navisored.required' => "La orden es necesaria.",
-                'desed.required' => "El pendiente solicitado es necesaria.",
-                'branded.required' => "El saldo solicitado es necesaria.",
-                'saldo_med.required' => "Debe ingresar el saldo minimo.",
-                'saldo_med.integer' => "El saldo minimo solicitado debe ser un numero entero.",
-                'saldo_ed.required' => "Debe ingresar el saldo.",
-                'saldo_ed.integer' => "El saldo solicitado debe ser un numero entero.",
+                'codigo_producto.required' => "El codigo producto solicitado es necesaria.",
+                'tipo_empaque.required' => "Debe seleccionar un tipo de empque.",
+                'codigo_material.required' => "El codigo material solicitado es necesaria.",
+                'des_material.required' => "Debe llevar un descripcion del material.",
+                'uxe.required' => "Debe ingresar SI o NO en una unidades por empaque.",
+                'cantidad.required' => "Debe ingresar la cantidad.",
+                'cantidad.integer' => "La cantidad solicitado debe ser un numero entero.",
             ]
         );
 
         if (!$validator->fails()) {
 
            DB::select(
-                'call actualizar_materiales(:pa_navision_item,
+                'call insertar_materiales_productos(:pa_item,
+                                            :pa_codigo_producto,
+                                            :pa_tipo_empaque,
                                             :pa_codigo_material,
-                                            :pa_brand,
-                                            :pa_linea,
-                                            :pa_item_description,
-                                            :pa_saldo_minimo,
-                                            :pa_saldo,
-                                            :pa_factory_item)',
+                                            :pa_des_material,
+                                            :pa_cantidad,
+                                            :pa_uxe)',
                 [
-                    'pa_factory_item' => $request['factoryed'],
-                    'pa_navision_item' => $request['navisored'],
-                    'pa_item_description' => $request['desed'],
-                    'pa_brand' => $request['branded'],
-                    'pa_saldo_minimo' => $request['saldo_med'],
-                    'pa_saldo' => $request['saldo_ed'],
-                    'pa_codigo_material' => $request['codigoed'],
-                    'pa_linea' => $request['lineaed']
+                    'pa_item' => $request['item'],
+                    'pa_codigo_producto' => $request['codigo_producto'],
+                    'pa_tipo_empaque' => $request['tipo_empaque'],
+                    'pa_codigo_material' => $request['codigo_material'],
+                    'pa_des_material' => $request['des_material'],
+                    'pa_cantidad' => $request['cantidad'],
+                    'pa_uxe' => $request['uxe']
                 ]
             );
-            $this->dispatchBrowserEvent('actualiza_exitoso');
+            $this->dispatchBrowserEvent('insercion_exitoso');
         } else {
-            $this->dispatchBrowserEvent('actualiza_falta', ['mensaje' => $validator->errors()->all()]);
+            $this->dispatchBrowserEvent('insercion_falta', ['mensaje' => $validator->errors()->all()]);
         }
     }
 
@@ -182,55 +186,53 @@ class MaterialesProductos extends Component
 
         $validator = Validator::make(
             [
-                'factoryed' => $request['factoryed'],
-                'navisored' => $request['navisored'],
-                'desed' => $request['desed'],
-                'branded' => $request['branded'],
-                'saldo_med' => $request['saldo_med'],
-                'saldo_ed' => $request['saldo_ed'],
-                'codigoed' => $request['codigoed'],
-                'lineaed' => $request['lineaed']
+                'item' => $request['item'],
+                'codigo_producto' => $request['codigo_producto'],
+                'tipo_empaque' => $request['tipo_empaque'],
+                'codigo_material' => $request['codigo_material'],
+                'des_material' => $request['des_material'],
+                'cantidad' => $request['cantidad'],
+                'uxe' => $request['uxe']
             ],
             [
-                'factoryed' => "required",
-                'navisored' => "required",
-                'desed' => "required",
-                'branded' => "required",
-                'saldo_med' => "required|integer",
-                'saldo_ed' => "required|integer"
+                'codigo_producto' => "required",
+                'tipo_empaque' => "required",
+                'codigo_material' => "required",
+                'des_material' => "required",
+                'cantidad' => "required|integer",
+                'uxe' => "required"
             ],
             [
-                'factoryed.required' => "La orden del sistema es necesaria.",
-                'navisored.required' => "La orden es necesaria.",
-                'desed.required' => "El pendiente solicitado es necesaria.",
-                'branded.required' => "El saldo solicitado es necesaria.",
-                'saldo_med.required' => "Debe ingresar el saldo minimo.",
-                'saldo_med.integer' => "El saldo minimo solicitado debe ser un numero entero.",
-                'saldo_ed.required' => "Debe ingresar el saldo.",
-                'saldo_ed.integer' => "El saldo solicitado debe ser un numero entero.",
+                'codigo_producto.required' => "El codigo producto solicitado es necesaria.",
+                'tipo_empaque.required' => "Debe seleccionar un tipo de empque.",
+                'codigo_material.required' => "El codigo material solicitado es necesaria.",
+                'des_material.required' => "Debe llevar un descripcion del material.",
+                'uxe.required' => "Debe ingresar SI o NO en una unidades por empaque.",
+                'cantidad.required' => "Debe ingresar la cantidad.",
+                'cantidad.integer' => "La cantidad solicitado debe ser un numero entero.",
             ]
         );
 
         if (!$validator->fails()) {
 
            DB::select(
-                'call actualizar_materiales(:pa_navision_item,
+                'call actualizar_materiales_productos(:pa_item,
+                                            :pa_codigo_producto,
+                                            :pa_tipo_empaque,
                                             :pa_codigo_material,
-                                            :pa_brand,
-                                            :pa_linea,
-                                            :pa_item_description,
-                                            :pa_saldo_minimo,
-                                            :pa_saldo,
-                                            :pa_factory_item)',
+                                            :pa_des_material,
+                                            :pa_cantidad,
+                                            :pa_uxe,
+                                            :pa_id)',
                 [
-                    'pa_factory_item' => $request['factoryed'],
-                    'pa_navision_item' => $request['navisored'],
-                    'pa_item_description' => $request['desed'],
-                    'pa_brand' => $request['branded'],
-                    'pa_saldo_minimo' => $request['saldo_med'],
-                    'pa_saldo' => $request['saldo_ed'],
-                    'pa_codigo_material' => $request['codigoed'],
-                    'pa_linea' => $request['lineaed']
+                    'pa_item' => $request['item'],
+                    'pa_codigo_producto' => $request['codigo_producto'],
+                    'pa_tipo_empaque' => $request['tipo_empaque'],
+                    'pa_codigo_material' => $request['codigo_material'],
+                    'pa_des_material' => $request['des_material'],
+                    'pa_cantidad' => $request['cantidad'],
+                    'pa_uxe' => $request['uxe'],
+                    'pa_id' => $request['id']
                 ]
             );
             $this->dispatchBrowserEvent('actualiza_exitoso');

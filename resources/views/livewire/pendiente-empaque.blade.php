@@ -52,24 +52,27 @@
 
                     <input name="buscar" id="buscar" class="  form-control  mr-sm-2" wire:model="busqueda"
                         placeholder="Búsqueda por Marca, Nombre y Vitola" style="width:350px;">
-                    <form action="{{Route('exportar_detallesprogramacion')}}" id="formver" name="formver">
 
-                        <button class="botonprincipal" type="submit" style="width:120px;">Exportar</button>
+                    <button onclick="mostrarMaterial(true)" type="button" class="botonprincipal @if($materiales)
+                        btn-success
+                    @else
+
+                    @endif" style="width:100px;height: 35;border-radius: 20%">Progra. con <br>Materiales</button>
+                    <button onclick="mostrarMaterial(false)" type="button" class="botonprincipal @if($materiales)
+
+                    @else
+                        btn-success
+                    @endif" style="width:100px;height: 35;border-radius: 20%">Progra. sin <br>Materiales</button>
+                    <form wire:submit.prevent="exportProgramacion()">
+                        <button class="botonprincipal" type="submit" style="width:100px;">Exportar</button>
                     </form>
                     <form hidden wire:submit.prevent="modal_limpiar()">
                         <button class="botonprincipal" type="submit" style="width:120px;">Vaciar</button>
                     </form>
-                    <form wire:submit.prevent="insertarDetalle_y_actualizarPendiente()"
-                        style="width:auto; padding-left:50px; ">
-                        @csrf
-                        <input name="fecha_creacion" id="fecha_creacion" type="date" class="  form-control  mr-sm-2"
-                            placeholder="" style="width:200px;" wire:model="fecha">
-                        <input name="fecha_contenedor" id="fecha_contenedor" type="text" class="  form-control  mr-sm-2"
-                            placeholder="Número y fecha del contenedor" style="width:300px;" required
-                            wire:model="contenedor" autocomplete="off">
-                        <button type=" button" name="crear_programacion" id="crear_programacion"
-                            class=" botonprincipal " value="" style="width:auto;"> Crear programación</button>
-                    </form>
+
+                    <button type=" button" onclick="guardar_programacion()"
+                            class=" botonprincipal "  style="width:auto;"> Crear programación
+                    </button>
 
                 </div>
             </div>
@@ -94,9 +97,9 @@
                             <th style=" text-align:center;">CELLO</th>
                             <th style=" text-align:center;">UPC</th>
                             <th style=" text-align:center;">SALDO</th>
-                            <th style=" text-align:center;">EXISTENCIA</th>
+                            <th style=" text-align:center;">EXISTENCIA(P)</th>
                             <th style=" text-align:center;">SOB/FAL</th>
-                            <th style=" text-align:center;">EN EXISTENCIA</th>
+                            <th style=" text-align:center;">EN EXISTENCIA(C)</th>
                             <th style=" text-align:center;">CAJAS</th>
                             <th style=" text-align:center;">OPERACIONES</th>
 
@@ -105,8 +108,8 @@
                     </thead>
                     <tbody>
                         @php
-                            $codigo_anterioir = '';
                             $existencia_actual = 0;
+                            $pendiente_restante = 0;
                         @endphp
                         @foreach($detalles_provicionales as $detalle_provicional)
                         <tr>
@@ -121,68 +124,98 @@
                             <td>{{$detalle_provicional->anillo}}</td>
                             <td>{{$detalle_provicional->cello}}</td>
                             <td>{{$detalle_provicional->upc}}</td>
-                            <td>{{$detalle_provicional->saldo}}</td>
+                            <td>{{intval($detalle_provicional->saldo)}}</td>
+
 
 
                             @php
-                            $pendiente_restante = 0;
-                            $codigo_cajas = $detalle_provicional->codigo_caja;
-
-
-                            if($codigo_cajas != $codigo_anterioir && $detalle_provicional->codigo_caja != ''){
-                                $codigo_anterioir = $codigo_cajas;
-                                $existencia_actual = isset(DB::select('SELECT * FROM lista_cajas WHERE codigo = ?', [$codigo_anterioir])[0]->existencia)?
-								DB::select('SELECT * FROM lista_cajas WHERE codigo = ?', [$codigo_anterioir])[0]->existencia : 0;
-                            }
-
-                            if($detalle_provicional->codigo_caja == ''){
-                                $existencia_actual = 0;
-                            }
-
-
-                            $existencia = DB::select('SELECT total from importar_existencias where codigo_producto = ?',[$detalle_provicional->cod_producto]);
-                            $programado_salir = DB::select('SELECT sum(saldo) as total from
-                                            detalle_programacion_temporal where cod_producto = ?',[$detalle_provicional->cod_producto]);
-
-                            if($detalle_provicional->cod_producto != '' && isset($existencia[0]->total) && isset($programado_salir[0]->total)){
-                                    $pendiente_restante = $existencia[0]->total - $programado_salir[0]->total;
-                            }
-                            @endphp
-
-                            <td>{{$detalle_provicional->total_existencia}}</td>
-
-                            <?php  if($pendiente_restante < 0){
-
-                                echo '<td style="color:red;">'.$pendiente_restante.'</td>' ;
-
-                                }else{
-
-                                echo '<td>' .$pendiente_restante. '</td>' ;
+                                if ($detalle_provicional->cod_producto == null) {
+                                    $existe_puros = [];
+                                } else {
+                                    $existe_puros = DB::select('SELECT * FROM importar_existencias WHERE codigo_producto = ?', [$detalle_provicional->cod_producto]);
                                 }
-                            ?>
-
-                            @php
-                                $existencia_actual = $existencia_actual - $detalle_provicional->cant_cajas;
-                            @endphp
-                                @if ($existencia_actual < 0)
-                                    <td style="color: red">{{'Faltan '.$existencia_actual}}</td>
-                                @endif
-                                @if ($existencia_actual > 0)
-                                    <td style="color: rgb(119, 0, 255)">{{'Sobran '.$existencia_actual}}</td>
-                                @endif
-                                @if ($existencia_actual == 0)
-                                    <td>{{$existencia_actual}}</td>
-                                @endif
-                            @php
-                                DB::update('UPDATE detalle_programacion_temporal
-                                SET detalle_programacion_temporal.cantida_sobrante = ?
-                                WHERE detalle_programacion_temporal.id_detalle_programacion =  ?', [$existencia_actual,$detalle_provicional->id]);
                             @endphp
 
 
-                            <td style="text-align:center">
-                                {{$detalle_provicional->cant_cajas_necesarias}}
-                            </td>
+                            @if(count($existe_puros) > 0)
+                                @php
+                                    $pendiente_restante =  $existe_puros[0]->total - intval($detalle_provicional->saldo);
+                                    $anteriores_puros = DB::select('SELECT SUM(detalle_programacion_temporal.saldo) AS "anterioir"
+                                                                    FROM detalle_programacion_temporal
+                                                                    WHERE detalle_programacion_temporal.cod_producto = ?
+                                                                            AND id_detalle_programacion < ?',
+                                                                [$detalle_provicional->cod_producto,
+                                                                 $detalle_provicional->id]);
+
+                                    $pendiente_restante -= $anteriores_puros[0]->anterioir;
+                               @endphp
+                                    <td>{{ intval($existe_puros[0]->total - $anteriores_puros[0]->anterioir)<0?0:intval($existe_puros[0]->total - $anteriores_puros[0]->anterioir)}}</td>
+                                    @if ($pendiente_restante < 0)
+                                        <td style="color: red">{{'Faltan '.$pendiente_restante}}</td>
+                                    @endif
+                                    @if ($pendiente_restante > 0)
+                                        <td style="color: rgb(119, 0, 255)">{{'Sobran '.$pendiente_restante}}</td>
+                                    @endif
+                                    @if ($pendiente_restante == 0)
+                                        <td>{{$pendiente_restante}}</td>
+                                    @endif
+                                @php
+                                    DB::update('UPDATE detalle_programacion_temporal
+                                    SET detalle_programacion_temporal.cantidad_sobrante_puros = ?
+                                    WHERE detalle_programacion_temporal.id_detalle_programacion =  ?', [$pendiente_restante,$detalle_provicional->id]);
+                                @endphp
+                            @else
+                                <td>0</td>
+                                <td>0</td>
+                            @endif
+
+
+                            @php
+                                if ($detalle_provicional->codigo_caja == null) {
+                                    $existe_caja = [];
+                                } else {
+                                    $existe_caja = DB::select('SELECT * FROM lista_cajas WHERE codigo = ?', [$detalle_provicional->codigo_caja]);
+                                }
+                            @endphp
+
+
+                            @if(count($existe_caja) > 0)
+                                @php
+                                    $existencia_actual = $existe_caja[0]->existencia - $detalle_provicional->cant_cajas_necesarias;
+                                    $anteriores = DB::select('SELECT SUM(detalle_programacion_temporal.cant_cajas) AS "anterioir"
+                                                                    FROM detalle_programacion_temporal
+                                                                    WHERE detalle_programacion_temporal.codigo_caja = ?
+                                                                            AND id_detalle_programacion < ?',
+                                                                [$detalle_provicional->codigo_caja,
+                                                                 $detalle_provicional->id]);
+
+                                    $existencia_actual -= $anteriores[0]->anterioir;
+                               @endphp
+                                    @if ($existencia_actual < 0)
+                                        <td style="color: red">{{'Faltan '.$existencia_actual}}</td>
+                                    @endif
+                                    @if ($existencia_actual > 0)
+                                        <td style="color: rgb(119, 0, 255)">{{'Sobran '.$existencia_actual}}</td>
+                                    @endif
+                                    @if ($existencia_actual == 0)
+                                        <td>{{$existencia_actual}}</td>
+                                    @endif
+                                @php
+                                    DB::update('UPDATE detalle_programacion_temporal
+                                    SET detalle_programacion_temporal.cantida_sobrante = ?
+                                    WHERE detalle_programacion_temporal.id_detalle_programacion =  ?', [$existencia_actual,$detalle_provicional->id]);
+                                @endphp
+
+                                <td style="text-align:center">
+                                    {{intval($detalle_provicional->cant_cajas_necesarias)}}
+                                </td>
+                            @else
+                                <td>N/D</td>
+
+                                <td style="text-align:center">0</td>
+                            @endif
+
+
                             <td style="text-align:center">
 
                                 <a  onclick="eliminar_detalle_prgramacion({{$detalle_provicional->id}})" href="#">
@@ -206,6 +239,70 @@
                             </td>
 
                         </tr>
+                        @if($materiales)
+                            @php
+                                $detalles_materiale = DB::select('call traer_materiales_temporal(?)', [$detalle_provicional->id]);
+                            @endphp
+                            @foreach ($detalles_materiale as $materiale)
+                                <tr>
+                                    <th colspan="3"></th>
+                                    <td colspan="6">{{ '('.$materiale->codigo_material.') '.$materiale->des_material }}</td>
+                                    <th>{{ $materiale->uxe }}</th>
+                                    <th>{{ $materiale->cantidad }}</th>
+                                    @php
+                                        $total_orden = 0;
+
+                                        if ($materiale->uxe == 'NO') {
+
+                                            $total_orden = intval($detalle_provicional->saldo)/($materiale->cantidad / $materiale->cantidad );
+
+                                        }else if($materiale->uxe == 'SI') {
+
+                                            if(( intval($detalle_provicional->por_caja) % 3 ) == 0){
+                                                $total_orden = intval($detalle_provicional->saldo)/(120 / $materiale->cantidad );
+                                            }else{
+                                                $total_orden = intval($detalle_provicional->saldo)/(100 / $materiale->cantidad );
+                                            }
+
+                                        }
+                                        DB::update('UPDATE detalles_temporal_materiales
+                                                        SET cantidad = ?
+                                                        WHERE id = ?', [$total_orden ,$materiale->id_de_detalles]);
+                                    @endphp
+                                    <td>{{ $total_orden }}</td>
+                                   
+                                    @php
+                                        $existencia_material_actual = $materiale->saldo - $total_orden;
+                                        $anteriores = DB::select('SELECT SUM(detalles_temporal_materiales.cantidad) AS "anterioir"
+                                                                        FROM detalles_temporal_materiales
+                                                                        WHERE detalles_temporal_materiales.id_material = ?
+                                                                                AND id < ?',
+                                                                    [$materiale->id_material,
+                                                                    $materiale->id_de_detalles]);
+
+                                        $existencia_material_actual -= $anteriores[0]->anterioir;
+                                    @endphp
+                                         <td>{{ intval($materiale->saldo - $anteriores[0]->anterioir)<0?0:intval($materiale->saldo - $anteriores[0]->anterioir)  }}</td>
+                                            @if ($existencia_material_actual < 0)
+                                                <td style="color: red">{{'Faltan '.$existencia_material_actual}}</td>
+                                            @endif
+                                            @if ($existencia_material_actual > 0)
+                                                <td style="color: rgb(119, 0, 255)">{{'Sobran '.$existencia_material_actual}}</td>
+                                            @endif
+                                            @if ($existencia_material_actual == 0)
+                                                <td>{{$existencia_material_actual}}</td>
+                                            @endif
+                                        @php
+                                            DB::update('UPDATE detalles_temporal_materiales
+                                                        SET restante = ?
+                                                        WHERE id = ?', [$existencia_material_actual ,$materiale->id_de_detalles]);
+
+                                        @endphp
+                                    <th colspan="3"></th>
+                                </tr>
+
+                            @endforeach
+                        @endif
 
                         @endforeach
                     </tbody>
@@ -536,10 +633,7 @@
                                 {{isset($datos->categoria)?($datos->categoria):"Sin categoria"}}</td>
                             <td>{{isset($datos->item)?($datos->item):""}}</td>
                             <td>
-                                @php
-                                    $codigo_de_caja = DB::select('select codigo_caja from clase_productos where item = ?', [(isset($datos->item)?($datos->item):"")]);
-                                @endphp
-                                {{$codigo_de_caja[0]->codigo_caja}}
+                                {{isset($datos->codigo_caja)?($datos->codigo_caja):""}}
                             </td>
                             <td>{{isset($datos->orden_del_sitema)?($datos->orden_del_sitema):""}}</td>
 
@@ -1110,6 +1204,66 @@
         }
 
 
+        function mostrarMaterial(v){
+            @this.materiales = v;
+        }
+
+
+        async function guardar_programacion() {
+                var html = '<div>' +
+                    '<div>' +
+                    '<div>' +
+                    '<div><br>' +
+                    '  <div class="mb-3 col">' +
+                    '<label for="txt_empaque" class="form-label">Editar tipo de empaque</label>' +
+                    '<input name="fecha_creacion_new" id="fecha_creacion_new" type="date" class="  form-control  mr-sm-2"'+
+                    'placeholder="" style="width:100%;">'+
+                    '</div>' +
+                    '<div class="mb-3 col">' +
+                        '<label for="txt_empaque" class="form-label">Nombre Ingles</label>' +
+                        '<input name="fecha_contenedor_new" id="fecha_contenedor_new" type="text" class="  form-control  mr-sm-2"'+
+                                'placeholder="Número y fecha del contenedor" style="width:100%;" autocomplete="off">'+
+                    '</div>' +
+                    '</div>' +
+                    '</div>' +
+                    '</div>' +
+                    '</div>';
+
+
+
+
+                const {
+                    value: formValues
+                } = await Swal.fire({
+                    title: ''
+                    , html: html
+                    , width: 300
+                    , showCancelButton: true
+                    , confirmButtonText: 'Guardar'
+                    , cancelButtonText: 'Cancelar'
+                    , focusConfirm: false
+                    , preConfirm: () => {
+                        return [
+                            document.getElementById('fecha_creacion_new').value
+                            , document.getElementById('fecha_contenedor_new').value
+                        ]
+                    }
+
+                })
+
+                if (formValues) {
+                    if ( formValues[0] == "" ) {
+                        toastr.info('Debe seleccionar una Fecha.', 'Advertencia!');
+                    } else if ( formValues[1] == "") {
+                        toastr.info('Debe ingresar la descripcion de la programacion.', 'Advertencia!');
+                    } else {
+                        @this.insertarDetalle_y_actualizarPendiente({
+                            'fecha': formValues[0],
+                            'contenedor': formValues[1]
+                        });
+                    }
+                }
+            }
 
     </script>
 
