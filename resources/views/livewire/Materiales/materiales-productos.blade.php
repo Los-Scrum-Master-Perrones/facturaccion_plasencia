@@ -1,18 +1,43 @@
 <div xmlns:wire="http://www.w3.org/1999/xhtml">
     <ul class="nav justify-content-center">
+        @if (auth()->user()->rol == 0 || auth()->user()->rol == 1 )
         <li class="nav-item">
-            <a style="color:white; font-size:12px;" href="{{ route('index_lista_cajas') }}"><strong>Catálogo Cajas</strong></a>
+            <a style="color:white; font-size:12px;" href="{{ route('inventario_cajas') }}"><strong>Catálogo Cajas</strong></a>
         </li>
         <li class="nav-item">
             <a style="color:white; font-size:12px;" href="{{ route('index_importar_cajas') }}"><strong>Importar Cajas</strong></a>
         </li>
+        @endif
         <li class="nav-item">
             <a style="color:white; font-size:12px;" href="{{ route('materiales.index') }}"><strong>Materiales</strong></a>
         </li>
         <li class="nav-item">
             <a style="color:#E5B1E2; font-size:12px;" href="{{ route('materiales.relacionar')}}"><strong>Materiales Productos</strong></a>
         </li>
+        <li class="nav-item">
+            <a style="color:white;  font-size:12px;" href="{{ route('entradas.salidas') }}"><strong>Entrada/Salida</strong></a>
+        </li>
     </ul>
+    <div class="row">
+        <div class="col-sm-3">
+
+        </div>
+        <div class="col-sm-6 form-group">
+            <form method="post" enctype="multipart/form-data" action="{{ url('/importar_ficha') }}"
+            class="form-inline">
+            @csrf
+            <input type="file" name="select_file" id="select_file" class="form-control mr-sm-2 "
+                style="width:430px;" required />
+            <input type="submit" name="upload" style="width:50px;" class=" botonprincipal mr-sm-2 "
+                value="Importar">
+            </form>
+        </div>
+
+        <div class="col-sm-3 ">
+
+
+        </div>
+    </div>
     <div class="row">
         <div class="col">
             <nav>
@@ -42,7 +67,7 @@
     </div>
 
     <div wire:change='tama' id="tabla_materiales" class="table-responsive">
-        <div style="width:100%; padding-left:0px; height:100%;">
+        <div wire:loading.class='oscurecer_contenido' style="width:100%; padding-left:0px; height:100%;">
             <table class="table table-light" style="font-size:10px; ">
                 <thead>
                     <tr style="font-size:16px; text-align:center;">
@@ -323,12 +348,12 @@
         var control3;
         var control4;
         window.addEventListener('tamanio_tabla', event => {
-            $('#tabla_materiales').css('height', ($('#bos').height() - 160));
+            $('#tabla_materiales').css('height', ($('#bos').height() - 230));
         });
 
 
         $(document).ready(function() {
-            $('#tabla_materiales').css('height', ($('#bos').height() - 160));
+            $('#tabla_materiales').css('height', ($('#bos').height() - 230));
             var seletscc = ["todas_fitem","todas_cp","todas_te","todas_cm","todas_Des"];
             seletscc.forEach(element => {
                 selects(element);
@@ -505,7 +530,7 @@
             Swal.fire('Actualizado con exito!', '', 'success');
 
             $('#material_actualizar').modal('hide');
-            $('#tabla_materiales').css('height', ($('#bos').height() - 180));
+            $('#tabla_materiales').css('height', ($('#bos').height() - 230));
         })
 
         window.addEventListener('actualiza_falta', event => {

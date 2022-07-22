@@ -11,11 +11,11 @@
             <a style="color:white; font-size:12px;" href="importar_c"><strong>Existencia en bodega</strong></a>
         </li>
         <li class="nav-item">
-            <a style="color:white; font-size:12px;" href="inventario_cajas"><strong>Existencia de cajas</strong></a>
+            <a style="color:white; font-size:12px;" href="{{ route('inventario_cajas') }}"><strong>Existencia de cajas</strong></a>
         </li>
         @endif
         <li class="nav-item">
-            <a style="color:#E5B1E2; font-size:12px;" href=""><strong>Programaciones</strong></a>
+            <a style="color:#E5B1E2; font-size:12px;" href="{{ route('entradas.salidas') }}"><strong>Programaciones</strong></a>
         </li>
     </ul>
 
@@ -164,7 +164,9 @@
                     <tbody>
 
                         @php
-                        $suma_total = 0;
+                            $suma_total = 0;
+                            $total_cajas = 0;
+
                         @endphp
                         @foreach($detalles_programaciones as $detalles_programacione)
                         <tr>
@@ -216,6 +218,9 @@
 
 
                         </tr>
+                        @php
+                            $total_cajas += $detalles_programacione->cant_cajas;
+                        @endphp
                         @endforeach
 
 
@@ -224,10 +229,15 @@
             </div>
 
         </div>
-        <div class="input-group" style="width:30%;position: fixed;right: 0px;bottom:0px; height:30px;">
+        <div class="input-group" style="width:40%;position: fixed;right: 0px;bottom:0px; height:30px;">
             <span class="form-control input-group-text">Total saldo</span>
             <input type="text" class="form-control" id="sumase" value="{{$suma_total}}">
+            <span class="form-control input-group-text">Total Cajas</span>
+            <input type="text" class="form-control" id="sumase" value="{{$total_cajas}}">
+            <span class="form-control input-group-text">Total Materiales</span>
+            <input type="text" class="form-control" id="sumase" value="{{$suma_total}}">
         </div>
+
 
     </div>
 

@@ -25,8 +25,11 @@ use App\Http\Livewire\DetalleProgramacion;
 use App\Http\Livewire\HistorialVentas;
 use App\Http\Livewire\Pedido;
 use App\Http\Livewire\EditarDetalles;
+use App\Http\Livewire\EntradasSalidas;
 use App\Http\Livewire\Materiales;
 use App\Http\Livewire\MaterialesProductos;
+use App\Models\EntradasSalida;
+use App\Models\MaterialesCatalogo;
 
 /*
 |--------------------------------------------------------------------------
@@ -66,6 +69,8 @@ Route::post('/importar_pendiente_empaque', [importar_pendiente_empaque::class, '
 
 Route::post('/importar_pedido', [PedidoController::class, 'import']);
 Route::get('/importar_pedido', [PedidoController::class, 'import']);
+
+Route::get('/importar_ficha', [MaterialesProductos::class, 'import']);
 
 Route::post('/nuevo_pedido', [PedidoController::class, 'nuevo_pedido'])->name('nuevo_pedido');
 Route::get('/nuevo_pedido', [PedidoController::class, 'nuevo_pedido'])->name('nuevo_pedido');
@@ -148,6 +153,7 @@ Route::post('/nuevo_pendiente',[ Pendiente::class,'insertar_nuevo_pendiente'])->
 Route::get('/nuevo_pendiente_empaque',[ PendienteEmpaque::class,'insertar_nuevo_pendiente_empaque'])->name('nuevo_pendiente_empaque');
 Route::post('/nuevo_pendiente_empaque',[ PendienteEmpaque::class,'insertar_nuevo_pendiente_empaque'])->name('nuevo_pendiente_empaque');
 
+Route::get('/export_pendiente_empaque',[ PendienteEmpaque::class,'actualizar_datos'])->name('exportar_materia');
 
 
 Route::get('/inventario_cajas', InventarioCajas::class)->name('inventario_cajas');
@@ -292,7 +298,7 @@ Route::post('/importar_cajas', [App\Http\Controllers\CajasController::class, 'im
 Route::get('/importar_cajas', [App\Http\Controllers\CajasController::class, 'import'])->name('importar_cajas');
 Route::post('/vaciar_import_tabla', [App\Http\Controllers\CajasController::class, 'vaciar_import_tabla'])->name('vaciar_import_tabla');
 
-Route::get('/anadir_inventario', [App\Http\Controllers\CajasController::class, 'anadir_inventario'])->name('anadir_inventario');
+Route::post('/anadir_inventario', [App\Http\Controllers\CajasController::class, 'anadir_inventario'])->name('anadir_inventario');
 
 Route::post('/importar_inv_cajas', [App\Http\Controllers\CajasController::class, 'importinvcajas'])->name('importar_inv_cajas');
 Route::get('/importar_inv_cajas', [App\Http\Controllers\CajasController::class, 'importinvcajas'])->name('importar_inv_cajas');
@@ -338,8 +344,9 @@ Route::get('/insertar_pro', [App\Http\Controllers\ImportExcelController::class, 
 
 // Materiales
 
-Route::get('materiales/index', Materiales::class)->name('materiales.index');
-Route::get('materiales/agregar', MaterialesProductos::class)->name('materiales.relacionar');
-
+Route::get('materiales_index', Materiales::class)->name('materiales.index');
+Route::get('materiales_agregar', MaterialesProductos::class)->name('materiales.relacionar');
+Route::post('/importar_ficha', [MaterialesProductos::class, 'import']);
+Route::get('/entradas_salidas', EntradasSalidas::class)->name('entradas.salidas');
 
 });

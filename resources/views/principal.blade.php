@@ -26,6 +26,8 @@
 
     <link rel="stylesheet" type="text/css" href="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.css">
     <link href="https://cdn.jsdelivr.net/npm/tom-select@2.0.3/dist/css/tom-select.css" rel="stylesheet">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-multiselect/1.1.1/css/bootstrap-multiselect.css" />
     <style>
         /* admite una sola linea en una fila */
         tr {
@@ -38,6 +40,18 @@
             border-bottom: none !important;
             cursor: inherit !important;
             text-decoration: none !important;
+        }
+
+        .oscurecer_contenido {
+            justify-content: center;
+            align-items: center;
+            background-color: black;
+            top: 0px;
+            left: 0px;
+            z-index: 9999;
+            width: 100%;
+            height: 100%;
+            opacity: 0.5;
         }
     </style>
 </head>
@@ -189,7 +203,7 @@
         <div class="right">
             <form action="{{Route('pendiente_empaque')}}" method="GET">
                 @csrf
-                @if ( auth()->user()->rol == 0 || auth()->user()->rol == 1 )
+                @if ( auth()->user()->rol == 0 || auth()->user()->rol == 1 || auth()->user()->rol == 4 || auth()->user()->rol == 2  )
                 <button type="submit" class="buttonsubmit">
                     <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="white"
                         class="bi bi-card-checklist" viewBox="0 0 16 16">
@@ -233,9 +247,13 @@
         @if (auth()->user()->rol != -1)
 
         <div class="righter">
-            <form action="{{Route('index_lista_cajas')}}" method="GET">
+            <form @if(auth()->user()->rol == 4)
+                    action="{{Route('materiales.index')}}"
+                @else
+                    action="{{ route('inventario_cajas') }}"
+                @endif  method="GET">
                 @csrf
-                @if (auth()->user()->rol == 0 || auth()->user()->rol == 1 || auth()->user()->rol == 2 )
+                @if (auth()->user()->rol == 0 || auth()->user()->rol == 1 || auth()->user()->rol == 4 )
                 <button type="submit" class="buttonsubmit">
                     <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="white" class="bi bi-box"
                         viewBox="0 0 16 16">
@@ -258,6 +276,8 @@
         </div>
 
         <div class="righter2">
+
+
             <form action="{{Route('index_lista_productos')}}" method="GET">
                 @csrf
                 <?php if (  auth()->user()->rol == 0 || auth()->user()->rol == 2  ): ?>
@@ -289,7 +309,7 @@
             @endif>
             <form action="{{Route('f_terminado')}}" method="GET">
                 @csrf
-                @if ( auth()->user()->rol == 0 || auth()->user()->rol == 2 )
+                @if ( auth()->user()->rol == 0 || auth()->user()->rol == 2 || auth()->user()->rol == 4)
                 <button type="submit" class="buttonsubmit">
                     <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="white"
                         class="bi bi-card-checklist" viewBox="0 0 16 16">
@@ -425,6 +445,7 @@
     @toastr_render
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="https://cdn.jsdelivr.net/npm/tom-select@2.0.3/dist/js/tom-select.complete.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-multiselect/1.1.1/js/bootstrap-multiselect.js"></script>
     @stack('scripts')
 
 

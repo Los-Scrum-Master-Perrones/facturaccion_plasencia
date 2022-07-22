@@ -2,9 +2,13 @@
 
 namespace App\Http\Livewire;
 
+use App\Exports\MaterialesCatalogoExport;
+use App\Imports\MaterialesProductosImport;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
 use Livewire\Component;
+use Maatwebsite\Excel\Facades\Excel;
 
 class MaterialesProductos extends Component
 {
@@ -25,6 +29,8 @@ class MaterialesProductos extends Component
     public $tuplas_conteo;
     public $todos;
     public $paginacion;
+
+
 
 
     public function render()
@@ -174,6 +180,7 @@ class MaterialesProductos extends Component
                     'pa_uxe' => $request['uxe']
                 ]
             );
+           
             $this->dispatchBrowserEvent('insercion_exitoso');
         } else {
             $this->dispatchBrowserEvent('insercion_falta', ['mensaje' => $validator->errors()->all()]);
@@ -240,4 +247,13 @@ class MaterialesProductos extends Component
             $this->dispatchBrowserEvent('actualiza_falta', ['mensaje' => $validator->errors()->all()]);
         }
     }
+
+    public function import(Request $request)
+    {
+       
+        (new MaterialesProductosImport)->import($request->select_file);
+
+        return redirect()->route('materiales.relacionar');
+    }
+
 }

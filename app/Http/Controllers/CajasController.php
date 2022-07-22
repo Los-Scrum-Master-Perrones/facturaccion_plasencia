@@ -17,7 +17,8 @@ class CajasController extends Controller
     }
 
     function index_importar(){
-        $cajas = DB::table('cajas')->get();
+
+        $cajas = DB::table('cajas')->where('oculto', 'N')->get();
         return view('import_cajas')->with('cajas', $cajas);
     }
 
@@ -100,11 +101,8 @@ class CajasController extends Controller
 
 
     function import(Request $request){
-        (new CajasImport)->import($request->select_file);
-        $cajas = DB::table('cajas')->get();
-
-
-        return view('import_cajas')->with('cajas', $cajas);
+        Excel::import(new CajasImport, $request->file('select_file')->store('temp'));
+        return redirect()->route('index_importar_cajas');
     }
 
 
@@ -113,9 +111,8 @@ class CajasController extends Controller
 
 
     function vaciar_import_tabla(){
-        $borrar = DB::table('cajas')->delete();
-        $cajas = DB::table('cajas')->get();
-        return view('import_cajas')->with('cajas', $cajas);
+        DB::table('cajas')->where('oculto', 'N')->delete();
+        return redirect()->route('index_importar_cajas');
     }
 
 
@@ -124,7 +121,7 @@ class CajasController extends Controller
 
     function anadir_inventario(Request $request){
 
-        $cajasinsertar = DB::table('cajas')->get();
+        $cajasinsertar = DB::table('cajas')->where('oculto', 'N')->get();
 
         foreach($cajasinsertar as $caja){
             $pa_codigo = $caja->codigo;
@@ -137,24 +134,20 @@ class CajasController extends Controller
                 VALUES (?, ?, ?, ?, ?);", [$caja->codigo, $caja->descripcion,'',0,0]);
             }
 
-            DB::select('call anadir_cajas_a_inventario(:pa_codigo, :pa_cantidad)', [
+            DB::select('call anadir_cajas_a_inventario(:pa_codigo, :pa_cantidad,:pa_remision)', [
                 'pa_codigo' => $pa_codigo,
-                'pa_cantidad' => $pa_cantidad
+                'pa_cantidad' => $pa_cantidad,
+                'pa_remision' => $request->input('remision')
                 ]);
+
+            DB::update('update cajas set oculto = "S" where id_cajas = ?', [$caja->id_cajas]);
+            DB::update('update cajas set remision = ? where id_cajas = ?', [$request->input('remision'),$caja->id_cajas]);
+
+
         }
 
-        DB::table('cajas')->delete();
-
-        $listacajas = DB::table('lista_cajas')->orderBy('existencia', 'desc')->get();
-        $mostrar_lista_cajas = \DB::select('call mostrar_lista_cajas');
-        return view('lista_cajas')->with('listacajas', $listacajas)->with('mostrar_lista_cajas', $mostrar_lista_cajas);
+        return redirect()->route('inventario_cajas');
     }
-
-
-
-
-
-
 
 
 

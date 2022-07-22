@@ -11,7 +11,7 @@
             <a style="color:white; font-size:12px;" href="importar_c"><strong>Existencia en bodega</strong></a>
         </li>
         <li class="nav-item">
-            <a style="color:white; font-size:12px;" href="inventario_cajas"><strong>Existencia de cajas</strong></a>
+            <a style="color:white; font-size:12px;" href="{{ route('inventario_cajas') }}"><strong>Existencia de cajas</strong></a>
         </li>
         <li class="nav-item">
             <a style="color:#E5B1E2; font-size:12px;" href=""><strong>Programaciones</strong></a>

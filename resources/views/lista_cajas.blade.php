@@ -31,6 +31,9 @@
         <li class="nav-item">
             <a style="color:white; font-size:12px;" href="{{ route('materiales.relacionar')}}"><strong>Materiales Productos</strong></a>
         </li>
+        <li class="nav-item">
+            <a style="color:white;  font-size:12px;" href="{{ route('entradas.salidas') }}"><strong>Entrada/Salida</strong></a>
+        </li>
     </ul>
 
 

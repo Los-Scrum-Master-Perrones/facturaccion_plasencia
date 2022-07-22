@@ -50,6 +50,7 @@ class PendienteEmpaque extends Component
     public $nombres;
     public $vitolas;
     public $tipo_empaques;
+    public $items_agregar=[];
 
     public $busqueda = '';
     public $borrar;
@@ -109,8 +110,16 @@ class PendienteEmpaque extends Component
     public function render()
     {
         //pendient empaque*****************************************************************
-        $this->cargaPendiente();
-        $this->cargaDetalleProgramacion();
+
+        if($this->ventanas == 1){
+            $this->cargaPendiente();
+        }
+        if($this->ventanas != 1){
+            $this->cargaDetalleProgramacion();
+        }
+
+        $this->dispatchBrowserEvent('tamanio_tabla');
+
         return view('livewire.pendiente-empaque')->extends('principal')->section('content');
     }
 
@@ -227,7 +236,134 @@ class PendienteEmpaque extends Component
                     'cant' => isset($datos_pendiente_empaque[$i]->cant_cajas) ?  $datos_pendiente_empaque[$i]->cant_cajas : null
                 ]
             );
+
+            $detalles_p = DB::select('CALL mostrar_ultimo_detalles_provicional()');
+
+        $existencia_actual = 0;
+        $pendiente_restante = 0;
+        $total_materiales = 0;
+
+        foreach ($detalles_p as $key => $value) {
+
+
+            if ($value->cod_producto == null) {
+                $existe_puros = [];
+            } else {
+                $existe_puros = DB::select('SELECT * FROM importar_existencias WHERE codigo_producto = ?', [$value->cod_producto]);
+            }
+
+
+
+            if(count($existe_puros) > 0){
+                $exi= $existe_puros[0]->total;
+                $pendiente_restante =  $exi - intval($value->saldo);
+                $anteriores_puros = DB::select('SELECT SUM(detalle_programacion_temporal.saldo) AS "anterioir"
+                                                FROM detalle_programacion_temporal
+                                                WHERE detalle_programacion_temporal.cod_producto = ?
+                                                        AND id_detalle_programacion < ?',
+                                            [$value->cod_producto,
+                                            $value->id]);
+
+                $pendiente_restante -= $anteriores_puros[0]->anterioir;
+
+                $valor_exist = $exi - $anteriores_puros[0]->anterioir;
+
+                DB::update('UPDATE detalle_programacion_temporal
+                    SET detalle_programacion_temporal.cantidad_sobrante_puros = ?,
+                        detalle_programacion_temporal.existencia_puros = ?
+                    WHERE detalle_programacion_temporal.id_detalle_programacion =  ?',
+
+                    [$pendiente_restante,
+                    $valor_exist<0?0:$valor_exist,
+                    $value->id]);
+            }
+
+            if ($value->codigo_caja == null) {
+                $existe_caja = [];
+            } else {
+                $existe_caja = DB::select('SELECT * FROM lista_cajas WHERE codigo = ?', [$value->codigo_caja]);
+            }
+
+
+            if(count($existe_caja) > 0){
+
+
+
+                $existencia_actual = $existe_caja[0]->existencia - $value->cant_cajas_necesarias;
+                $anteriores = DB::select('SELECT SUM(detalle_programacion_temporal.cant_cajas) AS "anterioir"
+                                                FROM detalle_programacion_temporal
+                                                WHERE detalle_programacion_temporal.codigo_caja = ?
+                                                        AND id_detalle_programacion < ?',
+                                            [$value->codigo_caja,
+                                            $value->id]);
+
+                $existencia_actual -= $anteriores[0]->anterioir;
+
+                $valor_exist_c = $existe_caja[0]->existencia - $anteriores[0]->anterioir;
+
+                DB::update('UPDATE detalle_programacion_temporal
+                    SET detalle_programacion_temporal.cantida_sobrante = ?,
+                        detalle_programacion_temporal.existencia_cajas = ?
+                    WHERE detalle_programacion_temporal.id_detalle_programacion =  ?',
+                        [$existencia_actual,
+                        $valor_exist_c<0?0:$valor_exist_c,
+                        $value->id]);
+            }
+
+
+
+                    $detalles_materiale = DB::select('call traer_materiales_temporal(?)', [$value->id]);
+
+                    foreach ($detalles_materiale as $materiale){
+
+                        $total_orden = 0;
+
+                        if ($materiale->uxe == 'NO') {
+
+                            $total_orden = $value->saldo;
+
+                        }else if($materiale->uxe == 'SI') {
+
+                            if(( $value->por_caja % 3 ) == 0){
+                                $total_orden = $value->saldo/(120 / $materiale->cantidad );
+                            }else{
+                                $total_orden = $value->saldo/(100 / $materiale->cantidad );
+                            }
+
+                        }
+                        DB::update('UPDATE detalles_temporal_materiales
+                                        SET cantidad = ?,
+                                        co_material = ?
+                                    WHERE id = ?', [$total_orden ,$materiale->codigo_material,$materiale->id_de_detalles]);
+
+                        $total_materiales += $total_orden;
+                        $existencia_material_actual = $materiale->saldo - $total_orden;
+                        $anteriores = DB::select('SELECT SUM(detalles_temporal_materiales.cantidad) AS "anterioir"
+                                                                        FROM detalles_temporal_materiales
+                                                                        WHERE detalles_temporal_materiales.co_material = ?
+                                                                                AND id < ?',
+                                                                    [$materiale->codigo_material,
+                                                                    $materiale->id_de_detalles]);
+
+                        $existencia_material_actual -= $anteriores[0]->anterioir;
+
+                        $valor_exist_ma = $materiale->saldo - $anteriores[0]->anterioir;
+
+                        DB::update('UPDATE detalles_temporal_materiales
+                                    SET restante = ?,
+                                    existencia_material = ?
+                                    WHERE id = ?', [$existencia_material_actual ,
+                                                    $valor_exist_ma<0?0:$valor_exist_ma,
+                                                    $materiale->id_de_detalles]);
+
+                    }
+
+
+
         }
+        }
+
+
 
         $this->cambio(2);
     }
@@ -251,6 +387,131 @@ class PendienteEmpaque extends Component
                 'cant' => isset($datos_pendiente[0]->cant_cajas) ? $datos_pendiente[0]->cant_cajas : null
             ]
         );
+
+        $detalles_p = DB::select('CALL mostrar_ultimo_detalles_provicional()');
+
+        $existencia_actual = 0;
+        $pendiente_restante = 0;
+        $total_materiales = 0;
+
+        foreach ($detalles_p as $key => $value) {
+
+
+            if ($value->cod_producto == null) {
+                $existe_puros = [];
+            } else {
+                $existe_puros = DB::select('SELECT * FROM importar_existencias WHERE codigo_producto = ?', [$value->cod_producto]);
+            }
+
+
+
+            if(count($existe_puros) > 0){
+                $exi= $existe_puros[0]->total;
+                $pendiente_restante =  $exi - intval($value->saldo);
+                $anteriores_puros = DB::select('SELECT SUM(detalle_programacion_temporal.saldo) AS "anterioir"
+                                                FROM detalle_programacion_temporal
+                                                WHERE detalle_programacion_temporal.cod_producto = ?
+                                                        AND id_detalle_programacion < ?',
+                                            [$value->cod_producto,
+                                            $value->id]);
+
+                $pendiente_restante -= $anteriores_puros[0]->anterioir;
+
+                $valor_exist = $exi - $anteriores_puros[0]->anterioir;
+
+                DB::update('UPDATE detalle_programacion_temporal
+                    SET detalle_programacion_temporal.cantidad_sobrante_puros = ?,
+                        detalle_programacion_temporal.existencia_puros = ?
+                    WHERE detalle_programacion_temporal.id_detalle_programacion =  ?',
+
+                    [$pendiente_restante,
+                    $valor_exist<0?0:$valor_exist,
+                    $value->id]);
+            }
+
+            if ($value->codigo_caja == null) {
+                $existe_caja = [];
+            } else {
+                $existe_caja = DB::select('SELECT * FROM lista_cajas WHERE codigo = ?', [$value->codigo_caja]);
+            }
+
+
+            if(count($existe_caja) > 0){
+
+
+
+                $existencia_actual = $existe_caja[0]->existencia - $value->cant_cajas_necesarias;
+                $anteriores = DB::select('SELECT SUM(detalle_programacion_temporal.cant_cajas) AS "anterioir"
+                                                FROM detalle_programacion_temporal
+                                                WHERE detalle_programacion_temporal.codigo_caja = ?
+                                                        AND id_detalle_programacion < ?',
+                                            [$value->codigo_caja,
+                                            $value->id]);
+
+                $existencia_actual -= $anteriores[0]->anterioir;
+
+                $valor_exist_c = $existe_caja[0]->existencia - $anteriores[0]->anterioir;
+
+                DB::update('UPDATE detalle_programacion_temporal
+                    SET detalle_programacion_temporal.cantida_sobrante = ?,
+                        detalle_programacion_temporal.existencia_cajas = ?
+                    WHERE detalle_programacion_temporal.id_detalle_programacion =  ?',
+                        [$existencia_actual,
+                        $valor_exist_c<0?0:$valor_exist_c,
+                        $value->id]);
+            }
+
+
+
+                    $detalles_materiale = DB::select('call traer_materiales_temporal(?)', [$value->id]);
+
+                    foreach ($detalles_materiale as $materiale){
+
+                        $total_orden = 0;
+
+                        if ($materiale->uxe == 'NO') {
+
+                            $total_orden = $value->saldo;
+
+                        }else if($materiale->uxe == 'SI') {
+
+                            if(( $value->por_caja % 3 ) == 0){
+                                $total_orden = $value->saldo/(120 / $materiale->cantidad );
+                            }else{
+                                $total_orden = $value->saldo/(100 / $materiale->cantidad );
+                            }
+
+                        }
+                        DB::update('UPDATE detalles_temporal_materiales
+                                        SET cantidad = ?,
+                                        co_material = ?
+                                    WHERE id = ?', [$total_orden ,$materiale->codigo_material,$materiale->id_de_detalles]);
+
+                        $total_materiales += $total_orden;
+                        $existencia_material_actual = $materiale->saldo - $total_orden;
+                        $anteriores = DB::select('SELECT SUM(detalles_temporal_materiales.cantidad) AS "anterioir"
+                                                                        FROM detalles_temporal_materiales
+                                                                        WHERE detalles_temporal_materiales.co_material = ?
+                                                                                AND id < ?',
+                                                                    [$materiale->codigo_material,
+                                                                    $materiale->id_de_detalles]);
+
+                        $existencia_material_actual -= $anteriores[0]->anterioir;
+
+                        $valor_exist_ma = $materiale->saldo - $anteriores[0]->anterioir;
+
+                        DB::update('UPDATE detalles_temporal_materiales
+                                    SET restante = ?,
+                                    existencia_material = ?
+                                    WHERE id = ?', [$existencia_material_actual ,
+                                                    $valor_exist_ma<0?0:$valor_exist_ma,
+                                                    $materiale->id_de_detalles]);
+
+                    }
+
+
+
+        }
 
 
 
@@ -548,99 +809,16 @@ class PendienteEmpaque extends Component
 
     public function cargaPendiente()
     {
-
-        /*Procedimientos de busquedas de la tabla pendiente Empaque*/
-        $this->marcas_p = DB::select(
-            'call buscar_marca_empaque(:uno,:dos,:tres,:cuatro)',
-            [
-                'uno' =>  $this->r_uno,
-                'dos' =>  $this->r_dos,
-                'tres' =>  $this->r_tres,
-                'cuatro' =>  $this->r_cuatro
-            ]
-        );
-        $this->nombre_p = \DB::select(
-            'call buscar_nombre_empaque(:uno,:dos,:tres,:cuatro)',
-            [
-                'uno' =>  $this->r_uno,
-                'dos' =>  $this->r_dos,
-                'tres' =>  $this->r_tres,
-                'cuatro' =>  $this->r_cuatro
-            ]
-        );
-        $this->vitolas_p = \DB::select(
-            'call buscar_vitola_empaque(:uno,:dos,:tres,:cuatro)',
-            [
-                'uno' =>  $this->r_uno,
-                'dos' =>  $this->r_dos,
-                'tres' =>  $this->r_tres,
-                'cuatro' =>  $this->r_cuatro
-            ]
-        );
-        $this->capas_p = \DB::select(
-            'call buscar_capa_empaque(:uno,:dos,:tres,:cuatro)',
-            [
-                'uno' =>  $this->r_uno,
-                'dos' =>  $this->r_dos,
-                'tres' =>  $this->r_tres,
-                'cuatro' =>  $this->r_cuatro
-            ]
-        );
-        $this->empaques_p = \DB::select(
-            'call buscar_tipo_empaque_empaque(:uno,:dos,:tres,:cuatro)',
-            [
-                'uno' =>  $this->r_uno,
-                'dos' =>  $this->r_dos,
-                'tres' =>  $this->r_tres,
-                'cuatro' =>  $this->r_cuatro
-            ]
-        );
-
-        $this->mes_p = \DB::select(
-            'call buscar_fecha_empaque(:uno,:dos,:tres,:cuatro)',
-            [
-                'uno' =>  $this->r_uno,
-                'dos' =>  $this->r_dos,
-                'tres' =>  $this->r_tres,
-                'cuatro' =>  $this->r_cuatro
-            ]
-        );
-        $this->items_p = \DB::select(
-            'call buscar_item_empaque(:uno,:dos,:tres,:cuatro)',
-            [
-                'uno' =>  $this->r_uno,
-                'dos' =>  $this->r_dos,
-                'tres' =>  $this->r_tres,
-                'cuatro' =>  $this->r_cuatro
-            ]
-        );
-        $this->ordenes_p = \DB::select(
-            'call buscar_ordenes_empaque(:uno,:dos,:tres,:cuatro)',
-            [
-                'uno' =>  $this->r_uno,
-                'dos' =>  $this->r_dos,
-                'tres' =>  $this->r_tres,
-                'cuatro' =>  $this->r_cuatro
-            ]
-        );
-        $this->hons_p = \DB::select(
-            'call buscar_hons_empaque(:uno,:dos,:tres,:cuatro)',
-            [
-                'uno' =>  $this->r_uno,
-                'dos' =>  $this->r_dos,
-                'tres' =>  $this->r_tres,
-                'cuatro' =>  $this->r_cuatro
-            ]
-        );
+        $this->detalles_provicionales = [];
         $this->capas = DB::select('call buscar_capa("")');
         $this->nombres = DB::select('call buscar_nombre("")');
         $this->vitolas = DB::select('call buscar_vitola("")');
         $this->marcas = DB::select('call buscar_marca("")');
+        $this->items_agregar = DB::select('select item from clase_productos');
         $this->tipo_empaques = DB::select('call buscar_tipo_empaque("")');
 
 
-
-        $this->tuplas_conteo = count(DB::select(
+        $todos = DB::select(
             'call buscar_pendiente_empaque(:uno,:dos,:tres,:cuatro,:pres,:seis,:siete,:paginacion,
             :pa_items,:pa_orden_sist,:pa_ordenes,
             :pa_marcas,:pa_vitolas,:pa_nombre,:pa_capas,
@@ -667,36 +845,12 @@ class PendienteEmpaque extends Component
 
 
             ]
-        ));
+            );
+        $this->tuplas_conteo = count($todos);
 
         if ($this->todos == 1) {
-            $this->datos_pendiente_empaque = DB::select(
-                'call buscar_pendiente_empaque(:uno,:dos,:tres,:cuatro,:pres,:seis,:siete,:paginacion,
-                :pa_items,:pa_orden_sist,:pa_ordenes,
-                :pa_marcas,:pa_vitolas,:pa_nombre,:pa_capas,
-                :pa_empaques,:pa_meses,:r_mill)',
-                [
-                    'uno' =>  $this->r_uno,
-                    'dos' =>  $this->r_dos,
-                    'tres' =>  $this->r_tres,
-                    'cuatro' =>  $this->r_cuatro,
-                    'pres' =>  $this->r_cinco,
-                    'seis' =>  $this->r_seis,
-                    'siete' =>  $this->r_siete,
-                    'paginacion' =>  -1,
-                    'pa_marcas' =>  $this->busqueda_marcas_p,
-                    'pa_nombre' =>  $this->busqueda_nombre_p,
-                    'pa_vitolas' =>  $this->busqueda_vitolas_p,
-                    'pa_capas' =>  $this->busqueda_capas_p,
-                    'pa_empaques' =>  $this->busqueda_empaques_p,
-                    'pa_meses' =>  $this->busqueda_mes_p,
-                    'pa_items' =>  $this->busqueda_items_p,
-                    'pa_orden_sist' =>  $this->busqueda_ordenes_p,
-                    'pa_ordenes' =>  $this->busqueda_hons_p,
-                    'r_mill' =>  $this->r_mill
 
-                ]
-            );
+            $this->datos_pendiente_empaque = $todos;
         } else {
             $this->datos_pendiente_empaque = DB::select(
                 'call buscar_pendiente_empaque(:uno,:dos,:tres,:cuatro,:pres,:seis,:siete,:paginacion,
@@ -727,6 +881,43 @@ class PendienteEmpaque extends Component
 
             );
         }
+
+
+        if (count($todos) > 0) {
+
+            $this->marcas_p = [];
+            $this->nombre_p = [];
+            $this->vitolas_p = [];
+            $this->capas_p = [];
+            $this->empaques_p = [];
+            $this->mes_p = [];
+            $this->items_p = [];
+            $this->ordenes_p = [];
+            $this->hons_p = [];
+
+            foreach ($todos as $detalles) {
+                array_push($this->marcas_p, $detalles->marca);
+                array_push($this->nombre_p, $detalles->nombre);
+                array_push($this->vitolas_p, $detalles->vitola);
+                array_push($this->capas_p, $detalles->capa);
+                array_push($this->empaques_p, $detalles->tipo_empaque);
+
+                array_push($this->mes_p, $detalles->mes);
+                array_push($this->items_p, $detalles->item);
+                array_push($this->ordenes_p, $detalles->orden_del_sitema);
+                array_push($this->hons_p, $detalles->orden);
+            }
+
+            $this->marcas_p = array_unique($this->marcas_p);
+            $this->nombre_p = array_unique($this->nombre_p);
+            $this->vitolas_p = array_unique($this->vitolas_p);
+            $this->capas_p = array_unique($this->capas_p);
+            $this->empaques_p = array_unique($this->empaques_p);
+            $this->mes_p = array_unique($this->mes_p);
+            $this->items_p = array_unique($this->items_p);
+            $this->ordenes_p = array_unique($this->ordenes_p);
+            $this->hons_p = array_unique($this->hons_p);
+        }
     }
 
     /***************** TODO funciones de detalle programacion*********************/
@@ -739,14 +930,27 @@ class PendienteEmpaque extends Component
                 'buscar' => $id
             ]
         );
-        $this->id_detalle = 0;
     }
-
-
-
 
     public function cargaDetalleProgramacion()
     {
+        $this->capas = [];
+        $this->nombres = [];
+        $this->vitolas = [];
+        $this->marcas = [];
+        $this->items_agregar = [];
+        $this->tipo_empaques = [];
+        $this->marcas_p = [];
+        $this->nombre_p = [];
+        $this->vitolas_p = [];
+        $this->capas_p = [];
+        $this->empaques_p = [];
+        $this->mes_p = [];
+        $this->items_p = [];
+        $this->ordenes_p = [];
+        $this->hons_p = [];
+        $this->datos_pendiente_empaque = [];
+
         $this->total_saldo = 0;
         $this->detalles_provicionales = DB::select('call mostrar_detalles_provicional(:buscar)', [
             'buscar' => $this->busqueda
@@ -778,11 +982,8 @@ class PendienteEmpaque extends Component
         $this->dispatchBrowserEvent('cerrar_modal_eliminar');
     }
 
-
-
     public function actualizar_saldo($id, $saldo)
     {
-
         $this->actualizar = DB::select(
             'call actualizar_saldo_programacion(:id, :saldo)',
             [
@@ -836,7 +1037,7 @@ class PendienteEmpaque extends Component
 
         DB::delete('delete from detalle_programacion_temporal');
         DB::delete('delete from detalles_temporal_materiales');
-        
+
         try {
             $datos = [];
             $cantidad_detalle_sampler = 0;
@@ -912,6 +1113,148 @@ class PendienteEmpaque extends Component
 
     public function exportProgramacion()
     {
-        return Excel::download(new detallesExport($this->materiales), 'ProgramaciónPro.xlsx');
+       return Excel::download(new detallesExport($this->materiales), 'ProgramaciónPro.xlsx');
+    }
+
+
+
+
+    public function actualizar_datos(){
+        $detalles_p = DB::select('call mostrar_detalles_provicional(:buscar)', [
+            'buscar' => ''
+        ]);
+
+        $existencia_actual = 0;
+        $pendiente_restante = 0;
+        $total_materiales = 0;
+
+        foreach ($detalles_p as $key => $value) {
+
+
+            if ($value->cod_producto == null) {
+                $existe_puros = [];
+            } else {
+                $existe_puros = DB::select('SELECT * FROM importar_existencias WHERE codigo_producto = ?', [$value->cod_producto]);
+            }
+
+
+
+            if(count($existe_puros) > 0){
+                $exi= $existe_puros[0]->total;
+                $pendiente_restante =  $exi - intval($value->saldo);
+                $anteriores_puros = DB::select('SELECT SUM(detalle_programacion_temporal.saldo) AS "anterioir"
+                                                FROM detalle_programacion_temporal
+                                                WHERE detalle_programacion_temporal.cod_producto = ?
+                                                        AND id_detalle_programacion < ?',
+                                            [$value->cod_producto,
+                                            $value->id]);
+
+                $pendiente_restante -= $anteriores_puros[0]->anterioir;
+
+                $valor_exist = $exi - $anteriores_puros[0]->anterioir;
+
+                DB::update('UPDATE detalle_programacion_temporal
+                    SET detalle_programacion_temporal.cantidad_sobrante_puros = ?,
+                        detalle_programacion_temporal.existencia_puros = ?
+                    WHERE detalle_programacion_temporal.id_detalle_programacion =  ?',
+
+                    [$pendiente_restante,
+                    $valor_exist<0?0:$valor_exist,
+                    $value->id]);
+            }
+
+            if ($value->codigo_caja == null) {
+                $existe_caja = [];
+            } else {
+                $existe_caja = DB::select('SELECT * FROM lista_cajas WHERE codigo = ?', [$value->codigo_caja]);
+            }
+
+
+            if(count($existe_caja) > 0){
+
+
+
+                $existencia_actual = $existe_caja[0]->existencia - $value->cant_cajas_necesarias;
+                $anteriores = DB::select('SELECT SUM(detalle_programacion_temporal.cant_cajas) AS "anterioir"
+                                                FROM detalle_programacion_temporal
+                                                WHERE detalle_programacion_temporal.codigo_caja = ?
+                                                        AND id_detalle_programacion < ?',
+                                            [$value->codigo_caja,
+                                            $value->id]);
+
+                $existencia_actual -= $anteriores[0]->anterioir;
+
+                $valor_exist_c = $existe_caja[0]->existencia - $anteriores[0]->anterioir;
+
+                DB::update('UPDATE detalle_programacion_temporal
+                    SET detalle_programacion_temporal.cantida_sobrante = ?,
+                        detalle_programacion_temporal.existencia_cajas = ?
+                    WHERE detalle_programacion_temporal.id_detalle_programacion =  ?',
+                        [$existencia_actual,
+                        $valor_exist_c<0?0:$valor_exist_c,
+                        $value->id]);
+            }
+
+
+                DB::select('call actualizar_detallePro_temporalMaterial(:pa_id_detalle_tempoarl,
+                            :pa_id_pendiente,
+                            :pa_codigo_producto)',
+                [
+                    'pa_id_detalle_tempoarl' => $value->id,
+                    'pa_id_pendiente' => $value->id_pendiente,
+                    'pa_codigo_producto' => $value->cod_producto
+                ]);
+
+
+                    $detalles_materiale = DB::select('call traer_materiales_temporal(?)', [$value->id]);
+
+                    foreach ($detalles_materiale as $materiale){
+
+                        $total_orden = 0;
+
+                        if ($materiale->uxe == 'NO') {
+
+                            $total_orden = $value->saldo;
+
+                        }else if($materiale->uxe == 'SI') {
+
+                            $total_orden = $value->cant_cajas_necesarias * $materiale->cantidad ;
+
+                        }
+                        DB::update('UPDATE detalles_temporal_materiales
+                                        SET cantidad = ?,
+                                        co_material = ?
+                                    WHERE id = ?', [$total_orden ,$materiale->codigo_material,$materiale->id_de_detalles]);
+
+                        $total_materiales += $total_orden;
+                        $existencia_material_actual = $materiale->saldo - $total_orden;
+                        $anteriores = DB::select('SELECT SUM(detalles_temporal_materiales.cantidad) AS "anterioir"
+                                                                        FROM detalles_temporal_materiales
+                                                                        WHERE detalles_temporal_materiales.co_material = ?
+                                                                                AND id < ?',
+                                                                    [$materiale->codigo_material,
+                                                                    $materiale->id_de_detalles]);
+
+                        $existencia_material_actual -= $anteriores[0]->anterioir;
+
+                        $valor_exist_ma = $materiale->saldo - $anteriores[0]->anterioir;
+
+                        DB::update('UPDATE detalles_temporal_materiales
+                                    SET restante = ?,
+                                    existencia_material = ?
+                                    WHERE id = ?', [$existencia_material_actual ,
+                                                    $valor_exist_ma<0?0:$valor_exist_ma,
+                                                    $materiale->id_de_detalles]);
+
+                    }
+
+
+
+        }
+
+        return redirect()->route('pendiente_empaque');
     }
 }
+
+
+

@@ -21,10 +21,10 @@ class MaterialesProductosImport implements ToCollection,
     {
 
             foreach ($rows as $row) {
-                if('MATERIAL_EMPAQUE'== $row[7]){
+                if('Descripción Material'!= $row[3]){
 
 
-                $empaques = DB::select('select * from tipo_empaques where tipo_empaque = ?', [$row[3]]);
+                $empaques = DB::select('select * from tipo_empaques where tipo_empaque = ?', [$row[1]]);
 
                 $material = DB::select('SELECT *
                                         FROM materiales_productos
@@ -32,17 +32,17 @@ class MaterialesProductosImport implements ToCollection,
                                               tipo_empaque = ? AND
                                               codigo_material = ?', [$row[0],
                                                                   $empaques[0]->id_tipo_empaque,
-                                                                       $row[4]]);
+                                                                       $row[2]]);
 
                 if (!isset($material[0]->codigo_producto)) {
 
                         $m = new MaterialesProductosModel();
                         $m->codigo_producto = $row[0];
                         $m->tipo_empaque = $empaques[0]->id_tipo_empaque;
-                        $m->codigo_material = $row[4];
-                        $m->des_material = $row[5];
-                        $m->cantidad = $row[6];
-                        $m->uxe = $row[8];
+                        $m->codigo_material = $row[2];
+                        $m->des_material = $row[3];
+                        $m->cantidad = $row[4];
+                        $m->uxe = $row[6]=='Unchecked'?'NO':'SI';
                         $m->save();
                 }
              }

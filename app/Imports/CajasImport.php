@@ -24,7 +24,7 @@ class CajasImport implements ToModel
         ) {
             $cajas = null;
         } else if (
-         $row[0] == 'Grand Total' || $row[4] == 'Existencia' || $row[0] == 'Código' ||  $row[0] == 'LISTADO DE PRODUCTOS POR DEPARTAMENTOS Y CATEGORIAS'
+            $row[0] == 'Grand Total' || $row[4] == 'Existencia' || $row[0] == 'Código' ||  $row[0] == 'LISTADO DE PRODUCTOS POR DEPARTAMENTOS Y CATEGORIAS'
         ) {
             $cajas = null;
         } else {
@@ -36,8 +36,10 @@ class CajasImport implements ToModel
                 'lote_destino' => $row[3],
                 'cantidad' => $row[4],
                 'costo_u' => $row[5],
-                'subtotal' => $row[6]
+                'subtotal' => $row[6],
+                'oculto' => 'N'
             ]);
+
         }
 
         return $cajas;

@@ -23,7 +23,7 @@
             <a style="color:black; font-size:16px;" href="importar_c"><strong>Existencia en bodega</strong></a>
         </li>
         <li class="nav-item">
-            <a style="color:black; font-size:16px;" href="inventario_cajas"><strong>Existencia de cajas</strong></a>
+            <a style="color:black; font-size:16px;" href="{{ route('inventario_cajas') }}"><strong>Existencia de cajas</strong></a>
         </li>
         <li class="nav-item">
             <a style="color:black; font-size:16px;" href="historial_programacion"><strong>Programaciones</strong></a>
@@ -86,12 +86,12 @@
                                             <th style=" text-align:center;">CELLO</th>
                                             <th style=" text-align:center;">UPC</th>
                                             <th style=" text-align:center;">SALDO</th>
-                       
+
 
                     </tr>
                 </thead>
                 <tbody>
-                   
+
                 </tbody>
             </table>
         </div>

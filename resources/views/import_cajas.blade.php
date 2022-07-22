@@ -55,8 +55,10 @@
             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 
             <li class="nav-item">
-                <form method="get" enctype="multipart/form-data" action="{{ url('/anadir_inventario') }}">
+                <form method="POST" action="{{ url('/anadir_inventario') }}">
                     @csrf
+                    <input required style="height:30px;" type="text" name="remision" class="form-text" value="" placeholder="Numero Remision">
+                    <br>
                     <input type="submit" name="upload" class=" botonprincipal " value="Añadir a inventario">
                 </form>
             </li>
@@ -88,6 +90,8 @@
                             <th>Lote origen</th>
                             <th>Lote Destino</th>
                             <th>Cantidad</th>
+                            <th>Faltantes</th>
+                            <th>Existencia</th>
                             <th>Costo Unitario</th>
                             <th>Subtotal</th>
                         </tr>
@@ -97,15 +101,25 @@
                             $total_catidad = 0;
                             $total_costo_u = 0;
                             $total_subtotal = 0;
+
+                            $total_en_existencia = 0;
+                            $total_faltantes = 0;
                         @endphp
                         @foreach($cajas as $caja)
 
+                        @php
+                            $arreglo = DB::select('select * from lista_cajas where codigo = ?', [$caja->codigo]);
+                            $total_en_existencia =  $arreglo[0]->existencia;
+                            $total_faltantes = $arreglo[0]->faltantes;
+                        @endphp
                         <tr>
                             <td>{{$caja->codigo}}</td>
                             <td>{{$caja->descripcion}}</td>
                             <td>{{$caja->lote_origen}}</td>
                             <td>{{$caja->lote_destino}}</td>
                             <td>{{$caja->cantidad}}</td>
+                            <td>{{$total_faltantes}}</td>
+                            <td>{{$total_en_existencia}}</td>
                             <td>{{$caja->costo_u}}</td>
                             <td>{{$caja->subtotal}}</td>
                         </tr>
@@ -123,6 +137,8 @@
                             <td></td>
                             <td></td>
                             <td>{{$total_catidad}}</td>
+                            <td></td>
+                            <td></td>
                             <td>{{$total_costo_u}}</td>
                             <td>{{$total_subtotal}}</td>
                         </tr>

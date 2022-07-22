@@ -1,6 +1,7 @@
 <div xmlns:wire="http://www.w3.org/1999/xhtml">
 
     <ul class="nav justify-content-center">
+        @if(auth()->user()->rol == 0 || auth()->user()->rol == 1)
         @if(auth()->user()->rol == -1)
 
         @else
@@ -11,44 +12,44 @@
                 <a style="color:white; font-size:12px;" href="importar_c"><strong>Existencia en bodega</strong></a>
             </li>
             <li class="nav-item">
-                <a style="color:white; font-size:12px;" href="inventario_cajas"><strong>Existencia de cajas</strong></a>
+                <a style="color:white; font-size:12px;" href="{{ route('inventario_cajas') }}"><strong>Existencia de cajas</strong></a>
             </li>
         @endif
         <li class="nav-item">
             <a style="color:white; font-size:12px; " href="historial_programacion"><strong>Programaciones</strong></a>
         </li>
+        @else
+        <br>
+        @endif
     </ul>
 
 
     <div class="container" style="max-width:100%; " @if($ventanas != 2) hidden @endif>
-        <div wire:loading>
-            <div class="centro_carga">
-
-                <div style="color: #a0cadb" class="la-ball-atom la-3x">
-                    <div></div>
-                    <div></div>
-                    <div></div>
-                    <div></div>
-                </div>
-
-            </div>
-        </div>
 
         <div class="row" style="text-align:center;">
 
             <div class="col">
                 <div class="input-group mb-3">
-
-                    <a type="button" name="crear_programacion" id="crear_programacion" wire:click.prevent="cambio(1)"
+                    <div wire:loading>
+                        <button id="btn_guardar" class="mr-sm-2 botonprincipal"
+                            disabled>
+                            <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                            Loading...
+                        </button>
+                    </div>
+                    <div wire:loading.attr="hidden" ">
+                        <a type="button" name="crear_programacion" id="crear_programacion" wire:click.prevent="cambio(1)"
                         class=" botonprincipal   mr-sm-2" value="" style="width:70px; " href="">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor"
-                            class="bi bi-reply-all-fill" viewBox="0 0 16 16">
-                            <path
-                                d="M8.021 11.9 3.453 8.62a.719.719 0 0 1 0-1.238L8.021 4.1a.716.716 0 0 1 1.079.619V6c1.5 0 6 0 7 8-2.5-4.5-7-4-7-4v1.281c0 .56-.606.898-1.079.62z" />
-                            <path
-                                d="M5.232 4.293a.5.5 0 0 1-.106.7L1.114 7.945a.5.5 0 0 1-.042.028.147.147 0 0 0 0 .252.503.503 0 0 1 .042.028l4.012 2.954a.5.5 0 1 1-.593.805L.539 9.073a1.147 1.147 0 0 1 0-1.946l3.994-2.94a.5.5 0 0 1 .699.106z" />
-                        </svg>
-                    </a>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor"
+                                class="bi bi-reply-all-fill" viewBox="0 0 16 16">
+                                <path
+                                    d="M8.021 11.9 3.453 8.62a.719.719 0 0 1 0-1.238L8.021 4.1a.716.716 0 0 1 1.079.619V6c1.5 0 6 0 7 8-2.5-4.5-7-4-7-4v1.281c0 .56-.606.898-1.079.62z" />
+                                <path
+                                    d="M5.232 4.293a.5.5 0 0 1-.106.7L1.114 7.945a.5.5 0 0 1-.042.028.147.147 0 0 0 0 .252.503.503 0 0 1 .042.028l4.012 2.954a.5.5 0 1 1-.593.805L.539 9.073a1.147 1.147 0 0 1 0-1.946l3.994-2.94a.5.5 0 0 1 .699.106z" />
+                            </svg>
+                        </a>
+                    </div>
+
 
                     <input name="buscar" id="buscar" class="  form-control  mr-sm-2" wire:model="busqueda"
                         placeholder="Búsqueda por Marca, Nombre y Vitola" style="width:350px;">
@@ -66,21 +67,21 @@
                     <form wire:submit.prevent="exportProgramacion()">
                         <button class="botonprincipal" type="submit" style="width:100px;">Exportar</button>
                     </form>
-                    <form hidden wire:submit.prevent="modal_limpiar()">
-                        <button class="botonprincipal" type="submit" style="width:120px;">Vaciar</button>
+                    <form method="GET" action="{{ route('exportar_materia') }}">
+                        <button class="botonprincipal" type="submit" style="width:120px;">Actualizar(Mat.)</button>
                     </form>
-
-                    <button type=" button" onclick="guardar_programacion()"
-                            class=" botonprincipal "  style="width:auto;"> Crear programación
-                    </button>
+                    @if(auth()->user()->rol == 0 || auth()->user()->rol == 1)
+                        <button type=" button" onclick="guardar_programacion()"
+                                class=" botonprincipal "  style="width:auto;"> Crear programación
+                        </button>
+                    @endif
 
                 </div>
             </div>
         </div>
 
-        <div class="panel-body" style="padding:0px;">
-            <div
-                style="width:100%; padding-left:0px;   font-size:10px;   overflow-x: display; overflow-y: auto; height:450px;">
+        <div wire:change='tama' id="tabla_materiales2" class="table-responsive">
+            <div wire:loading.class='oscurecer_contenido' style="width:100%; padding-left:0px; height:100%;">
 
                 <table class="table table-light" id="editable" style="font-size:10px;">
                     <thead>
@@ -99,17 +100,20 @@
                             <th style=" text-align:center;">SALDO</th>
                             <th style=" text-align:center;">EXISTENCIA(P)</th>
                             <th style=" text-align:center;">SOB/FAL</th>
-                            <th style=" text-align:center;">EN EXISTENCIA(C)</th>
                             <th style=" text-align:center;">CAJAS</th>
-                            <th style=" text-align:center;">OPERACIONES</th>
-
-
+                            <th style=" text-align:center;">EN EXISTENCIA(C)</th>
+                            <th style=" text-align:center;">SOB/FAL</th>
+                            @if(auth()->user()->rol == 0 || auth()->user()->rol == 1)
+                                <th style=" text-align:center;">OPERACIONES</th>
+                            @endif
                         </tr>
                     </thead>
                     <tbody>
                         @php
                             $existencia_actual = 0;
                             $pendiente_restante = 0;
+
+                            $total_materiales = 0;
                         @endphp
                         @foreach($detalles_provicionales as $detalle_provicional)
                         <tr>
@@ -125,97 +129,30 @@
                             <td>{{$detalle_provicional->cello}}</td>
                             <td>{{$detalle_provicional->upc}}</td>
                             <td>{{intval($detalle_provicional->saldo)}}</td>
-
-
-
-                            @php
-                                if ($detalle_provicional->cod_producto == null) {
-                                    $existe_puros = [];
-                                } else {
-                                    $existe_puros = DB::select('SELECT * FROM importar_existencias WHERE codigo_producto = ?', [$detalle_provicional->cod_producto]);
-                                }
-                            @endphp
-
-
-                            @if(count($existe_puros) > 0)
-                                @php
-                                    $pendiente_restante =  $existe_puros[0]->total - intval($detalle_provicional->saldo);
-                                    $anteriores_puros = DB::select('SELECT SUM(detalle_programacion_temporal.saldo) AS "anterioir"
-                                                                    FROM detalle_programacion_temporal
-                                                                    WHERE detalle_programacion_temporal.cod_producto = ?
-                                                                            AND id_detalle_programacion < ?',
-                                                                [$detalle_provicional->cod_producto,
-                                                                 $detalle_provicional->id]);
-
-                                    $pendiente_restante -= $anteriores_puros[0]->anterioir;
-                               @endphp
-                                    <td>{{ intval($existe_puros[0]->total - $anteriores_puros[0]->anterioir)<0?0:intval($existe_puros[0]->total - $anteriores_puros[0]->anterioir)}}</td>
-                                    @if ($pendiente_restante < 0)
-                                        <td style="color: red">{{'Faltan '.$pendiente_restante}}</td>
-                                    @endif
-                                    @if ($pendiente_restante > 0)
-                                        <td style="color: rgb(119, 0, 255)">{{'Sobran '.$pendiente_restante}}</td>
-                                    @endif
-                                    @if ($pendiente_restante == 0)
-                                        <td>{{$pendiente_restante}}</td>
-                                    @endif
-                                @php
-                                    DB::update('UPDATE detalle_programacion_temporal
-                                    SET detalle_programacion_temporal.cantidad_sobrante_puros = ?
-                                    WHERE detalle_programacion_temporal.id_detalle_programacion =  ?', [$pendiente_restante,$detalle_provicional->id]);
-                                @endphp
-                            @else
-                                <td>0</td>
-                                <td>0</td>
+                            <td>{{intval($detalle_provicional->existencia_puros)}}</td>
+                            @if (intval($detalle_provicional->cantidad_sobrante_puros) < 0)
+                                <td style="color: red">{{'Faltan '.intval($detalle_provicional->cantidad_sobrante_puros)}}</td>
+                            @endif
+                            @if (intval($detalle_provicional->cantidad_sobrante_puros) > 0)
+                                <td style="color: rgb(119, 0, 255)">{{'Sobran '.intval($detalle_provicional->cantidad_sobrante_puros)}}</td>
+                            @endif
+                            @if (intval($detalle_provicional->cantidad_sobrante_puros) == 0)
+                                <td>{{intval($detalle_provicional->cantidad_sobrante_puros)}}</td>
+                            @endif
+                            <td>{{intval($detalle_provicional->cant_cajas)}}</td>
+                            <td>{{intval($detalle_provicional->existencia_cajas)}}</td>
+                            @if (intval($detalle_provicional->cantida_sobrante) < 0)
+                                <td style="color: red">{{'Faltan '.intval($detalle_provicional->cantida_sobrante)}}</td>
+                            @endif
+                            @if (intval($detalle_provicional->cantida_sobrante) > 0)
+                                <td style="color: rgb(119, 0, 255)">{{'Sobran '.intval($detalle_provicional->cantida_sobrante)}}</td>
+                            @endif
+                            @if (intval($detalle_provicional->cantida_sobrante) == 0)
+                                <td>{{intval($detalle_provicional->cantida_sobrante)}}</td>
                             @endif
 
 
-                            @php
-                                if ($detalle_provicional->codigo_caja == null) {
-                                    $existe_caja = [];
-                                } else {
-                                    $existe_caja = DB::select('SELECT * FROM lista_cajas WHERE codigo = ?', [$detalle_provicional->codigo_caja]);
-                                }
-                            @endphp
-
-
-                            @if(count($existe_caja) > 0)
-                                @php
-                                    $existencia_actual = $existe_caja[0]->existencia - $detalle_provicional->cant_cajas_necesarias;
-                                    $anteriores = DB::select('SELECT SUM(detalle_programacion_temporal.cant_cajas) AS "anterioir"
-                                                                    FROM detalle_programacion_temporal
-                                                                    WHERE detalle_programacion_temporal.codigo_caja = ?
-                                                                            AND id_detalle_programacion < ?',
-                                                                [$detalle_provicional->codigo_caja,
-                                                                 $detalle_provicional->id]);
-
-                                    $existencia_actual -= $anteriores[0]->anterioir;
-                               @endphp
-                                    @if ($existencia_actual < 0)
-                                        <td style="color: red">{{'Faltan '.$existencia_actual}}</td>
-                                    @endif
-                                    @if ($existencia_actual > 0)
-                                        <td style="color: rgb(119, 0, 255)">{{'Sobran '.$existencia_actual}}</td>
-                                    @endif
-                                    @if ($existencia_actual == 0)
-                                        <td>{{$existencia_actual}}</td>
-                                    @endif
-                                @php
-                                    DB::update('UPDATE detalle_programacion_temporal
-                                    SET detalle_programacion_temporal.cantida_sobrante = ?
-                                    WHERE detalle_programacion_temporal.id_detalle_programacion =  ?', [$existencia_actual,$detalle_provicional->id]);
-                                @endphp
-
-                                <td style="text-align:center">
-                                    {{intval($detalle_provicional->cant_cajas_necesarias)}}
-                                </td>
-                            @else
-                                <td>N/D</td>
-
-                                <td style="text-align:center">0</td>
-                            @endif
-
-
+                            @if(auth()->user()->rol == 0  || auth()->user()->rol == 1)
                             <td style="text-align:center">
 
                                 <a  onclick="eliminar_detalle_prgramacion({{$detalle_provicional->id}})" href="#">
@@ -237,8 +174,10 @@
                                     </svg>
                                 </a>
                             </td>
+                            @endif
 
                         </tr>
+
                         @if($materiales)
                             @php
                                 $detalles_materiale = DB::select('call traer_materiales_temporal(?)', [$detalle_provicional->id]);
@@ -247,59 +186,24 @@
                                 <tr>
                                     <th colspan="3"></th>
                                     <td colspan="6">{{ '('.$materiale->codigo_material.') '.$materiale->des_material }}</td>
-                                    <th>{{ $materiale->uxe }}</th>
-                                    <th>{{ $materiale->cantidad }}</th>
-                                    @php
-                                        $total_orden = 0;
-
-                                        if ($materiale->uxe == 'NO') {
-
-                                            $total_orden = intval($detalle_provicional->saldo)/($materiale->cantidad / $materiale->cantidad );
-
-                                        }else if($materiale->uxe == 'SI') {
-
-                                            if(( intval($detalle_provicional->por_caja) % 3 ) == 0){
-                                                $total_orden = intval($detalle_provicional->saldo)/(120 / $materiale->cantidad );
-                                            }else{
-                                                $total_orden = intval($detalle_provicional->saldo)/(100 / $materiale->cantidad );
-                                            }
-
-                                        }
-                                        DB::update('UPDATE detalles_temporal_materiales
-                                                        SET cantidad = ?
-                                                        WHERE id = ?', [$total_orden ,$materiale->id_de_detalles]);
-                                    @endphp
-                                    <td>{{ $total_orden }}</td>
-                                   
-                                    @php
-                                        $existencia_material_actual = $materiale->saldo - $total_orden;
-                                        $anteriores = DB::select('SELECT SUM(detalles_temporal_materiales.cantidad) AS "anterioir"
-                                                                        FROM detalles_temporal_materiales
-                                                                        WHERE detalles_temporal_materiales.id_material = ?
-                                                                                AND id < ?',
-                                                                    [$materiale->id_material,
-                                                                    $materiale->id_de_detalles]);
-
-                                        $existencia_material_actual -= $anteriores[0]->anterioir;
-                                    @endphp
-                                         <td>{{ intval($materiale->saldo - $anteriores[0]->anterioir)<0?0:intval($materiale->saldo - $anteriores[0]->anterioir)  }}</td>
-                                            @if ($existencia_material_actual < 0)
-                                                <td style="color: red">{{'Faltan '.$existencia_material_actual}}</td>
-                                            @endif
-                                            @if ($existencia_material_actual > 0)
-                                                <td style="color: rgb(119, 0, 255)">{{'Sobran '.$existencia_material_actual}}</td>
-                                            @endif
-                                            @if ($existencia_material_actual == 0)
-                                                <td>{{$existencia_material_actual}}</td>
-                                            @endif
-                                        @php
-                                            DB::update('UPDATE detalles_temporal_materiales
-                                                        SET restante = ?
-                                                        WHERE id = ?', [$existencia_material_actual ,$materiale->id_de_detalles]);
-
-                                        @endphp
+                                    <th></th>
+                                    <th></th>
+                                    <td>{{ $materiale->cantidad_m }}</td>
+                                    <td>{{$materiale->existencia_material  }}</td>
+                                    @if ($materiale->restante  < 0)
+                                        <td style="color: red">{{'Faltan '.$materiale->restante }}</td>
+                                    @endif
+                                    @if ($materiale->restante  > 0)
+                                        <td style="color: rgb(119, 0, 255)">{{'Sobran '.$materiale->restante }}</td>
+                                    @endif
+                                    @if ($materiale->restante  == 0)
+                                        <td>{{$materiale->restante }}</td>
+                                    @endif
                                     <th colspan="3"></th>
                                 </tr>
+                                @php
+                                    $total_materiales += $materiale->cantidad_m;
+                                @endphp
 
                             @endforeach
                         @endif
@@ -311,7 +215,9 @@
             </div>
         </div>
         <br>
-        <div class="input-group" style="width:30%;position: fixed;right: 0px;bottom:0px; height:30px;">
+        <div class="input-group" style="width:40%;position: fixed;right: 0px;bottom:0px; height:30px;">
+            <span class="form-control input-group-text">Total Materiales</span>
+            <input type="text" class="form-control"  value="{{ $total_materiales }}">
             <span class="form-control input-group-text">Total Programacion</span>
             <input type="text" class="form-control" wire:model="total_saldo">
         </div>
@@ -319,19 +225,6 @@
 
     <div @if($ventanas == 2) hidden @endif>
         <div class="container" style="max-width:100%; ">
-            <div wire:loading>
-                <div class="centro_carga">
-
-                    <div style="color: #a0cadb" class="la-ball-atom la-3x">
-                        <div></div>
-                        <div></div>
-                        <div></div>
-                        <div></div>
-                    </div>
-
-                </div>
-            </div>
-
             <div class="row" style="margin-bottom:2px">
                 @if(auth()->user()->rol == -1)
 
@@ -339,7 +232,7 @@
                 <div class="col">
                     <div class="row">
                         <div class="col">
-
+                            @if(auth()->user()->rol == 0 || auth()->user()->rol == 1)
                                 <abbr title="Agregar a Programación">
                                     <button class=" botonprincipal" onclick="agregar_a_programacion()" > <svg xmlns="http://www.w3.org/2000/svg" width="16"
                                             height="16" fill="currentColor" class="bi bi-plus-circle" viewBox="0 0 16 16">
@@ -348,14 +241,23 @@
                                                 d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z" />
                                         </svg> Programación </button>
                                 </abbr>
-
+                            @endif
                         </div>
 
                         <div class="col">
-                            <abbr title="Revisar Programacion actual">
-                                <a href="" wire:click.prevent="cambio(2)"> <button class="botonprincipal">
-                                        Ver</button></a>
-                            </abbr>
+                            <div wire:loading>
+                                <button id="btn_guardar" class="mr-sm-2 botonprincipal"
+                                    disabled>
+                                    <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                                    Loading...
+                                </button>
+                            </div>
+                            <div wire:loading.attr="hidden" >
+                                <abbr title="Revisar Programacion actual">
+                                    <a href="" wire:click.prevent="cambio(2)"> <button class="botonprincipal">
+                                            Ver</button></a>
+                                </abbr>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -431,11 +333,11 @@
                     </div>
                 </div>
                 <div class="col" wire:ignore>
-                    <select onchange="buscar_tabla()" onclick="funcion1()" name="b_mes" id="b_mes"
-                        class=" mi-selector form-control" style="width:100%;height:34px;">
+                    <select onchange="buscar_tabla()" onclick="funcion1()" name="b_mes[]" id="b_mes"
+                        class="form-control"  multiple>
                         <option value="" style="overflow-y: scroll;">Todos los meses</option>
                         @foreach($mes_p as $mes)
-                        <option style="overflow-y: scroll;"> {{$mes->mes}}</option>
+                        <option selected style="overflow-y: scroll;"> {{$mes}}</option>
                         @endforeach
                     </select>
                 </div>
@@ -445,7 +347,7 @@
                         class=" mi-selector form-control" style="width:100%;height:34px;" name="states[]">
                         <option value="" style="overflow-y: scroll;">Todos Items</option>
                         @foreach($items_p as $item)
-                        <option style="overflow-y: scroll;"> {{$item->item}}</option>
+                        <option style="overflow-y: scroll;"> {{$item}}</option>
                         @endforeach
                     </select>
                 </div>
@@ -455,7 +357,7 @@
                         class=" mi-selector form-control" style="width:100%;height:34px;" name="states[]">
                         <option value="" style="overflow-y: scroll;">Todas las ordenes del sistema</option>
                         @foreach($ordenes_p as $orden)
-                        <option style="overflow-y: scroll;"> {{$orden->orden_del_sitema}}</option>
+                        <option style="overflow-y: scroll;"> {{$orden}}</option>
                         @endforeach
                     </select>
                 </div>
@@ -465,7 +367,7 @@
                         class=" mi-selector form-control" style="width:100%;height:34px;" name="states[]">
                         <option value="" style="overflow-y: scroll;">Todas las ordenes</option>
                         @foreach($hons_p as $hon)
-                        <option style="overflow-y: scroll;"> {{$hon->orden}}</option>
+                        <option style="overflow-y: scroll;"> {{$hon}}</option>
                         @endforeach
                     </select>
                 </div>
@@ -481,7 +383,7 @@
 
                 @else
                         <div class="col" wire:ignore>
-
+                            @if(auth()->user()->rol == 0 || auth()->user()->rol == 1)
                             <abbr title="Agregar a Pendiente Empaque">
                                 <button class=" botonprincipal" data-toggle="modal" data-target="#productos_crear_empaque">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
@@ -491,6 +393,7 @@
                                             d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z" />
                                     </svg> Nuevo </button>
                             </abbr>
+                            @endif
                         </div>
 
                         @endif
@@ -512,7 +415,7 @@
                         class=" mi-selector form-control" style="width:100%;height:34px;" name="states[]">
                         <option value="" style="overflow-y: scroll;">Todas las marcas</option>
                         @foreach($marcas_p as $marca)
-                        <option style="overflow-y: scroll;"> {{$marca->marca}}</option>
+                        <option style="overflow-y: scroll;"> {{$marca}}</option>
                         @endforeach
                     </select>
                 </div>
@@ -522,7 +425,7 @@
                         class=" mi-selector form-control" style="width:100%;height:34px;" name="states[]">
                         <option value="" style="overflow-y: scroll;">Todas las vitolas</option>
                         @foreach($vitolas_p as $vitola)
-                        <option style="overflow-y: scroll;"> {{$vitola->vitola}}</option>
+                        <option style="overflow-y: scroll;"> {{$vitola}}</option>
                         @endforeach
                     </select>
                 </div>
@@ -532,7 +435,7 @@
                         class=" mi-selector form-control" style="width:100%;height:34px;" name="states[]">
                         <option value="" style="overflow-y: scroll;">Todos los nombres</option>
                         @foreach($nombre_p as $nombre)
-                        <option style="overflow-y: scroll;"> {{$nombre->nombre}}</option>
+                        <option style="overflow-y: scroll;"> {{$nombre}}</option>
                         @endforeach
                     </select>
                 </div>
@@ -542,7 +445,7 @@
                         class=" mi-selector form-control" style="width:100%;height:34px;" name="states[]">
                         <option value="" style="overflow-y: scroll;">Todas las capas</option>
                         @foreach($capas_p as $capa)
-                        <option style="overflow-y: scroll;"> {{$capa->capa}}</option>
+                        <option style="overflow-y: scroll;"> {{$capa}}</option>
                         @endforeach
                     </select>
                 </div>
@@ -552,7 +455,7 @@
                         class=" mi-selector form-control" style="width:100%;height:34px;" name="states[]">
                         <option value="" style="overflow-y: scroll;">Todos los empaques</option>
                         @foreach($empaques_p as $empaque)
-                        <option style="overflow-y: scroll;"> {{$empaque->empaque}}</option>
+                        <option style="overflow-y: scroll;"> {{$empaque}}</option>
                         @endforeach
                     </select>
                 </div>
@@ -589,10 +492,9 @@
             </div>
         </div>
 
-        <div class="panel-body" style="padding:0px;">
-            <div style="width:100%; padding-left:0px;   font-size:10px;   display: block;
-            overflow-x: auto;
-         height:450px;">
+
+        <div wire:change='tama' id="tabla_materiales1" class="table-responsive">
+            <div wire:loading.class='oscurecer_contenido' style="width:100%; padding-left:0px; height:100%;">
                 <table class="table table-light" style="font-size:10px;" id="tabla_pendiente_empaque">
                     <thead style="width:100px;">
                         <tr>
@@ -616,11 +518,14 @@
                             <th>UPC</th>
                             <th>PENDIENTE</th>
                             <th>SALDO</th>
+				<th>CAJAS</th>
                             <th>BODEGAS</th>
                             @if(auth()->user()->rol == -1)
 
                             @else
-                            <th>OPERACIONES</th>
+                                @if(auth()->user()->rol == 0 || auth()->user()->rol == 1)
+                                    <th>OPERACIONES</th>
+                                @endif
                             @endif
                         </tr>
                     </thead>
@@ -656,14 +561,13 @@
                             <td>{{$datos->upc}}</td>
                             <td>{{$datos->pendiente}}</td>
                             <td>{{$datos->saldo}}</td>
-                            <td>
-                                @php
+                            <td>{{$datos->existencia_caja}}</td>
+                            <td>{{ $datos->total }}</td>
 
-                                @endphp
-                            </td>
                             @if(auth()->user()->rol == -1)
 
                             @else
+                            @if(auth()->user()->rol == 0 || auth()->user()->rol == 1)
                             <td style="text-align:center;">
 
                                 <?php
@@ -701,6 +605,7 @@
 
 
                             </td>
+                            @endif
                             @endif
                         </tr>
 
@@ -747,7 +652,7 @@
                                 <select name="itemn" id="itemn" style="height:30px; width: 100%;"
                                     class="form-control itema_nuevo" required type="text" autocomplete="off">
                                     <option value="">Todos los items</option>
-                                    @foreach ($items_p as $items)
+                                    @foreach ($items_agregar as $items)
                                     <option value="{{$items->item}}">{{$items->item}}</option>
                                     @endforeach
                                 </select>
@@ -1000,11 +905,29 @@
     </script>
 
     <script type="text/javascript">
+        var meses_control;
         $(document).ready(function () {
             $('.itema_nuevo').select2({
                 dropdownParent: $('#productos_crear_empaque')
             });
+
+            $('#tabla_materiales1').css('height', ($('#bos').height() - 250));
+            $('#tabla_materiales2').css('height', ($('#bos').height() - 160));
+
+            $('#b_mes').multiselect({
+                enableFiltering: true,
+                enableCaseInsensitiveFiltering: true,
+                buttonWidth:'100%',
+                buttonHeight:'34px'
+            });
+
         });
+
+        window.addEventListener('tamanio_tabla', event => {
+            $('#tabla_materiales1').css('height', ($('#bos').height() - 250));
+            $('#tabla_materiales2').css('height', ($('#bos').height() - 160));
+        });
+
     </script>
     <script type="text/javascript">
         function addexportar() {
@@ -1021,7 +944,14 @@
             @this.busqueda_vitolas_p = $('#b_vitola').val();
             @this.busqueda_capas_p = $('#b_capa').val();
             @this.busqueda_empaques_p = $('#b_empaque').val();
-            @this.busqueda_mes_p = $('#b_mes').val();
+
+            var meses = $('#b_mes').val();
+            var mesesconcatenados = '';
+            meses.forEach(element => {
+                mesesconcatenados = mesesconcatenados+element;
+            });
+
+            @this.busqueda_mes_p = mesesconcatenados;
             @this.busqueda_items_p = $('#b_item').val();
             @this.busqueda_ordenes_p = $('#b_orden').val();
             @this.busqueda_hons_p = $('#b_hon').val();

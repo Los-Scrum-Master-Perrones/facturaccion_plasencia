@@ -42,6 +42,15 @@ class HistorialProgramacion extends Component
             'id' => $this->id_tov
         ]);
 
+        foreach ($this->detalles_programaciones as $key => $value) {
+
+
+            if($value->sampler == 'si'){
+                $value->marca = $value->descripcion_sampler.' '. $value->marca;
+            }
+
+        }
+
         $this->detallestodos =  \DB::select('select * from detalle_programacion');
         return view('livewire.historial-programacion')->extends('principal')->section('content');
     }
@@ -151,12 +160,10 @@ class HistorialProgramacion extends Component
     public function eliminar_programacion(Request $request)
     {
 
-
         $borrar = \DB::select(
             'call eliminar_programacion(:id)',
             ['id' =>  $request->id_pro]
         );
-
 
 
         return redirect()->route('historial_programacion');
