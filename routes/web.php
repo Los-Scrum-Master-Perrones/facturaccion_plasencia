@@ -349,4 +349,12 @@ Route::get('materiales_agregar', MaterialesProductos::class)->name('materiales.r
 Route::post('/importar_ficha', [MaterialesProductos::class, 'import']);
 Route::get('/entradas_salidas', EntradasSalidas::class)->name('entradas.salidas');
 
+Route::post('/MaterialesPendiente', [Pendiente::class,'exportPendienteMateriales'])->name('materiales.exporPendiente');
+Route::post('/MaterialesPendiente2', [Pendiente::class,'imprimir_materiales'])->name('materiales.exportMateriales');
+Route::post('/MaterialesActualizar', [Pendiente::class,'actualizar_datos'])->name('materiales.actualizar_datos');
+Route::post('/MaterialesFichasPendiente', [Pendiente::class,'actualizar_fichas'])->name('materiales.actualizar_fichas');
+
+
+
+
 });

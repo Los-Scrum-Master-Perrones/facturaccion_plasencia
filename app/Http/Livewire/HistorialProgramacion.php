@@ -2,14 +2,15 @@
 
 namespace App\Http\Livewire;
 
+use App\Exports\MaterialesProgramacionExportView;
 use Livewire\Component;
-use DB;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
 use Maatwebsite\Excel\Facades\Excel;
 use Barryvdh\DomPDF\Facade as PDF;
 
 use App\Exports\ProgramcionExport;
+use Illuminate\Support\Facades\DB;
 
 class HistorialProgramacion extends Component
 {
@@ -25,12 +26,14 @@ class HistorialProgramacion extends Component
     public $id_pen;
     public $id_tov_imprimir;
 
+    public $materiales = false;
+
     public function render()
     {
 
-        $this->programaciones = \DB::select('call mostrar_programacion()');
+        $this->programaciones = DB::select('call mostrar_programacion()');
 
-        $this->detalles_programaciones = \DB::select(
+        $this->detalles_programaciones = DB::select(
             'call mostrar_detalles_programacion(:buscar,:id)',
             [
                 'buscar' =>  $this->busqueda,
@@ -38,7 +41,7 @@ class HistorialProgramacion extends Component
             ]
         );
 
-        $this->titulo = \DB::select('call max_programacion(:id)', [
+        $this->titulo = DB::select('call max_programacion(:id)', [
             'id' => $this->id_tov
         ]);
 
@@ -51,7 +54,8 @@ class HistorialProgramacion extends Component
 
         }
 
-        $this->detallestodos =  \DB::select('select * from detalle_programacion');
+        $this->dispatchBrowserEvent('tamanio_tabla');
+
         return view('livewire.historial-programacion')->extends('principal')->section('content');
     }
 
@@ -84,7 +88,7 @@ class HistorialProgramacion extends Component
     {
 
 
-        $cant_tipo = \DB::select(
+        $cant_tipo = DB::select(
             'call traer_cant_cajas(:id_pendiente)',
             ['id_pendiente' => $request->id_pendientee]
         );
@@ -100,7 +104,7 @@ class HistorialProgramacion extends Component
 
 
 
-        $borrar = \DB::select(
+        DB::select(
             'call eliminar_detalle_programacion(:id,:id_pendiente,:saldo,:cant)',
             [
                 'id' =>  $request->ide,
@@ -124,7 +128,7 @@ class HistorialProgramacion extends Component
 
         $saldo_final = ($request->saldo_pen - $request->saldo);
 
-        $cant_tipo = \DB::select(
+        $cant_tipo = DB::select(
             'call traer_cant_cajas(:id_pendiente)',
             ['id_pendiente' => $request->id_pendiente]
         );
@@ -141,7 +145,7 @@ class HistorialProgramacion extends Component
         $cajas_actualizar = ($cajas_utilizadas_viejas - $cajas_utilizadas_actual); //
 
 
-        $borrar = \DB::select(
+        DB::select(
             'call actualizar_detalle_pendiente(:id,:id_pendiente,:saldo,:saldo_pen,:cant)',
             [
                 'id' =>  $request->id_detalle,
@@ -160,7 +164,7 @@ class HistorialProgramacion extends Component
     public function eliminar_programacion(Request $request)
     {
 
-        $borrar = \DB::select(
+        DB::select(
             'call eliminar_programacion(:id)',
             ['id' =>  $request->id_pro]
         );
@@ -174,7 +178,7 @@ class HistorialProgramacion extends Component
 
 
 
-        $borrar = \DB::select(
+        DB::select(
             'call actualizar_programacion(:id,:con)',
             [
                 'id' =>  $request->id_p,
@@ -218,7 +222,7 @@ class HistorialProgramacion extends Component
         $fecha_imp = $ffecha->format('d-m-Y/h:i');
 
 
-        $depros = \DB::select(
+        $depros = DB::select(
             'call mostrar_detalles_programacion(:buscar,:id)',
             [
                 'buscar' => $this->busqueda,
@@ -228,5 +232,18 @@ class HistorialProgramacion extends Component
 
 
         return redirect()->route('imprimir_detalles', ['fecha' => $fecha, 'depros' => $depros]);
+    }
+
+    public function imprimir_materiales()
+    {
+
+        $this->materiales_programacion = DB::select('call exportar_materiales_programacion(?)', [$this->id_tov]);
+
+        $vista =  view('Exports.materiales-programacion-export', [
+            'materiales' => $this->materiales_programacion
+        ]);
+
+        $fecha_programa = DB::select('SELECT prograamacion.fecha FROM prograamacion  WHERE prograamacion.id  = ?', [$this->id_tov]);
+        return Excel::download(new MaterialesProgramacionExportView($vista,'Materiales'), 'Materiales ('. $fecha_programa[0]->fecha.').xlsx');
     }
 }

@@ -3,12 +3,15 @@
 namespace App\Http\Livewire;
 
 use App\Exports\detallesExport;
+use App\Exports\MaterialesProgramacionExportView;
 use Livewire\Component;
 
 use Illuminate\Http\Request;
 
 use Maatwebsite\Excel\Facades\Excel;
 use App\Exports\PendienteEmpaqueExport;
+use App\Exports\SheetMaterialesProgramacionExport;
+use Carbon\Carbon;
 use Exception;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
@@ -1019,7 +1022,8 @@ class PendienteEmpaque extends Component
                                                     :pa_caja_sobrantes,
                                                     :pa_cant_cajas,
                                                     :pa_codigo_caja,
-                                                    :pa_cantidad_sobrante_puros)',
+                                                    :pa_cantidad_sobrante_puros,
+                                                    :pa_des_contenedor)',
                 [
                     'pa_id_detalle_temporal' => $value->id_detalle_programacion,
                     'pa_numero_orden' => $value->numero_orden,
@@ -1030,13 +1034,14 @@ class PendienteEmpaque extends Component
                     'pa_caja_sobrantes' => $value->cantida_sobrante,
                     'pa_cant_cajas' => $value->cant_cajas,
                     'pa_codigo_caja' => $value->codigo_caja,
-                    'pa_cantidad_sobrante_puros' => $value->cantidad_sobrante_puros
+                    'pa_cantidad_sobrante_puros' => $value->cantidad_sobrante_puros,
+                    'pa_des_contenedor'=>$resquest['contenedor']
                 ]
             );
         }
 
-        DB::delete('delete from detalle_programacion_temporal');
-        DB::delete('delete from detalles_temporal_materiales');
+        DB::delete('TRUNCATE TABLE detalle_programacion_temporal');
+        DB::delete('TRUNCATE TABLE detalles_temporal_materiales');
 
         try {
             $datos = [];
@@ -1116,6 +1121,25 @@ class PendienteEmpaque extends Component
        return Excel::download(new detallesExport($this->materiales), 'ProgramaciónPro.xlsx');
     }
 
+    public function imprimir_materiales()
+    {
+
+        $this->materiales_programacion = DB::select('call exportar_materiales_temporal()');
+
+        $vista =  view('Exports.materiales-programacion-export', [
+            'materiales' => $this->materiales_programacion
+        ]);
+
+        $this->cajasProgramacion= DB::select('call exportar_cajas_temporal()');
+
+        $vista2 =  view('Exports.cajas-programacion-export', [
+            'materiales' => $this->cajasProgramacion
+        ]);
+
+
+        return Excel::download(new SheetMaterialesProgramacionExport($vista,$vista2), 'Materiales ('.Carbon::now()->format('Y-m-d').').xlsx');
+    }
+
 
 
 
@@ -1123,6 +1147,47 @@ class PendienteEmpaque extends Component
         $detalles_p = DB::select('call mostrar_detalles_provicional(:buscar)', [
             'buscar' => ''
         ]);
+
+
+        $detalles_p_materiales = DB::select('CALL `traer_materiales_temporal_todo`()');
+
+        foreach($detalles_p as $i => $value){
+
+            foreach ($detalles_p_materiales as $key => $value2) {
+                if($value->id == $value2->id_detalle_temporal){
+                    $value->materiales[] = $value2;
+                }
+            }
+
+            if($value->saldo == 0){
+                $value->materiales[] = [
+
+                        "id_de_detalles" => 96011,
+                        "id_detalle_temporal" => 403,
+                        "id_material" => 5788,
+                        "id" => 5788,
+                        "item" => "10499062",
+                        "codigo_producto" => "P-03201",
+                        "tipo_empaque" => 11,
+                        "codigo_material" => "ME-06506",
+                        "des_material" => "MATERIAL DE EMPAQUE ROCKY PATEL P.C. HEALTH WARNING TRANSPARENTE NEGRO",
+                        "cantidad" => 1,
+                        "uxe" => "SI",
+                        "saldo" => "835190.00",
+                        "cantidad_m" => "600.00",
+                        "existencia_material" => "804168.40",
+                        "restante" => "803568.40",
+                        "co_material" => "ME-06506"
+
+                ];
+
+            }
+        }
+
+
+
+        DB::delete('TRUNCATE TABLE detalles_temporal_materiales;');
+
 
         $existencia_actual = 0;
         $pendiente_restante = 0;
@@ -1195,36 +1260,114 @@ class PendienteEmpaque extends Component
                         $value->id]);
             }
 
+            $saaldoviejo = 8;
+                if($value->saldo == 0){
 
-                DB::select('call actualizar_detallePro_temporalMaterial(:pa_id_detalle_tempoarl,
-                            :pa_id_pendiente,
-                            :pa_codigo_producto)',
-                [
-                    'pa_id_detalle_tempoarl' => $value->id,
-                    'pa_id_pendiente' => $value->id_pendiente,
-                    'pa_codigo_producto' => $value->cod_producto
-                ]);
+                    $datso =  DB::select('SELECT detalle_programacion_temporal.*
+                                       FROM detalle_programacion_temporal
+                                            INNER JOIN pendiente_empaque on pendiente_empaque.id_pendiente = detalle_programacion_temporal.id_pendiente
+                                       WHERE pendiente_empaque.orden = ?
+                                            and numero_orden = ?
+                                            and pendiente_empaque.item = ?
+                                            and pendiente_empaque.paquetes = ?
+                                            and detalle_programacion_temporal.saldo>0
+
+                                        limit 0,1',
+                                            [$detalles_p[$key]->orden_hon,
+                                                $detalles_p[$key]->numero_orden,
+                                                $detalles_p[$key]->item,
+                                                $detalles_p[$key]->paquetes_sampler]);
+                    $saaldoviejo = $value->saldo;
+                    $value->saldo =  $datso[0]->saldo;
+                    $value->cant_cajas =  $datso[0]->cant_cajas;
+                    $value->cant_cajas_necesarias = $datso[0]->cant_cajas.'.0000';
+
+                }
 
 
-                    $detalles_materiale = DB::select('call traer_materiales_temporal(?)', [$value->id]);
 
-                    foreach ($detalles_materiale as $materiale){
+
+                if($value->saldo > 0 && isset($value->materiales ) ){
+
+                    foreach ($value->materiales as $materiale){
 
                         $total_orden = 0;
+
+                        if (!isset($materiale->uxe)) {
+
+                            if ($materiale['uxe'] == 'NO') {
+
+                                $total_orden = $value->saldo;
+
+                            }else if($materiale['uxe']  == 'SI') {
+
+                                $total_orden = $value->cant_cajas_necesarias * $materiale['cantidad'] ;
+
+                            }
+                            DB::insert('INSERT INTO detalles_temporal_materiales(`id_detalle_temporal`,
+                                                                                 `id_material`,
+                                                                                 `co_material`,
+                                                                                 `cantidad`,
+                                                                                 `existencia_material`,
+                                                                                 `restante`)
+                                             VALUES (?, ?, ?, ?, ?,?);',
+                                                    [   $value->id,
+                                                        $materiale['id_material'],
+                                                        $materiale['codigo_material'],
+                                                        $total_orden,
+                                                        $materiale['existencia_material'],
+                                                        $materiale['existencia_material'] - $total_orden]);
+
+                            $ultimo = DB::select('SELECT MAX(id) as "ultimoId" FROM detalles_temporal_materiales');
+
+
+                            $total_materiales += $total_orden;
+                            $existencia_material_actual = $materiale['saldo'] - $total_orden;
+                            $anteriores = DB::select('SELECT SUM(detalles_temporal_materiales.cantidad) AS "anterioir"
+                                                                            FROM detalles_temporal_materiales
+                                                                            WHERE detalles_temporal_materiales.co_material = ?
+                                                                                    AND id < ?',
+                                                                        [$materiale['codigo_material'],
+                                                                        $ultimo[0]->ultimoId]);
+
+                            $existencia_material_actual -= $anteriores[0]->anterioir;
+
+                            $valor_exist_ma = $materiale['saldo'] - $anteriores[0]->anterioir;
+
+                            DB::update('UPDATE detalles_temporal_materiales
+                                        SET restante = ?,
+                                        existencia_material = ?
+                                        WHERE id = ?', [$existencia_material_actual ,
+                                                        $valor_exist_ma<0?0:$valor_exist_ma,
+                                                        $ultimo[0]->ultimoId]);
+
+                        }else{
 
                         if ($materiale->uxe == 'NO') {
 
                             $total_orden = $value->saldo;
 
-                        }else if($materiale->uxe == 'SI') {
+                        }else if($materiale->uxe  == 'SI') {
 
                             $total_orden = $value->cant_cajas_necesarias * $materiale->cantidad ;
 
                         }
-                        DB::update('UPDATE detalles_temporal_materiales
-                                        SET cantidad = ?,
-                                        co_material = ?
-                                    WHERE id = ?', [$total_orden ,$materiale->codigo_material,$materiale->id_de_detalles]);
+                        DB::insert('INSERT INTO detalles_temporal_materiales(`id_detalle_temporal`,
+                                                                             `id_material`,
+                                                                             `co_material`,
+                                                                             `cantidad`,
+                                                                             `existencia_material`,
+                                                                             `restante`)
+                                         VALUES (?, ?, ?, ?, ?,?);',
+                                                [   $materiale->id_detalle_temporal,
+                                                    $materiale->id_material,
+                                                    $materiale->codigo_material,
+                                                    $total_orden,
+                                                    $materiale->existencia_material,
+                                                    $materiale->existencia_material - $total_orden]);
+
+                        $ultimo = DB::select('SELECT MAX(id) as "ultimoId" FROM detalles_temporal_materiales');
+
 
                         $total_materiales += $total_orden;
                         $existencia_material_actual = $materiale->saldo - $total_orden;
@@ -1233,7 +1376,7 @@ class PendienteEmpaque extends Component
                                                                         WHERE detalles_temporal_materiales.co_material = ?
                                                                                 AND id < ?',
                                                                     [$materiale->codigo_material,
-                                                                    $materiale->id_de_detalles]);
+                                                                    $ultimo[0]->ultimoId]);
 
                         $existencia_material_actual -= $anteriores[0]->anterioir;
 
@@ -1244,9 +1387,12 @@ class PendienteEmpaque extends Component
                                     existencia_material = ?
                                     WHERE id = ?', [$existencia_material_actual ,
                                                     $valor_exist_ma<0?0:$valor_exist_ma,
-                                                    $materiale->id_de_detalles]);
+                                                    $ultimo[0]->ultimoId]);
+
+                        }
 
                     }
+                }
 
 
 

@@ -39,7 +39,7 @@
 
                     @else
 
-                    <div class="col">
+                    <div class="col-4">
                         <abbr title="Agregar nuevo producto">
                             <button class="botonprincipal" data-toggle="modal" data-target="#productos_crear">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
@@ -53,8 +53,8 @@
                     </div>
                     @endif
 
-                    <div class="col">
-                        <abbr title="Importar a excel">
+                    <div class="col-2">
+                        <abbr title="Exportar a excel">
                             <button class="botonprincipal" wire:click="exportPendiente()">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
                                     class="bi bi-file-earmark-spreadsheet" viewBox="0 0 16 16">
@@ -63,7 +63,87 @@
                                 </svg>
                             </button>
                         </abbr>
+                    </div>
 
+                    <div class="col-2">
+                        <abbr title="Preparar Reporte Materiales">
+                            <form action="{{ route('materiales.actualizar_datos') }}" method="POST">
+                                @csrf
+                                <input type="text" hidden name="r_uno" id="r_uno" wire:model='r_uno'>
+                                <input type="text" hidden name="r_dos" id="r_dos" wire:model='r_dos'>
+                                <input type="text" hidden name="r_tres" id="r_tres" wire:model='r_tres'>
+                                <input type="text" hidden name="r_cuatro" id="r_cuatro" wire:model='r_cuatro'>
+                                <input type="text" hidden name="r_cinco" id="r_cinco" wire:model='r_cinco'>
+                                <input type="text" hidden name="r_seis" id="r_seis" wire:model='r_seis'>
+                                <input type="text" hidden name="r_siete" id="r_siete" wire:model='r_siete'>
+                                <input type="text" hidden name="busqueda_marcas_p" id="busqueda_marcas_p" wire:model='busqueda_marcas_p'>
+                                <input type="text" hidden name="busqueda_nombre_p" id="busqueda_nombre_p" wire:model='busqueda_nombre_p'>
+                                <input type="text" hidden name="busqueda_vitolas_p" id="busqueda_vitolas_p" wire:model='busqueda_vitolas_p'>
+                                <input type="text" hidden name="busqueda_capas_p" id="busqueda_capas_p" wire:model='busqueda_capas_p'>
+                                <input type="text" hidden name="busqueda_empaques_p" id="busqueda_empaques_p" wire:model='busqueda_empaques_p'>
+                                <input type="text" hidden name="busqueda_items_p" id="busqueda_items_p" wire:model='busqueda_items_p'>
+                                <input type="text" hidden name="busqueda_ordenes_p" id="busqueda_ordenes_p" wire:model='busqueda_ordenes_p'>
+                                <input type="text" hidden name="busqueda_hons_p" id="busqueda_hons_p" wire:model='busqueda_hons_p'>
+                                <input type="text" hidden name="r_mill" id="r_mill" wire:model='r_mill'>
+
+                                <button class="botonprincipal" type="submit">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-basket" viewBox="0 0 16 16">
+                                        <path d="M5.757 1.071a.5.5 0 0 1 .172.686L3.383 6h9.234L10.07 1.757a.5.5 0 1 1 .858-.514L13.783 6H15a1 1 0 0 1 1 1v1a1 1 0 0 1-1 1v4.5a2.5 2.5 0 0 1-2.5 2.5h-9A2.5 2.5 0 0 1 1 13.5V9a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1h1.217L5.07 1.243a.5.5 0 0 1 .686-.172zM2 9v4.5A1.5 1.5 0 0 0 3.5 15h9a1.5 1.5 0 0 0 1.5-1.5V9H2zM1 7v1h14V7H1zm3 3a.5.5 0 0 1 .5.5v3a.5.5 0 0 1-1 0v-3A.5.5 0 0 1 4 10zm2 0a.5.5 0 0 1 .5.5v3a.5.5 0 0 1-1 0v-3A.5.5 0 0 1 6 10zm2 0a.5.5 0 0 1 .5.5v3a.5.5 0 0 1-1 0v-3A.5.5 0 0 1 8 10zm2 0a.5.5 0 0 1 .5.5v3a.5.5 0 0 1-1 0v-3a.5.5 0 0 1 .5-.5zm2 0a.5.5 0 0 1 .5.5v3a.5.5 0 0 1-1 0v-3a.5.5 0 0 1 .5-.5z"/>
+                                      </svg>
+                                </button>
+                            </form>
+
+
+                        </abbr>
+                    </div>
+
+                    <div class="col-2">
+                        <abbr title="Exportar Materiales Pendiente">
+                            <form action="{{ route('materiales.exporPendiente') }}" method="POST">
+                                @csrf
+                                <input type="text" hidden name="r_uno" id="r_uno" wire:model='r_uno'>
+                                <input type="text" hidden name="r_dos" id="r_dos" wire:model='r_dos'>
+                                <input type="text" hidden name="r_tres" id="r_tres" wire:model='r_tres'>
+                                <input type="text" hidden name="r_cuatro" id="r_cuatro" wire:model='r_cuatro'>
+                                <input type="text" hidden name="r_cinco" id="r_cinco" wire:model='r_cinco'>
+                                <input type="text" hidden name="r_seis" id="r_seis" wire:model='r_seis'>
+                                <input type="text" hidden name="r_siete" id="r_siete" wire:model='r_siete'>
+                                <input type="text" hidden name="busqueda_marcas_p" id="busqueda_marcas_p" wire:model='busqueda_marcas_p'>
+                                <input type="text" hidden name="busqueda_nombre_p" id="busqueda_nombre_p" wire:model='busqueda_nombre_p'>
+                                <input type="text" hidden name="busqueda_vitolas_p" id="busqueda_vitolas_p" wire:model='busqueda_vitolas_p'>
+                                <input type="text" hidden name="busqueda_capas_p" id="busqueda_capas_p" wire:model='busqueda_capas_p'>
+                                <input type="text" hidden name="busqueda_empaques_p" id="busqueda_empaques_p" wire:model='busqueda_empaques_p'>
+                                <input type="text" hidden name="busqueda_items_p" id="busqueda_items_p" wire:model='busqueda_items_p'>
+                                <input type="text" hidden name="busqueda_ordenes_p" id="busqueda_ordenes_p" wire:model='busqueda_ordenes_p'>
+                                <input type="text" hidden name="busqueda_hons_p" id="busqueda_hons_p" wire:model='busqueda_hons_p'>
+                                <input type="text" hidden name="r_mill" id="r_mill" wire:model='r_mill'>
+
+                                <button class="botonprincipal" type="submit">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-list-check" viewBox="0 0 16 16">
+                                        <path fill-rule="evenodd" d="M5 11.5a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 0 1h-9a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 0 1h-9a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 0 1h-9a.5.5 0 0 1-.5-.5zM3.854 2.146a.5.5 0 0 1 0 .708l-1.5 1.5a.5.5 0 0 1-.708 0l-.5-.5a.5.5 0 1 1 .708-.708L2 3.293l1.146-1.147a.5.5 0 0 1 .708 0zm0 4a.5.5 0 0 1 0 .708l-1.5 1.5a.5.5 0 0 1-.708 0l-.5-.5a.5.5 0 1 1 .708-.708L2 7.293l1.146-1.147a.5.5 0 0 1 .708 0zm0 4a.5.5 0 0 1 0 .708l-1.5 1.5a.5.5 0 0 1-.708 0l-.5-.5a.5.5 0 0 1 .708-.708l.146.147 1.146-1.147a.5.5 0 0 1 .708 0z"/>
+                                      </svg>
+                                </button>
+                            </form>
+                        </abbr>
+                    </div>
+
+                    <div class="col-2">
+                        <abbr title="Exportar Solo Materiales">
+
+                            <form action="{{ route('materiales.exportMateriales') }}" method="POST">
+                                @csrf
+                                <input type="text" hidden name="busqueda_items_p" id="busqueda_items_p" wire:model='busqueda_items_p'>
+                                <input type="text" hidden name="busqueda_hons_p" id="busqueda_hons_p" wire:model='busqueda_hons_p'>
+                                <input type="text" hidden name="busqueda_ordenes_p" id="busqueda_ordenes_p" wire:model='busqueda_ordenes_p'>
+                                <input type="text" hidden name="busqueda_mes_p" id="busqueda_mes_p" wire:model='busqueda_mes_p'>
+
+                                <button class="botonprincipal" type="submit">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-list-columns-reverse" viewBox="0 0 16 16">
+                                        <path fill-rule="evenodd" d="M0 .5A.5.5 0 0 1 .5 0h2a.5.5 0 0 1 0 1h-2A.5.5 0 0 1 0 .5Zm4 0a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1h-10A.5.5 0 0 1 4 .5Zm-4 2A.5.5 0 0 1 .5 2h2a.5.5 0 0 1 0 1h-2a.5.5 0 0 1-.5-.5Zm4 0a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 0 1h-9a.5.5 0 0 1-.5-.5Zm-4 2A.5.5 0 0 1 .5 4h2a.5.5 0 0 1 0 1h-2a.5.5 0 0 1-.5-.5Zm4 0a.5.5 0 0 1 .5-.5h11a.5.5 0 0 1 0 1h-11a.5.5 0 0 1-.5-.5Zm-4 2A.5.5 0 0 1 .5 6h2a.5.5 0 0 1 0 1h-2a.5.5 0 0 1-.5-.5Zm4 0a.5.5 0 0 1 .5-.5h8a.5.5 0 0 1 0 1h-8a.5.5 0 0 1-.5-.5Zm-4 2A.5.5 0 0 1 .5 8h2a.5.5 0 0 1 0 1h-2a.5.5 0 0 1-.5-.5Zm4 0a.5.5 0 0 1 .5-.5h8a.5.5 0 0 1 0 1h-8a.5.5 0 0 1-.5-.5Zm-4 2a.5.5 0 0 1 .5-.5h2a.5.5 0 0 1 0 1h-2a.5.5 0 0 1-.5-.5Zm4 0a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1h-10a.5.5 0 0 1-.5-.5Zm-4 2a.5.5 0 0 1 .5-.5h2a.5.5 0 0 1 0 1h-2a.5.5 0 0 1-.5-.5Zm4 0a.5.5 0 0 1 .5-.5h6a.5.5 0 0 1 0 1h-6a.5.5 0 0 1-.5-.5Zm-4 2a.5.5 0 0 1 .5-.5h2a.5.5 0 0 1 0 1h-2a.5.5 0 0 1-.5-.5Zm4 0a.5.5 0 0 1 .5-.5h11a.5.5 0 0 1 0 1h-11a.5.5 0 0 1-.5-.5Z"/>
+                                    </svg>
+                                </button>
+                            </form>
+                        </abbr>
                     </div>
 
 
@@ -242,7 +322,28 @@
                     <ul class="pagination justify-content-center">
 
                         <li class="page-item">
-                            <a class="page-link" href="#" tabindex="-1" wire:click="mostrar_todo(0)">Dividir</a>
+
+                            <form action="{{ route('materiales.actualizar_fichas') }}" method="POST">
+                                @csrf
+                                <input type="text" hidden name="r_uno" id="r_uno" wire:model='r_uno'>
+                                <input type="text" hidden name="r_dos" id="r_dos" wire:model='r_dos'>
+                                <input type="text" hidden name="r_tres" id="r_tres" wire:model='r_tres'>
+                                <input type="text" hidden name="r_cuatro" id="r_cuatro" wire:model='r_cuatro'>
+                                <input type="text" hidden name="r_cinco" id="r_cinco" wire:model='r_cinco'>
+                                <input type="text" hidden name="r_seis" id="r_seis" wire:model='r_seis'>
+                                <input type="text" hidden name="r_siete" id="r_siete" wire:model='r_siete'>
+                                <input type="text" hidden name="busqueda_marcas_p" id="busqueda_marcas_p" wire:model='busqueda_marcas_p'>
+                                <input type="text" hidden name="busqueda_nombre_p" id="busqueda_nombre_p" wire:model='busqueda_nombre_p'>
+                                <input type="text" hidden name="busqueda_vitolas_p" id="busqueda_vitolas_p" wire:model='busqueda_vitolas_p'>
+                                <input type="text" hidden name="busqueda_capas_p" id="busqueda_capas_p" wire:model='busqueda_capas_p'>
+                                <input type="text" hidden name="busqueda_empaques_p" id="busqueda_empaques_p" wire:model='busqueda_empaques_p'>
+                                <input type="text" hidden name="busqueda_items_p" id="busqueda_items_p" wire:model='busqueda_items_p'>
+                                <input type="text" hidden name="busqueda_ordenes_p" id="busqueda_ordenes_p" wire:model='busqueda_ordenes_p'>
+                                <input type="text" hidden name="busqueda_hons_p" id="busqueda_hons_p" wire:model='busqueda_hons_p'>
+                                <input type="text" hidden name="r_mill" id="r_mill" wire:model='r_mill'>
+
+                                <button type="submit" class="page-link" style="height: 28px">Actualizar</button>
+                            </form>
                         </li>
                         @php
                         $cantida = 1;

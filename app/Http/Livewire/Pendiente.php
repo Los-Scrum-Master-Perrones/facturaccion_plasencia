@@ -2,9 +2,12 @@
 
 namespace App\Http\Livewire;
 
+use App\Exports\MaterialesProgramacionExportView;
 use Livewire\Component;
 
 use App\Exports\PendienteExport;
+use App\Exports\PendienteMaterialesExport;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 use Maatwebsite\Excel\Facades\Excel;
@@ -53,15 +56,15 @@ class Pendiente extends Component
     public $ordenes_p;
     public $hons_p;
 
-    public $busqueda_marcas_p;
-    public $busqueda_nombre_p;
-    public $busqueda_vitolas_p;
-    public $busqueda_capas_p;
-    public $busqueda_empaques_p;
-    public $busqueda_mes_p;
-    public $busqueda_items_p;
-    public $busqueda_ordenes_p;
-    public $busqueda_hons_p;
+    public $busqueda_marcas_p = '';
+    public $busqueda_nombre_p = '';
+    public $busqueda_vitolas_p = '';
+    public $busqueda_capas_p = '';
+    public $busqueda_empaques_p = '';
+    public $busqueda_mes_p = '';
+    public $busqueda_items_p = '';
+    public $busqueda_ordenes_p = '';
+    public $busqueda_hons_p = '';
     public $todos;
 
 
@@ -76,7 +79,7 @@ class Pendiente extends Component
 
     public function render()
     {
-        $item_sampler_mensaje="item";
+        $item_sampler_mensaje = "item";
 
         $this->items_p = DB::select('call buscar_pendiente_item()');
         /*Procedimientos de busquedas de la tabla pendiente*/
@@ -170,9 +173,7 @@ class Pendiente extends Component
         $this->vitolas = DB::select('call buscar_vitola("")');
         $this->tipo_empaques = DB::select('call buscar_tipo_empaque("")');
 
-
-
-        $this->tuplas_conteo = count(DB::select(
+        $todos = DB::select(
             'call buscar_pendiente(:uno,:dos,:tres,:cuatro,:pres,:seis,:siete,:paginacion,
         :pa_items,:pa_orden_sist,:pa_ordenes,
         :pa_marcas,:pa_vitolas,:pa_nombre,:pa_capas,
@@ -196,37 +197,14 @@ class Pendiente extends Component
                 'pa_orden_sist' =>  $this->busqueda_ordenes_p,
                 'pa_ordenes' =>  $this->busqueda_hons_p,
                 'r_mill' =>  $this->r_mill,
-
             ]
-        ));
+        );
+
+
+        $this->tuplas_conteo = count($todos);
 
         if ($this->todos == 1) {
-            $this->datos_pendiente = DB::select(
-                'call buscar_pendiente(:uno,:dos,:tres,:cuatro,:pres,:seis,:siete,:paginacion,
-            :pa_items,:pa_orden_sist,:pa_ordenes,
-            :pa_marcas,:pa_vitolas,:pa_nombre,:pa_capas,
-            :pa_empaques,:pa_meses,:r_mill)',
-                [
-                    'uno' =>  $this->r_uno,
-                    'dos' =>  $this->r_dos,
-                    'tres' =>  $this->r_tres,
-                    'cuatro' =>  $this->r_cuatro,
-                    'pres' =>  $this->r_cinco,
-                    'seis' =>  $this->r_seis,
-                    'siete' =>  $this->r_siete,
-                    'paginacion' =>  -1,
-                    'pa_marcas' =>  $this->busqueda_marcas_p,
-                    'pa_nombre' =>  $this->busqueda_nombre_p,
-                    'pa_vitolas' =>  $this->busqueda_vitolas_p,
-                    'pa_capas' =>  $this->busqueda_capas_p,
-                    'pa_empaques' =>  $this->busqueda_empaques_p,
-                    'pa_meses' =>  $this->busqueda_mes_p,
-                    'pa_items' =>  $this->busqueda_items_p,
-                    'pa_orden_sist' =>  $this->busqueda_ordenes_p,
-                    'pa_ordenes' =>  $this->busqueda_hons_p,
-                    'r_mill' =>  $this->r_mill,
-                ]
-            );
+            $this->datos_pendiente = $todos;
         } else {
             $this->datos_pendiente = DB::select(
                 'call buscar_pendiente(:uno,:dos,:tres,:cuatro,:pres,:seis,:siete,:paginacion,
@@ -257,86 +235,6 @@ class Pendiente extends Component
             );
         }
 
-
-
-        try {
-            $datos = [];
-            $cantidad_detalle_sampler = 0;
-            $detalles = 0;
-            $valores = [];
-
-            $pendiente = DB::select(
-                'call buscar_pendiente(:uno,:dos,:tres,:cuatro,:pres,:seis,:siete,:paginacion,
-            :pa_items,:pa_orden_sist,:pa_ordenes,
-            :pa_marcas,:pa_vitolas,:pa_nombre,:pa_capas,
-            :pa_empaques,:pa_meses,:r_mill)',
-                [
-                    'uno' =>  $this->r_uno,
-                    'dos' =>  $this->r_dos,
-                    'tres' =>  $this->r_tres,
-                    'cuatro' =>  $this->r_cuatro,
-                    'pres' =>  $this->r_cinco,
-                    'seis' =>  $this->r_seis,
-                    'siete' =>  $this->r_siete,
-                    'paginacion' =>  -1,
-                    'pa_marcas' =>  $this->busqueda_marcas_p,
-                    'pa_nombre' =>  $this->busqueda_nombre_p,
-                    'pa_vitolas' =>  $this->busqueda_vitolas_p,
-                    'pa_capas' =>  $this->busqueda_capas_p,
-                    'pa_empaques' =>  $this->busqueda_empaques_p,
-                    'pa_meses' =>  $this->busqueda_mes_p,
-                    'pa_items' =>  $this->busqueda_items_p,
-                    'pa_orden_sist' =>  $this->busqueda_ordenes_p,
-                    'pa_ordenes' =>  $this->busqueda_hons_p,
-                    'r_mill' =>  $this->r_mill,
-
-                ]
-            );
-
-            for ($i = 0; $i < count($pendiente); $i++) {
-                $item_sampler_mensaje="".$pendiente[$i]->item;
-
-
-
-                $sampler = DB::select('SELECT clase_productos.sampler FROM clase_productos WHERE  clase_productos.item = ?;', [$pendiente[$i]->item]);
-
-                if (isset($sampler[0])) {
-                    if ($sampler[0]->sampler == "si") {
-
-                        if ($cantidad_detalle_sampler == 0 && $detalles == 0) {
-                            $datos = DB::select('call traer_numero_detalles_productos(?)', [$pendiente[$i]->item]);
-                            $cantidad_detalle_sampler = $datos[0]->tuplas;
-                        }
-
-                        $valores = DB::select('call traer_detalles_productos_actualizar(?,?)', [$pendiente[$i]->item, $detalles]);
-
-                         $variable = DB::select('call actualizar_pendiente_sampler(:marca,:nombre,:vitola,:capa,:tipo,:item,:codigo ,:precio)', [
-                            'marca' => $valores[0]->marca,
-                            'nombre' => $valores[0]->nombre,
-                            'vitola' => $valores[0]->vitola,
-                            'capa' => $valores[0]->capa,
-                            'tipo' => $valores[0]->tipo_empaque,
-                            'item' =>  $pendiente[$i]->id_pendiente,
-                            'codigo' => $valores[0]->otra_descripcion,
-                            'precio' => $valores[0]->precio,
-                        ]);
-
-
-                        $detalles++;
-
-                        if ($detalles == $cantidad_detalle_sampler) {
-                            $detalles = 0;
-                            $cantidad_detalle_sampler = 0;
-                        }
-                    }
-                }
-            }
-        } catch (Exception $e) {
-            $this->dispatchBrowserEvent('notificacionErrorEjecucion', ['error' => $e->getMessage(), 'mensaje'=> $item_sampler_mensaje ]);
-
-        }
-
-
         return view('livewire.pendiente')->extends('principal')->section('content');
     }
 
@@ -359,7 +257,6 @@ class Pendiente extends Component
         $this->busqueda_items_p = "";
         $this->busqueda_ordenes_p = "";
         $this->busqueda_hons_p = "";
-
     }
 
     public function paginacion_numerica($numero)
@@ -436,7 +333,7 @@ class Pendiente extends Component
 
         if (!$validator->fails()) {
 
-           DB::select(
+            DB::select(
                 'call actualizar_pendientes(:id_pendientea2,:orden_sistema2,:orden2,:pendiente2,:saldo2,:observacion2)',
                 [
                     'id_pendientea2' => $request['id_pendientea2'],
@@ -490,8 +387,6 @@ class Pendiente extends Component
     public function insertar_nuevo_pendiente($request)
     {
 
-
-
         $validator = Validator::make(
             [
                 'categoria' => $request['categoria'],
@@ -544,14 +439,11 @@ class Pendiente extends Component
         } else {
             $this->dispatchBrowserEvent('notificacionErrorInsert', ['mensaje' => $validator->errors()->all()]);
         }
-
-
-
     }
 
     public function agregar_productos()
     {
-        $puro = DB::select('CALL `pendiente_producto_seleccion`(?)',[$this->codigo_item]);
+        $puro = DB::select('CALL `pendiente_producto_seleccion`(?)', [$this->codigo_item]);
         $this->capas_nuevo = $puro[0]->capa;
         $this->marcas_nuevo = $puro[0]->marca;
         $this->nombres_nuevo = $puro[0]->nombre;
@@ -560,6 +452,260 @@ class Pendiente extends Component
         $this->presentacion =  $puro[0]->presentacion;
         $this->codigo_precio_nuevo =  $puro[0]->codigo_precio;
         $this->precio_precio =  $puro[0]->precio;
+    }
+
+    public function actualizar_fichas(Request $request)
+    {
+        try {
+            $datos = [];
+            $cantidad_detalle_sampler = 0;
+            $detalles = 0;
+            $valores = [];
+
+            $pendiente = DB::select(
+                'call buscar_pendiente(:uno,:dos,:tres,:cuatro,:pres,:seis,:siete,:paginacion,
+            :pa_items,:pa_orden_sist,:pa_ordenes,
+            :pa_marcas,:pa_vitolas,:pa_nombre,:pa_capas,
+            :pa_empaques,:pa_meses,:r_mill)',
+            [
+                'uno' =>  is_null($request->r_uno)?'':$request->r_uno,
+                'dos' =>  is_null($request->r_dos)?'':$request->r_dos,
+                'tres' =>  is_null($request->r_tres)?'':$request->r_tres,
+                'cuatro' =>  is_null($request->r_cuatro)?'':$request->r_cuatro,
+                'pres' =>  is_null($request->r_cinco)?'':$request->r_cinco,
+                'seis' =>  is_null($request->r_seis)?'':$request->r_seis,
+                'siete' =>  is_null($request->r_siete)?'':$request->r_siete,
+                'paginacion' =>  -1,
+                'pa_marcas' =>  is_null($request->busqueda_marcas_p)?'':$request->busqueda_marcas_p,
+                'pa_nombre' =>  is_null($request->busqueda_nombre_p)?'':$request->busqueda_nombre_p,
+                'pa_vitolas' => is_null($request->busqueda_vitolas_p)?'':$request->busqueda_vitolas_p,
+                'pa_capas' =>  is_null($request->busqueda_capas_p)?'':$request->busqueda_capas_p,
+                'pa_empaques' =>  is_null($request->busqueda_empaques_p)?'':$request->busqueda_empaques_p,
+                'pa_meses' =>  is_null($request->busqueda_mes_p)?'':$request->busqueda_mes_p,
+                'pa_items' =>  is_null($request->busqueda_items_p)?'':$request->busqueda_items_p,
+                'pa_orden_sist' =>  is_null($request->busqueda_ordenes_p)?'':$request->busqueda_ordenes_p,
+                'pa_ordenes' =>  is_null($request->busqueda_hons_p)?'':$request->busqueda_hons_p,
+                'r_mill' =>  is_null($request->r_mill)?'':$request->r_mill,
+
+            ]
+            );
+
+            DB::delete('TRUNCATE TABLE detalles_pendiente_materiales;');
+
+            for ($i = 0; $i < count($pendiente); $i++) {
+                $item_sampler_mensaje = "" . $pendiente[$i]->item;
+
+
+
+                $sampler = DB::select('SELECT clase_productos.sampler FROM clase_productos WHERE  clase_productos.item = ?;', [$pendiente[$i]->item]);
+
+                if (isset($sampler[0])) {
+                    if ($sampler[0]->sampler == "si") {
+
+                        if ($cantidad_detalle_sampler == 0 && $detalles == 0) {
+                            $datos = DB::select('call traer_numero_detalles_productos(?)', [$pendiente[$i]->item]);
+                            $cantidad_detalle_sampler = $datos[0]->tuplas;
+                        }
+
+                        $valores = DB::select('call traer_detalles_productos_actualizar(?,?)', [$pendiente[$i]->item, $detalles]);
+
+                        $variable = DB::select('call actualizar_pendiente_sampler(:marca,:nombre,:vitola,:capa,:tipo,:item,:codigo ,:precio,:pa_codigo_productos)', [
+                            'marca' => $valores[0]->marca,
+                            'nombre' => $valores[0]->nombre,
+                            'vitola' => $valores[0]->vitola,
+                            'capa' => $valores[0]->capa,
+                            'tipo' => $valores[0]->tipo_empaque,
+                            'item' =>  $pendiente[$i]->id_pendiente,
+                            'codigo' => $valores[0]->otra_descripcion,
+                            'precio' => $valores[0]->precio,
+                            'pa_codigo_productos' => $valores[0]->codigo_producto,
+                        ]);
+
+
+                        $detalles++;
+
+                        if ($detalles == $cantidad_detalle_sampler) {
+                            $detalles = 0;
+                            $cantidad_detalle_sampler = 0;
+                        }
+
+                        DB::insert('CALL insertar_pendiente_materiales(:pa_item,
+                                                                        :cod_producto,
+                                                                        :pa_id_pendiente)',
+
+                                    ['pa_item' => $pendiente[$i]->item,
+                                    'cod_producto' => $valores[0]->codigo_producto,
+                                    'pa_id_pendiente' => $pendiente[$i]->id_pendiente]);
+
+
+
+                    }else{
+                        $s = DB::select('SELECT codigo_producto from clase_productos where item = ?', [$pendiente[$i]->item]);
+                        DB::update('UPDATE pendiente set codigo_productos = ? where id_pendiente = ?', [$s[0]->codigo_producto,$pendiente[$i]->id_pendiente]);
+
+                        DB::insert('CALL insertar_pendiente_materiales(:pa_item,
+                                                        :cod_producto,
+                                                        :pa_id_pendiente)',
+                                            ['pa_item' => $pendiente[$i]->item,
+                                             'cod_producto' => $s[0]->codigo_producto,
+                                             'pa_id_pendiente' => $pendiente[$i]->id_pendiente]);
+                    }
+                }
+            }
+
+            return redirect()->route('pendiente');
+        } catch (Exception $e) {
+            $this->dispatchBrowserEvent('notificacionErrorEjecucion', ['error' => $e->getMessage(), 'mensaje' => $item_sampler_mensaje]);
+        }
+    }
+
+
+    public function actualizar_datos(Request $request)
+    {
+        $pendiente = DB::select(
+            'call buscar_pendiente(:uno,:dos,:tres,:cuatro,:pres,:seis,:siete,:paginacion,
+                                    :pa_items,:pa_orden_sist,:pa_ordenes,
+                                    :pa_marcas,:pa_vitolas,:pa_nombre,:pa_capas,
+                                    :pa_empaques,:pa_meses,:r_mill)',
+            [
+                'uno' =>  is_null($request->r_uno)?'':$request->r_uno,
+                'dos' =>  is_null($request->r_dos)?'':$request->r_dos,
+                'tres' =>  is_null($request->r_tres)?'':$request->r_tres,
+                'cuatro' =>  is_null($request->r_cuatro)?'':$request->r_cuatro,
+                'pres' =>  is_null($request->r_cinco)?'':$request->r_cinco,
+                'seis' =>  is_null($request->r_seis)?'':$request->r_seis,
+                'siete' =>  is_null($request->r_siete)?'':$request->r_siete,
+                'paginacion' =>  -1,
+                'pa_marcas' =>  is_null($request->busqueda_marcas_p)?'':$request->busqueda_marcas_p,
+                'pa_nombre' =>  is_null($request->busqueda_nombre_p)?'':$request->busqueda_nombre_p,
+                'pa_vitolas' => is_null($request->busqueda_vitolas_p)?'':$request->busqueda_vitolas_p,
+                'pa_capas' =>  is_null($request->busqueda_capas_p)?'':$request->busqueda_capas_p,
+                'pa_empaques' =>  is_null($request->busqueda_empaques_p)?'':$request->busqueda_empaques_p,
+                'pa_meses' =>  is_null($request->busqueda_mes_p)?'':$request->busqueda_mes_p,
+                'pa_items' =>  is_null($request->busqueda_items_p)?'':$request->busqueda_items_p,
+                'pa_orden_sist' =>  is_null($request->busqueda_ordenes_p)?'':$request->busqueda_ordenes_p,
+                'pa_ordenes' =>  is_null($request->busqueda_hons_p)?'':$request->busqueda_hons_p,
+                'r_mill' =>  is_null($request->r_mill)?'':$request->r_mill,
+
+            ]
+        );
+
+        try {
+            $total_materiales = 0;
+
+            foreach ($pendiente as $key => $value) {
+
+                $detalles_materiale = DB::select('call traer_materiales_pendiente(?)', [$value->id_pendiente]);
+
+                foreach ($detalles_materiale as $materiale) {
+
+                    $total_orden = 0;
+
+                    if ($materiale->uxe == 'NO') {
+
+                        $total_orden = $value->saldo;
+                    } else if ($materiale->uxe == 'SI') {
+                        if($value->por_caja>0){
+                            $total_orden = (($value->saldo / $value->por_caja) * $materiale->cantidad);
+                        }
+                    }
+                    DB::update('UPDATE detalles_pendiente_materiales
+                                            SET cantidad = ?,
+                                            co_material = ?
+                                        WHERE id = ?', [$total_orden, $materiale->codigo_material, $materiale->id_de_detalles]);
+
+                    $total_materiales += $total_orden;
+                    $existencia_material_actual = $materiale->saldo - $total_orden;
+                    $anteriores = DB::select(
+                        'SELECT SUM(detalles_pendiente_materiales.cantidad) AS "anterioir"
+                                                                            FROM detalles_pendiente_materiales
+                                                                            WHERE detalles_pendiente_materiales.co_material = ?
+                                                                                    AND id < ?',
+                        [
+                            $materiale->codigo_material,
+                            $materiale->id_de_detalles
+                        ]
+                    );
+
+                    $existencia_material_actual -= $anteriores[0]->anterioir;
+
+                    $valor_exist_ma = $materiale->saldo - $anteriores[0]->anterioir;
+
+                    DB::update('UPDATE detalles_pendiente_materiales
+                                        SET restante = ?,
+                                        existencia_material = ?
+                                        WHERE id = ?', [
+                        $existencia_material_actual,
+                        $valor_exist_ma < 0 ? 0 : $valor_exist_ma,
+                        $materiale->id_de_detalles
+                    ]);
+                }
+            }
+
+            return redirect()->route('pendiente');
+
+        } catch (Exception $e) {
+            $this->dispatchBrowserEvent('notificacionErrorEjecucion', ['error' => $e->getMessage(), 'mensaje' => 'errores']);
+        }
 
     }
+
+
+    public function exportPendienteMateriales(Request $request)
+    {
+        $pendiente = DB::select(
+            'call buscar_pendiente(:uno,:dos,:tres,:cuatro,:pres,:seis,:siete,:paginacion,
+                                    :pa_items,:pa_orden_sist,:pa_ordenes,
+                                    :pa_marcas,:pa_vitolas,:pa_nombre,:pa_capas,
+                                    :pa_empaques,:pa_meses,:r_mill)',
+            [
+                'uno' =>  is_null($request->r_uno)?'':$request->r_uno,
+                'dos' =>  is_null($request->r_dos)?'':$request->r_dos,
+                'tres' =>  is_null($request->r_tres)?'':$request->r_tres,
+                'cuatro' =>  is_null($request->r_cuatro)?'':$request->r_cuatro,
+                'pres' =>  is_null($request->r_cinco)?'':$request->r_cinco,
+                'seis' =>  is_null($request->r_seis)?'':$request->r_seis,
+                'siete' =>  is_null($request->r_siete)?'':$request->r_siete,
+                'paginacion' =>  -1,
+                'pa_marcas' =>  is_null($request->busqueda_marcas_p)?'':$request->busqueda_marcas_p,
+                'pa_nombre' =>  is_null($request->busqueda_nombre_p)?'':$request->busqueda_nombre_p,
+                'pa_vitolas' => is_null($request->busqueda_vitolas_p)?'':$request->busqueda_vitolas_p,
+                'pa_capas' =>  is_null($request->busqueda_capas_p)?'':$request->busqueda_capas_p,
+                'pa_empaques' =>  is_null($request->busqueda_empaques_p)?'':$request->busqueda_empaques_p,
+                'pa_meses' =>  is_null($request->busqueda_mes_p)?'':$request->busqueda_mes_p,
+                'pa_items' =>  is_null($request->busqueda_items_p)?'':$request->busqueda_items_p,
+                'pa_orden_sist' =>  is_null($request->busqueda_ordenes_p)?'':$request->busqueda_ordenes_p,
+                'pa_ordenes' =>  is_null($request->busqueda_hons_p)?'':$request->busqueda_hons_p,
+                'r_mill' =>  is_null($request->r_mill)?'':$request->r_mill,
+
+            ]
+        );
+
+
+        return Excel::download(new PendienteMaterialesExport($pendiente), 'PendienteMateriales.xlsx');
+    }
+
+
+    public function imprimir_materiales(Request $request)
+    {
+
+        $mater_programacion = DB::select('call exportar_materiales_pendiente(:pa_item,
+                                                                                        :pa_orden,
+                                                                                        :pa_orden_del_sitema,
+                                                                                        :pa_mes)',
+                                                    [
+                                                        'pa_item' => is_null($request->busqueda_items_p)?'':$request->busqueda_items_p,
+                                                        'pa_orden' => is_null($request->busqueda_hons_p)?'':$request->busqueda_items_p,
+                                                        'pa_orden_del_sitema' =>is_null($request->busqueda_ordenes_p)?'':$request->busqueda_items_p,
+                                                        'pa_mes' => is_null($request->busqueda_mes_p)?'':$request->busqueda_items_p
+                                                    ]);
+
+        $vista =  view('Exports.materiales-pnedientes-export', [
+            'materiales' => $mater_programacion
+        ]);
+
+        return Excel::download(new MaterialesProgramacionExportView($vista,'Materiales'), 'Materiales Pendiente ('.Carbon::now()->format('Y-m-d').').xlsx');
+
+    }
+
 }

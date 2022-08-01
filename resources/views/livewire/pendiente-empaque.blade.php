@@ -37,7 +37,7 @@
                             Loading...
                         </button>
                     </div>
-                    <div wire:loading.attr="hidden" ">
+                    <div wire:loading.attr="hidden" >
                         <a type="button" name="crear_programacion" id="crear_programacion" wire:click.prevent="cambio(1)"
                         class=" botonprincipal   mr-sm-2" value="" style="width:70px; " href="">
                             <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor"
@@ -64,6 +64,9 @@
                     @else
                         btn-success
                     @endif" style="width:100px;height: 35;border-radius: 20%">Progra. sin <br>Materiales</button>
+
+                    <button class="botonprincipal" onclick="exportarMaterial()" type="button" style="width:100px;height: 35;border-radius: 20%">Materiales <br> Exportar </button>
+
                     <form wire:submit.prevent="exportProgramacion()">
                         <button class="botonprincipal" type="submit" style="width:100px;">Exportar</button>
                     </form>
@@ -935,6 +938,9 @@
             theForm.addEventListener('submit', function (event) {});
 
         }
+        function exportarMaterial(){
+                @this.imprimir_materiales();
+            }
     </script>
     <script>
         function buscar_tabla() {
