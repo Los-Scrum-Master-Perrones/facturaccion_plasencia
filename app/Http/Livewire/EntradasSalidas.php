@@ -14,12 +14,16 @@ class EntradasSalidas extends Component
     public $items_descripcions = [];
     public $items_tipos = [];
     public $items_fechas = [];
+    public $items_notas = [];
+
 
     public $items_factory = "";
     public $items_codigo_material = "";
     public $items_descripcion = "";
     public $items_tipo = "";
     public $items_fecha = "";
+    public $todas_nota = "";
+
 
     public $tuplas_conteo;
     public $todos;
@@ -35,14 +39,15 @@ class EntradasSalidas extends Component
     {
 
         $da = DB::select(
-            'CALL `mostrar_entradas_salidas`(?, ?, ?, ?, ?,-1,?)',
+            'CALL `mostrar_entradas_salidas`(?, ?, ?, ?, ?,-1,?,?)',
             [
                 $this->items_descripcion,
                 $this->items_codigo_material,
                 $this->items_tipo,
                 $this->items_factory,
                 $this->items_fecha,
-                $this->cajas
+                $this->cajas,
+                $this->todas_nota,
             ]
         );
 
@@ -50,20 +55,10 @@ class EntradasSalidas extends Component
 
 
         if ($this->todos == 1) {
-            $this->materiales = DB::select(
-                'CALL `mostrar_entradas_salidas`(?, ?, ?, ?, ?,-1, ?)',
-            [
-                $this->items_descripcion,
-                $this->items_codigo_material,
-                $this->items_tipo,
-                $this->items_factory,
-                $this->items_fecha,
-                $this->cajas
-            ]
-            );
+            $this->materiales = $da;
         } else {
             $this->materiales = DB::select(
-                'CALL `mostrar_entradas_salidas`(?, ?, ?, ?, ?, ?, ?)',
+                'CALL `mostrar_entradas_salidas`(?, ?, ?, ?, ?, ?, ?,?)',
                 [
                     $this->items_descripcion,
                     $this->items_codigo_material,
@@ -71,7 +66,8 @@ class EntradasSalidas extends Component
                     $this->items_factory,
                     $this->items_fecha,
                     $this->paginacion,
-                    $this->cajas
+                    $this->cajas,
+                    $this->todas_nota,
                 ]
             );
         }
@@ -82,6 +78,8 @@ class EntradasSalidas extends Component
             $this->items_descripcions = [];
             $this->items_tipos = [];
             $this->items_fechas = [];
+            $this->items_notas = [];
+
 
             foreach ($da as $detalles) {
                 array_push($this->items_factorys, $detalles->factory_item);
@@ -89,6 +87,7 @@ class EntradasSalidas extends Component
                 array_push($this->items_descripcions, $detalles->item_description);
                 array_push($this->items_tipos, $detalles->tipo);
                 array_push($this->items_fechas, $detalles->fecha);
+                array_push($this->items_notas, $detalles->descripcion);
             }
 
             $this->items_factorys = array_unique($this->items_factorys);
@@ -96,6 +95,7 @@ class EntradasSalidas extends Component
             $this->items_descripcions = array_unique($this->items_descripcions);
             $this->items_tipos = array_unique($this->items_tipos);
             $this->items_fechas = array_unique($this->items_fechas);
+            $this->items_notas = array_unique($this->items_notas);
         }
 
         $this->dispatchBrowserEvent('tamanio_tabla');

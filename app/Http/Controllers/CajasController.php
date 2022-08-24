@@ -18,7 +18,7 @@ class CajasController extends Controller
 
     function index_importar(){
 
-        $cajas = DB::table('cajas')->where('oculto', 'N')->get();
+        $cajas = DB::table('cajas')->orderBy('id_cajas')->where('oculto', 'N')->get();
         return view('import_cajas')->with('cajas', $cajas);
     }
 
@@ -157,7 +157,7 @@ class CajasController extends Controller
     function importinvcajas(Request $request)
     {
         (new InventarioCajasImport)->import($request->select_file);
-        $cajas = DB::table('cajas')->get();
+        $cajas = DB::table('cajas')->orderBy('id_cajas')->where('oculto', 'N')->get();
         return view('import_cajas')->with('cajas', $cajas);
     }
 }

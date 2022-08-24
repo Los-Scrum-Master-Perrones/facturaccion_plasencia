@@ -609,7 +609,7 @@
                         'pa_id': formValues[0],
                         'pa_codigo':formValues[1],
                         'pa_fecha':formValues[3],
-                        'pa_cantidad': (-1) * parseInt(formValues[2]),
+                        'pa_cantidad': formValues[2],
                         'pa_tipo': formValues[4],
                         'pa_descripcion':formValues[4]
                     });

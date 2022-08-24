@@ -109,8 +109,14 @@
 
                         @php
                             $arreglo = DB::select('select * from lista_cajas where codigo = ?', [$caja->codigo]);
-                            $total_en_existencia =  $arreglo[0]->existencia;
-                            $total_faltantes = $arreglo[0]->faltantes;
+                            if(isset($arreglo[0]->existencia)){
+                                $total_en_existencia =  $arreglo[0]->existencia;
+                                $total_faltantes = $arreglo[0]->faltantes;
+                            }else {
+                                $total_en_existencia =  0;
+                                $total_faltantes = 0;
+                            }
+
                         @endphp
                         <tr>
                             <td>{{$caja->codigo}}</td>

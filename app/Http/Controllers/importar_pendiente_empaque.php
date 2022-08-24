@@ -12,7 +12,7 @@ use Maatwebsite\Excel\Facades\Excel;
 
 class importar_pendiente_empaque extends Controller
 {
-  
+
 
     public function import_pendiente(Request $request)
     {

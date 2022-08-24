@@ -27,7 +27,7 @@
     btn-success
 @else
 
-@endif" style="width:100px;height: 35;border-radius: 20%">Materiales</button>href="index_importar_cajas"
+@endif" style="width:100px;height: 35;border-radius: 20%">Materiales</button>
 
 <button wire:click='cambio_caja(2)' type="button" class="botonprincipal @if($cajas == 2)
     btn-success
@@ -110,7 +110,15 @@
                                 @endforeach
                             </select>
                         </th>
-                        <th>Nota</th>
+                        <th wire:ignore>
+                            <select name="todas_notas" id="todas_notas" onchange="buscar_io()">
+                                <option value="">Notas</option>
+                                @foreach ($items_notas as $v)
+                                <option value="{{$v}}">{{$v}}</option>
+                                @endforeach
+                            </select>
+                        </th>
+                    </th>
                     </tr>
                 </thead>
                 <tbody>
@@ -158,6 +166,7 @@
         var control_nitem;
         var control_tipos;
         var control_fecha;
+        var control_notas;
 
         window.addEventListener('tamanio_tabla', event => {
             $('#tabla_materiales').css('height', ($('#bos').height() - 200));
@@ -204,6 +213,14 @@
                                                 }
                                             });
 
+            control_notas =  new TomSelect("#todas_notas", {
+                                                create: true
+                                                , sortField: {
+                                                    field: "text"
+                                                    , direction: "asc"
+                                                }
+                                            });
+
 
         });
 
@@ -215,6 +232,7 @@
             @this.items_codigo_material = $('#todas_cmaterial').val();
             @this.items_descripcion = $('#todas_nitem').val();
             @this.items_tipo = $('#todas_tipos').val();
+            @this.todas_nota = $('#todas_notas').val();
             @this.paginacion = 0;
         }
 

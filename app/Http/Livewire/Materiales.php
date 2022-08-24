@@ -4,6 +4,7 @@ namespace App\Http\Livewire;
 
 use App\Exports\MaterialesCatalogoExport;
 use App\Models\MaterialesCatalogo;
+use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
@@ -249,6 +250,25 @@ class Materiales extends Component
                     'pa_id' => $request['ided']
                 ]
             );
+
+            DB::select(
+                'call 01_entradas_salidas_registrar(:pa_codigo,
+                                                           :pa_fecha,
+                                                           :pa_cantidad,
+                                                           :pa_tipo,
+                                                           :pa_descripcion,
+                                                           :pa_usuario,
+                                                           :pa_id_material)',
+                [
+                    'pa_codigo' =>$request['codigoed'],
+                    'pa_fecha' => Carbon::now()->format('Y-m-d'),
+                    'pa_cantidad' => $request['saldo_ed'],
+                    'pa_tipo' => 'Editado',
+                    'pa_descripcion' => 'Modificado desde el Catalogo',
+                    'pa_usuario' => Auth::user()->id,
+                    'pa_id_material' => $request['ided']
+                ]
+            );
             $this->dispatchBrowserEvent('actualiza_exitoso');
         } else {
             $this->dispatchBrowserEvent('actualiza_falta', ['mensaje' => $validator->errors()->all()]);
@@ -432,7 +452,7 @@ class Materiales extends Component
 
         if($request['pa_tipo']=="Entrada Normal Material"){
             DB::select(
-                'call actualizar_materiales_salida(:pa_cantidad,
+                'call actualizar_materiales_entradas(:pa_cantidad,
                                                             :pa_id)',
                 [
                     'pa_cantidad' => $request['pa_cantidad'],
@@ -451,7 +471,7 @@ class Materiales extends Component
                 [
                     'pa_codigo' => $request['pa_codigo'],
                     'pa_fecha' => $request['pa_fecha'],
-                    'pa_cantidad' => intval($request['pa_cantidad']) * (-1),
+                    'pa_cantidad' => intval($request['pa_cantidad']),
                     'pa_tipo' => $request['pa_tipo'],
                     'pa_descripcion' => $request['pa_descripcion'],
                     'pa_usuario' => Auth::user()->id,

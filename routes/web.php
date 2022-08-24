@@ -356,5 +356,10 @@ Route::post('/MaterialesFichasPendiente', [Pendiente::class,'actualizar_fichas']
 
 
 
+Route::post('/MaterialesPendienteEmpaque', [PendienteEmpaque::class,'exportPendienteMateriales_pendiente_empaque'])->name('materiales_empaque.exporPendiente');
+Route::post('/MaterialesPendienteEmpaque2', [PendienteEmpaque::class,'imprimir_materiales_pendiente_empaque'])->name('materiales_empaque.exportMateriales');
+Route::post('/MaterialesPendienteEmpaqueActualizar', [PendienteEmpaque::class,'actualizar_datos_pendiente_empaque'])->name('materiales_empaque.actualizar_datos');
+Route::post('/MaterialesFichasPendienteEmpaque', [PendienteEmpaque::class,'actualizar_fichas_pendiente_empaque'])->name('materiales_empaque.actualizar_fichas');
+
 
 });

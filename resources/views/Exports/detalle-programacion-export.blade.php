@@ -3,6 +3,7 @@
         <tr style="text-align:center;">
             <th># ORDEN</th>
             <th style=" text-align:center;">ORDEN</th>
+            <th style=" text-align:center;">ITEM</th>
             <th style=" text-align:center;">CODIGO</th>
             <th style=" text-align:center;">MARCA</th>
             <th style=" text-align:center;">VITOLA</th>
@@ -32,6 +33,7 @@
         <tr>
             <td>{{$detalle_provicional->numero_orden}}</td>
             <td>{{$detalle_provicional->orden}}</td>
+            <td>{{$detalle_provicional->item}}</td>
             <td>{{$detalle_provicional->cod_producto}}</td>
             <td>{{$detalle_provicional->marca}}</td>
             <td>{{$detalle_provicional->vitola}}</td>
