@@ -14,6 +14,7 @@
             <th>ITEM</th>
             <th>Codigo</th>
             <th>CAPA</th>
+            <th></th>
             <th style="width:300px;"> DESCRIPCION</th>
             <th>PENDIENTE</th>
             <th>SALDO</th>
@@ -21,6 +22,9 @@
             <th>Existencia</th>
             <th>Actual</th>
             <th>Ficha</th>
+            <th></th>
+            <th></th>
+            <th>Cod. RP</th>
         </tr>
     </thead>
     <tbody name="body" id="body">
@@ -39,8 +43,10 @@
             <td>{{$datos->codigo_productos}}</td>
             <td>{{$datos->capa}}</td>
             <td>{{$datos->tipo_empaque.' '.$datos->marca.' '.$datos->nombre.' '.$datos->vitola}}</td>
+            <td>{{$datos->tipo_empaque.' '.$datos->marca.' '.$datos->nombre.' '.$datos->vitola}}</td>
             <td>{{$datos->pendiente}}</td>
             <td>{{$datos->saldo}}</td>
+            <th></th>
             <th></th>
             <th></th>
             <th></th>
@@ -58,13 +64,14 @@
         @forelse ($detalles_materiale as $materiale)
             <tr>
                 <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <th>{{ $materiale->codigo_material }}</th>
-                <th>{{ $materiale->factory_item }}</th>
-                <td>{{ $materiale->des_material }}</td>
+                <td>{{$datos->mes}}</td>
+                <td>{{$datos->orden_del_sitema}}</td>
+                <td>{{$datos->orden}}</td>
+                <td>{{$datos->item}}</td>
+                <td>{{$datos->codigo_productos}}</td>
+                <td>{{$datos->capa}}</td>
+                <td>{{$datos->tipo_empaque.' '.$datos->marca.' '.$datos->nombre.' '.$datos->vitola}}</td>
+                <td>{{ '('.$materiale->codigo_material.') '.$materiale->des_material }}</td>
                 <td></td>
                 <td></td>
                 @if($materiale->cantidad_m == '')
@@ -83,6 +90,7 @@
                 @if ($materiale->restante  == 0)
                     <td>{{$materiale->restante }}</td>
                 @endif
+                <th>{{ $materiale->factory_item }}</th>
             </tr>
         @empty
         @endforelse

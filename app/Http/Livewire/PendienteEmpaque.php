@@ -1201,7 +1201,34 @@ class PendienteEmpaque extends Component
                     "restante" => "803568.40",
                     "co_material" => "ME-06506"
 
-            ];
+                ];
+            }else if(count(isset($value->materiales)?$value->materiales:[])==0){
+                $mate = DB::select('SELECT * FROM materiales_productos WHERE materiales_productos.item = ? AND materiales_productos.codigo_producto = ?',[$value->item,$value->cod_producto]);
+
+
+                foreach ($mate as $key => $un_detalle) {
+                    $value->materiales[] = [
+
+                        "id_de_detalles" => 96011,
+                        "id_detalle_temporal" => $value->id,
+                        "id_material" => $un_detalle->id,
+                        "id" => $un_detalle->id,
+                        "item" => $value->item,
+                        "codigo_producto" => $value->cod_producto,
+                        "tipo_empaque" => $un_detalle->tipo_empaque,
+                        "codigo_material" =>  $un_detalle->codigo_material,
+                        "des_material" => $un_detalle->des_material,
+                        "cantidad" => $un_detalle->cantidad,
+                        "uxe" => $un_detalle->uxe,
+                        "saldo" => "835190.00",
+                        "cantidad_m" => "600.00",
+                        "existencia_material" => "804168.40",
+                        "restante" => "803568.40",
+                        "co_material" => $un_detalle->codigo_material
+
+                    ];
+                }
+
             }
         }
 

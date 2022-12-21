@@ -130,8 +130,8 @@ class CajasController extends Controller
             $no_existe = DB::select('select * from lista_cajas where codigo = ?', [$pa_codigo]);
 
             if(!isset($no_existe[0])){
-                DB::insert("INSERT INTO `lista_cajas` (`codigo`, `productoServicio`, `marca`, `tipo_empaque`, `existencia`)
-                VALUES (?, ?, ?, ?, ?);", [$caja->codigo, $caja->descripcion,'',0,0]);
+                DB::insert("INSERT INTO `lista_cajas` (codigo, productoServicio, marca, tipo_empaque, existencia,mal_estado,faltantes)
+                VALUES (?, ?, ?, ?, ?,?, ?);", [$caja->codigo, $caja->descripcion,'',0,0,0,0]);
             }
 
             DB::select('call anadir_cajas_a_inventario(:pa_codigo, :pa_cantidad,:pa_remision)', [
