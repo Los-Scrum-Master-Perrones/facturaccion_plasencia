@@ -1,0 +1,8 @@
+RewriteEngine On
+RewriteCond %{HTTP} off
+RewriteCond %{HTTP_HOST} (www\.)?testdev.smtabacos.com
+RewriteRule (.*) https://%{HTTP_HOST}%{REQUEST_URI}[l,r=301] 
+
+SetEnv ENVEROMENT produccion
+
+RewriteRule ^(.*)$ public/$1 [L]
