@@ -99,6 +99,43 @@
             <div class="col-sm" wire:ignore>
                 <input name="nombre" id="nombre" class="form-control" placeholder="Numero Factura" wire:model="num_fac">
             </div>
+
+            <div class="col">
+                <div class="dropdown">
+                    <button class="btn btn-secondary dropdown-toggle form-control" type="button"
+                        id="dropdownMenuButton1" data-toggle="dropdown">
+                        Presentacion
+                    </button>
+                    <ul class="dropdown-menu " aria-labelledby="dropdownMenuButton1">
+                        <div class="form-check ">
+                            <input class="form-check-input" type="checkbox" value="Puros Tripa Larga" id="checkbox5"
+                                checked name="checkbox5" wire:model="r_cinco">
+                            <label class="form-check-label " for="flexCheckDefault"> Puros Tripa Larga </label>
+                        </div>
+
+                        <div class="form-check ">
+                            <input class="form-check-input" type="checkbox" value="Puros Tripa Corta" id="checkbox6"
+                                checked name="checkbox6" wire:model="r_seis">
+                            <label class="form-check-label " for="flexCheckChecked"> Puros Tripa Corta </label>
+                        </div>
+
+                        <div class="form-check ">
+                            <input class="form-check-input " type="checkbox" value="Puros Sandwich" id="checkbox7"
+                                checked name="checkbox7" wire:model="r_siete">
+                            <label class="form-check-label " for="flexCheckDefault"> Puros Sandwich
+                            </label>
+                        </div>
+                        <div class="form-check ">
+                            <input class="form-check-input " type="checkbox" value="Puros Brocha" id="checkbox7"
+                                checked name="checkbox7" wire:model="r_mill">
+                            <label class="form-check-label " for="flexCheckDefault"> Puros Brocha
+                            </label>
+                        </div>
+                    </ul>
+                </div>
+            </div>
+
+            
             <div class="col-sm">
                 <button wire:click="exportar_reporte()" class=" botonprincipal">Exportar</button>
             </div>
@@ -121,6 +158,7 @@
                                 <th style="width:100px;">CAPA</th>
                                 <th>VITOLA</th>
                                 <th>EMPAQUE</th>
+                                <th>PRESENTACION</th>
                                 <th>ENVIADAS (CAJAS)</th>
                                 <th>ENVIADAS (TABACO)</th>
                                 <th>PRECIO ($)</th>
@@ -146,7 +184,8 @@
                                 <td>{{$producto->nombre}}</td>
                                 <td>{{$producto->capas}}</td>
                                 <td>{{$producto->vitola}}</td>
-                                <td>{{$producto->tipo_empaque}}</td>
+                                <td>{{$producto->tipo_empaque}}</td> 
+                                <td>{{$producto->presentacion}}</td>
                                 <td style="text-align: center">{{$producto->cantidad_cajas}}</td>
                                 <td style="text-align: center">{{(int)$producto->total_tabacos}}</td>
                                 <td style="text-align: end">{{number_format($producto->total_precio_tabacos,2)}}</td>

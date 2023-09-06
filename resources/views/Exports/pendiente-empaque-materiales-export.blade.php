@@ -82,10 +82,10 @@
                 @endif
 
                 @if ($materiale->restante  < 0)
-                    <td style="color: red">{{'Faltan '.$materiale->restante}}</td>
+                    <td style="color: red">{{'Faltan '.number_format($materiale->restante,0)}}</td>
                 @endif
                 @if ($materiale->restante > 0)
-                    <td style="color: blue">{{'Sobran '.$materiale->restante }}</td>
+                    <td style="color: blue">{{'Sobran '. number_format($materiale->restante,0) }}</td>
                 @endif
                 @if ($materiale->restante  == 0)
                     <td>{{$materiale->restante }}</td>

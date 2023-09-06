@@ -8,4 +8,6 @@ use Illuminate\Database\Eloquent\Model;
 class clase_producto extends Model
 {
     protected $guarded = [];
+    protected $table = 'clase_productos';
+    protected $primaryKey = 'id_producto';
 }

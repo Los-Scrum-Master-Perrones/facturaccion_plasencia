@@ -552,18 +552,18 @@
 
             if(operacion == 1){
                 titulo = 'Traspasar Material';
-                html = '<input id="swal-input1" type="number" style="width: 80%" class="swal2-input form-control">' +
+                html = '<input id="swal-input1" placeholder="Cantidad" type="number" style="width: 80%" class="swal2-input form-control">' +
                     '<input type="date" value="{{ Carbon\Carbon::now()->format('Y-m-d') }}" id="swal-input2" style="width: 80%" class="swal2-input form-control">'+
-                    '<select id="swal-input3"  style="width: 80%" class="swal2-input form-control">'+
+                    '<select id="swal-input3"  style="width: 80%;margin: 1em 2em 3px;" class="swal2-input form-control">'+
                                     '<option value="Mal Estado">Mal Estado</option>'+
                                     '<option value="Faltante">Faltante</option>'+
                     '</select>';
             }
             if(operacion == 2){
                 titulo = 'Entrada Material';
-                html = '<input id="swal-input1" type="number"  style="width: 80%" class="swal2-input form-control">' +
+                html = '<input id="swal-input1" placeholder="Cantidad" type="number"  style="width: 80%" class="swal2-input form-control">' +
                         '<input type="date" value="{{ Carbon\Carbon::now()->format('Y-m-d') }}" id="swal-input2" style="width: 80%" class="swal2-input form-control">'+
-                        '<select id="swal-input3"  style="width: 80%" class="swal2-input form-control">'+
+                        '<select id="swal-input3"  style="width: 80%;margin: 1em 2em 3px;" class="swal2-input form-control">'+
                                     '<option value="Entrada Normal Material">Entrada Normal</option>'+
                                     '<option value="Mal Estado Material">Renovar Material Dañado</option>'+
                                     '<option value="Faltante Material">Material faltante</option>'+
@@ -571,7 +571,7 @@
             }
             if(operacion == 3){
                 titulo = 'Salida Material';
-                html = '<input id="swal-input1" type="number" style="width: 80%" class="swal2-input form-control">' +
+                html = '<input id="swal-input1" placeholder="Cantidad" type="number" style="width: 80%" class="swal2-input form-control">' +
                         '<input id="swal-input2" placeholder="Descripcion" style="width: 80%" class="swal2-input form-control">' +
                     '<input type="date" value="{{ Carbon\Carbon::now()->format('Y-m-d') }}" id="swal-input3" style="width: 80%" class="swal2-input form-control">';
             }
@@ -581,13 +581,29 @@
                         html:html,
                         focusConfirm: true,
                         preConfirm: () => {
-                            return [
-                                id,
-                                codigo_material,
-                                document.getElementById('swal-input1').value,
-                                document.getElementById('swal-input2').value,
-                                document.getElementById('swal-input3').value,
-                            ]
+
+                            let swalinput1 = document.getElementById('swal-input1').value;
+                            let swalinput2 = document.getElementById('swal-input2').value;
+                            let swalinput3 = document.getElementById('swal-input3').value;
+
+                            if (!swalinput1) {
+                                Swal.showValidationMessage('Por favor ingrese la cantidad de la operacion')
+                            } else if (!swalinput2) {
+                                Swal.showValidationMessage('Por favor ingrese la direccion')
+                            } else if (!swalinput3) {
+                                Swal.showValidationMessage('Por favor agregue el tipo de operacion')
+                            } else if (isNaN(swalinput1)) {
+                                Swal.showValidationMessage('La cantidad debe ser un número')
+                            } else {
+                                return [
+                                    id,
+                                    codigo_material,
+                                    document.getElementById('swal-input1').value,
+                                    document.getElementById('swal-input2').value,
+                                    document.getElementById('swal-input3').value,
+                                ]
+                            }
+
                         }
             });
 

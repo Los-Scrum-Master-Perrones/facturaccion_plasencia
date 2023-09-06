@@ -31,6 +31,10 @@ class BusquedaAvanzada extends Component
     public $ordenes_p;
     public $ordenes_sis_p;
 
+    public $r_cinco = "Puros Tripa Larga";
+    public $r_seis = "Puros Tripa Corta";
+    public $r_siete = "Puros Sandwich";
+    public $r_mill = "Puros Brocha";
 
     public function render()
     {
@@ -67,7 +71,8 @@ class BusquedaAvanzada extends Component
         $this->dispatchBrowserEvent('activarCombo');
 
 
-        $this->productos = DB::select("call reporte_facura_pendiente(:fecha,:fecha2,:marca,:nombre,:capa,:vitola,:factura,:tipo_empaque,:orden,:orden_sistema)",[
+        $this->productos = DB::select("call reporte_facura_pendiente(:fecha,:fecha2,:marca,:nombre,:capa,:vitola,:factura,:tipo_empaque,:orden,:orden_sistema
+        ,:pa_cinco,:pa_seis,:pa_siete,:pa_mill)",[
             "fecha" =>$this->fecha_1,
             "fecha2" =>$this->fecha_2,
             "marca" => $this->marca,
@@ -77,7 +82,11 @@ class BusquedaAvanzada extends Component
             "factura" => $this->num_fac,
             "tipo_empaque" => $this->tipo_empaque,
             "orden" => $this->orden,
-            "orden_sistema" => $this->orden_sistema
+            "orden_sistema" => $this->orden_sistema,
+            "pa_cinco" => $this->r_cinco,
+            "pa_seis" => $this->r_seis,
+            "pa_siete" => $this->r_siete,
+            "pa_mill" => $this->r_mill
         ]);
 
         return view('livewire.busqueda-avanzada')->extends('principal')->section('content');
@@ -100,7 +109,8 @@ class BusquedaAvanzada extends Component
     }
 
     public function exportar_reporte(){
-        $this->productos = DB::select("call reporte_facura_pendiente(:fecha,:fecha2,:marca,:nombre,:capa,:vitola,:factura,:tipo_empaque,:orden,:orden_sistema)",[
+        $this->productos = DB::select("call reporte_facura_pendiente(:fecha,:fecha2,:marca,:nombre,:capa,:vitola,:factura,:tipo_empaque,:orden,:orden_sistema
+        ,:pa_cinco,:pa_seis,:pa_siete,:pa_mill)",[
             "fecha" =>$this->fecha_1,
             "fecha2" =>$this->fecha_2,
             "marca" => $this->marca,
@@ -110,7 +120,11 @@ class BusquedaAvanzada extends Component
             "factura" => $this->num_fac,
             "tipo_empaque" => $this->tipo_empaque,
             "orden" => $this->orden,
-            "orden_sistema" => $this->orden_sistema
+            "orden_sistema" => $this->orden_sistema,
+            "pa_cinco" => $this->r_cinco,
+            "pa_seis" => $this->r_seis,
+            "pa_siete" => $this->r_siete,
+            "pa_mill" => $this->r_mill
         ]);
 
         $vista =  view('Exports.pendiente_reporte', [

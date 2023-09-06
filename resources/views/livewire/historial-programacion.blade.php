@@ -27,15 +27,17 @@
 
         <div class="row" style="width:100%;">
 
-            <div class="col-sm-1" style="text-align:right;">
+        <div style="padding-left:25px;" class="col-sm-3" style="text-align:right;">
+        <input type="date" name="fecha" id="fecha" style="width: 100%;" class="form-control" placeholder="Nombre"
+                                wire:model="fecha">
             </div>
-            <div class="col-sm-3" style="text-align:right;">
+            <div class="col-sm-2" style="text-align:right;">
                 @foreach($titulo as $programacion)
                     <h4 style="color:#ffffff;" id="contenedor" name="contenedor" value="" wire:model="titulo"><strong>
                             {{ $programacion ->mes_contenedor }}</strong></h4>
                 @endforeach
             </div>
-            <div class="col-sm-4" style="text-align:right;">
+            <div class="col-sm-3" style="text-align:right;">
                 <form action="{{ Route('exportar_programacion') }}" id="formver" name="formver">
                     <input name="buscar" id="buscar" value="{{ isset($busqueda)?$busqueda:null }}"
                         onKeyDown="copiar('buscar','b');" class="  form-control" wire:model="busqueda"
@@ -92,6 +94,12 @@
                                 </tr>
                             </thead>
                             <tbody>
+
+                            @if($programaciones== null)
+                                <tr style="text-align:center;">
+                                    <th colspan="3" style=" text-align:center;">No existe Planificacion para este mes</th>
+                                </tr>
+                        @endif
 
                                 @foreach($programaciones as $i => $programacion)
                                     <tr>
@@ -177,6 +185,7 @@
                                 <tr style=" text-align:center;">
                                     <th># ORDEN</th>
                                     <th style=" text-align:center;">ORDEN</th>
+				    <th style=" text-align:center;">ITEM</th>
                                     <th style=" text-align:center;">MARCA</th>
                                     <th style=" text-align:center;">VITOLA</th>
                                     <th style=" text-align:center;">NOMBRE</th>
@@ -205,6 +214,7 @@
                                     <tr>
                                         <td> {{ $detalles_programacione->numero_orden }}</td>
                                         <td> {{ $detalles_programacione->orden }}</td>
+					<td> {{ $detalles_programacione->item }}</td>
                                         <td> {{ $detalles_programacione->marca }}</td>
                                         <td> {{ $detalles_programacione->vitola }}</td>
                                         <td> {{ $detalles_programacione->nombre }}</td>

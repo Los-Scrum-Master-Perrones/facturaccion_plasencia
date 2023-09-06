@@ -13,8 +13,10 @@ use App\Exports\PendienteEmpaqueExport;
 use App\Exports\PendienteEmpaqueMaterialesExport;
 use App\Exports\PendienteMaterialesExport;
 use App\Exports\SheetMaterialesProgramacionExport;
+use App\Http\Static_Vars;
 use Carbon\Carbon;
 use Exception;
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
 
@@ -25,6 +27,7 @@ class PendienteEmpaque extends Component
     public $nombre;
     public $tuplas;
     public $datos_pendiente_empaque_nuevo;
+    public $json_datos_pendiente_empaque;
 
 
     public $id_detalle = 0;
@@ -186,6 +189,7 @@ class PendienteEmpaque extends Component
                 'r_mill' =>  $this->r_mill,
             ]
         );
+
 
 
         $datos = [];
@@ -822,7 +826,6 @@ class PendienteEmpaque extends Component
         $this->items_agregar = DB::select('select item from clase_productos');
         $this->tipo_empaques = DB::select('call buscar_tipo_empaque("")');
 
-
         $todos = DB::select(
             'call buscar_pendiente_empaque(:uno,:dos,:tres,:cuatro,:pres,:seis,:siete,:paginacion,
             :pa_items,:pa_orden_sist,:pa_ordenes,
@@ -851,6 +854,8 @@ class PendienteEmpaque extends Component
 
             ]
             );
+
+
         $this->tuplas_conteo = count($todos);
 
         if ($this->todos == 1) {
@@ -923,6 +928,8 @@ class PendienteEmpaque extends Component
             $this->ordenes_p = array_unique($this->ordenes_p);
             $this->hons_p = array_unique($this->hons_p);
         }
+
+        Cache::put('json_datos_pendiente_empaque', $todos);
     }
 
     /***************** TODO funciones de detalle programacion*********************/
@@ -1455,38 +1462,12 @@ class PendienteEmpaque extends Component
     ##Datos de Fichas Materiales Pendiende Empaque
 
 
-    public function actualizar_fichas_pendiente_empaque(Request $request)
+    public function actualizar_fichas_pendiente_empaque()
     {
         $item_sampler_mensaje = "";
+
         try {
-            $datos_pendiente_empaque = DB::select(
-                'call buscar_pendiente_empaque(:uno,:dos,:tres,:cuatro,:pres,:seis,:siete,:paginacion,
-                :pa_items,:pa_orden_sist,:pa_ordenes,
-                :pa_marcas,:pa_vitolas,:pa_nombre,:pa_capas,
-                :pa_empaques,:pa_meses,:r_mill)',
-                [
-                    'uno' =>  is_null($request->r_uno)?'':$request->r_uno,
-                    'dos' =>  is_null($request->r_dos)?'':$request->r_dos,
-                    'tres' =>  is_null($request->r_tres)?'':$request->r_tres,
-                    'cuatro' =>  is_null($request->r_cuatro)?'':$request->r_cuatro,
-                    'pres' =>  is_null($request->r_cinco)?'':$request->r_cinco,
-                    'seis' =>  is_null($request->r_seis)?'':$request->r_seis,
-                    'siete' =>  is_null($request->r_siete)?'':$request->r_siete,
-                    'paginacion' =>  -1,
-                    'pa_marcas' =>  is_null($request->busqueda_marcas_p)?'':$request->busqueda_marcas_p,
-                    'pa_nombre' =>  is_null($request->busqueda_nombre_p)?'':$request->busqueda_nombre_p,
-                    'pa_vitolas' => is_null($request->busqueda_vitolas_p)?'':$request->busqueda_vitolas_p,
-                    'pa_capas' =>  is_null($request->busqueda_capas_p)?'':$request->busqueda_capas_p,
-                    'pa_empaques' =>  is_null($request->busqueda_empaques_p)?'':$request->busqueda_empaques_p,
-                    'pa_meses' =>  is_null($request->busqueda_mes_p)?'':$request->busqueda_mes_p,
-                    'pa_items' =>  is_null($request->busqueda_items_p)?'':$request->busqueda_items_p,
-                    'pa_orden_sist' =>  is_null($request->busqueda_ordenes_p)?'':$request->busqueda_ordenes_p,
-                    'pa_ordenes' =>  is_null($request->busqueda_hons_p)?'':$request->busqueda_hons_p,
-                    'r_mill' =>  is_null($request->r_mill)?'':$request->r_mill,
-                ]
-            );
-
-
+            $datos_pendiente_empaque = Cache::get('json_datos_pendiente_empaque');
             DB::delete('TRUNCATE TABLE detalles_pendiente_empaque_materiales;');
 
             $datos = [];
@@ -1494,21 +1475,14 @@ class PendienteEmpaque extends Component
             $detalles = 0;
             $valores = [];
 
-            $tuplas = count($datos_pendiente_empaque);
-
-            for ($i = 0; $i <  $tuplas; $i++) {
-
-                $sampler = DB::select('SELECT clase_productos.sampler FROM clase_productos WHERE  clase_productos.item = ?;', [$datos_pendiente_empaque[$i]->item]);
-
-                $item_sampler_mensaje = $datos_pendiente_empaque[$i]->item;
-                if (isset($sampler[0])) {
-                    if ($sampler[0]->sampler == "si") {
+            foreach ($datos_pendiente_empaque as $detalle) {
+                $item_sampler_mensaje = $detalle->id_pendiente;
+                    if ($detalle->sampler == "si") {
                         if ($cantidad_detalle_sampler == 0 && $detalles == 0) {
-                            $datos = DB::select('call traer_numero_detalles_productos(?)', [$datos_pendiente_empaque[$i]->item]);
-                            $cantidad_detalle_sampler = $datos[0]->tuplas;
+                            $cantidad_detalle_sampler = $detalle->tuplas;
+                            $detalles = 0;
                         }
-                        $valores = DB::select('call traer_detalles_productos_actualizar(?,?)', [$datos_pendiente_empaque[$i]->item, $detalles]);
-
+                        $valores = DB::select('call traer_detalles_productos_actualizar(?,?)', [$detalle->item, $detalles]);
 
                         $variable = DB::select('call actualizar_pendiente_empaque_sampler(:marca,:nombre,:vitola,:capa,:tipo,:item,:pa_codigo_poducto)', [
                             'marca' => $valores[0]->marca,
@@ -1516,14 +1490,15 @@ class PendienteEmpaque extends Component
                             'vitola' => $valores[0]->vitola,
                             'capa' => $valores[0]->capa,
                             'tipo' => $valores[0]->tipo_empaque,
-                            'item' =>  $datos_pendiente_empaque[$i]->id_pendiente,
+                            'item' =>  $detalle->id_pendiente,
                             'pa_codigo_poducto' => $valores[0]->codigo_producto,
                         ]);
 
-
-                        $datos_pendiente_empaque[$i]->cod_producto = isset($valores[0]->codigo_producto) ? $valores[0]->codigo_producto : "";
+                        $detalle->cod_producto = isset($valores[0]->codigo_producto) ? $valores[0]->codigo_producto : "";
                         DB::update('UPDATE pendiente_empaque SET codigo_poducto= ? WHERE  id_pendiente= ?;',
-                                         [isset($valores[0]->codigo_producto) ? $valores[0]->codigo_producto : "",$datos_pendiente_empaque[$i]->id_pendiente ]);
+                                         [isset($valores[0]->codigo_producto) ? $valores[0]->codigo_producto : "",$detalle->id_pendiente ]);
+
+
                         $detalles++;
 
                         if ($detalles == $cantidad_detalle_sampler) {
@@ -1535,81 +1510,44 @@ class PendienteEmpaque extends Component
                         :cod_producto,
                         :pa_id_pendiente)',
 
-                            ['pa_item' => $datos_pendiente_empaque[$i]->item,
+                            ['pa_item' => $detalle->item,
                             'cod_producto' => $valores[0]->codigo_producto,
-                            'pa_id_pendiente' => $datos_pendiente_empaque[$i]->id_pendiente]);
+                            'pa_id_pendiente' => $detalle->id_pendiente]);
                     }else {
 
+                        $cantidad_detalle_sampler = 0;
+                        $detalles = 0;
+                        $valores = DB::select('SELECT codigo_producto FROM clase_productos WHERE item = ?', [$detalle->item]);
+
+                        $detalle->cod_producto = isset($valores[0]->codigo_producto) ? $valores[0]->codigo_producto : "";
 
 
-
-                        $valores = DB::select('SELECT codigo_producto FROM clase_productos WHERE item = ?', [$datos_pendiente_empaque[$i]->item]);
-
-                        $datos_pendiente_empaque[$i]->cod_producto = isset($valores[0]->codigo_producto) ? $valores[0]->codigo_producto : "";
-
-
-                        DB::update('UPDATE pendiente_empaque set codigo_poducto = ? where id_pendiente = ?', [$valores[0]->codigo_producto,$datos_pendiente_empaque[$i]->id_pendiente]);
+                        DB::update('UPDATE pendiente_empaque set codigo_poducto = ? where id_pendiente = ?', [$valores[0]->codigo_producto,$detalle->id_pendiente]);
 
                         DB::insert('CALL insertar_pendiente_empaque_materiales(:pa_item,
                                                         :cod_producto,
                                                         :pa_id_pendiente)',
-                                            ['pa_item' => $datos_pendiente_empaque[$i]->item,
+                                            ['pa_item' => $detalle->item,
                                              'cod_producto' => $valores[0]->codigo_producto,
-                                             'pa_id_pendiente' => $datos_pendiente_empaque[$i]->id_pendiente]);
+                                             'pa_id_pendiente' => $detalle->id_pendiente]);
                     }
-                } else {
-                    $valores = DB::select('SELECT codigo_producto FROM clase_productos WHERE item = ?', [$datos_pendiente_empaque[$i]->item]);
-
-                    $datos_pendiente_empaque[$i]->cod_producto = isset($valores[0]->codigo_producto) ? $valores[0]->codigo_producto : "";
-
-
-                    DB::update('UPDATE pendiente_empaque set codigo_poducto = ? where id_pendiente = ?', [$valores[0]->codigo_producto,$datos_pendiente_empaque[$i]->id_pendiente]);
-
-                    DB::insert('CALL insertar_pendiente_empaque_materiales(:pa_item,
-                                                    :cod_producto,
-                                                    :pa_id_pendiente)',
-                                        ['pa_item' => $datos_pendiente_empaque[$i]->item,
-                                         'cod_producto' => $valores[0]->codigo_producto,
-                                         'pa_id_pendiente' => $datos_pendiente_empaque[$i]->id_pendiente]);
                 }
-            }
 
             return redirect()->route('pendiente_empaque');
         } catch (Exception $e) {
-            return  $e->getMessage();
-
+            $this->dispatchBrowserEvent('error_vista_pendiente_empaque', ['newName' => $e->getMessage()]);
+            $this->dispatchBrowserEvent('error_vista_pendiente_empaque', ['newName' => json_encode($detalle->tuplas) ]);
+            $this->dispatchBrowserEvent('error_vista_pendiente_empaque', ['newName' => json_encode($detalle) ]);
+            $this->dispatchBrowserEvent('error_vista_pendiente_empaque', ['newName' => json_encode($detalles) ]);
+            $this->dispatchBrowserEvent('error_vista_pendiente_empaque', ['newName' => json_encode($cantidad_detalle_sampler) ]);
+            $this->dispatchBrowserEvent('error_vista_pendiente_empaque', ['newName' => json_encode($item_sampler_mensaje) ]);
         }
     }
 
 
     public function actualizar_datos_pendiente_empaque(Request $request)
     {
-        $datos_pendiente_empaque = DB::select(
-            'call buscar_pendiente_empaque(:uno,:dos,:tres,:cuatro,:pres,:seis,:siete,:paginacion,
-            :pa_items,:pa_orden_sist,:pa_ordenes,
-            :pa_marcas,:pa_vitolas,:pa_nombre,:pa_capas,
-            :pa_empaques,:pa_meses,:r_mill)',
-            [
-                'uno' =>  is_null($request->r_uno)?'':$request->r_uno,
-                'dos' =>  is_null($request->r_dos)?'':$request->r_dos,
-                'tres' =>  is_null($request->r_tres)?'':$request->r_tres,
-                'cuatro' =>  is_null($request->r_cuatro)?'':$request->r_cuatro,
-                'pres' =>  is_null($request->r_cinco)?'':$request->r_cinco,
-                'seis' =>  is_null($request->r_seis)?'':$request->r_seis,
-                'siete' =>  is_null($request->r_siete)?'':$request->r_siete,
-                'paginacion' =>  -1,
-                'pa_marcas' =>  is_null($request->busqueda_marcas_p)?'':$request->busqueda_marcas_p,
-                'pa_nombre' =>  is_null($request->busqueda_nombre_p)?'':$request->busqueda_nombre_p,
-                'pa_vitolas' => is_null($request->busqueda_vitolas_p)?'':$request->busqueda_vitolas_p,
-                'pa_capas' =>  is_null($request->busqueda_capas_p)?'':$request->busqueda_capas_p,
-                'pa_empaques' =>  is_null($request->busqueda_empaques_p)?'':$request->busqueda_empaques_p,
-                'pa_meses' =>  is_null($request->busqueda_mes_p)?'':$request->busqueda_mes_p,
-                'pa_items' =>  is_null($request->busqueda_items_p)?'':$request->busqueda_items_p,
-                'pa_orden_sist' =>  is_null($request->busqueda_ordenes_p)?'':$request->busqueda_ordenes_p,
-                'pa_ordenes' =>  is_null($request->busqueda_hons_p)?'':$request->busqueda_hons_p,
-                'r_mill' =>  is_null($request->r_mill)?'':$request->r_mill,
-            ]
-        );
+        $datos_pendiente_empaque = Cache::get('json_datos_pendiente_empaque');
 
         try {
             $total_materiales = 0;
@@ -1618,18 +1556,24 @@ class PendienteEmpaque extends Component
 
                 $detalles_materiale = DB::select('call traer_materiales_pendiente_empaque(?)', [$value->id_pendiente]);
 
+                if($value->saldo == 0){
+                    $promed = DB::select('call traer_promedio_saldo_sampler_pendiente_empaque(?)', [$value->id_pendiente]);
+                    $value->saldo = $promed[0]->promedio;
+                }
+
+
                 foreach ($detalles_materiale as $materiale) {
 
                     $total_orden = 0;
 
                     if ($materiale->uxe == 'NO') {
-
                         $total_orden = $value->saldo;
                     } else if ($materiale->uxe == 'SI') {
                         if($value->por_caja>0){
                             $total_orden = (($value->saldo / $value->por_caja) * $materiale->cantidad);
                         }
                     }
+
                     DB::update('UPDATE detalles_pendiente_empaque_materiales
                                             SET cantidad = ?,
                                             co_material = ?

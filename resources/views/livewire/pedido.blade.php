@@ -14,6 +14,9 @@
             <a style="color:#E5B1E2; font-size:12px;" href="import_excel"><strong>Importar pedido</strong></a>
         </li>
         <li class="nav-item">
+            <a style="color:white; font-size:12px;" href="poimport"><strong>Importar PO</strong></a>
+        </li>
+        <li class="nav-item">
             <a style="color:white; font-size:12px;" href="pendiente_salida"><strong>Reporte</strong></a>
         </li>
     </ul>
@@ -90,6 +93,14 @@
                     }
 
                     @endif
+
+                    <button wire:click="comparativo()" 
+                    data-toggle="modal" data-target="#modal_diff" 
+                    style="width:100px;" class=" botonprincipal mr-sm-2 ">
+                        Comparativo
+                    </button>
+
+
                 </div>
             </div>
 
@@ -278,6 +289,64 @@
             </div>
         </div>
     </div>
+
+
+    <div wire:ignore class="modal fade" id="modal_diff" data-backdrop="static" data-keyboard="false" tabindex="-1"
+            aria-labelledby="staticBackdropLabel" aria-hidden="true" style="opacity:.9;background:#212529;">
+            <div class="modal-dialog modal-dialog-centered modal-xl">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h2 class="modal-title" id="staticBackdropLabel">COMPARATIVOS PEDIDOS </h2>
+                        <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <table class="table">
+                            
+                            <tr>
+                                <th>Item</th>
+                                <th>Descripcion</th>
+                                <th>HON</th>
+                                <th>PO</th>
+                                <th>Global</th>
+                                <th>Diferencia</th>
+                            </tr>
+                           
+
+                            <tbody>
+                                @foreach($comparativos as $com)
+                            <tr>
+                                <td>{{$com['item']}}</td>
+                                @php
+                                $descripcion = DB::select("select if(clase_productos.sampler ='si', 
+                            concat(descripcion_sampler, ' ', tipo_empaques.tipo_empaque),
+                            concat(marca_productos.marca, ' ',  vitola_productos.vitola,' ',
+                            nombre_productos.nombre,' ', capa_productos.capa, 
+                            ' ',tipo_empaques.tipo_empaque)) Descripcion from clase_productos 
+                            inner join marca_productos on marca_productos.id_marca = clase_productos.id_marca
+                            inner join tipo_empaques on tipo_empaques.id_tipo_empaque = clase_productos.id_tipo_empaque
+                            inner join capa_productos on capa_productos.id_capa = clase_productos.id_capa
+                            inner join vitola_productos on vitola_productos.id_vitola = clase_productos.id_vitola
+                            inner join nombre_productos on nombre_productos.id_nombre = clase_productos.id_nombre
+                            where item=?", [$com['item']]);
+                                @endphp
+                                <td>{{$descripcion[0]->Descripcion}}</td>
+                                <td>{{$com['hon']}}</td>
+                                <td>{{$com['individual']}}</td>
+                                <td>{{$com['global']}}</td>
+                                <td>{{$com['diferencia']}}</td>
+                            </tr>
+                            @endforeach
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="bmodal_yes" data-dismiss="modal">
+                            <span>Aceptar</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
 
 
 

@@ -19,11 +19,12 @@ class Pedido extends Component
     public $b_categoria;
     public $b_item;
     public $b_orden;
-
+    public $comparativos=[];
     public $nuevos;
 
     public function render()
     {
+        $this->comparativo();
         $this->nuevos = DB::select('select * from item_faltantes');
 
         $this->total_puros = 0;
@@ -95,7 +96,6 @@ class Pedido extends Component
     }
 
     public function mount(){
-
         $this->b_categoria= "";
         $this->b_item = "";
         $this->b_orden = "";
@@ -112,5 +112,45 @@ class Pedido extends Component
         DB::statement('alter table pedidos AUTO_INCREMENT=1;');
         $this->verificar = DB::select('call verificar_item_clase');
         $this->pedido_completo = DB::select('call mostrar_pedido');
+    }
+
+    function comparativo(){
+        $pedido = DB::table('pedidos')
+        ->select('item', 'numero_orden as hon', DB::raw('concat(item, numero_orden) as conca'),
+         DB::raw('sum(cant_paquetes*unidades) as cantidad'))
+        ->groupByRaw('item, numero_orden')->get();
+
+        $po = DB::table('po')->select('po.item', 'hon', DB::raw('sum(cantidad*tipo_empaques.por_caja) as cantidad'),
+        DB::raw('concat(po.item, hon) as conca'),)
+        ->join('clase_productos', 'clase_productos.item', 'po.item')
+        ->join('tipo_empaques', 'tipo_empaques.id_tipo_empaque', 'clase_productos.id_tipo_empaque')
+        ->groupByRaw('po.item, hon')
+        ->get();
+
+        foreach($pedido as $o){
+            $arreglo = array_column($po->toArray(), 'conca');
+            $res = array_search($o->conca, $arreglo);
+            if($res!==false){
+                $existencia[] = ['item'=>$o->item, 'hon'=>$o->hon,
+                'individual'=>$po[$res]->cantidad, 'global'=>$o->cantidad,
+                'diferencia'=>$o->cantidad-$po[$res]->cantidad];
+            }else{
+                $existencia[] = ['item'=>$o->item, 'hon'=>$o->hon,
+                'individual'=>0, 'global'=>$o->cantidad,
+                'diferencia'=>$o->cantidad];
+            }
+        }
+        foreach($po as $o){
+            $res = array_search($o->conca, array_column($pedido->toArray(), 'conca'));
+            if($res!==false){
+                
+            }else{
+                $existencia[] = ['item'=>$o->item, 'hon'=>$o->hon,
+                'individual'=>$o->cantidad, 'global'=>0,
+                'diferencia'=>$o->cantidad];
+            }
+        }
+        $this->comparativos = collect($existencia);
+
     }
 }

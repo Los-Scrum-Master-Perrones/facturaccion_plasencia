@@ -37,6 +37,7 @@ WithColumnFormatting
         return [
             '# ORDEN',
             'ORDEN',
+	    'ITEM',
             'MARCA',
             'VITOLA',
             'NOMBRE',

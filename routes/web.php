@@ -6,6 +6,7 @@ use App\Http\Controllers\importar_pendiente_empaque;
 use App\Http\Controllers\VehicleController;
 use App\Http\Controllers\PedidoController;
 use App\Http\Controllers\CapaProductoController;
+use App\Http\Controllers\PendienteApiController;
 use App\Http\Controllers\clase_producto;
 use App\Http\Controllers\importar_pendiente_lic;
 use App\Http\Controllers\programacion;
@@ -24,12 +25,15 @@ use App\Http\Livewire\HistorialProgramacion;
 use App\Http\Livewire\DetalleProgramacion;
 use App\Http\Livewire\HistorialVentas;
 use App\Http\Livewire\Pedido;
+use App\Http\Livewire\PO;
 use App\Http\Livewire\EditarDetalles;
 use App\Http\Livewire\EntradasSalidas;
 use App\Http\Livewire\Materiales;
 use App\Http\Livewire\MaterialesProductos;
+use App\Http\Livewire\Terminado;
 use App\Models\EntradasSalida;
 use App\Models\MaterialesCatalogo;
+use App\Http\Livewire\ReporteDiarios;
 
 /*
 |--------------------------------------------------------------------------
@@ -53,10 +57,10 @@ Route::get('/holisa',function () {
 
 Route::group(['middleware' => 'auth'], function () {
 
- Route::get('/import_excel', Pedido::class)->name('import_excel');
+Route::get('/import_excel', Pedido::class)->name('import_excel');
 
-
-
+Route::get('/poimport', PO::class)->name('poimport');
+Route::post('/poimport/import', [PO::class, 'importPO'])->name('poimportimport');
 
  Route::post('/importar_pendiente', [importar_pendiente_lic::class, 'import_pendiente'])->name('importar_pendiente');
 
@@ -89,6 +93,7 @@ Route::post('/actualizar_detalle_producto', [EditarDetalles::class, 'actualizar_
 Route::get('/pendiente_empaque', PendienteEmpaque::class)->name('pendiente_empaque');
 Route::post('/pendiente_empaque', PendienteEmpaque::class)->name('pendiente_empaque');
 
+Route::get('/pendiente_empaqueApi', [App\Http\Controllers\PendienteApiController::class, 'index'])->name('pendienteapi');
 
 Route::get('/insertar_detalles', [PendienteEmpaque::class, 'insertar_detalle_provicional'])->name('insertar_detalles');
 Route::post('/insertar_detalles', [PendienteEmpaque::class, 'insertar_detalle_provicional'])->name('insertar_detalles');
@@ -125,6 +130,7 @@ Route::post('/pendiente', Pendiente::class)->name('pendiente');
 Route::post('/pendiente_insertar', [Pendiente::class,'pendiente_indexi'])->name('pendiente_insertar');
 Route::post('/exportPendiente', [Pendiente::class,'exportPendiente'])->name('exportPendiente');
 
+Route::post('/exportPendientecaja', [Pendiente::class,'RemisionCajas'])->name('pendientecajapedido');
 
 Route::get('/borrarpendiente',[ Pendiente::class,'eliminar_pendiente'])->name('borrarpendiente');
 Route::post('/borrarpendiente',[ Pendiente::class,'eliminar_pendiente'])->name('borrarpendiente');
@@ -166,6 +172,19 @@ Route::post('/importar_c', ImportarProductoBodega::class)->name('importar_ca');
 
 Route::get('/historial_programacion', HistorialProgramacion::class)->name('historial_programacion');
 Route::post('/historial_programacion', HistorialProgramacion::class)->name('historial_programacion');
+
+Route::get('/programacionterminado', Terminado::class)->name('programacionterminado');
+Route::post('/programacionterminado', Terminado::class)->name('programacionterminado');
+
+Route::post('/programacionterminado/remision', [Terminado::class, 'ExcelDiario'])->name('programacionterminadoremision');
+Route::post('/programacionterminado/remisionreporte', [ReporteDiarios::class, 'ExcelDiarioRemision'])->name('programacionterminadoreporteremision');
+
+Route::post('/programacionterminadoupdate', [Terminado::class, 'updatelistos'])->name('updatelistos');
+
+Route::get('/exportar_programacion/terminado', [Terminado::class, 'exportProgramacion'])->name('exportar_programacion_terminado');
+
+Route::get('/reportediarios', ReporteDiarios::class)->name('reportediarios');
+Route::post('/reportediarios', ReporteDiarios::class)->name('reportediarios');
 
 
 Route::get('/borrar_historial_programacion', [HistorialProgramacion::class,'eliminar_detalles_pro'])->name('borrar_historial_programacion');

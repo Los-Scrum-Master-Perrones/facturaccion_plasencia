@@ -9,7 +9,7 @@ use App\Exports\PendienteExport;
 use App\Exports\PendienteMaterialesExport;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
-
+use App\Exports\OrdenCaja;
 use Maatwebsite\Excel\Facades\Excel;
 use Exception;
 use Illuminate\Support\Facades\DB;
@@ -706,6 +706,12 @@ class Pendiente extends Component
 
         return Excel::download(new MaterialesProgramacionExportView($vista,'Materiales'), 'Materiales Pendiente ('.Carbon::now()->format('Y-m-d').').xlsx');
 
+    }
+
+    public function RemisionCajas(Request $request)
+    {
+        $fecha = Carbon::parse($request->fecha)->format('Y-m-d');
+        return Excel::download(new OrdenCaja($fecha, $request->orden_sistema), 'Orden Cajas de Madera '.$request->orden_sistema.'.xlsx');
     }
 
 }

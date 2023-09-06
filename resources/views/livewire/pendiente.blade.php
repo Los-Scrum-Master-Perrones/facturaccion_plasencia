@@ -14,6 +14,11 @@
         <li class="nav-item">
             <a style="color:white; font-size:12px;" href="pendiente_salida"><strong>Reporte</strong></a>
         </li>
+
+        <li class="nav-item">
+            <a style="color:white; font-size:12px;"
+            data-toggle="modal" href="" data-target="#generarremisioncajas"><strong>Pedido Cajas <br> de Madera</strong></a>
+        </li>
     </ul>
 
     <div class="container" style="max-width:100%;">
@@ -770,6 +775,38 @@
             </div>
     </div>
     <!-- FIN MODAL ELMINAR DATO PENDIENTE -->
+
+
+
+     <!-- MODAL GENERAR REMISION DE CAJAS DE MADERA SEGUN ORDEN DEL SISTEMA -->
+     <div class="modal fade" id="generarremisioncajas" data-backdrop="static" data-keyboard="false" tabindex="-1"
+            aria-labelledby="staticBackdropLabel" aria-hidden="true" style="opacity:.9;background:#212529;">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="staticBackdropLabel">PEDIDO CAJAS DE MADERA. <strong></strong> </h5>
+                        <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <form method="post" action="{{route("pendientecajapedido")}}">
+                    @csrf
+                    <div class="modal-body">
+                        Ingrese el numero de Orden del Sistema que desea generar para su Orden de Cajas de Madera.
+                        <br>
+                        <br>
+                        <input class="" name="orden_sistema" id="orden_sistema" value=""/>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="bmodal_no " data-dismiss="modal">
+                            <span>Cancelar</span>
+                        </button>
+                        <button type="submit" class=" bmodal_yes ">
+                            <span>Generar Pedido</span>
+                        </button>
+                    </div>
+                    </form>
+                </div>
+            </div>
+    </div>
 
 
     @push('scripts')

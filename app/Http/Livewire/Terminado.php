@@ -10,14 +10,19 @@ use Maatwebsite\Excel\Facades\Excel;
 use Barryvdh\DomPDF\Facade as PDF;
 
 use App\Exports\ProgramcionExport;
+use App\Exports\RemisionTerminado;
+use App\Exports\ProgramacionTerminadoExport;
 use Illuminate\Support\Facades\DB;
+use Spatie\Browsershot\Browsershot;
 
-class HistorialProgramacion extends Component
+class Terminado extends Component
 {
     public $programaciones;
     public $detalles_programaciones;
     public $id_tov;
     public $titulo;
+    public $item_b;
+    public $id_d;
     public $borrar;
     public $busqueda;
     public $detallestodos;
@@ -26,17 +31,19 @@ class HistorialProgramacion extends Component
     public $id_pen;
     public $id_tov_imprimir;
     public $fecha;
+
     public $materiales = false;
 
     public function render()
     {
+
         $this->programaciones = DB::select('call mostrar_programacion(:pa_fecha)',
     [
         'pa_fecha' => $this->fecha
     ]);
 
         $this->detalles_programaciones = DB::select(
-            'call mostrar_detalles_programacion(:buscar,:id)',
+            'call mostrar_detalles_programacion_terminado(:buscar,:id)',
             [
                 'buscar' =>  $this->busqueda,
                 'id' => $this->id_tov
@@ -58,7 +65,7 @@ class HistorialProgramacion extends Component
 
         $this->dispatchBrowserEvent('tamanio_tabla');
 
-        return view('livewire.historial-programacion')->extends('principal')->section('content');
+        return view('livewire.programacionterminado')->extends('principal')->section('content');
     }
 
 
@@ -74,6 +81,7 @@ class HistorialProgramacion extends Component
         $this->id_pen = 0;
         $this->detallestodos = [];
         $this->titulo = [];
+        $this->id_d = 0;
         $this->id_tov_imprimir = 0;
         $this->fecha = Carbon::now()->format('Y-m-d');
     }
@@ -84,6 +92,16 @@ class HistorialProgramacion extends Component
     {
         $this->id_tov = $id;
         $this->id_tov_imprimir = $id;
+    }
+
+    public function item($marca, $size, $shape, $wrapper, $packing, $quantity, $item, $id)
+    {
+        $conca = 'RP-'.$item;
+        $this->item_b = $conca;
+        $this->id_d = $id;
+        $this->dispatchBrowserEvent('xxx', ['marca' => $marca,
+        'size' => $size,'shape' => $shape,'wrapper' => $wrapper,
+        'packing' => $packing,'quantity' => $quantity,'item' => $item]);
     }
 
 
@@ -195,20 +213,33 @@ class HistorialProgramacion extends Component
     }
 
 
+    public function updatelistos($pa_id, $pa_cantidad, $pa_item, $pa_id_programacion, $pa_numero_orden, $pa_orden)
+    {
+        DB::select(
+            'call update_listos(:id,:cantidad,:item,:programacion,:numero_orden,:orden)',
+            [
+                'id' =>  $pa_id,
+                'cantidad' => $pa_cantidad,
+                'item' =>  $pa_item,
+                'programacion' =>  $pa_id_programacion,
+                'numero_orden' =>  $pa_numero_orden,
+                'orden' =>  $pa_orden
+            ]
+        );
+
+        //return redirect()->route('programacionterminado');
+    }
+
+
     function exportProgramacion(Request $request)
     {
 
-
-
         if ($request->buscar === null) {
-            $bus = "";
+            $busqueda = "";
         } else {
-            $bus =  $request->buscar;
+            $busqueda =  $request->buscar;
         }
-
-
-
-        return Excel::download(new ProgramcionExport($bus, $request->id_tov), 'Programación.xlsx');
+        return Excel::download(new ProgramacionTerminadoExport($busqueda, $request->id_tov), 'ProgramaciónTerminado.xlsx');
     }
 
 
@@ -248,5 +279,11 @@ class HistorialProgramacion extends Component
 
         $fecha_programa = DB::select('SELECT prograamacion.fecha FROM prograamacion  WHERE prograamacion.id  = ?', [$this->id_tov]);
         return Excel::download(new MaterialesProgramacionExportView($vista,'Materiales'), 'Materiales ('. $fecha_programa[0]->fecha.').xlsx');
+    }
+
+    public function ExcelDiario(Request $request)
+    {
+        $fecha = Carbon::parse($request->fecha)->format('Y-m-d');
+        return Excel::download(new RemisionTerminado($fecha), 'RemisionTerminado.xlsx');
     }
 }

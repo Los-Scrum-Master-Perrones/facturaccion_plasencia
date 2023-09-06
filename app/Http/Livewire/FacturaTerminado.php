@@ -32,6 +32,8 @@ class FacturaTerminado extends Component
     public $total_factura_precio;
     public $fecha_factura;
     public $detalles_venta;
+    public $totaltotales;
+    public $totalcosto;
     public $datos_pendiente;
     public $tipo_factura;
     public $id_pendiente;
@@ -98,6 +100,7 @@ class FacturaTerminado extends Component
     public $items_p;
     public $ordenes_p;
     public $hons_p;
+    public $series_p;
 
     public $busqueda_marcas_p;
     public $busqueda_nombre_p;
@@ -137,6 +140,16 @@ class FacturaTerminado extends Component
 
     public $ventanas = 1;
 
+    public $items_b;
+    public $ordens_b;
+    public $t_empaque_b;
+    public $codigo_b;
+
+    public $items_f;
+    public $ordens_f;
+    public $t_empaque_f;
+    public $codigo_f;
+
     public function cambio($num){
           $this->ventanas = $num;
     }
@@ -149,7 +162,6 @@ class FacturaTerminado extends Component
 
         $this->titulo_mes = strftime("%B", strtotime($Nueva_Fecha));
         $this->titulo_cliente = $this->cliente;
-
         $this->items_p = DB::select('call buscar_pendiente_item()');
         /*Procedimientos de busquedas de la tabla pendiente*/
         $this->marcas_p = DB::select(
@@ -235,6 +247,23 @@ class FacturaTerminado extends Component
                 'cuatro' =>  $this->r_cuatro
             ]
         );
+
+        /*$this->series_p = DB::select(
+            'call buscar_precios_pendiente(:uno,:dos,:tres,:cuatro)',
+            [
+                'uno' =>  $this->r_uno,
+                'dos' =>  $this->r_dos,
+                'tres' =>  $this->r_tres,
+                'cuatro' =>  $this->r_cuatro
+            ]
+        );*/
+        $precio1= DB::table('clase_productos')
+        ->select('codigo_precio')->distinct()->get();
+
+        $precio2=DB::table('detalle_clase_productos')
+        ->select('otra_descripcion as codigo_precio')->distinct()->get();
+
+        $this->series_p = $precio1->concat($precio2);
 
         $this->capas = DB::select('call buscar_capa("")');
         $this->marcas = DB::select('call buscar_marca("")');
@@ -327,7 +356,11 @@ class FacturaTerminado extends Component
                 ]
             );
         }
-        $this->detalles_venta = DB::select('call mostrar_detalle_factura(?)', [$this->aereo]);
+        $this->detalles_venta = DB::select('call mostrar_detalle_factura(?,?,?,?,?)',[
+            $this->aereo, $this->items_b, $this->ordens_b, $this->codigo_b, $this->t_empaque_b
+        ]);
+        $this->totaltotales = DB::select('call mostrar_detalle_total(?)', [$this->aereo]);
+        $this->totalcosto = DB::select('call mostrar_detalle_costo_total_factura(?)', [$this->aereo]);
 
         $this->num_factura_sistema = DB::select('call traer_num_factura()')[0]->factura_interna;
 
@@ -380,7 +413,7 @@ class FacturaTerminado extends Component
 
                 $detalles = DB::select('select item, orden from pendiente where id_pendiente = ?', [$detalles_item[0]->id_pendiente]);
 
-                $valores_extras = DB::select('select id_pendiente, (select id_detalle from detalle_factura  where detalle_factura.id_pendiente = pendiente.id_pendiente) as id_detalle from pendiente where item = ? and orden = ?', [$detalles[0]->item, $detalles[0]->orden]);
+                $valores_extras = DB::select('select id_pendiente, (select id_detalle from detalle_factura where detalle_factura.id_pendiente = pendiente.id_pendiente) as id_detalle from pendiente where item = ? and orden = ?', [$detalles[0]->item, $detalles[0]->orden]);
 
                 DB::delete('call eliminar_detalle_factura(:id)', ['id' => $id]);
 
@@ -467,6 +500,10 @@ class FacturaTerminado extends Component
         $this->fecha_factura = Carbon::now()->format("Y-m-d");
 
         $this->aereo =  "RP";
+        $this->items_b =  "";
+        $this->ordens_b =  "";
+        $this->t_empaque_b =  "";
+        $this->codigo_b =  "";
     }
 
     public function paginacion_numerica($numero)
@@ -494,7 +531,7 @@ class FacturaTerminado extends Component
 
 
         $datos_pendiente = DB::select('SELECT item, orden, saldo,mes FROM pendiente WHERE id_pendiente = ?', [$this->id_pendiente_detalle]);
-       
+
         $conteo = DB::select('SELECT * FROM pendiente WHERE orden = ? AND item = ? AND mes = ?', [$datos_pendiente[0]->orden,  $datos_pendiente[0]->item, $datos_pendiente[0]->mes]);
 
         if ($sampler[0]->sampler == "si") {
@@ -614,7 +651,9 @@ class FacturaTerminado extends Component
     public function imprimir()
     {
 
-        $this->detalles_venta = DB::select('call mostrar_detalle_factura(?)', [$this->aereo]);
+        $this->detalles_venta = DB::select('call mostrar_detalle_factura(?,?,?,?,?)',[
+            $this->aereo, $this->items_b, $this->ordens_b, $this->codigo_b, $this->t_empaque_b
+        ]);
 
         $vista =  view('Exports.factura-terminado-exports-simple', [
             'detalles_venta' => $this->detalles_venta
@@ -625,7 +664,9 @@ class FacturaTerminado extends Component
     public function imprimir_formato_largo()
     {
 
-        $this->detalles_venta = DB::select('call mostrar_detalle_factura(?)', [$this->aereo]);
+        $this->detalles_venta = DB::select('call mostrar_detalle_factura(?,?,?,?,?)',[
+            $this->aereo, $this->items_b, $this->ordens_b, $this->codigo_b, $this->t_empaque_b
+        ]);
 
         $vista =  view('Exports.factura-terminado-exports', [
             'detalles_venta' => $this->detalles_venta
@@ -646,7 +687,9 @@ class FacturaTerminado extends Component
             if ($this->cliente != null && $this->contenedor != null) {
 
 
-                $detalles = DB::select('call mostrar_detalle_factura(?)', [$this->aereo]);
+                $detalles = DB::select('call mostrar_detalle_factura(?,?,?,?,?)',[
+                    $this->aereo, $this->items_b, $this->ordens_b, $this->codigo_b, $this->t_empaque_b
+                ]);
 
 
                 for ($i = 0; $i < count($detalles); $i++) {
@@ -657,7 +700,16 @@ class FacturaTerminado extends Component
                     $total_pendiete = $detalles[$i]->total_tabacos;
 
                     if ($sampler[0]->sampler == "si") {
+                        if($detalles[$i]->codigo_item == '10499010'){
+                            if($detalles[$i]->cod_prod == 'P-22419' || $detalles[$i]->cod_prod==''){
+                                $total_pendiete  = (($detalles[$i]->total_tabacos) / 30) * 8;
+                            }else{
+                                $total_pendiete  = (($detalles[$i]->total_tabacos) / 30) * 7;
+                            }
+
+                        }else{
                         $total_pendiete  = ($detalles[$i]->total_tabacos) / $cantidad_sampler[0]->conteo;
+                        }
                     }
 
                     DB::select('call `actualizar_pendiente_saldo_factura`(
@@ -721,20 +773,6 @@ class FacturaTerminado extends Component
                     "pa_fecha_factura" => $this->fecha_factura,
                     "pa_total_precio" => $this->total_factura_precio
                 ]);
-
-                DB::select('
-            insert into precios_historial(id_detalle_factura,precio) (SELECT detalle_factura.id_detalle AS id_detalle_factura,
-            ( if((SELECT clase_productos.sampler FROM clase_productos WHERE clase_productos.item = (SELECT pendiente.item FROM pendiente WHERE pendiente.id_pendiente = detalle_factura.id_pendiente)) = "si",
-            (SELECT pendiente.precio FROM pendiente WHERE pendiente.id_pendiente = detalle_factura.id_pendiente)
-            ,
-            (SELECT clase_productos.precio FROM clase_productos WHERE clase_productos.item =
-            (SELECT pendiente.item FROM pendiente WHERE pendiente.id_pendiente = detalle_factura.id_pendiente))
-            )
-            )
-             AS precio
-            FROM detalle_factura,factura_terminados
-            WHERE factura_terminados.id = detalle_factura.id_venta and factura_terminados.numero_factura = ?)
-            ', [$this->num_factura_sistema]);
 
                 $this->titulo_cliente = "";
                 $this->titulo_factura = "";

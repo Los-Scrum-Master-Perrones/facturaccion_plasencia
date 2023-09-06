@@ -5,7 +5,7 @@ namespace App\Http;
 use Illuminate\Support\Arr;
 
 class Static_Vars{
-      
+
     public static $item = "";
     public static $orden = "";
     public static $conteo = 0;
@@ -20,8 +20,8 @@ class Static_Vars{
    public static function traer_arreglo(){
       return  self::$items_inexistentes;
    }
-   
-      
+
+
     public static function Setitems($item) {
        self::$item = $item;
     }
@@ -41,11 +41,11 @@ class Static_Vars{
     public static function getitems() {
         return self::$item;
      }
- 
+
      public static function getordenes() {
         return self::$orden;
      }
- 
+
      public static function getconteos() {
         return self::$conteo;
      }
