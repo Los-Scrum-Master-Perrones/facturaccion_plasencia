@@ -9,6 +9,7 @@ class pendiente extends Model
 {
     protected $table = 'pendiente';
     protected $guarded = [];
+    protected $primaryKey = 'id_pendiente';
 
     public $timestamps = false;
 }

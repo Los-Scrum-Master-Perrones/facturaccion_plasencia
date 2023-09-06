@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Pendiente\PendienteComprobarEmpaque;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ReporteDiarioController;
@@ -29,6 +30,11 @@ Route::get('diarios/existenciasempaque/total', [App\Http\Controllers\ReporteDiar
 Route::get('diarios/fechaaingresar', [App\Http\Controllers\ReporteDiarioController::class, 'consultarProceso']);
 Route::get('diarios/editable/{fecha}', [App\Http\Controllers\ReporteDiarioController::class, 'editable']);
 Route::post('diarios/guardaregistrodiario', [App\Http\Controllers\ReporteDiarioController::class, 'guardaregistrodiario']);
+
+
+Route::get('pendiente/empaque/{id}', [PendienteComprobarEmpaque::class, 'mostra_detalles_pendiente_empaque'])->name('traer.noexistentes.pendiente_empaque');
+Route::get('pendiente/empaque/agregar/{id}', [PendienteComprobarEmpaque::class, 'agregar_detalles_pendiente_empaque'])->name('agregar.noexistentes.pendiente_empaque');
+
 
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     //return $request->user();

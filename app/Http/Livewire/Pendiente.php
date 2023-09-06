@@ -77,6 +77,8 @@ class Pendiente extends Component
     public $codigo_precio_nuevo;
     public $precio_precio;
 
+    public $dato = 0;
+
     public function render()
     {
         $item_sampler_mensaje = "item";
@@ -234,6 +236,20 @@ class Pendiente extends Component
                 ]
             );
         }
+
+        $usos = DB::select('SELECT pendiente_empaque.item, pendiente_empaque.id_pendiente_pedido
+        FROM pendiente_empaque');
+
+        $usosArray = [];
+        foreach ($usos as $uso) {
+            $usosArray[$uso->id_pendiente_pedido] = $uso->item;
+        }
+
+        foreach ($this->datos_pendiente as $key => $value) {
+            $value->esta_pendiente = isset($usosArray[$value->id_pendiente])?$usosArray[$value->id_pendiente]:'no';
+        }
+
+
 
         return view('livewire.pendiente')->extends('principal')->section('content');
     }
