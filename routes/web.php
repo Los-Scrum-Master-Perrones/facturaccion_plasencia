@@ -30,6 +30,7 @@ use App\Http\Livewire\EditarDetalles;
 use App\Http\Livewire\EntradasSalidas;
 use App\Http\Livewire\Materiales;
 use App\Http\Livewire\MaterialesProductos;
+use App\Http\Livewire\ProductoPrecio;
 use App\Http\Livewire\Terminado;
 use App\Models\EntradasSalida;
 use App\Models\MaterialesCatalogo;
@@ -373,12 +374,14 @@ Route::post('/MaterialesPendiente2', [Pendiente::class,'imprimir_materiales'])->
 Route::post('/MaterialesActualizar', [Pendiente::class,'actualizar_datos'])->name('materiales.actualizar_datos');
 Route::post('/MaterialesFichasPendiente', [Pendiente::class,'actualizar_fichas'])->name('materiales.actualizar_fichas');
 
-
-
 Route::post('/MaterialesPendienteEmpaque', [PendienteEmpaque::class,'exportPendienteMateriales_pendiente_empaque'])->name('materiales_empaque.exporPendiente');
 Route::post('/MaterialesPendienteEmpaque2', [PendienteEmpaque::class,'imprimir_materiales_pendiente_empaque'])->name('materiales_empaque.exportMateriales');
 Route::post('/MaterialesPendienteEmpaqueActualizar', [PendienteEmpaque::class,'actualizar_datos_pendiente_empaque'])->name('materiales_empaque.actualizar_datos');
 Route::post('/MaterialesFichasPendienteEmpaque', [PendienteEmpaque::class,'actualizar_fichas_pendiente_empaque'])->name('materiales_empaque.actualizar_fichas');
 
+
+//Catalgo de precios
+
+Route::get('/precios', ProductoPrecio::class)->name('precio.catalogo');
 
 });

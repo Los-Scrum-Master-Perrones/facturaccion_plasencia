@@ -15,7 +15,16 @@
     <script src="{{ URL::asset('https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js') }}"></script>
     <link rel="stylesheet" href="{{ URL::asset('https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css') }}">
 
+    <ul class="nav justify-content-center">
+        <li class="nav-item">
+            <a class="nav-link active" style="color:#ffffff; font-size:12px;" href="{{ route('productos') }}"><strong>Catalogo de Productos</strong></a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" style="color:#ffffff; font-size:12px;" href="{{ route('precio.catalogo') }}"><strong>Catalogo de Precios</strong></a>
+        </li>
+    </ul>
 
+    <br>
 
 
     <div class="container" style="max-width:100%; ">

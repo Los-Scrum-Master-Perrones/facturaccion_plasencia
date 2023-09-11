@@ -27,7 +27,10 @@
 
     <ul class="nav justify-content-center">
         <li class="nav-item">
-            <a class="nav-link active" style="color:#E5B1E2; font-size:12px;" href="{{ route('datos_producto') }}"><strong>Datos Adicionales</strong></a>
+            <a class="nav-link active" style="color:#ffffff; font-size:12px;" href="{{ route('datos_producto') }}"><strong>Datos Adicionales</strong></a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link active" style="color:#ffffff; font-size:12px;" href="{{ route('precio.catalogo') }}"><strong>Catalogo de Precios</strong></a>
         </li>
     </ul>
 
@@ -74,7 +77,7 @@
 
         <div class="panel-body" style="padding:0px;">
             <div wire:loading.class='oscurecer_contenido' style="width:100%; padding-left:0px;   font-size:10px;   overflow-x: display; overflow-y: auto;  height:450px;">
-               
+
                 <table class="table table-light" style="font-size:10px;">
                     <thead style=" position: static;">
                         <tr style="font-size:16px; text-align:center;">
