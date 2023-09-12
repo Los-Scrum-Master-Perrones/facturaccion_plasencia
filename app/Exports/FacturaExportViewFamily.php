@@ -16,7 +16,7 @@ use PhpOffice\PhpSpreadsheet\Worksheet\Worksheet;
 
 
 
-class FacturaExportView implements WithStyles, FromView, ShouldAutoSize,
+class FacturaExportViewFamily implements WithStyles, FromView, ShouldAutoSize,
                                 WithStrictNullComparison,
                                 WithColumnFormatting{
 
@@ -42,8 +42,7 @@ class FacturaExportView implements WithStyles, FromView, ShouldAutoSize,
     public function styles(Worksheet $sheet)
     {
         return [
-            // Configura el estilo de borde grueso para un rango de celdas
-            'A18:R18' => [
+            'A16:R16' => [
                 'borders' => [
                     'allBorders' => [
                         'borderStyle' => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THICK,
@@ -54,7 +53,7 @@ class FacturaExportView implements WithStyles, FromView, ShouldAutoSize,
                     'vertical' => \PhpOffice\PhpSpreadsheet\Style\Alignment::VERTICAL_CENTER,
                 ],
             ],
-            'A19:R19' => [
+            'A17:R17' => [
                 'borders' => [
                     'allBorders' => [
                         'borderStyle' => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THICK,
@@ -64,6 +63,9 @@ class FacturaExportView implements WithStyles, FromView, ShouldAutoSize,
                     'horizontal' => \PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_CENTER,
                     'vertical' => \PhpOffice\PhpSpreadsheet\Style\Alignment::VERTICAL_CENTER,
                 ],
+            ],
+            'A1:Z1000' => [
+                'autosize' => true,
             ],
         ];
     }

@@ -2,8 +2,6 @@
 
 namespace App\Http\Livewire;
 
-use App\Models\CatalogoHistorialPrecio;
-use App\Models\CatalogoItemsPrecio;
 use Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\Support\Facades\DB;
 use Livewire\Component;
@@ -29,6 +27,8 @@ class ProductoPrecio extends Component
     public $capa = '';
     public $empaque = '';
     public $datos = [];
+
+   
 
     public function mount()
     {

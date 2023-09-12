@@ -9,6 +9,7 @@ use Livewire\Component;
 
 use App\Exports\FacturaExport;
 use App\Exports\FacturaExportView;
+use App\Exports\FacturaExportViewFamily;
 use Maatwebsite\Excel\Facades\Excel;
 
 class FacturaTerminado extends Component
@@ -659,6 +660,27 @@ class FacturaTerminado extends Component
             'detalles_venta' => $this->detalles_venta
         ]);
         return Excel::download(new FacturaExportView($vista), 'Factura.xlsx');
+
+
+        $vista =  view('Exports.factura-terminado-exports-simple', [
+            'detalles_venta' => $this->detalles_venta
+        ]);
+
+        return Excel::download(new FacturaExportView($vista), 'FacturaDetallada.xlsx');
+    }
+
+    public function imprimir_factura_family()
+    {
+
+        $this->detalles_venta = DB::select('call mostrar_detalle_factura(?,?,?,?,?)',[
+            $this->aereo, $this->items_b, $this->ordens_b, $this->codigo_b, $this->t_empaque_b
+        ]);
+
+        $vista =  view('Exports.factura-terminado-exports-family', [
+            'detalles_venta' => $this->detalles_venta
+        ]);
+
+        return Excel::download(new FacturaExportViewFamily($vista), 'FACT FAMILY TOBACCO.xlsx');
     }
 
     public function imprimir_formato_largo()

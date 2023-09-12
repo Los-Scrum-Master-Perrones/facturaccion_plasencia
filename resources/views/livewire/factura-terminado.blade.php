@@ -76,13 +76,19 @@
                 <label style="font-size:15px;color:white;">Factura N#: {{ $num_factura_sistema }}</label>
             </div>
 
-            <div class="col-sm-3" style="text-align:end;">
+            <div class="col-sm-2" style="text-align:end;">
                 <button style="width:120px;" class="botonprincipal" wire:click="imprimir()">Imprimir</button>
             </div>
-            <div class="col-sm-3" style="text-align:end;">
+            @if($aereo == "FM")
+            <div class="col-sm-2" style="text-align:end;">
+                <button style="width:120px;" class="botonprincipal" wire:click="imprimir_factura_family()">Imprimir(Family)</button>
+            </div>
+            @else
+            <div class="col-sm-2" style="text-align:end;">
                 <button style="width:120px;" class="botonprincipal"
                     wire:click="imprimir_formato_largo()">Imprimir(factura Larga)</button>
             </div>
+            @endif
             <div class="col-sm-2" style="text-align:end;">
                 <button style="width:120px;" class="botonprincipal" wire:click="historial()">Historial</button>
             </div>

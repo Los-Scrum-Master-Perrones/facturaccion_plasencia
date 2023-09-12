@@ -1,24 +1,25 @@
 <div xmlns:wire="http://www.w3.org/1999/xhtml">
+
     <ul class="nav justify-content-center">
         @if (auth()->user()->rol == 0 || auth()->user()->rol == 1 )
         <li class="nav-item">
-            <a style="color:white; font-size:12px;" href="{{ route('inventario_cajas') }}"><strong>Catálogo
+            <a class="nav-link" style="color:white; font-size:12px;" href="{{ route('inventario_cajas') }}"><strong>Catálogo
                     Cajas</strong></a>
         </li>
         <li class="nav-item">
-            <a style="color:white; font-size:12px;" href="{{ route('index_importar_cajas') }}"><strong>Importar
+            <a class="nav-link" style="color:white; font-size:12px;" href="{{ route('index_importar_cajas') }}"><strong>Importar
                     Cajas</strong></a>
         </li>
         @endif
         <li class="nav-item">
-            <a style="color:white; font-size:12px;" href="{{ route('materiales.index') }}"><strong>Materiales</strong></a>
+            <a class="nav-link" style="color:white; font-size:12px;" href="{{ route('materiales.index') }}"><strong>Materiales</strong></a>
         </li>
         <li class="nav-item">
-            <a style="color:white; font-size:12px;" href="{{ route('materiales.relacionar') }}"><strong>Materiales
+            <a class="nav-link" style="color:white; font-size:12px;" href="{{ route('materiales.relacionar') }}"><strong>Materiales
                     materials</strong></a>
         </li>
         <li class="nav-item">
-            <a style="color:#E5B1E2; font-size:12px;" href="{{ route('entradas.salidas') }}"><strong>Entrada/Salida</strong></a>
+            <a class="nav-link" style="color:#E5B1E2; font-size:12px;" href="{{ route('entradas.salidas') }}"><strong>Entrada/Salida</strong></a>
         </li>
 
     </ul>
@@ -37,29 +38,7 @@
 
     <div class="row">
         <div class="col">
-            <nav>
-                <ul class="pagination justify-content-center">
-
-                    <li class="page-item">
-                        <a class="page-link" href="#" tabindex="-1" wire:click="mostrar_todo(0)">Dividir</a>
-                    </li>
-                    @php
-                    $cantida = 1;
-                    @endphp
-                    @for ($i = 0; $i < $tuplas_conteo ; $i+=100) <li class="page-item"><a class="page-link" href="#" wire:click="paginacion_numerica({{$i}})">{{$cantida}}</a></li>
-                        @php
-                        $cantida++;
-                        @endphp
-
-                        @endfor
-                        @php
-                        $cantida = 1;
-                        @endphp
-                        <li class="page-item">
-                            <a class="page-link" href="#" wire:click="mostrar_todo(1)">Mostrar Todo</a>
-                        </li>
-                </ul>
-            </nav>
+            {{ $materiales->links() }}
         </div>
     </div>
 
@@ -148,13 +127,25 @@
         </div>
         <br>
     </div>
-    <div class="col-sm-9">
-    </div>
-    <div class="col-sm-1">
-        <span style="width:50px;" class="form-control input-group-text">Total</span>
-    </div>
-    <div class="col-sm-2">
-        <input style="width:150px;" type="text" class="form-control" value="{{ number_format($saldo,0)  }}">
+    <div class="row">
+        <div class="col-6"></div>
+        <div class="col-3">
+            <div class="input-group mb-3">
+                <span class="input-group-text" id="basic-addon1">Total</span>
+                <input style="width:150px;" type="text" class="form-control" value="{{ number_format($saldo,0)  }}">
+            </div>
+        </div>
+        <div class="col-3">
+            <div class="input-group mb-3">
+                <span class="input-group-text" id="basic-addon1">Registros por pagina</span>
+                <select name="" id="" class="form-control" wire:model='por_pagina'>
+                    <option value="50">50</option>
+                    <option value="100">100</option>
+                    <option value="200">200</option>
+                    <option value="500">500</option>
+                </select>
+            </div>
+        </div>
     </div>
 
 

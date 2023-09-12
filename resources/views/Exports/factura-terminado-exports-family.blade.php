@@ -24,68 +24,67 @@
 
                     <tr>
                         <th style="font-family: Tahoma; font-size: 8"><b>Vendido a</b></th>
-                        <th style="font-family: Tahoma; font-size: 10" colspan="5"><strong>Rocky Patel Premium Cigar INC</strong></th>
+                        <th style="font-family: Tahoma; font-size: 10"><strong>FAMILY TOBACCO TRADERS</strong></th>
+                        <td></td><td></td><td></td><td></td><td></td><td></td><td></td>
+                        <td style="font-family: Tahoma; font-size: 8; font-weight: bold" colspan="2">Fecha</td>
+                        <td></td>
+                        <td style="font-family: Tahoma; font-size: 8" colspan="2"><b>28 de julio del 2023</b></td>
                     </tr>
                     <tr>
                         <td style="font-family: Tahoma; font-size: 8"><b>Sold to</b></td>
-                        <td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td>
-                        <td style="font-family: Tahoma; font-size: 8"><b>09 DE MAYO DEL 2023</b></td>
+                        <td>5100 NW 72 AVENUE.</td>
+                        <td></td><td></td><td></td><td></td><td></td><td></td><td></td>
+                        <td style="font-family: Tahoma; font-size: 8; font-weight: bold" colspan="2">Date</td>
+                        <td></td>
+                        <td></td>
                     </tr>
                     <tr>
                         <th style="font-family: Tahoma; font-size: 8"><b>Direccion</b></th>
-                        <th style="font-family: Tahoma; font-size: 10" colspan="5"><strong>4244 CORPORATE SQUARE</strong></th>
+                        <th style="font-family: Tahoma; font-size: 10" colspan="5">UNIT, D , MIAMI FLORIDA 33166</th>
+                        <td></td><td></td><td></td>
+                        <td style="font-family: Tahoma; font-size: 8; font-weight: bold" colspan="2">Su orden No.</td>
                         <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
+                        <td style="font-family: Tahoma; font-size: 8" colspan="2"><b>NOTIFY PARTY.:</b></td>
                     </tr>
                     <tr>
                         <td style="font-family: Tahoma; font-size: 8"><b>Address</b></td>
-                        <th style="font-family: Tahoma; font-size: 10" colspan="5"><strong>NAPLES, FL 34104, USA</strong></th>
+                        <th style="font-family: Tahoma; font-size: 10" colspan="5">TEL: 305-992-8628</th>
+                        <td></td><td></td><td></td>
+                        <td style="font-family: Tahoma; font-size: 8; font-weight: bold" colspan="2">Instrucciones de Embarque</td>
                         <td></td>
-                        <th style="text-align:center; font-family: Tahoma;font-size:16px;" ><b>PREMIUM CIGARS</b></th>
+                        <td style="font-family: Tahoma; font-size: 8" colspan="2"><b>DORAL FL. 33172</b></td>
                     </tr>
                     <tr>
                         <td></td>
-                        <th style="font-family: Tahoma; font-size: 10" colspan="6"><strong>'Shawn Bussler' sbussler@rockypatel.com</strong></th>
+                        <th style="font-family: Tahoma; font-size: 10" colspan="6">FAX: 305-461-0261</th>
+                        <td></td><td></td>
+                        <td style="font-family: Tahoma; font-size: 8; font-weight: bold" colspan="2">Shipping instruccitions</td>
                         <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
+                        <td style="font-family: Tahoma; font-size: 8" colspan="2"><b>TEL: 305-592-6910</b></td>
                     </tr>
                     <tr>
+                        <td style="font-family: Tahoma; font-size: 8"><b>Condiciones</b></td>
                         <td></td>
-                        <th style="font-family: Tahoma; font-size: 10" colspan="5"><strong>PHONE:  239 593 1833</strong></th>
-                        <td></td><td></td><td></td><td></td>
-                        <td style="font-family: Tahoma; font-size: 10"><b>NOTIFICAR A:</b></td>
-                    </tr>
-                    <tr>
+                        <td></td><td></td><td></td><td></td><td></td><td></td><td></td>
+                        <td style="font-family: Tahoma; font-size: 8; font-weight: bold" colspan="2">Consignado a</td>
                         <td></td>
-                        <th style="font-family: Tahoma; font-size: 10" colspan="5"><strong>FAX:  239 593 1839</strong></th>
-                        <td></td><td></td><td></td><td></td>
-                        <td style="font-family: Tahoma; font-size: 10"><b>{{ "R&R Customs Brokers LLC" }}</b></td>
+                        <td style="font-family: Tahoma; font-size: 8" colspan="2"><b>FAX: 305-593-1781</b></td>
                     </tr>
                     <tr>
+                        <td style="font-family: Tahoma; font-size: 8"><b>Conditions</b></td>
                         <td></td>
-                        <th style="font-family: Tahoma; font-size: 10" colspan="5"><strong>Tax ID:   56 1948219</strong></th>
-                        <td></td><td></td><td></td><td></td>
-                        <td style="font-family: Tahoma; font-size: 10" colspan="3"><b>8501 NW 17ST STE 120</b></td>
-                    </tr>
-                    <tr>
-                        <td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td>
-                        <td style="font-family: Tahoma; font-size: 10" colspan="3"><b>MIAMI FL 33126</b></td>
-                    </tr>
-                    <tr>
-                        <td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td>
-                        <td style="font-family: Tahoma; font-size: 10" colspan="3"><b>TEL: 305 345-5809 / 305 323-5713</b></td>
+                        <td style="font-family: Tahoma; font-size: 8"><b># 10</b></td>
+                        <td></td><td></td><td></td><td></td><td></td><td></td>
+                        <td style="font-family: Tahoma; font-size: 8; font-weight: bold" colspan="2">Consigned to</td>
+                        <td></td>
+                        <td style="font-family: Tahoma; font-size: 8" colspan="2"><b>ATTE: RALPH G. DE LA ROSA.</b></td>
                     </tr>
                     <tr></tr>
+                    <tr></tr>
                     <tr>
-                        <th style="font-family: Tahoma; font-size: 10; text-align: center"><strong><i>Seals</i></strong></th>
+                        <td style="font-family: Tahoma; font-size: 10; text-align: center"><strong><i>Seals</i></strong></td>
                         <td></td><td></td><td></td><td></td><td></td><td></td>
-                        <th style="font-family: Tahoma; font-size: 10; text-align: center"><b>AEREA</b></th>
+                        <td></td>
                     </tr>
                     <thead style="position: static;">
                         <tr style="font-size:10px; text-align:center">
@@ -140,30 +139,6 @@
                         ?>
 
                         @foreach($detalles_venta as $detalles)
-
-
-
-                        @if ( $orden == "" && $orden_actua == "")
-                        @php
-                        $orden_actua = $detalles->orden;
-                        $orden_actua = $detalles->orden;
-                        @endphp
-                        @endif
-
-                        @php
-                        $orden = $detalles->orden;
-                        @endphp
-
-                        @if ($orden_actua == $orden)
-
-                        @else
-                        <tr>
-                            <td colspan="18" style="background-color: gray"></td>
-                        </tr>
-                        @php
-                        $orden_actua = $detalles->orden;
-                        @endphp
-                        @endif
 
                         @php
 
@@ -411,21 +386,21 @@
 
 
                             <?php
-            $val_anterioir= $bultos+1;
-            $bultos += $detalles->cantidad_puros;
-            $val_actual=$bultos;
+                                $val_anterioir= $bultos+1;
+                                $bultos += $detalles->cantidad_puros;
+                                $val_actual=$bultos;
 
-            $total_puros_salida = DB::select('SELECT SUM(cantidad_puros*unidad) AS salida FROM detalle_factura WHERE facturado = "N" and id_pendiente = ?', [$detalles->id_pendiente]);
-            $total_saldo_pendiente = DB::select('SELECT saldo FROM pendiente WHERE id_pendiente = ?', [$detalles->id_pendiente]);
+                                $total_puros_salida = DB::select('SELECT SUM(cantidad_puros*unidad) AS salida FROM detalle_factura WHERE facturado = "N" and id_pendiente = ?', [$detalles->id_pendiente]);
+                                $total_saldo_pendiente = DB::select('SELECT saldo FROM pendiente WHERE id_pendiente = ?', [$detalles->id_pendiente]);
 
-            $total_restante =  intval($total_saldo_pendiente[0]->saldo) - intval($total_puros_salida[0]->salida);
+                                $total_restante =  intval($total_saldo_pendiente[0]->saldo) - intval($total_puros_salida[0]->salida);
 
-            $total_saldo_pendiente = DB::update('UPDATE detalle_factura SET anterior = ? WHERE id_detalle = ?', [$total_restante,$detalles->id_detalle]);
+                                $total_saldo_pendiente = DB::update('UPDATE detalle_factura SET anterior = ? WHERE id_detalle = ?', [$total_restante,$detalles->id_detalle]);
 
 
-            $total_neto += $detalles->total_neto;
-            $total_bruto += $detalles->total_bruto;
-        ?>
+                                $total_neto += $detalles->total_neto;
+                                $total_bruto += $detalles->total_bruto;
+                            ?>
 
                             @if ($val_actual == $val_anterioir)
                             <td style="text-align:center;font-size:9px; height: 24px;border: 5px solid #C00;overflow-x:auto;">{{$val_actual}}</td>
@@ -570,32 +545,9 @@
                         </tr>
                     </tbody>
                     <tr>
-                        <td style="font-family: Thaoma;font-weight: bold; font-size: 10">NOTE:</td>
-                    </tr>
-                    <tr>
-                        <td style="font-family: Thaoma;font-weight: bold; font-size: 10" colspan="14">
-                            “*These cigars (1) are wrapped in whole tobacco leaf; (2) contain a 100 percent leaf tobacco binder; (3) contain at least 50 percent (of the filter by weight) long filler tobacco; (4) are
-                        </td>
-                    </tr>
-                    <tr>
-                        <td style="font-family: Thaoma;font-weight: bold; font-size: 10" colspan="14">
-                            handmade or hand rolled; (5) have no filter, nontobacco tip, or nontobacco mouthpiece; (6) do not have a characterizing flavor other than tobacco; (7) contain only tobacco, water, and
-                        </td>
-                    </tr>
-                    <tr>
-                        <td style="font-family: Thaoma;font-weight: bold; font-size: 10" colspan="14">
-                            vegetable gum with no other ingredients or additives; and (8) weigh more than 6 pounds per 1,000 units.”
-                        </td>
-                    </tr>
-                    <tr>
-                        <td style="font-family: Thaoma;font-weight: bold; font-size: 10" colspan="14">
-                        </td>
-                    </tr>
-                    <tr>
                         <td style="font-family: Thaoma; font-size: 8" colspan="8">
                             REMIT PAYMENT BY A CHECK OR WIRE TRANSFER TO:
                         </td>
-                        <td></td><td></td><td></td><td></td><td></td>
                         <td style="font-family: Thaoma; font-size: 8" colspan="4">
                             COUNTRY OF ORIGEN: HONDURAS
                         </td>
@@ -604,7 +556,6 @@
                         <td style="font-family: Thaoma; font-weight: bold; font-size: 8" colspan="8">
                             TERRABANK N. A. 3191 CORAL WAY, MIAMI FL. 33145
                         </td>
-                        <td></td><td></td><td></td><td></td><td></td>
                         <td style="font-family: Thaoma; font-weight: bold; font-size: 8" colspan="4">
                             Manufactured by Tabacos De Oriente, S. De RL.
                         </td>
@@ -613,7 +564,6 @@
                         <td style="font-family: Thaoma; font-weight: bold; font-size: 8" colspan="8">
                             ABA N°. 066012333 SWIFT TBNAUS33 FOR CREDIT TO CCC, CARIBBEAN CIGAR COMPANY, ACCOUNT 1270595006
                         </td>
-                        <td></td><td></td><td></td><td></td><td></td>
                         <td style="font-family: Thaoma; font-weight: bold; font-size: 8" colspan="4">
                             Apartado #33, Danli, El Paraiso Honduras, S.
                         </td>
@@ -622,7 +572,6 @@
                         <td style="font-family: Thaoma; font-size: 8" colspan="8">
                             ALL SALES AND PRICES ARE FOB HONDURAS / NICARAGUA
                         </td>
-                        <td></td><td></td><td></td><td></td><td></td>
                         <td style="font-family: Thaoma; font-size: 8" colspan="4">
                             NONE OF THE CONSTITUENT TOBACCOS ARE FROM CUBA
                         </td>
