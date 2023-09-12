@@ -2,10 +2,12 @@
 
 namespace App\Http\Livewire;
 
+use App\Exports\CatalogoPrecioExport;
 use Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\Support\Facades\DB;
 use Livewire\Component;
 use Livewire\WithPagination;
+use Maatwebsite\Excel\Facades\Excel;
 
 class ProductoPrecio extends Component
 {
@@ -19,7 +21,6 @@ class ProductoPrecio extends Component
     public $capas_p = [];
     public $empaques_p = [];
 
-
     public $codigo = '';
     public $marca = '';
     public $nombre = '';
@@ -28,7 +29,10 @@ class ProductoPrecio extends Component
     public $empaque = '';
     public $datos = [];
 
-   
+    public $precio_mayor = 4000;
+    public $precio_menor = 0;
+
+    public $por_pagina = 25;
 
     public function mount()
     {
@@ -39,11 +43,19 @@ class ProductoPrecio extends Component
 
     public function render()
     {
-        $perPage = 25; // Número de registros por página
-        $start = ($this->page - 1) * $perPage; // Calcular el índice de inicio
+        $this->precio_mayor = $this->precio_mayor>=0? $this->precio_mayor:0;
+        $this->precio_menor = $this->precio_menor>=0? $this->precio_menor:0;
+        if($this->precio_mayor > $this->precio_menor){
+
+        }else{
+            $this->precio_mayor = 4000;
+            $this->precio_menor = 0;
+        }
+
+        $start = ($this->page - 1) * $this->por_pagina;
 
         $prodcutosPrecio = DB::select(
-            'call mostrar_catalogo_precios_busqueda(?,?,?,?,?,?,?,?)',
+            'call mostrar_catalogo_precios_busqueda(?,?,?,?,?,?,?,?,?,?)',
             [
                 $this->codigo,
                 $this->marca,
@@ -52,7 +64,9 @@ class ProductoPrecio extends Component
                 $this->capa,
                 $this->empaque,
                 $start,
-                $perPage
+                $this->por_pagina,
+                $this->precio_menor==''?0:$this->precio_menor,
+                $this->precio_mayor==''?0:$this->precio_mayor,
             ]
         );
         $usos = DB::select(
@@ -79,21 +93,23 @@ class ProductoPrecio extends Component
 
 
         $total = DB::select(
-            'call mostrar_catalogo_precios_conteo(?,?,?,?,?,?)',
+            'call mostrar_catalogo_precios_conteo(?,?,?,?,?,?,?,?)',
             [
                 $this->codigo,
                 $this->marca,
                 $this->nombre,
                 $this->vitola,
                 $this->capa,
-                $this->empaque
+                $this->empaque,
+                $this->precio_menor==''?0:$this->precio_menor,
+                $this->precio_mayor==''?0:$this->precio_mayor,
             ]
         )[0]->total;
 
         $this->datos=$prodcutosPrecio;
 
         return view('livewire.producto-precio', [
-            'prodcutosPrecio' => new LengthAwarePaginator($prodcutosPrecio, $total , $perPage)
+            'prodcutosPrecio' => new LengthAwarePaginator($prodcutosPrecio, $total , $this->por_pagina)
         ])->extends('layouts.Main')->section('content');
     }
 
@@ -124,5 +140,26 @@ class ProductoPrecio extends Component
             $this->capas_p = array_unique($this->capas_p);
             $this->empaques_p = array_unique($this->empaques_p);
         }
+    }
+
+    public function imprimir_reporte()
+    {
+        $vista =  view('Exports.producto-precio', [
+            'prodcutosPrecio' => DB::select(
+                'call mostrar_catalogo_precios_busqueda_historial(?,?,?,?,?,?,?,?)',
+                [
+                    $this->codigo,
+                    $this->marca,
+                    $this->nombre,
+                    $this->vitola,
+                    $this->capa,
+                    $this->empaque,
+                    $this->precio_menor==''?0:$this->precio_menor,
+                    $this->precio_mayor==''?0:$this->precio_mayor,
+                ]
+            )
+        ]);
+
+        return Excel::download(new CatalogoPrecioExport($vista), 'Catalogo Precios.xlsx');
     }
 }
