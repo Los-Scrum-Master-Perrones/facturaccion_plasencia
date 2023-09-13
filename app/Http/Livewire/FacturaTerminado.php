@@ -92,16 +92,16 @@ class FacturaTerminado extends Component
 
 
     /* procedimientos almacanedos busquedas pendiente*/
-    public $marcas_p;
-    public $nombre_p;
-    public $vitolas_p;
-    public $capas_p;
-    public $empaques_p;
-    public $mes_p;
-    public $items_p;
-    public $ordenes_p;
-    public $hons_p;
-    public $series_p;
+    public $marcas_p = [];
+    public $nombre_p = [];
+    public $vitolas_p = [];
+    public $capas_p = [];
+    public $empaques_p = [];
+    public $mes_p = [];
+    public $items_p = [];
+    public $ordenes_p = [];
+    public $hons_p = [];
+    public $series_p = [];
 
     public $busqueda_marcas_p;
     public $busqueda_nombre_p;
@@ -163,101 +163,7 @@ class FacturaTerminado extends Component
 
         $this->titulo_mes = strftime("%B", strtotime($Nueva_Fecha));
         $this->titulo_cliente = $this->cliente;
-        $this->items_p = DB::select('call buscar_pendiente_item()');
-        /*Procedimientos de busquedas de la tabla pendiente*/
-        $this->marcas_p = DB::select(
-            'call buscar_marca_pendiente(:uno,:dos,:tres,:cuatro)',
-            [
-                'uno' =>  $this->r_uno,
-                'dos' =>  $this->r_dos,
-                'tres' =>  $this->r_tres,
-                'cuatro' =>  $this->r_cuatro
-            ]
-        );
-        $this->nombre_p = DB::select(
-            'call buscar_nombre_pendiente(:uno,:dos,:tres,:cuatro)',
-            [
-                'uno' =>  $this->r_uno,
-                'dos' =>  $this->r_dos,
-                'tres' =>  $this->r_tres,
-                'cuatro' =>  $this->r_cuatro
-            ]
-        );
-        $this->vitolas_p = DB::select(
-            'call buscar_vitola_pendiente(:uno,:dos,:tres,:cuatro)',
-            [
-                'uno' =>  $this->r_uno,
-                'dos' =>  $this->r_dos,
-                'tres' =>  $this->r_tres,
-                'cuatro' =>  $this->r_cuatro
-            ]
-        );
-        $this->capas_p = DB::select(
-            'call buscar_capa_pendiente(:uno,:dos,:tres,:cuatro)',
-            [
-                'uno' =>  $this->r_uno,
-                'dos' =>  $this->r_dos,
-                'tres' =>  $this->r_tres,
-                'cuatro' =>  $this->r_cuatro
-            ]
-        );
-        $this->empaques_p = DB::select(
-            'call buscar_tipo_empaque_pendiente(:uno,:dos,:tres,:cuatro)',
-            [
-                'uno' =>  $this->r_uno,
-                'dos' =>  $this->r_dos,
-                'tres' =>  $this->r_tres,
-                'cuatro' =>  $this->r_cuatro
-            ]
-        );
 
-
-        $this->mes_p = DB::select(
-            'call buscar_fechas_pendiente(:uno,:dos,:tres,:cuatro)',
-            [
-                'uno' =>  $this->r_uno,
-                'dos' =>  $this->r_dos,
-                'tres' =>  $this->r_tres,
-                'cuatro' =>  $this->r_cuatro
-            ]
-        );
-        $this->items_p = DB::select(
-            'call buscar_item_pendiente(:uno,:dos,:tres,:cuatro)',
-            [
-                'uno' =>  $this->r_uno,
-                'dos' =>  $this->r_dos,
-                'tres' =>  $this->r_tres,
-                'cuatro' =>  $this->r_cuatro
-            ]
-        );
-        $this->ordenes_p = DB::select(
-            'call buscar_ordenes_pendiente(:uno,:dos,:tres,:cuatro)',
-            [
-                'uno' =>  $this->r_uno,
-                'dos' =>  $this->r_dos,
-                'tres' =>  $this->r_tres,
-                'cuatro' =>  $this->r_cuatro
-            ]
-        );
-        $this->hons_p = DB::select(
-            'call buscar_hons_pendiente(:uno,:dos,:tres,:cuatro)',
-            [
-                'uno' =>  $this->r_uno,
-                'dos' =>  $this->r_dos,
-                'tres' =>  $this->r_tres,
-                'cuatro' =>  $this->r_cuatro
-            ]
-        );
-
-        /*$this->series_p = DB::select(
-            'call buscar_precios_pendiente(:uno,:dos,:tres,:cuatro)',
-            [
-                'uno' =>  $this->r_uno,
-                'dos' =>  $this->r_dos,
-                'tres' =>  $this->r_tres,
-                'cuatro' =>  $this->r_cuatro
-            ]
-        );*/
         $precio1= DB::table('clase_productos')
         ->select('codigo_precio')->distinct()->get();
 
@@ -266,16 +172,8 @@ class FacturaTerminado extends Component
 
         $this->series_p = $precio1->concat($precio2);
 
-        $this->capas = DB::select('call buscar_capa("")');
-        $this->marcas = DB::select('call buscar_marca("")');
-        $this->nombres = DB::select('call buscar_nombre("")');
-        $this->vitolas = DB::select('call buscar_vitola("")');
-        $this->tipo_empaques = DB::select('call buscar_tipo_empaque("")');
-
-
-
-        $this->tuplas_conteo = count(DB::select(
-            'call buscar_pendiente(:uno,:dos,:tres,:cuatro,:pres,:seis,:siete,:paginacion,
+        $this->tuplas_conteo = DB::select(
+            'call buscar_pendiente_conteo(:uno,:dos,:tres,:cuatro,:pres,:seis,:siete,:paginacion,
         :pa_items,:pa_orden_sist,:pa_ordenes,
         :pa_marcas,:pa_vitolas,:pa_nombre,:pa_capas,
         :pa_empaques,:pa_meses,:r_mill )',
@@ -300,7 +198,7 @@ class FacturaTerminado extends Component
 		'r_mill' =>  $this->r_mill
 
             ]
-        ));
+        )[0]->total;
 
         if ($this->todos == 1) {
             $this->datos_pendiente = DB::select(
@@ -357,9 +255,50 @@ class FacturaTerminado extends Component
                 ]
             );
         }
+
+
+        if ($this->tuplas_conteo > 0) {
+
+            $this->items_p = [];
+            $this->marcas_p = [];
+            $this->nombre_p = [];
+            $this->vitolas_p = [];
+            $this->capas_p = [];
+            $this->empaques_p = [];
+            $this->mes_p = [];
+            $this->items_p = [];
+            $this->ordenes_p = [];
+            $this->hons_p = [];
+
+
+            foreach ($this->datos_pendiente as $detalles) {
+                array_push($this->items_p, $detalles->item);
+                array_push($this->marcas_p, $detalles->marca);
+                array_push($this->nombre_p, $detalles->nombre);
+                array_push($this->vitolas_p, $detalles->vitola);
+                array_push($this->capas_p, $detalles->capa);
+                array_push($this->empaques_p, $detalles->tipo_empaque);
+                array_push($this->mes_p, $detalles->mes);
+                array_push($this->ordenes_p, $detalles->orden_del_sitema);
+                array_push($this->hons_p, $detalles->orden);
+
+            }
+
+            $this->marcas_p = array_unique($this->marcas_p);
+            $this->nombre_p = array_unique($this->nombre_p);
+            $this->vitolas_p = array_unique($this->vitolas_p);
+            $this->capas_p = array_unique($this->capas_p);
+            $this->empaques_p = array_unique($this->empaques_p);
+            $this->mes_p = array_unique($this->mes_p);
+            $this->items_p = array_unique($this->items_p);
+            $this->ordenes_p = array_unique($this->ordenes_p);
+            $this->hons_p = array_unique($this->hons_p);
+        }
+
         $this->detalles_venta = DB::select('call mostrar_detalle_factura(?,?,?,?,?)',[
             $this->aereo, $this->items_b, $this->ordens_b, $this->codigo_b, $this->t_empaque_b
         ]);
+        
         $this->totaltotales = DB::select('call mostrar_detalle_total(?)', [$this->aereo]);
         $this->totalcosto = DB::select('call mostrar_detalle_costo_total_factura(?)', [$this->aereo]);
 

@@ -97,7 +97,9 @@
         <div class="card" style="padding:0px;">
             <div class="card-header">
                 <div class="row">
-                    <div class="col-4"></div>
+                    <div class="col-4">
+                        <button class="btn btn-primary" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasBottom" aria-controls="offcanvasBottom">Nuevo Precio</button>
+                    </div>
                     <div class="col-3"></div>
                     <div class="col-3">
                         <div class="input-group mb-2">
@@ -226,7 +228,14 @@
             </div>
         </div>
     </div>
-
+    <div wire:ignore class="offcanvas offcanvas-bottom" style="height: 60vh;" tabindex="-1" id="offcanvasBottom" aria-labelledby="offcanvasBottomLabel">
+        <div class="offcanvas-header top-right">
+          <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+        </div>
+        <div class="offcanvas-body">
+          @livewire('productos.calculo-precio')
+        </div>
+      </div>
     @push('scripts')
         <script>
             var seletscc = ["#b_codigo", "#b_marcas", "#b_nombre", "#b_vitolas", "#b_capas", "#b_empaques"];

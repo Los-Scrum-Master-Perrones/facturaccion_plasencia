@@ -40,6 +40,10 @@
                             <option value="FM">Family</option>
                             <option value="WH">Warehouse</option>
                             <option value="Aerea">Aerea</option>
+                            <option value="C1">Contenedor 1</option>
+                            <option value="C2">Contenedor 2</option>
+                            <option value="C3">Contenedor 3</option>
+                            <option value="C4">Contenedor 4</option>
                         </select>
 
                         <div wire:loading>
@@ -100,7 +104,7 @@
                     class="mi-selector form-control" style="width:100%;height:34px;">
                     <option value="" style="overfl ow-y: scroll;">Todos Items</option>
                     @foreach ($items_p as $item)
-                        <option value="{{ $item->item }}" style="overflow-y: scroll;"> {{ $item->item }}</option>
+                        <option value="{{ $item }}" style="overflow-y: scroll;"> {{ $item }}</option>
                     @endforeach
                 </select>
             </div>
@@ -110,7 +114,7 @@
                     class="mi-selector form-control" style="width:100%;height:34px;">
                     <option value="" style="overflow-y: scroll;">Todos Orden</option>
                     @foreach ($hons_p as $item)
-                        <option style="overflow-y: scroll;"> {{ $item->orden }}</option>
+                        <option style="overflow-y: scroll;"> {{ $item }}</option>
                     @endforeach
                 </select>
             </div>
@@ -120,7 +124,7 @@
                     class="mi-selector form-control" style="width:100%;height:34px;">
                     <option value="" style="overflow-y: scroll;">Todos Empaque</option>
                     @foreach ($empaques_p as $item)
-                        <option style="overflow-y: scroll;"> {{ $item->empaque }}</option>
+                        <option style="overflow-y: scroll;"> {{ $item }}</option>
                     @endforeach
                 </select>
             </div>
@@ -879,7 +883,7 @@
                     style="width:100%;height:34px;" name="states[]">
                     <option value="" style="overflow-y: scroll;">Todos Items</option>
                     @foreach ($items_p as $itemss)
-                        <option style="overflow-y: scroll;"> {{ $itemss->item }}</option>
+                        <option style="overflow-y: scroll;"> {{ $itemss }}</option>
                     @endforeach
                 </select>
             </div>
@@ -890,7 +894,7 @@
                     style="width:100%;height:34px;" name="states[]">
                     <option value="" style="overflow-y: scroll;">Todas las ordenes del sistema</option>
                     @foreach ($ordenes_p as $orden)
-                        <option style="overflow-y: scroll;"> {{ $orden->orden_del_sitema }}</option>
+                        <option style="overflow-y: scroll;"> {{ $orden }}</option>
                     @endforeach
                 </select>
             </div>
@@ -900,7 +904,7 @@
                     style="width:100%;height:34px;" name="states[]">
                     <option value="" style="overflow-y: scroll;">Todas las ordenes</option>
                     @foreach ($hons_p as $hon)
-                        <option style="overflow-y: scroll;"> {{ $hon->orden }}</option>
+                        <option style="overflow-y: scroll;"> {{ $hon }}</option>
                     @endforeach
                 </select>
             </div>
@@ -912,7 +916,7 @@
                     style="width:100%;height:34px;" name="states[]">
                     <option value="" style="overflow-y: scroll;">Todas las marcas</option>
                     @foreach ($marcas_p as $marca)
-                        <option style="overflow-y: scroll;"> {{ $marca->marca }}</option>
+                        <option style="overflow-y: scroll;"> {{ $marca }}</option>
                     @endforeach
                 </select>
             </div>
@@ -922,7 +926,7 @@
                     style="width:100%;height:34px;" name="states[]">
                     <option value="" style="overflow-y: scroll;">Todas las vitolas</option>
                     @foreach ($vitolas_p as $vitola)
-                        <option style="overflow-y: scroll;"> {{ $vitola->vitola }}</option>
+                        <option style="overflow-y: scroll;"> {{ $vitola }}</option>
                     @endforeach
                 </select>
             </div>
@@ -932,7 +936,7 @@
                     style="width:100%;height:34px;" name="states[]">
                     <option value="" style="overflow-y: scroll;">Todos los nombres</option>
                     @foreach ($nombre_p as $nombre)
-                        <option style="overflow-y: scroll;"> {{ $nombre->nombre }}</option>
+                        <option style="overflow-y: scroll;"> {{ $nombre }}</option>
                     @endforeach
                 </select>
             </div>
@@ -942,7 +946,7 @@
                     style="width:100%;height:34px;" name="states[]">
                     <option value="" style="overflow-y: scroll;">Todas las capas</option>
                     @foreach ($capas_p as $capa)
-                        <option style="overflow-y: scroll;"> {{ $capa->capa }}</option>
+                        <option style="overflow-y: scroll;"> {{ $capa }}</option>
                     @endforeach
                 </select>
             </div>
@@ -952,7 +956,7 @@
                     style="width:100%;height:34px;" name="states[]">
                     <option value="" style="overflow-y: scroll;">Todos los empaques</option>
                     @foreach ($empaques_p as $empaque)
-                        <option style="overflow-y: scroll;"> {{ $empaque->empaque }}</option>
+                        <option style="overflow-y: scroll;"> {{ $empaque }}</option>
                     @endforeach
                 </select>
             </div>
@@ -962,7 +966,7 @@
                     style="width:100%;height:34px;" name="states[]">
                     <option value="" style="overflow-y: scroll;">Todos los meses</option>
                     @foreach ($mes_p as $mes)
-                        <option style="overflow-y: scroll;"> {{ $mes->mes }}</option>
+                        <option style="overflow-y: scroll;"> {{ $mes }}</option>
                     @endforeach
                 </select>
             </div>
