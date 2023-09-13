@@ -88,7 +88,6 @@
 
         <div class="lefter2">
             <form action="{{Route('usuarios')}}" method="GET">
-                @csrf
                 <?php if (  auth()->user()->rol == 0): ?>
                 <button type="submit" class="buttonsubmit">
                     <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="white"
@@ -118,7 +117,6 @@
 
         <div class="lefter">
             <form action="{{Route('productos')}}" method="GET">
-                @csrf
                 <?php if (  auth()->user()->rol == 0 || auth()->user()->rol == 2 || auth()->user()->rol == 1): ?>
                 <button type="submit" class="buttonsubmit" aria-placeholder="Hola">
                     <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="white" class="bi bi-card-list"
@@ -147,7 +145,6 @@
         @endif
         <div class="left">
             <form action="{{Route('pendiente')}}" method="GET">
-                @csrf
                 @if(auth()->user()->rol == 0 || auth()->user()->rol == 2 || auth()->user()->rol == 1)
                 <button type="submit" class="buttonsubmit">
                     <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="white" class="bi bi-archive"
@@ -185,7 +182,6 @@
         <div class="center">
             <div class="explainer">
                 <form action="{{Route('principal')}}" method="GET">
-                    @csrf
                     <button type="submit" class="buttonsubmit" style="margin-bottom: -10px;">
                         <span>
                             <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="white"
@@ -204,7 +200,6 @@
 
         <div class="right">
             <form action="{{Route('pendiente_empaque')}}" method="GET">
-                @csrf
                 @if ( auth()->user()->rol == 0 || auth()->user()->rol == 1 || auth()->user()->rol == 4 || auth()->user()->rol == 2  )
                 <button type="submit" class="buttonsubmit">
                     <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="white"
@@ -254,7 +249,6 @@
                 @else
                     action="{{ route('inventario_cajas') }}"
                 @endif  method="GET">
-                @csrf
                 @if (auth()->user()->rol == 0 || auth()->user()->rol == 1 || auth()->user()->rol == 4 )
                 <button type="submit" class="buttonsubmit">
                     <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="white" class="bi bi-box"
@@ -281,7 +275,6 @@
 
 
             <form action="{{Route('programacionterminado')}}" method="GET">
-                @csrf
                 <?php if (  auth()->user()->rol == 0 || auth()->user()->rol == 2  ): ?>
                 <button type="submit" class="buttonsubmit">
                     <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="white" class="bi bi-truck"
@@ -310,7 +303,6 @@
             class="righter3"
             @endif>
             <form action="{{Route('f_terminado')}}" method="GET">
-                @csrf
                 @if ( auth()->user()->rol == 0 || auth()->user()->rol == 2 || auth()->user()->rol == 4)
                 <button type="submit" class="buttonsubmit">
                     <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="white"

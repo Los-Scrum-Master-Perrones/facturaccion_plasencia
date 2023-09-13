@@ -303,7 +303,7 @@ Route::get('/usuarios',[App\Http\Controllers\Users::class, 'index' ])->name('usu
 
 Route::get('/index_importar_cajas', [App\Http\Controllers\CajasController::class, 'index_importar'])->name('index_importar_cajas');
 Route::get('/index_bodega', [App\Http\Controllers\CajasController::class, 'index_bodega'])->name('index_bodega');
-Route::get('/index_lista_cajas', [App\Http\Controllers\CajasController::class, 'index_lista'])->name('index_lista_cajas');
+//Route::get('/index_lista_cajas', [App\Http\Controllers\CajasController::class, 'index_lista'])->name('index_lista_cajas');
 Route::post('/editaryeliminarlista', [App\Http\Controllers\CajasController::class, 'editaryeliminarlista'])->name('editaryeliminarlista');
 Route::get('/exportar_cajas', [App\Http\Controllers\CajasController::class, 'exportCajas'])->name('exportar_cajas');
 Route::get('/index_codigobarra', [App\Http\Controllers\CajasController::class, 'index_codigobarra'])->name('index_codigobarra');

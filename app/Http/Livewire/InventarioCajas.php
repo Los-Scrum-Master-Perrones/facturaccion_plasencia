@@ -14,12 +14,42 @@ class InventarioCajas extends Component
     public $listacajas;
     public $busqueda;
 
+    public $marcas = "";
+    public $codigo = "";
+    public $producto = "";
+    public $filtro = 0;
+
+
+    public $marcas_p = [];
+    public $codigo_p = [];
+    public $producto_p = [];
+
+
     public function render()
     {
-        $this->listacajas = DB::select('call buscar_listadecajas(:nombre)',[
-            'nombre'=>$this->busqueda
+        $this->listacajas = DB::select('call buscar_listadecajas(:marca,:codigo,:producto,:filtro)',[
+            'marca'=>$this->marcas,
+            'codigo'=>$this->codigo,
+            'producto'=>$this->producto,
+            'filtro'=>$this->filtro
         ]);
-        $this->dispatchBrowserEvent('tamanio_tabla');
+
+        if (count($this->listacajas) > 0) {
+
+            $this->marcas_p = [];
+            $this->codigo_p = [];
+            $this->producto_p = [];
+
+            foreach ($this->listacajas as $detalles) {
+                array_push($this->marcas_p, $detalles->marca);
+                array_push($this->codigo_p, $detalles->codigo);
+                array_push($this->producto_p, $detalles->productoServicio);
+            }
+
+            $this->marcas_p = array_unique($this->marcas_p);
+            $this->codigo_p = array_unique($this->codigo_p);
+            $this->producto_p = array_unique($this->producto_p);
+        }
 
         return view('livewire.inventario-cajas')->extends('principal')->section('content');
     }

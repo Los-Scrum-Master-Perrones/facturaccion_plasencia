@@ -20,7 +20,7 @@
 
     <ul class="nav justify-content-center">
         <li class="nav-item">
-            <a style="color:#E5B1E2; font-size:12px;" href="{{ route('index_lista_cajas') }}"><strong>Catálogo Cajas</strong></a>
+            <a style="color:#E5B1E2; font-size:12px;" href="{{ route('inventario_cajas') }}"><strong>Catálogo Cajas</strong></a>
         </li>
         <li class="nav-item">
             <a style="color:white; font-size:12px;" href="{{ route('index_importar_cajas') }}"><strong>Importar Cajas</strong></a>
@@ -55,7 +55,7 @@
                             </svg>
                         </button>
                     </form>
-                    <form action="{{Route('index_lista_cajas')}}" method="get">
+                    <form action="{{Route('inventario_cajas')}}" method="get">
                         <button class="botonprincipal  mr-sm-2 " style="width:40px;">
                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
                                 class="bi bi-x-lg" viewBox="0 0 16 16">

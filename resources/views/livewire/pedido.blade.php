@@ -94,8 +94,8 @@
 
                     @endif
 
-                    <button wire:click="comparativo()" 
-                    data-toggle="modal" data-target="#modal_diff" 
+                    <button wire:click="comparativo()"
+                    data-toggle="modal" data-target="#modal_diff"
                     style="width:100px;" class=" botonprincipal mr-sm-2 ">
                         Comparativo
                     </button>
@@ -209,6 +209,7 @@
                             <th style=" text-align:center;">Categoria</th>
                             <th style=" text-align:center;">RP Item#</th>
                             <th style=" text-align:center;">Paquetes</th>
+                            <th style=" text-align:center;">Codigo Producto</th>
                             <th style=" text-align:center;">Item Description</th>
                             <th style=" text-align:center;">Sticks</th>
                             <th style=" text-align:center;">Units</th>
@@ -224,6 +225,7 @@
                             <td>{{$pedido->categorias}}</td>
                             <td>{{$pedido->item}}</td>
                             <td>{{$pedido->cant_paquetes}}</td>
+                            <td>{{$pedido->codigo_p}}</td>
                             <td>{{$pedido->descripcion}}</td>
 				@if(is_numeric($pedido->unidades) && is_numeric($pedido->cant_paquetes))
                             		<td>{{$pedido->unidades*$pedido->cant_paquetes}}</td>
@@ -301,7 +303,7 @@
                     </div>
                     <div class="modal-body">
                         <table class="table">
-                            
+
                             <tr>
                                 <th>Item</th>
                                 <th>Descripcion</th>
@@ -310,18 +312,18 @@
                                 <th>Global</th>
                                 <th>Diferencia</th>
                             </tr>
-                           
+
 
                             <tbody>
                                 @foreach($comparativos as $com)
                             <tr>
                                 <td>{{$com['item']}}</td>
                                 @php
-                                $descripcion = DB::select("select if(clase_productos.sampler ='si', 
+                                $descripcion = DB::select("select if(clase_productos.sampler ='si',
                             concat(descripcion_sampler, ' ', tipo_empaques.tipo_empaque),
                             concat(marca_productos.marca, ' ',  vitola_productos.vitola,' ',
-                            nombre_productos.nombre,' ', capa_productos.capa, 
-                            ' ',tipo_empaques.tipo_empaque)) Descripcion from clase_productos 
+                            nombre_productos.nombre,' ', capa_productos.capa,
+                            ' ',tipo_empaques.tipo_empaque)) Descripcion from clase_productos
                             inner join marca_productos on marca_productos.id_marca = clase_productos.id_marca
                             inner join tipo_empaques on tipo_empaques.id_tipo_empaque = clase_productos.id_tipo_empaque
                             inner join capa_productos on capa_productos.id_capa = clase_productos.id_capa

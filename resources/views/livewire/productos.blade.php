@@ -302,7 +302,12 @@
                 , cancelButtonColor: '#d33'
                 , confirmButtonText: 'Si, eliminar!'
             }).then((result) => {
-                @this.eliminar_item(id);
+                if (result.isConfirmed) {
+                    @this.eliminar_item(id);
+                }else{
+                    
+                }
+
             })
         }
 

@@ -400,7 +400,6 @@
                         <option style="overflow-y: scroll;" value='{{$mes}}'>{{$mes}}</option>
                         @endforeach
                     </select>
-
                 </div>
                 <div class="col" wire:ignore>
                     <select onchange="buscar_tabla()" name="b_item" id="b_item" class=" mi-selector form-control" style="width:100%;height:34px;" name="states[]">
@@ -938,7 +937,7 @@
             $('#tabla_materiales2').css('height', ($('#bos').height() - 160));
 
             $("#b_mes").CreateMultiCheckBox({
-                width: '230px'
+                width: '50px'
                 , defaultText: 'Selecciona el mes'
                 , height: '250px'
             });

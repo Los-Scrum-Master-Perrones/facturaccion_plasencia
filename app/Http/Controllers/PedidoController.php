@@ -22,13 +22,11 @@ class PedidoController extends Controller
 
     function vaciar_import_excel()
     {
-
         $borrar = DB::table('pedidos')->delete();
         $pedido_completo =  DB::select('call mostrar_pedido');
         $verificar = DB::select('call verificar_item_clase');
         return redirect()->route('import_excel');
     }
-
 
     function nuevo_pedido(Request $request)
     {

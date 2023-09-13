@@ -65,7 +65,7 @@ class Pedido extends Component
 
 
                 $this->pedido_completo[$i]->descripcion = $descripcion_sampler[0]->descripcion_sampler." ".$valores[0]->marca." ".$valores[0]->nombre." ".$valores[0]->capa." ".$valores[0]->vitola;
-
+                $this->pedido_completo[$i]->codigo_p = $valores[0]->codigo_producto;
                 $detalles++;
 
                 if($detalles == $cantidad_detalle_sampler){
@@ -143,7 +143,7 @@ class Pedido extends Component
         foreach($po as $o){
             $res = array_search($o->conca, array_column($pedido->toArray(), 'conca'));
             if($res!==false){
-                
+
             }else{
                 $existencia[] = ['item'=>$o->item, 'hon'=>$o->hon,
                 'individual'=>$o->cantidad, 'global'=>0,
