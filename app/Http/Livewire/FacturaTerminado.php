@@ -298,13 +298,20 @@ class FacturaTerminado extends Component
         $this->detalles_venta = DB::select('call mostrar_detalle_factura(?,?,?,?,?)',[
             $this->aereo, $this->items_b, $this->ordens_b, $this->codigo_b, $this->t_empaque_b
         ]);
-        
+
         $this->totaltotales = DB::select('call mostrar_detalle_total(?)', [$this->aereo]);
         $this->totalcosto = DB::select('call mostrar_detalle_costo_total_factura(?)', [$this->aereo]);
 
         $this->num_factura_sistema = DB::select('call traer_num_factura()')[0]->factura_interna;
 
-        $this->detalles_produtos = DB::select('CALL `mostrar_detalles_productos`()');
+        $detalles_produtos = DB::select('CALL `mostrar_detalles_productos`()');
+
+
+        $usosArray = [];
+        foreach ($detalles_produtos as $uso) {
+            $usosArray[$uso->item][] =  $uso;
+        }
+        
 
         return view('livewire.factura-terminado')->extends('principal')->section('content');
     }
