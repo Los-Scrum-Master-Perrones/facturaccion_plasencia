@@ -4,11 +4,11 @@ namespace App\Imports;
 
 use App\Models\importar_existencia;
 use Maatwebsite\Excel\Concerns\ToModel;
-
+use Maatwebsite\Excel\Concerns\WithCalculatedFormulas;
 use Illuminate\Support\Facades\DB;
 use Maatwebsite\Excel\Concerns\Importable;
 
-class existenciaImport implements toModel
+class existenciaImport implements toModel,WithCalculatedFormulas
 {
 
     use Importable;

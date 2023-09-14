@@ -22,9 +22,9 @@ class ImportarProductoBodega extends Component
     public function render()
     {
 
-        $this->existencias  =  DB::select('call buscar_existencia(:buscar)',['buscar'=>$this->busqueda]);
+        $this->existencias  =  DB::select('call buscar_existencia(:buscar)', ['buscar' => $this->busqueda]);
 
-        if(isset($this->select_file)){
+        if (isset($this->select_file)) {
             $this->select_file->store('select_file');
         }
 
@@ -32,16 +32,16 @@ class ImportarProductoBodega extends Component
     }
 
 
-    public function mount(){
+    public function mount()
+    {
 
         $this->existencias = [];
-        $this->busqueda ="";
+        $this->busqueda = "";
         $this->existencias  =  DB::select('call mostrar_existencia_bodega');
-
-
     }
 
-      public  function import()  {
+    public  function import()
+    {
         $this->borrar =  DB::select('call borrar_datos_existencia');
         DB::select('ALTER TABLE importar_existencias AUTO_INCREMENT = 1');
         $this->validate([
@@ -50,14 +50,8 @@ class ImportarProductoBodega extends Component
         (new existenciaImport)->import($this->select_file);
     }
 
-    public  function vaciar()  {
+    public  function vaciar()
+    {
         $this->borrar =  DB::select('call borrar_datos_existencia');
     }
-
-
-
-
-
-
-
 }
