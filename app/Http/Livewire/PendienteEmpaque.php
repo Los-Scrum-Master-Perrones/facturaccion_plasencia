@@ -1284,7 +1284,7 @@ class PendienteEmpaque extends Component
                         detalle_programacion_temporal.existencia_puros = ?
                     WHERE detalle_programacion_temporal.id_detalle_programacion =  ?',
 
-                    [$value->cod_producto == null ? 0 : intval($value->saldo) == 0?0:$pendiente_restante,
+                    [($value->cod_producto == null) ? 0 : ((intval($value->saldo) == 0)?0:$pendiente_restante),
                     $valor_exist<0?0:$valor_exist,
                     $value->id]);
             }
