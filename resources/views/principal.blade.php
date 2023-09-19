@@ -438,7 +438,6 @@
 
     <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.25/js/jquery.dataTables.js">
     </script>
-    <script src="{{ asset('js/selectmultiple.js') }}"></script>
 
     @toastr_js
     @toastr_render
@@ -448,6 +447,7 @@
 
 
     <script src="{{ asset('js/datatables.js') }}"></script>
+    <script src="{{ asset('js/selectmultiple.js') }}"></script>
     @stack('scripts')
 
 
