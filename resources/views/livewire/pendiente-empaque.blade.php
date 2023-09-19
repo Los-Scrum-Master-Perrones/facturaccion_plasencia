@@ -937,9 +937,8 @@
             $('#tabla_materiales2').css('height', ($('#bos').height() - 160));
 
             $("#b_mes").CreateMultiCheckBox({
-                width: '50px'
+                width: '200px'
                 , defaultText: 'Selecciona el mes'
-                , height: '250px'
             });
 
         });

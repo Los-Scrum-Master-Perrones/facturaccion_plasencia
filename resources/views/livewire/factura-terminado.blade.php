@@ -37,13 +37,15 @@
 
                         <select name="para1" id="para1" wire:model="aereo">
                             <option value="RP">Rocky Patel</option>
-                            <option value="FM">Family</option>
-                            <option value="WH">Warehouse</option>
                             <option value="Aerea">Aerea</option>
+                            <option value="FM">Family</option>
+                            <option value="AereaFamily">Aerea (Family)</option>
+                            <option value="WH">Warehouse</option>
                             <option value="C1">Contenedor 1</option>
                             <option value="C2">Contenedor 2</option>
                             <option value="C3">Contenedor 3</option>
                             <option value="C4">Contenedor 4</option>
+                            <option value="C5">Contenedor 5</option>
                         </select>
 
                         <div wire:loading>
@@ -83,15 +85,16 @@
             <div class="col-sm-2" style="text-align:end;">
                 <button style="width:120px;" class="botonprincipal" wire:click="imprimir()">Imprimir</button>
             </div>
-            @if($aereo == "FM")
-            <div class="col-sm-2" style="text-align:end;">
-                <button style="width:120px;" class="botonprincipal" wire:click="imprimir_factura_family()">Imprimir(Family)</button>
-            </div>
+            @if ($aereo == 'FM')
+                <div class="col-sm-2" style="text-align:end;">
+                    <button style="width:120px;" class="botonprincipal"
+                        wire:click="imprimir_factura_family()">Imprimir(Family)</button>
+                </div>
             @else
-            <div class="col-sm-2" style="text-align:end;">
-                <button style="width:120px;" class="botonprincipal"
-                    wire:click="imprimir_formato_largo()">Imprimir(factura Larga)</button>
-            </div>
+                <div class="col-sm-2" style="text-align:end;">
+                    <button style="width:120px;" class="botonprincipal"
+                        wire:click="imprimir_formato_largo()">Imprimir(factura Larga)</button>
+                </div>
             @endif
             <div class="col-sm-2" style="text-align:end;">
                 <button style="width:120px;" class="botonprincipal" wire:click="historial()">Historial</button>
@@ -192,22 +195,15 @@
                             $total_neto = 0;
                             $total_bruto = 0;
                             $valor_factura = 0;
-                            $sampler_s = 0;
+
+                            $bultos = 0;
+                            $val_anterioir = 0;
+                            $val_actual = 0;
+
+                            $detalles_cantidad = 0;
                         @endphp
 
-
-
-                        <?php $bultos = 0;
-                        $val_anterioir = 0;
-                        $val_actual = 0;
-                        ?>
-
                         @foreach ($detalles_venta as $detalles)
-
-                            <?php try{ ?>
-
-
-
                             @if ($orden == '' && $orden_actua == '')
                                 @php
                                     $orden_actua = $detalles->orden;
@@ -230,109 +226,45 @@
                             @endif
 
                             @php
-
-                                $sampler = DB::select(
-                                    'SELECT sampler FROM clase_productos WHERE item =
-                        ?',
-                                    [$detalles->codigo_item],
-                                );
-
-                                $pendiente = DB::select(
-                                    'SELECT orden,mes FROM pendiente WHERE id_pendiente =
-                        ?',
-                                    [$detalles->id_pendiente],
-                                );
-
-                                $conteo_sampler = DB::select(
-                                    'SELECT COUNT(*) AS tuplas FROM pendiente WHERE item = ? AND orden
-                        = ? and mes = ?',
-                                    [$detalles->codigo_item, $pendiente[0]->orden, $pendiente[0]->mes],
-                                );
-
-                                $item_primero = DB::select(
-                                    'SELECT id_pendiente FROM pendiente WHERE item = ? AND mes = ? AND
-                        orden LIKE
-                        CONCAT("%",?,"%") limit 0,1',
-                                    [$detalles->codigo_item, $pendiente[0]->mes, $pendiente[0]->orden],
-                                );
-
-                                $total_pendiente = DB::select(
-                                    'SELECT sum(pendiente.saldo) AS
-                        total_saldo,sum(pendiente.pendiente) AS total_pendiente FROM pendiente WHERE item = ? AND orden
-                        = ? and mes = ?',
-                                    [$detalles->codigo_item, $pendiente[0]->orden, $pendiente[0]->mes],
-                                );
-
-                                if ($sampler[0]->sampler == 'si') {
-                                    $repartir = $detalles->total_tabacos / $conteo_sampler[0]->tuplas;
-                                }
-
+                                $sampler_s = false;
                             @endphp
 
-                            @if ($sampler[0]->sampler == 'si' && $item_primero[0]->id_pendiente == $detalles->id_pendiente)
+
+                            @if ($detalles->sampler == 'si')
                                 @php
-                                    $sampler_nombre = DB::select(
-                                        'SELECT concat((SELECT tipo_empaque_ingles FROM tipo_empaques WHERE
-                        tipo_empaques.id_tipo_empaque = clase_productos.id_tipo_empaque)," ",descripcion_sampler) as nom
-                        FROM clase_productos WHERE item = ?',
-                                        [$detalles->codigo_item],
-                                    );
-
-                                    $promedio = DB::select(
-                                        'SELECT AVG(precio) AS promedio FROM detalle_clase_productos WHERE item =
-                        ?',
-                                        [$detalles->codigo_item],
-                                    );
+                                    $sampler_s = true;
                                 @endphp
+                            @else
+                                @php
+                                    $sampler_s = false;
+                                @endphp
+                            @endif
 
+                            @php
+                                if (!$sampler_s) {
+                                    $val_anterioir = $bultos + 1;
+                                    $bultos += $detalles->cantidad_puros;
+                                    $val_actual = $bultos;
+                                } else {
+                                    if ($detalles_cantidad == 0) {
+                                        $detalles_cantidad = $detalles->can_detalles;
+                                    }
+                                }
+                            @endphp
 
-
-
-
-
+                            @if ($detalles_cantidad == $detalles->can_detalles && $sampler_s)
                                 <tr style="font-size:10px;">
                                     @php
                                         $val_anterioir = $bultos + 1;
                                         $bultos += $detalles->cantidad_puros;
 
                                         $val_actual = $bultos;
-
-                                        $total_sampler_detalles = DB::select(
-                                            'SELECT SUM(cantidad_puros*unidad) AS salida FROM
-                            detalle_factura WHERE facturado = "N" and id_pendiente = ?',
-                                            [$detalles->id_pendiente],
-                                        )[0]->salida;
-
-                                        $cantidad_sampler_empresa = DB::select(
-                                            'SELECT COUNT(pendiente.saldo) AS sampler_empresa
-                            FROM pendiente WHERE item = ? AND orden
-                            = ? and mes = ?',
-                                            [$detalles->codigo_item, $pendiente[0]->orden, $pendiente[0]->mes],
-                                        )[0]->sampler_empresa;
-
-                                        $cantidad_total_sampler_factura = DB::select(
-                                            'SELECT COUNT(pendiente.saldo) AS
-                            sampler_factura
-                            FROM pendiente WHERE item = ? AND orden
-                            = ? and mes = ? AND pendiente != 0 AND saldo !=
-                            0',
-                                            [$detalles->codigo_item, $pendiente[0]->orden, $pendiente[0]->mes],
-                                        )[0]->sampler_factura;
-
-                                        $total_ac = intval($total_pendiente[0]->total_saldo) - (intval($total_sampler_detalles) * intval($cantidad_total_sampler_factura)) / intval($cantidad_sampler_empresa);
-
-                                        $total_saldo_pendiente = DB::update(
-                                            'UPDATE detalle_factura SET anterior = ? WHERE
-                            id_detalle =
-                            ?',
-                                            [$total_ac, $detalles->id_detalle],
-                                        );
                                     @endphp
 
                                     @if ($val_actual == $val_anterioir)
-                                        <td style="overflow-x:auto;">{{ $val_actual }}</td>
+                                        <td>{{ $val_actual }}</td>
                                     @else
-                                        <td style="overflow-x:auto;">{{ $val_anterioir }} al {{ $val_actual }}
+                                        <td>{{ $val_anterioir }} al {{ $val_actual }}
                                         </td>
                                     @endif
 
@@ -342,21 +274,19 @@
                                     <td></td>
                                     <td>SEVERAL</td>
                                     <td>{{ $detalles->cantidad_por_caja }}</td>
-                                    <td style="width: 250px"><b>{{ strtoupper($sampler_nombre[0]->nom) }}</b> </td>
-                                    <td>{{ $detalles->codigo }}</td>
+                                    <td><b>{{ strtoupper($detalles->descripcion_sampler) }}</b> </td>
+                                    <td></td>
                                     <td>{{ $detalles->codigo_item }}</td>
                                     <td>{{ $detalles->orden }}</td>
-                                    <td>{{ $total_pendiente[0]->total_pendiente }}</td>
-                                    <td>{{ $total_ac }}</td>
+                                    <td>{{ $detalles->pen_pendiente }}</td>
+                                    <td>{{ $detalles->orden_restante }}</td>
 
-                                    <td style="width: 65px">{{ $detalles->total_bruto }}</td>
-                                    <td style="width: 60px">{{ $detalles->total_neto }}</td>
+                                    <td>{{ $detalles->total_bruto }}</td>
+                                    <td>{{ $detalles->total_neto }}</td>
                                     <td>{{ $detalles->precio_producto }}</td>
 
 
-                                    <td><b>{{ number_format(($promedio[0]->promedio * $detalles->cantidad_por_caja) / 1000, 4) }}</b>
-                                    </td>
-
+                                    <td><b></b></td>
                                     <td style="text-align: center">-</td>
                                     @if (auth()->user()->rol == -1)
                                     @else
@@ -367,9 +297,8 @@
                                                     fill="currentColor" class="bi bi-trash-fill" viewBox="0 0 16 16">
                                                     <path
                                                         d="M2.5 1a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1H3v9a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V4h.5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1H2.5zm3 4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5zM8 5a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7A.5.5 0 0 1 8 5zm3 .5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 1 0z" />
-                                                </svg></a>
-
-
+                                                </svg>
+                                            </a>
                                             <a style=" width:10px; height:10px;" data-toggle="modal" href=""
                                                 wire:click="editar_detalles({{ $detalles->id_detalle }})">
                                                 <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15"
@@ -381,357 +310,218 @@
                                                         d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z" />
                                                 </svg>
                                             </a>
-
                                         </td>
                                     @endif
-
 
                                 </tr>
 
                                 @php
-
                                     $total_neto += $detalles->total_neto;
                                     $total_bruto += $detalles->total_bruto;
-
-                                    $sampler_s = 0;
-                                    $arreglo_detalles = DB::select('CALL `traer_detalles_productos_factura`(?, ?)', [$detalles->codigo_item, $sampler_s]);
                                 @endphp
-
-
-
-                                <tr style="font-size:10px;">
-
-                                    <td style="overflow-x:auto;"></td>
-
-
-                                    @php
-                                        $unidades = DB::select(
-                                            'SELECT item,orden,mes,paquetes FROM pendiente WHERE id_pendiente =
-                            ?',
-                                            [$detalles->id_pendiente],
-                                        );
-                                        $total_unidades = 0;
-
-                                        $total_paqutes = DB::select(
-                                            'SELECT sum(paquetes) AS total_pendiente FROM pendiente
-                            WHERE item = ? AND orden = ? and mes = ?',
-                                            [$unidades[0]->item, $unidades[0]->orden, $unidades[0]->mes],
-                                        );
-
-                                    @endphp
-
-
-
-                                    <td></td>
-                                    <td></td>
-                                    <td><b></b></td>
-                                    @if ($total_paqutes[0]->total_pendiente > 0)
-                                        <td>{{ $detalles->total_tabacos * (intval($unidades[0]->paquetes) / $total_paqutes[0]->total_pendiente) }}
-                                        </td>
-                                    @else
-                                        <td>{{ $detalles->total_tabacos * (intval($unidades[0]->paquetes) / 1) }}
-                                        </td>
-                                    @endif
-                                    <td>{{ $arreglo_detalles[0]->capa }}</td>
-                                    <td></td>
-                                    <td style="width: 250px">{{ strtoupper($arreglo_detalles[0]->sampler) }}</td>
-                                    <td>{{ $arreglo_detalles[0]->otra_descripcion }}</td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td style="text-align: right">{{ number_format($arreglo_detalles[0]->precio, 4) }}
-                                    </td>
-                                    @php
-                                        $precios_historial = DB::select('select id from precios_historial where id_detalle_factura = ?', [$detalles->id_detalle]);
-                                        if (isset($precios_historial[0]->id)) {
-                                            DB::update('update precios_historial set precio = ? where id = ?', [$arreglo_detalles[0]->precio, $precios_historial[0]->id]);
-                                        } else {
-                                            DB::insert('insert into precios_historial (id_detalle_factura, precio) values (?, ?)', [$detalles->id_detalle, $arreglo_detalles[0]->precio]);
-                                        }
-                                    @endphp
-
-                                    <td></td>
-                                    @if ($total_paqutes[0]->total_pendiente > 0)
-                                        <td style="text-align: right">
-                                            {{ number_format(($detalles->total_tabacos * (intval($unidades[0]->paquetes) / $total_paqutes[0]->total_pendiente) * $arreglo_detalles[0]->precio) / 1000, 2) }}
-                                        </td>
-
-                                        @php
-                                            $valor_factura += ($detalles->total_tabacos * (intval($unidades[0]->paquetes) / $total_paqutes[0]->total_pendiente) * $arreglo_detalles[0]->precio) / 1000;
-                                        @endphp
-                                    @else
-                                        <td style="text-align: right">
-                                            {{ number_format(($detalles->total_tabacos * (intval($unidades[0]->paquetes) / 1) * $arreglo_detalles[0]->precio) / 1000, 2) }}
-                                        </td>
-
-                                        @php
-                                            $valor_factura += ($detalles->total_tabacos * (intval($unidades[0]->paquetes) / 1) * $arreglo_detalles[0]->precio) / 1000;
-                                        @endphp
-                                    @endif
-
-
-
-                                    @if (auth()->user()->rol == -1)
-                                    @else
-                                        <td style="width: 60px">
-                                            <a href="#"
-                                                onclick="eliminar_detalle_olvidado({{ $detalles->id_detalle }})">
-                                                <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15"
-                                                    fill="currentColor" class="bi bi-trash-fill" viewBox="0 0 16 16">
-                                                    <path
-                                                        d="M2.5 1a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1H3v9a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V4h.5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1H2.5zm3 4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5zM8 5a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7A.5.5 0 0 1 8 5zm3 .5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 1 0z" />
-                                                </svg>
-                                            </a>
-                                        </td>
-                                    @endif
-
-
-                                </tr>
-
-
-                                @if ($total_paqutes[0]->total_pendiente > 0)
-                                    @php
-                                        $total_puros_tabla += $detalles->total_tabacos * (intval($unidades[0]->paquetes) / $total_paqutes[0]->total_pendiente);
-                                    @endphp
-                                @else
-                                    @php
-                                        $total_puros_tabla += $detalles->total_tabacos * (intval($unidades[0]->paquetes) / 1);
-
-                                    @endphp
-                                @endif
-                                @php
-
-                                    $sampler_s++;
-                                @endphp
-                            @elseif ($sampler[0]->sampler == 'si')
-                                @php
-                                    $arreglo_detalles = DB::select('CALL `traer_detalles_productos_factura`(?, ?)', [$detalles->codigo_item, $sampler_s]);
-
-                                    $total_ac = intval($total_pendiente[0]->total_saldo) - intval($detalles->total_tabacos);
-
-                                    $total_saldo_pendiente = DB::update(
-                                        'UPDATE detalle_factura SET anterior = ? WHERE id_detalle =
-                        ?',
-                                        [$total_ac, $detalles->id_detalle],
-                                    );
-                                @endphp
-
-                                @php
-                                    $unidades = DB::select(
-                                        'SELECT item,orden,mes,paquetes FROM pendiente WHERE id_pendiente =
-                        ?',
-                                        [$detalles->id_pendiente],
-                                    );
-                                    $total_unidades = 0;
-
-                                    $total_paqutes = DB::select(
-                                        'SELECT sum(paquetes) AS total_pendiente FROM pendiente
-                        WHERE item = ? AND orden = ? and mes = ?',
-                                        [$unidades[0]->item, $unidades[0]->orden, $unidades[0]->mes],
-                                    );
-
-                                @endphp
-
-                                <tr style="font-size:10px;">
-                                    <td style="overflow-x:auto;"></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td><b></b></td>
-                                    @if ($total_paqutes[0]->total_pendiente > 0)
-                                        <td>{{ $detalles->total_tabacos * (intval($unidades[0]->paquetes) / $total_paqutes[0]->total_pendiente) }}
-                                        </td>
-                                    @else
-                                        <td>{{ $detalles->total_tabacos * (intval($unidades[0]->paquetes) / 1) }}
-                                        </td>
-                                    @endif
-
-
-                                    <td>{{ $arreglo_detalles[0]->capa }}</td>
-                                    <td></td>
-                                    <td style="width: 250px">{{ strtoupper($arreglo_detalles[0]->sampler) }}</td>
-                                    <td>{{ $arreglo_detalles[0]->otra_descripcion }}</td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td style="text-align: right">{{ number_format($arreglo_detalles[0]->precio, 4) }}
-                                    </td>
-
-                                    @php
-                                    $precios_historial = DB::select('select id from precios_historial where id_detalle_factura = ?', [$detalles->id_detalle]);
-                                    if (isset($precios_historial[0]->id)) {
-                                        DB::update('update precios_historial set precio = ? where id = ?', [$arreglo_detalles[0]->precio, $precios_historial[0]->id]);
-                                    } else {
-                                        DB::insert('insert into precios_historial (id_detalle_factura, precio) values (?, ?)', [$detalles->id_detalle, $arreglo_detalles[0]->precio]);
-                                    }
-
-                                @endphp
-
-                                    <td style="text-align: right"></td>
-                                    @if ($total_paqutes[0]->total_pendiente > 0)
-                                        <td style="text-align: right">
-                                            {{ number_format(($detalles->total_tabacos * (intval($unidades[0]->paquetes) / $total_paqutes[0]->total_pendiente) * $arreglo_detalles[0]->precio) / 1000, 2) }}
-                                        </td>
-                                        @php
-                                            $valor_factura += ($detalles->total_tabacos * (intval($unidades[0]->paquetes) / 1) * $arreglo_detalles[0]->precio) / 1000;
-                                        @endphp
-                                    @else
-                                        <td style="text-align: right">
-                                            {{ number_format(($detalles->total_tabacos * (intval($unidades[0]->paquetes) / 1) * $arreglo_detalles[0]->precio) / 1000, 2) }}
-                                        </td>
-                                        @php
-                                            $valor_factura += ($detalles->total_tabacos * (intval($unidades[0]->paquetes) / 1) * $arreglo_detalles[0]->precio) / 1000;
-                                        @endphp
-                                    @endif
-
-                                    @if (auth()->user()->rol == -1)
-                                    @else
-                                        <td style="width: 60px">
-                                            <a href="#"
-                                                onclick="eliminar_detalle_olvidado({{ $detalles->id_detalle }})">
-                                                <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15"
-                                                    fill="currentColor" class="bi bi-trash-fill" viewBox="0 0 16 16">
-                                                    <path
-                                                        d="M2.5 1a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1H3v9a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V4h.5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1H2.5zm3 4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5zM8 5a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7A.5.5 0 0 1 8 5zm3 .5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 1 0z" />
-                                                </svg>
-                                            </a>
-                                        </td>
-                                    @endif
-                                </tr>
-
-
-                                @if ($total_paqutes[0]->total_pendiente > 0)
-                                    @php
-                                        $total_puros_tabla += $detalles->total_tabacos * (intval($unidades[0]->paquetes) / $total_paqutes[0]->total_pendiente);
-                                    @endphp
-                                @else
-                                    @php
-                                        $total_puros_tabla += $detalles->total_tabacos * (intval($unidades[0]->paquetes) / 1);
-                                    @endphp
-                                @endif
-                                @php
-
-                                    $sampler_s++;
-                                @endphp
-                            @else
-                                @php
-                                    $total_puros_tabla += $detalles->total_tabacos;
-                                    $sampler_s = 0;
-                                @endphp
-                                <tr style="font-size:10px;">
-
-
-                                    <?php
-                                    $val_anterioir = $bultos + 1;
-                                    $bultos += $detalles->cantidad_puros;
-                                    $val_actual = $bultos;
-
-                                    $total_puros_salida = DB::select('SELECT SUM(cantidad_puros*unidad) AS salida FROM detalle_factura WHERE facturado = "N" and id_pendiente = ?', [$detalles->id_pendiente]);
-                                    $total_saldo_pendiente = DB::select('SELECT saldo FROM pendiente WHERE id_pendiente = ?', [$detalles->id_pendiente]);
-
-                                    $total_restante = intval($total_saldo_pendiente[0]->saldo) - intval($total_puros_salida[0]->salida);
-
-                                    $total_saldo_pendiente = DB::update('UPDATE detalle_factura SET anterior = ? WHERE id_detalle = ?', [$total_restante, $detalles->id_detalle]);
-
-                                    $total_neto += $detalles->total_neto;
-                                    $total_bruto += $detalles->total_bruto;
-                                    ?>
-
-                                    @if ($val_actual == $val_anterioir)
-                                        <td style="overflow-x:auto;">{{ $val_actual }}</td>
-                                    @else
-                                        <td style="overflow-x:auto;">{{ $val_anterioir }} al {{ $val_actual }}
-                                        </td>
-                                    @endif
-
-                                    <td>{{ $detalles->cantidad_puros }}</td>
-                                    <td>{{ $detalles->unidad }}</td>
-                                    <td><b>{{ $detalles->cantidad_cajas }}</b></td>
-                                    <td>{{ $detalles->total_tabacos }}</td>
-                                    <td>{{ $detalles->capas }}</td>
-                                    <td>{{ $detalles->cantidad_por_caja }}</td>
-                                    <td style="width: 250px">{{ $detalles->producto }}</td>
-                                    <td>{{ $detalles->codigo }}</td>
-                                    <td>{{ $detalles->codigo_item }}</td>
-                                    <td>{{ $detalles->orden }}</td>
-                                    <td>{{ $detalles->orden_total }}</td>
-                                    <td>{{ $total_restante }}</td>
-                                    <td style="width: 65px">{{ $detalles->total_bruto }}</td>
-                                    <td style="width: 60px">{{ $detalles->total_neto }}</td>
-                                    <td style="text-align: right">{{ $detalles->precio_producto }}</td>
-
-                                    @php
-                                        $precios_historial = DB::select('select id from precios_historial where id_detalle_factura = ?', [$detalles->id_detalle]);
-                                        if (isset($precios_historial[0]->id)) {
-                                            DB::update('update precios_historial set precio = ? where id = ?', [$detalles->precio_producto, $precios_historial[0]->id]);
-                                        } else {
-                                            DB::insert('insert into precios_historial (id_detalle_factura, precio) values (?, ?)', [$detalles->id_detalle, $detalles->precio_producto]);
-                                        }
-                                    @endphp
-
-
-                                    <td style="text-align: right"><b>{{ number_format($detalles->costo, 4) }}</b></td>
-                                    <td style="text-align: right">{{ number_format($detalles->valor_total, 2) }}</td>
-                                    @php
-                                        $valor_factura += $detalles->valor_total;
-                                    @endphp
-
-                                    @if (auth()->user()->rol == -1)
-                                    @else
-                                        <td style="width: 60px">
-                                            <a data-toggle="modal" data-target="#borrar_detalles" href=""
-                                                wire:click="borrar_detalles({{ $detalles->id_detalle }})">
-                                                <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15"
-                                                    fill="currentColor" class="bi bi-trash-fill" viewBox="0 0 16 16">
-                                                    <path
-                                                        d="M2.5 1a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1H3v9a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V4h.5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1H2.5zm3 4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5zM8 5a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7A.5.5 0 0 1 8 5zm3 .5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 1 0z" />
-                                                </svg></a>
-
-
-                                            <a style=" width:10px; height:10px;" data-toggle="modal" href=""
-                                                wire:click="editar_detalles({{ $detalles->id_detalle }})">
-                                                <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15"
-                                                    fill="currentColor" class="bi bi-pencil-square"
-                                                    viewBox="0 0 16 16">
-                                                    <path
-                                                        d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z" />
-                                                    <path fill-rule="evenodd"
-                                                        d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z" />
-                                                </svg>
-                                            </a>
-
-                                        </td>
-                                    @endif
-
-                                </tr>
                             @endif
 
-                            <?php }catch(\Exception $e){ ?>
+                            <tr style="font-size:10px;">
 
-                            <a href="#" onclick="eliminar_detalle_olvidado({{ $detalles->id_detalle }})">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15"
-                                    fill="currentColor" class="bi bi-trash-fill" viewBox="0 0 16 16">
-                                    <path
-                                        d="M2.5 1a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1H3v9a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V4h.5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1H2.5zm3 4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5zM8 5a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7A.5.5 0 0 1 8 5zm3 .5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 1 0z" />
-                                </svg>
-                            </a>
-                            <?php } ?>
+                                @if ($val_actual == $val_anterioir)
+                                    <td style="overflow-x:auto;">{{ $sampler_s ? '' : $val_actual }}</td>
+                                @else
+                                    <td style="overflow-x:auto;">
+                                        {{ $sampler_s ? '' : $val_anterioir . ' al ' . $val_actual }}
+                                    </td>
+                                @endif
 
+                                <td>{{ $sampler_s ? '' : $detalles->cantidad_puros }}</td>
+                                <td>{{ $sampler_s ? '' : $detalles->unidad }}</td>
+                                <td><b>{{ $sampler_s ? '' : $detalles->cantidad_cajas }}</b></td>
+                                <td>{{ $sampler_s ? $detalles->total_tabacos / $detalles->can_detalles : $detalles->total_tabacos }}
+                                </td>
+                                <td>{{ $detalles->capas }}</td>
+                                <td>{{ $sampler_s ? '' : $detalles->cantidad_por_caja }}</td>
+                                <td style="width: 250px">{{ $detalles->producto }}</td>
+                                <td style="text-align: center">
+                                    @if($detalles->codigo == '-')
+
+                                    @else
+
+                                    <a style="text-decoration: none"
+                                        @if ($detalles->codigo == '') data-toggle="modal" data-target="#modal_agregar_precio" href="#" onclick="detalles_pendiente({{ $detalles->id_producto }},{{ $detalles->id_pendiente }})"
+                                    @else
+                                        data-toggle="collapse" href="#collapseExample{{ $detalles->id_detalle }}" @endif
+                                        role="button" aria-expanded="false" aria-controls="collapseExample{{ $detalles->id_detalle }}">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                            fill="currentColor" class="bi bi-tag" viewBox="0 0 16 16">
+                                            <path
+                                                d="M6 4.5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0zm-1 0a.5.5 0 1 0-1 0 .5.5 0 0 0 1 0z" />
+                                            <path
+                                                d="M2 1h4.586a1 1 0 0 1 .707.293l7 7a1 1 0 0 1 0 1.414l-4.586 4.586a1 1 0 0 1-1.414 0l-7-7A1 1 0 0 1 1 6.586V2a1 1 0 0 1 1-1zm0 5.586 7 7L13.586 9l-7-7H2v4.586z" />
+                                        </svg>
+                                    </a>
+                                    @endif
+                                    {{ $detalles->codigo }}
+                                    @if($detalles->codigo == '' || $detalles->codigo == '-')
+
+                                    @else
+                                        <a style="text-decoration: none" href="#" onclick="eliminar_precio_catalogo({{ $detalles->id_producto }},{{ $detalles->id_pendiente }})">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-journal-x" viewBox="0 0 16 16">
+                                                <path fill-rule="evenodd" d="M6.146 6.146a.5.5 0 0 1 .708 0L8 7.293l1.146-1.147a.5.5 0 1 1 .708.708L8.707 8l1.147 1.146a.5.5 0 0 1-.708.708L8 8.707 6.854 9.854a.5.5 0 0 1-.708-.708L7.293 8 6.146 6.854a.5.5 0 0 1 0-.708z"/>
+                                                <path d="M3 0h10a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2v-1h1v1a1 1 0 0 0 1 1h10a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H3a1 1 0 0 0-1 1v1H1V2a2 2 0 0 1 2-2z"/>
+                                                <path d="M1 5v-.5a.5.5 0 0 1 1 0V5h.5a.5.5 0 0 1 0 1h-2a.5.5 0 0 1 0-1H1zm0 3v-.5a.5.5 0 0 1 1 0V8h.5a.5.5 0 0 1 0 1h-2a.5.5 0 0 1 0-1H1zm0 3v-.5a.5.5 0 0 1 1 0v.5h.5a.5.5 0 0 1 0 1h-2a.5.5 0 0 1 0-1H1z"/>
+                                            </svg>
+                                        </a>
+                                    @endif
+
+                                </td>
+                                <td>{{ $sampler_s ? '' : $detalles->codigo_item }}</td>
+                                <td>{{ $sampler_s ? '' : $detalles->orden }}</td>
+                                <td>{{ $sampler_s ? '' : $detalles->orden_total }}</td>
+                                <td>{{ $sampler_s ? '' : number_format($detalles->orden_restante, 0) }}</td>
+                                <td style="width: 65px">{{ $sampler_s ? '' : $detalles->total_bruto }}</td>
+                                <td style="width: 60px">{{ $sampler_s ? '' : $detalles->total_neto }}</td>
+                                <td style="text-align: right">
+                                    @if (number_format($detalles->precio_producto, 2) != 0.0)
+                                        <a style="text-decoration: none" href="#"
+                                            wire:click="incrementar_precio_catalogo({{ $detalles->id_producto }},10,'{{ $detalles->sampler }}','{{ $detalles->codigo }}',{{ $detalles->precio_producto }})">
+                                            <img width="16" height="16"
+                                                src="https://img.icons8.com/color/48/plus--v1.png" alt="plus--v1" />
+                                        </a>
+                                        {{ number_format($detalles->precio_producto, 2) }}
+                                        <a style="text-decoration: none" href="#"
+                                            wire:click="incrementar_precio_catalogo({{ $detalles->id_producto }},-10,'{{ $detalles->sampler }}','{{ $detalles->codigo }}',{{ $detalles->precio_producto }})">
+                                            <img width="16" height="16"
+                                                src="https://img.icons8.com/fluency/48/minus.png" alt="minus" />
+                                        </a>
+                                    @else
+                                        {{ number_format($detalles->precio_producto, 2) }}
+                                    @endif
+                                </td>
+                                <td style="text-align: right">
+                                    <b>{{ $sampler_s ? '' : number_format($detalles->costo, 4) }}</b></td>
+                                <td style="text-align: right">{{ number_format($detalles->valor_total, 2) }}</td>
+                                @php
+                                    $valor_factura += $detalles->valor_total;
+                                    $total_puros_tabla += $sampler_s ? $detalles->total_tabacos / $detalles->can_detalles : $detalles->total_tabacos;
+                                    $total_neto += $sampler_s ? 0 : $detalles->total_neto;
+                                    $total_bruto += $sampler_s ? 0 : $detalles->total_bruto;
+
+                                    if ($detalles_cantidad > 0 && $sampler_s) {
+                                        $detalles_cantidad--;
+                                    }
+                                @endphp
+
+                                @if (auth()->user()->rol == -1)
+                                @else
+                                    <td style="width: 60px">
+                                        <a data-toggle="modal" data-target="#modal_eliminar_detalle{{ $detalles->id_detalle }}" href="#">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15"
+                                                fill="currentColor" class="bi bi-trash-fill" viewBox="0 0 16 16">
+                                                <path
+                                                    d="M2.5 1a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1H3v9a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V4h.5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1H2.5zm3 4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5zM8 5a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7A.5.5 0 0 1 8 5zm3 .5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 1 0z" />
+                                            </svg>
+                                        </a>
+
+                                        <a style=" width:10px; height:10px;" data-toggle="modal" href=""
+                                            wire:click="editar_detalles({{ $detalles->id_detalle }})">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15"
+                                                fill="currentColor" class="bi bi-pencil-square" viewBox="0 0 16 16">
+                                                <path
+                                                    d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z" />
+                                                <path fill-rule="evenodd"
+                                                    d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z" />
+                                            </svg>
+                                        </a>
+                                        <form wire:submit.prevent="borrar_detalles_datos({{ $detalles->id_detalle }})">
+                                            <div class="modal fade" id="modal_eliminar_detalle{{ $detalles->id_detalle }}" data-backdrop="static" data-keyboard="false"
+                                                tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true"
+                                                style="opacity:.9;background:#212529;">
+                                                <div class="modal-dialog modal-dialog-centered">
+                                                    <div class="modal-content">
+                                                        <div class="modal-header">
+                                                            <h5 class="modal-title" id="staticBackdropLabel">Eliminar </h5>
+                                                            <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close"></button>
+                                                        </div>
+                                                        <div class="modal-body">
+                                                            ¿Estás seguro que quieres eliminar este producto de la factura?
+                                                        </div>
+                                                        <div class="modal-footer">
+                                                            <button type="button" class="bmodal_no" data-dismiss="modal">
+                                                                <span>Cancelar</span>
+                                                            </button>
+                                                            <button type="submit" class="bmodal_yes">
+                                                                <span>Eliminar</span>
+                                                            </button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </td>
+                                @endif
+                            </tr>
+                            @isset($precio_sugerido[$detalles->codigo . '-' . substr($detalles->orden, -4)])
+                                @php
+                                    $detalle = $precio_sugerido[$detalles->codigo . '-' . substr($detalles->orden, -4)];
+                                @endphp
+                                <tr style="font-size:10px;">
+                                    <td colspan="15"></td>
+                                    <td>
+                                        <div class="collapse" id="collapseExample{{ $detalles->id_detalle }}">
+                                            <div class="card-body">
+                                            <ol>
+                                                @php
+                                                    $anio = substr($detalles->orden, -4);
+                                                    $anio_actual = Carbon\Carbon::now()->format('Y');
+                                                    if ($anio != $anio_actual) {
+                                                        $detalle2 = $precio_sugerido[$detalles->codigo . '-' . $anio_actual];
+                                                    }
+                                                @endphp
+                                                <li>
+                                                    <div style="text-align: right">
+                                                        <a style="text-decoration: none" href="#"
+                                                            wire:click="actualizar_precio_catalogo({{ $detalles->id_producto }},{{ $detalle->precio }},'{{ $detalles->sampler }}','{{ $detalles->codigo }}')">
+                                                            <svg xmlns="http://www.w3.org/2000/svg" width="16"
+                                                                height="16" fill="currentColor" class="bi bi-bag-plus"
+                                                                viewBox="0 0 16 16">
+                                                                <path fill-rule="evenodd"
+                                                                    d="M8 7.5a.5.5 0 0 1 .5.5v1.5H10a.5.5 0 0 1 0 1H8.5V12a.5.5 0 0 1-1 0v-1.5H6a.5.5 0 0 1 0-1h1.5V8a.5.5 0 0 1 .5-.5z" />
+                                                                <path
+                                                                    d="M8 1a2.5 2.5 0 0 1 2.5 2.5V4h-5v-.5A2.5 2.5 0 0 1 8 1zm3.5 3v-.5a3.5 3.5 0 1 0-7 0V4H1v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V4h-3.5zM2 5h12v9a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V5z" />
+                                                            </svg>
+                                                        </a>
+                                                        <b>{{ '(' . $anio . ') ' . number_format($detalle->precio, 2) }}</b>
+                                                    </div>
+                                                </li>
+                                                @if ($anio != $anio_actual)
+                                                    <li>
+                                                        <div style="text-align: right">
+                                                            <a style="text-decoration: none" href="#"
+                                                                wire:click="actualizar_precio_catalogo({{ $detalles->id_producto }},{{ $detalle2->precio }},'{{ $detalles->sampler }}','{{ $detalles->codigo }}')">
+                                                                <svg xmlns="http://www.w3.org/2000/svg" width="16"
+                                                                    height="16" fill="currentColor"
+                                                                    class="bi bi-bag-plus" viewBox="0 0 16 16">
+                                                                    <path fill-rule="evenodd"
+                                                                        d="M8 7.5a.5.5 0 0 1 .5.5v1.5H10a.5.5 0 0 1 0 1H8.5V12a.5.5 0 0 1-1 0v-1.5H6a.5.5 0 0 1 0-1h1.5V8a.5.5 0 0 1 .5-.5z" />
+                                                                    <path
+                                                                        d="M8 1a2.5 2.5 0 0 1 2.5 2.5V4h-5v-.5A2.5 2.5 0 0 1 8 1zm3.5 3v-.5a3.5 3.5 0 1 0-7 0V4H1v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V4h-3.5zM2 5h12v9a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V5z" />
+                                                                </svg>
+                                                            </a>
+                                                            <b>{{ '(' . $anio_actual . ') ' . number_format($detalle2->precio, 2) }}</b>
+                                                        </div>
+                                                    </li>
+                                                @endif
+                                            </ol>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td colspan="3"></td>
+                                </tr>
+                            @endisset
                         @endforeach
 
                         @php
-
                             $this->total_cantidad_bultos = $val_actual;
-                            $this->total_total_puros = $totaltotales[0]->totaltotal;
                             $this->total_peso_bruto = $total_bruto;
                             $this->total_peso_neto = $total_neto;
-                            $this->total_precio = $totalcosto[0]->precio;
-                            $this->total_factura_precio = $totalcosto[0]->precio;
                         @endphp
                     </tbody>
                 </table>
@@ -751,7 +541,7 @@
                 <span id="de" class="input-group-text form-control"
                     style="background:rgba(174, 0, 255, 0.432);color:white;">Total Puros</span>
                 <input type="number" class="form-control  mr-sm-4" placeholder="0"
-                    value="{{ $totaltotales[0]->totaltotal }}" readonly>
+                    value="{{ $total_puros_tabla }}" readonly>
             </div>
 
 
@@ -760,19 +550,21 @@
 
                 <span id="de" class="input-group-text form-control"
                     style="background:rgba(174, 0, 255, 0.432);color:white;">Peso Bruto Total</span>
+
                 <input type="number" class="form-control  mr-sm-4" placeholder="0.00" value="{{ $total_bruto }}"
                     readonly>
 
                 <span id="de" class="input-group-text form-control"
                     style="background:rgba(174, 0, 255, 0.432);color:white;">Peso Neto Total</span>
+
                 <input type="number" class="form-control " placeholder="0.00" value="{{ $total_neto }}"
                     readonly>
 
                 <span id="de" class="input-group-text form-control"
                     style="background:rgba(174, 0, 255, 0.432);color:white;">Valor Total</span>
 
-                <input type="number" class="form-control " placeholder="0.00" value="{{ $totalcosto[0]->precio }}"
-                    readonly>
+                <input type="number" class="form-control" style="font-weight: bold'; font-size: 12px;"
+                    placeholder="0.00" value="{{ $valor_factura }}" readonly>
             </div>
         </div>
     </div>
@@ -1189,8 +981,7 @@
                                     autocomplete="off">
                             </div>
                             <div class="mb-3 col">
-                                <label for="txt_unidades" class="form-label">Unidades de Puros por
-                                    Bulto:</label>
+                                <label for="txt_unidades" class="form-label">Unidades de Puros por Bulto:</label>
                                 <input id="unidades_bultos" name="unidades_bultos"
                                     value="{{ $editar_unidades_bultos }}" class="form-control" type="text"
                                     autocomplete="off">
@@ -1232,7 +1023,6 @@
 
     <!-- INICIO MODAL ELMINAR DETALLE -->
     <form wire:submit.prevent="borrar_detalles_datos({{ $id_eliminar }})">
-
         <div class="modal fade" id="modal_eliminar_detalle" data-backdrop="static" data-keyboard="false"
             tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true"
             style="opacity:.9;background:#212529;">
@@ -1278,124 +1068,265 @@
         </div>
     </div>
 
+    <div class="modal fade" wire:ignore id="modal_agregar_precio" data-backdrop="static" data-keyboard="false"
+        tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true"
+        style="opacity:.9;background:#212529;">
+        <div class="modal-dialog modal-xl modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="staticBackdropLabel">Catalogo</h5>
+                    <button id="btn_cerrar" type="button" class="btn-close" data-dismiss="modal"
+                        aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+
+                    <table class="table" id="catalgo_precio">
+                        <thead>
+                            <tr style="text-align: center">
+                                <th>ID(Agregar)</th>
+                                <th>Codigo</th>
+                                <th>Marca</th>
+                                <th>Nombre</th>
+                                <th>Vitola</th>
+                                <th>Capa</th>
+                                <th>Tipo Empaque</th>
+                                <th>Precio ({{ Carbon\Carbon::now()->format('Y') }})</th>
+                            </tr>
+                        </thead>
+                        <tbody style="font-size: 0.6em">
+                            @foreach ($precio_catalogo as $precio)
+                                <tr>
+                                    <td>
+                                        <a style="text-decoration: none" href="#"
+                                            onclick="agregar_precio('{{ $precio->codigo }}',{{ $precio->precio }})">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                                fill="currentColor" class="bi bi-database-add" viewBox="0 0 16 16">
+                                                <path
+                                                    d="M12.5 16a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7Zm.5-5v1h1a.5.5 0 0 1 0 1h-1v1a.5.5 0 0 1-1 0v-1h-1a.5.5 0 0 1 0-1h1v-1a.5.5 0 0 1 1 0Z" />
+                                                <path
+                                                    d="M12.096 6.223A4.92 4.92 0 0 0 13 5.698V7c0 .289-.213.654-.753 1.007a4.493 4.493 0 0 1 1.753.25V4c0-1.007-.875-1.755-1.904-2.223C11.022 1.289 9.573 1 8 1s-3.022.289-4.096.777C2.875 2.245 2 2.993 2 4v9c0 1.007.875 1.755 1.904 2.223C4.978 15.71 6.427 16 8 16c.536 0 1.058-.034 1.555-.097a4.525 4.525 0 0 1-.813-.927C8.5 14.992 8.252 15 8 15c-1.464 0-2.766-.27-3.682-.687C3.356 13.875 3 13.373 3 13v-1.302c.271.202.58.378.904.525C4.978 12.71 6.427 13 8 13h.027a4.552 4.552 0 0 1 0-1H8c-1.464 0-2.766-.27-3.682-.687C3.356 10.875 3 10.373 3 10V8.698c.271.202.58.378.904.525C4.978 9.71 6.427 10 8 10c.262 0 .52-.008.774-.024a4.525 4.525 0 0 1 1.102-1.132C9.298 8.944 8.666 9 8 9c-1.464 0-2.766-.27-3.682-.687C3.356 7.875 3 7.373 3 7V5.698c.271.202.58.378.904.525C4.978 6.711 6.427 7 8 7s3.022-.289 4.096-.777ZM3 4c0-.374.356-.875 1.318-1.313C5.234 2.271 6.536 2 8 2s2.766.27 3.682.687C12.644 3.125 13 3.627 13 4c0 .374-.356.875-1.318 1.313C10.766 5.729 9.464 6 8 6s-2.766-.27-3.682-.687C3.356 4.875 3 4.373 3 4Z" />
+                                            </svg>
+                                        </a>
+                                        {{ $precio->id }}
+                                    </td>
+                                    <td style="text-align: center">{{ $precio->codigo }}</td>
+                                    <td>{{ $precio->marca }}</td>
+                                    <td>{{ $precio->nombre }}</td>
+                                    <td style="text-align: center">{{ $precio->vitola }}</td>
+                                    <td style="text-align: center">{{ $precio->capa }}</td>
+                                    <td style="text-align: center">{{ $precio->tipo_empaque }}</td>
+                                    <td style="text-align: right">{{ number_format($precio->precio, 2) }}</td>
+                                </tr>
+                            @endforeach
+                        </tbody>
+                        <tfoot>
+                            <tr>
+                                <th>ID</th>
+                                <th>Codigo</th>
+                                <th>Marca</th>
+                                <th>Nombre</th>
+                                <th>Vitola</th>
+                                <th>Capa</th>
+                                <th>Tipo Empaque</th>
+                                <th>Precio</th>
+                            </tr>
+                        </tfoot>
+                    </table>
+                </div>
+                <div class="modal-footer">
+                    <button data-dismiss="modal" class=" bmodal_yes ">
+                        <span>OK</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
     @push('scripts')
-    <script>
-        function myFunction() {
-            var input, filter, table, tr, td, i, j, visible;
-            input = document.getElementById("seacrh");
-            filter = input.value.toUpperCase();
-            table = document.getElementById("editable");
-            tr = table.getElementsByTagName("tr");
-            for (i = 0; i < tr.length; i++) {
-                visible = false;
-                td = tr[i].getElementsByTagName("td");
-                for (j = 0; j < td.length; j++) {
-                    if (td[j] && td[j].innerHTML.toUpperCase().indexOf(filter) > -1) {
-                        visible = true;
+        <script>
+            var id_producto = 0;
+            var id_pendiente = 0;
+            $(document).ready(function() {
+                $('#catalgo_precio').DataTable({
+                    "language": {
+                        "url": "//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/Spanish.json"
+                    },
+                    scrollY: 320,
+                    initComplete: function() {
+                        this.api()
+                            .columns()
+                            .every(function() {
+                                let column = this;
+                                let title = column.footer().textContent;
+
+                                // Create input element
+                                let input = document.createElement('input');
+                                input.placeholder = title;
+                                input.style.width = "120px";
+                                column.footer().replaceChildren(input);
+
+                                // Event listener for user input
+                                input.addEventListener('keyup', () => {
+                                    if (column.search() !== this.value) {
+                                        column.search(input.value).draw();
+                                    }
+                                });
+                            });
+                    }
+                });
+            });
+
+            function detalles_pendiente(id_producto_d, id_pendiente_d) {
+                id_producto = id_producto_d;
+                id_pendiente = id_pendiente_d;
+            }
+
+
+            function agregar_precio(codigo, precio) {
+                Swal.fire({
+                    title: 'Desea agregar el precio a este Item?',
+                    showDenyButton: false,
+                    showCancelButton: true,
+                    confirmButtonText: 'Guardar',
+                    denyButtonText: `Cancelar`,
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        @this.insertar_precio_catalogo(id_producto, id_pendiente, codigo, precio);
+                    }
+                })
+            }
+
+            function eliminar_precio_catalogo(id_producto_d, id_pendiente_d) {
+                Swal.fire({
+                    title: 'Desea eliminar el precio de ete item?',
+                    showDenyButton: false,
+                    showCancelButton: true,
+                    confirmButtonText: 'Eliminar',
+                    denyButtonText: `Cancelar`,
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        @this.eliminar_precio_catalogo(id_producto_d, id_pendiente_d);
+                    }
+                })
+            }
+
+            window.addEventListener('cerrar_modal_precio', event => {
+                var btnCerrar = document.getElementById("btn_cerrar");
+                btnCerrar.click();
+            })
+
+            window.addEventListener('borrar', event => {
+                $("#modal_eliminar_detalle").modal('show');
+            })
+
+            function myFunction() {
+                var input, filter, table, tr, td, i, j, visible;
+                input = document.getElementById("seacrh");
+                filter = input.value.toUpperCase();
+                table = document.getElementById("editable");
+                tr = table.getElementsByTagName("tr");
+                for (i = 0; i < tr.length; i++) {
+                    visible = false;
+                    td = tr[i].getElementsByTagName("td");
+                    for (j = 0; j < td.length; j++) {
+                        if (td[j] && td[j].innerHTML.toUpperCase().indexOf(filter) > -1) {
+                            visible = true;
+                        }
+                    }
+                    if (visible === true) {
+                        tr[i].style.display = "";
+                    } else {
+                        tr[i].style.display = "none";
                     }
                 }
-                if (visible === true) {
-                    tr[i].style.display = "";
+            }
+
+            function asignar(id) {
+                @this.id_pendiente_detalle = id;
+            }
+
+            function guardar_detalle() {
+                @this.insertar_detalle_factura(
+                    document.getElementById("intunidades_cajon").value, document.getElementById("intpeso_bruto").value,
+                    document.getElementById("intpeso_neto").value, document.getElementById("intcantidad_bultos").value,
+                    document.getElementById("intunidades_bultos").value
+                );
+                @this.item = "";
+            }
+        </script>
+        <script>
+            function wiremodel() {
+                @this.items_b = $('#item_b').val();
+                @this.ordens_b = $('#orden_b').val();
+                @this.t_empaque_b = $('#tipo_b').val();
+                @this.codigo_b = $('#precio_b').val();
+                @this.aereo = $('#para1').val();
+            }
+        </script>
+        <script>
+            window.addEventListener('abrir', event => {
+                $("#modal_actualizar").modal('show');
+                mostrarPendiente();
+            })
+
+            window.addEventListener('pendiente', event => {
+                mostrarPendiente();
+            })
+
+            window.addEventListener('cerrar', event => {
+                $("#modal_actualizar").modal('hide');
+            })
+
+            window.addEventListener('editar_detalless', event => {
+                $("#modal_editar_detalles").modal('show');
+            })
+
+            window.addEventListener('advertencia_mensaje', event => {
+                $("#modal_advertencia").modal('show');
+            })
+
+            window.addEventListener('cerrar_editar_detalles', event => {
+                $("#modal_editar_detalles").modal('hide');
+            })
+
+
+        </script>
+
+        <script>
+            function abrir(id, descripcion) {
+                $("#productos_faltantes").modal('show');
+            }
+        </script>
+
+        <script type="text/javascript">
+            function funcion1() {
+                $('.mi-selector').select2();
+            }
+        </script>
+
+        <script type="text/javascript">
+            function buscar_tabla() {
+                @this.busqueda_items_p = $('#b_item').val();
+                @this.busqueda_marcas_p = $('#b_marca').val();
+                @this.busqueda_nombre_p = $('#b_nombre').val();
+                @this.busqueda_vitolas_p = $('#b_vitola').val();
+                @this.busqueda_capas_p = $('#b_capa').val();
+                @this.busqueda_empaques_p = $('#b_empaque').val();
+                @this.busqueda_mes_p = $('#b_mes').val();
+                @this.busqueda_items_p = $('#b_item').val();
+                @this.busqueda_ordenes_p = $('#b_orden').val();
+                @this.busqueda_hons_p = $('#b_hon').val();
+                @this.paginacion = 0;
+            }
+
+            function eliminar_detalle_olvidado(id) {
+                var mensaje = confirm("¿Estás seguro que desea eliminar este detalle?");
+                if (mensaje) {
+                    @this.eliminar_detalle_olvidado(id);
                 } else {
-                    tr[i].style.display = "none";
+
                 }
             }
-        }
-
-        function asignar(id) {
-            @this.id_pendiente_detalle = id;
-        }
-
-        function guardar_detalle() {
-            @this.insertar_detalle_factura(
-                document.getElementById("intunidades_cajon").value,
-                document.getElementById("intpeso_bruto").value,
-                document.getElementById("intpeso_neto").value,
-                document.getElementById("intcantidad_bultos").value,
-                document.getElementById("intunidades_bultos").value
-            );
-            @this.item = "";
-        }
-    </script>
-    <script>
-        function wiremodel() {
-            @this.items_b = $('#item_b').val();
-            @this.ordens_b = $('#orden_b').val();
-            @this.t_empaque_b = $('#tipo_b').val();
-            @this.codigo_b = $('#precio_b').val();
-            @this.aereo = $('#para1').val();
-        }
-    </script>
-    <script>
-        window.addEventListener('abrir', event => {
-            $("#modal_actualizar").modal('show');
-            mostrarPendiente();
-        })
-
-        window.addEventListener('pendiente', event => {
-            mostrarPendiente();
-        })
-
-        window.addEventListener('cerrar', event => {
-            $("#modal_actualizar").modal('hide');
-        })
-
-        window.addEventListener('editar_detalless', event => {
-            $("#modal_editar_detalles").modal('show');
-        })
-
-        window.addEventListener('advertencia_mensaje', event => {
-            $("#modal_advertencia").modal('show');
-        })
-
-        window.addEventListener('cerrar_editar_detalles', event => {
-            $("#modal_editar_detalles").modal('hide');
-        })
-
-        window.addEventListener('borrar', event => {
-            $("#modal_eliminar_detalle").modal('show');
-        })
-
-        window.addEventListener('cerrar_modal_borrar', event => {
-            $("#modal_eliminar_detalle").modal('hide');
-        })
-    </script>
-
-    <script>
-        function abrir(id, descripcion) {
-            $("#productos_faltantes").modal('show');
-        }
-    </script>
-
-    <script type="text/javascript">
-        function funcion1() {
-            $('.mi-selector').select2();
-        }
-    </script>
-
-    <script type="text/javascript">
-        function buscar_tabla() {
-            @this.busqueda_items_p = $('#b_item').val();
-            @this.busqueda_marcas_p = $('#b_marca').val();
-            @this.busqueda_nombre_p = $('#b_nombre').val();
-            @this.busqueda_vitolas_p = $('#b_vitola').val();
-            @this.busqueda_capas_p = $('#b_capa').val();
-            @this.busqueda_empaques_p = $('#b_empaque').val();
-            @this.busqueda_mes_p = $('#b_mes').val();
-            @this.busqueda_items_p = $('#b_item').val();
-            @this.busqueda_ordenes_p = $('#b_orden').val();
-            @this.busqueda_hons_p = $('#b_hon').val();
-            @this.paginacion = 0;
-        }
-
-        function eliminar_detalle_olvidado(id) {
-            var mensaje = confirm("¿Estás seguro que desea eliminar este detalle?");
-            if (mensaje) {
-                @this.eliminar_detalle_olvidado(id);
-            } else {
-
-            }
-        }
-    </script>
+        </script>
     @endpush
 </div>

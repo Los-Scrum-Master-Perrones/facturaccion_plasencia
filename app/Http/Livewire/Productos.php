@@ -335,8 +335,6 @@ class Productos extends Component
         $this->ocultos = Cache::get('codigos_tabla_clase_productos');
     }
 
-
-
     public function eliminar_item($id){
         DB::delete('delete from clase_productos where id_producto = ?', [$id]);
         $this->dispatchBrowserEvent('item_eliminar');

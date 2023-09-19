@@ -10,6 +10,9 @@ use Livewire\Component;
 use App\Exports\FacturaExport;
 use App\Exports\FacturaExportView;
 use App\Exports\FacturaExportViewFamily;
+use App\Models\clase_producto;
+use App\Models\detalle_clase_producto;
+use App\Models\pendiente;
 use Maatwebsite\Excel\Facades\Excel;
 
 class FacturaTerminado extends Component
@@ -299,21 +302,30 @@ class FacturaTerminado extends Component
             $this->aereo, $this->items_b, $this->ordens_b, $this->codigo_b, $this->t_empaque_b
         ]);
 
-        $this->totaltotales = DB::select('call mostrar_detalle_total(?)', [$this->aereo]);
-        $this->totalcosto = DB::select('call mostrar_detalle_costo_total_factura(?)', [$this->aereo]);
-
         $this->num_factura_sistema = DB::select('call traer_num_factura()')[0]->factura_interna;
 
-        $detalles_produtos = DB::select('CALL `mostrar_detalles_productos`()');
+        // $detalles_produtos = DB::select('CALL `mostrar_detalles_productos`()');
+        // $usosArray = [];
+        // foreach ($detalles_produtos as $uso) {
+        //     $usosArray[$uso->item][] =  $uso;
+        // }
 
+        $usos = DB::select('call mostrar_precios_factura()');
+
+
+        $precio_catalogo = DB::select('call mostrar_precios_factura_catalogo()');
 
         $usosArray = [];
-        foreach ($detalles_produtos as $uso) {
-            $usosArray[$uso->item][] =  $uso;
+        $usosArray2 = [];
+        foreach ($usos as $uso) {
+            $usosArray[$uso->codigo.'-'.$uso->anio] =  $uso;
+            $usosArray2[$uso->codigo.'-'.$uso->anio][] =  $uso;
         }
-        
 
-        return view('livewire.factura-terminado')->extends('principal')->section('content');
+        return view('livewire.factura-terminado',
+                    ['precio_sugerido' => $usosArray,
+                     'precio_historial' => $usosArray2,
+                     'precio_catalogo' => $precio_catalogo])->extends('principal')->section('content');
     }
 
     public function cambiar_vista()
@@ -525,12 +537,10 @@ class FacturaTerminado extends Component
 
 
             $sampler = DB::select('SELECT sampler,descripcion_sampler
-        FROM clase_productos
-        WHERE  clase_productos.item = (select item from pendiente where id_pendiente =
-                                            (select id_pendiente from detalle_factura where id_detalle = ?)
-
-
-                                        );', [$request->id_pendi]);
+                        FROM clase_productos
+                        WHERE  clase_productos.item = (select item from pendiente where id_pendiente =
+                                                            (select id_pendiente from detalle_factura where id_detalle = ?)
+                                                        );', [$request->id_pendi]);
 
 
 
@@ -755,7 +765,84 @@ class FacturaTerminado extends Component
         return redirect()->route('historial_factura');
     }
 
+    public function actualizar_precio_catalogo(clase_producto $clase,$precio,$sampler,$codigo)
+    {
+        if($sampler == 'si'){
+            detalle_clase_producto::where('otra_descripcion','=', $codigo)->update(['precio' => $precio]);
+            pendiente::where('serie_precio','=', $codigo)->where('saldo','>', 0)->update(['precio' => $precio]);
+        }else{
+            $clase->precio = $precio;
+            $clase->save();
+        }
 
+    }
+
+    public function incrementar_precio_catalogo(clase_producto $clase,$cantidad,$sampler,$codigo,$precio)
+    {
+        if($sampler == 'si'){
+            detalle_clase_producto::where('otra_descripcion','=', $codigo)->update(['precio' => ($precio+$cantidad)]);
+            pendiente::where('serie_precio','=', $codigo)->where('saldo','>', 0)->update(['precio' => ($precio+$cantidad)]);
+        }else{
+
+            $clase->precio += $cantidad;
+            $clase->save();
+        }
+    }
+
+    public function insertar_precio_catalogo(clase_producto $clase,pendiente $pendiente,$codigo,$precio)
+    {
+        if($clase->sampler == 'si'){
+            detalle_clase_producto::where('item','=',  $pendiente->item)
+                                  ->where('id_capa','=',  $pendiente->capa)
+                                  ->where('id_vitola','=', $pendiente->vitola)
+                                  ->where('id_nombre','=', $pendiente->nombre)
+                                  ->where('id_marca','=', $pendiente->marca)
+                                  ->where('id_tipo_empaque','=', $pendiente->tipo_empaque)
+                                  ->update(['otra_descripcion' => $codigo,'precio' => $precio]);
+
+            pendiente::where('codigo_productos','=', $pendiente->codigo_productos)
+                     ->where('item','=', $pendiente->item)
+                     ->where('saldo','>', 0)
+                     ->update(['serie_precio' => $codigo, 'precio' => $precio]);
+        }else{
+            $pendiente->precio = $precio;
+            $pendiente->serie_precio = $codigo;
+            $pendiente->save();
+
+            $clase->precio = $precio;
+            $clase->codigo_precio = $codigo;
+            $clase->save();
+        }
+
+        $this->dispatchBrowserEvent('cerrar_modal_precio');
+
+    }
+
+    public function eliminar_precio_catalogo(clase_producto $clase,pendiente $pendiente)
+    {
+        if($clase->sampler == 'si'){
+            detalle_clase_producto::where('item','=',  $pendiente->item)
+                                  ->where('id_capa','=',  $pendiente->capa)
+                                  ->where('id_vitola','=', $pendiente->vitola)
+                                  ->where('id_nombre','=', $pendiente->nombre)
+                                  ->where('id_marca','=', $pendiente->marca)
+                                  ->where('id_tipo_empaque','=', $pendiente->tipo_empaque)
+                                  ->update(['otra_descripcion' => '','precio' => '0.0']);
+
+            pendiente::where('codigo_productos','=', $pendiente->codigo_productos)
+                     ->where('item','=', $pendiente->item)
+                     ->where('saldo','>', 0)
+                     ->update(['serie_precio' => '', 'precio' => '0.0']);
+        }else{
+            $pendiente->precio = '0.0';
+            $pendiente->serie_precio = '';
+            $pendiente->save();
+
+            $clase->precio = 0.0;
+            $clase->codigo_precio = '';
+            $clase->save();
+        }
+    }
 
     public function actualizar_Datos_sampler()
     {

@@ -19,6 +19,7 @@ use Exception;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
+use PhpParser\Node\Expr\Cast\Object_;
 
 class PendienteEmpaque extends Component
 {
@@ -1248,13 +1249,18 @@ class PendienteEmpaque extends Component
         $pendiente_restante = 0;
         $total_materiales = 0;
 
+
         foreach ($detalles_p as $key => $value) {
 
 
             if ($value->cod_producto == null) {
                 $existe_puros = [];
             } else {
-                $existe_puros = DB::select('SELECT * FROM importar_existencias WHERE codigo_producto = ?', [$value->cod_producto]);
+                $existe_puros = DB::select('SELECT sum(total) as total FROM importar_existencias WHERE codigo_producto = ?', [$value->cod_producto]);
+
+                if(count($existe_puros) == 0){
+                    $existe_puros = DB::select('SELECT 0 as total');
+                }
             }
 
 
@@ -1278,7 +1284,7 @@ class PendienteEmpaque extends Component
                         detalle_programacion_temporal.existencia_puros = ?
                     WHERE detalle_programacion_temporal.id_detalle_programacion =  ?',
 
-                    [$pendiente_restante,
+                    [$value->cod_producto == null ? 0 : intval($value->saldo) == 0?0:$pendiente_restante,
                     $valor_exist<0?0:$valor_exist,
                     $value->id]);
             }
