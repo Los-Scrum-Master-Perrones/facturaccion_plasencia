@@ -41,9 +41,9 @@
 
                     <div class="input-group mb-3">
                     <form wire:submit.prevent="import">
-                    @csrf
-                    <input type="file" name="select_file" id="select_file" wire:model="select_file" class=" botonprincipal form-control mr-sm-2" style="width:450px;" />
-                    <input type="submit" name="upload" style="width:130px;" class="botonprincipal mr-sm-2 " value="Importar">
+                        @csrf
+                        <input type="file" name="select_file" id="select_file" wire:model="select_file" class=" botonprincipal form-control mr-sm-2" style="width:450px;" />
+                        <input type="submit" name="upload" style="width:130px;" class="botonprincipal mr-sm-2 " value="Importar">
                     </form>
 
                     <form wire:submit.prevent="vaciar" >

@@ -116,6 +116,7 @@
                                 <option value="200">200</option>
                                 <option value="500">500</option>
                                 <option value="1000">1000</option>
+                                <option value="{{  $total }}">Todos</option>
                             </select>
                             <button class="btn btn-success" wire:click='imprimir_reporte'>
                                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-file-spreadsheet" viewBox="0 0 16 16">
@@ -238,11 +239,10 @@
       </div>
     @push('scripts')
         <script>
-            var seletscc = ["#b_codigo", "#b_marcas", "#b_nombre", "#b_vitolas", "#b_capas", "#b_empaques"];
+            var seletscc = ["#b_codigo", "#b_marcas", "#b_nombre", "#b_vitolas", "#b_capas", "#b_empaques","#floatingSelect22","#floatingSelect223"];
 
 
             $(document).ready(function() {
-
                 seletscc.forEach(element => {
                     selects(element);
                 });

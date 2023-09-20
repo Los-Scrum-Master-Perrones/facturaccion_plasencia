@@ -35,6 +35,7 @@ class EntradasSalidas extends Component
     public $cajas = 1;
 
     public $por_pagina = 50;
+    public $total = 0;
 
     public function cambio_caja($var)
     {
@@ -60,7 +61,7 @@ class EntradasSalidas extends Component
             ]
         );
 
-        $total = DB::select(
+        $this->total = DB::select(
             'CALL `mostrar_entradas_salidas_conteo`(?,?,?,?,?,?,?)',
             [
                 $this->items_descripcion,
@@ -104,7 +105,7 @@ class EntradasSalidas extends Component
         $this->dispatchBrowserEvent('tamanio_tabla');
 
         return view('livewire.EntradasSalidas.entradas-salidas', [
-            'materiales' => new LengthAwarePaginator($da, $total , $this->por_pagina)
+            'materiales' => new LengthAwarePaginator($da,  $this->total , $this->por_pagina)
         ])->extends('layouts.Main')->section('content');
     }
     public function paginacion_numerica($numero)

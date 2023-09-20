@@ -33,6 +33,7 @@ class ProductoPrecio extends Component
     public $precio_menor = 0;
 
     public $por_pagina = 25;
+    public $total = 0;
 
     public function mount()
     {
@@ -92,7 +93,7 @@ class ProductoPrecio extends Component
         }
 
 
-        $total = DB::select(
+        $this->total = DB::select(
             'call mostrar_catalogo_precios_conteo(?,?,?,?,?,?,?,?)',
             [
                 $this->codigo,
@@ -109,7 +110,7 @@ class ProductoPrecio extends Component
         $this->datos=$prodcutosPrecio;
 
         return view('livewire.producto-precio', [
-            'prodcutosPrecio' => new LengthAwarePaginator($prodcutosPrecio, $total , $this->por_pagina)
+            'prodcutosPrecio' => new LengthAwarePaginator($prodcutosPrecio, $this->total , $this->por_pagina)
         ])->extends('layouts.Main')->section('content');
     }
 
