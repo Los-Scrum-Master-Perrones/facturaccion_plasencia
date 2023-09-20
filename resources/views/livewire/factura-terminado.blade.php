@@ -339,7 +339,7 @@
                                 <td>{{ $detalles->capas }}</td>
                                 <td>{{ $sampler_s ? '' : $detalles->cantidad_por_caja }}</td>
                                 <td style="width: 250px">{{ $detalles->producto }}</td>
-                                <td style="text-align: center">
+                                <td style="text-align: center;">
                                     @if($detalles->codigo == '-')
 
                                     @else
@@ -378,7 +378,21 @@
                                 <td>{{ $sampler_s ? '' : number_format($detalles->orden_restante, 0) }}</td>
                                 <td style="width: 65px">{{ $sampler_s ? '' : $detalles->total_bruto }}</td>
                                 <td style="width: 60px">{{ $sampler_s ? '' : $detalles->total_neto }}</td>
-                                <td style="text-align: right">
+
+                                @php
+                                    $deta = [];
+                                    $actual = Carbon\Carbon::now()->format('Y');
+                                    if (isset($precio_sugerido[$detalles->codigo . '-' . $actual])) {
+                                        $deta = $precio_sugerido[$detalles->codigo . '-' . $actual];
+                                    }else {
+                                        $deta->precio = $detalles->precio_producto;
+                                    }
+                                @endphp
+                                <td @if(number_format($detalles->precio_producto, 2) == number_format($deta->precio, 2))
+                                    style="text-align: right;"
+                                @else
+                                    style="text-align: right; background-color: green; color: white"
+                                @endif>
                                     @if (number_format($detalles->precio_producto, 2) != 0.0)
                                         <a style="text-decoration: none" href="#"
                                             wire:click="incrementar_precio_catalogo({{ $detalles->id_producto }},10,'{{ $detalles->sampler }}','{{ $detalles->codigo }}',{{ $detalles->precio_producto }})">
