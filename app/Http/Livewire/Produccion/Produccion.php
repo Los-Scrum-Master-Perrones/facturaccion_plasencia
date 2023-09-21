@@ -78,8 +78,10 @@ class Produccion extends Component
         $start = ($this->page - 1) * $this->por_pagina;
 
         $da = DB::select(
-            'CALL `buscar_inventario_produccion`(?,?,?,?,?,?,?,?,?)',
+            'CALL `buscar_inventario_produccion`(?,?,?,?,?,?,?,?,?,?,?)',
             [
+                $this->b_fecha,
+                $this->b_orden,
                 $this->b_codigo,
                 $this->b_marca,
                 $this->b_nombre,
@@ -93,8 +95,10 @@ class Produccion extends Component
         );
 
         $this->total = DB::select(
-            'CALL `buscar_inventario_produccion_conteo`(?,?,?,?,?,?,?)',
+            'CALL `buscar_inventario_produccion_conteo`(?,?,?,?,?,?,?,?,?)',
             [
+                $this->b_fecha,
+                $this->b_orden,
                 $this->b_codigo,
                 $this->b_marca,
                 $this->b_nombre,

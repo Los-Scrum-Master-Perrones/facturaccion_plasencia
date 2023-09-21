@@ -236,11 +236,13 @@
             }
 
             function buscar_io() {
-                @this.b_codigo = $(seletscc[0]).val();
-                @this.b_marca = $(seletscc[1]).val();
-                @this.b_nombre = $(seletscc[2]).val();
-                @this.b_vitola = $(seletscc[3]).val();
-                @this.b_capa = $(seletscc[4]).val();
+                @this.b_orden = $(seletscc[0]).val();
+                @this.b_fecha = $(seletscc[1]).val();
+                @this.b_codigo = $(seletscc[2]).val();
+                @this.b_marca = $(seletscc[3]).val();
+                @this.b_nombre = $(seletscc[4]).val();
+                @this.b_vitola = $(seletscc[5]).val();
+                @this.b_capa = $(seletscc[6]).val();
                 @this.page = 1;
             }
         </script>
