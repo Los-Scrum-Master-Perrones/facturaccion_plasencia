@@ -7,5 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class capa_producto extends Model
 {
+    protected $table = 'capa_productos';
     protected $guarded = [];
+    protected $primaryKey = 'id_capa';
 }

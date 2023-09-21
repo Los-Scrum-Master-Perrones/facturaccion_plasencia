@@ -30,6 +30,7 @@ use App\Http\Livewire\EditarDetalles;
 use App\Http\Livewire\EntradasSalidas;
 use App\Http\Livewire\Materiales;
 use App\Http\Livewire\MaterialesProductos;
+use App\Http\Livewire\Produccion\Produccion;
 use App\Http\Livewire\ProductoPrecio;
 use App\Http\Livewire\Terminado;
 use App\Models\EntradasSalida;
@@ -383,5 +384,10 @@ Route::post('/MaterialesFichasPendienteEmpaque', [PendienteEmpaque::class,'actua
 //Catalgo de precios
 
 Route::get('/precios', ProductoPrecio::class)->name('precio.catalogo');
+
+
+//Produccion de precios
+Route::get('/produccion', Produccion::class)->name('produccion.index');
+
 
 });

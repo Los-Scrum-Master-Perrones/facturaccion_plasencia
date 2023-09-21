@@ -7,5 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class nombre_producto extends Model
 {
+    protected $table = 'nombre_productos';
     protected $guarded = [];
+    protected $primaryKey = 'id_nombre';
 }
