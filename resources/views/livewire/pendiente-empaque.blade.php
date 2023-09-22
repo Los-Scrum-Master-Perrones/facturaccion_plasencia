@@ -250,7 +250,7 @@
                                 @if (auth()->user()->rol == 0 || auth()->user()->rol == 1)
                                     <button class="btn btn-outline-dark" onclick="agregar_a_programacion()">
                                         <abbr title="Agregar a Programación">
-                                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14"
                                                 fill="white" class="bi bi-plus-circle" viewBox="0 0 16 16">
                                                 <path
                                                     d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z" />
@@ -463,16 +463,6 @@
                     </select>
                 </div>
                 <div class="col" wire:ignore>
-                    <select onchange="buscar_tabla()" name="b_item" id="b_item" style="width:100%;height:34px;"
-                        name="states[]">
-                        <option value="" style="overflow-y: scroll;">Todos Items</option>
-                        @foreach ($items_p as $item)
-                            <option style="overflow-y: scroll;"> {{ $item }}</option>
-                        @endforeach
-                    </select>
-                </div>
-
-                <div class="col" wire:ignore>
                     <select onchange="buscar_tabla()" name="b_orden" id="b_orden" style="width:100%;height:34px;"
                         name="states[]">
                         <option value="" style="overflow-y: scroll;">Todas las ordenes del sistema</option>
@@ -481,7 +471,6 @@
                         @endforeach
                     </select>
                 </div>
-
                 <div class="col" wire:ignore>
                     <select onchange="buscar_tabla()" name="b_hon" id="b_hon" style="width:100%;height:34px;"
                         name="states[]">
@@ -491,7 +480,6 @@
                         @endforeach
                     </select>
                 </div>
-
             </div>
             <div class="row">
                 <div class="col">
@@ -499,9 +487,9 @@
                         @if (auth()->user()->rol == -1)
                         @else
                             @if (auth()->user()->rol == 0 || auth()->user()->rol == 1)
-                            <button class="btn btn-outline-primary" data-toggle="modal" data-target="#productos_crear_empaque">
+                            <button class="btn btn-outline-primary fs-7" data-toggle="modal" data-target="#productos_crear_empaque">
                                 <abbr title="Agregar a Pendiente Empaque">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-plus-circle" viewBox="0 0 16 16">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="currentColor" class="bi bi-plus-circle" viewBox="0 0 16 16">
                                         <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z" />
                                         <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z" />
                                     </svg>
@@ -509,15 +497,24 @@
                             </button>
                             @endif
                         @endif
-                        <button class="btn btn-outline-secondary" wire:click="exportPendiente()">
+                        <button class="btn btn-outline-secondary fs-7" wire:click="exportPendiente()">
                             <abbr title="Exportar a excel">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-file-earmark-spreadsheet" viewBox="0 0 16 16">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="currentColor" class="bi bi-file-earmark-spreadsheet" viewBox="0 0 16 16">
                                     <path d="M14 14V4.5L9.5 0H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2zM9.5 3A1.5 1.5 0 0 0 11 4.5h2V9H3V2a1 1 0 0 1 1-1h5.5v2zM3 12v-2h2v2H3zm0 1h2v2H4a1 1 0 0 1-1-1v-1zm3 2v-2h3v2H6zm4 0v-2h3v1a1 1 0 0 1-1 1h-2zm3-3h-3v-2h3v2zm-7 0v-2h3v2H6z" />
                                 </svg>
                             </abbr>
                             Exportar
                         </button>
                     </div>
+                </div>
+                <div class="col" wire:ignore>
+                    <select onchange="buscar_tabla()" name="b_item" id="b_item" style="width:100%;height:34px;"
+                        name="states[]">
+                        <option value="" style="overflow-y: scroll;">Todos Items</option>
+                        @foreach ($items_p as $item)
+                            <option style="overflow-y: scroll;"> {{ $item }}</option>
+                        @endforeach
+                    </select>
                 </div>
 
                 <div class="col" wire:ignore>
