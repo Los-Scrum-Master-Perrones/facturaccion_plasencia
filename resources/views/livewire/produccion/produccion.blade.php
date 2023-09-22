@@ -20,7 +20,7 @@
             <div class="card-header">
                 <div class="row">
                     <div class="col-md-3" wire:ignore style="height: 30px">
-                        <input class="form-control" id="example" />
+                        <input class="form-control" autocomplete="off" id="example" />
                     </div>
                     <div class="col-md-4">
                         <form wire:submit.prevent="import" class="form-inline">
@@ -153,12 +153,12 @@
     </div>
     <div class="input-group" style="width:20%; position: fixed;right: 0px;bottom:0px; height:30px;">
         <span class="form-control input-group-text">Total saldo</span>
-        <input type="text" class="form-control" id="sumas" value="{{  $sumas }}">
+        <input type="text" class="form-control" id="sumas" value="{{ $sumas }}">
     </div>
 
     @push('scripts')
         <script>
-            var seletscc = ["#b_orden","#b_fecha","#b_codigo", "#b_marca", "#b_nombre", "#b_vitola", "#b_capa"];
+            var seletscc = ["#b_orden", "#b_fecha", "#b_codigo", "#b_marca", "#b_nombre", "#b_vitola", "#b_capa"];
             const inputField = document.querySelector("#example");
 
             $(document).ready(function() {
@@ -166,12 +166,23 @@
                     selects(element);
                 });
 
+                function selects(nombre) {
+                    new TomSelect(nombre, {
+                        create: false,
+                        sortField: {
+                            field: "text",
+                            direction: "asc"
+                        }
+                    });
+
+                }
+
 
                 const myDatePicker = new HotelDatepicker(inputField, {
                     autoClose: false,
                     startDate: new Date('2020-01-01'),
                     endDate: false,
-                    onSelectRange: function () {
+                    onSelectRange: function() {
                         console.log('Fecha de inicio:', myDatePicker.getValue());
 
                         const fechasSeparadas = myDatePicker.getValue().split(' - ');
@@ -225,15 +236,7 @@
 
             });
 
-            function selects(nombre) {
-                new TomSelect(nombre, {
-                    create: false,
-                    sortField: {
-                        field: "text",
-                        direction: "asc"
-                    }
-                });
-            }
+
 
             function buscar_io() {
                 @this.b_orden = $(seletscc[0]).val();

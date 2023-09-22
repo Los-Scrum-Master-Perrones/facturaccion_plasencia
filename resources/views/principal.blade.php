@@ -43,8 +43,6 @@
         }
     </style>
 
-    <link rel="stylesheet" href="{{ asset('css/selectmultiple.css') }}">
-
 </head>
 
 <!-- <body    style="background: linear-gradient(0deg, rgba(9,14,7,1) 6%, rgba(25,31,21,1) 28%, rgba(85,64,59,1) 51%, rgba(139,87,101,1) 75%,rgba(231,139,188,1) 100%);"> -->
@@ -381,7 +379,7 @@
         integrity="sha384-+YQ4JLhjyBLPDQt//I+STsc9iw4uQqACwlvpslubQzn4u2UU2UFM80nGisd026JF" crossorigin="anonymous">
     </script>
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.8/js/select2.min.js" defer></script>
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js" defer></script>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.14/dist/js/bootstrap-select.min.js"></script>
 
@@ -404,7 +402,6 @@
             $('#todas_tipo_empaques').select2();
             $('#todas_ordenes_sistema').select2();
             $('.mi-selector').select2();
-
         });
     </script>
 

@@ -380,7 +380,7 @@
                                 <td style="width: 60px">{{ $sampler_s ? '' : $detalles->total_neto }}</td>
 
                                 @php
-                                    $deta = [];
+                                    $deta = new stdClass();
                                     $actual = Carbon\Carbon::now()->format('Y');
                                     if (isset($precio_sugerido[$detalles->codigo . '-' . $actual])) {
                                         $deta = $precio_sugerido[$detalles->codigo . '-' . $actual];

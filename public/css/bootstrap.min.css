@@ -9348,6 +9348,14 @@ fieldset:disabled .btn {
     font-size: 1rem !important
 }
 
+.fs-7 {
+    font-size: 0.7rem !important
+}
+
+.fs-8 {
+    font-size: 0.6rem !important
+}
+
 .fst-italic {
     font-style: italic !important
 }
@@ -14441,7 +14449,6 @@ thead tr th {
  *   jQuery 3 3.7.0, DataTables 1.13.6
  */
 
-@charset "UTF-8";
 
 :root {
     --dt-row-selected: 2, 117, 216;
