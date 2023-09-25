@@ -87,25 +87,27 @@
         }
     </style>
 
-
     <br>
 
-
-
     <div class="container" style="max-width:100%;">
-
         <div class="card" style="padding:0px;">
             <div class="card-header">
                 <div class="row">
                     <div class="col-4">
-                        <button class="btn btn-primary" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasBottom" aria-controls="offcanvasBottom">Nuevo Precio</button>
+                        <button class="btn btn-primary" type="button" data-bs-toggle="modal"
+                            data-bs-target="#productos_agregar_detalles"
+                            aria-controls="productos_agregar_detalles">Crear Precio</button>
+                        <button class="btn btn-primary" type="button" data-bs-toggle="offcanvas"
+                            data-bs-target="#offcanvasBottom" aria-controls="offcanvasBottom">Nuevo Precio</button>
                     </div>
                     <div class="col-3"></div>
                     <div class="col-3">
                         <div class="input-group mb-2">
                             <span class="input-group-text" id="basic-addon1">Rango Precios</span>
-                            <input class="form-control" type="number" placeholder="$0.00" wire:model.lazy='precio_menor'>
-                            <input class="form-control" type="number" placeholder="$0.00" wire:model.lazy='precio_mayor'>
+                            <input class="form-control" type="number" placeholder="$0.00"
+                                wire:model.lazy='precio_menor'>
+                            <input class="form-control" type="number" placeholder="$0.00"
+                                wire:model.lazy='precio_mayor'>
                         </div>
                     </div>
                     <div class="col-2">
@@ -116,16 +118,17 @@
                                 <option value="200">200</option>
                                 <option value="500">500</option>
                                 <option value="1000">1000</option>
-                                <option value="{{  $total }}">Todos</option>
+                                <option value="{{ $total }}">Todos</option>
                             </select>
                             <button class="btn btn-success" wire:click='imprimir_reporte'>
-                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-file-spreadsheet" viewBox="0 0 16 16">
-                                    <path d="M2 2a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V2zm2-1a1 1 0 0 0-1 1v4h10V2a1 1 0 0 0-1-1H4zm9 6h-3v2h3V7zm0 3h-3v2h3v-2zm0 3h-3v2h2a1 1 0 0 0 1-1v-1zm-4 2v-2H6v2h3zm-4 0v-2H3v1a1 1 0 0 0 1 1h1zm-2-3h2v-2H3v2zm0-3h2V7H3v2zm3-2v2h3V7H6zm3 3H6v2h3v-2z"/>
-                                  </svg>
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                    fill="currentColor" class="bi bi-file-spreadsheet" viewBox="0 0 16 16">
+                                    <path
+                                        d="M2 2a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V2zm2-1a1 1 0 0 0-1 1v4h10V2a1 1 0 0 0-1-1H4zm9 6h-3v2h3V7zm0 3h-3v2h3v-2zm0 3h-3v2h2a1 1 0 0 0 1-1v-1zm-4 2v-2H6v2h3zm-4 0v-2H3v1a1 1 0 0 0 1 1h1zm-2-3h2v-2H3v2zm0-3h2V7H3v2zm3-2v2h3V7H6zm3 3H6v2h3v-2z" />
+                                </svg>
                             </button>
                         </div>
                     </div>
-
                 </div>
                 {{ $prodcutosPrecio->links() }}
             </div>
@@ -224,23 +227,141 @@
                             @endforeach
                         </tbody>
                     </table>
-
                 </div>
             </div>
         </div>
     </div>
-    <div wire:ignore class="offcanvas offcanvas-bottom" style="height: 60vh;" tabindex="-1" id="offcanvasBottom" aria-labelledby="offcanvasBottomLabel">
+    <div wire:ignore class="offcanvas offcanvas-bottom" style="height: 60vh;" tabindex="-1" id="offcanvasBottom"
+        aria-labelledby="offcanvasBottomLabel">
         <div class="offcanvas-header top-right">
-          <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
         </div>
         <div class="offcanvas-body">
-          @livewire('productos.calculo-precio')
+            @livewire('productos.calculo-precio')
         </div>
-      </div>
+    </div>
+
+    <div wire:ignore class="modal fade" id="productos_agregar_detalles" tabindex="-1" aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog modal-lg ">
+            <div class="modal-content">
+                <form wire:submit.prevent="save" id="form_detalle" name="form_detalle" style="width:100%;">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="staticBackdropLabel"><strong>Agregar Precio Nuevo</strong>
+                        </h5>
+                        <button  id="cerrar_modal_nuevo_precio" type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="row">
+                            <div class="mb-3 col">
+                                <label for="codigo_de" class="form-label" style="width:100%;">Codigo</label>
+                                <input name="codigo_de" id="codigo_de" class="form-control"  wire:model='codigo_n'  required type="text"
+                                    autocomplete="off">
+                            </div>
+                            <div class="mb-3 col">
+                                <label for="capa_de" class="form-label" style="width:100%;">Capa</label>
+                                <select name="capa_de" id="capa_de" onchange="buscar_agregar()"
+                                    style="width:100%;" required>
+                                    <option value="NINGUNA" style="overflow-y: scroll;">Ninguna</option>
+                                    @foreach ($capas_p as $capa)
+                                        <option style="overflow-y: scroll;"> {{ $capa }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                            <div class="mb-3 col">
+                                <label for="marca_de" class="form-label" style="width:100%;">Marca</label>
+                                <select name="marca_de" id="marca_de" onchange="buscar_agregar()"
+                                    style="width:100%;" required>
+                                    <option value="NINGUNA" style="overflow-y: scroll;">Ninguna</option>
+                                    @foreach ($marcas_p as $marca)
+                                        <option style="overflow-y: scroll;"> {{ $marca }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="mb-3 col">
+                                <label for="nombre_de" class="form-label" style="width:100%;">Nombre</label>
+                                <select name="nombre_de" id="nombre_de" onchange="buscar_agregar()"
+                                    style="width:100%;" required>
+                                    <option value="NINGUNA" style="overflow-y: scroll;">Ninguna</option>
+                                    @foreach ($nombre_p as $nombre)
+                                        <option style="overflow-y: scroll;"> {{ $nombre }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                            <div class="mb-3 col">
+                                <label for="vitola_de" class="form-label" style="width:100%;">Vitola</label>
+                                <select name="vitola_de" id="vitola_de" onchange="buscar_agregar()"
+                                    style="width:100%;" required>
+                                    <option value="NINGUNA" style="overflow-y: scroll;">Ninguna</option>
+                                    @foreach ($vitolas_p as $vitola)
+                                        <option style="overflow-y: scroll;"> {{ $vitola }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                            <div class="mb-3 col">
+                                <label for="tipo_de" class="form-label" style="width:100%;">Tipo de
+                                    empaque</label>
+                                <select name="tipo_de" id="tipo_de" onchange="buscar_agregar()"
+                                    style="width:100%;" required>
+                                    <option value="N/D" style="overflow-y: scroll;">Ninguna</option>
+                                    @foreach ($empaques_p as $tipo_empaque)
+                                        <option style="overflow-y: scroll;"> {{ $tipo_empaque }}
+                                        </option>
+                                    @endforeach
+                                </select>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="mb-3 col">
+                                <label for="txt_buenos">Precio</label>
+                                <input name="precio_de" id="precio_de" class="form-control" wire:model='precio_n' required type="number" onchange="buscar_agregar()"
+                                    autocomplete="off">
+                            </div>
+                            <div class="mb-3 col">
+                            </div>
+                            <div class="mb-3 col">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">
+                            <span>Cancelar</span>
+                        </button>
+                        <button type="submit" class="btn btn-success">
+                            <span>Guardar</span>
+                        </button>
+                    </div>
+
+                </form>
+            </div>
+        </div>
+    </div>
     @push('scripts')
         <script>
-            var seletscc = ["#b_codigo", "#b_marcas", "#b_nombre", "#b_vitolas", "#b_capas", "#b_empaques","#floatingSelect22","#floatingSelect223"];
 
+            const Toast = Swal.mixin({
+                toast: true,
+                position: 'top-end',
+                showConfirmButton: false,
+                timer: 3000,
+                timerProgressBar: true,
+                didOpen: (toast) => {
+                    toast.addEventListener('mouseenter', Swal.stopTimer)
+                    toast.addEventListener('mouseleave', Swal.resumeTimer)
+                }
+            });
+
+            var seletscc = ["#b_codigo", "#b_marcas", "#b_nombre", "#b_vitolas", "#b_capas", "#b_empaques", "#floatingSelect22",
+                "#capa_de",
+                "#marca_de",
+                "#nombre_de",
+                "#vitola_de",
+                "#tipo_de",
+                "#floatingSelect223"
+            ];
 
             $(document).ready(function() {
                 seletscc.forEach(element => {
@@ -250,7 +371,7 @@
 
             function selects(nombre) {
                 new TomSelect(nombre, {
-                    create: false,
+                    create: nombre === "#marca_de"? true : false,
                     sortField: {
                         field: "text",
                         direction: "asc"
@@ -268,16 +389,24 @@
                 @this.page = 1;
             }
 
+            function buscar_agregar() {
+                @this.marca_n = $(seletscc[8]).val();
+                @this.nombre_n = $(seletscc[9]).val();
+                @this.vitola_n = $(seletscc[10]).val();
+                @this.capa_n = $(seletscc[7]).val();
+                @this.empaque_n = $(seletscc[11]).val();
+            }
+
             function historial(key) {
                 let precios = @this.datos;
                 let historial = precios[key].historial[0];
                 historial = historial.reverse();
                 //alert(historial[0].precio);
-                let html =`<div class="lineatemp">`;
+                let html = `<div class="lineatemp">`;
                 var precio_ultimo = Number(historial[0].precio);
-                historial.forEach(e =>{
+                historial.forEach(e => {
 
-                    html  += `<div class="fila">
+                    html += `<div class="fila">
                             <div class="disco"><b></b><div>${Number(e.porcentaje_incremento).toFixed(2)*100}%</div></div>
                             <div>${e.anio}</div>
                             <div>$ ${Number(e.precio).toFixed(2)}</div>
@@ -285,7 +414,7 @@
 
                 });
 
-                html  += `</div>`;
+                html += `</div>`;
 
                 Swal.fire({
                     title: '<strong>Historial de Cambios</strong>',
@@ -299,6 +428,15 @@
                     cancelButtonAriaLabel: 'Thumbs down'
                 })
             }
+
+            window.addEventListener('RegistradoConExito', event => {
+                Toast.fire({
+                        icon: 'success',
+                        title: 'Registro realizada con exito.'
+                    });
+                var btnCerrar = document.getElementById("cerrar_modal_nuevo_precio");
+                btnCerrar.click();
+            })
         </script>
     @endpush
 </div>

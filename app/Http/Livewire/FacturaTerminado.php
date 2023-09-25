@@ -10,6 +10,9 @@ use Livewire\Component;
 use App\Exports\FacturaExport;
 use App\Exports\FacturaExportView;
 use App\Exports\FacturaExportViewFamily;
+use App\Models\CatalogoHistorialPrecio;
+use App\Models\CatalogoItemsPrecio;
+use App\Models\CatalogoMarcasPrecio;
 use App\Models\clase_producto;
 use App\Models\detalle_clase_producto;
 use App\Models\pendiente;
@@ -71,6 +74,7 @@ class FacturaTerminado extends Component
 
     public $detalles_produtos;
     public $aereo;
+    public $formatos_impresiones = '1';
 
     //TODO Busqueda pendiente factura
     public $items;
@@ -105,6 +109,8 @@ class FacturaTerminado extends Component
     public $ordenes_p = [];
     public $hons_p = [];
     public $series_p = [];
+    public $precios = [];
+    public $marcas_precio = [];
 
     public $busqueda_marcas_p;
     public $busqueda_nombre_p;
@@ -126,6 +132,15 @@ class FacturaTerminado extends Component
     public $presentacion;
     public $codigo_precio_nuevo;
     public $precio_precio;
+    public $codigo_n = '';
+    public $precio_n = '';
+    public $marca_n = '';
+    public $nombre_n = '';
+    public $vitola_n = '';
+    public $capa_n = '';
+    public $empaque_n = '';
+    public $id_pendiente_precio = 0;
+    public $id_clase_producto = 0;
 
     public $tuplas_conteo;
     public $paginacion;
@@ -272,7 +287,7 @@ class FacturaTerminado extends Component
             $this->items_p = [];
             $this->ordenes_p = [];
             $this->hons_p = [];
-
+            $this->precios = [];
 
             foreach ($this->datos_pendiente as $detalles) {
                 array_push($this->items_p, $detalles->item);
@@ -387,13 +402,10 @@ class FacturaTerminado extends Component
         });
     }
 
-
     public function cerrar_modal()
     {
         $this->dispatchBrowserEvent("cerrar");
     }
-
-
 
     public function mount()
     {
@@ -434,7 +446,6 @@ class FacturaTerminado extends Component
         $this->orden_pedidos = [];
         $this->marcas_busqueda = [];
         $this->busqueda_vitolas = [];
-        $this->busqueda_nombres = [];
         $this->busqueda_capas = [];
         $this->busqueda_tipo_empaques = [];
         $this->busqueda_meses = [];
@@ -444,7 +455,6 @@ class FacturaTerminado extends Component
 
         $this->paginacion = 0;
         $this->fecha = "";
-        $this->borrar = [];
         $this->busqueda_marcas_p = "";
         $this->busqueda_nombre_p = "";
         $this->busqueda_vitolas_p = "";
@@ -463,6 +473,10 @@ class FacturaTerminado extends Component
         $this->ordens_b =  "";
         $this->t_empaque_b =  "";
         $this->codigo_b =  "";
+
+
+        $this->codigo_n = CatalogoMarcasPrecio::orderBy('id', 'desc')->first()->codigo + 1000;
+        $this->marcas_precio = CatalogoMarcasPrecio::all('marca');
     }
 
     public function paginacion_numerica($numero)
@@ -605,57 +619,26 @@ class FacturaTerminado extends Component
         return redirect()->route('f_terminado');
     }
 
-    public function imprimir()
+    public function imprimir_formatos()
     {
+        $vista_html = ['1'=>'Exports.factura-terminado-exports-warehouse',
+                       '2'=>'Exports.factura-terminado-exports',
+                       '3'=>'Exports.factura-terminado-exports',
+                       '4'=>'Exports.factura-terminado-exports',
+                       '5'=>'Exports.factura-terminado-exports',
+                       '6'=>'Exports.factura-terminado-exports',
+                       '7'=>'Exports.factura-terminado-exports'];
 
         $this->detalles_venta = DB::select('call mostrar_detalle_factura(?,?,?,?,?)',[
             $this->aereo, $this->items_b, $this->ordens_b, $this->codigo_b, $this->t_empaque_b
         ]);
 
-        $vista =  view('Exports.factura-terminado-exports-simple', [
-            'detalles_venta' => $this->detalles_venta
-        ]);
-        return Excel::download(new FacturaExportView($vista), 'Factura.xlsx');
-
-
-        $vista =  view('Exports.factura-terminado-exports-simple', [
+        $vista =  view($vista_html[$this->formatos_impresiones], [
             'detalles_venta' => $this->detalles_venta
         ]);
 
         return Excel::download(new FacturaExportView($vista), 'FacturaDetallada.xlsx');
     }
-
-    public function imprimir_factura_family()
-    {
-
-        $this->detalles_venta = DB::select('call mostrar_detalle_factura(?,?,?,?,?)',[
-            $this->aereo, $this->items_b, $this->ordens_b, $this->codigo_b, $this->t_empaque_b
-        ]);
-
-        $vista =  view('Exports.factura-terminado-exports-family', [
-            'detalles_venta' => $this->detalles_venta
-        ]);
-
-        return Excel::download(new FacturaExportViewFamily($vista), 'FACT FAMILY TOBACCO.xlsx');
-    }
-
-    public function imprimir_formato_largo()
-    {
-
-        $this->detalles_venta = DB::select('call mostrar_detalle_factura(?,?,?,?,?)',[
-            $this->aereo, $this->items_b, $this->ordens_b, $this->codigo_b, $this->t_empaque_b
-        ]);
-
-        $vista =  view('Exports.factura-terminado-exports', [
-            'detalles_venta' => $this->detalles_venta
-        ]);
-
-        return Excel::download(new FacturaExportView($vista), 'FacturaDetallada.xlsx');
-    }
-
-
-
-
 
     public function insertar_factura()
     {
@@ -866,6 +849,79 @@ class FacturaTerminado extends Component
     {
         DB::delete('delete from detalle_factura where id_detalle = ?', [$id]);
         $this->da = "hola";
+    }
+
+
+    //Funcion insertar nuevo precio
+
+    public function imprimir_reporte()
+    {
+        $vista =  view('Exports.producto-precio', [
+            'prodcutosPrecio' => DB::select(
+                'call mostrar_catalogo_precios_busqueda_historial(?,?,?,?,?,?,?,?)',
+                [
+                    $this->codigo,
+                    $this->marca,
+                    $this->nombre,
+                    $this->vitola,
+                    $this->capa,
+                    $this->empaque,
+                    $this->precio_menor == '' ? 0 : $this->precio_menor,
+                    $this->precio_mayor == '' ? 0 : $this->precio_mayor,
+                ]
+            )
+        ]);
+
+        return Excel::download(new CatalogoPrecioExport($vista), 'Catalogo Precios.xlsx');
+    }
+
+    public function save()
+    {
+        try {
+            DB::beginTransaction();
+
+            $marca_precio =  CatalogoMarcasPrecio::firstOrCreate(
+                ['marca' => $this->marca_n],
+                ['codigo' => $this->codigo_n]
+            );
+
+            $codigo_precio_n = intval($marca_precio->codigo);
+            $codigo_precio = CatalogoItemsPrecio::where('id_catalogo_marca_precio', '=', $marca_precio->id)->orderBy('id', 'desc')->first();
+            if ($codigo_precio) {
+                $codigo_precio_n = $codigo_precio->codigo + 1;
+            } else {
+                $codigo_precio_n++;
+            }
+
+            $precio =  CatalogoItemsPrecio::firstOrCreate(
+                [
+                    'id_catalogo_marca_precio' => $marca_precio->id,
+                    'nombre' => $this->nombre_n,
+                    'vitola' => $this->vitola_n,
+                    'capa' => $this->capa_n,
+                    'tipo_empaque' => $this->empaque_n
+                ],
+                ['codigo' => $codigo_precio_n, 'fecha' => Carbon::now()->format('Y-m-d')]
+            );
+
+            CatalogoHistorialPrecio::updateOrCreate(
+                [
+                    'id_catalogo_items_precio' => $precio->id,
+                    'anio' => Carbon::now()->format('Y')
+                ],
+                ['precio' => $this->precio_n, 'porcentaje_incremento' => 0]
+            );
+
+            $this->insertar_precio_catalogo(clase_producto::find($this->id_clase_producto),pendiente::find($this->id_pendiente_precio),$precio->codigo,$this->precio_n);
+
+
+            $this->dispatchBrowserEvent('RegistradoConExito');
+
+            DB::commit();
+        } catch (\Exception $e) {
+            DB::rollback();
+            throw $e;
+        }
     }
 
 }

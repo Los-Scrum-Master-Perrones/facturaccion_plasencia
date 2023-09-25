@@ -80,7 +80,7 @@
             </div>
             <div class="col-sm-8" style="text-align:end;">
                 <div class="btn-group" style="height: 35px;" role="group">
-                    <button  class="btn btn-warning fs-7" wire:click="imprimir_formatos()">Imprimir</button>
+                    <button class="btn btn-warning fs-7" wire:click="imprimir_formatos()">Imprimir</button>
 
                     <select wire:model="formatos_impresiones" class="form-control">
                         <option value="1">Warehouse Detallada</option>
@@ -95,7 +95,7 @@
                 </div>
             </div>
         </div>
-<br>
+        <br>
         <div class="row" wire:ignore>
             <div class="col">
                 <select name="item_b" id="item_b" onchange="wiremodel()" name="states[]"
@@ -284,7 +284,7 @@
                                     @if (auth()->user()->rol == -1)
                                     @else
                                         <td style="width: 60px">
-                                            <a data-toggle="modal" data-target="#borrar_detalles" href=""
+                                            <a data-bs-toggle="modal" data-bs-target="#borrar_detalles" href=""
                                                 wire:click="borrar_detalles({{ $detalles->id_detalle }})">
                                                 <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15"
                                                     fill="currentColor" class="bi bi-trash-fill" viewBox="0 0 16 16">
@@ -292,7 +292,7 @@
                                                         d="M2.5 1a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1H3v9a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V4h.5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1H2.5zm3 4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5zM8 5a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7A.5.5 0 0 1 8 5zm3 .5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 1 0z" />
                                                 </svg>
                                             </a>
-                                            <a style=" width:10px; height:10px;" data-toggle="modal" href=""
+                                            <a style=" width:10px; height:10px;" data-bs-toggle="modal" href=""
                                                 wire:click="editar_detalles({{ $detalles->id_detalle }})">
                                                 <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15"
                                                     fill="currentColor" class="bi bi-pencil-square"
@@ -336,9 +336,11 @@
                                     @if ($detalles->codigo == '-')
                                     @else
                                         <a style="text-decoration: none"
-                                            @if ($detalles->codigo == '') data-toggle="modal" data-target="#modal_agregar_precio" href="#" onclick="detalles_pendiente({{ $detalles->id_producto }},{{ $detalles->id_pendiente }},'{{  $detalles->codigo_item.'-'.$detalles->producto  }}')"
-                                    @else
-                                        data-toggle="collapse" href="#collapseExample{{ $detalles->id_detalle }}" @endif
+                                            @if ($detalles->codigo == '')
+                                                data-bs-toggle="modal" data-bs-target="#modal_agregar_precio" href="#" onclick="detalles_pendiente({{ $detalles->id_producto }},{{ $detalles->id_pendiente }},'{{ $detalles->codigo_item . '-' . $detalles->producto }}')"
+                                            @else
+                                                data-bs-toggle="collapse" href="#collapseExample{{ $detalles->id_detalle }}"
+                                            @endif
                                             role="button" aria-expanded="false"
                                             aria-controls="collapseExample{{ $detalles->id_detalle }}">
                                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
@@ -349,6 +351,17 @@
                                                     d="M2 1h4.586a1 1 0 0 1 .707.293l7 7a1 1 0 0 1 0 1.414l-4.586 4.586a1 1 0 0 1-1.414 0l-7-7A1 1 0 0 1 1 6.586V2a1 1 0 0 1 1-1zm0 5.586 7 7L13.586 9l-7-7H2v4.586z" />
                                             </svg>
                                         </a>
+                                        @if ($detalles->codigo == '')
+                                        <a style="text-decoration: none"
+                                            data-bs-toggle="modal" data-bs-target="#productos_agregar_detalles" href="#" onclick="detalles_nuevo_precio({{  $detalles->id_detalle  }},'{{  $detalles->marca  }}','{{  $detalles->nombre  }}','{{  $detalles->vitola  }}','{{  $detalles->capa  }}','{{  $detalles->tipo_empaque_ingles  }}',{{ $detalles->id_producto }},{{ $detalles->id_pendiente }})"
+                                            role="button" aria-expanded="false"
+                                            aria-controls="collapseExample">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-folder-plus" viewBox="0 0 16 16">
+                                                <path d="m.5 3 .04.87a1.99 1.99 0 0 0-.342 1.311l.637 7A2 2 0 0 0 2.826 14H9v-1H2.826a1 1 0 0 1-.995-.91l-.637-7A1 1 0 0 1 2.19 4h11.62a1 1 0 0 1 .996 1.09L14.54 8h1.005l.256-2.819A2 2 0 0 0 13.81 3H9.828a2 2 0 0 1-1.414-.586l-.828-.828A2 2 0 0 0 6.172 1H2.5a2 2 0 0 0-2 2Zm5.672-1a1 1 0 0 1 .707.293L7.586 3H2.19c-.24 0-.47.042-.683.12L1.5 2.98a1 1 0 0 1 1-.98h3.672Z"/>
+                                                <path d="M13.5 9a.5.5 0 0 1 .5.5V11h1.5a.5.5 0 1 1 0 1H14v1.5a.5.5 0 1 1-1 0V12h-1.5a.5.5 0 0 1 0-1H13V9.5a.5.5 0 0 1 .5-.5Z"/>
+                                            </svg>
+                                        </a>
+                                        @endif
                                     @endif
                                     {{ $detalles->codigo }}
                                     @if ($detalles->codigo == '' || $detalles->codigo == '-')
@@ -422,8 +435,8 @@
                                 @if (auth()->user()->rol == -1)
                                 @else
                                     <td style="width: 60px">
-                                        <a data-toggle="modal"
-                                            data-target="#modal_eliminar_detalle{{ $detalles->id_detalle }}"
+                                        <a data-bs-toggle="modal"
+                                            data-bs-target="#modal_eliminar_detalle{{ $detalles->id_detalle }}"
                                             href="#">
                                             <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15"
                                                 fill="currentColor" class="bi bi-trash-fill" viewBox="0 0 16 16">
@@ -432,7 +445,7 @@
                                             </svg>
                                         </a>
 
-                                        <a style=" width:10px; height:10px;" data-toggle="modal" href=""
+                                        <a style=" width:10px; height:10px;" data-bs-toggle="modal" href=""
                                             wire:click="editar_detalles({{ $detalles->id_detalle }})">
                                             <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15"
                                                 fill="currentColor" class="bi bi-pencil-square" viewBox="0 0 16 16">
@@ -455,7 +468,7 @@
                                                             <h5 class="modal-title" id="staticBackdropLabel">Eliminar
                                                             </h5>
                                                             <button type="button" class="btn-close"
-                                                                data-dismiss="modal" aria-label="Close"></button>
+                                                                data-bs-dismiss="modal" aria-label="Close"></button>
                                                         </div>
                                                         <div class="modal-body">
                                                             ¿Estás seguro que quieres eliminar este producto de la
@@ -463,7 +476,7 @@
                                                         </div>
                                                         <div class="modal-footer">
                                                             <button type="button" class="bmodal_no"
-                                                                data-dismiss="modal">
+                                                                data-bs-dismiss="modal">
                                                                 <span>Cancelar</span>
                                                             </button>
                                                             <button type="submit" class="bmodal_yes">
@@ -554,8 +567,8 @@
                 id="sumas1">
                 <span id="de" class="input-group-text form-control fs-7"
                     style="background:rgba(174, 0, 255, 0.432);color:white;">Total Bultos</span>
-                <input type="number" class="form-control  mr-sm-4 fs-7" placeholder="0" value="{{ $val_actual }}"
-                    readonly>
+                <input type="number" class="form-control  mr-sm-4 fs-7" placeholder="0"
+                    value="{{ $val_actual }}" readonly>
 
                 <span id="de" class="input-group-text form-control fs-7"
                     style="background:rgba(174, 0, 255, 0.432);color:white;">Total Puros</span>
@@ -570,8 +583,8 @@
                 <span id="de" class="input-group-text form-control fs-7"
                     style="background:rgba(174, 0, 255, 0.432);color:white;">Peso Bruto Total</span>
 
-                <input type="number" class="form-control  mr-sm-4 fs-7" placeholder="0.00" value="{{ $total_bruto }}"
-                    readonly>
+                <input type="number" class="form-control  mr-sm-4 fs-7" placeholder="0.00"
+                    value="{{ $total_bruto }}" readonly>
 
                 <span id="de" class="input-group-text form-control fs-7"
                     style="background:rgba(174, 0, 255, 0.432);color:white;">Peso Neto Total</span>
@@ -621,7 +634,7 @@
             <div class="col">
                 <div class="dropdown">
                     <button class="btn btn-secondary dropdown-toggle form-control" type="button"
-                        id="dropdownMenuButton1" data-toggle="dropdown">
+                        id="dropdownMenuButton1" data-bs-toggle="dropdown">
                         Categorias
                     </button>
                     <ul class="dropdown-menu " aria-labelledby="dropdownMenuButton1">
@@ -657,7 +670,7 @@
             <div class="col">
                 <div class="dropdown">
                     <button class="btn btn-secondary dropdown-toggle form-control" type="button"
-                        id="dropdownMenuButton1" data-toggle="dropdown">
+                        id="dropdownMenuButton1" data-bs-toggle="dropdown">
                         Presentacion
                     </button>
                     <ul class="dropdown-menu " aria-labelledby="dropdownMenuButton1">
@@ -872,7 +885,7 @@
                                 @if (auth()->user()->rol == -1)
                                 @else
                                     <td style="text-align:center;">
-                                        <a data-toggle="modal" data-target="#modal_actualizar"
+                                        <a data-bs-toggle="modal" data-bs-target="#modal_actualizar"
                                             onclick="asignar({{ $datos->id_pendiente }});  document.getElementById('titulo1').innerHTML = '{{ $datos->descripcion_produto }}';"
                                             href="">
                                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
@@ -958,10 +971,10 @@
                     </div>
 
                     <div class="modal-footer">
-                        <button class="bmodal_no" data-dismiss="modal">
+                        <button class="bmodal_no" data-bs-dismiss="modal">
                             <span>Cancelar</span>
                         </button>
-                        <button type="submit" onclick="guardar_detalle()" data-dismiss="modal" class="bmodal_yes">
+                        <button type="submit" onclick="guardar_detalle()" data-bs-dismiss="modal" class="bmodal_yes">
                             <span>Agregar</span>
                         </button>
                     </div>
@@ -1026,7 +1039,7 @@
                     </div>
 
                     <div class="modal-footer">
-                        <button class="bmodal_no" data-dismiss="modal">
+                        <button class="bmodal_no" data-bs-dismiss="modal">
                             <span>Cancelar</span>
                         </button>
                         <button type="submit" class="bmodal_yes">
@@ -1049,13 +1062,13 @@
                 <div class="modal-content">
                     <div class="modal-header">
                         <h5 class="modal-title" id="staticBackdropLabel">Eliminar </h5>
-                        <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close"></button>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
                         ¿Estás seguro que quieres eliminar este producto de la factura?
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="bmodal_no" data-dismiss="modal">
+                        <button type="button" class="bmodal_no" data-bs-dismiss="modal">
                             <span>Cancelar</span>
                         </button>
                         <button type="submit" class="bmodal_yes">
@@ -1073,13 +1086,13 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title" id="staticBackdropLabel">Advertencia</h5>
-                    <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close"></button>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
                     Rellene los campos del Cliente y Contenedor
                 </div>
                 <div class="modal-footer">
-                    <button data-dismiss="modal" class=" bmodal_yes ">
+                    <button data-bs-dismiss="modal" class="btn btn-success">
                         <span>OK</span>
                     </button>
                 </div>
@@ -1094,7 +1107,7 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title" id="titulo_ctalogo_productos">Catalogo</h5>
-                    <button id="btn_cerrar" type="button" class="btn-close" data-dismiss="modal"
+                    <button id="btn_cerrar" type="button" class="btn-close" data-bs-dismiss="modal"
                         aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
@@ -1153,7 +1166,7 @@
                     </table>
                 </div>
                 <div class="modal-footer">
-                    <button data-dismiss="modal" class=" bmodal_yes ">
+                    <button data-bs-dismiss="modal" class="btn btn-success">
                         <span>OK</span>
                     </button>
                 </div>
@@ -1161,12 +1174,94 @@
         </div>
     </div>
 
+    <div wire:ignore class="modal fade" id="productos_agregar_detalles" tabindex="-1"
+        aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg ">
+            <div class="modal-content">
+                <form wire:submit.prevent="save" id="form_detalle" name="form_detalle" style="width:100%;">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="staticBackdropLabel"><strong>Agregar Precio Nuevo</strong>
+                        </h5>
+                        <button id="cerrar_modal_nuevo_precio" type="button" class="btn-close"
+                            data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="row">
+                            <div class="mb-3 col">
+                                <label for="codigo_de" class="form-label" style="width:100%;">Codigo</label>
+                                <input name="codigo_de" id="codigo_de" class="form-control" required type="text" autocomplete="off" wire:model='codigo_n'>
+                            </div>
+                            <div class="mb-3 col">
+                                <label for="marca_de" class="form-label" style="width:100%;">Marca</label>
+                                <select name="marca_de" id="marca_de" style="width:100%;" required autocomplete="off" onchange="cambio_marca()">
+                                    <option value="">Seleccione Marca</option>
+                                    @foreach ($marcas_precio as $marcas)
+                                        <option value="{{ $marcas->marca }}">{{ $marcas->marca }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                            <div class="mb-3 col">
+                                <label for="capa_de" class="form-label" style="width:100%;">Capa</label>
+                                <input name="capa_de" id="capa_de" class="form-control" style="width:100%;" required autocomplete="off" wire:model='capa_n'>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="mb-3 col">
+                                <label for="nombre_de" class="form-label" style="width:100%;">Nombre</label>
+                                <input name="nombre_de" id="nombre_de" class="form-control" style="width:100%;" required autocomplete="off" wire:model='nombre_n'>
+                            </div>
+                            <div class="mb-3 col">
+                                <label for="vitola_de" class="form-label" style="width:100%;">Vitola</label>
+                                <input name="vitola_de" id="vitola_de" class="form-control" style="width:100%;" required autocomplete="off" wire:model='vitola_n'>
+                            </div>
+                            <div class="mb-3 col">
+                                <label for="tipo_de" class="form-label" style="width:100%;">Tipo de empaque</label>
+                                <input name="tipo_de" id="tipo_de" class="form-control" style="width:100%;" required autocomplete="off" wire:model='empaque_n'>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="mb-3 col">
+                                <label for="txt_buenos">Precio</label>
+                                <input name="precio_de" id="precio_de" class="form-control" required type="number" autocomplete="off" wire:model='precio_n'>
+                            </div>
+                            <div class="mb-3 col">
+                            </div>
+                            <div class="mb-3 col">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">
+                            <span>Cancelar</span>
+                        </button>
+                        <button  class="btn btn-success" wire:loading.attr='disabled' type="submit">
+                            <span wire:loading.attr.remove='hidden'  hidden class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                            <span wire:loading.remove>Guardar</span>
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
     @push('scripts')
         <script>
+            const Toast = Swal.mixin({
+                toast: true,
+                position: 'top-end',
+                showConfirmButton: false,
+                timer: 3000,
+                timerProgressBar: true,
+                didOpen: (toast) => {
+                    toast.addEventListener('mouseenter', Swal.stopTimer)
+                    toast.addEventListener('mouseleave', Swal.resumeTimer)
+                }
+            });
+
             var id_producto = 0;
             var id_pendiente = 0;
 
-            var seletscc = ["#item_b", "#orden_b", "#tipo_b", "#precio_b"];
+            var seletscc = ["#item_b", "#orden_b", "#tipo_b", "#precio_b","#marca_de"];
 
 
             $(document).ready(function() {
@@ -1177,7 +1272,7 @@
 
             function selects(nombre) {
                 new TomSelect(nombre, {
-                    create: false,
+                    create: nombre === "#marca_de" ? true : false,
                     sortField: {
                         field: "text",
                         direction: "asc"
@@ -1216,12 +1311,35 @@
                 });
             });
 
-            function detalles_pendiente(id_producto_d, id_pendiente_d,producto) {
+            function detalles_pendiente(id_producto_d, id_pendiente_d, producto) {
                 id_producto = id_producto_d;
                 id_pendiente = id_pendiente_d;
 
-                document.getElementById('titulo_ctalogo_productos').innerHTML= 'Catalogo: '+producto;
+                document.getElementById('titulo_ctalogo_productos').innerHTML = 'Catalogo: ' + producto;
             }
+
+            function detalles_nuevo_precio(id,marca,nombre,vitola,capa,empaque,id_produc,id_pend) {
+                @this.nombre_n = nombre;
+                @this.vitola_n = vitola;
+                @this.capa_n = capa;
+                @this.empaque_n = empaque;
+
+                @this.id_pendiente_precio = id_pend;
+                @this.id_clase_producto = id_produc;
+            }
+
+            function cambio_marca() {
+                @this.marca_n = $('#marca_de').val();
+            }
+
+            window.addEventListener('RegistradoConExito', event => {
+                Toast.fire({
+                        icon: 'success',
+                        title: 'Registro realizada con exito.'
+                    });
+                var btnCerrar = document.getElementById("cerrar_modal_nuevo_precio");
+                btnCerrar.click();
+            })
 
 
             function agregar_precio(codigo, precio) {
