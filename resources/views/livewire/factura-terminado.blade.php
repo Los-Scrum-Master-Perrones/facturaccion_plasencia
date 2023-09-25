@@ -78,20 +78,19 @@
             <div class="col-sm-2" style="text-align:end;">
                 <label style="font-size:15px;color:white;">Factura N#: {{ $num_factura_sistema }}</label>
             </div>
-
-            <div class="col-sm-2" style="text-align:end;">
-
-            </div>
-            <div class="col-sm-6" style="text-align:end;">
+            <div class="col-sm-8" style="text-align:end;">
                 <div class="btn-group" style="height: 35px;" role="group">
-                    <button  class="btn btn-warning fs-7" wire:click="imprimir()">Imprimir</button>
-                    @if ($aereo == 'FM')
-                        <button s class="btn btn-info fs-7"
-                            wire:click="imprimir_factura_family()">Imprimir(Family)</button>
-                    @else
-                        <button class="btn btn-info fs-7"
-                            wire:click="imprimir_formato_largo()">Imprimir(factura Larga)</button>
-                    @endif
+                    <button  class="btn btn-warning fs-7" wire:click="imprimir_formatos()">Imprimir</button>
+
+                    <select wire:model="formatos_impresiones" class="form-control">
+                        <option value="1">Warehouse Detallada</option>
+                        <option value="2">Warehouse Simple</option>
+                        <option value="3"></option>
+                        <option value="4"></option>
+                        <option value="5"></option>
+                        <option value="6"></option>
+                        <option value="7"></option>
+                    </select>
                     <button class="btn btn-light fs-7" wire:click="historial()">Historial</button>
                 </div>
             </div>
@@ -163,9 +162,7 @@
                             <th rowspan="2" style="background:#ddd;">YOUR<br>ORDER #</th>
                             <th rowspan="2">ORDER<br>AMOUNT </th>
                             <th rowspan="2">BACK<br>ORDER<br>AMOUNT </th>
-
                             <th colspan="2"> Peso en Libras<br>Weigth in Pounds </th>
-
                             <th rowspan="2">Precio FOB<br>per 1000 ($)</th>
                             <th rowspan="2" style="background:#ddd;">Cost </th>
                             <th rowspan="2">Valor<br>Value ($)</th>
@@ -339,7 +336,7 @@
                                     @if ($detalles->codigo == '-')
                                     @else
                                         <a style="text-decoration: none"
-                                            @if ($detalles->codigo == '') data-toggle="modal" data-target="#modal_agregar_precio" href="#" onclick="detalles_pendiente({{ $detalles->id_producto }},{{ $detalles->id_pendiente }})"
+                                            @if ($detalles->codigo == '') data-toggle="modal" data-target="#modal_agregar_precio" href="#" onclick="detalles_pendiente({{ $detalles->id_producto }},{{ $detalles->id_pendiente }},'{{  $detalles->codigo_item.'-'.$detalles->producto  }}')"
                                     @else
                                         data-toggle="collapse" href="#collapseExample{{ $detalles->id_detalle }}" @endif
                                             role="button" aria-expanded="false"
@@ -555,14 +552,14 @@
 
             <div class="input-group" style="width:30%;position: fixed;left: 0px;bottom:0px; height:30px;display:flex;"
                 id="sumas1">
-                <span id="de" class="input-group-text form-control "
+                <span id="de" class="input-group-text form-control fs-7"
                     style="background:rgba(174, 0, 255, 0.432);color:white;">Total Bultos</span>
-                <input type="number" class="form-control  mr-sm-4" placeholder="0" value="{{ $val_actual }}"
+                <input type="number" class="form-control  mr-sm-4 fs-7" placeholder="0" value="{{ $val_actual }}"
                     readonly>
 
-                <span id="de" class="input-group-text form-control"
+                <span id="de" class="input-group-text form-control fs-7"
                     style="background:rgba(174, 0, 255, 0.432);color:white;">Total Puros</span>
-                <input type="number" class="form-control  mr-sm-4" placeholder="0"
+                <input type="number" class="form-control  mr-sm-4 fs-7" placeholder="0"
                     value="{{ $total_puros_tabla }}" readonly>
             </div>
 
@@ -570,22 +567,22 @@
             <div class="input-group"
                 style="width:45%;position: fixed;right: 0px;bottom:0px; height:30px;display:flex;" id="sumas2">
 
-                <span id="de" class="input-group-text form-control"
+                <span id="de" class="input-group-text form-control fs-7"
                     style="background:rgba(174, 0, 255, 0.432);color:white;">Peso Bruto Total</span>
 
-                <input type="number" class="form-control  mr-sm-4" placeholder="0.00" value="{{ $total_bruto }}"
+                <input type="number" class="form-control  mr-sm-4 fs-7" placeholder="0.00" value="{{ $total_bruto }}"
                     readonly>
 
-                <span id="de" class="input-group-text form-control"
+                <span id="de" class="input-group-text form-control fs-7"
                     style="background:rgba(174, 0, 255, 0.432);color:white;">Peso Neto Total</span>
 
-                <input type="number" class="form-control " placeholder="0.00" value="{{ $total_neto }}"
+                <input type="number" class="form-control  fs-7" placeholder="0.00" value="{{ $total_neto }}"
                     readonly>
 
-                <span id="de" class="input-group-text form-control"
+                <span id="de" class="input-group-text form-control fs-7"
                     style="background:rgba(174, 0, 255, 0.432);color:white;">Valor Total</span>
 
-                <input type="number" class="form-control" style="font-weight: bold'; font-size: 12px;"
+                <input type="number" class="form-control fs-7" style="font-weight: bold'; font-size: 12px;"
                     placeholder="0.00" value="{{ $valor_factura }}" readonly>
             </div>
         </div>
@@ -899,11 +896,11 @@
         </div>
 
         <div class="input-group" style="width:40%; position: fixed;right: 0px;bottom:0px; height:30px;">
-            <span class="form-control input-group-text">Total pendiente</span>
-            <input type="text" class="form-control" id="sumap" value="{{ $sumap }}">
+            <span class="form-control input-group-text fs-7">Total pendiente</span>
+            <input type="text" class="form-control fs-7" id="sumap" value="{{ $sumap }}">
 
-            <span class="form-control input-group-text">Total saldo</span>
-            <input type="text" class="form-control" id="sumas" value="{{ $sumas }}">
+            <span class="form-control input-group-text fs-7">Total saldo</span>
+            <input type="text" class="form-control fs-7" id="sumas" value="{{ $sumas }}">
         </div>
     </div>
 
@@ -1096,7 +1093,7 @@
         <div class="modal-dialog modal-xl modal-dialog-centered">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="staticBackdropLabel">Catalogo</h5>
+                    <h5 class="modal-title" id="titulo_ctalogo_productos">Catalogo</h5>
                     <button id="btn_cerrar" type="button" class="btn-close" data-dismiss="modal"
                         aria-label="Close"></button>
                 </div>
@@ -1219,9 +1216,11 @@
                 });
             });
 
-            function detalles_pendiente(id_producto_d, id_pendiente_d) {
+            function detalles_pendiente(id_producto_d, id_pendiente_d,producto) {
                 id_producto = id_producto_d;
                 id_pendiente = id_pendiente_d;
+
+                document.getElementById('titulo_ctalogo_productos').innerHTML= 'Catalogo: '+producto;
             }
 
 
