@@ -1222,7 +1222,7 @@
                         <div class="row">
                             <div class="mb-3 col">
                                 <label for="txt_buenos">Precio</label>
-                                <input name="precio_de" id="precio_de" class="form-control" required type="number" autocomplete="off" wire:model='precio_n'>
+                                <input name="precio_de" id="precio_de" class="form-control" type="text" autocomplete="off" wire:model='precio_n'>
                             </div>
                             <div class="mb-3 col">
                             </div>
