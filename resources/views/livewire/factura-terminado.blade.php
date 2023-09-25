@@ -11,7 +11,7 @@
                 <div class="col">
                     <div class="input-group mb-3">
                         <button id="boton_agregar" name="boton_agregar" wire:click.prevent="cambio(2)"
-                            class=" mr-sm-2 botonprincipal" style="width:120px;">
+                            class="btn btn-outline-purpura" style="width:120px;">
                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
                                 class="bi bi-plus-circle" viewBox="0 0 16 16">
                                 <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z" />
@@ -48,23 +48,20 @@
                             <option value="C5">Contenedor 5</option>
                         </select>
 
-                        <div wire:loading>
-                            <button id="btn_guardar" class="mr-sm-2 botonprincipal" style="width:120px; height: 35px;"
-                                disabled>
-                                <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
-                                Loading...
-                            </button>
-                        </div>
-                        <div wire:loading.attr="hidden" style="width:120px;">
-                            <button id="btn_guardar" class=" mr-sm-2 botonprincipal" wire:click="insertar_factura()"
-                                style="width:120px; height: 35px;">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
-                                    fill="currentColor" class="bi bi-save2" viewBox="0 0 16 16">
-                                    <path
-                                        d="M2 1a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H9.5a1 1 0 0 0-1 1v4.5h2a.5.5 0 0 1 .354.854l-2.5 2.5a.5.5 0 0 1-.708 0l-2.5-2.5A.5.5 0 0 1 5.5 6.5h2V2a2 2 0 0 1 2-2H14a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V2a2 2 0 0 1 2-2h2.5a.5.5 0 0 1 0 1H2z" />
-                                </svg> Guardar
-                            </button>
-                        </div>
+                        <button wire:loading.attr.remove='hidden' hidden class="btn btn-outline-purpura"
+                            style="width:120px;" disabled>
+                            <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                            Loading...
+                        </button>
+
+                        <button onclick="@this.insertar_factura()" wire:loading.attr='hidden'
+                            class="btn btn-outline-purpura">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                                class="bi bi-save2" viewBox="0 0 16 16">
+                                <path
+                                    d="M2 1a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H9.5a1 1 0 0 0-1 1v4.5h2a.5.5 0 0 1 .354.854l-2.5 2.5a.5.5 0 0 1-.708 0l-2.5-2.5A.5.5 0 0 1 5.5 6.5h2V2a2 2 0 0 1 2-2H14a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V2a2 2 0 0 1 2-2h2.5a.5.5 0 0 1 0 1H2z" />
+                            </svg> Guardar
+                        </button>
                     </div>
                 </div>
             </div>
@@ -83,28 +80,27 @@
             </div>
 
             <div class="col-sm-2" style="text-align:end;">
-                <button style="width:120px;" class="botonprincipal" wire:click="imprimir()">Imprimir</button>
+
             </div>
-            @if ($aereo == 'FM')
-                <div class="col-sm-2" style="text-align:end;">
-                    <button style="width:120px;" class="botonprincipal"
-                        wire:click="imprimir_factura_family()">Imprimir(Family)</button>
+            <div class="col-sm-6" style="text-align:end;">
+                <div class="btn-group" style="height: 35px;" role="group">
+                    <button  class="btn btn-warning fs-7" wire:click="imprimir()">Imprimir</button>
+                    @if ($aereo == 'FM')
+                        <button s class="btn btn-info fs-7"
+                            wire:click="imprimir_factura_family()">Imprimir(Family)</button>
+                    @else
+                        <button class="btn btn-info fs-7"
+                            wire:click="imprimir_formato_largo()">Imprimir(factura Larga)</button>
+                    @endif
+                    <button class="btn btn-light fs-7" wire:click="historial()">Historial</button>
                 </div>
-            @else
-                <div class="col-sm-2" style="text-align:end;">
-                    <button style="width:120px;" class="botonprincipal"
-                        wire:click="imprimir_formato_largo()">Imprimir(factura Larga)</button>
-                </div>
-            @endif
-            <div class="col-sm-2" style="text-align:end;">
-                <button style="width:120px;" class="botonprincipal" wire:click="historial()">Historial</button>
             </div>
         </div>
-
+<br>
         <div class="row" wire:ignore>
             <div class="col">
                 <select name="item_b" id="item_b" onchange="wiremodel()" name="states[]"
-                    class="mi-selector form-control" style="width:100%;height:34px;">
+                    style="width:100%;height:34px;">
                     <option value="" style="overfl ow-y: scroll;">Todos Items</option>
                     @foreach ($items_p as $item)
                         <option value="{{ $item }}" style="overflow-y: scroll;"> {{ $item }}</option>
@@ -114,7 +110,7 @@
 
             <div class="col">
                 <select name="orden_b" id="orden_b" onchange="wiremodel()" name="states[]"
-                    class="mi-selector form-control" style="width:100%;height:34px;">
+                    style="width:100%;height:34px;">
                     <option value="" style="overflow-y: scroll;">Todos Orden</option>
                     @foreach ($hons_p as $item)
                         <option style="overflow-y: scroll;"> {{ $item }}</option>
@@ -124,7 +120,7 @@
 
             <div class="col">
                 <select name="tipo_b" id="tipo_b" onchange="wiremodel()" name="states[]"
-                    class="mi-selector form-control" style="width:100%;height:34px;">
+                    style="width:100%;height:34px;">
                     <option value="" style="overflow-y: scroll;">Todos Empaque</option>
                     @foreach ($empaques_p as $item)
                         <option style="overflow-y: scroll;"> {{ $item }}</option>
@@ -134,7 +130,7 @@
 
             <div class="col">
                 <select name="precio_b" id="precio_b" onchange="wiremodel()" name="states[]"
-                    class="mi-selector form-control" style="width:100%;height:34px;">
+                    style="width:100%;height:34px;">
                     <option value="" style="overflow-y: scroll;">Todos Codigo Precio</option>
                     @foreach ($series_p as $item)
                         <option style="overflow-y: scroll;"> {{ $item->codigo_precio }}</option>
@@ -340,33 +336,36 @@
                                 <td>{{ $sampler_s ? '' : $detalles->cantidad_por_caja }}</td>
                                 <td style="width: 250px">{{ $detalles->producto }}</td>
                                 <td style="text-align: center;">
-                                    @if($detalles->codigo == '-')
-
+                                    @if ($detalles->codigo == '-')
                                     @else
-
-                                    <a style="text-decoration: none"
-                                        @if ($detalles->codigo == '') data-toggle="modal" data-target="#modal_agregar_precio" href="#" onclick="detalles_pendiente({{ $detalles->id_producto }},{{ $detalles->id_pendiente }})"
+                                        <a style="text-decoration: none"
+                                            @if ($detalles->codigo == '') data-toggle="modal" data-target="#modal_agregar_precio" href="#" onclick="detalles_pendiente({{ $detalles->id_producto }},{{ $detalles->id_pendiente }})"
                                     @else
                                         data-toggle="collapse" href="#collapseExample{{ $detalles->id_detalle }}" @endif
-                                        role="button" aria-expanded="false" aria-controls="collapseExample{{ $detalles->id_detalle }}">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
-                                            fill="currentColor" class="bi bi-tag" viewBox="0 0 16 16">
-                                            <path
-                                                d="M6 4.5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0zm-1 0a.5.5 0 1 0-1 0 .5.5 0 0 0 1 0z" />
-                                            <path
-                                                d="M2 1h4.586a1 1 0 0 1 .707.293l7 7a1 1 0 0 1 0 1.414l-4.586 4.586a1 1 0 0 1-1.414 0l-7-7A1 1 0 0 1 1 6.586V2a1 1 0 0 1 1-1zm0 5.586 7 7L13.586 9l-7-7H2v4.586z" />
-                                        </svg>
-                                    </a>
+                                            role="button" aria-expanded="false"
+                                            aria-controls="collapseExample{{ $detalles->id_detalle }}">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                                fill="currentColor" class="bi bi-tag" viewBox="0 0 16 16">
+                                                <path
+                                                    d="M6 4.5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0zm-1 0a.5.5 0 1 0-1 0 .5.5 0 0 0 1 0z" />
+                                                <path
+                                                    d="M2 1h4.586a1 1 0 0 1 .707.293l7 7a1 1 0 0 1 0 1.414l-4.586 4.586a1 1 0 0 1-1.414 0l-7-7A1 1 0 0 1 1 6.586V2a1 1 0 0 1 1-1zm0 5.586 7 7L13.586 9l-7-7H2v4.586z" />
+                                            </svg>
+                                        </a>
                                     @endif
                                     {{ $detalles->codigo }}
-                                    @if($detalles->codigo == '' || $detalles->codigo == '-')
-
+                                    @if ($detalles->codigo == '' || $detalles->codigo == '-')
                                     @else
-                                        <a style="text-decoration: none" href="#" onclick="eliminar_precio_catalogo({{ $detalles->id_producto }},{{ $detalles->id_pendiente }})">
-                                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-journal-x" viewBox="0 0 16 16">
-                                                <path fill-rule="evenodd" d="M6.146 6.146a.5.5 0 0 1 .708 0L8 7.293l1.146-1.147a.5.5 0 1 1 .708.708L8.707 8l1.147 1.146a.5.5 0 0 1-.708.708L8 8.707 6.854 9.854a.5.5 0 0 1-.708-.708L7.293 8 6.146 6.854a.5.5 0 0 1 0-.708z"/>
-                                                <path d="M3 0h10a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2v-1h1v1a1 1 0 0 0 1 1h10a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H3a1 1 0 0 0-1 1v1H1V2a2 2 0 0 1 2-2z"/>
-                                                <path d="M1 5v-.5a.5.5 0 0 1 1 0V5h.5a.5.5 0 0 1 0 1h-2a.5.5 0 0 1 0-1H1zm0 3v-.5a.5.5 0 0 1 1 0V8h.5a.5.5 0 0 1 0 1h-2a.5.5 0 0 1 0-1H1zm0 3v-.5a.5.5 0 0 1 1 0v.5h.5a.5.5 0 0 1 0 1h-2a.5.5 0 0 1 0-1H1z"/>
+                                        <a style="text-decoration: none" href="#"
+                                            onclick="eliminar_precio_catalogo({{ $detalles->id_producto }},{{ $detalles->id_pendiente }})">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                                fill="currentColor" class="bi bi-journal-x" viewBox="0 0 16 16">
+                                                <path fill-rule="evenodd"
+                                                    d="M6.146 6.146a.5.5 0 0 1 .708 0L8 7.293l1.146-1.147a.5.5 0 1 1 .708.708L8.707 8l1.147 1.146a.5.5 0 0 1-.708.708L8 8.707 6.854 9.854a.5.5 0 0 1-.708-.708L7.293 8 6.146 6.854a.5.5 0 0 1 0-.708z" />
+                                                <path
+                                                    d="M3 0h10a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2v-1h1v1a1 1 0 0 0 1 1h10a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H3a1 1 0 0 0-1 1v1H1V2a2 2 0 0 1 2-2z" />
+                                                <path
+                                                    d="M1 5v-.5a.5.5 0 0 1 1 0V5h.5a.5.5 0 0 1 0 1h-2a.5.5 0 0 1 0-1H1zm0 3v-.5a.5.5 0 0 1 1 0V8h.5a.5.5 0 0 1 0 1h-2a.5.5 0 0 1 0-1H1zm0 3v-.5a.5.5 0 0 1 1 0v.5h.5a.5.5 0 0 1 0 1h-2a.5.5 0 0 1 0-1H1z" />
                                             </svg>
                                         </a>
                                     @endif
@@ -384,15 +383,14 @@
                                     $actual = Carbon\Carbon::now()->format('Y');
                                     if (isset($precio_sugerido[$detalles->codigo . '-' . $actual])) {
                                         $deta = $precio_sugerido[$detalles->codigo . '-' . $actual];
-                                    }else {
+                                    } else {
                                         $deta->precio = $detalles->precio_producto;
                                     }
                                 @endphp
-                                <td @if(number_format($detalles->precio_producto, 2) == number_format($deta->precio, 2))
-                                    style="text-align: right;"
+                                <td
+                                    @if (number_format($detalles->precio_producto, 2) == number_format($deta->precio, 2)) style="text-align: right;"
                                 @else
-                                    style="text-align: right; background-color: green; color: white"
-                                @endif>
+                                    style="text-align: right; background-color: green; color: white" @endif>
                                     @if (number_format($detalles->precio_producto, 2) != 0.0)
                                         <a style="text-decoration: none" href="#"
                                             wire:click="incrementar_precio_catalogo({{ $detalles->id_producto }},10,'{{ $detalles->sampler }}','{{ $detalles->codigo }}',{{ $detalles->precio_producto }})">
@@ -410,7 +408,8 @@
                                     @endif
                                 </td>
                                 <td style="text-align: right">
-                                    <b>{{ $sampler_s ? '' : number_format($detalles->costo, 4) }}</b></td>
+                                    <b>{{ $sampler_s ? '' : number_format($detalles->costo, 4) }}</b>
+                                </td>
                                 <td style="text-align: right">{{ number_format($detalles->valor_total, 2) }}</td>
                                 @php
                                     $valor_factura += $detalles->valor_total;
@@ -426,7 +425,9 @@
                                 @if (auth()->user()->rol == -1)
                                 @else
                                     <td style="width: 60px">
-                                        <a data-toggle="modal" data-target="#modal_eliminar_detalle{{ $detalles->id_detalle }}" href="#">
+                                        <a data-toggle="modal"
+                                            data-target="#modal_eliminar_detalle{{ $detalles->id_detalle }}"
+                                            href="#">
                                             <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15"
                                                 fill="currentColor" class="bi bi-trash-fill" viewBox="0 0 16 16">
                                                 <path
@@ -444,21 +445,28 @@
                                                     d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z" />
                                             </svg>
                                         </a>
-                                        <form wire:submit.prevent="borrar_detalles_datos({{ $detalles->id_detalle }})">
-                                            <div class="modal fade" id="modal_eliminar_detalle{{ $detalles->id_detalle }}" data-backdrop="static" data-keyboard="false"
-                                                tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true"
+                                        <form
+                                            wire:submit.prevent="borrar_detalles_datos({{ $detalles->id_detalle }})">
+                                            <div class="modal fade"
+                                                id="modal_eliminar_detalle{{ $detalles->id_detalle }}"
+                                                data-backdrop="static" data-keyboard="false" tabindex="-1"
+                                                aria-labelledby="staticBackdropLabel" aria-hidden="true"
                                                 style="opacity:.9;background:#212529;">
                                                 <div class="modal-dialog modal-dialog-centered">
                                                     <div class="modal-content">
                                                         <div class="modal-header">
-                                                            <h5 class="modal-title" id="staticBackdropLabel">Eliminar </h5>
-                                                            <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close"></button>
+                                                            <h5 class="modal-title" id="staticBackdropLabel">Eliminar
+                                                            </h5>
+                                                            <button type="button" class="btn-close"
+                                                                data-dismiss="modal" aria-label="Close"></button>
                                                         </div>
                                                         <div class="modal-body">
-                                                            ¿Estás seguro que quieres eliminar este producto de la factura?
+                                                            ¿Estás seguro que quieres eliminar este producto de la
+                                                            factura?
                                                         </div>
                                                         <div class="modal-footer">
-                                                            <button type="button" class="bmodal_no" data-dismiss="modal">
+                                                            <button type="button" class="bmodal_no"
+                                                                data-dismiss="modal">
                                                                 <span>Cancelar</span>
                                                             </button>
                                                             <button type="submit" class="bmodal_yes">
@@ -481,35 +489,18 @@
                                     <td>
                                         <div class="collapse" id="collapseExample{{ $detalles->id_detalle }}">
                                             <div class="card-body">
-                                            <ol>
-                                                @php
-                                                    $anio = substr($detalles->orden, -4);
-                                                    $anio_actual = Carbon\Carbon::now()->format('Y');
-                                                    if ($anio != $anio_actual) {
-                                                        $detalle2 = $precio_sugerido[$detalles->codigo . '-' . $anio_actual];
-                                                    }
-                                                @endphp
-                                                <li>
-                                                    <div style="text-align: right">
-                                                        <a style="text-decoration: none" href="#"
-                                                            wire:click="actualizar_precio_catalogo({{ $detalles->id_producto }},{{ $detalle->precio }},'{{ $detalles->sampler }}','{{ $detalles->codigo }}')">
-                                                            <svg xmlns="http://www.w3.org/2000/svg" width="16"
-                                                                height="16" fill="currentColor" class="bi bi-bag-plus"
-                                                                viewBox="0 0 16 16">
-                                                                <path fill-rule="evenodd"
-                                                                    d="M8 7.5a.5.5 0 0 1 .5.5v1.5H10a.5.5 0 0 1 0 1H8.5V12a.5.5 0 0 1-1 0v-1.5H6a.5.5 0 0 1 0-1h1.5V8a.5.5 0 0 1 .5-.5z" />
-                                                                <path
-                                                                    d="M8 1a2.5 2.5 0 0 1 2.5 2.5V4h-5v-.5A2.5 2.5 0 0 1 8 1zm3.5 3v-.5a3.5 3.5 0 1 0-7 0V4H1v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V4h-3.5zM2 5h12v9a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V5z" />
-                                                            </svg>
-                                                        </a>
-                                                        <b>{{ '(' . $anio . ') ' . number_format($detalle->precio, 2) }}</b>
-                                                    </div>
-                                                </li>
-                                                @if ($anio != $anio_actual)
+                                                <ol>
+                                                    @php
+                                                        $anio = substr($detalles->orden, -4);
+                                                        $anio_actual = Carbon\Carbon::now()->format('Y');
+                                                        if ($anio != $anio_actual) {
+                                                            $detalle2 = $precio_sugerido[$detalles->codigo . '-' . $anio_actual];
+                                                        }
+                                                    @endphp
                                                     <li>
                                                         <div style="text-align: right">
                                                             <a style="text-decoration: none" href="#"
-                                                                wire:click="actualizar_precio_catalogo({{ $detalles->id_producto }},{{ $detalle2->precio }},'{{ $detalles->sampler }}','{{ $detalles->codigo }}')">
+                                                                wire:click="actualizar_precio_catalogo({{ $detalles->id_producto }},{{ $detalle->precio }},'{{ $detalles->sampler }}','{{ $detalles->codigo }}')">
                                                                 <svg xmlns="http://www.w3.org/2000/svg" width="16"
                                                                     height="16" fill="currentColor"
                                                                     class="bi bi-bag-plus" viewBox="0 0 16 16">
@@ -519,11 +510,28 @@
                                                                         d="M8 1a2.5 2.5 0 0 1 2.5 2.5V4h-5v-.5A2.5 2.5 0 0 1 8 1zm3.5 3v-.5a3.5 3.5 0 1 0-7 0V4H1v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V4h-3.5zM2 5h12v9a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V5z" />
                                                                 </svg>
                                                             </a>
-                                                            <b>{{ '(' . $anio_actual . ') ' . number_format($detalle2->precio, 2) }}</b>
+                                                            <b>{{ '(' . $anio . ') ' . number_format($detalle->precio, 2) }}</b>
                                                         </div>
                                                     </li>
-                                                @endif
-                                            </ol>
+                                                    @if ($anio != $anio_actual)
+                                                        <li>
+                                                            <div style="text-align: right">
+                                                                <a style="text-decoration: none" href="#"
+                                                                    wire:click="actualizar_precio_catalogo({{ $detalles->id_producto }},{{ $detalle2->precio }},'{{ $detalles->sampler }}','{{ $detalles->codigo }}')">
+                                                                    <svg xmlns="http://www.w3.org/2000/svg" width="16"
+                                                                        height="16" fill="currentColor"
+                                                                        class="bi bi-bag-plus" viewBox="0 0 16 16">
+                                                                        <path fill-rule="evenodd"
+                                                                            d="M8 7.5a.5.5 0 0 1 .5.5v1.5H10a.5.5 0 0 1 0 1H8.5V12a.5.5 0 0 1-1 0v-1.5H6a.5.5 0 0 1 0-1h1.5V8a.5.5 0 0 1 .5-.5z" />
+                                                                        <path
+                                                                            d="M8 1a2.5 2.5 0 0 1 2.5 2.5V4h-5v-.5A2.5 2.5 0 0 1 8 1zm3.5 3v-.5a3.5 3.5 0 1 0-7 0V4H1v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V4h-3.5zM2 5h12v9a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V5z" />
+                                                                    </svg>
+                                                                </a>
+                                                                <b>{{ '(' . $anio_actual . ') ' . number_format($detalle2->precio, 2) }}</b>
+                                                            </div>
+                                                        </li>
+                                                    @endif
+                                                </ol>
                                             </div>
                                         </div>
                                     </td>
@@ -1160,6 +1168,27 @@
         <script>
             var id_producto = 0;
             var id_pendiente = 0;
+
+            var seletscc = ["#item_b", "#orden_b", "#tipo_b", "#precio_b"];
+
+
+            $(document).ready(function() {
+                seletscc.forEach(element => {
+                    selects(element);
+                });
+            });
+
+            function selects(nombre) {
+                new TomSelect(nombre, {
+                    create: false,
+                    sortField: {
+                        field: "text",
+                        direction: "asc"
+                    }
+                });
+            }
+
+
             $(document).ready(function() {
                 $('#catalgo_precio').DataTable({
                     "language": {
@@ -1296,14 +1325,15 @@
             })
 
             window.addEventListener('advertencia_mensaje', event => {
-                $("#modal_advertencia").modal('show');
+                const myModal = new bootstrap.Modal(document.getElementById('modal_advertencia'), {
+                    keyboard: false
+                });
+                myModal.show();
             })
 
             window.addEventListener('cerrar_editar_detalles', event => {
                 $("#modal_editar_detalles").modal('hide');
             })
-
-
         </script>
 
         <script>

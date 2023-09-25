@@ -3777,6 +3777,24 @@ fieldset:disabled .btn {
     --bs-gradient: none
 }
 
+.btn-outline-purpura {
+    --bs-btn-color: rgba(174, 0, 255, 0.432); /* Color de texto púrpura */
+    --bs-btn-border-color: rgba(174, 0, 255, 0.432); /* Color de borde púrpura */
+    --bs-btn-hover-color: #fff; /* Color de texto al pasar el cursor (blanco) */
+    --bs-btn-hover-bg: rgba(174, 0, 255, 0.432); /* Color de fondo al pasar el cursor (púrpura) */
+    --bs-btn-hover-border-color: rgba(174, 0, 255, 0.432); /* Color de borde al pasar el cursor (púrpura) */
+    --bs-btn-focus-shadow-rgb: 128, 0, 128; /* Sombra al enfocar (púrpura) */
+    --bs-btn-active-color: #fff; /* Color de texto al hacer clic (blanco) */
+    --bs-btn-active-bg: rgba(174, 0, 255, 0.432); /* Color de fondo al hacer clic (púrpura) */
+    --bs-btn-active-border-color: rgba(174, 0, 255, 0.432); /* Color de borde al hacer clic (púrpura) */
+    --bs-btn-active-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125); /* Sombra al hacer clic (sombra predeterminada) */
+    --bs-btn-disabled-color: rgba(174, 0, 255, 0.432); /* Color de texto deshabilitado (púrpura) */
+    --bs-btn-disabled-bg: transparent; /* Fondo deshabilitado transparente */
+    --bs-btn-disabled-border-color: rgba(174, 0, 255, 0.432); /* Color de borde deshabilitado (púrpura) */
+    --bs-gradient: none; /* Desactivar gradiente si está configurado */
+}
+
+
 .btn-link {
     --bs-btn-font-weight: 400;
     --bs-btn-color: var(--bs-link-color);
