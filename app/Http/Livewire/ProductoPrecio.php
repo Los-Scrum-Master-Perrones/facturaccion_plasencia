@@ -46,7 +46,7 @@ class ProductoPrecio extends Component
     public $precio_mayor = 4000;
     public $precio_menor = 0;
 
-    public $por_pagina = 25;
+    public $por_pagina = 50;
     public $total = 0;
 
     public function mount()

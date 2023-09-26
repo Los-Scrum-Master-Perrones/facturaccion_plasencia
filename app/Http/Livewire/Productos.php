@@ -8,6 +8,7 @@ use App\Models\clase_producto;
 use ClaseProducto;
 use Livewire\Component;
 use Illuminate\Http\Request;
+use Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\DB;
 use Livewire\WithPagination;
@@ -15,14 +16,26 @@ use Livewire\WithPagination;
 
 class Productos extends Component
 {
-    public $productos;
+    use WithPagination;
+    protected $paginationTheme = 'bootstrap';
+
     public $busqueda ;
     public $detalle_productos;
-    public $marcas;
-    public $capas;
-    public $nombres;
-    public $vitolas;
-    public $tipo_empaques;
+
+    public $items = [];
+    public $marcas = [];
+    public $capas = [];
+    public $nombres = [];
+    public $vitolas = [];
+    public $tipo_empaques = [];
+
+
+    public $item = "";
+    public $marca = "";
+    public $nombre = "";
+    public $vitola = "";
+    public $capa = "";
+    public $tipo_empaque = "";
 
     public $mars;
     public $ites;
@@ -40,44 +53,78 @@ class Productos extends Component
 
     public $ocultos;
 
+    public $por_pagina = 25;
+    public $total = 0;
 
     public function render()
     {
+        $start = ($this->page - 1) * $this->por_pagina;
 
-        $this->capas = DB::select('call buscar_capa("")');
-        $this->marcas = DB::select('call buscar_marca("")');
-        $this->nombres = DB::select('call buscar_nombre("")');
-        $this->vitolas = DB::select('call buscar_vitola("")');
-        $this->tipo_empaques = DB::select('call buscar_tipo_empaque("")');
+        $produ= DB::select('CALL `buscar_producto`(?, ?, ?, ?, ?, ?,?,?)', [ $this->item,$this->marca,$this->nombre,$this->vitola,$this->capa,$this->tipo_empaque,$start,$this->por_pagina ]);
 
-        $this->productos = DB::select('call buscar_producto(:todo)', ['todo' => $this->busqueda]);
+        $this->detalle_productos = DB::select('call mostrar_detalles_productos');
+
+        $tod = DB::select(
+            'CALL `buscar_producto_conteo`(?, ?, ?, ?, ?, ?)',
+            [
+                $this->item,$this->marca,$this->nombre,$this->vitola,$this->capa,$this->tipo_empaque
+            ]
+        );
+
+        $this->cargar_select_busqueda($tod);
+        $this->total = count($tod);
 
 
         $usos = DB::select('SELECT item, COUNT(*) AS usos FROM pendiente GROUP BY item');
-
         $usosArray = [];
         foreach ($usos as $uso) {
             $usosArray[$uso->item] = $uso->usos;
         }
-
-        foreach ($this->productos as $key => $value) {
+        foreach ($produ as $key => $value) {
             $value->usos = isset($usosArray[$value->item])?$usosArray[$value->item]:'0';
         }
 
 
-        $this->detalle_productos = DB::select('call mostrar_detalles_productos');
+        return view('livewire.productos',[
+            'productos' => new LengthAwarePaginator($produ, $this->total, $this->por_pagina)
+        ])->extends('principal')->section('content');
+    }
+
+    public function cargar_select_busqueda($datos)
+    {
+        if (count($datos) > 0) {
+
+            $this->items = [];
+            $this->marcas = [];
+            $this->nombres = [];
+            $this->vitolas = [];
+            $this->capas = [];
+            $this->tipo_empaques = [];
+
+            foreach ($datos as $detalles) {
+                array_push($this->items, $detalles->item);
+                array_push($this->marcas, $detalles->marca == 'NINGUNA'?$detalles->des : $detalles->marca);
+                array_push($this->nombres, $detalles->nombre);
+                array_push($this->vitolas, $detalles->vitola);
+                array_push($this->capas, $detalles->capa);
+                array_push($this->tipo_empaques, $detalles->tipo_empaque);
+            }
+            array_push($this->marcas,'NINGUNA');
 
 
-
-        return view('livewire.productos')->extends('principal')->section('content');
+            $this->items = array_unique($this->items);
+            $this->marcas = array_unique($this->marcas);
+            $this->nombres = array_unique($this->nombres);
+            $this->vitolas = array_unique($this->vitolas);
+            $this->capas = array_unique($this->capas);
+            $this->tipo_empaques = array_unique($this->tipo_empaques);
+        }
     }
 
     public function mount()
     {
 
-        $this->productos = [];
         $this->marcas = [];
-        $this->cajas = [];
         $this->nombres = [];
         $this->vitolas = [];
         $this->tipo_empaques = [];
@@ -99,17 +146,10 @@ class Productos extends Component
         $this->anillos = "";
         $this->upc = "";
 
-        $this->capas = \DB::select('call buscar_capa("")');
-        $this->marcas = \DB::select('call buscar_marca("")');
-        $this->nombres = \DB::select('call buscar_nombre("")');
-        $this->vitolas = \DB::select('call buscar_vitola("")');
-        $this->tipo_empaques = \DB::select('call buscar_tipo_empaque("")');
-
         $this->ocultos = Cache::get('codigos_tabla_clase_productos',true);
     }
 
 
-    use WithPagination;
     public function insertar_clase(Request $request)
     {
 
@@ -132,8 +172,9 @@ class Productos extends Component
             $upc = "no";
         }
 
+        
 
-        $clase_producto = \DB::select(
+        $clase_producto = DB::select(
             'call insertar_clase_producto(:item,:cod_producto,:cod_caja,:cod_precio,:precio,:capa,:vitola,:nombre,:marca,:cello,:anillo,:upc,:tipo,:presentacion,:cantxbult)',
             [
                 'item' => $request->item,
@@ -153,12 +194,6 @@ class Productos extends Component
                 'cantxbult' => $request->cantxbult,
             ]
         );
-
-        $this->capas = \DB::select('call buscar_capa("")');
-        $this->marcas = \DB::select('call buscar_marca("")');
-        $this->nombres = \DB::select('call buscar_nombre("")');
-        $this->vitolas = \DB::select('call buscar_vitola("")');
-        $this->tipo_empaques = \DB::select('call buscar_tipo_empaque("")');
 
         return redirect()->route('productos');
     }
@@ -196,7 +231,7 @@ class Productos extends Component
         }
 
 
-        $clase_producto = \DB::select(
+        $clase_producto = DB::select(
             'call actualizar_productos(:id,:item,:cod_producto,:cod_caja,:cod_precio,:precio,
                 :capa,:vitola,:nombre,:marca,:cello,:anillo,:upc,:tipo,:presentacion,:sampler,:des, :cantxbult)',
             [
@@ -220,12 +255,6 @@ class Productos extends Component
                 'cantxbult' => $request->cantxbult,
             ]
         );
-        $this->capas = \DB::select('call buscar_capa("")');
-        $this->marcas = \DB::select('call buscar_marca("")');
-        $this->nombres = \DB::select('call buscar_nombre("")');
-        $this->vitolas = \DB::select('call buscar_vitola("")');
-        $this->tipo_empaques = \DB::select('call buscar_tipo_empaque("")');
-        $productos = \DB::select('call mostrar_productos');
 
         return redirect()->route('productos');
     }
@@ -255,7 +284,7 @@ class Productos extends Component
         }
 
 
-        $detalle_clase_producto = \DB::select(
+        $detalle_clase_producto = DB::select(
             'call insertar_detalle_clase_producto(:item,:capa,:vitola,:nombre,:marca,:cello,:anillo,:upc,:tipo,:precio)',
             [
                 'item' => $request->item_de,
@@ -271,17 +300,6 @@ class Productos extends Component
             ]
         );
 
-        $this->capas = \DB::select('call buscar_capa("")');
-        $this->marcas = \DB::select('call buscar_marca("")');
-        $this->nombres = \DB::select('call buscar_nombre("")');
-        $this->vitolas = \DB::select('call buscar_vitola("")');
-        $this->tipo_empaques = \DB::select('call buscar_tipo_empaque("")');
-
-
-        $productos = \DB::select('call mostrar_productos');
-        $detalle_productos = \DB::select('call mostrar_detalles_productos');
-
-
         return redirect()->route('productos');
     }
 
@@ -289,7 +307,7 @@ class Productos extends Component
     public function editar_productosssssss($numero_id)
     {
 
-        $datos_editar = \DB::select(
+        $datos_editar = DB::select(
             'call mostrar_datos_para_editar(:item)',
             ['item' => $numero_id]
         );
@@ -307,27 +325,6 @@ class Productos extends Component
         $this->vitols = $datos_editar[0]->vitola;
         $this->anillos = $datos_editar[0]->anillo;
         $this->upc = $datos_editar[0]->upc;
-    }
-
-
-    public function detalle_productos_index(Request $request)
-    {
-
-        $producto_unico =  DB::select(
-            'call mostrar_clase_paradetalle(:item)',
-            ['item' => $request->item_detalle]
-        );
-
-        $productos = DB::select('call mostrar_productos');
-
-        $detalle_productos = DB::select('call mostrar_detalles_productos');
-        $this->capas = DB::select('call buscar_capa("")');
-        $this->marcas = DB::select('call buscar_marca("")');
-        $this->nombres = DB::select('call buscar_nombre("")');
-        $this->vitolas = DB::select('call buscar_vitola("")');
-        $this->tipo_empaques = DB::select('call buscar_tipo_empaque("")');
-
-        return view('livewire.productos')->extends('principal')->section('content')->with('detalle_productos', $detalle_productos)->with('producto_unico', $producto_unico)->with('productos', $productos);
     }
 
     public function mostrar_ocultar_columnas(){
