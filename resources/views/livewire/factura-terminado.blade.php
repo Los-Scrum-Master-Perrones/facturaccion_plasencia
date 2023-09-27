@@ -35,7 +35,7 @@
                             class="form-control mr-sm-2 " wire:model="contenedor" placeholder="Primer Contenedor"
                             required>
 
-                        <select name="para1" id="para1" wire:model="aereo">
+                        <select name="para1" id="para1" wire:model="aereo" onchange="@this.cambio_formatos()">
                             <option value="RP">Rocky Patel</option>
                             <option value="Aerea">Aerea</option>
                             <option value="FM">Family</option>

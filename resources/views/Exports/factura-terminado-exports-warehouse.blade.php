@@ -36,7 +36,7 @@
                         <th></th>
                         <th></th>
                         <th></th>
-                        <th style="font-family: Tahoma; font-size: 8; text-justify: "><b>E-Mail:
+                        <th style="font-family: Tahoma; font-size: 8;"><b>E-Mail:
                                 taosasanmarcos@plasenciatabaco.com</b></th>
                     </tr>
                     <tr>
@@ -75,7 +75,7 @@
                         <td></td>
                         <td></td>
                         <td></td>
-                        <td style="font-famExports.ily: Tahoma; font-size: 8; font-weight: bold" colspan="2">Fecha
+                        <td style="font-family: Tahoma; font-size: 8; font-weight: bold" colspan="2">Fecha
                         </td>
                         <td></td>
                         <td style="font-family: Tahoma; font-size: 8" colspan="2"><b>14 DE OCTUBRE DEL 2021</b></td>
@@ -124,7 +124,7 @@
                         <td></td>
                         <td></td>
                         <td></td>
-                        <td style="font-family: Tahoma; font-size: 8; font-weight: bold" colspan="2">Shipping
+                        <td style="font-family: Tahoma; font-size: 8; font-weight: bold" colspan="2"><b>Shipping
                             instruccitions</b></td>
                     </tr>
                     <tr>

@@ -44,7 +44,7 @@
                         <td style="font-family: Tahoma; font-size: 8"><b>Address</b></td>
                         <th style="font-family: Tahoma; font-size: 10" colspan="5"><strong>NAPLES, FL 34104, USA</strong></th>
                         <td></td>
-                        <th style="text-align:center; font-family: Tahoma;font-size:16px;" ><b>PREMIUM CIGARS</b></th>
+                        <th style="text-align:center; font-family: Tahoma;font-size:16px;" ></th>
                     </tr>
                     <tr>
                         <td></td>
@@ -85,7 +85,7 @@
                     <tr>
                         <th style="font-family: Tahoma; font-size: 10; text-align: center"><strong><i>Seals</i></strong></th>
                         <td></td><td></td><td></td><td></td><td></td><td></td>
-                        <th style="font-family: Tahoma; font-size: 10; text-align: center"><b>AEREA</b></th>
+                        <th style="font-family: Tahoma; font-size: 10; text-align: center"><b>PREMIUM CIGARS</b></th>
                     </tr>
                     <thead style="position: static;">
                         <tr style="font-size:10px; text-align:center">

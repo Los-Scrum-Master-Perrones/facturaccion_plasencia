@@ -173,14 +173,7 @@ class FacturaTerminado extends Component
           $this->ventanas = $num;
     }
 
-    public function render()
-    {
-        setlocale(LC_TIME, "spanish");
-        $Nueva_Fecha = date("d-m-Y", strtotime($this->fecha_factura));
-
-
-        $this->titulo_mes = strftime("%B", strtotime($Nueva_Fecha));
-        $this->titulo_cliente = $this->cliente;
+    public function cambio_formatos()  {
 
         switch ($this->aereo) {
             case 'RP':
@@ -202,6 +195,17 @@ class FacturaTerminado extends Component
                 $this->formatos_impresiones = '4';
                 break;
         }
+    }
+
+    public function render()
+    {
+        setlocale(LC_TIME, "spanish");
+        $Nueva_Fecha = date("d-m-Y", strtotime($this->fecha_factura));
+
+
+        $this->titulo_mes = strftime("%B", strtotime($Nueva_Fecha));
+        $this->titulo_cliente = $this->cliente;
+
 
         $precio1= DB::table('clase_productos')
         ->select('codigo_precio')->distinct()->get();
