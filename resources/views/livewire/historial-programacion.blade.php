@@ -1,17 +1,17 @@
 <div xmlns:wire="http://www.w3.org/1999/xhtml">
 
-    <ul class="nav justify-content-center">
+    <ul class="nav nav-tabs justify-content-center">
         @if(auth()->user()->rol == -1)
 
         @else
             <li class="nav-item">
-                <a style="color:white; font-size:12px;" href="pendiente_empaque"><strong>Pendiente</strong></a>
+                <a class="nav-link" style="color:white; font-size:12px;" href="pendiente_empaque"><strong>Pendiente</strong></a>
             </li>
             <li class="nav-item">
-                <a style="color:white; font-size:12px;" href="importar_c"><strong>Existencia en bodega</strong></a>
+                <a class="nav-link" style="color:white; font-size:12px;" href="importar_c"><strong>Existencia en bodega</strong></a>
             </li>
             <li class="nav-item">
-                <a style="color:white; font-size:12px;"
+                <a class="nav-link" style="color:white; font-size:12px;"
                     href="{{ route('inventario_cajas') }}"><strong>Existencia de cajas</strong></a>
             </li>
         @endif

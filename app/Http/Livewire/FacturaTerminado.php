@@ -16,6 +16,9 @@ use App\Models\CatalogoMarcasPrecio;
 use App\Models\clase_producto;
 use App\Models\detalle_clase_producto;
 use App\Models\pendiente;
+use App\Models\PrecioHistorial;
+use Exception;
+use Illuminate\Support\Facades\Log;
 use Maatwebsite\Excel\Facades\Excel;
 
 class FacturaTerminado extends Component
@@ -52,6 +55,7 @@ class FacturaTerminado extends Component
     public $peso_bruto;
     public $peso_neto;
 
+    public $id_editar;
     public $editar_descripcion_producto;
     public $editar_cantidad_bultos;
     public $editar_unidades_bultos;
@@ -69,8 +73,6 @@ class FacturaTerminado extends Component
     public $hon;
 
     public $id_eliminar;
-    public $id_editar;
-
 
     public $detalles_produtos;
     public $aereo;
@@ -169,11 +171,13 @@ class FacturaTerminado extends Component
     public $t_empaque_f;
     public $codigo_f;
 
-    public function cambio($num){
-          $this->ventanas = $num;
+    public function cambio($num)
+    {
+        $this->ventanas = $num;
     }
 
-    public function cambio_formatos()  {
+    public function cambio_formatos()
+    {
 
         switch ($this->aereo) {
             case 'RP':
@@ -209,23 +213,23 @@ class FacturaTerminado extends Component
         $usosArray = [];
         $usosArray2 = [];
         $precio_catalogo = [];
-        $this->tuplas_conteo =0;
-        $this->datos_pendiente =[];
+        $this->tuplas_conteo = 0;
+        $this->datos_pendiente = [];
         $this->series_p = [];
         $this->detalles_venta = [];
 
-        if($this->ventanas == 1){
-            $precio1= DB::table('clase_productos')
-            ->select('codigo_precio')->distinct()->get();
+        if ($this->ventanas == 1) {
+            $precio1 = DB::table('clase_productos')
+                ->select('codigo_precio')->distinct()->get();
 
-            $precio2=DB::table('detalle_clase_productos')
-            ->select('otra_descripcion as codigo_precio')->distinct()->get();
+            $precio2 = DB::table('detalle_clase_productos')
+                ->select('otra_descripcion as codigo_precio')->distinct()->get();
 
             $this->series_p = $precio1->concat($precio2);
 
 
 
-            $this->detalles_venta = DB::select('call mostrar_detalle_factura(?,?,?,?,?)',[
+            $this->detalles_venta = DB::select('call mostrar_detalle_factura(?,?,?,?,?)', [
                 $this->aereo, $this->items_b, $this->ordens_b, $this->codigo_b, $this->t_empaque_b
             ]);
 
@@ -239,10 +243,10 @@ class FacturaTerminado extends Component
 
 
             foreach ($usos as $uso) {
-                $usosArray[$uso->codigo.'-'.$uso->anio] =  $uso;
-                $usosArray2[$uso->codigo.'-'.$uso->anio][] =  $uso;
+                $usosArray[$uso->codigo . '-' . $uso->anio] =  $uso;
+                $usosArray2[$uso->codigo . '-' . $uso->anio][] =  $uso;
             }
-        }else{
+        } else {
 
             $pendiente = DB::select(
                 'call buscar_pendiente(:uno,:dos,:tres,:cuatro,:pres,:seis,:siete,:paginacion,
@@ -267,9 +271,9 @@ class FacturaTerminado extends Component
                     'pa_items' =>  $this->busqueda_items_p,
                     'pa_orden_sist' =>  $this->busqueda_ordenes_p,
                     'pa_ordenes' =>  $this->busqueda_hons_p,
-        'r_mill' =>  $this->r_mill
+                    'r_mill' =>  $this->r_mill
                 ]
-                );
+            );
             $this->tuplas_conteo = count($pendiente);
 
             if ($this->todos == 1) {
@@ -298,29 +302,27 @@ class FacturaTerminado extends Component
                         'pa_items' =>  $this->busqueda_items_p,
                         'pa_orden_sist' =>  $this->busqueda_ordenes_p,
                         'pa_ordenes' =>  $this->busqueda_hons_p,
-            'r_mill' =>  $this->r_mill
+                        'r_mill' =>  $this->r_mill
                     ]
                 );
             }
         }
 
 
-
-
-
-
-        return view('livewire.factura-terminado',
-                    ['precio_sugerido' => $usosArray,
-                     'precio_historial' => $usosArray2,
-                     'precio_catalogo' => $precio_catalogo])->extends('principal')->section('content');
+        return view(
+            'livewire.factura-terminado',
+            [
+                'precio_sugerido' => $usosArray,
+                'precio_historial' => $usosArray2,
+                'precio_catalogo' => $precio_catalogo
+            ]
+        )->extends('principal')->section('content');
     }
 
     public function cambiar_vista()
     {
         $this->actual_ventan = !($this->actual_ventan);
     }
-
-
 
     public function editar_detalles($id)
     {
@@ -334,12 +336,6 @@ class FacturaTerminado extends Component
         $this->editar_peso_neto =  $detalles_valores[0]->total_neto / $detalles_valores[0]->cantidad_puros;
 
         $this->dispatchBrowserEvent("editar_detalless");
-    }
-
-    public function borrar_detalles($id)
-    {
-        $this->id_eliminar = $id;
-        $this->dispatchBrowserEvent("borrar");
     }
 
     public function borrar_detalles_datos($id)
@@ -474,7 +470,7 @@ class FacturaTerminado extends Component
                 'pa_items' =>  $this->busqueda_items_p,
                 'pa_orden_sist' =>  $this->busqueda_ordenes_p,
                 'pa_ordenes' =>  $this->busqueda_hons_p,
-        'r_mill' =>  $this->r_mill
+                'r_mill' =>  $this->r_mill
 
             ]
         );
@@ -503,7 +499,6 @@ class FacturaTerminado extends Component
                 array_push($this->mes_p, $detalles->mes);
                 array_push($this->ordenes_p, $detalles->orden_del_sitema);
                 array_push($this->hons_p, $detalles->orden);
-
             }
 
             $this->marcas_p = array_unique($this->marcas_p);
@@ -586,23 +581,25 @@ class FacturaTerminado extends Component
 
     public function actualizar_detalle_factura()
     {
-        DB::transaction(function () use ($request) {
+
+        try {
+            DB::beginTransaction();
             $sampler = DB::select('SELECT sampler,descripcion_sampler
                         FROM clase_productos
                         WHERE  clase_productos.item = (select item from pendiente where id_pendiente =
                                                             (select id_pendiente from detalle_factura where id_detalle = ?)
-                                                        );', [$request->id_pendi]);
+                                                        );', [$this->id_editar]);
 
 
 
 
             $datos_pendiente = DB::select('SELECT item, orden, saldo, mes FROM pendiente WHERE id_pendiente =
-                                        (select id_pendiente from detalle_factura where id_detalle = ?)', [$request->id_pendi]);
+                                        (select id_pendiente from detalle_factura where id_detalle = ?)', [$this->id_editar]);
 
 
             if ($sampler[0]->sampler == "si") {
 
-                $detalles_item = DB::select('select id_pendiente from detalle_factura  where id_detalle = ?', [$request->id_pendi]);
+                $detalles_item = DB::select('select id_pendiente from detalle_factura  where id_detalle = ?', [$this->id_editar]);
 
                 $detalles = DB::select('select item, orden from pendiente where id_pendiente = ?', [$detalles_item[0]->id_pendiente]);
 
@@ -615,14 +612,14 @@ class FacturaTerminado extends Component
                 ,:pa_cantidad_puros
                 ,:pa_unidad)', [
 
-                    "id_pendiente" => $request->id_pendi, "pa_cantidad_cajas" => $request->unidades_cajon, "pa_peso_bruto" => $request->peso_bruto,
-                    "pa_peso_neto" => $request->peso_neto, "pa_cantidad_puros" => $request->cantidad_bultos, "pa_unidad" => $request->unidades_bultos,
+                    "id_pendiente" => $this->id_editar, "pa_cantidad_cajas" => $this->editar_unidades_cajon, "pa_peso_bruto" => $this->editar_peso_bruto,
+                    "pa_peso_neto" => $this->editar_peso_neto, "pa_cantidad_puros" => $this->editar_cantidad_bultos, "pa_unidad" => $this->editar_unidades_bultos,
 
                 ]);
 
                 $conteo = count(DB::select('select * from detalle_clase_productos where item = ?', [$detalles[0]->item]));
 
-                $id_detalle_fa = $request->id_pendi + 1;
+                $id_detalle_fa = $this->id_editar + 1;
 
                 for ($i = 1; $i < $conteo; $i++) {
                     DB::select('call actualizar_detalle_factura(
@@ -634,8 +631,8 @@ class FacturaTerminado extends Component
                     ,:pa_unidad
                     )', [
 
-                        "id_pendiente" =>   $id_detalle_fa, "pa_cantidad_cajas" => $request->unidades_cajon, "pa_peso_bruto" => 0,
-                        "pa_peso_neto" => 0, "pa_cantidad_puros" => $request->cantidad_bultos, "pa_unidad" => $request->unidades_bultos,
+                        "id_pendiente" =>   $id_detalle_fa, "pa_cantidad_cajas" => $this->editar_unidades_cajon, "pa_peso_bruto" => 0,
+                        "pa_peso_neto" => 0, "pa_cantidad_puros" => $this->editar_cantidad_bultos, "pa_unidad" => $this->editar_unidades_bultos,
 
                     ]);
                     $id_detalle_fa++;
@@ -649,27 +646,39 @@ class FacturaTerminado extends Component
                     ,:pa_cantidad_puros
                     ,:pa_unidad)', [
 
-                    "id_pendiente" => $request->id_pendi, "pa_cantidad_cajas" => $request->unidades_cajon, "pa_peso_bruto" => $request->peso_bruto, "pa_peso_neto" => $request->peso_neto, "pa_cantidad_puros" => $request->cantidad_bultos, "pa_unidad" => $request->unidades_bultos
+                    "id_pendiente" => $this->id_editar,
+                    "pa_cantidad_cajas" => $this->editar_unidades_cajon,
+                    "pa_peso_bruto" => $this->editar_peso_bruto,
+                    "pa_peso_neto" => $this->editar_peso_neto,
+                    "pa_cantidad_puros" => $this->editar_cantidad_bultos,
+                    "pa_unidad" => $this->editar_unidades_bultos
                 ]);
             }
-        });
-        return redirect()->route('f_terminado');
+            DB::commit();
+
+            $this->dispatchBrowserEvent('mensaje_editar_correcto');
+        } catch (Exception $th) {
+            DB::rollBack();
+            $this->dispatchBrowserEvent('mensaje_editar_error',['errores'=>$th]);
+        }
     }
 
     public function imprimir_formatos()
     {
-        $vista_html = ['1'=>['vista'=>'Exports.factura-terminado-exports-warehouse','encabezado'=>[0=>'A18:P18',1=>'A19:P19']],
-                       '2'=>['vista'=>'Exports.factura-terminado-exports','encabezado'=>[0=>'A18:P18',1=>'A19:P19']],
-                       '3'=>['vista'=>'Exports.factura-terminado-exports-family','encabezado'=>[0=>'A16:R16',1=>'A17:R17']],
-                       '4'=>['vista'=>'Exports.factura-terminado-exports','encabezado'=>[0=>'A18:P18',1=>'A19:P19']],
-                       '5'=>['vista'=>'Exports.factura-terminado-exports-simple','encabezado'=>[1=>'A18:P18',1=>'A19:P19']],
-                       '6'=>['vista'=>'Exports.factura-terminado-exports-aerea','encabezado'=>[0=>'A18:R18',1=>'A19:R19']],
-                       '7'=>['vista'=>'Exports.factura-terminado-exports-family-aerea','encabezado'=>[0=>'A18:R18',1=>'A19:R19']],
-                       '8'=>['vista'=>'Exports.factura-terminado-exports-lion-leaf','encabezado'=>[0=>'A19:K19',1=>'A20:K20']],
-                       '9'=>['vista'=>'Exports.factura-terminado-exports-bandido','encabezado'=>[0=>'A15:N15',1=>'A16:N16']],
-                       '10'=>['vista'=>'Exports.factura-terminado-exports-coyote','encabezado'=>[0=>'A18:L18',1=>'A19:L19']],];
+        $vista_html = [
+            '1' => ['vista' => 'Exports.factura-terminado-exports-warehouse', 'encabezado' => [0 => 'A18:P18', 1 => 'A19:P19']],
+            '2' => ['vista' => 'Exports.factura-terminado-exports', 'encabezado' => [0 => 'A18:P18', 1 => 'A19:P19']],
+            '3' => ['vista' => 'Exports.factura-terminado-exports-family', 'encabezado' => [0 => 'A16:R16', 1 => 'A17:R17']],
+            '4' => ['vista' => 'Exports.factura-terminado-exports', 'encabezado' => [0 => 'A18:R18', 1 => 'A19:R19']],
+            '5' => ['vista' => 'Exports.factura-terminado-exports-simple', 'encabezado' => [1 => 'A18:P18', 1 => 'A19:P19']],
+            '6' => ['vista' => 'Exports.factura-terminado-exports-aerea', 'encabezado' => [0 => 'A18:R18', 1 => 'A19:R19']],
+            '7' => ['vista' => 'Exports.factura-terminado-exports-family-aerea', 'encabezado' => [0 => 'A18:R18', 1 => 'A19:R19']],
+            '8' => ['vista' => 'Exports.factura-terminado-exports-lion-leaf', 'encabezado' => [0 => 'A19:K19', 1 => 'A20:K20']],
+            '9' => ['vista' => 'Exports.factura-terminado-exports-bandido', 'encabezado' => [0 => 'A15:N15', 1 => 'A16:N16']],
+            '10' => ['vista' => 'Exports.factura-terminado-exports-coyote', 'encabezado' => [0 => 'A18:L18', 1 => 'A19:L19']],
+        ];
 
-        $this->detalles_venta = DB::select('call mostrar_detalle_factura(?,?,?,?,?)',[
+        $this->detalles_venta = DB::select('call mostrar_detalle_factura(?,?,?,?,?)', [
             $this->aereo, $this->items_b, $this->ordens_b, $this->codigo_b, $this->t_empaque_b
         ]);
 
@@ -677,39 +686,36 @@ class FacturaTerminado extends Component
             'detalles_venta' => $this->detalles_venta
         ]);
 
-        return Excel::download(new FacturaExportView($vista,$vista_html[$this->formatos_impresiones]['encabezado']), 'FacturaDetallada.xlsx');
+        return Excel::download(new FacturaExportView($vista, $vista_html[$this->formatos_impresiones]['encabezado']), 'FacturaDetallada.xlsx');
     }
 
     public function insertar_factura()
     {
-        DB::transaction(function () {
-
-
+        try {
+            DB::beginTransaction();
+            $precios = [];
             if ($this->cliente != null && $this->contenedor != null) {
 
 
-                $detalles = DB::select('call mostrar_detalle_factura(?,?,?,?,?)',[
+                $detalles = DB::select('call mostrar_detalle_factura(?,?,?,?,?)', [
                     $this->aereo, $this->items_b, $this->ordens_b, $this->codigo_b, $this->t_empaque_b
                 ]);
 
 
                 for ($i = 0; $i < count($detalles); $i++) {
 
-                    $sampler = DB::select('SELECT sampler FROM clase_productos where item = (SELECT item FROM pendiente WHERE id_pendiente = ? )', [$detalles[$i]->id_pendiente]);
-                    $cantidad_sampler = DB::select('SELECT COUNT(*) as conteo FROM detalle_clase_productos where item = (SELECT item FROM pendiente WHERE id_pendiente = ? )', [$detalles[$i]->id_pendiente]);
-
                     $total_pendiete = $detalles[$i]->total_tabacos;
+                    $precios[]=[ 'id_detalle_factura' => $detalles[$i]->id_detalle, 'precio'=> $detalles[$i]->precio_producto??0];
 
-                    if ($sampler[0]->sampler == "si") {
-                        if($detalles[$i]->codigo_item == '10499010'){
-                            if($detalles[$i]->cod_prod == 'P-22419' || $detalles[$i]->cod_prod==''){
+                    if ($detalles[$i]->sampler == "si") {
+                        if ($detalles[$i]->codigo_item == '10499010') {
+                            if ($detalles[$i]->cod_prod == 'P-22419' || $detalles[$i]->cod_prod == '') {
                                 $total_pendiete  = (($detalles[$i]->total_tabacos) / 30) * 8;
-                            }else{
+                            } else {
                                 $total_pendiete  = (($detalles[$i]->total_tabacos) / 30) * 7;
                             }
-
-                        }else{
-                        $total_pendiete  = ($detalles[$i]->total_tabacos) / $cantidad_sampler[0]->conteo;
+                        } else {
+                            $total_pendiete  = ($detalles[$i]->total_tabacos) / $detalles[$i]->can_detalles;
                         }
                     }
 
@@ -729,7 +735,7 @@ class FacturaTerminado extends Component
                     ]);
 
                     if (intval($pendiente[0]->total) > 0) {
-                        if ($sampler[0]->sampler == "si") {
+                        if ($detalles[$i]->sampler == "si") {
                             DB::update('UPDATE pendiente SET procesado = "N" WHERE orden = ? and mes = ? and item = ?', [
                                 $pendiente_actual[0]->orden,
                                 $pendiente_actual[0]->mes,
@@ -739,7 +745,7 @@ class FacturaTerminado extends Component
                             DB::update('UPDATE pendiente SET procesado = "N" WHERE id_pendiente = ?', [$detalles[$i]->id_pendiente]);
                         }
                     } else {
-                        if ($sampler[0]->sampler == "si") {
+                        if ($detalles[$i]->sampler == "si") {
                             DB::update('UPDATE pendiente SET procesado = "S" WHERE orden = ? and mes = ? and item = ?', [
                                 $pendiente_actual[0]->orden,
                                 $pendiente_actual[0]->mes,
@@ -750,6 +756,7 @@ class FacturaTerminado extends Component
                         }
                     }
                 }
+                PrecioHistorial::upsert($precios, ['id_detalle_factura']);
 
                 DB::select('call `insertar_factura_terminado`(
                 :orden_sufijo,
@@ -777,10 +784,17 @@ class FacturaTerminado extends Component
 
                 $this->titulo_cliente = "";
                 $this->titulo_factura = "";
+                DB::commit();
+                $this->dispatchBrowserEvent('mensaje_editar_correcto');
             } else {
+                DB::rollBack();
                 $this->dispatchBrowserEvent("advertencia_mensaje");
             }
-        });
+        } catch (Exception $th) {
+            DB::rollBack();
+            $this->dispatchBrowserEvent('mensaje_editar_error',['errores'=>$th->getMessage()]);
+            Log::info($th->getMessage());
+        }
     }
 
     public function historial()
@@ -788,46 +802,45 @@ class FacturaTerminado extends Component
         return redirect()->route('historial_factura');
     }
 
-    public function actualizar_precio_catalogo(clase_producto $clase,$precio,$sampler,$codigo)
+    public function actualizar_precio_catalogo(clase_producto $clase, $precio, $sampler, $codigo)
     {
-        if($sampler == 'si'){
-            detalle_clase_producto::where('otra_descripcion','=', $codigo)->update(['precio' => $precio]);
-            pendiente::where('serie_precio','=', $codigo)->where('saldo','>', 0)->update(['precio' => $precio]);
-        }else{
+        if ($sampler == 'si') {
+            detalle_clase_producto::where('otra_descripcion', '=', $codigo)->update(['precio' => $precio]);
+            pendiente::where('serie_precio', '=', $codigo)->where('saldo', '>', 0)->update(['precio' => $precio]);
+        } else {
             $clase->precio = $precio;
             $clase->save();
         }
-
     }
 
-    public function incrementar_precio_catalogo(clase_producto $clase,$cantidad,$sampler,$codigo,$precio)
+    public function incrementar_precio_catalogo(clase_producto $clase, $cantidad, $sampler, $codigo, $precio)
     {
-        if($sampler == 'si'){
-            detalle_clase_producto::where('otra_descripcion','=', $codigo)->update(['precio' => ($precio+$cantidad)]);
-            pendiente::where('serie_precio','=', $codigo)->where('saldo','>', 0)->update(['precio' => ($precio+$cantidad)]);
-        }else{
+        if ($sampler == 'si') {
+            detalle_clase_producto::where('otra_descripcion', '=', $codigo)->update(['precio' => ($precio + $cantidad)]);
+            pendiente::where('serie_precio', '=', $codigo)->where('saldo', '>', 0)->update(['precio' => ($precio + $cantidad)]);
+        } else {
 
             $clase->precio += $cantidad;
             $clase->save();
         }
     }
 
-    public function insertar_precio_catalogo(clase_producto $clase,pendiente $pendiente,$codigo,$precio)
+    public function insertar_precio_catalogo(clase_producto $clase, pendiente $pendiente, $codigo, $precio)
     {
-        if($clase->sampler == 'si'){
-            detalle_clase_producto::where('item','=',  $pendiente->item)
-                                  ->where('id_capa','=',  $pendiente->capa)
-                                  ->where('id_vitola','=', $pendiente->vitola)
-                                  ->where('id_nombre','=', $pendiente->nombre)
-                                  ->where('id_marca','=', $pendiente->marca)
-                                  ->where('id_tipo_empaque','=', $pendiente->tipo_empaque)
-                                  ->update(['otra_descripcion' => $codigo,'precio' => $precio]);
+        if ($clase->sampler == 'si') {
+            detalle_clase_producto::where('item', '=',  $pendiente->item)
+                ->where('id_capa', '=',  $pendiente->capa)
+                ->where('id_vitola', '=', $pendiente->vitola)
+                ->where('id_nombre', '=', $pendiente->nombre)
+                ->where('id_marca', '=', $pendiente->marca)
+                ->where('id_tipo_empaque', '=', $pendiente->tipo_empaque)
+                ->update(['otra_descripcion' => $codigo, 'precio' => $precio]);
 
-            pendiente::where('codigo_productos','=', $pendiente->codigo_productos)
-                     ->where('item','=', $pendiente->item)
-                     ->where('saldo','>', 0)
-                     ->update(['serie_precio' => $codigo, 'precio' => $precio]);
-        }else{
+            pendiente::where('codigo_productos', '=', $pendiente->codigo_productos)
+                ->where('item', '=', $pendiente->item)
+                ->where('saldo', '>', 0)
+                ->update(['serie_precio' => $codigo, 'precio' => $precio]);
+        } else {
             $pendiente->precio = $precio;
             $pendiente->serie_precio = $codigo;
             $pendiente->save();
@@ -838,25 +851,24 @@ class FacturaTerminado extends Component
         }
 
         $this->dispatchBrowserEvent('cerrar_modal_precio');
-
     }
 
-    public function eliminar_precio_catalogo(clase_producto $clase,pendiente $pendiente)
+    public function eliminar_precio_catalogo(clase_producto $clase, pendiente $pendiente)
     {
-        if($clase->sampler == 'si'){
-            detalle_clase_producto::where('item','=',  $pendiente->item)
-                                  ->where('id_capa','=',  $pendiente->capa)
-                                  ->where('id_vitola','=', $pendiente->vitola)
-                                  ->where('id_nombre','=', $pendiente->nombre)
-                                  ->where('id_marca','=', $pendiente->marca)
-                                  ->where('id_tipo_empaque','=', $pendiente->tipo_empaque)
-                                  ->update(['otra_descripcion' => '','precio' => '0.0']);
+        if ($clase->sampler == 'si') {
+            detalle_clase_producto::where('item', '=',  $pendiente->item)
+                ->where('id_capa', '=',  $pendiente->capa)
+                ->where('id_vitola', '=', $pendiente->vitola)
+                ->where('id_nombre', '=', $pendiente->nombre)
+                ->where('id_marca', '=', $pendiente->marca)
+                ->where('id_tipo_empaque', '=', $pendiente->tipo_empaque)
+                ->update(['otra_descripcion' => '', 'precio' => '0.0']);
 
-            pendiente::where('codigo_productos','=', $pendiente->codigo_productos)
-                     ->where('item','=', $pendiente->item)
-                     ->where('saldo','>', 0)
-                     ->update(['serie_precio' => '', 'precio' => '0.0']);
-        }else{
+            pendiente::where('codigo_productos', '=', $pendiente->codigo_productos)
+                ->where('item', '=', $pendiente->item)
+                ->where('saldo', '>', 0)
+                ->update(['serie_precio' => '', 'precio' => '0.0']);
+        } else {
             $pendiente->precio = '0.0';
             $pendiente->serie_precio = '';
             $pendiente->save();
@@ -952,7 +964,7 @@ class FacturaTerminado extends Component
                 ['precio' => $this->precio_n, 'porcentaje_incremento' => 0]
             );
 
-            $this->insertar_precio_catalogo(clase_producto::find($this->id_clase_producto),pendiente::find($this->id_pendiente_precio),$precio->codigo,$this->precio_n);
+            $this->insertar_precio_catalogo(clase_producto::find($this->id_clase_producto), pendiente::find($this->id_pendiente_precio), $precio->codigo, $this->precio_n);
 
 
             $this->dispatchBrowserEvent('RegistradoConExito');
@@ -963,5 +975,4 @@ class FacturaTerminado extends Component
             throw $e;
         }
     }
-
 }

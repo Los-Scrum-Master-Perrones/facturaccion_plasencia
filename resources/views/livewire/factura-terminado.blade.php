@@ -287,15 +287,17 @@
                                     @if (auth()->user()->rol == -1)
                                     @else
                                         <td style="width: 60px">
-                                            <a data-bs-toggle="modal" data-bs-target="#borrar_detalles" href="#"
-                                                wire:click="borrar_detalles({{ $detalles->id_detalle }})">
+                                            <a style="text-decoration: none"
+                                                onclick="eliminar_item({{ $detalles->id_detalle }})" href="#">
                                                 <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15"
                                                     fill="currentColor" class="bi bi-trash-fill" viewBox="0 0 16 16">
                                                     <path
                                                         d="M2.5 1a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1H3v9a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V4h.5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1H2.5zm3 4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5zM8 5a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7A.5.5 0 0 1 8 5zm3 .5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 1 0z" />
                                                 </svg>
                                             </a>
-                                            <a style=" width:10px; height:10px;" data-bs-toggle="modal" href="#"
+
+                                            <a style="text-decoration: none; width:10px; height:10px;"
+                                                data-bs-toggle="modal" href="#"
                                                 wire:click="editar_detalles({{ $detalles->id_detalle }})">
                                                 <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15"
                                                     fill="currentColor" class="bi bi-pencil-square"
@@ -339,11 +341,9 @@
                                     @if ($detalles->codigo == '-')
                                     @else
                                         <a style="text-decoration: none"
-                                            @if ($detalles->codigo == '')
-                                                data-bs-toggle="modal" data-bs-target="#modal_agregar_precio" href="#" onclick="detalles_pendiente({{ $detalles->id_producto }},{{ $detalles->id_pendiente }},'{{ $detalles->codigo_item . '-' . $detalles->producto }}')"
+                                            @if ($detalles->codigo == '') data-bs-toggle="modal" data-bs-target="#modal_agregar_precio" href="#" onclick="detalles_pendiente({{ $detalles->id_producto }},{{ $detalles->id_pendiente }},'{{ $detalles->codigo_item . '-' . $detalles->producto }}')"
                                             @else
-                                                data-bs-toggle="collapse" href="#collapseExample{{ $detalles->id_detalle }}"
-                                            @endif
+                                                data-bs-toggle="collapse" href="#collapseExample{{ $detalles->id_detalle }}" @endif
                                             role="button" aria-expanded="false"
                                             aria-controls="collapseExample{{ $detalles->id_detalle }}">
                                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
@@ -355,15 +355,19 @@
                                             </svg>
                                         </a>
                                         @if ($detalles->codigo == '')
-                                        <a style="text-decoration: none"
-                                            data-bs-toggle="modal" data-bs-target="#productos_agregar_detalles" href="#" onclick="detalles_nuevo_precio({{  $detalles->id_detalle  }},'{{  $detalles->marca  }}','{{  $detalles->nombre  }}','{{  $detalles->vitola  }}','{{  $detalles->capa  }}','{{  $detalles->tipo_empaque_ingles  }}',{{ $detalles->id_producto }},{{ $detalles->id_pendiente }})"
-                                            role="button" aria-expanded="false"
-                                            aria-controls="collapseExample">
-                                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-folder-plus" viewBox="0 0 16 16">
-                                                <path d="m.5 3 .04.87a1.99 1.99 0 0 0-.342 1.311l.637 7A2 2 0 0 0 2.826 14H9v-1H2.826a1 1 0 0 1-.995-.91l-.637-7A1 1 0 0 1 2.19 4h11.62a1 1 0 0 1 .996 1.09L14.54 8h1.005l.256-2.819A2 2 0 0 0 13.81 3H9.828a2 2 0 0 1-1.414-.586l-.828-.828A2 2 0 0 0 6.172 1H2.5a2 2 0 0 0-2 2Zm5.672-1a1 1 0 0 1 .707.293L7.586 3H2.19c-.24 0-.47.042-.683.12L1.5 2.98a1 1 0 0 1 1-.98h3.672Z"/>
-                                                <path d="M13.5 9a.5.5 0 0 1 .5.5V11h1.5a.5.5 0 1 1 0 1H14v1.5a.5.5 0 1 1-1 0V12h-1.5a.5.5 0 0 1 0-1H13V9.5a.5.5 0 0 1 .5-.5Z"/>
-                                            </svg>
-                                        </a>
+                                            <a style="text-decoration: none" data-bs-toggle="modal"
+                                                data-bs-target="#productos_agregar_detalles" href="#"
+                                                onclick="detalles_nuevo_precio({{ $detalles->id_detalle }},'{{ $detalles->marca }}','{{ $detalles->nombre }}','{{ $detalles->vitola }}','{{ $detalles->capa }}','{{ $detalles->tipo_empaque_ingles }}',{{ $detalles->id_producto }},{{ $detalles->id_pendiente }})"
+                                                role="button" aria-expanded="false" aria-controls="collapseExample">
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                                    fill="currentColor" class="bi bi-folder-plus"
+                                                    viewBox="0 0 16 16">
+                                                    <path
+                                                        d="m.5 3 .04.87a1.99 1.99 0 0 0-.342 1.311l.637 7A2 2 0 0 0 2.826 14H9v-1H2.826a1 1 0 0 1-.995-.91l-.637-7A1 1 0 0 1 2.19 4h11.62a1 1 0 0 1 .996 1.09L14.54 8h1.005l.256-2.819A2 2 0 0 0 13.81 3H9.828a2 2 0 0 1-1.414-.586l-.828-.828A2 2 0 0 0 6.172 1H2.5a2 2 0 0 0-2 2Zm5.672-1a1 1 0 0 1 .707.293L7.586 3H2.19c-.24 0-.47.042-.683.12L1.5 2.98a1 1 0 0 1 1-.98h3.672Z" />
+                                                    <path
+                                                        d="M13.5 9a.5.5 0 0 1 .5.5V11h1.5a.5.5 0 1 1 0 1H14v1.5a.5.5 0 1 1-1 0V12h-1.5a.5.5 0 0 1 0-1H13V9.5a.5.5 0 0 1 .5-.5Z" />
+                                                </svg>
+                                            </a>
                                         @endif
                                     @endif
                                     {{ $detalles->codigo }}
@@ -438,9 +442,8 @@
                                 @if (auth()->user()->rol == -1)
                                 @else
                                     <td style="width: 60px">
-                                        <a data-bs-toggle="modal"
-                                            data-bs-target="#modal_eliminar_detalle{{ $detalles->id_detalle }}"
-                                            href="#">
+                                        <a style="text-decoration: none"
+                                            onclick="eliminar_item({{ $detalles->id_detalle }})" href="#">
                                             <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15"
                                                 fill="currentColor" class="bi bi-trash-fill" viewBox="0 0 16 16">
                                                 <path
@@ -458,37 +461,6 @@
                                                     d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z" />
                                             </svg>
                                         </a>
-                                        <form
-                                            wire:submit.prevent="borrar_detalles_datos({{ $detalles->id_detalle }})">
-                                            <div class="modal fade"
-                                                id="modal_eliminar_detalle{{ $detalles->id_detalle }}"
-                                                data-backdrop="static" data-keyboard="false" tabindex="-1"
-                                                aria-labelledby="staticBackdropLabel" aria-hidden="true"
-                                                style="opacity:.9;background:#212529;">
-                                                <div class="modal-dialog modal-dialog-centered">
-                                                    <div class="modal-content">
-                                                        <div class="modal-header">
-                                                            <h5 class="modal-title" id="staticBackdropLabel">Eliminar
-                                                            </h5>
-                                                            <button type="button" class="btn-close"
-                                                                data-bs-dismiss="modal" aria-label="Close"></button>
-                                                        </div>
-                                                        <div class="modal-body">
-                                                            ¿Estás seguro que quieres eliminar este producto de la
-                                                            factura?
-                                                        </div>
-                                                        <div class="modal-footer">
-                                                            <button type="button" class="btn btn-danger" data-bs-dismiss="modal">
-                                                                <span>Cancelar</span>
-                                                            </button>
-                                                            <button type="submit" class="btn btn-success">
-                                                                <span>Eliminar</span>
-                                                            </button>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </form>
                                     </td>
                                 @endif
                             </tr>
@@ -556,6 +528,8 @@
                             $this->total_cantidad_bultos = $val_actual;
                             $this->total_peso_bruto = $total_bruto;
                             $this->total_peso_neto = $total_neto;
+                            $this->total_factura_precio = $valor_factura;
+                            $this->total_total_puros = $total_puros_tabla;
                         @endphp
                     </tbody>
                 </table>
@@ -889,7 +863,7 @@
                                     <td style="text-align:center;">
                                         <a data-bs-toggle="modal" data-bs-target="#modal_actualizar"
                                             onclick="asignar({{ $datos->id_pendiente }});  document.getElementById('titulo1').innerHTML = '{{ $datos->descripcion_produto }}';"
-                                            href="">
+                                            href="#">
                                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
                                                 fill="currentColor" class="bi bi-bag-plus-fill" viewBox="0 0 16 16">
                                                 <path fill-rule="evenodd"
@@ -919,168 +893,126 @@
         </div>
     </div>
 
-
-
-
     <!-- INICIO MODAL INSERTAR DATOS DETALLES FACTURA -->
-
-    <form id="actualizar_pendiente" name="actualizar_pendiente" wire:ignore>
-        <div class="modal fade" role="dialog" id="modal_actualizar" data-backdrop="static" data-keyboard="false"
-            tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true"
-            style="opacity:.9;background:#212529;width=900px;">
-            <div class="modal-dialog modal-dialog-centered modal-lg" style="opacity:.9;background:#212529;width=40%">
-                <div class="modal-content">
-                    @csrf
-                    <div class="modal-header">
-                        <h5 id="staticBackdropLabel"><strong>Descripción del producto: </strong><span id="titulo1"
-                                name="titulo1"></span></h5>
-                    </div>
-
-                    <div class="modal-body">
-                        <div class="row">
-
-                            <input name="id_pendi" id="id_pendi" wire:model="id_pendiente" hidden />
-                            <input name="para" id="para" wire:model="aereo" hidden />
-
-                            <div class="mb-3 col">
-                                <label for="txt_bultos" class="form-label">Cantidad de Bultos:</label>
-                                <input id="intcantidad_bultos" name="intcantidad_bultos" class="form-control"
-                                    type="number" min="1" autocomplete="off" required>
-                            </div>
-                            <div class="mb-3 col">
-                                <label for="txt_unidades" class="form-label">Unidades de Puros por
-                                    Bulto:</label>
-                                <input id="intunidades_bultos" name="intunidades_bultos" class="form-control"
-                                    type="number" min="1" autocomplete="off" required>
-                            </div>
-                            <div class="mb-3 col">
-                                <label for="txt_unidad_cajon" class="form-label">Unidad por Cajon:</label>
-                                <input id="intunidades_cajon" name="intunidades_cajon" class="form-control"
-                                    type="number" min="1" autocomplete="off" required>
-                            </div>
-                            <div class="mb-3 col">
-                                <label for="txt_peso_bruto" class="form-label">Peso Bruto (Lbs)</label>
-                                <input id="intpeso_bruto" name="intpeso_bruto" class="form-control" type="number"
-                                    min="1" autocomplete="off" required>
-                            </div>
-                            <div class="mb-3 col">
-                                <label for="txt_peso_neto" class="form-label">Peso Neto (Lbs)</label>
-                                <input id="intpeso_neto" name="intpeso_neto" class="form-control" type="number"
-                                    min="1" autocomplete="off" required>
-                            </div>
-
-                        </div>
-                    </div>
-
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">
-                            <span>Cancelar</span>
-                        </button>
-                        <button type="submit" onclick="guardar_detalle()" data-bs-dismiss="modal" class="btn btn-success">
-                            <span>Agregar</span>
-                        </button>
-                    </div>
-
+    <div wire:ignore class="modal fade" role="dialog" id="modal_actualizar" data-backdrop="static"
+        data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true"
+        style="opacity:.9;background:#212529;width=900px;">
+        <div class="modal-dialog modal-dialog-centered modal-lg" style="opacity:.9;background:#212529;width=40%">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 id="staticBackdropLabel"><strong>Descripción del producto: </strong><span id="titulo1"
+                            name="titulo1"></span></h5>
                 </div>
+
+                <div class="modal-body">
+                    <div class="row">
+
+                        <input name="id_pendi" id="id_pendi" wire:model="id_pendiente" hidden />
+                        <input name="para" id="para" wire:model="aereo" hidden />
+
+                        <div class="mb-3 col">
+                            <label for="txt_bultos" class="form-label">Cantidad de Bultos:</label>
+                            <input id="intcantidad_bultos" name="intcantidad_bultos" class="form-control"
+                                type="number" min="1" autocomplete="off" required>
+                        </div>
+                        <div class="mb-3 col">
+                            <label for="txt_unidades" class="form-label">Unidades de Puros por
+                                Bulto:</label>
+                            <input id="intunidades_bultos" name="intunidades_bultos" class="form-control"
+                                type="number" min="1" autocomplete="off" required>
+                        </div>
+                        <div class="mb-3 col">
+                            <label for="txt_unidad_cajon" class="form-label">Unidad por Cajon:</label>
+                            <input id="intunidades_cajon" name="intunidades_cajon" class="form-control"
+                                type="number" min="1" autocomplete="off" required>
+                        </div>
+                        <div class="mb-3 col">
+                            <label for="txt_peso_bruto" class="form-label">Peso Bruto (Lbs)</label>
+                            <input id="intpeso_bruto" name="intpeso_bruto" class="form-control" type="number"
+                                min="1" autocomplete="off" required>
+                        </div>
+                        <div class="mb-3 col">
+                            <label for="txt_peso_neto" class="form-label">Peso Neto (Lbs)</label>
+                            <input id="intpeso_neto" name="intpeso_neto" class="form-control" type="number"
+                                min="1" autocomplete="off" required>
+                        </div>
+
+                    </div>
+                </div>
+
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-danger" data-bs-dismiss="modal">
+                        <span>Cancelar</span>
+                    </button>
+                    <button type="button" onclick="guardar_detalle()" data-bs-dismiss="modal"
+                        class="btn btn-success">
+                        <span>Agregar</span>
+                    </button>
+                </div>
+
             </div>
         </div>
-    </form>
+    </div>
 
     <!-- INICIO MODAL ACTUALIZAR DATO PENDIENTE -->
-
-    <form  action="{{ Route('actualizar_detalle_factura') }}" method="POST" id="actualizar_from"
-        name="actualizar_from">
-        <div wire:ignore class="modal fade" role="dialog" id="modal_editar_detalles" data-backdrop="static"
-            data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true"
-            style="opacity:.9;background:#212529;width=900px;">
-            <div class="modal-dialog modal-dialog-centered modal-lg" style="opacity:.9;background:#212529;width=40%">
-                <div class="modal-content">
-                    @csrf
-                    <div class="modal-header">
-                        <h5 id="staticBackdropLabel"><strong>Descripción del producto: </strong><span id="titulo"
-                                name="titulo">{{ $id_editar . ' ' . $editar_descripcion_producto }}</span>
-                        </h5>
-                    </div>
-
-                    <div class="modal-body">
-                        <div class="row">
-
-                            <input type="text" name="id_pendi" id="id_pendi" value="{{ $id_editar }}"
-                                hidden />
-
-                            <div class="mb-3 col">
-                                <label for="txt_bultos" class="form-label">Cantidad de Bultos:</label>
-                                <input id="cantidad_bultos" name="cantidad_bultos"
-                                    value="{{ $editar_cantidad_bultos }}" class="form-control" type="text"
-                                    autocomplete="off">
-                            </div>
-                            <div class="mb-3 col">
-                                <label for="txt_unidades" class="form-label">Unidades de Puros por Bulto:</label>
-                                <input id="unidades_bultos" name="unidades_bultos"
-                                    value="{{ $editar_unidades_bultos }}" class="form-control" type="text"
-                                    autocomplete="off">
-                            </div>
-                            <div class="mb-3 col">
-                                <label for="txt_unidad_cajon" class="form-label">Unidad por Cajon:</label>
-                                <input id="unidades_cajon" name="unidades_cajon"
-                                    value="{{ $editar_unidades_cajon }}" class="form-control" type="text"
-                                    autocomplete="off">
-                            </div>
-                            <div class="mb-3 col">
-                                <label for="txt_peso_bruto" class="form-label">Peso Bruto (Lbs)</label>
-                                <input id="peso_bruto" name="peso_bruto" value="{{ $editar_peso_bruto }}"
-                                    class="form-control" type="text" autocomplete="off">
-                            </div>
-                            <div class="mb-3 col">
-                                <label for="txt_peso_neto" class="form-label">Peso Neto (Lbs)</label>
-                                <input id="peso_neto" name="peso_neto" value="{{ $editar_peso_neto }}"
-                                    class="form-control" type="text" autocomplete="off">
-                            </div>
-
+    <div wire:ignore class="modal fade" role="dialog" id="modal_editar_detalles" data-backdrop="static"
+        data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true"
+        style="opacity:.9;background:#212529;width=900px;">
+        <div class="modal-dialog modal-dialog-centered modal-lg" style="opacity:.9;background:#212529;width=40%">
+            <div class="modal-content">
+                @csrf
+                <div class="modal-header">
+                    <h5 id="staticBackdropLabel"><strong>Descripción del producto: </strong>
+                        <input style=" border: none; background: transparent; outline: none; width: 100%"
+                            type="text" name="" id=""
+                            wire:model.defer='editar_descripcion_producto'>
+                    </h5>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <input type="text" name="id_pendi" id="id_pendi" wire:model.defer='id_editar' hidden />
+                        <div class="mb-3 col">
+                            <label for="txt_bultos" class="form-label">Cantidad de Bultos:</label>
+                            <input id="cantidad_bultos" name="cantidad_bultos"
+                                wire:model.defer='editar_cantidad_bultos' class="form-control" type="text"
+                                autocomplete="off">
+                        </div>
+                        <div class="mb-3 col">
+                            <label for="txt_unidades" class="form-label">Unidades de Puros por Bulto:</label>
+                            <input id="unidades_bultos" name="unidades_bultos"
+                                wire:model.defer='editar_unidades_bultos' class="form-control" type="text"
+                                autocomplete="off">
+                        </div>
+                        <div class="mb-3 col">
+                            <label for="txt_unidad_cajon" class="form-label">Unidad por Cajon:</label>
+                            <input id="unidades_cajon" name="unidades_cajon" wire:model.defer='editar_unidades_cajon'
+                                class="form-control" type="text" autocomplete="off">
+                        </div>
+                        <div class="mb-3 col">
+                            <label for="txt_peso_bruto" class="form-label">Peso Bruto (Lbs)</label>
+                            <input id="peso_bruto" name="peso_bruto" wire:model.defer='editar_peso_bruto'
+                                class="form-control" type="text" autocomplete="off">
+                        </div>
+                        <div class="mb-3 col">
+                            <label for="txt_peso_neto" class="form-label">Peso Neto (Lbs)</label>
+                            <input id="peso_neto" name="peso_neto" wire:model.defer='editar_peso_neto'
+                                class="form-control" type="text" autocomplete="off">
                         </div>
                     </div>
+                </div>
 
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">
-                            <span>Cancelar</span>
-                        </button>
-                        <button type="submit" class="btn btn-success">
-                            <span>Agregar</span>
-                        </button>
-                    </div>
-
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-danger" data-bs-dismiss="modal" id="btn_cerrar_modal">
+                        <span>Cancelar</span>
+                    </button>
+                    <button wire:click="actualizar_detalle_factura()" class="btn btn-success" wire:model="">
+                        <span>Agregar</span>
+                    </button>
                 </div>
             </div>
         </div>
-    </form>
+    </div>
     <!-- FIN MODAL ACTUALIZAR DATO PENDIENTE -->
-
-    <!-- INICIO MODAL ELMINAR DETALLE -->
-    <form wire:submit.prevent="borrar_detalles_datos({{ $id_eliminar }})">
-        <div class="modal fade" id="modal_eliminar_detalle" data-backdrop="static" data-keyboard="false"
-            tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true"
-            style="opacity:.9;background:#212529;">
-            <div class="modal-dialog modal-dialog-centered">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="staticBackdropLabel">Eliminar </h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
-                    <div class="modal-body">
-                        ¿Estás seguro que quieres eliminar este producto de la factura?
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">
-                            <span>Cancelar</span>
-                        </button>
-                        <button type="submit" class="btn btn-success">
-                            <span>Eliminar</span>
-                        </button>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </form>
 
     <div class="modal fade" id="modal_advertencia" data-backdrop="static" data-keyboard="false" tabindex="-1"
         aria-labelledby="staticBackdropLabel" aria-hidden="true" style="opacity:.9;background:#212529;">
@@ -1102,7 +1034,7 @@
         </div>
     </div>
 
-    <div class="modal fade" wire:ignore id="modal_agregar_precio" data-backdrop="static" data-keyboard="false"
+    <div wire:ignore class="modal fade" id="modal_agregar_precio" data-backdrop="static" data-keyboard="false"
         tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true"
         style="opacity:.9;background:#212529;">
         <div class="modal-dialog modal-xl modal-dialog-centered">
@@ -1191,11 +1123,13 @@
                         <div class="row">
                             <div class="mb-3 col">
                                 <label for="codigo_de" class="form-label" style="width:100%;">Codigo</label>
-                                <input name="codigo_de" id="codigo_de" class="form-control" required type="text" autocomplete="off" wire:model='codigo_n'>
+                                <input name="codigo_de" id="codigo_de" class="form-control" required type="text"
+                                    autocomplete="off" wire:model='codigo_n'>
                             </div>
                             <div class="mb-3 col">
                                 <label for="marca_de" class="form-label" style="width:100%;">Marca</label>
-                                <select name="marca_de" id="marca_de" style="width:100%;" required autocomplete="off" onchange="cambio_marca()">
+                                <select name="marca_de" id="marca_de" style="width:100%;" required
+                                    autocomplete="off" onchange="cambio_marca()">
                                     <option value="">Seleccione Marca</option>
                                     @foreach ($marcas_precio as $marcas)
                                         <option value="{{ $marcas->marca }}">{{ $marcas->marca }}</option>
@@ -1204,27 +1138,32 @@
                             </div>
                             <div class="mb-3 col">
                                 <label for="capa_de" class="form-label" style="width:100%;">Capa</label>
-                                <input name="capa_de" id="capa_de" class="form-control" style="width:100%;" required autocomplete="off" wire:model='capa_n'>
+                                <input name="capa_de" id="capa_de" class="form-control" style="width:100%;"
+                                    required autocomplete="off" wire:model='capa_n'>
                             </div>
                         </div>
                         <div class="row">
                             <div class="mb-3 col">
                                 <label for="nombre_de" class="form-label" style="width:100%;">Nombre</label>
-                                <input name="nombre_de" id="nombre_de" class="form-control" style="width:100%;" required autocomplete="off" wire:model='nombre_n'>
+                                <input name="nombre_de" id="nombre_de" class="form-control" style="width:100%;"
+                                    required autocomplete="off" wire:model='nombre_n'>
                             </div>
                             <div class="mb-3 col">
                                 <label for="vitola_de" class="form-label" style="width:100%;">Vitola</label>
-                                <input name="vitola_de" id="vitola_de" class="form-control" style="width:100%;" required autocomplete="off" wire:model='vitola_n'>
+                                <input name="vitola_de" id="vitola_de" class="form-control" style="width:100%;"
+                                    required autocomplete="off" wire:model='vitola_n'>
                             </div>
                             <div class="mb-3 col">
                                 <label for="tipo_de" class="form-label" style="width:100%;">Tipo de empaque</label>
-                                <input name="tipo_de" id="tipo_de" class="form-control" style="width:100%;" required autocomplete="off" wire:model='empaque_n'>
+                                <input name="tipo_de" id="tipo_de" class="form-control" style="width:100%;"
+                                    required autocomplete="off" wire:model='empaque_n'>
                             </div>
                         </div>
                         <div class="row">
                             <div class="mb-3 col">
                                 <label for="txt_buenos">Precio</label>
-                                <input name="precio_de" id="precio_de" class="form-control" type="text" autocomplete="off" wire:model='precio_n'>
+                                <input name="precio_de" id="precio_de" class="form-control" type="text"
+                                    autocomplete="off" wire:model='precio_n'>
                             </div>
                             <div class="mb-3 col">
                             </div>
@@ -1236,8 +1175,9 @@
                         <button type="button" class="btn btn-danger" data-bs-dismiss="modal">
                             <span>Cancelar</span>
                         </button>
-                        <button  class="btn btn-success" wire:loading.attr='disabled' type="submit">
-                            <span wire:loading.attr.remove='hidden'  hidden class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                        <button class="btn btn-success" wire:loading.attr='disabled' type="submit">
+                            <span wire:loading.attr.remove='hidden' hidden class="spinner-border spinner-border-sm"
+                                role="status" aria-hidden="true"></span>
                             <span wire:loading.remove>Guardar</span>
                         </button>
                     </div>
@@ -1263,8 +1203,7 @@
             var id_producto = 0;
             var id_pendiente = 0;
 
-            var seletscc = ["#item_b", "#orden_b", "#tipo_b", "#precio_b","#marca_de"];
-
+            var seletscc = ["#item_b", "#orden_b", "#tipo_b", "#precio_b", "#marca_de"];
 
             $(document).ready(function() {
                 seletscc.forEach(element => {
@@ -1281,7 +1220,6 @@
                     }
                 });
             }
-
 
             $(document).ready(function() {
                 $('#catalgo_precio').DataTable({
@@ -1320,7 +1258,7 @@
                 document.getElementById('titulo_ctalogo_productos').innerHTML = 'Catalogo: ' + producto;
             }
 
-            function detalles_nuevo_precio(id,marca,nombre,vitola,capa,empaque,id_produc,id_pend) {
+            function detalles_nuevo_precio(id, marca, nombre, vitola, capa, empaque, id_produc, id_pend) {
                 @this.nombre_n = nombre;
                 @this.vitola_n = vitola;
                 @this.capa_n = capa;
@@ -1336,13 +1274,12 @@
 
             window.addEventListener('RegistradoConExito', event => {
                 Toast.fire({
-                        icon: 'success',
-                        title: 'Registro realizada con exito.'
-                    });
+                    icon: 'success',
+                    title: 'Registro realizada con exito.'
+                });
                 var btnCerrar = document.getElementById("cerrar_modal_nuevo_precio");
                 btnCerrar.click();
             })
-
 
             function agregar_precio(codigo, precio) {
                 Swal.fire({
@@ -1377,8 +1314,46 @@
                 btnCerrar.click();
             })
 
-            window.addEventListener('borrar', event => {
-                $("#modal_eliminar_detalle").modal('show');
+            function eliminar_item(id) {
+
+                Swal.fire({
+                    title: 'Esta seguro?',
+                    text: "¿Quieres eliminar este producto de la factura?",
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#3085d6',
+                    cancelButtonColor: '#d33',
+                    confirmButtonText: 'Si, eliminar!'
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        @this.borrar_detalles_datos(id);
+                    } else {
+
+                    }
+
+                })
+            }
+
+            window.addEventListener('mensaje_editar_error', function(event) {
+                var miVariable = event.detail.errores;
+
+                console.log("Hay error en:", miVariable);
+            });
+
+            window.addEventListener('mensaje_editar_correcto', event => {
+                Toast.fire({
+                    icon: 'success',
+                    title: 'Editado con exito.'
+                });
+                $('#modal_editar_detalles').modal('hide')
+            })
+
+
+            window.addEventListener('cerrar_modal_borrar', event => {
+                Toast.fire({
+                    icon: 'success',
+                    title: 'Eliminado con exito.'
+                });
             })
 
             function myFunction() {

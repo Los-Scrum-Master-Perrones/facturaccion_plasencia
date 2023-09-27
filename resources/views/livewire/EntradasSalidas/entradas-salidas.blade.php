@@ -1,6 +1,6 @@
 <div xmlns:wire="http://www.w3.org/1999/xhtml">
 
-    <ul class="nav justify-content-center">
+    <ul class="nav nav-tabs justify-content-center">
         @if (auth()->user()->rol == 0 || auth()->user()->rol == 1 )
         <li class="nav-item">
             <a class="nav-link" style="color:white; font-size:12px;" href="{{ route('inventario_cajas') }}"><strong>Catálogo

@@ -1,15 +1,15 @@
 <div xmlns:wire="http://www.w3.org/1999/xhtml">
 
-    <ul class="nav justify-content-center">
+    <ul class="nav nav-tabs justify-content-center">
         @if(auth()->user()->rol == -1)
 
         @else
             <li class="nav-item">
-                <a style="color:white; font-size:12px;" href="{{route('reportediarios')}}"><strong>Reporte Diarios</strong></a>
+                <a class="nav-link" style="color:white; font-size:12px;" href="{{route('reportediarios')}}"><strong>Reporte Diarios</strong></a>
             </li>
         @endif
         <li class="nav-item">
-            <a style="color:#E5B1E2; font-size:12px;"
+            <a class="nav-link" style="color:#E5B1E2; font-size:12px;"
                 href="{{ route('programacionterminado') }}"><strong>Programaciones</strong></a>
         </li>
     </ul>

@@ -1,5 +1,5 @@
 <div xmlns:wire="http://www.w3.org/1999/xhtml">
-    <ul class="nav justify-content-center">
+    <ul class="nav nav-tabs justify-content-center">
         <li class="nav-item">
             <a class="nav-link active fs-7" aria-current="page" href="pendiente"><strong>Pendiente</strong></a>
         </li>

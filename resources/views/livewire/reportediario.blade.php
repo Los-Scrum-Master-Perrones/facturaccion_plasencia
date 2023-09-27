@@ -1,6 +1,6 @@
 <div xmlns:wire="http://www.w3.org/1999/xhtml">
 
-    <ul class="nav justify-content-center">
+    <ul class="nav nav-tabs justify-content-center">
         @if(auth()->user()->rol == -1)
 
         @else
@@ -9,7 +9,7 @@
             </li>
         @endif
         <li class="nav-item">
-            <a style="color:white; font-size:12px;"
+            <a class="nav-link" style="color:white; font-size:12px;"
                 href="{{ route('programacionterminado') }}"><strong>Programaciones</strong></a>
         </li>
     </ul>
@@ -37,7 +37,7 @@
 
 
 
-    
+
 
 
     <div style="width:100%; padding-left:25px; padding-right:10px;">
@@ -83,7 +83,7 @@
                                                         </button>
                                                     </a>
                                                 </div>
-                                                
+
                                                 <div class="col-sm-1" style="text-align:right;">
                                                 <form method="post" action="{{route("programacionterminadoreporteremision")}}">
                                                 @csrf
@@ -92,9 +92,9 @@
                                                 font: inherit;  cursor: pointer; outline: inherit;" type="submit">
                                                             <abbr title="Generar Remision">
                                                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-download" viewBox="0 0 16 16">
-                                                                <path d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 
+                                                                <path d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0
                                                                 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5z"/>
-                                                                <path d="M7.646 11.854a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V1.5a.5.5 0 0 
+                                                                <path d="M7.646 11.854a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V1.5a.5.5 0 0
                                                                 0-1 0v8.793L5.354 8.146a.5.5 0 1 0-.708.708l3 3z"/>
                                                             </svg>
                                                             </abbr>
@@ -150,12 +150,12 @@
                                         <td> {{ $detalles_programacione->capa }}</td>
                                         <td> {{ $detalles_programacione->tipo_empaque }}</td>
                                         <td>{{  $detalles_programacione->cantidad }}</td>
-                                        <td style="text-align:center;">                                        
+                                        <td style="text-align:center;">
                                     </tr>
                                 @endforeach
 
                                 <tr>
-                                    <td style="text-align:center;" colspan="8"> 
+                                    <td style="text-align:center;" colspan="8">
                                     <FONT SIZE=3 for="" style="font-family: fantasy;" class="form-label">
                                                                                 TOTAL
                                         </FONT></td>
@@ -168,7 +168,7 @@
                     </div>
                 </div>
             </div>
-            
+
         </div>
 
     </div>
@@ -201,7 +201,7 @@
                 $('#pa_numero_orden').val(pa_numero_orden);
                 $('#pa_orden').val(pa_orden);
             }
-            
+
 
             function limpiartable(){
                 $('#tablechange').empty();
