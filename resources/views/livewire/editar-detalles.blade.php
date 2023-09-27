@@ -49,19 +49,19 @@
                         <tr>
                             <td>{{$i}}</td>
                             <td>{{$detalle->item}}</td>
-                            <td>{{$detalle->codigo_producto}}</td>   
+                            <td>{{$detalle->codigo_producto}}</td>
                             <td>{{$detalle->capa}}</td>
-                            <td>{{$detalle->vitola}}</td>   
+                            <td>{{$detalle->vitola}}</td>
                             <td>{{$detalle->nombre}}</td>
-                            <td>{{$detalle->marca}}</td>   
-                            <td>{{$detalle->cello}}</td> 
-                            <td>{{$detalle->anillo}}</td> 
+                            <td>{{$detalle->marca}}</td>
+                            <td>{{$detalle->cello}}</td>
+                            <td>{{$detalle->anillo}}</td>
                             <td>{{$detalle->upc}}</td>
-                            <td>{{$detalle->tipo_empaque}}</td>   
+                            <td>{{$detalle->tipo_empaque}}</td>
                             <td>{{$detalle->otra_descripcion}}</td>
-                            <td>{{$detalle->precio}}</td>    
-                            <td>  <a style=" width:10px; height:10px;" data-toggle="modal" href=""
-                                data-target="#modal_actualizar" type="submit"
+                            <td>{{$detalle->precio}}</td>
+                            <td>  <a style=" width:10px; height:10px;" data-bs-toggle="modal" href=""
+                                data-bs-target="#modal_actualizar" type="submit"
                                 onclick="cargar_datos_editar({{$detalle->id_producto}})">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" fill="currentColor"
                                     class="bi bi-pencil-square" viewBox="0 0 16 16">
@@ -71,7 +71,7 @@
                                         d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z" />
                                 </svg>
                                 </a>
-                            </td>                          
+                            </td>
                         </tr>
                         @endforeach
                     </tbody>
@@ -214,7 +214,7 @@ document.getElementById('div_EditarDetalleProducto').style.display = "none";
 
                         <div class="modal-body">
 
-                         
+
                             <div class="row">
                                 <div class="mb-3 col">
                                     <label for="txt_figuraytipo" class="form-label">Item</label>
@@ -240,7 +240,7 @@ document.getElementById('div_EditarDetalleProducto').style.display = "none";
                                         <option style="overflow-y: scroll;"> {{$capa->capa}}</option>
                                         @endforeach
                                     </select>
-                                </div>                               
+                                </div>
                             </div>
 
 
@@ -277,7 +277,7 @@ document.getElementById('div_EditarDetalleProducto').style.display = "none";
                                     </select>
                                 </div>
 
-                             
+
 
                             </div>
 
@@ -300,7 +300,7 @@ document.getElementById('div_EditarDetalleProducto').style.display = "none";
                                     <label for="txt_buenos" class="form-label">Precio</label>
                                     <input name="precio" id="precio_ac" class="form-control"  type="text"
                                         autocomplete="off">
-                                </div>                              
+                                </div>
 
                             </div>
 

@@ -112,8 +112,8 @@
 
                                                 @else
                                                     <div class="col-sm-1" style="text-align:right;">
-                                                        <a data-toggle="modal"
-                                                            data-target="#modal_eliminar_programacion"
+                                                        <a data-bs-toggle="modal"
+                                                            data-bs-target="#modal_eliminar_programacion"
                                                             onclick="datos_modal_eliminar_pro({{ $programacion->id }})"
                                                             href="">
                                                             <abbr title="Eliminar programación"><svg
@@ -128,8 +128,8 @@
                                                         </a>
                                                     </div>
                                                     <div class="col-sm-1" style="text-align:right;">
-                                                        <a style=" width:10px; height:10px;" data-toggle="modal" href=""
-                                                            data-target="#modal_actualizar_programacion" type="submit"
+                                                        <a style=" width:10px; height:10px;" data-bs-toggle="modal" href=""
+                                                            data-bs-target="#modal_actualizar_programacion" type="submit"
                                                             onclick="datos_modal_actualizar_programacion({{ $programacion->id }},
                                                                                              '{{ $programacion->mes_contenedor }}')">
                                                             <abbr title="Editar programacion">
@@ -232,7 +232,7 @@
 
                                         <td style="text-align:center">
 
-                                            <a data-toggle="modal" data-target="#modal_eliminar_detalle" onclick="datos_modal_eliminar({{ $detalles_programacione->id_detalle_programacion }},
+                                            <a data-bs-toggle="modal" data-bs-target="#modal_eliminar_detalle" onclick="datos_modal_eliminar({{ $detalles_programacione->id_detalle_programacion }},
                                                                     {{ $detalles_programacione->id_pendiente }},
                                                                     '{{ $detalles_programacione->saldo }}',
                                                                     '{{ $detalles_programacione->cajas }}',
@@ -247,8 +247,8 @@
                                                 </abbr>
                                             </a>
 
-                                            <a style=" width:10px; height:10px;" data-toggle="modal" href=""
-                                                data-target="#modal_actualizar_saldo" type="submit" onclick="datos_modal_actualizar({{ $detalles_programacione->id_detalle_programacion }},
+                                            <a style=" width:10px; height:10px;" data-bs-toggle="modal" href=""
+                                                data-bs-target="#modal_actualizar_saldo" type="submit" onclick="datos_modal_actualizar({{ $detalles_programacione->id_detalle_programacion }},
                                                                     {{ $detalles_programacione->id_pendiente }},
                                                                     '{{ $detalles_programacione->saldo }}',
                                                                     '{{ $detalles_programacione->cajas }}',
@@ -340,7 +340,7 @@
                 <div class="modal-content">
                     <div class="modal-header">
                         <h5 class="modal-title" id="staticBackdropLabel">Eliminar detalle</h5>
-                        <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close"></button>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
                     </div>
@@ -355,7 +355,7 @@
 
 
                         <button style=" background: #b39f64; color: #ecedf1;" type="button" class=" btn-info-claro "
-                            data-dismiss="modal">
+                            data-bs-dismiss="modal">
                             <span>Cancelar</span>
                         </button>
                         <button type="submit" class=" btn-info ">
@@ -389,7 +389,7 @@
 
 
                         <input name="id_pro" id="id_pro" hidden />
-                        <button type="button" class=" btn_no " data-dismiss="modal">
+                        <button type="button" class=" btn_no " data-bs-dismiss="modal">
                             <span>Cancelar</span>
                         </button>
                         <button type="submit" class=" btn_yes ">
@@ -430,7 +430,7 @@
 
                         <input name="id_p" id="id_p" hidden />
 
-                        <button type="button" class=" btn_no " data-dismiss="modal">
+                        <button type="button" class=" btn_no " data-bs-dismiss="modal">
                             <span>Cancelar</span>
                         </button>
                         <button type="submit" class="btn_yes">
@@ -464,7 +464,7 @@
 
                         <h5 class="modal-title" id="staticBackdropLabel"
                             style="width:450px; text-align:center; font-size:20px;">Actualizar saldo</h5>
-                        <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close"></button>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
                         <div class="mb-3 col">
@@ -476,7 +476,7 @@
                     </div>
                     <div class="modal-footer">
                         <button style=" background: #b39f64; color: #ecedf1;" type="button" class=" btn-info-claro "
-                            data-dismiss="modal">
+                            data-bs-dismiss="modal">
                             <span>Cancelar</span>
                         </button>
                         <button class=" btn-info float-right" style="margin-right: 10px">

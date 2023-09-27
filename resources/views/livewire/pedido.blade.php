@@ -56,8 +56,8 @@
                     @endif
 
 
-                    <button data-toggle="modal" style="width:30px;" class=" botonprincipal mr-sm-2 "
-                        data-target="#modal_actualizar">
+                    <button data-bs-toggle="modal" style="width:30px;" class=" botonprincipal mr-sm-2 "
+                        data-bs-target="#modal_actualizar">
                         <abbr title="Agregar nuevo pedido">
                             <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor"
                                 class="bi bi-plus-circle" viewBox="0 0 16 16">
@@ -95,7 +95,7 @@
                     @endif
 
                     <button wire:click="comparativo()"
-                    data-toggle="modal" data-target="#modal_diff"
+                    data-bs-toggle="modal" data-bs-target="#modal_diff"
                     style="width:100px;" class=" botonprincipal mr-sm-2 ">
                         Comparativo
                     </button>
@@ -183,7 +183,7 @@
                         </div>
 
                         <div class="modal-footer">
-                            <button class="bmodal_no" data-dismiss="modal">
+                            <button class="bmodal_no" data-bs-dismiss="modal">
                                 <span>Cancelar</span>
                             </button>
                             <button type="submit" class="bmodal_yes">
@@ -280,7 +280,7 @@
                 </div>
 
                 <div class="modal-footer">
-                    <button class="bmodal_no" data-dismiss="modal">
+                    <button class="bmodal_no" data-bs-dismiss="modal">
                         <span>Cancelar</span>
                     </button>
                     <button type="submit" class="bmodal_yes">
@@ -299,7 +299,7 @@
                 <div class="modal-content">
                     <div class="modal-header">
                         <h2 class="modal-title" id="staticBackdropLabel">COMPARATIVOS PEDIDOS </h2>
-                        <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close"></button>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
                         <table class="table">
@@ -342,7 +342,7 @@
                         </table>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="bmodal_yes" data-dismiss="modal">
+                        <button type="button" class="bmodal_yes" data-bs-dismiss="modal">
                             <span>Aceptar</span>
                         </button>
                     </div>

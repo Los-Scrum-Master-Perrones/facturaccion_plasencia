@@ -387,7 +387,7 @@
                 <div class="col">
                     <div class="dropdown">
                         <button class="btn btn-secondary dropdown-toggle form-control" type="button"
-                            id="dropdownMenuButton1" data-toggle="dropdown">
+                            id="dropdownMenuButton1" data-bs-toggle="dropdown">
                             Categorias
                         </button>
                         <ul class="dropdown-menu " aria-labelledby="dropdownMenuButton1">
@@ -422,7 +422,7 @@
                 <div class="col">
                     <div class="dropdown">
                         <button class="btn btn-secondary dropdown-toggle form-control" type="button"
-                            id="dropdownMenuButton1" data-toggle="dropdown">
+                            id="dropdownMenuButton1" data-bs-toggle="dropdown">
                             Presentacion
                         </button>
                         <ul class="dropdown-menu " aria-labelledby="dropdownMenuButton1">
@@ -487,7 +487,7 @@
                         @if (auth()->user()->rol == -1)
                         @else
                             @if (auth()->user()->rol == 0 || auth()->user()->rol == 1)
-                            <button class="btn btn-outline-primary fs-7" data-toggle="modal" data-target="#productos_crear_empaque">
+                            <button class="btn btn-outline-primary fs-7" data-bs-toggle="modal" data-bs-target="#productos_crear_empaque">
                                 <abbr title="Agregar a Pendiente Empaque">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="currentColor" class="bi bi-plus-circle" viewBox="0 0 16 16">
                                         <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z" />
@@ -687,8 +687,8 @@
                                             echo '</svg>';
                                             echo '</a>';
 
-                                            echo '<a style=" width:20px; height:20px;" data-toggle="modal" href=""';
-                                            echo '             data-target="#modal_actualizar" type="submit"';
+                                            echo '<a style=" width:20px; height:20px;" data-bs-toggle="modal" href=""';
+                                            echo '             data-bs-target="#modal_actualizar" type="submit"';
                                             echo '        onclick="datos_modal_actualizar_p(' . $datos->id_pendiente . ')">';
                                             echo '        <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" fill="currentColor"';
                                             echo '            class="bi bi-pencil-square" viewBox="0 0 16 16">';
@@ -699,7 +699,7 @@
                                             echo '        </svg>';
                                             echo '    </a>';
 
-                                            echo '<a data-toggle="modal" data-target="#modal_eliminar_detalle"';
+                                            echo '<a data-bs-toggle="modal" data-bs-target="#modal_eliminar_detalle"';
                                             echo '    onclick="datos_modal_eliminar(' . $datos->id_pendiente . ')" href="">';
                                             echo '    <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" fill="currentColor"';
                                             echo '        class="bi bi-trash-fill" viewBox="0 0 16 16">';
@@ -745,7 +745,7 @@
 
                 <div class="modal-header">
                     <h5 id="staticBackdropLabel"><strong>Agregar producto</strong></h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
                 </div>
 
                 <div class="modal-body">
@@ -866,7 +866,7 @@
                 </div>
 
                 <div class="modal-footer">
-                    <button type="button" class=" bmodal_no" data-dismiss="modal"><span>Cancelar</span>
+                    <button type="button" class=" bmodal_no" data-bs-dismiss="modal"><span>Cancelar</span>
                         @csrf
                     </button>
                     <button onclick="insertar_nuevo_pendiente()" class=" bmodal_yes "> <span>Guardar</span>
@@ -929,7 +929,7 @@
                 </div>
 
                 <div class="modal-footer">
-                    <button class="bmodal_no" data-dismiss="modal">
+                    <button class="bmodal_no" data-bs-dismiss="modal">
                         <span>Cancelar</span>
                     </button>
                     <button type="button" class="bmodal_yes" onclick="guardar_actualizacion()">
@@ -950,7 +950,7 @@
                 <div class="modal-header">
                     <h5 class="modal-title" id="staticBackdropLabel">Eliminar <strong><input value=""
                                 id="txt_usuarioE" name="txt_usuarioE" style="border:none;"></strong> </h5>
-                    <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close"></button>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
                     <input name="id_pendiente3" id="id_pendiente3" value="" hidden />
@@ -958,7 +958,7 @@
                     ¿Estás seguro que quieres eliminar este registro del pendiente?
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="bmodal_no " data-dismiss="modal">
+                    <button type="button" class="bmodal_no " data-bs-dismiss="modal">
                         <span>Cancelar</span>
                     </button>
                     <button type="button" onclick="eliminar_pendiente()" class=" bmodal_yes ">
@@ -980,13 +980,13 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title" id="staticBackdropLabel">Advertencia</h5>
-                    <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close"></button>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
                     ¿Estás seguro que quieres limpiar estos registros?
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="bmodal_no" data-dismiss="modal">
+                    <button type="button" class="bmodal_no" data-bs-dismiss="modal">
                         <span>Cancelar</span>
                     </button>
                     <button wire:click="eliminar_datos()" class=" bmodal_yes ">

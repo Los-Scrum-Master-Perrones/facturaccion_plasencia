@@ -126,7 +126,7 @@
                     <tr>
                         <td style="text-align:center;">{{ $count }}</td>
                         <td>
-                            <a data-toggle="modal" data-target="#material_actualizar" style="width:10px; height:10px;" href="#"
+                            <a data-bs-toggle="modal" data-bs-target="#material_actualizar" style="width:10px; height:10px;" href="#"
                                          onclick="editar_material({{$material->id}},
                                                                             '{{$material->item}}',
                                                                             '{{$material->codigo_producto}}',
@@ -173,7 +173,7 @@
 
             <div class="modal-header">
                 <h5 id="staticBackdropLabel"><strong>Actualizar Material</strong></h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
             </div>
 
             <div class="modal-body">
@@ -233,7 +233,7 @@
             </div>
 
             <div class="modal-footer">
-                <button type="button" class=" bmodal_no" data-dismiss="modal"><span>Cancelar</span>
+                <button type="button" class=" bmodal_no" data-bs-dismiss="modal"><span>Cancelar</span>
                     @csrf
                 </button>
                 <button onclick="actulizar_material()" class=" bmodal_yes "> <span>Guardar</span> </button>
@@ -247,7 +247,7 @@
             position:fixed;
             top:20px;
             left: 20px;' href='#' >
-    <button type="button" data-toggle="modal" data-target="#material_nuevo" class="btn btn-info" style="border-radius: 50%;width: 50px; height: 50px; text-align: center">
+    <button type="button" data-bs-toggle="modal" data-bs-target="#material_nuevo" class="btn btn-info" style="border-radius: 50%;width: 50px; height: 50px; text-align: center">
         <div wire:loading>
             <span class="spinner-border spinner-border-sm"  role="status" aria-hidden="true"></span>
         </div>
@@ -270,7 +270,7 @@
 
             <div class="modal-header">
                 <h5 id="staticBackdropLabel"><strong>Nuevo Material</strong></h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
             </div>
 
             <div class="modal-body">
@@ -329,7 +329,7 @@
             </div>
 
             <div class="modal-footer">
-                <button type="button" class=" bmodal_no" data-dismiss="modal"><span>Cancelar</span>
+                <button type="button" class=" bmodal_no" data-bs-dismiss="modal"><span>Cancelar</span>
                     @csrf
                 </button>
                 <button onclick="insertar_material()" class=" bmodal_yes "> <span>Guardar</span> </button>

@@ -39,7 +39,7 @@
                     </form>
 
 
-                        <button data-toggle="modal" data-target="#modal_eliminar_detalle"
+                        <button data-bs-toggle="modal" data-bs-target="#modal_eliminar_detalle"
                         style="width:160px;" class="botonprincipal mr-sm-2 ">Limpiar</button>
 
                 </div>
@@ -163,7 +163,7 @@
                 <div class="modal-content">
                     <div class="modal-header">
                         <h5 class="modal-title" id="staticBackdropLabel">Eliminar </h5>
-                        <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close"></button>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
                         Seleccione el HON a eliminar
@@ -172,7 +172,7 @@
                         <input class="col-md-3" wire:model="hondelete" name="hon" id="HON"/>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="bmodal_no" data-dismiss="modal">
+                        <button type="button" class="bmodal_no" data-bs-dismiss="modal">
                             <span>Cancelar</span>
                         </button>
                         <button type="submit" class="bmodal_yes">

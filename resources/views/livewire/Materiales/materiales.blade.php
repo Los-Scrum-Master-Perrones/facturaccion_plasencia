@@ -150,7 +150,7 @@
                     <tr>
                         <td style=" text-align:center;">{{ $count }}</td>
                         <td>
-                            <a data-toggle="modal" data-target="#material_actualizar" style="width:10px; height:10px;" href="#" onclick="editar_material({{$material->id}},
+                            <a data-bs-toggle="modal" data-bs-target="#material_actualizar" style="width:10px; height:10px;" href="#" onclick="editar_material({{$material->id}},
                                                                             '{{$material->factory_item}}',
                                                                             '{{$material->navision_item}}',
                                                                             '{{$material->codigo_material}}',
@@ -285,7 +285,7 @@
 
                 <div class="modal-header">
                     <h5 id="staticBackdropLabel"><strong>Actualizar Material</strong></h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
                 </div>
 
                 <div class="modal-body">
@@ -365,7 +365,7 @@
                 </div>
 
                 <div class="modal-footer">
-                    <button type="button" class=" bmodal_no" data-dismiss="modal"><span>Cancelar</span>
+                    <button type="button" class=" bmodal_no" data-bs-dismiss="modal"><span>Cancelar</span>
                         @csrf
                     </button>
                     <button onclick="actulizar_material()" class=" bmodal_yes "> <span>Guardar</span> </button>
@@ -379,7 +379,7 @@
                 position:fixed;
                 top:20px;
                 left: 20px;' href='#' >
-        <button type="button" data-toggle="modal" data-target="#material_nuevo" class="btn btn-info" style="border-radius: 50%;width: 50px; height: 50px; text-align: center">
+        <button type="button" data-bs-toggle="modal" data-bs-target="#material_nuevo" class="btn btn-info" style="border-radius: 50%;width: 50px; height: 50px; text-align: center">
             <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor" class="bi bi-plus-circle" viewBox="0 0 16 16">
                 <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
                 <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z"/>
@@ -397,7 +397,7 @@
 
                 <div class="modal-header">
                     <h5 id="staticBackdropLabel"><strong>Nuevo Material</strong></h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
                 </div>
 
                 <div class="modal-body">
@@ -477,7 +477,7 @@
                 </div>
 
                 <div class="modal-footer">
-                    <button type="button" class=" bmodal_no" data-dismiss="modal"><span>Cancelar</span>
+                    <button type="button" class=" bmodal_no" data-bs-dismiss="modal"><span>Cancelar</span>
                         @csrf
                     </button>
                     <button onclick="insertar_material()" class=" bmodal_yes "> <span>Guardar</span> </button>

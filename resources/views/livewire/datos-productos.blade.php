@@ -34,15 +34,15 @@
             <div class="col">
                 <div class="input-group mb-3">
 
-                    <button class="mr-sm-2 botonprincipal " data-toggle="modal" data-target="#modal_marca" style="width:150px;">Agregar Marca</button>
+                    <button class="mr-sm-2 botonprincipal " data-bs-toggle="modal" data-bs-target="#modal_marca" style="width:150px;">Agregar Marca</button>
 
-                    <button class="mr-sm-2 botonprincipal " data-toggle="modal" data-target="#modal_capa" style="width:150px;">Agregar Capa</button>
+                    <button class="mr-sm-2 botonprincipal " data-bs-toggle="modal" data-bs-target="#modal_capa" style="width:150px;">Agregar Capa</button>
 
-                    <button class=" mr-sm-2 botonprincipal " data-toggle="modal" data-target="#modal_nombre" style="width:150px;">Agregar Nombre</button>
+                    <button class=" mr-sm-2 botonprincipal " data-bs-toggle="modal" data-bs-target="#modal_nombre" style="width:150px;">Agregar Nombre</button>
 
-                    <button class="mr-sm-2 botonprincipal " data-toggle="modal" data-target="#modal_tipo" style="width:150px;">Agregar Tipo empaque</button>
+                    <button class="mr-sm-2 botonprincipal " data-bs-toggle="modal" data-bs-target="#modal_tipo" style="width:150px;">Agregar Tipo empaque</button>
 
-                    <button class="mr-sm-2 botonprincipal " data-toggle="modal" data-target="#modal_vitola" style="width:150px;">Agregar Vitola</button>
+                    <button class="mr-sm-2 botonprincipal " data-bs-toggle="modal" data-bs-target="#modal_vitola" style="width:150px;">Agregar Vitola</button>
 
                     <input name="buscar" type="text" id="buscar" wire:model="busqueda" class="  form-control  mr-sm-2  " placeholder="Búsqueda por item, nombre y capa" style="width:350px;">
 
@@ -241,7 +241,7 @@
                     <div class="modal-content">
                         <div class="modal-header">
                             <h5 class="modal-title" id="staticBackdropLabel"><strong>Agregar marca</strong></h5>
-                            <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close"></button>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
                         <div class="modal-body">
                             <div class="mb-3 col">
@@ -250,7 +250,7 @@
                             </div>
                         </div>
                         <div class="modal-footer">
-                            <button type="button" class=" bmodal_no " data-dismiss="modal">
+                            <button type="button" class=" bmodal_no " data-bs-dismiss="modal">
                                 <span>Cancelar</span>
                             </button>
                             <button onclick="validar_marca()" class="bmodal_yes">
@@ -275,7 +275,7 @@
                     <div class="modal-content">
                         <div class="modal-header">
                             <h5 class="modal-title" id="staticBackdropLabel"><strong>Editar marca</strong></h5>
-                            <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close"></button>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
                         <div class="modal-body">
                             <div class="mb-3 col">
@@ -285,7 +285,7 @@
                             </div>
                         </div>
                         <div class="modal-footer">
-                            <button type="button" class=" bmodal_no " data-dismiss="modal">
+                            <button type="button" class=" bmodal_no " data-bs-dismiss="modal">
                                 <span>Cancelar</span>
                             </button>
                             <button onclick="validar_marca()" class="bmodal_yes">
@@ -380,7 +380,7 @@
                     <div class="modal-content">
                         <div class="modal-header">
                             <h5 class="modal-title" id="staticBackdropLabel"><strong>Agregar capa</strong></h5>
-                            <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close"></button>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
                         <div class="modal-body">
                             <div class="mb-3 col">
@@ -389,7 +389,7 @@
                             </div>
                         </div>
                         <div class="modal-footer">
-                            <button type="button" class=" bmodal_no " data-dismiss="modal">
+                            <button type="button" class=" bmodal_no " data-bs-dismiss="modal">
                                 <span>Cancelar</span>
                             </button>
                             <button onclick="validar_capa()" type="submit" class=" bmodal_yes " value="Guardar">
@@ -413,7 +413,7 @@
                     <div class="modal-content">
                         <div class="modal-header">
                             <h5 class="modal-title" id="staticBackdropLabel"><strong>Editar capa</strong></h5>
-                            <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close"></button>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
                         <div class="modal-body">
                             <div class="mb-3 col">
@@ -423,7 +423,7 @@
                             </div>
                         </div>
                         <div class="modal-footer">
-                            <button type="button" class=" bmodal_no " data-dismiss="modal">
+                            <button type="button" class=" bmodal_no " data-bs-dismiss="modal">
                                 <span>Cancelar</span>
                             </button>
                             <button onclick="validar_capa()" type="submit" class=" bmodal_yes " value="Actualizar">
@@ -487,7 +487,7 @@
                     <div class="modal-content">
                         <div class="modal-header">
                             <h5 class="modal-title" id="staticBackdropLabel"><strong>Agregar nombre</strong></h5>
-                            <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close"></button>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
                         <div class="modal-body">
                             <div class="mb-3 col">
@@ -496,7 +496,7 @@
                             </div>
                         </div>
                         <div class="modal-footer">
-                            <button type="button" class=" bmodal_no" data-dismiss="modal">
+                            <button type="button" class=" bmodal_no" data-bs-dismiss="modal">
                                 <span>Cancelar</span>
                             </button>
                             <button onclick="validar_nombre()" class=" bmodal_yes " value="Guardar">
@@ -519,7 +519,7 @@
                     <div class="modal-content">
                         <div class="modal-header">
                             <h5 class="modal-title" id="staticBackdropLabel"><strong>Editar nombre</strong></h5>
-                            <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close"></button>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
                         <div class="modal-body">
                             <div class="mb-3 col">
@@ -529,7 +529,7 @@
                             </div>
                         </div>
                         <div class="modal-footer">
-                            <button type="button" class=" bmodal_no" data-dismiss="modal">
+                            <button type="button" class=" bmodal_no" data-bs-dismiss="modal">
                                 <span>Cancelar</span>
                             </button>
                             <button onclick="validar_nombre()" class=" bmodal_yes " value="Actualizar">
@@ -595,7 +595,7 @@
                     <div class="modal-content">
                         <div class="modal-header">
                             <h5 class="modal-title" id="staticBackdropLabel"><strong>Agregar tipo de empaque</strong></h5>
-                            <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close"></button>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
                         <div class="modal-body">
                             <div class="mb-3 col">
@@ -612,7 +612,7 @@
                             </div>
                         </div>
                         <div class="modal-footer">
-                            <button type="button" class=" bmodal_no " data-dismiss="modal">
+                            <button type="button" class=" bmodal_no " data-bs-dismiss="modal">
                                 <span>Cancelar</span>
                             </button>
                             <button onclick="validar_tipo()" type="submit" class=" bmodal_yes " value="Guardar">
@@ -674,7 +674,7 @@
                     <div class="modal-content">
                         <div class="modal-header">
                             <h5 class="modal-title" id="staticBackdropLabel"><strong>Agregar Vitola</strong></h5>
-                            <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close"></button>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
                         <div class="modal-body">
                             <div class="mb-3 col">
@@ -684,7 +684,7 @@
                             </div>
                         </div>
                         <div class="modal-footer">
-                            <button type="button" class=" bmodal_no" data-dismiss="modal"><span>Cancelar</span></button>
+                            <button type="button" class=" bmodal_no" data-bs-dismiss="modal"><span>Cancelar</span></button>
                             <button onclick="validar_vitola()" class=" bmodal_yes">
                                 <span>Guardar</span>
                             </button>
@@ -705,7 +705,7 @@
                     <div class="modal-content">
                         <div class="modal-header">
                             <h5 class="modal-title" id="staticBackdropLabel"><strong>Editar Vitola</strong></h5>
-                            <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close"></button>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
                         <div class="modal-body">
                             <div class="mb-3 col">
@@ -715,7 +715,7 @@
                             </div>
                         </div>
                         <div class="modal-footer">
-                            <button type="button" class=" bmodal_no" data-dismiss="modal"><span>Cancelar</span></button>
+                            <button type="button" class=" bmodal_no" data-bs-dismiss="modal"><span>Cancelar</span></button>
                             <button onclick="validar_vitola()" class=" bmodal_yes">
                                 <span>Actualizar</span>
                             </button>

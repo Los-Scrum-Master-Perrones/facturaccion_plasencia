@@ -25,7 +25,7 @@
         <div @if (auth()->user()->rol == -1) class="lefter"
             @else
             class="lefter3" @endif>
-            <button type="submit" class="buttonsubmit" data-toggle="modal" data-target="#modal_cerrarsesion">
+            <button type="submit" class="buttonsubmit" data-bs-toggle="modal" data-bs-target="#modal_cerrarsesion">
                 <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="white" class="bi bi-power"
                     viewBox="0 0 16 16">
                     <path d="M7.5 1v7h1V1h-1z" />
@@ -311,7 +311,7 @@
                     ¿Esta seguro(a) de que quiere cerrar sesión?
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="bmodal_no" data-dismiss="modal">
+                    <button type="button" class="bmodal_no" data-bs-dismiss="modal">
                         <span>Cancelar</span>
                     </button>
                     <button

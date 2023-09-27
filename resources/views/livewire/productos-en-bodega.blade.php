@@ -35,8 +35,8 @@
             </div>
             <div class="row">
                 <div class="col-sm">
-                    <button class="btn botonprincipal form-control" data-toggle="modal"
-                        data-target="#modal_nuevoproducto" style="width:200px;">Nuevo
+                    <button class="btn botonprincipal form-control" data-bs-toggle="modal"
+                        data-bs-target="#modal_nuevoproducto" style="width:200px;">Nuevo
                         producto</button>
                 </div>
 
@@ -78,8 +78,8 @@
                         <td>{{$producto->tipo_empaque}}</td>
                         <td>
 
-                            <a class="buttom" style="font-size:12px;" data-toggle="modal"
-                                data-target="#modal_agregarproducto" href=""
+                            <a class="buttom" style="font-size:12px;" data-bs-toggle="modal"
+                                data-bs-target="#modal_agregarproducto" href=""
                                 onclick="agregar_item({{$producto->id_producto}},{{ strlen($producto->item)}})">
                                 <svg xmlns="http://www.w3.org/2000/svg" width=25 height="25" fill="black"
                                     class="bi bi-pencil-square" viewBox="0 0 16 16">
@@ -91,8 +91,8 @@
 
 
                             </a>
-                            <button style="font-size:12px;" data-toggle="modal"
-                                data-target="#modal_ver_detalle_producto"
+                            <button style="font-size:12px;" data-bs-toggle="modal"
+                                data-bs-target="#modal_ver_detalle_producto"
                                 onclick="item_detalle(parseInt({{$producto->item}},10),{{ strlen($producto->item)}})">Ver
                                 detalle</button></td>
                     </tr>
@@ -233,7 +233,7 @@
                     ` + producto[i].vitola + `
                     ` + producto[i].marca + `
                     ` + producto[i].nombre + `
-                    
+
 
                     </strong></h3>
 
@@ -258,7 +258,7 @@
                     <div class="modal-header">
                         <h5 style="font-size:20px; width:3000px; text-align:center; font:bold" class=""
                             id="staticBackdropLabel">Agregar producto</h5>
-                        <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close"></button>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
 
                     <div class="modal-body">
@@ -325,7 +325,7 @@
 
                     <div class="modal-footer">
                         <button style=" background: #b39f64; color: #ecedf1;" type="button" class=" btn-info-claro "
-                            data-dismiss="modal">
+                            data-bs-dismiss="modal">
                             <span style="font-size:16px">Cancelar</span>
                             @csrf
                         </button>
@@ -352,7 +352,7 @@
                     <div class="modal-header">
                         <h5 style="font-size:20px; width:3000px; text-align:center; font:bold" class=""
                             id="staticBackdropLabel">Agregar detalle del producto</h5>
-                        <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close"></button>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
 
                     <div class="modal-body">
@@ -441,7 +441,7 @@
 
                     <div class="modal-footer">
                         <button style=" background: #b39f64; color: #ecedf1;" type="button" class=" btn-info-claro "
-                            data-dismiss="modal">
+                            data-bs-dismiss="modal">
                             <span style="font-size:16px">Cancelar</span>
                             @csrf
                         </button>
@@ -470,7 +470,7 @@
                     <div class="modal-header">
                         <h5 style="font-size:20px; width:3000px; text-align:center; font:bold" class=""
                             id="staticBackdropLabel">Detalles del producto</h5>
-                        <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close"></button>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
 
                     <div class="modal-body">

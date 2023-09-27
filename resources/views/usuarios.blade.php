@@ -15,7 +15,7 @@
     </br>
     <div class="row" style="width:100%;">
         <div class="col-md-2">
-            <button class=" botonprincipal" data-toggle="modal" data-target="#modal_agregar_usuarios">
+            <button class=" botonprincipal" data-bs-toggle="modal" data-bs-target="#modal_agregar_usuarios">
                 <span> Agregar Usuarios</span>
             </button>
         </div>
@@ -60,7 +60,7 @@
 
                     <td style="padding:0px;   vertical-align: inherit;">
                         @if ( $usuario->name != 'admin' &&  $usuario->email != 'admin@privado.com')
-                        <a data-toggle="modal" data-target="#modal_editar_usuario"
+                        <a data-bs-toggle="modal" data-bs-target="#modal_editar_usuario"
                             onclick="datos_modal({{ $id_usuario_basico = $usuario->id }})">
                             <svg xmlns="http://www.w3.org/2000/svg" width=20 height="20" fill="currentColor"
                                 class="bi bi-pencil-square" viewBox="0 0 16 16">
@@ -71,7 +71,7 @@
                             </svg>
                         </a>
 
-                        <a data-toggle="modal" data-target="#modal_eliminar_usuario"
+                        <a data-bs-toggle="modal" data-bs-target="#modal_eliminar_usuario"
                             onclick="datos_modal_eliminar({{ $id_usuario_basicoE = $usuario->id }})">
                             <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor"
                                 class="bi bi-x-square" viewBox="0 0 16 16">
@@ -82,7 +82,7 @@
                             </svg>
                         </a>
 
-                        <a data-toggle="modal" data-target="#modal_cambiar_contrasenia"
+                        <a data-bs-toggle="modal" data-bs-target="#modal_cambiar_contrasenia"
                             onclick="datos_modal_contra({{ $id_usuario_contrasenia = $usuario->id }})">
                             <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor"
                                 class="bi bi-key" viewBox="0 0 16 16">
@@ -129,7 +129,7 @@
                 </div>
 
                 <div class="modal-footer">
-                    <button class="bmodal_no" data-dismiss="modal">
+                    <button class="bmodal_no" data-bs-dismiss="modal">
                         <span>Cancelar</span>
                     </button>
                     <button type="submit" class="bmodal_yes">
@@ -272,7 +272,7 @@
                 </div>
 
                 <div class="modal-footer">
-                    <button class="bmodal_no " data-dismiss="modal">
+                    <button class="bmodal_no " data-bs-dismiss="modal">
                         <span>Cancelar</span>
                     </button>
                     <button onclick="v_agregarusuario()" class="bmodal_yes ">
@@ -383,7 +383,7 @@
                 </div>
 
                 <div class="modal-footer">
-                    <button class="bmodal_no" data-dismiss="modal">
+                    <button class="bmodal_no" data-bs-dismiss="modal">
                         <span>Cancelar</span>
                     </button>
                     <button class="bmodal_yes " onclick="validar_actualizar_contrasenia()">
@@ -469,7 +469,7 @@
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button class=" bmodal_no " data-dismiss="modal">
+                    <button class=" bmodal_no " data-bs-dismiss="modal">
                         <span>Cancelar</span>
                         @csrf
                     </button>

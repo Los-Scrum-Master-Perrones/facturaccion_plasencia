@@ -10,7 +10,7 @@
             <a class="nav-link fs-7" href="pendiente_salida"><strong>Reporte</strong></a>
         </li>
         <li class="nav-item">
-            <a class="nav-link fs-7" data-toggle="modal" href="" data-target="#generarremisioncajas">
+            <a class="nav-link fs-7" data-bs-toggle="modal" href="" data-bs-target="#generarremisioncajas">
                 <abbr title="Crear pedido de cajas de madera de alguna orden"><strong>Pedido Cajas</strong></abbr>
             </a>
         </li>
@@ -35,7 +35,7 @@
                             aria-label="Basic mixed styles example">
                             @if (auth()->user()->rol == -1)
                             @else
-                                <button class="btn btn-outline-dark" data-toggle="modal" data-target="#productos_crear">
+                                <button class="btn btn-outline-dark" data-bs-toggle="modal" data-bs-target="#productos_crear">
                                     <abbr title="Agregar nuevo producto al pendiente">
                                         <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14"
                                             fill="white" class="bi bi-plus-circle" viewBox="0 0 16 16">
@@ -162,7 +162,7 @@
             <div class="col">
                 <div class="dropdown">
                     <button class="btn btn-secondary dropdown-toggle form-control" type="button"
-                        id="dropdownMenuButton1" data-toggle="dropdown">
+                        id="dropdownMenuButton1" data-bs-toggle="dropdown">
                         Categorias
                     </button>
                     <ul class="dropdown-menu " aria-labelledby="dropdownMenuButton1">
@@ -198,7 +198,7 @@
             <div class="col">
                 <div class="dropdown">
                     <button class="btn btn-secondary dropdown-toggle form-control" type="button"
-                        id="dropdownMenuButton1" data-toggle="dropdown">
+                        id="dropdownMenuButton1" data-bs-toggle="dropdown">
                         Presentacion
                     </button>
                     <ul class="dropdown-menu " aria-labelledby="dropdownMenuButton1">
@@ -383,7 +383,7 @@
 
                     <div class="modal-header">
                         <h5 id="staticBackdropLabel"><strong>Agregar producto</strong></h5>
-                        <button type="button" id="cerrar_modal_productos_crear" class="btn btn-close" data-dismiss="modal" aria-label="Close">
+                        <button type="button" id="cerrar_modal_productos_crear" class="btn btn-close" data-bs-dismiss="modal" aria-label="Close">
                     </div>
 
                     <div class="modal-body">
@@ -564,7 +564,7 @@
                     </div>
 
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-danger" data-dismiss="modal"><span>Cancelar</span>
+                        <button type="button" class="btn btn-danger" data-bs-dismiss="modal"><span>Cancelar</span>
                             @csrf
                         </button>
                         <button onclick="insertar_nuevo_pendiente()" class="btn btn-success"> <span>Guardar</span>
@@ -659,7 +659,7 @@
                             @if (auth()->user()->rol == -1)
                             @else
                                 <td style="width:120px;">
-                                    <a data-toggle="modal" data-target="#modal_eliminar_detalle"
+                                    <a data-bs-toggle="modal" data-bs-target="#modal_eliminar_detalle"
                                         onclick="datos_modal_eliminar({{ $datos->id_pendiente }})" href="#">
                                         <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15"
                                             fill="currentColor" class="bi bi-trash-fill" viewBox="0 0 16 16">
@@ -667,8 +667,8 @@
                                                 d="M2.5 1a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1H3v9a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V4h.5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1H2.5zm3 4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5zM8 5a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7A.5.5 0 0 1 8 5zm3 .5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 1 0z" />
                                         </svg>
                                     </a>
-                                    <a style=" width:10px; height:10px;" data-toggle="modal" href="#"
-                                        data-target="#modal_actualizar" type="submit"
+                                    <a style=" width:10px; height:10px;" data-bs-toggle="modal" href="#"
+                                        data-bs-target="#modal_actualizar" type="submit"
                                         onclick="datos_modal_actualizar({{ $datos->id_pendiente }})">
                                         <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15"
                                             fill="currentColor" class="bi bi-pencil-square" viewBox="0 0 16 16">
@@ -715,7 +715,7 @@
                     <h5 id="staticBackdropLabel">
                         <strong>Descripción del producto: </strong><span id="tituloupdate" name="tituloupdate"></span>
                     </h5>
-                    <button id='boton_cerrar_modal_actualizar' type="button" class="btn-close" data-dismiss="modal" aria-label="Close"></button>
+                    <button id='boton_cerrar_modal_actualizar' type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
                     <div class="row">
@@ -752,7 +752,7 @@
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button class="btn btn-danger" data-dismiss="modal">
+                    <button class="btn btn-danger" data-bs-dismiss="modal">
                         <span>Cancelar</span>
                     </button>
                     <button type="button" class="btn btn-success" onclick="guardar_actualizacion()">
@@ -772,7 +772,7 @@
                 <div class="modal-header">
                     <h5 class="modal-title" id="staticBackdropLabel">Eliminar <strong><input value=""
                                 id="txt_usuarioE" name="txt_usuarioE" style="border:none;"></strong> </h5>
-                    <button id="boton_cerrar_modal_eliminar_detalle" type="button" class="btn-close" data-dismiss="modal" aria-label="Close"></button>
+                    <button id="boton_cerrar_modal_eliminar_detalle" type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
                     <input name="id_pendiente3" id="id_pendiente3" value="" hidden />
@@ -780,7 +780,7 @@
                     ¿Estás seguro que quieres eliminar este registro del pendiente?
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-danger" data-dismiss="modal">
+                    <button type="button" class="btn btn-danger" data-bs-dismiss="modal">
                         <span>Cancelar</span>
                     </button>
                     <button type="button" onclick="eliminar_pendiente()" class="btn btn-success">
@@ -801,7 +801,7 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <h6 class="modal-title" id="staticBackdropLabel">PEDIDO CAJAS DE MADERA<strong></strong> </h6>
-                    <button type="button" class="btn btn-close" data-dismiss="modal" aria-label="Close"></button>
+                    <button type="button" class="btn btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <form method="post" action="{{ route('pendientecajapedido') }}">
                     @csrf
@@ -812,7 +812,7 @@
                         <input class="form-control" name="orden_sistema" id="orden_sistema" value="" />
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-danger" data-dismiss="modal">
+                        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">
                             <span>Cancelar</span>
                         </button>
                         <button type="submit" class="btn btn-success">

@@ -132,7 +132,7 @@
                         <tr>
                             <td style=" text-align:center;">{{ $count }}</td>
                             <td>
-                                <a data-toggle="modal" data-target="#material_actualizar" style="width:10px; height:10px;"
+                                <a data-bs-toggle="modal" data-bs-target="#material_actualizar" style="width:10px; height:10px;"
                                     href="#" onclick="editar_material({{$material->id}},
                                                                             '{{$material->codigo}}',
                                                                             '{{$material->marca}}',

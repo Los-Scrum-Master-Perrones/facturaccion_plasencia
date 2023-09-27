@@ -64,8 +64,8 @@
                             </svg>
                         </button>
                     </form>
-                    <button class="botonprincipal  mr-sm-2 " style="width:120px;" data-toggle="modal"
-                        data-target="#modal_agregar_lista">Agregar</button>
+                    <button class="botonprincipal  mr-sm-2 " style="width:120px;" data-bs-toggle="modal"
+                        data-bs-target="#modal_agregar_lista">Agregar</button>
                     <form action="{{Route('exportar_cajas')}}">
                         @csrf
                         <button type="submit" class="botonprincipal" style="width:120px;">Exportar</button>
@@ -101,7 +101,7 @@
                             <td>{{$caja->marca}}</td>
                             <td>{{$caja->existencia}}</td>
                             <td style=" text-align:center;">
-                                <a data-toggle="modal" data-target="#modal_editar_caja"
+                                <a data-bs-toggle="modal" data-bs-target="#modal_editar_caja"
                                     onclick="datos_modal_editar({{$id_usuario_basicoE= $caja->id}})">
                                     <svg xmlns="http://www.w3.org/2000/svg" width=25 height="25" fill="black"
                                         class="bi bi-pencil-square" viewBox="0 0 16 16">
@@ -168,7 +168,7 @@
                     </div>
 
                     <div class="modal-footer">
-                        <button type="button" class=" bmodal_no " data-dismiss="modal">
+                        <button type="button" class=" bmodal_no " data-bs-dismiss="modal">
                             <span>Cancelar</span>
                         </button>
                         <button type="submit" class="bmodal_yes">
@@ -214,7 +214,7 @@
                         </div>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="bmodal_no " data-dismiss="modal">
+                        <button type="button" class="bmodal_no " data-bs-dismiss="modal">
                             <span>Cancelar</span>
                         </button>
                         <button type="submit" class=" bmodal_yes ">

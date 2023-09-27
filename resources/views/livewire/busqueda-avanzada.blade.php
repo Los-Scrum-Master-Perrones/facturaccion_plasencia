@@ -103,7 +103,7 @@
             <div class="col">
                 <div class="dropdown">
                     <button class="btn btn-secondary dropdown-toggle form-control" type="button"
-                        id="dropdownMenuButton1" data-toggle="dropdown">
+                        id="dropdownMenuButton1" data-bs-toggle="dropdown">
                         Presentacion
                     </button>
                     <ul class="dropdown-menu " aria-labelledby="dropdownMenuButton1">
@@ -135,7 +135,7 @@
                 </div>
             </div>
 
-            
+
             <div class="col-sm">
                 <button wire:click="exportar_reporte()" class=" botonprincipal">Exportar</button>
             </div>
@@ -184,7 +184,7 @@
                                 <td>{{$producto->nombre}}</td>
                                 <td>{{$producto->capas}}</td>
                                 <td>{{$producto->vitola}}</td>
-                                <td>{{$producto->tipo_empaque}}</td> 
+                                <td>{{$producto->tipo_empaque}}</td>
                                 <td>{{$producto->presentacion}}</td>
                                 <td style="text-align: center">{{$producto->cantidad_cajas}}</td>
                                 <td style="text-align: center">{{(int)$producto->total_tabacos}}</td>

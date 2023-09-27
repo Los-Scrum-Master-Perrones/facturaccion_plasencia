@@ -32,8 +32,8 @@
                             {{ $programacion ->mes_contenedor }}</strong></h4>
                 @endforeach
             </div>
-            
-            
+
+
             <div class="col-sm-4" style="text-align:right;">
                 <form action="{{ Route('exportar_programacion_terminado') }}" id="formver" name="formver">
                     <input name="buscar" id="buscar" value="{{ isset($busqueda)?$busqueda:null }}"
@@ -41,7 +41,7 @@
                         placeholder="Búsqueda por Marca, Nombre, Vitola e Item" style="width:100%; padding:right;">
             </div>
 
-            
+
             <div class="col-sm-1" style="text-align:right;">
 
                 <input value="{{ isset($id_tov)?$id_tov:0 }}" name="id_tov" id="id_tov" hidden
@@ -54,7 +54,7 @@
             <div hidden class="col-sm-1" style="text-align:right;">
 
                 <button class="botonprincipal"  style="width:60px;"
-                data-toggle="modal" data-target="#Remision">Generar Remision</button>
+                data-bs-toggle="modal" data-bs-target="#Remision">Generar Remision</button>
 
             </div>
 
@@ -66,7 +66,7 @@
 
 
 
-    
+
 
 
     <div style="width:100%; padding-left:25px; padding-right:10px;">
@@ -187,35 +187,35 @@
                                         <td style="text-align:center;">
                                         <a class="" onclick="cargardatos('{{$detalles_programacione->id}}',
                                         '{{$detalles_programacione->item}}','{{$detalles_programacione->id_programacion}}',
-                                        '{{$detalles_programacione->numero_orden}}','{{$detalles_programacione->ordenes}}',)" 
-                                        data-toggle="modal" data-target="#modal-listos">
+                                        '{{$detalles_programacione->numero_orden}}','{{$detalles_programacione->ordenes}}',)"
+                                        data-bs-toggle="modal" data-bs-target="#modal-listos">
                                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
                                         class="bi bi-bag-plus-fill" viewBox="0 0 16 16">
                                         <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
-                                        <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 
+                                        <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0
                                         0 1 0-1h3v-3A.5.5 0 0 1 8 4z"/>
                                         </svg>
                                         </a></td>
 
-                                        
+
                                         <td class="xokers">
                                             <a id="{{'xokers'.$acum}}" href="data:image/png;base64,{{DNS2D::getBarcodePNG(strval($detalles_programacione->id), 'QRCODE')}}"
                                                 download="{{ $detalles_programacione->marca.' '. $detalles_programacione->vitola }}">
                                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
                                         class="bi bi-bag-plus-fill" viewBox="0 0 16 16">
-                                        <path d="M0 .5A.5.5 0 0 1 .5 0h3a.5.5 0 0 1 0 1H1v2.5a.5.5 0 0 1-1 0v-3Zm12 0a.5.5 0 0 1 .5-.5h3a.5.5 0 0 1 
+                                        <path d="M0 .5A.5.5 0 0 1 .5 0h3a.5.5 0 0 1 0 1H1v2.5a.5.5 0 0 1-1 0v-3Zm12 0a.5.5 0 0 1 .5-.5h3a.5.5 0 0 1
                                         .5.5v3a.5.5 0 0 1-1 0V1h-2.5a.5.5 0 0 1-.5-.5ZM.5 12a.5.5 0 0 1 .5.5V15h2.5a.5.5 0 0 1 0 1h-3a.5.5 0 0 1-.5
-                                        -.5v-3a.5.5 0 0 1 .5-.5Zm15 0a.5.5 0 0 1 .5.5v3a.5.5 0 0 1-.5.5h-3a.5.5 0 0 1 0-1H15v-2.5a.5.5 0 0 
+                                        -.5v-3a.5.5 0 0 1 .5-.5Zm15 0a.5.5 0 0 1 .5.5v3a.5.5 0 0 1-.5.5h-3a.5.5 0 0 1 0-1H15v-2.5a.5.5 0 0
                                         1 .5-.5ZM4 4h1v1H4V4Z"/>
                                         <path d="M7 2H2v5h5V2ZM3 3h3v3H3V3Zm2 8H4v1h1v-1Z"/>
                                         <path d="M7 9H2v5h5V9Zm-4 1h3v3H3v-3Zm8-6h1v1h-1V4Z"/>
-                                        <path d="M9 2h5v5H9V2Zm1 1v3h3V3h-3ZM8 8v2h1v1H8v1h2v-2h1v2h1v-1h2v-1h-3V8H8Zm2 2H9V9h1v1Zm4 2h-1v1h-2v1h3v-2Zm-4 
+                                        <path d="M9 2h5v5H9V2Zm1 1v3h3V3h-3ZM8 8v2h1v1H8v1h2v-2h1v2h1v-1h2v-1h-3V8H8Zm2 2H9V9h1v1Zm4 2h-1v1h-2v1h3v-2Zm-4
                                         2v-1H8v1h2Z"/>
                                          <path d="M12 9h2V8h-2v1Z"/>
                                     </svg>
                                             </a>
                                         </td>
-                                        
+
                                         <td class="xokers">
                                             <button wire:click="item(
                                             '{{$detalles_programacione->sampler_descri}}',
@@ -225,13 +225,13 @@
                                             ,'{{$detalles_programacione->id}}')">
                                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
                                         class="bi bi-bag-plus-fill" viewBox="0 0 16 16">
-                                        <path d="M0 .5A.5.5 0 0 1 .5 0h3a.5.5 0 0 1 0 1H1v2.5a.5.5 0 0 1-1 0v-3Zm12 0a.5.5 0 0 1 .5-.5h3a.5.5 0 0 1 
+                                        <path d="M0 .5A.5.5 0 0 1 .5 0h3a.5.5 0 0 1 0 1H1v2.5a.5.5 0 0 1-1 0v-3Zm12 0a.5.5 0 0 1 .5-.5h3a.5.5 0 0 1
                                         .5.5v3a.5.5 0 0 1-1 0V1h-2.5a.5.5 0 0 1-.5-.5ZM.5 12a.5.5 0 0 1 .5.5V15h2.5a.5.5 0 0 1 0 1h-3a.5.5 0 0 1-.5
-                                        -.5v-3a.5.5 0 0 1 .5-.5Zm15 0a.5.5 0 0 1 .5.5v3a.5.5 0 0 1-.5.5h-3a.5.5 0 0 1 0-1H15v-2.5a.5.5 0 0 
+                                        -.5v-3a.5.5 0 0 1 .5-.5Zm15 0a.5.5 0 0 1 .5.5v3a.5.5 0 0 1-.5.5h-3a.5.5 0 0 1 0-1H15v-2.5a.5.5 0 0
                                         1 .5-.5ZM4 4h1v1H4V4Z"/>
                                         <path d="M7 2H2v5h5V2ZM3 3h3v3H3V3Zm2 8H4v1h1v-1Z"/>
                                         <path d="M7 9H2v5h5V9Zm-4 1h3v3H3v-3Zm8-6h1v1h-1V4Z"/>
-                                        <path d="M9 2h5v5H9V2Zm1 1v3h3V3h-3ZM8 8v2h1v1H8v1h2v-2h1v2h1v-1h2v-1h-3V8H8Zm2 2H9V9h1v1Zm4 2h-1v1h-2v1h3v-2Zm-4 
+                                        <path d="M9 2h5v5H9V2Zm1 1v3h3V3h-3ZM8 8v2h1v1H8v1h2v-2h1v2h1v-1h2v-1h-3V8H8Zm2 2H9V9h1v1Zm4 2h-1v1h-2v1h3v-2Zm-4
                                         2v-1H8v1h2Z"/>
                                          <path d="M12 9h2V8h-2v1Z"/>
                                     </svg>
@@ -242,7 +242,7 @@
                                 @endforeach
 
                                 <tr>
-                                    <td style="text-align:center;" colspan="9"> 
+                                    <td style="text-align:center;" colspan="9">
                                     <FONT SIZE=3 for="" style="font-family: fantasy;" class="form-label">
                                                                                 TOTAL
                                         </FONT></td>
@@ -257,7 +257,7 @@
                     </div>
                 </div>
             </div>
-            
+
         </div>
 
     </div>
@@ -273,7 +273,7 @@
                     <div class="modal-header">
 
                         <h5 class="modal-title" id="staticBackdropLabel" style="width:450px; text-align:center; font-size:20px;">Cargar Diario</h5>
-                        <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close"></button>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
                         <div class="mb-3 col">
@@ -290,10 +290,10 @@
                     </div>
                     <div class="modal-footer">
                         <button style=" background: #b39f64; color: #ecedf1;" type="button" class=" btn-info-claro "
-                            data-dismiss="modal">
+                            data-bs-dismiss="modal">
                             <span>Cancelar</span>
                         </button>
-                        <button type="submit" onclick="updatelisto()" data-dismiss="modal" class="bmodal_yes">
+                        <button type="submit" onclick="updatelisto()" data-bs-dismiss="modal" class="bmodal_yes">
                             <span>Agregar</span>
                         </button>
                     </div>
@@ -311,7 +311,7 @@
                     <div class="modal-header">
 
                         <h5 class="modal-title" id="staticBackdropLabel" style="width:450px; text-align:center; font-size:20px;">Generar Remision</h5>
-                        <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close"></button>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <form method="post" action="{{route("programacionterminadoremision")}}">
                     @csrf
@@ -323,7 +323,7 @@
                     </div>
                     <div class="modal-footer">
                         <button style=" background: #b39f64; color: #ecedf1;" type="button" class=" btn-info-claro "
-                            data-dismiss="modal">
+                            data-bs-dismiss="modal">
                             <span>Cancelar</span>
                         </button>
                         <button style=" background: #b39f64; color: #ecedf1;" type="submit">
@@ -336,7 +336,7 @@
         </div>
 
 
- 
+
     <!-- FIN MODAL  ACTUALIZAR SALDO -->
 
 
@@ -349,7 +349,7 @@
 
                         <h5 class="modal-title" id="staticBackdropLabel"
                             style="width:450px; text-align:center; font-size:20px;">Exportar Ficha</h5>
-                        <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close"></button>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div style=""  class="modal-body">
                         <div id="etiqueta" style="width:10.5cm; height:17cm;">
@@ -443,7 +443,7 @@
                     </div>
                     <div class="modal-footer">
                         <button style=" background: #b39f64; color: #ecedf1;" type="button" class=" btn-info-claro "
-                            data-dismiss="modal">
+                            data-bs-dismiss="modal">
                             <span>Cancelar</span>
                         </button>
                         <button onclick="generarFicha()" class=" btn-info float-right" style="margin-right: 10px">
@@ -489,7 +489,7 @@
                 for (let i = 1; i <= cant; i++) {
                     let elemento= "#xokers"+i;
                     $(elemento)[0].click();
-                    
+
                 }
             }
 
@@ -523,7 +523,7 @@
             click(link);
             document.body.removeChild(link);
             }
-            
+
 
             function limpiartable(){
                 $('#tablechange').empty();

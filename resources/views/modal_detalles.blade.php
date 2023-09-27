@@ -11,23 +11,23 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 style="font-size:20px; width:3000px; text-align:center; font:bold" class="" id="staticBackdropLabel">Detalles del producto</h5>
-                    <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close"></button>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
 
                 <div class="modal-body">
-                
+
                     <div class="card-body">
-                   
+
                         <div class="row">
                         @foreach($producto_unico as $producto_uni)
                            <h3>{{$producto_uni->item}} </h3>
                         @endforeach
                         </div>
 
-                      
+
 
                 <div class="modal-footer">
-                   
+
 
 
                 </div>

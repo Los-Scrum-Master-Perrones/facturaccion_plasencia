@@ -153,7 +153,7 @@
 
                             <td style="text-align:center">
 
-                                <a data-toggle="modal" data-target="#modal_eliminar_detalle"
+                                <a data-bs-toggle="modal" data-bs-target="#modal_eliminar_detalle"
                                     onclick="datos_modal_eliminar({{ $detalle_provicional->id }})"
                                     href="{{$ids = $detalle_provicional->id}}">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
@@ -163,8 +163,8 @@
                                     </svg>
                                 </a>
 
-                                <a style=" width:10px; height:10px;" data-toggle="modal" href=""
-                                    data-target="#modal_actualizar_saldo" type="submit"
+                                <a style=" width:10px; height:10px;" data-bs-toggle="modal" href=""
+                                    data-bs-target="#modal_actualizar_saldo" type="submit"
                                     onclick="datos_modal_actualizar({{$detalle_provicional->id}})">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor"
                                         class="bi bi-pencil-square" viewBox="0 0 16 16">
@@ -207,7 +207,7 @@
 
                         <h5 class="modal-title" id="staticBackdropLabel"
                             style="width:450px; text-align:center; font-size:20px;">Actualizar saldo</h5>
-                        <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close"></button>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
                         <div class="mb-3 col">
@@ -221,7 +221,7 @@
                     </div>
                     <div class="modal-footer">
                         <button style=" background: #b39f64; color: #ecedf1;" type="button" class=" btn-info-claro "
-                            data-dismiss="modal">
+                            data-bs-dismiss="modal">
                             <span>Cancelar</span>
                         </button>
                         <button class=" btn-info float-right" style="margin-right: 10px">
@@ -307,14 +307,14 @@
                     <div class="modal-header">
                         <h5 class="modal-title" id="staticBackdropLabel">Eliminar a <strong><input value=""
                                     id="txt_usuarioE" name="txt_usuarioE" style="border:none;"></strong> </h5>
-                        <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close"></button>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
                         ¿Estás seguro que quieres eliminar este registro?
                     </div>
                     <div class="modal-footer">
                         <button style=" background: #b39f64; color: #ecedf1;" type="button" class=" btn-info-claro "
-                            data-dismiss="modal">
+                            data-bs-dismiss="modal">
                             <span>Cancelar</span>
                         </button>
                         <button type="submit" class=" btn-info ">
@@ -333,13 +333,13 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title" id="staticBackdropLabel">Advertencia</h5>
-                    <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close"></button>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
                     ¿Estás seguro que quieres limpiar estos registros?
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="bmodal_no" data-dismiss="modal">
+                    <button type="button" class="bmodal_no" data-bs-dismiss="modal">
                         <span>Cancelar</span>
                     </button>
                     <button wire:click="eliminar_datos()" class=" bmodal_yes ">

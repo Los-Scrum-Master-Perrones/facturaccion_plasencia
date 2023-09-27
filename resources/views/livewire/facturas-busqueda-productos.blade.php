@@ -592,7 +592,7 @@
                     <div class="modal-header">
                         <h5 class="modal-title" id="staticBackdropLabel"
                             style="width:450px; text-align:center; font-size:20px;">Actualizar Venta</h5>
-                        <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close"></button>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
                         <div class="mb-3 col">
@@ -618,7 +618,7 @@
                     </div>
                     <div class="modal-footer">
                         <button style=" background: #b39f64; color: #ecedf1;" type="button" class=" btn-info-claro "
-                            data-dismiss="modal">
+                            data-bs-dismiss="modal">
                             <span>Cancelar</span>
                         </button>
                         <button class=" btn-info float-right" style="margin-right: 10px">

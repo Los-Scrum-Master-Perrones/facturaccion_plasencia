@@ -30,18 +30,18 @@
 
 
 
-<div class="container" style="max-width:100%; "> 
+<div class="container" style="max-width:100%; ">
 <div class="row"  style="width:100%%; text-align:right;">
 <div class="col">
 
-<input   data-toggle="modal"  style="width:20%; font-size:12px " class=" botonprincipal mr-sm-2 "  data-target="#modal_actualizar" type="submit"  value="Agregar producto al inventario">
-                  
+<input   data-bs-toggle="modal"  style="width:20%; font-size:12px " class=" botonprincipal mr-sm-2 "  data-bs-target="#modal_actualizar" type="submit"  value="Agregar producto al inventario">
+
 </div>
 </div>
 
 <br>
-               
-<div class="panel-body" style="padding:0px;">   
+
+<div class="panel-body" style="padding:0px;">
             <div style="width:100%; padding-left:0px;   font-size:10px;   overflow-x: display; overflow-y: auto;
      height:500px;">
                         <table class="table table-light"
@@ -77,7 +77,7 @@
                             <td>{{$producto->Existencia}}</td>
                             <td style=" text-align:center;">
 
-                            <a data-toggle="modal" data-target="#modal_editar_producto" onclick ="datos_modal_editar({{$id_producto_basicoE= $producto->id}})">
+                            <a data-bs-toggle="modal" data-bs-target="#modal_editar_producto" onclick ="datos_modal_editar({{$id_producto_basicoE= $producto->id}})">
                             <svg xmlns="http://www.w3.org/2000/svg" width=25 height="25" fill="black" class="bi bi-pencil-square" viewBox="0 0 16 16">
                     <path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456l-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z"/>
                     <path fill-rule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z"/>
@@ -90,35 +90,35 @@
                             </tbody>
                         </table>
 
-              
+
                 </div>
                 </div>
 
   </div>
 
 
-          
+
 
         <script type="text/javascript">
-    function datos_modal_editar(id){ 
+    function datos_modal_editar(id){
 
 var datas = '<?php echo json_encode($listaproductoseditar);?>';
 var data = JSON.parse(datas);
 
-for (var i = 0; i < data.length; i++) {  
-  if(data[i].id === id){    
+for (var i = 0; i < data.length; i++) {
+  if(data[i].id === id){
      document.formulario_mostrarEP.id_productoE.value = data[i].id;
      document.formulario_mostrarEP.existencia_productoE.value = data[i].Existencia;
      document.formulario_mostrarEP.orden_pedido.value = data[i].orden_pedido;
      document.formulario_mostrarEP.orden_sistema.value = data[i].orden_sistema;
-  
+
     }
     }
-    }   
+    }
 </script>
-       
-       
-       
+
+
+
     <!-- INICIO DEL MODAL NUEVO PRODUCTO -->
 
     <form action="{{Route('insertar_pro')}} " method="POST">
@@ -130,7 +130,7 @@ for (var i = 0; i < data.length; i++) {
 
                     <div class="modal-header">
                         <h5 id="staticBackdropLabel"><strong>Agregar producto</strong></h5>
-                        <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close"></button>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
 
                     <div class="modal-body">
@@ -142,9 +142,9 @@ for (var i = 0; i < data.length; i++) {
                                     <input name="lote" id="lote" style="font-size:16px; height:30px;" class="form-control" required
                                         type="text" autocomplete="off">
                                 </div>
-                         
 
-                            
+
+
 
                             <div class="mb-3 col">
                                     <label for="txt_vitola" class="form-label">Marca</label>
@@ -169,14 +169,14 @@ for (var i = 0; i < data.length; i++) {
                                         @endforeach
                                     </select>
                                 </div>
-                               
+
 
                                 </div>
 
                                 <div class="row">
-                               
 
-                            
+
+
 
                                 <div class="mb-3 col">
                                     <label for="txt_buenos" class="form-label">Vitola</label>
@@ -204,14 +204,14 @@ for (var i = 0; i < data.length; i++) {
                                 </div>
 
 
-                    
+
 
                                 <div class="mb-3 col">
                                     <label for="txt_total" class="form-label">Existencia</label>
                                     <input name="existencia" id="existencia"  style="height:30px;"
                                         class="form-control" required type="text" autocomplete="off">
                                 </div>
-                               
+
                             </div>
 
 
@@ -221,7 +221,7 @@ for (var i = 0; i < data.length; i++) {
 
                     <div class="modal-footer">
                         <button  type="button" class=" bmodal_no"
-                            data-dismiss="modal"><span >Cancelar</span>
+                            data-bs-dismiss="modal"><span >Cancelar</span>
                             @csrf
                         </button>
                         <button onclick="agregarproducto()"class=" bmodal_yes "> <span>Guardar</span> </button>
@@ -234,20 +234,20 @@ for (var i = 0; i < data.length; i++) {
     <!-- FIN DEL MODAL NUEVO PRODUCTO -->
 
  <!-- INICIO MODAL CAMBIAR EXISTENCIA -->
- 
+
  <form id = "formulario_mostrarEP" name = "formulario_mostrarEP" action = "{{Route('editar_existencia_producto')}}"  method="POST">
 @csrf
 <?php use App\Http\Controllers\ImportExcelController; ?>
-<div hidden>{{$id_producto_basicoE=0}}</div>  
+<div hidden>{{$id_producto_basicoE=0}}</div>
 
 <div class="modal fade" id="modal_editar_producto" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true" style="opacity:.9;background:#212529;">
   <div class="modal-dialog modal-dialog-centered" >
     <div class="modal-content">
-      
+
       <div class="modal-header">
         <h5 class="modal-title" id="staticBackdropLabel">Editar existencia Producto</h5>
       </div>
-      
+
       <div class="modal-body">
         <input id="id_productoE" name = "id_productoE"   value ="" hidden />
 
@@ -265,11 +265,11 @@ for (var i = 0; i < data.length; i++) {
         <input  class="form-control" id="orden_sistema" name = "orden_sistema" value =""  />
         </div>
         </div>
-      
+
       </div>
 
       <div class="modal-footer" >
-        <button  type="button" class=" bmodal_no " data-dismiss="modal" >
+        <button  type="button" class=" bmodal_no " data-bs-dismiss="modal" >
         <span>Cancelar</span>
         </button>
         <button type="submit" class="bmodal_yes"   >
@@ -295,10 +295,10 @@ for (var i = 0; i < data.length; i++) {
     <div class="modal-content">
       <div class="modal-header">
         <h5 class="modal-title" id="staticBackdropLabel">Agregar caja <strong><input  id="txt_usuarioE" name= "txt_usuarioE" style="border:none;"></strong> </h5>
-       
+
       </div>
       <div class="modal-body">
-    
+
 
       <div class="row">
         <div class="mb-3 col">
@@ -309,7 +309,7 @@ for (var i = 0; i < data.length; i++) {
         </div>
         <div class="mb-3 col">
         <input name="marca"  class="form-control " style="width:100%;"   placeholder="Marca" >
-        </div>  
+        </div>
         <div class="mb-3 col">
         <input name="existencia"  class="form-control " style="width:100%;"   placeholder="Existencia" >
         </div>
@@ -319,13 +319,13 @@ for (var i = 0; i < data.length; i++) {
 
       </div>
       <div class="modal-footer" >
-        <button  type="button" class=" btn botonprincipal " data-dismiss="modal" >
+        <button  type="button" class=" btn botonprincipal " data-bs-dismiss="modal" >
             <span>Cancelar</span>
         </button>
         <button type="submit" class=" btn botonprincipal  "   >
             <span>Agregar</span>
-        </button>   
-      
+        </button>
+
       </div>
     </div>
   </div>

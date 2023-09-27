@@ -51,8 +51,8 @@
             </div>
             <div class="row">
                 <div class="col-sm">
-                    <button class="btn botonprincipal form-control" data-toggle="modal"
-                        data-target="#modal_nuevoproducto" style="width:200px;">Nuevo
+                    <button class="btn botonprincipal form-control" data-bs-toggle="modal"
+                    data-bs-target="#modal_nuevoproducto" style="width:200px;">Nuevo
                         producto</button>
                 </div>
 

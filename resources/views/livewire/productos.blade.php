@@ -23,8 +23,6 @@
                 href="{{ route('precio.catalogo') }}"><strong>Catalogo de Precios</strong></a>
         </li>
     </ul>
-
-    <br>
     <div class="container" style="max-width:100%;">
         <div class="card" style="padding:0px;">
             <div class="card-header">
