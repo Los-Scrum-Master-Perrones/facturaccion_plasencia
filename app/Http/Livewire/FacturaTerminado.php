@@ -74,7 +74,7 @@ class FacturaTerminado extends Component
 
     public $detalles_produtos;
     public $aereo;
-    public $formatos_impresiones = '1';
+    public $formatos_impresiones = '4';
 
     //TODO Busqueda pendiente factura
     public $items;
@@ -206,45 +206,45 @@ class FacturaTerminado extends Component
         $this->titulo_mes = strftime("%B", strtotime($Nueva_Fecha));
         $this->titulo_cliente = $this->cliente;
 
+        $usosArray = [];
+        $usosArray2 = [];
+        $precio_catalogo = [];
+        $this->tuplas_conteo =0;
+        $this->datos_pendiente =[];
+        $this->series_p = [];
+        $this->detalles_venta = [];
 
-        $precio1= DB::table('clase_productos')
-        ->select('codigo_precio')->distinct()->get();
+        if($this->ventanas == 1){
+            $precio1= DB::table('clase_productos')
+            ->select('codigo_precio')->distinct()->get();
 
-        $precio2=DB::table('detalle_clase_productos')
-        ->select('otra_descripcion as codigo_precio')->distinct()->get();
+            $precio2=DB::table('detalle_clase_productos')
+            ->select('otra_descripcion as codigo_precio')->distinct()->get();
 
-        $this->series_p = $precio1->concat($precio2);
+            $this->series_p = $precio1->concat($precio2);
 
-        $this->tuplas_conteo = DB::select(
-            'call buscar_pendiente_conteo(:uno,:dos,:tres,:cuatro,:pres,:seis,:siete,:paginacion,
-        :pa_items,:pa_orden_sist,:pa_ordenes,
-        :pa_marcas,:pa_vitolas,:pa_nombre,:pa_capas,
-        :pa_empaques,:pa_meses,:r_mill )',
-            [
-                'uno' =>  $this->r_uno,
-                'dos' =>  $this->r_dos,
-                'tres' =>  $this->r_tres,
-                'cuatro' =>  $this->r_cuatro,
-                'pres' =>  $this->r_cinco,
-                'seis' =>  $this->r_seis,
-                'siete' =>  $this->r_siete,
-                'paginacion' =>  -1,
-                'pa_marcas' =>  $this->busqueda_marcas_p,
-                'pa_nombre' =>  $this->busqueda_nombre_p,
-                'pa_vitolas' =>  $this->busqueda_vitolas_p,
-                'pa_capas' =>  $this->busqueda_capas_p,
-                'pa_empaques' =>  $this->busqueda_empaques_p,
-                'pa_meses' =>  $this->busqueda_mes_p,
-                'pa_items' =>  $this->busqueda_items_p,
-                'pa_orden_sist' =>  $this->busqueda_ordenes_p,
-                'pa_ordenes' =>  $this->busqueda_hons_p,
-		'r_mill' =>  $this->r_mill
 
-            ]
-        )[0]->total;
 
-        if ($this->todos == 1) {
-            $this->datos_pendiente = DB::select(
+            $this->detalles_venta = DB::select('call mostrar_detalle_factura(?,?,?,?,?)',[
+                $this->aereo, $this->items_b, $this->ordens_b, $this->codigo_b, $this->t_empaque_b
+            ]);
+
+            $this->num_factura_sistema = DB::select('call traer_num_factura()')[0]->factura_interna;
+
+
+            $usos = DB::select('call mostrar_precios_factura()');
+
+
+            $precio_catalogo = DB::select('call mostrar_precios_factura_catalogo()');
+
+
+            foreach ($usos as $uso) {
+                $usosArray[$uso->codigo.'-'.$uso->anio] =  $uso;
+                $usosArray2[$uso->codigo.'-'.$uso->anio][] =  $uso;
+            }
+        }else{
+
+            $pendiente = DB::select(
                 'call buscar_pendiente(:uno,:dos,:tres,:cuatro,:pres,:seis,:siete,:paginacion,
             :pa_items,:pa_orden_sist,:pa_ordenes,
             :pa_marcas,:pa_vitolas,:pa_nombre,:pa_capas,
@@ -267,95 +267,47 @@ class FacturaTerminado extends Component
                     'pa_items' =>  $this->busqueda_items_p,
                     'pa_orden_sist' =>  $this->busqueda_ordenes_p,
                     'pa_ordenes' =>  $this->busqueda_hons_p,
-		'r_mill' =>  $this->r_mill
+        'r_mill' =>  $this->r_mill
                 ]
-            );
-        } else {
-            $this->datos_pendiente = DB::select(
-                'call buscar_pendiente(:uno,:dos,:tres,:cuatro,:pres,:seis,:siete,:paginacion,
-                :pa_items,:pa_orden_sist,:pa_ordenes,
-                :pa_marcas,:pa_vitolas,:pa_nombre,:pa_capas,
-                :pa_empaques,:pa_meses,:r_mill)',
-                [
-                    'uno' =>  $this->r_uno,
-                    'dos' =>  $this->r_dos,
-                    'tres' =>  $this->r_tres,
-                    'cuatro' =>  $this->r_cuatro,
-                    'pres' =>  $this->r_cinco,
-                    'seis' =>  $this->r_seis,
-                    'siete' =>  $this->r_siete,
-                    'paginacion' =>  $this->paginacion,
-                    'pa_marcas' =>  $this->busqueda_marcas_p,
-                    'pa_nombre' =>  $this->busqueda_nombre_p,
-                    'pa_vitolas' =>  $this->busqueda_vitolas_p,
-                    'pa_capas' =>  $this->busqueda_capas_p,
-                    'pa_empaques' =>  $this->busqueda_empaques_p,
-                    'pa_meses' =>  $this->busqueda_mes_p,
-                    'pa_items' =>  $this->busqueda_items_p,
-                    'pa_orden_sist' =>  $this->busqueda_ordenes_p,
-                    'pa_ordenes' =>  $this->busqueda_hons_p,
-		'r_mill' =>  $this->r_mill
-                ]
-            );
-        }
+                );
+            $this->tuplas_conteo = count($pendiente);
 
-
-        if ($this->tuplas_conteo > 0) {
-
-            $this->items_p = [];
-            $this->marcas_p = [];
-            $this->nombre_p = [];
-            $this->vitolas_p = [];
-            $this->capas_p = [];
-            $this->empaques_p = [];
-            $this->mes_p = [];
-            $this->items_p = [];
-            $this->ordenes_p = [];
-            $this->hons_p = [];
-            $this->precios = [];
-
-            foreach ($this->datos_pendiente as $detalles) {
-                array_push($this->items_p, $detalles->item);
-                array_push($this->marcas_p, $detalles->marca);
-                array_push($this->nombre_p, $detalles->nombre);
-                array_push($this->vitolas_p, $detalles->vitola);
-                array_push($this->capas_p, $detalles->capa);
-                array_push($this->empaques_p, $detalles->tipo_empaque);
-                array_push($this->mes_p, $detalles->mes);
-                array_push($this->ordenes_p, $detalles->orden_del_sitema);
-                array_push($this->hons_p, $detalles->orden);
-
+            if ($this->todos == 1) {
+                $this->datos_pendiente = $pendiente;
+            } else {
+                $this->datos_pendiente = DB::select(
+                    'call buscar_pendiente(:uno,:dos,:tres,:cuatro,:pres,:seis,:siete,:paginacion,
+                    :pa_items,:pa_orden_sist,:pa_ordenes,
+                    :pa_marcas,:pa_vitolas,:pa_nombre,:pa_capas,
+                    :pa_empaques,:pa_meses,:r_mill)',
+                    [
+                        'uno' =>  $this->r_uno,
+                        'dos' =>  $this->r_dos,
+                        'tres' =>  $this->r_tres,
+                        'cuatro' =>  $this->r_cuatro,
+                        'pres' =>  $this->r_cinco,
+                        'seis' =>  $this->r_seis,
+                        'siete' =>  $this->r_siete,
+                        'paginacion' =>  $this->paginacion,
+                        'pa_marcas' =>  $this->busqueda_marcas_p,
+                        'pa_nombre' =>  $this->busqueda_nombre_p,
+                        'pa_vitolas' =>  $this->busqueda_vitolas_p,
+                        'pa_capas' =>  $this->busqueda_capas_p,
+                        'pa_empaques' =>  $this->busqueda_empaques_p,
+                        'pa_meses' =>  $this->busqueda_mes_p,
+                        'pa_items' =>  $this->busqueda_items_p,
+                        'pa_orden_sist' =>  $this->busqueda_ordenes_p,
+                        'pa_ordenes' =>  $this->busqueda_hons_p,
+            'r_mill' =>  $this->r_mill
+                    ]
+                );
             }
-
-            $this->marcas_p = array_unique($this->marcas_p);
-            $this->nombre_p = array_unique($this->nombre_p);
-            $this->vitolas_p = array_unique($this->vitolas_p);
-            $this->capas_p = array_unique($this->capas_p);
-            $this->empaques_p = array_unique($this->empaques_p);
-            $this->mes_p = array_unique($this->mes_p);
-            $this->items_p = array_unique($this->items_p);
-            $this->ordenes_p = array_unique($this->ordenes_p);
-            $this->hons_p = array_unique($this->hons_p);
         }
 
-        $this->detalles_venta = DB::select('call mostrar_detalle_factura(?,?,?,?,?)',[
-            $this->aereo, $this->items_b, $this->ordens_b, $this->codigo_b, $this->t_empaque_b
-        ]);
-
-        $this->num_factura_sistema = DB::select('call traer_num_factura()')[0]->factura_interna;
 
 
-        $usos = DB::select('call mostrar_precios_factura()');
 
 
-        $precio_catalogo = DB::select('call mostrar_precios_factura_catalogo()');
-
-        $usosArray = [];
-        $usosArray2 = [];
-        foreach ($usos as $uso) {
-            $usosArray[$uso->codigo.'-'.$uso->anio] =  $uso;
-            $usosArray2[$uso->codigo.'-'.$uso->anio][] =  $uso;
-        }
 
         return view('livewire.factura-terminado',
                     ['precio_sugerido' => $usosArray,
@@ -497,6 +449,73 @@ class FacturaTerminado extends Component
 
         $this->codigo_n = CatalogoMarcasPrecio::orderBy('id', 'desc')->first()->codigo + 1000;
         $this->marcas_precio = CatalogoMarcasPrecio::all('marca');
+
+
+        $datos = DB::select(
+            'call buscar_pendiente_conteo(:uno,:dos,:tres,:cuatro,:pres,:seis,:siete,:paginacion,
+        :pa_items,:pa_orden_sist,:pa_ordenes,
+        :pa_marcas,:pa_vitolas,:pa_nombre,:pa_capas,
+        :pa_empaques,:pa_meses,:r_mill )',
+            [
+                'uno' =>  $this->r_uno,
+                'dos' =>  $this->r_dos,
+                'tres' =>  $this->r_tres,
+                'cuatro' =>  $this->r_cuatro,
+                'pres' =>  $this->r_cinco,
+                'seis' =>  $this->r_seis,
+                'siete' =>  $this->r_siete,
+                'paginacion' =>  -1,
+                'pa_marcas' =>  $this->busqueda_marcas_p,
+                'pa_nombre' =>  $this->busqueda_nombre_p,
+                'pa_vitolas' =>  $this->busqueda_vitolas_p,
+                'pa_capas' =>  $this->busqueda_capas_p,
+                'pa_empaques' =>  $this->busqueda_empaques_p,
+                'pa_meses' =>  $this->busqueda_mes_p,
+                'pa_items' =>  $this->busqueda_items_p,
+                'pa_orden_sist' =>  $this->busqueda_ordenes_p,
+                'pa_ordenes' =>  $this->busqueda_hons_p,
+        'r_mill' =>  $this->r_mill
+
+            ]
+        );
+
+        if (count($datos) > 0) {
+
+            $this->items_p = [];
+            $this->marcas_p = [];
+            $this->nombre_p = [];
+            $this->vitolas_p = [];
+            $this->capas_p = [];
+            $this->empaques_p = [];
+            $this->mes_p = [];
+            $this->items_p = [];
+            $this->ordenes_p = [];
+            $this->hons_p = [];
+            $this->precios = [];
+
+            foreach ($datos as $detalles) {
+                array_push($this->items_p, $detalles->item);
+                array_push($this->marcas_p, $detalles->marca);
+                array_push($this->nombre_p, $detalles->nombre);
+                array_push($this->vitolas_p, $detalles->vitola);
+                array_push($this->capas_p, $detalles->capa);
+                array_push($this->empaques_p, $detalles->tipo_empaque);
+                array_push($this->mes_p, $detalles->mes);
+                array_push($this->ordenes_p, $detalles->orden_del_sitema);
+                array_push($this->hons_p, $detalles->orden);
+
+            }
+
+            $this->marcas_p = array_unique($this->marcas_p);
+            $this->nombre_p = array_unique($this->nombre_p);
+            $this->vitolas_p = array_unique($this->vitolas_p);
+            $this->capas_p = array_unique($this->capas_p);
+            $this->empaques_p = array_unique($this->empaques_p);
+            $this->mes_p = array_unique($this->mes_p);
+            $this->items_p = array_unique($this->items_p);
+            $this->ordenes_p = array_unique($this->ordenes_p);
+            $this->hons_p = array_unique($this->hons_p);
+        }
     }
 
     public function paginacion_numerica($numero)
