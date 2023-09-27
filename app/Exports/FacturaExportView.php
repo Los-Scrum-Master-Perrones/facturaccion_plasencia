@@ -21,9 +21,11 @@ class FacturaExportView implements WithStyles, FromView, ShouldAutoSize,
                                 WithColumnFormatting{
 
     public $nom;
+    public $ecabezado;
 
-    function __construct($nom) {
+    function __construct($nom,$ecabezado) {
         $this->nom = $nom;
+        $this->ecabezado = $ecabezado;
     }
 
     public function view(): View
@@ -43,7 +45,7 @@ class FacturaExportView implements WithStyles, FromView, ShouldAutoSize,
     {
         return [
             // Configura el estilo de borde grueso para un rango de celdas
-            'A18:R18' => [
+            $this->ecabezado[0] => [
                 'borders' => [
                     'allBorders' => [
                         'borderStyle' => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THICK,
@@ -54,7 +56,7 @@ class FacturaExportView implements WithStyles, FromView, ShouldAutoSize,
                     'vertical' => \PhpOffice\PhpSpreadsheet\Style\Alignment::VERTICAL_CENTER,
                 ],
             ],
-            'A19:R19' => [
+            $this->ecabezado[1] => [
                 'borders' => [
                     'allBorders' => [
                         'borderStyle' => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THICK,

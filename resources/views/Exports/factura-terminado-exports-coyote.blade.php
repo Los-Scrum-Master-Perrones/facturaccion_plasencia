@@ -5,13 +5,8 @@
                         <th></th>
                         <th></th>
                         <th></th>
-                        <th></th>
-                        <th></th>
                         <th style="text-align:center; font-family: Tahoma;font-size:24px;"><b>CARIBBEAN CIGARS
                                 COMPANY</b></th>
-                        <th></th>
-                        <th></th>
-                        <th></th>
                         <th></th>
                         <th></th>
                         <th></th>
@@ -24,9 +19,7 @@
                         <th></th>
                         <th></th>
                         <th></th>
-                        <th></th>
-                        <th></th>
-                        <th style="font-family: Tahoma; font-size: 8"><b>Address: Danli, El Paraiso,Honduras</b></th>
+                        <th style="font-family: Tahoma; font-size: 8"><b>DIRECCION</b></th>
                     </tr>
                     <tr>
                         <th></th>
@@ -34,10 +27,7 @@
                         <th></th>
                         <th></th>
                         <th></th>
-                        <th></th>
-                        <th></th>
-                        <th style="font-family: Tahoma; font-size: 8; text-justify: "><b>E-Mail:
-                                taosasanmarcos@plasenciatabaco.com</b></th>
+                        <th style="font-family: Tahoma; font-size: 8"><b>ADDRESS:  Panama,  Rep. De Panama</b></th>
                     </tr>
                     <tr>
                         <th></th>
@@ -45,9 +35,7 @@
                         <th></th>
                         <th></th>
                         <th></th>
-                        <th></th>
-                        <th></th>
-                        <th style="font-family: Tahoma; font-size: 8"><b>Contact: Samia Valladares</b></th>
+                        <th style="font-family: Tahoma; font-size: 8"><b>Phones: Tel. (504) 2763-2906</b></th>
                     </tr>
                     <tr>
                         <th></th>
@@ -55,133 +43,115 @@
                         <th></th>
                         <th></th>
                         <th></th>
-                        <th></th>
-                        <th></th>
-                        <th style="font-family: Tahoma; font-size: 8"><b>Phones: (504) 27632906 / (504) 27636981</b></th>
-                    </tr>
-
-                    <tr>
-                        <th style="font-family: Tahoma; font-size: 8"><b>Vendido a</b></th>
-                        <th style="font-family: Tahoma; font-size: 10" colspan="4"><strong>ROCKY PATEL PREMIUM CIGARS,
-                                INC.</strong></th>
-
+                        <th style="font-family: Tahoma; font-size: 8"><b>Fax: Fax.(504) 2763-2239</b></th>
                     </tr>
                     <tr>
-                        <td style="font-family: Tahoma; font-size: 8"><b>Sold to</b></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td style="font-famExports.ily: Tahoma; font-size: 8; font-weight: bold" colspan="2">Fecha
-                        </td>
-                        <td></td>
-                        <td style="font-family: Tahoma; font-size: 8" colspan="2"><b>14 DE OCTUBRE DEL 2021</b></td>
+                        <td style="font-family: Arial; font-size: 8"><b>Vendido a</b></td>
+                        <td style="font-family: Tahoma; font-size: 10" colspan="4"><strong>FAMILY TOBACCO TRADERS</strong></td>
                     </tr>
                     <tr>
-                        <td style="font-family: Tahoma; font-size: 8"><b>Direccion</b></td>
-                        <td style="font-family: Tahoma; font-size: 10" colspan="5"><b>4244 CORPORATE SQUARE</b></td>
-                        <td></td>
-                        <td></td>
-                        <td style="font-family: Tahoma; font-size: 8; font-weight: bold" colspan="2">Date</td>
+                        <td style="font-family: Arial; font-size: 8"><b>Sold to</b></td>
+                        <td style="font-family: Arial; font-size: 10; font-weight: bold" colspan="4">5100 NW 72 ABENUE.</td>
+                        <td style="font-family: Arial; font-size: 8; font-weight: bold">Fecha</td>
                     </tr>
                     <tr>
-                        <td style="font-family: Tahoma; font-size: 8"><b>Address</b></td>
-                        <td style="font-family: Tahoma; font-size: 10" colspan="3"><b>NAPLES, FL 34104, USA</b></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td style="font-family: Tahoma; font-size: 8; font-weight: bold" colspan="2">Su orden No.
-                        </td>
+                        <td style="font-family: Arial; font-size: 8"><b>Direccion</b></td>
+                        <td style="font-family: Arial; font-size: 10" colspan="4">UNIT, D , MIAMI FLORIDA 33166</td>
+                        <td style="font-family: Tahoma; font-size: 8; font-weight: bold">Date</td>
+                    </tr>
+                    <tr>
+                        <td style="font-family: Arial; font-size: 8"><b>Address</b></td>
+                        <td style="font-family: Arial; font-size: 10" colspan="4">TEL: 305-992-8628</td>
+                        <td style="font-family: Tahoma; font-size: 8;font-weight: bold">Su orden No.</td>
+                        <td style="font-family: Tahoma; font-size: 8;" colspan="3"></td>
                     </tr>
                     <tr>
                         <td></td>
-                        <td style="font-family: Tahoma; font-size: 10" colspan="4"><b>'Shawn Bussler'
-                            sbussler@rockypatel.com</b></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td style="font-family: Tahoma; font-size: 8; font-weight: bold" colspan="2">Your order No.
-                        </td>
-                        <td></td>
-                        <td style="font-family: Tahoma; font-size: 12" colspan="2"><b>WAREHOUSE</b></td>
+                        <td style="font-family: Arial; font-size: 10" colspan="4">FAX: 305-461-0261</td>
+                        <td style="font-family: Tahoma; font-size: 8;font-weight: bold">Your order No.</td>
                     </tr>
                     <tr>
-                        <td></td>
-                        <td style="font-family: Tahoma; font-size: 10" colspan="4"><b>PHONE: 239 593 1833</b></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td style="font-family: Tahoma; font-size: 8; font-weight: bold" colspan="2"><b>Instrucciones de
-                            Embarque</b></td>
+                        <td style="font-family: Arial; font-size: 8"><b>Condiciones</b></td>
+                        <td style="font-family: Arial; font-size: 10"></td>
+                        <td style="font-family: Arial; font-size: 10"></td>
+                        <td style="font-family: Arial; font-size: 10"></td>
+                        <td style="font-family: Arial; font-size: 10"></td>
+                        <td style="font-family: Tahoma; font-size: 8; font-weight: bold">Instrucciones de Embarque</td>
+                        <td style="font-family: Arial; font-size: 10"></td>
+                        <td style="font-family: Tahoma; font-size: 10; font-weight: bold" colspan="3">NOTIFY PARTY.:</td>
                     </tr>
                     <tr>
-                        <td></td>
-                        <td style="font-family: Tahoma; font-size: 10" colspan="4"><b>FAX: 305-461-0261</b></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td style="font-family: Tahoma; font-size: 8; font-weight: bold" colspan="2">Shipping
-                            instruccitions</b></td>
+                        <td style="font-family: Arial; font-size: 8"><b>Conditions</b></td>
+                        <td style="font-family: Arial; font-size: 10"></td>
+                        <td style="font-family: Arial; font-size: 10"># 6</td>
+                        <td style="font-family: Arial; font-size: 10"></td>
+                        <td style="font-family: Arial; font-size: 10"></td>
+                        <td style="font-family: Tahoma; font-size: 8; font-weight: bold">Shipping instruccitions</td>
+                        <td style="font-family: Arial; font-size: 10"></td>
+                        <td style="font-family: Tahoma; font-size: 10; font-weight: bold" colspan="3">IMPERIAL FREIGHT 2287 NW 102 ND PLACE</td>
                     </tr>
                     <tr>
-                        <td></td>
-                        <td style="font-family: Tahoma; font-size: 10"><b>Tax ID: 56 1948219</b></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td style="font-family: Tahoma; font-size: 8; font-weight: bold" colspan="2"><b>Consignado a</b>
-                        </td>
+                        <td style="font-family: Arial; font-size: 8"></td>
+                        <td style="font-family: Arial; font-size: 10"></td>
+                        <td style="font-family: Arial; font-size: 10"></td>
+                        <td style="font-family: Arial; font-size: 10"></td>
+                        <td style="font-family: Arial; font-size: 10"></td>
+                        <td style="font-family: Tahoma; font-size: 8; font-weight: bold">Consignado a</td>
+                        <td style="font-family: Arial; font-size: 10"></td>
+                        <td style="font-family: Tahoma; font-size: 10; font-weight: bold" colspan="3">DORAL FL. 33172</td>
                     </tr>
                     <tr>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td style="font-family: Tahoma; font-size: 8; font-weight: bold" colspan="2">Consigned to
-                        </td>
+                        <td style="font-family: Arial; font-size: 8"></td>
+                        <td style="font-family: Arial; font-size: 10"></td>
+                        <td style="font-family: Arial; font-size: 10"></td>
+                        <td style="font-family: Arial; font-size: 10"></td>
+                        <td style="font-family: Arial; font-size: 10"></td>
+                        <td style="font-family: Tahoma; font-size: 8; font-weight: bold">Consigned to</td>
+                        <td style="font-family: Arial; font-size: 10"></td>
+                        <td style="font-family: Tahoma; font-size: 10; font-weight: bold" colspan="3">TEL: 305-592-6910</td>
                     </tr>
-                    <tr></tr>
-                    <tr></tr>
                     <tr>
-                        <td style="font-family: Tahoma; font-size: 10; text-align: center"><strong><i>Seals</i></strong>
-                        </td>
+                        <td style="font-family: Arial; font-size: 8"></td>
+                        <td style="font-family: Arial; font-size: 10"></td>
+                        <td style="font-family: Arial; font-size: 10"></td>
+                        <td style="font-family: Arial; font-size: 10"></td>
+                        <td style="font-family: Arial; font-size: 10"></td>
+                        <td style="font-family: Tahoma; font-size: 8; font-weight: bold"></td>
+                        <td style="font-family: Arial; font-size: 10"></td>
+                        <td style="font-family: Tahoma; font-size: 10; font-weight: bold" colspan="3">FAX: 305-593-1781</td>
+                    </tr>
+                    <tr>
+                        <td style="font-family: Arial; font-size: 8"></td>
+                        <td style="font-family: Arial; font-size: 10"></td>
+                        <td style="font-family: Arial; font-size: 10"></td>
+                        <td style="font-family: Arial; font-size: 10"></td>
+                        <td style="font-family: Arial; font-size: 10"></td>
+                        <td style="font-family: Tahoma; font-size: 8; font-weight: bold"></td>
+                        <td style="font-family: Arial; font-size: 10"></td>
+                        <td style="font-family: Tahoma; font-size: 10; font-weight: bold" colspan="3">ATTE: RALPH G. DE LA ROSA.</td>
+                    </tr>
+                    <tr>
+                        <td style="font-family: Tahoma; font-size: 10; text-align: center"><strong><i>Seals</i></strong></td>
                         <td></td>
                         <td></td>
                         <td></td>
                         <td></td>
-                        <td></td>
+                        <td style="font-family: Tahoma; font-size: 10; text-align: center">COYOTE</td>
                         <td></td>
                         <td></td>
                     </tr>
                     <thead style="position: static;">
                         <tr style="font-size:10px; text-align:center">
-                            <th rowspan="2">Bulto<br>Package<br>No. </th>
-                            <th rowspan="2">Cant.<br>Quant. </th>
-                            <th rowspan="2">Unidad<br>Unit. </th>
-                            <th rowspan="2" style="background:#ddd;">Units<br> </th>
-                            <th rowspan="2">Total<br>Tabacos<br>Cigars </th>
-                            <th rowspan="2">Capa<br>Wrappar </th>
-                            <th rowspan="2">#</th>
-                            <th rowspan="2">Clase<br>Class </th>
-                            <th rowspan="2">CODIGO #<br>ITEM # </th>
-                            <th rowspan="2">YOUR<br>ITEM # </th>
-                            <th rowspan="2" style="background:#ddd;">YOUR<br>ORDER # </th>
-                            <th rowspan="2">ORDER<br>AMOUNT </th>
-                            <th rowspan="2">BACK<br>ORDER<br>AMOUNT </th>
-                            <th colspan="2"> Peso en Libras<br>Weigth in Pounds </th>
-                            <th rowspan="2">Precio FOB<br>per 1000 ($) </th>
-                            <th rowspan="2" style="background:#ddd;">Cost</th>
+                            <th rowspan="2">Bulto<br>Package<br>No.</th>
+                            <th rowspan="2">Cant.<br>Quant.</th>
+                            <th rowspan="2">Unidad<br>Unit.</th>
+                            <th rowspan="2">Total<br>Tabacos<br>Cigars</th>
+                            <th rowspan="2">Capa<br>Wrappar</th>
+                            <th rowspan="2">Clase<br>Class</th>
+                            <th rowspan="2">CODIGO #<br>ITEM #</th>
+                            <th rowspan="2" style="background:#ddd;">YOUR<br>ORDER #</th>
+                            <th colspan="2">Peso en Libras<br>Weigth in Pounds</th>
+                            <th rowspan="2">Precio FOB<br>per 1000 ($)</th>
                             <th rowspan="2">Valor<br>Value ($)</th>
                         </tr>
 
@@ -334,37 +304,20 @@
                                     <td
                                         style="text-align:right;font-size:9px; height: 24px;border: 5px solid #C00;overflow-x:auto;overflow-x:auto;">
                                         {{ $detalles->unidad }}</td>
-                                    <td
-                                        style="text-align:center;font-size:9px; height: 24px;border: 5px solid #C00;overflow-x:auto;overflow-x:auto;">
-                                        <b>{{ $detalles->cantidad_cajas }}</b></td>
-                                    <td
-                                        style="text-align:right;font-size:9px; height: 24px;border: 5px solid #C00;overflow-x:auto;overflow-x:auto;">
-                                    </td>
+
+                                    <td></td>
                                     <td
                                         style="text-align:center;font-size:9px; height: 24px;border: 5px solid #C00;overflow-x:auto;overflow-x:auto;">
                                         SEVERAL</td>
                                     <td
-                                        style="text-align:center;font-size:9px; height: 24px;border: 5px solid #C00;overflow-x:auto;overflow-x:auto;">
-                                        {{ $detalles->cantidad_por_caja }}</td>
-                                    <td
                                         style="text-align:left;font-size:9px; height: 24px;border: 5px solid #C00;overflow-x:auto;overflow-x:auto;">
                                         <b>{{ strtoupper($sampler_nombre[0]->nom) }}</b> </td>
-                                    <td
-                                        style="text-align:center;font-size:9px; height: 24px;border: 5px solid #C00;overflow-x:auto;overflow-x:auto;">
-                                    </td>
                                     <td
                                         style="text-align:center;font-size:9px; height: 24px;border: 5px solid #C00;overflow-x:auto;overflow-x:auto;">
                                         {{ $detalles->codigo_item }}</td>
                                     <td
                                         style="text-align:center;font-size:9px; height: 24px;border: 5px solid #C00;overflow-x:auto;overflow-x:auto;">
                                         {{ $detalles->orden }}</td>
-                                    <td
-                                        style="text-align:center;font-size:9px; height: 24px;border: 5px solid #C00;overflow-x:auto;overflow-x:auto;">
-                                        {{ $total_pendiente[0]->total_pendiente }}</td>
-                                    <td
-                                        style="text-align:center;font-size:9px; height: 24px;border: 5px solid #C00;overflow-x:auto;overflow-x:auto;">
-                                        {{ $total_ac }}</td>
-
                                     <td
                                         style="text-align:center;font-size:9px; height: 24px;border: 5px solid #C00;overflow-x:auto;overflow-x:auto;">
                                         {{ $detalles->total_bruto }}</td>
@@ -374,12 +327,6 @@
                                     <td
                                         style="text-align:right;font-size:9px; height: 24px;border: 5px solid #C00;overflow-x:auto;overflow-x:auto;">
                                         {{ $detalles->precio_producto }}</td>
-
-
-                                    <td
-                                        style="text-align:right;font-size:9px; height: 24px;border: 5px solid #C00;overflow-x:auto;overflow-x:auto;">
-                                        <b>{{ number_format(($promedio[0]->promedio * $detalles->cantidad_por_caja) / 1000, 4) }}</b>
-                                    </td>
 
                                     <td
                                         style="text-align:center;font-size:9px; height: 24px;border: 5px solid #C00;overflow-x:auto;overflow-x:auto;">
@@ -427,9 +374,6 @@
                                         style="text-align:center;font-size:9px; height: 24px;border: 5px solid #C00;overflow-x:auto;">
                                     </td>
                                     <td
-                                        style="text-align:center;font-size:9px; height: 24px;border: 5px solid #C00;overflow-x:auto;">
-                                        <b></b></td>
-                                    <td
                                         style="text-align:right;font-size:9px; height: 24px;border: 5px solid #C00;overflow-x:auto;">
                                         {{ $detalles->total_tabacos * (intval($unidades[0]->paquetes) / $total_paqutes[0]->total_pendiente) }}
                                     </td>
@@ -437,20 +381,8 @@
                                         style="text-align:center;font-size:9px; height: 24px;border: 5px solid #C00;overflow-x:auto;">
                                         {{ $arreglo_detalles[0]->capa }}</td>
                                     <td
-                                        style="text-align:center;font-size:9px; height: 24px;border: 5px solid #C00;overflow-x:auto;">
-                                    </td>
-                                    <td
                                         style="text-align:left;font-size:9px; height: 24px;border: 5px solid #C00;overflow-x:auto;">
                                         {{ strtoupper($arreglo_detalles[0]->sampler) }}</td>
-                                    <td
-                                        style="text-align:center;font-size:9px; height: 24px;border: 5px solid #C00;overflow-x:auto;">
-                                        {{ $arreglo_detalles[0]->otra_descripcion }}</td>
-                                    <td
-                                        style="text-align:center;font-size:9px; height: 24px;border: 5px solid #C00;overflow-x:auto;">
-                                    </td>
-                                    <td
-                                        style="text-align:center;font-size:9px; height: 24px;border: 5px solid #C00;overflow-x:auto;">
-                                    </td>
                                     <td
                                         style="text-align:center;font-size:9px; height: 24px;border: 5px solid #C00;overflow-x:auto;">
                                     </td>
@@ -466,11 +398,6 @@
                                     <td
                                         style="text-align:right;font-size:9px; height: 24px;border: 5px solid #C00;overflow-x:auto;">
                                         {{ number_format($arreglo_detalles[0]->precio, 4) }}</td>
-
-
-                                    <td
-                                        style="text-align:center;font-size:9px; height: 24px;border: 5px solid #C00;overflow-x:auto;">
-                                    </td>
                                     <td
                                         style="text-align:right;font-size:9px; height: 24px;border: 5px solid #C00;overflow-x:auto;">
                                         {{ number_format(($detalles->total_tabacos * (intval($unidades[0]->paquetes) / $total_paqutes[0]->total_pendiente) * $arreglo_detalles[0]->precio) / 1000, 2) }}
@@ -478,11 +405,7 @@
                                     @php
                                         $valor_factura += ($detalles->total_tabacos * (intval($unidades[0]->paquetes) / $total_paqutes[0]->total_pendiente) * $arreglo_detalles[0]->precio) / 1000;
                                     @endphp
-
-
-
                                 </tr>
-
 
                                 @php
                                     $total_puros_tabla += $detalles->total_tabacos * (intval($unidades[0]->paquetes) / $total_paqutes[0]->total_pendiente);
@@ -527,9 +450,6 @@
                                         style="text-align:center;font-size:9px; height: 24px;border: 5px solid #C00;overflow-x:auto;">
                                     </td>
                                     <td
-                                        style="text-align:center;font-size:9px; height: 24px;border: 5px solid #C00;overflow-x:auto;">
-                                        <b></b></td>
-                                    <td
                                         style="text-align:right;font-size:9px; height: 24px;border: 5px solid #C00;overflow-x:auto;">
                                         {{ $detalles->total_tabacos * (intval($unidades[0]->paquetes) / $total_paqutes[0]->total_pendiente) }}
                                     </td>
@@ -537,20 +457,8 @@
                                         style="text-align:center;font-size:9px; height: 24px;border: 5px solid #C00;overflow-x:auto;">
                                         {{ $arreglo_detalles[0]->capa }}</td>
                                     <td
-                                        style="text-align:center;font-size:9px; height: 24px;border: 5px solid #C00;overflow-x:auto;">
-                                    </td>
-                                    <td
                                         style="text-align:left;font-size:9px; height: 24px;border: 5px solid #C00;overflow-x:auto;">
                                         {{ strtoupper($arreglo_detalles[0]->sampler) }}</td>
-                                    <td
-                                        style="text-align:center;font-size:9px; height: 24px;border: 5px solid #C00;overflow-x:auto;">
-                                        {{ $arreglo_detalles[0]->otra_descripcion }}</td>
-                                    <td
-                                        style="text-align:center;font-size:9px; height: 24px;border: 5px solid #C00;overflow-x:auto;">
-                                    </td>
-                                    <td
-                                        style="text-align:center;font-size:9px; height: 24px;border: 5px solid #C00;overflow-x:auto;">
-                                    </td>
                                     <td
                                         style="text-align:center;font-size:9px; height: 24px;border: 5px solid #C00;overflow-x:auto;">
                                     </td>
@@ -565,10 +473,6 @@
                                     </td>
                                     <td style="text-align:right;font-size:9px; height: 24px;border: 5px solid #C00;">
                                         {{ number_format($arreglo_detalles[0]->precio, 4) }}</td>
-
-
-                                    <td style="text-align:right;font-size:9px; height: 24px;border: 5px solid #C00;">
-                                    </td>
                                     <td style="text-align:right;font-size:9px; height: 24px;border: 5px solid #C00;">
                                         {{ number_format(($detalles->total_tabacos * (intval($unidades[0]->paquetes) / $total_paqutes[0]->total_pendiente) * $arreglo_detalles[0]->precio) / 1000, 2) }}
                                     </td>
@@ -621,36 +525,22 @@
                                         {{ $detalles->cantidad_puros }}</td>
                                     <td style="text-align:right;font-size:9px; height: 24px;border: 5px solid #C00;">
                                         {{ $detalles->unidad }}</td>
-                                    <td style="text-align:center;font-size:9px; height: 24px;border: 5px solid #C00;">
-                                        <b>{{ $detalles->cantidad_cajas }}</b></td>
                                     <td style="text-align:right;font-size:9px; height: 24px;border: 5px solid #C00;">
                                         {{ $detalles->total_tabacos }}</td>
                                     <td style="text-align:center;font-size:9px; height: 24px;border: 5px solid #C00;">
                                         {{ $detalles->capas }}</td>
-                                    <td style="text-align:center;font-size:9px; height: 24px;border: 5px solid #C00;">
-                                        {{ $detalles->cantidad_por_caja }}</td>
                                     <td style="text-align:left;font-size:9px; height: 24px;border: 5px solid #C00;">
                                         {{ $detalles->producto }}</td>
-                                    <td style="text-align:center;font-size:9px; height: 24px;border: 5px solid #C00;">
-                                        {{ $detalles->codigo }}</td>
                                     <td style="text-align:center;font-size:9px; height: 24px;border: 5px solid #C00;">
                                         {{ $detalles->codigo_item }}</td>
                                     <td style="text-align:center;font-size:9px; height: 24px;border: 5px solid #C00;">
                                         {{ $detalles->orden }}</td>
-                                    <td style="text-align:center;font-size:9px; height: 24px;border: 5px solid #C00;">
-                                        {{ $detalles->orden_total }}</td>
-                                    <td style="text-align:center;font-size:9px; height: 24px;border: 5px solid #C00;">
-                                        {{ $total_restante }}</td>
                                     <td style="text-align:center;font-size:9px; height: 24px;border: 5px solid #C00;">
                                         {{ $detalles->total_bruto }}</td>
                                     <td style="text-align:center;font-size:9px; height: 24px;border: 5px solid #C00;">
                                         {{ $detalles->total_neto }}</td>
                                     <td style="text-align:center;font-size:9px; height: 24px;border: 5px solid #C00;">
                                         {{ $detalles->precio_producto }}</td>
-
-
-                                    <td style="text-align:right;font-size:9px; height: 24px;border: 5px solid #C00;">
-                                        <b>{{ number_format($detalles->costo, 4) }}</b></td>
                                     <td style="text-align:right;font-size:9px; height: 24px;border: 5px solid #C00;">
                                         {{ number_format($detalles->valor_total, 2) }}</td>
                                     @php
@@ -674,24 +564,7 @@
                             </td>
                             <td
                                 style="text-align:right;font-size:12px; font-weight: bold; height: 24px;border: 5px solid #C00;">
-                            </td>
-                            <td
-                                style="text-align:right;font-size:12px; font-weight: bold; height: 24px;border: 5px solid #C00;">
                                 <b>{{ $total_puros_tabla }}</b></td>
-
-
-                            <td
-                                style="text-align:right;font-size:12px; font-weight: bold; height: 24px;border: 5px solid #C00;">
-                            </td>
-                            <td
-                                style="text-align:right;font-size:12px; font-weight: bold; height: 24px;border: 5px solid #C00;">
-                            </td>
-                            <td
-                                style="text-align:right;font-size:12px; font-weight: bold; height: 24px;border: 5px solid #C00;">
-                            </td>
-                            <td
-                                style="text-align:right;font-size:12px; font-weight: bold; height: 24px;border: 5px solid #C00;">
-                            </td>
                             <td
                                 style="text-align:right;font-size:12px; font-weight: bold; height: 24px;border: 5px solid #C00;">
                             </td>
@@ -715,9 +588,6 @@
                             </td>
                             <td
                                 style="text-align:right;font-size:12px; font-weight: bold; height: 24px;border: 5px solid #C00;">
-                            </td>
-                            <td
-                                style="text-align:right;font-size:12px; font-weight: bold; height: 24px;border: 5px solid #C00;">
                                 <b>{{ number_format($valor_factura, 2) }}</b></td>
                         </tr>
                         <tr>
@@ -733,6 +603,14 @@
                             <td style="text-align:center;font-size:8px; height: 24px;border: 5px solid #C00;"></td>
                             <td style="text-align:center;font-size:8px; height: 24px;border: 5px solid #C00;"></td>
                             <td style="text-align:center;font-size:8px; height: 24px;border: 5px solid #C00;"></td>
+                        </tr>
+                        <tr>
+                            <td style="text-align:center;font-size:8px; height: 24px;border: 5px solid #C00;"></td>
+                            <td style="text-align:center;font-size:8px; height: 24px;border: 5px solid #C00;"></td>
+                            <td style="text-align:center;font-size:8px; height: 24px;border: 5px solid #C00;"></td>
+                            <td style="text-align:center;font-size:8px; height: 24px;border: 5px solid #C00;"></td>
+                            <td style="text-align:center;font-size:8px; height: 24px;border: 5px solid #C00;"></td>
+                            <td style="text-align:center;font-size:8px; height: 24px;border: 5px solid #C00;"></td>
                             <td style="text-align:center;font-size:8px; height: 24px;border: 5px solid #C00;"></td>
                             <td style="text-align:center;font-size:8px; height: 24px;border: 5px solid #C00;"></td>
                             <td style="text-align:center;font-size:8px; height: 24px;border: 5px solid #C00;"></td>
@@ -753,36 +631,8 @@
                             <td style="text-align:center;font-size:8px; height: 24px;border: 5px solid #C00;"></td>
                             <td style="text-align:center;font-size:8px; height: 24px;border: 5px solid #C00;"></td>
                             <td style="text-align:center;font-size:8px; height: 24px;border: 5px solid #C00;"></td>
-                            <td style="text-align:center;font-size:8px; height: 24px;border: 5px solid #C00;"></td>
-                            <td style="text-align:center;font-size:8px; height: 24px;border: 5px solid #C00;"></td>
-                            <td style="text-align:center;font-size:8px; height: 24px;border: 5px solid #C00;"></td>
-                            <td style="text-align:center;font-size:8px; height: 24px;border: 5px solid #C00;"></td>
-                            <td style="text-align:center;font-size:8px; height: 24px;border: 5px solid #C00;"></td>
-                            <td style="text-align:center;font-size:8px; height: 24px;border: 5px solid #C00;"></td>
                         </tr>
                         <tr>
-                            <td style="text-align:center;font-size:8px; height: 24px;border: 5px solid #C00;"></td>
-                            <td style="text-align:center;font-size:8px; height: 24px;border: 5px solid #C00;"></td>
-                            <td style="text-align:center;font-size:8px; height: 24px;border: 5px solid #C00;"></td>
-                            <td style="text-align:center;font-size:8px; height: 24px;border: 5px solid #C00;"></td>
-                            <td style="text-align:center;font-size:8px; height: 24px;border: 5px solid #C00;"></td>
-                            <td style="text-align:center;font-size:8px; height: 24px;border: 5px solid #C00;"></td>
-                            <td style="text-align:center;font-size:8px; height: 24px;border: 5px solid #C00;"></td>
-                            <td style="text-align:center;font-size:8px; height: 24px;border: 5px solid #C00;"></td>
-                            <td style="text-align:center;font-size:8px; height: 24px;border: 5px solid #C00;"></td>
-                            <td style="text-align:center;font-size:8px; height: 24px;border: 5px solid #C00;"></td>
-                            <td style="text-align:center;font-size:8px; height: 24px;border: 5px solid #C00;"></td>
-                            <td style="text-align:center;font-size:8px; height: 24px;border: 5px solid #C00;"></td>
-                            <td style="text-align:center;font-size:8px; height: 24px;border: 5px solid #C00;"></td>
-                            <td style="text-align:center;font-size:8px; height: 24px;border: 5px solid #C00;"></td>
-                            <td style="text-align:center;font-size:8px; height: 24px;border: 5px solid #C00;"></td>
-                            <td style="text-align:center;font-size:8px; height: 24px;border: 5px solid #C00;"></td>
-                            <td style="text-align:center;font-size:8px; height: 24px;border: 5px solid #C00;"></td>
-                            <td style="text-align:center;font-size:8px; height: 24px;border: 5px solid #C00;"></td>
-                        </tr>
-                        <tr>
-                            <td style="text-align:center;font-size:8px; height: 24px;border: 5px solid #C00;"></td>
-                            <td style="text-align:center;font-size:8px; height: 24px;border: 5px solid #C00;"></td>
                             <td style="text-align:center;font-size:8px; height: 24px;border: 5px solid #C00;"></td>
                             <td style="text-align:center;font-size:8px; height: 24px;border: 5px solid #C00;"></td>
                             <td style="text-align:center;font-size:8px; height: 24px;border: 5px solid #C00;"></td>
@@ -791,10 +641,7 @@
                             <td
                                 style="text-align:center;font-size:11px; height: 24px;border: 5px solid #C00; font-family: Calibri">
                                 <b>CARIBBEAN CIGAR COMPANY</b></td>
-                            <td style="text-align:center;font-size:8px; height: 24px;border: 5px solid #C00;"></td>
-                            <td style="text-align:center;font-size:8px; height: 24px;border: 5px solid #C00;"></td>
-                            <td style="text-align:center;font-size:8px; height: 24px;border: 5px solid #C00;"></td>
-                            <td style="text-align:center;font-size:8px; height: 24px;border: 5px solid #C00;"></td>
+
                             <td style="text-align:center;font-size:8px; height: 24px;border: 5px solid #C00;"></td>
                             <td style="text-align:center;font-size:8px; height: 24px;border: 5px solid #C00;"></td>
                             <td style="text-align:center;font-size:8px; height: 24px;border: 5px solid #C00;"></td>
@@ -804,7 +651,7 @@
                         </tr>
                     </tbody>
                     <tr>
-                        <td style="font-family: Thaoma; font-size: 8" colspan="8">
+                        <td style="font-family: Thaoma; font-size: 8" colspan="6">
                             REMIT PAYMENT BY A CHECK OR WIRE TRANSFER TO:
                         </td>
                         <td style="font-family: Thaoma; font-size: 8" colspan="4">
@@ -812,25 +659,24 @@
                         </td>
                     </tr>
                     <tr>
-                        <td style="font-family: Thaoma; font-weight: bold; font-size: 8" colspan="8">
-                            TERRABANK N. A. 3191 CORAL WAY, MIAMI FL. 33145
+                        <td style="font-family: Thaoma; font-weight: bold; font-size: 8" colspan="6">
+                            TERRABANK,  N.A. 3191 CORAL WAY, PENTHOOUSE 1,  MIAMI FL. 33145, TEL. 305 448 4898
                         </td>
                         <td style="font-family: Thaoma; font-weight: bold; font-size: 8" colspan="4">
                             Manufactured by Tabacos De Oriente, S. De RL.
                         </td>
                     </tr>
                     <tr>
-                        <td style="font-family: Thaoma; font-weight: bold; font-size: 8" colspan="8">
-                            ABA N°. 066012333 SWIFT TBNAUS33 FOR CREDIT TO CCC, CARIBBEAN CIGAR COMPANY, ACCOUNT
-                            1270595006
+                        <td style="font-family: Thaoma; font-weight: bold; font-size: 8" colspan="6">
+                            ABA No. 066012333 , SWFT . TBNAUS33 FOR CREDIT TO CCC CARIBBEAN CIGAR COMPANY, ACCOUNT :
                         </td>
                         <td style="font-family: Thaoma; font-weight: bold; font-size: 8" colspan="4">
                             Apartado #33, Danli, El Paraiso Honduras, S.
                         </td>
                     </tr>
                     <tr>
-                        <td style="font-family: Thaoma; font-size: 8" colspan="8">
-                            ALL SALES AND PRICES ARE FOB HONDURAS / NICARAGUA
+                        <td style="font-family: Thaoma; font-size: 8" colspan="6">
+                            ALL SALES AND PRICES ARE HONDURAS/NICARAGUA
                         </td>
                         <td style="font-family: Thaoma; font-size: 8" colspan="4">
                             NONE OF THE CONSTITUENT TOBACCOS ARE FROM CUBA

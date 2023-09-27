@@ -182,6 +182,27 @@ class FacturaTerminado extends Component
         $this->titulo_mes = strftime("%B", strtotime($Nueva_Fecha));
         $this->titulo_cliente = $this->cliente;
 
+        switch ($this->aereo) {
+            case 'RP':
+                $this->formatos_impresiones = '4';
+                break;
+            case 'Aerea':
+                $this->formatos_impresiones = '6';
+                break;
+            case 'FM':
+                $this->formatos_impresiones = '3';
+                break;
+            case 'AereaFamily':
+                $this->formatos_impresiones = '7';
+                break;
+            case 'WH':
+                $this->formatos_impresiones = '1';
+                break;
+            default:
+                $this->formatos_impresiones = '4';
+                break;
+        }
+
         $precio1= DB::table('clase_productos')
         ->select('codigo_precio')->distinct()->get();
 
@@ -319,11 +340,6 @@ class FacturaTerminado extends Component
 
         $this->num_factura_sistema = DB::select('call traer_num_factura()')[0]->factura_interna;
 
-        // $detalles_produtos = DB::select('CALL `mostrar_detalles_productos`()');
-        // $usosArray = [];
-        // foreach ($detalles_produtos as $uso) {
-        //     $usosArray[$uso->item][] =  $uso;
-        // }
 
         $usos = DB::select('call mostrar_precios_factura()');
 
@@ -621,23 +637,26 @@ class FacturaTerminado extends Component
 
     public function imprimir_formatos()
     {
-        $vista_html = ['1'=>'Exports.factura-terminado-exports-warehouse',
-                       '2'=>'Exports.factura-terminado-exports',
-                       '3'=>'Exports.factura-terminado-exports',
-                       '4'=>'Exports.factura-terminado-exports',
-                       '5'=>'Exports.factura-terminado-exports',
-                       '6'=>'Exports.factura-terminado-exports',
-                       '7'=>'Exports.factura-terminado-exports'];
+        $vista_html = ['1'=>['vista'=>'Exports.factura-terminado-exports-warehouse','encabezado'=>[0=>'A18:P18',1=>'A19:P19']],
+                       '2'=>['vista'=>'Exports.factura-terminado-exports','encabezado'=>[0=>'A18:P18',1=>'A19:P19']],
+                       '3'=>['vista'=>'Exports.factura-terminado-exports-family','encabezado'=>[0=>'A18:P18',1=>'A19:P19']],
+                       '4'=>['vista'=>'Exports.factura-terminado-exports','encabezado'=>[0=>'A18:P18',1=>'A19:P19']],
+                       '5'=>['vista'=>'Exports.factura-terminado-exports-simple','encabezado'=>[1=>'A18:P18',1=>'A19:P19']],
+                       '6'=>['vista'=>'Exports.factura-terminado-exports-aerea','encabezado'=>[0=>'A18:R18',1=>'A19:R19']],
+                       '7'=>['vista'=>'Exports.factura-terminado-exports-family-aerea','encabezado'=>[0=>'A18:R18',1=>'A19:R19']],
+                       '8'=>['vista'=>'Exports.factura-terminado-exports-lion-leaf','encabezado'=>[0=>'A19:K19',1=>'A20:K20']],
+                       '9'=>['vista'=>'Exports.factura-terminado-exports-bandido','encabezado'=>[0=>'A15:N15',1=>'A16:N16']],
+                       '10'=>['vista'=>'Exports.factura-terminado-exports-coyote','encabezado'=>[0=>'A18:L18',1=>'A19:L19']],];
 
         $this->detalles_venta = DB::select('call mostrar_detalle_factura(?,?,?,?,?)',[
             $this->aereo, $this->items_b, $this->ordens_b, $this->codigo_b, $this->t_empaque_b
         ]);
 
-        $vista =  view($vista_html[$this->formatos_impresiones], [
+        $vista =  view($vista_html[$this->formatos_impresiones]['vista'], [
             'detalles_venta' => $this->detalles_venta
         ]);
 
-        return Excel::download(new FacturaExportView($vista), 'FacturaDetallada.xlsx');
+        return Excel::download(new FacturaExportView($vista,$vista_html[$this->formatos_impresiones]['encabezado']), 'FacturaDetallada.xlsx');
     }
 
     public function insertar_factura()

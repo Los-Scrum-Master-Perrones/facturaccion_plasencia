@@ -1,5 +1,5 @@
 <div xmlns:wire="http://www.w3.org/1999/xhtml">
-    <ul class="nav justify-content-center">
+    <ul class="nav  nav-tabs  justify-content-center">
         <li class="nav-item">
             <a class="nav-link" style="color:white; font-size:12px;"
                 href="{{ route('materiales.index') }}"><strong>Materiales</strong></a>

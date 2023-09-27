@@ -165,7 +165,6 @@ Route::get('/export_pendiente_empaque',[ PendienteEmpaque::class,'actualizar_dat
 
 
 Route::get('/inventario_cajas', InventarioCajas::class)->name('inventario_cajas');
-Route::post('/inventario_cajas', InventarioCajas::class)->name('inventario_cajas');
 
 
 Route::get('/importar_c', ImportarProductoBodega::class)->name('importar_ca');

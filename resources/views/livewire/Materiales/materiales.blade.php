@@ -14,26 +14,26 @@
         </symbol>
     </svg>
 
-    <ul class="nav justify-content-center">
+    <ul class="nav  nav-tabs  justify-content-center">
         @if (auth()->user()->rol == 0 || auth()->user()->rol == 1 )
         <li class="nav-item">
-            <a style="color:white; font-size:12px;" href="{{ route('inventario_cajas') }}"><strong>Catálogo
+            <a class="nav-link" style="color:white; font-size:12px;" href="{{ route('inventario_cajas') }}"><strong>Catálogo
                     Cajas</strong></a>
         </li>
         <li class="nav-item">
-            <a style="color:white; font-size:12px;" href="{{ route('index_importar_cajas') }}"><strong>Importar
+            <a class="nav-link"  style="color:white; font-size:12px;" href="{{ route('index_importar_cajas') }}"><strong>Importar
                     Cajas</strong></a>
         </li>
         @endif
         <li class="nav-item">
-            <a style="color:#E5B1E2; font-size:12px;" href="{{ route('materiales.index') }}"><strong>Materiales</strong></a>
+            <a class="nav-link"  style="color:#E5B1E2; font-size:12px;" href="{{ route('materiales.index') }}"><strong>Materiales</strong></a>
         </li>
         <li class="nav-item">
-            <a style="color:white; font-size:12px;" href="{{ route('materiales.relacionar') }}"><strong>Materiales
+            <a class="nav-link"  style="color:white; font-size:12px;" href="{{ route('materiales.relacionar') }}"><strong>Materiales
                     materials</strong></a>
         </li>
         <li class="nav-item">
-            <a style="color:white;  font-size:12px;" href="{{ route('entradas.salidas') }}"><strong>Entrada/Salida</strong></a>
+            <a class="nav-link"  style="color:white;  font-size:12px;" href="{{ route('entradas.salidas') }}"><strong>Entrada/Salida</strong></a>
         </li>
     </ul>
 

@@ -85,11 +85,14 @@
                     <select wire:model="formatos_impresiones" class="form-control">
                         <option value="1">Warehouse Detallada</option>
                         <option value="2">Warehouse Simple</option>
-                        <option value="3"></option>
-                        <option value="4"></option>
-                        <option value="5"></option>
-                        <option value="6"></option>
-                        <option value="7"></option>
+                        <option value="3">Family</option>
+                        <option value="4">Rocky Patel</option>
+                        <option value="5">Rocky Patel Simple</option>
+                        <option value="6">Rocky Patel(Aerea)</option>
+                        <option value="7">Family (Aerea)</option>
+                        <option value="8">LIOM LEAF</option>
+                        <option value="9">Bandido</option>
+                        <option value="10">Coyote</option>
                     </select>
                     <button class="btn btn-light fs-7" wire:click="historial()">Historial</button>
                 </div>

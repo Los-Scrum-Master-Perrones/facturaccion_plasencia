@@ -13,13 +13,13 @@
         }
     </style>
 
-    <ul class="nav justify-content-center">
+    <ul class="nav nav-tabs justify-content-center">
         <li class="nav-item">
-            <a class="nav-link active" style="color:#ffffff; font-size:12px;"
+            <a class="nav-link" style="color:#ffffff; font-size:12px;"
                 href="{{ route('datos_producto') }}"><strong>Datos Adicionales</strong></a>
         </li>
         <li class="nav-item">
-            <a class="nav-link active" style="color:#ffffff; font-size:12px;"
+            <a class="nav-link" style="color:#ffffff; font-size:12px;"
                 href="{{ route('precio.catalogo') }}"><strong>Catalogo de Precios</strong></a>
         </li>
     </ul>
@@ -64,7 +64,7 @@
             </div>
             <div class="card-body">
                 <div wire:loading.class='oscurecer_contenido'
-                    style="width:100%; padding-left:0px;   font-size:10px;   overflow-x: display; overflow-y: auto;   height: 75vh">
+                    style="width:100%; padding-left:0px;   font-size:10px;   overflow-x: display; overflow-y: auto;   height: 85vh">
 
                     <table class="table table-light" style="font-size:10px;">
                         <thead style=" position: static;" wire:ignore>
