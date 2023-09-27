@@ -337,10 +337,10 @@ document.getElementById('div_EditarDetalleProducto').style.display = "none";
                         </div>
 
                         <div class="modal-footer">
-                            <button class="bmodal_no" onclick="ocultar_div_EditarProducto()">
+                            <button type="button" class="btn btn-danger" onclick="ocultar_div_EditarProducto()">
                                 <span>Cancelar</span>
                             </button>
-                            <button type="submit" class="bmodal_yes">
+                            <button type="submit" class="btn btn-success">
                                 <span>Guardar</span>
                             </button>
                         </div>

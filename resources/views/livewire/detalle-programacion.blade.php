@@ -339,10 +339,10 @@
                     ¿Estás seguro que quieres limpiar estos registros?
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="bmodal_no" data-bs-dismiss="modal">
+                    <button type="button" class="btn btn-danger" data-bs-dismiss="modal">
                         <span>Cancelar</span>
                     </button>
-                    <button wire:click="eliminar_datos()" class=" bmodal_yes ">
+                    <button wire:click="eliminar_datos()" class="btn btn-success">
                         <span>Eliminar</span>
                     </button>
                 </div>

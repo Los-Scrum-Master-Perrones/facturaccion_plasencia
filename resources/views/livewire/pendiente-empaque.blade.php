@@ -866,10 +866,10 @@
                 </div>
 
                 <div class="modal-footer">
-                    <button type="button" class=" bmodal_no" data-bs-dismiss="modal"><span>Cancelar</span>
+                    <button type="button" class="btn btn-danger" data-bs-dismiss="modal"><span>Cancelar</span>
                         @csrf
                     </button>
-                    <button onclick="insertar_nuevo_pendiente()" class=" bmodal_yes "> <span>Guardar</span>
+                    <button onclick="insertar_nuevo_pendiente()" class="btn btn-success"> <span>Guardar</span>
                     </button>
                 </div>
             </div>
@@ -929,10 +929,10 @@
                 </div>
 
                 <div class="modal-footer">
-                    <button class="bmodal_no" data-bs-dismiss="modal">
+                    <button type="button" class="btn btn-danger" data-bs-dismiss="modal">
                         <span>Cancelar</span>
                     </button>
-                    <button type="button" class="bmodal_yes" onclick="guardar_actualizacion()">
+                    <button type="button" class="btn btn-success" onclick="guardar_actualizacion()">
                         <span>Actualizar</span>
                     </button>
                 </div>
@@ -958,10 +958,10 @@
                     ¿Estás seguro que quieres eliminar este registro del pendiente?
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="bmodal_no " data-bs-dismiss="modal">
+                    <button type="button" class="btn btn-danger" data-bs-dismiss="modal">
                         <span>Cancelar</span>
                     </button>
-                    <button type="button" onclick="eliminar_pendiente()" class=" bmodal_yes ">
+                    <button type="button" onclick="eliminar_pendiente()" class="btn btn-success">
                         <span>Eliminar</span>
                     </button>
                 </div>
@@ -986,10 +986,10 @@
                     ¿Estás seguro que quieres limpiar estos registros?
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="bmodal_no" data-bs-dismiss="modal">
+                    <button type="button" class="btn btn-danger" data-bs-dismiss="modal">
                         <span>Cancelar</span>
                     </button>
-                    <button wire:click="eliminar_datos()" class=" bmodal_yes ">
+                    <button wire:click="eliminar_datos()" class="btn btn-success">
                         <span>Eliminar</span>
                     </button>
                 </div>

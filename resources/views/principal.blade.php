@@ -344,13 +344,13 @@
                     ¿Esta seguro(a) de que quiere cerrar sesión?
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="bmodal_no" data-bs-dismiss="modal">
+                    <button type="button" class="btn btn-danger" data-bs-dismiss="modal">
                         <span>Cancelar</span>
                     </button>
                     <button
                         onclick="event.preventDefault();
            document.getElementById('logout-form').submit();"
-                        class="bmodal_yes">
+                        class="btn btn-success">
                         <span>Cerrar Sesión</span>
                     </button>
 

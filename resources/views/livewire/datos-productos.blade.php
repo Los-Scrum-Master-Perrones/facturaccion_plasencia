@@ -250,10 +250,10 @@
                             </div>
                         </div>
                         <div class="modal-footer">
-                            <button type="button" class=" bmodal_no " data-bs-dismiss="modal">
+                            <button type="button" class="btn btn-danger" data-bs-dismiss="modal">
                                 <span>Cancelar</span>
                             </button>
-                            <button onclick="validar_marca()" class="bmodal_yes">
+                            <button onclick="validar_marca()"class="btn btn-success">
                                 <span>Guardar</span>
                             </button>
                             @csrf
@@ -285,10 +285,10 @@
                             </div>
                         </div>
                         <div class="modal-footer">
-                            <button type="button" class=" bmodal_no " data-bs-dismiss="modal">
+                            <button type="button" class="btn btn-danger" data-bs-dismiss="modal">
                                 <span>Cancelar</span>
                             </button>
-                            <button onclick="validar_marca()" class="bmodal_yes">
+                            <button onclick="validar_marca()" class="btn btn-success">
                                 <span>Actualizar</span>
                             </button>
 
@@ -389,10 +389,10 @@
                             </div>
                         </div>
                         <div class="modal-footer">
-                            <button type="button" class=" bmodal_no " data-bs-dismiss="modal">
+                            <button type="button" class="btn btn-danger" data-bs-dismiss="modal">
                                 <span>Cancelar</span>
                             </button>
-                            <button onclick="validar_capa()" type="submit" class=" bmodal_yes " value="Guardar">
+                            <button onclick="validar_capa()" type="submit" class="btn btn-success" value="Guardar">
 
                                 <span>Guardar</span>
                             </button>
@@ -423,10 +423,10 @@
                             </div>
                         </div>
                         <div class="modal-footer">
-                            <button type="button" class=" bmodal_no " data-bs-dismiss="modal">
+                            <button type="button" class="btn btn-danger" data-bs-dismiss="modal">
                                 <span>Cancelar</span>
                             </button>
-                            <button onclick="validar_capa()" type="submit" class=" bmodal_yes " value="Actualizar">
+                            <button onclick="validar_capa()" type="submit" class="btn btn-success" value="Actualizar">
 
                                 <span>Guardar</span>
                             </button>
@@ -496,10 +496,10 @@
                             </div>
                         </div>
                         <div class="modal-footer">
-                            <button type="button" class=" bmodal_no" data-bs-dismiss="modal">
+                            <button type="button" class="btn btn-danger" data-bs-dismiss="modal">
                                 <span>Cancelar</span>
                             </button>
-                            <button onclick="validar_nombre()" class=" bmodal_yes " value="Guardar">
+                            <button onclick="validar_nombre()" class="btn btn-success" value="Guardar">
                                 <span>Guardar</span>
                             </button>
                             @csrf
@@ -529,10 +529,10 @@
                             </div>
                         </div>
                         <div class="modal-footer">
-                            <button type="button" class=" bmodal_no" data-bs-dismiss="modal">
+                            <button type="button" class="btn btn-danger" data-bs-dismiss="modal">
                                 <span>Cancelar</span>
                             </button>
-                            <button onclick="validar_nombre()" class=" bmodal_yes " value="Actualizar">
+                            <button onclick="validar_nombre()" class="btn btn-success" value="Actualizar">
                                 <span>Actualizar</span>
                             </button>
                             @csrf
@@ -612,10 +612,10 @@
                             </div>
                         </div>
                         <div class="modal-footer">
-                            <button type="button" class=" bmodal_no " data-bs-dismiss="modal">
+                            <button type="button" class="btn btn-danger" data-bs-dismiss="modal">
                                 <span>Cancelar</span>
                             </button>
-                            <button onclick="validar_tipo()" type="submit" class=" bmodal_yes " value="Guardar">
+                            <button onclick="validar_tipo()" type="submit" class="btn btn-success" value="Guardar">
                                 <span>Guardar</span>
                             </button>
                             @csrf
@@ -684,8 +684,8 @@
                             </div>
                         </div>
                         <div class="modal-footer">
-                            <button type="button" class=" bmodal_no" data-bs-dismiss="modal"><span>Cancelar</span></button>
-                            <button onclick="validar_vitola()" class=" bmodal_yes">
+                            <button type="button" class="btn btn-danger" data-bs-dismiss="modal"><span>Cancelar</span></button>
+                            <button onclick="validar_vitola()" class="btn btn-success">
                                 <span>Guardar</span>
                             </button>
                             @csrf
@@ -715,8 +715,8 @@
                             </div>
                         </div>
                         <div class="modal-footer">
-                            <button type="button" class=" bmodal_no" data-bs-dismiss="modal"><span>Cancelar</span></button>
-                            <button onclick="validar_vitola()" class=" bmodal_yes">
+                            <button type="button" class="btn btn-danger" data-bs-dismiss="modal"><span>Cancelar</span></button>
+                            <button onclick="validar_vitola()" class="btn btn-success">
                                 <span>Actualizar</span>
                             </button>
                             @csrf

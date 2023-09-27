@@ -568,8 +568,6 @@ class FacturaTerminado extends Component
     public function actualizar_detalle_factura(Request $request)
     {
         DB::transaction(function () use ($request) {
-
-
             $sampler = DB::select('SELECT sampler,descripcion_sampler
                         FROM clase_productos
                         WHERE  clase_productos.item = (select item from pendiente where id_pendiente =

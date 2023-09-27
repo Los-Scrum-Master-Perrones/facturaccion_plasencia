@@ -293,7 +293,7 @@
                             data-bs-dismiss="modal">
                             <span>Cancelar</span>
                         </button>
-                        <button type="submit" onclick="updatelisto()" data-bs-dismiss="modal" class="bmodal_yes">
+                        <button type="submit" onclick="updatelisto()" data-bs-dismiss="modal" class="btn btn-success">
                             <span>Agregar</span>
                         </button>
                     </div>

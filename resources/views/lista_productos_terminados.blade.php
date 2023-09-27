@@ -220,11 +220,12 @@ for (var i = 0; i < data.length; i++) {
                     </div>
 
                     <div class="modal-footer">
-                        <button  type="button" class=" bmodal_no"
-                            data-bs-dismiss="modal"><span >Cancelar</span>
-                            @csrf
+                        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">
+                            <span>Cancelar</span>
                         </button>
-                        <button onclick="agregarproducto()"class=" bmodal_yes "> <span>Guardar</span> </button>
+                        <button onclick="agregarproducto()" class="btn btn-success">
+                            <span>Guardar</span>
+                        </button>
                     </div>
 
                 </div>
@@ -269,10 +270,10 @@ for (var i = 0; i < data.length; i++) {
       </div>
 
       <div class="modal-footer" >
-        <button  type="button" class=" bmodal_no " data-bs-dismiss="modal" >
+        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">
         <span>Cancelar</span>
         </button>
-        <button type="submit" class="bmodal_yes"   >
+        <button type="submit" class="btn btn-success">
         <span>Actualizar</span>
         </button>
       </div>

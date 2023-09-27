@@ -168,10 +168,10 @@
                     </div>
 
                     <div class="modal-footer">
-                        <button type="button" class=" bmodal_no " data-bs-dismiss="modal">
+                        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">
                             <span>Cancelar</span>
                         </button>
-                        <button type="submit" class="bmodal_yes">
+                        <button type="submit" class="btn btn-success">
                             <span>Actualizar</span>
                         </button>
                     </div>
@@ -214,10 +214,10 @@
                         </div>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="bmodal_no " data-bs-dismiss="modal">
+                        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">
                             <span>Cancelar</span>
                         </button>
-                        <button type="submit" class=" bmodal_yes ">
+                        <button type="submit" class="btn btn-success">
                             <span>Agregar</span>
                         </button>
 

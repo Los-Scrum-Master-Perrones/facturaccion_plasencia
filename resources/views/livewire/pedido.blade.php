@@ -183,10 +183,10 @@
                         </div>
 
                         <div class="modal-footer">
-                            <button class="bmodal_no" data-bs-dismiss="modal">
+                            <button type="button" class="btn btn-danger" data-bs-dismiss="modal">
                                 <span>Cancelar</span>
                             </button>
-                            <button type="submit" class="bmodal_yes">
+                            <button type="submit" class="btn btn-success">
                                 <span>Añadir</span>
                             </button>
                         </div>
@@ -280,10 +280,10 @@
                 </div>
 
                 <div class="modal-footer">
-                    <button class="bmodal_no" data-bs-dismiss="modal">
+                    <button type="button" class="btn btn-danger" data-bs-dismiss="modal">
                         <span>Cancelar</span>
                     </button>
-                    <button type="submit" class="bmodal_yes">
+                    <button type="submit" class="btn btn-success">
                         <span>Eliminar</span>
                     </button>
                 </div>
@@ -342,7 +342,7 @@
                         </table>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="bmodal_yes" data-bs-dismiss="modal">
+                        <button type="button" class="btn btn-success" data-bs-dismiss="modal">
                             <span>Aceptar</span>
                         </button>
                     </div>
@@ -448,10 +448,10 @@
                 </div>
 
                 <div class="modal-footer">
-                    <button class="bmodal_no" wire:click="agregar_productos()">
+                    <button  type="button" class="btn btn-danger" wire:click="agregar_productos()">
                         <span>Agregar Productos</span>
                     </button>
-                    <button wire:click="agregar_productos_exporta()" class="bmodal_yes">
+                    <button wire:click="agregar_productos_exporta()" class="btn btn-success">
                         <span>Exportar</span>
                     </button>
                 </div>

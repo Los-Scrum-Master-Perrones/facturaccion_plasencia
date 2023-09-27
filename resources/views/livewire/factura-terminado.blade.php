@@ -287,7 +287,7 @@
                                     @if (auth()->user()->rol == -1)
                                     @else
                                         <td style="width: 60px">
-                                            <a data-bs-toggle="modal" data-bs-target="#borrar_detalles" href=""
+                                            <a data-bs-toggle="modal" data-bs-target="#borrar_detalles" href="#"
                                                 wire:click="borrar_detalles({{ $detalles->id_detalle }})">
                                                 <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15"
                                                     fill="currentColor" class="bi bi-trash-fill" viewBox="0 0 16 16">
@@ -295,7 +295,7 @@
                                                         d="M2.5 1a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1H3v9a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V4h.5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1H2.5zm3 4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5zM8 5a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7A.5.5 0 0 1 8 5zm3 .5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 1 0z" />
                                                 </svg>
                                             </a>
-                                            <a style=" width:10px; height:10px;" data-bs-toggle="modal" href=""
+                                            <a style=" width:10px; height:10px;" data-bs-toggle="modal" href="#"
                                                 wire:click="editar_detalles({{ $detalles->id_detalle }})">
                                                 <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15"
                                                     fill="currentColor" class="bi bi-pencil-square"
@@ -478,11 +478,10 @@
                                                             factura?
                                                         </div>
                                                         <div class="modal-footer">
-                                                            <button type="button" class="bmodal_no"
-                                                                data-bs-dismiss="modal">
+                                                            <button type="button" class="btn btn-danger" data-bs-dismiss="modal">
                                                                 <span>Cancelar</span>
                                                             </button>
-                                                            <button type="submit" class="bmodal_yes">
+                                                            <button type="submit" class="btn btn-success">
                                                                 <span>Eliminar</span>
                                                             </button>
                                                         </div>
@@ -974,10 +973,10 @@
                     </div>
 
                     <div class="modal-footer">
-                        <button class="bmodal_no" data-bs-dismiss="modal">
+                        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">
                             <span>Cancelar</span>
                         </button>
-                        <button type="submit" onclick="guardar_detalle()" data-bs-dismiss="modal" class="bmodal_yes">
+                        <button type="submit" onclick="guardar_detalle()" data-bs-dismiss="modal" class="btn btn-success">
                             <span>Agregar</span>
                         </button>
                     </div>
@@ -989,9 +988,9 @@
 
     <!-- INICIO MODAL ACTUALIZAR DATO PENDIENTE -->
 
-    <form action="{{ Route('actualizar_detalle_factura') }}" method="POST" id="actualizar_from"
+    <form  action="{{ Route('actualizar_detalle_factura') }}" method="POST" id="actualizar_from"
         name="actualizar_from">
-        <div class="modal fade" role="dialog" id="modal_editar_detalles" data-backdrop="static"
+        <div wire:ignore class="modal fade" role="dialog" id="modal_editar_detalles" data-backdrop="static"
             data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true"
             style="opacity:.9;background:#212529;width=900px;">
             <div class="modal-dialog modal-dialog-centered modal-lg" style="opacity:.9;background:#212529;width=40%">
@@ -1042,10 +1041,10 @@
                     </div>
 
                     <div class="modal-footer">
-                        <button class="bmodal_no" data-bs-dismiss="modal">
+                        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">
                             <span>Cancelar</span>
                         </button>
-                        <button type="submit" class="bmodal_yes">
+                        <button type="submit" class="btn btn-success">
                             <span>Agregar</span>
                         </button>
                     </div>
@@ -1071,10 +1070,10 @@
                         ¿Estás seguro que quieres eliminar este producto de la factura?
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="bmodal_no" data-bs-dismiss="modal">
+                        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">
                             <span>Cancelar</span>
                         </button>
-                        <button type="submit" class="bmodal_yes">
+                        <button type="submit" class="btn btn-success">
                             <span>Eliminar</span>
                         </button>
                     </div>

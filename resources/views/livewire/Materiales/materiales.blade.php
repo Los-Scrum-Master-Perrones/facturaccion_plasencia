@@ -365,10 +365,10 @@
                 </div>
 
                 <div class="modal-footer">
-                    <button type="button" class=" bmodal_no" data-bs-dismiss="modal"><span>Cancelar</span>
-                        @csrf
+                    <button type="button" class="btn btn-danger" data-bs-dismiss="modal">
+                        <span>Cancelar</span>
                     </button>
-                    <button onclick="actulizar_material()" class=" bmodal_yes "> <span>Guardar</span> </button>
+                    <button onclick="actulizar_material()" class="btn btn-success"> <span>Guardar</span> </button>
                 </div>
             </div>
         </div>
@@ -477,10 +477,10 @@
                 </div>
 
                 <div class="modal-footer">
-                    <button type="button" class=" bmodal_no" data-bs-dismiss="modal"><span>Cancelar</span>
-                        @csrf
+                    <button type="button" class="btn btn-danger" data-bs-dismiss="modal">
+                        <span>Cancelar</span>
                     </button>
-                    <button onclick="insertar_material()" class=" bmodal_yes "> <span>Guardar</span> </button>
+                    <button onclick="insertar_material()" class="btn btn-success"> <span>Guardar</span> </button>
                 </div>
             </div>
         </div>
