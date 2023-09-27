@@ -565,7 +565,7 @@ class FacturaTerminado extends Component
         $this->ventanas = 1;
     }
 
-    public function actualizar_detalle_factura(Request $request)
+    public function actualizar_detalle_factura()
     {
         DB::transaction(function () use ($request) {
             $sampler = DB::select('SELECT sampler,descripcion_sampler
@@ -641,7 +641,7 @@ class FacturaTerminado extends Component
     {
         $vista_html = ['1'=>['vista'=>'Exports.factura-terminado-exports-warehouse','encabezado'=>[0=>'A18:P18',1=>'A19:P19']],
                        '2'=>['vista'=>'Exports.factura-terminado-exports','encabezado'=>[0=>'A18:P18',1=>'A19:P19']],
-                       '3'=>['vista'=>'Exports.factura-terminado-exports-family','encabezado'=>[0=>'A18:P18',1=>'A19:P19']],
+                       '3'=>['vista'=>'Exports.factura-terminado-exports-family','encabezado'=>[0=>'A16:R16',1=>'A17:R17']],
                        '4'=>['vista'=>'Exports.factura-terminado-exports','encabezado'=>[0=>'A18:P18',1=>'A19:P19']],
                        '5'=>['vista'=>'Exports.factura-terminado-exports-simple','encabezado'=>[1=>'A18:P18',1=>'A19:P19']],
                        '6'=>['vista'=>'Exports.factura-terminado-exports-aerea','encabezado'=>[0=>'A18:R18',1=>'A19:R19']],
