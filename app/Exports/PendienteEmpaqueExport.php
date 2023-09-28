@@ -34,7 +34,7 @@ class PendienteEmpaqueExport implements
             'ID',
             'CATEGORIA',
             'ITEM',
-            'SO # ORDEN',
+            '# ORDEN',
             'OBSERVACÓN',
             'PRESENTACIÓN',
             'MES',

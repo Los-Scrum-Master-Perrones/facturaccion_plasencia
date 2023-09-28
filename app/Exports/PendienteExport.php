@@ -32,7 +32,7 @@ class PendienteExport implements FromCollection,
         return [
             'CATEGORIA',
             'ITEM',
-            'SO # ORDEN',
+            '# ORDEN',
             'OBSERVACÓN',
             'PRESENTACIÓN',
             'MES',

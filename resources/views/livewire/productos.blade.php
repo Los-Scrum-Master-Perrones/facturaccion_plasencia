@@ -284,8 +284,8 @@
                                     <label for="marca_ac" class="form-label">Marca</label>
                                     <select class="mi-selector2" style=" height:30px; width: 100%; " name="marca_ac"
                                         id="marca_ac" placeholder="Ingresa figura y tipo" required>
-                                        @foreach ($marcas as $marca)
-                                            <option style="overflow-y: scroll;"> {{ $marca }}</option>
+                                        @foreach ($marcass as $marca)
+                                            <option style="overflow-y: scroll;"> {{ $marca->marca }}</option>
                                         @endforeach
                                     </select>
                                 </div>
@@ -300,8 +300,8 @@
                                     <label for="txt_figuraytipo" class="form-label">Capa</label>
                                     <select class=" mi-selector2" style=" height:30px; width: 100%; " name="capa_ac"
                                         id="capa_ac" placeholder="Ingresa figura y tipo" required>
-                                        @foreach ($capas as $capa)
-                                            <option style="overflow-y: scroll;"> {{ $capa }}</option>
+                                        @foreach ($capass as $capa)
+                                            <option style="overflow-y: scroll;"> {{ $capa->capa }}</option>
                                         @endforeach
                                     </select>
                                 </div>
@@ -309,8 +309,8 @@
                                     <label for="txt_total" class="form-label">Nombre</label>
                                     <select class=" mi-selector2" style=" height:30px; width: 100%; "
                                         name="nombre_ac" id="nombre_ac" placeholder="Ingresa figura y tipo" required>
-                                        @foreach ($nombres as $nombre)
-                                            <option style="overflow-y: scroll;"> {{ $nombre }}</option>
+                                        @foreach ($nombress as $nombre)
+                                            <option style="overflow-y: scroll;"> {{ $nombre->nombre }}</option>
                                         @endforeach
                                     </select>
                                 </div>
@@ -320,8 +320,8 @@
                                     <label for="txt_buenos" class="form-label">Vitola</label>
                                     <select class=" mi-selector2" style=" height:30px; width: 100%; "
                                         name="vitola_ac" id="vitola_ac" placeholder="Ingresa figura y tipo" required>
-                                        @foreach ($vitolas as $vitola)
-                                            <option style="overflow-y: scroll;"> {{ $vitola }}</option>
+                                        @foreach ($vitolass as $vitola)
+                                            <option style="overflow-y: scroll;"> {{ $vitola->vitola }}</option>
                                         @endforeach
                                     </select>
                                 </div>
@@ -330,8 +330,8 @@
                                     <label for="txt_malos" class="form-label">Tipo de empaque</label>
                                     <select class=" mi-selector2" style=" height:30px; width: 100%; " name="tipo_ac"
                                         id="tipo_ac" placeholder="Ingresa figura y tipo" required>
-                                        @foreach ($tipo_empaques as $tipo_empaque)
-                                            <option style="overflow-y: scroll;"> {{ $tipo_empaque }}
+                                        @foreach ($empaquess as $tipo_empaque)
+                                            <option style="overflow-y: scroll;"> {{ $tipo_empaque->tipo_empaque }}
                                             </option>
                                         @endforeach
                                     </select>
@@ -613,8 +613,8 @@
                                         <select class=" mi-selector" name="marca" id="marca"
                                             placeholder="Ingresa figura y tipo" style=" height:30px; width: 100%; "
                                             name="states[]" required>
-                                            @foreach ($marcas as $marca)
-                                                <option> {{ $marca }}</option>
+                                            @foreach ($marcass as $marca)
+                                                <option> {{ $marca->marca }}</option>
                                             @endforeach
                                         </select>
 
@@ -634,8 +634,8 @@
                                         <select class="form-control mi-selector" name="capa" id="capa"
                                             placeholder="Ingresa figura y tipo"
                                             style="overflow-y: scroll; width:100%;" required>
-                                            @foreach ($capas as $capa)
-                                                <option style="overflow-y: scroll;"> {{ $capa }}</option>
+                                            @foreach ($capass as $capa)
+                                                <option style="overflow-y: scroll;"> {{ $capa->capa }}</option>
                                             @endforeach
                                         </select>
                                     </div>
@@ -646,8 +646,8 @@
                                         <select class="form-control mi-selector" name="nombre" id="nombre"
                                             placeholder="Ingresa figura y tipo"
                                             style="overflow-y: scroll; width:100%;" required>
-                                            @foreach ($nombres as $nombre)
-                                                <option style="overflow-y: scroll;"> {{ $nombre }}</option>
+                                            @foreach ($nombress as $nombre)
+                                                <option style="overflow-y: scroll;"> {{ $nombre->nombre }}</option>
                                             @endforeach
                                         </select>
                                     </div>
@@ -662,8 +662,8 @@
                                         <select class="form-control mi-selector" name="vitola" id="vitola"
                                             placeholder="Ingresa figura y tipo"
                                             style="overflow-y: scroll; width:100%;" required>
-                                            @foreach ($vitolas as $vitola)
-                                                <option style="overflow-y: scroll;"> {{ $vitola }}</option>
+                                            @foreach ($vitolass as $vitola)
+                                                <option style="overflow-y: scroll;"> {{ $vitola->vitola }}</option>
                                             @endforeach
                                         </select>
 
@@ -674,8 +674,8 @@
                                         <select class="form-control mi-selector" name="tipo" id="tipo"
                                             placeholder="Ingresa figura y tipo" style="overflow-y: scroll;width:100%;"
                                             required>
-                                            @foreach ($tipo_empaques as $tipo_empaque)
-                                                <option style="overflow-y: scroll;"> {{ $tipo_empaque }}
+                                            @foreach ($empaquess as $tipo_empaque)
+                                                <option style="overflow-y: scroll;"> {{ $tipo_empaque->tipo_empaque }}
                                                 </option>
                                             @endforeach
                                         </select>

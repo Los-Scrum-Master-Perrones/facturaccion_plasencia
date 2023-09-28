@@ -50,7 +50,7 @@
                                 <tr>
                                     <th>#</th>
                                     <th>Orden del pedido</th>
-                                    <th>SO # ORDEN</th>
+                                    <th># ORDEN</th>
                                     <th>Marca</th>
                                     <th>Alias Vitola</th>
                                     <th>Vitola</th>

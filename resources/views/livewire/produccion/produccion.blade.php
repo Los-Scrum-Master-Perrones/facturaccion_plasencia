@@ -22,19 +22,18 @@
                     <div class="col-md-3" wire:ignore style="height: 30px">
                         <input class="form-control" autocomplete="off" id="example" />
                     </div>
-                    <div class="col-md-4">
-                        <form wire:submit.prevent="import" class="form-inline">
-                            @csrf
+                    <div class="col-md-5">
                             <div class="input-group mb-3" style="height: 30px">
                                 <input type="file" name="select_file" id="select_file"
                                     style="height: 30px;font-size: 0.7em" wire:model="select_file"
                                     class="form-control" />
-                                <input type="submit" name="upload" class="btn btn-primary"
-                                    style="height: 30px;font-size: 0.7em" value="Importar">
+                                <input type="submit" wire:click="import" name="upload" class="btn btn-primary"
+                                    style="height: 30px;font-size: 0.7em" value="Importar Produccion Diaria">
+                                <input type="submit" wire:click="import2" name="upload" class="btn btn-secondary"
+                                    style="height: 30px;font-size: 0.7em" value="Importar Precios (R,B)">
                             </div>
-                        </form>
                     </div>
-                    <div class="col-md-3"></div>
+                    <div class="col-md-2"></div>
                     <div class="col-md-2">
                         <div class="input-group mb-3" style="height: 30px">
                             <span class="input-group-text" id="basic-addon1" style="height: 30px;font-size: 0.7em">Por

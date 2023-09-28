@@ -4,7 +4,12 @@ namespace App\Http\Controllers;
 
 namespace App\Http\Livewire;
 
+use App\Models\capa_producto;
 use App\Models\clase_producto;
+use App\Models\marca_producto;
+use App\Models\nombre_producto;
+use App\Models\tipo_empaque;
+use App\Models\vitola_producto;
 use ClaseProducto;
 use Livewire\Component;
 use Illuminate\Http\Request;
@@ -86,7 +91,12 @@ class Productos extends Component
 
 
         return view('livewire.productos',[
-            'productos' => new LengthAwarePaginator($produ, $this->total, $this->por_pagina)
+            'productos' => new LengthAwarePaginator($produ, $this->total, $this->por_pagina),
+            'marcass' => marca_producto::all(),
+            'nombress' => nombre_producto::all(),
+            'vitolass' => vitola_producto::all(),
+            'capass' => capa_producto::all(),
+            'empaquess' => tipo_empaque::all()
         ])->extends('principal')->section('content');
     }
 
@@ -172,7 +182,7 @@ class Productos extends Component
             $upc = "no";
         }
 
-        
+
 
         $clase_producto = DB::select(
             'call insertar_clase_producto(:item,:cod_producto,:cod_caja,:cod_precio,:precio,:capa,:vitola,:nombre,:marca,:cello,:anillo,:upc,:tipo,:presentacion,:cantxbult)',

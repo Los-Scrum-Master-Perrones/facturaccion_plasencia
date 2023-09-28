@@ -3,6 +3,7 @@
 namespace App\Http\Livewire\Produccion;
 
 use App\Imports\ProducidoImport;
+use App\Imports\ProducidoPreciosImport;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\DB;
 use Livewire\Component;
@@ -115,12 +116,22 @@ class Produccion extends Component
         ])->extends('layouts.Main')->section('content');
     }
 
-    public  function import()
+    public function import()
     {
         $this->validate([
             'select_file' => 'max:1024', // 1MB Max
         ]);
         (new ProducidoImport)->import($this->select_file);
     }
+
+    public function import2()
+    {
+        $this->validate([
+            'select_file' => 'max:1024', // 1MB Max
+        ]);
+        (new ProducidoPreciosImport)->import($this->select_file);
+    }
+
+
 
 }

@@ -373,98 +373,98 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div  class="modal-body">
-                    <div id="etiqueta">
+                    <div id="etiqueta" style="padding: 20px">
                         <div style="text-align:center;">
                             <FONT SIZE=7 for="" style="font-family: fantasy;" class="form-label">
                                 FRAGILE
                             </FONT>
                             <br>
                             <div class="col-sm-3">
-                                <h1 style="font-family: fantasy;" class="">{!! DNS2D::getBarcodeSVG(strval($id_d), 'QRCODE', 3, 3) !!}</h1>
+                                <h1 style="font-family: fantasy;" class=" fs-4">{!! DNS2D::getBarcodeSVG(strval($id_d), 'QRCODE', 3, 3) !!}</h1>
                             </div>
-                            <h1><img class="form-label" style="width:200px; font-family: fantasy; text-align:center;"
+                            <h1><img class="form-label fs-4" style="width:200px; font-family: fantasy; text-align:center;"
                                     src="{{ asset('images/Rocky-Patel.png') }}" alt="Rocky">
                             </h1>
                         </div>
 
 
                         <div class="mb-2 row">
-                            <h1 for="staticEmail" style="font-family: fantasy;" class="col-sm-3">MARK: </h1>
+                            <h1 for="staticEmail" style="font-family: fantasy;" class="col-sm-3 fs-4">MARK: </h1>
                             <div class="offset-md-1 col-sm-8" style="text-align:center;">
-                                <h1 contenteditable id="mark" style="font-family: fantasy;" class="">
+                                <h1 contenteditable id="mark" style="font-family: fantasy;" class=" fs-4">
                                     DECADE BY RP</h1>
                             </div>
                         </div>
 
                         <div class="mb-2 row">
-                            <h1 for="staticEmail" style="font-family: fantasy;" class="col-sm-3">SIZE: </h1>
+                            <h1 for="staticEmail" style="font-family: fantasy;" class="col-sm-3 fs-4">SIZE: </h1>
                             <div class="offset-md-2 col-sm-6" style="text-align:center;">
-                                <h1 id="size" contenteditable style="font-family: fantasy;" class="">6-1/2
+                                <h1 id="size" contenteditable style="font-family: fantasy;" class=" fs-4">6-1/2
                                     X 52</h1>
                             </div>
                         </div>
 
                         <div class="mb-2 row">
-                            <h1 for="staticEmail" style="font-family: fantasy;" class="col-sm-3">SHAPE: </h1>
+                            <h1 for="staticEmail" style="font-family: fantasy;" class="col-sm-3 fs-4">SHAPE: </h1>
                             <div class="offset-md-2 col-sm-6" style="text-align:center;">
-                                <h1 id="shape" contenteditable style="font-family: fantasy;" class="">TORO
+                                <h1 id="shape" contenteditable style="font-family: fantasy;" class=" fs-4">TORO
                                     PRESS</h1>
                             </div>
                         </div>
 
                         <div class="mb-2 row">
-                            <h1 for="staticEmail" style="font-family: fantasy;" class="col-sm-3">WRAPPER: </h1>
+                            <h1 for="staticEmail" style="font-family: fantasy;" class="col-sm-3 fs-4">WRAPPER: </h1>
                             <div class="offset-md-2 col-sm-6" style="text-align:center;">
-                                <h1 id="wrapper" contenteditable style="font-family: fantasy;" class="">
+                                <h1 id="wrapper" contenteditable style="font-family: fantasy;" class=" fs-4">
                                     SUMATRA</h1>
                             </div>
                         </div>
 
                         <div class="mb-2 row">
-                            <h1 for="staticEmail" style="font-family: fantasy;" class="col-sm-3">PACKING: </h1>
+                            <h1 for="staticEmail" style="font-family: fantasy;" class="col-sm-3 fs-4">PACKING: </h1>
                             <div class="offset-md-2 col-sm-6" style="text-align:center;">
-                                <h1 id="packing" style="font-family: fantasy;" class="">BOX/20</label>
+                                <h1 id="packing" style="font-family: fantasy;" class=" fs-4">BOX/20</label>
                             </div>
                         </div>
 
                         <div class="mb-2 row">
-                            <h1 for="staticEmail" style="font-family: fantasy;" class="col-sm-3">QUANTITY: </h1>
+                            <h1 for="staticEmail" style="font-family: fantasy;" class="col-sm-3 fs-4">QUANTITY: </h1>
                             <div class="offset-md-2 col-sm-6" style="text-align:center;">
-                                <h1 contenteditable style="font-family: fantasy;" id="quantity" class="">560
+                                <h1 contenteditable style="font-family: fantasy;" id="quantity" class=" fs-4">560
                                 </h1>
                             </div>
                         </div>
 
                         <div class="mb-2 row">
-                            <h1 for="staticEmail" style="font-family: fantasy;" class="col-sm-3">DATE: </h1>
+                            <h1 for="staticEmail" style="font-family: fantasy;" class="col-sm-3 fs-4">DATE: </h1>
                             <div class="offset-md-2 col-sm-6" style="text-align:center;">
-                                <h1 id="date" contenteditable style="font-family: fantasy;" class="">
+                                <h1 id="date" contenteditable style="font-family: fantasy;" class=" fs-4">
                                     MES-00-0000</h1>
                             </div>
                         </div>
 
 
                         <div class="mb-2 row">
-                            <h1 for="staticEmail" style="font-family: fantasy;" class="col-sm-3">BOX #: </h1>
+                            <h1 for="staticEmail" style="font-family: fantasy;" class="col-sm-3 fs-4">BOX #: </h1>
                             <div class="offset-md-2 col-sm-6" style="text-align:center;">
-                                <h1 contenteditable id="box" style="font-family: fantasy;" class="">00
+                                <h1 contenteditable id="box" style="font-family: fantasy;" class=" fs-4">00
                                 </h1>
                             </div>
                         </div>
 
                         <div class="mb-2 row">
-                            <h1 for="staticEmail" style="font-family: fantasy;" class="col-sm-6">ITEM NUMBER: </h1>
+                            <h1 for="staticEmail" style="font-family: fantasy;" class="col-sm-6 fs-4">ITEM NUMBER: </h1>
                             <div class="col-sm-4">
-                                <h1 id="itemnumber" style="font-family: fantasy;" class="">20005001</h1>
+                                <h1 id="itemnumber" style="font-family: fantasy;" class=" fs-4">20005001</h1>
                             </div>
                         </div>
 
                         <div class="mb-2 row">
-                            <h1 for="staticEmail" style="font-family: fantasy;" class="col-sm-2">BARCODE: </h1>
+                            <h1 for="staticEmail" style="font-family: fantasy;" class="col-sm-2 fs-4">BARCODE: </h1>
                         </div>
 
                         <div class="col-sm-3">
-                            <h1 style="font-family: fantasy;" class="">{!! DNS1D::getBarcodeSVG($item_b, 'C128A', 1, 50) !!}</h1>
+                            <h1 style="font-family: fantasy;" class=" fs-4">{!! DNS1D::getBarcodeSVG($item_b, 'C128A', 1, 50) !!}</h1>
                         </div>
 
                     </div>

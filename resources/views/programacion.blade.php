@@ -59,7 +59,7 @@
 <table id="editable" class="table table-striped table-secondary table-bordered border-primary " style="overflow-x:auto;">
                             <thead>
                                 <tr>
-                                    <th>SO # ORDEN</th>
+                                    <th># ORDEN</th>
                                     <th>ORDEN</th>
                                     <th>MARCA</th>
                                     <th>NOMBRE</th>

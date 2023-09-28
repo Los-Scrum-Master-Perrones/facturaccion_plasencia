@@ -609,7 +609,7 @@
                             <th>CATEGORIA</th>
                             <th>ITEM</th>
                             <th>CODIGO CAJA</th>
-                            <th>SO # ORDEN</th>
+                            <th># ORDEN</th>
                             <th>OBSERVACÓN</th>
                             <th>PRESENTACIÓN</th>
                             <th>MES</th>
