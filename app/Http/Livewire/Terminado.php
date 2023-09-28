@@ -99,9 +99,7 @@ class Terminado extends Component
         $conca = 'RP-'.$item;
         $this->item_b = $conca;
         $this->id_d = $id;
-        $this->dispatchBrowserEvent('xxx', ['marca' => $marca,
-        'size' => $size,'shape' => $shape,'wrapper' => $wrapper,
-        'packing' => $packing,'quantity' => $quantity,'item' => $item]);
+        $this->dispatchBrowserEvent('xxx', ['marca' => $marca,'size' => $size,'shape' => $shape,'wrapper' => $wrapper,'packing' => $packing,'quantity' => $quantity,'item' => $item]);
     }
 
 
