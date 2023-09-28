@@ -51,7 +51,7 @@
                             </span>
                         </button>
                     </form>
-                    
+
                 </div>
                 <div class="panel-body">
                     <div class="table-responsive">
@@ -59,7 +59,7 @@
 <table id="editable" class="table table-striped table-secondary table-bordered border-primary " style="overflow-x:auto;">
                             <thead>
                                 <tr>
-                                    <th>ORDEN DEL SISTEMA</th>
+                                    <th>SO # ORDEN</th>
                                     <th>ORDEN</th>
                                     <th>MARCA</th>
                                     <th>NOMBRE</th>
@@ -74,7 +74,7 @@
                             </thead>
                             <tbody>
 
-     
+
                             </tbody>
                         </table>
                         </div>
@@ -82,8 +82,8 @@
             </div>
         </div>
 
-                        
- 
+
+
         <script type="text/javascript">
             $(document).ready(function () {
 
@@ -119,7 +119,7 @@
 
         </script>
 
-       
+
 </body>
 @endsection
 </html>
