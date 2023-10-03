@@ -3,6 +3,7 @@
 namespace App\Http\Livewire\Produccion;
 
 use App\Imports\ProducidoImport;
+use App\Imports\ProducidoPendienteImport;
 use App\Imports\ProducidoPreciosImport;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\DB;
@@ -20,16 +21,16 @@ class Produccion extends Component
     protected $paginationTheme = 'bootstrap';
 
     public $b_fecha = '';
+    public $b_presentacion = '';
     public $b_orden = '';
     public $b_codigo = '';
     public $b_marca = '';
     public $b_nombre = '';
     public $b_vitola = '';
     public $b_capa = '';
-    public $b_fecha_inicial = '';
-    public $b_fecha_final = '';
-
+    
     public $fechas = [];
+    public $presentacion = [];
     public $ordenes = [];
     public $codigos = [];
     public $marcas = [];
@@ -41,6 +42,7 @@ class Produccion extends Component
     public $total = 0;
 
     public function mount() {
+
         $this->b_fecha_inicial = Carbon::now()->format('Y-m-d');
         $this->b_fecha_final = Carbon::now()->format('Y-m-d');
 
@@ -74,6 +76,7 @@ class Produccion extends Component
             $this->capas = array_unique($this->capas);
         }
     }
+
     public function render()
     {
         $start = ($this->page - 1) * $this->por_pagina;
@@ -129,7 +132,9 @@ class Produccion extends Component
         $this->validate([
             'select_file' => 'max:1024', // 1MB Max
         ]);
-        (new ProducidoPreciosImport)->import($this->select_file);
+
+        (new ProducidoPendienteImport)->import($this->select_file);
+        //(new ProducidoPreciosImport)->import($this->select_file);
     }
 
 

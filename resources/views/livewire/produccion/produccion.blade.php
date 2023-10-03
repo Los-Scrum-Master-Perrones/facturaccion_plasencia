@@ -1,17 +1,10 @@
 <div xmlns:wire="http://www.w3.org/1999/xhtml">
-    <ul class="nav  nav-tabs  justify-content-center">
+    <ul class="nav nav-tabs justify-content-center">
         <li class="nav-item">
-            <a class="nav-link" style="color:white; font-size:12px;"
-                href="{{ route('materiales.index') }}"><strong>Materiales</strong></a>
+            <a class="nav-link fs-7" aria-current="page" href="{{ route('produccion.pendiente.index') }}"><strong>Pendiente</strong></a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" style="color:white; font-size:12px;"
-                href="{{ route('materiales.relacionar') }}"><strong>Materiales
-                    materials</strong></a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link" style="color:#E5B1E2; font-size:12px;"
-                href="{{ route('entradas.salidas') }}"><strong>Entrada/Salida</strong></a>
+            <a class="nav-link active fs-7" href="{{ route('produccion.index') }}"><strong>Entradas</strong></a>
         </li>
     </ul>
 
@@ -19,6 +12,13 @@
         <div class="card" style="padding:0px;">
             <div class="card-header">
                 <div class="row">
+                    <div class="col-md-2" wire:ignore style="height: 30px">
+                        <div wire:loading>
+                            <button id="btn_guardar" class="btn btn-outline-purpura" disabled>
+                                <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                            </button>
+                        </div>
+                    </div>
                     <div class="col-md-3" wire:ignore style="height: 30px">
                         <input class="form-control" autocomplete="off" id="example" />
                     </div>
@@ -33,7 +33,6 @@
                                     style="height: 30px;font-size: 0.7em" value="Importar Precios (R,B)">
                             </div>
                     </div>
-                    <div class="col-md-2"></div>
                     <div class="col-md-2">
                         <div class="input-group mb-3" style="height: 30px">
                             <span class="input-group-text" id="basic-addon1" style="height: 30px;font-size: 0.7em">Por

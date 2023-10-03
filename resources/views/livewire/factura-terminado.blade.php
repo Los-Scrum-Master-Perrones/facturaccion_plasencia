@@ -87,7 +87,6 @@
                         <option value="2">Warehouse Simple</option>
                         <option value="3">Family</option>
                         <option value="4">Rocky Patel</option>
-                        <option value="5">Rocky Patel Simple</option>
                         <option value="6">Rocky Patel(Aerea)</option>
                         <option value="7">Family (Aerea)</option>
                         <option value="8">LIOM LEAF</option>

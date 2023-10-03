@@ -666,13 +666,13 @@ class FacturaTerminado extends Component
     public function imprimir_formatos()
     {
         $vista_html = [
-            '1' => ['vista' => 'Exports.factura-terminado-exports-warehouse', 'encabezado' => [0 => 'A18:P18', 1 => 'A19:P19']],
+            '1' => ['vista' => 'Exports.factura-terminado-exports-warehouse', 'encabezado' => [0 => 'A18:R18', 1 => 'A19:R19']],
             '2' => ['vista' => 'Exports.factura-terminado-exports', 'encabezado' => [0 => 'A18:P18', 1 => 'A19:P19']],
             '3' => ['vista' => 'Exports.factura-terminado-exports-family', 'encabezado' => [0 => 'A16:R16', 1 => 'A17:R17']],
             '4' => ['vista' => 'Exports.factura-terminado-exports', 'encabezado' => [0 => 'A18:R18', 1 => 'A19:R19']],
             '5' => ['vista' => 'Exports.factura-terminado-exports-simple', 'encabezado' => [1 => 'A18:P18', 1 => 'A19:P19']],
             '6' => ['vista' => 'Exports.factura-terminado-exports-aerea', 'encabezado' => [0 => 'A18:R18', 1 => 'A19:R19']],
-            '7' => ['vista' => 'Exports.factura-terminado-exports-family-aerea', 'encabezado' => [0 => 'A18:R18', 1 => 'A19:R19']],
+            '7' => ['vista' => 'Exports.factura-terminado-exports-family-aerea', 'encabezado' => [0 => 'A18:P18', 1 => 'A19:P19']],
             '8' => ['vista' => 'Exports.factura-terminado-exports-lion-leaf', 'encabezado' => [0 => 'A19:K19', 1 => 'A20:K20']],
             '9' => ['vista' => 'Exports.factura-terminado-exports-bandido', 'encabezado' => [0 => 'A15:N15', 1 => 'A16:N16']],
             '10' => ['vista' => 'Exports.factura-terminado-exports-coyote', 'encabezado' => [0 => 'A18:L18', 1 => 'A19:L19']],

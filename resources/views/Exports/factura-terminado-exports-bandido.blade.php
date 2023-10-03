@@ -49,7 +49,6 @@
                     </tr>
                     <tr>
                         <td style="font-family: Arial; font-size: 8"><b>Vendido a</b></td>
-                        <td style="font-family: Tahoma; font-size: 10" colspan="4"><strong>ROCKY PATEL PREMIUM CIGARS, INC.</strong></td>
                     </tr>
                     <tr>
                         <td style="font-family: Arial; font-size: 8"><b>Sold to</b></td>
