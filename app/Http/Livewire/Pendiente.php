@@ -10,6 +10,10 @@ use App\Exports\PendienteMaterialesExport;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use App\Exports\OrdenCaja;
+use App\Models\pendiente as ModelsPendiente;
+use App\Models\pendiente_empaque;
+use App\Models\Produccion;
+use App\Models\ProduccionPendiente;
 use Maatwebsite\Excel\Facades\Excel;
 use Exception;
 use Illuminate\Support\Facades\DB;
@@ -246,7 +250,7 @@ class Pendiente extends Component
         }
 
         foreach ($this->datos_pendiente as $key => $value) {
-            $value->esta_pendiente = isset($usosArray[$value->id_pendiente])?$usosArray[$value->id_pendiente]:'no';
+            $value->esta_pendiente = isset($usosArray[$value->id_pendiente]) ? $usosArray[$value->id_pendiente] : 'no';
         }
 
 
@@ -288,23 +292,177 @@ class Pendiente extends Component
     public function pendiente_indexi(Request $request)
     {
 
-        $insertar_pendiente = DB::select(
-            'call insertar_pendiente(:fecha,:sistema)',
-            [
-                'fecha' => (string)$request->fecha,
-                'sistema' => $request->sistema
-            ]
-        );
+        try {
+            DB::beginTransaction();
+            $insertar_pendiente = DB::select(
+                'call pedidos_pendiente_insertar(:sistema,:fecha)',
+                [
+                    'fecha' => (string)$request->fecha,
+                    'sistema' => $request->sistema
+                ]
+            );
 
-        $insertar_pendiente_empaque =  DB::select(
-            'call insertar_pendente_empaque(:fecha,:sistema)',
-            [
-                'fecha' => (string)$request->fecha,
-                'sistema' => $request->sistema
-            ]
-        );
 
-        return redirect()->route('pendiente')->with('insertar_pendiente', $insertar_pendiente);
+
+
+            $datos = [];
+            $datos2 = [];
+
+
+            $todosLosDetalles = DB::select('call traer_numero_detalles_productos_datos()');
+
+
+            $cantidad_detalle_sampler = 0;
+            $detalles = 0;
+            $valores = [];
+
+            foreach ($todosLosDetalles as $key => $value) {
+                $valores[$value->item][] = $value;
+            }
+
+            for ($i = 0; $i < count($insertar_pendiente); $i++) {
+
+                if ($insertar_pendiente[$i]->sampler == 'si') {
+
+                    if ($cantidad_detalle_sampler == 0 && $detalles == 0) {
+                        $cantidad_detalle_sampler = $insertar_pendiente[$i]->can_sampler;
+                    }
+
+                    $val = $valores[$insertar_pendiente[$i]->item];
+
+                    $insertar_pendiente[$i]->marca = $val[$detalles]->id_marca;
+                    $insertar_pendiente[$i]->vitola = $val[$detalles]->id_vitola;
+                    $insertar_pendiente[$i]->nombre = $val[$detalles]->id_nombre;
+                    $insertar_pendiente[$i]->capa = $val[$detalles]->id_capa;
+                    $insertar_pendiente[$i]->codigo_productos = $val[$detalles]->codigo_producto;
+                    $insertar_pendiente[$i]->serie_precio = $val[$detalles]->codigo_producto;
+                    $insertar_pendiente[$i]->precio = $val[$detalles]->codigo_producto;
+                    $detalles++;
+
+                    if ($detalles == $cantidad_detalle_sampler) {
+                        $detalles = 0;
+                        $cantidad_detalle_sampler = 0;
+                    }
+                }
+            }
+
+            foreach ($insertar_pendiente as $key => $value) {
+                $datos[] = [
+                    "categoria" => $value->categoria,
+                    "item" => $value->item,
+                    "orden_del_sitema" => $value->orden_del_sitema,
+                    "observacion" => $value->observacion,
+                    "presentacion" => $value->presentacion,
+                    "mes" => $value->mes,
+                    "orden" => $value->orden,
+                    "marca" => $value->marca,
+                    "vitola" => $value->vitola,
+                    "nombre" => $value->nombre,
+                    "capa" => $value->capa,
+                    "tipo_empaque" => $value->tipo_empaque,
+                    "cello" => $value->cello,
+                    "pendiente" => $value->pendiente,
+                    "saldo" => $value->saldo,
+                    "paquetes" => $value->paquetes,
+                    "unidades" => $value->unidades,
+                    "serie_precio" => $value->serie_precio,
+                    "precio" => $value->precio,
+                    "procesado" => $value->procesado,
+                    "codigo_productos" => $value->codigo_productos
+                ];
+            }
+
+
+            ModelsPendiente::upsert(
+                $datos,
+                ['orden_del_sitema', 'mes', 'orden'],
+                ['serie_precio', 'precio']
+            );
+
+            $insertar_pendiente_empaque = DB::select(
+                'call pedidos_pendiente_empaque_insertar(:sistema)',
+                [
+                    'sistema' => $request->sistema
+                ]
+            );
+
+            foreach ($insertar_pendiente_empaque as $key => $value2) {
+                $datos2[] = [
+                    "categoria" => $value2->categoria,
+                    "item" => $value2->item,
+                    "orden_del_sitema" => $value2->orden_del_sitema,
+                    "observacion" => $value2->observacion,
+                    "presentacion" => $value2->presentacion,
+                    "mes" => $value2->mes,
+                    "orden" => $value2->orden,
+                    "marca" => $value2->marca,
+                    "vitola" => $value2->vitola,
+                    "nombre" => $value2->nombre,
+                    "capa" => $value2->capa,
+                    "tipo_empaque" => $value2->tipo_empaque,
+                    "cello" => $value2->cello,
+                    "pendiente" => $value2->pendiente,
+                    "saldo" => $value2->saldo,
+                    "paquetes" => $value2->paquetes,
+                    "unidades" => $value2->unidades,
+                    "id_pendiente_pedido" => $value2->id_pendiente,
+                    "procesado" => $value2->procesado,
+                    "codigo_poducto" => $value2->codigo_productos
+                ];
+            }
+
+            pendiente_empaque::upsert(
+                $datos2,
+                ['orden_del_sitema'],
+                ['codigo_poducto']
+            );
+
+            $datos3 = [];
+            $insertar_pendiente_empaque = DB::select(
+                'call pedidos_produccion_pendiente_insertar(:sistema)',
+                [
+                    'sistema' => $request->sistema
+                ]
+            );
+
+            foreach ($insertar_pendiente_empaque as $key => $value) {
+
+                $producto = Produccion::firstOrCreate(
+                    ['codigo' => $value->codigo_productos],
+                    [
+                        'presentacion' => $value->presentacion,
+                        'id_marca' => $value->marca,
+                        'id_nombre' => $value->nombre,
+                        'id_vitola' => $value->vitola,
+                        'id_capa' => $value->capa,
+                        'existencia' => 0,
+                    ]
+                );
+
+
+                $datos3[] = [
+                    'fecha_recibido' => (string)$request->fecha,
+                    'cantidad' => $value->total,
+                    'orden_sistema' => $request->sistema,
+                    'id_producto' =>  $producto->id
+                ];
+            }
+
+
+            ProduccionPendiente::upsert(
+                $datos3,
+                [
+                    'fecha_recibido', 'orden_sistema', 'id_producto'
+                ],
+            );
+
+            DB::commit();
+
+            return redirect()->route('pendiente')->with('insertar_pendiente', $insertar_pendiente);
+        } catch (\Exception $e) {
+            DB::rollback();
+            echo json_encode($e);
+        }
     }
 
     public function pendiente_index(Request $request)
@@ -483,27 +641,27 @@ class Pendiente extends Component
             :pa_items,:pa_orden_sist,:pa_ordenes,
             :pa_marcas,:pa_vitolas,:pa_nombre,:pa_capas,
             :pa_empaques,:pa_meses,:r_mill)',
-            [
-                'uno' =>  is_null($request->r_uno)?'':$request->r_uno,
-                'dos' =>  is_null($request->r_dos)?'':$request->r_dos,
-                'tres' =>  is_null($request->r_tres)?'':$request->r_tres,
-                'cuatro' =>  is_null($request->r_cuatro)?'':$request->r_cuatro,
-                'pres' =>  is_null($request->r_cinco)?'':$request->r_cinco,
-                'seis' =>  is_null($request->r_seis)?'':$request->r_seis,
-                'siete' =>  is_null($request->r_siete)?'':$request->r_siete,
-                'paginacion' =>  -1,
-                'pa_marcas' =>  is_null($request->busqueda_marcas_p)?'':$request->busqueda_marcas_p,
-                'pa_nombre' =>  is_null($request->busqueda_nombre_p)?'':$request->busqueda_nombre_p,
-                'pa_vitolas' => is_null($request->busqueda_vitolas_p)?'':$request->busqueda_vitolas_p,
-                'pa_capas' =>  is_null($request->busqueda_capas_p)?'':$request->busqueda_capas_p,
-                'pa_empaques' =>  is_null($request->busqueda_empaques_p)?'':$request->busqueda_empaques_p,
-                'pa_meses' =>  is_null($request->busqueda_mes_p)?'':$request->busqueda_mes_p,
-                'pa_items' =>  is_null($request->busqueda_items_p)?'':$request->busqueda_items_p,
-                'pa_orden_sist' =>  is_null($request->busqueda_ordenes_p)?'':$request->busqueda_ordenes_p,
-                'pa_ordenes' =>  is_null($request->busqueda_hons_p)?'':$request->busqueda_hons_p,
-                'r_mill' =>  is_null($request->r_mill)?'':$request->r_mill,
+                [
+                    'uno' =>  is_null($request->r_uno) ? '' : $request->r_uno,
+                    'dos' =>  is_null($request->r_dos) ? '' : $request->r_dos,
+                    'tres' =>  is_null($request->r_tres) ? '' : $request->r_tres,
+                    'cuatro' =>  is_null($request->r_cuatro) ? '' : $request->r_cuatro,
+                    'pres' =>  is_null($request->r_cinco) ? '' : $request->r_cinco,
+                    'seis' =>  is_null($request->r_seis) ? '' : $request->r_seis,
+                    'siete' =>  is_null($request->r_siete) ? '' : $request->r_siete,
+                    'paginacion' =>  -1,
+                    'pa_marcas' =>  is_null($request->busqueda_marcas_p) ? '' : $request->busqueda_marcas_p,
+                    'pa_nombre' =>  is_null($request->busqueda_nombre_p) ? '' : $request->busqueda_nombre_p,
+                    'pa_vitolas' => is_null($request->busqueda_vitolas_p) ? '' : $request->busqueda_vitolas_p,
+                    'pa_capas' =>  is_null($request->busqueda_capas_p) ? '' : $request->busqueda_capas_p,
+                    'pa_empaques' =>  is_null($request->busqueda_empaques_p) ? '' : $request->busqueda_empaques_p,
+                    'pa_meses' =>  is_null($request->busqueda_mes_p) ? '' : $request->busqueda_mes_p,
+                    'pa_items' =>  is_null($request->busqueda_items_p) ? '' : $request->busqueda_items_p,
+                    'pa_orden_sist' =>  is_null($request->busqueda_ordenes_p) ? '' : $request->busqueda_ordenes_p,
+                    'pa_ordenes' =>  is_null($request->busqueda_hons_p) ? '' : $request->busqueda_hons_p,
+                    'r_mill' =>  is_null($request->r_mill) ? '' : $request->r_mill,
 
-            ]
+                ]
             );
 
             DB::delete('TRUNCATE TABLE detalles_pendiente_materiales;');
@@ -545,26 +703,31 @@ class Pendiente extends Component
                             $cantidad_detalle_sampler = 0;
                         }
 
-                        DB::insert('CALL insertar_pendiente_materiales(:pa_item,
+                        DB::insert(
+                            'CALL insertar_pendiente_materiales(:pa_item,
                                                                         :cod_producto,
                                                                         :pa_id_pendiente)',
 
-                                    ['pa_item' => $pendiente[$i]->item,
-                                    'cod_producto' => $valores[0]->codigo_producto,
-                                    'pa_id_pendiente' => $pendiente[$i]->id_pendiente]);
-
-
-
-                    }else{
+                            [
+                                'pa_item' => $pendiente[$i]->item,
+                                'cod_producto' => $valores[0]->codigo_producto,
+                                'pa_id_pendiente' => $pendiente[$i]->id_pendiente
+                            ]
+                        );
+                    } else {
                         $s = DB::select('SELECT codigo_producto from clase_productos where item = ?', [$pendiente[$i]->item]);
-                        DB::update('UPDATE pendiente set codigo_productos = ? where id_pendiente = ?', [$s[0]->codigo_producto,$pendiente[$i]->id_pendiente]);
+                        DB::update('UPDATE pendiente set codigo_productos = ? where id_pendiente = ?', [$s[0]->codigo_producto, $pendiente[$i]->id_pendiente]);
 
-                        DB::insert('CALL insertar_pendiente_materiales(:pa_item,
+                        DB::insert(
+                            'CALL insertar_pendiente_materiales(:pa_item,
                                                         :cod_producto,
                                                         :pa_id_pendiente)',
-                                            ['pa_item' => $pendiente[$i]->item,
-                                             'cod_producto' => $s[0]->codigo_producto,
-                                             'pa_id_pendiente' => $pendiente[$i]->id_pendiente]);
+                            [
+                                'pa_item' => $pendiente[$i]->item,
+                                'cod_producto' => $s[0]->codigo_producto,
+                                'pa_id_pendiente' => $pendiente[$i]->id_pendiente
+                            ]
+                        );
                     }
                 }
             }
@@ -584,24 +747,24 @@ class Pendiente extends Component
                                     :pa_marcas,:pa_vitolas,:pa_nombre,:pa_capas,
                                     :pa_empaques,:pa_meses,:r_mill)',
             [
-                'uno' =>  is_null($request->r_uno)?'':$request->r_uno,
-                'dos' =>  is_null($request->r_dos)?'':$request->r_dos,
-                'tres' =>  is_null($request->r_tres)?'':$request->r_tres,
-                'cuatro' =>  is_null($request->r_cuatro)?'':$request->r_cuatro,
-                'pres' =>  is_null($request->r_cinco)?'':$request->r_cinco,
-                'seis' =>  is_null($request->r_seis)?'':$request->r_seis,
-                'siete' =>  is_null($request->r_siete)?'':$request->r_siete,
+                'uno' =>  is_null($request->r_uno) ? '' : $request->r_uno,
+                'dos' =>  is_null($request->r_dos) ? '' : $request->r_dos,
+                'tres' =>  is_null($request->r_tres) ? '' : $request->r_tres,
+                'cuatro' =>  is_null($request->r_cuatro) ? '' : $request->r_cuatro,
+                'pres' =>  is_null($request->r_cinco) ? '' : $request->r_cinco,
+                'seis' =>  is_null($request->r_seis) ? '' : $request->r_seis,
+                'siete' =>  is_null($request->r_siete) ? '' : $request->r_siete,
                 'paginacion' =>  -1,
-                'pa_marcas' =>  is_null($request->busqueda_marcas_p)?'':$request->busqueda_marcas_p,
-                'pa_nombre' =>  is_null($request->busqueda_nombre_p)?'':$request->busqueda_nombre_p,
-                'pa_vitolas' => is_null($request->busqueda_vitolas_p)?'':$request->busqueda_vitolas_p,
-                'pa_capas' =>  is_null($request->busqueda_capas_p)?'':$request->busqueda_capas_p,
-                'pa_empaques' =>  is_null($request->busqueda_empaques_p)?'':$request->busqueda_empaques_p,
-                'pa_meses' =>  is_null($request->busqueda_mes_p)?'':$request->busqueda_mes_p,
-                'pa_items' =>  is_null($request->busqueda_items_p)?'':$request->busqueda_items_p,
-                'pa_orden_sist' =>  is_null($request->busqueda_ordenes_p)?'':$request->busqueda_ordenes_p,
-                'pa_ordenes' =>  is_null($request->busqueda_hons_p)?'':$request->busqueda_hons_p,
-                'r_mill' =>  is_null($request->r_mill)?'':$request->r_mill,
+                'pa_marcas' =>  is_null($request->busqueda_marcas_p) ? '' : $request->busqueda_marcas_p,
+                'pa_nombre' =>  is_null($request->busqueda_nombre_p) ? '' : $request->busqueda_nombre_p,
+                'pa_vitolas' => is_null($request->busqueda_vitolas_p) ? '' : $request->busqueda_vitolas_p,
+                'pa_capas' =>  is_null($request->busqueda_capas_p) ? '' : $request->busqueda_capas_p,
+                'pa_empaques' =>  is_null($request->busqueda_empaques_p) ? '' : $request->busqueda_empaques_p,
+                'pa_meses' =>  is_null($request->busqueda_mes_p) ? '' : $request->busqueda_mes_p,
+                'pa_items' =>  is_null($request->busqueda_items_p) ? '' : $request->busqueda_items_p,
+                'pa_orden_sist' =>  is_null($request->busqueda_ordenes_p) ? '' : $request->busqueda_ordenes_p,
+                'pa_ordenes' =>  is_null($request->busqueda_hons_p) ? '' : $request->busqueda_hons_p,
+                'r_mill' =>  is_null($request->r_mill) ? '' : $request->r_mill,
 
             ]
         );
@@ -618,13 +781,13 @@ class Pendiente extends Component
                     $total_orden = 0;
 
                     if ($materiale->uxe == 'NO') {
-
                         $total_orden = $value->saldo;
                     } else if ($materiale->uxe == 'SI') {
-                        if($value->por_caja>0){
+                        if ($value->por_caja > 0) {
                             $total_orden = (($value->saldo / $value->por_caja) * $materiale->cantidad);
                         }
                     }
+
                     DB::update('UPDATE detalles_pendiente_materiales
                                             SET cantidad = ?,
                                             co_material = ?
@@ -659,11 +822,9 @@ class Pendiente extends Component
             }
 
             return redirect()->route('pendiente');
-
         } catch (Exception $e) {
             $this->dispatchBrowserEvent('notificacionErrorEjecucion', ['error' => $e->getMessage(), 'mensaje' => 'errores']);
         }
-
     }
 
 
@@ -675,24 +836,24 @@ class Pendiente extends Component
                                     :pa_marcas,:pa_vitolas,:pa_nombre,:pa_capas,
                                     :pa_empaques,:pa_meses,:r_mill)',
             [
-                'uno' =>  is_null($request->r_uno)?'':$request->r_uno,
-                'dos' =>  is_null($request->r_dos)?'':$request->r_dos,
-                'tres' =>  is_null($request->r_tres)?'':$request->r_tres,
-                'cuatro' =>  is_null($request->r_cuatro)?'':$request->r_cuatro,
-                'pres' =>  is_null($request->r_cinco)?'':$request->r_cinco,
-                'seis' =>  is_null($request->r_seis)?'':$request->r_seis,
-                'siete' =>  is_null($request->r_siete)?'':$request->r_siete,
+                'uno' =>  is_null($request->r_uno) ? '' : $request->r_uno,
+                'dos' =>  is_null($request->r_dos) ? '' : $request->r_dos,
+                'tres' =>  is_null($request->r_tres) ? '' : $request->r_tres,
+                'cuatro' =>  is_null($request->r_cuatro) ? '' : $request->r_cuatro,
+                'pres' =>  is_null($request->r_cinco) ? '' : $request->r_cinco,
+                'seis' =>  is_null($request->r_seis) ? '' : $request->r_seis,
+                'siete' =>  is_null($request->r_siete) ? '' : $request->r_siete,
                 'paginacion' =>  -1,
-                'pa_marcas' =>  is_null($request->busqueda_marcas_p)?'':$request->busqueda_marcas_p,
-                'pa_nombre' =>  is_null($request->busqueda_nombre_p)?'':$request->busqueda_nombre_p,
-                'pa_vitolas' => is_null($request->busqueda_vitolas_p)?'':$request->busqueda_vitolas_p,
-                'pa_capas' =>  is_null($request->busqueda_capas_p)?'':$request->busqueda_capas_p,
-                'pa_empaques' =>  is_null($request->busqueda_empaques_p)?'':$request->busqueda_empaques_p,
-                'pa_meses' =>  is_null($request->busqueda_mes_p)?'':$request->busqueda_mes_p,
-                'pa_items' =>  is_null($request->busqueda_items_p)?'':$request->busqueda_items_p,
-                'pa_orden_sist' =>  is_null($request->busqueda_ordenes_p)?'':$request->busqueda_ordenes_p,
-                'pa_ordenes' =>  is_null($request->busqueda_hons_p)?'':$request->busqueda_hons_p,
-                'r_mill' =>  is_null($request->r_mill)?'':$request->r_mill,
+                'pa_marcas' =>  is_null($request->busqueda_marcas_p) ? '' : $request->busqueda_marcas_p,
+                'pa_nombre' =>  is_null($request->busqueda_nombre_p) ? '' : $request->busqueda_nombre_p,
+                'pa_vitolas' => is_null($request->busqueda_vitolas_p) ? '' : $request->busqueda_vitolas_p,
+                'pa_capas' =>  is_null($request->busqueda_capas_p) ? '' : $request->busqueda_capas_p,
+                'pa_empaques' =>  is_null($request->busqueda_empaques_p) ? '' : $request->busqueda_empaques_p,
+                'pa_meses' =>  is_null($request->busqueda_mes_p) ? '' : $request->busqueda_mes_p,
+                'pa_items' =>  is_null($request->busqueda_items_p) ? '' : $request->busqueda_items_p,
+                'pa_orden_sist' =>  is_null($request->busqueda_ordenes_p) ? '' : $request->busqueda_ordenes_p,
+                'pa_ordenes' =>  is_null($request->busqueda_hons_p) ? '' : $request->busqueda_hons_p,
+                'r_mill' =>  is_null($request->r_mill) ? '' : $request->r_mill,
 
             ]
         );
@@ -705,29 +866,29 @@ class Pendiente extends Component
     public function imprimir_materiales(Request $request)
     {
 
-        $mater_programacion = DB::select('call exportar_materiales_pendiente(:pa_item,
+        $mater_programacion = DB::select(
+            'call exportar_materiales_pendiente(:pa_item,
                                                                                         :pa_orden,
                                                                                         :pa_orden_del_sitema,
                                                                                         :pa_mes)',
-                                                    [
-                                                        'pa_item' => is_null($request->busqueda_items_p)?'':$request->busqueda_items_p,
-                                                        'pa_orden' => is_null($request->busqueda_hons_p)?'':$request->busqueda_items_p,
-                                                        'pa_orden_del_sitema' =>is_null($request->busqueda_ordenes_p)?'':$request->busqueda_items_p,
-                                                        'pa_mes' => is_null($request->busqueda_mes_p)?'':$request->busqueda_items_p
-                                                    ]);
+            [
+                'pa_item' => is_null($request->busqueda_items_p) ? '' : $request->busqueda_items_p,
+                'pa_orden' => is_null($request->busqueda_hons_p) ? '' : $request->busqueda_items_p,
+                'pa_orden_del_sitema' => is_null($request->busqueda_ordenes_p) ? '' : $request->busqueda_items_p,
+                'pa_mes' => is_null($request->busqueda_mes_p) ? '' : $request->busqueda_items_p
+            ]
+        );
 
         $vista =  view('Exports.materiales-pnedientes-export', [
             'materiales' => $mater_programacion
         ]);
 
-        return Excel::download(new MaterialesProgramacionExportView($vista,'Materiales'), 'Materiales Pendiente ('.Carbon::now()->format('Y-m-d').').xlsx');
-
+        return Excel::download(new MaterialesProgramacionExportView($vista, 'Materiales'), 'Materiales Pendiente (' . Carbon::now()->format('Y-m-d') . ').xlsx');
     }
 
     public function RemisionCajas(Request $request)
     {
         $fecha = Carbon::parse($request->fecha)->format('Y-m-d');
-        return Excel::download(new OrdenCaja($fecha, $request->orden_sistema), 'Orden Cajas de Madera '.$request->orden_sistema.'.xlsx');
+        return Excel::download(new OrdenCaja($fecha, $request->orden_sistema), 'Orden Cajas de Madera ' . $request->orden_sistema . '.xlsx');
     }
-
 }

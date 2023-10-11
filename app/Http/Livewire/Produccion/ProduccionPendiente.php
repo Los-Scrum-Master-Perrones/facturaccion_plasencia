@@ -140,16 +140,6 @@ class ProduccionPendiente extends Component
             ]
         );
 
-        // public $ = '';
-        // public $ = '';
-        // public $b_presentacion = '';
-        // public $ = '';
-        // public $ = '';
-        // public $ = '';
-        // public $ = '';
-        // public $ = '';
-        // public $b_mes = '';
-
         $this->total = DB::select(
             'CALL `buscar_produccion_pendiente_conteo`(?, ?, ?, ?, ?, ?, ?,?)',
             [

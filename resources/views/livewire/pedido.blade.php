@@ -145,9 +145,6 @@
                                     <label for="txt_figuraytipo" class="form-label">Orden</label>
                                     <input name="orden" id="orden" class="form-control" type="text" autocomplete="off">
                                 </div>
-
-
-
                             </div>
                             <div class="row">
 
@@ -217,26 +214,22 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <?php $count = 1; ?>
-
-                        @foreach($pedido_completo as $pedido)
+                        @foreach($pedido_completo as $key => $pedido)
                         <tr>
-                            <td>{{$count}}</td>
+                            <td>{{++$key}}</td>
                             <td>{{$pedido->categorias}}</td>
                             <td>{{$pedido->item}}</td>
                             <td>{{$pedido->cant_paquetes}}</td>
                             <td>{{$pedido->codigo_p}}</td>
                             <td>{{$pedido->descripcion}}</td>
-				@if(is_numeric($pedido->unidades) && is_numeric($pedido->cant_paquetes))
-                            		<td>{{$pedido->unidades*$pedido->cant_paquetes}}</td>
-				@else
-					<td>{{0}}</td>
-				@endif
+                                @if(is_numeric($pedido->unidades) && is_numeric($pedido->cant_paquetes))
+                            <td>{{$pedido->unidades*$pedido->cant_paquetes}}</td>
+                                @else
+                            <td>{{0}}</td>
+                                @endif
                             <td>{{$pedido->unidades}}</td>
                             <td>{{$pedido->numero_orden}}</td>
-
                         </tr>
-                        <?php $count++; ?>
                         @endforeach
                     </tbody>
                 </table>
@@ -270,7 +263,7 @@
             <div class="modal-content">
 
                 <div class="modal-header">
-                    <h5 class="modal-title" id="staticBackdropLabel">Eliminar Usuario </h5>
+                    <h5 class="modal-title" id="staticBackdropLabel">Eliminar Usuario</h5>
                 </div>
 
                 <div class="modal-body">
@@ -298,7 +291,7 @@
             <div class="modal-dialog modal-dialog-centered modal-xl">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h2 class="modal-title" id="staticBackdropLabel">COMPARATIVOS PEDIDOS </h2>
+                        <h2 class="modal-title" id="staticBackdropLabel">COMPARATIVOS PEDIDOS</h2>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">

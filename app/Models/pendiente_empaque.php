@@ -13,4 +13,29 @@ class pendiente_empaque extends Model
     protected $primaryKey = 'id_pendiente';
 
     public $timestamps = false;
+
+
+
+    protected $fillable = [
+        'categoria',
+        'item',
+        'orden_del_sistema',
+        'observacion',
+        'presentacion',
+        'mes',
+        'orden',
+        'marca',
+        'vitola',
+        'nombre',
+        'capa',
+        'tipo_empaque',
+        'cello',
+        'pendiente',
+        'saldo',
+        'paquetes',
+        'unidades',
+        'id_pendiente_pedido',
+        'procesado',
+        'codigo_poducto',
+    ];
 }
