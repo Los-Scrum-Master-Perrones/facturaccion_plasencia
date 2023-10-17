@@ -25,6 +25,7 @@ class ProduccionEmpleado extends Component
     public $b_codigo_empleado = '';
     public $b_nombre_empleado = '';
     public $b_rol = 'boncherorolero';
+    public $b_presentacion = '';
 
     public $ordenes = [];
     public $marcas = [];
@@ -34,6 +35,7 @@ class ProduccionEmpleado extends Component
     public $codigos_producto = [];
     public $codigos_empleado = [];
     public $nombres_empleado = [];
+    public $presentacions = [];
 
     public $por_pagina = 50;
     public $total = 0;
@@ -54,6 +56,7 @@ class ProduccionEmpleado extends Component
             $this->codigos_producto = [];
             $this->codigos_empleado = [];
             $this->nombres_empleado = [];
+            $this->presentacions = [];
 
             foreach ($da as $detalles) {
                 array_push($this->ordenes, $detalles->orden);
@@ -64,6 +67,7 @@ class ProduccionEmpleado extends Component
                 array_push($this->codigos_producto, $detalles->codigo_producto);
                 array_push($this->codigos_empleado, $detalles->codigo_empleaado);
                 array_push($this->nombres_empleado, $detalles->nombre_empleado);
+                array_push($this->presentacions, $detalles->presentacion);
             }
             $this->ordenes = array_unique($this->ordenes);
             $this->marcas = array_unique($this->marcas);
@@ -73,6 +77,7 @@ class ProduccionEmpleado extends Component
             $this->codigos_producto = array_unique($this->codigos_producto);
             $this->codigos_empleado = array_unique($this->codigos_empleado);
             $this->nombres_empleado = array_unique($this->nombres_empleado);
+            $this->presentacions = array_unique($this->presentacions);
         }
     }
     public function render()
@@ -80,7 +85,7 @@ class ProduccionEmpleado extends Component
         $start = ($this->page - 1) * $this->por_pagina;
 
         $da = DB::select(
-            'CALL `buscar_produccion_empleado`(?,?,?,?,?,?,?,?,?,?,?,?,?)',
+            'CALL `buscar_produccion_empleado`(?,?,?,?,?,?,?,?,?,?,?,?,?,?)',
             [
                 $this->b_fecha_1,
                 $this->b_fecha_2,
@@ -95,12 +100,12 @@ class ProduccionEmpleado extends Component
                 $start,
                 $this->por_pagina,
                 $this->b_nombre_empleado,
-
+                $this->b_presentacion
             ]
         );
 
         $this->total = DB::select(
-            'CALL `buscar_produccion_empleado_conteo`(?,?,?,?,?,?,?,?,?,?,?)',
+            'CALL `buscar_produccion_empleado_conteo`(?,?,?,?,?,?,?,?,?,?,?,?)',
             [
                 $this->b_fecha_1,
                 $this->b_fecha_2,
@@ -113,6 +118,7 @@ class ProduccionEmpleado extends Component
                 $this->b_codigo_empleado,
                 $this->b_rol,
                 $this->b_nombre_empleado,
+                $this->b_presentacion
             ]
         )[0]->total;
 

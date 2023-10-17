@@ -219,6 +219,16 @@
                                                     alt="time-machine--v1" />
                                             </abbr>
                                         </a>
+                                        <a wire:click="editarPrecio({{ $prodPrecio->id }})" onclick='cargar_modal("{{ $prodPrecio->marca }}","{{ $prodPrecio->nombre }}","{{ $prodPrecio->vitola }}","{{ $prodPrecio->capa }}","{{ $prodPrecio->tipo_empaque }}",{{ $prodPrecio->precio_actual->precio }})' style=" width:10px; height:10px; text-decoration: none" data-bs-toggle="modal" href="#"
+                                            data-bs-target="#productos_editar_detalles" type="submit">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15"
+                                                fill="currentColor" class="bi bi-pencil-square" viewBox="0 0 16 16">
+                                                <path
+                                                    d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z" />
+                                                <path fill-rule="evenodd"
+                                                    d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z" />
+                                            </svg>
+                                        </a>
                                     </td>
                                 </tr>
                                 @php
@@ -241,25 +251,26 @@
         </div>
     </div>
 
-    <div wire:ignore class="modal fade" id="productos_agregar_detalles" tabindex="-1" aria-labelledby="exampleModalLabel"
-        aria-hidden="true">
+    <div wire:ignore class="modal fade" id="productos_agregar_detalles" tabindex="-1"
+        aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-lg ">
             <div class="modal-content">
                 <form wire:submit.prevent="save" id="form_detalle" name="form_detalle" style="width:100%;">
                     <div class="modal-header">
                         <h5 class="modal-title" id="staticBackdropLabel"><strong>Agregar Precio Nuevo</strong>
                         </h5>
-                        <button  id="cerrar_modal_nuevo_precio" type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        <button id="cerrar_modal_nuevo_precio" type="button" class="btn-close"
+                            data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
                         <div class="row">
                             <div class="mb-3 col">
-                                <label for="codigo_de" class="form-label" style="width:100%;">Codigo</label>
-                                <input name="codigo_de" id="codigo_de" class="form-control"  wire:model='codigo_n'  required type="text"
-                                    autocomplete="off">
+                                <label class="form-label" style="width:100%;">Codigo</label>
+                                <input name="codigo_de" id="codigo_de" class="form-control" wire:model='codigo_n'
+                                    required type="text" autocomplete="off">
                             </div>
                             <div class="mb-3 col">
-                                <label for="capa_de" class="form-label" style="width:100%;">Capa</label>
+                                <label class="form-label" style="width:100%;">Capa</label>
                                 <select name="capa_de" id="capa_de" onchange="buscar_agregar()"
                                     style="width:100%;" required>
                                     <option value="NINGUNA" style="overflow-y: scroll;">Ninguna</option>
@@ -269,7 +280,7 @@
                                 </select>
                             </div>
                             <div class="mb-3 col">
-                                <label for="marca_de" class="form-label" style="width:100%;">Marca</label>
+                                <label  class="form-label" style="width:100%;">Marca</label>
                                 <select name="marca_de" id="marca_de" onchange="buscar_agregar()"
                                     style="width:100%;" required>
                                     <option value="NINGUNA" style="overflow-y: scroll;">Ninguna</option>
@@ -281,7 +292,7 @@
                         </div>
                         <div class="row">
                             <div class="mb-3 col">
-                                <label for="nombre_de" class="form-label" style="width:100%;">Nombre</label>
+                                <label class="form-label" style="width:100%;">Nombre</label>
                                 <select name="nombre_de" id="nombre_de" onchange="buscar_agregar()"
                                     style="width:100%;" required>
                                     <option value="NINGUNA" style="overflow-y: scroll;">Ninguna</option>
@@ -291,7 +302,7 @@
                                 </select>
                             </div>
                             <div class="mb-3 col">
-                                <label for="vitola_de" class="form-label" style="width:100%;">Vitola</label>
+                                <label  class="form-label" style="width:100%;">Vitola</label>
                                 <select name="vitola_de" id="vitola_de" onchange="buscar_agregar()"
                                     style="width:100%;" required>
                                     <option value="NINGUNA" style="overflow-y: scroll;">Ninguna</option>
@@ -301,7 +312,7 @@
                                 </select>
                             </div>
                             <div class="mb-3 col">
-                                <label for="tipo_de" class="form-label" style="width:100%;">Tipo de
+                                <label  class="form-label" style="width:100%;">Tipo de
                                     empaque</label>
                                 <select name="tipo_de" id="tipo_de" onchange="buscar_agregar()"
                                     style="width:100%;" required>
@@ -316,8 +327,8 @@
                         <div class="row">
                             <div class="mb-3 col">
                                 <label for="txt_buenos">Precio</label>
-                                <input name="precio_de" id="precio_de" class="form-control" wire:model='precio_n' required type="number" onchange="buscar_agregar()"
-                                    autocomplete="off">
+                                <input name="precio_de" id="precio_de" class="form-control" wire:model='precio_n'
+                                    required type="number" onchange="buscar_agregar()" autocomplete="off">
                             </div>
                             <div class="mb-3 col">
                             </div>
@@ -339,9 +350,115 @@
             </div>
         </div>
     </div>
+
+    <!-- INICIO MODAL ACTUALIZAR DATO PRECIO -->
+    <div wire:ignore class="modal fade" id="productos_editar_detalles" tabindex="-1"
+        aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg ">
+            <div class="modal-content">
+                <form wire:submit.prevent="actualizarPrecio()" id="form_detalle" name="form_detalle" style="width:100%;">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="staticBackdropLabel"><strong>Editar Precio Nuevo</strong>
+                        </h5>
+                        <button id="cerrar_modal_nuevo_precio" type="button" class="btn-close"
+                            data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="row">
+                            <div class="mb-3 col">
+                                <label for="codigo_edi" class="form-label" style="width:100%;">Codigo</label>
+                                <input name="codigo_edi" id="codigo_edi" class="form-control" wire:model='new_precio.codigo'
+                                    required type="text" autocomplete="off">
+                            </div>
+                            <div class="mb-3 col">
+                                <label class="form-label" style="width:100%;">Capa</label>
+                                <select name="capa_edi" id="capa_edi"  wire:model='new_precio.capa'
+                                    style="width:100%;" required>
+                                    <option value="NINGUNA" style="overflow-y: scroll;">Ninguna</option>
+                                    @foreach ($capas_p as $capa)
+                                        <option style="overflow-y: scroll;">{{ $capa }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                            <div class="mb-3 col">
+                                <label for="marca_edi" class="form-label" style="width:100%;">Marca</label>
+                                <select name="marca_edi" id="marca_edi"
+                                    style="width:100%;" required>
+                                    <option value="NINGUNA" style="overflow-y: scroll;">Ninguna</option>
+                                    @foreach ($marcas_p as $marca)
+                                        <option style="overflow-y: scroll;"> {{ $marca }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="mb-3 col">
+                                <label for="nombre_edi" class="form-label" style="width:100%;">Nombre</label>
+                                <select name="nombre_edi" id="nombre_edi" wire:model='new_precio.nombre'
+                                    style="width:100%;" required>
+                                    <option value="NINGUNA" style="overflow-y: scroll;">Ninguna</option>
+                                    @foreach ($nombre_p as $nombre)
+                                        <option style="overflow-y: scroll;"> {{ $nombre }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                            <div class="mb-3 col">
+                                <label for="vitola_edi" class="form-label" style="width:100%;">Vitola</label>
+                                <select name="vitola_edi" id="vitola_edi" wire:model='new_precio.vitola'
+                                    style="width:100%;" required>
+                                    <option value="NINGUNA" style="overflow-y: scroll;">Ninguna</option>
+                                    @foreach ($vitolas_p as $vitola)
+                                        <option style="overflow-y: scroll;"> {{ $vitola }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                            <div class="mb-3 col">
+                                <label for="tipo_edi" class="form-label" style="width:100%;">Tipo de
+                                    empaque</label>
+                                <select name="tipo_edi" id="tipo_edi" wire:model='new_precio.tipo_empaque'
+                                    style="width:100%;" required>
+                                    <option value="N/D" style="overflow-y: scroll;">Ninguna</option>
+                                    @foreach ($empaques_p as $tipo_empaque)
+                                        <option style="overflow-y: scroll;"> {{ $tipo_empaque }}
+                                        </option>
+                                    @endforeach
+                                </select>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="mb-3 col">
+                                <label for="txt_buenos">Precio</label>
+                                <input name="precio_edi" id="precio_edi" class="form-control" wire:model='edi_precio'
+                                    required type="text"  autocomplete="off">
+                            </div>
+                            <div class="mb-3 col">
+                            </div>
+                            <div class="mb-3 col">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">
+                            <span>Cancelar</span>
+                        </button>
+                        <button type="submit" class="btn btn-success" data-bs-dismiss="modal">
+                            <span>Guardar</span>
+                        </button>
+                    </div>
+
+                </form>
+            </div>
+        </div>
+    </div>
+    <!-- FIN MODAL ACTUALIZAR DATO PRECIO -->
     @push('scripts')
         <script>
-
+            var control_marca;
+            var control_nombre;
+            var control_vitola;
+            var control_capa;
+            var control_tipo;
             const Toast = Swal.mixin({
                 toast: true,
                 position: 'top-end',
@@ -360,23 +477,63 @@
                 "#nombre_de",
                 "#vitola_de",
                 "#tipo_de",
-                "#floatingSelect223"
+                "#floatingSelect223",
             ];
 
             $(document).ready(function() {
                 seletscc.forEach(element => {
                     selects(element);
                 });
-            });
 
-            function selects(nombre) {
-                new TomSelect(nombre, {
-                    create: nombre === "#marca_de"? true : false,
+                control_capa = new TomSelect('#capa_edi', {
                     sortField: {
                         field: "text",
                         direction: "asc"
                     }
                 });
+                control_marca = new TomSelect('#marca_edi', {
+                    sortField: {
+                        field: "text",
+                        direction: "asc"
+                    }
+                });
+                control_nombre = new TomSelect('#nombre_edi', {
+                    sortField: {
+                        field: "text",
+                        direction: "asc"
+                    }
+                });
+                control_vitola = new TomSelect('#vitola_edi', {
+                    sortField: {
+                        field: "text",
+                        direction: "asc"
+                    }
+                });
+                control_tipo = new TomSelect('#tipo_edi', {
+                    sortField: {
+                        field: "text",
+                        direction: "asc"
+                    }
+                });
+            });
+
+            function selects(nombre) {
+                new TomSelect(nombre, {
+                    create: nombre === "#marca_de" ? true : false,
+                    sortField: {
+                        field: "text",
+                        direction: "asc"
+                    }
+                });
+            }
+
+            function cargar_modal(marca,nombre,vitola,capa,empaque,precio){
+                control_marca.setValue(marca);
+                control_nombre.setValue(nombre);
+                control_vitola.setValue(vitola);
+                control_capa.setValue(capa);
+                control_tipo.setValue(empaque);
+                @this.edi_precio =precio;
             }
 
             function buscar_io() {
@@ -431,9 +588,9 @@
 
             window.addEventListener('RegistradoConExito', event => {
                 Toast.fire({
-                        icon: 'success',
-                        title: 'Registro realizada con exito.'
-                    });
+                    icon: 'success',
+                    title: 'Registro realizada con exito.'
+                });
                 var btnCerrar = document.getElementById("cerrar_modal_nuevo_precio");
                 btnCerrar.click();
             })

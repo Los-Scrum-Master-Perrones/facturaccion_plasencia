@@ -74,6 +74,8 @@
                                             <option value="{{ $v }}">{{ $v }}</option>
                                         @endforeach
                                     </select>
+                                </th>
+                                <th wire:ignore>
                                     <select name="b_nombre_empleado" id="b_nombre_empleado" onchange="buscar_io()">
                                         <option value="">Empleado</option>
                                         @foreach ($nombres_empleado as $v)
@@ -85,6 +87,14 @@
                                     <select name="b_codigo" id="b_codigo" onchange="buscar_io()">
                                         <option value="">CODIGO PRODUCTO</option>
                                         @foreach ($codigos_producto as $v)
+                                            <option value="{{ $v }}">{{ $v }}</option>
+                                        @endforeach
+                                    </select>
+                                </th>
+                                <th wire:ignore>
+                                    <select name="b_presentacion" id="b_presentacion" onchange="buscar_io()">
+                                        <option value="">PRESENTACION</option>
+                                        @foreach ($presentacions as $v)
                                             <option value="{{ $v }}">{{ $v }}</option>
                                         @endforeach
                                     </select>
@@ -134,17 +144,19 @@
                             @foreach ($productos as $id => $producto)
                                 <tr>
                                     <td>{{ ++$id }}</td>
-                                    <td>{{ $producto->orden }}</td>
-                                    <td>{{ $producto->fecha }}</td>
-                                    <td>{{ '('.Str::upper($producto->rol).') '.$producto->codigo_empleaado.'-'.$producto->nombre_empleado }}</td>
-                                    <td>{{ $producto->codigo_producto }}</td>
+                                    <td class="text-center">{{ $producto->orden }}</td>
+                                    <td class="text-center">{{ $producto->fecha }}</td>
+                                    <td class="text-center">{{ $producto->codigo_empleaado }}</td>
+                                    <td>{{ '('.Str::upper($producto->rol).') '.$producto->nombre_empleado }}</td>
+                                    <td class="text-center">{{ $producto->codigo_producto }}</td>
+                                    <td class="text-center">{{ $producto->presentacion }}</td>
                                     <td>{{ $producto->marca }}</td>
                                     <td>{{ $producto->nombre }}</td>
                                     <td>{{ $producto->vitola }}</td>
                                     <td>{{ $producto->capa }}</td>
-                                    <td>{{ $producto->cantidad }}</td>
+                                    <td class="text-center">{{ $producto->cantidad }}</td>
                                     <td>L. {{ number_format($producto->por_pagar, 2) }}</td>
-                                    <td>
+                                    <td class="text-center">
                                         <a style="text-decoration: none" onclick="eliminar_item({{ $producto->id }})" href="#">
                                             <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" fill="currentColor" class="bi bi-trash-fill" viewBox="0 0 16 16">
                                                 <path d="M2.5 1a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1H3v9a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V4h.5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1H2.5zm3 4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5zM8 5a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7A.5.5 0 0 1 8 5zm3 .5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 1 0z" />
@@ -186,7 +198,7 @@
                     }
                 })
 
-            var seletscc = ["#b_orden", "#b_codigo","#b_nombre_empleado","#b_codigo_empleado","#b_marca", "#b_nombre", "#b_vitola", "#b_capa"];
+            var seletscc = ["#b_orden", "#b_codigo","#b_nombre_empleado","#b_codigo_empleado","#b_marca", "#b_nombre", "#b_vitola", "#b_capa", "#b_presentacion"];
             const inputField = document.querySelector("#example");
 
             $(document).ready(function() {
@@ -214,6 +226,7 @@
                 @this.b_codigo_productos = $(seletscc[1]).val();
                 @this.b_codigo_empleado = $(seletscc[3]).val();
                 @this.b_nombre_empleado = $(seletscc[2]).val();
+                @this.b_presentacion = $(seletscc[8]).val();
                 @this.page = 1;
             }
 

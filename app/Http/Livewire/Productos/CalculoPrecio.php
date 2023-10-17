@@ -69,4 +69,6 @@ class CalculoPrecio extends Component
             'vitolas' => vitola_producto::all()
         ]);
     }
+
+
 }

@@ -43,6 +43,19 @@ class ProductoPrecio extends Component
     public $empaque = '';
     public $datos = [];
 
+    public CatalogoItemsPrecio $new_precio;
+
+    public $rules = [
+        'new_precio.codigo' => 'string|required',
+        'new_precio.id_catalogo_marca_precio' => 'integer|required',
+        'new_precio.nombre' => 'string|required',
+        'new_precio.vitola' => 'string|required',
+        'new_precio.capa' => 'string|required',
+        'new_precio.tipo_empaque' => 'string|required',
+        'new_precio.fecha' => 'date|required',
+    ];
+    public $edi_precio = '';
+
     public $precio_mayor = 4000;
     public $precio_menor = 0;
 
@@ -51,6 +64,16 @@ class ProductoPrecio extends Component
 
     public function mount()
     {
+        $this->new_precio = new CatalogoItemsPrecio([
+            `codigo` =>  'P-',
+            `id_catalogo_marca_precio` =>  0,
+            `nombre` =>  '',
+            `vitola` =>  '',
+            `capa` =>  '',
+            `tipo_empaque` =>  '',
+            `fecha` =>  Carbon::now()->format('Y-m-d'),
+        ]);
+
         $prodcutosPrecio =  DB::select('call mostrar_catalogo_precios()');
         $this->codigo_n = CatalogoMarcasPrecio::orderBy('id', 'desc')->first()->codigo + 1000;
         $this->cargar_select_busqueda($prodcutosPrecio);
@@ -221,5 +244,22 @@ class ProductoPrecio extends Component
             DB::rollback();
             throw $e;
         }
+    }
+
+    public function editarPrecio(CatalogoItemsPrecio $p) {
+        $this->new_precio = $p;
+    }
+
+
+    public function actualizarPrecio() {
+        $this->new_precio->save();
+
+        CatalogoHistorialPrecio::updateOrCreate(
+            [
+                'id_catalogo_items_precio' => $this->new_precio->id,
+                'anio' => Carbon::now()->format('Y')
+            ],
+            ['precio' => $this->edi_precio]
+        );
     }
 }
