@@ -165,7 +165,7 @@ class ProduccionPendiente extends Component
         return view('livewire.produccion.produccion-pendiente', [
             'historial' => $usosArray2,
             'pendiente' => new LengthAwarePaginator($da,  $this->total , $this->por_pagina)
-        ])->extends('layouts.Main')->section('content');
+        ])->extends('layouts.produccion.produccion-menu')->section('contenido');
     }
 
 
@@ -211,5 +211,11 @@ class ProduccionPendiente extends Component
 
     public function editar_pendiente(ModelsProduccionPendiente $pendiente) {
         $this->produc_pendiente = $pendiente;
+    }
+
+    public function imprimir_reporte_diario() {
+        $datos = DB::select('call reporte_produccion_mensual(?)',[Carbon::now()->format('Y-m-d')]);
+
+        return view('ReporteDiarioProduccion',[ 'pendiente' => $datos]);
     }
 }

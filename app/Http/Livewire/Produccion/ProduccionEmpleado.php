@@ -2,141 +2,122 @@
 
 namespace App\Http\Livewire\Produccion;
 
-use App\Imports\ProducidoImport;
-use App\Imports\ProducidoPendienteImport;
-use App\Imports\ProducidoPreciosImport;
 use Carbon\Carbon;
+use Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\Support\Facades\DB;
 use Livewire\Component;
 use Livewire\WithPagination;
-use Illuminate\Pagination\LengthAwarePaginator;
-use Livewire\WithFileUploads;
 
-class Produccion extends Component
+class ProduccionEmpleado extends Component
 {
     use WithPagination;
-    use WithFileUploads;
-    public $select_file;
 
     protected $paginationTheme = 'bootstrap';
 
-    public $b_fecha = '';
-    public $b_presentacion = '';
     public $b_orden = '';
-    public $b_codigo = '';
+    public $b_fecha_1 = '';
+    public $b_fecha_2 = '';
     public $b_marca = '';
     public $b_nombre = '';
     public $b_vitola = '';
     public $b_capa = '';
+    public $b_codigo_productos = '';
+    public $b_codigo_empleado = '';
+    public $b_nombre_empleado = '';
+    public $b_rol = 'boncherorolero';
 
-    public $fechas = [];
-    public $presentacion = [];
     public $ordenes = [];
-    public $codigos = [];
     public $marcas = [];
     public $nombres = [];
     public $vitolas = [];
     public $capas = [];
+    public $codigos_producto = [];
+    public $codigos_empleado = [];
+    public $nombres_empleado = [];
 
     public $por_pagina = 50;
     public $total = 0;
 
     public function mount() {
 
-        $this->b_fecha_inicial = Carbon::now()->format('Y-m-d');
-        $this->b_fecha_final = Carbon::now()->format('Y-m-d');
+        $this->b_fecha_1 = Carbon::now()->format('Y-m-d');
+        $this->b_fecha_2 = Carbon::now()->format('Y-m-d');
 
-        $da = DB::select('CALL `buscar_inventario_produccion_detalles`()');
+        $da = DB::select('CALL `buscar_produccion_empleado_detalles`()');
 
         if (count($da) > 0) {
-            $this->fechas = [];
             $this->ordenes = [];
-            $this->codigos = [];
             $this->marcas = [];
             $this->nombres = [];
             $this->vitolas = [];
             $this->capas = [];
+            $this->codigos_producto = [];
+            $this->codigos_empleado = [];
+            $this->nombres_empleado = [];
 
             foreach ($da as $detalles) {
-                array_push($this->fechas, $detalles->fecha);
                 array_push($this->ordenes, $detalles->orden);
-                array_push($this->codigos, $detalles->codigo);
                 array_push($this->marcas, $detalles->marca);
-                array_push($this->nombres, $detalles->nombre);
-                array_push($this->vitolas, $detalles->vitola);
+                array_push($this->nombres, $detalles->orden);
+                array_push($this->vitolas, $detalles->nombre);
                 array_push($this->capas, $detalles->capa);
+                array_push($this->codigos_producto, $detalles->codigo_producto);
+                array_push($this->codigos_empleado, $detalles->codigo_empleaado);
+                array_push($this->nombres_empleado, $detalles->nombre_empleado);
             }
-
-            $this->fechas = array_unique($this->fechas);
             $this->ordenes = array_unique($this->ordenes);
-            $this->codigos = array_unique($this->codigos);
             $this->marcas = array_unique($this->marcas);
             $this->nombres = array_unique($this->nombres);
             $this->vitolas = array_unique($this->vitolas);
             $this->capas = array_unique($this->capas);
+            $this->codigos_producto = array_unique($this->codigos_producto);
+            $this->codigos_empleado = array_unique($this->codigos_empleado);
+            $this->nombres_empleado = array_unique($this->nombres_empleado);
         }
     }
-
     public function render()
     {
         $start = ($this->page - 1) * $this->por_pagina;
 
         $da = DB::select(
-            'CALL `buscar_inventario_produccion`(?,?,?,?,?,?,?,?,?,?,?)',
+            'CALL `buscar_produccion_empleado`(?,?,?,?,?,?,?,?,?,?,?,?,?)',
             [
-                $this->b_fecha,
+                $this->b_fecha_1,
+                $this->b_fecha_2,
                 $this->b_orden,
-                $this->b_codigo,
                 $this->b_marca,
                 $this->b_nombre,
                 $this->b_vitola,
                 $this->b_capa,
+                $this->b_codigo_productos,
+                $this->b_codigo_empleado,
+                $this->b_rol,
                 $start,
                 $this->por_pagina,
-                $this->b_fecha_inicial,
-                $this->b_fecha_final
+                $this->b_nombre_empleado,
+
             ]
         );
 
         $this->total = DB::select(
-            'CALL `buscar_inventario_produccion_conteo`(?,?,?,?,?,?,?,?,?)',
+            'CALL `buscar_produccion_empleado_conteo`(?,?,?,?,?,?,?,?,?,?,?)',
             [
-                $this->b_fecha,
+                $this->b_fecha_1,
+                $this->b_fecha_2,
                 $this->b_orden,
-                $this->b_codigo,
                 $this->b_marca,
                 $this->b_nombre,
                 $this->b_vitola,
                 $this->b_capa,
-                $this->b_fecha_inicial,
-                $this->b_fecha_final
+                $this->b_codigo_productos,
+                $this->b_codigo_empleado,
+                $this->b_rol,
+                $this->b_nombre_empleado,
             ]
         )[0]->total;
 
-
-        return view('livewire.produccion.produccion', [
+        return view('livewire.produccion.produccion-empleado',[
             'productos' => new LengthAwarePaginator($da,  $this->total , $this->por_pagina)
         ])->extends('layouts.produccion.produccion-menu')->section('contenido');
     }
-
-    public function import()
-    {
-        $this->validate([
-            'select_file' => 'max:1024', // 1MB Max
-        ]);
-        (new ProducidoImport)->import($this->select_file);
-    }
-
-    public function import2()
-    {
-        $this->validate([
-            'select_file' => 'max:1024', // 1MB Max
-        ]);
-
-        (new ProducidoPendienteImport)->import($this->select_file);
-        //(new ProducidoPreciosImport)->import($this->select_file);
-    }
-
-
-
 }

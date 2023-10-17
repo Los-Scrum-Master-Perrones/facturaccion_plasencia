@@ -1,5 +1,4 @@
-<div xmlns:wire="http://www.w3.org/1999/xhtml">
-
+<div>
     <div class="container" style="max-width:100%;">
         <div class="card" style="padding:0px;height: 85%;">
             <div class="card-header">
@@ -12,18 +11,9 @@
                         </div>
                     </div>
                     <div class="col-md-3" wire:ignore style="height: 30px">
-                        <input class="form-control" autocomplete="off" id="example" />
                     </div>
                     <div class="col-md-5">
-                            <div class="input-group mb-3" style="height: 30px">
-                                <input type="file" name="select_file" id="select_file"
-                                    style="height: 30px;font-size: 0.7em" wire:model="select_file"
-                                    class="form-control" />
-                                <input type="submit" wire:click="import" name="upload" class="btn btn-primary"
-                                    style="height: 30px;font-size: 0.7em" value="Importar Produccion Diaria">
-                                <input type="submit" wire:click="import2" name="upload" class="btn btn-secondary"
-                                    style="height: 30px;font-size: 0.7em" value="Importar Precios (R,B)">
-                            </div>
+
                     </div>
                     <div class="col-md-2">
                         <div class="input-group mb-3" style="height: 30px">
@@ -50,11 +40,20 @@
                 {{ $productos->links() }}
             </div>
             <div class="card-body">
-                <div wire:loading.class='oscurecer_contenido' class="table-responsive" style="height: 75vh">
+                <div wire:loading.class='oscurecer_contenido'
+                    style="width:100%; padding-left:0px;   font-size:10px;   overflow-x: display; overflow-y: auto;  height:450px;">
                     <table class="table table-light" style="font-size:10px;">
                         <thead>
                             <tr>
                                 <th>N#</th>
+                                <th wire:ignore>
+                                    <select name="b_destino" id="b_destino" onchange="buscar_io()">
+                                        <option value="">DESTINO</option>
+                                        @foreach ($destino as $v)
+                                            <option value="{{ $v }}">{{ $v }}</option>
+                                        @endforeach
+                                    </select>
+                                </th>
                                 <th wire:ignore>
                                     <select name="b_fecha" id="b_fecha" onchange="buscar_io()">
                                         <option value="">FECHA</option>
@@ -111,7 +110,8 @@
                                         @endforeach
                                     </select>
                                 </th>
-                                <th>SALDO</th>
+                                <th>CANTIDAD</th>
+                                <th>OPERACION</th>
                             </tr>
                         </thead>
                         <tbody name="body" id="body">
@@ -121,16 +121,24 @@
                             @foreach ($productos as $id => $producto)
                                 <tr>
                                     <td>{{ ++$id }}</td>
-                                    <td>{{ $producto->fecha }}</td>
-                                    <td>{{ intval($producto->orden) }}</td>
+                                    <td>{{ $producto->destino }}</td>
+                                    <td>{{ $producto->fecha_salida }}</td>
+                                    <td>{{ intval($producto->orden_sistema) }}</td>
                                     <td>{{ $producto->codigo }}</td>
                                     <td>{{ $producto->marca }}</td>
                                     <td>{{ $producto->nombre }}</td>
                                     <td>{{ $producto->vitola }}</td>
                                     <td>{{ $producto->capa }}</td>
-                                    <td>{{ $producto->existencia }}</td>
+                                    <td>{{ $producto->cantidad }}</td>
+                                    <td>
+                                        <a style="text-decoration: none" onclick="eliminar_item({{ $producto->id }})" href="#">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" fill="currentColor" class="bi bi-trash-fill" viewBox="0 0 16 16">
+                                                <path d="M2.5 1a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1H3v9a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V4h.5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1H2.5zm3 4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5zM8 5a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7A.5.5 0 0 1 8 5zm3 .5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 1 0z" />
+                                            </svg>
+                                        </a>
+                                    </td>
                                     @php
-                                        $sumas += $producto->existencia;
+                                        $sumas += $producto->cantidad;
                                     @endphp
                                 </tr>
                             @endforeach
@@ -147,7 +155,20 @@
 
     @push('scripts')
         <script>
-            var seletscc = ["#b_orden", "#b_fecha", "#b_codigo", "#b_marca", "#b_nombre", "#b_vitola", "#b_capa"];
+
+            const Toast = Swal.mixin({
+                    toast: true
+                    , position: 'top-end'
+                    , showConfirmButton: false
+                    , timer: 3000
+                    , timerProgressBar: true
+                    , didOpen: (toast) => {
+                        toast.addEventListener('mouseenter', Swal.stopTimer)
+                        toast.addEventListener('mouseleave', Swal.resumeTimer)
+                    }
+                })
+
+            var seletscc = ["#b_orden", "#b_fecha", "#b_codigo", "#b_marca", "#b_nombre", "#b_vitola", "#b_capa","#b_destino"];
             const inputField = document.querySelector("#example");
 
             $(document).ready(function() {
@@ -163,69 +184,8 @@
                             direction: "asc"
                         }
                     });
-
                 }
-
-
-                const myDatePicker = new HotelDatepicker(inputField, {
-                    autoClose: false,
-                    startDate: new Date('2020-01-01'),
-                    endDate: false,
-                    onSelectRange: function() {
-                        console.log('Fecha de inicio:', myDatePicker.getValue());
-
-                        const fechasSeparadas = myDatePicker.getValue().split(' - ');
-
-                        const fechaInicio = fechasSeparadas[0];
-                        const fechaFin = fechasSeparadas[1];
-
-                        @this.b_fecha_inicial = fechaInicio;
-                        @this.b_fecha_final = fechaFin;
-                    },
-                    i18n: {
-                        selected: 'Rango de Fecha:',
-                        night: 'Día',
-                        nights: 'Días',
-                        button: 'Cerrar',
-                        clearButton: 'Limpiar',
-                        submitButton: 'Enviar',
-                        'checkin-disabled': 'Check-in no disponible',
-                        'checkout-disabled': 'Check-out no disponible',
-                        'day-names-short': ['Dom', 'Lun', 'Mar', 'Mié', 'Jue', 'Vie', 'Sáb'],
-                        'day-names': ['Domingo', 'Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado'],
-                        'month-names-short': ['Ene', 'Feb', 'Mar', 'Abr', 'May', 'Jun', 'Jul', 'Ago', 'Sep',
-                            'Oct', 'Nov', 'Dic'
-                        ],
-                        'month-names': ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio',
-                            'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'
-                        ],
-                        'error-more': 'El rango de fechas no debe ser mayor a 1 noche',
-                        'error-more-plural': 'El rango de fechas no debe ser mayor a %d noches',
-                        'error-less': 'El rango de fechas no debe ser menor a 1 noche',
-                        'error-less-plural': 'El rango de fechas no debe ser menor a %d noches',
-                        'info-more': 'Por favor, selecciona un rango de fechas de al menos 1 noche',
-                        'info-more-plural': 'Por favor, selecciona un rango de fechas de al menos %d noches',
-                        'info-range': 'Por favor, selecciona un rango de fechas entre %d y %d noches',
-                        'info-range-equal': 'Por favor, selecciona un rango de fechas de %d noches',
-                        'info-default': 'Por favor, selecciona un rango de fechas',
-                        'aria-application': 'Calendario',
-                        'aria-selected-checkin': 'Seleccionado como fecha de check-in, %s',
-                        'aria-selected-checkout': 'Seleccionado como fecha de check-out, %s',
-                        'aria-selected': 'Seleccionado, %s',
-                        'aria-disabled': 'No disponible, %s',
-                        'aria-choose-checkin': 'Elige %s como tu fecha de check-in',
-                        'aria-choose-checkout': 'Elige %s como tu fecha de check-out',
-                        'aria-prev-month': 'Ir hacia atrás para cambiar al mes anterior',
-                        'aria-next-month': 'Ir hacia adelante para cambiar al próximo mes',
-                        'aria-close-button': 'Cerrar el selector de fechas',
-                        'aria-clear-button': 'Limpiar las fechas seleccionadas',
-                        'aria-submit-button': 'Enviar el formulario'
-                    }
-                });
-
             });
-
-
 
             function buscar_io() {
                 @this.b_orden = $(seletscc[0]).val();
@@ -235,8 +195,34 @@
                 @this.b_nombre = $(seletscc[4]).val();
                 @this.b_vitola = $(seletscc[5]).val();
                 @this.b_capa = $(seletscc[6]).val();
+                @this.b_destino = $(seletscc[7]).val();
                 @this.page = 1;
             }
+
+            function eliminar_item(id) {
+                Swal.fire({
+                    title: 'Esta seguro?',
+                    text: "Eliminar la salida, no podra revertise!",
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#3085d6',
+                    cancelButtonColor: '#d33',
+                    confirmButtonText: 'Si, eliminar!'
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        @this.eliminar_salida(id);
+                    } else {
+
+                    }
+                })
+            }
+
+            window.addEventListener('salida_eliminada', event => {
+                Toast.fire({
+                    icon: 'success'
+                    , title: 'Salida eliminada con exito.'
+                });
+            })
         </script>
     @endpush
 </div>

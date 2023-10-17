@@ -1,101 +1,4 @@
 <div xmlns:wire="http://www.w3.org/1999/xhtml">
-    <style>
-        .oscurecer_contenido {
-            justify-content: center;
-            align-items: center;
-            background-color: black;
-            top: 0px;
-            left: 0px;
-            z-index: 9999;
-            width: 100%;
-            height: 100%;
-            opacity: 0.5;
-        }
-
-        html {
-            font-family: sans-serif;
-        }
-
-        .lineatemp {
-            position: relative;
-            width: 600px;
-            margin: 0 auto;
-            border: 1px solid lightgray;
-            border-radius: 10px;
-        }
-
-        .fila {
-            display: flex;
-            justify-content: start;
-            border-bottom: 1px solid lightgray;
-            position: relative;
-        }
-
-        .fila .disco {
-            width: 36px;
-            display: flex;
-            flex-direction: column;
-            position: relative;
-            justify-content: center;
-            align-items: center;
-        }
-
-        .fila .disco:after {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: calc(505 - 2px);
-            height: 100%;
-            width: 3px;
-            background: #80DEEA;
-            z-index: -1;
-        }
-
-        .fila:first-child .disco:after {
-            height: 50%;
-            top: 50%;
-        }
-
-        .fila:last-child .disco:after {
-            height: 50%;
-        }
-
-        .fila .disco>div {
-
-            aspect-ratio: 1/1;
-            border-radius: 50%;
-            background: lightblue;
-            box-sizing: border-box;
-        }
-
-        .fila:hover .disco>div {
-            border: 3px solid red;
-            background: white;
-        }
-
-        .fila div:nth-of-type(2) {
-            width: 20%;
-            padding: 4px;
-            display: flex;
-            align-items: center;
-        }
-
-        .fila div:nth-of-type(3) {
-            width: 60%;
-            padding: 4px;
-        }
-
-    </style>
-
-    <ul class="nav nav-tabs justify-content-center">
-        <li class="nav-item">
-            <a class="nav-link active fs-7" aria-current="page" href="{{ route('produccion.pendiente.index') }}"><strong>Pendiente</strong></a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link fs-7" href="{{ route('produccion.index') }}"><strong>Entradas</strong></a>
-        </li>
-    </ul>
-
     <div class="container" style="max-width:100%;">
         <div wire:loading>
             <div class="centro_carga">
@@ -137,13 +40,13 @@
                                     </svg>
                                 </abbr>
                             </button>
-                            <button class="btn btn-outline-success" onclick="exportar_pendiente()">
-                                <abbr title="Exportar Materiales Pendiente">
+                            <a class="btn btn-outline-success" href="{{ route('produccion.reporte.diario') }}">
+                                <abbr title="Exportar Reporte del Mes">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-list-check" viewBox="0 0 16 16">
                                         <path fill-rule="evenodd" d="M5 11.5a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 0 1h-9a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 0 1h-9a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 0 1h-9a.5.5 0 0 1-.5-.5zM3.854 2.146a.5.5 0 0 1 0 .708l-1.5 1.5a.5.5 0 0 1-.708 0l-.5-.5a.5.5 0 1 1 .708-.708L2 3.293l1.146-1.147a.5.5 0 0 1 .708 0zm0 4a.5.5 0 0 1 0 .708l-1.5 1.5a.5.5 0 0 1-.708 0l-.5-.5a.5.5 0 1 1 .708-.708L2 7.293l1.146-1.147a.5.5 0 0 1 .708 0zm0 4a.5.5 0 0 1 0 .708l-1.5 1.5a.5.5 0 0 1-.708 0l-.5-.5a.5.5 0 0 1 .708-.708l.146.147 1.146-1.147a.5.5 0 0 1 .708 0z" />
                                     </svg>
                                 </abbr>
-                            </button>
+                            </a>
                             <button class="btn btn-outline-warning" onclick="exportar_materiales()">
                                 <abbr title="Exportar Solo Materiales">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-list-columns-reverse" viewBox="0 0 16 16">
@@ -472,11 +375,11 @@
 
                         @if (auth()->user()->rol == -1)
                         @else
-                        <td style="width:120px;">
+                        <td style="width:120px; text-align: center">
                             @if(isset($historial[$detalle->id]))
                             <a href="#" onclick='mostrar_historial({{ $detalle->id }})'>
                                 <abbr title="Historial de Precios">
-                                    <img width="16" height="16" src="https://img.icons8.com/ios/50/time-machine--v1.png" alt="time-machine--v1" />
+                                    <img width="16" height="16" fill="currentColor" src="https://img.icons8.com/ios/50/time-machine--v1.png" alt="time-machine--v1" />
                                 </abbr>
                             </a>
                             @endif
@@ -487,11 +390,15 @@
                                     <path fill-rule="evenodd" d="M12.5 16a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7Zm.354-1.646a.5.5 0 0 1-.722-.016l-1.149-1.25a.5.5 0 1 1 .737-.676l.28.305V11a.5.5 0 0 1 1 0v1.793l.396-.397a.5.5 0 0 1 .708.708l-1.25 1.25Z" />
                                 </svg>
                             </a>
-                            <a style="text-decoration: none" data-bs-toggle="modal" data-bs-target="#modal_eliminar_detalle" onclick="datos_modal_eliminar({{ $detalle->id }})" href="#">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" fill="currentColor" class="bi bi-trash-fill" viewBox="0 0 16 16">
-                                    <path d="M2.5 1a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1H3v9a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V4h.5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1H2.5zm3 4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5zM8 5a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7A.5.5 0 0 1 8 5zm3 .5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 1 0z" />
-                                </svg>
-                            </a>
+                            @if($porcentaje > 0)
+
+                            @else
+                                <a style="text-decoration: none" onclick="datos_modal_eliminar({{ $detalle->id }})" href="#">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" fill="currentColor" class="bi bi-trash-fill" viewBox="0 0 16 16">
+                                        <path d="M2.5 1a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1H3v9a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V4h.5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1H2.5zm3 4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5zM8 5a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7A.5.5 0 0 1 8 5zm3 .5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 1 0z" />
+                                    </svg>
+                                </a>
+                            @endif
                             <a style="text-decoration: none" data-bs-toggle="modal" href="#" data-bs-target="#modal_actualizar" wire:click="editar_pendiente({{ $detalle->id }})">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" fill="currentColor" class="bi bi-pencil-square" viewBox="0 0 16 16">
                                     <path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z" />

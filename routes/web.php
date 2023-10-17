@@ -31,7 +31,10 @@ use App\Http\Livewire\EntradasSalidas;
 use App\Http\Livewire\Materiales;
 use App\Http\Livewire\MaterialesProductos;
 use App\Http\Livewire\Produccion\Produccion;
+use App\Http\Livewire\Produccion\ProduccionCatalogo;
+use App\Http\Livewire\Produccion\ProduccionEmpleado;
 use App\Http\Livewire\Produccion\ProduccionPendiente;
+use App\Http\Livewire\Produccion\ProduccionPendienteSalida;
 use App\Http\Livewire\ProductoPrecio;
 use App\Http\Livewire\Terminado;
 use App\Models\EntradasSalida;
@@ -389,6 +392,10 @@ Route::get('/precios', ProductoPrecio::class)->name('precio.catalogo');
 //Produccion de precios
 Route::get('/produccion', Produccion::class)->name('produccion.index');
 Route::get('/produccion/pendiente', ProduccionPendiente::class)->name('produccion.pendiente.index');
+Route::get('/produccion/empleados', ProduccionEmpleado::class)->name('produccion.empleados');
+Route::get('/produccion/catalogo', ProduccionCatalogo::class)->name('produccion.catalogo');
+Route::get('/produccion/pendiente/salida', ProduccionPendienteSalida::class)->name('produccion.pendiente.salida');
+Route::get('/imprimir/pendiente/producir', [ProduccionPendiente::class,'imprimir_reporte_diario'])->name('produccion.reporte.diario');
 
 
 });

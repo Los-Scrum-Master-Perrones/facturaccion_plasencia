@@ -1,34 +1,36 @@
-<div xmlns:wire="http://www.w3.org/1999/xhtml">
-
+<div>
     <div class="container" style="max-width:100%;">
         <div class="card" style="padding:0px;height: 85%;">
             <div class="card-header">
                 <div class="row">
-                    <div class="col-md-2" wire:ignore style="height: 30px">
+                    <div class="col-md-3" wire:ignore style="height: 30px">
+                        <div class="input-group mb-3">
+                            <input type="date" class="form-control" wire:model='b_fecha_1'>
+                            <input type="date" class="form-control" wire:model='b_fecha_2'>
+                        </div>
+                    </div>
+                    <div class="col-md-1" wire:ignore   >
                         <div wire:loading>
                             <button id="btn_guardar" class="btn btn-outline-purpura" disabled>
                                 <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
                             </button>
                         </div>
                     </div>
-                    <div class="col-md-3" wire:ignore style="height: 30px">
-                        <input class="form-control" autocomplete="off" id="example" />
-                    </div>
+
                     <div class="col-md-5">
-                            <div class="input-group mb-3" style="height: 30px">
-                                <input type="file" name="select_file" id="select_file"
-                                    style="height: 30px;font-size: 0.7em" wire:model="select_file"
-                                    class="form-control" />
-                                <input type="submit" wire:click="import" name="upload" class="btn btn-primary"
-                                    style="height: 30px;font-size: 0.7em" value="Importar Produccion Diaria">
-                                <input type="submit" wire:click="import2" name="upload" class="btn btn-secondary"
-                                    style="height: 30px;font-size: 0.7em" value="Importar Precios (R,B)">
-                            </div>
+                        <input type="radio" autocomplete="off" wire:model='b_rol' value='rolero'>
+                        <label for="success-outlined">Roleros</label>
+
+                        <input type="radio" autocomplete="off" wire:model='b_rol' value='bonchero'>
+                        <label for="danger-outlined">Boncheros</label>
+
+                        <input type="radio" autocomplete="off" wire:model='b_rol' value='boncherorolero'>
+                        <label for="danger-outlined">Ambos</label>
                     </div>
+                    <div class="col-md-1" wire:ignore style="height: 30px"></div>
                     <div class="col-md-2">
                         <div class="input-group mb-3" style="height: 30px">
-                            <span class="input-group-text" id="basic-addon1" style="height: 30px;font-size: 0.7em">Por
-                                Pagina</span>
+                            <span class="input-group-text" id="basic-addon1" style="height: 30px;font-size: 0.7em">Por Pagina</span>
                             <select name="" id="" class="form-control" wire:model='por_pagina'
                                 style="height: 30px;font-size: 0.7em">
                                 <option value="50">50</option>
@@ -50,19 +52,12 @@
                 {{ $productos->links() }}
             </div>
             <div class="card-body">
-                <div wire:loading.class='oscurecer_contenido' class="table-responsive" style="height: 75vh">
+                <div wire:loading.class='oscurecer_contenido'
+                    style="width:100%; padding-left:0px;   font-size:10px;   overflow-x: display; overflow-y: auto;  height:450px;">
                     <table class="table table-light" style="font-size:10px;">
                         <thead>
                             <tr>
                                 <th>N#</th>
-                                <th wire:ignore>
-                                    <select name="b_fecha" id="b_fecha" onchange="buscar_io()">
-                                        <option value="">FECHA</option>
-                                        @foreach ($fechas as $v)
-                                            <option value="{{ $v }}">{{ $v }}</option>
-                                        @endforeach
-                                    </select>
-                                </th>
                                 <th wire:ignore>
                                     <select name="b_orden" id="b_orden" onchange="buscar_io()">
                                         <option value="">ORDEN</option>
@@ -71,10 +66,25 @@
                                         @endforeach
                                     </select>
                                 </th>
+                                <th>FECHA</th>
+                                <th wire:ignore>
+                                    <select name="b_codigo_empleado" id="b_codigo_empleado" onchange="buscar_io()">
+                                        <option value="">Codigo</option>
+                                        @foreach ($codigos_empleado as $v)
+                                            <option value="{{ $v }}">{{ $v }}</option>
+                                        @endforeach
+                                    </select>
+                                    <select name="b_nombre_empleado" id="b_nombre_empleado" onchange="buscar_io()">
+                                        <option value="">Empleado</option>
+                                        @foreach ($nombres_empleado as $v)
+                                            <option value="{{ $v }}">{{ $v }}</option>
+                                        @endforeach
+                                    </select>
+                                </th>
                                 <th wire:ignore>
                                     <select name="b_codigo" id="b_codigo" onchange="buscar_io()">
                                         <option value="">CODIGO PRODUCTO</option>
-                                        @foreach ($codigos as $v)
+                                        @foreach ($codigos_producto as $v)
                                             <option value="{{ $v }}">{{ $v }}</option>
                                         @endforeach
                                     </select>
@@ -111,26 +121,39 @@
                                         @endforeach
                                     </select>
                                 </th>
-                                <th>SALDO</th>
+                                <th>CANTIDAD</th>
+                                <th>CANTIDAD (L)</th>
+                                <th>OPERACION</th>
                             </tr>
                         </thead>
                         <tbody name="body" id="body">
                             @php
                                 $sumas = 0;
+                                $sumasLempiras = 0;
                             @endphp
                             @foreach ($productos as $id => $producto)
                                 <tr>
                                     <td>{{ ++$id }}</td>
+                                    <td>{{ $producto->orden }}</td>
                                     <td>{{ $producto->fecha }}</td>
-                                    <td>{{ intval($producto->orden) }}</td>
-                                    <td>{{ $producto->codigo }}</td>
+                                    <td>{{ '('.Str::upper($producto->rol).') '.$producto->codigo_empleaado.'-'.$producto->nombre_empleado }}</td>
+                                    <td>{{ $producto->codigo_producto }}</td>
                                     <td>{{ $producto->marca }}</td>
                                     <td>{{ $producto->nombre }}</td>
                                     <td>{{ $producto->vitola }}</td>
                                     <td>{{ $producto->capa }}</td>
-                                    <td>{{ $producto->existencia }}</td>
+                                    <td>{{ $producto->cantidad }}</td>
+                                    <td>L. {{ number_format($producto->por_pagar, 2) }}</td>
+                                    <td>
+                                        <a style="text-decoration: none" onclick="eliminar_item({{ $producto->id }})" href="#">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" fill="currentColor" class="bi bi-trash-fill" viewBox="0 0 16 16">
+                                                <path d="M2.5 1a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1H3v9a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V4h.5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1H2.5zm3 4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5zM8 5a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7A.5.5 0 0 1 8 5zm3 .5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 1 0z" />
+                                            </svg>
+                                        </a>
+                                    </td>
                                     @php
-                                        $sumas += $producto->existencia;
+                                        $sumas += $producto->cantidad;
+                                        $sumasLempiras += $producto->por_pagar;
                                     @endphp
                                 </tr>
                             @endforeach
@@ -140,14 +163,30 @@
             </div>
         </div>
     </div>
-    <div class="input-group" style="width:20%; position: fixed;right: 0px;bottom:0px; height:30px;">
-        <span class="form-control input-group-text">Total saldo</span>
-        <input type="text" class="form-control" id="sumas" value="{{ $sumas }}">
+    <div class="input-group" style="width:30%; position: fixed;right: 0px;bottom:0px; height:30px;">
+        <span class="form-control input-group-text">Total</span>
+        <input type="text" class="form-control" id="sumas" value="{{ number_format($sumas) }}">
+
+        <span class="form-control input-group-text">Total (L.)</span>
+        <input type="text" class="form-control" id="sumas" value="{{ number_format($sumasLempiras,2) }}">
     </div>
 
     @push('scripts')
         <script>
-            var seletscc = ["#b_orden", "#b_fecha", "#b_codigo", "#b_marca", "#b_nombre", "#b_vitola", "#b_capa"];
+
+            const Toast = Swal.mixin({
+                    toast: true
+                    , position: 'top-end'
+                    , showConfirmButton: false
+                    , timer: 3000
+                    , timerProgressBar: true
+                    , didOpen: (toast) => {
+                        toast.addEventListener('mouseenter', Swal.stopTimer)
+                        toast.addEventListener('mouseleave', Swal.resumeTimer)
+                    }
+                })
+
+            var seletscc = ["#b_orden", "#b_codigo","#b_nombre_empleado","#b_codigo_empleado","#b_marca", "#b_nombre", "#b_vitola", "#b_capa"];
             const inputField = document.querySelector("#example");
 
             $(document).ready(function() {
@@ -163,80 +202,45 @@
                             direction: "asc"
                         }
                     });
-
                 }
-
-
-                const myDatePicker = new HotelDatepicker(inputField, {
-                    autoClose: false,
-                    startDate: new Date('2020-01-01'),
-                    endDate: false,
-                    onSelectRange: function() {
-                        console.log('Fecha de inicio:', myDatePicker.getValue());
-
-                        const fechasSeparadas = myDatePicker.getValue().split(' - ');
-
-                        const fechaInicio = fechasSeparadas[0];
-                        const fechaFin = fechasSeparadas[1];
-
-                        @this.b_fecha_inicial = fechaInicio;
-                        @this.b_fecha_final = fechaFin;
-                    },
-                    i18n: {
-                        selected: 'Rango de Fecha:',
-                        night: 'Día',
-                        nights: 'Días',
-                        button: 'Cerrar',
-                        clearButton: 'Limpiar',
-                        submitButton: 'Enviar',
-                        'checkin-disabled': 'Check-in no disponible',
-                        'checkout-disabled': 'Check-out no disponible',
-                        'day-names-short': ['Dom', 'Lun', 'Mar', 'Mié', 'Jue', 'Vie', 'Sáb'],
-                        'day-names': ['Domingo', 'Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado'],
-                        'month-names-short': ['Ene', 'Feb', 'Mar', 'Abr', 'May', 'Jun', 'Jul', 'Ago', 'Sep',
-                            'Oct', 'Nov', 'Dic'
-                        ],
-                        'month-names': ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio',
-                            'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'
-                        ],
-                        'error-more': 'El rango de fechas no debe ser mayor a 1 noche',
-                        'error-more-plural': 'El rango de fechas no debe ser mayor a %d noches',
-                        'error-less': 'El rango de fechas no debe ser menor a 1 noche',
-                        'error-less-plural': 'El rango de fechas no debe ser menor a %d noches',
-                        'info-more': 'Por favor, selecciona un rango de fechas de al menos 1 noche',
-                        'info-more-plural': 'Por favor, selecciona un rango de fechas de al menos %d noches',
-                        'info-range': 'Por favor, selecciona un rango de fechas entre %d y %d noches',
-                        'info-range-equal': 'Por favor, selecciona un rango de fechas de %d noches',
-                        'info-default': 'Por favor, selecciona un rango de fechas',
-                        'aria-application': 'Calendario',
-                        'aria-selected-checkin': 'Seleccionado como fecha de check-in, %s',
-                        'aria-selected-checkout': 'Seleccionado como fecha de check-out, %s',
-                        'aria-selected': 'Seleccionado, %s',
-                        'aria-disabled': 'No disponible, %s',
-                        'aria-choose-checkin': 'Elige %s como tu fecha de check-in',
-                        'aria-choose-checkout': 'Elige %s como tu fecha de check-out',
-                        'aria-prev-month': 'Ir hacia atrás para cambiar al mes anterior',
-                        'aria-next-month': 'Ir hacia adelante para cambiar al próximo mes',
-                        'aria-close-button': 'Cerrar el selector de fechas',
-                        'aria-clear-button': 'Limpiar las fechas seleccionadas',
-                        'aria-submit-button': 'Enviar el formulario'
-                    }
-                });
-
             });
-
-
 
             function buscar_io() {
                 @this.b_orden = $(seletscc[0]).val();
-                @this.b_fecha = $(seletscc[1]).val();
-                @this.b_codigo = $(seletscc[2]).val();
-                @this.b_marca = $(seletscc[3]).val();
-                @this.b_nombre = $(seletscc[4]).val();
-                @this.b_vitola = $(seletscc[5]).val();
-                @this.b_capa = $(seletscc[6]).val();
+                @this.b_marca = $(seletscc[4]).val();
+                @this.b_nombre = $(seletscc[5]).val();
+                @this.b_vitola = $(seletscc[6]).val();
+                @this.b_capa = $(seletscc[7]).val();
+                @this.b_codigo_productos = $(seletscc[1]).val();
+                @this.b_codigo_empleado = $(seletscc[3]).val();
+                @this.b_nombre_empleado = $(seletscc[2]).val();
                 @this.page = 1;
             }
+
+            function eliminar_item(id) {
+                Swal.fire({
+                    title: 'Esta seguro?',
+                    text: "Eliminar la salida, no podra revertise!",
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#3085d6',
+                    cancelButtonColor: '#d33',
+                    confirmButtonText: 'Si, eliminar!'
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        @this.eliminar_salida(id);
+                    } else {
+
+                    }
+                })
+            }
+
+            window.addEventListener('salida_eliminada', event => {
+                Toast.fire({
+                    icon: 'success'
+                    , title: 'Salida eliminada con exito.'
+                });
+            })
         </script>
     @endpush
 </div>

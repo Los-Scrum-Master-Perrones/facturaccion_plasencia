@@ -2,26 +2,20 @@
 
 namespace App\Http\Livewire\Produccion;
 
-use App\Imports\ProducidoImport;
-use App\Imports\ProducidoPendienteImport;
-use App\Imports\ProducidoPreciosImport;
-use Carbon\Carbon;
+use App\Models\ProduccionPendienteSalida as ModelsProduccionPendienteSalida;
+use Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\Support\Facades\DB;
 use Livewire\Component;
 use Livewire\WithPagination;
-use Illuminate\Pagination\LengthAwarePaginator;
-use Livewire\WithFileUploads;
 
-class Produccion extends Component
+class ProduccionPendienteSalida extends Component
 {
     use WithPagination;
-    use WithFileUploads;
-    public $select_file;
 
     protected $paginationTheme = 'bootstrap';
 
     public $b_fecha = '';
-    public $b_presentacion = '';
+    public $b_destino = '';
     public $b_orden = '';
     public $b_codigo = '';
     public $b_marca = '';
@@ -29,8 +23,8 @@ class Produccion extends Component
     public $b_vitola = '';
     public $b_capa = '';
 
+    public $destino = [];
     public $fechas = [];
-    public $presentacion = [];
     public $ordenes = [];
     public $codigos = [];
     public $marcas = [];
@@ -43,10 +37,7 @@ class Produccion extends Component
 
     public function mount() {
 
-        $this->b_fecha_inicial = Carbon::now()->format('Y-m-d');
-        $this->b_fecha_final = Carbon::now()->format('Y-m-d');
-
-        $da = DB::select('CALL `buscar_inventario_produccion_detalles`()');
+        $da = DB::select('CALL `buscar_produccion_salida_detalles`()');
 
         if (count($da) > 0) {
             $this->fechas = [];
@@ -56,10 +47,12 @@ class Produccion extends Component
             $this->nombres = [];
             $this->vitolas = [];
             $this->capas = [];
+            $this->destino = [];
 
             foreach ($da as $detalles) {
-                array_push($this->fechas, $detalles->fecha);
-                array_push($this->ordenes, $detalles->orden);
+                array_push($this->destino, $detalles->destino);
+                array_push($this->fechas, $detalles->fecha_salida);
+                array_push($this->ordenes, $detalles->orden_sistema);
                 array_push($this->codigos, $detalles->codigo);
                 array_push($this->marcas, $detalles->marca);
                 array_push($this->nombres, $detalles->nombre);
@@ -67,6 +60,7 @@ class Produccion extends Component
                 array_push($this->capas, $detalles->capa);
             }
 
+            $this->destino = array_unique($this->destino);
             $this->fechas = array_unique($this->fechas);
             $this->ordenes = array_unique($this->ordenes);
             $this->codigos = array_unique($this->codigos);
@@ -76,67 +70,49 @@ class Produccion extends Component
             $this->capas = array_unique($this->capas);
         }
     }
-
     public function render()
     {
         $start = ($this->page - 1) * $this->por_pagina;
 
         $da = DB::select(
-            'CALL `buscar_inventario_produccion`(?,?,?,?,?,?,?,?,?,?,?)',
+            'CALL `buscar_produccion_salida`(?,?,?,?,?,?,?,?,?,?)',
             [
+                $this->b_destino,
                 $this->b_fecha,
                 $this->b_orden,
-                $this->b_codigo,
                 $this->b_marca,
                 $this->b_nombre,
                 $this->b_vitola,
                 $this->b_capa,
+                $this->b_codigo,
                 $start,
-                $this->por_pagina,
-                $this->b_fecha_inicial,
-                $this->b_fecha_final
+                $this->por_pagina
             ]
         );
 
         $this->total = DB::select(
-            'CALL `buscar_inventario_produccion_conteo`(?,?,?,?,?,?,?,?,?)',
+            'CALL `buscar_produccion_salida_conteo`(?,?,?,?,?,?,?,?)',
             [
+                $this->b_destino,
                 $this->b_fecha,
                 $this->b_orden,
-                $this->b_codigo,
                 $this->b_marca,
                 $this->b_nombre,
                 $this->b_vitola,
                 $this->b_capa,
-                $this->b_fecha_inicial,
-                $this->b_fecha_final
+                $this->b_codigo,
             ]
         )[0]->total;
 
-
-        return view('livewire.produccion.produccion', [
+        return view('livewire.produccion.produccion-pendiente-salida',[
             'productos' => new LengthAwarePaginator($da,  $this->total , $this->por_pagina)
         ])->extends('layouts.produccion.produccion-menu')->section('contenido');
     }
 
-    public function import()
-    {
-        $this->validate([
-            'select_file' => 'max:1024', // 1MB Max
-        ]);
-        (new ProducidoImport)->import($this->select_file);
+    public function eliminar_salida(ModelsProduccionPendienteSalida $salida) {
+        $salida->delete();
+
+        $this->dispatchBrowserEvent('salida_eliminada');
     }
-
-    public function import2()
-    {
-        $this->validate([
-            'select_file' => 'max:1024', // 1MB Max
-        ]);
-
-        (new ProducidoPendienteImport)->import($this->select_file);
-        //(new ProducidoPreciosImport)->import($this->select_file);
-    }
-
-
 
 }
