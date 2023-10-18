@@ -16,15 +16,13 @@
 
 <body id="bos"
     style="background: url({{ 'http://' . $_SERVER['HTTP_HOST'] . '/fondologin.jpg' }}) center center no-repeat;    background-size:100% 100%;">
-
-
-
+    @php
+        $rol = Auth::user()->rol;
+    @endphp
     @yield('content')
     <br><br><br><br><br>
     <div class="all" style="padding-bottom: 10px">
-        <div @if (auth()->user()->rol == -1) class="lefter"
-            @else
-            class="lefter3" @endif>
+        <div class="lefter4">
             <button type="submit" class="buttonsubmit" data-bs-toggle="modal" data-bs-target="#modal_cerrarsesion">
                 <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="white" class="bi bi-power"
                     viewBox="0 0 16 16">
@@ -35,107 +33,60 @@
             </button>
             <div class="text">CERRAR</div>
         </div>
-
-        @if (auth()->user()->rol != -1)
-            <div class="lefter3">
-                <form action="{{ Route('usuarios') }}" method="GET">
-                    <?php if (  auth()->user()->rol == 0): ?>
-                    <button type="submit" class="buttonsubmit">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="white"
-                            class="bi bi-people-fill" viewBox="0 0 16 16">
-                            <path d="M7 14s-1 0-1-1 1-4 5-4 5 3 5 4-1 1-1 1H7zm4-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6z" />
-                            <path fill-rule="evenodd"
-                                d="M5.216 14A2.238 2.238 0 0 1 5 13c0-1.355.68-2.75 1.936-3.72A6.325 6.325 0 0 0 5 9c-4 0-5 3-5 4s1 1 1 1h4.216z" />
-                            <path d="M4.5 8a2.5 2.5 0 1 0 0-5 2.5 2.5 0 0 0 0 5z" />
-                        </svg>
-                    </button>
-                    <div class="text">USUARIOS</div>
-                    <?php else: ?>
-                    <button type="submit" class="buttonsubmit" disabled>
-                        <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="gray"
-                            class="bi bi-people-fill" viewBox="0 0 16 16">
-                            <path d="M7 14s-1 0-1-1 1-4 5-4 5 3 5 4-1 1-1 1H7zm4-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6z" />
-                            <path fill-rule="evenodd"
-                                d="M5.216 14A2.238 2.238 0 0 1 5 13c0-1.355.68-2.75 1.936-3.72A6.325 6.325 0 0 0 5 9c-4 0-5 3-5 4s1 1 1 1h4.216z" />
-                            <path d="M4.5 8a2.5 2.5 0 1 0 0-5 2.5 2.5 0 0 0 0 5z" />
-                        </svg>
-                    </button>
-                    <div class="text" style="color:gray;">USUARIOS</div>
-                    <?php endif; ?>
-                </form>
-            </div>
-
-
-            <div class="lefter2">
-                <form action="{{ Route('productos') }}" method="GET">
-
-                    <?php if (  auth()->user()->rol == 0 || auth()->user()->rol == 2 || auth()->user()->rol == 1): ?>
-                    <button type="submit" class="buttonsubmit" aria-placeholder="Hola">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="white"
-                            class="bi bi-card-list" viewBox="0 0 16 16">
-                            <path
-                                d="M14.5 3a.5.5 0 0 1 .5.5v9a.5.5 0 0 1-.5.5h-13a.5.5 0 0 1-.5-.5v-9a.5.5 0 0 1 .5-.5h13zm-13-1A1.5 1.5 0 0 0 0 3.5v9A1.5 1.5 0 0 0 1.5 14h13a1.5 1.5 0 0 0 1.5-1.5v-9A1.5 1.5 0 0 0 14.5 2h-13z" />
-                            <path
-                                d="M5 8a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7A.5.5 0 0 1 5 8zm0-2.5a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7a.5.5 0 0 1-.5-.5zm0 5a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7a.5.5 0 0 1-.5-.5zm-1-5a.5.5 0 1 1-1 0 .5.5 0 0 1 1 0zM4 8a.5.5 0 1 1-1 0 .5.5 0 0 1 1 0zm0 2.5a.5.5 0 1 1-1 0 .5.5 0 0 1 1 0z" />
-                        </svg>
-                    </button>
-                    <div class="text">PRODUCTOS</div>
-                    <?php else: ?>
-                    <button type="submit" class="buttonsubmit" aria-placeholder="Hola" disabled>
-                        <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="gray"
-                            class="bi bi-card-list" viewBox="0 0 16 16">
-                            <path
-                                d="M14.5 3a.5.5 0 0 1 .5.5v9a.5.5 0 0 1-.5.5h-13a.5.5 0 0 1-.5-.5v-9a.5.5 0 0 1 .5-.5h13zm-13-1A1.5 1.5 0 0 0 0 3.5v9A1.5 1.5 0 0 0 1.5 14h13a1.5 1.5 0 0 0 1.5-1.5v-9A1.5 1.5 0 0 0 14.5 2h-13z" />
-                            <path
-                                d="M5 8a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7A.5.5 0 0 1 5 8zm0-2.5a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7a.5.5 0 0 1-.5-.5zm0 5a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7a.5.5 0 0 1-.5-.5zm-1-5a.5.5 0 1 1-1 0 .5.5 0 0 1 1 0zM4 8a.5.5 0 1 1-1 0 .5.5 0 0 1 1 0zm0 2.5a.5.5 0 1 1-1 0 .5.5 0 0 1 1 0z" />
-                        </svg>
-                    </button>
-                    <div class="text" style="color:gray;">PRODUCTOS</div>
-                    <?php endif; ?>
-                </form>
-            </div>
-        @endif
+        <div class="lefter3">
+            <a class="buttonsubmit" @if($rol == 0)
+                href="{{ route('usuarios') }}"
+            @else
+                disabled
+            @endif >
+                <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="white" class="bi bi-people-fill"
+                    viewBox="0 0 16 16">
+                    <path d="M7 14s-1 0-1-1 1-4 5-4 5 3 5 4-1 1-1 1H7zm4-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6z" />
+                    <path fill-rule="evenodd"
+                        d="M5.216 14A2.238 2.238 0 0 1 5 13c0-1.355.68-2.75 1.936-3.72A6.325 6.325 0 0 0 5 9c-4 0-5 3-5 4s1 1 1 1h4.216z" />
+                    <path d="M4.5 8a2.5 2.5 0 1 0 0-5 2.5 2.5 0 0 0 0 5z" />
+                </svg>
+            </a>
+            <div class="text">USUARIOS</div>
+        </div>
+        <div class="lefter2">
+            <a class="buttonsubmit" @if($rol == 0 || $rol == 1 || $rol == 2)
+                            href="{{ route('productos') }}"
+                        @else
+                            disabled
+                        @endif>
+                <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="white" class="bi bi-card-list"
+                    viewBox="0 0 16 16">
+                    <path
+                        d="M14.5 3a.5.5 0 0 1 .5.5v9a.5.5 0 0 1-.5.5h-13a.5.5 0 0 1-.5-.5v-9a.5.5 0 0 1 .5-.5h13zm-13-1A1.5 1.5 0 0 0 0 3.5v9A1.5 1.5 0 0 0 1.5 14h13a1.5 1.5 0 0 0 1.5-1.5v-9A1.5 1.5 0 0 0 14.5 2h-13z" />
+                    <path
+                        d="M5 8a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7A.5.5 0 0 1 5 8zm0-2.5a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7a.5.5 0 0 1-.5-.5zm0 5a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7a.5.5 0 0 1-.5-.5zm-1-5a.5.5 0 1 1-1 0 .5.5 0 0 1 1 0zM4 8a.5.5 0 1 1-1 0 .5.5 0 0 1 1 0zm0 2.5a.5.5 0 1 1-1 0 .5.5 0 0 1 1 0z" />
+                </svg>
+            </a>
+            <div class="text">PRODUCTOS</div>
+        </div>
         <div class="lefter">
-            <form action="{{ Route('pendiente') }}" method="GET">
-                @if (auth()->user()->rol == 0 || auth()->user()->rol == 2 || auth()->user()->rol == 1)
-                    <button type="submit" class="buttonsubmit">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="white"
-                            class="bi bi-archive" viewBox="0 0 16 16">
-                            <path
-                                d="M0 2a1 1 0 0 1 1-1h14a1 1 0 0 1 1 1v2a1 1 0 0 1-1 1v7.5a2.5 2.5 0 0 1-2.5 2.5h-9A2.5 2.5 0 0 1 1 12.5V5a1 1 0 0 1-1-1V2zm2 3v7.5A1.5 1.5 0 0 0 3.5 14h9a1.5 1.5 0 0 0 1.5-1.5V5H2zm13-3H1v2h14V2zM5 7.5a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5z" />
-                        </svg>
-                    </button>
-                    <div class="text">PENDIENTE</div>
-                @elseif (auth()->user()->rol == -1)
-                    <button type="submit" class="buttonsubmit">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="white"
-                            class="bi bi-archive" viewBox="0 0 16 16">
-                            <path
-                                d="M0 2a1 1 0 0 1 1-1h14a1 1 0 0 1 1 1v2a1 1 0 0 1-1 1v7.5a2.5 2.5 0 0 1-2.5 2.5h-9A2.5 2.5 0 0 1 1 12.5V5a1 1 0 0 1-1-1V2zm2 3v7.5A1.5 1.5 0 0 0 3.5 14h9a1.5 1.5 0 0 0 1.5-1.5V5H2zm13-3H1v2h14V2zM5 7.5a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5z" />
-                        </svg>
-                    </button>
-                    <div class="text">PENDIENTE</div>
-                @else
-                    <button type="submit" class="buttonsubmit" disabled>
-                        <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="gray"
-                            class="bi bi-archive" viewBox="0 0 16 16">
-                            <path
-                                d="M0 2a1 1 0 0 1 1-1h14a1 1 0 0 1 1 1v2a1 1 0 0 1-1 1v7.5a2.5 2.5 0 0 1-2.5 2.5h-9A2.5 2.5 0 0 1 1 12.5V5a1 1 0 0 1-1-1V2zm2 3v7.5A1.5 1.5 0 0 0 3.5 14h9a1.5 1.5 0 0 0 1.5-1.5V5H2zm13-3H1v2h14V2zM5 7.5a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5z" />
-                        </svg>
-                    </button>
-                    <div class="text" style="color:gray;">PENDIENTE</div>
-                @endif
-            </form>
+            <a class="buttonsubmit" @if($rol == 0 || $rol == 1 || $rol == 2)
+                        href="{{ route('pendiente') }}"
+                    @else
+                        disabled
+                    @endif>
+                <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="white" class="bi bi-archive"
+                    viewBox="0 0 16 16">
+                    <path
+                        d="M0 2a1 1 0 0 1 1-1h14a1 1 0 0 1 1 1v2a1 1 0 0 1-1 1v7.5a2.5 2.5 0 0 1-2.5 2.5h-9A2.5 2.5 0 0 1 1 12.5V5a1 1 0 0 1-1-1V2zm2 3v7.5A1.5 1.5 0 0 0 3.5 14h9a1.5 1.5 0 0 0 1.5-1.5V5H2zm13-3H1v2h14V2zM5 7.5a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5z" />
+                </svg>
+            </a>
+            <div class="text">PENDIENTE</div>
         </div>
         <div class="left">
-            <a class="buttonsubmit"
-                @if (auth()->user()->rol == -1 || auth()->user()->rol == 0 || auth()->user()->rol == 2 || auth()->user()->rol == 1)
-                    href="{{ route('produccion.index') }}"
-                @else
-                    disabled
-                @endif>
-                <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="white"
-                    class="bi bi-building-check" viewBox="0 0 16 16">
+            <a class="buttonsubmit"  @if($rol == 0 || $rol == 3)
+                                            href="{{ route('produccion.index') }}"
+                                    @else
+                                        disabled
+                                    @endif>
+                <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="white" class="bi bi-building-check"
+                    viewBox="0 0 16 16">
                     <path
                         d="M12.5 16a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7Zm1.679-4.493-1.335 2.226a.75.75 0 0 1-1.174.144l-.774-.773a.5.5 0 0 1 .708-.708l.547.548 1.17-1.951a.5.5 0 1 1 .858.514Z" />
                     <path
@@ -146,158 +97,83 @@
             </a>
             <div class="text">PRODUCCIÓN</div>
         </div>
-
         <div class="center">
             <div class="explainer">
-                <form action="{{ Route('principal') }}" method="GET">
-                    <button type="submit" class="buttonsubmit" style="margin-bottom: -10px;">
-                        <span>
-                            <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="white"
-                                class="bi bi-list" viewBox="0 0 16 16">
-                                <path fill-rule="evenodd"
-                                    d="M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5z" />
-                            </svg>
+                <a class="buttonsubmit" href="{{ route('principal') }}">
 
-                        </span>
-
-                    </button>
-                </form>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="white" class="bi bi-list"
+                        viewBox="0 0 16 16">
+                        <path fill-rule="evenodd"
+                            d="M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5z" />
+                    </svg>
+                </a>
             </div>
             <div class="text">INICIO</div>
         </div>
-
         <div class="right">
-            <form action="{{ Route('pendiente_empaque') }}" method="GET">
-                @if (auth()->user()->rol == 0 || auth()->user()->rol == 1 || auth()->user()->rol == 4 || auth()->user()->rol == 2)
-                    <button type="submit" class="buttonsubmit">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="white"
-                            class="bi bi-card-checklist" viewBox="0 0 16 16">
-                            <path
-                                d="M14.5 3a.5.5 0 0 1 .5.5v9a.5.5 0 0 1-.5.5h-13a.5.5 0 0 1-.5-.5v-9a.5.5 0 0 1 .5-.5h13zm-13-1A1.5 1.5 0 0 0 0 3.5v9A1.5 1.5 0 0 0 1.5 14h13a1.5 1.5 0 0 0 1.5-1.5v-9A1.5 1.5 0 0 0 14.5 2h-13z" />
-                            <path
-                                d="M7 5.5a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5zm-1.496-.854a.5.5 0 0 1 0 .708l-1.5 1.5a.5.5 0 0 1-.708 0l-.5-.5a.5.5 0 1 1 .708-.708l.146.147 1.146-1.147a.5.5 0 0 1 .708 0zM7 9.5a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5zm-1.496-.854a.5.5 0 0 1 0 .708l-1.5 1.5a.5.5 0 0 1-.708 0l-.5-.5a.5.5 0 0 1 .708-.708l.146.147 1.146-1.147a.5.5 0 0 1 .708 0z" />
-                        </svg>
-                    </button>
-                    <div class="text">PENDIENTE EMPAQUE</div>
-                @elseif (auth()->user()->rol == -1)
-                    <button type="submit" class="buttonsubmit">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="white"
-                            class="bi bi-card-checklist" viewBox="0 0 16 16">
-                            <path
-                                d="M14.5 3a.5.5 0 0 1 .5.5v9a.5.5 0 0 1-.5.5h-13a.5.5 0 0 1-.5-.5v-9a.5.5 0 0 1 .5-.5h13zm-13-1A1.5 1.5 0 0 0 0 3.5v9A1.5 1.5 0 0 0 1.5 14h13a1.5 1.5 0 0 0 1.5-1.5v-9A1.5 1.5 0 0 0 14.5 2h-13z" />
-                            <path
-                                d="M7 5.5a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5zm-1.496-.854a.5.5 0 0 1 0 .708l-1.5 1.5a.5.5 0 0 1-.708 0l-.5-.5a.5.5 0 1 1 .708-.708l.146.147 1.146-1.147a.5.5 0 0 1 .708 0zM7 9.5a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5zm-1.496-.854a.5.5 0 0 1 0 .708l-1.5 1.5a.5.5 0 0 1-.708 0l-.5-.5a.5.5 0 0 1 .708-.708l.146.147 1.146-1.147a.5.5 0 0 1 .708 0z" />
-                        </svg>
-                    </button>
-                    <div class="text">PENDIENTE EMPAQUE</div>
-                @else
-                    <button type="submit" class="buttonsubmit" disabled>
-                        <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="gray"
-                            class="bi bi-card-checklist" viewBox="0 0 16 16">
-                            <path
-                                d="M14.5 3a.5.5 0 0 1 .5.5v9a.5.5 0 0 1-.5.5h-13a.5.5 0 0 1-.5-.5v-9a.5.5 0 0 1 .5-.5h13zm-13-1A1.5 1.5 0 0 0 0 3.5v9A1.5 1.5 0 0 0 1.5 14h13a1.5 1.5 0 0 0 1.5-1.5v-9A1.5 1.5 0 0 0 14.5 2h-13z" />
-                            <path
-                                d="M7 5.5a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5zm-1.496-.854a.5.5 0 0 1 0 .708l-1.5 1.5a.5.5 0 0 1-.708 0l-.5-.5a.5.5 0 1 1 .708-.708l.146.147 1.146-1.147a.5.5 0 0 1 .708 0zM7 9.5a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5zm-1.496-.854a.5.5 0 0 1 0 .708l-1.5 1.5a.5.5 0 0 1-.708 0l-.5-.5a.5.5 0 0 1 .708-.708l.146.147 1.146-1.147a.5.5 0 0 1 .708 0z" />
-                        </svg>
-                    </button>
-                    <div class="text" style="color:gray;">PENDIENTE EMPAQUE</div>
-                @endif
-            </form>
+            <a class="buttonsubmit" @if($rol == 0 || $rol == 1 || $rol == 4)
+                                        href="{{ route('pendiente_empaque') }}"
+                                    @else
+                                        disabled
+                                    @endif>
+                <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="white" class="bi bi-card-checklist"
+                    viewBox="0 0 16 16">
+                    <path
+                        d="M14.5 3a.5.5 0 0 1 .5.5v9a.5.5 0 0 1-.5.5h-13a.5.5 0 0 1-.5-.5v-9a.5.5 0 0 1 .5-.5h13zm-13-1A1.5 1.5 0 0 0 0 3.5v9A1.5 1.5 0 0 0 1.5 14h13a1.5 1.5 0 0 0 1.5-1.5v-9A1.5 1.5 0 0 0 14.5 2h-13z" />
+                    <path
+                        d="M7 5.5a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5zm-1.496-.854a.5.5 0 0 1 0 .708l-1.5 1.5a.5.5 0 0 1-.708 0l-.5-.5a.5.5 0 1 1 .708-.708l.146.147 1.146-1.147a.5.5 0 0 1 .708 0zM7 9.5a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5zm-1.496-.854a.5.5 0 0 1 0 .708l-1.5 1.5a.5.5 0 0 1-.708 0l-.5-.5a.5.5 0 0 1 .708-.708l.146.147 1.146-1.147a.5.5 0 0 1 .708 0z" />
+                </svg>
+            </a>
+            <div class="text">PENDIENTE EMPAQUE</div>
         </div>
-        @if (auth()->user()->rol != -1)
-            <div class="righter">
-                <form
-                    @if (auth()->user()->rol == 4) action="{{ Route('materiales.index') }}"
-                @else
-                action="{{ route('inventario_cajas') }}" @endif
-                    method="GET">
-                    @if (auth()->user()->rol == 0 || auth()->user()->rol == 1 || auth()->user()->rol == 4)
-                        <button type="submit" class="buttonsubmit">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="white"
-                                class="bi bi-box" viewBox="0 0 16 16">
-                                <path
-                                    d="M8.186 1.113a.5.5 0 0 0-.372 0L1.846 3.5 8 5.961 14.154 3.5 8.186 1.113zM15 4.239l-6.5 2.6v7.922l6.5-2.6V4.24zM7.5 14.762V6.838L1 4.239v7.923l6.5 2.6zM7.443.184a1.5 1.5 0 0 1 1.114 0l7.129 2.852A.5.5 0 0 1 16 3.5v8.662a1 1 0 0 1-.629.928l-7.185 2.874a.5.5 0 0 1-.372 0L.63 13.09a1 1 0 0 1-.63-.928V3.5a.5.5 0 0 1 .314-.464L7.443.184z" />
-                            </svg>
-                        </button>
-                        <div class="text">MATERIALES</div>
-                    @else
-                        <button type="submit" class="buttonsubmit" disabled>
-                            <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="gray"
-                                class="bi bi-box" viewBox="0 0 16 16">
-                                <path
-                                    d="M8.186 1.113a.5.5 0 0 0-.372 0L1.846 3.5 8 5.961 14.154 3.5 8.186 1.113zM15 4.239l-6.5 2.6v7.922l6.5-2.6V4.24zM7.5 14.762V6.838L1 4.239v7.923l6.5 2.6zM7.443.184a1.5 1.5 0 0 1 1.114 0l7.129 2.852A.5.5 0 0 1 16 3.5v8.662a1 1 0 0 1-.629.928l-7.185 2.874a.5.5 0 0 1-.372 0L.63 13.09a1 1 0 0 1-.63-.928V3.5a.5.5 0 0 1 .314-.464L7.443.184z" />
-                            </svg>
-                        </button>
-                        <div class="text" style="color:gray;">MATERIALES</div>
-                    @endif
-                </form>
-            </div>
-            <div class="righter2">
-                <form action="{{ Route('programacionterminado') }}" method="GET">
-                    <?php if (  auth()->user()->rol == 0 || auth()->user()->rol == 2  ): ?>
-                    <button type="submit" class="buttonsubmit">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="white"
-                            class="bi bi-truck" viewBox="0 0 16 16">
-                            <path
-                                d="M0 3.5A1.5 1.5 0 0 1 1.5 2h9A1.5 1.5 0 0 1 12 3.5V5h1.02a1.5 1.5 0 0 1 1.17.563l1.481 1.85a1.5 1.5 0 0 1 .329.938V10.5a1.5 1.5 0 0 1-1.5 1.5H14a2 2 0 1 1-4 0H5a2 2 0 1 1-3.998-.085A1.5 1.5 0 0 1 0 10.5v-7zm1.294 7.456A1.999 1.999 0 0 1 4.732 11h5.536a2.01 2.01 0 0 1 .732-.732V3.5a.5.5 0 0 0-.5-.5h-9a.5.5 0 0 0-.5.5v7a.5.5 0 0 0 .294.456zM12 10a2 2 0 0 1 1.732 1h.768a.5.5 0 0 0 .5-.5V8.35a.5.5 0 0 0-.11-.312l-1.48-1.85A.5.5 0 0 0 13.02 6H12v4zm-9 1a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm9 0a1 1 0 1 0 0 2 1 1 0 0 0 0-2z" />
-                        </svg>
-                    </button>
-                    <div class="text">TERMINADO</div>
-                    <?php else: ?>
-                    <button type="submit" class="buttonsubmit" disabled>
-                        <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="gray"
-                            class="bi bi-truck" viewBox="0 0 16 16">
-                            <path
-                                d="M0 3.5A1.5 1.5 0 0 1 1.5 2h9A1.5 1.5 0 0 1 12 3.5V5h1.02a1.5 1.5 0 0 1 1.17.563l1.481 1.85a1.5 1.5 0 0 1 .329.938V10.5a1.5 1.5 0 0 1-1.5 1.5H14a2 2 0 1 1-4 0H5a2 2 0 1 1-3.998-.085A1.5 1.5 0 0 1 0 10.5v-7zm1.294 7.456A1.999 1.999 0 0 1 4.732 11h5.536a2.01 2.01 0 0 1 .732-.732V3.5a.5.5 0 0 0-.5-.5h-9a.5.5 0 0 0-.5.5v7a.5.5 0 0 0 .294.456zM12 10a2 2 0 0 1 1.732 1h.768a.5.5 0 0 0 .5-.5V8.35a.5.5 0 0 0-.11-.312l-1.48-1.85A.5.5 0 0 0 13.02 6H12v4zm-9 1a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm9 0a1 1 0 1 0 0 2 1 1 0 0 0 0-2z" />
-                        </svg>
-                    </button>
-                    <div class="text" style="color:gray;">TERMINADO</div>
-                    <?php endif; ?>
-                </form>
-            </div>
-        @endif
-        <div @if (auth()->user()->rol == -1) class="righter"
-            @else
-            class="righter3" @endif>
-            <form action="{{ Route('f_terminado') }}" method="GET">
-
-                @if (auth()->user()->rol == 0 || auth()->user()->rol == 2 || auth()->user()->rol == 4)
-                    <button type="submit" class="buttonsubmit">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="white"
-                            class="bi bi-card-checklist" viewBox="0 0 16 16">
-                            <path
-                                d="M14.5 3a.5.5 0 0 1 .5.5v9a.5.5 0 0 1-.5.5h-13a.5.5 0 0 1-.5-.5v-9a.5.5 0 0 1 .5-.5h13zm-13-1A1.5 1.5 0 0 0 0 3.5v9A1.5 1.5 0 0 0 1.5 14h13a1.5 1.5 0 0 0 1.5-1.5v-9A1.5 1.5 0 0 0 14.5 2h-13z" />
-                            <path
-                                d="M7 5.5a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5zm-1.496-.854a.5.5 0 0 1 0 .708l-1.5 1.5a.5.5 0 0 1-.708 0l-.5-.5a.5.5 0 1 1 .708-.708l.146.147 1.146-1.147a.5.5 0 0 1 .708 0zM7 9.5a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5zm-1.496-.854a.5.5 0 0 1 0 .708l-1.5 1.5a.5.5 0 0 1-.708 0l-.5-.5a.5.5 0 0 1 .708-.708l.146.147 1.146-1.147a.5.5 0 0 1 .708 0z" />
-                        </svg>
-                    </button>
-                    <div class="text">FACTURACION</div>
-                @elseif (auth()->user()->rol == -1)
-                    <button type="submit" class="buttonsubmit">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="white"
-                            class="bi bi-card-checklist" viewBox="0 0 16 16">
-                            <path
-                                d="M14.5 3a.5.5 0 0 1 .5.5v9a.5.5 0 0 1-.5.5h-13a.5.5 0 0 1-.5-.5v-9a.5.5 0 0 1 .5-.5h13zm-13-1A1.5 1.5 0 0 0 0 3.5v9A1.5 1.5 0 0 0 1.5 14h13a1.5 1.5 0 0 0 1.5-1.5v-9A1.5 1.5 0 0 0 14.5 2h-13z" />
-                            <path
-                                d="M7 5.5a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5zm-1.496-.854a.5.5 0 0 1 0 .708l-1.5 1.5a.5.5 0 0 1-.708 0l-.5-.5a.5.5 0 1 1 .708-.708l.146.147 1.146-1.147a.5.5 0 0 1 .708 0zM7 9.5a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5zm-1.496-.854a.5.5 0 0 1 0 .708l-1.5 1.5a.5.5 0 0 1-.708 0l-.5-.5a.5.5 0 0 1 .708-.708l.146.147 1.146-1.147a.5.5 0 0 1 .708 0z" />
-                        </svg>
-                    </button>
-                    <div class="text">FACTURACION</div>
-                @else
-                    <button type="submit" class="buttonsubmit" disabled>
-                        <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="gray"
-                            class="bi bi-card-checklist" viewBox="0 0 16 16">
-                            <path
-                                d="M14.5 3a.5.5 0 0 1 .5.5v9a.5.5 0 0 1-.5.5h-13a.5.5 0 0 1-.5-.5v-9a.5.5 0 0 1 .5-.5h13zm-13-1A1.5 1.5 0 0 0 0 3.5v9A1.5 1.5 0 0 0 1.5 14h13a1.5 1.5 0 0 0 1.5-1.5v-9A1.5 1.5 0 0 0 14.5 2h-13z" />
-                            <path
-                                d="M7 5.5a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5zm-1.496-.854a.5.5 0 0 1 0 .708l-1.5 1.5a.5.5 0 0 1-.708 0l-.5-.5a.5.5 0 1 1 .708-.708l.146.147 1.146-1.147a.5.5 0 0 1 .708 0zM7 9.5a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5zm-1.496-.854a.5.5 0 0 1 0 .708l-1.5 1.5a.5.5 0 0 1-.708 0l-.5-.5a.5.5 0 0 1 .708-.708l.146.147 1.146-1.147a.5.5 0 0 1 .708 0z" />
-                        </svg>
-                    </button>
-                    <div class="text" style="color:gray;">FACTURACION</div>
-                @endif
-            </form>
+        <div class="righter">
+            <a class="buttonsubmit" @if($rol == 0 || $rol == 1 || $rol == 4)
+                                        @if($rol == 1)
+                                            href="{{ route('inventario_cajas') }}"
+                                        @else
+                                            href="{{ route('materiales.index') }}"
+                                        @endif
+                                    @else
+                                        disabled
+                                    @endif>
+                <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="white" class="bi bi-box"
+                    viewBox="0 0 16 16">
+                    <path
+                        d="M8.186 1.113a.5.5 0 0 0-.372 0L1.846 3.5 8 5.961 14.154 3.5 8.186 1.113zM15 4.239l-6.5 2.6v7.922l6.5-2.6V4.24zM7.5 14.762V6.838L1 4.239v7.923l6.5 2.6zM7.443.184a1.5 1.5 0 0 1 1.114 0l7.129 2.852A.5.5 0 0 1 16 3.5v8.662a1 1 0 0 1-.629.928l-7.185 2.874a.5.5 0 0 1-.372 0L.63 13.09a1 1 0 0 1-.63-.928V3.5a.5.5 0 0 1 .314-.464L7.443.184z" />
+                </svg>
+            </a>
+            <div class="text">MATERIALES</div>
         </div>
-
+        <div class="righter2">
+            <a class="buttonsubmit" @if($rol == 0 ||  $rol == 2)
+                                        href="{{ route('programacionterminado') }}"
+                                    @else
+                                        disabled
+                                    @endif>
+                <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="white" class="bi bi-truck"
+                    viewBox="0 0 16 16">
+                    <path
+                        d="M0 3.5A1.5 1.5 0 0 1 1.5 2h9A1.5 1.5 0 0 1 12 3.5V5h1.02a1.5 1.5 0 0 1 1.17.563l1.481 1.85a1.5 1.5 0 0 1 .329.938V10.5a1.5 1.5 0 0 1-1.5 1.5H14a2 2 0 1 1-4 0H5a2 2 0 1 1-3.998-.085A1.5 1.5 0 0 1 0 10.5v-7zm1.294 7.456A1.999 1.999 0 0 1 4.732 11h5.536a2.01 2.01 0 0 1 .732-.732V3.5a.5.5 0 0 0-.5-.5h-9a.5.5 0 0 0-.5.5v7a.5.5 0 0 0 .294.456zM12 10a2 2 0 0 1 1.732 1h.768a.5.5 0 0 0 .5-.5V8.35a.5.5 0 0 0-.11-.312l-1.48-1.85A.5.5 0 0 0 13.02 6H12v4zm-9 1a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm9 0a1 1 0 1 0 0 2 1 1 0 0 0 0-2z" />
+                </svg>
+            </a>
+            <div class="text">TERMINADO</div>
+        </div>
+        <div class="righter3">
+            <a class="buttonsubmit" @if($rol == 0 || $rol == 2)
+                                        href="{{ route('f_terminado') }}"
+                                    @else
+                                        disabled
+                                    @endif>
+                <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="white" class="bi bi-card-checklist"
+                    viewBox="0 0 16 16">
+                    <path
+                        d="M14.5 3a.5.5 0 0 1 .5.5v9a.5.5 0 0 1-.5.5h-13a.5.5 0 0 1-.5-.5v-9a.5.5 0 0 1 .5-.5h13zm-13-1A1.5 1.5 0 0 0 0 3.5v9A1.5 1.5 0 0 0 1.5 14h13a1.5 1.5 0 0 0 1.5-1.5v-9A1.5 1.5 0 0 0 14.5 2h-13z" />
+                    <path
+                        d="M7 5.5a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5zm-1.496-.854a.5.5 0 0 1 0 .708l-1.5 1.5a.5.5 0 0 1-.708 0l-.5-.5a.5.5 0 1 1 .708-.708l.146.147 1.146-1.147a.5.5 0 0 1 .708 0zM7 9.5a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5zm-1.496-.854a.5.5 0 0 1 0 .708l-1.5 1.5a.5.5 0 0 1-.708 0l-.5-.5a.5.5 0 0 1 .708-.708l.146.147 1.146-1.147a.5.5 0 0 1 .708 0z" />
+                </svg>
+            </a>
+            <div class="text">FACTURA</div>
+        </div>
     </div>
 
     <div class="modal fade" id="modal_cerrarsesion" data-backdrop="static" data-keyboard="false" tabindex="-1"
@@ -314,10 +190,8 @@
                     <button type="button" class="btn btn-danger" data-bs-dismiss="modal">
                         <span>Cancelar</span>
                     </button>
-                    <button
-                        onclick="event.preventDefault();
-           document.getElementById('logout-form').submit();"
-                        class="btn btn-success">
+                    <button onclick="event.preventDefault();
+           document.getElementById('logout-form').submit();" class="btn btn-success">
                         <span>Cerrar Sesión</span>
                     </button>
 
@@ -331,15 +205,10 @@
 
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"
         integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
-
-
     <script src="{{ asset('js/app.js') }}"></script>
-
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous">
     </script>
-
-
     <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.8/js/select2.min.js" defer></script>
 
 
@@ -386,7 +255,8 @@
 
     @livewireScripts
 
-    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.25/js/jquery.dataTables.js"></script>
+    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.25/js/jquery.dataTables.js">
+    </script>
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="https://cdn.jsdelivr.net/npm/tom-select@2.2.2/dist/js/tom-select.complete.min.js"></script>
 

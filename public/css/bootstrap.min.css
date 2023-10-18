@@ -14322,9 +14322,13 @@ thead tr th {
 .lefter,
 .lefter2,
 .lefter3,
+.lefter4,
+.lefter5,
 .righter,
 .righter2,
-.righter3 {
+.righter3,
+.righter4,
+.righter5 {
     width: 66px;
     height: 30px;
     transform-style: preserve-3d;
