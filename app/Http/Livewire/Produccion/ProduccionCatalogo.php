@@ -25,6 +25,7 @@ class ProduccionCatalogo extends Component
     public $b_nombre = '';
     public $b_vitola = '';
     public $b_capa = '';
+    public $b_color = '';
 
     //filtros tabla
     public $presentacion = [];
@@ -33,12 +34,14 @@ class ProduccionCatalogo extends Component
     public $nombres = [];
     public $vitolas = [];
     public $capas = [];
-
+    public $colores = [];
 
     public $capas_select = [];
     public $marcas_select = [];
     public $nombres_select = [];
     public $vitolas_select = [];
+
+    public $color_n = '';
 
     //nuevo
     public Produccion $produc;
@@ -52,10 +55,8 @@ class ProduccionCatalogo extends Component
         'produc.id_capa' => 'integer|required',
         'produc.precio_bonchero' => 'numeric|required',
         'produc.precio_rolero' => 'numeric|required',
-        'produc.existencia' => 'integer|required',
+        'produc.existencia' => 'integer',
     ];
-
-
 
     public $por_pagina = 50;
     public $total = 0;
@@ -83,6 +84,7 @@ class ProduccionCatalogo extends Component
             $this->nombres = [];
             $this->vitolas = [];
             $this->capas = [];
+            $this->colores = [];
 
             foreach ($da as $detalles) {
                 array_push($this->presentacion, $detalles->presentacion);
@@ -91,6 +93,7 @@ class ProduccionCatalogo extends Component
                 array_push($this->nombres, $detalles->nombre);
                 array_push($this->vitolas, $detalles->vitola);
                 array_push($this->capas, $detalles->capa);
+                array_push($this->colores, $detalles->color);
             }
 
             $this->presentacion = array_unique($this->presentacion);
@@ -99,6 +102,7 @@ class ProduccionCatalogo extends Component
             $this->nombres = array_unique($this->nombres);
             $this->vitolas = array_unique($this->vitolas);
             $this->capas = array_unique($this->capas);
+            $this->colores = array_unique($this->colores);
         }
 
 
@@ -113,7 +117,7 @@ class ProduccionCatalogo extends Component
         $start = ($this->page - 1) * $this->por_pagina;
 
         $da = DB::select(
-            'CALL `buscar_produccion_catalogo`(?,?,?,?,?,?,?,?)',
+            'CALL `buscar_produccion_catalogo`(?,?,?,?,?,?,?,?,?)',
             [
                 $this->b_presentacion,
                 $this->b_codigo,
@@ -123,18 +127,20 @@ class ProduccionCatalogo extends Component
                 $this->b_capa,
                 $start,
                 $this->por_pagina,
+                $this->b_color,
             ]
         );
 
         $this->total = DB::select(
-            'CALL `buscar_produccion_catalogo_conteo`(?,?,?,?,?,?)',
+            'CALL `buscar_produccion_catalogo_conteo`(?,?,?,?,?,?,?)',
             [
                 $this->b_presentacion,
                 $this->b_codigo,
                 $this->b_marca,
                 $this->b_nombre,
                 $this->b_vitola,
-                $this->b_capa
+                $this->b_capa,
+                $this->b_color,
             ]
         )[0]->total;
 
@@ -144,15 +150,70 @@ class ProduccionCatalogo extends Component
     }
 
     public function eliminar_salida(Produccion $salida) {
-        $salida->delete();
 
-        $this->dispatchBrowserEvent('salida_eliminada');
+        try {
+            DB::beginTransaction();
+
+            $salida->delete();
+
+            $this->dispatchBrowserEvent('error_general',['errorr' => 'Registro eliminado con exito','icon' => 'success']);
+
+            DB::commit();
+        } catch (\Exception $th) {
+            $this->dispatchBrowserEvent('error_general',['errorr' => $th->getMessage(),'icon' => 'error']);
+            DB::rollBack();
+        }
+
     }
 
     public function registra_producto() {
-        $this->produc->save();
 
-        $this->dispatchBrowserEvent('salida_eliminada');
+        try {
+            DB::beginTransaction();
+
+
+
+            $this->produc->save();
+
+            $marca = marca_producto::find($this->produc->id_marca);
+            $marca->color = $this->color_n;
+
+            $marca->save();
+
+            $this->produc = new Produccion([
+                `codigo` =>  'P-',
+                `presentacion` =>  'Puros Tripa Larga',
+                `id_marca` =>  0,
+                `id_nombre` =>  0,
+                `id_vitola` =>  0,
+                `id_capa` =>  0,
+                `precio_bonchero` =>  0,
+                `precio_rolero` =>  0,
+                `existencia` =>  0,
+            ]);
+
+            $this->dispatchBrowserEvent('error_general',['errorr' => 'Registro creado con exito','icon' => 'success']);
+
+            DB::commit();
+        } catch (\Exception $th) {
+            $this->dispatchBrowserEvent('error_general',['errorr' => $th->getMessage(),'icon' => 'error']);
+            DB::rollBack();
+        }
+    }
+
+    public function editar_producto(Produccion $edit) {
+
+        try {
+            DB::beginTransaction();
+
+            $this->color_n = marca_producto::find($edit->id_marca)->color;
+            $this->produc = $edit;
+
+            DB::commit();
+        } catch (\Exception $th) {
+            $this->dispatchBrowserEvent('error_general',['errorr' => $th->getMessage(),'icon' => 'error']);
+            DB::rollBack();
+        }
     }
 
 }

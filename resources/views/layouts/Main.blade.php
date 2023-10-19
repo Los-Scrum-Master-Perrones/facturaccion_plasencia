@@ -213,6 +213,10 @@
 
 
     <script>
+
+
+
+
         $(document).ready(function() {
             $('.mi-selector').select2();
 
@@ -251,6 +255,11 @@
         window.addEventListener('cerrar_eliminar_datelles_clase', event => {
             $("#modal_ver_detalle_producto").modal('hide');
         })
+
+
+
+
+
     </script>
 
     @livewireScripts
@@ -268,5 +277,27 @@
     @stack('scripts')
 
 
+    <script>
+
+        const Toast2 = Swal.mixin({
+        toast: true,
+        position: 'top-end',
+        showConfirmButton: false,
+        timer: 3000,
+        timerProgressBar: true,
+        didOpen: (toast) => {
+            toast.addEventListener('mouseenter', Swal.stopTimer)
+            toast.addEventListener('mouseleave', Swal.resumeTimer)
+        }
+        })
+
+        window.addEventListener('error_general', event => {
+            Toast2.fire({
+                icon: event.detail.icon,
+                title: event.detail.errorr
+            })
+        })
+
+    </script>
 
 </body>

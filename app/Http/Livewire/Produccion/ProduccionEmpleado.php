@@ -2,11 +2,14 @@
 
 namespace App\Http\Livewire\Produccion;
 
+use App\Exports\ProduccionEmpleadoExport;
+use App\Exports\ProduccionEmpleadoPlanillaExport;
 use Carbon\Carbon;
 use Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\Support\Facades\DB;
 use Livewire\Component;
 use Livewire\WithPagination;
+use Maatwebsite\Excel\Facades\Excel;
 
 class ProduccionEmpleado extends Component
 {
@@ -125,5 +128,55 @@ class ProduccionEmpleado extends Component
         return view('livewire.produccion.produccion-empleado',[
             'productos' => new LengthAwarePaginator($da,  $this->total , $this->por_pagina)
         ])->extends('layouts.produccion.produccion-menu')->section('contenido');
+    }
+
+    public function imprimir_reporte(){
+        $start = ($this->page - 1) * $this->por_pagina;
+        $da = DB::select(
+            'CALL `buscar_produccion_empleado`(?,?,?,?,?,?,?,?,?,?,?,?,?,?)',
+            [
+                $this->b_fecha_1,
+                $this->b_fecha_2,
+                $this->b_orden,
+                $this->b_marca,
+                $this->b_nombre,
+                $this->b_vitola,
+                $this->b_capa,
+                $this->b_codigo_productos,
+                $this->b_codigo_empleado,
+                $this->b_rol,
+                $start,
+                $this->por_pagina,
+                $this->b_nombre_empleado,
+                $this->b_presentacion
+            ]
+        );
+
+        return Excel::download(new ProduccionEmpleadoExport(collect($da)), 'Empleados.xlsx');
+
+    }
+
+    public function imprimir_reporte_planilla(){
+
+        $dia_semana_lunes = date('N', strtotime($this->b_fecha_1));
+
+        $dia_semana_domingo = date('N', strtotime($this->b_fecha_2));
+
+        if ($dia_semana_lunes == 1 && ($dia_semana_domingo == 7 || $dia_semana_domingo == 6)) {
+
+            $da = DB::select(
+                'CALL `buscar_produccion_empleado_planilla`(?,?,?)',
+                [
+                    $this->b_fecha_1,
+                    $this->b_fecha_2,
+                    $this->b_presentacion
+                ]
+            );
+
+            return Excel::download(new ProduccionEmpleadoPlanillaExport($da), 'Planilla del '.Carbon::parse($this->b_fecha_1)->format('d').' al '.$this->b_fecha_2.'.xlsx');
+
+        }else{
+            $this->dispatchBrowserEvent('error_general',['errorr' => 'Rango de Fechas incorrectos','icon' => 'error']);
+        }
     }
 }

@@ -111,6 +111,14 @@
                                         @endforeach
                                     </select>
                                 </th>
+                                <th wire:ignore>
+                                    <select name="b_color" id="b_color" onchange="buscar_io()">
+                                        <option value="">COLOR</option>
+                                        @foreach ($colores as $v)
+                                            <option value="{{ $v }}">{{ $v }}</option>
+                                        @endforeach
+                                    </select>
+                                </th>
                                 <th>SALDO</th>
                             </tr>
                         </thead>
@@ -128,6 +136,7 @@
                                     <td>{{ $producto->nombre }}</td>
                                     <td>{{ $producto->vitola }}</td>
                                     <td>{{ $producto->capa }}</td>
+                                    <td>{{ $producto->color }}</td>
                                     <td>{{ $producto->existencia }}</td>
                                     @php
                                         $sumas += $producto->existencia;
@@ -147,7 +156,7 @@
 
     @push('scripts')
         <script>
-            var seletscc = ["#b_orden", "#b_fecha", "#b_codigo", "#b_marca", "#b_nombre", "#b_vitola", "#b_capa"];
+            var seletscc = ["#b_orden", "#b_fecha", "#b_codigo", "#b_marca", "#b_nombre", "#b_vitola", "#b_capa", "#b_color"];
             const inputField = document.querySelector("#example");
 
             $(document).ready(function() {
@@ -235,6 +244,7 @@
                 @this.b_nombre = $(seletscc[4]).val();
                 @this.b_vitola = $(seletscc[5]).val();
                 @this.b_capa = $(seletscc[6]).val();
+                @this.b_color = $(seletscc[7]).val();
                 @this.page = 1;
             }
         </script>

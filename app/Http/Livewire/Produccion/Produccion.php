@@ -28,6 +28,7 @@ class Produccion extends Component
     public $b_nombre = '';
     public $b_vitola = '';
     public $b_capa = '';
+    public $b_color = '';
 
     public $fechas = [];
     public $presentacion = [];
@@ -37,6 +38,7 @@ class Produccion extends Component
     public $nombres = [];
     public $vitolas = [];
     public $capas = [];
+    public $colores = [];
 
     public $por_pagina = 50;
     public $total = 0;
@@ -56,6 +58,7 @@ class Produccion extends Component
             $this->nombres = [];
             $this->vitolas = [];
             $this->capas = [];
+            $this->colores = [];
 
             foreach ($da as $detalles) {
                 array_push($this->fechas, $detalles->fecha);
@@ -65,6 +68,7 @@ class Produccion extends Component
                 array_push($this->nombres, $detalles->nombre);
                 array_push($this->vitolas, $detalles->vitola);
                 array_push($this->capas, $detalles->capa);
+                array_push($this->colores, $detalles->color);
             }
 
             $this->fechas = array_unique($this->fechas);
@@ -74,6 +78,7 @@ class Produccion extends Component
             $this->nombres = array_unique($this->nombres);
             $this->vitolas = array_unique($this->vitolas);
             $this->capas = array_unique($this->capas);
+            $this->colores = array_unique($this->colores);
         }
     }
 
@@ -82,7 +87,7 @@ class Produccion extends Component
         $start = ($this->page - 1) * $this->por_pagina;
 
         $da = DB::select(
-            'CALL `buscar_inventario_produccion`(?,?,?,?,?,?,?,?,?,?,?)',
+            'CALL `buscar_inventario_produccion`(?,?,?,?,?,?,?,?,?,?,?,?)',
             [
                 $this->b_fecha,
                 $this->b_orden,
@@ -94,12 +99,13 @@ class Produccion extends Component
                 $start,
                 $this->por_pagina,
                 $this->b_fecha_inicial,
-                $this->b_fecha_final
+                $this->b_fecha_final,
+                $this->b_color
             ]
         );
 
         $this->total = DB::select(
-            'CALL `buscar_inventario_produccion_conteo`(?,?,?,?,?,?,?,?,?)',
+            'CALL `buscar_inventario_produccion_conteo`(?,?,?,?,?,?,?,?,?,?)',
             [
                 $this->b_fecha,
                 $this->b_orden,
@@ -109,7 +115,8 @@ class Produccion extends Component
                 $this->b_vitola,
                 $this->b_capa,
                 $this->b_fecha_inicial,
-                $this->b_fecha_final
+                $this->b_fecha_final,
+                $this->b_color
             ]
         )[0]->total;
 

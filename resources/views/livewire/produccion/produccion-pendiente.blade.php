@@ -155,6 +155,14 @@
                 </select>
             </div>
             <div class="col" wire:ignore>
+                <select onchange="buscar_tabla()" name="b_color" id="b_color" style="width:100%;height:34px;" name="states[]">
+                    <option value="" style="overflow-y: scroll;">Colores</option>
+                    @foreach ($colores as $color)
+                    <option style="overflow-y: scroll;"> {{ $color }}</option>
+                    @endforeach
+                </select>
+            </div>
+            <div class="col" wire:ignore>
                 <select name="por_pagina" id="por_pagina" onchange="buscar_tabla()">
                     <option selected value="50">50</option>
                     <option value="200">200</option>
@@ -292,6 +300,7 @@
                         <th>NOMBRE</th>
                         <th>VITOLA</th>
                         <th>CAPA</th>
+                        <th>COLOR</th>
                         <th>PENDIENTE</th>
                         <th>PRODUCIDO</th>
                         <th>RESTANTE</th>
@@ -339,7 +348,7 @@
                         <td>{{ $detalle->nombre }}</td>
                         <td>{{ $detalle->vitola }}</td>
                         <td>{{ $detalle->capa }}</td>
-
+                        <td>{{ $detalle->color }}</td>
                         <td style="text-align:right;">{{ $detalle->pendiente }}</td>
                         <td style="text-align:right;">{{ $detalle->pendiente - $detalle->restantes }}
                             @php
@@ -564,7 +573,7 @@
 
 
     var seletscc = ["#b_codigo", "#b_orden", "#b_mes", "#b_fecha", "#b_marca", "#b_nombre"
-        , "#b_vitola", "#b_capa", "#por_pagina", "#itemn"
+        , "#b_vitola", "#b_capa", "#por_pagina", "#itemn","#b_color"
     ];
 
 
@@ -807,6 +816,7 @@
         @this.b_capas = $(seletscc[7]).val();
         @this.b_mes = $(seletscc[2]).val();
         @this.por_pagina = $(seletscc[8]).val();
+        @this.b_color = $('#b_color').val();
         @this.page = 1;
     }
 

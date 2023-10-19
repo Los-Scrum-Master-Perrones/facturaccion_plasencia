@@ -2,6 +2,7 @@
 
 namespace App\Http\Livewire\Produccion;
 
+use App\Exports\ProduccionReporteExport;
 use App\Models\capa_producto;
 use App\Models\marca_producto;
 use App\Models\nombre_producto;
@@ -14,6 +15,7 @@ use Illuminate\Support\Facades\DB;
 use Livewire\Component;
 use Livewire\WithPagination;
 use Illuminate\Pagination\LengthAwarePaginator;
+use Maatwebsite\Excel\Facades\Excel;
 
 class ProduccionPendiente extends Component
 {
@@ -35,7 +37,7 @@ class ProduccionPendiente extends Component
     public $tipo2 = "Puros Tripa Corta";
     public $tipo3 = "Puros Sandwich";
     public $tipo4 = "Puros Brocha";
-
+    public $b_color = '';
 
     public ModelsProduccionPendiente $produc_pendiente;
 
@@ -65,6 +67,7 @@ class ProduccionPendiente extends Component
     public $vitolas = [];
     public $capas = [];
     public $mes = [];
+    public $colores = [];
 
     public $por_pagina = 50;
     public $total = 0;
@@ -91,6 +94,7 @@ class ProduccionPendiente extends Component
             $this->nombres = [];
             $this->vitolas = [];
             $this->capas = [];
+            $this->colores = [];
 
             foreach ($da as $detalles) {
                 array_push($this->fechas, $detalles->fecha_recibido);
@@ -102,6 +106,7 @@ class ProduccionPendiente extends Component
                 array_push($this->nombres, $detalles->nombre);
                 array_push($this->vitolas, $detalles->vitola);
                 array_push($this->capas, $detalles->capa);
+                array_push($this->colores, $detalles->color);
             }
 
             $this->fechas = array_unique($this->fechas);
@@ -113,6 +118,7 @@ class ProduccionPendiente extends Component
             $this->nombres = array_unique($this->nombres);
             $this->vitolas = array_unique($this->vitolas);
             $this->capas = array_unique($this->capas);
+            $this->colores = array_unique($this->colores);
         }
     }
     public function render()
@@ -125,7 +131,7 @@ class ProduccionPendiente extends Component
         $var4 = $this->tipo4?$this->tipo4:'';
 
         $da = DB::select(
-            'CALL `buscar_produccion_pendiente`(?, ?, ?, ?, ?, ?, ?, ?, ?,?)',
+            'CALL `buscar_produccion_pendiente`(?, ?, ?, ?, ?, ?, ?, ?, ?,?,?)',
             [
                 $this->b_ordenes,
                 $this->b_fechas,
@@ -136,12 +142,13 @@ class ProduccionPendiente extends Component
                 $this->b_capas,
                 $start,
                 $this->por_pagina,
-                $var1.$var2.$var3.$var4.'Sin Presentacion'
+                $var1.$var2.$var3.$var4.'Sin Presentacion',
+                $this->b_color,
             ]
         );
 
         $this->total = DB::select(
-            'CALL `buscar_produccion_pendiente_conteo`(?, ?, ?, ?, ?, ?, ?,?)',
+            'CALL `buscar_produccion_pendiente_conteo`(?, ?, ?, ?, ?, ?, ?,?,?)',
             [
                 $this->b_ordenes,
                 $this->b_fechas,
@@ -150,7 +157,8 @@ class ProduccionPendiente extends Component
                 $this->b_nombres,
                 $this->b_vitolas,
                 $this->b_capas,
-                $var1.$var2.$var3.$var4.'Sin Presentacion'
+                $var1.$var2.$var3.$var4.'Sin Presentacion',
+                $this->b_color,
             ]
         )[0]->total;
 
@@ -216,6 +224,6 @@ class ProduccionPendiente extends Component
     public function imprimir_reporte_diario() {
         $datos = DB::select('call reporte_produccion_mensual(?)',[Carbon::now()->format('Y-m-d')]);
 
-        return view('ReporteDiarioProduccion',[ 'pendiente' => $datos]);
+        return Excel::download(new ProduccionReporteExport($datos), 'Reporte Mensual Produccion.xlsx');
     }
 }
