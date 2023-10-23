@@ -668,8 +668,8 @@
                                 <td>{{ $datos->upc }}</td>
                                 <td>{{ $datos->pendiente }}</td>
                                 <td>{{ $datos->saldo }}</td>
-                                <td>{{ $datos->existencia_caja }}</td>
-                                <td>{{ $datos->total }}</td>
+                                <td>{{ $cajas[$datos->codigo_caja] ?? 0 }}</td>
+                                <td>{{ $puros[$datos->codigo_productos] ?? 0 }}</td>
 
                                 @if (auth()->user()->rol == -1)
                                 @else
@@ -887,7 +887,7 @@
             <div class="modal-content">
 
                 <div class="modal-header">
-                    <h5 id="staticBackdropLabel"><strong>Descripción del producto: </strong><span id="tituloupdate"
+                    <h5 id="staticBackdropLabel"><strong>Descripción del producto:</strong><span id="tituloupdate"
                             name="tituloupdate"></span></h5>
                 </div>
                 <div class="modal-body">

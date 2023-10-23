@@ -129,7 +129,21 @@ class PendienteEmpaque extends Component
 
         $this->dispatchBrowserEvent('tamanio_tabla');
 
-        return view('livewire.pendiente-empaque')->extends('principal')->section('content');
+        $puros = DB::select('CALL `pendiente_empaque_puros`()');
+        $cajas =  DB::select('CALL `pendiente_empaque_cajas`()');
+
+        $purosArray = [];
+        $cajasArray2 = [];
+        foreach ($puros as $key => $uso) {
+            $purosArray[$uso->codigo_producto] =  $uso->total;
+        }
+        foreach ($cajas as $key => $value) {
+            $cajasArray2[$value->codigo] =  $value->existencia;
+        }
+
+        return view('livewire.pendiente-empaque',[
+           'puros' => $purosArray,
+           'cajas' => $cajasArray2 ])->extends('principal')->section('content');
     }
 
     public function mount()
@@ -856,7 +870,6 @@ class PendienteEmpaque extends Component
             ]
             );
 
-
         $this->tuplas_conteo = count($todos);
 
         if ($this->todos == 1) {
@@ -929,6 +942,7 @@ class PendienteEmpaque extends Component
             $this->ordenes_p = array_unique($this->ordenes_p);
             $this->hons_p = array_unique($this->hons_p);
         }
+
 
         Cache::put('json_datos_pendiente_empaque', $todos);
     }
