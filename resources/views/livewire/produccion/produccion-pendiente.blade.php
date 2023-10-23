@@ -40,7 +40,7 @@
                                     </svg>
                                 </abbr>
                             </button>
-                            <a class="btn btn-outline-success" href="{{ route('produccion.reporte.diario') }}">
+                            <a class="btn btn-outline-success" data-bs-toggle="modal" data-bs-target="#exampleModal">
                                 <abbr title="Exportar Reporte del Mes">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-list-check" viewBox="0 0 16 16">
                                         <path fill-rule="evenodd" d="M5 11.5a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 0 1h-9a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 0 1h-9a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 0 1h-9a.5.5 0 0 1-.5-.5zM3.854 2.146a.5.5 0 0 1 0 .708l-1.5 1.5a.5.5 0 0 1-.708 0l-.5-.5a.5.5 0 1 1 .708-.708L2 3.293l1.146-1.147a.5.5 0 0 1 .708 0zm0 4a.5.5 0 0 1 0 .708l-1.5 1.5a.5.5 0 0 1-.708 0l-.5-.5a.5.5 0 1 1 .708-.708L2 7.293l1.146-1.147a.5.5 0 0 1 .708 0zm0 4a.5.5 0 0 1 0 .708l-1.5 1.5a.5.5 0 0 1-.708 0l-.5-.5a.5.5 0 0 1 .708-.708l.146.147 1.146-1.147a.5.5 0 0 1 .708 0z" />
@@ -436,6 +436,26 @@
         <input type="text" class="form-control fs-7" id="sumaprecio" value="{{ number_format($sumaprecio_dolar, 2) }}">
         --}}
     </div>
+
+    <form action="{{ route('produccion.reporte.diario') }}" method="GET">
+        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="exampleModalLabel">Reporte Diario</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <input type="date" class="form-control" name="fecha" value="{{ Carbon\Carbon::now()->format('Y-m-d') }}">
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-primary">Save changes</button>
+                </div>
+            </div>
+            </div>
+        </div>
+    </form>
 
     <!-- INICIO MODAL ACTUALIZAR DATO PENDIENTE -->
     <div  wire:ignore class="modal fade" role="dialog" id="modal_actualizar" data-backdrop="static" data-keyboard="false"

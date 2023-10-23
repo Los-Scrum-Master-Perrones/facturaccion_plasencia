@@ -17,7 +17,7 @@
                         </div>
                     </div>
 
-                    <div class="col-md-5">
+                    <div class="col-md-2">
                         <input type="radio" autocomplete="off" wire:model='b_rol' value='rolero'>
                         <label for="success-outlined">Roleros</label>
 
@@ -27,7 +27,15 @@
                         <input type="radio" autocomplete="off" wire:model='b_rol' value='boncherorolero'>
                         <label for="danger-outlined">Ambos</label>
                     </div>
-                    <div class="col-md-1" wire:ignore style="height: 30px"></div>
+                    <div class="col-md-3" wire:ignore style="height: 30px">
+                        <input type="checkbox" autocomplete="off" wire:model='b_presentacion1' value='Tripa Larga'>
+                        <label for="success-outlined">Tripa Larga</label>
+
+                        <input type="checkbox" autocomplete="off" wire:model='b_presentacion2' value='Tripa Corta'>
+                        <label for="danger-outlined">Tripa Corta</label>
+
+                        <input type="checkbox" autocomplete="off" wire:model='b_presentacion3' value='Brocha'>
+                        <label for="danger-outlined">Brocha</label></div>
                     <div class="col-md-2">
                         <div class="input-group mb-3" style="height: 30px">
                             <span class="input-group-text" id="basic-addon1" style="height: 30px;font-size: 0.7em">Por Pagina</span>
@@ -100,12 +108,7 @@
                                     </select>
                                 </th>
                                 <th wire:ignore>
-                                    <select name="b_presentacion" id="b_presentacion" onchange="buscar_io()">
-                                        <option value="">PRESENTACION</option>
-                                        @foreach ($presentacions as $v)
-                                            <option value="{{ $v }}">{{ $v }}</option>
-                                        @endforeach
-                                    </select>
+                                    PRESENTACION
                                 </th>
                                 <th style="width:100px;" wire:ignore>
                                     <select name="b_marca" id="b_marca" onchange="buscar_io()">

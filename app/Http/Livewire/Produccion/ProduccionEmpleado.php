@@ -28,7 +28,9 @@ class ProduccionEmpleado extends Component
     public $b_codigo_empleado = '';
     public $b_nombre_empleado = '';
     public $b_rol = 'boncherorolero';
-    public $b_presentacion = '';
+    public $b_presentacion1 = 'Tripa Larga';
+    public $b_presentacion2 = 'Tripa Corta';
+    public $b_presentacion3 = 'Brocha';
 
     public $ordenes = [];
     public $marcas = [];
@@ -103,7 +105,7 @@ class ProduccionEmpleado extends Component
                 $start,
                 $this->por_pagina,
                 $this->b_nombre_empleado,
-                $this->b_presentacion
+                $this->b_presentacion1 . $this->b_presentacion2 . $this->b_presentacion3
             ]
         );
 
@@ -121,7 +123,7 @@ class ProduccionEmpleado extends Component
                 $this->b_codigo_empleado,
                 $this->b_rol,
                 $this->b_nombre_empleado,
-                $this->b_presentacion
+                $this->b_presentacion1 . $this->b_presentacion2 . $this->b_presentacion3
             ]
         )[0]->total;
 

@@ -11,6 +11,7 @@ use App\Models\ProduccionPendiente as ModelsProduccionPendiente;
 use App\Models\ProduccionPendienteSalida;
 use App\Models\vitola_producto;
 use Carbon\Carbon;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Livewire\Component;
 use Livewire\WithPagination;
@@ -221,9 +222,9 @@ class ProduccionPendiente extends Component
         $this->produc_pendiente = $pendiente;
     }
 
-    public function imprimir_reporte_diario() {
-        $datos = DB::select('call reporte_produccion_mensual(?)',[Carbon::now()->format('Y-m-d')]);
+    public function imprimir_reporte_diario(Request $request) {
+        $datos = DB::select('call reporte_produccion_mensual(?)',[$request->input('fecha')]);
 
-        return Excel::download(new ProduccionReporteExport($datos), 'Reporte Mensual Produccion.xlsx');
+        return Excel::download(new ProduccionReporteExport($datos), 'Reporte Diario Produccion '.$request->input('fecha').'.xlsx');
     }
 }

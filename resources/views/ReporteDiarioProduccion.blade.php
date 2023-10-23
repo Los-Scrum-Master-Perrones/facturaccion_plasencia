@@ -137,8 +137,7 @@
                 @endphp
                 <tr>
                     <td></td>
-                    <td style="color: red"><b>{{ $pend->empresa . ' ' }}</b></td>
-                    <td colspan="2" style="color: blue"><b>"{{ $pend->marca }}"</b></td>
+                    <td style="color: red"><b>{{ $pend->empresa . ' ' }}{{ ' "'.$pend->marca.'"' }}</b></td>
                     <td colspan="8"></td>
                 </tr>
             @endif
