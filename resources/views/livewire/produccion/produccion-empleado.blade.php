@@ -209,7 +209,7 @@
                     }
                 })
 
-            var seletscc = ["#b_orden", "#b_codigo","#b_nombre_empleado","#b_codigo_empleado","#b_marca", "#b_nombre", "#b_vitola", "#b_capa", "#b_presentacion"];
+            var seletscc = ["#b_orden", "#b_codigo","#b_nombre_empleado","#b_codigo_empleado","#b_marca", "#b_nombre", "#b_vitola", "#b_capa"];
             const inputField = document.querySelector("#example");
 
             $(document).ready(function() {
@@ -237,7 +237,6 @@
                 @this.b_codigo_productos = $(seletscc[1]).val();
                 @this.b_codigo_empleado = $(seletscc[3]).val();
                 @this.b_nombre_empleado = $(seletscc[2]).val();
-                @this.b_presentacion = $(seletscc[8]).val();
                 @this.page = 1;
             }
 

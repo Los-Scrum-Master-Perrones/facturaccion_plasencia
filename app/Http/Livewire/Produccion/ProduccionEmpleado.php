@@ -150,7 +150,7 @@ class ProduccionEmpleado extends Component
                 $start,
                 $this->por_pagina,
                 $this->b_nombre_empleado,
-                $this->b_presentacion
+                $this->b_presentacion1 . $this->b_presentacion2 . $this->b_presentacion3
             ]
         );
 
@@ -171,7 +171,7 @@ class ProduccionEmpleado extends Component
                 [
                     $this->b_fecha_1,
                     $this->b_fecha_2,
-                    $this->b_presentacion
+                    $this->b_presentacion1 . $this->b_presentacion2 . $this->b_presentacion3
                 ]
             );
 
