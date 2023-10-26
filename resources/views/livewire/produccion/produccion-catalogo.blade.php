@@ -128,7 +128,7 @@
                                 <td>{{ $producto->color }}</td>
                                 <td class="ri">{{ number_format($producto->precio_rolero,4) }}</td>
                                 <td class="text-right">{{ number_format($producto->precio_bonchero,4) }}</td>
-                                <td class="text-center">
+                                <td>
                                     @if ( is_null($producto->usado) )
                                     <a style="text-decoration: none" onclick="eliminar_item({{ $producto->id }})"
                                         href="#">
@@ -141,9 +141,8 @@
                                     @else
 
                                     @endif
-                                    <a style="text-decoration: none" href="#"
-                                        data-bs-toggle="modal" data-bs-target="#productos_editar" wire:click='editar_producto({{ $producto->id }})'
-                                        onclick="cargar_modal({{ $producto->id_marca }},{{ $producto->id_nombre }},{{ $producto->id_vitola }},{{ $producto->id_capa }},'{{ $producto->color }}')">
+                                    <a style="text-decoration: none" href="#" data-bs-toggle="modal" data-bs-target="#productos_editar"
+                                        onclick="cargar_modal({{ $producto->id_marca }},{{ $producto->id_nombre }},{{ $producto->id_vitola }},{{ $producto->id_capa }},'{{ $producto->color }}',{{ $producto->id }})">
                                         <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" fill="currentColor" class="bi bi-pencil-square" viewBox="0 0 16 16">
                                             <path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z" />
                                             <path fill-rule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z" />
@@ -462,12 +461,13 @@
                 @this.page = 1;
             }
 
-            function cargar_modal(marca,nombre,vitola,capa,color){
+            function cargar_modal(marca,nombre,vitola,capa,color,id){
                 control_marca.setValue(marca);
                 control_nombre.setValue(nombre);
                 control_vitola.setValue(vitola);
                 control_capa.setValue(capa);
                 @this.color_n =color;
+                @this.editar_producto(id);
             }
 
             function eliminar_item(id) {

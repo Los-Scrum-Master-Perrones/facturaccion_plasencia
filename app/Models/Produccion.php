@@ -35,7 +35,5 @@ class Produccion extends Model
         'id_vitola' => 'int',
         'id_capa' => 'int',
         'existencia' => 'int',
-        'created_at' => 'datetime',
-        'updated_at' => 'datetime',
     ];
 }

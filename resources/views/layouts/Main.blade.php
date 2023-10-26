@@ -20,7 +20,6 @@
         $rol = Auth::user()->rol;
     @endphp
     @yield('content')
-    <br><br><br><br><br>
     <div class="all" style="padding-bottom: 10px">
         <div class="lefter4">
             <button type="submit" class="buttonsubmit" data-bs-toggle="modal" data-bs-target="#modal_cerrarsesion">

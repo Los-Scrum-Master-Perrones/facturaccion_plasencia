@@ -175,10 +175,10 @@ class ProduccionCatalogo extends Component
 
             $this->produc->save();
 
-            $marca = marca_producto::find($this->produc->id_marca);
-            $marca->color = $this->color_n;
+            Produccion::where('id_marca', $this->produc->id_marca)
+                        ->where('id_capa', $this->produc->id_capa)
+                        ->update(['color' =>  $this->color_n]);
 
-            $marca->save();
 
             $this->produc = new Produccion([
                 `codigo` =>  'P-',
@@ -208,7 +208,7 @@ class ProduccionCatalogo extends Component
 
             $this->color_n = marca_producto::find($edit->id_marca)->color;
             $this->produc = $edit;
-
+            $this->dispatchBrowserEvent('error_general',['errorr' => 'Listo para Editar','icon' => 'info']);
             DB::commit();
         } catch (\Exception $th) {
             $this->dispatchBrowserEvent('error_general',['errorr' => $th->getMessage(),'icon' => 'error']);

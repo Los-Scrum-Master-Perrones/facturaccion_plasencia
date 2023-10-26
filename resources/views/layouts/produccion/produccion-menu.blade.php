@@ -110,6 +110,11 @@
         @endif fs-7" aria-current="page" href="{{ route('produccion.pendiente.index') }}"><strong>Pendiente</strong></a>
     </li>
     <li class="nav-item">
+        <a class="nav-link @if($url == route('produccion.producir.marca'))
+            active
+        @endif fs-7" href="{{ route('produccion.producir.marca') }}"><strong>Planificacion</strong></a>
+    </li>
+    <li class="nav-item">
         <a class="nav-link @if($url == route('produccion.empleados'))
             active
         @endif fs-7" href="{{ route('produccion.empleados') }}"><strong>Empleados</strong></a>
