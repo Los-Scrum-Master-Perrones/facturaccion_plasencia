@@ -95,6 +95,7 @@
                                     <th>ROLERO</th>
                                     <th>VITOLA</th>
                                     <th>MARCAS</th>
+                                    <th>TAREA</th>
                                 </tr>
                             </thead>
                             <tbody class="fs-7">
@@ -116,6 +117,7 @@
                                             @endforeach
                                         </select>
                                     </td>
+                                    <td colspan="2" class="text-center"></td>
                                     <td colspan="2" class="text-center"></td>
                                 </tr>
                                 @foreach ($modulo_empleado as $key => $emple)
@@ -172,6 +174,9 @@
                                             </a>
                                         </td>
                                     @endif
+                                    <td>
+                                        <input type="number" class="form-control form-control-sm form-control-color" style="width: 4rem;">
+                                    </td>
                                 </tr>
                                 @endforeach
                             </tbody>
@@ -195,7 +200,7 @@
                 </div>
                 <div class="modal-body">
 
-                    <table class="table" id="catalgo_pendiente">
+                    <table class="table table-striped"  id="catalgo_pendiente">
                         <thead>
                             <tr style="text-align: center">
                                 <th style="width: 60px">ID(Agregar)</th>
@@ -270,7 +275,8 @@
         $(document).ready(function() {
                 $('#catalgo_pendiente').DataTable({
                     "language": {
-                        "url": "//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/Spanish.json"
+                        "url": "//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/Spanish.json",
+                        "pageLength": 50
                     },
                     scrollY: 320,
                     initComplete: function() {
@@ -283,7 +289,7 @@
                                 // Create input element
                                 let input = document.createElement('input');
                                 input.placeholder = title;
-                                input.style.width = "120px";
+                                input.style.width = "200px";
                                 column.footer().replaceChildren(input);
 
                                 // Event listener for user input

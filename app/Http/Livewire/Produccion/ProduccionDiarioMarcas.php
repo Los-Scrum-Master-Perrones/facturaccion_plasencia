@@ -85,5 +85,16 @@ class ProduccionDiarioMarcas extends Component
         }
         $mod->save();
     }
+
+    public function nueva_tareas($num,$id) {
+        $mod = new ProduccionDiarioProducir;
+        $mod->modulo = $this->modulo_actual;
+        if ($num == 1) {
+            $mod->id_empleado = $id;
+        }elseif($num ==2){
+            $mod->id_empleado2 = $id;
+        }
+        $mod->save();
+    }
 }
 

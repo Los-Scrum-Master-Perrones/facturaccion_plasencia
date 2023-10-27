@@ -20,9 +20,11 @@
                                     style="height: 30px;font-size: 0.7em" wire:model="select_file"
                                     class="form-control" />
                                 <input type="submit" wire:click="import" name="upload" class="btn btn-primary"
-                                    style="height: 30px;font-size: 0.7em" value="Importar Produccion Diaria">
+                                    style="height: 30px;font-size: 0.7em" value="Produccion Diaria">
                                 <input type="submit" wire:click="import2" name="upload" class="btn btn-secondary"
                                     style="height: 30px;font-size: 0.7em" value="Importar Precios (R,B)">
+                                <input type="submit" wire:click="import3" name="upload" class="btn btn-info"
+                                    style="height: 30px;font-size: 0.7em" value="Rehechoscv">
                             </div>
                     </div>
                     <div class="col-md-2">
