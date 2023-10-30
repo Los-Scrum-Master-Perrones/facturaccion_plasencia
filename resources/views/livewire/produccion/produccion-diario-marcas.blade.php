@@ -1,7 +1,11 @@
 <div class="container-fluid" style="height: 90vh">
     <div class="row">
-        <div class="col-md-4">
-            <div class="card" style="height: 90vh;">
+        <div class="col-md-4" @if(count($empleados)==0)
+            hidden
+        @else
+
+        @endif>
+            <div class="card" style="height: 90vh;" >
                 <div class="card-body">
                     <div class="table-responsive" style="height: 87vh;">
                         <table class="table table-hover table-sm">
@@ -42,26 +46,41 @@
                 </div>
             </div>
         </div>
-        <div class="col-md-8">
+        <div @if(count($empleados)==0)
+        class="col-md-12"
+    @else
+    class="col-md-8"
+    @endif>
             <ul class="nav nav-tabs justify-content-center">
+                @php
+                    $moduloactual = [];
+                @endphp
                 @foreach ($modulos as $modulo)
                 <li class="nav-item">
                     <a class="nav-link @if($modulo_actual == $modulo->id)
                         active
+
+                        @php
+                            $moduloactual = $modulo;
+                        @endphp
                     @else
 
-                    @endif fs-7" href="#" wire:click="cambiar_modulo({{ $modulo->id }})"><strong>{{ $modulo->nombre
-                            }}</strong></a>
+                    @endif fs-7" href="#" wire:click="cambiar_modulo({{ $modulo->id }})"><strong>{{ $modulo->nombre }}</strong></a>
                 </li>
                 @endforeach
-                <li class="nav-item">
-                    <a class="nav-link fs-7 active" href="#">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-bag-plus" viewBox="0 0 16 16">
-                            <path fill-rule="evenodd" d="M8 7.5a.5.5 0 0 1 .5.5v1.5H10a.5.5 0 0 1 0 1H8.5V12a.5.5 0 0 1-1 0v-1.5H6a.5.5 0 0 1 0-1h1.5V8a.5.5 0 0 1 .5-.5z"/>
-                            <path d="M8 1a2.5 2.5 0 0 1 2.5 2.5V4h-5v-.5A2.5 2.5 0 0 1 8 1zm3.5 3v-.5a3.5 3.5 0 1 0-7 0V4H1v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V4h-3.5zM2 5h12v9a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V5z"/>
-                        </svg>
-                    </a>
-                </li>
+                @if($modulo->nombre == 'Modulo 7')
+
+                @else
+                    <li class="nav-item">
+                        <a class="nav-link fs-7 active" href="#" wire:click="agregar_nuevo_modulo()">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-bag-plus" viewBox="0 0 16 16">
+                                <path fill-rule="evenodd" d="M8 7.5a.5.5 0 0 1 .5.5v1.5H10a.5.5 0 0 1 0 1H8.5V12a.5.5 0 0 1-1 0v-1.5H6a.5.5 0 0 1 0-1h1.5V8a.5.5 0 0 1 .5-.5z"/>
+                                <path d="M8 1a2.5 2.5 0 0 1 2.5 2.5V4h-5v-.5A2.5 2.5 0 0 1 8 1zm3.5 3v-.5a3.5 3.5 0 1 0-7 0V4H1v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V4h-3.5zM2 5h12v9a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V5z"/>
+                            </svg>
+                        </a>
+                    </li>
+                @endif
+
                 <li class="nav-item">
                     <a class="nav-link fs-7 active" href="#">
                         <abbr title="Etiquetas de Mesas">
@@ -83,8 +102,54 @@
                 </li>
             </ul>
             <div class="card" style="height: 86vh;">
+                <div class="card-header">
+                    <div class="row">
+                        <div class="col-md-2">
+                            <label for="">Revisadores</label>
+                        </div>
+                        <div class="col-md-5">
+                            @if(is_null($moduloactual->revisador1))
+                            @isset($revisador['revisador'])
+                            <select class="form-control form-control-sm" name="" id="revisador_1" onchange="agregar_revisador_modulo({{ $moduloactual->id }},'revisador_1',1)">
+                                <option value="">Selecione</option>
+                                @foreach ($revisador['revisador'] as $revisa)
+                                    <option value="{{ $revisa->id }}">{{ $revisa->codigo.' - '.$revisa->nombre }}</option>
+                                @endforeach
+                            </select>
+                            @endisset
+                            @else
+                                <a href="#" style="text-decoration: none" wire:click="eliminar_revisador_modulo({{ $moduloactual->id }},1)">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash3-fill" viewBox="0 0 16 16">
+                                        <path d="M11 1.5v1h3.5a.5.5 0 0 1 0 1h-.538l-.853 10.66A2 2 0 0 1 11.115 16h-6.23a2 2 0 0 1-1.994-1.84L2.038 3.5H1.5a.5.5 0 0 1 0-1H5v-1A1.5 1.5 0 0 1 6.5 0h3A1.5 1.5 0 0 1 11 1.5Zm-5 0v1h4v-1a.5.5 0 0 0-.5-.5h-3a.5.5 0 0 0-.5.5ZM4.5 5.029l.5 8.5a.5.5 0 1 0 .998-.06l-.5-8.5a.5.5 0 1 0-.998.06Zm6.53-.528a.5.5 0 0 0-.528.47l-.5 8.5a.5.5 0 0 0 .998.058l.5-8.5a.5.5 0 0 0-.47-.528ZM8 4.5a.5.5 0 0 0-.5.5v8.5a.5.5 0 0 0 1 0V5a.5.5 0 0 0-.5-.5Z"/>
+                                    </svg>
+                                </a>
+                                {{ $moduloactual->revisador1 }}
+                            @endif
+                        </div>
+                        <div class="col-md-5">
+                            @if(is_null($moduloactual->revisador2))
+                            @isset($revisador['revisador'])
+                            <select class="form-control form-control-sm" name="" id="revisador_2" onchange="agregar_revisador_modulo({{ $moduloactual->id }},'revisador_2',2)">
+                                <option value="">Selecione</option>
+                                @foreach ($revisador['revisador'] as $revisa)
+                                    <option value="{{ $revisa->id }}">{{ $revisa->codigo.' - '.$revisa->nombre }}</option>
+                                @endforeach
+                            </select>
+                            @endisset
+                            @else
+                                <a href="#" style="text-decoration: none" wire:click="eliminar_revisador_modulo({{ $moduloactual->id }},2)">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash3-fill" viewBox="0 0 16 16">
+                                        <path d="M11 1.5v1h3.5a.5.5 0 0 1 0 1h-.538l-.853 10.66A2 2 0 0 1 11.115 16h-6.23a2 2 0 0 1-1.994-1.84L2.038 3.5H1.5a.5.5 0 0 1 0-1H5v-1A1.5 1.5 0 0 1 6.5 0h3A1.5 1.5 0 0 1 11 1.5Zm-5 0v1h4v-1a.5.5 0 0 0-.5-.5h-3a.5.5 0 0 0-.5.5ZM4.5 5.029l.5 8.5a.5.5 0 1 0 .998-.06l-.5-8.5a.5.5 0 1 0-.998.06Zm6.53-.528a.5.5 0 0 0-.528.47l-.5 8.5a.5.5 0 0 0 .998.058l.5-8.5a.5.5 0 0 0-.47-.528ZM8 4.5a.5.5 0 0 0-.5.5v8.5a.5.5 0 0 0 1 0V5a.5.5 0 0 0-.5-.5Z"/>
+                                    </svg>
+                                </a>
+                                {{ $moduloactual->revisador2 }}
+                            @endif
+
+                        </div>
+                    </div>
+                </div>
                 <div class="card-body">
-                    <div class="table-responsive" style="height: 83vh;">
+                    <div class="table-responsive" style="height: 78vh;">
                         <table class="table table-hover table-sm">
                             <thead>
                                 <tr>
@@ -93,29 +158,35 @@
                                     <th>BONCHERO</th>
                                     <th>COD</th>
                                     <th>ROLERO</th>
+                                    <th>ORDEN</th>
                                     <th>VITOLA</th>
                                     <th>MARCAS</th>
                                     <th>TAREA</th>
+                                    <th>ESTIMADO</th>
                                 </tr>
                             </thead>
                             <tbody class="fs-7">
                                 <tr>
                                     <td></td>
                                     <td colspan="2" class="text-center">
+                                        @isset($boncheros['boncheros'])
                                         <select class="form-control form-control-sm" name="" id="empleadon" onchange="agregar_nueva_tupla(1,'empleadon')">
                                             <option value="">Selecione</option>
                                             @foreach ($boncheros['boncheros'] as $bonche)
                                                 <option value="{{ $bonche->id }}">{{ $bonche->codigo.' - '.$bonche->nombre }}</option>
                                             @endforeach
                                         </select>
+                                        @endisset
                                     </td>
                                     <td colspan="2" class="text-center">
+                                        @isset($roleros['roleros'])
                                         <select class="form-control form-control-sm" name="" id="empleadon2" onchange="agregar_nueva_tupla(2,'empleadon2')">
                                             <option value="">Selecione</option>
                                             @foreach ($roleros['roleros'] as $rolero)
                                                 <option value="{{ $rolero->id }}">{{ $rolero->codigo.' - '.$rolero->nombre }}</option>
                                             @endforeach
                                         </select>
+                                        @endisset
                                     </td>
                                     <td colspan="2" class="text-center"></td>
                                     <td colspan="2" class="text-center"></td>
@@ -125,12 +196,14 @@
                                     <td>{{ ++$key }}</td>
                                     @if(is_null($emple->codigo_empleaado))
                                         <td colspan="2" class="text-center">
+                                            @isset($boncheros['boncheros'])
                                             <select class="form-control form-control-sm" name="" id="empleado{{ $emple->id }}" onchange="agregar_empleado({{ $emple->id }},1,'empleado{{ $emple->id }}')">
                                                 <option value="">Selecione</option>
                                                 @foreach ($boncheros['boncheros'] as $bonche)
                                                     <option value="{{ $bonche->id }}">{{ $bonche->codigo.' - '.$bonche->nombre }}</option>
                                                 @endforeach
                                             </select>
+                                            @endisset
                                         </td>
                                     @else
                                         <td>
@@ -142,15 +215,16 @@
                                             {{ $emple->codigo_empleaado }}</td>
                                         <td>{{ $emple->nombre_empleado }}</td>
                                     @endif
-
                                     @if(is_null($emple->codigo_empleaado2))
                                     <td colspan="2" class="text-center">
+                                        @isset($roleros['roleros'])
                                         <select class="form-control form-control-sm" name="" id="empleado2{{ $emple->id }}" onchange="agregar_empleado({{ $emple->id }},2,'empleado2{{ $emple->id }}')">
                                             <option value="">Selecione</option>
                                             @foreach ($roleros['roleros'] as $rolero)
                                                 <option value="{{ $rolero->id }}">{{ $rolero->codigo.' - '.$rolero->nombre }}</option>
                                             @endforeach
                                         </select>
+                                        @endisset
                                     </td>
                                     @else
                                         <td>
@@ -162,11 +236,12 @@
                                             {{ $emple->codigo_empleaado2 }}</td>
                                         <td>{{ $emple->nombre_empleado2 }}</td>
                                     @endif
+                                    <td>{{ $emple->orden_sistema }}</td>
                                     @if(is_null($emple->marca))
                                         <td colspan="2" class="text-center"><button class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#modal_agregar_marca" onclick="seleccionar_tupla({{ $emple->id  }})">Agregar Marca</button></td>
                                     @else
                                         <td>{{ $emple->vitola.' '.$emple->nombre }}</td>
-                                        <td>{{ $emple->marca }}
+                                        <td>{{ $emple->marca }} <b>{{ '(P-'.$emple->restantes.')' }}</b>
                                             <a href="#" style="text-decoration: none" wire:click="eliminar_detalle({{ $emple->id }},3)">
                                                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash3-fill" viewBox="0 0 16 16">
                                                     <path d="M11 1.5v1h3.5a.5.5 0 0 1 0 1h-.538l-.853 10.66A2 2 0 0 1 11.115 16h-6.23a2 2 0 0 1-1.994-1.84L2.038 3.5H1.5a.5.5 0 0 1 0-1H5v-1A1.5 1.5 0 0 1 6.5 0h3A1.5 1.5 0 0 1 11 1.5Zm-5 0v1h4v-1a.5.5 0 0 0-.5-.5h-3a.5.5 0 0 0-.5.5ZM4.5 5.029l.5 8.5a.5.5 0 1 0 .998-.06l-.5-8.5a.5.5 0 1 0-.998.06Zm6.53-.528a.5.5 0 0 0-.528.47l-.5 8.5a.5.5 0 0 0 .998.058l.5-8.5a.5.5 0 0 0-.47-.528ZM8 4.5a.5.5 0 0 0-.5.5v8.5a.5.5 0 0 0 1 0V5a.5.5 0 0 0-.5-.5Z"/>
@@ -175,7 +250,19 @@
                                         </td>
                                     @endif
                                     <td>
-                                        <input type="number" class="form-control form-control-sm form-control-color" style="width: 4rem;">
+                                        <input value="{{ $emple->tareas }}" type="number" id="tearea{{ $emple->id }}" onchange="agregar_nueva_tarea({{ $emple->id }},'#tearea{{ $emple->id }}')" class="form-control form-control-sm form-control-color" style="width: 4rem;">
+                                    </td>
+                                    <td>
+                                        @if($emple->tareas == 0 || is_null($emple->marca))
+                                            0
+                                        @else
+                                            @php
+                                                $n = $emple->por_empleado / $emple->tareas;
+                                                $whole = floor($n); // 1
+                                                $fraction = $n - $whole; // .25
+                                            @endphp
+                                            {{ number_format($n , 0).'d y '. number_format(($fraction )*8, 0).'h' }}
+                                        @endif
                                     </td>
                                 </tr>
                                 @endforeach
@@ -186,7 +273,6 @@
             </div>
         </div>
     </div>
-
 
     <div wire:ignore class="modal fade" id="modal_agregar_marca" data-backdrop="static" data-keyboard="false"
         tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true"
@@ -199,7 +285,6 @@
                         aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-
                     <table class="table table-striped"  id="catalgo_pendiente">
                         <thead>
                             <tr style="text-align: center">
@@ -259,8 +344,17 @@
         function agregar_empleado(id,num,select){
             @this.agregar_detalle(id,num,$('#'+select).val());
         }
+
         function agregar_nueva_tupla(num,select){
             @this.nueva_tupla_detalle(num,$('#'+select).val());
+        }
+
+        function agregar_revisador_modulo(id,select,num){
+            @this.agregar_revisador_modulo(id,$('#'+select).val(),num);
+        }
+
+        function agregar_nueva_tarea(id,num){
+            @this.nueva_tareas(id,$(num).val());
         }
 
         function seleccionar_tupla(id) {
@@ -270,7 +364,6 @@
         function agregar_pendiente(id) {
             @this.agregar_detalle(id_detalles,3,id);
         }
-
 
         $(document).ready(function() {
                 $('#catalgo_pendiente').DataTable({

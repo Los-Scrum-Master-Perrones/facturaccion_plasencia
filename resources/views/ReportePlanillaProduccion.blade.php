@@ -178,7 +178,7 @@
     <td></td>
     <td></td>
     <td></td>
-    <td style="color: blue; font-size: 10px; font-family: Arial" colspan="3"><b>Total Ordinario Planilla de Brochita</b></td>
+    <td style="color: blue; font-size: 10px; font-family: Arial" colspan="3"><b>Total Ordinario Planilla</b></td>
     <td style="color: red; font-size: 10px; font-family: Arial"><b>L. {{ number_format($e_suma_neto_precio,2) }}</b></td>
     <td></td>
 </tr>

@@ -2,6 +2,7 @@
 
 namespace App\Http\Livewire\Produccion;
 
+use App\Models\ProduccionDiarioModulos;
 use App\Models\ProduccionDiarioProducir;
 use Illuminate\Support\Facades\DB;
 use Livewire\Component;
@@ -31,12 +32,20 @@ class ProduccionDiarioMarcas extends Component
 
         $roleros = [];
         $boncheros = [];
+        $revisador = [];
+        $brocha = [];
         foreach ($this->empleados as $uso) {
             if ($uso->rol == 'rolero') {
                 $roleros['roleros'][] =  $uso;
-            } else {
-
+            }
+            if($uso->rol == 'bonchero'){
                 $boncheros['boncheros'][] =  $uso;
+            }
+            if($uso->rol == 'revisador'){
+                $revisador['revisador'][] =  $uso;
+            }
+            if($uso->rol == 'brocha'){
+                $brocha['brocha'][] =  $uso;
             }
         }
 
@@ -45,6 +54,7 @@ class ProduccionDiarioMarcas extends Component
         [
             'roleros' => $roleros,
             'boncheros' => $boncheros,
+            'revisador' => $revisador,
             'pendiente_catalogo' => $pendiente_catalogo
         ]
         )->extends('layouts.produccion.produccion-menu')->section('contenido');
@@ -86,15 +96,49 @@ class ProduccionDiarioMarcas extends Component
         $mod->save();
     }
 
-    public function nueva_tareas($num,$id) {
-        $mod = new ProduccionDiarioProducir;
-        $mod->modulo = $this->modulo_actual;
-        if ($num == 1) {
-            $mod->id_empleado = $id;
-        }elseif($num ==2){
-            $mod->id_empleado2 = $id;
+    public function nueva_tareas(ProduccionDiarioProducir $mod,$id) {
+        if ($id > 0) {
+            $mod->tareas = $id;
+        }else {
+            $mod->tareas = 0;
         }
         $mod->save();
     }
+
+
+
+
+
+    public function agregar_nuevo_modulo() {
+        $numero_modulos = ProduccionDiarioModulos::all()->count();
+        $numero_modulos+=1;
+        if($numero_modulos < 8){
+            $modulo = new ProduccionDiarioModulos();
+            $modulo->nombre = 'Modulo '.$numero_modulos;
+            $modulo->save();
+        }
+
+    }
+    
+    public function agregar_revisador_modulo(ProduccionDiarioModulos $modulo,$id,$num) {
+        if ($num == 1) {
+            $modulo->id_revisador1 = $id;
+        }elseif($num ==2){
+            $modulo->id_revisador2 = $id;
+        }
+        $modulo->save();
+    }
+
+    public function eliminar_revisador_modulo(ProduccionDiarioModulos $modulo,$num) {
+        if ($num == 1) {
+            $modulo->id_revisador1 = null;
+        }elseif($num ==2){
+            $modulo->id_revisador2 = null;
+        }
+        $modulo->save();
+    }
+
+
+
 }
 

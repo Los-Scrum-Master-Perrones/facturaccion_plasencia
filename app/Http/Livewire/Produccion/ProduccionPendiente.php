@@ -224,7 +224,8 @@ class ProduccionPendiente extends Component
 
     public function imprimir_reporte_diario(Request $request) {
         $datos = DB::select('call reporte_produccion_mensual(?)',[$request->input('fecha')]);
+        $rehechos = DB::select('call reporte_produccion_mensual_rehechos(?)',[$request->input('fecha')]);
 
-        return Excel::download(new ProduccionReporteExport($datos), 'Reporte Diario Produccion '.$request->input('fecha').'.xlsx');
+        return Excel::download(new ProduccionReporteExport($datos,$rehechos), 'Reporte Diario Produccion '.$request->input('fecha').'.xlsx');
     }
 }

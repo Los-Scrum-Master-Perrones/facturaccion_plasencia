@@ -118,13 +118,6 @@ class ProducidoRehechosImport implements ToCollection, WithCalculatedFormulas
             $orden_empleado->cantidad = $cadena_sin_coma_punto;
             $orden_empleado->save();
 
-
-            $orden_empleado = new ProduccionOrdenEmpleado();
-            $orden_empleado->id_empleado = $empleado->id;
-            $orden_empleado->id_orden = $orden_entrada->id;
-            $orden_empleado->cantidad = $cadena_sin_coma_punto;
-            $orden_empleado->save();
-
             $orden_pendiente = ProduccionPendiente::firstOrCreate(
                 ['id_producto' => $producto->id,'orden_sistema' => $orden,'fecha_recibido' => $this->obtenerPrimeraPalabra($fecha),'observacion' => 'Orden creada por puros rehechos'],
                 ['cantidad' => 0]

@@ -17,14 +17,16 @@ class ProduccionReporteExport implements
 {
 
     public $nom;
+    public $rehechos;
 
-    function __construct($nom) {
+    function __construct($nom,$rehechos) {
         $this->nom = $nom;
+        $this->rehechos = $rehechos;
     }
 
     public function view(): View
     {
-        return view('ReporteDiarioProduccion',[ 'pendiente' => $this->nom]) ;
+        return view('ReporteDiarioProduccion',[ 'rehechos' => $this->rehechos, 'pendiente' => $this->nom ]) ;
     }
 
     function defaultStyles(Style $defaultStyle)

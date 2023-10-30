@@ -151,8 +151,7 @@
                 <td style="text-align:center;font-size:8px;border: 1px solid #C00;">0</td>
                 <td style="text-align:center;font-size:8px;border: 1px solid #C00;">{{ $pend->pendiente }}</td>
                 <td style="text-align:center;font-size:8px;border: 1px solid #C00;">{{ $pend->acumulado_neto }}</td>
-                <td style="text-align:center;font-size:8px;border: 1px solid #C00;">{{ $pend->restante_total_almes }}
-                </td>
+                <td style="text-align:center;font-size:8px;border: 1px solid #C00;">{{ $pend->restante_total_almes }}</td>
                 <td style="text-align:center;font-size:8px;border: 1px solid #C00;">{{ $pend->acumulado_del_mes }}</td>
                 <td style="text-align:center;font-size:8px;border: 1px solid #C00;">
                     {{ $pend->acumulado_neto - $pend->acumulado_del_mes }}</td>
@@ -249,6 +248,47 @@
                         <b>{{ $acumulado_neto_mes }}</b></td>
                 </tr>
             @endif
+
+
+
+        @endforeach
+        <tr></tr>
+        <tr>
+            <td></td>
+            <td style="color: red"><b>Total Rehechos</b></td>
+            <td colspan="8"></td>
+        </tr>
+        @php
+            $pendiente_rehechos = 0;
+            $acumulado_neto_rehechos = 0;
+            $prestante_total_almes_rehechos = 0;
+            $acumulado_del_mes_rehechos = 0;
+            $acumulado_del_mes_neto_rehechos = 0;
+        @endphp
+        @foreach ($rehechos as $rehe)
+
+                <tr>
+                    <td style="text-align:center;font-size:8px;border: 1px solid #C00;">{{ $rehe->orden_sistema }}</td>
+                    <td style="text-align:center;font-size:8px;border: 1px solid #C00;">{{ $rehe->vitola }}</td>
+                    <td style="text-align:center;font-size:8px;border: 1px solid #C00;">{{ $rehe->nombre }}</td>
+                    <td style="text-align:center;font-size:8px;border: 1px solid #C00;">{{ $rehe->marca }}</td>
+                    <td style="text-align:center;font-size:8px;border: 1px solid #C00;">{{ $rehe->capa }}</td>
+                    <td style="text-align:center;font-size:8px;border: 1px solid #C00;">0</td>
+                    <td style="text-align:center;font-size:8px;border: 1px solid #C00;">0</td>
+                    <td style="text-align:center;font-size:8px;border: 1px solid #C00;">{{ $rehe->pendiente }}</td>
+                    <td style="text-align:center;font-size:8px;border: 1px solid #C00;">{{ $rehe->acumulado_neto }}</td>
+                    <td style="text-align:center;font-size:8px;border: 1px solid #C00;">{{ $rehe->restante_total_almes }}</td>
+                    <td style="text-align:center;font-size:8px;border: 1px solid #C00;">{{ $rehe->acumulado_del_mes }}</td>
+                    <td style="text-align:center;font-size:8px;border: 1px solid #C00;">
+                        {{ $rehe->acumulado_neto - $rehe->acumulado_del_mes }}</td>
+                </tr>
+            @php
+                $pendiente_rehechos += $rehe->pendiente;
+                $acumulado_neto_rehechos += $rehe->acumulado_neto;
+                $prestante_total_almes_rehechos += $rehe->restante_total_almes;
+                $acumulado_del_mes_rehechos += $rehe->acumulado_del_mes;
+                $acumulado_del_mes_neto_rehechos += $rehe->acumulado_neto - $rehe->acumulado_del_mes;
+            @endphp
         @endforeach
         <tr></tr>
         <tr></tr>
@@ -259,11 +299,11 @@
             <td style="text-align:center;font-size:8px;border: 1px solid #C00;"></td>
             <td style="text-align:center;font-size:8px;border: 1px solid #C00;">0</td>
             <td style="text-align:center;font-size:8px;border: 1px solid #C00;">0</td>
-            <td style="text-align:center;font-size:8px;border: 1px solid #C00; color: red"></td>
-            <td style="text-align:center;font-size:8px;border: 1px solid #C00; color: red"></td>
-            <td style="text-align:center;font-size:8px;border: 1px solid #C00; color: red"></td>
-            <td style="text-align:center;font-size:8px;border: 1px solid #C00; color: red"></td>
-            <td style="text-align:center;font-size:8px;border: 1px solid #C00; color: red"></td>
+            <td style="text-align:center;font-size:8px;border: 1px solid #C00; color: red">{{ $pendiente_rehechos }}</td>
+            <td style="text-align:center;font-size:8px;border: 1px solid #C00; color: red">{{ $acumulado_neto_rehechos }}</td>
+            <td style="text-align:center;font-size:8px;border: 1px solid #C00; color: red">{{ $prestante_total_almes_rehechos }}</td>
+            <td style="text-align:center;font-size:8px;border: 1px solid #C00; color: red">{{ $acumulado_del_mes_rehechos }}</td>
+            <td style="text-align:center;font-size:8px;border: 1px solid #C00; color: red">{{ $acumulado_del_mes_neto_rehechos }}</td>
         </tr>
         <tr>
             <td style="text-align:center;font-size:8px;border: 1px solid #C00;"></td>
@@ -376,11 +416,12 @@
             <td style="text-align:center;font-size:8px;border: 1px solid #C00;"></td>
             <td style="text-align:center;font-size:8px;border: 1px solid #C00;">0</td>
             <td style="text-align:center;font-size:8px;border: 1px solid #C00;">0</td>
-            <td style="text-align:center;font-size:8px;border: 1px solid #C00; color: red">{{ $pendiente_stotales }}</td>
-            <td style="text-align:center;font-size:8px;border: 1px solid #C00; color: red">{{ $acumulado_netototales }}</td>
-            <td style="text-align:center;font-size:8px;border: 1px solid #C00; color: red">{{ $restante_total_almestotales }}</td>
-            <td style="text-align:center;font-size:8px;border: 1px solid #C00; color: red">{{ $acumulado_del_mestotales }}</td>
-            <td style="text-align:center;font-size:8px;border: 1px solid #C00; color: red">{{ $acumulado_neto_mestotales }}</td>
+            <td style="text-align:center;font-size:8px;border: 1px solid #C00; color: red">{{ $pendiente_stotales + $pendiente_rehechos}}</td>
+            <td style="text-align:center;font-size:8px;border: 1px solid #C00; color: red">{{ $acumulado_netototales + $acumulado_neto_rehechos}}</td>
+            <td style="text-align:center;font-size:8px;border: 1px solid #C00; color: red">{{ $restante_total_almestotales + $prestante_total_almes_rehechos}}</td>
+            <td style="text-align:center;font-size:8px;border: 1px solid #C00; color: red">{{ $acumulado_del_mestotales + $acumulado_del_mes_rehechos}}</td>
+            <td style="text-align:center;font-size:8px;border: 1px solid #C00; color: red">{{ $acumulado_neto_mestotales + $acumulado_del_mes_neto_rehechos}}</td>
+
         </tr>
     </tbody>
 </table>

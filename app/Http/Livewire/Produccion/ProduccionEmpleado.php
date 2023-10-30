@@ -167,11 +167,12 @@ class ProduccionEmpleado extends Component
         if ($dia_semana_lunes == 1 && ($dia_semana_domingo == 7 || $dia_semana_domingo == 6)) {
 
             $da = DB::select(
-                'CALL `buscar_produccion_empleado_planilla`(?,?,?)',
+                'CALL `buscar_produccion_empleado_planilla`(?,?,?,?)',
                 [
                     $this->b_fecha_1,
                     $this->b_fecha_2,
-                    $this->b_presentacion1 . $this->b_presentacion2 . $this->b_presentacion3
+                    $this->b_presentacion1 . $this->b_presentacion2 . $this->b_presentacion3,
+                    $this->b_rol
                 ]
             );
 
