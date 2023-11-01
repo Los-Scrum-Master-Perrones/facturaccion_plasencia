@@ -13,6 +13,7 @@ use Illuminate\Database\Eloquent\Model;
  * @property string $fecha_recibido
  * @property int $cantidad
  * @property string $observacion
+ * @property int $prioridad
  */
 class ProduccionPendiente extends Model
 {
@@ -24,7 +25,8 @@ class ProduccionPendiente extends Model
         'orden_sistema',
         'fecha_recibido',
         'cantidad',
-        'observacion'
+        'observacion',
+        'prioridad'
     ];
 
 }

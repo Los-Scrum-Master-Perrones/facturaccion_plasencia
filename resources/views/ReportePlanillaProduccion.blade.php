@@ -47,7 +47,7 @@
             <td>{{ $pend->viernes }}</td>
             <td>{{ $pend->sabado }}</td>
             <td style="text-align: center">{{ $pend->suma_total }}</td>
-            <td style="text-align: center">L. {{ number_format($pend->precio * $pend->suma_total,2) }}</td>
+            <td style="text-align: center">L. {{ number_format($pend->precio * $pend->suma_total,2,',','.') }}</td>
             <td></td>
         </tr>
         @php
@@ -74,7 +74,7 @@
             <td><b>{{ $viernes_e }}</b></td>
             <td><b>{{ $sabado_e }}</b></td>
             <td style="text-align: center"><b>{{ $e_suma_total }}</b></td>
-            <td style="text-align: center;color: red"><b>L. {{ number_format($e_suma_total_precio,2) }}</b></td>
+            <td style="text-align: center;color: red"><b>L. {{ number_format($e_suma_total_precio,2,',','.') }}</b></td>
             <td><b></b></td>
         </tr>
             @php
@@ -123,7 +123,7 @@
             <td>{{ $pend->viernes }}</td>
             <td>{{ $pend->sabado }}</td>
             <td style="text-align: center">{{ $pend->suma_total }}</td>
-            <td style="text-align: center">L. {{ number_format($pend->precio * $pend->suma_total,2) }}</td>
+            <td style="text-align: center">L. {{ number_format($pend->precio * $pend->suma_total,2,',','.') }}</td>
             <td></td>
         </tr>
 
@@ -150,7 +150,7 @@
         <td><b>{{ $viernes_e }}</b></td>
         <td><b>{{ $sabado_e }}</b></td>
         <td style="text-align: center"><b>{{ $e_suma_total }}</b></td>
-        <td style="text-align: center;color: red"><b>L. {{ number_format($e_suma_total_precio,2) }}</b></td>
+        <td style="text-align: center;color: red"><b>L. {{ number_format($e_suma_total_precio,2,',','.') }}</b></td>
         <td><b></b></td>
     </tr>
         @php
@@ -179,7 +179,7 @@
     <td></td>
     <td></td>
     <td style="color: blue; font-size: 10px; font-family: Arial" colspan="3"><b>Total Ordinario Planilla</b></td>
-    <td style="color: red; font-size: 10px; font-family: Arial"><b>L. {{ number_format($e_suma_neto_precio,2) }}</b></td>
+    <td style="color: red; font-size: 10px; font-family: Arial"><b>L. {{ number_format($e_suma_neto_precio,2,',','.') }}</b></td>
     <td></td>
 </tr>
 <tr></tr>
@@ -193,6 +193,6 @@
     <td></td>
     <td></td>
     <td style="color: red; font-size: 10px; font-family: Arial;text-align: center"><b>G.T.</b></td>
-    <td style="color: red; font-size: 10px; font-family: Arial;text-align: center"><b>L. {{ number_format($e_suma_neto_precio,2) }}</b></td>
+    <td style="color: red; font-size: 10px; font-family: Arial;text-align: center"><b>L. {{ number_format($e_suma_neto_precio,2,',','.') }}</b></td>
 </tr>
 

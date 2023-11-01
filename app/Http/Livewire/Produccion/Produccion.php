@@ -2,6 +2,7 @@
 
 namespace App\Http\Livewire\Produccion;
 
+use App\Imports\ProduccionMaterialesImport;
 use App\Imports\ProducidoImport;
 use App\Imports\ProducidoPendienteImport;
 use App\Imports\ProducidoPreciosImport;
@@ -149,6 +150,8 @@ class Produccion extends Component
         $this->validate([
             'select_file' => 'max:1024', // 1MB Max
         ]);
+        //(new ProduccionMaterialesImport)->import($this->select_file);
+
         (new ProducidoRehechosImport)->import($this->select_file);
     }
 

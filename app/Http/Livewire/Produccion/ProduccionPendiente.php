@@ -47,6 +47,8 @@ class ProduccionPendiente extends Component
         'produc_pendiente.orden_sistema' => 'required',
         'produc_pendiente.fecha_recibido' => 'required|date',
         'produc_pendiente.cantidad' => 'required|integer|min:0',
+        'produc_pendiente.observacion' => 'max:255',
+        'produc_pendiente.prioridad' => 'integer|min:0',
     ];
 
     public $presentacionn = "";
@@ -72,6 +74,8 @@ class ProduccionPendiente extends Component
 
     public $por_pagina = 50;
     public $total = 0;
+
+    public $prioridad = true;
 
     public function mount() {
 
@@ -132,7 +136,7 @@ class ProduccionPendiente extends Component
         $var4 = $this->tipo4?$this->tipo4:'';
 
         $da = DB::select(
-            'CALL `buscar_produccion_pendiente`(?, ?, ?, ?, ?, ?, ?, ?, ?,?,?)',
+            'CALL `buscar_produccion_pendiente`(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)',
             [
                 $this->b_ordenes,
                 $this->b_fechas,
@@ -145,11 +149,12 @@ class ProduccionPendiente extends Component
                 $this->por_pagina,
                 $var1.$var2.$var3.$var4.'Sin Presentacion',
                 $this->b_color,
+                $this->prioridad,
             ]
         );
 
         $this->total = DB::select(
-            'CALL `buscar_produccion_pendiente_conteo`(?, ?, ?, ?, ?, ?, ?,?,?)',
+            'CALL `buscar_produccion_pendiente_conteo`(?, ?, ?, ?, ?, ?, ?, ?, ?, ?)',
             [
                 $this->b_ordenes,
                 $this->b_fechas,
@@ -160,6 +165,7 @@ class ProduccionPendiente extends Component
                 $this->b_capas,
                 $var1.$var2.$var3.$var4.'Sin Presentacion',
                 $this->b_color,
+                $this->prioridad,
             ]
         )[0]->total;
 
@@ -175,6 +181,10 @@ class ProduccionPendiente extends Component
             'historial' => $usosArray2,
             'pendiente' => new LengthAwarePaginator($da,  $this->total , $this->por_pagina)
         ])->extends('layouts.produccion.produccion-menu')->section('contenido');
+    }
+
+    public function mostrar_prioridad() {
+        $this->prioridad = !$this->prioridad;
     }
 
 

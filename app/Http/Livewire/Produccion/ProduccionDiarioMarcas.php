@@ -119,7 +119,7 @@ class ProduccionDiarioMarcas extends Component
         }
 
     }
-    
+
     public function agregar_revisador_modulo(ProduccionDiarioModulos $modulo,$id,$num) {
         if ($num == 1) {
             $modulo->id_revisador1 = $id;
@@ -136,6 +136,12 @@ class ProduccionDiarioMarcas extends Component
             $modulo->id_revisador2 = null;
         }
         $modulo->save();
+    }
+
+    public function imprimir_reporte(){
+
+        return Excel::download(new ProduccionEmpleadoExport(collect($da)), 'Empleados.xlsx');
+
     }
 
 

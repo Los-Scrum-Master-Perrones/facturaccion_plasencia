@@ -275,13 +275,12 @@
                                     <td>{{ $detalles->orden }}</td>
                                     <td>{{ $detalles->pen_pendiente }}</td>
                                     <td>{{ $detalles->orden_restante }}</td>
-
                                     <td>{{ $detalles->total_bruto }}</td>
                                     <td>{{ $detalles->total_neto }}</td>
-                                    <td>{{ $detalles->precio_producto }}</td>
-
-
-                                    <td><b></b></td>
+                                    <td></td>
+                                    <td style="text-align: right">
+                                        <b>{{ number_format($detalles->costo_promedio, 4) }}</b>
+                                    </td>
                                     <td style="text-align: center">-</td>
                                     @if (auth()->user()->rol == -1)
                                     @else

@@ -47,11 +47,9 @@
                                     </svg>
                                 </abbr>
                             </a>
-                            <button class="btn btn-outline-warning" onclick="exportar_materiales()">
-                                <abbr title="Exportar Solo Materiales">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-list-columns-reverse" viewBox="0 0 16 16">
-                                        <path fill-rule="evenodd" d="M0 .5A.5.5 0 0 1 .5 0h2a.5.5 0 0 1 0 1h-2A.5.5 0 0 1 0 .5Zm4 0a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1h-10A.5.5 0 0 1 4 .5Zm-4 2A.5.5 0 0 1 .5 2h2a.5.5 0 0 1 0 1h-2a.5.5 0 0 1-.5-.5Zm4 0a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 0 1h-9a.5.5 0 0 1-.5-.5Zm-4 2A.5.5 0 0 1 .5 4h2a.5.5 0 0 1 0 1h-2a.5.5 0 0 1-.5-.5Zm4 0a.5.5 0 0 1 .5-.5h11a.5.5 0 0 1 0 1h-11a.5.5 0 0 1-.5-.5Zm-4 2A.5.5 0 0 1 .5 6h2a.5.5 0 0 1 0 1h-2a.5.5 0 0 1-.5-.5Zm4 0a.5.5 0 0 1 .5-.5h8a.5.5 0 0 1 0 1h-8a.5.5 0 0 1-.5-.5Zm-4 2A.5.5 0 0 1 .5 8h2a.5.5 0 0 1 0 1h-2a.5.5 0 0 1-.5-.5Zm4 0a.5.5 0 0 1 .5-.5h8a.5.5 0 0 1 0 1h-8a.5.5 0 0 1-.5-.5Zm-4 2a.5.5 0 0 1 .5-.5h2a.5.5 0 0 1 0 1h-2a.5.5 0 0 1-.5-.5Zm4 0a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1h-10a.5.5 0 0 1-.5-.5Zm-4 2a.5.5 0 0 1 .5-.5h2a.5.5 0 0 1 0 1h-2a.5.5 0 0 1-.5-.5Zm4 0a.5.5 0 0 1 .5-.5h6a.5.5 0 0 1 0 1h-6a.5.5 0 0 1-.5-.5Zm-4 2a.5.5 0 0 1 .5-.5h2a.5.5 0 0 1 0 1h-2a.5.5 0 0 1-.5-.5Zm4 0a.5.5 0 0 1 .5-.5h11a.5.5 0 0 1 0 1h-11a.5.5 0 0 1-.5-.5Z" />
-                                    </svg>
+                            <button class="btn btn-outline-warning" wire:click="mostrar_prioridad()">
+                                <abbr title="Prioridades">
+                                    <img width="20" height="20" src="https://img.icons8.com/3d-fluency/94/high-priority.png" alt="high-priority"/>
                                 </abbr>
                             </button>
 
@@ -301,6 +299,7 @@
                         <th>VITOLA</th>
                         <th>CAPA</th>
                         <th>COLOR</th>
+                        <th>PRIORIDAD</th>
                         <th>PENDIENTE</th>
                         <th>PRODUCIDO</th>
                         <th>RESTANTE</th>
@@ -341,7 +340,8 @@
                         $diferencia_dias = $dias_habiles;
                         @endphp
                         <td>{{ $diferencia_dias }}</td>
-                        <td></td>
+                        <td>{{ $detalle->observacion }}</td>
+
                         <td>{{ $detalle->presentacion }}</td>
                         <td>{{ $detalle->mes }}</td>
                         <td style="width:200px">{{ $detalle->marca }}</td>
@@ -349,6 +349,17 @@
                         <td>{{ $detalle->vitola }}</td>
                         <td>{{ $detalle->capa }}</td>
                         <td>{{ $detalle->color }}</td>
+                        <td class="text-center">
+                            @if( $detalle->prioridad > 0)
+                                @if( $detalle->prioridad_completo > 0)
+                                    <div class="alert alert-danger text-center" role="alert"><b>{{ $detalle->prioridad }}</b></div>
+                                @else
+                                    <div class="alert alert-success text-center" role="alert"><b>{{ $detalle->prioridad }}</b></div>
+                                @endif
+                            @else
+                                {{ $detalle->prioridad }}
+                            @endif
+                        </td>
                         <td style="text-align:right;">{{ $detalle->pendiente }}</td>
                         <td style="text-align:right;">{{ $detalle->pendiente - $detalle->restantes }}
                             @php
@@ -370,7 +381,6 @@
                                     @if($porcentaje>=75 && $porcentaje <= 100)
                                         bg-success
                                     @endif
-
                                     " role="progressbar" style="width: {{ $porcentaje }}%;" aria-valuenow="{{ $porcentaje  }}" aria-valuemin="0" aria-valuemax="100" style="color: black">
                                     {{ number_format($porcentaje,0) }}%
                                 </div>
@@ -494,7 +504,12 @@
                     <div class="row">
                         <div class="mb-3 col">
                             <label for="txt_figuraytipo" class="form-label">Observación</label>
-                            <input name="observacion2" id="observacion2" class="form-control" type="text"
+                            <input name="observacion2" id="observacion2" class="form-control" type="text" wire:model.defer='produc_pendiente.observacion'
+                                autocomplete="off">
+                        </div>
+                        <div class="mb-3 col">
+                            <label for="txt_figuraytipo" class="form-label">Prioridad</label>
+                            <input name="prioridad" id="prioridad" class="form-control" type="text" wire:model.defer='produc_pendiente.prioridad'
                                 autocomplete="off">
                         </div>
                     </div>
