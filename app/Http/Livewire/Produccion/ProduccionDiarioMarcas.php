@@ -2,10 +2,12 @@
 
 namespace App\Http\Livewire\Produccion;
 
+use App\Exports\ProduccionModulosEmpleadoExport;
 use App\Models\ProduccionDiarioModulos;
 use App\Models\ProduccionDiarioProducir;
 use Illuminate\Support\Facades\DB;
 use Livewire\Component;
+use Maatwebsite\Excel\Facades\Excel;
 
 class ProduccionDiarioMarcas extends Component
 {
@@ -138,11 +140,13 @@ class ProduccionDiarioMarcas extends Component
         $modulo->save();
     }
 
-    public function imprimir_reporte(){
+    public function imprimir_planificacion(){
 
-        return Excel::download(new ProduccionEmpleadoExport(collect($da)), 'Empleados.xlsx');
-
+        $modulos = DB::select('call buscar_produccion_empleado_planificacion_modulos()');
+        return Excel::download(new ProduccionModulosEmpleadoExport($modulos), 'Reporte diario de marcas a producir.xlsx');
     }
+
+
 
 
 

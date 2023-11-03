@@ -1,11 +1,7 @@
 <div class="container-fluid" style="height: 90vh">
     <div class="row">
-        <div class="col-md-4" @if(count($empleados)==0)
-            hidden
-        @else
-
-        @endif>
-            <div class="card" style="height: 90vh;" >
+        <div class="col-md-4" @if (count($empleados) == 0) hidden @else @endif>
+            <div class="card" style="height: 90vh;">
                 <div class="card-body">
                     <div class="table-responsive" style="height: 87vh;">
                         <table class="table table-hover table-sm">
@@ -27,18 +23,21 @@
                             </thead>
                             <tbody>
                                 @foreach ($empleados as $empleado)
-                                <tr class="text-center">
-                                    <td style="width: 60px">{{ $empleado->codigo }}</td>
-                                    <td style="width: 60px">{{ $empleado->rol }}</td>
-                                    <td>{{ $empleado->nombre }}</td>
-                                    <td>
-                                        <a href="#" style="text-decoration: none">
-                                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-90deg-right" viewBox="0 0 16 16">
-                                                <path fill-rule="evenodd" d="M14.854 4.854a.5.5 0 0 0 0-.708l-4-4a.5.5 0 0 0-.708.708L13.293 4H3.5A2.5 2.5 0 0 0 1 6.5v8a.5.5 0 0 0 1 0v-8A1.5 1.5 0 0 1 3.5 5h9.793l-3.147 3.146a.5.5 0 0 0 .708.708l4-4z"/>
-                                            </svg>
-                                        </a>
-                                    </td>
-                                </tr>
+                                    <tr class="text-center">
+                                        <td style="width: 60px">{{ $empleado->codigo }}</td>
+                                        <td style="width: 60px">{{ $empleado->rol }}</td>
+                                        <td>{{ $empleado->nombre }}</td>
+                                        <td>
+                                            <a href="#" style="text-decoration: none">
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                                    fill="currentColor" class="bi bi-arrow-90deg-right"
+                                                    viewBox="0 0 16 16">
+                                                    <path fill-rule="evenodd"
+                                                        d="M14.854 4.854a.5.5 0 0 0 0-.708l-4-4a.5.5 0 0 0-.708.708L13.293 4H3.5A2.5 2.5 0 0 0 1 6.5v8a.5.5 0 0 0 1 0v-8A1.5 1.5 0 0 1 3.5 5h9.793l-3.147 3.146a.5.5 0 0 0 .708.708l4-4z" />
+                                                </svg>
+                                            </a>
+                                        </td>
+                                    </tr>
                                 @endforeach
                             </tbody>
                         </table>
@@ -46,36 +45,33 @@
                 </div>
             </div>
         </div>
-        <div @if(count($empleados)==0)
-        class="col-md-12"
-    @else
-    class="col-md-8"
-    @endif>
+        <div @if (count($empleados) == 0) class="col-md-12" @else class="col-md-8" @endif>
             <ul class="nav nav-tabs justify-content-center">
                 @php
                     $moduloactual = [];
                 @endphp
                 @foreach ($modulos as $modulo)
-                <li class="nav-item">
-                    <a class="nav-link @if($modulo_actual == $modulo->id)
-                        active
+                    <li class="nav-item">
+                        <a class="nav-link @if ($modulo_actual == $modulo->id) active
 
                         @php
                             $moduloactual = $modulo;
                         @endphp
-                    @else
-
-                    @endif fs-7" href="#" wire:click="cambiar_modulo({{ $modulo->id }})"><strong>{{ $modulo->nombre }}</strong></a>
-                </li>
+                    @else @endif fs-7"
+                            href="#"
+                            wire:click="cambiar_modulo({{ $modulo->id }})"><strong>{{ $modulo->nombre }}</strong></a>
+                    </li>
                 @endforeach
-                @if($modulo->nombre == 'Modulo 7')
-
+                @if ($modulo->nombre == 'Modulo 7')
                 @else
                     <li class="nav-item">
                         <a class="nav-link fs-7 active" href="#" wire:click="agregar_nuevo_modulo()">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-bag-plus" viewBox="0 0 16 16">
-                                <path fill-rule="evenodd" d="M8 7.5a.5.5 0 0 1 .5.5v1.5H10a.5.5 0 0 1 0 1H8.5V12a.5.5 0 0 1-1 0v-1.5H6a.5.5 0 0 1 0-1h1.5V8a.5.5 0 0 1 .5-.5z"/>
-                                <path d="M8 1a2.5 2.5 0 0 1 2.5 2.5V4h-5v-.5A2.5 2.5 0 0 1 8 1zm3.5 3v-.5a3.5 3.5 0 1 0-7 0V4H1v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V4h-3.5zM2 5h12v9a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V5z"/>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                                class="bi bi-bag-plus" viewBox="0 0 16 16">
+                                <path fill-rule="evenodd"
+                                    d="M8 7.5a.5.5 0 0 1 .5.5v1.5H10a.5.5 0 0 1 0 1H8.5V12a.5.5 0 0 1-1 0v-1.5H6a.5.5 0 0 1 0-1h1.5V8a.5.5 0 0 1 .5-.5z" />
+                                <path
+                                    d="M8 1a2.5 2.5 0 0 1 2.5 2.5V4h-5v-.5A2.5 2.5 0 0 1 8 1zm3.5 3v-.5a3.5 3.5 0 1 0-7 0V4H1v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V4h-3.5zM2 5h12v9a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V5z" />
                             </svg>
                         </a>
                     </li>
@@ -84,28 +80,35 @@
                 <li class="nav-item">
                     <a class="nav-link fs-7 active" href="#">
                         <abbr title="Etiquetas de Mesas">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-tag-fill" viewBox="0 0 16 16">
-                                <path d="M2 1a1 1 0 0 0-1 1v4.586a1 1 0 0 0 .293.707l7 7a1 1 0 0 0 1.414 0l4.586-4.586a1 1 0 0 0 0-1.414l-7-7A1 1 0 0 0 6.586 1H2zm4 3.5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0z"/>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                                class="bi bi-tag-fill" viewBox="0 0 16 16">
+                                <path
+                                    d="M2 1a1 1 0 0 0-1 1v4.586a1 1 0 0 0 .293.707l7 7a1 1 0 0 0 1.414 0l4.586-4.586a1 1 0 0 0 0-1.414l-7-7A1 1 0 0 0 6.586 1H2zm4 3.5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0z" />
                             </svg>
                         </abbr>
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link fs-7 active" href="#">
+                    <a class="nav-link fs-7 active" href="#" onclick="vinetas()">
                         <abbr title="Etiquetas de las maletas">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-tags" viewBox="0 0 16 16">
-                                <path d="M3 2v4.586l7 7L14.586 9l-7-7H3zM2 2a1 1 0 0 1 1-1h4.586a1 1 0 0 1 .707.293l7 7a1 1 0 0 1 0 1.414l-4.586 4.586a1 1 0 0 1-1.414 0l-7-7A1 1 0 0 1 2 6.586V2z"/>
-                                <path d="M5.5 5a.5.5 0 1 1 0-1 .5.5 0 0 1 0 1zm0 1a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3zM1 7.086a1 1 0 0 0 .293.707L8.75 15.25l-.043.043a1 1 0 0 1-1.414 0l-7-7A1 1 0 0 1 0 7.586V3a1 1 0 0 1 1-1v5.086z"/>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                                class="bi bi-tags" viewBox="0 0 16 16">
+                                <path
+                                    d="M3 2v4.586l7 7L14.586 9l-7-7H3zM2 2a1 1 0 0 1 1-1h4.586a1 1 0 0 1 .707.293l7 7a1 1 0 0 1 0 1.414l-4.586 4.586a1 1 0 0 1-1.414 0l-7-7A1 1 0 0 1 2 6.586V2z" />
+                                <path
+                                    d="M5.5 5a.5.5 0 1 1 0-1 .5.5 0 0 1 0 1zm0 1a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3zM1 7.086a1 1 0 0 0 .293.707L8.75 15.25l-.043.043a1 1 0 0 1-1.414 0l-7-7A1 1 0 0 1 0 7.586V3a1 1 0 0 1 1-1v5.086z" />
                             </svg>
                         </abbr>
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link fs-7 active" href="#">
+                    <a class="nav-link fs-7 active" href="#" wire:click='imprimir_planificacion()'>
                         <abbr title="Exportar planificacion">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-file-earmark-spreadsheet-fill" viewBox="0 0 16 16">
-                                <path d="M6 12v-2h3v2H6z"/>
-                                <path d="M9.293 0H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V4.707A1 1 0 0 0 13.707 4L10 .293A1 1 0 0 0 9.293 0zM9.5 3.5v-2l3 3h-2a1 1 0 0 1-1-1zM3 9h10v1h-3v2h3v1h-3v2H9v-2H6v2H5v-2H3v-1h2v-2H3V9z"/>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                                class="bi bi-file-earmark-spreadsheet-fill" viewBox="0 0 16 16">
+                                <path d="M6 12v-2h3v2H6z" />
+                                <path
+                                    d="M9.293 0H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V4.707A1 1 0 0 0 13.707 4L10 .293A1 1 0 0 0 9.293 0zM9.5 3.5v-2l3 3h-2a1 1 0 0 1-1-1zM3 9h10v1h-3v2h3v1h-3v2H9v-2H6v2H5v-2H3v-1h2v-2H3V9z" />
                             </svg>
                         </abbr>
                     </a>
@@ -118,38 +121,49 @@
                             <label for="">Revisadores</label>
                         </div>
                         <div class="col-md-5">
-                            @if(is_null($moduloactual->revisador1))
-                            @isset($revisador['revisador'])
-                            <select class="form-control form-control-sm" name="" id="revisador_1" onchange="agregar_revisador_modulo({{ $moduloactual->id }},'revisador_1',1)">
-                                <option value="">Selecione</option>
-                                @foreach ($revisador['revisador'] as $revisa)
-                                    <option value="{{ $revisa->id }}">{{ $revisa->codigo.' - '.$revisa->nombre }}</option>
-                                @endforeach
-                            </select>
-                            @endisset
+                            @if (is_null($moduloactual->revisador1))
+                                @isset($revisador['revisador'])
+                                    <select class="form-control form-control-sm" name="" id="revisador_1"
+                                        onchange="agregar_revisador_modulo({{ $moduloactual->id }},'revisador_1',1)">
+                                        <option value="">Selecione</option>
+                                        @foreach ($revisador['revisador'] as $revisa)
+                                            <option value="{{ $revisa->id }}">
+                                                {{ $revisa->codigo . ' - ' . $revisa->nombre }}
+                                            </option>
+                                        @endforeach
+                                    </select>
+                                @endisset
                             @else
-                                <a href="#" style="text-decoration: none" wire:click="eliminar_revisador_modulo({{ $moduloactual->id }},1)">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash3-fill" viewBox="0 0 16 16">
-                                        <path d="M11 1.5v1h3.5a.5.5 0 0 1 0 1h-.538l-.853 10.66A2 2 0 0 1 11.115 16h-6.23a2 2 0 0 1-1.994-1.84L2.038 3.5H1.5a.5.5 0 0 1 0-1H5v-1A1.5 1.5 0 0 1 6.5 0h3A1.5 1.5 0 0 1 11 1.5Zm-5 0v1h4v-1a.5.5 0 0 0-.5-.5h-3a.5.5 0 0 0-.5.5ZM4.5 5.029l.5 8.5a.5.5 0 1 0 .998-.06l-.5-8.5a.5.5 0 1 0-.998.06Zm6.53-.528a.5.5 0 0 0-.528.47l-.5 8.5a.5.5 0 0 0 .998.058l.5-8.5a.5.5 0 0 0-.47-.528ZM8 4.5a.5.5 0 0 0-.5.5v8.5a.5.5 0 0 0 1 0V5a.5.5 0 0 0-.5-.5Z"/>
+                                <a href="#" style="text-decoration: none"
+                                    wire:click="eliminar_revisador_modulo({{ $moduloactual->id }},1)">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                        fill="currentColor" class="bi bi-trash3-fill" viewBox="0 0 16 16">
+                                        <path
+                                            d="M11 1.5v1h3.5a.5.5 0 0 1 0 1h-.538l-.853 10.66A2 2 0 0 1 11.115 16h-6.23a2 2 0 0 1-1.994-1.84L2.038 3.5H1.5a.5.5 0 0 1 0-1H5v-1A1.5 1.5 0 0 1 6.5 0h3A1.5 1.5 0 0 1 11 1.5Zm-5 0v1h4v-1a.5.5 0 0 0-.5-.5h-3a.5.5 0 0 0-.5.5ZM4.5 5.029l.5 8.5a.5.5 0 1 0 .998-.06l-.5-8.5a.5.5 0 1 0-.998.06Zm6.53-.528a.5.5 0 0 0-.528.47l-.5 8.5a.5.5 0 0 0 .998.058l.5-8.5a.5.5 0 0 0-.47-.528ZM8 4.5a.5.5 0 0 0-.5.5v8.5a.5.5 0 0 0 1 0V5a.5.5 0 0 0-.5-.5Z" />
                                     </svg>
                                 </a>
                                 {{ $moduloactual->revisador1 }}
                             @endif
                         </div>
                         <div class="col-md-5">
-                            @if(is_null($moduloactual->revisador2))
-                            @isset($revisador['revisador'])
-                            <select class="form-control form-control-sm" name="" id="revisador_2" onchange="agregar_revisador_modulo({{ $moduloactual->id }},'revisador_2',2)">
-                                <option value="">Selecione</option>
-                                @foreach ($revisador['revisador'] as $revisa)
-                                    <option value="{{ $revisa->id }}">{{ $revisa->codigo.' - '.$revisa->nombre }}</option>
-                                @endforeach
-                            </select>
-                            @endisset
+                            @if (is_null($moduloactual->revisador2))
+                                @isset($revisador['revisador'])
+                                    <select class="form-control form-control-sm" name="" id="revisador_2"
+                                        onchange="agregar_revisador_modulo({{ $moduloactual->id }},'revisador_2',2)">
+                                        <option value="">Selecione</option>
+                                        @foreach ($revisador['revisador'] as $revisa)
+                                            <option value="{{ $revisa->id }}">
+                                                {{ $revisa->codigo . ' - ' . $revisa->nombre }}</option>
+                                        @endforeach
+                                    </select>
+                                @endisset
                             @else
-                                <a href="#" style="text-decoration: none" wire:click="eliminar_revisador_modulo({{ $moduloactual->id }},2)">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash3-fill" viewBox="0 0 16 16">
-                                        <path d="M11 1.5v1h3.5a.5.5 0 0 1 0 1h-.538l-.853 10.66A2 2 0 0 1 11.115 16h-6.23a2 2 0 0 1-1.994-1.84L2.038 3.5H1.5a.5.5 0 0 1 0-1H5v-1A1.5 1.5 0 0 1 6.5 0h3A1.5 1.5 0 0 1 11 1.5Zm-5 0v1h4v-1a.5.5 0 0 0-.5-.5h-3a.5.5 0 0 0-.5.5ZM4.5 5.029l.5 8.5a.5.5 0 1 0 .998-.06l-.5-8.5a.5.5 0 1 0-.998.06Zm6.53-.528a.5.5 0 0 0-.528.47l-.5 8.5a.5.5 0 0 0 .998.058l.5-8.5a.5.5 0 0 0-.47-.528ZM8 4.5a.5.5 0 0 0-.5.5v8.5a.5.5 0 0 0 1 0V5a.5.5 0 0 0-.5-.5Z"/>
+                                <a href="#" style="text-decoration: none"
+                                    wire:click="eliminar_revisador_modulo({{ $moduloactual->id }},2)">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                        fill="currentColor" class="bi bi-trash3-fill" viewBox="0 0 16 16">
+                                        <path
+                                            d="M11 1.5v1h3.5a.5.5 0 0 1 0 1h-.538l-.853 10.66A2 2 0 0 1 11.115 16h-6.23a2 2 0 0 1-1.994-1.84L2.038 3.5H1.5a.5.5 0 0 1 0-1H5v-1A1.5 1.5 0 0 1 6.5 0h3A1.5 1.5 0 0 1 11 1.5Zm-5 0v1h4v-1a.5.5 0 0 0-.5-.5h-3a.5.5 0 0 0-.5.5ZM4.5 5.029l.5 8.5a.5.5 0 1 0 .998-.06l-.5-8.5a.5.5 0 1 0-.998.06Zm6.53-.528a.5.5 0 0 0-.528.47l-.5 8.5a.5.5 0 0 0 .998.058l.5-8.5a.5.5 0 0 0-.47-.528ZM8 4.5a.5.5 0 0 0-.5.5v8.5a.5.5 0 0 0 1 0V5a.5.5 0 0 0-.5-.5Z" />
                                     </svg>
                                 </a>
                                 {{ $moduloactual->revisador2 }}
@@ -181,103 +195,134 @@
                                     <td></td>
                                     <td colspan="2" class="text-center">
                                         @isset($boncheros['boncheros'])
-                                        <select class="form-control form-control-sm" name="" id="empleadon" onchange="agregar_nueva_tupla(1,'empleadon')">
-                                            <option value="">Selecione</option>
-                                            @foreach ($boncheros['boncheros'] as $bonche)
-                                                <option value="{{ $bonche->id }}">{{ $bonche->codigo.' - '.$bonche->nombre }}</option>
-                                            @endforeach
-                                        </select>
+                                            <select class="form-control form-control-sm" name="" id="empleadon"
+                                                onchange="agregar_nueva_tupla(1,'empleadon')">
+                                                <option value="">Selecione</option>
+                                                @foreach ($boncheros['boncheros'] as $bonche)
+                                                    <option value="{{ $bonche->id }}">
+                                                        {{ $bonche->codigo . ' - ' . $bonche->nombre }}</option>
+                                                @endforeach
+                                            </select>
                                         @endisset
                                     </td>
                                     <td colspan="2" class="text-center">
                                         @isset($roleros['roleros'])
-                                        <select class="form-control form-control-sm" name="" id="empleadon2" onchange="agregar_nueva_tupla(2,'empleadon2')">
-                                            <option value="">Selecione</option>
-                                            @foreach ($roleros['roleros'] as $rolero)
-                                                <option value="{{ $rolero->id }}">{{ $rolero->codigo.' - '.$rolero->nombre }}</option>
-                                            @endforeach
-                                        </select>
+                                            <select class="form-control form-control-sm" name="" id="empleadon2"
+                                                onchange="agregar_nueva_tupla(2,'empleadon2')">
+                                                <option value="">Selecione</option>
+                                                @foreach ($roleros['roleros'] as $rolero)
+                                                    <option value="{{ $rolero->id }}">
+                                                        {{ $rolero->codigo . ' - ' . $rolero->nombre }}</option>
+                                                @endforeach
+                                            </select>
                                         @endisset
                                     </td>
                                     <td colspan="2" class="text-center"></td>
                                     <td colspan="2" class="text-center"></td>
                                 </tr>
                                 @foreach ($modulo_empleado as $key => $emple)
-                                <tr>
-                                    <td>{{ ++$key }}</td>
-                                    @if(is_null($emple->codigo_empleaado))
-                                        <td colspan="2" class="text-center">
-                                            @isset($boncheros['boncheros'])
-                                            <select class="form-control form-control-sm" name="" id="empleado{{ $emple->id }}" onchange="agregar_empleado({{ $emple->id }},1,'empleado{{ $emple->id }}')">
-                                                <option value="">Selecione</option>
-                                                @foreach ($boncheros['boncheros'] as $bonche)
-                                                    <option value="{{ $bonche->id }}">{{ $bonche->codigo.' - '.$bonche->nombre }}</option>
-                                                @endforeach
-                                            </select>
-                                            @endisset
-                                        </td>
-                                    @else
-                                        <td>
-                                            <a href="#" style="text-decoration: none" wire:click="eliminar_detalle({{ $emple->id }},1)">
-                                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash3-fill" viewBox="0 0 16 16">
-                                                    <path d="M11 1.5v1h3.5a.5.5 0 0 1 0 1h-.538l-.853 10.66A2 2 0 0 1 11.115 16h-6.23a2 2 0 0 1-1.994-1.84L2.038 3.5H1.5a.5.5 0 0 1 0-1H5v-1A1.5 1.5 0 0 1 6.5 0h3A1.5 1.5 0 0 1 11 1.5Zm-5 0v1h4v-1a.5.5 0 0 0-.5-.5h-3a.5.5 0 0 0-.5.5ZM4.5 5.029l.5 8.5a.5.5 0 1 0 .998-.06l-.5-8.5a.5.5 0 1 0-.998.06Zm6.53-.528a.5.5 0 0 0-.528.47l-.5 8.5a.5.5 0 0 0 .998.058l.5-8.5a.5.5 0 0 0-.47-.528ZM8 4.5a.5.5 0 0 0-.5.5v8.5a.5.5 0 0 0 1 0V5a.5.5 0 0 0-.5-.5Z"/>
-                                                </svg>
-                                            </a>
-                                            {{ $emple->codigo_empleaado }}</td>
-                                        <td>{{ $emple->nombre_empleado }}</td>
-                                    @endif
-                                    @if(is_null($emple->codigo_empleaado2))
-                                    <td colspan="2" class="text-center">
-                                        @isset($roleros['roleros'])
-                                        <select class="form-control form-control-sm" name="" id="empleado2{{ $emple->id }}" onchange="agregar_empleado({{ $emple->id }},2,'empleado2{{ $emple->id }}')">
-                                            <option value="">Selecione</option>
-                                            @foreach ($roleros['roleros'] as $rolero)
-                                                <option value="{{ $rolero->id }}">{{ $rolero->codigo.' - '.$rolero->nombre }}</option>
-                                            @endforeach
-                                        </select>
-                                        @endisset
-                                    </td>
-                                    @else
-                                        <td>
-                                            <a href="#" style="text-decoration: none" wire:click="eliminar_detalle({{ $emple->id }},2)">
-                                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash3-fill" viewBox="0 0 16 16">
-                                                    <path d="M11 1.5v1h3.5a.5.5 0 0 1 0 1h-.538l-.853 10.66A2 2 0 0 1 11.115 16h-6.23a2 2 0 0 1-1.994-1.84L2.038 3.5H1.5a.5.5 0 0 1 0-1H5v-1A1.5 1.5 0 0 1 6.5 0h3A1.5 1.5 0 0 1 11 1.5Zm-5 0v1h4v-1a.5.5 0 0 0-.5-.5h-3a.5.5 0 0 0-.5.5ZM4.5 5.029l.5 8.5a.5.5 0 1 0 .998-.06l-.5-8.5a.5.5 0 1 0-.998.06Zm6.53-.528a.5.5 0 0 0-.528.47l-.5 8.5a.5.5 0 0 0 .998.058l.5-8.5a.5.5 0 0 0-.47-.528ZM8 4.5a.5.5 0 0 0-.5.5v8.5a.5.5 0 0 0 1 0V5a.5.5 0 0 0-.5-.5Z"/>
-                                                </svg>
-                                            </a>
-                                            {{ $emple->codigo_empleaado2 }}</td>
-                                        <td>{{ $emple->nombre_empleado2 }}</td>
-                                    @endif
-                                    <td>{{ $emple->orden_sistema }}</td>
-                                    @if(is_null($emple->marca))
-                                        <td colspan="2" class="text-center"><button class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#modal_agregar_marca" onclick="seleccionar_tupla({{ $emple->id  }})">Agregar Marca</button></td>
-                                    @else
-                                        <td>{{ $emple->vitola.' '.$emple->nombre }}</td>
-                                        <td>{{ $emple->marca }}</b>
-                                            <a href="#" style="text-decoration: none" wire:click="eliminar_detalle({{ $emple->id }},3)">
-                                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash3-fill" viewBox="0 0 16 16">
-                                                    <path d="M11 1.5v1h3.5a.5.5 0 0 1 0 1h-.538l-.853 10.66A2 2 0 0 1 11.115 16h-6.23a2 2 0 0 1-1.994-1.84L2.038 3.5H1.5a.5.5 0 0 1 0-1H5v-1A1.5 1.5 0 0 1 6.5 0h3A1.5 1.5 0 0 1 11 1.5Zm-5 0v1h4v-1a.5.5 0 0 0-.5-.5h-3a.5.5 0 0 0-.5.5ZM4.5 5.029l.5 8.5a.5.5 0 1 0 .998-.06l-.5-8.5a.5.5 0 1 0-.998.06Zm6.53-.528a.5.5 0 0 0-.528.47l-.5 8.5a.5.5 0 0 0 .998.058l.5-8.5a.5.5 0 0 0-.47-.528ZM8 4.5a.5.5 0 0 0-.5.5v8.5a.5.5 0 0 0 1 0V5a.5.5 0 0 0-.5-.5Z"/>
-                                                </svg>
-                                            </a>
-                                        </td>
-
-                                    @endif
-                                    <td><b>{{ $emple->restantes }}</td>
-                                    <td>
-                                        <input value="{{ $emple->tareas }}" type="number" id="tearea{{ $emple->id }}" onchange="agregar_nueva_tarea({{ $emple->id }},'#tearea{{ $emple->id }}')" class="form-control form-control-sm form-control-color" style="width: 4rem;">
-                                    </td>
-                                    <td>
-                                        @if($emple->tareas == 0 || is_null($emple->marca))
-                                            0
+                                    <tr>
+                                        <td>{{ ++$key }}</td>
+                                        @if (is_null($emple->codigo_empleaado))
+                                            <td colspan="2" class="text-center">
+                                                @isset($boncheros['boncheros'])
+                                                    <select class="form-control form-control-sm" name=""
+                                                        id="empleado{{ $emple->id }}"
+                                                        onchange="agregar_empleado({{ $emple->id }},1,'empleado{{ $emple->id }}')">
+                                                        <option value="">Selecione</option>
+                                                        @foreach ($boncheros['boncheros'] as $bonche)
+                                                            <option value="{{ $bonche->id }}">
+                                                                {{ $bonche->codigo . ' - ' . $bonche->nombre }}</option>
+                                                        @endforeach
+                                                    </select>
+                                                @endisset
+                                            </td>
                                         @else
-                                            @php
-                                                $n = $emple->por_empleado / $emple->tareas;
-                                                $whole = floor($n); // 1
-                                                $fraction = $n - $whole; // .25
-                                            @endphp
-                                            {{ number_format($n , 0).'d y '. number_format(($fraction )*8, 0).'h' }}
+                                            <td>
+                                                <a href="#" style="text-decoration: none"
+                                                    wire:click="eliminar_detalle({{ $emple->id }},1)">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="16"
+                                                        height="16" fill="currentColor" class="bi bi-trash3-fill"
+                                                        viewBox="0 0 16 16">
+                                                        <path
+                                                            d="M11 1.5v1h3.5a.5.5 0 0 1 0 1h-.538l-.853 10.66A2 2 0 0 1 11.115 16h-6.23a2 2 0 0 1-1.994-1.84L2.038 3.5H1.5a.5.5 0 0 1 0-1H5v-1A1.5 1.5 0 0 1 6.5 0h3A1.5 1.5 0 0 1 11 1.5Zm-5 0v1h4v-1a.5.5 0 0 0-.5-.5h-3a.5.5 0 0 0-.5.5ZM4.5 5.029l.5 8.5a.5.5 0 1 0 .998-.06l-.5-8.5a.5.5 0 1 0-.998.06Zm6.53-.528a.5.5 0 0 0-.528.47l-.5 8.5a.5.5 0 0 0 .998.058l.5-8.5a.5.5 0 0 0-.47-.528ZM8 4.5a.5.5 0 0 0-.5.5v8.5a.5.5 0 0 0 1 0V5a.5.5 0 0 0-.5-.5Z" />
+                                                    </svg>
+                                                </a>
+                                                {{ $emple->codigo_empleaado }}
+                                            </td>
+                                            <td>{{ $emple->nombre_empleado }}</td>
                                         @endif
-                                    </td>
-                                </tr>
+                                        @if (is_null($emple->codigo_empleaado2))
+                                            <td colspan="2" class="text-center">
+                                                @isset($roleros['roleros'])
+                                                    <select class="form-control form-control-sm" name=""
+                                                        id="empleado2{{ $emple->id }}"
+                                                        onchange="agregar_empleado({{ $emple->id }},2,'empleado2{{ $emple->id }}')">
+                                                        <option value="">Selecione</option>
+                                                        @foreach ($roleros['roleros'] as $rolero)
+                                                            <option value="{{ $rolero->id }}">
+                                                                {{ $rolero->codigo . ' - ' . $rolero->nombre }}</option>
+                                                        @endforeach
+                                                    </select>
+                                                @endisset
+                                            </td>
+                                        @else
+                                            <td>
+                                                <a href="#" style="text-decoration: none"
+                                                    wire:click="eliminar_detalle({{ $emple->id }},2)">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="16"
+                                                        height="16" fill="currentColor" class="bi bi-trash3-fill"
+                                                        viewBox="0 0 16 16">
+                                                        <path
+                                                            d="M11 1.5v1h3.5a.5.5 0 0 1 0 1h-.538l-.853 10.66A2 2 0 0 1 11.115 16h-6.23a2 2 0 0 1-1.994-1.84L2.038 3.5H1.5a.5.5 0 0 1 0-1H5v-1A1.5 1.5 0 0 1 6.5 0h3A1.5 1.5 0 0 1 11 1.5Zm-5 0v1h4v-1a.5.5 0 0 0-.5-.5h-3a.5.5 0 0 0-.5.5ZM4.5 5.029l.5 8.5a.5.5 0 1 0 .998-.06l-.5-8.5a.5.5 0 1 0-.998.06Zm6.53-.528a.5.5 0 0 0-.528.47l-.5 8.5a.5.5 0 0 0 .998.058l.5-8.5a.5.5 0 0 0-.47-.528ZM8 4.5a.5.5 0 0 0-.5.5v8.5a.5.5 0 0 0 1 0V5a.5.5 0 0 0-.5-.5Z" />
+                                                    </svg>
+                                                </a>
+                                                {{ $emple->codigo_empleaado2 }}
+                                            </td>
+                                            <td>{{ $emple->nombre_empleado2 }}</td>
+                                        @endif
+                                        <td>{{ $emple->orden_sistema }}</td>
+                                        @if (is_null($emple->marca))
+                                            <td colspan="2" class="text-center"><button
+                                                    class="btn btn-primary btn-sm" data-bs-toggle="modal"
+                                                    data-bs-target="#modal_agregar_marca"
+                                                    onclick="seleccionar_tupla({{ $emple->id }})">Agregar
+                                                    Marca</button></td>
+                                        @else
+                                            <td>{{ $emple->vitola . ' ' . $emple->nombre }}</td>
+                                            <td>{{ $emple->marca }}</b>
+                                                <a href="#" style="text-decoration: none"
+                                                    wire:click="eliminar_detalle({{ $emple->id }},3)">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="16"
+                                                        height="16" fill="currentColor" class="bi bi-trash3-fill"
+                                                        viewBox="0 0 16 16">
+                                                        <path
+                                                            d="M11 1.5v1h3.5a.5.5 0 0 1 0 1h-.538l-.853 10.66A2 2 0 0 1 11.115 16h-6.23a2 2 0 0 1-1.994-1.84L2.038 3.5H1.5a.5.5 0 0 1 0-1H5v-1A1.5 1.5 0 0 1 6.5 0h3A1.5 1.5 0 0 1 11 1.5Zm-5 0v1h4v-1a.5.5 0 0 0-.5-.5h-3a.5.5 0 0 0-.5.5ZM4.5 5.029l.5 8.5a.5.5 0 1 0 .998-.06l-.5-8.5a.5.5 0 1 0-.998.06Zm6.53-.528a.5.5 0 0 0-.528.47l-.5 8.5a.5.5 0 0 0 .998.058l.5-8.5a.5.5 0 0 0-.47-.528ZM8 4.5a.5.5 0 0 0-.5.5v8.5a.5.5 0 0 0 1 0V5a.5.5 0 0 0-.5-.5Z" />
+                                                    </svg>
+                                                </a>
+                                            </td>
+                                        @endif
+                                        <td><b>{{ $emple->restantes }}</td>
+                                        <td>
+                                            <input value="{{ $emple->tareas }}" type="number"
+                                                id="tearea{{ $emple->id }}"
+                                                onchange="agregar_nueva_tarea({{ $emple->id }},'#tearea{{ $emple->id }}')"
+                                                class="form-control form-control-sm form-control-color"
+                                                style="width: 4rem;">
+                                        </td>
+                                        <td>
+                                            @if ($emple->tareas == 0 || is_null($emple->marca))
+                                                0
+                                            @else
+                                                @php
+                                                    $n = $emple->por_empleado / $emple->tareas;
+                                                    $whole = floor($n); // 1
+                                                    $fraction = $n - $whole; // .25
+                                                @endphp
+                                                {{ number_format($n, 0) . 'd y ' . number_format($fraction * 8, 0) . 'h' }}
+                                            @endif
+                                        </td>
+                                    </tr>
                                 @endforeach
                             </tbody>
                         </table>
@@ -298,7 +343,7 @@
                         aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <table class="table table-striped"  id="catalgo_pendiente">
+                    <table class="table table-striped" id="catalgo_pendiente">
                         <thead>
                             <tr style="text-align: center">
                                 <th style="width: 60px">ID(Agregar)</th>
@@ -312,7 +357,7 @@
                             @foreach ($pendiente_catalogo as $key => $pendiente)
                                 <tr>
                                     <td>
-                                        <a style="text-decoration: none" href="#"  data-bs-dismiss="modal"
+                                        <a style="text-decoration: none" href="#" data-bs-dismiss="modal"
                                             onclick="agregar_pendiente('{{ $pendiente->id }}')">
                                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
                                                 fill="currentColor" class="bi bi-database-add" viewBox="0 0 16 16">
@@ -351,34 +396,70 @@
         </div>
     </div>
 
-@push('scripts')
-    <script>
-        var id_detalles = 0;
-        function agregar_empleado(id,num,select){
-            @this.agregar_detalle(id,num,$('#'+select).val());
-        }
+    @push('scripts')
+        <script>
+            var id_detalles = 0;
 
-        function agregar_nueva_tupla(num,select){
-            @this.nueva_tupla_detalle(num,$('#'+select).val());
-        }
+            function agregar_empleado(id, num, select) {
+                @this.agregar_detalle(id, num, $('#' + select).val());
+            }
 
-        function agregar_revisador_modulo(id,select,num){
-            @this.agregar_revisador_modulo(id,$('#'+select).val(),num);
-        }
+            function agregar_nueva_tupla(num, select) {
+                @this.nueva_tupla_detalle(num, $('#' + select).val());
+            }
 
-        function agregar_nueva_tarea(id,num){
-            @this.nueva_tareas(id,$(num).val());
-        }
+            function agregar_revisador_modulo(id, select, num) {
+                @this.agregar_revisador_modulo(id, $('#' + select).val(), num);
+            }
 
-        function seleccionar_tupla(id) {
-            id_detalles = id;
-        }
+            function agregar_nueva_tarea(id, num) {
+                @this.nueva_tareas(id, $(num).val());
+            }
 
-        function agregar_pendiente(id) {
-            @this.agregar_detalle(id_detalles,3,id);
-        }
+            function seleccionar_tupla(id) {
+                id_detalles = id;
+            }
 
-        $(document).ready(function() {
+            function agregar_pendiente(id) {
+                @this.agregar_detalle(id_detalles, 3, id);
+            }
+
+            function vinetas() {
+
+                const swalWithBootstrapButtons = Swal.mixin({
+                    customClass: {
+                        confirmButton: 'btn btn-success',
+                        cancelButton: 'btn btn-danger'
+                    },
+                    buttonsStyling: false
+                })
+                swalWithBootstrapButtons.fire({
+                    title: 'Viñetas por Orden',
+                    focusConfirm: false,
+                    showConfirmButton: true,
+                    showCancelButton: true,
+                    confirmButtonText: 'Generar',
+                    cancelButtonText: 'Exportar',
+
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        swalWithBootstrapButtons.fire(
+                            'Deleted!',
+                            'Your file has been deleted.',
+                            'success'
+                        )
+                    } else if (result.dismiss === Swal.DismissReason.cancel) {
+                        swalWithBootstrapButtons.fire(
+                            'Cancelled',
+                            'Your imaginary file is safe :)',
+                            'error'
+                        )
+                    }
+                })
+            }
+
+
+            $(document).ready(function() {
                 $('#catalgo_pendiente').DataTable({
                     "language": {
                         "url": "//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/Spanish.json",
@@ -408,6 +489,8 @@
                     }
                 });
             });
-    </script>
-@endpush
+        </script>
+    @endpush
 </div>
+<?php
+

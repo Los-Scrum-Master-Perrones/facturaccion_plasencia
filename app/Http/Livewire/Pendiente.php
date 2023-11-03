@@ -427,6 +427,9 @@ class Pendiente extends Component
 
             foreach ($insertar_pendiente_empaque as $key => $value) {
 
+                if($value->codigo_productos == '' ){
+                    continue;
+                }
                 $producto = Produccion::firstOrCreate(
                     ['codigo' => $value->codigo_productos],
                     [
@@ -457,10 +460,11 @@ class Pendiente extends Component
             );
 
             DB::commit();
-
+            $this->dispatchBrowserEvent('error_general',['errorr' => 'Insertado con exito','icon' => 'success']);
             return redirect()->route('pendiente')->with('insertar_pendiente', $insertar_pendiente);
         } catch (\Exception $e) {
             DB::rollback();
+            $this->dispatchBrowserEvent('error_general',['errorr' => $e.' Falta codido de producto','icon' => 'error']);
             echo json_encode($e);
         }
     }
