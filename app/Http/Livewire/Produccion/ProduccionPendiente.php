@@ -63,6 +63,7 @@ class ProduccionPendiente extends Component
     public $observacion = "";
     public $fecha_orden = "";
     public $cantidad_pendiente = "";
+    public $cliente = "";
 
     public $fechas = [];
     public $ordenes = [];
@@ -74,6 +75,7 @@ class ProduccionPendiente extends Component
     public $capas = [];
     public $mes = [];
     public $colores = [];
+    public $clientes = [];
 
     public $por_pagina = 50;
     public $total = 0;
@@ -103,6 +105,7 @@ class ProduccionPendiente extends Component
             $this->vitolas = [];
             $this->capas = [];
             $this->colores = [];
+            $this->clientes = [];
 
             foreach ($da as $detalles) {
                 array_push($this->fechas, $detalles->fecha_recibido);
@@ -115,6 +118,7 @@ class ProduccionPendiente extends Component
                 array_push($this->vitolas, $detalles->vitola);
                 array_push($this->capas, $detalles->capa);
                 array_push($this->colores, $detalles->color);
+                array_push($this->clientes, $detalles->cliente);
             }
 
             $this->fechas = array_unique($this->fechas);
@@ -127,6 +131,7 @@ class ProduccionPendiente extends Component
             $this->vitolas = array_unique($this->vitolas);
             $this->capas = array_unique($this->capas);
             $this->colores = array_unique($this->colores);
+            $this->clientes = array_unique($this->clientes);
         }
     }
     public function render()
@@ -139,7 +144,7 @@ class ProduccionPendiente extends Component
         $var4 = $this->tipo4?$this->tipo4:'';
 
         $da = DB::select(
-            'CALL `buscar_produccion_pendiente`(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)',
+            'CALL `buscar_produccion_pendiente`(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)',
             [
                 $this->b_ordenes,
                 $this->b_fechas,
@@ -153,11 +158,12 @@ class ProduccionPendiente extends Component
                 $var1.$var2.$var3.$var4.'Sin Presentacion',
                 $this->b_color,
                 $this->prioridad,
+                $this->cliente
             ]
         );
 
         $this->total = DB::select(
-            'CALL `buscar_produccion_pendiente_conteo`(?, ?, ?, ?, ?, ?, ?, ?, ?, ?)',
+            'CALL `buscar_produccion_pendiente_conteo`(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)',
             [
                 $this->b_ordenes,
                 $this->b_fechas,
@@ -169,9 +175,9 @@ class ProduccionPendiente extends Component
                 $var1.$var2.$var3.$var4.'Sin Presentacion',
                 $this->b_color,
                 $this->prioridad,
+                $this->cliente
             ]
         )[0]->total;
-
 
         $usos = ProduccionPendienteSalida::all(['id_produccion_pendiente','destino','cantidad','fecha_salida']);
 

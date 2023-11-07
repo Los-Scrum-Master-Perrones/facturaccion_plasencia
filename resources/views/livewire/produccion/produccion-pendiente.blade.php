@@ -150,6 +150,15 @@
 
         <div class="row" wire:ignore>
             <div class="col" wire:ignore>
+                <select onchange="buscar_tabla()" name="b_empresa" id="b_empresa" style="width:100%;height:34px;"
+                    name="states[]">
+                    <option value="" style="overflow-y: scroll;">Clientes</option>
+                    @foreach ($clientes as $client)
+                        <option style="overflow-y: scroll;"> {{ $client }}</option>
+                    @endforeach
+                </select>
+            </div>
+            <div class="col" wire:ignore>
                 <select onchange="buscar_tabla()" name="b_marca" id="b_marca" style="width:100%;height:34px;"
                     name="states[]">
                     <option value="" style="overflow-y: scroll;">Marcas</option>
@@ -203,6 +212,7 @@
             </div>
         </div>
         <div class="row p-2" style="margin-bottom: -30px">
+
             <div class="col">
                 {{ $pendiente->links() }}
             </div>
@@ -712,7 +722,7 @@
 
 
             var seletscc = ["#b_codigo", "#b_orden", "#b_mes", "#b_fecha", "#b_marca", "#b_nombre", "#b_vitola", "#b_capa",
-                "#por_pagina", "#itemn", "#b_color"
+                "#por_pagina", "#itemn", "#b_color","#b_empresa"
             ];
 
 
@@ -953,6 +963,7 @@
                 @this.b_mes = $(seletscc[2]).val();
                 @this.por_pagina = $(seletscc[8]).val();
                 @this.b_color = $('#b_color').val();
+                @this.cliente = $(seletscc[11]).val();
                 @this.page = 1;
             }
 

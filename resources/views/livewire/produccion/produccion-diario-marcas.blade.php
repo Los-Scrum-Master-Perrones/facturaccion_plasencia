@@ -558,7 +558,7 @@
                                 <tr>
                                     <td>${e.vitola}</td>
                                     <td>${e.figuraTipo} ${e.material}</td>
-                                    <td>${e.buenos2}</td>
+                                    <td>${e.buenos}</td>
                                 </tr>
                             </tbody>`;
 

@@ -54,6 +54,7 @@
                         <thead>
                             <tr>
                                 <th>N#</th>
+                                <th wire:ignore style="width:200px;">Cliente</th>
                                 <th wire:ignore style="width:100px;">
                                     <select name="b_presentacion" id="b_presentacion" onchange="buscar_io()">
                                         <option value="">Presentacion</option>
@@ -119,6 +120,7 @@
                             @foreach ($productos as $id => $producto)
                             <tr>
                                 <td>{{ ++$id }}</td>
+                                <td>{{ $producto->cliente }}</td>
                                 <td>{{ $producto->presentacion }}</td>
                                 <td class="text-center">{{ $producto->codigo }}</td>
                                 <td>{{ $producto->marca }}</td>
@@ -367,6 +369,13 @@
                             <input style="font-size:16px"
                                 class="form-control fs-7" type="text" autocomplete="off"
                                 wire:model.defer='color_n'>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="mb-3 col">
+                            <label for="txt_figuraytipo" class="form-label">Cliente</label>
+                            <input style="font-size:16px" class="form-control fs-7"
+                                type="text" autocomplete="off" wire:model.defer='cliente'>
                         </div>
                     </div>
                 </div>

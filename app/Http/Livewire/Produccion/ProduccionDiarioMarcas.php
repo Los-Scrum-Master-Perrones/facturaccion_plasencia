@@ -80,6 +80,7 @@ class ProduccionDiarioMarcas extends Component
             $mod->id_produccion_orden = null;
             $mod->moldes_para_uso = null;
             $mod->moldes_sobrantes = null;
+            $mod->moldes_ids = null;
         }
         $mod->save();
     }
@@ -123,7 +124,7 @@ class ProduccionDiarioMarcas extends Component
                 if ($detal->marca == 'The Edge Nicaragua' && $detal->nombre == 'Torpedo') {
 
                     foreach ($usosMoldes[$detal->ring_real . 'TORPEDO HAB.'] as $key => $value) {
-
+                        $moldes[] = $value;
                         $moldes_necesarios2 -= $value->buenos;
                         $value->buenos -= $moldes_necesarios;
 
@@ -136,7 +137,7 @@ class ProduccionDiarioMarcas extends Component
                         }
 
                         $moldes_en_existencia+=$value->buenos;
-                        $moldes[] = $value;
+
                     }
 
                     ProduccionDiarioProducir::where('id',$detal->id_producir)
@@ -150,7 +151,7 @@ class ProduccionDiarioMarcas extends Component
                 if ($detal->marca != 'The Edge Nicaragua' && $detal->nombre == 'Torpedo') {
 
                     foreach ($usosMoldes[$detal->ring_real . 'TORPEDO'] as $key => $value) {
-
+                        $moldes[] = $value;
                         $moldes_necesarios2 -= $value->buenos;
                         $value->buenos -= $moldes_necesarios;
 
@@ -162,7 +163,7 @@ class ProduccionDiarioMarcas extends Component
                             $moldes_necesarios2 = 0;
                         }
                         $moldes_en_existencia+=$value->buenos;
-                        $moldes[] = $value;
+
                     }
 
                     ProduccionDiarioProducir::where('id',$detal->id_producir)
@@ -175,6 +176,7 @@ class ProduccionDiarioMarcas extends Component
                 if ($detal->marca != 'The Edge Nicaragua' && $detal->nombre != 'Torpedo') {
 
                     foreach ($usosMoldes[$detal->ring_real] as $key => $value) {
+                        $moldes[] = $value;
                         if ($value->tamanio >= intval($detal->tamanio)) {
                             $moldes_necesarios2 -= $value->buenos;
                             $value->buenos -= $moldes_necesarios;
@@ -188,7 +190,7 @@ class ProduccionDiarioMarcas extends Component
                             }
                         }
                         $moldes_en_existencia+=$value->buenos;
-                        $moldes[] = $value;
+
                     }
 
 

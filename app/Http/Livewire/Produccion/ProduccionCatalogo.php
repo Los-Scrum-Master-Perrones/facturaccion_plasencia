@@ -26,6 +26,9 @@ class ProduccionCatalogo extends Component
     public $b_vitola = '';
     public $b_capa = '';
     public $b_color = '';
+    public $b_cliente = '';
+
+    public $cliente = '';
 
     //filtros tabla
     public $presentacion = [];
@@ -35,6 +38,7 @@ class ProduccionCatalogo extends Component
     public $vitolas = [];
     public $capas = [];
     public $colores = [];
+    public $clientes = [];
 
     public $capas_select = [];
     public $marcas_select = [];
@@ -85,6 +89,7 @@ class ProduccionCatalogo extends Component
             $this->vitolas = [];
             $this->capas = [];
             $this->colores = [];
+            $this->clientes = [];
 
             foreach ($da as $detalles) {
                 array_push($this->presentacion, $detalles->presentacion);
@@ -94,6 +99,7 @@ class ProduccionCatalogo extends Component
                 array_push($this->vitolas, $detalles->vitola);
                 array_push($this->capas, $detalles->capa);
                 array_push($this->colores, $detalles->color);
+                array_push($this->clientes, $detalles->cliente);
             }
 
             $this->presentacion = array_unique($this->presentacion);
@@ -103,6 +109,7 @@ class ProduccionCatalogo extends Component
             $this->vitolas = array_unique($this->vitolas);
             $this->capas = array_unique($this->capas);
             $this->colores = array_unique($this->colores);
+            $this->clientes = array_unique($this->clientes);
         }
 
 
@@ -117,7 +124,7 @@ class ProduccionCatalogo extends Component
         $start = ($this->page - 1) * $this->por_pagina;
 
         $da = DB::select(
-            'CALL `buscar_produccion_catalogo`(?,?,?,?,?,?,?,?,?)',
+            'CALL `buscar_produccion_catalogo`(?,?,?,?,?,?,?,?,?,?)',
             [
                 $this->b_presentacion,
                 $this->b_codigo,
@@ -128,11 +135,12 @@ class ProduccionCatalogo extends Component
                 $start,
                 $this->por_pagina,
                 $this->b_color,
+                $this->b_cliente
             ]
         );
 
         $this->total = DB::select(
-            'CALL `buscar_produccion_catalogo_conteo`(?,?,?,?,?,?,?)',
+            'CALL `buscar_produccion_catalogo_conteo`(?,?,?,?,?,?,?,?)',
             [
                 $this->b_presentacion,
                 $this->b_codigo,
@@ -141,6 +149,7 @@ class ProduccionCatalogo extends Component
                 $this->b_vitola,
                 $this->b_capa,
                 $this->b_color,
+                $this->b_cliente
             ]
         )[0]->total;
 
@@ -179,7 +188,7 @@ class ProduccionCatalogo extends Component
                         ->where('id_capa', $this->produc->id_capa)
                         ->update(['color' =>  $this->color_n]);
 
-
+            marca_producto::where('id_marca', $this->produc->id_marca)->update(['empresa' =>  $this->cliente]);
             $this->produc = new Produccion([
                 `codigo` =>  'P-',
                 `presentacion` =>  'Puros Tripa Larga',
@@ -207,6 +216,7 @@ class ProduccionCatalogo extends Component
             DB::beginTransaction();
 
             $this->color_n = marca_producto::find($edit->id_marca)->color;
+            $this->cliente = marca_producto::find($edit->id_marca)->empresa;
             $this->produc = $edit;
             $this->dispatchBrowserEvent('error_general',['errorr' => 'Listo para Editar','icon' => 'info']);
             DB::commit();
