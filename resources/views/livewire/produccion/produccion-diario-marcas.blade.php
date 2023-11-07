@@ -543,19 +543,28 @@
             function historial(key) {
                 let historial = JSON.parse(key);
 
-                let html = `<div class="lineatemp">`;
+                let html = `<table class='table table-hover table-sm'>
+                            <thead>
+                                <tr>
+                                    <th>Vitola</th>
+                                    <th>Nombre</th>
+                                    <th>Existencia</th>
+                                </tr>
+                            </thead>`;
 
                 historial.forEach(e => {
 
-                    html += `<div class="fila">
-                                <div>${e.vitola}</div>
-                                <div>${e.figuraTipo} ${e.material}</div>
-                                <div>${e.buenos2}</div>
-                            </div>`;
+                    html += `<tbody>
+                                <tr>
+                                    <td>${e.vitola}</td>
+                                    <td>${e.figuraTipo} ${e.material}</td>
+                                    <td>${e.buenos2}</td>
+                                </tr>
+                            </tbody>`;
 
                 });
 
-                html += `</div>`;
+                html += `</table>`;
 
                 Swal.fire({
                     title: '<strong>Moldes usables</strong>',
