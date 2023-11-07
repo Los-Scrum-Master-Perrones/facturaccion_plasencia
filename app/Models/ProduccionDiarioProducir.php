@@ -12,6 +12,9 @@ use Illuminate\Database\Eloquent\Model;
  * @property int $id_empleado2
  * @property string $id_produccion_orden
  * @property int $tareas
+ * @property int $moldes_ids
+ * @property int $moldes_para_uso
+ * @property int $moldes_sobrantes
  */
 class ProduccionDiarioProducir extends Model
 {
@@ -25,6 +28,9 @@ class ProduccionDiarioProducir extends Model
         'id_empleado',
         'id_empleado2',
         'id_produccion_orden',
-        'tareas'
+        'tareas',
+        'moldes_ids',
+        'moldes_para_uso',
+        'moldes_sobrantes',
     ];
 }

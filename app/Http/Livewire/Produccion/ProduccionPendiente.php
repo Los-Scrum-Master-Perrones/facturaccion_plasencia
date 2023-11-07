@@ -3,6 +3,7 @@
 namespace App\Http\Livewire\Produccion;
 
 use App\Exports\ProduccionReporteExport;
+use App\Imports\ProduccionMoldesImport;
 use App\Models\capa_producto;
 use App\Models\marca_producto;
 use App\Models\nombre_producto;
@@ -16,11 +17,13 @@ use Illuminate\Support\Facades\DB;
 use Livewire\Component;
 use Livewire\WithPagination;
 use Illuminate\Pagination\LengthAwarePaginator;
+use Livewire\WithFileUploads;
 use Maatwebsite\Excel\Facades\Excel;
 
 class ProduccionPendiente extends Component
 {
     use WithPagination;
+    use WithFileUploads;
     public $select_file;
 
     protected $paginationTheme = 'bootstrap';
@@ -177,6 +180,8 @@ class ProduccionPendiente extends Component
             $usosArray2[$uso->id_produccion_pendiente][] =  $uso;
         }
 
+
+
         return view('livewire.produccion.produccion-pendiente', [
             'historial' => $usosArray2,
             'pendiente' => new LengthAwarePaginator($da,  $this->total , $this->por_pagina)
@@ -237,5 +242,14 @@ class ProduccionPendiente extends Component
         $rehechos = DB::select('call reporte_produccion_mensual_rehechos(?)',[$request->input('fecha')]);
 
         return Excel::download(new ProduccionReporteExport($datos,$rehechos), 'Reporte Diario Produccion '.$request->input('fecha').'.xlsx');
+    }
+
+    public function importMoldes()
+    {
+        $this->validate([
+            'select_file' => 'max:1024', // 1MB Max
+        ]);
+
+        (new ProduccionMoldesImport)->import($this->select_file);
     }
 }

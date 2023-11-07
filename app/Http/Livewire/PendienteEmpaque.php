@@ -1509,7 +1509,7 @@ class PendienteEmpaque extends Component
                         'vitola' => $valores[0]->vitola,
                         'capa' => $valores[0]->capa,
                         'tipo' => $valores[0]->tipo_empaque,
-                        'item' =>  $detalle->id_pendiente,
+                        'item' =>  $detalle->id_pendiente, 
                         'pa_codigo_poducto' => $valores[0]->codigo_producto,
                     ]);
 

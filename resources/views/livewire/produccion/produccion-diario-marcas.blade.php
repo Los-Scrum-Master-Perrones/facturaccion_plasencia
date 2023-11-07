@@ -1,4 +1,91 @@
 <div class="container-fluid" style="height: 90vh">
+        <style>
+        .oscurecer_contenido {
+            justify-content: center;
+            align-items: center;
+            background-color: black;
+            top: 0px;
+            left: 0px;
+            z-index: 9999;
+            width: 100%;
+            height: 100%;
+            opacity: 0.5;
+        }
+
+        html {
+            font-family: sans-serif;
+        }
+
+        .lineatemp {
+            position: relative;
+            width: 650px;
+            margin: 0 auto;
+            border: 1px solid lightgray;
+            border-radius: 10px;
+        }
+
+        .fila {
+            display: flex;
+            justify-content: start;
+            border-bottom: 1px solid lightgray;
+            position: relative;
+        }
+
+        .fila .disco {
+            width: 36px;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .fila .disco:after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: calc(505 - 2px);
+            height: 100%;
+            width: 3px;
+            background: #80DEEA;
+            z-index: -1;
+        }
+
+        .fila:first-child .disco:after {
+            height: 50%;
+            top: 50%;
+        }
+
+        .fila:last-child .disco:after {
+            height: 50%;
+        }
+
+        .fila .disco>div {
+
+            aspect-ratio: 1/1;
+            border-radius: 50%;
+            background: lightblue;
+            box-sizing: border-box;
+        }
+
+        .fila:hover .disco>div {
+            border: 3px solid red;
+            background: white;
+        }
+
+        .fila div:nth-of-type(2) {
+            width: 20%;
+            padding: 4px;
+            display: flex;
+            align-items: center;
+        }
+
+        .fila div:nth-of-type(3) {
+            width: 60%;
+            padding: 4px;
+        }
+    </style>
+
     <div class="row">
         <div class="col-md-4" @if (count($empleados) == 0) hidden @else @endif>
             <div class="card" style="height: 90vh;">
@@ -188,6 +275,8 @@
                                     <th>PEND.</th>
                                     <th>TAREA</th>
                                     <th>ESTIMADO</th>
+                                    <th>MOLDES USAR</th>
+                                    <th>EXISTENCIA</th>
                                 </tr>
                             </thead>
                             <tbody class="fs-7">
@@ -220,6 +309,10 @@
                                     <td colspan="2" class="text-center"></td>
                                     <td colspan="2" class="text-center"></td>
                                 </tr>
+                                @php
+                                    $moldes_totale_para_usar = 0;
+                                    $moldes = 0;
+                                @endphp
                                 @foreach ($modulo_empleado as $key => $emple)
                                     <tr>
                                         <td>{{ ++$key }}</td>
@@ -322,7 +415,24 @@
                                                 {{ number_format($n, 0) . 'd y ' . number_format($fraction * 8, 0) . 'h' }}
                                             @endif
                                         </td>
+                                        <td>{{ $emple->moldes_para_uso }}</td>
+                                        <td>{{ $emple->moldes_sobrantes }}
+                                            <a href="#" onclick="historial('{{ $emple->moldes_ids }}')">
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-list-check" viewBox="0 0 16 16">
+                                                    <path fill-rule="evenodd" d="M5 11.5a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 0 1h-9a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 0 1h-9a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 0 1h-9a.5.5 0 0 1-.5-.5zM3.854 2.146a.5.5 0 0 1 0 .708l-1.5 1.5a.5.5 0 0 1-.708 0l-.5-.5a.5.5 0 1 1 .708-.708L2 3.293l1.146-1.147a.5.5 0 0 1 .708 0zm0 4a.5.5 0 0 1 0 .708l-1.5 1.5a.5.5 0 0 1-.708 0l-.5-.5a.5.5 0 1 1 .708-.708L2 7.293l1.146-1.147a.5.5 0 0 1 .708 0zm0 4a.5.5 0 0 1 0 .708l-1.5 1.5a.5.5 0 0 1-.708 0l-.5-.5a.5.5 0 0 1 .708-.708l.146.147 1.146-1.147a.5.5 0 0 1 .708 0z"/>
+                                                </svg>
+                                            </a>
+                                        </td>
                                     </tr>
+                                    @php
+                                        $moldes_totale_para_usar += $emple->moldes_para_uso;
+                                        if (is_null($emple->marca)) {
+
+                                        }else {
+                                            $moldes += $emple->moldes;
+                                        }
+
+                                    @endphp
                                 @endforeach
                             </tbody>
                         </table>
@@ -330,6 +440,12 @@
                 </div>
             </div>
         </div>
+    </div>
+    <div class="input-group" style="width:40%; position: fixed;right: 0px;bottom:0px; height:30px;">
+        <span class="form-control input-group-text fs-7">Moldes</span>
+        <input type="text" class="form-control fs-7" id="sumap" value="{{ $moldes }}">
+        <span class="form-control input-group-text fs-7">Moldes Necesarios</span>
+        <input type="text" class="form-control fs-7" id="sumap" value="{{ number_format($moldes_totale_para_usar, 0) }}">
     </div>
 
     <div wire:ignore class="modal fade" id="modal_agregar_marca" data-backdrop="static" data-keyboard="false"
@@ -422,6 +538,38 @@
 
             function agregar_pendiente(id) {
                 @this.agregar_detalle(id_detalles, 3, id);
+            }
+
+            function historial(key) {
+                let historial = JSON.parse(key);
+
+                let html = `<div class="lineatemp">`;
+
+               historial.forEach(e => {
+
+                    html += `<div class="fila">
+                                <div>${e.vitola}</div>
+                                <div>${e.figuraTipo}</div>
+                                <div>${e.material}</div>
+                                <div>${e.buenos2}</div>
+                            </div>`
+
+                });
+
+                html += `</div>`;
+
+                Swal.fire({
+                    title: '<strong>Historial de Cambios</strong>',
+                    html: html,
+                    width: 800,
+                    showCloseButton: true,
+                    showCancelButton: false,
+                    focusConfirm: false,
+                    confirmButtonText: '<i class="fa fa-thumbs-up"></i> Great!',
+                    confirmButtonAriaLabel: 'Thumbs up, great!',
+                    cancelButtonText: '<i class="fa fa-thumbs-down"></i>',
+                    cancelButtonAriaLabel: 'Thumbs down'
+                })
             }
 
             function vinetas() {
