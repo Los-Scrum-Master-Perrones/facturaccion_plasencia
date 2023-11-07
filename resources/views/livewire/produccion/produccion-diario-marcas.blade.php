@@ -545,21 +545,21 @@
 
                 let html = `<div class="lineatemp">`;
 
-               historial.forEach(e => {
+                historial.forEach(e => {
 
                     html += `<div class="fila">
                                 <div>${e.vitola}</div>
                                 <div>${e.figuraTipo}</div>
                                 <div>${e.material}</div>
                                 <div>${e.buenos2}</div>
-                            </div>`
+                            </div>`;
 
                 });
 
                 html += `</div>`;
 
                 Swal.fire({
-                    title: '<strong>Historial de Cambios</strong>',
+                    title: '<strong>Moldes usables</strong>',
                     html: html,
                     width: 800,
                     showCloseButton: true,
