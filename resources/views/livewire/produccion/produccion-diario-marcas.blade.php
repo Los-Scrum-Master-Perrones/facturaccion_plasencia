@@ -549,8 +549,7 @@
 
                     html += `<div class="fila">
                                 <div>${e.vitola}</div>
-                                <div>${e.figuraTipo}</div>
-                                <div>${e.material}</div>
+                                <div>${e.figuraTipo} ${e.material}</div>
                                 <div>${e.buenos2}</div>
                             </div>`;
 
