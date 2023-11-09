@@ -1,5 +1,5 @@
 <div class="container-fluid" style="height: 90vh">
-        <style>
+    <style>
         .oscurecer_contenido {
             justify-content: center;
             align-items: center;
@@ -84,6 +84,15 @@
             width: 60%;
             padding: 4px;
         }
+
+        .align-self-center {
+            width: -webkit-fill-available;
+        }
+
+        li {
+            display: list-item;
+            text-align: center;
+        }
     </style>
 
     <div class="row">
@@ -140,7 +149,6 @@
                 @foreach ($modulos as $modulo)
                     <li class="nav-item">
                         <a class="nav-link @if ($modulo_actual == $modulo->id) active
-
                         @php
                             $moduloactual = $modulo;
                         @endphp
@@ -200,6 +208,17 @@
                         </abbr>
                     </a>
                 </li>
+                <li class="nav-item">
+                    <a class="nav-link fs-7 active" href="#" onclick="moldes_parejas()">
+                        <abbr title="Moldes por Parejas">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                                class="bi bi-archive-fill" viewBox="0 0 16 16">
+                                <path
+                                    d="M12.643 15C13.979 15 15 13.845 15 12.5V5H1v7.5C1 13.845 2.021 15 3.357 15h9.286zM5.5 7h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1 0-1zM.8 1a.8.8 0 0 0-.8.8V3a.8.8 0 0 0 .8.8h14.4A.8.8 0 0 0 16 3V1.8a.8.8 0 0 0-.8-.8H.8z" />
+                            </svg>
+                        </abbr>
+                    </a>
+                </li>
             </ul>
             <div class="card" style="height: 86vh;">
                 <div class="card-header">
@@ -255,7 +274,6 @@
                                 </a>
                                 {{ $moduloactual->revisador2 }}
                             @endif
-
                         </div>
                     </div>
                 </div>
@@ -416,22 +434,69 @@
                                             @endif
                                         </td>
                                         <td>{{ $emple->moldes_para_uso }}</td>
-                                        <td>{{ $emple->moldes_sobrantes }}
-                                            <a href="#" onclick="historial('{{ $emple->moldes_ids }}')">
-                                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-list-check" viewBox="0 0 16 16">
-                                                    <path fill-rule="evenodd" d="M5 11.5a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 0 1h-9a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 0 1h-9a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 0 1h-9a.5.5 0 0 1-.5-.5zM3.854 2.146a.5.5 0 0 1 0 .708l-1.5 1.5a.5.5 0 0 1-.708 0l-.5-.5a.5.5 0 1 1 .708-.708L2 3.293l1.146-1.147a.5.5 0 0 1 .708 0zm0 4a.5.5 0 0 1 0 .708l-1.5 1.5a.5.5 0 0 1-.708 0l-.5-.5a.5.5 0 1 1 .708-.708L2 7.293l1.146-1.147a.5.5 0 0 1 .708 0zm0 4a.5.5 0 0 1 0 .708l-1.5 1.5a.5.5 0 0 1-.708 0l-.5-.5a.5.5 0 0 1 .708-.708l.146.147 1.146-1.147a.5.5 0 0 1 .708 0z"/>
+                                        <td>
+                                            <button type="button" class="btn btn-sm btn-primary dropdown-toggle"
+                                                data-bs-toggle="collapse" data-bs-target="#collapseExample{{ $key }}">
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                                    fill="currentColor" class="bi bi-list-check" viewBox="0 0 16 16">
+                                                    <path fill-rule="evenodd"
+                                                        d="M5 11.5a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 0 1h-9a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 0 1h-9a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 0 1h-9a.5.5 0 0 1-.5-.5zM3.854 2.146a.5.5 0 0 1 0 .708l-1.5 1.5a.5.5 0 0 1-.708 0l-.5-.5a.5.5 0 1 1 .708-.708L2 3.293l1.146-1.147a.5.5 0 0 1 .708 0zm0 4a.5.5 0 0 1 0 .708l-1.5 1.5a.5.5 0 0 1-.708 0l-.5-.5a.5.5 0 1 1 .708-.708L2 7.293l1.146-1.147a.5.5 0 0 1 .708 0zm0 4a.5.5 0 0 1 0 .708l-1.5 1.5a.5.5 0 0 1-.708 0l-.5-.5a.5.5 0 0 1 .708-.708l.146.147 1.146-1.147a.5.5 0 0 1 .708 0z" />
                                                 </svg>
-                                            </a>
+                                            </button>
                                         </td>
                                     </tr>
+                                    @isset($usosMoldes[$emple->ring_real])
+                                        <tr>
+                                            <td colspan="10"></td>
+                                            <td colspan="3">
+                                                <div class="collapse" id="collapseExample{{ $key }}">
+                                                    <div class="card card-body">
+                                                        @foreach ($usosMoldes[$emple->ring_real] as $molde)
+                                                            <div class="row">
+                                                                <div class="col-sm-1">
+                                                                    @if($emple->moldes_para_uso == $emple->moldes_a_usar || $molde->buenos <= 0)
+                                                                        @if(isset($apartdoMoldes[$emple->id][$molde->id]))
+                                                                            @php
+                                                                                $mol = $apartdoMoldes[$emple->id][$molde->id][0];
+                                                                            @endphp
+                                                                            @if($mol->check)
+                                                                                <input type="checkbox" checked name="" id="" wire:click="asignare_molde({{ $molde->id }},{{ $emple->id }},'collapseExample{{ $key }}')">
+                                                                            @else
+
+                                                                            @endif
+                                                                        @endif
+                                                                    @else
+                                                                        @if(isset($apartdoMoldes[$emple->id][$molde->id]))
+                                                                            @php
+                                                                                $mol = $apartdoMoldes[$emple->id][$molde->id][0];
+                                                                            @endphp
+                                                                            @if($mol->check)
+                                                                                <input type="checkbox" checked name="" id="" wire:click="asignare_molde({{ $molde->id }},{{ $emple->id }},'collapseExample{{ $key }}')">
+                                                                            @else
+                                                                            <input type="checkbox" name="" id="" wire:click="asignare_molde({{ $molde->id }},{{ $emple->id }},'collapseExample{{ $key }}')">
+                                                                            @endif
+                                                                        @else
+                                                                            <input type="checkbox" name="" id="" wire:click="asignare_molde({{ $molde->id }},{{ $emple->id }},'collapseExample{{ $key }}')">
+                                                                        @endif
+                                                                    @endif
+                                                                </div>
+                                                                <div class="col-sm-8">{{  $molde->vitola.' '.$molde->figuraTipo.' '.$molde->material }} </div>
+                                                                <div class="col-sm-3">{{  $molde->buenos  }} </div>
+                                                            </div>
+                                                        @endforeach
+
+                                                    </div>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    @endisset
+
                                     @php
                                         $moldes_totale_para_usar += $emple->moldes_para_uso;
                                         if (is_null($emple->marca)) {
-
-                                        }else {
+                                        } else {
                                             $moldes += $emple->moldes;
                                         }
-
                                     @endphp
                                 @endforeach
                             </tbody>
@@ -445,7 +510,8 @@
         <span class="form-control input-group-text fs-7">Moldes</span>
         <input type="text" class="form-control fs-7" id="sumap" value="{{ $moldes }}">
         <span class="form-control input-group-text fs-7">Moldes Necesarios</span>
-        <input type="text" class="form-control fs-7" id="sumap" value="{{ number_format($moldes_totale_para_usar, 0) }}">
+        <input type="text" class="form-control fs-7" id="sumap"
+            value="{{ number_format($moldes_totale_para_usar, 0) }}">
     </div>
 
     <div wire:ignore class="modal fade" id="modal_agregar_marca" data-backdrop="static" data-keyboard="false"
@@ -512,6 +578,60 @@
         </div>
     </div>
 
+    <div wire:ignore class="modal fade" id="modal_agregar_moldes" data-backdrop="static" data-keyboard="false"
+        tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true"
+        style="opacity:.9;background:#212529;">
+        <div class="modal-dialog modal-xl modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="titulo_ctalogo_productos">Marcas</h5>
+                    <button id="btn_cerrar" type="button" class="btn-close" data-bs-dismiss="modal"
+                        aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <table class="table table-striped" id="catalgo_molde">
+                        <thead>
+                            <tr>
+                                <th style="width: 60px">ID(Agregar)</th>
+                                <th style="text-align: center">VITOLA</th>
+                                <th>FIGURA</th>
+                                <th>EXISTENCIA</th>
+                            </tr>
+                        </thead>
+                        <tbody style="font-size: 1em">
+                            @foreach ($moldesss as $key => $molde)
+                                <tr>
+                                    <td>
+                                        <a style="text-decoration: none" href="#" data-bs-dismiss="modal"
+                                            onclick="agregar_pendiente('{{ $molde->id }}')">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                                fill="currentColor" class="bi bi-database-add" viewBox="0 0 16 16">
+                                                <path
+                                                    d="M12.5 16a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7Zm.5-5v1h1a.5.5 0 0 1 0 1h-1v1a.5.5 0 0 1-1 0v-1h-1a.5.5 0 0 1 0-1h1v-1a.5.5 0 0 1 1 0Z" />
+                                                <path
+                                                    d="M12.096 6.223A4.92 4.92 0 0 0 13 5.698V7c0 .289-.213.654-.753 1.007a4.493 4.493 0 0 1 1.753.25V4c0-1.007-.875-1.755-1.904-2.223C11.022 1.289 9.573 1 8 1s-3.022.289-4.096.777C2.875 2.245 2 2.993 2 4v9c0 1.007.875 1.755 1.904 2.223C4.978 15.71 6.427 16 8 16c.536 0 1.058-.034 1.555-.097a4.525 4.525 0 0 1-.813-.927C8.5 14.992 8.252 15 8 15c-1.464 0-2.766-.27-3.682-.687C3.356 13.875 3 13.373 3 13v-1.302c.271.202.58.378.904.525C4.978 12.71 6.427 13 8 13h.027a4.552 4.552 0 0 1 0-1H8c-1.464 0-2.766-.27-3.682-.687C3.356 10.875 3 10.373 3 10V8.698c.271.202.58.378.904.525C4.978 9.71 6.427 10 8 10c.262 0 .52-.008.774-.024a4.525 4.525 0 0 1 1.102-1.132C9.298 8.944 8.666 9 8 9c-1.464 0-2.766-.27-3.682-.687C3.356 7.875 3 7.373 3 7V5.698c.271.202.58.378.904.525C4.978 6.711 6.427 7 8 7s3.022-.289 4.096-.777ZM3 4c0-.374.356-.875 1.318-1.313C5.234 2.271 6.536 2 8 2s2.766.27 3.682.687C12.644 3.125 13 3.627 13 4c0 .374-.356.875-1.318 1.313C10.766 5.729 9.464 6 8 6s-2.766-.27-3.682-.687C3.356 4.875 3 4.373 3 4Z" />
+                                            </svg>
+                                        </a>
+                                        {{ ++$key }}
+                                    </td>
+                                    <td style="text-align: center">{{ $molde->vitola }}</td>
+                                    <td>{{ $molde->figuraTipo }}</td>
+                                    <td style="text-align: center">{{ $molde->buenos }}</td>
+                                </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
+                </div>
+                <div class="modal-footer">
+                    <button data-bs-dismiss="modal" class="btn btn-success">
+                        <span>OK</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
     @push('scripts')
         <script>
             var id_detalles = 0;
@@ -532,9 +652,6 @@
                 @this.nueva_tareas(id, $(num).val());
             }
 
-            function seleccionar_tupla(id) {
-                id_detalles = id;
-            }
 
             function agregar_pendiente(id) {
                 @this.agregar_detalle(id_detalles, 3, id);
@@ -543,41 +660,46 @@
             function historial(key) {
                 let historial = JSON.parse(key);
 
-                let html = `<table class='table table-hover table-sm'>
+                let html = `<table class='table table-hover table-sm' ">
                             <thead>
                                 <tr>
                                     <th>Vitola</th>
                                     <th>Nombre</th>
                                     <th>Existencia</th>
+                                    <th>Usado</th>
                                 </tr>
-                            </thead>`;
+                            </thead>
+                            <tbody>`;
 
                 historial.forEach(e => {
 
-                    html += `<tbody>
-                                <tr>
-                                    <td>${e.vitola}</td>
-                                    <td>${e.figuraTipo} ${e.material}</td>
-                                    <td>${e.buenos}</td>
-                                </tr>
-                            </tbody>`;
+                    html += `<tr>
+                                <td>${e.vitola}</td>
+                                <td>${e.figuraTipo} ${e.material}</td>
+                                <td>${e.buenos}</td>
+                                <td>
+                                    <input type="checkbox" name="" id="" ` + (e.buenos ? `checked` : ``) + `>
+                                </td>
+                            </tr>
+                            `;
 
                 });
 
-                html += `</table>`;
+                html += `</tbody>
+                        </table>`;
 
                 Swal.fire({
                     title: '<strong>Moldes usables</strong>',
                     html: html,
-                    width: 800,
+                    width: 1200,
                     showCloseButton: true,
                     showCancelButton: false,
-                    focusConfirm: false,
                     confirmButtonText: '<i class="fa fa-thumbs-up"></i> Great!',
                     confirmButtonAriaLabel: 'Thumbs up, great!',
                     cancelButtonText: '<i class="fa fa-thumbs-down"></i>',
                     cancelButtonAriaLabel: 'Thumbs down'
                 })
+
             }
 
             function vinetas() {
@@ -614,7 +736,20 @@
                 })
             }
 
+            async function moldes_parejas() {
+                const {
+                    value: moldes
+                } = await Swal.fire({
+                    input: "number",
+                    inputLabel: "Moldes por pareja",
+                    inputPlaceholder: "Ingrese la cantidad de moldes por pareja"
+                });
+                if (moldes) {
+                    @this.actualizar_moldes_usar(moldes);
+                }
+            }
 
+            var table;
             $(document).ready(function() {
                 $('#catalgo_pendiente').DataTable({
                     "language": {
@@ -633,6 +768,7 @@
                                 let input = document.createElement('input');
                                 input.placeholder = title;
                                 input.style.width = "200px";
+
                                 column.footer().replaceChildren(input);
 
                                 // Event listener for user input
@@ -644,9 +780,18 @@
                             });
                     }
                 });
+
             });
+
+            window.addEventListener('abrirOpciones', event => {
+                $('#'+event.detail.id).collapse('toggle');
+            })
+
+            function seleccionar_tupla(id) {
+                id_detalles = id;
+            }
+
         </script>
     @endpush
 </div>
 <?php
-

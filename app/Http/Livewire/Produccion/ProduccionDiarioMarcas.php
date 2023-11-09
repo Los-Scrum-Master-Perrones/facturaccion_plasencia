@@ -5,6 +5,8 @@ namespace App\Http\Livewire\Produccion;
 use App\Exports\ProduccionModulosEmpleadoExport;
 use App\Models\ProduccionDiarioModulos;
 use App\Models\ProduccionDiarioProducir;
+use App\Models\ProduccionMolde;
+use App\Models\ProduccionMoldeDiario;
 use Illuminate\Support\Facades\DB;
 use Livewire\Component;
 use Maatwebsite\Excel\Facades\Excel;
@@ -25,6 +27,9 @@ class ProduccionDiarioMarcas extends Component
         $pendiente_catalogo = DB::select('CALL `buscar_produccion_empleado_planificacion_marcas`()');
         $this->modulo_empleado = DB::select('CALL `buscar_produccion_modulos_empleados`(?)', [$this->modulo_actual]);
         $this->modulos = DB::select('CALL `buscar_produccion_empleado_planificacion_modulos`()');
+        $moldes = DB::select(
+            'CALL `buscar_produccion_moldes_inventario`(0)'
+        );
 
         $this->empleados = DB::select('CALL `buscar_produccion_empleado_planificacion`(?, ?, ?)', [
             $this->b_codigo,
@@ -52,6 +57,18 @@ class ProduccionDiarioMarcas extends Component
         }
 
 
+        $usosMoldes = [];
+        foreach ($moldes as $uso) {
+            $usosMoldes[$uso->ring][] =  $uso;
+        }
+
+
+        $apratado_moldes = ProduccionMoldeDiario::all();
+        $apartdoMoldes = [];
+        foreach ($apratado_moldes as $uso) {
+            $apartdoMoldes[$uso->id_produccion_diario][$uso->id_molde][] =  $uso;
+        }
+
 
 
         return view(
@@ -60,6 +77,9 @@ class ProduccionDiarioMarcas extends Component
                 'roleros' => $roleros,
                 'boncheros' => $boncheros,
                 'revisador' => $revisador,
+                'moldesss' => $moldes,
+                'usosMoldes' => $usosMoldes,
+                'apartdoMoldes' => $apartdoMoldes,
                 'pendiente_catalogo' => $pendiente_catalogo,
             ]
         )->extends('layouts.produccion.produccion-menu')->section('contenido');
@@ -97,115 +117,7 @@ class ProduccionDiarioMarcas extends Component
         $mod->save();
 
         if ($num == 3) {
-            $moldes = DB::select(
-                'CALL `buscar_produccion_moldes_inventario`()'
-            );
-
-            $usosMoldes = [];
-            foreach ($moldes as $uso) {
-                if ($uso->figuraTipo == 'TORPEDO') {
-                    $usosMoldes[$uso->ring . $uso->figuraTipo][] =  $uso;
-                } else if ($uso->figuraTipo == 'TORPEDO HAB.') {
-                    $usosMoldes[$uso->ring . $uso->figuraTipo][] =  $uso;
-                } else {
-                    $usosMoldes[$uso->ring][] =  $uso;
-                }
-            }
-            $detalles = DB::select('CALL `buscar_produccion_empleado_planificacion_pendiente`()');
-
-            foreach ($detalles as $detal) {
-                try {
-                    //code...
-
-                $moldes_necesarios = 35;
-                $moldes_necesarios2 = 35;
-                $moldes_en_existencia = 0;
-                $moldes = [];
-                if ($detal->marca == 'The Edge Nicaragua' && $detal->nombre == 'Torpedo') {
-
-                    foreach ($usosMoldes[$detal->ring_real . 'TORPEDO HAB.'] as $key => $value) {
-                        $moldes[] = $value;
-                        $moldes_necesarios2 -= $value->buenos;
-                        $value->buenos -= $moldes_necesarios;
-
-                        if ($value->buenos <= 0) {
-                            $value->buenos = 0;
-                        }
-
-                        if ($moldes_necesarios2 <= 0) {
-                            $moldes_necesarios2 = 0;
-                        }
-
-                        $moldes_en_existencia+=$value->buenos;
-
-                    }
-
-                    ProduccionDiarioProducir::where('id',$detal->id_producir)
-                                            ->update(['moldes_para_uso' => $moldes_necesarios-$moldes_necesarios2,
-                                                      'moldes_sobrantes' => $moldes_en_existencia,
-                                                      'moldes_ids' => json_encode($moldes)]);
-
-                }
-
-                $moldes = [];
-                if ($detal->marca != 'The Edge Nicaragua' && $detal->nombre == 'Torpedo') {
-
-                    foreach ($usosMoldes[$detal->ring_real . 'TORPEDO'] as $key => $value) {
-                        $moldes[] = $value;
-                        $moldes_necesarios2 -= $value->buenos;
-                        $value->buenos -= $moldes_necesarios;
-
-                        if ($value->buenos <= 0) {
-                            $value->buenos = 0;
-                        }
-
-                        if ($moldes_necesarios2 <= 0) {
-                            $moldes_necesarios2 = 0;
-                        }
-                        $moldes_en_existencia+=$value->buenos;
-
-                    }
-
-                    ProduccionDiarioProducir::where('id',$detal->id_producir)
-                                            ->update(['moldes_para_uso' => $moldes_necesarios-$moldes_necesarios2,
-                                                      'moldes_sobrantes' => $moldes_en_existencia,
-                                                      'moldes_ids' => json_encode($moldes)]);
-                }
-
-                $moldes = [];
-                if ($detal->marca != 'The Edge Nicaragua' && $detal->nombre != 'Torpedo') {
-
-                    foreach ($usosMoldes[$detal->ring_real] as $key => $value) {
-                        $moldes[] = $value;
-                        if ($value->tamanio >= intval($detal->tamanio)) {
-                            $moldes_necesarios2 -= $value->buenos;
-                            $value->buenos -= $moldes_necesarios;
-
-                            if ($value->buenos <= 0) {
-                                $value->buenos = 0;
-                            }
-
-                            if ($moldes_necesarios2 <= 0) {
-                                $moldes_necesarios2 = 0;
-                            }
-                        }
-                        $moldes_en_existencia+=$value->buenos;
-
-                    }
-
-
-                    ProduccionDiarioProducir::where('id',$detal->id_producir)
-                                            ->update(['moldes_para_uso' => $moldes_necesarios-$moldes_necesarios2,
-                                                      'moldes_sobrantes' => $moldes_en_existencia,
-                                                      'moldes_ids' => json_encode($moldes)]);
-                }
-
-                } catch (\Exception $th) {
-                    $this->dispatchBrowserEvent('error_general', ['errorr' => json_encode($moldes), 'icon' => 'info']);
-                }
-            }
-
-
+            //$this->actualizar_asignacion_moldes();
         }
     }
 
@@ -231,10 +143,6 @@ class ProduccionDiarioMarcas extends Component
         }
         $mod->save();
     }
-
-
-
-
 
     public function agregar_nuevo_modulo()
     {
@@ -269,8 +177,81 @@ class ProduccionDiarioMarcas extends Component
 
     public function imprimir_planificacion()
     {
-
         $modulos = DB::select('call buscar_produccion_empleado_planificacion_modulos()');
         return Excel::download(new ProduccionModulosEmpleadoExport($modulos), 'Reporte diario de marcas a producir.xlsx');
     }
+
+    public function actualizar_moldes_usar($cantidad)
+    {
+        DB::update('update produccion_diario_producir set moldes_a_usar = ?', [$cantidad]);
+        //$this->actualizar_asignacion_moldes();
+    }
+
+
+
+    public function asignare_molde($id,ProduccionDiarioProducir $modulo,$id_collapse)
+    {
+        $moldes_existencia = DB::select('call buscar_produccion_moldes_inventario(?)',[$id])[0];
+        $check = 0;
+        $moldesss =  ProduccionMoldeDiario::where('id_produccion_diario','=',$modulo->id)->where('id_molde','=',$id)->first();
+
+
+
+        if(!$moldesss){
+            $moldesss = ProduccionMoldeDiario::updateOrCreate(
+                ['id_produccion_diario' => $modulo->id, 'id_molde' => $id],
+                ['cantidad' =>0 , 'check' => $check]
+            );
+
+            $moldesss->save();
+        }
+
+        $molde_necesario = $modulo->moldes_para_uso - $modulo->moldes_a_usar;
+        if($molde_necesario == 0){
+            $modulo->moldes_para_uso -= $moldesss->cantidad;
+            $moldesss->cantidad = 0;
+            $moldesss->check = 0;
+
+            $modulo->save();
+            $moldesss->save();
+            return;
+        }
+
+        if($moldesss->check == 0){
+            if($modulo->moldes_para_uso > 0 && ($modulo->moldes_para_uso+$moldes_existencia->buenos) < $modulo->moldes_a_usar){
+                $moldesss->cantidad = $moldes_existencia->buenos;
+                $modulo->moldes_para_uso += $moldes_existencia->buenos;
+            }
+
+            if($modulo->moldes_para_uso > 0 && ($modulo->moldes_para_uso+$moldes_existencia->buenos) > $modulo->moldes_a_usar){
+                $moldesss->cantidad = $modulo->moldes_a_usar - $modulo->moldes_para_uso;
+                $modulo->moldes_para_uso +=  $modulo->moldes_a_usar - $modulo->moldes_para_uso;
+            }
+
+            if($modulo->moldes_para_uso == 0 && $moldes_existencia->buenos < $modulo->moldes_a_usar ){
+                $moldesss->cantidad = $moldes_existencia->buenos;
+                $modulo->moldes_para_uso += $moldes_existencia->buenos;
+            }
+
+            if($modulo->moldes_para_uso == 0 && $moldes_existencia->buenos > $modulo->moldes_a_usar ){
+                $moldesss->cantidad = $modulo->moldes_a_usar;
+                $modulo->moldes_para_uso = $modulo->moldes_a_usar;
+            }
+            $moldesss->check = 1;
+        }else{
+            $modulo->moldes_para_uso -= $moldesss->cantidad;
+            $moldesss->cantidad = 0;
+            $moldesss->check = 0;
+        }
+
+
+
+
+        $modulo->save();
+        $moldesss->save();
+
+        $this->dispatchBrowserEvent('abrirOpciones',['id' => $id_collapse]);
+
+    }
+
 }
