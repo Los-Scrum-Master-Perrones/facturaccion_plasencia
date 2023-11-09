@@ -520,17 +520,23 @@
                         </tr>
                         @isset($materiales[$detalle->marca.$detalle->vitola.$detalle->capa])
                         <tr>
-                            <td colspan="13"></td>
-                            <td colspan="4">
+                            <td colspan="11"></td>
+                            <td colspan="6">
                                 <div class="collapse" id="collapseExample{{ $i }}">
                                     <div class="card card-body">
+                                        <div class="row">
+                                            <div class="col-sm-8">Material</div>
+                                            <div class="col-sm-2">ONZ</div>
+                                            <div class="col-sm-2">LBS</div>
+                                        </div>
                                         @foreach ($materiales[$detalle->marca.$detalle->vitola.$detalle->capa] as $molde)
                                             <div class="row">
-                                                <div class="col-sm-9">{{  $molde->nombre_material.'('.$molde->onza.')' }} </div>
+                                                <div class="col-sm-8">{{  $molde->nombre_material.'('.$molde->onza.')' }} </div>
                                                 @php
                                                     $arr = explode(' ',trim($molde->onza));
                                                 @endphp
-                                                <div class="col-sm-3">{{  number_format((intval($arr[0])/100)*$detalle->restantes,0,',','.')  }} </div>
+                                                <div class="col-sm-2">{{  number_format((intval($arr[0])/100)*$detalle->restantes,0,',','')  }} </div>
+                                                <div class="col-sm-2">{{  number_format(((intval($arr[0])/100)*$detalle->restantes)/16,2,',','')  }} </div>
                                             </div>
                                         @endforeach
 
