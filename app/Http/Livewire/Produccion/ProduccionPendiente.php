@@ -186,10 +186,16 @@ class ProduccionPendiente extends Component
             $usosArray2[$uso->id_produccion_pendiente][] =  $uso;
         }
 
+        $materiales = DB::select('CALL `buscar_produccion_materiales`()');
 
+        $usosMateriales = [];
+        foreach ($materiales as $uso) {
+            $usosMateriales[$uso->des][] =  $uso;
+        }
 
         return view('livewire.produccion.produccion-pendiente', [
             'historial' => $usosArray2,
+            'materiales' => $usosMateriales,
             'pendiente' => new LengthAwarePaginator($da,  $this->total , $this->por_pagina)
         ])->extends('layouts.produccion.produccion-menu')->section('contenido');
     }

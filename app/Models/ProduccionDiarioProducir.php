@@ -14,6 +14,7 @@ use Illuminate\Database\Eloquent\Model;
  * @property int $tareas
  * @property int $moldes_ids
  * @property int $moldes_para_uso
+ * @property int $moldes_a_usar
  * @property int $moldes_sobrantes
  */
 class ProduccionDiarioProducir extends Model
@@ -31,6 +32,7 @@ class ProduccionDiarioProducir extends Model
         'tareas',
         'moldes_ids',
         'moldes_para_uso',
+        'moldes_a_usar',
         'moldes_sobrantes',
     ];
 }
