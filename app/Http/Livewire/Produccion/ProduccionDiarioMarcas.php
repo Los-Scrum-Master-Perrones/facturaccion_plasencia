@@ -246,7 +246,9 @@ class ProduccionDiarioMarcas extends Component
 
 
 
-
+        if($moldesss->cantidad < 0){
+            $moldesss->cantidad = 0;
+        }
         $modulo->save();
         $moldesss->save();
 
