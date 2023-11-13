@@ -432,7 +432,7 @@
                                                 0
                                             @else
                                                 @php
-                                                    $n = $emple->por_empleado / $emple->tareas;
+                                                    $n = $emple->por_empleado;
                                                     $whole = floor($n); // 1
                                                     $fraction = $n - $whole; // .25
                                                 @endphp
