@@ -436,7 +436,7 @@
                                                     $whole = round($n, 0, PHP_ROUND_HALF_DOWN); // 1
                                                     $fraction = $n - $whole; // .25
                                                 @endphp
-                                                {{ number_format($n, 0) . 'd y ' . number_format($fraction * 8, 0) . 'h' }}
+                                                {{ number_format($whole, 0) . 'd y ' . number_format($fraction * 8, 0) . 'h' }}
                                             @endif
                                         </td>
                                         <td>{{ $emple->moldes_para_uso }}</td>
