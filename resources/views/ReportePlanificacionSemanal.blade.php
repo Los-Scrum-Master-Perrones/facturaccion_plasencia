@@ -10,6 +10,7 @@
             <th>Capa R.</th>
             <th>Color</th>
             <th>Tamaño</th>
+            <th>Cant. Parejas</th>
             <th>Pendiente</th>
             @php
                 $fecha = Carbon\Carbon::now()->format('Y-m-d');
@@ -51,6 +52,15 @@
         </tr>
     </thead>
     <tbody>
+        @php
+            $total_restante = 0;
+            $parejas = 0;
+            $total_acumulados = array();
+
+            for ($i=0; $i < $dias; $i++) {
+                $total_acumulados[] = 0;
+            }
+        @endphp
         @foreach ($pendientes as $pendiente)
             <tr>
                 <td>{{ $pendiente->codigo }}</td>
@@ -62,9 +72,12 @@
                 <td>{{ $pendiente->capa }}</td>
                 <td>{{ $pendiente->color }}</td>
                 <td></td>
+                <td>{{ $pendiente->parejas }}</td>
                 <td>{{ $pendiente->restantes }}</td>
                 @php
+                    $parejas += $pendiente->parejas;
                     $producido_acumulado = $pendiente->restantes;
+                    $total_restante +=$pendiente->restantes;
                 @endphp
                 @for ($i = 0; $i < $dias; $i++)
                     @php
@@ -79,10 +92,31 @@
                             $producido = $producido_acumulado;
                         }
                         $producido_acumulado -= $producido;
+
+                        $total_acumulados[$i] += $producido;
                     @endphp
                     <td>{{ $producido }}</td>
+
                 @endfor
             </tr>
         @endforeach
     </tbody>
+    <tfoot>
+        <tr>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td><b>{{ $parejas }}</b></td>
+            <td><b>{{ $total_restante }}</b></td>
+            @foreach ($total_acumulados as $total)
+                <td><b>{{ $total }}</b></td>
+            @endforeach
+        </tr>
+    </tfoot>
 </table>
