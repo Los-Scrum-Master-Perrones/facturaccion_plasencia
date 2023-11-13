@@ -3,6 +3,7 @@
 namespace App\Http\Livewire\Produccion;
 
 use App\Exports\ProduccionModulosEmpleadoExport;
+use App\Exports\ProduccionPlanificacionSemanal;
 use App\Models\ProduccionDiarioModulos;
 use App\Models\ProduccionDiarioProducir;
 use App\Models\ProduccionMolde;
@@ -180,6 +181,13 @@ class ProduccionDiarioMarcas extends Component
         $modulos = DB::select('call buscar_produccion_empleado_planificacion_modulos()');
         return Excel::download(new ProduccionModulosEmpleadoExport($modulos), 'Reporte diario de marcas a producir.xlsx');
     }
+
+    public function imprimir_planificacion_semanal()
+    {
+        $modulos = DB::select('call reporte_produccion_planificacion_semanal()');
+        return Excel::download(new ProduccionPlanificacionSemanal($modulos), 'Reporte semanal a producir.xlsx');
+    }
+
 
     public function actualizar_moldes_usar($cantidad)
     {

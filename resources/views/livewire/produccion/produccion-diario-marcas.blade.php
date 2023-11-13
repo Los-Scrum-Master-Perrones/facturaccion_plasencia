@@ -143,6 +143,13 @@
         </div>
         <div @if (count($empleados) == 0) class="col-md-12" @else class="col-md-8" @endif>
             <ul class="nav nav-tabs justify-content-center">
+                <li class="nav-item"  wire:loading>
+                    <a class="nav-link fs-7 active" href="#">
+                        <div class="spinner-grow text-danger" style="width: 1rem; height: 1rem;" role="status">
+                            <span class="visually-hidden">Loading...</span>
+                        </div>
+                    </a>
+                </li>
                 @php
                     $moduloactual = [];
                 @endphp
@@ -171,7 +178,6 @@
                         </a>
                     </li>
                 @endif
-
                 <li class="nav-item">
                     <a class="nav-link fs-7 active" href="#">
                         <abbr title="Etiquetas de Mesas">
@@ -197,7 +203,7 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link fs-7 active" href="#" wire:click='imprimir_planificacion()'>
+                    <a class="nav-link fs-7 active" href="#"  onclick="exportar_documentos()">
                         <abbr title="Exportar planificacion">
                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
                                 class="bi bi-file-earmark-spreadsheet-fill" viewBox="0 0 16 16">
@@ -436,7 +442,8 @@
                                         <td>{{ $emple->moldes_para_uso }}</td>
                                         <td>
                                             <button type="button" class="btn btn-sm btn-primary dropdown-toggle"
-                                                data-bs-toggle="collapse" data-bs-target="#collapseExample{{ $key }}">
+                                                data-bs-toggle="collapse"
+                                                data-bs-target="#collapseExample{{ $key }}">
                                                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
                                                     fill="currentColor" class="bi bi-list-check" viewBox="0 0 16 16">
                                                     <path fill-rule="evenodd"
@@ -454,34 +461,43 @@
                                                         @foreach ($usosMoldes[$emple->ring_real] as $molde)
                                                             <div class="row">
                                                                 <div class="col-sm-1">
-                                                                    @if($emple->moldes_para_uso == $emple->moldes_a_usar || $molde->buenos <= 0)
-                                                                        @if(isset($apartdoMoldes[$emple->id][$molde->id]))
+                                                                    @if ($emple->moldes_para_uso == $emple->moldes_a_usar || $molde->buenos <= 0)
+                                                                        @if (isset($apartdoMoldes[$emple->id][$molde->id]))
                                                                             @php
                                                                                 $mol = $apartdoMoldes[$emple->id][$molde->id][0];
                                                                             @endphp
-                                                                            @if($mol->check)
-                                                                                <input type="checkbox" checked name="" id="" wire:click="asignare_molde({{ $molde->id }},{{ $emple->id }},'collapseExample{{ $key }}')">
+                                                                            @if ($mol->check)
+                                                                                <input type="checkbox" checked
+                                                                                    name="" id=""
+                                                                                    wire:click="asignare_molde({{ $molde->id }},{{ $emple->id }},'collapseExample{{ $key }}')">
                                                                             @else
-
                                                                             @endif
                                                                         @endif
                                                                     @else
-                                                                        @if(isset($apartdoMoldes[$emple->id][$molde->id]))
+                                                                        @if (isset($apartdoMoldes[$emple->id][$molde->id]))
                                                                             @php
                                                                                 $mol = $apartdoMoldes[$emple->id][$molde->id][0];
                                                                             @endphp
-                                                                            @if($mol->check)
-                                                                                <input type="checkbox" checked name="" id="" wire:click="asignare_molde({{ $molde->id }},{{ $emple->id }},'collapseExample{{ $key }}')">
+                                                                            @if ($mol->check)
+                                                                                <input type="checkbox" checked
+                                                                                    name="" id=""
+                                                                                    wire:click="asignare_molde({{ $molde->id }},{{ $emple->id }},'collapseExample{{ $key }}')">
                                                                             @else
-                                                                            <input type="checkbox" name="" id="" wire:click="asignare_molde({{ $molde->id }},{{ $emple->id }},'collapseExample{{ $key }}')">
+                                                                                <input type="checkbox" name=""
+                                                                                    id=""
+                                                                                    wire:click="asignare_molde({{ $molde->id }},{{ $emple->id }},'collapseExample{{ $key }}')">
                                                                             @endif
                                                                         @else
-                                                                            <input type="checkbox" name="" id="" wire:click="asignare_molde({{ $molde->id }},{{ $emple->id }},'collapseExample{{ $key }}')">
+                                                                            <input type="checkbox" name=""
+                                                                                id=""
+                                                                                wire:click="asignare_molde({{ $molde->id }},{{ $emple->id }},'collapseExample{{ $key }}')">
                                                                         @endif
                                                                     @endif
                                                                 </div>
-                                                                <div class="col-sm-8">{{  $molde->vitola.' '.$molde->figuraTipo.' '.$molde->material }} </div>
-                                                                <div class="col-sm-3">{{  $molde->buenos  }} </div>
+                                                                <div class="col-sm-8">
+                                                                    {{ $molde->vitola . ' ' . $molde->figuraTipo . ' ' . $molde->material }}
+                                                                </div>
+                                                                <div class="col-sm-3">{{ $molde->buenos }} </div>
                                                             </div>
                                                         @endforeach
 
@@ -702,6 +718,32 @@
 
             }
 
+            function exportar_documentos() {
+
+                const swalWithBootstrapButtons = Swal.mixin({
+                    customClass: {
+                        confirmButton: 'btn btn-success',
+                        cancelButton: 'btn btn-danger'
+                    },
+                    buttonsStyling: false
+                })
+                swalWithBootstrapButtons.fire({
+                    title: 'Exportar documentos',
+                    focusConfirm: false,
+                    showConfirmButton: true,
+                    showCancelButton: true,
+                    confirmButtonText: 'Promedio Semanal',
+                    cancelButtonText: 'Planificación',
+
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        @this.imprimir_planificacion_semanal();
+                    } else if (result.dismiss === Swal.DismissReason.cancel) {
+                        @this.imprimir_planificacion();
+                    }
+                })
+            }
+
             function vinetas() {
 
                 const swalWithBootstrapButtons = Swal.mixin({
@@ -784,13 +826,12 @@
             });
 
             window.addEventListener('abrirOpciones', event => {
-                $('#'+event.detail.id).collapse('toggle');
+                $('#' + event.detail.id).collapse('toggle');
             })
 
             function seleccionar_tupla(id) {
                 id_detalles = id;
             }
-
         </script>
     @endpush
 </div>
