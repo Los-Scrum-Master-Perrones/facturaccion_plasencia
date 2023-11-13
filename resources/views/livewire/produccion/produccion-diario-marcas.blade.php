@@ -433,7 +433,7 @@
                                             @else
                                                 @php
                                                     $n = $emple->por_empleado;
-                                                    $whole = floor($n); // 1
+                                                    $whole = round($n, 0, PHP_ROUND_HALF_DOWN); // 1
                                                     $fraction = $n - $whole; // .25
                                                 @endphp
                                                 {{ number_format($n, 0) . 'd y ' . number_format($fraction * 8, 0) . 'h' }}
