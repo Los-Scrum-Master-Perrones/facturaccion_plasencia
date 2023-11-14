@@ -28,15 +28,14 @@
             <td style="text-align:center;font-size:12px;border: 1px solid #C00;"><b>{{ $emple->restantes }}</b></td>
             <td style="text-align:center;font-size:12px;border: 1px solid #C00;">{{ $emple->tareas }}</td>
             <td style="text-align:center;font-size:12px;border: 1px solid #C00;">
-                @if($emple->tareas == 0 || is_null($emple->marca))
+                @if ($emple->tareas == 0 || is_null($emple->marca))
                     0
                 @else
                     @php
-                        $n = $emple->por_empleado / $emple->tareas;
-                        $whole = floor($n); // 1
-                        $fraction = $n - $whole; // .25
+                        $n = $emple->por_empleado;
+                        $fraction = $n - intval($n); // .25
                     @endphp
-                    {{ number_format($n , 0).'d y '. number_format(($fraction )*8, 0).'h' }}
+                    {{ intval($n) . 'd y ' . number_format($fraction * 8, 0) . 'h' }}
                 @endif
             </td>
         </tr>

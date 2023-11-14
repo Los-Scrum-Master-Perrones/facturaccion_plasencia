@@ -1118,10 +1118,10 @@
             })
 
             window.addEventListener('notificacionconfirmacionUpdate', event => {
-                toastr.success('Actualización realizada con exito.', 'Completado!');
                 $("#modal_actualizar").removeClass("in");
                 $(".modal-backdrop").remove();
                 $("#modal_actualizar").hide();
+                toastr.success('Actualización realizada con exito.', 'Completado!');
             })
 
             window.addEventListener('notificacionErrorUpdate', event => {

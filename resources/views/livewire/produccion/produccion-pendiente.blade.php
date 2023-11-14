@@ -369,6 +369,7 @@
                         <th>CAPA</th>
                         <th>COLOR</th>
                         <th>PRIORIDAD</th>
+                        <th>PEND. PRIORIDAD</th>
                         <th>PENDIENTE</th>
                         <th>PRODUCIDO</th>
                         <th>RESTANTE</th>

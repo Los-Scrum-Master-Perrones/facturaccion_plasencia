@@ -1,17 +1,17 @@
 <table class="table table-light" style="font-size:10px;">
     <thead>
         <tr>
-            <th>Codigo</th>
-            <th>Presentacion</th>
-            <th>Marca</th>
-            <th>Nombre</th>
-            <th>Vitola</th>
-            <th>RG</th>
-            <th>Capa R.</th>
-            <th>Color</th>
-            <th>Tamaño</th>
-            <th>Cant. Parejas</th>
-            <th>Pendiente</th>
+            <th style="text-align:center;font-size:12px;border: 1px solid #C00;font-weight: bold;">Codigo</th>
+            <th style="text-align:center;font-size:12px;border: 1px solid #C00;font-weight: bold;">Presentacion</th>
+            <th style="text-align:center;font-size:12px;border: 1px solid #C00;font-weight: bold;">Marca</th>
+            <th style="text-align:center;font-size:12px;border: 1px solid #C00;font-weight: bold;">Nombre</th>
+            <th style="text-align:center;font-size:12px;border: 1px solid #C00;font-weight: bold;">Vitola</th>
+            <th style="text-align:center;font-size:12px;border: 1px solid #C00;font-weight: bold;">RG</th>
+            <th style="text-align:center;font-size:12px;border: 1px solid #C00;font-weight: bold;"h>Capa R.</th>
+            <th style="text-align:center;font-size:12px;border: 1px solid #C00;font-weight: bold;">Color</th>
+            <th style="text-align:center;font-size:12px;border: 1px solid #C00;font-weight: bold;">Tamaño</th>
+            <th style="text-align:center;font-size:12px;border: 1px solid #C00;font-weight: bold;">Cant. Parejas</th>
+            <th style="text-align:center;font-size:12px;border: 1px solid #C00;font-weight: bold;">Pendiente</th>
             @php
                 $fecha = Carbon\Carbon::now()->format('Y-m-d');
 
@@ -38,7 +38,7 @@
                         $fecha = date('Y-m-d', $nueva_fecha_timestamp);
                     }
                 @endphp
-                <th>{{ $fecha }}</th>
+                <th style="text-align:center;font-size:12px;border: 1px solid #C00;font-weight: bold;">{{ $fecha }}</th>
                 @php
                     $fecha_obj = new DateTime($fecha);
                     $days_to_add = 1;
@@ -63,17 +63,17 @@
         @endphp
         @foreach ($pendientes as $pendiente)
             <tr>
-                <td>{{ $pendiente->codigo }}</td>
-                <td>{{ $pendiente->presentacion }}</td>
-                <td>{{ $pendiente->marca }}</td>
-                <td>{{ $pendiente->nombre }}</td>
-                <td>{{ $pendiente->vitola }}</td>
-                <td>{{ $pendiente->ring_real }}</td>
-                <td>{{ $pendiente->capa }}</td>
-                <td>{{ $pendiente->color }}</td>
-                <td></td>
-                <td>{{ $pendiente->parejas }}</td>
-                <td>{{ $pendiente->restantes }}</td>
+                <td style="text-align:center;font-size:8px;border: 1px solid #C00;">{{ $pendiente->codigo }}</td>
+                <td style="text-align:center;font-size:8px;border: 1px solid #C00;">{{ $pendiente->presentacion }}</td>
+                <td style="text-align:center;font-size:8px;border: 1px solid #C00;">{{ $pendiente->marca }}</td>
+                <td style="text-align:center;font-size:8px;border: 1px solid #C00;">{{ $pendiente->nombre }}</td>
+                <td style="text-align:center;font-size:8px;border: 1px solid #C00;">{{ $pendiente->vitola }}</td>
+                <td style="text-align:center;font-size:8px;border: 1px solid #C00;">{{ $pendiente->ring_real }}</td>
+                <td style="text-align:center;font-size:8px;border: 1px solid #C00;">{{ $pendiente->capa }}</td>
+                <td style="text-align:center;font-size:8px;border: 1px solid #C00;">{{ $pendiente->color }}</td>
+                <td style="text-align:center;font-size:8px;border: 1px solid #C00;"></td>
+                <td style="text-align:center;font-size:8px;border: 1px solid #C00;">{{ $pendiente->parejas }}</td>
+                <td style="text-align:center;font-size:8px;border: 1px solid #C00;">{{ $pendiente->restantes }}</td>
                 @php
                     $parejas += $pendiente->parejas;
                     $producido_acumulado = $pendiente->restantes;
@@ -95,7 +95,7 @@
 
                         $total_acumulados[$i] += $producido;
                     @endphp
-                    <td>{{ $producido }}</td>
+                    <td style="text-align:center;font-size:8px;border: 1px solid #C00;">{{ $producido }}</td>
 
                 @endfor
             </tr>
@@ -103,19 +103,19 @@
     </tbody>
     <tfoot>
         <tr>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td><b>{{ $parejas }}</b></td>
-            <td><b>{{ $total_restante }}</b></td>
+            <td style="text-align:center;font-size:8px;border: 1px solid #C00;"></td>
+            <td style="text-align:center;font-size:8px;border: 1px solid #C00;"></td>
+            <td style="text-align:center;font-size:8px;border: 1px solid #C00;"></td>
+            <td style="text-align:center;font-size:8px;border: 1px solid #C00;"></td>
+            <td style="text-align:center;font-size:8px;border: 1px solid #C00;"></td>
+            <td style="text-align:center;font-size:8px;border: 1px solid #C00;"></td>
+            <td style="text-align:center;font-size:8px;border: 1px solid #C00;"></td>
+            <td style="text-align:center;font-size:8px;border: 1px solid #C00;"></td>
+            <td style="text-align:center;font-size:8px;border: 1px solid #C00;"></td>
+            <td style="text-align:center;font-size:8px;border: 1px solid #C00;"><b>{{ $parejas }}</b></td>
+            <td style="text-align:center;font-size:8px;border: 1px solid #C00;"><b>{{ $total_restante }}</b></td>
             @foreach ($total_acumulados as $total)
-                <td><b>{{ $total }}</b></td>
+                <td style="text-align:center;font-size:8px;border: 1px solid #C00;"><b>{{ $total }}</b></td>
             @endforeach
         </tr>
     </tfoot>

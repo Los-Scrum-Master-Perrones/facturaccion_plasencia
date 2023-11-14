@@ -16,14 +16,18 @@ class ProduccionEmpleadoPlanillaExport implements
 {
 
     public $nom;
+    public $rangoFecha;
+    public $titulo;
 
-    function __construct($nom) {
+    function __construct($nom,$rangoFecha,$titulo) {
         $this->nom = $nom;
+        $this->rangoFecha = $rangoFecha;
+        $this->titulo = $titulo;
     }
 
     public function view(): View
     {
-        return view('ReportePlanillaProduccion',[ 'pendiente' => $this->nom]) ;
+        return view('ReportePlanillaProduccion',[ 'pendiente' => $this->nom , 'rangoFecha' => $this->rangoFecha, 'titulo' => $this->titulo]) ;
     }
 
 

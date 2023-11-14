@@ -29,7 +29,7 @@
 </tr>
 <tr>
     <td></td>
-    <td colspan="6" style='text-align: center; font-family: Calibri; font-size: 11'><i><b>Planilla de Brocha Semana del 09/10/2023 al 15/10/2023</b></i></td>
+    <td colspan="6" style='text-align: center; font-family: Calibri; font-size: 11'><i><b>Planilla de {{ $titulo }}, Semana del {{ $rangoFecha }}</b></i></td>
 </tr>
 @foreach ($pendiente as $key => $pend)
     @php

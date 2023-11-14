@@ -433,9 +433,7 @@
                                             @else
                                                 @php
                                                     $n = $emple->por_empleado;
-                                                   
                                                     $fraction = $n - intval($n); // .25
-
                                                 @endphp
                                                 {{ intval($n) . 'd y ' . number_format($fraction * 8, 0) . 'h' }}
                                             @endif

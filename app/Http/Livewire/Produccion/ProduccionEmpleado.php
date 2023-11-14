@@ -176,7 +176,31 @@ class ProduccionEmpleado extends Component
                 ]
             );
 
-            return Excel::download(new ProduccionEmpleadoPlanillaExport($da), 'Planilla del '.Carbon::parse($this->b_fecha_1)->format('d').' al '.$this->b_fecha_2.'.xlsx');
+            $rangoFecha = Carbon::parse($this->b_fecha_1)->format('d').' al '.$this->b_fecha_2;
+
+            $rangoFecha2 = $this->b_fecha_1.' al '.$this->b_fecha_2;
+
+            $titulo = '';
+
+            if ($this->b_presentacion1) {
+                $titulo .= "Tripa Larga";
+            }
+            if ($this->b_presentacion2 ) {
+                if (!empty($titulo)) {
+                    $titulo .= ", ";
+                }
+                $titulo .= "Tripa Corta";
+            }
+            if ($this->b_presentacion3) {
+                if (!empty($titulo)) {
+                    $titulo .= ", ";
+                }
+                $titulo .= "Brocha";
+            }
+
+
+
+            return Excel::download(new ProduccionEmpleadoPlanillaExport($da,$rangoFecha2, $titulo), 'Planilla de '.$titulo.' del '.$rangoFecha.'.xlsx');
 
         }else{
             $this->dispatchBrowserEvent('error_general',['errorr' => 'Rango de Fechas incorrectos','icon' => 'error']);
