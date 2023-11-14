@@ -355,7 +355,7 @@ class FacturaTerminado extends Component
 
                 $detalles = DB::select('select item, orden from pendiente where id_pendiente = ?', [$detalles_item[0]->id_pendiente]);
 
-                $valores_extras = DB::select('select id_pendiente, (select id_detalle from detalle_factura where detalle_factura.id_pendiente = pendiente.id_pendiente) as id_detalle from pendiente where item = ? and orden = ?', [$detalles[0]->item, $detalles[0]->orden]);
+                $valores_extras = DB::select('select id_pendiente, (select id_detalle from detalle_factura where detalle_factura.id_pendiente = pendiente.id_pendiente) as id_detalle from pendiente where item = ? and orden = ? limit 0', [$detalles[0]->item, $detalles[0]->orden]);
 
                 DB::delete('call eliminar_detalle_factura(:id)', ['id' => $id]);
 

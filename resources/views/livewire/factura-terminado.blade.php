@@ -330,7 +330,7 @@
                                 <td>{{ $sampler_s ? '' : $detalles->cantidad_puros }}</td>
                                 <td>{{ $sampler_s ? '' : $detalles->unidad }}</td>
                                 <td><b>{{ $sampler_s ? '' : $detalles->cantidad_cajas }}</b></td>
-                                <td>{{ $sampler_s ? $detalles->total_tabacos / $detalles->can_detalles : $detalles->total_tabacos }}
+                                <td>{{ $sampler_s ? (($detalles->paquetes)/$detalles->pen_paquetes)*$detalles->cantidad_puros* $detalles->unidad : $detalles->total_tabacos }}
                                 </td>
                                 <td>{{ $detalles->capas }}</td>
                                 <td>{{ $sampler_s ? '' : $detalles->cantidad_por_caja }}</td>
@@ -428,7 +428,7 @@
                                 <td style="text-align: right">{{ number_format($detalles->valor_total, 2) }}</td>
                                 @php
                                     $valor_factura += $detalles->valor_total;
-                                    $total_puros_tabla += $sampler_s ? $detalles->total_tabacos / $detalles->can_detalles : $detalles->total_tabacos;
+                                    $total_puros_tabla += $sampler_s ? (($detalles->paquetes)/$detalles->pen_paquetes)*$detalles->cantidad_puros* $detalles->unidad : $detalles->total_tabacos;
                                     $total_neto += $sampler_s ? 0 : $detalles->total_neto;
                                     $total_bruto += $sampler_s ? 0 : $detalles->total_bruto;
 
