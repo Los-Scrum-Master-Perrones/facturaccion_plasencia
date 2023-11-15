@@ -434,6 +434,7 @@
                                     {{ $detalle->prioridad }}
                                 @endif
                             </td>
+                            <td style="text-align:right;color: red">{{ $detalle->pendiente_prioridad<= 0? 'Completado':$detalle->pendiente_prioridad  }}</td>
                             <td style="text-align:right;">{{ $detalle->pendiente }}</td>
                             <td style="text-align:right;">{{ $detalle->pendiente - $detalle->restantes }}
                                 @php
