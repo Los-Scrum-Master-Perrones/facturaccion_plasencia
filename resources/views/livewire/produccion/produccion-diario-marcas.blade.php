@@ -269,6 +269,8 @@
                                 {{ $moduloactual->revisador1 }}
                             @endif
                         </div>
+                        @endisset
+                        @isset($moduloactual->revisador2)
                         <div class="col-md-5">
                             @if (is_null($moduloactual->revisador2))
                                 @isset($revisador['revisador'])
