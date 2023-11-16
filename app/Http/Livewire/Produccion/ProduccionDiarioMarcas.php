@@ -22,12 +22,14 @@ class ProduccionDiarioMarcas extends Component
     public $modulo_empleado = [];
     public $modulos = [];
     public $modulo_actual = 1;
+    public $nombre_empleado = '';
 
     public function render()
     {
         $pendiente_catalogo = DB::select('CALL `buscar_produccion_empleado_planificacion_marcas`()');
-        $this->modulo_empleado = DB::select('CALL `buscar_produccion_modulos_empleados`(?)', [$this->modulo_actual]);
+        $this->modulo_empleado = DB::select('CALL `buscar_produccion_modulos_empleados`(?,?)', [$this->modulo_actual,$this->nombre_empleado]);
         $this->modulos = DB::select('CALL `buscar_produccion_empleado_planificacion_modulos`()');
+
         $moldes = DB::select(
             'CALL `buscar_produccion_moldes_inventario`(0)'
         );
@@ -37,6 +39,7 @@ class ProduccionDiarioMarcas extends Component
             $this->b_rol,
             $this->b_nombre,
         ]);
+
 
         $roleros = [];
         $boncheros = [];
@@ -82,6 +85,7 @@ class ProduccionDiarioMarcas extends Component
                 'usosMoldes' => $usosMoldes,
                 'apartdoMoldes' => $apartdoMoldes,
                 'pendiente_catalogo' => $pendiente_catalogo,
+                'emplead' => DB::select('CALL `buscar_produccion_empleado_planificacion_busqueda`()')
             ]
         )->extends('layouts.produccion.produccion-menu')->section('contenido');
     }
@@ -89,6 +93,7 @@ class ProduccionDiarioMarcas extends Component
     public function cambiar_modulo($id)
     {
         $this->modulo_actual = $id;
+        $this->nombre_empleado = '';
     }
 
     public function eliminar_detalle(ProduccionDiarioProducir $mod, $num)

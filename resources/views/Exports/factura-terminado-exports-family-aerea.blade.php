@@ -287,7 +287,7 @@
                             <td style="text-align:center;font-size:9px; height: 24px;border: 5px solid #C00;overflow-x:auto;overflow-x:auto;">{{$detalles->codigo_item}}</td>
                             <td style="text-align:center;font-size:9px; height: 24px;border: 5px solid #C00;overflow-x:auto;overflow-x:auto;">{{$detalles->orden}}</td>
                             <td style="text-align:center;font-size:9px; height: 24px;border: 5px solid #C00;overflow-x:auto;overflow-x:auto;">{{$total_pendiente[0]->total_pendiente}}</td>
-                            <td style="text-align:center;font-size:9px; height: 24px;border: 5px solid #C00;overflow-x:auto;overflow-x:auto;">{{$total_ac}}</td>
+                            <td style="text-align:center;font-size:9px; height: 24px;border: 5px solid #C00;overflow-x:auto;overflow-x:auto;">{{$detalles->orden_restante }}</td>
 
                             <td style="text-align:center;font-size:9px; height: 24px;border: 5px solid #C00;overflow-x:auto;overflow-x:auto;">{{$detalles->total_bruto}}</td>
                             <td style="text-align:center;font-size:9px; height: 24px;border: 5px solid #C00;overflow-x:auto;overflow-x:auto;">{{$detalles->total_neto}}</td>

@@ -143,7 +143,7 @@
         </div>
         <div @if (count($empleados) == 0) class="col-md-12" @else class="col-md-8" @endif>
             <ul class="nav nav-tabs justify-content-center">
-                <li class="nav-item"  wire:loading>
+                <li class="nav-item" wire:loading>
                     <a class="nav-link fs-7 active" href="#">
                         <div class="spinner-grow text-danger" style="width: 1rem; height: 1rem;" role="status">
                             <span class="visually-hidden">Loading...</span>
@@ -203,7 +203,7 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link fs-7 active" href="#"  onclick="exportar_documentos()">
+                    <a class="nav-link fs-7 active" href="#" onclick="exportar_documentos()">
                         <abbr title="Exportar planificacion">
                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
                                 class="bi bi-file-earmark-spreadsheet-fill" viewBox="0 0 16 16">
@@ -225,6 +225,17 @@
                         </abbr>
                     </a>
                 </li>
+                <li class="nav-item">
+                    <a class="nav-link fs-7 active" href="#" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                        <abbr title="Buscar empleado">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                fill="currentColor" class="bi bi-binoculars-fill" viewBox="0 0 16 16">
+                                <path
+                                    d="M4.5 1A1.5 1.5 0 0 0 3 2.5V3h4v-.5A1.5 1.5 0 0 0 5.5 1h-1zM7 4v1h2V4h4v.882a.5.5 0 0 0 .276.447l.895.447A1.5 1.5 0 0 1 15 7.118V13H9v-1.5a.5.5 0 0 1 .146-.354l.854-.853V9.5a.5.5 0 0 0-.5-.5h-3a.5.5 0 0 0-.5.5v.793l.854.853A.5.5 0 0 1 7 11.5V13H1V7.118a1.5 1.5 0 0 1 .83-1.342l.894-.447A.5.5 0 0 0 3 4.882V4h4zM1 14v.5A1.5 1.5 0 0 0 2.5 16h3A1.5 1.5 0 0 0 7 14.5V14H1zm8 0v.5a1.5 1.5 0 0 0 1.5 1.5h3a1.5 1.5 0 0 0 1.5-1.5V14H9zm4-11H9v-.5A1.5 1.5 0 0 1 10.5 1h1A1.5 1.5 0 0 1 13 2.5V3z" />
+                            </svg>
+                        </abbr>
+                    </a>
+                </li>
             </ul>
             <div class="card" style="height: 86vh;">
                 <div class="card-header">
@@ -232,6 +243,7 @@
                         <div class="col-md-2">
                             <label for="">Revisadores</label>
                         </div>
+                        @isset($moduloactual->revisador1)
                         <div class="col-md-5">
                             @if (is_null($moduloactual->revisador1))
                                 @isset($revisador['revisador'])
@@ -281,6 +293,7 @@
                                 {{ $moduloactual->revisador2 }}
                             @endif
                         </div>
+                        @endisset
                     </div>
                 </div>
                 <div class="card-body">
@@ -647,6 +660,26 @@
     </div>
 
 
+    <div wire:ignore class="modal" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Buscar empleado por modulo</h5>
+                    <button type="button" class="btn-close" id="boton_cerrar_buscar" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <select id="selectOptions" onchange="buscar()">
+                        <option value="">Seleccionar</option>
+                        @foreach ($emplead as $emple)
+                            <option value="{{ $emple->id }}">{{ $emple->codigo.'-'.$emple->nombre }}</option>
+                        @endforeach
+                    </select>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
     @push('scripts')
         <script>
             var id_detalles = 0;
@@ -791,6 +824,7 @@
             }
 
             var table;
+            let buscador;
             $(document).ready(function() {
                 $('#catalgo_pendiente').DataTable({
                     "language": {
@@ -822,6 +856,13 @@
                     }
                 });
 
+                buscador = new TomSelect('#selectOptions', {
+                        create: false,
+                        sortField: {
+                            field: "text",
+                            direction: "asc"
+                        }
+                    });
             });
 
             window.addEventListener('abrirOpciones', event => {
@@ -830,6 +871,20 @@
 
             function seleccionar_tupla(id) {
                 id_detalles = id;
+            }
+
+            function buscar() {
+                let empleados = @json($emplead);
+                let id = buscador.getValue();
+                empleados.filter((empleado)=>{
+                    if (empleado.id == id) {
+                        @this.cambiar_modulo(empleado.modulo);
+                        @this.nombre_empleado = empleado.nombre;
+                        $('#boton_cerrar_buscar').click();
+                    }
+                });
+
+
             }
         </script>
     @endpush
