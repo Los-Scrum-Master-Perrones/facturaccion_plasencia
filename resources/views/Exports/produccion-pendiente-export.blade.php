@@ -41,6 +41,7 @@
             <th style="text-align:center;font-size:16px;border: 1px solid #C00; font-weight: bold">PEND. PRIORIDAD</th>
             <th style="text-align:center;font-size:16px;border: 1px solid #C00; font-weight: bold">PENDIENTE</th>
             <th style="text-align:center;font-size:16px;border: 1px solid #C00; font-weight: bold">PRODUCIDO</th>
+            <th style="text-align:center;font-size:16px;border: 1px solid #C00; font-weight: bold">%</th>
             <th style="text-align:center;font-size:16px;border: 1px solid #C00; font-weight: bold">RESTANTE</th>
         </tr>
     </thead>
@@ -92,12 +93,12 @@
                 <td style="text-align:center;font-size:12px;border: 1px solid #C00; text-align: center; text-align:right;color: red">
                     {{ $detalle->pendiente_prioridad <= 0 && $detalle->prioridad>0 ? 'Completado' : $detalle->pendiente_prioridad }}</td>
                 <td style="text-align:center;font-size:12px;border: 1px solid #C00;text-align:right;">{{ $detalle->pendiente }}</td>
-                <td style="text-align:center;font-size:12px;border: 1px solid #C00;text-align:right;">{{ $detalle->pendiente - $detalle->restantes }}
+                <td style="text-align:center;font-size:12px;border: 1px solid #C00;text-align:right;">{{ $detalle->pendiente - $detalle->restantes }}</td>
+                <td style="text-align:center;font-size:12px;border: 1px solid #C00;text-align:right;">
                     @php
                         $porcentaje = (($detalle->pendiente - $detalle->restantes) / $detalle->pendiente) * 100;
                     @endphp
                     {{ number_format($porcentaje, 0) }}%
-
                 </td>
                 <td style="text-align:center;font-size:12px;border: 1px solid #C00;text-align:right;">{{ $detalle->restantes }}</td>
             </tr>
