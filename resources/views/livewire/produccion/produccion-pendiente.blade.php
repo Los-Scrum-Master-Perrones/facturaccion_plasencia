@@ -508,7 +508,7 @@
                                                 d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z" />
                                         </svg>
                                     </a>
-                                    @isset($materiales[$detalle->marca.$detalle->vitola])
+                                    @isset($materiales[$detalle->marca.$detalle->nombre.$detalle->vitola])
                                     <button type="button" class="btn btn-sm btn-primary dropdown-toggle" data-bs-toggle="collapse" data-bs-target="#collapseExample{{ $i }}">
                                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
                                             fill="currentColor" class="bi bi-list-check" viewBox="0 0 16 16">
@@ -520,7 +520,7 @@
                                 </td>
                             @endif
                         </tr>
-                        @isset($materiales[$detalle->marca.$detalle->vitola])
+                        @isset($materiales[$detalle->marca.$detalle->nombre.$detalle->vitola])
                         <tr>
                             <td colspan="11"></td>
                             <td colspan="6">
@@ -531,7 +531,7 @@
                                             <div class="col-sm-2">ONZ</div>
                                             <div class="col-sm-2">LBS</div>
                                         </div>
-                                        @foreach ($materiales[$detalle->marca.$detalle->vitola] as $molde)
+                                        @foreach ($materiales[$detalle->marca.$detalle->nombre.$detalle->vitola] as $molde)
                                             <div class="row">
                                                 <div class="col-sm-8">{{  $molde->nombre_material.'('.$molde->onza.')' }} </div>
                                                 @php
@@ -574,12 +574,25 @@
                             aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
-                        <input type="date" class="form-control" name="fecha"
-                            value="{{ Carbon\Carbon::now()->format('Y-m-d') }}">
+                        <div class="row">
+                            <div class="col">
+                                <input type="date" class="form-control" name="fecha"
+                                value="{{ Carbon\Carbon::now()->format('Y-m-d') }}">
+                            </div>
+                        </div>
+                        <br>
+                        <div class="row">
+                            <div class="col-md-6 text-center">
+                                <button type="button" class="btn btn-success" data-bs-dismiss="modal" wire:click='imprimir_pendiente_por_producir()'>Exportar Pendiente</button>
+                            </div>
+                            <div class="col-md-6 text-center">
+                                <button type="button" class="btn btn-info" data-bs-dismiss="modal">Exportar Materiales</button>
+                            </div>
+                        </div>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                        <button type="submit" class="btn btn-primary">Save changes</button>
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                        <button type="submit" class="btn btn-primary">Exportar</button>
                     </div>
                 </div>
             </div>

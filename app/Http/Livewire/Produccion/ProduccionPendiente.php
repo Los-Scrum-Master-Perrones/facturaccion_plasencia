@@ -2,6 +2,7 @@
 
 namespace App\Http\Livewire\Produccion;
 
+use App\Exports\ProduccionPendiente as ExportsProduccionPendiente;
 use App\Exports\ProduccionReporteExport;
 use App\Imports\ProduccionMoldesImport;
 use App\Models\capa_producto;
@@ -255,6 +256,37 @@ class ProduccionPendiente extends Component
 
         return Excel::download(new ProduccionReporteExport($datos,$rehechos), 'Reporte Diario Produccion '.$request->input('fecha').'.xlsx');
     }
+
+    public function imprimir_pendiente_por_producir() {
+        $start = ($this->page - 1) * $this->por_pagina;
+
+        $var1 = $this->tipo1?$this->tipo1:'';
+        $var2 = $this->tipo2?$this->tipo2:'';
+        $var3 = $this->tipo3?$this->tipo3:'';
+        $var4 = $this->tipo4?$this->tipo4:'';
+        $da = DB::select(
+            'CALL `buscar_produccion_pendiente`(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)',
+            [
+                $this->b_ordenes,
+                $this->b_fechas,
+                $this->b_codigos,
+                $this->b_marcas,
+                $this->b_nombres,
+                $this->b_vitolas,
+                $this->b_capas,
+                $start,
+                $this->por_pagina,
+                $var1.$var2.$var3.$var4.'Sin Presentacion',
+                $this->b_color,
+                $this->prioridad,
+                $this->cliente
+            ]
+        );
+
+        return Excel::download(new ExportsProduccionPendiente($da), 'Pendiente por producir '.Carbon::now()->format('Y-m-d').'.xlsx');
+    }
+
+
 
     public function importMoldes()
     {

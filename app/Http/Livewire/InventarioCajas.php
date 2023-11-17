@@ -2,11 +2,14 @@
 
 namespace App\Http\Livewire;
 
+use App\Exports\InventarioCajasExport;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
+use Maatwebsite\Excel\Facades\Excel;
 
 class InventarioCajas extends Component
 {
@@ -318,6 +321,20 @@ class InventarioCajas extends Component
 
 
     }
+
+    public function imprimir_reporte() {
+
+        $listacajas = DB::select('call buscar_listadecajas(:marca,:codigo,:producto,:filtro)',[
+            'marca'=>$this->marcas,
+            'codigo'=>$this->codigo,
+            'producto'=>$this->producto,
+            'filtro'=>$this->filtro
+        ]);
+
+        return Excel::download(new InventarioCajasExport($listacajas), 'Catalogo cajas '.Carbon::now()->format('Y-m-d').'.xlsx');
+    }
+
+
 }
 
 
