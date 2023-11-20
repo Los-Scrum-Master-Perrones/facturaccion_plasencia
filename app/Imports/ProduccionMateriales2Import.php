@@ -102,6 +102,7 @@ class ProduccionMateriales2Import implements ToCollection, WithCalculatedFormula
         }
 
         ProduccionMateriales::upsert($datos, [
+            'id_producto',
             'marca',
             'nombre',
             'vitola',
@@ -110,7 +111,11 @@ class ProduccionMateriales2Import implements ToCollection, WithCalculatedFormula
             'onza',
             'banda',
             'onza_banda'
-        ], ['base']);
+        ], [ 'marca',
+        'nombre',
+        'vitola',
+        'capa',
+        'nombre_material'], ['onza_banda']);
 
     }
 
