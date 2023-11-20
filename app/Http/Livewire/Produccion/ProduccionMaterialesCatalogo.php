@@ -5,7 +5,6 @@ namespace App\Http\Livewire\Produccion;
 use App\Models\capa_producto;
 use App\Models\marca_producto;
 use App\Models\nombre_producto;
-use App\Models\Produccion;
 use App\Models\ProduccionMateriales;
 use App\Models\vitola_producto;
 use Illuminate\Pagination\LengthAwarePaginator;
@@ -13,7 +12,7 @@ use Illuminate\Support\Facades\DB;
 use Livewire\Component;
 use Livewire\WithPagination;
 
-class ProduccionCatalogo extends Component
+class ProduccionMaterialesCatalogo extends Component
 {
     use WithPagination;
     protected $paginationTheme = 'bootstrap';
@@ -25,8 +24,16 @@ class ProduccionCatalogo extends Component
     public $b_nombre = '';
     public $b_vitola = '';
     public $b_capa = '';
-    public $b_color = '';
-    public $b_cliente = '';
+    public $b_nombre_material = '';
+    public $b_banda = '';
+
+    //Productos
+    public $produc_pendiente = '';
+    public $presentacionn = '';
+    public $marcas_nuevo = '';
+    public $capas_nuevo = '';
+    public $vitolas_nuevo = '';
+    public $nombres_nuevo = '';
 
     //filtros tabla
     public $presentacion = [];
@@ -35,12 +42,10 @@ class ProduccionCatalogo extends Component
     public $nombres = [];
     public $vitolas = [];
     public $capas = [];
-    public $materiales = [];
+    public $nombres_materials = [];
+    public $bandas = [];
+    public $datos_codigo = [];
 
-    public $capas_select = [];
-    public $marcas_select = [];
-    public $nombres_select = [];
-    public $vitolas_select = [];
 
 
     //nuevo
@@ -48,21 +53,34 @@ class ProduccionCatalogo extends Component
 
     public $rules = [
         'material.id_producto' => 'string|required',
-        'material.marca' => 'string|required',
+        'material.marca' => 'string',
         'material.nombre' => 'string',
-        'material.vitola' => 'string|required',
-        'material.capa' => 'string|required',
-        'material.nombre_material' => 'string|required',
-        'material.onza' => 'string|required',
+        'material.vitola' => 'string',
+        'material.capa' => 'string',
+        'material.nombre_material' => 'string',
+        'material.onza' => 'string',
         'material.banda' => 'string',
         'material.onza_banda' => 'string',
-        'material.base' => 'string|required',
+        'material.base' => 'string',
+        'material.activo' => 'string',
     ];
 
     public $por_pagina = 50;
     public $total = 0;
+    public $activoss = 'A';
 
-    public function mount() {
+    public function activos($ac)
+    {
+        $this->activoss = $ac;
+    }
+    public function activar_desactivar(ProduccionMateriales $tupla, $ac)
+    {
+        $tupla->activo = $ac;
+        $tupla->save();
+    }
+
+    public function mount()
+    {
 
         $this->material = new ProduccionMateriales([
             `id_producto` =>  0,
@@ -75,9 +93,10 @@ class ProduccionCatalogo extends Component
             `banda` => '',
             `onza_banda` =>  '',
             `base` => '',
+            `activo` => 'A',
         ]);
 
-        $da = DB::select('CALL `buscar_produccion_catalogo_materiales_detalles`()');
+        $da = DB::select('CALL `buscar_produccion_materiales_catalogo_detalles`()');
 
         if (count($da) > 0) {
             $this->presentacion = [];
@@ -86,7 +105,8 @@ class ProduccionCatalogo extends Component
             $this->nombres = [];
             $this->vitolas = [];
             $this->capas = [];
-            $this->materiales = [];
+            $this->nombres_materials = [];
+            $this->bandas = [];
 
             foreach ($da as $detalles) {
                 array_push($this->presentacion, $detalles->presentacion);
@@ -95,7 +115,8 @@ class ProduccionCatalogo extends Component
                 array_push($this->nombres, $detalles->nombre);
                 array_push($this->vitolas, $detalles->vitola);
                 array_push($this->capas, $detalles->capa);
-                array_push($this->materiales, $detalles->nombre_material);
+                array_push($this->nombres_materials, $detalles->nombre_material);
+                array_push($this->bandas, $detalles->banda);
             }
 
             $this->presentacion = array_unique($this->presentacion);
@@ -104,14 +125,11 @@ class ProduccionCatalogo extends Component
             $this->nombres = array_unique($this->nombres);
             $this->vitolas = array_unique($this->vitolas);
             $this->capas = array_unique($this->capas);
-            $this->materiales = array_unique($this->materiales);
+            $this->nombres_materials = array_unique($this->nombres_materials);
+            $this->bandas = array_unique($this->bandas);
         }
 
 
-        $this->capas_select = capa_producto::all();
-        $this->marcas_select = marca_producto::all();
-        $this->nombres_select = nombre_producto::all();
-        $this->vitolas_select = vitola_producto::all();
     }
 
     public function render()
@@ -119,41 +137,35 @@ class ProduccionCatalogo extends Component
         $start = ($this->page - 1) * $this->por_pagina;
 
         $da = DB::select(
-            'CALL `buscar_produccion_catalogo`(?,?,?,?,?,?,?,?,?,?)',
+            'CALL `buscar_produccion_materiales_catalogo`(?,?,?,?,?,?,?,?,?,?,@salida,?);',
             [
-                $this->b_presentacion,
                 $this->b_codigo,
+                $this->b_presentacion,
                 $this->b_marca,
                 $this->b_nombre,
                 $this->b_vitola,
                 $this->b_capa,
+                $this->b_nombre_material,
+                $this->b_banda,
                 $start,
                 $this->por_pagina,
-                $this->b_color,
-                $this->b_cliente
+                $this->activoss
             ]
         );
 
-        $this->total = DB::select(
-            'CALL `buscar_produccion_catalogo_conteo`(?,?,?,?,?,?,?,?)',
-            [
-                $this->b_presentacion,
-                $this->b_codigo,
-                $this->b_marca,
-                $this->b_nombre,
-                $this->b_vitola,
-                $this->b_capa,
-                $this->b_color,
-                $this->b_cliente
-            ]
-        )[0]->total;
+        $this->total = DB::select('SELECT @salida AS longitud')[0]->longitud;
 
-        return view('livewire.produccion.produccion-catalogo', [
-            'productos' => new LengthAwarePaginator($da,  $this->total , $this->por_pagina)
+        $this->datos_codigo = DB::select("CALL `buscar_produccion_catalogo`('','','','','','',0,'999999','','')");
+
+
+        return view('livewire.produccion.produccion-materiales-catalogo', [
+            'productos' => new LengthAwarePaginator($da,  $this->total, $this->por_pagina)
         ])->extends('layouts.produccion.produccion-menu')->section('contenido');
     }
 
-    public function eliminar_salida(Produccion $salida) {
+
+
+    /* public function eliminar_salida(Produccion $salida) {
 
         try {
             DB::beginTransaction();
@@ -169,56 +181,63 @@ class ProduccionCatalogo extends Component
         }
 
     }
+*/
 
-    public function registra_producto() {
+    public function asignar_codigo_producto($id,ProduccionMateriales $edit)
+    {
+        try {
+            DB::beginTransaction();
+            $edit->id_producto = $id;
+            $edit->save();
+            $this->dispatchBrowserEvent('error_general', ['errorr' => 'Editado con exito', 'icon' => 'success']);
+            DB::commit();
+        } catch (\Exception $th) {
+            $this->dispatchBrowserEvent('error_general', ['errorr' => $th->getMessage(), 'icon' => 'error']);
+            DB::rollBack();
+        }
+    }
+
+    public function editar_producto(ProduccionMateriales $edit)
+    {
+        try {
+            DB::beginTransaction();
+            $this->material = $edit;
+            $this->dispatchBrowserEvent('error_general', ['errorr' => 'Listo para Editar', 'icon' => 'info']);
+            DB::commit();
+        } catch (\Exception $th) {
+            $this->dispatchBrowserEvent('error_general', ['errorr' => $th->getMessage(), 'icon' => 'error']);
+            DB::rollBack();
+        }
+    }
+
+    public function registra_producto()
+    {
 
         try {
             DB::beginTransaction();
 
+            $this->material->save();
 
-
-            $this->produc->save();
-
-            Produccion::where('id_marca', $this->produc->id_marca)
-                        ->where('id_capa', $this->produc->id_capa)
-                        ->update(['color' =>  $this->color_n]);
-
-            marca_producto::where('id_marca', $this->produc->id_marca)->update(['empresa' =>  $this->cliente]);
-            $this->produc = new Produccion([
-                `codigo` =>  'P-',
-                `presentacion` =>  'Puros Tripa Larga',
-                `id_marca` =>  0,
-                `id_nombre` =>  0,
-                `id_vitola` =>  0,
-                `id_capa` =>  0,
-                `precio_bonchero` =>  0,
-                `precio_rolero` =>  0,
-                `existencia` =>  0,
+            $this->material = new ProduccionMateriales([
+                `id_producto` =>  0,
+                `marca` =>  '',
+                `nombre` => '',
+                `vitola` =>  '',
+                `capa` =>  '',
+                `nombre_material` => '',
+                `onza` =>  '',
+                `banda` => '',
+                `onza_banda` =>  '',
+                `base` => '',
+                `activo` => 'A',
             ]);
 
-            $this->dispatchBrowserEvent('error_general',['errorr' => 'Registro creado con exito','icon' => 'success']);
+            $this->dispatchBrowserEvent('error_general', ['errorr' => 'Registro creado con exito', 'icon' => 'success']);
 
             DB::commit();
         } catch (\Exception $th) {
-            $this->dispatchBrowserEvent('error_general',['errorr' => $th->getMessage(),'icon' => 'error']);
+            $this->dispatchBrowserEvent('error_general', ['errorr' => $th->getMessage(), 'icon' => 'error']);
             DB::rollBack();
         }
     }
-
-    public function editar_producto(Produccion $edit) {
-
-        try {
-            DB::beginTransaction();
-
-            $this->color_n = marca_producto::find($edit->id_marca)->color;
-            $this->cliente = marca_producto::find($edit->id_marca)->empresa;
-            $this->produc = $edit;
-            $this->dispatchBrowserEvent('error_general',['errorr' => 'Listo para Editar','icon' => 'info']);
-            DB::commit();
-        } catch (\Exception $th) {
-            $this->dispatchBrowserEvent('error_general',['errorr' => $th->getMessage(),'icon' => 'error']);
-            DB::rollBack();
-        }
-    }
-
 }

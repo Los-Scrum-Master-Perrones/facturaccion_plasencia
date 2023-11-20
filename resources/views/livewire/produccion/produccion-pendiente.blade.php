@@ -242,7 +242,7 @@
                                     <select name="itemn" id="itemn" style="height:30px; width: 100%;"
                                         class="fs-7" required type="text" autocomplete="off"
                                         onchange="buscar_codigo()">
-                                        <option value="">Todos los items</option>
+                                        <option value="">Todos los Codigos</option>
                                         @foreach ($codigos as $codigo)
                                             <option value="{{ $codigo }}">{{ $codigo }}</option>
                                         @endforeach

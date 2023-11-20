@@ -17,6 +17,7 @@ use Illuminate\Database\Eloquent\Model;
  * @property string $banda
  * @property int $onza_banda
  * @property int $base
+ * @property string $activo
  */
 class ProduccionMateriales extends Model
 {
@@ -33,7 +34,8 @@ class ProduccionMateriales extends Model
         'onza',
         'banda',
         'onza_banda',
-        'base'
+        'base',
+        'activo'
     ];
 
 
