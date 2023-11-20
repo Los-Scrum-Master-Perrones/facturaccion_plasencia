@@ -508,7 +508,7 @@
                                                 d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z" />
                                         </svg>
                                     </a>
-                                    @isset($materiales[$detalle->marca.$detalle->nombre.$detalle->vitola])
+                                    @isset($materiales[$detalle->id_producto])
                                     <button type="button" class="btn btn-sm btn-primary dropdown-toggle" data-bs-toggle="collapse" data-bs-target="#collapseExample{{ $i }}">
                                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
                                             fill="currentColor" class="bi bi-list-check" viewBox="0 0 16 16">
@@ -520,23 +520,25 @@
                                 </td>
                             @endif
                         </tr>
-                        @isset($materiales[$detalle->marca.$detalle->nombre.$detalle->vitola])
+                        @isset($materiales[$detalle->id_producto])
                         <tr>
                             <td colspan="11"></td>
                             <td colspan="6">
                                 <div class="collapse" id="collapseExample{{ $i }}">
                                     <div class="card card-body">
                                         <div class="row">
-                                            <div class="col-sm-8">Material</div>
+                                            <div class="col-sm-6">Material</div>
+                                            <div class="col-sm-2">Base</div>
                                             <div class="col-sm-2">ONZ</div>
                                             <div class="col-sm-2">LBS</div>
                                         </div>
-                                        @foreach ($materiales[$detalle->marca.$detalle->nombre.$detalle->vitola] as $molde)
+                                        @foreach ($materiales[$detalle->id_producto] as $molde)
                                             <div class="row">
-                                                <div class="col-sm-8">{{  $molde->nombre_material.'('.$molde->onza.')' }} </div>
+                                                <div class="col-sm-6">{{  $molde->nombre_material }} </div>
                                                 @php
                                                     $arr = explode(' ',trim($molde->onza));
                                                 @endphp
+                                                <div class="col-sm-2" style="color: red; font-weight: bold; font-size: 10px">{{  '('.$molde->onza.')'  }} </div>
                                                 <div class="col-sm-2">{{  number_format((intval($arr[0])/100)*$detalle->restantes,0,',','')  }} </div>
                                                 <div class="col-sm-2">{{  number_format(((intval($arr[0])/100)*$detalle->restantes)/16,2,',','')  }} </div>
                                             </div>

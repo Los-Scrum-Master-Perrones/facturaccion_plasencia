@@ -191,7 +191,7 @@ class ProduccionPendiente extends Component
 
         $usosMateriales = [];
         foreach ($materiales as $uso) {
-            $usosMateriales[$uso->des][] =  $uso;
+            $usosMateriales[$uso->id_producto][] =  $uso;
         }
 
         return view('livewire.produccion.produccion-pendiente', [

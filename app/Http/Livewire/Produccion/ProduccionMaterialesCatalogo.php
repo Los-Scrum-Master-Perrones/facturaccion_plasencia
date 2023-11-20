@@ -2,19 +2,19 @@
 
 namespace App\Http\Livewire\Produccion;
 
-use App\Models\capa_producto;
-use App\Models\marca_producto;
-use App\Models\nombre_producto;
+use App\Imports\ProduccionMateriales2Import;
 use App\Models\ProduccionMateriales;
-use App\Models\vitola_producto;
 use Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\Support\Facades\DB;
 use Livewire\Component;
+use Livewire\WithFileUploads;
 use Livewire\WithPagination;
 
 class ProduccionMaterialesCatalogo extends Component
 {
+    use WithFileUploads;
     use WithPagination;
+    public $select_file;
     protected $paginationTheme = 'bootstrap';
 
     //busqueda
@@ -239,5 +239,13 @@ class ProduccionMaterialesCatalogo extends Component
             $this->dispatchBrowserEvent('error_general', ['errorr' => $th->getMessage(), 'icon' => 'error']);
             DB::rollBack();
         }
+    }
+
+    public function import()
+    {
+        $this->validate([
+            'select_file' => 'max:1024', // 1MB Max
+        ]);
+        (new ProduccionMateriales2Import)->import($this->select_file);
     }
 }

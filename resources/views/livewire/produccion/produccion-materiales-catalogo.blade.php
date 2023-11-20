@@ -3,7 +3,7 @@
         <div class="card" style="height: 90vh;">
             <div class="card-header">
                 <div class="row">
-                    <div class="col-md-3" wire:ignore style="height: 30px">
+                    <div class="col-md-2" wire:ignore>
                         <div class="btn-group" style="height: 35px;" role="group"
                             aria-label="Basic mixed styles example">
                             @if (auth()->user()->rol == -1)
@@ -22,9 +22,16 @@
                             @endif
                         </div>
                     </div>
-                    <div class="col-md-1" wire:ignore>
+                    <div class="col-md-4" wire:ignore>
+                        {{-- <div class="input-group mb-3" style="height: 30px">
+                            <input type="file" name="select_file" id="select_file"
+                                style="height: 30px;font-size: 0.7em" wire:model="select_file"
+                                class="form-control" />
+                            <input type="submit" wire:click="import" name="upload" class="btn btn-primary"
+                            style="height: 30px;font-size: 0.7em" value="Produccion Diaria">
+                        </div> --}}
                     </div>
-                    <div class="col-md-5">
+                    <div class="col-md-3">
                     </div>
                     <div class="col-md-1" wire:ignore style="height: 30px"></div>
                     <div class="col-md-2">
