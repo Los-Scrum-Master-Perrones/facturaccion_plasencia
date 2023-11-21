@@ -9,7 +9,7 @@
                             <input type="date" class="form-control" wire:model='b_fecha_2'>
                         </div>
                     </div>
-                    <div class="col-md-1" wire:ignore   >
+                    <div class="col-md-1">
                         <div wire:loading>
                             <button id="btn_guardar" class="btn btn-outline-purpura" disabled>
                                 <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>

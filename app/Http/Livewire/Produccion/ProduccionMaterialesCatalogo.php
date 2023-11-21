@@ -210,6 +210,29 @@ class ProduccionMaterialesCatalogo extends Component
         }
     }
 
+    public function modificar_onzas($id,ProduccionMateriales $edit)
+    {
+        try {
+
+            $patron = "/^\d+\sONZ$/";
+
+            if (preg_match($patron, $id)) {
+                DB::beginTransaction();
+                $edit->onza = $id;
+                $edit->save();
+                $this->dispatchBrowserEvent('error_general', ['errorr' => 'Editado con exito', 'icon' => 'success']);
+                DB::commit();
+            } else {
+                $this->dispatchBrowserEvent('error_general', ['errorr' => 'El formato no es el indicado (XX ONZ.)', 'icon' => 'info']);
+            }
+        } catch (\Exception $th) {
+            $this->dispatchBrowserEvent('error_general', ['errorr' => $th->getMessage(), 'icon' => 'error']);
+            DB::rollBack();
+        }
+    }
+
+
+
     public function registra_producto()
     {
 

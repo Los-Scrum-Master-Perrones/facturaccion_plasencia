@@ -19,17 +19,21 @@
                                         </svg>
                                     </abbr>
                                 </button>
+
                             @endif
+                            <button id="btn_guardar" class="btn btn-outline-purpura" disabled wire:loading>
+                                <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                            </button>
                         </div>
                     </div>
                     <div class="col-md-4" wire:ignore>
-                        {{-- <div class="input-group mb-3" style="height: 30px">
+                        <div class="input-group mb-3" style="height: 30px">
                             <input type="file" name="select_file" id="select_file"
                                 style="height: 30px;font-size: 0.7em" wire:model="select_file"
                                 class="form-control" />
                             <input type="submit" wire:click="import" name="upload" class="btn btn-primary"
                             style="height: 30px;font-size: 0.7em" value="Produccion Diaria">
-                        </div> --}}
+                        </div>
                     </div>
                     <div class="col-md-3">
                     </div>
@@ -77,7 +81,7 @@
                 </div>
             </div>
             <div class="card-body">
-                <div wire:loading.class='oscurecer_contenido' class="table-responsive" style="height: 74vh;">
+                <div class="table-responsive" style="height: 74vh;">
                     <table class="table table-light" style="font-size:10px;">
                         <thead>
                             <tr>
@@ -140,16 +144,8 @@
                                     </select>
                                 </th>
                                 <th>Onza</th>
-                                <th wire:ignore>
-                                    <select name="b_banda" id="b_banda" onchange="buscar_io()">
-                                        <option value="">Bandas</option>
-                                        @foreach ($bandas as $v)
-                                            <option value="{{ $v }}">{{ $v }}</option>
-                                        @endforeach
-                                    </select>
-                                </th>
-                                <th>Banda Onza</th>
                                 <th>Base</th>
+                                <th class="text-center">A/I</th>
                                 <th class="text-center">OPERACION</th>
                             </tr>
                         </thead>
@@ -178,10 +174,14 @@
                                     <td>{{ $producto->vitola }}</td>
                                     <td>{{ $producto->capa }}</td>
                                     <td>{{ $producto->nombre_material }}</td>
-                                    <td>{{ $producto->onza }}</td>
-                                    <td>{{ $producto->banda }}</td>
-                                    <td>{{ $producto->onza_banda }}</td>
-                                    <td>{{ $producto->banda }}</td>
+                                    <td>
+                                        <input value="{{ $producto->onza }}" type="text"
+                                        id="tearea{{ $producto->id_material }}"
+                                        onchange="modificar_onzas({{ $producto->id_material }},'#tearea{{ $producto->id_material }}')"
+                                        class="form-control form-control-sm form-control-color fs-7"
+                                        style="width: 80px">
+                                    </td>
+                                    <td>{{ $producto->base }}</td>
                                     <td>
                                         <div class="form-check form-switch">
                                             <input class="form-check-input"
@@ -196,6 +196,15 @@
                                                 @endif
                                             </label>
                                         </div>
+                                    </td>
+                                    <td>
+                                        {{-- <a style="text-decoration: none" href="#" data-bs-toggle="modal" data-bs-target="#productos_editar"
+                                        onclick="cargar_modal({{ $producto->id_marca }},{{ $producto->id_nombre }},{{ $producto->id_vitola }},{{ $producto->id_capa }},'{{ $producto->color }}',{{ $producto->id }})">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" fill="currentColor" class="bi bi-pencil-square" viewBox="0 0 16 16">
+                                                <path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z" />
+                                                <path fill-rule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z" />
+                                            </svg>
+                                        </a> --}}
                                     </td>
                                 </tr>
                             @endforeach
@@ -499,7 +508,7 @@
                 }
             });
 
-            var seletscc = ["#b_presentacion", "#b_codigo", "#b_marca", "#b_nombre", "#b_vitola", "#b_capa", "#b_banda",
+            var seletscc = ["#b_presentacion", "#b_codigo", "#b_marca", "#b_nombre", "#b_vitola", "#b_capa",
                 "#b_material"
             ];
             const inputField = document.querySelector("#example");
@@ -555,7 +564,6 @@
                 @this.b_vitola = $(seletscc[4]).val();
                 @this.b_capa = $(seletscc[5]).val();
                 @this.b_nombre_material = $(seletscc[6]).val();
-                @this.b_banda = $(seletscc[7]).val();
                 @this.page = 1;
             }
 
@@ -572,6 +580,9 @@
                 @this.asignar_codigo_producto($('#codigon').val(),$('#idMaterial').val());
             }
 
+            function modificar_onzas(id, num) {
+                @this.modificar_onzas($(num).val(),id);
+            }
 
 
 
