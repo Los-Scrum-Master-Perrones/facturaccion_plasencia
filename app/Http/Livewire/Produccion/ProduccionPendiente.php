@@ -9,6 +9,7 @@ use App\Models\capa_producto;
 use App\Models\marca_producto;
 use App\Models\nombre_producto;
 use App\Models\Produccion;
+use App\Models\ProduccionMateriales;
 use App\Models\ProduccionPendiente as ModelsProduccionPendiente;
 use App\Models\ProduccionPendienteSalida;
 use App\Models\vitola_producto;
@@ -18,6 +19,7 @@ use Illuminate\Support\Facades\DB;
 use Livewire\Component;
 use Livewire\WithPagination;
 use Illuminate\Pagination\LengthAwarePaginator;
+use Illuminate\Support\Facades\Validator;
 use Livewire\WithFileUploads;
 use Maatwebsite\Excel\Facades\Excel;
 
@@ -77,6 +79,7 @@ class ProduccionPendiente extends Component
     public $mes = [];
     public $colores = [];
     public $clientes = [];
+    public $datos_codigo = [];
 
     public $por_pagina = 50;
     public $total = 0;
@@ -181,6 +184,8 @@ class ProduccionPendiente extends Component
         )[0]->total;
 
         $usos = ProduccionPendienteSalida::all(['id_produccion_pendiente','destino','cantidad','fecha_salida']);
+
+        $this->datos_codigo = DB::select("SELECT DISTINCT CONCAT(produccion_materiales.banda,'-',produccion_materiales.nombre_material) as nombre_material FROM produccion_materiales");
 
         $usosArray2 = [];
         foreach ($usos as $uso) {
@@ -296,4 +301,70 @@ class ProduccionPendiente extends Component
 
         (new ProduccionMoldesImport)->import($this->select_file);
     }
+
+    public function asinar_material($material, Produccion $id)
+    {
+        try {
+            $validator = Validator::make([
+                'material' => $material,
+            ], [
+                'material' => 'required|string', // Material es requerido y debe ser un string
+            ], [
+                'material.required' => 'El campo material es requerido.',
+                'material.string' => 'El campo material debe ser un texto.',
+            ]);
+
+            if ($validator->fails()) {
+                $errors = $validator->errors()->all();
+                $errorMessage = implode(' ', $errors);
+                $this->dispatchBrowserEvent('error_general', ['errorr' => $errorMessage, 'icon' => 'error']);
+                DB::rollBack();
+            }else{
+                DB::beginTransaction();
+
+
+                ProduccionMateriales::updateOrCreate(
+                    [
+                        'marca' =>  marca_producto::find($id->id_marca)->marca,
+                        'nombre' => nombre_producto::find($id->id_nombre)->nombre,
+                        'vitola' => vitola_producto::find($id->id_vitola)->vitola,
+                        'capa' => capa_producto::find($id->id_capa)->capa,
+                        'nombre_material' => explode("-", $material)[1]],
+                    [
+                        'id_producto' => $id->id,
+                        'onza' => explode("-", $material)[0] == 'BANDA' || explode("-", $material)[0] == 'CAPA' ? '8 ONZ.' :'18 ONZ.',
+                        'banda' => explode("-", $material)[0],
+                        'onza_banda' => '',
+                        'base' => 100,
+                    ]
+                );
+
+
+                $this->dispatchBrowserEvent('error_general', ['errorr' => $material.' agregado con exito', 'icon' => 'success']);
+                DB::commit();
+            }
+
+        } catch (\Exception $th) {
+            $this->dispatchBrowserEvent('error_general', ['errorr' => $th->getMessage(), 'icon' => 'error']);
+            DB::rollBack();
+        }
+    }
+
+    public function eliminar_material(ProduccionMateriales $id)
+    {
+        try {
+
+            DB::beginTransaction();
+
+            $id->delete();
+
+            $this->dispatchBrowserEvent('error_general', ['errorr' => 'Se Elimino con exito', 'icon' => 'success']);
+            DB::commit();
+
+        } catch (\Exception $th) {
+            $this->dispatchBrowserEvent('error_general', ['errorr' => $th->getMessage(), 'icon' => 'error']);
+            DB::rollBack();
+        }
+    }
+
 }

@@ -508,19 +508,18 @@
                                                 d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z" />
                                         </svg>
                                     </a>
-                                    @isset($materiales[$detalle->id_producto])
-                                    <button type="button" class="btn btn-sm btn-primary dropdown-toggle" data-bs-toggle="collapse" data-bs-target="#collapseExample{{ $i }}">
+
+                                    <button type="button" class="btn btn-sm  @if(isset($materiales[$detalle->id_producto])) btn-primary @else  btn-danger @endif dropdown-toggle" data-bs-toggle="collapse" data-bs-target="#collapseExample{{ $i }}">
                                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
                                             fill="currentColor" class="bi bi-list-check" viewBox="0 0 16 16">
                                             <path fill-rule="evenodd"
                                                 d="M5 11.5a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 0 1h-9a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 0 1h-9a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 0 1h-9a.5.5 0 0 1-.5-.5zM3.854 2.146a.5.5 0 0 1 0 .708l-1.5 1.5a.5.5 0 0 1-.708 0l-.5-.5a.5.5 0 1 1 .708-.708L2 3.293l1.146-1.147a.5.5 0 0 1 .708 0zm0 4a.5.5 0 0 1 0 .708l-1.5 1.5a.5.5 0 0 1-.708 0l-.5-.5a.5.5 0 1 1 .708-.708L2 7.293l1.146-1.147a.5.5 0 0 1 .708 0zm0 4a.5.5 0 0 1 0 .708l-1.5 1.5a.5.5 0 0 1-.708 0l-.5-.5a.5.5 0 0 1 .708-.708l.146.147 1.146-1.147a.5.5 0 0 1 .708 0z" />
                                         </svg>
                                     </button>
-                                    @endisset
                                 </td>
                             @endif
                         </tr>
-                        @isset($materiales[$detalle->id_producto])
+                        @if(isset($materiales[$detalle->id_producto]))
                         <tr>
                             <td colspan="11"></td>
                             <td colspan="6">
@@ -534,7 +533,15 @@
                                         </div>
                                         @foreach ($materiales[$detalle->id_producto] as $molde)
                                             <div class="row">
-                                                <div class="col-sm-6">{{  $molde->nombre_material }} </div>
+                                                <div class="col-sm-6">
+                                                    <a href="#" style="text-decoration: none" wire:click="eliminar_material({{ $molde->id }},2)">
+                                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                                            fill="currentColor" class="bi bi-trash3-fill" viewBox="0 0 16 16">
+                                                            <path
+                                                                d="M11 1.5v1h3.5a.5.5 0 0 1 0 1h-.538l-.853 10.66A2 2 0 0 1 11.115 16h-6.23a2 2 0 0 1-1.994-1.84L2.038 3.5H1.5a.5.5 0 0 1 0-1H5v-1A1.5 1.5 0 0 1 6.5 0h3A1.5 1.5 0 0 1 11 1.5Zm-5 0v1h4v-1a.5.5 0 0 0-.5-.5h-3a.5.5 0 0 0-.5.5ZM4.5 5.029l.5 8.5a.5.5 0 1 0 .998-.06l-.5-8.5a.5.5 0 1 0-.998.06Zm6.53-.528a.5.5 0 0 0-.528.47l-.5 8.5a.5.5 0 0 0 .998.058l.5-8.5a.5.5 0 0 0-.47-.528ZM8 4.5a.5.5 0 0 0-.5.5v8.5a.5.5 0 0 0 1 0V5a.5.5 0 0 0-.5-.5Z" />
+                                                        </svg>
+                                                    </a>
+                                                    {{  $molde->nombre_material }} </div>
                                                 @php
                                                     $arr = explode(' ',trim($molde->onza));
                                                 @endphp
@@ -543,13 +550,50 @@
                                                 <div class="col-sm-2">{{  number_format(((intval($arr[0])/100)*$detalle->restantes)/16,2,',','')  }} </div>
                                             </div>
                                         @endforeach
-
+                                            <div class="row">
+                                                <div class="col-sm-12 text-center">
+                                                    <a style="text-decoration: none" data-bs-toggle="modal" href="#" data-bs-target="#modal_agreagr_material" onclick="agregar_material({{ $detalle->id_producto }})">
+                                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-plus-circle" viewBox="0 0 16 16">
+                                                            <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
+                                                            <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z"/>
+                                                        </svg>
+                                                    </a>
+                                                </div>
+                                            </div>
                                     </div>
                                 </div>
                             </td>
                             <td colspan="4"></td>
                         </tr>
-                        @endisset
+                        @else
+                        <tr>
+                            <td colspan="11"></td>
+                            <td colspan="6">
+                                <div class="collapse" id="collapseExample{{ $i }}">
+                                    <div class="card card-body">
+                                        <div class="row">
+                                            <div class="col-sm-6">Material</div>
+                                            <div class="col-sm-2">Base</div>
+                                            <div class="col-sm-2">ONZ</div>
+                                            <div class="col-sm-2">LBS</div>
+                                        </div>
+                                        <div class="row">
+                                                <div class="col-sm-12 text-center">
+                                                    <a style="text-decoration: none" data-bs-toggle="modal" href="#" data-bs-target="#modal_agreagr_material" onclick="agregar_material({{ $detalle->id_producto }})">
+                                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-plus-circle" viewBox="0 0 16 16">
+                                                            <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
+                                                            <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z"/>
+                                                        </svg>
+                                                    </a>
+                                                </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </td>
+                            <td colspan="4"></td>
+                        </tr>
+
+                        @endif
                         @php
                             $sumas = $sumas + $detalle->restantes;
                             // $sumaprecio_dolar += $datos->precio_dolares;
@@ -743,12 +787,41 @@
 </div>
 </div>
 </div> --}}
-
+    <div wire:ignore class="modal fade" id="modal_agreagr_material" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Buscar empleado por modulo</h5>
+                    <button type="button" class="btn-close"  data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col">
+                            <input type="text" hidden id="idproducto">
+                            <label for="txt_figuraytipo" class="form-label">Codigos</label>
+                            <select name="codigon" id="codigon" style="height:30px; width: 100%;"
+                                class="fs-7" required type="text" autocomplete="off">
+                                <option value="">Todos los materiales</option>
+                                @foreach ($datos_codigo as $codiog)
+                                    <option value="{{ $codiog->nombre_material }}">{{ $codiog->nombre_material }}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-warning" id="boton_cerrar_buscar" data-bs-dismiss="modal" aria-label="Close">Cancelar</button>
+                    <button type="button" class="btn btn-success" onclick="asinar_material()">Agregar</button>
+                </div>
+            </div>
+        </div>
+    </div>
 
     @push('scripts')
         <script type="text/javascript">
-            var historial = @json($historial);
 
+            var historial = @json($historial);
+            var control_producto;
 
             const Toast = Swal.mixin({
                 toast: true,
@@ -771,6 +844,14 @@
             $(document).ready(function() {
                 seletscc.forEach(element => {
                     selects(element);
+                });
+
+
+                control_producto = new TomSelect('#codigon', {
+                    sortField: {
+                        field: "text",
+                        direction: "asc"
+                    }
                 });
             });
 
@@ -884,6 +965,14 @@
                     cancelButtonText: '<i class="fa fa-thumbs-down"></i>',
                     cancelButtonAriaLabel: 'Thumbs down'
                 })
+            }
+
+            function agregar_material(idproducto) {
+                document.getElementById('idproducto').value = idproducto;
+            }
+
+            function asinar_material() {
+                @this.asinar_material(control_producto.getValue(),$('#idproducto').val());
             }
 
             // function mostra_detalles_pendiente_empaque(id) {
