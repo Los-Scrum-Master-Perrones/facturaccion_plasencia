@@ -12,14 +12,25 @@ class ProduccionPendiente implements
 {
 
     public $nom;
+    public $tipo;
+    public $usosMateriales;
 
-    function __construct($nom) {
+    function __construct($nom,$usosMateriales,$tipo) {
         $this->nom = $nom;
+        $this->tipo = $tipo;
+        $this->usosMateriales = $usosMateriales;
     }
 
     public function view(): View
     {
-        return view('Exports.produccion-pendiente-export',[ 'pendiente' => $this->nom ]) ;
+        if($this->tipo == 1){
+            return view('Exports.produccion-pendiente-export',[ 'pendiente' => $this->nom ]) ;
+        }
+
+        if($this->tipo == 2){
+            return view('Exports.produccion-pendiente-materiales-export',[ 'pendiente' => $this->nom,'usosMateriales' => $this->usosMateriales ]) ;
+        }
+
     }
 
 

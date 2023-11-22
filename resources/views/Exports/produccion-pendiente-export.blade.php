@@ -47,8 +47,13 @@
     </thead>
     <tbody name="body" id="body">
         @php
-            $sumas = 0;
-            $sumap = 0;
+            $sumaPendiente = 0;
+            $sumaRestantes = 0;
+            $sumaProducido = 0;
+            $sumaPriodiad = 0;
+            $sumaPriodiadRestantes = 0;
+
+
             $sumaprecio_dolar = 0;
             $moldes_nesarios_base10 = 0;
             $moldes_exitentea = 0;
@@ -56,30 +61,30 @@
         @endphp
         @foreach ($pendiente as $i => $detalle)
             <tr>
+                @php
+                $fecha_recibido = new DateTime($detalle->fecha_recibido);
+                $fecha_actual = new DateTime();
+
+                $intervalo = new DateInterval('P1D'); // Intervalo de 1 día
+                $periodo = new DatePeriod($fecha_recibido, $intervalo, $fecha_actual);
+
+                $dias_habiles = 0;
+
+                foreach ($periodo as $fecha) {
+                    $dia_semana = $fecha->format('N'); // 1 (lunes) a 7 (domingo)
+
+                    // Excluir sábado (6) y domingo (7)
+                    if ($dia_semana != 6 && $dia_semana != 7) {
+                        $dias_habiles++;
+                    }
+                }
+                $diferencia_dias = $dias_habiles;
+            @endphp
                 <td style="text-align:center;font-size:12px;border: 1px solid #C00;">{{ ++$i }}</td>
                 <td style="text-align:center;font-size:12px;border: 1px solid #C00;">{{ $detalle->empresa }}</td>
                 <td style="text-align:center;font-size:12px;border: 1px solid #C00;">{{ $detalle->codigo }}</td>
                 <td style="text-align:center;font-size:12px;border: 1px solid #C00;">{{ $detalle->orden_sistema }}</td>
                 <td style="text-align:center;font-size:12px;border: 1px solid #C00;">{{ $detalle->fecha_recibido }}</td>
-                @php
-                    $fecha_recibido = new DateTime($detalle->fecha_recibido);
-                    $fecha_actual = new DateTime();
-
-                    $intervalo = new DateInterval('P1D'); // Intervalo de 1 día
-                    $periodo = new DatePeriod($fecha_recibido, $intervalo, $fecha_actual);
-
-                    $dias_habiles = 0;
-
-                    foreach ($periodo as $fecha) {
-                        $dia_semana = $fecha->format('N'); // 1 (lunes) a 7 (domingo)
-
-                        // Excluir sábado (6) y domingo (7)
-                        if ($dia_semana != 6 && $dia_semana != 7) {
-                            $dias_habiles++;
-                        }
-                    }
-                    $diferencia_dias = $dias_habiles;
-                @endphp
                 <td style="text-align:center;font-size:12px;border: 1px solid #C00;">{{ $diferencia_dias }}</td>
                 <td style="text-align:center;font-size:12px;border: 1px solid #C00;">{{ $detalle->observacion }}</td>
                 <td style="text-align:center;font-size:12px;border: 1px solid #C00;">{{ $detalle->presentacion }}</td>
@@ -104,8 +109,41 @@
             </tr>
 
             @php
-                $sumas = $sumas + $detalle->restantes;
+                $sumaPendiente += $detalle->pendiente;
+                $sumaRestantes += $detalle->restantes;
+                $sumaProducido += $detalle->pendiente - $detalle->restantes;
+                $sumaPriodiad += $detalle->prioridad;
+                $sumaPriodiadRestantes = $detalle->pendiente_prioridad;
             @endphp
         @endforeach
     </tbody>
+    <tfoot>
+        <tr>
+            <td style="text-align:center;font-size:12px;border: 1px solid #C00;"></td>
+            <td style="text-align:center;font-size:12px;border: 1px solid #C00;"></td>
+            <td style="text-align:center;font-size:12px;border: 1px solid #C00;"></td>
+            <td style="text-align:center;font-size:12px;border: 1px solid #C00;"></td>
+            <td style="text-align:center;font-size:12px;border: 1px solid #C00;"></td>
+            <td style="text-align:center;font-size:12px;border: 1px solid #C00;"></td>
+            <td style="text-align:center;font-size:12px;border: 1px solid #C00;"></td>
+            <td style="text-align:center;font-size:12px;border: 1px solid #C00;"></td>
+            <td style="text-align:center;font-size:12px;border: 1px solid #C00;"></td>
+            <td style="text-align:center;font-size:12px;border: 1px solid #C00;width:200px"></td>
+            <td style="text-align:center;font-size:12px;border: 1px solid #C00;"></td>
+            <td style="text-align:center;font-size:12px;border: 1px solid #C00;"></td>
+            <td style="text-align:center;font-size:12px;border: 1px solid #C00;"></td>
+            <td style="text-align:center;font-size:12px;border: 1px solid #C00;"></td>
+            <td style="text-align:center;font-size:12px;border: 1px solid #C00;">{{ $sumaPriodiad }}</td>
+            <td style="font-size:12px;border: 1px solid #C00; text-align:right;color: red">{{ $sumaPriodiadRestantes }}</td>
+            <td style="text-align:center;font-size:12px;border: 1px solid #C00;text-align:right;">{{ $sumaPendiente }}</td>
+            <td style="text-align:center;font-size:12px;border: 1px solid #C00;text-align:right;">{{ $sumaProducido }}</td>
+            <td style="text-align:center;font-size:12px;border: 1px solid #C00;text-align:right;">
+                @php
+                    $porcentaje = (($sumaPendiente - $sumaRestantes) / $sumaPendiente) * 100;
+                @endphp
+                {{ number_format($porcentaje, 0) }}%
+            </td>
+            <td style="text-align:center;font-size:12px;border: 1px solid #C00;text-align:right;">{{ $sumaRestantes }}</td>
+        </tr>
+    </tfoot>
 </table>

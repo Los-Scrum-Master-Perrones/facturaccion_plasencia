@@ -262,7 +262,7 @@ class ProduccionPendiente extends Component
         return Excel::download(new ProduccionReporteExport($datos,$rehechos), 'Reporte Diario Produccion '.$request->input('fecha').'.xlsx');
     }
 
-    public function imprimir_pendiente_por_producir() {
+    public function imprimir_pendiente_por_producir($tipo) {
         $start = ($this->page - 1) * $this->por_pagina;
 
         $var1 = $this->tipo1?$this->tipo1:'';
@@ -288,7 +288,14 @@ class ProduccionPendiente extends Component
             ]
         );
 
-        return Excel::download(new ExportsProduccionPendiente($da), 'Pendiente por producir '.Carbon::now()->format('Y-m-d').'.xlsx');
+        $materiales = DB::select('CALL `buscar_produccion_materiales`()');
+
+        $usosMateriales = [];
+        foreach ($materiales as $uso) {
+            $usosMateriales[$uso->id_producto][] =  $uso;
+        }
+
+        return Excel::download(new ExportsProduccionPendiente($da,$usosMateriales,$tipo), 'Pendiente por producir '.Carbon::now()->format('Y-m-d').'.xlsx');
     }
 
 
@@ -340,7 +347,7 @@ class ProduccionPendiente extends Component
                 );
 
 
-                $this->dispatchBrowserEvent('error_general', ['errorr' => $material.' agregado con exito', 'icon' => 'success']);
+                $this->dispatchBrowserEvent('error_general', ['errorr' => $material.' actualizado con exito', 'icon' => 'success']);
                 DB::commit();
             }
 

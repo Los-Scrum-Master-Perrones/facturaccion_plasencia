@@ -615,7 +615,7 @@
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h1 class="modal-title fs-5" id="exampleModalLabel">Reporte Diario</h1>
+                        <h1 class="modal-title fs-5" id="exampleModalLabel">Reportes</h1>
                         <button type="button" class="btn-close" data-bs-dismiss="modal"
                             aria-label="Close"></button>
                     </div>
@@ -628,11 +628,14 @@
                         </div>
                         <br>
                         <div class="row">
-                            <div class="col-md-6 text-center">
-                                <button type="button" class="btn btn-success" data-bs-dismiss="modal" wire:click='imprimir_pendiente_por_producir()'>Exportar Pendiente</button>
+                            <div class="col-md-4 text-center">
+                                <button type="button" class="btn btn-success" data-bs-dismiss="modal" wire:click='imprimir_pendiente_por_producir(1)'>Pendiente</button>
                             </div>
-                            <div class="col-md-6 text-center">
-                                <button type="button" class="btn btn-info" data-bs-dismiss="modal">Exportar Materiales</button>
+                            <div class="col-md-4 text-center">
+                                <button type="button" class="btn btn-info" data-bs-dismiss="modal" wire:click='imprimir_pendiente_por_producir(2)'>Materiales</button>
+                            </div>
+                            <div class="col-md-4 text-center">
+                                <button type="button" class="btn btn-info" data-bs-dismiss="modal">Mat. Por Tipo</button>
                             </div>
                         </div>
                     </div>
@@ -848,6 +851,7 @@
 
 
                 control_producto = new TomSelect('#codigon', {
+                    create: true,
                     sortField: {
                         field: "text",
                         direction: "asc"

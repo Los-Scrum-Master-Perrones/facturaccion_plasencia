@@ -140,7 +140,7 @@
                                     <td>{{ ++$id }}</td>
                                     <td style="text-align: center">
                                         @if (is_null($producto->codigo))
-                                            <a href="#" data-bs-toggle="modal" data-bs-target="#productos_crear" onclick="asignar_id_material({{ $producto->id_material }},'{{ $producto->marca.' '.$producto->nombre.' '.$producto->vitola.' '.$producto->capa }}')">
+                                            <a  tabindex="-1" href="#" data-bs-toggle="modal" data-bs-target="#productos_crear" onclick="asignar_id_material({{ $producto->id_material }},'{{ $producto->marca.' '.$producto->nombre.' '.$producto->vitola.' '.$producto->capa }}')">
                                                 <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14"
                                                     fill="green" class="bi bi-plus-circle" viewBox="0 0 16 16">
                                                     <path
@@ -159,17 +159,19 @@
                                     <td>{{ $producto->vitola }}</td>
                                     <td>{{ $producto->capa }}</td>
                                     <td>{{ $producto->nombre_material }}</td>
-                                    <td>
-                                        <input value="{{ $producto->onza }}" type="text"
-                                        id="tearea{{ $producto->id_material }}"
-                                        onchange="modificar_onzas({{ $producto->id_material }},'#tearea{{ $producto->id_material }}')"
-                                        class="form-control form-control-sm form-control-color fs-7"
-                                        style="width: 80px">
+                                    <td style="width: 100px;">
+                                        <div class="input-group">
+                                            <input value="{{ $arr = explode(' ',trim( $producto->onza))[0]; }}" type="text"
+                                            id="tearea{{ $producto->id_material }}"
+                                            onchange="modificar_onzas({{ $producto->id_material }},'#tearea{{ $producto->id_material }}')"
+                                            class="form-control form-control-color fs-7">
+                                            <span class="input-group-text fs-7" id="basic-addon1"> ONZ</span>
+                                        </div>
                                     </td>
                                     <td>{{ $producto->base }}</td>
                                     <td>
                                         <div class="form-check form-switch">
-                                            <input class="form-check-input"
+                                            <input  tabindex="-1" class="form-check-input"
                                                 onchange="activar_desactivar({{ $producto->id_material }},'{{ $producto->activo == 'A' ? 'I' : 'A' }}')"
                                                 type="checkbox" @if ($producto->activo == 'A') checked @endif
                                                 role="switch" id="flexSwitchCheckDisabled">
@@ -566,10 +568,8 @@
             }
 
             function modificar_onzas(id, num) {
-                @this.modificar_onzas($(num).val(),id);
+                @this.modificar_onzas($(num).val()+' ONZ',id);
             }
-
-
 
             // function cargar_modal(marca,nombre,vitola,capa,color,id){
             //     control_marca.setValue(marca);

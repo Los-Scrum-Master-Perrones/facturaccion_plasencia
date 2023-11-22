@@ -3,6 +3,8 @@
 namespace App\Http\Livewire;
 
 use App\Exports\InventarioCajasExport;
+use App\Models\ListaCajas;
+use App\Models\marca_producto;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -10,6 +12,8 @@ use Livewire\Component;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
 use Maatwebsite\Excel\Facades\Excel;
+
+use function PHPSTORM_META\map;
 
 class InventarioCajas extends Component
 {
@@ -26,6 +30,8 @@ class InventarioCajas extends Component
     public $marcas_p = [];
     public $codigo_p = [];
     public $producto_p = [];
+
+    public $marcas_actualizar = [];
 
 
     public function render()
@@ -53,6 +59,8 @@ class InventarioCajas extends Component
             $this->codigo_p = array_unique($this->codigo_p);
             $this->producto_p = array_unique($this->producto_p);
         }
+
+        $this->marcas_actualizar = marca_producto::all();
 
         return view('livewire.inventario-cajas')->extends('principal')->section('content');
     }
@@ -332,6 +340,73 @@ class InventarioCajas extends Component
         ]);
 
         return Excel::download(new InventarioCajasExport($listacajas), 'Catalogo cajas '.Carbon::now()->format('Y-m-d').'.xlsx');
+    }
+
+
+    public function update_material($data) {
+
+        try {
+            $validator =  Validator::make($data, [
+                'id' => 'required|integer',
+                'codigo' => 'required|string|max:50',
+                'productoServicio' => 'nullable|string|max:255',
+                'marca' => 'nullable|string|max:100',
+                'tipo_empaque' => 'nullable|integer',
+                'mal_estado' => 'required|numeric',
+                'faltantes' => 'required|integer',
+                'existencia' => 'required|integer',
+            ], [
+                'id.integer' => 'El ID debe ser un número entero.',
+                'id.required' => 'El ID es obligatorio.',
+                'codigo.required' => 'El código es obligatorio.',
+                'codigo.string' => 'El código debe ser una cadena de caracteres.',
+                'codigo.max' => 'El código no puede exceder los 50 caracteres.',
+                'productoServicio.string' => 'El producto/servicio debe ser una cadena de caracteres.',
+                'productoServicio.max' => 'El producto/servicio no puede exceder los 255 caracteres.',
+                'marca.string' => 'La marca debe ser una cadena de caracteres.',
+                'marca.max' => 'La marca no puede exceder los 100 caracteres.',
+                'tipo_empaque.integer' => 'El tipo de empaque debe ser un número entero.',
+                'mal_estado.required' => 'El mal estado es obligatorio.',
+                'mal_estado.numeric' => 'El mal estado debe ser un número.',
+                'faltantes.required' => 'Los faltantes son obligatorios.',
+                'faltantes.integer' => 'Los faltantes deben ser un número entero.',
+                'existencia.required' => 'La existencia es obligatoria.',
+                'existencia.integer' => 'La existencia debe ser un número entero.',
+            ]);
+
+            if ($validator->fails()) {
+                $errors = $validator->errors()->all();
+                $errorMessage = implode(' ', $errors);
+                $this->dispatchBrowserEvent('error_general', ['errorr' => $errorMessage, 'icon' => 'error']);
+                DB::rollBack();
+            }else{
+                DB::beginTransaction();
+
+                ListaCajas::updateOrCreate(
+                    [
+                        'id' =>  $data['id'],
+
+                    ],
+                    [
+                        'codigo' => $data['codigo'],
+                        'productoServicio' => $data['productoServicio'],
+                        'marca' => $data['marca'],
+                        'tipo_empaque' => $data['tipo_empaque'],
+                        'mal_estado' => $data['mal_estado'],
+                        'faltantes' => $data['faltantes'],
+                        'existencia' => $data['existencia'],
+                    ]
+                );
+
+
+                $this->dispatchBrowserEvent('error_general', ['errorr' => $data['productoServicio'].' editado con exito', 'icon' => 'success']);
+                DB::commit();
+            }
+
+        } catch (\Exception $th) {
+            $this->dispatchBrowserEvent('error_general', ['errorr' => $th->getMessage(), 'icon' => 'error']);
+            DB::rollBack();
+        }
     }
 
 
