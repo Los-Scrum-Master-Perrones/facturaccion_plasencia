@@ -309,16 +309,20 @@ class ProduccionPendiente extends Component
         (new ProduccionMoldesImport)->import($this->select_file);
     }
 
-    public function asinar_material($material, Produccion $id)
+    public function asinar_material($material, Produccion $id, $peso)
     {
         try {
             $validator = Validator::make([
                 'material' => $material,
+                'peso' => $peso,
             ], [
                 'material' => 'required|string', // Material es requerido y debe ser un string
+                'peso' => 'required|integer', // Material es requerido y debe ser un string
             ], [
                 'material.required' => 'El campo material es requerido.',
                 'material.string' => 'El campo material debe ser un texto.',
+                'peso.required' => 'El campo peso es requerido.',
+                'peso.integer' => 'El campo peso debe ser un numero.',
             ]);
 
             if ($validator->fails()) {
@@ -339,10 +343,11 @@ class ProduccionPendiente extends Component
                         'nombre_material' => explode("-", $material)[1]],
                     [
                         'id_producto' => $id->id,
-                        'onza' => explode("-", $material)[0] == 'BANDA' || explode("-", $material)[0] == 'CAPA' ? '8 ONZ.' :'18 ONZ.',
+                        'onza' => explode("-", $material)[0] == 'BANDA' || explode("-", $material)[0] == 'CAPA' ? '8 ONZ.' :$peso.' ONZ',
                         'banda' => explode("-", $material)[0],
                         'onza_banda' => '',
                         'base' => 100,
+                        'activo' => 'A',
                     ]
                 );
 

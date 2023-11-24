@@ -5,14 +5,19 @@ namespace App\Http\Livewire;
 use App\Exports\MaterialesCatalogoExport;
 use App\Models\MaterialesCatalogo;
 use Carbon\Carbon;
+use Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
 use Livewire\Component;
+use Livewire\WithPagination;
 use Maatwebsite\Excel\Facades\Excel;
 
 class Materiales extends Component
 {
+    use WithPagination;
+    protected $paginationTheme = 'bootstrap';
+
     public $materiales = [];
     //busquedas
     public $items_factory = [];
@@ -33,49 +38,39 @@ class Materiales extends Component
     public $todos;
     public $paginacion;
 
+    public $por_pagina = 50;
+    public $total = 0;
+
+
+
     public function render()
-    {
-        $this->factoryItemUltimo = DB::select('SELECT MAX(materiales_catalogo.factory_item) AS "ultimo_item"
-                                               FROM materiales_catalogo')[0]->ultimo_item;
-        $da = DB::select(
-            'CALL `mostrar_materiales`(?, ?, ?, ?, ?,-1)',
+    {   $start = ($this->page - 1) * $this->por_pagina;
+
+
+
+        $this->items_codigo_existentes = DB::select('SELECT DISTINCT codigo_material,des_material FROM materiales_productos');
+
+
+        $datos_materiales = DB::select(
+            'CALL `mostrar_materiales`(?, ?, ?, ?, ?, ?, ?, @salida_total,@salida_ultimo_codigo)',
             [
                 $this->factory,
                 $this->navisor,
                 $this->codigo,
                 $this->br,
-                $this->descrip
+                $this->descrip,
+                $start,
+                $this->por_pagina,
             ]
         );
 
-        $this->tuplas_conteo = count($da);
 
-        $this->items_codigo_existentes = DB::select('SELECT DISTINCT codigo_material,des_material FROM materiales_productos');
+        $this->total = DB::select('SELECT @salida_total AS longitud')[0]->longitud;
 
-        if ($this->todos == 1) {
-            $this->materiales = DB::select(
-                'CALL `mostrar_materiales`(?, ?, ?, ?, ?,-1)',
-                [
-                    $this->factory,
-                    $this->navisor,
-                    $this->codigo,
-                    $this->br,
-                    $this->descrip
-                ]
-            );
-        } else {
-            $this->materiales = DB::select(
-                'CALL `mostrar_materiales`(?, ?, ?, ?, ?, ?)',
-                [
-                    $this->factory,
-                    $this->navisor,
-                    $this->codigo,
-                    $this->br,
-                    $this->descrip,
-                    $this->paginacion
-                ]
-            );
-        }
+        $this->factoryItemUltimo = DB::select('SELECT @salida_ultimo_codigo AS ultimo_codigo')[0]->ultimo_codigo;
+
+
+        $da = DB::select('CALL `mostrar_materiales_detalles`()');
 
         if (count($da) > 0) {
 
@@ -100,9 +95,20 @@ class Materiales extends Component
             $this->brand = array_unique($this->brand);
         }
 
-        $this->dispatchBrowserEvent('tamanio_tabla');
 
-        return view('livewire.Materiales.materiales')->extends('principal')->section('content');
+
+
+        if (Auth::user()->rol == -2) {
+            return view('livewire.Materiales.materiales',[
+                'datos_materiales' => new LengthAwarePaginator($datos_materiales,  $this->total , $this->por_pagina)
+            ])->extends('layouts.Materiales.principal')->section('content');
+        }else{
+            return view('livewire.Materiales.materiales',[
+                'datos_materiales' => new LengthAwarePaginator($datos_materiales,  $this->total , $this->por_pagina)
+            ])->extends('principal')->section('content');
+        }
+
+
     }
     public function paginacion_numerica($numero)
     {
@@ -285,19 +291,20 @@ class Materiales extends Component
 
     public function imprimir()
     {
-        $this->materiales = DB::select(
-            'CALL `mostrar_materiales`(?, ?, ?, ?, ?,-1)',
-            [
-                $this->factory,
-                $this->navisor,
-                $this->codigo,
-                $this->br,
-                $this->descrip
-            ]
-        );
-
+        $start = ($this->page - 1) * $this->por_pagina;
         $vista =  view('Exports.materiales-productos-export', [
-            'materiales' =>  $this->materiales
+            'materiales' =>  DB::select(
+                'CALL `mostrar_materiales`(?, ?, ?, ?, ?, ?, ?, @salida_total,@salida_ultimo_codigo)',
+                [
+                    $this->factory,
+                    $this->navisor,
+                    $this->codigo,
+                    $this->br,
+                    $this->descrip,
+                    $start,
+                    $this->por_pagina,
+                ]
+            )
         ]);
 
 

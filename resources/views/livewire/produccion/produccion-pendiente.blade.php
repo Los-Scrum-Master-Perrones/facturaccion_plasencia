@@ -791,7 +791,7 @@
 </div>
 </div> --}}
     <div wire:ignore class="modal fade" id="modal_agreagr_material" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
+        <div class="modal-dialog modal-lg" >
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title" id="exampleModalLabel">Buscar por material</h5>
@@ -799,7 +799,7 @@
                 </div>
                 <div class="modal-body">
                     <div class="row">
-                        <div class="col">
+                        <div class="col-md-10">
                             <input type="text" hidden id="idproducto">
                             <label for="txt_figuraytipo" class="form-label">Codigos</label>
                             <select name="codigon" id="codigon" style="height:30px; width: 100%;"
@@ -809,6 +809,10 @@
                                     <option value="{{ $codiog->nombre_material }}">{{ $codiog->nombre_material }}</option>
                                 @endforeach
                             </select>
+                        </div>
+                        <div class="col-md-2">
+                            <label for="txt_figuraytipo" class="form-label">Peso</label>
+                            <input class="form-control" type="number" name="peso" id="peso">
                         </div>
                     </div>
                 </div>
@@ -976,7 +980,7 @@
             }
 
             function asinar_material() {
-                @this.asinar_material(control_producto.getValue(),$('#idproducto').val());
+                @this.asinar_material(control_producto.getValue(),$('#idproducto').val(),$('#peso').val());
             }
 
             // function mostra_detalles_pendiente_empaque(id) {

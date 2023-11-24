@@ -226,7 +226,8 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link fs-7 active" href="#" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                    <a class="nav-link fs-7 active" href="#" data-bs-toggle="modal"
+                        data-bs-target="#exampleModal">
                         <abbr title="Buscar empleado">
                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
                                 fill="currentColor" class="bi bi-binoculars-fill" viewBox="0 0 16 16">
@@ -658,18 +659,20 @@
     </div>
 
 
-    <div wire:ignore class="modal" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div wire:ignore class="modal" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title" id="exampleModalLabel">Buscar empleado por modulo</h5>
-                    <button type="button" class="btn-close" id="boton_cerrar_buscar" data-bs-dismiss="modal" aria-label="Close"></button>
+                    <button type="button" class="btn-close" id="boton_cerrar_buscar" data-bs-dismiss="modal"
+                        aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
                     <select id="selectOptions" onchange="buscar()">
                         <option value="">Seleccionar</option>
                         @foreach ($emplead as $emple)
-                            <option value="{{ $emple->id }}">{{ $emple->codigo.'-'.$emple->nombre }}</option>
+                            <option value="{{ $emple->id }}">{{ $emple->codigo . '-' . $emple->nombre }}</option>
                         @endforeach
                     </select>
                 </div>
@@ -855,12 +858,12 @@
                 });
 
                 buscador = new TomSelect('#selectOptions', {
-                        create: false,
-                        sortField: {
-                            field: "text",
-                            direction: "asc"
-                        }
-                    });
+                    create: false,
+                    sortField: {
+                        field: "text",
+                        direction: "asc"
+                    }
+                });
             });
 
             window.addEventListener('abrirOpciones', event => {
@@ -874,7 +877,7 @@
             function buscar() {
                 let empleados = @json($emplead);
                 let id = buscador.getValue();
-                empleados.filter((empleado)=>{
+                empleados.filter((empleado) => {
                     if (empleado.id == id) {
                         @this.cambiar_modulo(empleado.modulo);
                         @this.nombre_empleado = empleado.nombre;
@@ -887,4 +890,3 @@
         </script>
     @endpush
 </div>
-<?php

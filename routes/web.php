@@ -63,14 +63,14 @@ Route::get('/holisa',function () {
     return view('codigobarra');
 });
 
-Route::group(['middleware' => 'auth'], function () {
+Route::group(['middleware' => ['auth', 'checkRole']], function () {
 
 Route::get('/import_excel', Pedido::class)->name('import_excel');
 
 Route::get('/poimport', PO::class)->name('poimport');
 Route::post('/poimport/import', [PO::class, 'importPO'])->name('poimportimport');
 
- Route::post('/importar_pendiente', [importar_pendiente_lic::class, 'import_pendiente'])->name('importar_pendiente');
+Route::post('/importar_pendiente', [importar_pendiente_lic::class, 'import_pendiente'])->name('importar_pendiente');
 
 
 Route::post('/import', [VehicleController::class, 'import']);
@@ -406,3 +406,11 @@ Route::get('/produccion/materiales/catalogo', ProduccionMaterialesCatalogo::clas
 
 
 });
+
+Route::group(['middleware' => ['auth', 'checkRole']], function () {
+    Route::get('materiales_index2', Materiales::class)->name('materiales.index2');
+});
+
+
+
+Route::get('/unauthorized', [App\Http\Controllers\Principal::class, 'unauthorized' ])->name('unauthorized');
