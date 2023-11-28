@@ -568,7 +568,9 @@
             }
 
             function modificar_onzas(id, num) {
-                @this.modificar_onzas($(num).val()+' ONZ',id);
+                if($(num).val() != ''){
+                    @this.modificar_onzas($(num).val()+' ONZ',id);
+                }
             }
 
             // function cargar_modal(marca,nombre,vitola,capa,color,id){
