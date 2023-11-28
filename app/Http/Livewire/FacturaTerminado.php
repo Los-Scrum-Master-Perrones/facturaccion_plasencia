@@ -785,14 +785,14 @@ class FacturaTerminado extends Component
                 $this->titulo_cliente = "";
                 $this->titulo_factura = "";
                 DB::commit();
-                $this->dispatchBrowserEvent('mensaje_editar_correcto');
+                $this->dispatchBrowserEvent('error_general', ['errorr' => 'Guardada con exito', 'icon' => 'success']);
             } else {
                 DB::rollBack();
-                $this->dispatchBrowserEvent("advertencia_mensaje");
+                $this->dispatchBrowserEvent('error_general', ['errorr' => "Escriba el Cliente y el Contenedor", 'icon' => 'error']);
             }
         } catch (Exception $th) {
             DB::rollBack();
-            $this->dispatchBrowserEvent('mensaje_editar_error',['errores'=>$th->getMessage()]);
+            $this->dispatchBrowserEvent('error_general', ['errorr' => $th->getMessage(), 'icon' => 'error']);
             Log::info($th->getMessage());
         }
     }

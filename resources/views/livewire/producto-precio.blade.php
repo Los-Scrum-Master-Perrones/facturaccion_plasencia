@@ -229,6 +229,14 @@
                                                     d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z" />
                                             </svg>
                                         </a>
+                                        <a style="text-decoration: none" onclick="eliminar_item({{ $prodPrecio->id }})"
+                                            href="#">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15"
+                                                fill="currentColor" class="bi bi-trash-fill" viewBox="0 0 16 16">
+                                                <path
+                                                    d="M2.5 1a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1H3v9a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V4h.5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1H2.5zm3 4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5zM8 5a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7A.5.5 0 0 1 8 5zm3 .5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 1 0z" />
+                                            </svg>
+                                        </a>
                                     </td>
                                 </tr>
                                 @php
@@ -284,8 +292,8 @@
                                 <select name="marca_de" id="marca_de" onchange="buscar_agregar()"
                                     style="width:100%;" required>
                                     <option value="NINGUNA" style="overflow-y: scroll;">Ninguna</option>
-                                    @foreach ($marcas_p as $marca)
-                                        <option style="overflow-y: scroll;"> {{ $marca }}</option>
+                                    @foreach ($marcas_p2 as $pr)
+                                        <option value="{{ $pr->marca }}">{{ $pr->codigo."-".$pr->marca }}</option>
                                     @endforeach
                                 </select>
                             </div>
@@ -583,6 +591,24 @@
                     confirmButtonAriaLabel: 'Thumbs up, great!',
                     cancelButtonText: '<i class="fa fa-thumbs-down"></i>',
                     cancelButtonAriaLabel: 'Thumbs down'
+                })
+            }
+
+            function eliminar_item(id) {
+                Swal.fire({
+                    title: 'Esta seguro?',
+                    text: "Eliminar el codigo, no podra revertise!",
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#3085d6',
+                    cancelButtonColor: '#d33',
+                    confirmButtonText: 'Si, eliminar!'
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        @this.eliminar_precio(id);
+                    } else {
+
+                    }
                 })
             }
 

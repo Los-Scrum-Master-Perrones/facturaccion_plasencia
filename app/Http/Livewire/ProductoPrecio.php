@@ -30,6 +30,7 @@ class ProductoPrecio extends Component
 
     public $codigo_p = [];
     public $marcas_p = [];
+    public $marcas_p2 = [];
     public $nombre_p = [];
     public $vitolas_p = [];
     public $capas_p = [];
@@ -156,7 +157,6 @@ class ProductoPrecio extends Component
 
             $this->codigo_p = [];
             $this->marcas_p = [];
-            $this->nombre_p = [];
             $this->vitolas_p = [];
             $this->capas_p = [];
             $this->empaques_p = [];
@@ -177,6 +177,11 @@ class ProductoPrecio extends Component
             $this->capas_p = array_unique($this->capas_p);
             $this->empaques_p = array_unique($this->empaques_p);
         }
+
+
+
+        $this->marcas_p2 = CatalogoMarcasPrecio::all();
+
     }
 
     public function imprimir_reporte()
@@ -261,5 +266,18 @@ class ProductoPrecio extends Component
             ],
             ['precio' => $this->edi_precio]
         );
+    }
+
+    public function eliminar_precio(CatalogoItemsPrecio $de)
+    {
+        try {
+            DB::beginTransaction();
+            $de->delete();
+            $this->dispatchBrowserEvent('error_general', ['errorr' => 'Eliminado con exito', 'icon' => 'info']);
+            DB::commit();
+        } catch (\Exception $th) {
+            $this->dispatchBrowserEvent('error_general', ['errorr' => $th->getMessage(), 'icon' => 'error']);
+            DB::rollBack();
+        }
     }
 }
