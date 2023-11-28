@@ -422,12 +422,15 @@
                                         {{ number_format($detalles->precio_producto, 2) }}
                                     @endif
                                 </td>
+                                @php
+                                     $unitario = $sampler_s ? (($detalles->paquetes)/$detalles->pen_paquetes)*$detalles->cantidad_puros* $detalles->unidad : $detalles->total_tabacos;
+                                @endphp
                                 <td style="text-align: right">
                                     <b>{{ $sampler_s ? '' : number_format($detalles->costo, 4) }}</b>
                                 </td>
-                                <td style="text-align: right">{{ number_format($detalles->valor_total, 2) }}</td>
+                                <td style="text-align: right">{{ number_format((($unitario)*$detalles->precio_producto)/1000, 2) }}</td>
                                 @php
-                                    $valor_factura += $detalles->valor_total;
+                                    $valor_factura += (($unitario)*$detalles->precio_producto)/1000;
                                     $total_puros_tabla += $sampler_s ? (($detalles->paquetes)/$detalles->pen_paquetes)*$detalles->cantidad_puros* $detalles->unidad : $detalles->total_tabacos;
                                     $total_neto += $sampler_s ? 0 : $detalles->total_neto;
                                     $total_bruto += $sampler_s ? 0 : $detalles->total_bruto;
