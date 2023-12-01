@@ -282,7 +282,7 @@ class ProduccionPendiente extends Component
         $var3 = $this->tipo3?$this->tipo3:'';
         $var4 = $this->tipo4?$this->tipo4:'';
         $da = DB::select(
-            'CALL `buscar_produccion_pendiente`(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)',
+            'CALL `buscar_produccion_pendiente`(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?,@total_conteo)',
             [
                 $this->b_ordenes,
                 $this->b_fechas,
