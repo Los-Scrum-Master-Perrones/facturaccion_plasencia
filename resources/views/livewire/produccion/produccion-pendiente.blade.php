@@ -73,6 +73,14 @@
                                         alt="external-Mold-bakery-goofy-color-kerismaker" />
                                 </abbr>
                             </button>
+                            <button class="btn btn-outline-warning" wire:click="mostrar_sobrantes()">
+                                <abbr title="Prioridades">
+                                    <img width="20" height="20"
+                                        src="https://img.icons8.com/3d-fluency/94/high-priority.png"
+                                        alt="high-priority" />
+                                </abbr>
+                            </button>
+
 
                         </div>
                     </div>

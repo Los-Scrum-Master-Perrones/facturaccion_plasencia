@@ -34,6 +34,7 @@ use App\Http\Livewire\Produccion\Produccion;
 use App\Http\Livewire\Produccion\ProduccionCatalogo;
 use App\Http\Livewire\Produccion\ProduccionDiarioMarcas;
 use App\Http\Livewire\Produccion\ProduccionEmpleado;
+use App\Http\Livewire\Produccion\ProduccionMateriales;
 use App\Http\Livewire\Produccion\ProduccionMaterialesCatalogo;
 use App\Http\Livewire\Produccion\ProduccionPendiente;
 use App\Http\Livewire\Produccion\ProduccionPendienteSalida;
@@ -400,6 +401,7 @@ Route::get('/produccion/empleados', ProduccionEmpleado::class)->name('produccion
 Route::get('/produccion/empleados/marcas', ProduccionDiarioMarcas::class)->name('produccion.producir.marca');
 Route::get('/produccion/catalogo', ProduccionCatalogo::class)->name('produccion.catalogo');
 Route::get('/produccion/materiales/catalogo', ProduccionMaterialesCatalogo::class)->name('produccion.catalogo.materiales');
+Route::get('/produccion/materiales', ProduccionMateriales::class)->name('produccion.materiales');
 
 
 

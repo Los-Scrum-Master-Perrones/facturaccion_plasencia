@@ -105,12 +105,20 @@
         fs-7 "
         style="color: white" @endif  href="{{ route('produccion.catalogo') }}"><strong>Catalogo</strong></a>
         </li>
+
+        <li class="nav-item">
+            <a
+                class="nav-link @if ($url == route('produccion.materiales')) active    fs-7 "
+        @else
+        fs-7 "
+        style="color: white" @endif  href="{{ route('produccion.materiales') }}"><strong>Materiales</strong></a>
+        </li>
         <li class="nav-item">
             <a
                 class="nav-link @if ($url == route('produccion.catalogo.materiales')) active    fs-7 "
         @else
         fs-7 "
-        style="color: white" @endif  href="{{ route('produccion.catalogo.materiales') }}"><strong>Ficha</strong></a>
+        style="color: white" @endif  href="{{ route('produccion.catalogo.materiales') }}"><strong>Ficha M.</strong></a>
         </li>
         <li class="nav-item">
             <a class="nav-link @if ($url == route('produccion.pendiente.index')) active    fs-7 "

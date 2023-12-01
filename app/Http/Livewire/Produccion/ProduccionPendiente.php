@@ -85,6 +85,7 @@ class ProduccionPendiente extends Component
     public $total = 0;
 
     public $prioridad = true;
+    public $sobrante = false;
 
     public function mount() {
 
@@ -147,41 +148,48 @@ class ProduccionPendiente extends Component
         $var3 = $this->tipo3?$this->tipo3:'';
         $var4 = $this->tipo4?$this->tipo4:'';
 
-        $da = DB::select(
-            'CALL `buscar_produccion_pendiente`(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)',
-            [
-                $this->b_ordenes,
-                $this->b_fechas,
-                $this->b_codigos,
-                $this->b_marcas,
-                $this->b_nombres,
-                $this->b_vitolas,
-                $this->b_capas,
-                $start,
-                $this->por_pagina,
-                $var1.$var2.$var3.$var4.'Sin Presentacion',
-                $this->b_color,
-                $this->prioridad,
-                $this->cliente
-            ]
-        );
+        if(!$this->sobrante){
+            $da = DB::select(
+                'CALL `buscar_produccion_pendiente`(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?,@total_conteo)',
+                [
+                    $this->b_ordenes,
+                    $this->b_fechas,
+                    $this->b_codigos,
+                    $this->b_marcas,
+                    $this->b_nombres,
+                    $this->b_vitolas,
+                    $this->b_capas,
+                    $start,
+                    $this->por_pagina,
+                    $var1.$var2.$var3.$var4.'Sin Presentacion',
+                    $this->b_color,
+                    $this->prioridad,
+                    $this->cliente
+                ]
+            );
+        }else{
+            $da = DB::select(
+                'CALL `buscar_produccion_pendiente_sobrantes`(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?,@total_conteo)',
+                [
+                    $this->b_ordenes,
+                    $this->b_fechas,
+                    $this->b_codigos,
+                    $this->b_marcas,
+                    $this->b_nombres,
+                    $this->b_vitolas,
+                    $this->b_capas,
+                    $start,
+                    $this->por_pagina,
+                    $var1.$var2.$var3.$var4.'Sin Presentacion',
+                    $this->b_color,
+                    $this->prioridad,
+                    $this->cliente
+                ]
+            );
+        }
 
-        $this->total = DB::select(
-            'CALL `buscar_produccion_pendiente_conteo`(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)',
-            [
-                $this->b_ordenes,
-                $this->b_fechas,
-                $this->b_codigos,
-                $this->b_marcas,
-                $this->b_nombres,
-                $this->b_vitolas,
-                $this->b_capas,
-                $var1.$var2.$var3.$var4.'Sin Presentacion',
-                $this->b_color,
-                $this->prioridad,
-                $this->cliente
-            ]
-        )[0]->total;
+
+        $this->total = DB::select('select @total_conteo as total')[0]->total;
 
         $usos = ProduccionPendienteSalida::all(['id_produccion_pendiente','destino','cantidad','fecha_salida']);
 
@@ -208,6 +216,10 @@ class ProduccionPendiente extends Component
 
     public function mostrar_prioridad() {
         $this->prioridad = !$this->prioridad;
+    }
+
+    public function mostrar_sobrantes() {
+        $this->sobrante = !$this->sobrante;
     }
 
 

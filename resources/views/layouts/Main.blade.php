@@ -297,6 +297,21 @@
             })
         })
 
+        @if($errors->any())
+            Swal.fire({
+                icon: "error",
+                title: "Oops...",
+                text: `<div class="alert alert-danger">
+                        <ul>
+                            @foreach ($errors->all() as $error)
+                                <li>{{ $error }}</li>
+                            @endforeach
+                        </ul>
+                    </div>`,
+                footer: '<a href="#">Why do I have this issue?</a>'
+            });
+        @endif
+
     </script>
 
 </body>
