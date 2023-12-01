@@ -380,7 +380,7 @@
                         <th>PEND. PRIORIDAD</th>
                         <th>PENDIENTE</th>
                         <th>PRODUCIDO</th>
-                        <th>RESTANTE</th>
+                        <th>@if($sobrante) SOBRANTES @else RESTANTE @endif </th>
                         <th>PRECIO ROLERO</th>
                         <th>PRECIO BONCHERO</th>
                         <th></th>
@@ -464,7 +464,7 @@
                                     </div>
                                 </div>
                             </td>
-                            <td style="text-align:right;">{{ $detalle->restantes }}</td>
+                            <td style="text-align:right;">@if($sobrante) {{ -1*$detalle->restantes }} @else {{ $detalle->restantes }} @endif </td>
                             <td style="text-align:right;">{{ $detalle->precio_rolero }}</td>
                             <td style="text-align:right;">{{ $detalle->precio_bonchero }}</td>
 
