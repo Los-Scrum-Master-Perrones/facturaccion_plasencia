@@ -20,7 +20,7 @@
     <th></th>
 </tr>
 <tr></tr>
-<table class="table table-light" style="font-size:9px;" id="tabla_pendiente">
+<table class="table table-light table-hover" style="font-size:9px;" id="tabla_pendiente">
     <thead>
         <tr>
             <th style="text-align:center;font-size:16px;border: 1px solid #C00; font-weight: bold">N#</th>

@@ -37,7 +37,7 @@
                 <div class="col-sm"
                     style="width:20%; padding-left:0px; height: 200px;  overflow-x: display; overflow-y: auto;">
 
-                    <table class="table table-light" id="editable" style="font-size:8px;max-height: 200px">
+                    <table class="table table-light table-hover" id="editable" style="font-size:8px;max-height: 200px">
                         <thead>
                             <tr>
                                 <th>#-No. Factura</th>
@@ -108,7 +108,7 @@
 
             <div class="row">
                 <div class="col-sm" style="width:80%; padding-left:0px; ">
-                    <table class="table table-light" id="editable">
+                    <table class="table table-light table-hover" id="editable">
                         <thead style="font-size:8px;">
                             <tr style="font-size:8px; ">
                                 <th rowspan="2">Bulto<br>Package<br>No.</th>

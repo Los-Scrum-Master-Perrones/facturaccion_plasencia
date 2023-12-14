@@ -44,7 +44,7 @@
 <div class="panel-body" style="padding:0px;">
             <div style="width:100%; padding-left:0px;   font-size:10px;   overflow-x: display; overflow-y: auto;
      height:500px;">
-                        <table class="table table-light"
+                        <table class="table table-light table-hover"
                         style="font-size:10px;">
                             <thead>
                                 <tr>

@@ -82,7 +82,7 @@
             <div style="width:100%; padding-left:0px;   font-size:10px;   overflow-x: display; overflow-y: auto;
      height:450px;">
 
-                <table class="table table-light" style="font-size:10px;">
+                <table class="table table-light table-hover" style="font-size:10px;">
                     <thead>
                         <tr>
                             <th>Código</th>

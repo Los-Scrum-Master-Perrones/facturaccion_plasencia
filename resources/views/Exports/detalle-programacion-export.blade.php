@@ -1,4 +1,4 @@
-<table class="table table-light" id="editable" style="font-size:10px;">
+<table class="table table-light table-hover" id="editable" style="font-size:10px;">
     <thead>
         <tr style="text-align:center;">
             <th># ORDEN</th>

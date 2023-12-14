@@ -90,7 +90,7 @@
             </div>
             <div class="card-body">
                 <div wire:loading.class='oscurecer_contenido' class="table-responsive" style="height: 70vh;">
-                    <table class="table table-light" style="font-size:10px; ">
+                    <table class="table table-light table-hover" style="font-size:10px; ">
                         <thead>
                             <tr style="font-size:16px; text-align:center;">
                                 <th style=" text-align:center;">N#</th>

@@ -45,7 +45,7 @@
             <div class="col-sm-3" style="padding-left:0px;   font-size:10px;  ">
                 <div wire:change='tama' id="tabla_materiales2" class="table-responsive">
                     <div wire:loading.class='oscurecer_contenido' style="width:100%; padding-left:0px;">
-                        <table class="table table-light" id="editable" style="font-size:10px;">
+                        <table class="table table-light table-hover" id="editable" style="font-size:10px;">
                             <thead>
                                 <tr style="text-align:center;">
                                     <th style=" text-align:center;">#-No.</th>
@@ -116,7 +116,7 @@
             <div class="col-sm-9" style="padding-left:0px;   font-size:10px;  ">
                 <div wire:change='tama' id="tabla_materiales" class="table-responsive">
                     <div wire:loading.class='oscurecer_contenido' style="width:100%; padding-left:0px; height:100%;">
-                        <table class="table table-light" id="editable" style="font-size:10px;">
+                        <table class="table table-light table-hover" id="editable" style="font-size:10px;">
                             <thead>
                                 <tr style=" text-align:center;">
                                     <th># ORDEN</th>

@@ -1,4 +1,4 @@
-                <table class="table table-light" id="editable">
+                <table class="table table-light table-hover" id="editable">
                     <tr>
                         <th></th><th></th><th></th><th></th><th></th><th></th><th></th>
                         <th style="text-align:center; font-family: Tahoma;font-size:24px;" ><b>CARIBBEAN CIGARS COMPANY</b></th>

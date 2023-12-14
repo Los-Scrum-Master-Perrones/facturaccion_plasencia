@@ -23,7 +23,7 @@
 <button onclick="esto()">pa</button>
 <script type="text/javascript">
 function esto(){
-    
+
 JsBarcode("#pharmacode", "12345", {format: "pharmacode"});
 }
 </script>
@@ -31,7 +31,7 @@ JsBarcode("#pharmacode", "12345", {format: "pharmacode"});
 <svg id="pharmacode"></svg>
 
 
-<table class="table table-light"
+<table class="table table-light table-hover"
 style="font-size:10px;">
 <thead>
 <tr>
@@ -56,15 +56,15 @@ style="font-size:10px;">
         <td>{{$caja->cantidad}}</td>
         <td>{{$caja->costo_u}}</td>
         <td>{{$caja->subtotal}}</td>
-        <td> 	
+        <td>
             <svg class="barcode"
             jsbarcode-format="upc"
             jsbarcode-value="1234"
             jsbarcode-textmargin="0"
             jsbarcode-fontoptions="bold">
-            </svg> 
+            </svg>
         </td>
         </tr>
         @endforeach
         </tbody>
-        </table>  
+        </table>

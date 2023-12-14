@@ -7,7 +7,7 @@
     <title>Document</title>
 </head>
 <body>
-    
+
 <title>Programación </title>
 
 <div class="row" style="width: 100%;margin:10px; text-align:center;">
@@ -20,7 +20,7 @@
 
         <div style="text-size:20px;margin-bottom:5px;">Fecha:</div>
 
-        <table class="table table-light" id="editable" style="font-size:10px;m">
+        <table class="table table-light table-hover" id="editable" style="font-size:10px;m">
                     <thead>
                         <tr style="font-size:16px; text-align:center;">
                             <th># ORDEN</th>
@@ -53,7 +53,7 @@
                             <td> {{$depro->cello}}</td>
                             <td> {{$depro->upc}}</td>
                             <td> {{$depro->saldo}}</td>
-                           
+
 
 
                         </tr>

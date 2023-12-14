@@ -148,12 +148,12 @@
                 style="width:100%; padding-left:0px;   font-size:10px;   overflow-x: display; overflow-y: auto;
                 height:70%;">
 
-                <table class="table table-light" id="editable">
+                <table class="table table-light table-hover" id="editable">
                     <thead style="font-size:8px;">
                         <tr style="font-size:8px; ">
                             <th rowspan="2">Bulto<br>Package<br>No.</th>
                             <th rowspan="2">Cant.<br>Quant.</th>
-                            <th rowspan="2">Unidad<br>Unit. </th>
+                            <th rowspan="2">Unidad<br>Unit.</th>
                             <th rowspan="2" style="background:#ddd;">Units</th>
                             <th rowspan="2">Total<br>Tabacos<br>Cigars </th>
                             <th rowspan="2">Capa<br>Wrappar </th>
@@ -807,7 +807,7 @@
             <div
                 style="width:100%; padding-left:0px;  font-size:9px;   overflow-x: display; overflow-y: auto;
          height:75%;">
-                <table class="table table-light" style="font-size:9px;" id="tabla_pendiente">
+                <table class="table table-light table-hover" style="font-size:9px;" id="tabla_pendiente">
                     <thead>
                         <tr>
                             <th>N#</th>

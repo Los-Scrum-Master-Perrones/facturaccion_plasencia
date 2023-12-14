@@ -1,4 +1,4 @@
-    <table class="table table-light" id="editable">
+    <table class="table table-light table-hover" id="editable">
         <thead style="position: static;">
             <tr style="font-size:10px; text-align:center">
                 <th rowspan="2">Bulto<br>Package<br>No. </th>

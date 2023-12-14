@@ -900,7 +900,6 @@ class FacturaTerminado extends Component
     public function eliminar_detalle_olvidado($id)
     {
         DB::delete('delete from detalle_factura where id_detalle = ?', [$id]);
-        $this->da = "hola";
     }
 
 

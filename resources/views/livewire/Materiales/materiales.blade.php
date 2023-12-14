@@ -122,7 +122,7 @@
                 </div>
                 <div class="card-body">
                     <div class="table-responsive" style="height: 72vh;">
-                        <table class="table table-light" style="font-size:10px; ">
+                        <table class="table table-light table-hover" style="font-size:10px; ">
                             <thead>
                                 <tr style="font-size:16px; text-align:center;">
                                     <th style=" text-align:center;">N#</th>

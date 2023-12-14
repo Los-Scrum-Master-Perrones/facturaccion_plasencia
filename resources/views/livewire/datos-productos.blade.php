@@ -65,7 +65,7 @@
                 <div class="row">
                     <div class="col-sm" style="font-size:10px; overflow:scroll;height:500px;">
 
-                        <table class="table table-light" id="editable" style="font-size:10px;m">
+                        <table class="table table-light table-hover" id="editable" style="font-size:10px;m">
                             <thead>
                                 <tr>
                                     <th>Código</th>
@@ -97,7 +97,7 @@
                     <div class="col-sm" style="font-size:10px; overflow:scroll;
      height:500px;">
 
-                        <table class="table table-light" id="editable" style="font-size:10px; overflow:scroll;
+                        <table class="table table-light table-hover" id="editable" style="font-size:10px; overflow:scroll;
      height:50px;">
                             <thead>
                                 <tr>
@@ -130,7 +130,7 @@
                     <div class="col-sm" style="font-size:10px; overflow:scroll;
      height:500px;">
 
-                        <table class="table table-light" id="editable" style="font-size:10px;m">
+                        <table class="table table-light table-hover" id="editable" style="font-size:10px;m">
                             <thead>
                                 <tr>
                                     <th>Código</th>
@@ -162,7 +162,7 @@
                     <div class="col-sm" style="font-size:10px; overflow:scroll;
      height:500px;">
 
-                        <table class="table table-light" id="editable" style="font-size:10px;m">
+                        <table class="table table-light  table-hover" id="editable" style="font-size:10px;m">
                             <thead>
                                 <tr>
                                     <th>Código</th>
@@ -199,7 +199,7 @@
                     <div class="col-sm" style="font-size:10px; overflow:scroll;
      height:500px;">
                         @csrf
-                        <table class="table table-light" id="editable" style="font-size:10px;m">
+                        <table class="table table-light table-hover" id="editable" style="font-size:10px;m">
                             <thead>
                                 <tr>
                                     <th>Código</th>

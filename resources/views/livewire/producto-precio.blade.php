@@ -135,7 +135,7 @@
             <div class="card-body">
                 <div wire:loading.class='oscurecer_contenido'
                     style="width:100%; padding-left:0px;   font-size:10px;   overflow-x: display; overflow-y: auto;  height:450px;">
-                    <table class="table table-light" style="font-size:10px;">
+                    <table class="table table-light table-hover" style="font-size:10px;">
                         <thead style=" position: static;">
                             <tr style="font-size:16px; text-align:center;">
                                 <th style=" text-align:center;">#</th>

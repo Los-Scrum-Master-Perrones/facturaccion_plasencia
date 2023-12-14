@@ -1,4 +1,4 @@
-                <table class="table table-light" id="editable">
+                <table class="table table-light table-hover" id="editable">
                     <tr>
                         <th></th>
                         <th></th>

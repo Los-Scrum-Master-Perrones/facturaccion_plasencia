@@ -58,7 +58,7 @@
         <div class="row">
             <div class="col-sm" style="width:20%; padding-left:0px; ">
 
-                <table class="table table-light" id="editable" style="font-size:10px;">
+                <table class="table table-light table-hover" id="editable" style="font-size:10px;">
                     <thead>
                         <tr style="text-align:center;">
                             <th style=" text-align:center;">#-No.</th>
@@ -142,7 +142,7 @@
 
 
             <div class="col-sm" style="width:80%; padding-left:0px; ">
-                <table class="table table-light" id="editable" style="font-size:10px;">
+                <table class="table table-light table-hover" id="editable" style="font-size:10px;">
                     <thead>
                         <tr style=" text-align:center;">
                             <th># ORDEN</th>

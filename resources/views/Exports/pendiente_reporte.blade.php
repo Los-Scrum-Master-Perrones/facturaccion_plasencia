@@ -1,4 +1,4 @@
-<table class="table table-light" style="font-size:10px;">
+<table class="table table-light table-hover" style="font-size:10px;">
     <thead>
         <tr>
             <th>ITEM</th>

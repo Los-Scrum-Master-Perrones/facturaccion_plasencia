@@ -72,7 +72,7 @@
     <div style="width:1250px; padding-left:100px;">
         <div class="table-responsive">
             @csrf
-            <table class="table table-light" id="editable" style="font-size:10px;m">
+            <table class="table table-light table-hover" id="editable" style="font-size:10px;m">
                 <thead>
                     <tr style="font-size:16px; text-align:center;">
                     <th># ORDEN</th>

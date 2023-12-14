@@ -580,7 +580,7 @@
     <div class="panel-body">
         <div
             style="width:100%; padding-left:0px;  font-size:9px;   overflow-x: display; overflow-y: auto; height:75%;">
-            <table class="table table-light" style="font-size:9px;" id="tabla_pendiente">
+            <table class="table table-light table-hover" style="font-size:9px;" id="tabla_pendiente">
                 <thead>
                     <tr>
                         <th>N#</th>

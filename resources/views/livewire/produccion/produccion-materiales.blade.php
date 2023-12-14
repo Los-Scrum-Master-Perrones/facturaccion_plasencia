@@ -39,7 +39,7 @@
             </div>
             <div class="card-body">
                 <div class="table-responsive" style="height: 74vh;">
-                    <table class="table table-light" style="font-size:10px;">
+                    <table class="table table-light table-hover" style="font-size:10px;">
                         <thead>
                             <tr>
                                 <th>N#</th>

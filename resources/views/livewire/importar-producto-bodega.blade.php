@@ -1,132 +1,94 @@
 <div xmlns:wire="http://www.w3.org/1999/xhtml">
-<title></title>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" />
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Hola</title>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" />
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
-<script src="{{ URL::asset('css/tabla.js') }}"></script>
-@livewireStyles
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-wEmeIV1mKuiNpC+IOBjI7aAzPcEZeedi5yW5f2yOq55WWLwNGmvvx4Um1vskeMj0" crossorigin="anonymous">
-
-
-
-
-
-    <ul class="nav justify-content-center">
+    <ul class="nav nav-tabs justify-content-center">
         <li class="nav-item">
-            <a style="color:white;font-size:12px;" href="pendiente_empaque"><strong>Pendiente</strong></a>
+            <a class="nav-link" style="color:white;font-size:12px;" href="pendiente_empaque"><strong>Pendiente</strong></a>
         </li>
         <li class="nav-item">
-            <a  style="color:#E5B1E2; font-size:12px;" href="importar_c"><strong>Existencia en bodega</strong></a>
+            <a class="nav-link" style="color:#E5B1E2; font-size:12px;" href="importar_c"><strong>Existencia en
+                    bodega</strong></a>
         </li>
         <li class="nav-item">
-            <a style="color:white; font-size:12px;" href="{{ route('inventario_cajas') }}"><strong>Existencia de cajas</strong></a>
+            <a class="nav-link" style="color:white; font-size:12px;"
+                href="{{ route('inventario_cajas') }}"><strong>Existencia de cajas</strong></a>
         </li>
         <li class="nav-item">
-            <a style="color:white; font-size:12px;" href="historial_programacion"><strong>Programaciones</strong></a>
+            <a class="nav-link" style="color:white; font-size:12px;"
+                href="historial_programacion"><strong>Programaciones</strong></a>
         </li>
     </ul>
 
-
-    <div class="container" style="max-width:100%; ">
-
-            <div class="row" style="text-align:center;">
-
-                <div class="col">
-
-                    <div class="input-group mb-3">
-                    <form wire:submit.prevent="import">
-                        @csrf
-                        <input type="file" name="select_file" id="select_file" wire:model="select_file" class=" botonprincipal form-control mr-sm-2" style="width:450px;" />
-                        <input type="submit" name="upload" style="width:130px;" class="botonprincipal mr-sm-2 " value="Importar">
-                    </form>
-
-                    <form wire:submit.prevent="vaciar" >
-                    @csrf
-                    <input type="submit" style="width:130px;" class=" botonprincipal mr-sm-2 "  value="Vaciar tabla">
-                    </form>
-
-                    <input name="busqueda" id="busqueda"  wire:model= "busqueda" class="botonprincipal  form-control"    placeholder="Búsqueda por Marca, Nombre y Capa" >
+    <div class="container" style="max-width:100%;">
+        <div class="card" style="height: 90vh;">
+            <div class="card-header">
+                <div class="row">
+                    <div class="col-md-4" wire:ignore>
+                        <form wire:submit.prevent="import" class="force-inline">
+                            <div class="input-group mb-3" style="height: 30px">
+                                <input type="file" name="select_file" id="select_file" wire:model="select_file"
+                                    class="form-control" style="width:150px;" />
+                                <input type="submit" name="upload" style="width:100px;" class="btn btn-primary"
+                                    value="Importar">
+                                <button type="button" class="btn btn-warning"  wire:click="vaciar">Vaciar</button>
+                            </div>
+                        </form>
                     </div>
-
+                    <div class="col-md-4">
+                        <input name="busqueda" id="busqueda"  wire:model= "busqueda" class="form-control" placeholder="Búsqueda por Marca, Nombre y Capa" >
+                    </div>
+                    <div class="col-md-3" wire:ignore style="height: 30px"></div>
+                    <div class="col-md-1">
+                        <div class="input-group  align-text-top" >
+                            <button class="btn btn-success" wire:click='imprimir_reporte' style="height: 30px">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                    fill="currentColor" class="bi bi-file-spreadsheet" viewBox="0 0 16 16">
+                                    <path
+                                        d="M2 2a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V2zm2-1a1 1 0 0 0-1 1v4h10V2a1 1 0 0 0-1-1H4zm9 6h-3v2h3V7zm0 3h-3v2h3v-2zm0 3h-3v2h2a1 1 0 0 0 1-1v-1zm-4 2v-2H6v2h3zm-4 0v-2H3v1a1 1 0 0 0 1 1h1zm-2-3h2v-2H3v2zm0-3h2V7H3v2zm3-2v2h3V7H6zm3 3H6v2h3v-2z" />
+                                </svg>
+                            </button>
+                        </div>
+                    </div>
                 </div>
             </div>
+            <div class="card-body">
+                <div class="table-responsive" style="height: 74vh;">
+                    <table class="table table-light table-hover">
+                        <thead>
+                            <tr>
+                                <th>Código sistema</th>
+                                <th>Marca</th>
+                                <th>Alias vitola</th>
+                                <th>Vitola</th>
+                                <th>Capa</th>
+                                <th>Existencia</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @php
+                                $total = 0;
+                            @endphp
+                            @foreach ($existencias as $existencia)
+                                <tr>
+                                    <td>{{ $existencia->codigo_producto }}</td>
+                                    <td>{{ $existencia->marca }}</td>
+                                    <td>{{ $existencia->nombre }}</td>
+                                    <td>{{ $existencia->vitola }}</td>
+                                    <td>{{ $existencia->capa }}</td>
+                                    <td>{{ $existencia->total }}</td>
+                                </tr>
+                                @php
+                                    $total += $existencia->total;
+                                @endphp
+                            @endforeach
+                        </tbody>
+                    </table>
 
-
-
-
-            <div class="panel-body" style="padding:0px;">
-            <div style="width:100%; padding-left:0px;    overflow-x: display; overflow-y: auto;
-     height:450px;">
-            @csrf
-            <table class="table table-light">
-                <thead>
-                    <tr>
-                        <th>Código sistema</th>
-                        <th >Marca</th>
-                        <th >Alias vitola</th>
-                        <th >Vitola</th>
-                        <th >Capa</th>
-                        <th >Existencia</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @foreach($existencias as $existencia)
-                    <tr>
-                        <td>{{$existencia->codigo_producto}}</td>
-                        <td>{{$existencia->marca}}</td>
-                        <td>{{$existencia->nombre}}</td>
-                        <td>{{$existencia->vitola}}</td>
-                        <td>{{$existencia->capa}}</td>
-                        <td>{{$existencia->total}}</td>
-                    </tr>
-                    @endforeach
-                </tbody>
-            </table>
+                    <div class="input-group" style="width:40%; position: fixed;right: 0px;bottom:0px; height:30px;">
+                        <span class="form-control input-group-text">Total pendiente</span>
+                        <input type="text" class="form-control" id="sumap" value="{{ number_format($total , 0) }}">
+                    </div>
+                </div>
+            </div>
         </div>
-
     </div>
-
-
-
-    <script type="text/javascript">
-        $(document).ready(function () {
-
-            $.ajaxSetup({
-                headers: {
-                    'X-CSRF-Token': $("input[name=_token]").val()
-                }
-            });
-
-            $('#editable').Tabledit({
-                url: '{{ route("tabledit.action") }}',
-                method: 'POST',
-                dataType: "json",
-                columns: {
-                    identifier: [0, 'id'],
-                    editable: [
-                        [1, 'first_name'],
-                        [2, 'last_name'],
-                        [3, 'gender']
-                    ]
-                },
-                restoreButton: false,
-
-                onSuccess: function (data, textStatus, jqXHR) {
-                    if (data.action == 'delete') {
-                        $('#' + data.id).remove();
-                    }
-                }
-
-            });
-
-        });
-    </script>
-
-
 </div>

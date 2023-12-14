@@ -33,42 +33,42 @@
 </ul>
 
   <div class="container" style="max-width:100%; ">
-    
-    
+
+
   <ul class="nav"  >
 
   <form method="post" enctype="multipart/form-data" action="{{ url('/importar_archivoproductos_terminados') }}" >
-      @csrf    
+      @csrf
 <div class="row">
 <div class="col">
-   <input type="file" name="select_file" id="select_file" class=" botonprincipal" style="width:300px;" />    
+   <input type="file" name="select_file" id="select_file" class=" botonprincipal" style="width:300px;" />
   </div>
 <div class="col">
 <input type="submit" name="upload" class=" botonprincipal " value="Importar" style="width:100px;" />
 </div>
-</div>   
+</div>
       </form>
 
-      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  
-  
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
   <li class="nav-item">
   <form method="get" enctype="multipart/form-data" action="{{ url('/reemplazar_productos_terminado') }}" >
-      @csrf 
+      @csrf
       <input type="submit" name="upload" class=" botonprincipal " value="Actualizar producto terminado">
       </form>
      </li>
   </ul>
-   
- 
 
-  
-                
 
- <div class="panel-body" style="padding:0px;">   
+
+
+
+
+ <div class="panel-body" style="padding:0px;">
             <div style="width:100%; padding-left:0px;   font-size:10px;   overflow-x: display; overflow-y: auto;
      height:450px;">
-                   
-<table class="table table-light"
+
+<table class="table table-light table-hover"
 style="font-size:10px;">
 <thead>
 <tr>
@@ -98,9 +98,9 @@ style="font-size:10px;">
         </div>
         </div>
         </div>
-          
-        
-      
+
+
+
 
 
 

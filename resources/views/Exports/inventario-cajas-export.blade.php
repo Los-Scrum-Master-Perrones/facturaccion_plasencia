@@ -1,4 +1,4 @@
-<table class="table table-light" style="font-size:10px; ">
+<table class="table table-light table-hover" style="font-size:10px; ">
     <thead>
         <tr style="font-size:16px; text-align:center;">
             <th style="text-align:center;font-size:16px;border: 1px solid #C00; font-weight: bold">N#</th>

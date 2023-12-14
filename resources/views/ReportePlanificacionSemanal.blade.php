@@ -1,4 +1,4 @@
-<table class="table table-light" style="font-size:10px;">
+<table class="table table-light table-hover" style="font-size:10px;">
     <thead>
         <tr>
             <th style="text-align:center;font-size:12px;border: 1px solid #C00;font-weight: bold;">Codigo</th>
