@@ -19,6 +19,8 @@
             <th style="text-align:center;font-size:16px;border: 1px solid #C00; font-weight: bold">UPC</th>
             <th style="text-align:center;font-size:16px;border: 1px solid #C00; font-weight: bold">PENDIENTE</th>
             <th style="text-align:center;font-size:16px;border: 1px solid #C00; font-weight: bold">SALDO</th>
+            <th style="text-align:center;font-size:16px;border: 1px solid #C00; font-weight: bold">CODIGO CAJA</th>
+            <th style="text-align:center;font-size:16px;border: 1px solid #C00; font-weight: bold">CODIGO PURO</th>
             <th style="text-align:center;font-size:16px;border: 1px solid #C00; font-weight: bold">CANT. CAJAS</th>
             <th style="text-align:center;font-size:16px;border: 1px solid #C00; font-weight: bold">CAJAS</th>
             <th style="text-align:center;font-size:16px;border: 1px solid #C00; font-weight: bold">CAJAS FALTANTES</th>
@@ -63,6 +65,8 @@
                 <td style="text-align:center;font-size:12px;border: 1px solid #C00;">{{ $datos->upc }}</td>
                 <td style="text-align:center;font-size:12px;border: 1px solid #C00;">{{ $datos->pendiente }}</td>
                 <td style="text-align:center;font-size:12px;border: 1px solid #C00;">{{ $datos->saldo }}</td>
+                <td style="text-align:center;font-size:12px;border: 1px solid #C00;">{{ $datos->codigo_caja }}</td>
+                <td style="text-align:center;font-size:12px;border: 1px solid #C00;">{{ $datos->codigo_productos }}</td>
                 @php
                     $cajitas = 0;
                     if ($datos->sampler != 'si' && (explode(" ", $datos->tipo_empaque)[0] == 'CAJAS' || explode(" ", $datos->tipo_empaque)[0] == 'CAJA')) {
@@ -152,6 +156,8 @@
     </tbody>
     <tfoot>
         <tr>
+            <th style="text-align:center;font-size:16px;border: 1px solid #C00; font-weight: bold"></th>
+            <th style="text-align:center;font-size:16px;border: 1px solid #C00; font-weight: bold"></th>
             <th style="text-align:center;font-size:16px;border: 1px solid #C00; font-weight: bold"></th>
             <th style="text-align:center;font-size:16px;border: 1px solid #C00; font-weight: bold"></th>
             <th style="text-align:center;font-size:16px;border: 1px solid #C00; font-weight: bold"></th>
