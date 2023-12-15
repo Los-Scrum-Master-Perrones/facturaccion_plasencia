@@ -95,7 +95,6 @@
         @empty
         @endforelse
 
-
         @php
             $sumas = $sumas + $datos->saldo;
             $sumap = $sumap + $datos->pendiente;

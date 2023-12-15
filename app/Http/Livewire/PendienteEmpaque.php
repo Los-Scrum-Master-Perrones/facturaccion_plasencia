@@ -4,6 +4,7 @@ namespace App\Http\Livewire;
 
 use App\Exports\detallesExport;
 use App\Exports\MaterialesProgramacionExportView;
+use App\Exports\PendienteEmpaqueCuadradoExport;
 use Livewire\Component;
 
 use Illuminate\Http\Request;
@@ -1509,7 +1510,7 @@ class PendienteEmpaque extends Component
                         'vitola' => $valores[0]->vitola,
                         'capa' => $valores[0]->capa,
                         'tipo' => $valores[0]->tipo_empaque,
-                        'item' =>  $detalle->id_pendiente, 
+                        'item' =>  $detalle->id_pendiente,
                         'pa_codigo_poducto' => $valores[0]->codigo_producto,
                     ]);
 
@@ -1698,5 +1699,58 @@ class PendienteEmpaque extends Component
         ]);
 
         return Excel::download(new MaterialesProgramacionExportView($vista, 'Materiales'), 'Materiales Pendiente (' . Carbon::now()->format('Y-m-d') . ').xlsx');
+    }
+
+    public function imprimir_materiales_pendiente_empaque_productos_cajas()
+    {
+
+        $datos_pendiente_empaque = DB::select(
+            'call buscar_pendiente_empaque(:uno,:dos,:tres,:cuatro,:pres,:seis,:siete,:paginacion,
+            :pa_items,:pa_orden_sist,:pa_ordenes,
+            :pa_marcas,:pa_vitolas,:pa_nombre,:pa_capas,
+            :pa_empaques,:pa_meses,:r_mill)',
+            [
+                'uno' =>  $this->r_uno,
+                'dos' =>  $this->r_dos,
+                'tres' =>  $this->r_tres,
+                'cuatro' =>  $this->r_cuatro,
+                'pres' =>  $this->r_cinco,
+                'seis' =>  $this->r_seis,
+                'siete' =>  $this->r_siete,
+                'paginacion' =>  -1,
+                'pa_marcas' =>  $this->busqueda_marcas_p,
+                'pa_nombre' =>  $this->busqueda_nombre_p,
+                'pa_vitolas' =>  $this->busqueda_vitolas_p,
+                'pa_capas' =>  $this->busqueda_capas_p,
+                'pa_empaques' =>  $this->busqueda_empaques_p,
+                'pa_meses' =>  $this->busqueda_mes_p,
+                'pa_items' =>  $this->busqueda_items_p,
+                'pa_orden_sist' =>  $this->busqueda_ordenes_p,
+                'pa_ordenes' =>  $this->busqueda_hons_p,
+                'r_mill' =>  $this->r_mill,
+            ]
+        );
+
+
+        $puros = DB::select('CALL `pendiente_empaque_puros`()');
+        $cajas =  DB::select('CALL `pendiente_empaque_cajas`()');
+
+        $purosArray = [];
+        $cajasArray2 = [];
+        foreach ($puros as $key => $uso) {
+            $purosArray[$uso->codigo_producto] =  $uso->total;
+        }
+        foreach ($cajas as $key => $value) {
+            $cajasArray2[$value->codigo] =  $value->existencia;
+        }
+
+        $vista =  view('Exports.pendiente-empaque-export', [
+            'datos_pendiente_empaque' => $datos_pendiente_empaque,
+            'puros' => $purosArray,
+            'cajas' => $cajasArray2
+        ]);
+
+
+        return Excel::download(new PendienteEmpaqueCuadradoExport($vista), 'Pendiente Empaque (' . Carbon::now()->format('Y-m-d') . ').xlsx');
     }
 }

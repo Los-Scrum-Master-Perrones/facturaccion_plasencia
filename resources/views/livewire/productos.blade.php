@@ -375,7 +375,7 @@
 
                                 <div class="mb-3 col">
                                     <label for="txt_buenos" class="form-label">Precio</label>
-                                    <input name="precio" id="precio_ac" class="form-control" required
+                                    <input name="precio" id="precio_ac" class="form-control"
                                         type="text" autocomplete="off">
                                 </div>
 
@@ -556,12 +556,12 @@
                                 <label for="txt_malos" class="form-label">Código de
                                     precio</label>
                                 <input name="precio_de" id="precio_de" style="font-size:16px" class="form-control"
-                                    required type="text" autocomplete="off">
+                                     type="text" autocomplete="off">
                             </div>
                             <div class="mb-3 col">
 
                                 <label for="txt_buenos" class="form-label">Precio</label>
-                                <input name="precio" id="precio" class="form-control" required type="text"
+                                <input name="precio" id="precio" class="form-control"  type="text"
                                     autocomplete="off">
 
                             </div>
@@ -707,24 +707,24 @@
                                     <div class="mb-3 col">
                                         <label for="txt_total" class="form-label">Código del
                                             sistema</label>
-                                        <input name="cod_sistema" id="cod_sistema" class="form-control" required
+                                        <input name="cod_sistema" id="cod_sistema" class="form-control"
                                             type="text" autocomplete="off">
                                     </div>
                                     <div class="mb-3 col">
                                         <label for="txt_buenos" class="form-label">Código de
                                             precio</label>
-                                        <input name="cod_precio" id="cod_precio" class="form-control" required
+                                        <input name="cod_precio" id="cod_precio" class="form-control"
                                             type="text" autocomplete="off">
                                     </div>
                                     <div class="mb-3 col">
                                         <label for="txt_buenos" class="form-label">Precio</label>
-                                        <input name="precio" id="precio" class="form-control" required
+                                        <input name="precio" id="precio" class="form-control"
                                             type="text" autocomplete="off">
                                     </div>
 
                                     <div class="mb-3 col">
                                         <label for="txt_total" class="form-label">Código de la cajita</label>
-                                        <input name="cod_caja" id="cod_caja" class="form-control" required
+                                        <input name="cod_caja" id="cod_caja" class="form-control" 
                                             type="text" autocomplete="off">
                                     </div>
 

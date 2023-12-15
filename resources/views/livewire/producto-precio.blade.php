@@ -336,7 +336,7 @@
                             <div class="mb-3 col">
                                 <label for="txt_buenos">Precio</label>
                                 <input name="precio_de" id="precio_de" class="form-control" wire:model='precio_n'
-                                    required type="number" onchange="buscar_agregar()" autocomplete="off">
+                                    required type="text" onchange="buscar_agregar()" autocomplete="off">
                             </div>
                             <div class="mb-3 col">
                             </div>

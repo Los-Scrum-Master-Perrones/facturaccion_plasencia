@@ -38,7 +38,6 @@
             <th style="text-align:center;font-size:16px;border: 1px solid #C00; font-weight: bold">COLOR</th>
             <th style="text-align:center;font-size:16px;border: 1px solid #C00; font-weight: bold">PENDIENTE</th>
             <th style="text-align:center;font-size:16px;border: 1px solid #C00; font-weight: bold">RESTANTE</th>
-
             <th style="text-align:center;font-size:16px;border: 1px solid #C00; font-weight: bold">MATERIAL</th>
             <th style="text-align:center;font-size:16px;border: 1px solid #C00; font-weight: bold">NORMA</th>
             <th style="text-align:center;font-size:16px;border: 1px solid #C00; font-weight: bold">TIPO</th>
