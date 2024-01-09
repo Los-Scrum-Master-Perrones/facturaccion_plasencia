@@ -1,23 +1,17 @@
 <div xmlns:wire="http://www.w3.org/1999/xhtml">
-
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" />
-    @livewireStyles
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-wEmeIV1mKuiNpC+IOBjI7aAzPcEZeedi5yW5f2yOq55WWLwNGmvvx4Um1vskeMj0" crossorigin="anonymous">
-
-
-    <ul class="nav justify-content-center">
+    <ul class="nav nav-tabs justify-content-center">
         <li class="nav-item">
-            <a style="color:white; font-size:12px;" href="pendiente"><strong>Pendiente</strong></a>
+            <a class="nav-link fs-7" style=" font-size:12px;" href="pendiente"><strong>Pendiente</strong></a>
         </li>
         <li class="nav-item">
-            <a style="color:#E5B1E2; font-size:12px;" href="import_excel"><strong>Importar pedido</strong></a>
+            <a class="nav-link active fs-7" style=" font-size:12px;" href="import_excel"><strong>Importar
+                    pedido</strong></a>
         </li>
         <li class="nav-item">
-            <a style="color:white; font-size:12px;" href="poimport"><strong>Importar PO</strong></a>
+            <a class="nav-link fs-7" style=" font-size:12px;" href="poimport"><strong>Importar PO</strong></a>
         </li>
         <li class="nav-item">
-            <a style="color:white; font-size:12px;" href="pendiente_salida"><strong>Reporte</strong></a>
+            <a class="nav-link fs-7" style=" font-size:12px;" href="pendiente_salida"><strong>Reporte</strong></a>
         </li>
     </ul>
 
@@ -26,38 +20,41 @@
     <div class="container" style="max-width:100%;">
 
         <div class="row" style="text-align:center; padding-left: 15px">
-            <div class="col">
-                <div class="input-group" style="max-width:100%;">
-
-                    <form method="post" enctype="multipart/form-data" action="{{ url('/importar_pedido') }}"
-                        class="form-inline">
+            <div class="col-4">
+                <form method="post" enctype="multipart/form-data" action="{{ url('/importar_pedido') }}"
+                    class="form form-inline">
+                    @csrf
+                    <input type="file" name="select_file" id="select_file" class="btn btn-outline-danger" required />
+                    <input type="checkbox" name="documento" id="documento" value="Nuevo" checked>
+                    <label for="" style="color: white">Formato Nuevo</label>
+                    <input type="submit" name="upload" class="btn btn-success" value="Importar">
+                </form>
+            </div>
+            <div class="col-4">
+                @if (count($nuevos) == 0)
+                    <form action="{{ Route('pendiente_insertar') }}" method="POST" class="form form-inline">
                         @csrf
-                        <input type="file" name="select_file" id="select_file" class="form-control   mr-sm-2 "
-                            style="width:250px;" required />
-                        <input type="submit" name="upload" style="width:130px;" class=" botonprincipal mr-sm-2 "
-                            value="Importar">
+                        <div class="row">
+                            <div class="col-md-4">
+                                <input type="date" value="" name="fecha" id="fecha"
+                                class="form-control" required>
+                            </div>
+                            <div class="col-md-2">
+                                <input type="number" value="" name="sistema" id="sistema" class="form-control"
+                                required>
+                            </div>
+                            <div class="col-md-4">
+                                <button onclick="agregarpendiente()" class="btn btn-info">Agregar a pendiente</button>
+                            </div>
+                            <div class="col-md-2">
+                            </div>
+                        </div>
                     </form>
-
-
-
-                    @if (count($nuevos) == 0){
-                    <form action="{{Route('pendiente_insertar')}}" method="POST">
-                        @csrf
-                        <input type="date" value="" name="fecha" id="fecha"
-                            style="width: 120px; color:black ;text-align:center;" class=" form-control   mr-sm-2 "
-                            required>
-                        <input type="number" value="" name="sistema" id="sistema"
-                            style="width: 60px; color:black ;text-align:center;" class=" form-control   mr-sm-2 "
-                            required>
-                        <button onclick="agregarpendiente()" style="width:160px;"
-                            class="botonprincipal mr-sm-2 ">Agregar a pendiente</button>
-                    </form>
-                    }
-                    @endif
-
-
-                    <button data-bs-toggle="modal" style="width:30px;" class=" botonprincipal mr-sm-2 "
-                        data-bs-target="#modal_actualizar">
+                @endif
+            </div>
+            <div class="col-2">
+                <div class="btn-group">
+                    <button data-bs-toggle="modal" class="btn btn-success" data-bs-target="#modal_actualizar">
                         <abbr title="Agregar nuevo pedido">
                             <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor"
                                 class="bi bi-plus-circle" viewBox="0 0 16 16">
@@ -68,7 +65,7 @@
                         </abbr>
                     </button>
 
-                    <button wire:click="vaciar_import_excel()" style="width:30px;" class=" botonprincipal mr-sm-2 ">
+                    <button wire:click="vaciar_import_excel()" class="btn btn-warning">
                         <abbr title="Vacia la tabla">
                             <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor"
                                 class="bi bi-folder-x" viewBox="0 0 16 16">
@@ -80,47 +77,37 @@
                         </abbr>
                     </button>
 
-                    @if (count($nuevos) > 0){
-                    <button wire:click="modal_productos_nuevos()" style="width:30px;" class=" botonprincipal mr-sm-2 ">
-                        <abbr title="Nuevos Productos">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
-                                class="bi bi-lightning-charge" viewBox="0 0 16 16">
-                                <path
-                                    d="M11.251.068a.5.5 0 0 1 .227.58L9.677 6.5H13a.5.5 0 0 1 .364.843l-8 8.5a.5.5 0 0 1-.842-.49L6.323 9.5H3a.5.5 0 0 1-.364-.843l8-8.5a.5.5 0 0 1 .615-.09zM4.157 8.5H7a.5.5 0 0 1 .478.647L6.11 13.59l5.732-6.09H9a.5.5 0 0 1-.478-.647L9.89 2.41 4.157 8.5z" />
-                            </svg>
-                        </abbr>
-                    </button>
-                    }
-
+                    @if (count($nuevos) > 0)
+                        <button wire:click="modal_productos_nuevos()" class="btn btn-secondary">
+                            <abbr title="Nuevos Productos">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                    fill="currentColor" class="bi bi-lightning-charge" viewBox="0 0 16 16">
+                                    <path
+                                        d="M11.251.068a.5.5 0 0 1 .227.58L9.677 6.5H13a.5.5 0 0 1 .364.843l-8 8.5a.5.5 0 0 1-.842-.49L6.323 9.5H3a.5.5 0 0 1-.364-.843l8-8.5a.5.5 0 0 1 .615-.09zM4.157 8.5H7a.5.5 0 0 1 .478.647L6.11 13.59l5.732-6.09H9a.5.5 0 0 1-.478-.647L9.89 2.41 4.157 8.5z" />
+                                </svg>
+                            </abbr>
+                        </button>
                     @endif
 
-                    <button wire:click="comparativo()"
-                    data-bs-toggle="modal" data-bs-target="#modal_diff"
-                    style="width:100px;" class=" botonprincipal mr-sm-2 ">
+                    <button wire:click="comparativo()" data-bs-toggle="modal" data-bs-target="#modal_diff"
+                        class="btn btn-primary">
                         Comparativo
                     </button>
-
-
                 </div>
             </div>
-
-
-
-
+            <div class="col-2"></div>
         </div>
         <div class="col">
             <div class="input-group mb-3">
                 <input class=" form-control  mr-sm-2" placeholder="Búsqueda por Item" wire:model="b_item">
                 <input class=" form-control  mr-sm-2" placeholder="Búsqueda por Categoria" wire:model="b_categoria">
                 <input class=" form-control  mr-sm-2" placeholder="Búsqueda por Orden" wire:model="b_orden">
-
             </div>
-
         </div>
 
-        <form action="{{Route('nuevo_pedido')}}" method="POST" id="nuevo_pedido" name="nuevo_pedido">
-            <div class="modal fade" role="dialog" id="modal_actualizar" data-backdrop="static" data-keyboard="false"
-                tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true"
+        <form action="{{ Route('nuevo_pedido') }}" method="POST" id="nuevo_pedido" name="nuevo_pedido">
+            <div class="modal fade" role="dialog" id="modal_actualizar" data-backdrop="static"
+                data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true"
                 style="opacity:.9;background:#212529;width=800px;">
                 <div class="modal-dialog modal-dialog-centered modal-lg"
                     style="opacity:.9;background:#212529;width=80%">
@@ -139,11 +126,13 @@
 
                                 <div class="mb-6 col">
                                     <label for="txt_figuraytipo" class="form-label">Item</label>
-                                    <input name="item" id="item" class="form-control" type="text" autocomplete="off">
+                                    <input name="item" id="item" class="form-control" type="text"
+                                        autocomplete="off">
                                 </div>
                                 <div class="mb-6 col">
                                     <label for="txt_figuraytipo" class="form-label">Orden</label>
-                                    <input name="orden" id="orden" class="form-control" type="text" autocomplete="off">
+                                    <input name="orden" id="orden" class="form-control" type="text"
+                                        autocomplete="off">
                                 </div>
                             </div>
                             <div class="row">
@@ -196,7 +185,8 @@
 
 
         <div class="panel-body" style="padding:0px;">
-            <div style="width:100%; padding-left:0px;   font-size:10px;   overflow-x: display; overflow-y: auto;
+            <div
+                style="width:100%; padding-left:0px;   font-size:10px;   overflow-x: display; overflow-y: auto;
      height:70%;">
                 @csrf
                 <table class="table table-light table-hover" style="font-size:10px; ">
@@ -214,48 +204,33 @@
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach($pedido_completo as $key => $pedido)
-                        <tr>
-                            <td>{{++$key}}</td>
-                            <td>{{$pedido->categorias}}</td>
-                            <td>{{$pedido->item}}</td>
-                            <td>{{$pedido->cant_paquetes}}</td>
-                            <td>{{$pedido->codigo_p}}</td>
-                            <td>{{$pedido->descripcion}}</td>
-                                @if(is_numeric($pedido->unidades) && is_numeric($pedido->cant_paquetes))
-                            <td>{{$pedido->unidades*$pedido->cant_paquetes}}</td>
+                        @foreach ($pedido_completo as $key => $pedido)
+                            <tr>
+                                <td>{{ ++$key }}</td>
+                                <td>{{ $pedido->categorias }}</td>
+                                <td>{{ $pedido->item }}</td>
+                                <td>{{ $pedido->cant_paquetes }}</td>
+                                <td>{{ $pedido->codigo_p }}</td>
+                                <td>{{ $pedido->descripcion }}</td>
+                                @if (is_numeric($pedido->unidades) && is_numeric($pedido->cant_paquetes))
+                                    <td>{{ $pedido->unidades * $pedido->cant_paquetes }}</td>
                                 @else
-                            <td>{{0}}</td>
+                                    <td>{{ 0 }}</td>
                                 @endif
-                            <td>{{$pedido->unidades}}</td>
-                            <td>{{$pedido->numero_orden}}</td>
-                        </tr>
+                                <td>{{ $pedido->unidades }}</td>
+                                <td>{{ $pedido->numero_orden }}</td>
+                            </tr>
                         @endforeach
                     </tbody>
                 </table>
 
-
-            </div>
-
-            <br>
-            <div class="col-sm-9">
-            </div>
-            <div class="col-sm-1">
-                <span style="width:50px;" class="form-control input-group-text">Total</span>
-            </div>
-            <div class="col-sm-2">
-                <input style="width:150px;" type="text" class="form-control" wire:model="total_puros">
             </div>
         </div>
-
-
-
-
     </div>
-
-
-
-
+    <div class="input-group" style="width:20%; position: fixed;right: 0px;bottom:0px; height:30px;">
+        <span class="form-control input-group-text fs-7">Total</span>
+        <input type="text" class="form-control fs-7" wire:model="total_puros" >
+    </div>
 
     <div class="modal fade" id="datos_faltantes" data-backdrop="static" data-keyboard="false" tabindex="-1"
         aria-labelledby="staticBackdropLabel" aria-hidden="true" style="opacity:.9;background:#212529;">
@@ -267,8 +242,8 @@
                 </div>
 
                 <div class="modal-body">
-                    ¿Estás seguro que quieres eliminar a <strong><input value="" id="txt_usuarioE" name="txt_usuarioE"
-                            style="border:none;text-align:center;" readonly></strong>?
+                    ¿Estás seguro que quieres eliminar a <strong><input value="" id="txt_usuarioE"
+                            name="txt_usuarioE" style="border:none;text-align:center;" readonly></strong>?
                     <input name="id_usuarioE" id="id_usuarioE" value="" hidden />
                 </div>
 
@@ -287,32 +262,33 @@
 
 
     <div wire:ignore class="modal fade" id="modal_diff" data-backdrop="static" data-keyboard="false" tabindex="-1"
-            aria-labelledby="staticBackdropLabel" aria-hidden="true" style="opacity:.9;background:#212529;">
-            <div class="modal-dialog modal-dialog-centered modal-xl">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h2 class="modal-title" id="staticBackdropLabel">COMPARATIVOS PEDIDOS</h2>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
-                    <div class="modal-body">
-                        <table class="table">
+        aria-labelledby="staticBackdropLabel" aria-hidden="true" style="opacity:.9;background:#212529;">
+        <div class="modal-dialog modal-dialog-centered modal-xl">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h2 class="modal-title" id="staticBackdropLabel">COMPARATIVOS PEDIDOS</h2>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <table class="table">
 
-                            <tr>
-                                <th>Item</th>
-                                <th>Descripcion</th>
-                                <th>HON</th>
-                                <th>PO</th>
-                                <th>Global</th>
-                                <th>Diferencia</th>
-                            </tr>
+                        <tr>
+                            <th>Item</th>
+                            <th>Descripcion</th>
+                            <th>HON</th>
+                            <th>PO</th>
+                            <th>Global</th>
+                            <th>Diferencia</th>
+                        </tr>
 
 
-                            <tbody>
-                                @foreach($comparativos as $com)
-                            <tr>
-                                <td>{{$com['item']}}</td>
-                                @php
-                                $descripcion = DB::select("select if(clase_productos.sampler ='si',
+                        <tbody>
+                            @foreach ($comparativos as $com)
+                                <tr>
+                                    <td>{{ $com['item'] }}</td>
+                                    @php
+                                        $descripcion = DB::select(
+                                            "select if(clase_productos.sampler ='si',
                             concat(descripcion_sampler, ' ', tipo_empaques.tipo_empaque),
                             concat(marca_productos.marca, ' ',  vitola_productos.vitola,' ',
                             nombre_productos.nombre,' ', capa_productos.capa,
@@ -322,26 +298,28 @@
                             inner join capa_productos on capa_productos.id_capa = clase_productos.id_capa
                             inner join vitola_productos on vitola_productos.id_vitola = clase_productos.id_vitola
                             inner join nombre_productos on nombre_productos.id_nombre = clase_productos.id_nombre
-                            where item=?", [$com['item']]);
-                                @endphp
-                                <td>{{$descripcion[0]->Descripcion}}</td>
-                                <td>{{$com['hon']}}</td>
-                                <td>{{$com['individual']}}</td>
-                                <td>{{$com['global']}}</td>
-                                <td>{{$com['diferencia']}}</td>
-                            </tr>
+                            where item=?",
+                                            [$com['item']],
+                                        );
+                                    @endphp
+                                    {{-- <td>{{ $descripcion[0]->Descripcion }}</td> --}}
+                                    <td>{{ $com['hon'] }}</td>
+                                    <td>{{ $com['individual'] }}</td>
+                                    <td>{{ $com['global'] }}</td>
+                                    <td>{{ $com['diferencia'] }}</td>
+                                </tr>
                             @endforeach
-                            </tbody>
-                        </table>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-success" data-bs-dismiss="modal">
-                            <span>Aceptar</span>
-                        </button>
-                    </div>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-success" data-bs-dismiss="modal">
+                        <span>Aceptar</span>
+                    </button>
                 </div>
             </div>
         </div>
+    </div>
 
 
 
@@ -351,12 +329,12 @@
     <script type="text/javascript">
         function agregarpendiente() {
 
-            var datas = '<?php echo json_encode($verificar);?>';
+            var datas = '<?php echo json_encode($verificar); ?>';
             var data = JSON.parse(datas);
 
             if (data.length > 0) {
                 var bool = confirm(
-                    'Necesitas agregar los productos correspondientes a los siguientes item: \n @foreach($verificar as $v) \n{{$v->item}} @endforeach '
+                    'Necesitas agregar los productos correspondientes a los siguientes item: \n @foreach ($verificar as $v) \n{{ $v->item }} @endforeach '
                 );
                 if (bool) {
                     location.href = "/productos";
@@ -365,7 +343,7 @@
 
 
             } else {
-                theForm.addEventListener('submit', function (event) {});
+                theForm.addEventListener('submit', function(event) {});
             }
         }
     </script>
@@ -384,7 +362,7 @@
 
 
     <script type="text/javascript">
-        $(document).ready(function () {
+        $(document).ready(function() {
 
             $.ajaxSetup({
                 headers: {
@@ -393,7 +371,7 @@
             });
 
             $('#editable').Tabledit({
-                url: '{{ route("tabledit.action") }}',
+                url: '{{ route('tabledit.action') }}',
                 method: 'POST',
                 dataType: "json",
                 columns: {
@@ -406,7 +384,7 @@
                 },
                 restoreButton: false,
 
-                onSuccess: function (data, textStatus, jqXHR) {
+                onSuccess: function(data, textStatus, jqXHR) {
                     if (data.action == 'delete') {
                         $('#' + data.id).remove();
                     }
@@ -432,7 +410,7 @@
 
                     <ul>
                         @foreach ($nuevos as $n)
-                        <li>{{$n->categoria." ".$n->item." ".$n->detalles}}</li>
+                            <li>{{ $n->categoria . ' ' . $n->item . ' ' . $n->detalles }}</li>
                         @endforeach
 
                     </ul>
@@ -441,7 +419,7 @@
                 </div>
 
                 <div class="modal-footer">
-                    <button  type="button" class="btn btn-danger" wire:click="agregar_productos()">
+                    <button type="button" class="btn btn-danger" wire:click="agregar_productos()">
                         <span>Agregar Productos</span>
                     </button>
                     <button wire:click="agregar_productos_exporta()" class="btn btn-success">

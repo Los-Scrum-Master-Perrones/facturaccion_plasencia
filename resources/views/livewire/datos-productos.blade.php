@@ -15,12 +15,22 @@
     <script src="{{ URL::asset('https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js') }}"></script>
     <link rel="stylesheet" href="{{ URL::asset('https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css') }}">
 
-    <ul class="nav justify-content-center">
+    <ul class="nav nav-tabs justify-content-center">
         <li class="nav-item">
-            <a class="nav-link active" style="color:#ffffff; font-size:12px;" href="{{ route('productos') }}"><strong>Catalogo de Productos</strong></a>
+            <a class="nav-link fs-7"
+                href="{{ route('productos') }}"><strong>Productos</strong></a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" style="color:#ffffff; font-size:12px;" href="{{ route('precio.catalogo') }}"><strong>Catalogo de Precios</strong></a>
+            <a class="nav-link active  fs-7" style="color:#080707;"
+                href="{{ route('datos_producto') }}"><strong>Datos Adicionales</strong></a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link fs-7"
+                href="{{ route('precio.catalogo') }}"><strong>Catalogo de Precios</strong></a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link fs-7"
+                href="{{ route('productos.catalogo') }}"><strong>Catalogo de Productos</strong></a>
         </li>
     </ul>
 

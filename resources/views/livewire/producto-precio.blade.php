@@ -87,7 +87,24 @@
         }
     </style>
 
-    <br>
+    <ul class="nav nav-tabs justify-content-center">
+        <li class="nav-item">
+            <a class="nav-link fs-7"
+                href="{{ route('productos') }}"><strong>Productos</strong></a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link fs-7"
+                href="{{ route('datos_producto') }}"><strong>Datos Adicionales</strong></a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link active  fs-7" style="color:#080707;"
+                href="{{ route('precio.catalogo') }}"><strong>Catalogo de Precios</strong></a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link fs-7"
+                href="{{ route('productos.catalogo') }}"><strong>Catalogo de Productos</strong></a>
+        </li>
+    </ul>
 
     <div class="container" style="max-width:100%;">
         <div class="card" style="padding:0px;">

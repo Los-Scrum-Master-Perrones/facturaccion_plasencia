@@ -15,7 +15,7 @@
 
     <ul class="nav nav-tabs justify-content-center">
         <li class="nav-item">
-            <a class="nav-link active fs-7" style="color:#080707;"
+            <a class="nav-link fs-7"
                 href="{{ route('productos') }}"><strong>Productos</strong></a>
         </li>
         <li class="nav-item">
@@ -27,7 +27,7 @@
                 href="{{ route('precio.catalogo') }}"><strong>Catalogo de Precios</strong></a>
         </li>
         <li class="nav-item">
-            <a class="nav-link fs-7"
+            <a class="nav-link active fs-7" style="color:#080707;"
                 href="{{ route('productos.catalogo') }}"><strong>Catalogo de Productos</strong></a>
         </li>
     </ul>
@@ -36,7 +36,7 @@
             <div class="card-header">
                 <div class="btn-toolbar justify-content-between" role="toolbar" aria-label="Toolbar with button groups">
                     <div class="btn-group btn-group-sm" role="group" aria-label="First group">
-                        <button class="btn btn-outline-purpura" data-bs-toggle="modal" data-bs-target="#productos_crear"
+                        {{-- <button class="btn btn-outline-purpura" data-bs-toggle="modal" data-bs-target="#productos_crear"
                             style="height:35px;">Nuevo
                             producto
                         </button>
@@ -45,16 +45,15 @@
                             <button class="btn btn-outline-purpura" style="height:35px;">Editar
                                 detalles
                                 producto</button>
-                        </form>
+                        </form> --}}
                     </div>
                     <div class="btn-group btn-group-sm" role="group" aria-label="First group">
                         <span class="input-group-text" id="basic-addon1" style="height:35px;">Por Pagina</span>
                         <select name="" id="" class="form-control" wire:model='por_pagina'
                             style="height:35px;">
+                            <option value="25">25</option>
                             <option value="50">50</option>
                             <option value="200">200</option>
-                            <option value="500">500</option>
-                            <option value="1000">1000</option>
                             <option value="{{ $total }}">Todos</option>
                         </select>
                         <button class="btn btn-success" wire:click='imprimir_reporte' style="height:35px;">
@@ -77,7 +76,7 @@
                             <tr style="font-size:16px; text-align:center;">
                                 <th style=" text-align:center;">#</th>
                                 <th style=" text-align:center;" wire:ignore>
-                                    <select style="width: 150px;height:35px;" onchange="buscar_io()" name="b_items"
+                                    <select style="height:35px;" onchange="buscar_io()" name="b_items"
                                         id="b_items">
                                         <option value="">Item</option>
                                         @foreach ($items as $pr)
@@ -85,90 +84,28 @@
                                         @endforeach
                                     </select>
                                 </th>
-                                @if ($ocultos)
-                                    <th style=" text-align:center;">Cod. Producto</th>
-                                    <th style=" text-align:center;">Cod. Caja</th>
-                                @endif
                                 <th style=" text-align:center;" wire:ignore>
-                                    <select style="width: 150px;height:35px;" onchange="buscar_io()" name="b_marcas"
-                                        id="b_marcas">
-                                        <option value="">Marcas</option>
-                                        @foreach ($marcas as $pr)
+                                    <select style="height:35px;" onchange="buscar_io()" name="b_descripcion"
+                                        id="b_descripcion">
+                                        <option value="">Descripcion</option>
+                                        @foreach ($descripciones as $pr)
                                             <option value="{{ $pr }}">{{ $pr }}</option>
                                         @endforeach
                                     </select>
                                 </th>
-                                <th style=" text-align:center;" wire:ignore>
-                                    <select style="width: 150px;height:35px;" onchange="buscar_io()" name="b_nombre"
-                                        id="b_nombre">
-                                        <option value="">Nombre</option>
-                                        @foreach ($nombres as $pr)
-                                            <option value="{{ $pr }}">{{ $pr }}</option>
-                                        @endforeach
-                                    </select>
-                                </th>
-                                <th style=" text-align:center;" wire:ignore>
-                                    <select style="width: 150px;height:35px;" onchange="buscar_io()" name="b_vitolas"
-                                        id="b_vitolas">
-                                        <option value="">Vitolas</option>
-                                        @foreach ($vitolas as $pr)
-                                            <option value="{{ $pr }}">{{ $pr }}</option>
-                                        @endforeach
-                                    </select>
-                                </th>
-                                <th style=" text-align:center;" wire:ignore>
-                                    <select style="width: 150px;height:35px;" onchange="buscar_io()" name="b_capas"
-                                        id="b_capas">
-                                        <option value="">Capas</option>
-                                        @foreach ($capas as $pr)
-                                            <option value="{{ $pr }}">{{ $pr }}</option>
-                                        @endforeach
-                                    </select>
-                                </th>
-                                <th style=" text-align:center;" wire:ignore>
-                                    <select style="width: 150px;height:35px;" onchange="buscar_io()"
-                                        name="b_empaques" id="b_empaques">
-                                        <option value="">Tipo de Empaque</option>
-                                        @foreach ($tipo_empaques as $pr)
-                                            <option value="{{ $pr }}">{{ $pr }}</option>
-                                        @endforeach
-                                    </select>
-                                </th>
-                                @if ($ocultos)
-                                    <th style=" text-align:center;">Cod. Precio</th>
-                                @endif
-
-                                <th style=" text-align:center;">Precio</th>
-                                <th style=" text-align:center;">Detalles</th>
+                                <th style=" text-align:center;">Unidades</th>
+                                {{-- <th style=" text-align:center;">Detalles</th> --}}
                             </tr>
                         </thead>
 
                         <tbody>
                             @foreach ($productos as $producto)
                                 <tr>
-                                    <td>{{ $producto->id_producto }}</td>
+                                    <td>{{ $producto->id }}</td>
                                     <td>{{ $producto->item }}</td>
-                                    @if ($ocultos)
-                                        <td>{{ $producto->codigo_producto }}</td>
-                                        <td>{{ $producto->codigo_caja }}</td>
-                                    @endif
-                                    @if ($producto->sampler == 'no' || is_null($producto->sampler))
-                                        <td>{{ $producto->marca }}</td>
-                                        <td>{{ $producto->nombre }}</td>
-                                        <td>{{ $producto->vitola }}</td>
-                                        <td>{{ $producto->capa }}</td>
-                                    @else
-                                        <td colspan="4">{{ $producto->des }}</td>
-                                    @endif
-                                    <td>{{ $producto->tipo_empaque }}</td>
-
-                                    @if ($ocultos)
-                                        <td>{{ $producto->codigo_precio }}</td>
-                                    @endif
-
-                                    <td>{{ $producto->precio }}</td>
-
-                                    <td style=" text-align:center;">
+                                    <td>{{ $producto->descripcion }}</td>
+                                    <td>{{ $producto->unidades }}</td>
+                                    {{-- <td style=" text-align:center;">
 
                                         @if ($producto->sampler === 'si')
                                             <a style=" width:30px; height:30px;" data-bs-toggle="modal"
@@ -220,7 +157,7 @@
                                             </a>
                                         @endif
 
-                                    </td>
+                                    </td> --}}
                                 </tr>
                             @endforeach
                         </tbody>
@@ -234,7 +171,7 @@
 
 
 
-
+{{--
     <!-- INICIO DEL MODAL VER DETALLE PRODUCTO -->
     <div class="modal fade" id="modal_ver_detalle_producto" data-backdrop="static" data-keyboard="false"
         tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true"
@@ -779,12 +716,12 @@
             </div>
         </form>
         <!-- FIN DEL MODAL NUEVO PRODUCTO -->
-    </div>
+    </div> --}}
 
 
     <!-- SCRIPT MODAL EDITAR MOLDE -->
 
-    <script type="text/javascript">
+    {{-- <script type="text/javascript">
         function cargar_datos_editar(id) {
 
             var producto = JSON.parse(id);
@@ -948,7 +885,9 @@
         }
     </script>
 
-    @push('scripts')
+     --}}
+
+     @push('scripts')
         <script>
             const Toast = Swal.mixin({
                 toast: true,
@@ -962,7 +901,7 @@
                 }
             });
 
-            var seletscc = ["#b_items", "#b_marcas", "#b_nombre", "#b_vitolas", "#b_capas", "#b_empaques"];
+            var seletscc = ["#b_items", "#b_descripcion"];
 
             $(document).ready(function() {
                 seletscc.forEach(element => {
@@ -982,38 +921,8 @@
 
             function buscar_io() {
                 @this.item = $(seletscc[0]).val();
-                @this.marca = $(seletscc[1]).val();
-                @this.nombre = $(seletscc[2]).val();
-                @this.vitola = $(seletscc[3]).val();
-                @this.capa = $(seletscc[4]).val();
-                @this.tipo_empaque = $(seletscc[5]).val();
-                //@this.page = 1;
-            }
-
-            $(document).ready(function() {
-                $('.mi-selector').select2({
-                    dropdownParent: $('#productos_crear')
-                });
-            });
-
-            $(document).ready(function() {
-                $('.mi-selector2').select2({
-                    dropdownParent: $('#productos_actualizar')
-                });
-            });
-
-            $(document).ready(function() {
-                $('.mi-selector4').select2({
-                    dropdownParent: $('#productos_agregar_detalles')
-                });
-            });
-
-            function ocultar() {
-                if (document.formulario_actualizar.sampler.checked) {
-                    document.getElementById('des').style.display = "block";
-                } else {
-                    document.getElementById('des').style.display = "none";
-                }
+                @this.descripcione = $(seletscc[1]).val();
+                @this.page = 1;
             }
 
             function agregar_item(id) {

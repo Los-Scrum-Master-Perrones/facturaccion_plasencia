@@ -39,6 +39,7 @@ use App\Http\Livewire\Produccion\ProduccionMaterialesCatalogo;
 use App\Http\Livewire\Produccion\ProduccionPendiente;
 use App\Http\Livewire\Produccion\ProduccionPendienteSalida;
 use App\Http\Livewire\ProductoPrecio;
+use App\Http\Livewire\ProductosCatalogo;
 use App\Http\Livewire\Terminado;
 use App\Models\EntradasSalida;
 use App\Models\MaterialesCatalogo;
@@ -81,7 +82,7 @@ Route::post('/importar_pendiente_empaque', [importar_pendiente_empaque::class, '
 
 
 Route::post('/importar_pedido', [PedidoController::class, 'import']);
-Route::get('/importar_pedido', [PedidoController::class, 'import']);
+Route::post('/importar_catalogo_product', [PedidoController::class, 'importCatlogoCompleto']);
 
 Route::get('/importar_ficha', [MaterialesProductos::class, 'import']);
 
@@ -90,7 +91,7 @@ Route::get('/nuevo_pedido', [PedidoController::class, 'nuevo_pedido'])->name('nu
 
 
 Route::get('/productos', Productos::class)->name('productos');
-Route::post('/productos', Productos::class)->name('productos');
+Route::get('/catalogo_productos', ProductosCatalogo::class)->name('productos.catalogo');
 
 Route::post('/editarDetalles', EditarDetalles::class)->name('editarDetalles');
 Route::get('/editarDetalles', EditarDetalles::class)->name('editarDetalles');

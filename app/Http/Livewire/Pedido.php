@@ -62,7 +62,6 @@ class Pedido extends Component
                 }
 
                 $val = $valores[$this->pedido_completo[$i]->item];
-
                 $this->pedido_completo[$i]->descripcion = $this->pedido_completo[$i]->descripcion_sampler . " " . $val[$detalles]->marca . " " . $val[$detalles]->nombre . " " . $val[$detalles]->capa . " " . $val[$detalles]->vitola;
                 $this->pedido_completo[$i]->codigo_p = $val[$detalles]->codigo_producto;
                 $detalles++;
@@ -74,7 +73,7 @@ class Pedido extends Component
             }
         }
 
-        return view('livewire.pedido')->extends('principal')->section('content');
+        return view('livewire.pedido')->extends('layouts.Main')->section('content');
     }
 
     public function modal_productos_nuevos()
