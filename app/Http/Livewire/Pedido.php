@@ -3,6 +3,8 @@
 namespace App\Http\Livewire;
 
 use App\Exports\SamplerFaltantes;
+use App\Models\clase_producto;
+use App\Models\pedido as ModelsPedido;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\DB;
 use Livewire\Component;
@@ -19,6 +21,7 @@ class Pedido extends Component
     public $b_categoria;
     public $b_item;
     public $b_orden;
+    public $b_sampler;
     public $comparativos = [];
     public $nuevos;
 
@@ -30,10 +33,11 @@ class Pedido extends Component
         $this->total_puros = 0;
         $this->verificar = DB::select('call verificar_item_clase');
 
-        $this->pedido_completo = DB::select('call buscar_pedidos(:item,:categoria,:orden)', [
+        $this->pedido_completo = DB::select('call buscar_pedidos(:item,:categoria,:orden,:sampler)', [
             "item" => $this->b_item,
             "categoria" => $this->b_categoria,
-            "orden" => $this->b_orden
+            "orden" => $this->b_orden,
+            "sampler" => $this->b_sampler
         ]);
 
 
@@ -73,7 +77,18 @@ class Pedido extends Component
             }
         }
 
-        return view('livewire.pedido')->extends('layouts.Main')->section('content');
+
+        $itemsCatalogo = DB::select('call buscar_catalogo_productos_comprabacion');
+
+        $usosArray = [];
+        foreach ($itemsCatalogo as $uso) {
+            $usosArray[$uso->item] = $uso;
+        }
+
+
+        return view('livewire.pedido',[
+            'catalogo' => $usosArray
+        ])->extends('layouts.Main')->section('content');
     }
 
     public function modal_productos_nuevos()
@@ -97,6 +112,7 @@ class Pedido extends Component
         $this->b_categoria = "";
         $this->b_item = "";
         $this->b_orden = "";
+        $this->b_sampler = "";
         $this->total_puros = 0;
         $this->verificar = [];
         $this->pedido_completo = [];
@@ -164,4 +180,40 @@ class Pedido extends Component
         }
         $this->comparativos = collect($existencia);
     }
+
+
+    public function preparar() {
+
+    }
+
+
+    public function nueva_tareas(ModelsPedido $mod, $id)
+    {
+        if ($id > 0) {
+            $mod->unidades = $id;
+        } else {
+            $mod->unidades = 0;
+        }
+        $mod->save();
+    }
+    public function nueva_codigo($item, $id)
+    {
+        $mod = clase_producto::where('item','=',$item)->first();
+        if ($id > 0) {
+            $mod->codigo_producto = $id;
+        } else {
+            $mod->codigo_producto = "";
+        }
+        $mod->save();
+    }
+    public function nueva_paquetes(ModelsPedido $mod, $id)
+    {
+        if ($id > 0) {
+            $mod->cant_paquetes = $id;
+        } else {
+            $mod->cant_paquetes = 0;
+        }
+        $mod->save();
+    }
+
 }

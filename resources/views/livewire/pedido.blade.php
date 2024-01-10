@@ -208,16 +208,40 @@
                             <tr>
                                 <td>{{ ++$key }}</td>
                                 <td>{{ $pedido->categorias }}</td>
-                                <td>{{ $pedido->item }}</td>
-                                <td>{{ $pedido->cant_paquetes }}</td>
-                                <td>{{ $pedido->codigo_p }}</td>
+                                <td>{{ $pedido->item }}
+                                    @if (isset($catalogo[$pedido->item]->unidades))
+                                        <img width="12" height="12" src="https://img.icons8.com/emoji/48/check-mark-emoji.png" alt="check-mark-emoji"/>
+                                    @else
+                                        <img width="12" height="12" src="https://img.icons8.com/fluency/48/delete-sign.png" alt="delete-sign"/>
+                                    @endif
+                                </td>
+                                <td>
+                                    <input value="{{ $pedido->cant_paquetes }}" type="number"
+                                    id="paquetes{{ $pedido->id }}"
+                                    onchange="agregar_nueva_paquetes({{ $pedido->id }},'#paquetes{{ $pedido->id }}')"
+                                    class="form-control form-control-sm"
+                                    style="width: 4rem;">
+                                </td>
+                                <td>
+                                    <input value="{{ $pedido->codigo_p }}" type="text"
+                                    id="codigo{{ $pedido->codigo_p }}"
+                                    onchange="agregar_nueva_codigo('{{ $pedido->item }}','#codigo{{ $pedido->codigo_p }}')"
+                                    class="form-control form-control-sm"
+                                    style="width: 5rem;">
+                                </td>
                                 <td>{{ $pedido->descripcion }}</td>
                                 @if (is_numeric($pedido->unidades) && is_numeric($pedido->cant_paquetes))
                                     <td>{{ $pedido->unidades * $pedido->cant_paquetes }}</td>
                                 @else
                                     <td>{{ 0 }}</td>
                                 @endif
-                                <td>{{ $pedido->unidades }}</td>
+                                <td>
+                                    <input value="{{ $pedido->unidades }}" type="number"
+                                    id="unidad{{ $pedido->id }}"
+                                    onchange="agregar_nueva_tarea({{ $pedido->id }},'#unidad{{ $pedido->id }}')"
+                                    class="form-control form-control-sm"
+                                    style="width: 4rem;">
+                                </td>
                                 <td>{{ $pedido->numero_orden }}</td>
                             </tr>
                         @endforeach
@@ -393,6 +417,16 @@
             });
 
         });
+
+        function agregar_nueva_tarea(id, num) {
+                @this.nueva_tareas(id, $(num).val());
+        }
+        function agregar_nueva_codigo(id, num) {
+                @this.nueva_codigo(id, $(num).val());
+        }
+        function agregar_nueva_paquetes(id, num) {
+                @this.nueva_paquetes(id, $(num).val());
+        }
     </script>
 
 
