@@ -181,11 +181,9 @@ class Pedido extends Component
         $this->comparativos = collect($existencia);
     }
 
-
     public function preparar() {
 
     }
-
 
     public function nueva_tareas(ModelsPedido $mod, $id)
     {
