@@ -44,6 +44,12 @@ class ProductoPrecio extends Component
     public $empaque = '';
     public $datos = [];
 
+
+    public $chechDerivados = '';
+    public $porcentajes_actual = '';
+    public $marca_actual = '';
+    public $presentacion_actual = 'no fuma';
+
     public CatalogoItemsPrecio $new_precio;
 
     public $rules = [
@@ -280,4 +286,54 @@ class ProductoPrecio extends Component
             DB::rollBack();
         }
     }
+    //public $chechDerivados = '';
+    //public $presentacion_actual = '';
+    public function agregarPrecioNuevoAnio(){
+        try {
+            DB::beginTransaction();
+            $precios_anteriores = DB::select('call traer_catalogo_precios_anio_anterioir()');
+            $precios = [];
+            $items = [];
+            foreach ($precios_anteriores as $key => $value) {
+                $precios[$value->id][] = $value;
+            }
+
+            if($this->marca_actual == "todos"){
+                $items = CatalogoItemsPrecio::all();
+            }else{
+                $items = DB::select('call traer_catalogo_precios_filtro_marca(:pa_marca,:pa_desicion,:pa_presentacion)',[
+                    'pa_marca' => $this->marca_actual,
+                    'pa_desicion' => $this->chechDerivados=="todos"? 1:0,
+                    'pa_presentacion' => $this->presentacion_actual=="fuma"? 1:0,
+                ]);
+            }
+
+
+            foreach ($items as $key => $value) {
+                $datos2[] = [
+                    "id_catalogo_items_precio" => $value->id,
+                    "precio" => doubleval($precios[$value->id][0]->precio)*(1.00+(doubleval($this->porcentajes_actual)/100)),
+                    "porcentaje_incremento" => (doubleval($this->porcentajes_actual)/100),
+                    "anio" => Carbon::now()->format('Y'),
+                ];
+            }
+
+            CatalogoHistorialPrecio::upsert(
+                $datos2,
+                ['id_catalogo_items_precio','anio'],
+                ['precio', 'porcentaje_incremento']
+            );
+
+            $this->dispatchBrowserEvent('error_general', ['errorr' => 'Actualizado con exito', 'icon' => 'info']);
+            DB::commit();
+
+
+        } catch (\Exception $th) {
+            $this->dispatchBrowserEvent('error_general', ['errorr' => $th->getMessage(), 'icon' => 'error']);
+            DB::rollBack();
+        }
+    }
+
+
+
 }

@@ -220,12 +220,12 @@
                                     id="paquetes{{ $pedido->id }}"
                                     onchange="agregar_nueva_paquetes({{ $pedido->id }},'#paquetes{{ $pedido->id }}')"
                                     class="form-control form-control-sm"
-                                    style="width: 4rem;">
+                                    style="width: 5rem;">
                                 </td>
                                 <td>
                                     <input value="{{ $pedido->codigo_p }}" type="text"
-                                    id="codigo{{ $pedido->codigo_p }}"
-                                    onchange="agregar_nueva_codigo('{{ $pedido->item }}','#codigo{{ $pedido->codigo_p }}')"
+                                    id="codigo{{ $pedido->item }}"
+                                    onchange="agregar_nueva_codigo('{{ $pedido->item }}','#codigo{{ $pedido->item }}')"
                                     class="form-control form-control-sm"
                                     style="width: 5rem;">
                                 </td>

@@ -89,20 +89,17 @@
 
     <ul class="nav nav-tabs justify-content-center">
         <li class="nav-item">
-            <a class="nav-link fs-7"
-                href="{{ route('productos') }}"><strong>Productos</strong></a>
+            <a class="nav-link fs-7" href="{{ route('productos') }}"><strong>Productos</strong></a>
         </li>
         <li class="nav-item">
-            <a class="nav-link fs-7"
-                href="{{ route('datos_producto') }}"><strong>Datos Adicionales</strong></a>
+            <a class="nav-link fs-7" href="{{ route('datos_producto') }}"><strong>Datos Adicionales</strong></a>
         </li>
         <li class="nav-item">
             <a class="nav-link active  fs-7" style="color:#080707;"
                 href="{{ route('precio.catalogo') }}"><strong>Catalogo de Precios</strong></a>
         </li>
         <li class="nav-item">
-            <a class="nav-link fs-7"
-                href="{{ route('productos.catalogo') }}"><strong>Catalogo de Productos</strong></a>
+            <a class="nav-link fs-7" href="{{ route('productos.catalogo') }}"><strong>Catalogo de Productos</strong></a>
         </li>
     </ul>
 
@@ -116,6 +113,9 @@
                             aria-controls="productos_agregar_detalles">Crear Precio</button>
                         <button class="btn btn-primary" type="button" data-bs-toggle="offcanvas"
                             data-bs-target="#offcanvasBottom" aria-controls="offcanvasBottom">Nuevo Precio</button>
+                        <button class="btn btn-primary" type="button" data-bs-toggle="offcanvas"
+                            data-bs-target="#offcanvasActualizarPrecios"
+                            aria-controls="offcanvasActualizarPrecios">Actualizar Precio</button>
                     </div>
                     <div class="col-3"></div>
                     <div class="col-3">
@@ -202,8 +202,8 @@
                                     </select>
                                 </th>
                                 <th style=" text-align:center;" wire:ignore>
-                                    <select style="width: 150px;height:35px;" onchange="buscar_io()" name="b_empaques"
-                                        id="b_empaques">
+                                    <select style="width: 150px;height:35px;" onchange="buscar_io()"
+                                        name="b_empaques" id="b_empaques">
                                         <option value="">Tipo de Empaque</option>
                                         @foreach ($empaques_p as $pr)
                                             <option value="{{ $pr }}">{{ $pr }}</option>
@@ -236,7 +236,10 @@
                                                     alt="time-machine--v1" />
                                             </abbr>
                                         </a>
-                                        <a wire:click="editarPrecio({{ $prodPrecio->id }})" onclick='cargar_modal("{{ $prodPrecio->marca }}","{{ $prodPrecio->nombre }}","{{ $prodPrecio->vitola }}","{{ $prodPrecio->capa }}","{{ $prodPrecio->tipo_empaque }}",{{ $prodPrecio->precio_actual->precio }})' style=" width:10px; height:10px; text-decoration: none" data-bs-toggle="modal" href="#"
+                                        <a wire:click="editarPrecio({{ $prodPrecio->id }})"
+                                            onclick='cargar_modal("{{ $prodPrecio->marca }}","{{ $prodPrecio->nombre }}","{{ $prodPrecio->vitola }}","{{ $prodPrecio->capa }}","{{ $prodPrecio->tipo_empaque }}",{{ $prodPrecio->precio_actual->precio }})'
+                                            style=" width:10px; height:10px; text-decoration: none"
+                                            data-bs-toggle="modal" href="#"
                                             data-bs-target="#productos_editar_detalles" type="submit">
                                             <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15"
                                                 fill="currentColor" class="bi bi-pencil-square" viewBox="0 0 16 16">
@@ -246,8 +249,8 @@
                                                     d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z" />
                                             </svg>
                                         </a>
-                                        <a style="text-decoration: none" onclick="eliminar_item({{ $prodPrecio->id }})"
-                                            href="#">
+                                        <a style="text-decoration: none"
+                                            onclick="eliminar_item({{ $prodPrecio->id }})" href="#">
                                             <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15"
                                                 fill="currentColor" class="bi bi-trash-fill" viewBox="0 0 16 16">
                                                 <path
@@ -275,6 +278,86 @@
             @livewire('productos.calculo-precio')
         </div>
     </div>
+
+    <form  wire:submit.prevent="agregarPrecioNuevoAnio">
+        <div wire:ignore class="offcanvas offcanvas-bottom" style="height: 60vh;" tabindex="-1"
+            id="offcanvasActualizarPrecios" aria-labelledby="offcanvasActualizarPreciosLabel">
+            <div class="offcanvas-header top-right">
+                <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+            </div>
+            <div class="offcanvas-body">
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-sm-4">
+
+                        </div>
+                        <div class="col-sm-4 text-center">
+                            <h4>Actualizar Precio - {{ Carbon\Carbon::now()->format('Y') }}</h4>
+                        </div>
+                        <div class="col-sm-4">
+
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-3">
+                            <label class="form-label" style="width:100%;">Marca</label>
+                            <select name="marca_actualizar_de" id="marca_actualizar_de"  wire:model.defer="marca_actual"
+                                style="width:100%;" required>
+                                <option value="NINGUNA" style="overflow-y: scroll;">Ninguna</option>
+                                <option value="todos" style="overflow-y: scroll;">Actualizar Todo</option>
+                                <option value="resto" style="overflow-y: scroll;">Sin Actualizar</option>
+                                @foreach ($marcas_p2 as $pr)
+                                    <option value="{{ $pr->marca }}">{{ $pr->marca }}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                        <div class="col-sm-3">
+                            <label class="form-label" style="width:100%;">Presentacion</label>
+                            <select name="presentacion_de" id="presentacion_de" wire:model.defer="presentacion_actual"
+                                style="width:100%;" required>
+                                <option value="no fuma" style="overflow-y: scroll;">Tripa Larga</option>
+                                <option value="fuma" style="overflow-y: scroll;">Tripa Corta</option>
+                            </select>
+                        </div>
+                        <div class="col-sm-1">
+                            <label for="txt_buenos">Porcentaje (%)</label>
+                            <input name="porcentaje_de" id="porcentaje_de" wire:model.defer="porcentajes_actual" class="form-control"  style="margin-top: 6px" required type="text" autocomplete="off">
+                        </div>
+                        <div class="col-sm-5">
+
+                        </div>
+                    </div>
+                    <br><br>
+                    <div class="row">
+                        <div class="col-sm-3">
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="flexRadioDefault" wire:model="chechDerivados"
+                                    id="flexRadioDefault2" value="todos">
+                                <label class="form-check-label" for="flexRadioDefault2">
+                                    Actualizacion Especifica
+                                </label>
+                            </div>
+                        </div>
+                        <div class="col-sm-3">
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="flexRadioDefault" wire:model="chechDerivados"
+                                    id="flexRadioDefault3" value="derivados" checked>
+                                <label class="form-check-label" for="flexRadioDefault3">
+                                    Actualizacion Derivados
+                                </label>
+                            </div>
+                        </div>
+                        <div class="col-sm-5">
+
+                        </div>
+                        <div class="col-sm-1">
+                            <button class="btn btn-primary" type="submit">Actualizar</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
 
     <div wire:ignore class="modal fade" id="productos_agregar_detalles" tabindex="-1"
         aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -305,12 +388,12 @@
                                 </select>
                             </div>
                             <div class="mb-3 col">
-                                <label  class="form-label" style="width:100%;">Marca</label>
+                                <label class="form-label" style="width:100%;">Marca</label>
                                 <select name="marca_de" id="marca_de" onchange="buscar_agregar()"
                                     style="width:100%;" required>
                                     <option value="NINGUNA" style="overflow-y: scroll;">Ninguna</option>
                                     @foreach ($marcas_p2 as $pr)
-                                        <option value="{{ $pr->marca }}">{{ $pr->codigo."-".$pr->marca }}</option>
+                                        <option value="{{ $pr->marca }}">{{ $pr->codigo . '-' . $pr->marca }}</option>
                                     @endforeach
                                 </select>
                             </div>
@@ -327,7 +410,7 @@
                                 </select>
                             </div>
                             <div class="mb-3 col">
-                                <label  class="form-label" style="width:100%;">Vitola</label>
+                                <label class="form-label" style="width:100%;">Vitola</label>
                                 <select name="vitola_de" id="vitola_de" onchange="buscar_agregar()"
                                     style="width:100%;" required>
                                     <option value="NINGUNA" style="overflow-y: scroll;">Ninguna</option>
@@ -337,7 +420,7 @@
                                 </select>
                             </div>
                             <div class="mb-3 col">
-                                <label  class="form-label" style="width:100%;">Tipo de
+                                <label class="form-label" style="width:100%;">Tipo de
                                     empaque</label>
                                 <select name="tipo_de" id="tipo_de" onchange="buscar_agregar()"
                                     style="width:100%;" required>
@@ -381,7 +464,8 @@
         aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-lg ">
             <div class="modal-content">
-                <form wire:submit.prevent="actualizarPrecio()" id="form_detalle" name="form_detalle" style="width:100%;">
+                <form wire:submit.prevent="actualizarPrecio()" id="form_detalle" name="form_detalle"
+                    style="width:100%;">
                     <div class="modal-header">
                         <h5 class="modal-title" id="staticBackdropLabel"><strong>Editar Precio Nuevo</strong>
                         </h5>
@@ -392,12 +476,12 @@
                         <div class="row">
                             <div class="mb-3 col">
                                 <label for="codigo_edi" class="form-label" style="width:100%;">Codigo</label>
-                                <input name="codigo_edi" id="codigo_edi" class="form-control" wire:model='new_precio.codigo'
-                                    required type="text" autocomplete="off">
+                                <input name="codigo_edi" id="codigo_edi" class="form-control"
+                                    wire:model='new_precio.codigo' required type="text" autocomplete="off">
                             </div>
                             <div class="mb-3 col">
                                 <label class="form-label" style="width:100%;">Capa</label>
-                                <select name="capa_edi" id="capa_edi"  wire:model='new_precio.capa'
+                                <select name="capa_edi" id="capa_edi" wire:model='new_precio.capa'
                                     style="width:100%;" required>
                                     <option value="NINGUNA" style="overflow-y: scroll;">Ninguna</option>
                                     @foreach ($capas_p as $capa)
@@ -407,8 +491,7 @@
                             </div>
                             <div class="mb-3 col">
                                 <label for="marca_edi" class="form-label" style="width:100%;">Marca</label>
-                                <select name="marca_edi" id="marca_edi"
-                                    style="width:100%;" required>
+                                <select name="marca_edi" id="marca_edi" style="width:100%;" required>
                                     <option value="NINGUNA" style="overflow-y: scroll;">Ninguna</option>
                                     @foreach ($marcas_p as $marca)
                                         <option style="overflow-y: scroll;"> {{ $marca }}</option>
@@ -453,8 +536,8 @@
                         <div class="row">
                             <div class="mb-3 col">
                                 <label for="txt_buenos">Precio</label>
-                                <input name="precio_edi" id="precio_edi" class="form-control" wire:model='edi_precio'
-                                    required type="text"  autocomplete="off">
+                                <input name="precio_edi" id="precio_edi" class="form-control"
+                                    wire:model='edi_precio' required type="text" autocomplete="off">
                             </div>
                             <div class="mb-3 col">
                             </div>
@@ -503,6 +586,8 @@
                 "#vitola_de",
                 "#tipo_de",
                 "#floatingSelect223",
+                "#presentacion_de",
+                "#marca_actualizar_de",
             ];
 
             $(document).ready(function() {
@@ -544,7 +629,7 @@
 
             function selects(nombre) {
                 new TomSelect(nombre, {
-                    create: nombre === "#marca_de" ? true : false,
+                    create:  true ,
                     sortField: {
                         field: "text",
                         direction: "asc"
@@ -552,13 +637,13 @@
                 });
             }
 
-            function cargar_modal(marca,nombre,vitola,capa,empaque,precio){
+            function cargar_modal(marca, nombre, vitola, capa, empaque, precio) {
                 control_marca.setValue(marca);
                 control_nombre.setValue(nombre);
                 control_vitola.setValue(vitola);
                 control_capa.setValue(capa);
                 control_tipo.setValue(empaque);
-                @this.edi_precio =precio;
+                @this.edi_precio = precio;
             }
 
             function buscar_io() {

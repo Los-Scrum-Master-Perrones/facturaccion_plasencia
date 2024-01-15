@@ -370,8 +370,21 @@ class Pendiente extends Component
                     "procesado" => $value->procesado,
                     "codigo_productos" => $value->codigo_productos
                 ];
+                if($value->codigo_productos == '' ){
+                    continue;
+                }
+                Produccion::firstOrCreate(
+                    ['codigo' => $value->codigo_productos],
+                    [
+                        'presentacion' => $value->presentacion,
+                        'id_marca' => $value->marca,
+                        'id_nombre' => $value->nombre,
+                        'id_vitola' => $value->vitola,
+                        'id_capa' => $value->capa,
+                        'existencia' => 0,
+                    ]
+                );
             }
-
 
             ModelsPendiente::upsert(
                 $datos,
@@ -430,24 +443,12 @@ class Pendiente extends Component
                 if($value->codigo_productos == '' ){
                     continue;
                 }
-                $producto = Produccion::firstOrCreate(
-                    ['codigo' => $value->codigo_productos],
-                    [
-                        'presentacion' => $value->presentacion,
-                        'id_marca' => $value->marca,
-                        'id_nombre' => $value->nombre,
-                        'id_vitola' => $value->vitola,
-                        'id_capa' => $value->capa,
-                        'existencia' => 0,
-                    ]
-                );
-
 
                 $datos3[] = [
                     'fecha_recibido' => (string)$request->fecha,
                     'cantidad' => $value->total,
                     'orden_sistema' => $request->sistema,
-                    'id_producto' =>  $producto->id
+                    'id_producto' =>  $value->id
                 ];
             }
 
@@ -465,7 +466,7 @@ class Pendiente extends Component
         } catch (\Exception $e) {
             DB::rollback();
             $this->dispatchBrowserEvent('error_general',['errorr' => $e.' Falta codido de producto','icon' => 'error']);
-            echo json_encode($e);
+            echo json_encode($e->getMessage());
         }
     }
 
