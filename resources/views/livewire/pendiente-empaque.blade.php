@@ -35,17 +35,17 @@
         <div class="row" style="text-align:center;">
 
             <div class="col">
-                <div class="input-group mb-3">
+                <div class="btn-group" role="group" aria-label="Basic example">
                     <div wire:loading>
-                        <button id="btn_guardar" class="mr-sm-2 botonprincipal" disabled>
+                        <button id="btn_guardar" class="btn btn-info fs-7"  disabled>
                             <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
                             Loading...
                         </button>
                     </div>
                     <div wire:loading.attr="hidden">
                         <a type="button" name="crear_programacion" id="crear_programacion"
-                            wire:click.prevent="cambio(1)" class=" botonprincipal   mr-sm-2" value=""
-                            style="width:70px; " href="">
+                            wire:click.prevent="cambio(1)" class="btn btn-info fs-7" value=""
+                            style="width:100px; " href="">
                             <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor"
                                 class="bi bi-reply-all-fill" viewBox="0 0 16 16">
                                 <path
@@ -57,33 +57,28 @@
                     </div>
 
 
-                    <input name="buscar" id="buscar" class="  form-control  mr-sm-2" wire:model="busqueda"
-                        placeholder="Búsqueda por Marca, Nombre y Vitola" style="width:350px;">
-
+                    <input name="buscar" id="buscar" class="form-control fs-7" wire:model="busqueda"
+                        placeholder="Búsqueda por Marca, Nombre y Vitola" style="width:500px; height: 35px;">
+                        <select class="form-select" id="floatingSelect" aria-label="Floating label select example" wire:model='programacion_actual' style="width:200px; height: 35px;">
+                            <option value="1">Contenedor 1</option>
+                            <option value="2">Contenedor 2</option>
+                            <option value="3">Contenedor 3</option>
+                            <option value="4">Contenedor 4</option>
+                            <option value="5">Contenedor 5</option>
+                        </select>
                     <button onclick="mostrarMaterial(true)" type="button"
-                        class="botonprincipal @if ($materiales) btn-success
-                    @else @endif"
-                        style="width:100px;height: 35;border-radius: 20%">Progra. con <br>Materiales</button>
+                        class="btn btn-primary fs-7 @if ($materiales) btn-success
+                    @else @endif" style="width:100px;">Con Materiales</button>
+
                     <button onclick="mostrarMaterial(false)" type="button"
-                        class="botonprincipal @if ($materiales) @else
-                        btn-success @endif"
-                        style="width:100px;height: 35;border-radius: 20%">Progra. sin <br>Materiales</button>
+                        class="btn btn-primary fs-7 @if ($materiales) @else
+                        btn-success @endif" style="width:100px;">Sin Materiales</button>
 
-                    <button class="botonprincipal" onclick="exportarMaterial()" type="button"
-                        style="width:100px;height: 35;border-radius: 20%">Materiales <br> Exportar </button>
-
-                    <form wire:submit.prevent="exportProgramacion()">
-                        <button class="botonprincipal" type="submit" style="width:100px;">Exportar</button>
-                    </form>
-                    <form method="GET" action="{{ route('exportar_materia') }}">
-                        <button class="botonprincipal" type="submit" style="width:120px;">Actualizar(Mat.)</button>
-                    </form>
+                    <button type="button" class="btn btn-primary fs-7" style="width:100px;" data-bs-toggle="modal" data-bs-target="#exampleModal">Opciones</button>
                     @if (auth()->user()->rol == 0 || auth()->user()->rol == 1)
-                        <button type=" button" onclick="guardar_programacion()" class=" botonprincipal "
-                            style="width:auto;"> Crear programación
+                        <button type=" button" onclick="guardar_programacion()" class="btn btn-secondary fs-7"> Crear programación
                         </button>
                     @endif
-
                 </div>
             </div>
         </div>
@@ -516,6 +511,15 @@
                     </div>
                 </div>
                 <div class="col" wire:ignore>
+                        <select class="form-select" id="floatingSelect" aria-label="Floating label select example" wire:model='programacion_actual'>
+                            <option value="1">Contenedor 1</option>
+                            <option value="2">Contenedor 2</option>
+                            <option value="3">Contenedor 3</option>
+                            <option value="4">Contenedor 4</option>
+                            <option value="5">Contenedor 5</option>
+                        </select>
+                </div>
+                <div class="col" wire:ignore>
                     <select onchange="buscar_tabla()" name="b_item" id="b_item" style="width:100%;height:34px;"
                         name="states[]">
                         <option value="" style="overflow-y: scroll;">Todos Items</option>
@@ -574,6 +578,8 @@
                         @endforeach
                     </select>
                 </div>
+
+
 
             </div>
             <div class="row p-2"  style="margin-bottom: -10px">
@@ -1006,6 +1012,38 @@
     </div>
     <!-- FIN MODAL ELMINAR TODO DETALLE DETALLE PROGRAMACION -->
 
+        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+            aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h1 class="modal-title fs-5" id="exampleModalLabel">Reportes</h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal"
+                            aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="row">
+                            <div class="col-md-4 text-center">
+                                <button class="btn btn-warning fs-7" onclick="exportarMaterial()" type="button">Materiales <br> Exportar </button>
+                            </div>
+                            <div class="col-md-4 text-center">
+                                <form wire:submit.prevent="exportProgramacion()" class="btn btn-success fs-7">
+                                    <button class="btn btn-success fs-7" type="submit">Exportar</button>
+                                </form>
+                            </div>
+                            <div class="col-md-4 text-center">
+                                <form method="GET" action="{{ route('exportar_materia') }}">
+                                    <button class="btn btn-primary fs-7" type="submit" >Actualizar(Mat.)</button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
 
     {{-- JavaScript detalle programacion --}}
     @push('scripts')

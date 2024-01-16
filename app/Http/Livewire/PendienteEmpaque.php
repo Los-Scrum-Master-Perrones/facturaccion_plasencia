@@ -12,15 +12,12 @@ use Illuminate\Http\Request;
 use Maatwebsite\Excel\Facades\Excel;
 use App\Exports\PendienteEmpaqueExport;
 use App\Exports\PendienteEmpaqueMaterialesExport;
-use App\Exports\PendienteMaterialesExport;
 use App\Exports\SheetMaterialesProgramacionExport;
-use App\Http\Static_Vars;
 use Carbon\Carbon;
 use Exception;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
-use PhpParser\Node\Expr\Cast\Object_;
 
 class PendienteEmpaque extends Component
 {
@@ -111,6 +108,7 @@ class PendienteEmpaque extends Component
     public $total_saldo;
 
     public $ventanas = 1;
+    public $programacion_actual = 1;
 
     public function cambio($num)
     {
@@ -214,54 +212,46 @@ class PendienteEmpaque extends Component
         $detalles = 0;
         $valores = [];
 
-        $tuplas = count($datos_pendiente_empaque);
+        foreach ($datos_pendiente_empaque as $key => $value) {
 
-        for ($i = 0; $i <  $tuplas; $i++) {
+            if ($value->sampler == "si") {
+                if ($cantidad_detalle_sampler == 0 && $detalles == 0) {
+                    $datos = DB::select('call traer_numero_detalles_productos(?)', [$value->item]);
+                    $cantidad_detalle_sampler = $datos[0]->tuplas;
+                }
+                $valores = DB::select('call traer_detalles_productos_actualizar(?,?)', [$value->item, $detalles]);
 
-            $sampler = DB::select('SELECT clase_productos.sampler FROM clase_productos WHERE  clase_productos.item = ?;', [$datos_pendiente_empaque[$i]->item]);
+                $value->cod_producto = isset($valores[0]->codigo_producto) ? $valores[0]->codigo_producto : "";
+                DB::update(
+                    'UPDATE pendiente_empaque SET codigo_poducto= ? WHERE  id_pendiente= ?;',
+                    [isset($valores[0]->codigo_producto) ? $valores[0]->codigo_producto : "", $value->id_pendiente]
+                );
+                $detalles++;
 
-            if (isset($sampler[0])) {
-                if ($sampler[0]->sampler == "si") {
-                    if ($cantidad_detalle_sampler == 0 && $detalles == 0) {
-                        $datos = DB::select('call traer_numero_detalles_productos(?)', [$datos_pendiente_empaque[$i]->item]);
-                        $cantidad_detalle_sampler = $datos[0]->tuplas;
-                    }
-                    $valores = DB::select('call traer_detalles_productos_actualizar(?,?)', [$datos_pendiente_empaque[$i]->item, $detalles]);
-
-                    $datos_pendiente_empaque[$i]->cod_producto = isset($valores[0]->codigo_producto) ? $valores[0]->codigo_producto : "";
-                    DB::update(
-                        'UPDATE pendiente_empaque SET codigo_poducto= ? WHERE  id_pendiente= ?;',
-                        [isset($valores[0]->codigo_producto) ? $valores[0]->codigo_producto : "", $datos_pendiente_empaque[$i]->id_pendiente]
-                    );
-                    $detalles++;
-
-                    if ($detalles == $cantidad_detalle_sampler) {
-                        $detalles = 0;
-                        $cantidad_detalle_sampler = 0;
-                    }
-                } else {
-                    $valores = DB::select('SELECT codigo_producto FROM clase_productos WHERE item = ?', [$datos_pendiente_empaque[$i]->item]);
-
-                    $datos_pendiente_empaque[$i]->cod_producto = isset($valores[0]->codigo_producto) ? $valores[0]->codigo_producto : "";
+                if ($detalles == $cantidad_detalle_sampler) {
+                    $detalles = 0;
+                    $cantidad_detalle_sampler = 0;
                 }
             } else {
-                $valores = DB::select('SELECT codigo_producto FROM clase_productos WHERE item = ?', [$datos_pendiente_empaque[$i]->item]);
+                $valores = DB::select('SELECT codigo_producto FROM clase_productos WHERE item = ?', [$value->item]);
 
-                $datos_pendiente_empaque[$i]->cod_producto = isset($valores[0]->codigo_producto) ? $valores[0]->codigo_producto : "";
+                $value->cod_producto = isset($valores[0]->codigo_producto) ? $valores[0]->codigo_producto : "";
             }
         }
 
 
-        for ($i = 0; $tuplas > $i; $i++) {
+
+        foreach ($datos_pendiente_empaque as $key => $value2) {
             $detalles = DB::select(
-                'call insertar_detallePro_temporalSinExistencia(:numero_orden,:orden,:cod_producto,:saldo,:id_pendiente,:cant)',
+                'call insertar_detallePro_temporalSinExistencia(:numero_orden,:orden,:cod_producto,:saldo,:id_pendiente,:cant,:num)',
                 [
-                    'numero_orden' => isset($datos_pendiente_empaque[$i]->orden_del_sitema) ?  $datos_pendiente_empaque[$i]->orden_del_sitema : null,
-                    'orden' => isset($datos_pendiente_empaque[$i]->orden) ?  $datos_pendiente_empaque[$i]->orden : null,
-                    'cod_producto' => isset($datos_pendiente_empaque[$i]->cod_producto) ?  $datos_pendiente_empaque[$i]->cod_producto : null,
-                    'saldo' => isset($datos_pendiente_empaque[$i]->saldo) ?  $datos_pendiente_empaque[$i]->saldo : null,
-                    'id_pendiente' => isset($datos_pendiente_empaque[$i]->id_pendiente) ?  $datos_pendiente_empaque[$i]->id_pendiente : null,
-                    'cant' => isset($datos_pendiente_empaque[$i]->cant_cajas) ?  $datos_pendiente_empaque[$i]->cant_cajas : null
+                    'numero_orden' => isset($value2->orden_del_sitema) ? $value2->orden_del_sitema : null,
+                    'orden' => isset($value2->orden) ? $value2->orden : null,
+                    'cod_producto' => isset($value2->cod_producto) ? $value2->cod_producto : null,
+                    'saldo' => isset($value2->saldo) ? $value2->saldo : null,
+                    'id_pendiente' => isset($value2->id_pendiente) ? $value2->id_pendiente : null,
+                    'cant' => isset($value2->cant_cajas) ? $value2->cant_cajas : null,
+                    'num' => $this->programacion_actual
                 ]
             );
 
@@ -421,14 +411,15 @@ class PendienteEmpaque extends Component
         );
 
         DB::select(
-            'call insertar_detallePro_temporalSinExistencia(:numero_orden,:orden,:cod_producto,:saldo,:id_pendiente,:cant)',
+            'call insertar_detallePro_temporalSinExistencia(:numero_orden,:orden,:cod_producto,:saldo,:id_pendiente,:cant,:num)',
             [
                 'numero_orden' => isset($datos_pendiente[0]->orden_del_sitema) ? $datos_pendiente[0]->orden_del_sitema : null,
                 'orden' => isset($datos_pendiente[0]->orden) ? $datos_pendiente[0]->orden : null,
                 'cod_producto' => isset($datos_pendiente[0]->codigo_producto) ? $datos_pendiente[0]->codigo_producto : null,
                 'saldo' => isset($datos_pendiente[0]->saldo) ? $datos_pendiente[0]->saldo : null,
                 'id_pendiente' => isset($datos_pendiente[0]->id_pendiente) ? $datos_pendiente[0]->id_pendiente : null,
-                'cant' => isset($datos_pendiente[0]->cant_cajas) ? $datos_pendiente[0]->cant_cajas : null
+                'cant' => isset($datos_pendiente[0]->cant_cajas) ? $datos_pendiente[0]->cant_cajas : null,
+                'num' => $this->programacion_actual
             ]
         );
 
@@ -1015,11 +1006,10 @@ class PendienteEmpaque extends Component
         $this->datos_pendiente_empaque = [];
 
         $this->total_saldo = 0;
-        $this->detalles_provicionales = DB::select('call mostrar_detalles_provicional(:buscar)', [
-            'buscar' => $this->busqueda
+        $this->detalles_provicionales =  DB::select('call mostrar_detalles_provicional(:buscar,:num)', [
+            'buscar' => '',
+            'num' => $this->programacion_actual
         ]);
-
-
 
         foreach ($this->detalles_provicionales as $key => $value) {
 
@@ -1114,7 +1104,7 @@ class PendienteEmpaque extends Component
 
     public function exportProgramacion()
     {
-        return Excel::download(new detallesExport($this->materiales), 'ProgramaciónPro.xlsx');
+        return Excel::download(new detallesExport($this->materiales, $this->programacion_actual), 'ProgramaciónPro.xlsx');
     }
 
     public function imprimir_materiales()
@@ -1138,8 +1128,9 @@ class PendienteEmpaque extends Component
 
     public function actualizar_datos()
     {
-        $detalles_p = DB::select('call mostrar_detalles_provicional(:buscar)', [
-            'buscar' => ''
+        $detalles_p = DB::select('call mostrar_detalles_provicional(:buscar,:num)', [
+            'buscar' => '',
+            'num' => $this->programacion_actual
         ]);
 
 

@@ -2,23 +2,11 @@
 
 namespace App\Exports;
 
-use Maatwebsite\Excel\Concerns\FromCollection;
-
-
-
-
 use Maatwebsite\Excel\Concerns\FromView;
 use Illuminate\Contracts\View\View;
 use Illuminate\Support\Facades\DB;
 use Maatwebsite\Excel\Concerns\ShouldAutoSize;
-use Maatwebsite\Excel\Concerns\Exportable;
-use Maatwebsite\Excel\Concerns\WithStyles;
-use PhpOffice\PhpSpreadsheet\Worksheet\Worksheet;
-
-use PhpOffice\PhpSpreadsheet\Style\NumberFormat;
-use Maatwebsite\Excel\Concerns\WithHeadings;
 use Maatwebsite\Excel\Concerns\WithStrictNullComparison;
-use Maatwebsite\Excel\Concerns\WithColumnFormatting;
 
 class detallesExport implements
     FromView,
@@ -27,14 +15,16 @@ class detallesExport implements
 {
 
     public $nom;
+    public $nm;
 
-    function __construct($nom) {
+    function __construct($nom,$nm) {
         $this->nom = $nom;
+        $this->nm = $nm;
     }
 
     public function view(): View
     {
-        $detalles_provicionales = DB::select('call mostrar_detalles_provicional("")');
+        $detalles_provicionales = DB::select('call mostrar_detalles_provicional("",?)',[ $this->nm]);
         foreach ($detalles_provicionales as $key => $value) {
 
             if($value->sampler == 'si'){
