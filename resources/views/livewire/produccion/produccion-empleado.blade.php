@@ -35,10 +35,12 @@
                         <label for="danger-outlined">Tripa Corta</label>
 
                         <input type="checkbox" autocomplete="off" wire:model='b_presentacion3' value='Brocha'>
-                        <label for="danger-outlined">Brocha</label></div>
+                        <label for="danger-outlined">Brocha</label>
+                    </div>
                     <div class="col-md-2">
                         <div class="input-group mb-3" style="height: 30px">
-                            <span class="input-group-text" id="basic-addon1" style="height: 30px;font-size: 0.7em">Por Pagina</span>
+                            <span class="input-group-text" id="basic-addon1" style="height: 30px;font-size: 0.7em">Por
+                                Pagina</span>
                             <select name="" id="" class="form-control" wire:model='por_pagina'
                                 style="height: 30px;font-size: 0.7em">
                                 <option value="50">50</option>
@@ -56,9 +58,21 @@
                             </button>
                             <button class="btn btn-primary" wire:click='imprimir_reporte_planilla' style="height: 30px">
                                 <abbr title="Planilla">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-clipboard2-check-fill" viewBox="0 0 16 16">
-                                        <path d="M10 .5a.5.5 0 0 0-.5-.5h-3a.5.5 0 0 0-.5.5.5.5 0 0 1-.5.5.5.5 0 0 0-.5.5V2a.5.5 0 0 0 .5.5h5A.5.5 0 0 0 11 2v-.5a.5.5 0 0 0-.5-.5.5.5 0 0 1-.5-.5Z"/>
-                                        <path d="M4.085 1H3.5A1.5 1.5 0 0 0 2 2.5v12A1.5 1.5 0 0 0 3.5 16h9a1.5 1.5 0 0 0 1.5-1.5v-12A1.5 1.5 0 0 0 12.5 1h-.585c.055.156.085.325.085.5V2a1.5 1.5 0 0 1-1.5 1.5h-5A1.5 1.5 0 0 1 4 2v-.5c0-.175.03-.344.085-.5Zm6.769 6.854-3 3a.5.5 0 0 1-.708 0l-1.5-1.5a.5.5 0 1 1 .708-.708L7.5 9.793l2.646-2.647a.5.5 0 0 1 .708.708Z"/>
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                        fill="currentColor" class="bi bi-clipboard2-check-fill" viewBox="0 0 16 16">
+                                        <path
+                                            d="M10 .5a.5.5 0 0 0-.5-.5h-3a.5.5 0 0 0-.5.5.5.5 0 0 1-.5.5.5.5 0 0 0-.5.5V2a.5.5 0 0 0 .5.5h5A.5.5 0 0 0 11 2v-.5a.5.5 0 0 0-.5-.5.5.5 0 0 1-.5-.5Z" />
+                                        <path
+                                            d="M4.085 1H3.5A1.5 1.5 0 0 0 2 2.5v12A1.5 1.5 0 0 0 3.5 16h9a1.5 1.5 0 0 0 1.5-1.5v-12A1.5 1.5 0 0 0 12.5 1h-.585c.055.156.085.325.085.5V2a1.5 1.5 0 0 1-1.5 1.5h-5A1.5 1.5 0 0 1 4 2v-.5c0-.175.03-.344.085-.5Zm6.769 6.854-3 3a.5.5 0 0 1-.708 0l-1.5-1.5a.5.5 0 1 1 .708-.708L7.5 9.793l2.646-2.647a.5.5 0 0 1 .708.708Z" />
+                                    </svg>
+                                </abbr>
+                            </button>
+                            <button class="btn btn-danger" style="height: 30px" data-bs-toggle="modal" data-bs-target="#modal_eliminar_produccuin" >
+                                <abbr title="Eliminar por Fecha">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                        fill="currentColor" class="bi bi-trash3" viewBox="0 0 16 16">
+                                        <path
+                                            d="M6.5 1h3a.5.5 0 0 1 .5.5v1H6v-1a.5.5 0 0 1 .5-.5M11 2.5v-1A1.5 1.5 0 0 0 9.5 0h-3A1.5 1.5 0 0 0 5 1.5v1H1.5a.5.5 0 0 0 0 1h.538l.853 10.66A2 2 0 0 0 4.885 16h6.23a2 2 0 0 0 1.994-1.84l.853-10.66h.538a.5.5 0 0 0 0-1zm1.958 1-.846 10.58a1 1 0 0 1-.997.92h-6.23a1 1 0 0 1-.997-.92L3.042 3.5zm-7.487 1a.5.5 0 0 1 .528.47l.5 8.5a.5.5 0 0 1-.998.06L5 5.03a.5.5 0 0 1 .47-.53Zm5.058 0a.5.5 0 0 1 .47.53l-.5 8.5a.5.5 0 1 1-.998-.06l.5-8.5a.5.5 0 0 1 .528-.47M8 4.5a.5.5 0 0 1 .5.5v8.5a.5.5 0 0 1-1 0V5a.5.5 0 0 1 .5-.5" />
                                     </svg>
                                 </abbr>
                             </button>
@@ -158,7 +172,7 @@
                                     <td class="text-center">{{ $producto->orden }}</td>
                                     <td class="text-center">{{ $producto->fecha }}</td>
                                     <td class="text-center">{{ $producto->codigo_empleaado }}</td>
-                                    <td>{{ '('.Str::upper($producto->rol).') '.$producto->nombre_empleado }}</td>
+                                    <td>{{ '(' . Str::upper($producto->rol) . ') ' . $producto->nombre_empleado }}</td>
                                     <td class="text-center">{{ $producto->codigo_producto }}</td>
                                     <td class="text-center">{{ $producto->presentacion }}</td>
                                     <td>{{ $producto->marca }}</td>
@@ -168,9 +182,12 @@
                                     <td class="text-center">{{ $producto->cantidad }}</td>
                                     <td>L. {{ number_format($producto->por_pagar, 2) }}</td>
                                     <td class="text-center">
-                                        <a style="text-decoration: none" onclick="eliminar_item({{ $producto->id }})" href="#">
-                                            <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" fill="currentColor" class="bi bi-trash-fill" viewBox="0 0 16 16">
-                                                <path d="M2.5 1a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1H3v9a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V4h.5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1H2.5zm3 4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5zM8 5a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7A.5.5 0 0 1 8 5zm3 .5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 1 0z" />
+                                        <a style="text-decoration: none" onclick="eliminar_item({{ $producto->id }})"
+                                            href="#">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15"
+                                                fill="currentColor" class="bi bi-trash-fill" viewBox="0 0 16 16">
+                                                <path
+                                                    d="M2.5 1a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1H3v9a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V4h.5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1H2.5zm3 4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5zM8 5a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7A.5.5 0 0 1 8 5zm3 .5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 1 0z" />
                                             </svg>
                                         </a>
                                     </td>
@@ -191,25 +208,61 @@
         <input type="text" class="form-control" id="sumas" value="{{ number_format($sumas) }}">
 
         <span class="form-control input-group-text">Total (L.)</span>
-        <input type="text" class="form-control" id="sumas" value="{{ number_format($sumasLempiras,2) }}">
+        <input type="text" class="form-control" id="sumas" value="{{ number_format($sumasLempiras, 2) }}">
+    </div>
+
+    <div class="modal fade" id="modal_eliminar_produccuin" data-backdrop="static" data-keyboard="false"
+        tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true"
+        style="opacity:.9;background:#212529;">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="staticBackdropLabel">Advertencia</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-md-12 text-center">
+                            <h5>¿Estás seguro que quieres limpiar estos registros?</h5>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-4"></div>
+                        <div class="col-md-4">
+                            <input type="date" class="form-control" wire:model.defer='fecha_eliminar' name="" id="">
+                        </div>
+                        <div class="col-md-4"></div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-danger" data-bs-dismiss="modal">
+                        <span>Cancelar</span>
+                    </button>
+                    <button wire:click="eliminar_entrada()" class="btn btn-success">
+                        <span>Eliminar</span>
+                    </button>
+                </div>
+            </div>
+        </div>
     </div>
 
     @push('scripts')
         <script>
-
             const Toast = Swal.mixin({
-                    toast: true
-                    , position: 'top-end'
-                    , showConfirmButton: false
-                    , timer: 3000
-                    , timerProgressBar: true
-                    , didOpen: (toast) => {
-                        toast.addEventListener('mouseenter', Swal.stopTimer)
-                        toast.addEventListener('mouseleave', Swal.resumeTimer)
-                    }
-                })
+                toast: true,
+                position: 'top-end',
+                showConfirmButton: false,
+                timer: 3000,
+                timerProgressBar: true,
+                didOpen: (toast) => {
+                    toast.addEventListener('mouseenter', Swal.stopTimer)
+                    toast.addEventListener('mouseleave', Swal.resumeTimer)
+                }
+            })
 
-            var seletscc = ["#b_orden", "#b_codigo","#b_nombre_empleado","#b_codigo_empleado","#b_marca", "#b_nombre", "#b_vitola", "#b_capa"];
+            var seletscc = ["#b_orden", "#b_codigo", "#b_nombre_empleado", "#b_codigo_empleado", "#b_marca", "#b_nombre",
+                "#b_vitola", "#b_capa"
+            ];
             const inputField = document.querySelector("#example");
 
             $(document).ready(function() {
@@ -260,10 +313,12 @@
 
             window.addEventListener('salida_eliminada', event => {
                 Toast.fire({
-                    icon: 'success'
-                    , title: 'Salida eliminada con exito.'
+                    icon: 'success',
+                    title: 'Salida eliminada con exito.'
                 });
             })
         </script>
     @endpush
+
+
 </div>

@@ -4,6 +4,9 @@ namespace App\Http\Livewire\Produccion;
 
 use App\Exports\ProduccionEmpleadoExport;
 use App\Exports\ProduccionEmpleadoPlanillaExport;
+use App\Models\ProduccionEmpleado as ModelsProduccionEmpleado;
+use App\Models\ProduccionOrden;
+use App\Models\ProduccionOrdenEmpleado;
 use Carbon\Carbon;
 use Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\Support\Facades\DB;
@@ -45,8 +48,11 @@ class ProduccionEmpleado extends Component
     public $por_pagina = 50;
     public $total = 0;
 
+    public $fecha_eliminar = '';
+
     public function mount() {
 
+        $this->fecha_eliminar = Carbon::now()->format('Y-m-d');
         $this->b_fecha_1 = Carbon::now()->format('Y-m-d');
         $this->b_fecha_2 = Carbon::now()->format('Y-m-d');
 
@@ -198,12 +204,37 @@ class ProduccionEmpleado extends Component
                 $titulo .= "Brocha";
             }
 
-
-
             return Excel::download(new ProduccionEmpleadoPlanillaExport($da,$rangoFecha2, $titulo), 'Planilla de '.$titulo.' del '.$rangoFecha.'.xlsx');
 
         }else{
             $this->dispatchBrowserEvent('error_general',['errorr' => 'Rango de Fechas incorrectos','icon' => 'error']);
+        }
+    }
+
+    public function eliminar_entrada(){
+        try {
+            DB::beginTransaction();
+
+                $ordenes_eliminar = ProduccionOrden::where('fecha','=',$this->fecha_eliminar)->get();
+                $id_ordenes = [];
+                $id_ordenes_empleado = [];
+
+                foreach ($ordenes_eliminar as $key => $value) {
+                    $id_ordenes[] = $value->id;
+
+                    $orden_empleado = ProduccionOrdenEmpleado::where('id_orden','=',$value->id)->get();
+                    foreach ($orden_empleado as $key => $value2) {
+                        $id_ordenes_empleado[] = $value2->id;
+                    }
+                }
+
+                ProduccionOrdenEmpleado::destroy($id_ordenes_empleado);
+                ProduccionOrden::destroy($id_ordenes);
+            DB::commit();
+            $this->dispatchBrowserEvent('error_general',['errorr' => 'Insertado con exito','icon' => 'success']);
+        } catch (\Exception $e) {
+            DB::rollback();
+            $this->dispatchBrowserEvent('error_general',['errorr' => $e.' Falta codido de producto','icon' => 'error']);
         }
     }
 }

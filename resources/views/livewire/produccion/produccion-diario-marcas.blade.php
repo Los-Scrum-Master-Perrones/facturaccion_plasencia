@@ -296,7 +296,7 @@
                     </div>
                 </div>
                 <div class="card-body">
-                    <div class="table-responsive" style="height: 78vh;">
+                    <div wire:loading.class='oscurecer_contenido' class="table-responsive" style="height: 78vh;">
                         <table class="table table-hover table-sm">
                             <thead>
                                 <tr>
@@ -355,15 +355,10 @@
                                         @if (is_null($emple->codigo_empleaado))
                                             <td colspan="2" class="text-center">
                                                 @isset($boncheros['boncheros'])
-                                                    <select class="form-control form-control-sm" name=""
-                                                        id="empleado{{ $emple->id }}"
-                                                        onchange="agregar_empleado({{ $emple->id }},1,'empleado{{ $emple->id }}')">
-                                                        <option value="">Selecione</option>
-                                                        @foreach ($boncheros['boncheros'] as $bonche)
-                                                            <option value="{{ $bonche->id }}">
-                                                                {{ $bonche->codigo . ' - ' . $bonche->nombre }}</option>
-                                                        @endforeach
-                                                    </select>
+                                                    <button type="button" class="btn btn-success" data-bs-toggle="modal"  data-bs-target="#busquedaEmpleadobonchero"
+                                                    onclick="agregar_id_bonchero({{ $emple->id }},1)">
+                                                            BONCHEROS
+                                                    </button>
                                                 @endisset
                                             </td>
                                         @else
@@ -384,15 +379,10 @@
                                         @if (is_null($emple->codigo_empleaado2))
                                             <td colspan="2" class="text-center">
                                                 @isset($roleros['roleros'])
-                                                    <select class="form-control form-control-sm" name=""
-                                                        id="empleado2{{ $emple->id }}"
-                                                        onchange="agregar_empleado({{ $emple->id }},2,'empleado2{{ $emple->id }}')">
-                                                        <option value="">Selecione</option>
-                                                        @foreach ($roleros['roleros'] as $rolero)
-                                                            <option value="{{ $rolero->id }}">
-                                                                {{ $rolero->codigo . ' - ' . $rolero->nombre }}</option>
-                                                        @endforeach
-                                                    </select>
+                                                    <button type="button" class="btn btn-warning" data-bs-toggle="modal"  data-bs-target="#busquedaEmpleadorolero"
+                                                     onclick="agregar_id_rolero({{ $emple->id }},2)">
+                                                            ROLEROS
+                                                    </button>
                                                 @endisset
                                             </td>
                                         @else
@@ -680,13 +670,73 @@
         </div>
     </div>
 
+    <div wire:ignore class="modal" id="busquedaEmpleadobonchero" tabindex="-1" aria-labelledby="exampleModalLabel"
+    aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Buscar empleado Bonchero</h5>
+                    <button type="button" class="btn-close" id="boton_cerrar_buscarr_bonchero" data-bs-dismiss="modal"
+                        aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <input type="text" id="posicion1" hidden>
+                    <select id="selectBoncheros" onchange="agregar_empleado_bonchero()">
+                        <option value="">Seleccionar</option>
+                        @foreach ($boncheros['boncheros'] as $bonche)
+                            <option value="{{ $bonche->id }}">
+                                {{ $bonche->codigo . ' - ' . $bonche->nombre }}</option>
+                        @endforeach
+                    </select>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div wire:ignore class="modal" id="busquedaEmpleadorolero" tabindex="-1" aria-labelledby="exampleModalLabel"
+    aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Buscar empleado Rolero</h5>
+                    <button type="button" class="btn-close" id="boton_cerrar_buscar_rolero" data-bs-dismiss="modal"
+                        aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <input type="text" id="posicion2" hidden>
+                    <select id="selectRoleros" onchange="agregar_empleado_rolero()">
+                        <option value="">Seleccionar</option>
+                        @foreach ($roleros['roleros'] as $rolero)
+                            <option value="{{ $rolero->id }}">
+                                {{ $rolero->codigo . ' - ' . $rolero->nombre }}</option>
+                        @endforeach
+                    </select>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
 
     @push('scripts')
         <script>
             var id_detalles = 0;
+            let id_tupla = 0;
+            var table;
+            let buscador;
+            let boncheros;
+            let roleros;
 
-            function agregar_empleado(id, num, select) {
-                @this.agregar_detalle(id, num, $('#' + select).val());
+            function agregar_id_rolero(id,columna_rolero) {
+                $('#posicion2').val(columna_rolero);
+                roleros.open();
+                id_tupla=id;
+            }
+
+            function agregar_id_bonchero(id,columna_bonchero) {
+                $('#posicion1').val(columna_bonchero);
+                boncheros.open();
+                id_tupla=id;
             }
 
             function agregar_nueva_tupla(num, select) {
@@ -824,8 +874,7 @@
                 }
             }
 
-            var table;
-            let buscador;
+
             $(document).ready(function() {
                 $('#catalgo_pendiente').DataTable({
                     "language": {
@@ -864,6 +913,23 @@
                         direction: "asc"
                     }
                 });
+
+                boncheros = new TomSelect('#selectBoncheros', {
+                    create: false,
+                    sortField: {
+                        field: "text",
+                        direction: "asc"
+                    }
+                });
+
+                roleros = new TomSelect('#selectRoleros', {
+                    create: false,
+                    sortField: {
+                        field: "text",
+                        direction: "asc"
+                    }
+                });
+
             });
 
             window.addEventListener('abrirOpciones', event => {
@@ -884,8 +950,19 @@
                         $('#boton_cerrar_buscar').click();
                     }
                 });
+            }
 
 
+            function agregar_empleado_rolero() {
+                $('#boton_cerrar_buscar_rolero').click();
+                @this.agregar_detalle(id_tupla, 2, roleros.getValue());
+
+
+            }
+
+            function agregar_empleado_bonchero() {
+                $('#boton_cerrar_buscarr_bonchero').click();
+                @this.agregar_detalle(id_tupla, 1, boncheros.getValue());
             }
         </script>
     @endpush

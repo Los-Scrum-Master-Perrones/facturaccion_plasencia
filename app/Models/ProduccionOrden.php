@@ -11,7 +11,7 @@ use Illuminate\Database\Eloquent\Model;
  * @property int $id_producto
  * @property int $orden
  * @property int $cantidad
- * @property int $fecha
+ * @property date $fecha
  */
 class ProduccionOrden extends Model
 {
