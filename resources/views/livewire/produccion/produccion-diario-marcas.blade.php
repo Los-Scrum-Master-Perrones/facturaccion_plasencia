@@ -440,7 +440,19 @@
                                                 {{ intval($n) . 'd y ' . number_format($fraction * 8, 0) . 'h' }}
                                             @endif
                                         </td>
-                                        <td>{{ $emple->moldes_para_uso }}</td>
+                                        <td>
+                                            <div class="input-group input-group-sm " style="width: 5.5rem;">
+                                                <div class="input-group-prepend">
+                                                    <span class="input-group-text fs-7" id="basic-addon1">{{ $emple->moldes_para_uso??0 }}</span>
+                                                </div>
+                                                <input value="{{ $emple->moldes_a_usar }}" type="number"
+                                                id="moldes{{ $emple->id }}"
+                                                onchange="agregar_nueva_moldes({{ $emple->id }},'#moldes{{ $emple->id }}')"
+                                                class="form-control  fs-7">
+                                            </div>
+
+
+                                        </td>
                                         <td>
                                             <button type="button" class="btn btn-sm btn-primary dropdown-toggle"
                                                 data-bs-toggle="collapse"
@@ -455,8 +467,8 @@
                                     </tr>
                                     @isset($usosMoldes[$emple->ring_real])
                                         <tr>
-                                            <td colspan="10"></td>
-                                            <td colspan="3">
+                                            <td colspan="8"></td>
+                                            <td colspan="5">
                                                 <div class="collapse" id="collapseExample{{ $key }}">
                                                     <div class="card card-body">
                                                         @foreach ($usosMoldes[$emple->ring_real] as $molde)
@@ -749,6 +761,10 @@
 
             function agregar_nueva_tarea(id, num) {
                 @this.nueva_tareas(id, $(num).val());
+            }
+
+            function agregar_nueva_moldes(id, num) {
+                @this.nueva_moldes(id, $(num).val());
             }
 
 

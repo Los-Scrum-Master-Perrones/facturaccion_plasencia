@@ -134,6 +134,7 @@ class Produccion extends Component
             'select_file' => 'max:1024', // 1MB Max
         ]);
         (new ProducidoImport)->import($this->select_file);
+        
     }
 
     public function import2()
@@ -144,7 +145,7 @@ class Produccion extends Component
 
         (new ProducidoPreciosImport)->import($this->select_file);
     }
-    
+
     public function import3()
     {
         $this->validate([

@@ -62,8 +62,10 @@ class ProduccionDiarioMarcas extends Component
 
 
         $usosMoldes = [];
+        $usosMoldesConID = [];
         foreach ($moldes as $uso) {
             $usosMoldes[$uso->ring][] =  $uso;
+            $usosMoldesConID[$uso->id][] =  $uso;
         }
 
 
@@ -84,6 +86,7 @@ class ProduccionDiarioMarcas extends Component
                 'moldesss' => $moldes,
                 'usosMoldes' => $usosMoldes,
                 'apartdoMoldes' => $apartdoMoldes,
+                'usosMoldesConID' => $usosMoldesConID,
                 'pendiente_catalogo' => $pendiente_catalogo,
                 'emplead' => DB::select('CALL `buscar_produccion_empleado_planificacion_busqueda`()')
             ]
@@ -104,8 +107,8 @@ class ProduccionDiarioMarcas extends Component
             $mod->id_empleado2 = null;
         } elseif ($num == 3) {
             $mod->id_produccion_orden = null;
-            $mod->moldes_para_uso = null;
-            $mod->moldes_sobrantes = null;
+            $mod->moldes_para_uso = 0;
+            $mod->moldes_sobrantes = 0;
             $mod->moldes_ids = null;
         }
         $mod->save();
@@ -146,6 +149,27 @@ class ProduccionDiarioMarcas extends Component
             $mod->tareas = $id;
         } else {
             $mod->tareas = 0;
+        }
+        $mod->save();
+    }
+
+
+    public function nueva_moldes(ProduccionDiarioProducir $mod, $id)
+    {
+        if ($id > 0) {
+            $mod->moldes_a_usar = $id;
+            $mod->moldes_para_uso = 0;
+            $mod->moldes_sobrantes = 0;
+            $mod->moldes_ids = null;
+
+            ProduccionMoldeDiario::where('id_produccion_diario',$mod->id)
+                                    ->update(['cantidad' => 0,'check' => 0]);
+
+        } else {
+            $mod->moldes_a_usar = 0;
+            $mod->moldes_para_uso = 0;
+            $mod->moldes_sobrantes = 0;
+            $mod->moldes_ids = null;
         }
         $mod->save();
     }
@@ -231,22 +255,16 @@ class ProduccionDiarioMarcas extends Component
         }
 
         if($moldesss->check == 0){
-            if($modulo->moldes_para_uso > 0 && ($modulo->moldes_para_uso+$moldes_existencia->buenos) < $modulo->moldes_a_usar){
+            if($modulo->moldes_para_uso > 0 && ($modulo->moldes_para_uso+$moldes_existencia->buenos) <= $modulo->moldes_a_usar){
                 $moldesss->cantidad = $moldes_existencia->buenos;
                 $modulo->moldes_para_uso += $moldes_existencia->buenos;
-            }
-
-            if($modulo->moldes_para_uso > 0 && ($modulo->moldes_para_uso+$moldes_existencia->buenos) > $modulo->moldes_a_usar){
+            }elseif($modulo->moldes_para_uso > 0 && ($modulo->moldes_para_uso+$moldes_existencia->buenos) > $modulo->moldes_a_usar){
                 $moldesss->cantidad = $modulo->moldes_a_usar - $modulo->moldes_para_uso;
                 $modulo->moldes_para_uso +=  $modulo->moldes_a_usar - $modulo->moldes_para_uso;
-            }
-
-            if($modulo->moldes_para_uso == 0 && $moldes_existencia->buenos < $modulo->moldes_a_usar ){
+            }elseif($modulo->moldes_para_uso == 0 && $moldes_existencia->buenos < $modulo->moldes_a_usar ){
                 $moldesss->cantidad = $moldes_existencia->buenos;
                 $modulo->moldes_para_uso += $moldes_existencia->buenos;
-            }
-
-            if($modulo->moldes_para_uso == 0 && $moldes_existencia->buenos > $modulo->moldes_a_usar ){
+            }elseif($modulo->moldes_para_uso == 0 && $moldes_existencia->buenos > $modulo->moldes_a_usar ){
                 $moldesss->cantidad = $modulo->moldes_a_usar;
                 $modulo->moldes_para_uso = $modulo->moldes_a_usar;
             }
