@@ -125,7 +125,8 @@
                                 <td>{{ $detalle_provicional->orden }}</td>
                                 <td>{{ $detalle_provicional->item }}</td>
                                 <td>{{ $detalle_provicional->cod_producto }}</td>
-                                <td>{{ $detalle_provicional->marca }}</td>
+                                <td>{{ $detalle_provicional->marca }} <br>
+                                    <span style="color: red">{{ $detalle_provicional->observacion }}</span></td>
                                 <td>{{ $detalle_provicional->vitola }}</td>
                                 <td>{{ $detalle_provicional->nombre }}</td>
                                 <td>{{ $detalle_provicional->capa }}</td>
@@ -1024,16 +1025,16 @@
                     <div class="modal-body">
                         <div class="row">
                             <div class="col-md-4 text-center">
-                                <button class="btn btn-warning fs-7" onclick="exportarMaterial()" type="button">Materiales <br> Exportar </button>
+                                <button class="btn btn-warning fs-7" onclick="exportarMaterial()" type="button"  data-bs-dismiss="modal">Materiales <br> Exportar </button>
                             </div>
                             <div class="col-md-4 text-center">
                                 <form wire:submit.prevent="exportProgramacion()" class="btn btn-success fs-7">
-                                    <button class="btn btn-success fs-7" type="submit">Exportar</button>
+                                    <button class="btn btn-success fs-7" data-bs-dismiss="modal" type="submit">Exportar</button>
                                 </form>
                             </div>
                             <div class="col-md-4 text-center">
                                 <form method="GET" action="{{ route('exportar_materia') }}">
-                                    <button class="btn btn-primary fs-7" type="submit" >Actualizar(Mat.)</button>
+                                    <button class="btn btn-primary fs-7" data-bs-dismiss="modal" type="submit" >Actualizar(Mat.)</button>
                                 </form>
                             </div>
                         </div>

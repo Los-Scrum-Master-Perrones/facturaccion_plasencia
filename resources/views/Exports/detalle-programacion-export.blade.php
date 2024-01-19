@@ -35,7 +35,8 @@
             <td>{{$detalle_provicional->orden}}</td>
             <td>{{$detalle_provicional->item}}</td>
             <td>{{$detalle_provicional->cod_producto}}</td>
-            <td>{{$detalle_provicional->marca}}</td>
+            <td>{{ $detalle_provicional->marca }} <br>
+                <span style="color: red">{{ $detalle_provicional->observacion }}</span></td>
             <td>{{$detalle_provicional->vitola}}</td>
             <td>{{$detalle_provicional->nombre}}</td>
             <td>{{$detalle_provicional->capa}}</td>
