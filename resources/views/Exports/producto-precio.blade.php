@@ -14,9 +14,28 @@
 
      <tbody>
          @php
-         $count = 1;
+            $count = 1;
+            $marca = "";
          @endphp
          @foreach ($prodcutosPrecio as $key => $prodPrecio)
+         @if($marca == $prodPrecio->marca )
+
+         @else
+            <tr>
+                <td></td>
+                <td></td>
+                <td style="text-decoration: underline; font-size: 14px; text-align: center"><b><u>{{ $prodPrecio->marca }}</u></b></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+            @php
+                $marca = $prodPrecio->marca;
+            @endphp
+         @endif
+
          <tr>
              <td>{{ $count }}</td>
              <td>{{ $prodPrecio->codigo }}</td>
