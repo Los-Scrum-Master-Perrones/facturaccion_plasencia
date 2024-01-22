@@ -20,6 +20,7 @@ class ProductoPrecio extends Component
     protected $paginationTheme = 'bootstrap';
 
     public $codigo_n = '';
+    public $presentacion_n = '';
     public $precio_n = '';
     public $marca_n = '';
     public $nombre_n = '';
@@ -37,12 +38,12 @@ class ProductoPrecio extends Component
     public $empaques_p = [];
 
     public $codigo = '';
+    public $presentacion = '';
     public $marca = '';
     public $nombre = '';
     public $vitola = '';
     public $capa = '';
     public $empaque = '';
-    public $datos = [];
 
 
     public $chechDerivados = '';
@@ -55,6 +56,7 @@ class ProductoPrecio extends Component
     public $rules = [
         'new_precio.codigo' => 'string|required',
         'new_precio.id_catalogo_marca_precio' => 'integer|required',
+        'new_precio.presentacion' => 'string|required',
         'new_precio.nombre' => 'string|required',
         'new_precio.vitola' => 'string|required',
         'new_precio.capa' => 'string|required',
@@ -99,7 +101,7 @@ class ProductoPrecio extends Component
         $start = ($this->page - 1) * $this->por_pagina;
 
         $prodcutosPrecio = DB::select(
-            'call mostrar_catalogo_precios_busqueda(?,?,?,?,?,?,?,?,?,?)',
+            'call mostrar_catalogo_precios_busqueda(?,?,?,?,?,?,?,?,?,?,?)',
             [
                 $this->codigo,
                 $this->marca,
@@ -111,17 +113,19 @@ class ProductoPrecio extends Component
                 $this->por_pagina,
                 $this->precio_menor == '' ? 0 : $this->precio_menor,
                 $this->precio_mayor == '' ? 0 : $this->precio_mayor,
+                $this->presentacion
             ]
         );
         $usos = DB::select(
-            'call mostrar_catalogo_precios_historial(?,?,?,?,?,?)',
+            'call mostrar_catalogo_precios_historial(?,?,?,?,?,?,?)',
             [
                 $this->codigo,
                 $this->marca,
                 $this->nombre,
                 $this->vitola,
                 $this->capa,
-                $this->empaque
+                $this->empaque,
+                $this->presentacion
             ]
         );
         $usosArray = [];
@@ -137,7 +141,7 @@ class ProductoPrecio extends Component
 
 
         $this->total = DB::select(
-            'call mostrar_catalogo_precios_conteo(?,?,?,?,?,?,?,?)',
+            'call mostrar_catalogo_precios_conteo(?,?,?,?,?,?,?,?,?)',
             [
                 $this->codigo,
                 $this->marca,
@@ -147,13 +151,13 @@ class ProductoPrecio extends Component
                 $this->empaque,
                 $this->precio_menor == '' ? 0 : $this->precio_menor,
                 $this->precio_mayor == '' ? 0 : $this->precio_mayor,
+                $this->presentacion
             ]
         )[0]->total;
 
-        $this->datos = $prodcutosPrecio;
-
         return view('livewire.producto-precio', [
-            'prodcutosPrecio' => new LengthAwarePaginator($prodcutosPrecio, $this->total, $this->por_pagina)
+            'prodcutosPrecio' => new LengthAwarePaginator($prodcutosPrecio, $this->total, $this->por_pagina),
+            'datos' => $prodcutosPrecio
         ])->extends('layouts.Main')->section('content');
     }
 
@@ -194,7 +198,7 @@ class ProductoPrecio extends Component
     {
         $vista =  view('Exports.producto-precio', [
             'prodcutosPrecio' => DB::select(
-                'call mostrar_catalogo_precios_busqueda_historial(?,?,?,?,?,?,?,?)',
+                'call mostrar_catalogo_precios_busqueda_historial(?,?,?,?,?,?,?,?,?)',
                 [
                     $this->codigo,
                     $this->marca,
@@ -204,6 +208,7 @@ class ProductoPrecio extends Component
                     $this->empaque,
                     $this->precio_menor == '' ? 0 : $this->precio_menor,
                     $this->precio_mayor == '' ? 0 : $this->precio_mayor,
+                    $this->presentacion
                 ]
             )
         ]);
@@ -304,7 +309,7 @@ class ProductoPrecio extends Component
                 $items = DB::select('call traer_catalogo_precios_filtro_marca(:pa_marca,:pa_desicion,:pa_presentacion)',[
                     'pa_marca' => $this->marca_actual,
                     'pa_desicion' => $this->chechDerivados=="todos"? 1:0,
-                    'pa_presentacion' => $this->presentacion_actual=="fuma"? 1:0,
+                    'pa_presentacion' => $this->presentacion_actual,
                 ]);
             }
 

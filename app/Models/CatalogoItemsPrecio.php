@@ -11,11 +11,14 @@ class CatalogoItemsPrecio extends Model
 
     protected $table = 'catalogo_items_precio';
 
-    protected $fillable = ['id_catalogo_marca_precio',
-                           'codigo',
-                           'nombre',
-                           'vitola',
-                           'capa',
-                           'tipo_empaque',
-                           'fecha'];
+    protected $fillable = [
+        'id_catalogo_marca_precio',
+        'presentacion',
+        'codigo',
+        'nombre',
+        'vitola',
+        'capa',
+        'tipo_empaque',
+        'fecha'
+    ];
 }

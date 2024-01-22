@@ -2,6 +2,7 @@
 
 namespace App\Http\Livewire;
 
+use App\Exports\CatalogoPrecioExport;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
@@ -909,7 +910,7 @@ class FacturaTerminado extends Component
     {
         $vista =  view('Exports.producto-precio', [
             'prodcutosPrecio' => DB::select(
-                'call mostrar_catalogo_precios_busqueda_historial(?,?,?,?,?,?,?,?)',
+                'call mostrar_catalogo_precios_busqueda_historial(?,?,?,?,?,?,?,?,?)',
                 [
                     $this->codigo,
                     $this->marca,
@@ -919,6 +920,7 @@ class FacturaTerminado extends Component
                     $this->empaque,
                     $this->precio_menor == '' ? 0 : $this->precio_menor,
                     $this->precio_mayor == '' ? 0 : $this->precio_mayor,
+                    ''
                 ]
             )
         ]);

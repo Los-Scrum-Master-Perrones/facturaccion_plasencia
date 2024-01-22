@@ -166,6 +166,15 @@
                                     </select>
                                 </th>
                                 <th style=" text-align:center;" wire:ignore>
+                                    <select style="width: 150px;height:35px;" onchange="buscar_io()" name="b_presentacion"
+                                        id="b_presentacion">
+                                        <option value="">Presentacion</option>
+                                        <option value="Tripa Larga">Tripa Larga</option>
+                                        <option value="Tripa Corta">Tripa Corta</option>
+                                        <option value="Bandido">Bandido</option>
+                                    </select>
+                                </th>
+                                <th style=" text-align:center;" wire:ignore>
                                     <select style="width: 150px;height:35px;" onchange="buscar_io()" name="b_marcas"
                                         id="b_marcas">
                                         <option value="">Marcas</option>
@@ -222,6 +231,7 @@
                                 <tr>
                                     <td>{{ $count }}</td>
                                     <td>{{ $prodPrecio->codigo }}</td>
+                                    <td>{{ $prodPrecio->presentacion }}</td>
                                     <td>{{ $prodPrecio->marca }}</td>
                                     <td>{{ $prodPrecio->nombre }}</td>
                                     <td>{{ $prodPrecio->vitola }}</td>
@@ -315,8 +325,9 @@
                             <label class="form-label" style="width:100%;">Presentacion</label>
                             <select name="presentacion_de" id="presentacion_de" wire:model.defer="presentacion_actual"
                                 style="width:100%;" required>
-                                <option value="no fuma" style="overflow-y: scroll;">Tripa Larga</option>
-                                <option value="fuma" style="overflow-y: scroll;">Tripa Corta</option>
+                                <option value="''" style="overflow-y: scroll;">Todos</option>
+                                <option style="overflow-y: scroll;">Tripa Larga</option>
+                                <option style="overflow-y: scroll;">Tripa Corta</option>
                             </select>
                         </div>
                         <div class="col-sm-1">
@@ -540,6 +551,13 @@
                                     wire:model='edi_precio' required type="text" autocomplete="off">
                             </div>
                             <div class="mb-3 col">
+                                <label for="txt_buenos">Presentacions</label>
+                                <select class="form-control" name="presentacion_ac" id="presentacion_ac"
+                                    wire:model='new_precio.presentacion' required>
+                                    <option style="overflow-y: scroll;">Tripa Larga</option>
+                                    <option style="overflow-y: scroll;">Tripa Corta</option>
+                                    <option style="overflow-y: scroll;">Brocha</option>
+                            </select>
                             </div>
                             <div class="mb-3 col">
                             </div>
@@ -625,6 +643,13 @@
                         direction: "asc"
                     }
                 });
+
+                new TomSelect('#b_presentacion', {
+                    sortField: {
+                        field: "text",
+                        direction: "asc"
+                    }
+                });
             });
 
             function selects(nombre) {
@@ -648,6 +673,7 @@
 
             function buscar_io() {
                 @this.codigo = $(seletscc[0]).val();
+                @this.presentacion = $("#b_presentacion").val();
                 @this.marca = $(seletscc[1]).val();
                 @this.nombre = $(seletscc[2]).val();
                 @this.vitola = $(seletscc[3]).val();
@@ -674,7 +700,7 @@
                 historial.forEach(e => {
 
                     html += `<div class="fila">
-                            <div class="disco"><b></b><div>${Number(e.porcentaje_incremento).toFixed(2)*100}%</div></div>
+                            <div class="disco"><b></b><div>${Number(e.porcentaje_incremento).toFixed(4)*100}%</div></div>
                             <div>${e.anio}</div>
                             <div>$ ${Number(e.precio).toFixed(2)}</div>
                         </div>`
