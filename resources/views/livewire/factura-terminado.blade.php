@@ -476,7 +476,7 @@
                                             <div class="card-body">
                                                 <ol>
                                                     @php
-                                                        $anio = substr($detalles->orden, -4);
+                                                        $anio = Carbon\Carbon::now()->subYear()->format('Y');
                                                         $anio_actual = Carbon\Carbon::now()->format('Y');
                                                         if ($anio != $anio_actual) {
                                                             $detalle2 = $precio_sugerido[$detalles->codigo . '-' . $anio_actual];
