@@ -878,16 +878,28 @@
             }
 
             async function moldes_parejas() {
-                const {
-                    value: moldes
-                } = await Swal.fire({
-                    input: "number",
-                    inputLabel: "Moldes por pareja",
-                    inputPlaceholder: "Ingrese la cantidad de moldes por pareja"
-                });
-                if (moldes) {
-                    @this.actualizar_moldes_usar(moldes);
-                }
+                const swalWithBootstrapButtons = Swal.mixin({
+                    customClass: {
+                        confirmButton: 'btn btn-success',
+                        cancelButton: 'btn btn-danger'
+                    },
+                    buttonsStyling: false
+                })
+                swalWithBootstrapButtons.fire({
+                    title: 'Exportar Docuemtos Moldes',
+                    focusConfirm: false,
+                    showConfirmButton: true,
+                    showCancelButton: false,
+                    confirmButtonText: 'Moldes Restantes',
+                    cancelButtonText: 'Planificación',
+
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        @this.imprimir_moldes_restantes();
+                    } else if (result.dismiss === Swal.DismissReason.cancel) {
+                        //@this.imprimir_planificacion();
+                    }
+                })
             }
 
 

@@ -919,7 +919,7 @@
 
                 if (detalle[i].item === producto.item) {
                     var tabla_nueva = `
-                          <tr>
+                        <tr>
                             <td>` + detalle[i].item + `</td>
                             <td>` + detalle[i].marca + `</td>
                             <td>` + detalle[i].nombre + `</td>
@@ -938,9 +938,9 @@
                                     </div>
                                 </form>
                             </td>
-                          </tr>
+                        </tr>
 
-                          `;
+                        `;
                     document.getElementById("body").innerHTML += tabla_nueva.toString();
                 }
 

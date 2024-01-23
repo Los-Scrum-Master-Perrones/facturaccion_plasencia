@@ -211,6 +211,11 @@ class ProduccionDiarioMarcas extends Component
         return Excel::download(new ProduccionModulosEmpleadoExport($modulos), 'Reporte diario de marcas a producir.xlsx');
     }
 
+    public function imprimir_moldes_restantes()
+    {    $moldes = DB::select('CALL `buscar_produccion_moldes_inventario`(0)');
+        return Excel::download(new ProduccionModulosEmpleadoExport($moldes), 'Reporte diario de marcas a producir.xlsx');
+    }
+
     public function imprimir_planificacion_semanal()
     {
         $modulos = DB::select('call reporte_produccion_planificacion_semanal()');

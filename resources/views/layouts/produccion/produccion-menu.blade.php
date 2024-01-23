@@ -155,6 +155,7 @@
         fs-7 "
         style="color: white" @endif  href="{{ route('produccion.pendiente.salida') }}"><strong>Salidas</strong></a>
         </li>
+        @livewire('produccion.componentes.produccion-notificaciones')
     </ul>
     @yield('contenido')
 @endsection

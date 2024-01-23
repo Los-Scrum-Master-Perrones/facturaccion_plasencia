@@ -13,7 +13,6 @@
 </head>
 
 <!-- <body    style="background: linear-gradient(0deg, rgba(9,14,7,1) 6%, rgba(25,31,21,1) 28%, rgba(85,64,59,1) 51%, rgba(139,87,101,1) 75%,rgba(231,139,188,1) 100%);"> -->
-
 <body id="bos"
     style="background: url({{ 'http://' . $_SERVER['HTTP_HOST'] . '/fondologin.jpg' }}) center center no-repeat;    background-size:100% 100%;">
     @php
@@ -276,42 +275,5 @@
     @stack('scripts')
 
 
-    <script>
-
-        const Toast2 = Swal.mixin({
-        toast: true,
-        position: 'top-end',
-        showConfirmButton: false,
-        timer: 3000,
-        timerProgressBar: true,
-        didOpen: (toast) => {
-            toast.addEventListener('mouseenter', Swal.stopTimer)
-            toast.addEventListener('mouseleave', Swal.resumeTimer)
-        }
-        })
-
-        window.addEventListener('error_general', event => {
-            Toast2.fire({
-                icon: event.detail.icon,
-                title: event.detail.errorr
-            })
-        })
-
-        @if($errors->any())
-            Swal.fire({
-                icon: "error",
-                title: "Oops...",
-                text: `<div class="alert alert-danger">
-                        <ul>
-                            @foreach ($errors->all() as $error)
-                                <li>{{ $error }}</li>
-                            @endforeach
-                        </ul>
-                    </div>`,
-                footer: '<a href="#">Why do I have this issue?</a>'
-            });
-        @endif
-
-    </script>
 
 </body>
