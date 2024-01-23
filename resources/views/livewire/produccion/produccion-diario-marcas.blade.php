@@ -465,6 +465,13 @@
                                             </button>
                                         </td>
                                     </tr>
+                                    @if($emple->ring_real == 55)
+                                        @php
+                                            $emple->ring_real = 56;
+                                        @endphp
+                                    @else
+
+                                    @endif
                                     @isset($usosMoldes[$emple->ring_real])
                                         <tr>
                                             <td colspan="8"></td>

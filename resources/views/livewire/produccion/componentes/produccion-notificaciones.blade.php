@@ -97,7 +97,7 @@
                             <tr>
                                 <td>
                                     <a style="text-decoration: none" href="#" data-bs-dismiss="modal"
-                                        onclick="agregar_pendiente('{{ $pendiente->id }}',0)">
+                                        onclick="agregar_pendiente2('{{ $pendiente->id }}',0)">
                                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
                                             fill="currentColor" class="bi bi-database-add" viewBox="0 0 16 16">
                                             <path
@@ -212,7 +212,7 @@
                                         <td>
                                             ${(i + 1)}
                                             <a style="text-decoration: none" href="#" data-bs-dismiss="modal"
-                                                onclick="agregar_pendiente(${datos.ordenes[0][i].id},${id_pendiente})">
+                                                onclick="agregar_pendiente2(${datos.ordenes[0][i].id},${id_pendiente})">
                                                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
                                                     fill="currentColor" class="bi bi-database-add" viewBox="0 0 16 16">
                                                     <path
@@ -282,7 +282,7 @@
 
 
 
-        function agregar_pendiente(id, id_pendiente) {
+        function agregar_pendiente2(id, id_pendiente) {
 
             if (id_parejas.length > 0) {
                 @this.agregar_detalle_parejas(id_orden_cambiar, id,id_parejas);

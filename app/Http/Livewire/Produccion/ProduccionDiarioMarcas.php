@@ -110,6 +110,8 @@ class ProduccionDiarioMarcas extends Component
             $mod->moldes_para_uso = 0;
             $mod->moldes_sobrantes = 0;
             $mod->moldes_ids = null;
+            ProduccionMoldeDiario::where('id_produccion_diario',$mod->id)
+                                    ->update(['cantidad' => 0,'check' => 0]);
         }
         $mod->save();
     }
@@ -122,6 +124,7 @@ class ProduccionDiarioMarcas extends Component
             $mod->id_empleado2 = $id;
         } elseif ($num == 3) {
             $mod->id_produccion_orden = $id;
+
         }
         $mod->save();
 

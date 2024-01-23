@@ -3,6 +3,7 @@
 namespace App\Http\Livewire\Produccion\Componentes;
 
 use App\Models\ProduccionDiarioProducir;
+use App\Models\ProduccionMoldeDiario;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
 use Livewire\Component;
@@ -119,6 +120,8 @@ class ProduccionNotificaciones extends Component
                     ProduccionDiarioProducir::where('id','=',$value)->update(['id_produccion_orden' => $id_pendient,
                                                                                             'moldes_para_uso' => 0,
                                                                                             'moldes_a_usar' => 0]);
+                    ProduccionMoldeDiario::where('id_produccion_diario',$value)
+                                    ->update(['cantidad' => 0,'check' => 0]);
                 }
 
                 DB::commit();
