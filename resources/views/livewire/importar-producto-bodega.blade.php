@@ -26,8 +26,8 @@
                         <form wire:submit.prevent="import" class="force-inline">
                             <div class="input-group mb-3" style="height: 30px">
                                 <input type="file" name="select_file" id="select_file" wire:model="select_file"
-                                    class="form-control" style="width:150px;" />
-                                <input type="submit" name="upload" style="width:100px;" class="btn btn-primary"
+                                    class="form-control" style="width:150px;" required   />
+                                <input type="submit" name="upload" style="width:100px;" class="btn btn-primary"   wire:loading.attr="disabled" 
                                     value="Importar">
                                 <button type="button" class="btn btn-warning"  wire:click="vaciar">Vaciar</button>
                             </div>
