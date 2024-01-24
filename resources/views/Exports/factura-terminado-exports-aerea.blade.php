@@ -337,12 +337,6 @@
 
                                         $total_ac = intval($total_pendiente[0]->total_saldo) - (intval($total_sampler_detalles) * intval($cantidad_total_sampler_factura)) / intval($cantidad_sampler_empresa);
 
-                                        $total_saldo_pendiente = DB::update(
-                                            'UPDATE detalle_factura SET anterior = ? WHERE
-                            id_detalle =
-                            ?',
-                                            [$total_ac, $detalles->id_detalle],
-                                        );
                                     @endphp
 
                                     @if ($val_actual == $val_anterioir)
@@ -522,11 +516,7 @@
 
                                     $total_ac = intval($total_pendiente[0]->total_saldo) - intval($detalles->total_tabacos);
 
-                                    $total_saldo_pendiente = DB::update(
-                                        'UPDATE detalle_factura SET anterior = ? WHERE id_detalle =
-                        ?',
-                                        [$total_ac, $detalles->id_detalle],
-                                    );
+
                                 @endphp
 
                                 <tr style="font-size:10px;">
@@ -626,9 +616,6 @@
                                     $total_puros_salida = DB::select('SELECT SUM(cantidad_puros*unidad) AS salida FROM detalle_factura WHERE facturado = "N" and id_pendiente = ?', [$detalles->id_pendiente]);
                                     $total_saldo_pendiente = DB::select('SELECT saldo FROM pendiente WHERE id_pendiente = ?', [$detalles->id_pendiente]);
 
-                                    $total_restante = intval($total_saldo_pendiente[0]->saldo) - intval($total_puros_salida[0]->salida);
-
-                                    $total_saldo_pendiente = DB::update('UPDATE detalle_factura SET anterior = ? WHERE id_detalle = ?', [$total_restante, $detalles->id_detalle]);
 
                                     $total_neto += $detalles->total_neto;
                                     $total_bruto += $detalles->total_bruto;
@@ -668,7 +655,7 @@
                                     <td style="text-align:center;font-size:9px; height: 24px;border: 5px solid #C00;">
                                         {{ $detalles->orden_total }}</td>
                                     <td style="text-align:center;font-size:9px; height: 24px;border: 5px solid #C00;">
-                                        {{ $total_restante }}</td>
+                                        {{ $detalles->orden_restante }}</td>
                                     <td style="text-align:center;font-size:9px; height: 24px;border: 5px solid #C00;">
                                         {{ $detalles->total_bruto }}</td>
                                     <td style="text-align:center;font-size:9px; height: 24px;border: 5px solid #C00;">

@@ -664,7 +664,7 @@ class FacturaTerminado extends Component
         }
     }
 
-    public function imprimir_formatos()
+    public function imprimir_formatos($picos)
     {
         $vista_html = [
             '1' => ['vista' => 'Exports.factura-terminado-exports-warehouse', 'encabezado' => [0 => 'A18:R18', 1 => 'A19:R19']],
@@ -679,9 +679,18 @@ class FacturaTerminado extends Component
             '10' => ['vista' => 'Exports.factura-terminado-exports-coyote', 'encabezado' => [0 => 'A18:L18', 1 => 'A19:L19']],
         ];
 
-        $this->detalles_venta = DB::select('call mostrar_detalle_factura(?,?,?,?,?)', [
-            $this->aereo, $this->items_b, $this->ordens_b, $this->codigo_b, $this->t_empaque_b
-        ]);
+        if ($picos == 1) {
+            $this->detalles_venta = DB::select('call mostrar_detalle_factura(?,?,?,?,?)', [
+                $this->aereo, $this->items_b, $this->ordens_b, $this->codigo_b, $this->t_empaque_b
+            ]);
+        } else {
+            $this->detalles_venta = DB::select('call mostrar_detalle_factura_sin_picos(?,?,?,?,?)', [
+                $this->aereo, $this->items_b, $this->ordens_b, $this->codigo_b, $this->t_empaque_b
+            ]);
+        }
+
+
+
 
         $vista =  view($vista_html[$this->formatos_impresiones]['vista'], [
             'detalles_venta' => $this->detalles_venta

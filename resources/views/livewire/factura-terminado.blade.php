@@ -80,7 +80,8 @@
             </div>
             <div class="col-sm-8" style="text-align:end;">
                 <div class="btn-group" style="height: 35px;" role="group">
-                    <button class="btn btn-warning fs-7" wire:click="imprimir_formatos()">Imprimir</button>
+                    <button class="btn btn-warning fs-7" wire:click="imprimir_formatos(0)">Imprimir(Aduana)</button>
+                    <button class="btn btn-warning fs-7" wire:click="imprimir_formatos(1)">Imprimir</button>
 
                     <select wire:model="formatos_impresiones" class="form-control">
                         <option value="1">Warehouse Detallada</option>
