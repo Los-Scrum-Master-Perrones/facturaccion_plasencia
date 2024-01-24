@@ -16,15 +16,17 @@ class detallesExport implements
 
     public $nom;
     public $nm;
+    public $busqueda;
 
-    function __construct($nom,$nm) {
+    function __construct($nom,$nm,$busqueda) {
         $this->nom = $nom;
         $this->nm = $nm;
+        $this->busqueda = $busqueda;
     }
 
     public function view(): View
     {
-        $detalles_provicionales = DB::select('call mostrar_detalles_provicional("",?)',[ $this->nm]);
+        $detalles_provicionales = DB::select('call mostrar_detalles_provicional(?,?)',[ $this->busqueda, $this->nm]);
         foreach ($detalles_provicionales as $key => $value) {
 
             if($value->sampler == 'si'){

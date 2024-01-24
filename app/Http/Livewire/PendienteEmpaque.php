@@ -1007,7 +1007,7 @@ class PendienteEmpaque extends Component
 
         $this->total_saldo = 0;
         $this->detalles_provicionales =  DB::select('call mostrar_detalles_provicional(:buscar,:num)', [
-            'buscar' => '',
+            'buscar' => $this->busqueda,
             'num' => $this->programacion_actual
         ]);
 
@@ -1104,19 +1104,19 @@ class PendienteEmpaque extends Component
 
     public function exportProgramacion()
     {
-        return Excel::download(new detallesExport($this->materiales, $this->programacion_actual), 'ProgramaciónPro.xlsx');
+        return Excel::download(new detallesExport($this->materiales, $this->programacion_actual,$this->busqueda), 'ProgramaciónPro.xlsx');
     }
 
     public function imprimir_materiales()
     {
 
-        $this->materiales_programacion = DB::select('call exportar_materiales_temporal()');
+        $this->materiales_programacion = DB::select('call exportar_materiales_temporal(?)',[$this->programacion_actual]);
 
         $vista =  view('Exports.materiales-programacion-export', [
             'materiales' => $this->materiales_programacion
         ]);
 
-        $this->cajasProgramacion = DB::select('call exportar_cajas_temporal()');
+        $this->cajasProgramacion = DB::select('call exportar_cajas_temporal(?)',[$this->programacion_actual]);
 
         $vista2 =  view('Exports.cajas-programacion-export', [
             'materiales' => $this->cajasProgramacion
@@ -1129,7 +1129,7 @@ class PendienteEmpaque extends Component
     public function actualizar_datos()
     {
         $detalles_p = DB::select('call mostrar_detalles_provicional_actualizar_material(:buscar)', [
-            'buscar' => '',
+            'buscar' => $this->busqueda,
         ]);
 
 
