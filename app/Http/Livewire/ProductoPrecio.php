@@ -196,21 +196,45 @@ class ProductoPrecio extends Component
 
     public function imprimir_reporte()
     {
+        $prodcutosPrecio = DB::select(
+            'call mostrar_catalogo_precios_busqueda_historial(?,?,?,?,?,?,?,?,?)',
+            [
+                $this->codigo,
+                $this->marca,
+                $this->nombre,
+                $this->vitola,
+                $this->capa,
+                $this->empaque,
+                $this->precio_menor == '' ? 0 : $this->precio_menor,
+                $this->precio_mayor == '' ? 0 : $this->precio_mayor,
+                $this->presentacion
+            ]
+            );
+        $usos = DB::select('call mostrar_catalogo_precios_historial("","","","","","","")');
+
+
+
+        $usosArray = [];
+        $usosArray2 = [];
+        foreach ($usos as $uso) {
+            $uso->precio_anio[$uso->anio] = $uso->precio;
+
+            $usosArray[$uso->id_catalogo_items_precio] =  $uso;
+            $usosArray2[$uso->id_catalogo_items_precio][] =  $uso;
+        }
+        foreach ($prodcutosPrecio as $key => $value) {
+            $value->precio_actual = $usosArray[$value->id];
+            $value->historial[] = $usosArray2[$value->id];
+        }
+
+        $anios = DB::select('SELECT DISTINCT anio
+        from catalogo_historial_precio
+        ORDER BY anio');
+
+
         $vista =  view('Exports.producto-precio', [
-            'prodcutosPrecio' => DB::select(
-                'call mostrar_catalogo_precios_busqueda_historial(?,?,?,?,?,?,?,?,?)',
-                [
-                    $this->codigo,
-                    $this->marca,
-                    $this->nombre,
-                    $this->vitola,
-                    $this->capa,
-                    $this->empaque,
-                    $this->precio_menor == '' ? 0 : $this->precio_menor,
-                    $this->precio_mayor == '' ? 0 : $this->precio_mayor,
-                    $this->presentacion
-                ]
-            )
+            'prodcutosPrecio' => $prodcutosPrecio,
+            'anios' => $anios
         ]);
 
         return Excel::download(new CatalogoPrecioExport($vista), 'Catalogo Precios.xlsx');

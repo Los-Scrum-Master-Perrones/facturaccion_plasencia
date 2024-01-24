@@ -12,18 +12,14 @@ class ProduccionMoldesRestantesExport implements
 {
 
     public $nom;
-    public $rangoFecha;
-    public $titulo;
 
-    function __construct($nom,$rangoFecha,$titulo) {
+    function __construct($nom) {
         $this->nom = $nom;
-        $this->rangoFecha = $rangoFecha;
-        $this->titulo = $titulo;
     }
 
     public function view(): View
     {
-        return view('ReportePlanillaProduccion',[ 'pendiente' => $this->nom , 'rangoFecha' => $this->rangoFecha, 'titulo' => $this->titulo]) ;
+        return view('ReportePlanificacionMoldes',[ 'moldes' => $this->nom]) ;
     }
 
 

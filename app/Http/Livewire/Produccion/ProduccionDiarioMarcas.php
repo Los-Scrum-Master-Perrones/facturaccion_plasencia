@@ -3,6 +3,7 @@
 namespace App\Http\Livewire\Produccion;
 
 use App\Exports\ProduccionModulosEmpleadoExport;
+use App\Exports\ProduccionMoldesRestantesExport;
 use App\Exports\ProduccionPlanificacionSemanal;
 use App\Models\ProduccionDiarioModulos;
 use App\Models\ProduccionDiarioProducir;
@@ -216,7 +217,7 @@ class ProduccionDiarioMarcas extends Component
 
     public function imprimir_moldes_restantes()
     {    $moldes = DB::select('CALL `buscar_produccion_moldes_inventario`(0)');
-        return Excel::download(new ProduccionModulosEmpleadoExport($moldes), 'Reporte diario de marcas a producir.xlsx');
+        return Excel::download(new ProduccionMoldesRestantesExport($moldes), 'Reporte moldes en uso.xlsx');
     }
 
     public function imprimir_planificacion_semanal()
