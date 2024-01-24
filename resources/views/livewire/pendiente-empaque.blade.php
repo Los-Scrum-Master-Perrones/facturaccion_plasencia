@@ -1033,7 +1033,7 @@
                                 </form>
                             </div>
                             <div class="col-md-4 text-center">
-                                <form method="GET" action="{{ route('exportar_materia') }}">
+                                <form wire:submit.prevent="actualizar_datos()">
                                     <button class="btn btn-primary fs-7" data-bs-dismiss="modal" type="submit" >Actualizar(Mat.)</button>
                                 </form>
                             </div>

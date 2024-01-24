@@ -1128,9 +1128,8 @@ class PendienteEmpaque extends Component
 
     public function actualizar_datos()
     {
-        $detalles_p = DB::select('call mostrar_detalles_provicional(:buscar,:num)', [
+        $detalles_p = DB::select('call mostrar_detalles_provicional_actualizar_material(:buscar)', [
             'buscar' => '',
-            'num' => $this->programacion_actual
         ]);
 
 
