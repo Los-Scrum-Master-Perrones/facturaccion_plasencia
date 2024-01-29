@@ -3,13 +3,16 @@
 namespace App\Http\Livewire;
 
 use App\Exports\MaterialesProgramacionExportView;
+use App\Models\DetalleProgramacion;
+use App\Models\EntradasSalida;
+use App\Models\ListaCajas;
+use App\Models\Prograamacion;
 use Livewire\Component;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
 use Maatwebsite\Excel\Facades\Excel;
 use Barryvdh\DomPDF\Facade as PDF;
 
-use App\Exports\ProgramcionExport;
 use Illuminate\Support\Facades\DB;
 
 class HistorialProgramacion extends Component
@@ -87,39 +90,56 @@ class HistorialProgramacion extends Component
     }
 
 
-    public function eliminar_detalles_pro(Request $request)
+    public function eliminar_detalles_pro(DetalleProgramacion $detalle)
     {
+        $programacion = Prograamacion::find($detalle->id_programacion);
+
+        if( is_null($detalle->codigo_caja) ){
+            $cant_tipo = DB::select(
+                'call traer_cant_cajas(:id_pendiente)', ['id_pendiente' => $detalle->id_pendiente]
+            );
+                if ($cant_tipo[0]->cajas_tipo != null) {
+                    $restantes = explode(" ", $detalle->cajas);
+
+                    if($restantes[0] == 'Faltan'){
+                        if($detalle->cant_cajas == $restantes[1]){
 
 
-        $cant_tipo = DB::select(
-            'call traer_cant_cajas(:id_pendiente)',
-            ['id_pendiente' => $request->id_pendientee]
-        );
 
-        if ($cant_tipo[0]->cajas_tipo != null) {
+                        }elseif($detalle->cant_cajas < $restantes[1]){
+                            $caja = ListaCajas::where('codigo','=',$detalle->codigo_caja)->first();
 
-            $cajas_vie = ($request->saldo_viejo / $cant_tipo[0]->cajas_tipo);
+                            $salida = EntradasSalida::where('codigo','=',$detalle->codigo_caja)->where('descripcion','=',$programacion->mes_contenedor)->first();
 
-            $actualizar_existencia =  ($cajas_vie + $request->cant_cajase);
-        } else {
-            $actualizar_existencia = 0;
+                            ListaCajas::where('codigo','=','')->update([]);
+                        }
+                    }
+
+
+                } else {
+
+                }
         }
 
 
 
-        DB::select(
-            'call eliminar_detalle_programacion(:id,:id_pendiente,:saldo,:cant)',
-            [
-                'id' =>  $request->ide,
-                'id_pendiente' => $request->id_pendientee,
-                'saldo' => $request->saldoe,
-                'cant' => $actualizar_existencia
-            ]
-        );
 
 
 
-        return redirect()->route('historial_programacion');
+
+        // DB::select(
+        //     'call eliminar_detalle_programacion(:id,:id_pendiente,:saldo,:cant)',
+        //     [
+        //         'id' =>  $request->ide,
+        //         'id_pendiente' => $request->id_pendientee,
+        //         'saldo' => $request->saldoe,
+        //         'cant' => $actualizar_existencia
+        //     ]
+        // );
+
+
+
+        // return redirect()->route('historial_programacion');
     }
 
 

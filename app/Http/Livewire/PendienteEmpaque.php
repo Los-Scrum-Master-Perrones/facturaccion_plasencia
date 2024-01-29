@@ -1046,9 +1046,13 @@ class PendienteEmpaque extends Component
 
     public function insertarDetalle_y_actualizarPendiente($resquest)
     {
-        try {
 
-            $provicionales = DB::select('SELECT * FROM detalle_programacion_temporal');
+        try {
+            DB::beginTransaction();
+            $provicionales = DB::select(
+                'SELECT * FROM detalle_programacion_temporal where numero_programacion = ?',
+                [$this->programacion_actual]
+            );
 
             $this->insertar_programacion = DB::select(
                 'call insertar_programacion(:fecha,:contenedor)',
@@ -1059,20 +1063,18 @@ class PendienteEmpaque extends Component
             );
 
             foreach ($provicionales as $key => $value) {
-
-
                 DB::insert(
                     'call insertar_detalle_programacion(:pa_id_detalle_temporal,
-                                                    :pa_numero_orden,
-                                                    :pa_orden,
-                                                    :pa_cod_producto,
-                                                    :pa_saldo,
-                                                    :pa_id_pendiente,
-                                                    :pa_caja_sobrantes,
-                                                    :pa_cant_cajas,
-                                                    :pa_codigo_caja,
-                                                    :pa_cantidad_sobrante_puros,
-                                                    :pa_des_contenedor)',
+                                :pa_numero_orden,
+                                :pa_orden,
+                                :pa_cod_producto,
+                                :pa_saldo,
+                                :pa_id_pendiente,
+                                :pa_caja_sobrantes,
+                                :pa_cant_cajas,
+                                :pa_codigo_caja,
+                                :pa_cantidad_sobrante_puros,
+                                :pa_des_contenedor)',
                     [
                         'pa_id_detalle_temporal' => $value->id_detalle_programacion,
                         'pa_numero_orden' => $value->numero_orden,
@@ -1089,37 +1091,41 @@ class PendienteEmpaque extends Component
                 );
             }
 
-            DB::delete('TRUNCATE TABLE detalle_programacion_temporal');
-            DB::delete('TRUNCATE TABLE detalles_temporal_materiales');
+            DB::delete('DELETE detalles_temporal_materiales FROM detalles_temporal_materiales
+            INNER JOIN detalle_programacion_temporal ON detalle_programacion_temporal.id_detalle_programacion = detalles_temporal_materiales.id_detalle_temporal
+                WHERE detalle_programacion_temporal.numero_programacion = ?',[$this->programacion_actual]);
+
+            DB::delete('DELETE FROM detalle_programacion_temporal WHERE numero_programacion = ?', [$this->programacion_actual]);
+
 
             $this->dispatchBrowserEvent('error_general', ['errorr' => 'Programacion creada con exito', 'icon' => 'success']);
-        } catch (Exception $t) {
-            $this->dispatchBrowserEvent('error_general', ['errorr' => $t->getMessage(), 'icon' => 'error']);
+            DB::commit();
+        } catch (\Exception $th) {
+            $this->dispatchBrowserEvent('error_general', ['errorr' => $th->getMessage(), 'icon' => 'error']);
+            DB::rollBack();
         }
-
-        //return redirect()->route('historial_programacion');
     }
 
 
 
     public function exportProgramacion()
     {
-        return Excel::download(new detallesExport($this->materiales, $this->programacion_actual,$this->busqueda), 'ProgramaciónPro.xlsx');
+        return Excel::download(new detallesExport($this->materiales, $this->programacion_actual, $this->busqueda), 'ProgramaciónPro.xlsx');
     }
 
     public function imprimir_materiales()
     {
 
-        $this->materiales_programacion = DB::select('call exportar_materiales_temporal(?)',[$this->programacion_actual]);
+        $materiales_programacion = DB::select('call exportar_materiales_temporal(?)', [$this->programacion_actual]);
 
         $vista =  view('Exports.materiales-programacion-export', [
-            'materiales' => $this->materiales_programacion
+            'materiales' => $materiales_programacion
         ]);
 
-        $this->cajasProgramacion = DB::select('call exportar_cajas_temporal(?)',[$this->programacion_actual]);
+        $cajasProgramacion = DB::select('call exportar_cajas_temporal(?)', [$this->programacion_actual]);
 
         $vista2 =  view('Exports.cajas-programacion-export', [
-            'materiales' => $this->cajasProgramacion
+            'materiales' => $cajasProgramacion
         ]);
 
 
@@ -1131,7 +1137,6 @@ class PendienteEmpaque extends Component
         $detalles_p = DB::select('call mostrar_detalles_provicional_actualizar_material(:buscar)', [
             'buscar' => $this->busqueda,
         ]);
-
 
         $detalles_p_materiales = DB::select('CALL `traer_materiales_temporal_todo`()');
 
@@ -1215,10 +1220,7 @@ class PendienteEmpaque extends Component
             }
         }
 
-
-
         DB::delete('TRUNCATE TABLE detalles_temporal_materiales;');
-
 
         $existencia_actual = 0;
         $pendiente_restante = 0;

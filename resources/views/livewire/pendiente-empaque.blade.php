@@ -37,7 +37,7 @@
             <div class="col">
                 <div class="btn-group" role="group" aria-label="Basic example">
                     <div wire:loading>
-                        <button id="btn_guardar" class="btn btn-info fs-7"  disabled>
+                        <button id="btn_guardar" class="btn btn-info fs-7" disabled>
                             <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
                             Loading...
                         </button>
@@ -59,24 +59,29 @@
 
                     <input name="buscar" id="buscar" class="form-control fs-7" wire:model="busqueda"
                         placeholder="Búsqueda por Marca, Nombre y Vitola" style="width:500px; height: 35px;">
-                        <select class="form-select" id="floatingSelect" aria-label="Floating label select example" wire:model='programacion_actual' style="width:200px; height: 35px;">
-                            <option value="1">Contenedor 1</option>
-                            <option value="2">Contenedor 2</option>
-                            <option value="3">Contenedor 3</option>
-                            <option value="4">Contenedor 4</option>
-                            <option value="5">Contenedor 5</option>
-                        </select>
+                    <select class="form-select" id="floatingSelect" aria-label="Floating label select example"
+                        wire:model='programacion_actual' style="width:200px; height: 35px;">
+                        <option value="1">Contenedor 1</option>
+                        <option value="2">Contenedor 2</option>
+                        <option value="3">Contenedor 3</option>
+                        <option value="4">Contenedor 4</option>
+                        <option value="5">Contenedor 5</option>
+                    </select>
                     <button onclick="mostrarMaterial(true)" type="button"
                         class="btn btn-primary fs-7 @if ($materiales) btn-success
-                    @else @endif" style="width:100px;">Con Materiales</button>
+                    @else @endif"
+                        style="width:100px;">Con Materiales</button>
 
                     <button onclick="mostrarMaterial(false)" type="button"
                         class="btn btn-primary fs-7 @if ($materiales) @else
-                        btn-success @endif" style="width:100px;">Sin Materiales</button>
+                        btn-success @endif"
+                        style="width:100px;">Sin Materiales</button>
 
-                    <button type="button" class="btn btn-primary fs-7" style="width:100px;" data-bs-toggle="modal" data-bs-target="#exampleModal">Opciones</button>
+                    <button type="button" class="btn btn-primary fs-7" style="width:100px;" data-bs-toggle="modal"
+                        data-bs-target="#exampleModal">Opciones</button>
                     @if (auth()->user()->rol == 0 || auth()->user()->rol == 1)
-                        <button type=" button" onclick="guardar_programacion()" class="btn btn-secondary fs-7"> Crear programación
+                        <button type=" button" onclick="guardar_programacion()" class="btn btn-secondary fs-7"> Crear
+                            programación
                         </button>
                     @endif
                 </div>
@@ -126,7 +131,8 @@
                                 <td>{{ $detalle_provicional->item }}</td>
                                 <td>{{ $detalle_provicional->cod_producto }}</td>
                                 <td>{{ $detalle_provicional->marca }} <br>
-                                    <span style="color: red">{{ $detalle_provicional->observacion }}</span></td>
+                                    <span style="color: red">{{ $detalle_provicional->observacion }}</span>
+                                </td>
                                 <td>{{ $detalle_provicional->vitola }}</td>
                                 <td>{{ $detalle_provicional->nombre }}</td>
                                 <td>{{ $detalle_provicional->capa }}</td>
@@ -197,7 +203,8 @@
                                     <tr>
                                         <th colspan="3"></th>
                                         <td colspan="6">
-                                            {{ '(' . $materiale->codigo_material . ') ' . $materiale->des_material }}</td>
+                                            {{ '(' . $materiale->codigo_material . ') ' . $materiale->des_material }}
+                                        </td>
                                         <th></th>
                                         <th></th>
                                         <td>{{ $materiale->cantidad_m }}</td>
@@ -483,28 +490,37 @@
                         @if (auth()->user()->rol == -1)
                         @else
                             @if (auth()->user()->rol == 0 || auth()->user()->rol == 1)
-                            <button class="btn btn-outline-primary fs-7" data-bs-toggle="modal" data-bs-target="#productos_crear_empaque">
-                                <abbr title="Agregar a Pendiente Empaque">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="currentColor" class="bi bi-plus-circle" viewBox="0 0 16 16">
-                                        <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z" />
-                                        <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z" />
-                                    </svg>
-                                </abbr> Nuevo
-                            </button>
+                                <button class="btn btn-outline-primary fs-7" data-bs-toggle="modal"
+                                    data-bs-target="#productos_crear_empaque">
+                                    <abbr title="Agregar a Pendiente Empaque">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14"
+                                            fill="currentColor" class="bi bi-plus-circle" viewBox="0 0 16 16">
+                                            <path
+                                                d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z" />
+                                            <path
+                                                d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z" />
+                                        </svg>
+                                    </abbr> Nuevo
+                                </button>
                             @endif
                         @endif
                         <button class="btn btn-outline-secondary fs-7" wire:click="exportPendiente()">
                             <abbr title="Exportar a excel">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="currentColor" class="bi bi-file-earmark-spreadsheet" viewBox="0 0 16 16">
-                                    <path d="M14 14V4.5L9.5 0H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2zM9.5 3A1.5 1.5 0 0 0 11 4.5h2V9H3V2a1 1 0 0 1 1-1h5.5v2zM3 12v-2h2v2H3zm0 1h2v2H4a1 1 0 0 1-1-1v-1zm3 2v-2h3v2H6zm4 0v-2h3v1a1 1 0 0 1-1 1h-2zm3-3h-3v-2h3v2zm-7 0v-2h3v2H6z" />
+                                <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14"
+                                    fill="currentColor" class="bi bi-file-earmark-spreadsheet" viewBox="0 0 16 16">
+                                    <path
+                                        d="M14 14V4.5L9.5 0H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2zM9.5 3A1.5 1.5 0 0 0 11 4.5h2V9H3V2a1 1 0 0 1 1-1h5.5v2zM3 12v-2h2v2H3zm0 1h2v2H4a1 1 0 0 1-1-1v-1zm3 2v-2h3v2H6zm4 0v-2h3v1a1 1 0 0 1-1 1h-2zm3-3h-3v-2h3v2zm-7 0v-2h3v2H6z" />
                                 </svg>
                             </abbr>
                             Exportar
                         </button>
-                        <button class="btn btn-outline-purpura fs-7" wire:click="imprimir_materiales_pendiente_empaque_productos_cajas()">
+                        <button class="btn btn-outline-purpura fs-7"
+                            wire:click="imprimir_materiales_pendiente_empaque_productos_cajas()">
                             <abbr title="Exportar a excel Pendiente Rebajando cajas y Puros">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="currentColor" class="bi bi-file-earmark-spreadsheet" viewBox="0 0 16 16">
-                                    <path d="M14 14V4.5L9.5 0H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2zM9.5 3A1.5 1.5 0 0 0 11 4.5h2V9H3V2a1 1 0 0 1 1-1h5.5v2zM3 12v-2h2v2H3zm0 1h2v2H4a1 1 0 0 1-1-1v-1zm3 2v-2h3v2H6zm4 0v-2h3v1a1 1 0 0 1-1 1h-2zm3-3h-3v-2h3v2zm-7 0v-2h3v2H6z" />
+                                <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14"
+                                    fill="currentColor" class="bi bi-file-earmark-spreadsheet" viewBox="0 0 16 16">
+                                    <path
+                                        d="M14 14V4.5L9.5 0H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2zM9.5 3A1.5 1.5 0 0 0 11 4.5h2V9H3V2a1 1 0 0 1 1-1h5.5v2zM3 12v-2h2v2H3zm0 1h2v2H4a1 1 0 0 1-1-1v-1zm3 2v-2h3v2H6zm4 0v-2h3v1a1 1 0 0 1-1 1h-2zm3-3h-3v-2h3v2zm-7 0v-2h3v2H6z" />
                                 </svg>
                             </abbr>
                             Pendiente
@@ -512,13 +528,14 @@
                     </div>
                 </div>
                 <div class="col" wire:ignore>
-                        <select class="form-select" id="floatingSelect" aria-label="Floating label select example" wire:model='programacion_actual'>
-                            <option value="1">Contenedor 1</option>
-                            <option value="2">Contenedor 2</option>
-                            <option value="3">Contenedor 3</option>
-                            <option value="4">Contenedor 4</option>
-                            <option value="5">Contenedor 5</option>
-                        </select>
+                    <select class="form-select" id="floatingSelect" aria-label="Floating label select example"
+                        wire:model='programacion_actual'>
+                        <option value="1">Contenedor 1</option>
+                        <option value="2">Contenedor 2</option>
+                        <option value="3">Contenedor 3</option>
+                        <option value="4">Contenedor 4</option>
+                        <option value="5">Contenedor 5</option>
+                    </select>
                 </div>
                 <div class="col" wire:ignore>
                     <select onchange="buscar_tabla()" name="b_item" id="b_item" style="width:100%;height:34px;"
@@ -583,7 +600,7 @@
 
 
             </div>
-            <div class="row p-2"  style="margin-bottom: -10px">
+            <div class="row p-2" style="margin-bottom: -10px">
                 <div class="col">
                     <nav>
                         <ul class="pagination justify-content-center">
@@ -607,7 +624,8 @@
                                 $cantida = 1;
                             @endphp
                             <li class="page-item">
-                                <a class="page-link  fs-8" href="#" wire:click="mostrar_todo(1)">Mostrar Todo</a>
+                                <a class="page-link  fs-8" href="#" wire:click="mostrar_todo(1)">Mostrar
+                                    Todo</a>
                             </li>
                         </ul>
                     </nav>
@@ -739,10 +757,11 @@
 
         <div class="input-group" style="width:30%;position: fixed;right: 0px;bottom:0px; height:30px;">
             <span class="form-control input-group-text fs-7">Total pendiente</span>
-            <input type="text" class="form-control  fs-7" id="sumape" value="{{ number_format($sumape,0) }}">
+            <input type="text" class="form-control  fs-7" id="sumape"
+                value="{{ number_format($sumape, 0) }}">
 
             <span class="form-control input-group-text fs-7">Total saldo</span>
-            <input type="text" class="form-control fs-7" id="sumase" value="{{ number_format($sumase,0) }}">
+            <input type="text" class="form-control fs-7" id="sumase" value="{{ number_format($sumase, 0) }}">
         </div>
     </div>
 
@@ -1013,38 +1032,40 @@
     </div>
     <!-- FIN MODAL ELMINAR TODO DETALLE DETALLE PROGRAMACION -->
 
-        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
-            aria-hidden="true">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h1 class="modal-title fs-5" id="exampleModalLabel">Reportes</h1>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal"
-                            aria-label="Close"></button>
-                    </div>
-                    <div class="modal-body">
-                        <div class="row">
-                            <div class="col-md-4 text-center">
-                                <button class="btn btn-warning fs-7" onclick="exportarMaterial()" type="button"  data-bs-dismiss="modal">Materiales <br> Exportar </button>
-                            </div>
-                            <div class="col-md-4 text-center">
-                                <form wire:submit.prevent="exportProgramacion()" class="btn btn-success fs-7">
-                                    <button class="btn btn-success fs-7" data-bs-dismiss="modal" type="submit">Exportar</button>
-                                </form>
-                            </div>
-                            <div class="col-md-4 text-center">
-                                <form wire:submit.prevent="actualizar_datos()">
-                                    <button class="btn btn-primary fs-7" data-bs-dismiss="modal" type="submit" >Actualizar(Mat.)</button>
-                                </form>
-                            </div>
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="exampleModalLabel">Reportes</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-md-4 text-center">
+                            <button class="btn btn-warning fs-7" onclick="exportarMaterial()" type="button"
+                                data-bs-dismiss="modal">Materiales <br> Exportar </button>
+                        </div>
+                        <div class="col-md-4 text-center">
+                            <form wire:submit.prevent="exportProgramacion()" class="btn btn-success fs-7">
+                                <button class="btn btn-success fs-7" data-bs-dismiss="modal"
+                                    type="submit">Exportar</button>
+                            </form>
+                        </div>
+                        <div class="col-md-4 text-center">
+                            <form wire:submit.prevent="actualizar_datos()">
+                                <button class="btn btn-primary fs-7" data-bs-dismiss="modal"
+                                    type="submit">Actualizar(Mat.)</button>
+                            </form>
                         </div>
                     </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
                 </div>
             </div>
         </div>
+    </div>
 
     {{-- JavaScript detalle programacion --}}
     @push('scripts')
@@ -1278,20 +1299,14 @@
 
             var data = JSON.parse(datas);
 
-
             for (var i = 0; i < data.length; i++) {
                 if (data[i].id === id) {
+
                     document.form_saldo.saldo.value = data[i].saldo;
-
                     document.form_saldo.id_detalle.value = data[i].id;
-
                     document.form_saldo.id_pendientea.value = data[i].id_pendiente;
-
                     document.form_saldo.cant_cajas.value = data[i].cant_cajas;
-
                     document.form_saldo.saldo_viejo.value = data[i].cant_cajas_necesarias;
-
-
 
                 }
             }
@@ -1331,34 +1346,26 @@
 
 
         async function guardar_programacion() {
-            var html = '<div>' +
-                '<div>' +
-                '<div>' +
-                '<div><br>' +
-                '  <div class="mb-3 col">' +
-                '<label for="txt_empaque" class="form-label">Editar tipo de empaque</label>' +
-                '<input name="fecha_creacion_new" id="fecha_creacion_new" type="date" class="  form-control  mr-sm-2"' +
-                'placeholder="" style="width:100%;">' +
-                '</div>' +
-                '<div class="mb-3 col">' +
-                '<label for="txt_empaque" class="form-label">Nombre Ingles</label>' +
-                '<input name="fecha_contenedor_new" id="fecha_contenedor_new" type="text" class="  form-control  mr-sm-2"' +
-                'placeholder="Número y fecha del contenedor" style="width:100%;" autocomplete="off">' +
-                '</div>' +
-                '</div>' +
-                '</div>' +
-                '</div>' +
-                '</div>';
-
-
-
+            var html = `<div>
+                            <br>
+                            <div class="mb-3 col">
+                                <label for="txt_empaque" class="form-label">Fecha de Programación</label>
+                                <input name="fecha_creacion_new" id="fecha_creacion_new" type="date" class="  form-control  mr-sm-2"
+                                            placeholder="" style="width:100%;">
+                            </div>
+                            <div class="mb-3 col">
+                                <label for="txt_empaque" class="form-label">Nombre Programación</label>
+                                <input name="fecha_contenedor_new" id="fecha_contenedor_new" type="text" class="  form-control  mr-sm-2"
+                                            placeholder="Número y fecha del contenedor" style="width:100%;" autocomplete="off">
+                            </div>
+                        </div>`;
 
             const {
                 value: formValues
             } = await Swal.fire({
                 title: '',
                 html: html,
-                width: 300,
+                width: 400,
                 showCancelButton: true,
                 confirmButtonText: 'Guardar',
                 cancelButtonText: 'Cancelar',

@@ -11,12 +11,12 @@
 
         <ul class="dropdown-menu">
             <li><a class="dropdown-item" href="#"><b><u>Ordenes Completeadas</u></b></a></li>
-            <li><a class="dropdown-item" href="#">Asignar Automaticamente</a></li>
+            <li><a class="dropdown-item" href="#" wire:click='actualiazarOrdenesExistentes()'>Asignar Automaticamente</a></li>
             @foreach ($ordenes as $completado)
                 @isset($completado->id_produccion_orden)
                     <li>
                         <a class="dropdown-item" href="#"
-                            @if (isset($completado->ordenes)) data-bs-toggle="modal" data-bs-target="#modal_agregar_orden"
+                        @if (isset($completado->ordenes)) data-bs-toggle="modal" data-bs-target="#modal_agregar_orden"
                                 onclick="cambiarOrden('{{ json_encode($completado) }}',{{ $completado->id_produccion_orden }},'{{ json_encode($ordenes_parejas[$completado->id_produccion_orden]) }}')"
                         @else
                             data-bs-toggle="modal" data-bs-target="#modal_agregar_marca2" onclick="cambiarOrdenDiferente({{ $completado->id_produccion_orden }},'{{ json_encode($ordenes_parejas[$completado->id_produccion_orden]) }}')" @endif>
@@ -34,7 +34,7 @@
     <div class="modal-dialog modal-xl">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 id="staticBackdropLabel">Detalles del producto <span style="font-size:10px;" name="clase"
+                <h5 id="staticBackdropLabel">Detalles del producto<span style="font-size:10px;" name="clase"
                         id="clase"></span></h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
@@ -189,7 +189,6 @@
             if (rowCount <= 1) {} else {
                 for (var x = rowCount - 1; x > 0; x--) {
                     document.getElementById("bodyTabla").innerHTML = "";
-
                 }
             }
 
@@ -235,8 +234,8 @@
                 document.getElementById("bodyTabla").innerHTML += tabla_nueva.toString();
 
             }
-            id_parejas = [];
 
+            id_parejas = [];
         }
 
         function cambiarOrdenDiferente(id_orden, params) {

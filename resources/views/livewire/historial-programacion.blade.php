@@ -214,7 +214,7 @@
                                     <tr>
                                         <td> {{ $detalles_programacione->numero_orden }}</td>
                                         <td> {{ $detalles_programacione->orden }}</td>
-					<td> {{ $detalles_programacione->item }}</td>
+					                    <td> {{ $detalles_programacione->item }}</td>
                                         <td> {{ $detalles_programacione->marca }}</td>
                                         <td> {{ $detalles_programacione->vitola }}</td>
                                         <td> {{ $detalles_programacione->nombre }}</td>
@@ -232,12 +232,7 @@
 
                                         <td style="text-align:center">
 
-                                            <a data-bs-toggle="modal" data-bs-target="#modal_eliminar_detalle" onclick="datos_modal_eliminar({{ $detalles_programacione->id_detalle_programacion }},
-                                                                    {{ $detalles_programacione->id_pendiente }},
-                                                                    '{{ $detalles_programacione->saldo }}',
-                                                                    '{{ $detalles_programacione->cajas }}',
-                                                                    '{{ $detalles_programacione->cant_cajas }}')"
-                                                href="#">
+                                            <a data-bs-toggle="modal" data-bs-target="#modal_eliminar_detalle" onclick="datos_modal_eliminar({{ $detalles_programacione->id_detalle_programacion }})" href="#">
                                                 <abbr title="Eliminar detalles"><svg xmlns="http://www.w3.org/2000/svg"
                                                         width="16" height="16" fill="currentColor"
                                                         class="bi bi-trash-fill" viewBox="0 0 16 16">
@@ -329,11 +324,8 @@
 
 
     <!-- INICIO MODAL ELMINAR DETALLE -->
-    <form action="{{ Route('borrar_historial_programacion') }}" method="POST" id="formulario_mostrarE"
+    <form  id="formulario_mostrarE"
         name="formulario_mostrarE">
-
-        @csrf
-
         <div class="modal fade" id="modal_eliminar_detalle" data-backdrop="static" data-keyboard="false" tabindex="-1"
             aria-labelledby="staticBackdropLabel" aria-hidden="true" style="opacity:.9;background:#212529;">
             <div class="modal-dialog modal-dialog-centered">
@@ -346,19 +338,12 @@
                     </div>
                     <div class="modal-footer">
 
-
                         <input name="ide" id="ide" hidden />
-                        <input name="saldoe" id="saldoe" hidden />
-                        <input name="id_pendientee" id="id_pendientee" hidden />
-                        <input name="saldo_viejo" id="saldo_viejo" hidden />
-                        <input name="cant_cajase" id="cant_cajase" hidden />
 
-
-                        <button style=" background: #b39f64; color: #ecedf1;" type="button" class=" btn-info-claro "
-                            data-bs-dismiss="modal">
+                        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">
                             <span>Cancelar</span>
                         </button>
-                        <button type="submit" class=" btn-info ">
+                        <button type="button" class="btn btn-success" onclick="datos_reversar_item()" data-bs-dismiss="modal">
                             <span>Eliminar</span>
                         </button>
                     </div>
@@ -515,18 +500,12 @@
 
             });
 
-            function datos_modal_eliminar(id,
-                id_pendiente,
-                saldo,
-                cant_cajas_necesarias,
-                cant_cajas) {
-
+            function datos_modal_eliminar(id) {
                 $('#ide').val(id);
-                $('#saldoe').val(saldo);
-                $('#id_pendientee').val(id_pendiente);
-                $('#cant_cajase').val(cant_cajas);
-                $('#saldo_viejo').val(saldo);
+            }
 
+            function datos_reversar_item() {
+                @this.eliminar_detalles_pro($('#ide').val());
             }
 
             function datos_modal_actualizar(id,
