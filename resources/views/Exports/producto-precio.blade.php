@@ -8,6 +8,8 @@
             <th style=" text-align:center;">Vitolas</th>
             <th style=" text-align:center;">Capas</th>
             <th style=" text-align:center;">Tipo de Empaque</th>
+            <th style=" text-align:center;">Banda</th>
+            <th style=" text-align:center;">Cello</th>
             @foreach ($anios as $anio)
 
                 <th style="text-align:center;">{{ $anio->anio }}</th>
@@ -48,6 +50,8 @@
                 <td>{{ $prodPrecio->vitola }}</td>
                 <td>{{ $prodPrecio->capa }}</td>
                 <td>{{ $prodPrecio->tipo_empaque }}</td>
+                <td>{{ $prodPrecio->banda }}</td>
+                <td>{{ $prodPrecio->cello }}</td>
                 @foreach ($anios as $anio)
                     @php
                         $precio = 0;

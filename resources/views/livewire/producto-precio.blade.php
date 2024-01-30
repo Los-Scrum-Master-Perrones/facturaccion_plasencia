@@ -219,6 +219,8 @@
                                         @endforeach
                                     </select>
                                 </th>
+                                <th style=" text-align:center;">BANDA</th>
+                                <th style=" text-align:center;">CELLO</th>
                                 <th style=" text-align:center;">Precio ({{ Carbon\Carbon::now()->format('Y') }})</th>
                             </tr>
                         </thead>
@@ -237,6 +239,8 @@
                                     <td>{{ $prodPrecio->vitola }}</td>
                                     <td>{{ $prodPrecio->capa }}</td>
                                     <td>{{ $prodPrecio->tipo_empaque }}</td>
+                                    <td>{{ $prodPrecio->banda }}</td>
+                                    <td>{{ $prodPrecio->cello }}</td>
                                     <td style="text-align: right">
                                         {{ '$ ' . number_format($prodPrecio->precio_actual->precio, 2) }}
                                         <a href="#" onclick='historial({{ $key }})'>

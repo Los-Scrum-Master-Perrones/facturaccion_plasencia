@@ -19,6 +19,8 @@ class CatalogoItemsPrecio extends Model
         'vitola',
         'capa',
         'tipo_empaque',
-        'fecha'
+        'fecha',
+        'banda',
+        'cello',
     ];
 }
