@@ -15,9 +15,9 @@ class RolRoky
      * @param  \Closure(\Illuminate\Http\Request): (\Illuminate\Http\Response|\Illuminate\Http\RedirectResponse)  $next
      * @return \Illuminate\Http\Response|\Illuminate\Http\RedirectResponse
      */
-    public function handle(Request $request, Closure $next)
+    public function handle(Request $request, Closure $next, string $role)
     {
-        if (Auth::user()->rol == -2) {
+        if (!auth()->check() || !(auth()->user()->rol == $role)){
             return redirect()->route('unauthorized');
         }
 

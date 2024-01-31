@@ -2,6 +2,7 @@
 
 namespace App\Http\Livewire\Produccion;
 
+use App\Imports\MarcaPrecioImport;
 use App\Imports\ProduccionMaterialesImport;
 use App\Imports\ProducidoImport;
 use App\Imports\ProducidoPendienteImport;
@@ -134,7 +135,6 @@ class Produccion extends Component
             'select_file' => 'max:1024', // 1MB Max
         ]);
         (new ProducidoImport)->import($this->select_file);
-        
     }
 
     public function import2()
@@ -154,6 +154,17 @@ class Produccion extends Component
 
         (new ProducidoRehechosImport)->import($this->select_file);
     }
+
+    public function import_precio()
+    {
+        $this->validate([
+            'select_file' => '', // 1MB Max
+        ]);
+
+        (new MarcaPrecioImport)->import($this->select_file);
+    }
+
+
 
 
 }

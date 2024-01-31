@@ -53,6 +53,10 @@
             <h1>Acceso no autorizado</h1>
             <p>Lo siento, no tienes permisos para acceder a esta página.</p>
             <a href="/" class="btn">Volver al inicio</a>
+            <form action="{{ route('logout') }}" method="POST">
+                @csrf
+                <button type="submit"  class="btn btn-success">Cerrar Sesion</button>
+            </form>
         </div>
     </div>
 </body>

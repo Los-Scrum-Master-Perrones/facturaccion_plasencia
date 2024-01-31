@@ -322,9 +322,8 @@
                             </div>
 
                             <div class="row">
-
                                 <div class="mb-3 col">
-                                    <label for="txt_total" class="form-label">Pendinte</label>
+                                    <label for="txt_total" class="form-label">Pendiente</label>
                                     <input name="paquetes" id="paquetes" class="form-control fs-7" required
                                         type="number" autocomplete="off"
                                         wire:model.defer='produc_pendiente.cantidad'>
@@ -409,7 +408,8 @@
                                 $dias_habiles = 0;
 
                                 foreach ($periodo as $fecha) {
-                                    $dia_semana = $fecha->format('N'); // 1 (lunes) a 7 (domingo)
+                                    $dia_semana = $fecha->format('N');
+                                    // 1 (lunes) a 7 (domingo)
 
                                     // Excluir sábado (6) y domingo (7)
                                     if ($dia_semana != 6 && $dia_semana != 7) {
@@ -444,7 +444,12 @@
                             <td style="text-align:right;">{{ $detalle->pendiente }}</td>
                             <td style="text-align:right;">{{ $detalle->pendiente - $detalle->restantes }}
                                 @php
-                                    $porcentaje = (($detalle->pendiente - $detalle->restantes) / $detalle->pendiente) * 100;
+                                    if ($detalle->pendiente == 0) {
+                                        $porcentaje = 0;
+                                    }else {
+                                        $porcentaje = (($detalle->pendiente - $detalle->restantes) / $detalle->pendiente) * 100;
+                                    }
+
                                 @endphp
                                 <div class="progress">
                                     <div class="progress-bar @if ($porcentaje < 25) bg-danger @endif

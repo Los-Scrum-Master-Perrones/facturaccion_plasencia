@@ -19,7 +19,7 @@
                                 <input type="file" name="select_file" id="select_file"
                                     style="height: 30px;font-size: 0.7em" wire:model="select_file"
                                     class="form-control" />
-                                <input type="submit" wire:click="import" name="upload" class="btn btn-primary"
+                                <input type="submit" wire:click="import_precio" name="upload" class="btn btn-primary"
                                     style="height: 30px;font-size: 0.7em" value="Produccion Diaria">
                                 <input type="submit" wire:click="import2" name="upload" class="btn btn-secondary"
                                     style="height: 30px;font-size: 0.7em" value="Importar Precios (R,B)">

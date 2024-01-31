@@ -308,6 +308,7 @@
                                     <th>ORDEN</th>
                                     <th>VITOLA</th>
                                     <th>MARCAS</th>
+                                    <th>CAPA</th>
                                     <th>PEND.</th>
                                     <th>TAREA</th>
                                     <th>ESTIMADO</th>
@@ -420,6 +421,7 @@
                                                     </svg>
                                                 </a>
                                             </td>
+                                            <td>{{ $emple->capa }}</td>
                                         @endif
                                         <td><b>{{ $emple->restantes }}</td>
                                         <td>
