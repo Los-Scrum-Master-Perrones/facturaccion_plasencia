@@ -8,11 +8,13 @@ use App\Models\ProduccionEmpleado as ModelsProduccionEmpleado;
 use App\Models\ProduccionOrden;
 use App\Models\ProduccionOrdenEmpleado;
 use Carbon\Carbon;
+use Illuminate\Http\Request;
 use Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\Support\Facades\DB;
 use Livewire\Component;
 use Livewire\WithPagination;
 use Maatwebsite\Excel\Facades\Excel;
+use Illuminate\Http\Response;
 
 class ProduccionEmpleado extends Component
 {
@@ -236,5 +238,16 @@ class ProduccionEmpleado extends Component
             DB::rollback();
             $this->dispatchBrowserEvent('error_general',['errorr' => $e.' Falta codido de producto','icon' => 'error']);
         }
+    }
+
+    // funcion para api
+    public function empledos_activos($activo, Request $request){
+        $mostrar_empledos = DB::select('call buscar_produccion_empleado_A_I(?,?)', [$activo, $request->nombre]);
+
+        return response()->json([
+            'data' => $mostrar_empledos,
+            'estatus' => Response::HTTP_OK,
+        ], Response::HTTP_OK);
+
     }
 }

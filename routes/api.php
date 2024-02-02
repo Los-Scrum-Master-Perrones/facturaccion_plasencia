@@ -4,6 +4,7 @@ use App\Http\Controllers\Pendiente\PendienteComprobarEmpaque;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ReporteDiarioController;
+use App\Http\Livewire\Produccion\ProduccionEmpleado;
 
 /*
 |--------------------------------------------------------------------------
@@ -39,3 +40,7 @@ Route::get('pendiente/empaque/agregar/{id}', [PendienteComprobarEmpaque::class, 
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     //return $request->user();
 });
+
+
+// ruta para produccion
+Route::get('emplados/{activo}', [ProduccionEmpleado::class, 'empledos_activos']);
