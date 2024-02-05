@@ -36,6 +36,9 @@
 
                         <input type="checkbox" autocomplete="off" wire:model='b_presentacion3' value='Brocha'>
                         <label for="danger-outlined">Brocha</label>
+
+                        <input type="checkbox" autocomplete="off" wire:model='b_presentacion4' value='Sandwich'>
+                        <label for="danger-outlined">Sandwich</label>
                     </div>
                     <div class="col-md-2">
                         <div class="input-group mb-3" style="height: 30px">

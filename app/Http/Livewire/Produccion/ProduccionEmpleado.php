@@ -36,6 +36,7 @@ class ProduccionEmpleado extends Component
     public $b_presentacion1 = 'Tripa Larga';
     public $b_presentacion2 = 'Tripa Corta';
     public $b_presentacion3 = 'Brocha';
+    public $b_presentacion4 = 'Sandwich';
 
     public $ordenes = [];
     public $marcas = [];
@@ -113,7 +114,7 @@ class ProduccionEmpleado extends Component
                 $start,
                 $this->por_pagina,
                 $this->b_nombre_empleado,
-                $this->b_presentacion1 . $this->b_presentacion2 . $this->b_presentacion3
+                $this->b_presentacion1 . $this->b_presentacion2 . $this->b_presentacion3.$this->b_presentacion4
             ]
         );
 
@@ -131,7 +132,7 @@ class ProduccionEmpleado extends Component
                 $this->b_codigo_empleado,
                 $this->b_rol,
                 $this->b_nombre_empleado,
-                $this->b_presentacion1 . $this->b_presentacion2 . $this->b_presentacion3
+                $this->b_presentacion1 . $this->b_presentacion2 . $this->b_presentacion3.$this->b_presentacion4
             ]
         )[0]->total;
 
@@ -158,7 +159,7 @@ class ProduccionEmpleado extends Component
                 $start,
                 $this->por_pagina,
                 $this->b_nombre_empleado,
-                $this->b_presentacion1 . $this->b_presentacion2 . $this->b_presentacion3
+                $this->b_presentacion1 . $this->b_presentacion2 . $this->b_presentacion3.$this->b_presentacion4
             ]
         );
 
@@ -179,7 +180,7 @@ class ProduccionEmpleado extends Component
                 [
                     $this->b_fecha_1,
                     $this->b_fecha_2,
-                    $this->b_presentacion1 . $this->b_presentacion2 . $this->b_presentacion3,
+                    $this->b_presentacion1 . $this->b_presentacion2 . $this->b_presentacion3.$this->b_presentacion4,
                     $this->b_rol
                 ]
             );
@@ -204,6 +205,13 @@ class ProduccionEmpleado extends Component
                     $titulo .= ", ";
                 }
                 $titulo .= "Brocha";
+            }
+
+            if ($this->b_presentacion3) {
+                if (!empty($titulo)) {
+                    $titulo .= ", ";
+                }
+                $titulo .= "Sandwich";
             }
 
             return Excel::download(new ProduccionEmpleadoPlanillaExport($da,$rangoFecha2, $titulo), 'Planilla de '.$titulo.' del '.$rangoFecha.'.xlsx');
