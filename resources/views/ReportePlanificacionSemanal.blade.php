@@ -7,14 +7,14 @@
             <th style="text-align:center;font-size:12px;border: 1px solid #C00;font-weight: bold;">Nombre</th>
             <th style="text-align:center;font-size:12px;border: 1px solid #C00;font-weight: bold;">Vitola</th>
             <th style="text-align:center;font-size:12px;border: 1px solid #C00;font-weight: bold;">RG</th>
-            <th style="text-align:center;font-size:12px;border: 1px solid #C00;font-weight: bold;"h>Capa R.</th>
+            <th style="text-align:center;font-size:12px;border: 1px solid #C00;font-weight: bold;">Capa R.</th>
             <th style="text-align:center;font-size:12px;border: 1px solid #C00;font-weight: bold;">Color</th>
             <th style="text-align:center;font-size:12px;border: 1px solid #C00;font-weight: bold;">Tamaño</th>
-            <th style="text-align:center;font-size:12px;border: 1px solid #C00;font-weight: bold;">Cant. Parejas</th>
+            <th style="text-align:center;font-size:12px;border: 1px solid #C00;font-weight: bold;">Parejas</th>
             <th style="text-align:center;font-size:12px;border: 1px solid #C00;font-weight: bold;">Pendiente</th>
             @php
                 $fecha = Carbon\Carbon::now()->format('Y-m-d');
-
+                $fecha2 = Carbon\Carbon::now()->format('d');
             @endphp
             @for ($i = 0; $i < $dias; $i++)
                 @php
@@ -28,6 +28,7 @@
                         $fecha_timestamp = strtotime($fecha);
                         $nueva_fecha_timestamp = strtotime("+$days_to_add days", $fecha_timestamp);
                         $fecha = date('Y-m-d', $nueva_fecha_timestamp);
+                        $fecha2 = date('d', $nueva_fecha_timestamp);
                     }
 
                     if ($dia_de_semana == 0) {
@@ -36,9 +37,10 @@
                         $fecha_timestamp = strtotime($fecha);
                         $nueva_fecha_timestamp = strtotime("+$days_to_add days", $fecha_timestamp);
                         $fecha = date('Y-m-d', $nueva_fecha_timestamp);
+                        $fecha2 = date('d', $nueva_fecha_timestamp);
                     }
                 @endphp
-                <th style="text-align:center;font-size:12px;border: 1px solid #C00;font-weight: bold;">{{ $fecha }}</th>
+                <th style="text-align:center;font-size:12px;border: 1px solid #C00;font-weight: bold;">{{ $fecha2 }}</th>
                 @php
                     $fecha_obj = new DateTime($fecha);
                     $days_to_add = 1;
@@ -46,6 +48,7 @@
                     $fecha_timestamp = strtotime($fecha);
                     $nueva_fecha_timestamp = strtotime("+$days_to_add days", $fecha_timestamp);
                     $fecha = date('Y-m-d', $nueva_fecha_timestamp);
+                    $fecha2 = date('d', $nueva_fecha_timestamp);
                 @endphp
             @endfor
 

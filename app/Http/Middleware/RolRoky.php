@@ -17,10 +17,6 @@ class RolRoky
      */
     public function handle(Request $request, Closure $next, string $role)
     {
-        if (!auth()->check() || !(auth()->user()->rol == $role)){
-            return redirect()->route('unauthorized');
-        }
-
         return $next($request);
     }
 

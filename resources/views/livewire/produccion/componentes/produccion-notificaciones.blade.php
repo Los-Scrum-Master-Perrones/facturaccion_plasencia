@@ -11,7 +11,7 @@
 
         <ul class="dropdown-menu">
             <li><a class="dropdown-item" href="#"><b><u>Ordenes Completeadas</u></b></a></li>
-            <li><a class="dropdown-item" href="#" wire:click='actualiazarOrdenesExistentes()'>Asignar Automaticamente</a></li>
+            <li><a class="dropdown-item" href="#" onclick="actualizarOrdenesSimilares()">Asignar Automaticamente</a></li>
             @foreach ($ordenes as $completado)
                 @isset($completado->id_produccion_orden)
                     <li>
@@ -177,6 +177,13 @@
     <script>
         var id_orden_cambiar = 0;
         let id_parejas = [];
+
+        function actualizarOrdenesSimilares() {
+            if (window.confirm("Desea actualizar los codigos similares?")) {
+                @this.actualiazarOrdenesExistentes();
+            }
+
+        }
 
         function cambiarOrden(params, id_pendiente) {
             var datos = JSON.parse(params);

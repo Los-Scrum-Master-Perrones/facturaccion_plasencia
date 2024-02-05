@@ -29,5 +29,4 @@ class ProduccionPlanificacionSemanal implements
         return view('ReportePlanificacionSemanal',[ 'pendientes' => $this->nom , 'dias' => $moyorDias ]) ;
     }
 
-
 }
