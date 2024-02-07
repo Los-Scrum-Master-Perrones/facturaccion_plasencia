@@ -6,9 +6,10 @@ use App\Exports\ProduccionModulosEmpleadoExport;
 use App\Exports\ProduccionMoldesRestantesExport;
 use App\Exports\ProduccionPlanificacionSemanal;
 use App\Models\ProduccionDiarioModulos;
+use App\Models\ProduccionDiarioPendienteVineta;
 use App\Models\ProduccionDiarioProducir;
-use App\Models\ProduccionMolde;
 use App\Models\ProduccionMoldeDiario;
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\DB;
 use Livewire\Component;
 use Maatwebsite\Excel\Facades\Excel;
@@ -78,6 +79,12 @@ class ProduccionDiarioMarcas extends Component
 
 
 
+        $todas_vinetas = DB::select('SELECT * FROM produccion_diario_pendiente_vinetas');
+        $apartdoVinetas = [];
+        foreach ($todas_vinetas as $uso) {
+            $apartdoVinetas[$uso->id_produccion_pendiente.$uso->rolero.$uso->bonchero][] =  $uso;
+        }
+
         return view(
             'livewire.produccion.produccion-diario-marcas',
             [
@@ -89,6 +96,7 @@ class ProduccionDiarioMarcas extends Component
                 'apartdoMoldes' => $apartdoMoldes,
                 'usosMoldesConID' => $usosMoldesConID,
                 'pendiente_catalogo' => $pendiente_catalogo,
+                'vinetas' => $apartdoVinetas,
                 'emplead' => DB::select('CALL `buscar_produccion_empleado_planificacion_busqueda`()')
             ]
         )->extends('layouts.produccion.produccion-menu')->section('contenido');
@@ -294,6 +302,65 @@ class ProduccionDiarioMarcas extends Component
 
         $this->dispatchBrowserEvent('abrirOpciones',['id' => $id_collapse]);
 
+    }
+
+    public function generar_vinetas(){
+
+        $produccion  = DB::select('call buscar_produccion_vinetas_diario()');
+        $produccion_empleados  = DB::select('call buscar_produccion_vinetas_empleado_orden()');
+        $datos1  = [];
+
+        foreach ($produccion_empleados as $key => $value) {
+            $datos1[$value->id_produccion_orden][] = $value;
+        }
+
+        $datos2  = [];
+        $conteo = 0;
+        foreach ($produccion as $key => $value) {
+            $empleados = $datos1[$value->id_produccion_orden];
+
+            $conteo = 0;
+            $por_parejas = $value->por_parejas_normal;
+
+            for ($i=1; $i <= $value->vinetas; $i++) {
+
+
+                if(!isset($empleados[$conteo]->id_empleado1)){
+                    $conteo--;
+                }
+                $datos2[] = [
+                    "id_produccion_pendiente" => $value->id_produccion_orden,
+                    "rolero" => $empleados[$conteo]->id_empleado1,
+                    "bonchero" => $empleados[$conteo]->id_empleado2,
+                    "revisador" => 0,
+                    "puros" => 50,
+                    "estado" => 'A',
+                ];
+
+                if($value->por_parejas_normal == $i ){
+                    $conteo++;
+                    $value->por_parejas_normal+=$por_parejas;
+                }
+            }
+
+            if($value->pico > 0){
+                $datos2[] = [
+                    "id_produccion_pendiente" => $value->id_produccion_orden,
+                    "rolero" => 0,
+                    "bonchero" => 0,
+                    "revisador" => 0,
+                    "puros" => $value->pico,
+                    "estado" => 'A',
+                ];
+            }
+
+        }
+
+        ProduccionDiarioPendienteVineta::upsert(
+            $datos2,
+            [],
+            []
+        );
     }
 
 }

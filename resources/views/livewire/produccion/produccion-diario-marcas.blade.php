@@ -190,7 +190,7 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link fs-7 active" href="#" onclick="vinetas()">
+                    <a class="nav-link fs-7 active" href="#" wire:click="generar_vinetas()">
                         <abbr title="Etiquetas de las maletas">
                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
                                 class="bi bi-tags" viewBox="0 0 16 16">
@@ -423,7 +423,14 @@
                                             </td>
                                             <td>{{ $emple->capa }}</td>
                                         @endif
-                                        <td><b>{{ $emple->restantes }}</td>
+                                        <td>
+                                            <b>{{ $emple->restantes }}</b>
+                                            <a href="#">
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-substack" viewBox="0 0 16 16">
+                                                    <path d="M15 3.604H1v1.891h14v-1.89ZM1 7.208V16l7-3.926L15 16V7.208zM15 0H1v1.89h14z"/>
+                                                  </svg>
+                                            </a>
+                                        </td>
                                         <td>
                                             <input value="{{ $emple->tareas }}" type="number"
                                                 id="tearea{{ $emple->id }}"
@@ -471,7 +478,11 @@
                                         @php
                                             $emple->ring_real = 56;
                                         @endphp
-                                    @else
+                                    @elseif($emple->ring_real == 47)
+                                        @php
+                                            $emple->ring_real = 48;
+                                        @endphp
+                                @else
 
                                     @endif
                                     @isset($usosMoldes[$emple->ring_real])
