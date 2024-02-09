@@ -6,9 +6,9 @@ use Illuminate\Http\Request;
 use Maatwebsite\Excel\Facades\Excel;
 use Illuminate\Support\Facades\DB;
 use App\Imports\POimport;
-use Carbon\Carbon;
-use Exception;
-
+use App\Models\clase_producto;
+use App\Models\detalle_clase_producto;
+use App\Models\pedido;
 
 class PO extends Component
 {
@@ -64,5 +64,50 @@ class PO extends Component
             DB::table('po')->truncate();
         $this->dispatchBrowserEvent('exito');
         }
+    }
+
+    public function pasarPedido(){
+
+        $Po = DB::select("CALL `mostra_po`('','','','','','','')");
+
+        foreach ($Po as $key => $value) {
+            $sampler = clase_producto::where("item", "=", $value->item)->first();
+
+            if (isset($sampler->sampler) ) {
+                if ($sampler->sampler == 'si') {
+                    $detalles_sampler = detalle_clase_producto::where("item", "=", $value->item)->get();
+                    foreach ($detalles_sampler as $key => $value2) {
+                        $pedio =  new pedido([
+                            'item' => $value->item,
+                            'cant_paquetes' => ($value->cantidad*$value->por_caja)/count($detalles_sampler),
+                            'unidades' => 1,
+                            'numero_orden' => $value->hon,
+                            'categoria' => "1",
+                        ]);
+                        $pedio->save();
+                    }
+                } else {
+                    $pedio =  new pedido([
+                        'item' =>$value->item,
+                        'cant_paquetes' => $value->por_caja,
+                        'unidades' => $value->cantidad,
+                        'numero_orden' => $value->hon,
+                        'categoria' => "1",
+                    ]);
+                    $pedio->save();
+                }
+            } else {
+
+                $pedio =  new pedido([
+                    'item' => $value->item,
+                    'cant_paquetes' => $value->por_caja,
+                    'unidades' => $value->cantidad,
+                    'numero_orden' => $value->hon,
+                    'categoria' => "1",
+                ]);
+                $pedio->save();
+            }
+        }
+        return redirect()->route('import_excel');
     }
 }
