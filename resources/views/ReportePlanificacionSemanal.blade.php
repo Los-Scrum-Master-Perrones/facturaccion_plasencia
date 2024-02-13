@@ -12,6 +12,7 @@
             <th style="text-align:center;font-size:12px;border: 1px solid #C00;font-weight: bold;">Tamaño</th>
             <th style="text-align:center;font-size:12px;border: 1px solid #C00;font-weight: bold;">Parejas</th>
             <th style="text-align:center;font-size:12px;border: 1px solid #C00;font-weight: bold;">Pendiente</th>
+            <th style="text-align:center;font-size:12px;border: 1px solid #C00;font-weight: bold;">Global</th>
             @php
                 $fecha = Carbon\Carbon::now()->format('Y-m-d');
                 $fecha2 = Carbon\Carbon::now()->format('d');
@@ -57,6 +58,7 @@
     <tbody>
         @php
             $total_restante = 0;
+            $total_restante_global = 0;
             $parejas = 0;
             $total_acumulados = array();
 
@@ -77,29 +79,42 @@
                 <td style="text-align:center;font-size:8px;border: 1px solid #C00;"></td>
                 <td style="text-align:center;font-size:8px;border: 1px solid #C00;">{{ $pendiente->parejas }}</td>
                 <td style="text-align:center;font-size:8px;border: 1px solid #C00;">{{ $pendiente->restantes }}</td>
+                <td style="text-align:center;font-size:8px;border: 1px solid #C00;">{{ $pendiente->restantes_global }}</td>
                 @php
                     $parejas += $pendiente->parejas;
                     $producido_acumulado = $pendiente->restantes;
+                    $producido_acumulado_global = $pendiente->restantes_global;
                     $total_restante +=$pendiente->restantes;
+                    $total_restante_global +=$pendiente->restantes_global;
+
+                    $total_produccio = 0;
                 @endphp
                 @for ($i = 0; $i < $dias; $i++)
                     @php
                         $producido = $pendiente->tarea_acumulada;
 
-                        if($producido > $pendiente->restantes){
-                            $producido = $pendiente->restantes;
-                            $pendiente->restantes = 0;
+                        if($producido > $pendiente->restantes_global){
+                            $producido = $pendiente->restantes_global;
+                            $pendiente->restantes_global = 0;
                         }
 
-                        if($producido_acumulado < $producido){
-                            $producido = $producido_acumulado;
+                        if($producido_acumulado_global < $producido){
+                            $producido = $producido_acumulado_global;
                         }
-                        $producido_acumulado -= $producido;
+                        $producido_acumulado_global -= $producido;
 
                         $total_acumulados[$i] += $producido;
                     @endphp
-                    <td style="text-align:center;font-size:8px;border: 1px solid #C00;">{{ $producido }}</td>
 
+                    @if ($total_produccio >= $producido_acumulado)
+                        <td style="text-align:center;font-size:8px;border: 1px solid #C00;@if( $producido !=0 ) color:purple @else color:black @endif" >{{ $producido }}</td>
+                    @elseif($total_produccio <= $producido_acumulado)
+                        <td style="text-align:center;font-size:8px;border: 1px solid #C00;color:blue"><b>{{ $producido }}</b></td>
+                    @endif
+
+                    @php
+                        $total_produccio += $producido;
+                    @endphp
                 @endfor
             </tr>
         @endforeach
@@ -117,6 +132,7 @@
             <td style="text-align:center;font-size:8px;border: 1px solid #C00;"></td>
             <td style="text-align:center;font-size:8px;border: 1px solid #C00;"><b>{{ $parejas }}</b></td>
             <td style="text-align:center;font-size:8px;border: 1px solid #C00;"><b>{{ $total_restante }}</b></td>
+            <td style="text-align:center;font-size:8px;border: 1px solid #C00;">{{ $total_restante_global }}</td>
             @foreach ($total_acumulados as $total)
                 <td style="text-align:center;font-size:8px;border: 1px solid #C00;"><b>{{ $total }}</b></td>
             @endforeach
