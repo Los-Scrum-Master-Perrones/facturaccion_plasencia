@@ -75,7 +75,9 @@
             <td><b>{{ $sabado_e }}</b></td>
             <td style="text-align: center"><b>{{ $e_suma_total }}</b></td>
             <td style="text-align: center;color: red"><b>L. {{ number_format($e_suma_total_precio,2,',','.') }}</b></td>
+
             <td><b></b></td>
+            <td style="text-align: center;color: red"><b>{{ number_format($e_suma_total_precio,4,',','') }}</b></td>
         </tr>
             @php
                     $lunes_e = 0;
@@ -152,6 +154,7 @@
         <td style="text-align: center"><b>{{ $e_suma_total }}</b></td>
         <td style="text-align: center;color: red"><b>L. {{ number_format($e_suma_total_precio,2,',','.') }}</b></td>
         <td><b></b></td>
+        <td style="text-align: center;color: red"><b>{{ number_format($e_suma_total_precio,4,',','') }}</b></td>
     </tr>
         @php
                 $lunes_e = 0;
