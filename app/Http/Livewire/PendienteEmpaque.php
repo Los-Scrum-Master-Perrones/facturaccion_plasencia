@@ -1337,9 +1337,16 @@ class PendienteEmpaque extends Component
                     ]
                 );
                 $saaldoviejo = $value->saldo;
-                $value->saldo =  doubleval($datso[0]->saldo);
-                $value->cant_cajas =  doubleval($datso[0]->cant_cajas);
-                $value->cant_cajas_necesarias = doubleval($value->saldo / $datso[0]->por_caja);
+                if(!isset($datso[0]->saldo)){
+                    $value->saldo =  0;
+                    $value->cant_cajas =  0;
+                    $value->cant_cajas_necesarias = 0;
+                }else{
+                    $value->saldo =  doubleval($datso[0]->saldo);
+                    $value->cant_cajas =  doubleval($datso[0]->cant_cajas);
+                    $value->cant_cajas_necesarias = doubleval($value->saldo / $datso[0]->por_caja);
+                }
+
             }
 
 
