@@ -134,7 +134,7 @@
                                     <span style="color: red">{{ $detalle_provicional->observacion }} </span>
                                     @php
                                         $mensaje = '';
-                                        if( explode(" ",$detalle_provicional->tipo_empaque)[0] == "CAJAS" && is_null($detalle_provicional->codigo_caja) ){
+                                        if( explode(" ",$detalle_provicional->tipo_empaque)[0] == "CAJAS" && is_null($detalle_provicional->codigo_caja) && $detalle_provicional->sampler != 'si'  ){
                                             $mensaje = "(No tiene Codigo de Cajita)";
                                         }
                                         $detalle_provicional->tipo_empaque
