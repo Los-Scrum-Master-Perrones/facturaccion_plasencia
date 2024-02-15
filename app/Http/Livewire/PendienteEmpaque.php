@@ -18,6 +18,7 @@ use Exception;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
+use stdClass;
 
 class PendienteEmpaque extends Component
 {
@@ -1192,8 +1193,10 @@ class PendienteEmpaque extends Component
 
                 ];
             } else if (count(isset($value->materiales) ? $value->materiales : []) == 0) {
-                $mate = DB::select('SELECT * FROM materiales_productos WHERE materiales_productos.item = ? AND materiales_productos.codigo_producto = ?', [$value->item, $value->cod_producto]);
-
+                $mate = DB::select('SELECT *
+                                    FROM materiales_productos
+                                    WHERE materiales_productos.item = ? AND materiales_productos.codigo_producto = ?',
+                                  [$value->item, $value->cod_producto]);
 
                 foreach ($mate as $key => $un_detalle) {
                     $value->materiales[] = [
@@ -1227,6 +1230,7 @@ class PendienteEmpaque extends Component
         $total_materiales = 0;
 
 
+        //return view(json_encode($detalles_p));
         foreach ($detalles_p as $key => $value) {
 
 
@@ -1239,8 +1243,6 @@ class PendienteEmpaque extends Component
                     $existe_puros = DB::select('SELECT 0 as total');
                 }
             }
-
-
 
             if (count($existe_puros) > 0) {
                 $exi = $existe_puros[0]->total;
@@ -1275,11 +1277,23 @@ class PendienteEmpaque extends Component
             }
 
             if ($value->codigo_caja == null) {
-                $existe_caja = [];
+                if($value->sampler == 'si'){
+                    $existe_caja = [];
+                }else{
+                    $tipod_Caja = explode(" ",$value->tipo_empaque);
+                    if( strtoupper($tipod_Caja[0]) == strtoupper('Cajas')){
+                        $objet = new stdClass();
+                        $objet->existencia = 0;
+                        $existe_caja[] = $objet;
+                    }else{
+                        $existe_caja = [];
+                    }
+
+                }
+
             } else {
                 $existe_caja = DB::select('SELECT * FROM lista_cajas WHERE codigo = ?', [$value->codigo_caja]);
             }
-
 
             if (count($existe_caja) > 0) {
 
@@ -1348,8 +1362,6 @@ class PendienteEmpaque extends Component
                 }
 
             }
-
-
 
 
             if ($value->saldo > 0 && isset($value->materiales)) {

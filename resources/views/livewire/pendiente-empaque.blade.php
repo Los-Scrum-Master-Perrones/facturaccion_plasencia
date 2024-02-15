@@ -131,7 +131,15 @@
                                 <td>{{ $detalle_provicional->item }}</td>
                                 <td>{{ $detalle_provicional->cod_producto }}</td>
                                 <td>{{ $detalle_provicional->marca }} <br>
-                                    <span style="color: red">{{ $detalle_provicional->observacion }}</span>
+                                    <span style="color: red">{{ $detalle_provicional->observacion }} </span>
+                                    @php
+                                        $mensaje = '';
+                                        if( explode(" ",$detalle_provicional->tipo_empaque)[0] == "CAJAS" && is_null($detalle_provicional->codigo_caja) ){
+                                            $mensaje = "(No tiene Codigo de Cajita)";
+                                        }
+                                        $detalle_provicional->tipo_empaque
+                                    @endphp
+                                    <span style="color: red" >{{  $mensaje }}</span>
                                 </td>
                                 <td>{{ $detalle_provicional->vitola }}</td>
                                 <td>{{ $detalle_provicional->nombre }}</td>
