@@ -44,3 +44,4 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 
 // ruta para produccion
 Route::get('emplados/{activo}', [ProduccionEmpleado::class, 'empledos_activos']);
+Route::post('empleado/crud/{id}', [ProduccionEmpleado::class, 'funciones_crud']);

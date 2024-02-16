@@ -10,6 +10,7 @@ use Illuminate\Database\Eloquent\Model;
  * @property int $codigo
  * @property string $nombre
  * @property string $rol
+ * * @property string $activo
  */
 class ProduccionEmpleado extends Model
 {
@@ -17,7 +18,7 @@ class ProduccionEmpleado extends Model
     protected $table = 'produccion_empleado';
 
     protected $fillable = [
-        'codigo', 'nombre', 'rol',
+        'codigo', 'nombre', 'rol', 'activo',
     ];
 
     protected $casts = [
@@ -25,6 +26,7 @@ class ProduccionEmpleado extends Model
         'codigo' => 'int',
         'nombre' => 'string',
         'rol' => 'string',
+        'activo'=> 'string',
         'created_at' => 'datetime',
         'updated_at' => 'datetime',
     ];

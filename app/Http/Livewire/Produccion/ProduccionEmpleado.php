@@ -15,6 +15,8 @@ use Livewire\Component;
 use Livewire\WithPagination;
 use Maatwebsite\Excel\Facades\Excel;
 use Illuminate\Http\Response;
+use Illuminate\Support\Facades\Validator;
+use Illuminate\Validation\Rule;
 
 class ProduccionEmpleado extends Component
 {
@@ -257,5 +259,80 @@ class ProduccionEmpleado extends Component
             'estatus' => Response::HTTP_OK,
         ], Response::HTTP_OK);
 
+    }
+
+    public function funciones_crud(Request $request, $id){
+            //return json_encode($request -> all());
+        try {
+            $validator = Validator::make($request->all() , 
+                [
+                    'codigo' => 'required|integer|unique:produccion_empleado,codigo,'.$id,
+                    'nombre' => 'required|string',
+                    'rol' => ['required', Rule::in(['rolero', 'bonchero', 'revisador'])],
+                ], [
+                    'unique' => 'El :attribute de empleado ya existe.',
+                    'required' => 'El :attribute es requerido.',
+                    'integer' => 'El :attribute debe ser un entero.',
+                    'string' => 'El :attribute debe ser una cadena de caracteres.',
+                    'in' => 'El :attribute debe ser uno de los siguientes valores: rolero, bonchero, revisador.',
+                ]);
+
+            if ($validator->fails()) {
+                $errors = $validator->errors()->all();
+
+                DB::beginTransaction();
+                
+                if(isset($request->all()['activo'])){
+                    $actu = ModelsProduccionEmpleado::find($id);
+
+                    $actu -> activo = $request -> all()['activo'];
+
+                    $agregar = $actu -> save();
+                    
+                    DB::commit();
+
+                    return response()->json([
+                        'data' => ['¡Se actualizo con éxito!'],
+                        'estatus' => Response::HTTP_CREATED,
+                    ], Response::HTTP_CREATED);
+                }else{
+                return response()->json([
+                    'data' => $errors,
+                    'estatus' => Response::HTTP_INTERNAL_SERVER_ERROR,
+                    ], 
+                    Response::HTTP_INTERNAL_SERVER_ERROR);
+                }
+            }else{
+                DB::beginTransaction();
+                if($id == 0){
+                    $actu = new ModelsProduccionEmpleado();
+                    $actu -> activo = 'A';
+                }
+                else if ($id > 0){
+                    $actu = ModelsProduccionEmpleado::find($id);
+
+                    $actu -> codigo = $request -> all()['codigo'];
+                    $actu -> nombre = $request -> all()['nombre'];
+                    $actu -> rol = $request -> all()['rol'];
+
+                    $agregar = $actu -> save();
+                }
+                
+                DB::commit();
+
+                return response()->json([
+                    'data' => ['¡Se guardo con éxito!'],
+                    'estatus' => Response::HTTP_CREATED,
+                ], Response::HTTP_CREATED);
+            }
+
+        } catch (\Exception $th) {
+
+            return response()->json([
+                'data' => $th->getMessage(),
+                'estatus' => Response::HTTP_INTERNAL_SERVER_ERROR,
+            ], Response::HTTP_INTERNAL_SERVER_ERROR);
+            DB::rollBack();
+        }
     }
 }

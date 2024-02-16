@@ -310,8 +310,6 @@ class ProduccionPendiente extends Component
         return Excel::download(new ExportsProduccionPendiente($da,$usosMateriales,$tipo), 'Pendiente por producir '.Carbon::now()->format('Y-m-d').'.xlsx');
     }
 
-
-
     public function importMoldes()
     {
         $this->validate([
@@ -362,7 +360,6 @@ class ProduccionPendiente extends Component
                         'activo' => 'A',
                     ]
                 );
-
 
                 $this->dispatchBrowserEvent('error_general', ['errorr' => $material.' actualizado con exito', 'icon' => 'success']);
                 DB::commit();
