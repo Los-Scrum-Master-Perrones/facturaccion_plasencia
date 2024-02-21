@@ -10,10 +10,13 @@ use Illuminate\Database\Eloquent\Model;
  * @property string $id
  * @property int $id_produccion_pendiente
  * @property int|null $rolero
+ * @property int|null $rolero_remplazo
  * @property int|null $bonchero
+ * @property int|null $bonchero_remplazo
  * @property string|null $revisador
  * @property string $puros
  * @property string $estado
+ * @property int|null $id_modulo
  */
 class ProduccionDiarioPendienteVineta extends Model
 {
@@ -25,11 +28,16 @@ class ProduccionDiarioPendienteVineta extends Model
         'id',
         'id_produccion_pendiente',
         'rolero',
+        'rolero_remplazo',
         'bonchero',
+        'bonchero_remplazo',
         'revisador',
         'puros',
         'estado',
+        'id_modulo',
     ];
+
+
 
 }
 

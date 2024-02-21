@@ -79,7 +79,11 @@
         </div>
         <div class="left">
             <a class="buttonsubmit"  @if($rol == 0 || $rol == 3)
-                                            href="{{ route('produccion.index') }}"
+                                @if (Auth::user()->hasRole(['ADMIN','PRODUCCION']))
+                                    href="{{ route('produccion.index') }}"
+                                @else
+                                    href="{{ route('produccion.pendiente.index') }}"
+                                @endif
                                     @else
                                         disabled
                                     @endif>

@@ -178,6 +178,7 @@ return [
         App\Providers\RouteServiceProvider::class,
         Maatwebsite\Excel\ExcelServiceProvider::class,
         Yoeunes\Toastr\ToastrServiceProvider::class,
+        Spatie\Permission\PermissionServiceProvider::class,
 
     ],
 

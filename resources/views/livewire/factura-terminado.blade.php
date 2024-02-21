@@ -1215,7 +1215,7 @@
 
             function selects(nombre) {
                 new TomSelect(nombre, {
-                    create: nombre === "#marca_de" ? true : false,
+                    create:  true,
                     sortField: {
                         field: "text",
                         direction: "asc"

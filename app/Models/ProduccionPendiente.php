@@ -14,6 +14,7 @@ use Illuminate\Database\Eloquent\Model;
  * @property int $cantidad
  * @property string $observacion
  * @property int $prioridad
+ * @property string $fecha_prioridad
  */
 class ProduccionPendiente extends Model
 {
@@ -26,7 +27,8 @@ class ProduccionPendiente extends Model
         'fecha_recibido',
         'cantidad',
         'observacion',
-        'prioridad'
+        'prioridad',
+        'fecha_prioridad'
     ];
 
 }

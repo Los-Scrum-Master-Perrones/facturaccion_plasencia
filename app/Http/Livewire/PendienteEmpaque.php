@@ -13,6 +13,12 @@ use Maatwebsite\Excel\Facades\Excel;
 use App\Exports\PendienteEmpaqueExport;
 use App\Exports\PendienteEmpaqueMaterialesExport;
 use App\Exports\SheetMaterialesProgramacionExport;
+use App\Models\clase_producto;
+use App\Models\pendiente;
+use App\Models\pendiente_empaque;
+use App\Models\Produccion;
+use App\Models\ProduccionPendiente;
+use App\Models\ProduccionPendienteSalida;
 use Carbon\Carbon;
 use Exception;
 use Illuminate\Support\Facades\Cache;
@@ -141,9 +147,25 @@ class PendienteEmpaque extends Component
             $cajasArray2[$value->codigo] =  $value->existencia;
         }
 
+        $pendienteProducir = [];
+
+        $pendiente_produccion = DB::select("CALL `buscar_produccion_pendiente`('', '', '', '', '', '', '', 0, '1000', 'Puros Tripa LargaPuros Tripa CortaPuros SandwichPuros BrochaSin Presentacion', '', 1, '',@total_conteo)");
+        foreach ($pendiente_produccion as $key => $value) {
+            $pendienteProducir[$value->orden_sistema.$value->codigo]  = $value;
+        }
+
+        $pendiente_empaque_codPro = [];
+
+        $pendiente_empaque = DB::select("CALL `buscar_pendiente_empaque_codigos_similares`()");
+        foreach ($pendiente_empaque as $key => $value) {
+            $pendiente_empaque_codPro[$value->orden_del_sitema.$value->codigo_productos][]  = $value;
+        }
+
         return view('livewire.pendiente-empaque', [
             'puros' => $purosArray,
-            'cajas' => $cajasArray2
+            'cajas' => $cajasArray2,
+            'porProducir' => $pendienteProducir,
+            'codigoPendiente' => $pendiente_empaque_codPro
         ])->extends('principal')->section('content');
     }
 
@@ -893,8 +915,6 @@ class PendienteEmpaque extends Component
                 'pa_orden_sist' =>  $this->busqueda_ordenes_p,
                 'pa_ordenes' =>  $this->busqueda_hons_p,
                 'r_mill' =>  $this->r_mill,
-
-
             ]
         );
 
@@ -1654,7 +1674,6 @@ class PendienteEmpaque extends Component
         }
     }
 
-
     public function exportPendienteMateriales_pendiente_empaque(Request $request)
     {
         $pendiente = DB::select(
@@ -1687,7 +1706,6 @@ class PendienteEmpaque extends Component
 
         return Excel::download(new PendienteEmpaqueMaterialesExport($pendiente), 'PendienteMateriales.xlsx');
     }
-
 
     public function imprimir_materiales_pendiente_empaque(Request $request)
     {
@@ -1763,5 +1781,21 @@ class PendienteEmpaque extends Component
 
 
         return Excel::download(new PendienteEmpaqueCuadradoExport($vista), 'Pendiente Empaque (' . Carbon::now()->format('Y-m-d') . ').xlsx');
+    }
+
+    ##Generar prioridaddes
+    public function generar_prioridad(ProduccionPendiente $produccion_pendiente, $prioridad){
+        try {
+            DB::beginTransaction();
+
+            $produccion_pendiente->update(['prioridad' => $prioridad,'fecha_prioridad' => Carbon::now()]);
+
+            $this->dispatchBrowserEvent('error_general', ['errorr' => 'Actualizado con exito', 'icon' => 'info']);
+            DB::commit();
+        } catch (\Exception $th) {
+            $this->dispatchBrowserEvent('error_general', ['errorr' => $th->getMessage(), 'icon' => 'error']);
+            DB::rollBack();
+        }
+
     }
 }

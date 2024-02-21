@@ -21,7 +21,7 @@ class ProduccionPlanificacionSemanal implements
     {
         $moyorDias = 0;
         foreach ($this->nom as $key => $value) {
-            $dias = $value->restantes/$value->tarea_acumulada;
+            $dias = $value->restantes_global/$value->tarea_acumulada;
             if($dias>$moyorDias){
                 $moyorDias = $dias;
             }

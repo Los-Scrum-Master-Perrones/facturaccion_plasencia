@@ -20,6 +20,7 @@
         "maatwebsite/excel": "^3.1",
         "milon/barcode": "^10.0",
         "snapappointments/bootstrap-select": "^1.13",
+        "spatie/laravel-permission": "^6.3",
         "yoeunes/toastr": "^1.2"
     },
     "require-dev": {

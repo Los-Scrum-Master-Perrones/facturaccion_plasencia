@@ -88,7 +88,7 @@
             </div>
         </div>
 
-        <div wire:change='tama' id="tabla_materiales2" class="table-responsive">
+        <div id="tabla_materiales2" class="table-responsive">
             <div wire:loading.class='oscurecer_contenido' style="width:100%; padding-left:0px; height:100%;">
 
                 <table class="table table-light table-hover" id="editable" style="font-size:10px;">
@@ -613,16 +613,15 @@
                     <nav>
                         <ul class="pagination justify-content-center">
                             <li class="page-item">
-                                <button type="button" class="page-link  fs-8"
+                                <button type="button" class="page-link fs-8"
                                     wire:click='actualizar_fichas_pendiente_empaque()'>Actualizar</button>
-
                             </li>
                             @php
                                 $cantida = 1;
                             @endphp
                             @for ($i = 0; $i < $tuplas_conteo; $i += 100)
-                                <li class="page-item"><a class="page-link  fs-8" href="#"
-                                        wire:click="paginacion_numerica({{ $i }})">{{ $cantida }}</a>
+                                <li class="page-item">
+                                    <a class="page-link  fs-8" href="#" wire:click="paginacion_numerica({{ $i }})">{{ $cantida }}</a>
                                 </li>
                                 @php
                                     $cantida++;
@@ -632,8 +631,7 @@
                                 $cantida = 1;
                             @endphp
                             <li class="page-item">
-                                <a class="page-link  fs-8" href="#" wire:click="mostrar_todo(1)">Mostrar
-                                    Todo</a>
+                                <a class="page-link  fs-8" href="#" wire:click="mostrar_todo(1)">Mostrar Todo</a>
                             </li>
                         </ul>
                     </nav>
@@ -641,7 +639,7 @@
             </div>
         </div>
 
-        <div wire:change='tama' id="tabla_materiales1" class="table-responsive">
+        <div id="tabla_materiales1" class="table-responsive">
             <div wire:loading.class='oscurecer_contenido' style="width:100%; padding-left:0px; height:100%;">
                 <table class="table table-light table-hover" style="font-size:10px;" id="tabla_pendiente_empaque">
                     <thead style="width:100px;">
@@ -649,7 +647,8 @@
                             <th>N#</th>
                             <th>CATEGORIA</th>
                             <th>ITEM</th>
-                            <th>CODIGO CAJA</th>
+                            <th>CD. CAJA</th>
+                            <th>CD. PROD.</th>
                             <th># ORDEN</th>
                             <th>OBSERVACÓN</th>
                             <th>PRESENTACIÓN</th>
@@ -685,12 +684,26 @@
                                 <td style="width:100px; max-width: 400px;overflow-x:auto;">
                                     {{ isset($datos->categoria) ? $datos->categoria : 'Sin categoria' }}</td>
                                 <td>{{ isset($datos->item) ? $datos->item : '' }}</td>
-                                <td>
-                                    {{ isset($datos->codigo_caja) ? $datos->codigo_caja : '' }}
-                                </td>
+                                <td>{{ isset($datos->codigo_caja) ? $datos->codigo_caja : '' }}</td>
+                                <td>{{ isset($datos->codigo_productos) ? $datos->codigo_productos : '' }}</td>
                                 <td>{{ isset($datos->orden_del_sitema) ? $datos->orden_del_sitema : '' }}</td>
+                                <td style="width:100px;">{{ $datos->observacion }}
+                                    @if (is_null($datos->observacion) || $datos->observacion == '')
 
-                                <td style="width:100px;">{{ $datos->observacion }}</td>
+                                    @else
+                                        <br>
+                                    @endif
+                                    @if (isset($porProducir[$datos->orden_del_sitema.$datos->codigo_productos]))
+                                        <span style="color: red">Prioridad: {{ $porProducir[$datos->orden_del_sitema.$datos->codigo_productos]->prioridad }}</span>
+                                        <a href="#"  data-bs-toggle="modal" data-bs-target="#modal_agregar_prioridad"
+                                            onclick="modal_datos_produccion_pendiente('{{ json_encode($porProducir[$datos->orden_del_sitema.$datos->codigo_productos]) }}','{{ json_encode($codigoPendiente[$datos->orden_del_sitema.$datos->codigo_productos]) }}')">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" fill="red" class="bi bi-shield-exclamation" viewBox="0 0 16 16">
+                                                <path d="M5.338 1.59a61 61 0 0 0-2.837.856.48.48 0 0 0-.328.39c-.554 4.157.726 7.19 2.253 9.188a10.7 10.7 0 0 0 2.287 2.233c.346.244.652.42.893.533q.18.085.293.118a1 1 0 0 0 .101.025 1 1 0 0 0 .1-.025q.114-.034.294-.118c.24-.113.547-.29.893-.533a10.7 10.7 0 0 0 2.287-2.233c1.527-1.997 2.807-5.031 2.253-9.188a.48.48 0 0 0-.328-.39c-.651-.213-1.75-.56-2.837-.855C9.552 1.29 8.531 1.067 8 1.067c-.53 0-1.552.223-2.662.524zM5.072.56C6.157.265 7.31 0 8 0s1.843.265 2.928.56c1.11.3 2.229.655 2.887.87a1.54 1.54 0 0 1 1.044 1.262c.596 4.477-.787 7.795-2.465 9.99a11.8 11.8 0 0 1-2.517 2.453 7 7 0 0 1-1.048.625c-.28.132-.581.24-.829.24s-.548-.108-.829-.24a7 7 0 0 1-1.048-.625 11.8 11.8 0 0 1-2.517-2.453C1.928 10.487.545 7.169 1.141 2.692A1.54 1.54 0 0 1 2.185 1.43 63 63 0 0 1 5.072.56"/>
+                                                <path d="M7.001 11a1 1 0 1 1 2 0 1 1 0 0 1-2 0M7.1 4.995a.905.905 0 1 1 1.8 0l-.35 3.507a.553.553 0 0 1-1.1 0z"/>
+                                            </svg>
+                                        </a>
+                                    @endif
+                                </td>
                                 <td style="width:100px;">{{ $datos->presentacion }}</td>
                                 <td>{{ $datos->mes }}</td>
 
@@ -803,7 +816,6 @@
                                     @endforeach
                                 </select>
                             </div>
-
                             <div class="mb-3 col">
                                 <label for="txt_figuraytipo" class="form-label">Categoria</label>
                                 <select class="form-control" name="categoria" id="categoria"
@@ -814,88 +826,68 @@
                                     <option value="4">INTERNATIONAL SALES</option>
                                 </select>
                             </div>
-
                             <div class="mb-3 col">
                                 <label for="txt_malos" class="form-label">Presentación</label>
                                 <input class="form-control" name="presentacionn" id="presentacionn"
                                     wire:model='presentacion' placeholder="Ingresa figura y tipo"
                                     style="overflow-y: scroll; height:30px;" disabled>
                             </div>
-
                             <div class="mb-3 col">
                                 <label for="txt_vitola" class="form-label">Marca</label>
                                 <input style=" height:30px; width: 100%;" name="marcan" id="marcan"
                                     wire:model='marcas_nuevo' placeholder="Ingresa figura y tipo" disabled>
-
                             </div>
                         </div>
-
-
                         <div class="row">
                             <div class="mb-3 col">
                                 <label for="txt_figuraytipo" class="form-label">Capa</label>
                                 <input style=" height:30px; width: 100%;" name="capan" id="capan"
                                     wire:model='capas_nuevo' placeholder="Ingresa figura y tipo" disabled>
                             </div>
-
-
                             <div class="mb-3 col">
-                                <label for="txt_malos" class="form-label">Tipo de
-                                    empaque</label>
+                                <label for="txt_malos" class="form-label">Tipo de empaque</label>
                                 <input style=" height:30px; width: 100%;" name="tipon" id="tipon"
                                     wire:model='tipo_empaques_nuevo' placeholder="Ingresa figura y tipo" disabled>
                             </div>
-
-
                             <div class="mb-3 col">
                                 <label for="vitola" class="form-label">Vitola</label>
                                 <input style=" height:30px; width: 100%;" name="vitolan" wire:model='vitolas_nuevo'
                                     id="vitolan" placeholder="Ingresa figura y tipo" disabled>
                             </div>
-
                             <div class="mb-3 col">
                                 <label for="txt_total" class="form-label">Nombre</label>
                                 <input style=" height:30px; width: 100%;" name="nombren" wire:model='nombres_nuevo'
                                     id="nombren" placeholder="Ingresa figura y tipo" disabled>
-
                             </div>
                         </div>
 
-
                         <div class="row">
-
                             <div class="mb-2 col">
                                 <label for="txt_figuraytipo" class="form-label">Orden del sistema</label>
                                 <input name="ordensis" id="ordensis" style="font-size:16px" class="form-control"
                                     type="text" autocomplete="off">
                             </div>
-
                             <div class="mb-2 col">
                                 <label for="txt_figuraytipo" class="form-label">Orden</label>
                                 <input name="ordenn" id="ordenn" style="font-size:16px" class="form-control"
                                     required type="text" autocomplete="off">
                             </div>
-
-
                             <div class="mb-2 col">
                                 <label for="txt_figuraytipo" class="form-label">Fecha</label>
                                 <input value="{{ Carbon\Carbon::now()->format('Y-m-d') }}" name=" fechan"
                                     id="fechan" style="font-size:12px" class="form-control" required
                                     type="date" autocomplete="off">
                             </div>
-
                             <div class="mb-2 col">
                                 <label for="txt_total" class="form-label">Pendiente</label>
                                 <input name="pendienten" id="pendienten" class="form-control" required
                                     type="number" autocomplete="off">
                             </div>
-
                             <div class="mb-2 col">
                                 <label for="txt_buenos" class="form-label">Saldo</label>
                                 <input name="saldon" id="saldon" class="form-control" required type="number"
                                     autocomplete="off">
                             </div>
-
                         </div>
                         <div class="row">
                             <div class="mb-6 col">
@@ -1075,6 +1067,69 @@
         </div>
     </div>
 
+
+    <div class="modal fade" id="modal_agregar_prioridad" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-xl">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="exampleModalLabel">Agregar Prioridad</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="container-fluid">
+                        <div class="row">
+                            <div class="col-12" style="text-align: center">
+                                <h6 id="titulo_modal_prioridad">Ordenes Similares</h6>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-12">
+                                <table class="table table-bordered border-secondary table-hover">
+                                    <thead>
+                                        <tr style="font-size:16px; text-align:center;">
+                                            <th style="text-align:center;">Sistema</th>
+                                            <th style="text-align:center;">Orden</th>
+                                            <th style="text-align:center;" >Marca</th>
+                                            <th style="text-align:center;">Vitola</th>
+                                            <th style="text-align:center;">Nombre</th>
+                                            <th style="text-align:center;">Capa</th>
+                                            <th style="text-align:center;">Tipo Empaque</th>
+                                            <th style="text-align:center;">Pendiente</th>
+                                            <th style="text-align:center;">Saldo</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="tabla_productos_clientes">
+
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-4">
+
+                            </div>
+                            <div class="col-4">
+                                <div class="input-group mb-3">
+                                    <span class="input-group-text" id="basic-addon1">Restantes por Producir</span>
+                                    <input type="text" id="restantes_modal" class="form-control" placeholder="Username" aria-label="Username" aria-describedby="basic-addon1">
+                                </div>
+                            </div>
+                            <div class="col-4">
+                                <div class="input-group mb-3">
+                                    <span class="input-group-text" id="basic-addon1">Prioridad</span>
+                                    <input type="text" id="prioridad_modal"  class="form-control" placeholder="Username" aria-label="Username" aria-describedby="basic-addon1">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" data-bs-dismiss="modal" onclick="actualizar_prioridad()">Aceptar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
     {{-- JavaScript detalle programacion --}}
     @push('scripts')
         <script type="text/javascript">
@@ -1101,7 +1156,7 @@
 
             function selects(nombre) {
                 new TomSelect(nombre, {
-                    create: false,
+                    create: true,
                     sortField: {
                         field: "text",
                         direction: "asc"
@@ -1120,6 +1175,44 @@
             function exportar_materiales() {
                 document.getElementById("form_exportar_materiales").submit();
             }
+
+            var id_produccion;
+            function modal_datos_produccion_pendiente(datos_produccion_pendiente, datos_pendiente_empaque) {
+                var produccion_pendiente = JSON.parse(datos_produccion_pendiente);
+                var pendiente_empaque = JSON.parse(datos_pendiente_empaque);
+
+                document.getElementById('restantes_modal').value = produccion_pendiente.restantes;
+                document.getElementById('prioridad_modal').value = produccion_pendiente.prioridad==null? 0: produccion_pendiente.prioridad;4
+                document.getElementById('titulo_modal_prioridad').innerHTML = "Ordenes Similares: "+produccion_pendiente.codigo;
+
+
+                id_produccion = produccion_pendiente.id;
+
+                document.getElementById('tabla_productos_clientes').innerHTML = "";
+
+                pendiente_empaque.forEach(element => {
+                    document.getElementById('tabla_productos_clientes').innerHTML += `
+                        <tr>
+                            <td>${element.orden_del_sitema}</td>
+                            <td>${element.orden}</td>
+                            <td class="fs-7">${element.marca}</td>
+                            <td>${element.vitola}</td>
+                            <td>${element.nombre}</td>
+                            <td>${element.capa}</td>
+                            <td>${element.tipo_empaque}</td>
+                            <td>${element.pendiente}</td>
+                            <td>${element.saldo}</td>
+                        </tr>
+                    `;
+                });
+
+            }
+
+            function actualizar_prioridad() {
+                @this.generar_prioridad(id_produccion,document.getElementById('prioridad_modal').value);
+            }
+
+
         </script>
 
         <script type="text/javascript">
@@ -1346,7 +1439,6 @@
                 @this.actualizar_saldo(id, saldo);
             }
         }
-
 
         function mostrarMaterial(v) {
             @this.materiales = v;
