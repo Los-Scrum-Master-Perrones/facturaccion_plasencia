@@ -9,7 +9,9 @@ use App\Models\ProduccionDiarioModulos;
 use App\Models\ProduccionDiarioPendienteVineta;
 use App\Models\ProduccionDiarioProducir;
 use App\Models\ProduccionMoldeDiario;
-use Illuminate\Support\Facades\Cache;
+use Barryvdh\DomPDF\Facade\Pdf;
+use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 use Illuminate\Support\Facades\DB;
 use Livewire\Component;
 use Maatwebsite\Excel\Facades\Excel;
@@ -25,11 +27,13 @@ class ProduccionDiarioMarcas extends Component
     public $modulos = [];
     public $modulo_actual = 1;
     public $nombre_empleado = '';
+    public $verempleados = false;
+
 
     public function render()
     {
         $pendiente_catalogo = DB::select('CALL `buscar_produccion_empleado_planificacion_marcas`()');
-        $this->modulo_empleado = DB::select('CALL `buscar_produccion_modulos_empleados`(?,?)', [$this->modulo_actual,$this->nombre_empleado]);
+        $this->modulo_empleado = DB::select('CALL `buscar_produccion_modulos_empleados`(?,?,@total_tarea)', [$this->modulo_actual, $this->nombre_empleado]);
         $this->modulos = DB::select('CALL `buscar_produccion_empleado_planificacion_modulos`()');
 
         $moldes = DB::select(
@@ -41,7 +45,6 @@ class ProduccionDiarioMarcas extends Component
             $this->b_rol,
             $this->b_nombre,
         ]);
-
 
         $roleros = [];
         $boncheros = [];
@@ -82,7 +85,7 @@ class ProduccionDiarioMarcas extends Component
         $todas_vinetas = DB::select('SELECT * FROM produccion_diario_pendiente_vinetas');
         $apartdoVinetas = [];
         foreach ($todas_vinetas as $uso) {
-            $apartdoVinetas[$uso->id_produccion_pendiente.$uso->rolero.$uso->bonchero][] =  $uso;
+            $apartdoVinetas[$uso->id_produccion_pendiente . $uso->rolero . $uso->bonchero][] =  $uso;
         }
 
         return view(
@@ -97,6 +100,7 @@ class ProduccionDiarioMarcas extends Component
                 'usosMoldesConID' => $usosMoldesConID,
                 'pendiente_catalogo' => $pendiente_catalogo,
                 'vinetas' => $apartdoVinetas,
+                'tareaglobal' => DB::select('SELECT @total_tarea as total_tarea')[0]->total_tarea,
                 'emplead' => DB::select('CALL `buscar_produccion_empleado_planificacion_busqueda`()')
             ]
         )->extends('layouts.produccion.produccion-menu')->section('contenido');
@@ -106,6 +110,11 @@ class ProduccionDiarioMarcas extends Component
     {
         $this->modulo_actual = $id;
         $this->nombre_empleado = '';
+    }
+
+    public function ocultar_empleados()
+    {
+        $this->verempleados = !$this->verempleados;
     }
 
     public function eliminar_detalle(ProduccionDiarioProducir $mod, $num)
@@ -119,8 +128,8 @@ class ProduccionDiarioMarcas extends Component
             $mod->moldes_para_uso = 0;
             $mod->moldes_sobrantes = 0;
             $mod->moldes_ids = null;
-            ProduccionMoldeDiario::where('id_produccion_diario',$mod->id)
-                                    ->update(['cantidad' => 0,'check' => 0]);
+            ProduccionMoldeDiario::where('id_produccion_diario', $mod->id)
+                ->update(['cantidad' => 0, 'check' => 0]);
         }
         $mod->save();
     }
@@ -133,7 +142,6 @@ class ProduccionDiarioMarcas extends Component
             $mod->id_empleado2 = $id;
         } elseif ($num == 3) {
             $mod->id_produccion_orden = $id;
-
         }
         $mod->save();
 
@@ -174,9 +182,8 @@ class ProduccionDiarioMarcas extends Component
             $mod->moldes_sobrantes = 0;
             $mod->moldes_ids = null;
 
-            ProduccionMoldeDiario::where('id_produccion_diario',$mod->id)
-                                    ->update(['cantidad' => 0,'check' => 0]);
-
+            ProduccionMoldeDiario::where('id_produccion_diario', $mod->id)
+                ->update(['cantidad' => 0, 'check' => 0]);
         } else {
             $mod->moldes_a_usar = 0;
             $mod->moldes_para_uso = 0;
@@ -224,7 +231,8 @@ class ProduccionDiarioMarcas extends Component
     }
 
     public function imprimir_moldes_restantes()
-    {    $moldes = DB::select('CALL `buscar_produccion_moldes_inventario`(0)');
+    {
+        $moldes = DB::select('CALL `buscar_produccion_moldes_inventario`(0)');
         return Excel::download(new ProduccionMoldesRestantesExport($moldes), 'Reporte moldes en uso.xlsx');
     }
 
@@ -243,25 +251,25 @@ class ProduccionDiarioMarcas extends Component
 
 
 
-    public function asignare_molde($id,ProduccionDiarioProducir $modulo,$id_collapse)
+    public function asignare_molde($id, ProduccionDiarioProducir $modulo, $id_collapse)
     {
-        $moldes_existencia = DB::select('call buscar_produccion_moldes_inventario(?)',[$id])[0];
+        $moldes_existencia = DB::select('call buscar_produccion_moldes_inventario(?)', [$id])[0];
         $check = 0;
-        $moldesss =  ProduccionMoldeDiario::where('id_produccion_diario','=',$modulo->id)->where('id_molde','=',$id)->first();
+        $moldesss =  ProduccionMoldeDiario::where('id_produccion_diario', '=', $modulo->id)->where('id_molde', '=', $id)->first();
 
 
 
-        if(!$moldesss){
+        if (!$moldesss) {
             $moldesss = ProduccionMoldeDiario::updateOrCreate(
                 ['id_produccion_diario' => $modulo->id, 'id_molde' => $id],
-                ['cantidad' =>0 , 'check' => $check]
+                ['cantidad' => 0, 'check' => $check]
             );
 
             $moldesss->save();
         }
 
         $molde_necesario = $modulo->moldes_para_uso - $modulo->moldes_a_usar;
-        if($molde_necesario == 0){
+        if ($molde_necesario == 0) {
             $modulo->moldes_para_uso -= $moldesss->cantidad;
             $moldesss->cantidad = 0;
             $moldesss->check = 0;
@@ -271,22 +279,22 @@ class ProduccionDiarioMarcas extends Component
             return;
         }
 
-        if($moldesss->check == 0){
-            if($modulo->moldes_para_uso > 0 && ($modulo->moldes_para_uso+$moldes_existencia->buenos) <= $modulo->moldes_a_usar){
+        if ($moldesss->check == 0) {
+            if ($modulo->moldes_para_uso > 0 && ($modulo->moldes_para_uso + $moldes_existencia->buenos) <= $modulo->moldes_a_usar) {
                 $moldesss->cantidad = $moldes_existencia->buenos;
                 $modulo->moldes_para_uso += $moldes_existencia->buenos;
-            }elseif($modulo->moldes_para_uso > 0 && ($modulo->moldes_para_uso+$moldes_existencia->buenos) > $modulo->moldes_a_usar){
+            } elseif ($modulo->moldes_para_uso > 0 && ($modulo->moldes_para_uso + $moldes_existencia->buenos) > $modulo->moldes_a_usar) {
                 $moldesss->cantidad = $modulo->moldes_a_usar - $modulo->moldes_para_uso;
                 $modulo->moldes_para_uso +=  $modulo->moldes_a_usar - $modulo->moldes_para_uso;
-            }elseif($modulo->moldes_para_uso == 0 && $moldes_existencia->buenos < $modulo->moldes_a_usar ){
+            } elseif ($modulo->moldes_para_uso == 0 && $moldes_existencia->buenos < $modulo->moldes_a_usar) {
                 $moldesss->cantidad = $moldes_existencia->buenos;
                 $modulo->moldes_para_uso += $moldes_existencia->buenos;
-            }elseif($modulo->moldes_para_uso == 0 && $moldes_existencia->buenos > $modulo->moldes_a_usar ){
+            } elseif ($modulo->moldes_para_uso == 0 && $moldes_existencia->buenos > $modulo->moldes_a_usar) {
                 $moldesss->cantidad = $modulo->moldes_a_usar;
                 $modulo->moldes_para_uso = $modulo->moldes_a_usar;
             }
             $moldesss->check = 1;
-        }else{
+        } else {
             $modulo->moldes_para_uso -= $moldesss->cantidad;
             $moldesss->cantidad = 0;
             $moldesss->check = 0;
@@ -294,73 +302,115 @@ class ProduccionDiarioMarcas extends Component
 
 
 
-        if($moldesss->cantidad < 0){
+        if ($moldesss->cantidad < 0) {
             $moldesss->cantidad = 0;
         }
         $modulo->save();
         $moldesss->save();
 
-        $this->dispatchBrowserEvent('abrirOpciones',['id' => $id_collapse]);
-
+        $this->dispatchBrowserEvent('abrirOpciones', ['id' => $id_collapse]);
     }
 
-    public function generar_vinetas(){
+    public function generar_vinetas()
+    {
 
-        $produccion  = DB::select('call buscar_produccion_vinetas_diario()');
-        $produccion_empleados  = DB::select('call buscar_produccion_vinetas_empleado_orden()');
-        $datos1  = [];
+        try {
+            DB::beginTransaction();
+            $produccion  = DB::select('call buscar_produccion_vinetas_diario()');
+            $produccion_empleados  = DB::select('call buscar_produccion_vinetas_empleado_orden()');
+            $datos1  = [];
 
-        foreach ($produccion_empleados as $key => $value) {
-            $datos1[$value->id_produccion_orden][] = $value;
-        }
+            foreach ($produccion_empleados as $key => $value) {
+                $datos1[$value->id_produccion_orden][] = $value;
+            }
 
-        $datos2  = [];
-        $conteo = 0;
-        foreach ($produccion as $key => $value) {
-            $empleados = $datos1[$value->id_produccion_orden];
-
+            $datos2  = [];
             $conteo = 0;
-            $por_parejas = $value->por_parejas_normal;
+            foreach ($produccion as $key => $value) {
+                $empleados = $datos1[$value->id_produccion_orden];
 
-            for ($i=1; $i <= $value->vinetas; $i++) {
+                $conteo = 0;
+                $por_parejas = $value->por_parejas_normal;
+
+                for ($i = 1; $i <= $value->vinetas; $i++) {
 
 
-                if(!isset($empleados[$conteo]->id_empleado1)){
-                    $conteo--;
+                    if (!isset($empleados[$conteo]->id_empleado1)) {
+                        $conteo--;
+                    }
+                    $datos2[] = [
+                        "id_produccion_pendiente" => intval($value->id_produccion_orden),
+                        "rolero" => $empleados[$conteo]->id_empleado1,
+                        "bonchero" => $empleados[$conteo]->id_empleado2,
+                        "revisador" => 0,
+                        "puros" => 50,
+                        "estado" => 'A',
+                        "id_modulo" => 1,
+                    ];
+                    if ($value->por_parejas_normal == $i) {
+                        $conteo++;
+                        $value->por_parejas_normal += $por_parejas;
+                    }
                 }
-                $datos2[] = [
-                    "id_produccion_pendiente" => $value->id_produccion_orden,
-                    "rolero" => $empleados[$conteo]->id_empleado1,
-                    "bonchero" => $empleados[$conteo]->id_empleado2,
-                    "revisador" => 0,
-                    "puros" => 50,
-                    "estado" => 'A',
-                ];
 
-                if($value->por_parejas_normal == $i ){
-                    $conteo++;
-                    $value->por_parejas_normal+=$por_parejas;
+                if ($value->pico > 0) {
+                    $datos2[] = [
+                        "id_produccion_pendiente" => intval($value->id_produccion_orden),
+                        "rolero" => $empleados[0]->id_empleado1,
+                        "bonchero" => $empleados[0]->id_empleado2,
+                        "revisador" => 0,
+                        "puros" => $value->pico,
+                        "estado" => 'A',
+                        "id_modulo" => 1,
+                    ];
                 }
             }
 
-            if($value->pico > 0){
-                $datos2[] = [
-                    "id_produccion_pendiente" => $value->id_produccion_orden,
-                    "rolero" => 0,
-                    "bonchero" => 0,
-                    "revisador" => 0,
-                    "puros" => $value->pico,
-                    "estado" => 'A',
-                ];
-            }
 
+            ProduccionDiarioPendienteVineta::upsert(
+                $datos2,
+                [],
+                []
+            );
+
+            $this->dispatchBrowserEvent('error_general', ['errorr' => 'Actualizado con exito', 'icon' => 'info']);
+            DB::commit();
+        } catch (\Exception $th) {
+            $this->dispatchBrowserEvent('error_general', ['errorr' => $th->getMessage(), 'icon' => 'error']);
+            DB::rollBack();
         }
-
-        ProduccionDiarioPendienteVineta::upsert(
-            $datos2,
-            [],
-            []
-        );
     }
 
+    public function generar_vinetas_pdf(Request $re)
+    {
+
+        $vinetas  = DB::select('CALL `buscar_produccion_vinetas_generar`(?,?,?)', [$re->id_orden, $re->id_rolero, $re->id_bonchero]);
+
+        $pdf = Pdf::loadView('Exports.vinetas-export-pdf', ["vinetas" => $vinetas]);
+        $pdf->setPaper('legal', 'portrait');
+
+        return $pdf->stream('ejemplo.pdf');
+        return $pdf->download('ejemplo.pdf');
+    }
+
+
+    public function vinetas($estado){
+        $vinetas  = DB::select('CALL `traer_produccion_vinetas_api_estado`(?)', [$estado]);
+        
+        return response()->json([
+            'data' => $vinetas,
+            'estatus' => Response::HTTP_OK,
+        ], Response::HTTP_OK);
+        
+    }
+
+    public function scanner_vinetas($id){
+        $scannervinetas  = DB::select('CALL `traer_produccion_vinetas_api_scannner`(?)', [$id]);
+        
+        return response()->json([
+            'data' => $scannervinetas,
+            'estatus' => Response::HTTP_OK,
+        ], Response::HTTP_OK);
+
+    }
 }

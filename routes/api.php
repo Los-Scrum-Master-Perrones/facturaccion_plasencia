@@ -4,6 +4,7 @@ use App\Http\Controllers\Pendiente\PendienteComprobarEmpaque;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ReporteDiarioController;
+use App\Http\Livewire\Produccion\ProduccionDiarioMarcas;
 use App\Http\Livewire\Produccion\ProduccionEmpleado;
 
 /*
@@ -45,3 +46,8 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 // ruta para produccion
 Route::get('emplados/{activo}', [ProduccionEmpleado::class, 'empledos_activos']);
 Route::post('empleado/crud/{id}', [ProduccionEmpleado::class, 'funciones_crud']);
+
+Route::get('vinetas/{estado}', [ProduccionDiarioMarcas::class, 'vinetas']);
+Route::get('vinetaScanner/{id}', [ProduccionDiarioMarcas::class, 'scanner_vinetas']);
+
+
