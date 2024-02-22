@@ -9,6 +9,7 @@ use App\Models\ProduccionDiarioModulos;
 use App\Models\ProduccionDiarioPendienteVineta;
 use App\Models\ProduccionDiarioProducir;
 use App\Models\ProduccionMoldeDiario;
+use App\ProduccionDiarioPendienteVineta as AppProduccionDiarioPendienteVineta;
 use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
@@ -367,7 +368,7 @@ class ProduccionDiarioMarcas extends Component
             }
 
 
-            ProduccionDiarioPendienteVineta::upsert(
+            AppProduccionDiarioPendienteVineta::upsert(
                 $datos2,
                 [],
                 []
@@ -396,17 +397,17 @@ class ProduccionDiarioMarcas extends Component
 
     public function vinetas($estado){
         $vinetas  = DB::select('CALL `traer_produccion_vinetas_api_estado`(?)', [$estado]);
-        
+
         return response()->json([
             'data' => $vinetas,
             'estatus' => Response::HTTP_OK,
         ], Response::HTTP_OK);
-        
+
     }
 
     public function scanner_vinetas($id){
         $scannervinetas  = DB::select('CALL `traer_produccion_vinetas_api_scannner`(?)', [$id]);
-        
+
         return response()->json([
             'data' => $scannervinetas,
             'estatus' => Response::HTTP_OK,
