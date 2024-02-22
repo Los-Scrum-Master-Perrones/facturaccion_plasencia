@@ -408,6 +408,10 @@ class ProduccionDiarioMarcas extends Component
     public function scanner_vinetas($id){
         $scannervinetas  = DB::select('CALL `traer_produccion_vinetas_api_scannner`(?)', [$id]);
 
+        if (count($scannervinetas) == 1){
+            ProduccionDiarioPendienteVineta::where('id', $scannervinetas[0]->id)->update(['estado'=>'E']);
+        }
+
         return response()->json([
             'data' => $scannervinetas,
             'estatus' => Response::HTTP_OK,
