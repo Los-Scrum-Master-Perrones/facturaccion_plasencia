@@ -404,23 +404,23 @@
                                     }
                                 @endphp
                                 <td
-                                    @if (number_format($detalles->precio_producto, 2) == number_format($deta->precio, 2)) style="text-align: right;"
+                                    @if (number_format(floatval($detalles->precio_producto), 2) == number_format(floatval($deta->precio), 2)) style="text-align: right;"
                                 @else
                                     style="text-align: right; background-color: green; color: white" @endif>
-                                    @if (number_format($detalles->precio_producto, 2) != 0.0)
+                                    @if (number_format(floatval($detalles->precio_producto), 2) != 0.0)
                                         <a style="text-decoration: none" href="#"
                                             wire:click="incrementar_precio_catalogo({{ $detalles->id_producto }},10,'{{ $detalles->sampler }}','{{ $detalles->codigo }}',{{ $detalles->precio_producto }})">
                                             <img width="16" height="16"
                                                 src="https://img.icons8.com/color/48/plus--v1.png" alt="plus--v1" />
                                         </a>
-                                        {{ number_format($detalles->precio_producto, 2) }}
+                                        {{ number_format(floatval($detalles->precio_producto), 2) }}
                                         <a style="text-decoration: none" href="#"
                                             wire:click="incrementar_precio_catalogo({{ $detalles->id_producto }},-10,'{{ $detalles->sampler }}','{{ $detalles->codigo }}',{{ $detalles->precio_producto }})">
                                             <img width="16" height="16"
                                                 src="https://img.icons8.com/fluency/48/minus.png" alt="minus" />
                                         </a>
                                     @else
-                                        {{ number_format($detalles->precio_producto, 2) }}
+                                        {{ number_format(floatval($detalles->precio_producto), 2) }}
                                     @endif
                                 </td>
                                 @php
@@ -429,9 +429,9 @@
                                 <td style="text-align: right">
                                     <b>{{ $sampler_s ? '' : number_format($detalles->costo, 4) }}</b>
                                 </td>
-                                <td style="text-align: right">{{ number_format((($unitario)*$detalles->precio_producto)/1000, 2) }}</td>
+                                <td style="text-align: right">{{ number_format((($unitario)*floatval($detalles->precio_producto))/1000, 2) }}</td>
                                 @php
-                                    $valor_factura += (($unitario)*$detalles->precio_producto)/1000;
+                                    $valor_factura += (($unitario)*floatval($detalles->precio_producto))/1000;
                                     $total_puros_tabla += $sampler_s ? (($detalles->paquetes)/$detalles->pen_paquetes)*$detalles->cantidad_puros* $detalles->unidad : $detalles->total_tabacos;
                                     $total_neto += $sampler_s ? 0 : $detalles->total_neto;
                                     $total_bruto += $sampler_s ? 0 : $detalles->total_bruto;
