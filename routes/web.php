@@ -33,6 +33,7 @@ use App\Http\Livewire\Produccion\Produccion;
 use App\Http\Livewire\Produccion\ProduccionCatalogo;
 use App\Http\Livewire\Produccion\ProduccionDiarioMarcas;
 use App\Http\Livewire\Produccion\ProduccionEmpleado;
+use App\Http\Livewire\Produccion\ProduccionEmpleadoRendimiento;
 use App\Http\Livewire\Produccion\ProduccionMateriales;
 use App\Http\Livewire\Produccion\ProduccionMaterialesCatalogo;
 use App\Http\Livewire\Produccion\ProduccionPendiente;
@@ -395,6 +396,9 @@ Route::group(['middleware' => ['auth', 'checkRole:0,1,2,3,4']], function () {
     Route::get('/imprimir/pendiente/producir', [ProduccionPendiente::class, 'imprimir_reporte_diario'])->name('produccion.reporte.diario');
     Route::get('/produccion/empleados', ProduccionEmpleado::class)->name('produccion.empleados');
     Route::get('/produccion/empleados/marcas', ProduccionDiarioMarcas::class)->name('produccion.producir.marca');
+    Route::get('/produccion/empleados/vinetas', [ProduccionDiarioMarcas::class, 'generar_vinetas_pdf'])->name('produccion.producir.vinetas');
+
+    Route::get('/produccion/empleados/rendimiento', ProduccionEmpleadoRendimiento::class)->name('produccion.empleados.rendimiento');
     Route::get('/produccion/catalogo', ProduccionCatalogo::class)->name('produccion.catalogo');
     Route::get('/produccion/materiales/catalogo', ProduccionMaterialesCatalogo::class)->name('produccion.catalogo.materiales');
     Route::get('/produccion/materiales', ProduccionMateriales::class)->name('produccion.materiales');

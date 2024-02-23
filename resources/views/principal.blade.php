@@ -114,7 +114,11 @@
         </div>
         <div class="left">
             <a class="buttonsubmit"  @if($rol == 0 || $rol == 3)
-                                            href="{{ route('produccion.index') }}"
+                            @if (Auth::user()->hasRole(['ADMIN','PRODUCCION']))
+                                href="{{ route('produccion.index') }}"
+                            @else
+                                href="{{ route('produccion.pendiente.index') }}"
+                            @endif
                                     @else
                                         disabled
                                     @endif>
@@ -302,7 +306,7 @@
     <script>
 
         const Toast2 = Swal.mixin({
-        toast: true,
+        toast: false,
         position: 'top-end',
         showConfirmButton: false,
         timer: 3000,

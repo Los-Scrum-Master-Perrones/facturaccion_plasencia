@@ -493,8 +493,8 @@
                                 <select name="marca_de" id="marca_de" class="mi-selector4 form-control"
                                     style="width:100%;" required>
                                     <option value="NINGUNA" style="overflow-y: scroll;">Ninguna</option>
-                                    @foreach ($marcas as $marca)
-                                        <option style="overflow-y: scroll;"> {{ $marca }}</option>
+                                    @foreach ($marcass as $marca)
+                                        <option style="overflow-y: scroll;"> {{ $marca->marca }}</option>
                                     @endforeach
                                 </select>
                             </div>
