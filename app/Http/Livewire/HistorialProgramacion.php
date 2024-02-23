@@ -3,6 +3,7 @@
 namespace App\Http\Livewire;
 
 use App\Exports\MaterialesProgramacionExportView;
+use App\Exports\ProgramcionExport;
 use App\Models\DetalleProgramacion;
 use App\Models\EntradasSalida;
 use App\Models\ListaCajas;
@@ -11,7 +12,6 @@ use Livewire\Component;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
 use Maatwebsite\Excel\Facades\Excel;
-use Barryvdh\DomPDF\Facade as PDF;
 
 use Illuminate\Support\Facades\DB;
 
@@ -260,10 +260,10 @@ class HistorialProgramacion extends Component
     public function imprimir_materiales()
     {
 
-        $this->materiales_programacion = DB::select('call exportar_materiales_programacion(?)', [$this->id_tov]);
+        $materiales_programacion = DB::select('call exportar_materiales_programacion(?)', [$this->id_tov]);
 
         $vista =  view('Exports.materiales-programacion-export', [
-            'materiales' => $this->materiales_programacion
+            'materiales' => $materiales_programacion
         ]);
 
         $fecha_programa = DB::select('SELECT prograamacion.fecha FROM prograamacion  WHERE prograamacion.id  = ?', [$this->id_tov]);
