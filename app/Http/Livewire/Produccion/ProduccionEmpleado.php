@@ -307,6 +307,11 @@ class ProduccionEmpleado extends Component
                 if($id == 0){
                     $actu = new ModelsProduccionEmpleado();
                     $actu -> activo = 'A';
+                    $actu -> codigo = $request -> all()['codigo'];
+                    $actu -> nombre = $request -> all()['nombre'];
+                    $actu -> rol = $request -> all()['rol'];
+
+                    $agregar = $actu -> save();
                 }
                 else if ($id > 0){
                     $actu = ModelsProduccionEmpleado::find($id);
