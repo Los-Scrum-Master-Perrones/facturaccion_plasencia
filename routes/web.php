@@ -27,6 +27,7 @@ use App\Http\Livewire\Pedido;
 use App\Http\Livewire\PO;
 use App\Http\Livewire\EditarDetalles;
 use App\Http\Livewire\EntradasSalidas;
+use App\Http\Livewire\InventarioMantenimiento;
 use App\Http\Livewire\Materiales;
 use App\Http\Livewire\MaterialesProductos;
 use App\Http\Livewire\Produccion\Produccion;
@@ -402,13 +403,15 @@ Route::group(['middleware' => ['auth', 'checkRole:0,1,2,3,4']], function () {
     Route::get('/produccion/catalogo', ProduccionCatalogo::class)->name('produccion.catalogo');
     Route::get('/produccion/materiales/catalogo', ProduccionMaterialesCatalogo::class)->name('produccion.catalogo.materiales');
     Route::get('/produccion/materiales', ProduccionMateriales::class)->name('produccion.materiales');
+
+
+    Route::get('/inventario/materiales', InventarioMantenimiento::class)->name('inventario.materiales');
 });
 
 Route::group(['middleware' => ['auth', 'checkRole:-2']], function () {
     Route::get('materiales_index2', Materiales::class)->name('materiales.index2');
     Route::get('/', [App\Http\Controllers\Principal::class, 'index'])->name('tabla');
 });
-
 
 
 Route::get('/unauthorized', [App\Http\Controllers\Principal::class, 'unauthorized'])->name('unauthorized');

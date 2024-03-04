@@ -59,6 +59,10 @@
                 <a class="nav-link" style="color:white;  font-size:12px;"
                     href="{{ route('entradas.salidas') }}"><strong>Entrada/Salida</strong></a>
             </li>
+            <li class="nav-item">
+                <a class="nav-link" style="color:white;  font-size:12px;"
+                    href="{{ route('inventario.materiales') }}"><strong>Inventario</strong></a>
+            </li>
         </ul>
     @endif
 
