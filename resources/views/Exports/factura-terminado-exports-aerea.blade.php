@@ -803,9 +803,7 @@
                             <td style="text-align:center;font-size:8px; height: 24px;border: 5px solid #C00;"></td>
                             <td style="text-align:center;font-size:8px; height: 24px;border: 5px solid #C00;"></td>
                             <td style="text-align:center;font-size:8px; height: 24px;border: 5px solid #C00;"></td>
-                            <td
-                                style="text-align:center;font-size:11px; height: 24px;border: 5px solid #C00; font-family: Calibri">
-                                <b>CARIBBEAN CIGAR COMPANY</b></td>
+                            <td style="text-align:center;font-size:11px; height: 24px;border: 5px solid #C00; font-family: Calibri"><b>CARIBBEAN CIGAR COMPANY</b></td>
                             <td style="text-align:center;font-size:8px; height: 24px;border: 5px solid #C00;"></td>
                             <td style="text-align:center;font-size:8px; height: 24px;border: 5px solid #C00;"></td>
                             <td style="text-align:center;font-size:8px; height: 24px;border: 5px solid #C00;"></td>
@@ -828,7 +826,7 @@
                     </tr>
                     <tr>
                         <td style="font-family: Thaoma; font-weight: bold; font-size: 8" colspan="8">
-                            TERRABANK, N.A. 3191 CORAL WAY, PENTHOOUSE 1, MIAMI FL. 33145, TEL. 305 448 4898
+                            TERRABANK N. A. 3191 CORAL WAY, PENTHOUSE 1,MIAMI FL. 33145. TEL: 305 448 4898
                         </td>
                         <td style="font-family: Thaoma; font-weight: bold; font-size: 8" colspan="4">
                             Manufactured by Tabacos De Oriente, S. De RL.
@@ -836,8 +834,7 @@
                     </tr>
                     <tr>
                         <td style="font-family: Thaoma; font-weight: bold; font-size: 8" colspan="8">
-                            ABA No. 066012333 , SWFT . TBNAUS33 FOR CREDIT TO CCC CARIBBEAN CIGAR COMPANY, ACCOUNT :
-                            1270595006
+                            ABA N° 066012333 ,  SWIFT TBNAUS33
                         </td>
                         <td style="font-family: Thaoma; font-weight: bold; font-size: 8" colspan="4">
                             Apartado #33, Danli, El Paraiso Honduras, S.
@@ -845,10 +842,22 @@
                     </tr>
                     <tr>
                         <td style="font-family: Thaoma; font-size: 8" colspan="8">
-                            ALL SALES AND PRICES ARE HONDURAS/NICARAGUA
+                            FOR DEPOSIT INTO: CARIBBEAN CIGAR COMPANY   ACCOUNT NO: 1270595006
                         </td>
                         <td style="font-family: Thaoma; font-size: 8" colspan="4">
                             NONE OF THE CONSTITUENT TOBACCOS ARE FROM CUBA
                         </td>
+                    </tr>
+                    <tr>
+                        <td style="font-family: Thaoma; font-size: 8" colspan="8">
+                            CALLE AQUILINO DE LA GUARDIA,PISO 9. TORRE BANCO GENERAL. MARBELLA,BELLA VISTA. PANAMA,PANAMA. TEL: 507 209 5900
+                        </td>
+                        <td style="font-family: Thaoma; font-size: 8" colspan="4"></td>
+                    </tr>
+                    <tr>
+                        <td style="font-family: Thaoma; font-size: 8" colspan="8">
+                            ALL SALES AND PRICES ARE HONDURAS/NICARAGUA
+                        </td>
+                        <td style="font-family: Thaoma; font-size: 8" colspan="4"></td>
                     </tr>
                 </table>

@@ -855,7 +855,7 @@
                         <td></td>
                         <td></td>
                         <td style="font-family: Thaoma; font-size: 8" colspan="4">
-                            COUNTRY OF ORIGEN: HONDURAS
+                            TERRABANK N. A. 3191 CORAL WAY, PENTHOUSE 1,MIAMI FL. 33145. TEL: 305 448 4898
                         </td>
                     </tr>
                     <tr>
@@ -873,8 +873,7 @@
                     </tr>
                     <tr>
                         <td style="font-family: Thaoma; font-weight: bold; font-size: 8" colspan="8">
-                            ABA N°. 066012333 SWIFT TBNAUS33 FOR CREDIT TO CCC, CARIBBEAN CIGAR COMPANY, ACCOUNT
-                            1270595006
+                            ABA N° 066012333 ,  SWIFT TBNAUS33
                         </td>
                         <td></td>
                         <td></td>
@@ -883,6 +882,32 @@
                         <td></td>
                         <td style="font-family: Thaoma; font-weight: bold; font-size: 8" colspan="4">
                             Apartado #33, Danli, El Paraiso Honduras, S.
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="font-family: Thaoma; font-size: 8" colspan="8">
+                            FOR DEPOSIT INTO: CARIBBEAN CIGAR COMPANY   ACCOUNT NO: 1270595006
+                        </td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td style="font-family: Thaoma; font-size: 8" colspan="4">
+                            NONE OF THE CONSTITUENT TOBACCOS ARE FROM CUBA
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="font-family: Thaoma; font-size: 8" colspan="8">
+                            CALLE AQUILINO DE LA GUARDIA,PISO 9. TORRE BANCO GENERAL. MARBELLA,BELLA VISTA. PANAMA,PANAMA. TEL: 507 209 5900
+                        </td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td style="font-family: Thaoma; font-size: 8" colspan="4">
+                            NONE OF THE CONSTITUENT TOBACCOS ARE FROM CUBA
                         </td>
                     </tr>
                     <tr>
