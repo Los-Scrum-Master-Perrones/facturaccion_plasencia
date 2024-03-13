@@ -9,6 +9,8 @@ use Illuminate\Database\Eloquent\Model;
  *
  * @property string $id
  * @property int $id_produccion_pendiente
+ * @property double $peso
+ * @property string|null $fecha
  * @property int|null $rolero
  * @property int|null $rolero_remplazo
  * @property int|null $bonchero
@@ -27,6 +29,8 @@ class ProduccionDiarioPendienteVineta extends Model
     protected $fillable = [
         'id',
         'id_produccion_pendiente',
+        'peso',
+        'fecha',
         'rolero',
         'rolero_remplazo',
         'bonchero',
