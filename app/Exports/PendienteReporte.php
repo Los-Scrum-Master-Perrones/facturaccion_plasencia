@@ -31,11 +31,12 @@ class PendienteReporte implements  FromView, ShouldAutoSize,
     {
         return [
             'A' => NumberFormat::FORMAT_TEXT,
-            'G' => NumberFormat::FORMAT_NUMBER,
             'H' => NumberFormat::FORMAT_NUMBER,
-            'I' => NumberFormat::FORMAT_CURRENCY_USD_SIMPLE,
+            'I' => NumberFormat::FORMAT_NUMBER,
+            'J' => NumberFormat::FORMAT_CURRENCY_USD,
             'K' => NumberFormat::FORMAT_TEXT,
             'L' => NumberFormat::FORMAT_TEXT,
+            'M' => NumberFormat::FORMAT_TEXT,
         ];
     }
 }

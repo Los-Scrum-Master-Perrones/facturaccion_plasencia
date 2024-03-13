@@ -7,9 +7,32 @@
 
     <link rel="stylesheet" href="{{ asset('css/bootstrap.min.css') }}">
     <link rel="stylesheet" href="{{ asset('css/plugins.bundle.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/app.css') }}">
     @livewireStyles
     <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/css/select2.min.css" rel="stylesheet" />
     <link href="https://cdn.jsdelivr.net/npm/tom-select@2.2.2/dist/css/tom-select.css" rel="stylesheet">
+    <style>
+        .loader {
+            width: 100%;
+            height: 12px;
+            display: inline-block;
+            background-color: #FFF;
+            background-image: linear-gradient(45deg, rgba(0, 0, 0, 0.25) 25%, transparent 25%, transparent 50%, rgba(0, 0, 0, 0.25) 50%, rgba(0, 0, 0, 0.25) 75%, transparent 75%, transparent);
+            font-size: 30px;
+            background-size: 1em 1em;
+            box-sizing: border-box;
+            animation: barStripe 1s linear infinite;
+        }
+
+        @keyframes barStripe {
+            0% {
+                background-position: 1em 0;
+            }
+
+            100% {
+                background-position: 0 0;
+            }
+        }</style>
 </head>
 
 <!-- <body    style="background: linear-gradient(0deg, rgba(9,14,7,1) 6%, rgba(25,31,21,1) 28%, rgba(85,64,59,1) 51%, rgba(139,87,101,1) 75%,rgba(231,139,188,1) 100%);"> -->

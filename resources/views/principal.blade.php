@@ -11,6 +11,7 @@
 
     <link rel="stylesheet" href="{{ asset('css/bootstrap.min.css') }}">
     <link rel="stylesheet" href="{{ asset('css/plugins.bundle.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/app.css') }}">
     @livewireStyles
     <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/css/select2.min.css" rel="stylesheet" />
     <link href="https://cdn.jsdelivr.net/npm/tom-select@2.2.2/dist/css/tom-select.css" rel="stylesheet">
@@ -40,6 +41,29 @@
             width: 100%;
             height: 100%;
             opacity: 0.5;
+        }
+
+
+        .loader {
+            width: 100%;
+            height: 12px;
+            display: inline-block;
+            background-color: #FFF;
+            background-image: linear-gradient(45deg, rgba(0, 0, 0, 0.25) 25%, transparent 25%, transparent 50%, rgba(0, 0, 0, 0.25) 50%, rgba(0, 0, 0, 0.25) 75%, transparent 75%, transparent);
+            font-size: 30px;
+            background-size: 1em 1em;
+            box-sizing: border-box;
+            animation: barStripe 1s linear infinite;
+        }
+
+        @keyframes barStripe {
+            0% {
+                background-position: 1em 0;
+            }
+
+            100% {
+                background-position: 0 0;
+            }
         }
     </style>
 
