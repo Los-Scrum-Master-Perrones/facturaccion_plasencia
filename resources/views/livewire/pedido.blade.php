@@ -93,6 +93,10 @@
                         class="btn btn-primary">
                         Comparativo
                     </button>
+                    <button wire:click="exportar_reporte_a_producir()" class="btn btn-success">
+                        Exportar
+                    </button>
+
                 </div>
             </div>
             <div class="col-2"></div>
@@ -185,10 +189,7 @@
 
 
         <div class="panel-body" style="padding:0px;">
-            <div
-                style="width:100%; padding-left:0px;   font-size:10px;   overflow-x: display; overflow-y: auto;
-     height:70%;">
-                @csrf
+            <div style="width:100%; padding-left:0px;   font-size:10px;   overflow-x: display; overflow-y: auto; height:70%;">
                 <table class="table table-light table-hover" style="font-size:10px; ">
                     <thead>
                         <tr style="font-size:16px; text-align:center;">

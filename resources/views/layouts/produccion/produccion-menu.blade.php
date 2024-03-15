@@ -85,77 +85,90 @@
             width: 60%;
             padding: 4px;
         }
-    </style>
-    @php
-        // Obtener el protocolo (http o https)
-        $protocol = isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? 'https' : 'http';
-        // Obtener el nombre del host (dominio)
-        $host = $_SERVER['HTTP_HOST'];
-        // Obtener la ruta actual
-        $path = $_SERVER['REQUEST_URI'];
-        // Construir la URL completa
-        $url = $protocol . '://' . $host . $path;
 
+    </style>
+
+
+
+    @php
+        $protocol = isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? 'https' : 'http';
+        $host = $_SERVER['HTTP_HOST'];
+        $path = $_SERVER['REQUEST_URI'];
+        $url = $protocol . '://' . $host . $path;
     @endphp
+
+
     <ul class="nav nav-tabs justify-content-center">
         <li class="nav-item">
-            <a
-                class="nav-link @if ($url == route('produccion.catalogo')) active    fs-7 "
-        @else
-        fs-7 "
-        style="color: white" @endif  href="{{ route('produccion.catalogo') }}"><strong>Catalogo</strong></a>
+            <a @if (!Auth::user()->hasRole(['ADMIN', 'PRODUCCION', 'PRODUCCION MATERIALES'])) hidden @endif
+                class="nav-link @if ($url == route('produccion.catalogo')) active fs-7 "
+            @else
+            fs-7 "
+            style="color: white" @endif href="{{ route('produccion.catalogo') }}"><strong>Catalogo</strong></a>
         </li>
 
         <li class="nav-item">
-            <a
-                class="nav-link @if ($url == route('produccion.materiales')) active    fs-7 "
-        @else
-        fs-7 "
-        style="color: white" @endif  href="{{ route('produccion.materiales') }}"><strong>Materiales</strong></a>
+            <a @if (!Auth::user()->hasRole(['ADMIN', 'PRODUCCION', 'PRODUCCION MATERIALES'])) hidden @endif
+                class="nav-link @if ($url == route('produccion.materiales')) active fs-7 "
+            @else
+            fs-7 "
+            style="color: white" @endif href="{{ route('produccion.materiales') }}"><strong>Materiales</strong></a>
         </li>
         <li class="nav-item">
-            <a
-                class="nav-link @if ($url == route('produccion.catalogo.materiales')) active    fs-7 "
-        @else
-        fs-7 "
-        style="color: white" @endif  href="{{ route('produccion.catalogo.materiales') }}"><strong>Ficha M.</strong></a>
+            <a @if (!Auth::user()->hasRole(['ADMIN', 'PRODUCCION', 'PRODUCCION MATERIALES'])) hidden @endif
+                class="nav-link @if ($url == route('produccion.catalogo.materiales')) active fs-7 "
+            @else
+            fs-7 "
+            style="color: white" @endif href="{{ route('produccion.catalogo.materiales') }}"><strong>Ficha
+                    M.</strong></a>
         </li>
         <li class="nav-item">
-            <a class="nav-link @if ($url == route('produccion.pendiente.index')) active    fs-7 "
-        @else
-        fs-7 "
-        style="color: white" @endif aria-current="page"
+            <a @if (!Auth::user()->hasRole(['ADMIN', 'PRODUCCION', 'PRODUCCION MATERIALES'])) hidden @endif
+                class="nav-link @if ($url == route('produccion.pendiente.index')) active fs-7 "
+            @else
+            fs-7 "
+            style="color: white" @endif aria-current="page"
                 href="{{ route('produccion.pendiente.index') }}"><strong>Pendiente</strong></a>
         </li>
         <li class="nav-item">
-            <a
-                class="nav-link @if ($url == route('produccion.producir.marca')) active    fs-7 "
-        @else
-        fs-7 "
-        style="color: white" @endif href="{{ route('produccion.producir.marca') }}"><strong>Planificacion</strong></a>
+            <a @if (!Auth::user()->hasRole(['ADMIN', 'PRODUCCION', 'PRODUCCION MATERIALES'])) hidden @endif
+                class="nav-link @if ($url == route('produccion.producir.marca')) active fs-7 "
+            @else
+            fs-7 "
+            style="color: white" @endif href="{{ route('produccion.producir.marca') }}"><strong>Planificacion</strong></a>
         </li>
         <li class="nav-item">
-            <a
-                class="nav-link @if ($url == route('produccion.empleados')) active    fs-7 "
-        @else
-        fs-7 "
-        style="color: white" @endif href="{{ route('produccion.empleados') }}"><strong>Empleados</strong></a>
+            <a @if (!Auth::user()->hasRole(['ADMIN', 'PRODUCCION'])) hidden @endif
+                class="nav-link @if ($url == route('produccion.empleados')) active fs-7 "
+            @else
+            fs-7 "
+            style="color: white" @endif href="{{ route('produccion.empleados') }}"><strong>Empleados</strong></a>
         </li>
         <li class="nav-item">
-            <a
-                class="nav-link @if ($url == route('produccion.index')) active    fs-7 "
-        @else
-        fs-7 "
-        style="color: white" @endif href="{{ route('produccion.index') }}"><strong>Entradas</strong></a>
+            <a @if (!Auth::user()->hasRole(['ADMIN', 'PRODUCCION'])) hidden @endif
+                class="nav-link @if ($url == route('produccion.index')) active fs-7 "
+            @else
+            fs-7 "
+            style="color: white" @endif href="{{ route('produccion.index') }}"><strong>Entradas</strong></a>
         </li>
         <li class="nav-item">
-            <a
-                class="nav-link @if ($url == route('produccion.pendiente.salida')) active    fs-7 "
-        @else
-        fs-7 "
-        style="color: white" @endif  href="{{ route('produccion.pendiente.salida') }}"><strong>Salidas</strong></a>
+            <a @if (!Auth::user()->hasRole(['ADMIN', 'PRODUCCION'])) hidden @endif
+                class="nav-link @if ($url == route('produccion.pendiente.salida')) active fs-7 "
+            @else
+            fs-7 "
+            style="color: white" @endif href="{{ route('produccion.pendiente.salida') }}"><strong>Salidas</strong></a>
         </li>
-        @livewire('produccion.componentes.produccion-notificaciones')
+        <li class="nav-item">
+            <a @if (!Auth::user()->hasRole(['ADMIN', 'PRODUCCION'])) hidden @endif
+                class="nav-link @if ($url == route('produccion.empleados.rendimiento')) active fs-7 "
+            @else
+            fs-7 "
+            style="color: white" @endif href="{{ route('produccion.empleados.rendimiento') }}"><strong>Estadisticas</strong></a>
+        </li>
+        @if (Auth::user()->hasRole(['ADMIN', 'PRODUCCION']))
+            @livewire('produccion.componentes.produccion-notificaciones')
+        @endif
+
     </ul>
     @yield('contenido')
 @endsection

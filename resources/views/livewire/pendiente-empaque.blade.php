@@ -95,23 +95,23 @@
                     <thead>
                         <tr style="text-align:center;">
                             <th># ORDEN</th>
-                            <th style=" text-align:center;">ORDEN</th>
-                            <th style=" text-align:center;">ITEM</th>
-                            <th style=" text-align:center;">CODIGO</th>
-                            <th style=" text-align:center;">MARCA</th>
-                            <th style=" text-align:center;">VITOLA</th>
-                            <th style=" text-align:center;">NOMBRE</th>
-                            <th style=" text-align:center;">CAPA</th>
-                            <th style=" text-align:center;">TIPO EMPAQUE</th>
-                            <th style=" text-align:center;">ANILLO</th>
-                            <th style=" text-align:center;">CELLO</th>
-                            <th style=" text-align:center;">UPC</th>
-                            <th style=" text-align:center;">SALDO</th>
-                            <th style=" text-align:center;">EXISTENCIA(P)</th>
-                            <th style=" text-align:center;">SOB/FAL</th>
-                            <th style=" text-align:center;">CAJAS</th>
-                            <th style=" text-align:center;">EN EXISTENCIA(C)</th>
-                            <th style=" text-align:center;">SOB/FAL</th>
+                            <th style="text-align:center;">ORDEN</th>
+                            <th style="text-align:center;">ITEM</th>
+                            <th style="text-align:center;">CODIGO</th>
+                            <th style="text-align:center;">MARCA</th>
+                            <th style="text-align:center;">VITOLA</th>
+                            <th style="text-align:center;">NOMBRE</th>
+                            <th style="text-align:center;">CAPA</th>
+                            <th style="text-align:center;">TIPO EMPAQUE</th>
+                            <th style="text-align:center;">ANILLO</th>
+                            <th style="text-align:center;">CELLO</th>
+                            <th style="text-align:center;">UPC</th>
+                            <th style="text-align:center;">SALDO</th>
+                            <th style="text-align:center;">EXISTENCIA(P)</th>
+                            <th style="text-align:center;">SOB/FAL</th>
+                            <th style="text-align:center;">CAJAS</th>
+                            <th style="text-align:center;">EN EXISTENCIA(C)</th>
+                            <th style="text-align:center;">SOB/FAL</th>
                             @if (auth()->user()->rol == 0 || auth()->user()->rol == 1)
                                 <th style=" text-align:center;">OPERACIONES</th>
                             @endif
@@ -694,6 +694,7 @@
                                         <br>
                                     @endif
                                     @if (isset($porProducir[$datos->orden_del_sitema.$datos->codigo_productos]))
+                                        @if (isset($codigoPendiente[$datos->orden_del_sitema.$datos->codigo_productos]))
                                         <span style="color: red">Prioridad: {{ $porProducir[$datos->orden_del_sitema.$datos->codigo_productos]->prioridad }}</span>
                                         <a href="#"  data-bs-toggle="modal" data-bs-target="#modal_agregar_prioridad"
                                             onclick="modal_datos_produccion_pendiente('{{ json_encode($porProducir[$datos->orden_del_sitema.$datos->codigo_productos]) }}','{{ json_encode($codigoPendiente[$datos->orden_del_sitema.$datos->codigo_productos]) }}')">
@@ -702,6 +703,7 @@
                                                 <path d="M7.001 11a1 1 0 1 1 2 0 1 1 0 0 1-2 0M7.1 4.995a.905.905 0 1 1 1.8 0l-.35 3.507a.553.553 0 0 1-1.1 0z"/>
                                             </svg>
                                         </a>
+                                        @endif
                                     @endif
                                 </td>
                                 <td style="width:100px;">{{ $datos->presentacion }}</td>

@@ -8,11 +8,15 @@ use App\Exports\ProduccionPlanificacionSemanal;
 use App\Models\ProduccionDiarioModulos;
 use App\Models\ProduccionDiarioPendienteVineta;
 use App\Models\ProduccionDiarioProducir;
+use App\Models\ProduccionDiarioProducirGuardados;
 use App\Models\ProduccionMoldeDiario;
 use Barryvdh\DomPDF\Facade\Pdf;
+use Carbon\Carbon;
+use Carbon\CarbonImmutable;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Validator;
 use Livewire\Component;
 use Maatwebsite\Excel\Facades\Excel;
 
@@ -85,8 +89,15 @@ class ProduccionDiarioMarcas extends Component
         $todas_vinetas = DB::select('SELECT * FROM produccion_diario_pendiente_vinetas');
         $apartdoVinetas = [];
         foreach ($todas_vinetas as $uso) {
+            if(is_null($uso->bonchero)){
+                $uso->bonchero = "";
+            }
+            if(is_null($uso->rolero)){
+                $uso->rolero = "";
+            }
             $apartdoVinetas[$uso->id_produccion_pendiente . $uso->rolero . $uso->bonchero][] =  $uso;
         }
+
 
         return view(
             'livewire.produccion.produccion-diario-marcas',
@@ -105,6 +116,8 @@ class ProduccionDiarioMarcas extends Component
             ]
         )->extends('layouts.produccion.produccion-menu')->section('contenido');
     }
+
+
 
     public function cambiar_modulo($id)
     {
@@ -150,6 +163,32 @@ class ProduccionDiarioMarcas extends Component
         }
     }
 
+    public function agregar_detalle_extra(ProduccionDiarioProducir $mod, $modulo, $id)
+    {
+        $tupla = ProduccionDiarioProducir::where('modulo', '=', $mod->modulo)
+                                            ->whereRaw('(id_produccion_orden is null or id_produccion_orden = 0)')
+                                            ->first();
+
+        if(!$tupla){
+            $tupla = new ProduccionDiarioProducir();
+        }
+        $tupla->modulo = $mod->modulo;
+        $tupla->id_empleado = $mod->id_empleado;
+        $tupla->id_empleado2 = $mod->id_empleado2;
+        $tupla->moldes_a_usar = $mod->moldes_a_usar;
+        $tupla->moldes_para_uso = 0;
+        $tupla->tareas = $mod->tareas;
+        $tupla->id_produccion_orden = $id;
+        $tupla->moldes_ids = 'extra';
+        $tupla->created_at = $mod->created_at;
+        $tupla->save();
+
+    }
+
+    public function eliminar_detalle_extra(ProduccionDiarioProducir $mod)
+    {
+        $mod->delete();
+    }
 
     public function nueva_tupla_detalle($num, $id)
     {
@@ -340,12 +379,14 @@ class ProduccionDiarioMarcas extends Component
                     }
                     $datos2[] = [
                         "id_produccion_pendiente" => intval($value->id_produccion_orden),
+                        "fecha" => Carbon::now()->format('Y-m-d'),
+                        "peso" => 0,
                         "rolero" => $empleados[$conteo]->id_empleado1,
                         "bonchero" => $empleados[$conteo]->id_empleado2,
-                        "revisador" => 0,
+                        "revisador" => $empleados[$conteo]->revisadores,
                         "puros" => 50,
                         "estado" => 'A',
-                        "id_modulo" => 1,
+                        "id_modulo" => $empleados[$conteo]->id_modulo,
                     ];
                     if ($value->por_parejas_normal == $i) {
                         $conteo++;
@@ -356,12 +397,14 @@ class ProduccionDiarioMarcas extends Component
                 if ($value->pico > 0) {
                     $datos2[] = [
                         "id_produccion_pendiente" => intval($value->id_produccion_orden),
+                        "fecha" => Carbon::now()->format('Y-m-d'),
+                        "peso" => 0,
                         "rolero" => $empleados[0]->id_empleado1,
                         "bonchero" => $empleados[0]->id_empleado2,
-                        "revisador" => 0,
+                        "revisador" => $empleados[0]->revisadores,
                         "puros" => $value->pico,
                         "estado" => 'A',
-                        "id_modulo" => 1,
+                        "id_modulo" => $empleados[0]->id_modulo,
                     ];
                 }
             }
@@ -396,17 +439,17 @@ class ProduccionDiarioMarcas extends Component
 
     public function vinetas(Request $request, $estado){
         $vinetas  = DB::select('CALL `traer_produccion_vinetas_api_estado`(?,?)', [$estado, $request->marca]);
-        
+
         return response()->json([
             'data' => $vinetas,
             'estatus' => Response::HTTP_OK,
         ], Response::HTTP_OK);
-        
+
     }
 
     public function scanner_vinetas($id){
         $scannervinetas  = DB::select('CALL `traer_produccion_vinetas_api_scannner`(?)', [$id]);
-        
+
         if (count($scannervinetas) == 1){
             ProduccionDiarioPendienteVineta::where('id', $scannervinetas[0]->id)->update(['estado'=>'E']);
         }
@@ -416,5 +459,110 @@ class ProduccionDiarioMarcas extends Component
             'estatus' => Response::HTTP_OK,
         ], Response::HTTP_OK);
 
+    }
+
+
+    public function scanner_vinetas_aceptar(Request $reques,$id){
+        //$scannervinetas  = DB::select('CALL `traer_produccion_vinetas_api_scannner`(?)', [$id]);
+
+        $mensje = [];
+        try {
+            $validator = Validator::make($reques->all(), [
+                'puro' => 'required|integer|min:1',
+                'fecha' => 'required|date',
+                'peso' => 'required|numeric|min:0.1',
+                'bonchero' => 'required|exists:produccion_empleado,codigo',
+                'rolero' => 'required|exists:produccion_empleado,codigo',
+                'revisador' => 'required|string|regex:/^[0-9\s]+$/',
+            ], [
+                'puro.required' => 'La cantidad de puros es obligatorio.',
+                'puro.integer' => 'La cantidad de puros debe ser un número entero.',
+                'puro.min' => 'El valor mínimo para los puros es :min.',
+                'fecha.required' => 'La fecha es obligatorio.',
+                'fecha.date' => 'La fecha debe ser tener un formato valido.',
+                'peso.required' => 'El peso es obligatorio.',
+                'peso.numeric' => 'El pesos debe ser un número.',
+                'peso.min' => 'El valor mínimo para el peso es de :min.',
+                'bonchero.required' => 'El bonchero es obligatorio.',
+                'bonchero.exists' => 'El valor proporcionado para el bonchero no existe en la base de datos.',
+                'rolero.required' => 'El rolero es obligatorio.',
+                'rolero.exists' => 'El valor proporcionado para rolero no existe en la base de datos.',
+                'revisador.required' => 'Debe asignar revisadores a esta viñeta.',
+                'revisador.string' => 'Los codigos de revisadores debe ser una cadena de texto.',
+                'revisador.regex' => 'Los codigos de revisadores debe contener solo números y espacios.',
+            ]);
+
+            if ($validator->fails()) {
+                $errors = $validator->errors()->all();
+
+                foreach ($errors as $key => $value) {
+                    $mensje[] =$value;
+                }
+
+                return response()->json([
+                    'data' => $mensje,
+                    'estatus' => 500
+                ], 500);
+
+            }else{
+                DB::beginTransaction();
+
+                $vineta = ProduccionDiarioPendienteVineta::find($id);
+                $vineta->peso = $reques->all()['peso'];
+                $vineta->fecha = $reques->all()['fecha'];
+                $vineta->revisador = $reques->all()['revisador'];
+                $vineta->puros = $reques->all()['puro'];
+                $vineta->peso = $reques->all()['peso'];
+                $vineta->estado = "S";
+                $vineta->save();
+
+                $mensje[] = "Se Actualizo, Muy bien por ti";
+                DB::commit();
+            }
+
+        } catch (\Exception $th) {
+            $mensje[] = $th->getMessage();
+            DB::rollBack();
+        }
+
+        return response()->json([
+            'data' => $mensje,
+            'estatus' => Response::HTTP_OK,
+        ], Response::HTTP_OK);
+    }
+
+
+    public function guardar_planificacion(){
+        $planificacion = DB::select('call buscar_produccion_modulos_empleados_guardar()');
+
+        $date = CarbonImmutable::now()->locale('es_HN');
+
+        $startOfWeek = $date->startOfWeek(Carbon::MONDAY);
+        $endOfWeek = $date->endOfWeek(Carbon::SUNDAY);
+
+        foreach ($planificacion as $key => $value) {
+            if(!(is_null($value->id_pendiente) || $value->id_pendiente =='0' )){
+                if($value->restantes > 0){
+                $detalle = ProduccionDiarioProducirGuardados::where('id_empleado',$value->id_empleado1)
+                                            ->where('id_empleado2',$value->id_empleado2)
+                                            ->where('id_produccion_orden',$value->id_pendiente)
+                                            ->where('inicio_semana',$startOfWeek->format('Y-m-d'))
+                                            ->where('fin_semana',$endOfWeek->format('Y-m-d'))->first();
+
+                    if(!$detalle){
+                        $plan = new ProduccionDiarioProducirGuardados();
+                        $plan->modulo = $value->id_modulo;
+                        $plan->id_empleado = $value->id_empleado1;
+                        $plan->id_empleado2 = $value->id_empleado2;
+                        $plan->id_produccion_orden = $value->id_pendiente;
+                        $plan->pendiente =  $value->restantes;
+                        $plan->tareas = $value->tareas;
+                        $plan->inicio_semana = $startOfWeek->format('Y-m-d');
+                        $plan->fin_semana = $endOfWeek->format('Y-m-d');
+                        $plan->save();
+                    }
+                }
+            }
+        }
     }
 }

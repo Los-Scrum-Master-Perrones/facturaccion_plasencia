@@ -18,18 +18,21 @@
                             aria-label="Basic mixed styles example">
                             @if (auth()->user()->rol == -1)
                             @else
-                                <button class="btn btn-outline-dark" data-bs-toggle="modal"
-                                    data-bs-target="#productos_crear" wire:click='nuevo_pendiente()'>
-                                    <abbr title="Agregar nuevo producto al pendiente">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14"
-                                            fill="white" class="bi bi-plus-circle" viewBox="0 0 16 16">
-                                            <path
-                                                d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z" />
-                                            <path
-                                                d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z" />
-                                        </svg>
-                                    </abbr>
-                                </button>
+                            @if (Auth::user()->hasRole(['ADMIN','PRODUCCION']))
+                                    <button class="btn btn-outline-dark" data-bs-toggle="modal"
+                                        data-bs-target="#productos_crear" wire:click='nuevo_pendiente()'>
+                                        <abbr title="Agregar nuevo producto al pendiente">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14"
+                                                fill="white" class="bi bi-plus-circle" viewBox="0 0 16 16">
+                                                <path
+                                                    d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z" />
+                                                <path
+                                                    d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z" />
+                                            </svg>
+                                        </abbr>
+                                    </button>
+                                @endif
+
                             @endif
                             <button class="btn btn-outline-danger" wire:click="exportPendiente()">
                                 <abbr title="Exportar a excel">
@@ -65,6 +68,7 @@
                                         alt="high-priority" />
                                 </abbr>
                             </button>
+                            @if (Auth::user()->hasRole(['ADMIN','PRODUCCION']))
                             <button class="btn btn-outline-info" data-bs-toggle="modal"
                                 data-bs-target="#modal_subir_moldes">
                                 <abbr title="Actualizar Moldes">
@@ -73,6 +77,8 @@
                                         alt="external-Mold-bakery-goofy-color-kerismaker" />
                                 </abbr>
                             </button>
+                            @endif
+
                             <button class="btn btn-outline-warning" wire:click="mostrar_sobrantes()">
                                 <abbr title="Sobrantes">
                                    <img width="20" height="20" src="https://img.icons8.com/nolan/25/product.png" alt="product"/>
@@ -476,49 +482,52 @@
                             @if (auth()->user()->rol == -1)
                             @else
                                 <td style="width:120px; text-align: center">
+                                    @if (Auth::user()->hasRole(['ADMIN','PRODUCCION']))
                                     @if (isset($historial[$detalle->id]))
-                                        <a href="#" onclick='mostrar_historial({{ $detalle->id }})'>
-                                            <abbr title="Historial de Precios">
-                                                <img width="16" height="16" fill="currentColor"
-                                                    src="https://img.icons8.com/ios/50/time-machine--v1.png"
-                                                    alt="time-machine--v1" />
-                                            </abbr>
-                                        </a>
+                                    <a href="#" onclick='mostrar_historial({{ $detalle->id }})'>
+                                        <abbr title="Historial de Precios">
+                                            <img width="16" height="16" fill="currentColor"
+                                                src="https://img.icons8.com/ios/50/time-machine--v1.png"
+                                                alt="time-machine--v1" />
+                                        </abbr>
+                                    </a>
+                                @endif
+
+                                <a style="text-decoration: none" onclick="enviar_produccion({{ $detalle->id }})"
+                                    href="#">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15"
+                                        fill="currentColor" class="bi bi-send-arrow-down-fill"
+                                        viewBox="0 0 16 16">
+                                        <path fill-rule="evenodd"
+                                            d="M15.854.146a.5.5 0 0 1 .11.54L13.026 8.03A4.5 4.5 0 0 0 8 12.5c0 .5 0 1.5-.773.36l-1.59-2.498L.644 7.184l-.002-.001-.41-.261a.5.5 0 0 1 .083-.886l.452-.18.001-.001L15.314.035a.5.5 0 0 1 .54.111ZM6.637 10.07l7.494-7.494.471-1.178-1.178.471L5.93 9.363l.338.215a.5.5 0 0 1 .154.154l.215.338Z" />
+                                        <path fill-rule="evenodd"
+                                            d="M12.5 16a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7Zm.354-1.646a.5.5 0 0 1-.722-.016l-1.149-1.25a.5.5 0 1 1 .737-.676l.28.305V11a.5.5 0 0 1 1 0v1.793l.396-.397a.5.5 0 0 1 .708.708l-1.25 1.25Z" />
+                                    </svg>
+                                </a>
+                                @if ($porcentaje > 0)
+                                @else
+                                    <a style="text-decoration: none"
+                                        onclick="datos_modal_eliminar({{ $detalle->id }})" href="#">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15"
+                                            fill="currentColor" class="bi bi-trash-fill" viewBox="0 0 16 16">
+                                            <path
+                                                d="M2.5 1a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1H3v9a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V4h.5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1H2.5zm3 4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5zM8 5a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7A.5.5 0 0 1 8 5zm3 .5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 1 0z" />
+                                        </svg>
+                                    </a>
+                                @endif
+                                <a style="text-decoration: none" data-bs-toggle="modal" href="#"
+                                    data-bs-target="#modal_actualizar"
+                                    onclick="editar_pendiente({{ $detalle->id }})">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15"
+                                        fill="currentColor" class="bi bi-pencil-square" viewBox="0 0 16 16">
+                                        <path
+                                            d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z" />
+                                        <path fill-rule="evenodd"
+                                            d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z" />
+                                    </svg>
+                                </a>
                                     @endif
 
-                                    <a style="text-decoration: none" onclick="enviar_produccion({{ $detalle->id }})"
-                                        href="#">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15"
-                                            fill="currentColor" class="bi bi-send-arrow-down-fill"
-                                            viewBox="0 0 16 16">
-                                            <path fill-rule="evenodd"
-                                                d="M15.854.146a.5.5 0 0 1 .11.54L13.026 8.03A4.5 4.5 0 0 0 8 12.5c0 .5 0 1.5-.773.36l-1.59-2.498L.644 7.184l-.002-.001-.41-.261a.5.5 0 0 1 .083-.886l.452-.18.001-.001L15.314.035a.5.5 0 0 1 .54.111ZM6.637 10.07l7.494-7.494.471-1.178-1.178.471L5.93 9.363l.338.215a.5.5 0 0 1 .154.154l.215.338Z" />
-                                            <path fill-rule="evenodd"
-                                                d="M12.5 16a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7Zm.354-1.646a.5.5 0 0 1-.722-.016l-1.149-1.25a.5.5 0 1 1 .737-.676l.28.305V11a.5.5 0 0 1 1 0v1.793l.396-.397a.5.5 0 0 1 .708.708l-1.25 1.25Z" />
-                                        </svg>
-                                    </a>
-                                    @if ($porcentaje > 0)
-                                    @else
-                                        <a style="text-decoration: none"
-                                            onclick="datos_modal_eliminar({{ $detalle->id }})" href="#">
-                                            <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15"
-                                                fill="currentColor" class="bi bi-trash-fill" viewBox="0 0 16 16">
-                                                <path
-                                                    d="M2.5 1a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1H3v9a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V4h.5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1H2.5zm3 4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5zM8 5a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7A.5.5 0 0 1 8 5zm3 .5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 1 0z" />
-                                            </svg>
-                                        </a>
-                                    @endif
-                                    <a style="text-decoration: none" data-bs-toggle="modal" href="#"
-                                        data-bs-target="#modal_actualizar"
-                                        onclick="editar_pendiente({{ $detalle->id }})">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15"
-                                            fill="currentColor" class="bi bi-pencil-square" viewBox="0 0 16 16">
-                                            <path
-                                                d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z" />
-                                            <path fill-rule="evenodd"
-                                                d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z" />
-                                        </svg>
-                                    </a>
 
                                     <button type="button" class="btn btn-sm  @if(isset($materiales[$detalle->id_producto])) btn-primary @else  btn-danger @endif dropdown-toggle" data-bs-toggle="collapse" data-bs-target="#collapseExample{{ $i }}">
                                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"

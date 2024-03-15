@@ -253,18 +253,16 @@ class ProduccionEmpleado extends Component
     // funcion para api
     public function empledos_activos($activo, Request $request){
         $mostrar_empledos = DB::select('call buscar_produccion_empleado_A_I(?,?)', [$activo, $request->nombre]);
-
         return response()->json([
             'data' => $mostrar_empledos,
             'estatus' => Response::HTTP_OK,
         ], Response::HTTP_OK);
-
     }
 
     public function funciones_crud(Request $request, $id){
             //return json_encode($request -> all());
         try {
-            $validator = Validator::make($request->all() , 
+            $validator = Validator::make($request->all() ,
                 [
                     'codigo' => 'required|integer|unique:produccion_empleado,codigo,'.$id,
                     'nombre' => 'required|string',
@@ -281,14 +279,14 @@ class ProduccionEmpleado extends Component
                 $errors = $validator->errors()->all();
 
                 DB::beginTransaction();
-                
+
                 if(isset($request->all()['activo'])){
                     $actu = ModelsProduccionEmpleado::find($id);
 
                     $actu -> activo = $request -> all()['activo'];
 
                     $agregar = $actu -> save();
-                    
+
                     DB::commit();
 
                     return response()->json([
@@ -299,7 +297,7 @@ class ProduccionEmpleado extends Component
                 return response()->json([
                     'data' => $errors,
                     'estatus' => Response::HTTP_INTERNAL_SERVER_ERROR,
-                    ], 
+                    ],
                     Response::HTTP_INTERNAL_SERVER_ERROR);
                 }
             }else{
@@ -322,7 +320,7 @@ class ProduccionEmpleado extends Component
 
                     $agregar = $actu -> save();
                 }
-                
+
                 DB::commit();
 
                 return response()->json([

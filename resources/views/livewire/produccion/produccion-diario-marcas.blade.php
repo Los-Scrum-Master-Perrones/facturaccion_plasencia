@@ -93,10 +93,75 @@
             display: list-item;
             text-align: center;
         }
+
+        .flotante {
+            display: inline-block;
+            position: fixed;
+            bottom: 50vh;
+            left: 0px;
+            width: 50px;
+            /* ajusta el tamaño según necesites */
+            height: 50px;
+            /* ajusta el tamaño según necesites */
+            border-radius: 50%;
+            /* hace que el botón sea redondo */
+            background-color: green;
+            /* define el color verde */
+            border: none;
+            /* elimina el borde */
+            cursor: pointer;
+            /* cambia el cursor al pasar sobre el botón */
+            z-index: 999;
+            display: flex;
+            /* usa flexbox para centrar contenido */
+            justify-content: center;
+            /* centra horizontalmente */
+            align-items: center;
+            /* centra verticalmente */
+        }
+
+        .flotante svg {
+            width: 70%;
+            /* ajusta el tamaño del icono según necesites */
+            height: 70%;
+            /* ajusta el tamaño del icono según necesites */
+        }
+
+        .lightRed {
+            background-color: #ff8080 !important
+        }
     </style>
 
+
+
+    <div style="height: 0.8rem;" role="status">
+        <div wire:loading style="width: 100%;" role="status">
+            <span class="loader"></span>
+        </div>
+    </div>
+
+    <a class='flotante' href='#' wire:click="ocultar_empleados()">
+        @if ($verempleados == 0)
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="white"
+                class="bi bi-person-check" viewBox="0 0 16 16">
+                <path
+                    d="M12.5 16a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7m1.679-4.493-1.335 2.226a.75.75 0 0 1-1.174.144l-.774-.773a.5.5 0 0 1 .708-.708l.547.548 1.17-1.951a.5.5 0 1 1 .858.514M11 5a3 3 0 1 1-6 0 3 3 0 0 1 6 0M8 7a2 2 0 1 0 0-4 2 2 0 0 0 0 4" />
+                <path
+                    d="M8.256 14a4.5 4.5 0 0 1-.229-1.004H3c.001-.246.154-.986.832-1.664C4.484 10.68 5.711 10 8 10q.39 0 .74.025c.226-.341.496-.65.804-.918Q8.844 9.002 8 9c-5 0-6 3-6 4s1 1 1 1z" />
+            </svg>
+        @else
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="white"
+                class="bi bi-person-dash" viewBox="0 0 16 16">
+                <path
+                    d="M12.5 16a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7M11 12h3a.5.5 0 0 1 0 1h-3a.5.5 0 0 1 0-1m0-7a3 3 0 1 1-6 0 3 3 0 0 1 6 0M8 7a2 2 0 1 0 0-4 2 2 0 0 0 0 4" />
+                <path
+                    d="M8.256 14a4.5 4.5 0 0 1-.229-1.004H3c.001-.246.154-.986.832-1.664C4.484 10.68 5.711 10 8 10q.39 0 .74.025c.226-.341.496-.65.804-.918Q8.844 9.002 8 9c-5 0-6 3-6 4s1 1 1 1z" />
+            </svg>
+        @endif
+    </a>
+
     <div class="row">
-        <div class="col-md-4" @if (count($empleados) == 0) hidden @else @endif>
+        <div class="col-md-4" @if ($verempleados == 0) hidden @else @endif>
             <div class="card" style="height: 90vh;">
                 <div class="card-body">
                     <div class="table-responsive" style="height: 87vh;">
@@ -141,15 +206,9 @@
                 </div>
             </div>
         </div>
-        <div @if (count($empleados) == 0) class="col-md-12" @else class="col-md-8" @endif>
+        <div @if ($verempleados == 0) class="col-md-12" @else class="col-md-8" @endif>
             <ul class="nav nav-tabs justify-content-center">
-                <li class="nav-item" wire:loading>
-                    <a class="nav-link fs-7 active" href="#">
-                        <div class="spinner-grow text-danger" style="width: 1rem; height: 1rem;" role="status">
-                            <span class="visually-hidden">Loading...</span>
-                        </div>
-                    </a>
-                </li>
+
                 @php
                     $moduloactual = [];
                 @endphp
@@ -164,6 +223,11 @@
                             wire:click="cambiar_modulo({{ $modulo->id }})"><strong>{{ $modulo->nombre }}</strong></a>
                     </li>
                 @endforeach
+                @if (!$moduloactual)
+                    @php
+                        $moduloactual = $modulo;
+                    @endphp
+                @endif
                 @if ($modulo->nombre == 'Modulo 7')
                 @else
                     <li class="nav-item">
@@ -217,8 +281,8 @@
                 <li class="nav-item">
                     <a class="nav-link fs-7 active" href="#" onclick="moldes_parejas()">
                         <abbr title="Moldes por Parejas">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
-                                class="bi bi-archive-fill" viewBox="0 0 16 16">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                fill="currentColor" class="bi bi-archive-fill" viewBox="0 0 16 16">
                                 <path
                                     d="M12.643 15C13.979 15 15 13.845 15 12.5V5H1v7.5C1 13.845 2.021 15 3.357 15h9.286zM5.5 7h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1 0-1zM.8 1a.8.8 0 0 0-.8.8V3a.8.8 0 0 0 .8.8h14.4A.8.8 0 0 0 16 3V1.8a.8.8 0 0 0-.8-.8H.8z" />
                             </svg>
@@ -237,6 +301,33 @@
                         </abbr>
                     </a>
                 </li>
+                <li class="nav-item" hidden>
+                    <a class="nav-link fs-7 active" href="#" data-bs-toggle="modal"
+                        data-bs-target="#modal_programar_marca">
+                        <abbr title="Programar por marca">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                fill="currentColor" class="bi bi-calendar-week" viewBox="0 0 16 16">
+                                <path
+                                    d="M11 6.5a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5zm-3 0a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5zm-5 3a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5zm3 0a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5z" />
+                                <path
+                                    d="M3.5 0a.5.5 0 0 1 .5.5V1h8V.5a.5.5 0 0 1 1 0V1h1a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V3a2 2 0 0 1 2-2h1V.5a.5.5 0 0 1 .5-.5M1 4v10a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V4z" />
+                            </svg>
+                        </abbr>
+                    </a>
+                </li>
+                <li class="nav-item" wire:loading.attr="hidden">
+                    <a class="nav-link fs-7 active" href="#" wire:click="guardar_planificacion()">
+                        <abbr title="Guardar Planificacion">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                fill="currentColor" class="bi bi-floppy-fill" viewBox="0 0 16 16">
+                                <path
+                                    d="M0 1.5A1.5 1.5 0 0 1 1.5 0H3v5.5A1.5 1.5 0 0 0 4.5 7h7A1.5 1.5 0 0 0 13 5.5V0h.086a1.5 1.5 0 0 1 1.06.44l1.415 1.414A1.5 1.5 0 0 1 16 2.914V14.5a1.5 1.5 0 0 1-1.5 1.5H14v-5.5A1.5 1.5 0 0 0 12.5 9h-9A1.5 1.5 0 0 0 2 10.5V16h-.5A1.5 1.5 0 0 1 0 14.5z" />
+                                <path
+                                    d="M3 16h10v-5.5a.5.5 0 0 0-.5-.5h-9a.5.5 0 0 0-.5.5zm9-16H4v5.5a.5.5 0 0 0 .5.5h7a.5.5 0 0 0 .5-.5zM9 1h2v4H9z" />
+                            </svg>
+                        </abbr>
+                    </a>
+                </li>
             </ul>
             <div class="card" style="height: 86vh;">
                 <div class="card-header">
@@ -247,49 +338,57 @@
                         <div class="col-md-5">
                             @if (is_null($moduloactual->revisador1))
                                 @isset($revisador['revisador'])
-                                    <select class="form-control form-control-sm" name="" id="revisador_1"
-                                        onchange="agregar_revisador_modulo({{ $moduloactual->id }},'revisador_1',1)">
-                                        <option value="">Selecione</option>
-                                        @foreach ($revisador['revisador'] as $revisa)
-                                            <option value="{{ $revisa->id }}">
-                                                {{ $revisa->codigo . ' - ' . $revisa->nombre }}
-                                            </option>
-                                        @endforeach
-                                    </select>
+                                    @if (Auth::user()->hasRole(['ADMIN', 'PRODUCCION']))
+                                        <select class="form-control form-control-sm" name="" id="revisador_1"
+                                            onchange="agregar_revisador_modulo({{ $moduloactual->id }},'revisador_1',1)">
+                                            <option value="">Selecione</option>
+                                            @foreach ($revisador['revisador'] as $revisa)
+                                                <option value="{{ $revisa->id }}">
+                                                    {{ $revisa->codigo . ' - ' . $revisa->nombre }}
+                                                </option>
+                                            @endforeach
+                                        </select>
+                                    @endif
                                 @endisset
                             @else
-                                <a href="#" style="text-decoration: none"
-                                    wire:click="eliminar_revisador_modulo({{ $moduloactual->id }},1)">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
-                                        fill="currentColor" class="bi bi-trash3-fill" viewBox="0 0 16 16">
-                                        <path
-                                            d="M11 1.5v1h3.5a.5.5 0 0 1 0 1h-.538l-.853 10.66A2 2 0 0 1 11.115 16h-6.23a2 2 0 0 1-1.994-1.84L2.038 3.5H1.5a.5.5 0 0 1 0-1H5v-1A1.5 1.5 0 0 1 6.5 0h3A1.5 1.5 0 0 1 11 1.5Zm-5 0v1h4v-1a.5.5 0 0 0-.5-.5h-3a.5.5 0 0 0-.5.5ZM4.5 5.029l.5 8.5a.5.5 0 1 0 .998-.06l-.5-8.5a.5.5 0 1 0-.998.06Zm6.53-.528a.5.5 0 0 0-.528.47l-.5 8.5a.5.5 0 0 0 .998.058l.5-8.5a.5.5 0 0 0-.47-.528ZM8 4.5a.5.5 0 0 0-.5.5v8.5a.5.5 0 0 0 1 0V5a.5.5 0 0 0-.5-.5Z" />
-                                    </svg>
-                                </a>
+                                @if (Auth::user()->hasRole(['ADMIN', 'PRODUCCION']))
+                                    <a href="#" style="text-decoration: none"
+                                        wire:click="eliminar_revisador_modulo({{ $moduloactual->id }},1)">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                            fill="currentColor" class="bi bi-trash3-fill" viewBox="0 0 16 16">
+                                            <path
+                                                d="M11 1.5v1h3.5a.5.5 0 0 1 0 1h-.538l-.853 10.66A2 2 0 0 1 11.115 16h-6.23a2 2 0 0 1-1.994-1.84L2.038 3.5H1.5a.5.5 0 0 1 0-1H5v-1A1.5 1.5 0 0 1 6.5 0h3A1.5 1.5 0 0 1 11 1.5Zm-5 0v1h4v-1a.5.5 0 0 0-.5-.5h-3a.5.5 0 0 0-.5.5ZM4.5 5.029l.5 8.5a.5.5 0 1 0 .998-.06l-.5-8.5a.5.5 0 1 0-.998.06Zm6.53-.528a.5.5 0 0 0-.528.47l-.5 8.5a.5.5 0 0 0 .998.058l.5-8.5a.5.5 0 0 0-.47-.528ZM8 4.5a.5.5 0 0 0-.5.5v8.5a.5.5 0 0 0 1 0V5a.5.5 0 0 0-.5-.5Z" />
+                                        </svg>
+                                    </a>
+                                @endif
                                 {{ $moduloactual->revisador1 }}
                             @endif
                         </div>
                         <div class="col-md-5">
                             @if (is_null($moduloactual->revisador2))
                                 @isset($revisador['revisador'])
-                                    <select class="form-control form-control-sm" name="" id="revisador_2"
-                                        onchange="agregar_revisador_modulo({{ $moduloactual->id }},'revisador_2',2)">
-                                        <option value="">Selecione</option>
-                                        @foreach ($revisador['revisador'] as $revisa)
-                                            <option value="{{ $revisa->id }}">
-                                                {{ $revisa->codigo . ' - ' . $revisa->nombre }}</option>
-                                        @endforeach
-                                    </select>
+                                    @if (Auth::user()->hasRole(['ADMIN', 'PRODUCCION']))
+                                        <select class="form-control form-control-sm" name="" id="revisador_2"
+                                            onchange="agregar_revisador_modulo({{ $moduloactual->id }},'revisador_2',2)">
+                                            <option value="">Selecione</option>
+                                            @foreach ($revisador['revisador'] as $revisa)
+                                                <option value="{{ $revisa->id }}">
+                                                    {{ $revisa->codigo . ' - ' . $revisa->nombre }}</option>
+                                            @endforeach
+                                        </select>
+                                    @endif
                                 @endisset
                             @else
-                                <a href="#" style="text-decoration: none"
-                                    wire:click="eliminar_revisador_modulo({{ $moduloactual->id }},2)">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
-                                        fill="currentColor" class="bi bi-trash3-fill" viewBox="0 0 16 16">
-                                        <path
-                                            d="M11 1.5v1h3.5a.5.5 0 0 1 0 1h-.538l-.853 10.66A2 2 0 0 1 11.115 16h-6.23a2 2 0 0 1-1.994-1.84L2.038 3.5H1.5a.5.5 0 0 1 0-1H5v-1A1.5 1.5 0 0 1 6.5 0h3A1.5 1.5 0 0 1 11 1.5Zm-5 0v1h4v-1a.5.5 0 0 0-.5-.5h-3a.5.5 0 0 0-.5.5ZM4.5 5.029l.5 8.5a.5.5 0 1 0 .998-.06l-.5-8.5a.5.5 0 1 0-.998.06Zm6.53-.528a.5.5 0 0 0-.528.47l-.5 8.5a.5.5 0 0 0 .998.058l.5-8.5a.5.5 0 0 0-.47-.528ZM8 4.5a.5.5 0 0 0-.5.5v8.5a.5.5 0 0 0 1 0V5a.5.5 0 0 0-.5-.5Z" />
-                                    </svg>
-                                </a>
+                                @if (Auth::user()->hasRole(['ADMIN', 'PRODUCCION']))
+                                    <a href="#" style="text-decoration: none"
+                                        wire:click="eliminar_revisador_modulo({{ $moduloactual->id }},2)">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                            fill="currentColor" class="bi bi-trash3-fill" viewBox="0 0 16 16">
+                                            <path
+                                                d="M11 1.5v1h3.5a.5.5 0 0 1 0 1h-.538l-.853 10.66A2 2 0 0 1 11.115 16h-6.23a2 2 0 0 1-1.994-1.84L2.038 3.5H1.5a.5.5 0 0 1 0-1H5v-1A1.5 1.5 0 0 1 6.5 0h3A1.5 1.5 0 0 1 11 1.5Zm-5 0v1h4v-1a.5.5 0 0 0-.5-.5h-3a.5.5 0 0 0-.5.5ZM4.5 5.029l.5 8.5a.5.5 0 1 0 .998-.06l-.5-8.5a.5.5 0 1 0-.998.06Zm6.53-.528a.5.5 0 0 0-.528.47l-.5 8.5a.5.5 0 0 0 .998.058l.5-8.5a.5.5 0 0 0-.47-.528ZM8 4.5a.5.5 0 0 0-.5.5v8.5a.5.5 0 0 0 1 0V5a.5.5 0 0 0-.5-.5Z" />
+                                        </svg>
+                                    </a>
+                                @endif
                                 {{ $moduloactual->revisador2 }}
                             @endif
                         </div>
@@ -317,126 +416,208 @@
                                 </tr>
                             </thead>
                             <tbody class="fs-7">
-                                <tr>
-                                    <td></td>
-                                    <td colspan="2" class="text-center">
-                                        @isset($boncheros['boncheros'])
-                                            <select class="form-control form-control-sm" name="" id="empleadon"
-                                                onchange="agregar_nueva_tupla(1,'empleadon')">
-                                                <option value="">Selecione</option>
-                                                @foreach ($boncheros['boncheros'] as $bonche)
-                                                    <option value="{{ $bonche->id }}">
-                                                        {{ $bonche->codigo . ' - ' . $bonche->nombre }}</option>
-                                                @endforeach
-                                            </select>
-                                        @endisset
-                                    </td>
-                                    <td colspan="2" class="text-center">
-                                        @isset($roleros['roleros'])
-                                            <select class="form-control form-control-sm" name="" id="empleadon2"
-                                                onchange="agregar_nueva_tupla(2,'empleadon2')">
-                                                <option value="">Selecione</option>
-                                                @foreach ($roleros['roleros'] as $rolero)
-                                                    <option value="{{ $rolero->id }}">
-                                                        {{ $rolero->codigo . ' - ' . $rolero->nombre }}</option>
-                                                @endforeach
-                                            </select>
-                                        @endisset
-                                    </td>
-                                    <td colspan="2" class="text-center"></td>
-                                    <td colspan="2" class="text-center"></td>
-                                </tr>
+                                @if (Auth::user()->hasRole(['ADMIN', 'PRODUCCION']))
+                                    <tr>
+                                        <td></td>
+                                        <td colspan="2" class="text-center">
+                                            @isset($boncheros['boncheros'])
+                                                <select class="form-control form-control-sm" name=""
+                                                    id="empleadon" onchange="agregar_nueva_tupla(1,'empleadon')">
+                                                    <option value="">Selecione</option>
+                                                    @foreach ($boncheros['boncheros'] as $bonche)
+                                                        <option value="{{ $bonche->id }}">
+                                                            {{ $bonche->codigo . ' - ' . $bonche->nombre }}</option>
+                                                    @endforeach
+                                                </select>
+                                            @endisset
+                                        </td>
+                                        <td colspan="2" class="text-center">
+                                            @isset($roleros['roleros'])
+                                                <select class="form-control form-control-sm" name=""
+                                                    id="empleadon2" onchange="agregar_nueva_tupla(2,'empleadon2')">
+                                                    <option value="">Selecione</option>
+                                                    @foreach ($roleros['roleros'] as $rolero)
+                                                        <option value="{{ $rolero->id }}">
+                                                            {{ $rolero->codigo . ' - ' . $rolero->nombre }}</option>
+                                                    @endforeach
+                                                </select>
+                                            @endisset
+                                        </td>
+                                        <td colspan="2" class="text-center"></td>
+                                        <td colspan="2" class="text-center"></td>
+                                    </tr>
+                                @endif
                                 @php
                                     $moldes_totale_para_usar = 0;
                                     $moldes = 0;
+                                    $empleado1 = '';
+                                    $mostrar = true;
                                 @endphp
                                 @foreach ($modulo_empleado as $key => $emple)
+                                    @php
+                                        if ($emple->codigo_empleaado == $empleado1) {
+                                            $mostrar = false;
+                                        }
+
+                                        if ($emple->codigo_empleaado != $empleado1) {
+                                            $empleado1 = $emple->codigo_empleaado;
+                                            $mostrar = true;
+                                        }
+                                    @endphp
+
                                     <tr>
                                         <td>{{ ++$key }}</td>
-                                        @if (is_null($emple->codigo_empleaado))
-                                            <td colspan="2" class="text-center">
-                                                @isset($boncheros['boncheros'])
-                                                    <button type="button" class="btn btn-success" data-bs-toggle="modal"  data-bs-target="#busquedaEmpleadobonchero"
-                                                    onclick="agregar_id_bonchero({{ $emple->id }},1)">
-                                                            BONCHEROS
-                                                    </button>
-                                                @endisset
+                                        @if(!$mostrar)
+                                            <td colspan="4">
+
                                             </td>
                                         @else
-                                            <td>
-                                                <a href="#" style="text-decoration: none"
-                                                    wire:click="eliminar_detalle({{ $emple->id }},1)">
-                                                    <svg xmlns="http://www.w3.org/2000/svg" width="16"
-                                                        height="16" fill="currentColor" class="bi bi-trash3-fill"
-                                                        viewBox="0 0 16 16">
-                                                        <path
-                                                            d="M11 1.5v1h3.5a.5.5 0 0 1 0 1h-.538l-.853 10.66A2 2 0 0 1 11.115 16h-6.23a2 2 0 0 1-1.994-1.84L2.038 3.5H1.5a.5.5 0 0 1 0-1H5v-1A1.5 1.5 0 0 1 6.5 0h3A1.5 1.5 0 0 1 11 1.5Zm-5 0v1h4v-1a.5.5 0 0 0-.5-.5h-3a.5.5 0 0 0-.5.5ZM4.5 5.029l.5 8.5a.5.5 0 1 0 .998-.06l-.5-8.5a.5.5 0 1 0-.998.06Zm6.53-.528a.5.5 0 0 0-.528.47l-.5 8.5a.5.5 0 0 0 .998.058l.5-8.5a.5.5 0 0 0-.47-.528ZM8 4.5a.5.5 0 0 0-.5.5v8.5a.5.5 0 0 0 1 0V5a.5.5 0 0 0-.5-.5Z" />
-                                                    </svg>
-                                                </a>
-                                                {{ $emple->codigo_empleaado }}
-                                            </td>
-                                            <td>{{ $emple->nombre_empleado }}</td>
+                                            @if (is_null($emple->codigo_empleaado))
+                                                @if (Auth::user()->hasRole(['ADMIN', 'PRODUCCION']))
+                                                    <td colspan="2" class="text-center">
+                                                        @isset($boncheros['boncheros'])
+                                                            <button type="button" class="btn btn-success"
+                                                                data-bs-toggle="modal"
+                                                                data-bs-target="#busquedaEmpleadobonchero"
+                                                                onclick="agregar_id_bonchero({{ $emple->id }},1,`{{ json_encode($boncheros['boncheros']) }}`)">
+                                                                BONCHEROS
+                                                            </button>
+                                                        @endisset
+                                                    </td>
+                                                @endif
+                                            @else
+                                                <td>
+                                                    @if (Auth::user()->hasRole(['ADMIN', 'PRODUCCION']))
+                                                        <a href="#" style="text-decoration: none"
+                                                            wire:click="eliminar_detalle({{ $emple->id }},1)">
+                                                            <svg xmlns="http://www.w3.org/2000/svg" width="16"
+                                                                height="16" fill="red" class="bi bi-trash3-fill"
+                                                                viewBox="0 0 16 16">
+                                                                <path
+                                                                    d="M11 1.5v1h3.5a.5.5 0 0 1 0 1h-.538l-.853 10.66A2 2 0 0 1 11.115 16h-6.23a2 2 0 0 1-1.994-1.84L2.038 3.5H1.5a.5.5 0 0 1 0-1H5v-1A1.5 1.5 0 0 1 6.5 0h3A1.5 1.5 0 0 1 11 1.5Zm-5 0v1h4v-1a.5.5 0 0 0-.5-.5h-3a.5.5 0 0 0-.5.5ZM4.5 5.029l.5 8.5a.5.5 0 1 0 .998-.06l-.5-8.5a.5.5 0 1 0-.998.06Zm6.53-.528a.5.5 0 0 0-.528.47l-.5 8.5a.5.5 0 0 0 .998.058l.5-8.5a.5.5 0 0 0-.47-.528ZM8 4.5a.5.5 0 0 0-.5.5v8.5a.5.5 0 0 0 1 0V5a.5.5 0 0 0-.5-.5Z" />
+                                                            </svg>
+                                                        </a>
+                                                    @endif
+                                                    {{ $emple->codigo_empleaado }}
+                                                </td>
+                                                <td>{{ $emple->nombre_empleado }}</td>
+                                            @endif
+                                            @if (is_null($emple->codigo_empleaado2))
+                                                    <td colspan="2" class="text-center">
+                                                        @isset($roleros['roleros'])
+                                                            @if (Auth::user()->hasRole(['ADMIN', 'PRODUCCION']))
+                                                                <button type="button" class="btn btn-warning"
+                                                                    data-bs-toggle="modal"
+                                                                    data-bs-target="#busquedaEmpleadorolero"
+                                                                    onclick="agregar_id_rolero({{ $emple->id }},2,`{{ json_encode($roleros['roleros']) }}`)">
+                                                                    ROLEROS
+                                                                </button>
+                                                            @endif
+                                                        @endisset
+                                                    </td>
+                                                @else
+                                                    <td>
+                                                        @if (Auth::user()->hasRole(['ADMIN', 'PRODUCCION']))
+                                                            <a href="#" style="text-decoration: none"
+                                                                wire:click="eliminar_detalle({{ $emple->id }},2)">
+                                                                <svg xmlns="http://www.w3.org/2000/svg" width="16"
+                                                                    height="16" fill="red" class="bi bi-trash3-fill"
+                                                                    viewBox="0 0 16 16">
+                                                                    <path
+                                                                        d="M11 1.5v1h3.5a.5.5 0 0 1 0 1h-.538l-.853 10.66A2 2 0 0 1 11.115 16h-6.23a2 2 0 0 1-1.994-1.84L2.038 3.5H1.5a.5.5 0 0 1 0-1H5v-1A1.5 1.5 0 0 1 6.5 0h3A1.5 1.5 0 0 1 11 1.5Zm-5 0v1h4v-1a.5.5 0 0 0-.5-.5h-3a.5.5 0 0 0-.5.5ZM4.5 5.029l.5 8.5a.5.5 0 1 0 .998-.06l-.5-8.5a.5.5 0 1 0-.998.06Zm6.53-.528a.5.5 0 0 0-.528.47l-.5 8.5a.5.5 0 0 0 .998.058l.5-8.5a.5.5 0 0 0-.47-.528ZM8 4.5a.5.5 0 0 0-.5.5v8.5a.5.5 0 0 0 1 0V5a.5.5 0 0 0-.5-.5Z" />
+                                                                </svg>
+                                                            </a>
+                                                        @endif
+                                                        {{ $emple->codigo_empleaado2 }}
+                                                    </td>
+                                                    <td>{{ $emple->nombre_empleado2 }}</td>
+                                                @endif
                                         @endif
-                                        @if (is_null($emple->codigo_empleaado2))
-                                            <td colspan="2" class="text-center">
-                                                @isset($roleros['roleros'])
-                                                    <button type="button" class="btn btn-warning" data-bs-toggle="modal"  data-bs-target="#busquedaEmpleadorolero"
-                                                     onclick="agregar_id_rolero({{ $emple->id }},2)">
-                                                            ROLEROS
-                                                    </button>
-                                                @endisset
-                                            </td>
-                                        @else
-                                            <td>
-                                                <a href="#" style="text-decoration: none"
-                                                    wire:click="eliminar_detalle({{ $emple->id }},2)">
-                                                    <svg xmlns="http://www.w3.org/2000/svg" width="16"
-                                                        height="16" fill="currentColor" class="bi bi-trash3-fill"
-                                                        viewBox="0 0 16 16">
-                                                        <path
-                                                            d="M11 1.5v1h3.5a.5.5 0 0 1 0 1h-.538l-.853 10.66A2 2 0 0 1 11.115 16h-6.23a2 2 0 0 1-1.994-1.84L2.038 3.5H1.5a.5.5 0 0 1 0-1H5v-1A1.5 1.5 0 0 1 6.5 0h3A1.5 1.5 0 0 1 11 1.5Zm-5 0v1h4v-1a.5.5 0 0 0-.5-.5h-3a.5.5 0 0 0-.5.5ZM4.5 5.029l.5 8.5a.5.5 0 1 0 .998-.06l-.5-8.5a.5.5 0 1 0-.998.06Zm6.53-.528a.5.5 0 0 0-.528.47l-.5 8.5a.5.5 0 0 0 .998.058l.5-8.5a.5.5 0 0 0-.47-.528ZM8 4.5a.5.5 0 0 0-.5.5v8.5a.5.5 0 0 0 1 0V5a.5.5 0 0 0-.5-.5Z" />
-                                                    </svg>
-                                                </a>
-                                                {{ $emple->codigo_empleaado2 }}
-                                            </td>
-                                            <td>{{ $emple->nombre_empleado2 }}</td>
-                                        @endif
+
+
                                         <td>{{ $emple->orden_sistema }}</td>
                                         @if (is_null($emple->marca))
-                                            <td colspan="2" class="text-center"><button
-                                                    class="btn btn-primary btn-sm" data-bs-toggle="modal"
-                                                    data-bs-target="#modal_agregar_marca"
-                                                    onclick="seleccionar_tupla({{ $emple->id }})">Agregar
-                                                    Marca</button></td>
+                                            @if (Auth::user()->hasRole(['ADMIN', 'PRODUCCION']))
+                                                <td colspan="3" class="text-center">
+                                                    <button class="btn btn-primary btn-sm" data-bs-toggle="modal"
+                                                        data-bs-target="#modal_agregar_marca"
+                                                        onclick="seleccionar_tupla({{ $emple->id }})">Agregar Marca
+                                                    </button>
+                                                </td>
+                                            @endif
                                         @else
                                             <td>{{ $emple->vitola . ' ' . $emple->nombre }}</td>
-                                            <td>{{ $emple->marca }}</b>
-                                                <a href="#" style="text-decoration: none"
-                                                    wire:click="eliminar_detalle({{ $emple->id }},3)">
-                                                    <svg xmlns="http://www.w3.org/2000/svg" width="16"
-                                                        height="16" fill="currentColor" class="bi bi-trash3-fill"
-                                                        viewBox="0 0 16 16">
-                                                        <path
-                                                            d="M11 1.5v1h3.5a.5.5 0 0 1 0 1h-.538l-.853 10.66A2 2 0 0 1 11.115 16h-6.23a2 2 0 0 1-1.994-1.84L2.038 3.5H1.5a.5.5 0 0 1 0-1H5v-1A1.5 1.5 0 0 1 6.5 0h3A1.5 1.5 0 0 1 11 1.5Zm-5 0v1h4v-1a.5.5 0 0 0-.5-.5h-3a.5.5 0 0 0-.5.5ZM4.5 5.029l.5 8.5a.5.5 0 1 0 .998-.06l-.5-8.5a.5.5 0 1 0-.998.06Zm6.53-.528a.5.5 0 0 0-.528.47l-.5 8.5a.5.5 0 0 0 .998.058l.5-8.5a.5.5 0 0 0-.47-.528ZM8 4.5a.5.5 0 0 0-.5.5v8.5a.5.5 0 0 0 1 0V5a.5.5 0 0 0-.5-.5Z" />
-                                                    </svg>
-                                                </a>
+                                            <td>
+                                                @if (Auth::user()->hasRole(['ADMIN', 'PRODUCCION']))
+                                                    <a href="#" style="text-decoration: none"
+                                                        data-bs-toggle="modal" data-bs-target="#modal_agregar_marca"
+                                                        onclick="seleccionar_tupla_extra({{ $emple->id }},{{ $emple->id_modulo }})">
+                                                        <svg xmlns="http://www.w3.org/2000/svg" width="16"
+                                                            height="16" fill="green" class="bi bi-plus-square"
+                                                            viewBox="0 0 16 16">
+                                                            <path
+                                                                d="M14 1a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1zM2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2z" />
+                                                            <path
+                                                                d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4" />
+                                                        </svg>
+                                                    </a>
+                                                @endif
+                                                <b>{{ $emple->marca }}</b>
+                                                @if (Auth::user()->hasRole(['ADMIN', 'PRODUCCION']))
+                                                    @if(!$mostrar)
+                                                        <a href="#" style="text-decoration: none"
+                                                            wire:click="eliminar_detalle_extra({{ $emple->id }})">
+                                                            <svg xmlns="http://www.w3.org/2000/svg" width="16"
+                                                                height="16" fill="red" class="bi bi-trash3-fill"
+                                                                viewBox="0 0 16 16">
+                                                                <path
+                                                                    d="M11 1.5v1h3.5a.5.5 0 0 1 0 1h-.538l-.853 10.66A2 2 0 0 1 11.115 16h-6.23a2 2 0 0 1-1.994-1.84L2.038 3.5H1.5a.5.5 0 0 1 0-1H5v-1A1.5 1.5 0 0 1 6.5 0h3A1.5 1.5 0 0 1 11 1.5Zm-5 0v1h4v-1a.5.5 0 0 0-.5-.5h-3a.5.5 0 0 0-.5.5ZM4.5 5.029l.5 8.5a.5.5 0 1 0 .998-.06l-.5-8.5a.5.5 0 1 0-.998.06Zm6.53-.528a.5.5 0 0 0-.528.47l-.5 8.5a.5.5 0 0 0 .998.058l.5-8.5a.5.5 0 0 0-.47-.528ZM8 4.5a.5.5 0 0 0-.5.5v8.5a.5.5 0 0 0 1 0V5a.5.5 0 0 0-.5-.5Z" />
+                                                            </svg>
+                                                        </a>
+                                                    @else
+                                                        <a href="#" style="text-decoration: none"
+                                                            wire:click="eliminar_detalle({{ $emple->id }},3)">
+                                                            <svg xmlns="http://www.w3.org/2000/svg" width="16"
+                                                                height="16" fill="red" class="bi bi-trash3-fill"
+                                                                viewBox="0 0 16 16">
+                                                                <path
+                                                                    d="M11 1.5v1h3.5a.5.5 0 0 1 0 1h-.538l-.853 10.66A2 2 0 0 1 11.115 16h-6.23a2 2 0 0 1-1.994-1.84L2.038 3.5H1.5a.5.5 0 0 1 0-1H5v-1A1.5 1.5 0 0 1 6.5 0h3A1.5 1.5 0 0 1 11 1.5Zm-5 0v1h4v-1a.5.5 0 0 0-.5-.5h-3a.5.5 0 0 0-.5.5ZM4.5 5.029l.5 8.5a.5.5 0 1 0 .998-.06l-.5-8.5a.5.5 0 1 0-.998.06Zm6.53-.528a.5.5 0 0 0-.528.47l-.5 8.5a.5.5 0 0 0 .998.058l.5-8.5a.5.5 0 0 0-.47-.528ZM8 4.5a.5.5 0 0 0-.5.5v8.5a.5.5 0 0 0 1 0V5a.5.5 0 0 0-.5-.5Z" />
+                                                            </svg>
+                                                        </a>
+                                                    @endif
+                                                @endif
                                             </td>
                                             <td>{{ $emple->capa }}</td>
                                         @endif
                                         <td>
                                             <b>{{ $emple->restantes }}</b>
-                                            <a href="#">
-                                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-substack" viewBox="0 0 16 16">
-                                                    <path d="M15 3.604H1v1.891h14v-1.89ZM1 7.208V16l7-3.926L15 16V7.208zM15 0H1v1.89h14z"/>
-                                                  </svg>
-                                            </a>
+                                            @if (Auth::user()->hasRole(['ADMIN', 'PRODUCCION']))
+                                                @if (is_null($emple->vinetas_parejas))
+                                                @else
+                                                    <a href="#">
+                                                        <abbr title="Viñetas restantes: {{ $emple->vinetas_parejas }}"
+                                                            onclick="generar_viñetas_pdf({{ $emple->id_produccion_orden }},{{ $emple->id_empleado }},{{ $emple->id_empleado2 }})">
+                                                            <svg xmlns="http://www.w3.org/2000/svg" width="14"
+                                                                height="14" fill="red" class="bi bi-substack"
+                                                                viewBox="0 0 16 16">
+                                                                <path
+                                                                    d="M15 3.604H1v1.891h14v-1.89ZM1 7.208V16l7-3.926L15 16V7.208zM15 0H1v1.89h14z" />
+                                                            </svg>
+                                                        </abbr>
+                                                    </a>
+                                                @endif
+                                            @endif
                                         </td>
                                         <td>
-                                            <input value="{{ $emple->tareas }}" type="number"
-                                                id="tearea{{ $emple->id }}"
-                                                onchange="agregar_nueva_tarea({{ $emple->id }},'#tearea{{ $emple->id }}')"
-                                                class="form-control form-control-sm form-control-color"
-                                                style="width: 4rem;">
+                                            @if (Auth::user()->hasRole(['ADMIN', 'PRODUCCION']))
+                                                <input value="{{ $emple->tareas }}" type="number"
+                                                    id="tearea{{ $emple->id }}"
+                                                    onchange="agregar_nueva_tarea({{ $emple->id }},'#tearea{{ $emple->id }}')"
+                                                    class="form-control form-control-sm form-control-color"
+                                                    style="width: 4rem;">
+                                            @else
+                                                {{ $emple->tareas }}
+                                            @endif
                                         </td>
                                         <td>
                                             @if ($emple->tareas == 0 || is_null($emple->marca))
@@ -452,29 +633,44 @@
                                         <td>
                                             <div class="input-group input-group-sm " style="width: 5.5rem;">
                                                 <div class="input-group-prepend">
-                                                    <span class="input-group-text fs-7" id="basic-addon1">{{ $emple->moldes_para_uso??0 }}</span>
+                                                    <span class="input-group-text fs-7"
+                                                        id="basic-addon1">{{ $emple->moldes_para_uso ?? 0 }}</span>
                                                 </div>
-                                                <input value="{{ $emple->moldes_a_usar }}" type="number"
-                                                id="moldes{{ $emple->id }}"
-                                                onchange="agregar_nueva_moldes({{ $emple->id }},'#moldes{{ $emple->id }}')"
-                                                class="form-control  fs-7">
+                                                @if (Auth::user()->hasRole(['ADMIN', 'PRODUCCION']))
+                                                    <input value="{{ $emple->moldes_a_usar }}" type="number"
+                                                        id="moldes{{ $emple->id }}"
+                                                        onchange="agregar_nueva_moldes({{ $emple->id }},'#moldes{{ $emple->id }}')"
+                                                        class="form-control  fs-7">
+                                                @endif
                                             </div>
-
-
                                         </td>
                                         <td>
-                                            <button type="button" class="btn btn-sm btn-primary dropdown-toggle"
-                                                data-bs-toggle="collapse"
-                                                data-bs-target="#collapseExample{{ $key }}">
-                                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
-                                                    fill="currentColor" class="bi bi-list-check" viewBox="0 0 16 16">
-                                                    <path fill-rule="evenodd"
-                                                        d="M5 11.5a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 0 1h-9a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 0 1h-9a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 0 1h-9a.5.5 0 0 1-.5-.5zM3.854 2.146a.5.5 0 0 1 0 .708l-1.5 1.5a.5.5 0 0 1-.708 0l-.5-.5a.5.5 0 1 1 .708-.708L2 3.293l1.146-1.147a.5.5 0 0 1 .708 0zm0 4a.5.5 0 0 1 0 .708l-1.5 1.5a.5.5 0 0 1-.708 0l-.5-.5a.5.5 0 1 1 .708-.708L2 7.293l1.146-1.147a.5.5 0 0 1 .708 0zm0 4a.5.5 0 0 1 0 .708l-1.5 1.5a.5.5 0 0 1-.708 0l-.5-.5a.5.5 0 0 1 .708-.708l.146.147 1.146-1.147a.5.5 0 0 1 .708 0z" />
-                                                </svg>
-                                            </button>
+                                            @if (Auth::user()->hasRole(['ADMIN', 'PRODUCCION']))
+                                                @if (is_null($emple->marca))
+                                                <button type="button" class="btn btn-sm btn-danger" wire:click="eliminar_detalle_extra({{ $emple->id }})">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="16"
+                                                        height="16" fill="currentColor" class="bi bi-trash3-fill"
+                                                        viewBox="0 0 16 16">
+                                                        <path
+                                                            d="M11 1.5v1h3.5a.5.5 0 0 1 0 1h-.538l-.853 10.66A2 2 0 0 1 11.115 16h-6.23a2 2 0 0 1-1.994-1.84L2.038 3.5H1.5a.5.5 0 0 1 0-1H5v-1A1.5 1.5 0 0 1 6.5 0h3A1.5 1.5 0 0 1 11 1.5Zm-5 0v1h4v-1a.5.5 0 0 0-.5-.5h-3a.5.5 0 0 0-.5.5ZM4.5 5.029l.5 8.5a.5.5 0 1 0 .998-.06l-.5-8.5a.5.5 0 1 0-.998.06Zm6.53-.528a.5.5 0 0 0-.528.47l-.5 8.5a.5.5 0 0 0 .998.058l.5-8.5a.5.5 0 0 0-.47-.528ZM8 4.5a.5.5 0 0 0-.5.5v8.5a.5.5 0 0 0 1 0V5a.5.5 0 0 0-.5-.5Z" />
+                                                    </svg>
+                                                </button>
+                                                @else
+                                                <button type="button" class="btn btn-sm btn-primary dropdown-toggle"
+                                                    data-bs-toggle="collapse"
+                                                    data-bs-target="#collapseExample{{ $key }}">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="16"
+                                                        height="16" fill="currentColor" class="bi bi-list-check"
+                                                        viewBox="0 0 16 16">
+                                                        <path fill-rule="evenodd"
+                                                            d="M5 11.5a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 0 1h-9a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 0 1h-9a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 0 1h-9a.5.5 0 0 1-.5-.5zM3.854 2.146a.5.5 0 0 1 0 .708l-1.5 1.5a.5.5 0 0 1-.708 0l-.5-.5a.5.5 0 1 1 .708-.708L2 3.293l1.146-1.147a.5.5 0 0 1 .708 0zm0 4a.5.5 0 0 1 0 .708l-1.5 1.5a.5.5 0 0 1-.708 0l-.5-.5a.5.5 0 1 1 .708-.708L2 7.293l1.146-1.147a.5.5 0 0 1 .708 0zm0 4a.5.5 0 0 1 0 .708l-1.5 1.5a.5.5 0 0 1-.708 0l-.5-.5a.5.5 0 0 1 .708-.708l.146.147 1.146-1.147a.5.5 0 0 1 .708 0z" />
+                                                    </svg>
+                                                </button>
+                                                @endif
+                                            @endif
                                         </td>
                                     </tr>
-                                    @if($emple->ring_real == 55)
+                                    @if ($emple->ring_real == 55)
                                         @php
                                             $emple->ring_real = 56;
                                         @endphp
@@ -482,8 +678,7 @@
                                         @php
                                             $emple->ring_real = 48;
                                         @endphp
-                                @else
-
+                                    @else
                                     @endif
                                     @isset($usosMoldes[$emple->ring_real])
                                         <tr>
@@ -497,7 +692,10 @@
                                                                     @if ($emple->moldes_para_uso == $emple->moldes_a_usar || $molde->buenos <= 0)
                                                                         @if (isset($apartdoMoldes[$emple->id][$molde->id]))
                                                                             @php
-                                                                                $mol = $apartdoMoldes[$emple->id][$molde->id][0];
+                                                                                $mol =
+                                                                                    $apartdoMoldes[$emple->id][
+                                                                                        $molde->id
+                                                                                    ][0];
                                                                             @endphp
                                                                             @if ($mol->check)
                                                                                 <input type="checkbox" checked
@@ -509,7 +707,10 @@
                                                                     @else
                                                                         @if (isset($apartdoMoldes[$emple->id][$molde->id]))
                                                                             @php
-                                                                                $mol = $apartdoMoldes[$emple->id][$molde->id][0];
+                                                                                $mol =
+                                                                                    $apartdoMoldes[$emple->id][
+                                                                                        $molde->id
+                                                                                    ][0];
                                                                             @endphp
                                                                             @if ($mol->check)
                                                                                 <input type="checkbox" checked
@@ -556,10 +757,12 @@
         </div>
     </div>
     <div class="input-group" style="width:40%; position: fixed;right: 0px;bottom:0px; height:30px;">
+        <span class="form-control input-group-text fs-7">Tareas Global</span>
+        <input type="text" class="form-control fs-7" id="sumap1" value="{{ $tareaglobal }}">
         <span class="form-control input-group-text fs-7">Moldes</span>
-        <input type="text" class="form-control fs-7" id="sumap" value="{{ $moldes }}">
+        <input type="text" class="form-control fs-7" id="sumap2" value="{{ $moldes }}">
         <span class="form-control input-group-text fs-7">Moldes Necesarios</span>
-        <input type="text" class="form-control fs-7" id="sumap"
+        <input type="text" class="form-control fs-7" id="sumap3"
             value="{{ number_format($moldes_totale_para_usar, 0) }}">
     </div>
 
@@ -579,6 +782,7 @@
                             <tr style="text-align: center">
                                 <th style="width: 60px">ID(Agregar)</th>
                                 <th>ORDEN</th>
+                                <th>PRIORIDAD</th>
                                 <th>FECHA</th>
                                 <th>PRODUCTO</th>
                                 <th>POR PRODUCIR</th>
@@ -600,9 +804,18 @@
                                         </a>
                                         {{ ++$key }}
                                     </td>
-                                    <td style="text-align: center">{{ $pendiente->orden_sistema }}</td>
+                                    <td style="text-align: center;">{{ $pendiente->orden_sistema }}</td>
+                                    @if ($pendiente->prioridad > 0)
+                                        @if($pendiente->restantes > $pendiente->prioridad)
+                                            <td style="text-align: center; color: red !important">Prioridad: {{ $pendiente->prioridad }}</td>
+                                        @else
+                                            <td style="text-align: center; color: red !important">Prioridad: {{ $pendiente->restantes }}</td>
+                                        @endif
+                                    @else
+                                        <td style="text-align: center"></td>
+                                    @endif
                                     <td>{{ $pendiente->fecha_recibido }}</td>
-                                    <td>{{ $pendiente->producto }}</td>
+                                    <td>{{ $pendiente->codigo . ' - ' . $pendiente->producto }}</td>
                                     <td style="text-align: center">{{ $pendiente->restantes }}</td>
                                 </tr>
                             @endforeach
@@ -611,6 +824,7 @@
                             <tr>
                                 <th>ID(Agregar)</th>
                                 <th>ORDEN</th>
+                                <th>PRIORIDAD</th>
                                 <th>FECHA</th>
                                 <th>PRODUCTO</th>
                                 <th>POR PRODUCIR</th>
@@ -680,7 +894,6 @@
         </div>
     </div>
 
-
     <div wire:ignore class="modal" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
         aria-hidden="true">
         <div class="modal-dialog">
@@ -690,7 +903,7 @@
                     <button type="button" class="btn-close" id="boton_cerrar_buscar" data-bs-dismiss="modal"
                         aria-label="Close"></button>
                 </div>
-                <div class="modal-body">
+                <div class="modal-body" id="selectEmpleado">
                     <select id="selectOptions" onchange="buscar()">
                         <option value="">Seleccionar</option>
                         @foreach ($emplead as $emple)
@@ -703,30 +916,32 @@
     </div>
 
     <div wire:ignore class="modal" id="busquedaEmpleadobonchero" tabindex="-1" aria-labelledby="exampleModalLabel"
-    aria-hidden="true">
+        aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title" id="exampleModalLabel">Buscar empleado Bonchero</h5>
-                    <button type="button" class="btn-close" id="boton_cerrar_buscarr_bonchero" data-bs-dismiss="modal"
-                        aria-label="Close"></button>
+                    <button type="button" class="btn-close" id="boton_cerrar_buscarr_bonchero"
+                        data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
                     <input type="text" id="posicion1" hidden>
-                    <select id="selectBoncheros" onchange="agregar_empleado_bonchero()">
-                        <option value="">Seleccionar</option>
-                        @foreach ($boncheros['boncheros'] as $bonche)
-                            <option value="{{ $bonche->id }}">
-                                {{ $bonche->codigo . ' - ' . $bonche->nombre }}</option>
-                        @endforeach
-                    </select>
+                    <div id="selectBonchero">
+                        <select id="selectBoncheros" onchange="agregar_empleado_bonchero()">
+                            <option value="">Seleccionar</option>
+                            @foreach ($boncheros['boncheros'] as $bonche)
+                                <option value="{{ $bonche->id }}">
+                                    {{ $bonche->codigo . ' - ' . $bonche->nombre }}</option>
+                            @endforeach
+                        </select>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
 
     <div wire:ignore class="modal" id="busquedaEmpleadorolero" tabindex="-1" aria-labelledby="exampleModalLabel"
-    aria-hidden="true">
+        aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
@@ -736,39 +951,154 @@
                 </div>
                 <div class="modal-body">
                     <input type="text" id="posicion2" hidden>
-                    <select id="selectRoleros" onchange="agregar_empleado_rolero()">
-                        <option value="">Seleccionar</option>
-                        @foreach ($roleros['roleros'] as $rolero)
-                            <option value="{{ $rolero->id }}">
-                                {{ $rolero->codigo . ' - ' . $rolero->nombre }}</option>
-                        @endforeach
-                    </select>
+                    <div id="selectRolero">
+                        <select id="selectRoleros" onchange="agregar_empleado_rolero()">
+                            <option value="">Seleccionar</option>
+                            @foreach ($roleros['roleros'] as $rolero)
+                                <option value="{{ $rolero->id }}">
+                                    {{ $rolero->codigo . ' - ' . $rolero->nombre }}</option>
+                            @endforeach
+                        </select>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div wire:ignore class="modal fade" id="modal_programar_marca" data-backdrop="static" data-keyboard="false"
+        tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true"
+        style="opacity:.9;background:#212529;">
+        <div class="modal-dialog modal-xl modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="titulo_ctalogo_productos">Marcas</h5>
+                    <button id="btn_cerrar" type="button" class="btn-close" data-bs-dismiss="modal"
+                        aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <table class="table table-striped" id="catalgo_pendiente_asignar_por_marca">
+                        <thead>
+                            <tr style="text-align: center">
+                                <th style="width: 60px">ID(Agregar)</th>
+                                <th>ORDEN</th>
+                                <th>PRIORIDAD</th>
+                                <th>FECHA</th>
+                                <th>PRODUCTO</th>
+                                <th>POR PRODUCIR</th>
+                            </tr>
+                        </thead>
+                        <tbody style="font-size: 1em">
+                            @foreach ($pendiente_catalogo as $key => $pendiente)
+                                <tr>
+                                    <td>
+                                        <a style="text-decoration: none" href="#" data-bs-dismiss="modal"
+                                            onclick="agregar_pendiente('{{ $pendiente->id }}')">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                                fill="currentColor" class="bi bi-database-add" viewBox="0 0 16 16">
+                                                <path
+                                                    d="M12.5 16a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7Zm.5-5v1h1a.5.5 0 0 1 0 1h-1v1a.5.5 0 0 1-1 0v-1h-1a.5.5 0 0 1 0-1h1v-1a.5.5 0 0 1 1 0Z" />
+                                                <path
+                                                    d="M12.096 6.223A4.92 4.92 0 0 0 13 5.698V7c0 .289-.213.654-.753 1.007a4.493 4.493 0 0 1 1.753.25V4c0-1.007-.875-1.755-1.904-2.223C11.022 1.289 9.573 1 8 1s-3.022.289-4.096.777C2.875 2.245 2 2.993 2 4v9c0 1.007.875 1.755 1.904 2.223C4.978 15.71 6.427 16 8 16c.536 0 1.058-.034 1.555-.097a4.525 4.525 0 0 1-.813-.927C8.5 14.992 8.252 15 8 15c-1.464 0-2.766-.27-3.682-.687C3.356 13.875 3 13.373 3 13v-1.302c.271.202.58.378.904.525C4.978 12.71 6.427 13 8 13h.027a4.552 4.552 0 0 1 0-1H8c-1.464 0-2.766-.27-3.682-.687C3.356 10.875 3 10.373 3 10V8.698c.271.202.58.378.904.525C4.978 9.71 6.427 10 8 10c.262 0 .52-.008.774-.024a4.525 4.525 0 0 1 1.102-1.132C9.298 8.944 8.666 9 8 9c-1.464 0-2.766-.27-3.682-.687C3.356 7.875 3 7.373 3 7V5.698c.271.202.58.378.904.525C4.978 6.711 6.427 7 8 7s3.022-.289 4.096-.777ZM3 4c0-.374.356-.875 1.318-1.313C5.234 2.271 6.536 2 8 2s2.766.27 3.682.687C12.644 3.125 13 3.627 13 4c0 .374-.356.875-1.318 1.313C10.766 5.729 9.464 6 8 6s-2.766-.27-3.682-.687C3.356 4.875 3 4.373 3 4Z" />
+                                            </svg>
+                                        </a>
+                                        {{ ++$key }}
+                                    </td>
+                                    <td style="text-align: center;">{{ $pendiente->orden_sistema }}</td>
+                                    @if ($pendiente->prioridad > 0)
+                                        <td style="text-align: center; color: red !important">Prioridad: {{ $pendiente->prioridad }}</td>
+                                    @else
+                                        <td style="text-align: center"></td>
+                                    @endif
+                                    <td>{{ $pendiente->fecha_recibido }}</td>
+                                    <td>{{ $pendiente->codigo . ' - ' . $pendiente->producto }}</td>
+                                    <td style="text-align: center">{{ $pendiente->restantes }}</td>
+                                </tr>
+                            @endforeach
+                        </tbody>
+                        <tfoot>
+                            <tr>
+                                <th>ID(Agregar)</th>
+                                <th>ORDEN</th>
+                                <th>PRIORIDAD</th>
+                                <th>FECHA</th>
+                                <th>PRODUCTO</th>
+                                <th>POR PRODUCIR</th>
+                            </tr>
+                        </tfoot>
+                    </table>
+                </div>
+                <div class="modal-footer">
+                    <button data-bs-dismiss="modal" class="btn btn-success">
+                        <span>OK</span>
+                    </button>
                 </div>
             </div>
         </div>
     </div>
 
 
-
     @push('scripts')
         <script>
             var id_detalles = 0;
+            var para_detalle_extra = false;
+            var id_modulo = 0;
+
             let id_tupla = 0;
             var table;
             let buscador;
             let boncheros;
             let roleros;
 
-            function agregar_id_rolero(id,columna_rolero) {
+            function agregar_id_rolero(id, columna_rolero, rols) {
                 $('#posicion2').val(columna_rolero);
+
+                document.getElementById('selectRolero').innerHTML = "";
+                var emple = JSON.parse(rols);
+                var select = `<select id="selectRoleros" onchange="agregar_empleado_rolero()">
+                                    <option value="">Seleccionar</option>`
+                emple.forEach(element => {
+                    select += `<option value="${element.id}">${element.codigo}-${element.nombre}</option>`;
+                });
+                select += `</select>`;
+                document.getElementById('selectRolero').innerHTML = select;
+                roleros = new TomSelect('#selectRoleros', {
+                    create: false,
+                    sortField: {
+                        field: "text",
+                        direction: "asc"
+                    }
+                });
+
+                console.log('Rolero: ' + emple.length);
+
+                id_tupla = id;
                 roleros.open();
-                id_tupla=id;
             }
 
-            function agregar_id_bonchero(id,columna_bonchero) {
+            function agregar_id_bonchero(id, columna_bonchero, bonche) {
                 $('#posicion1').val(columna_bonchero);
+
+
+                document.getElementById('selectBonchero').innerHTML = "";
+                var emple = JSON.parse(bonche);
+                var select = `<select id="selectBoncheros" onchange="agregar_empleado_bonchero()">
+                                    <option value="">Seleccionar</option>`
+                emple.forEach(element => {
+                    select += `<option value="${element.id}">${element.codigo}-${element.nombre}</option>`;
+                });
+                select += `</select>`;
+                document.getElementById('selectBonchero').innerHTML = select;
+                boncheros = new TomSelect('#selectBoncheros', {
+                    create: false,
+                    sortField: {
+                        field: "text",
+                        direction: "asc"
+                    }
+                });
+
+
                 boncheros.open();
-                id_tupla=id;
+                id_tupla = id;
             }
 
             function agregar_nueva_tupla(num, select) {
@@ -789,8 +1119,15 @@
 
 
             function agregar_pendiente(id) {
-                @this.agregar_detalle(id_detalles, 3, id);
+                if (para_detalle_extra) {
+                    @this.agregar_detalle_extra(id_detalles, id_modulo, id);
+                } else {
+                    @this.agregar_detalle(id_detalles, 3, id);
+                }
+                para_detalle_extra = false;
             }
+
+
 
             function historial(key) {
                 let historial = JSON.parse(key);
@@ -922,13 +1259,58 @@
                 })
             }
 
-
             $(document).ready(function() {
                 $('#catalgo_pendiente').DataTable({
                     "language": {
                         "url": "//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/Spanish.json",
                         "pageLength": 50
                     },
+                    "paging": true,
+                    "autoWidth": true,
+                    "columnDefs": [{
+                        "targets": 2,
+                        "render": function(data, type, full, meta) {
+                            if (type === 'display' && data == '') {
+                                return data;
+                            } else {
+                               // console.log(meta.row + 1);
+                                var rowIndex = meta.row + 1;
+                                $('#catalgo_pendiente tbody tr:nth-child(' + rowIndex + ')').addClass('lightRed');
+                                return data;
+                            }
+                        }
+                    }],
+                    scrollY: 320,
+                    initComplete: function() {
+                        this.api()
+                            .columns()
+                            .every(function() {
+                                let column = this;
+                                let title = column.footer().textContent;
+
+                                // Create input element
+                                let input = document.createElement('input');
+                                input.placeholder = title;
+                                input.style.width = "167px";
+
+                                column.footer().replaceChildren(input);
+
+                                // Event listener for user input
+                                input.addEventListener('keyup', () => {
+                                    if (column.search() !== this.value) {
+                                        column.search(input.value).draw();
+                                    }
+                                });
+                            });
+                    }
+                });
+
+                $('#catalgo_pendiente_asignar_por_marca').DataTable({
+                    "language": {
+                        "url": "//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/Spanish.json",
+                        "pageLength": 50
+                    },
+
                     scrollY: 320,
                     initComplete: function() {
                         this.api()
@@ -984,9 +1366,19 @@
                 $('#' + event.detail.id).collapse('toggle');
             })
 
+
+
             function seleccionar_tupla(id) {
                 id_detalles = id;
             }
+
+            function seleccionar_tupla_extra(id,modulo) {
+                id_detalles = id;
+                para_detalle_extra = true;
+                id_modulo = modulo;
+            }
+
+
 
             function buscar() {
                 let empleados = @json($emplead);
@@ -1011,6 +1403,22 @@
             function agregar_empleado_bonchero() {
                 $('#boton_cerrar_buscarr_bonchero').click();
                 @this.agregar_detalle(id_tupla, 1, boncheros.getValue());
+            }
+
+            function generar_viñetas_pdf(id_orden, id_rolero, id_bonchero) {
+                var opcion = confirm("Desea geneara las viñetas para esta pareja?");
+                if (opcion == true) {
+                    if (id_rolero === undefined) {
+                        id_rolero = '0';
+                    }
+                    if (id_bonchero === undefined) {
+                        id_bonchero = '0';
+                    }
+                    window.location = "{{ route('produccion.producir.vinetas') }}" + "?id_orden=" + id_orden +
+                        "&id_bonchero=" + id_bonchero + "&id_rolero=" + id_rolero + "";
+                } else {
+
+                }
             }
         </script>
     @endpush

@@ -2,6 +2,7 @@
 
 namespace App\Http\Livewire;
 
+use App\Exports\ProduccionOrdenNuevaExport;
 use App\Exports\SamplerFaltantes;
 use App\Models\clase_producto;
 use App\Models\pedido as ModelsPedido;
@@ -213,5 +214,66 @@ class Pedido extends Component
         }
         $mod->save();
     }
+
+
+    public function exportar_reporte_a_producir()
+    {
+        $pedido_completo = DB::select('call buscar_pedidos(:item,:categoria,:orden,:sampler)', [
+            "item" => $this->b_item,
+            "categoria" => $this->b_categoria,
+            "orden" => $this->b_orden,
+            "sampler" => $this->b_sampler
+        ]);
+
+        $todosLosDetalles = DB::select('call traer_numero_detalles_productos_datos()');
+
+
+        $cantidad_detalle_sampler = 0;
+        $detalles = 0;
+        $total_puros = 0;
+        $valores = [];
+
+        $ordenesCompletas = [];
+
+        foreach ($todosLosDetalles as $key => $value) {
+            $valores[$value->item][] = $value;
+        }
+
+        for ($i = 0; $i < count($pedido_completo); $i++) {
+            if (is_numeric($pedido_completo[$i]->unidades) && is_numeric($pedido_completo[$i]->cant_paquetes)) {
+                $total_puros += $pedido_completo[$i]->unidades * $pedido_completo[$i]->cant_paquetes;
+            } else {
+                $total_puros += 0;
+            }
+
+            if ($pedido_completo[$i]->sampler == 'si') {
+
+                if ($cantidad_detalle_sampler == 0 && $detalles == 0) {
+                    $cantidad_detalle_sampler = $pedido_completo[$i]->can_sampler;
+                }
+
+                $val = $valores[$pedido_completo[$i]->item];
+                $pedido_completo[$i]->descripcion = $pedido_completo[$i]->descripcion_sampler . " " . $val[$detalles]->marca . " " . $val[$detalles]->nombre . " " . $val[$detalles]->capa . " " . $val[$detalles]->vitola;
+                $pedido_completo[$i]->codigo_p = $val[$detalles]->codigo_producto;
+                $detalles++;
+
+                if ($detalles == $cantidad_detalle_sampler) {
+                    $detalles = 0;
+                    $cantidad_detalle_sampler = 0;
+                }
+            }
+        }
+
+
+        foreach ($pedido_completo as $key => $value) {
+            $ordenesCompletas[$value->codigo_p][] = $value;
+        }
+
+        return Excel::download(new ProduccionOrdenNuevaExport($ordenesCompletas), "Reporte Nueva Orden - " . Carbon::now()->format("Ymdgis") . ".xls");
+    }
+
+
+
+
 
 }

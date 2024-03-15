@@ -16,6 +16,11 @@
             </li>
         @endif
     </ul>
+    <div style="height: 0.8rem;" role="status">
+        <div wire:loading style="width: 100%;" role="status">
+            <span class="loader"></span>
+        </div>
+    </div>
     <div class="container" style="max-width:100%; ">
         <div class="row">
 

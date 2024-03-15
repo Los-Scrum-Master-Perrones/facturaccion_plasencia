@@ -50,6 +50,9 @@ Route::post('empleado/crud/{id}', [ProduccionEmpleado::class, 'funciones_crud'])
 
 Route::get('vinetas/{estado}', [ProduccionDiarioMarcas::class, 'vinetas']);
 Route::get('vinetaScanner/{id}', [ProduccionDiarioMarcas::class, 'scanner_vinetas']);
+Route::post('vinetaScanner/guardar/{id}', [ProduccionDiarioMarcas::class, 'scanner_vinetas_aceptar']);
+
+
 
 Route::get('inventario/{estado}', [InventarioMantenimiento::class, 'invetario_material']);
 

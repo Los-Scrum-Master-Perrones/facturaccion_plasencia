@@ -1169,28 +1169,36 @@ class PendienteEmpaque extends Component
                 }
             }
 
-            if ($value->saldo == 0 && count(isset($value->materiales) ? $value->materiales : []) == 0) {
-                $value->materiales[] = [
 
-                    "id_de_detalles" => 96011,
-                    "id_detalle_temporal" => 403,
-                    "id_material" => 5788,
-                    "id" => 5788,
-                    "item" => "10499062",
-                    "codigo_producto" => "P-03201",
-                    "tipo_empaque" => 11,
-                    "codigo_material" => "ME-06506",
-                    "des_material" => "MATERIAL DE EMPAQUE ROCKY PATEL P.C. HEALTH WARNING TRANSPARENTE NEGRO",
-                    "cantidad" => 1,
-                    "uxe" => "SI",
-                    "saldo" => "835190.00",
-                    "cantidad_m" => "600.00",
-                    "existencia_material" => "804168.40",
-                    "restante" => "803568.40",
-                    "co_material" => "ME-06506"
+            if (count(isset($value->materiales) ? $value->materiales : []) == 0) {
+                $mate = DB::select('SELECT *
+                                    FROM materiales_productos
+                                    WHERE materiales_productos.item = ? AND materiales_productos.codigo_producto = ?',
+                                [$value->item, $value->cod_producto]);
 
-                ];
-            } else if ($value->saldo == 0) {
+                foreach ($mate as $key => $un_detalle) {
+                    $value->materiales[] = [
+                        "id_de_detalles" => 96011,
+                        "id_detalle_temporal" => $value->id,
+                        "id_material" => $un_detalle->id,
+                        "id" => $un_detalle->id,
+                        "item" => $value->item,
+                        "codigo_producto" => $value->cod_producto,
+                        "tipo_empaque" => $un_detalle->tipo_empaque,
+                        "codigo_material" =>  $un_detalle->codigo_material,
+                        "des_material" => $un_detalle->des_material,
+                        "cantidad" => $un_detalle->cantidad,
+                        "uxe" => $un_detalle->uxe,
+                        "saldo" => "835190.00",
+                        "cantidad_m" => "600.00",
+                        "existencia_material" => "804168.40",
+                        "restante" => "803568.40",
+                        "co_material" => $un_detalle->codigo_material
+                    ];
+                }
+            }
+
+            if ($value->pendiente == 0) {
                 unset($value->materiales);
                 $value->materiales[] = [
 
@@ -1212,34 +1220,6 @@ class PendienteEmpaque extends Component
                     "co_material" => "ME-06506"
 
                 ];
-            } else if (count(isset($value->materiales) ? $value->materiales : []) == 0) {
-                $mate = DB::select('SELECT *
-                                    FROM materiales_productos
-                                    WHERE materiales_productos.item = ? AND materiales_productos.codigo_producto = ?',
-                                  [$value->item, $value->cod_producto]);
-
-                foreach ($mate as $key => $un_detalle) {
-                    $value->materiales[] = [
-
-                        "id_de_detalles" => 96011,
-                        "id_detalle_temporal" => $value->id,
-                        "id_material" => $un_detalle->id,
-                        "id" => $un_detalle->id,
-                        "item" => $value->item,
-                        "codigo_producto" => $value->cod_producto,
-                        "tipo_empaque" => $un_detalle->tipo_empaque,
-                        "codigo_material" =>  $un_detalle->codigo_material,
-                        "des_material" => $un_detalle->des_material,
-                        "cantidad" => $un_detalle->cantidad,
-                        "uxe" => $un_detalle->uxe,
-                        "saldo" => "835190.00",
-                        "cantidad_m" => "600.00",
-                        "existencia_material" => "804168.40",
-                        "restante" => "803568.40",
-                        "co_material" => $un_detalle->codigo_material
-
-                    ];
-                }
             }
         }
 
@@ -1505,7 +1485,7 @@ class PendienteEmpaque extends Component
             }
         }
 
-        return redirect()->route('pendiente_empaque');
+       // return redirect()->route('pendiente_empaque');
     }
 
 

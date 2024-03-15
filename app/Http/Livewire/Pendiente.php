@@ -303,14 +303,10 @@ class Pendiente extends Component
             );
 
 
-
-
             $datos = [];
             $datos2 = [];
 
-
             $todosLosDetalles = DB::select('call traer_numero_detalles_productos_datos()');
-
 
             $cantidad_detalle_sampler = 0;
             $detalles = 0;
