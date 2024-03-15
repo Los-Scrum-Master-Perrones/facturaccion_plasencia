@@ -237,7 +237,6 @@
                 'descripcion': document.getElementById('descripcionCrear').value,
             });
             document.getElementById('nombreCrear').value = '';
-            document.getElementById('fecha_ingresoCrear').value = '';
             document.getElementById('cantidadCrear').value = '',
                 document.getElementById('descripcionCrear').value = '';
         }

@@ -180,8 +180,6 @@ class ProduccionCatalogo extends Component
         try {
             DB::beginTransaction();
 
-
-
             $this->produc->save();
 
             Produccion::where('id_marca', $this->produc->id_marca)

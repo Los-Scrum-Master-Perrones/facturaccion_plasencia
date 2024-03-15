@@ -47,7 +47,6 @@ class Materiales extends Component
     {   $start = ($this->page - 1) * $this->por_pagina;
 
 
-
         $this->items_codigo_existentes = DB::select('SELECT DISTINCT codigo_material,des_material FROM materiales_productos');
 
 
