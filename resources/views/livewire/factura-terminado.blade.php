@@ -410,14 +410,16 @@
                                     @if (number_format(floatval($detalles->precio_producto), 2) != 0.0)
                                         <a style="text-decoration: none" href="#"
                                             wire:click="incrementar_precio_catalogo({{ $detalles->id_producto }},10,'{{ $detalles->sampler }}','{{ $detalles->codigo }}',{{ $detalles->precio_producto }})">
-                                            <img width="16" height="16"
-                                                src="https://img.icons8.com/color/48/plus--v1.png" alt="plus--v1" />
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="red" class="bi bi-dash-circle-fill" viewBox="0 0 16 16">
+                                                <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0M4.5 7.5a.5.5 0 0 0 0 1h7a.5.5 0 0 0 0-1z"/>
+                                              </svg>
                                         </a>
                                         {{ number_format(floatval($detalles->precio_producto), 2) }}
                                         <a style="text-decoration: none" href="#"
                                             wire:click="incrementar_precio_catalogo({{ $detalles->id_producto }},-10,'{{ $detalles->sampler }}','{{ $detalles->codigo }}',{{ $detalles->precio_producto }})">
-                                            <img width="16" height="16"
-                                                src="https://img.icons8.com/fluency/48/minus.png" alt="minus" />
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="blue" class="bi bi-plus-circle-fill" viewBox="0 0 16 16">
+                                                <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0M8.5 4.5a.5.5 0 0 0-1 0v3h-3a.5.5 0 0 0 0 1h3v3a.5.5 0 0 0 1 0v-3h3a.5.5 0 0 0 0-1h-3z"/>
+                                              </svg>
                                         </a>
                                     @else
                                         {{ number_format(floatval($detalles->precio_producto), 2) }}

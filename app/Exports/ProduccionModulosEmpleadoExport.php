@@ -16,14 +16,11 @@ class ProduccionModulosEmpleadoExport implements WithMultipleSheets
 
     public function sheets(): array
     {
-        $datos = [];
         $sheets = [];
 
         foreach ($this->detalles as $detall) {
-
-            $empleados = DB::select('CALL `buscar_produccion_modulos_empleados`(?,"")',[$detall->id]);
+            $empleados = DB::select('CALL `buscar_produccion_modulos_empleados`(?,"",   @total_tarea)',[$detall->id]);
             $sheets[] = new ProduccionPlanificacionExportSheet($empleados,$detall->nombre);
-
         }
 
         return $sheets;
