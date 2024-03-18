@@ -280,7 +280,7 @@
                                     <td>{{ $detalles->total_neto }}</td>
                                     <td></td>
                                     <td style="text-align: right">
-                                        <b>{{ number_format($detalles->costo_promedio, 4) }}</b>
+                                        <b>{{ number_format($costoMedioArray[$detalles->codigo_item.$detalles->orden.$detalles->unidad]/$detalles->cantidad_cajas , 4) }}</b>
                                     </td>
                                     <td style="text-align: center">-</td>
                                     @if (auth()->user()->rol == -1)
@@ -331,7 +331,7 @@
                                 <td>{{ $sampler_s ? '' : $detalles->cantidad_puros }}</td>
                                 <td>{{ $sampler_s ? '' : $detalles->unidad }}</td>
                                 <td><b>{{ $sampler_s ? '' : $detalles->cantidad_cajas }}</b></td>
-                                <td>{{ $sampler_s ? (($detalles->paquetes)/$detalles->pen_paquetes)*$detalles->cantidad_puros* $detalles->unidad : $detalles->total_tabacos }}
+                                <td>{{ $sampler_s ? (($detalles->paquetes) / $detalles->pen_paquetes) * $detalles->cantidad_puros*$detalles->unidad : $detalles->total_tabacos }}
                                 </td>
                                 <td>{{ $detalles->capas }}</td>
                                 <td>{{ $sampler_s ? '' : $detalles->cantidad_por_caja }}</td>

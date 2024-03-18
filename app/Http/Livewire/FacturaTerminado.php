@@ -211,6 +211,7 @@ class FacturaTerminado extends Component
         $this->titulo_mes = strftime("%B", strtotime($Nueva_Fecha));
         $this->titulo_cliente = $this->cliente;
 
+        $costoMedioArray = [];
         $usosArray = [];
         $usosArray2 = [];
         $precio_catalogo = [];
@@ -242,6 +243,17 @@ class FacturaTerminado extends Component
 
             $precio_catalogo = DB::select('call mostrar_precios_factura_catalogo()');
 
+
+
+            foreach ($this->detalles_venta  as $uso) {
+                if($uso->sampler == 'si'){
+                    if(!isset($costoMedioArray[$uso->codigo_item.$uso->orden.$uso->unidad])){
+                        $costoMedioArray[$uso->codigo_item.$uso->orden.$uso->unidad] = 0;
+                    }
+                    $costoMedioArray[$uso->codigo_item.$uso->orden.$uso->unidad] += ((($uso->paquetes) / $uso->pen_paquetes) * $uso->cantidad_puros*$uso->unidad ) * (floatval($uso->precio_producto)/1000);
+                }
+
+            }
 
             foreach ($usos as $uso) {
                 $usosArray[$uso->codigo . '-' . $uso->anio] =  $uso;
@@ -313,6 +325,7 @@ class FacturaTerminado extends Component
         return view(
             'livewire.factura-terminado',
             [
+                'costoMedioArray'=> $costoMedioArray,
                 'precio_sugerido' => $usosArray,
                 'precio_historial' => $usosArray2,
                 'precio_catalogo' => $precio_catalogo
