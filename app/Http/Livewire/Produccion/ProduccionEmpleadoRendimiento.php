@@ -2,12 +2,15 @@
 
 namespace App\Http\Livewire\Produccion;
 
+use App\Exports\ProduccionPlanificacionSemanal;
+use App\Exports\ProduccionPlanificacionSemanalPorcentaje;
 use App\Models\ProduccionDiarioProducirGuardados;
 use Carbon\Carbon;
 use Carbon\CarbonImmutable;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\DB;
 use Livewire\Component;
+use Maatwebsite\Excel\Facades\Excel;
 
 class ProduccionEmpleadoRendimiento extends Component
 {
@@ -68,5 +71,25 @@ class ProduccionEmpleadoRendimiento extends Component
         $fechas_separadas = explode(" ",$this->fechas);
 
         ProduccionDiarioProducirGuardados::where('inicio_semana',$fechas_separadas[0])->where('fin_semana',$fechas_separadas[1])->delete();
+    }
+
+    public function exportar_reporte(){
+        $datos_por_fecha = [];
+        $fechas_separadas = explode(" ",$this->fechas);
+        $planificado_semana = DB::select('CALL `reporte_produccion_planificacion_semanal_vs_produccion`(?)',
+                                    [
+                                        $fechas_separadas[0]
+                                    ]);
+
+        foreach ($planificado_semana as $key => $value) {
+            $datos_por_fecha[$value->fecha][$value->codigo][] = $value;
+        }
+
+        $planificado_semana = DB::select('CALL `buscar_produccion_reporte_semanal`(?,?)',
+                            [
+                                $fechas_separadas[0],
+                                $fechas_separadas[1],
+                            ]);
+        return Excel::download(new ProduccionPlanificacionSemanalPorcentaje($planificado_semana,$datos_por_fecha,$fechas_separadas[0]), 'Reporte % Produccion.xlsx');
     }
 }
