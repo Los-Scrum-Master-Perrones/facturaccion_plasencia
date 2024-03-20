@@ -243,7 +243,7 @@
                                     <td>{{ $prodPrecio->cello }}</td>
                                     <td style="text-align: right">
                                         {{ '$ ' . number_format($prodPrecio->precio_actual->precio, 2) }}
-                                        <a href="#" onclick='historial({{ $key }})'>
+                                        <a href="#" onclick='historial(`{{ json_encode($prodPrecio->historial[0]) }}`)'>
                                             <abbr title="Historial de Precios">
                                                 <img width="20" height="20"
                                                     src="https://img.icons8.com/ios/50/time-machine--v1.png"
@@ -695,8 +695,9 @@
             }
 
             function historial(key) {
-                let precios = @this.datos;
-                let historial = precios[key].historial[0];
+
+                let historial = JSON.parse(key);
+                //alert(historial);
                 historial = historial.reverse();
                 //alert(historial[0].precio);
                 let html = `<div class="lineatemp">`;
@@ -715,6 +716,7 @@
 
                 Swal.fire({
                     title: '<strong>Historial de Cambios</strong>',
+                    height: 622,
                     html: html,
                     showCloseButton: true,
                     showCancelButton: false,
