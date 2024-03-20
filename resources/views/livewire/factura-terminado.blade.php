@@ -866,7 +866,7 @@
                                 @else
                                     <td style="text-align:center;">
                                         <a data-bs-toggle="modal" data-bs-target="#modal_actualizar"
-                                            onclick="asignar({{ $datos->id_pendiente }});  document.getElementById('titulo1').innerHTML = '{{ $datos->descripcion_produto }}';"
+                                            onclick="asignar({{ $datos->id_pendiente }},`{{ $datos->descripcion_produto }}`,{{ $datos->por_caja }})"
                                             href="#">
                                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
                                                 fill="currentColor" class="bi bi-bag-plus-fill" viewBox="0 0 16 16">
@@ -1382,8 +1382,11 @@
                 }
             }
 
-            function asignar(id) {
+            function asignar(id,descripcion_produto,porcaja) {
                 @this.id_pendiente_detalle = id;
+                document.getElementById('titulo1').innerHTML = descripcion_produto;
+                document.getElementById('intunidades_cajon').value = porcaja;
+
             }
 
             function guardar_detalle() {
