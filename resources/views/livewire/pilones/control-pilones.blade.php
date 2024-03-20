@@ -155,7 +155,7 @@
                 <div class="modal-content">
                     <div class="modal-header">
                         <h3 class="titulo1">
-                            Editar control de pilón
+                            Editar control de pilón 
                         </h3>
                     </div>
                     <div class="modal-body">
@@ -242,7 +242,7 @@
                 })
                 event.preventDefault()
             }
-            
+
             let control_tabla_entrada;
             let control_tabla_entrada_edit;
 

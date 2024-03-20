@@ -32,7 +32,9 @@ use App\Http\Livewire\Materiales;
 use App\Http\Livewire\MaterialesProductos;
 use App\Http\Livewire\Pilones\ControlPilones;
 use App\Http\Livewire\Pilones\EntradasPilones;
+use App\Http\Livewire\Pilones\ProcesoPilones;
 use App\Http\Livewire\Pilones\RegistroPilones;
+use App\Http\Livewire\Pilones\RemisionPilon;
 use App\Http\Livewire\Produccion\Produccion;
 use App\Http\Livewire\Produccion\ProduccionCatalogo;
 use App\Http\Livewire\Produccion\ProduccionDiarioMarcas;
@@ -413,6 +415,10 @@ Route::group(['middleware' => ['auth', 'checkRole:0,1,2,3,4']], function () {
     Route::get('/pilones', RegistroPilones::class)->name('pilones');
     Route::get('/pilones/entradapiles', EntradasPilones::class)->name('pilones.entradas');
     Route::get('/pilones/controlpilones', ControlPilones::class)->name('pilones.control');
+    Route::get('/pilones/remisionpilones', RemisionPilon::class)->name('pilones.remision');
+    Route::get('/pilones/procesopilones', ProcesoPilones::class)->name('pilones.proceso');
+
+
 });
 
 Route::group(['middleware' => ['auth', 'checkRole:-2']], function () {
